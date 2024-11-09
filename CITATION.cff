@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+title: Eta Kappa Notes
+message: >-
+  If you use this notes in your research, please cite it
+  using the following metadata from this file.
+type: software
+authors:
+  - name: Mu Nu Chapter of IEEE-HKN
+    city: Torino
+    country: IT
+    website: "https://hknpolito.org/"
+  - given-names: Eduard
+    family-names: Occhipinti
+    email: eduard.occhipinti@studenti.polito.it
+    orcid: "https://orcid.org/0009-0008-4050-2298"
+  - given-names: Erik
+    family-names: Scolaro
+    email: erik.scolaro@studenti.polito.it
+repository-code: "https://github.com/MuNuChapterHKN/Eta-Kappa-Notes"
+keywords:
+  - notes
+license: GPL-3.0
