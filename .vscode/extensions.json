@@ -4,6 +4,7 @@
         "James-Yu.latex-workshop",
         "EditorConfig.EditorConfig",
         "SimonSiefke.svg-preview",
-        "hediet.vscode-drawio"
+        "hediet.vscode-drawio",
+        "ltex-plus.vscode-ltex-plus"
     ]
 }

@@ -11,11 +11,11 @@ authors:
     website: "https://hknpolito.org/"
   - given-names: Eduard
     family-names: Occhipinti
-    email: eduard.occhipinti@studenti.polito.it
+    email: eduard.antonovic.occhipinti@hknpolito.org
     orcid: "https://orcid.org/0009-0008-4050-2298"
   - given-names: Erik
     family-names: Scolaro
-    email: erik.scolaro@studenti.polito.it
+    email: erik.scolaro@hknpolito.org
 repository-code: "https://github.com/MuNuChapterHKN/Eta-Kappa-Notes"
 keywords:
   - notes
