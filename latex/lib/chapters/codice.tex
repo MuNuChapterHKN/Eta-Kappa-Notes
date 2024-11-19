@@ -1,0 +1,126 @@
+\chapter{Formattare codice}
+
+In questo capitolo verrà mostrato come utilizzare il pacchetto \texttt{listings} per formattare il codice sorgente in LaTeX. Questo pacchetto permette di evidenziare la sintassi di diversi linguaggi di programmazione e di personalizzare lo stile per adattarlo al proprio documento.
+
+\section{Inserimento del codice}
+
+Dopo aver definito lo stile, è possibile utilizzarlo per formattare il codice all'interno del documento. Per farlo, si usa il comando \texttt{\textbackslash lstset} per impostare lo stile e il comando \texttt{\textbackslash lstinputlisting} o \texttt{\textbackslash begin{lstlisting}...\textbackslash end{lstlisting}} per includere il codice. Ecco un esempio:
+
+\subsection{Esempio con file esterno} Puoi anche includere un file esterno contenente il codice:
+
+\lstinputlisting[language=Python, breaklines, breakautoindent]{./src/py/2d_example.py}
+
+\section{Formattare il Codice}
+
+Il pacchetto \texttt{listings} consente di visualizzare il codice sorgente all'interno di un documento LaTeX, mantenendo la formattazione e l'evidenziazione della sintassi. In questa sezione, esploreremo come utilizzare \texttt{listings} per includere e formattare il codice nel nostro documento.
+
+\subsection{Stili Predefiniti}
+\texttt{listings} fornisce alcuni stili predefiniti per evidenziare la sintassi di vari linguaggi di programmazione. Questi stili permettono di includere facilmente blocchi di codice con una corretta evidenziazione della sintassi.
+
+Ad esempio, per includere codice Python nel documento, puoi utilizzare il seguente comando:
+
+\begin{lstlisting}
+	\begin{lstlisting}[language=Python]
+		def hello_world():
+		print("Hello, World!")
+	/end{lstlisting}
+\end{lstlisting}
+
+Risultato: 
+\begin{lstlisting}[language=Python]
+	def hello_world():
+	print("Hello, World!")
+\end{lstlisting}
+
+In questo esempio, il pacchetto \texttt{listings} riconosce automaticamente la sintassi Python e la evidenzia correttamente.
+
+\subsection{Linguaggi di programmazione supportati}
+\texttt{listings} supporta molti linguaggi di programmazione, quindi è possibile utilizzare la sintassi di evidenziazione automatica per una vasta gamma di linguaggi. Basta specificare il linguaggio tramite l'opzione \texttt{language} nell'ambiente \texttt{lstlisting}. Alcuni dei linguaggi supportati includono:
+
+\begin{itemize}
+	\item Python: \texttt{language=Python}
+	\item C/C++: \texttt{language=C}
+	\item Java: \texttt{language=Java}
+	\item SQL: \texttt{language=SQL}
+	\item HTML: \texttt{language=HTML}
+	\item CSS: \texttt{language=CSS}
+	\item JavaScript: \texttt{language=JavaScript}
+	\item XML: \texttt{language=XML}
+\end{itemize}
+
+Esempio di codice SQL:
+
+\begin{lstlisting}[language=SQL]
+	SELECT * FROM users WHERE age > 18;
+\end{lstlisting}
+
+\subsection{Personalizzare gli Stili}
+Anche se il pacchetto offre stili predefiniti, è possibile personalizzare l'aspetto del codice. Se ci fosse la necessità di creare nuovi stili, contattare il responsabile. Alcuni parametri personalizzabili, qui elencati per evidenziare le potenzialità degli stili, sono:
+
+\begin{itemize}
+	\item \texttt{language}: Definisce il linguaggio del codice.
+	\item \texttt{basicstyle}: Imposta il tipo di carattere di base per il codice.
+	\item \texttt{keywordstyle}: Modifica lo stile delle parole chiave.
+	\item \texttt{stringstyle}: Modifica lo stile delle stringhe.
+	\item \texttt{commentstyle}: Definisce lo stile per i commenti.
+	\item \texttt{numbers}: Visualizza i numeri di riga.
+	\item \texttt{frame}: Aggiunge un bordo attorno al codice.
+	\item \texttt{backgroundcolor}: Imposta il colore di sfondo del codice.
+\end{itemize}
+
+Questo è il prima e dopo l'applicazione dello stile sql style definito all'interno di HKNtools.tex :
+\begin{lstlisting}[language=SQL]
+	-- Query per selezionare i dati degli utenti
+	SELECT name, age
+	FROM users
+	WHERE age > 18
+	ORDER BY age DESC;
+\end{lstlisting}
+
+\begin{lstlisting}[style=sqlstyle]
+	-- Query per selezionare i dati degli utenti
+	SELECT name, age
+	FROM users
+	WHERE age > 18
+	ORDER BY age DESC;
+\end{lstlisting}
+
+\subsection{Configurazione Globale}
+Puoi anche configurare \texttt{listings} globalmente per applicare le stesse impostazioni di stile a tutto il documento utilizzando il comando \texttt{\\lstset}. Ad esempio:
+
+\begin{lstlisting}
+\lstset{
+	language=Python,
+	numbers=left,
+	frame=single,
+	backgroundcolor=\color{lightgray},
+	stepnumber=1
+}
+\end{lstlisting}
+
+Questo imposterà le opzioni per tutti i blocchi di codice Python nel documento. 
+Ecco gli effetti prima e dopo l'uso dell'istruzione:
+
+\begin{lstlisting}[language=Python]
+	def hello_world():
+	print("Hello, World!")
+\end{lstlisting}
+
+\lstset{
+	language=Python,
+	numbers=left,
+	frame=single,
+	backgroundcolor=\color{lightgray},
+	stepnumber=1
+}
+
+\begin{lstlisting}[language=Python]
+	def hello_world():
+	print("Hello, World!")
+\end{lstlisting}
+
+\section{Stili personalizzati attualmente esistenti}
+Ulteriori stili verranno implementati man mano che ne nascerà l'esigenza da parte dei collaboratori. Per ora, questi sono quelli attualmente definiti:
+\begin{itemize}
+	\item SQL: sqlstyle
+\end{itemize}
