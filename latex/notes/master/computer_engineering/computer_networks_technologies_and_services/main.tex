@@ -1,0 +1,152 @@
+\input{../../../../lib/_preamble.tex}
+
+\title{Computer Networks Technologies and Services}
+
+\maketitle
+\tableofcontents
+
+\section{IPv4 Addressing and Routing}
+
+\subsection{IPv4 Addressing}
+
+IP addresses have the goal to be "nominally unique", that means that they should be unique in the network they are in.
+
+IP addresses are 32 bit identifiers for the \hl{interface}, not the device. The device can have multiple interfaces, and each interface has its own IP address. For example a smartphone can have an IP address for the Wi-Fi interface and another one for the cellular interface.
+
+\subsection{Notation}
+
+\begin{figure}[htb]
+  \centering
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includesvg[width=\textwidth,inkscapelatex=false]{res/svg/datagram.drawio}
+    \caption{IP Datagram}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includesvg[width=\textwidth,inkscapelatex=false]{res/svg/router.drawio}
+    \caption{Router - Layer 3}
+  \end{subfigure}
+
+  \vspace{1em}
+
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includesvg[width=\textwidth,inkscapelatex=false]{res/svg/switch.drawio}
+    \caption{Switch - Layer 2}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.45\textwidth}
+    \centering
+    \includesvg[width=\textwidth,inkscapelatex=false]{res/svg/access_point.drawio}
+    \caption{Access Point - Layer 2}
+  \end{subfigure}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includesvg[width=0.5\textwidth,inkscapelatex=false]{res/svg/ip_address}
+  \caption{IP Address}
+\end{figure}
+
+\begin{itemize}
+  \item An IP Network is a set of IP devices whose interfaces have
+  \begin{itemize}
+    \item same network ID
+    \item common physical connection (link-layer network)
+  \end{itemize}
+\end{itemize}
+
+\subsection{Special Addresses}
+
+\begin{figure}[h]
+  \begin{minipage}{0.45\textwidth}
+    \begin{bytefield}[bitwidth=\linewidth]{32}
+      \bitbox{20}{Some value} & \bitbox{12}{All zeros}
+    \end{bytefield}
+    \caption*{The (sub)network ID}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.45\textwidth}
+    \begin{bytefield}[bitwidth=\linewidth]{32}
+      \bitbox{32}{All ones}
+    \end{bytefield}
+    \caption*{\hl{Limited}: Broadcast packet becomes a L2 packet}
+  \end{minipage}
+
+  \begin{minipage}{0.45\textwidth}
+    \begin{bytefield}[bitwidth=\linewidth]{32}
+      \bitbox{20}{Some value} & \bitbox{12}{All ones}
+    \end{bytefield}
+    \caption*{Directed broadcast for network (usually restricted)}
+  \end{minipage}
+  \hfill
+  \begin{minipage}{0.45\textwidth}
+    \begin{bytefield}[bitwidth=\linewidth]{32}
+      \bitbox{8}{127} & \bitbox{24}{Anything (often ones)}
+    \end{bytefield}
+    \caption*{Loopback}
+  \end{minipage}
+  \end{figure}
+
+  \section{Addressing Classes}
+
+  \begin{figure}[h]
+    \begin{bytefield}{32}
+      \bitheader{0-31}
+      \bitbox{1}{\colorbox{yellow!20}{0}} & \bitbox{7}{Network} & \bitbox{24}{Host}
+    \end{bytefield}
+    \caption{Class A - 128 networks, 16M hosts per network}
+  \end{figure}
+
+  \begin{figure}[h]
+    \begin{bytefield}{32}
+      \bitheader{0-31}
+      \bitbox{2}{\colorbox{yellow!20}{10}} & \bitbox{14}{Network} & \bitbox{16}{Host}
+    \end{bytefield}
+    \caption{Class B - 16K networks, 64K hosts per network}
+  \end{figure}
+
+  \begin{figure}[h]
+    \begin{bytefield}{32}
+      \bitheader{0-31}
+      \bitbox{3}{\colorbox{yellow!20}{110}} & \bitbox{21}{Network} & \bitbox{8}{Host}
+    \end{bytefield}
+    \caption{Class C - 2M networks, 254 hosts per network}
+  \end{figure}
+
+  \section{CIDR | Classless Inter-Domain Routing}
+
+  Enables the use of arbitrary length network prefixes. The network prefix is written as \texttt{a.b.c.d/x}, where \texttt{x} is the number of bits in the network prefix.
+
+  The network prefix is also referred to as the \colorbox{yellow!20}{subnet mask} or \colorbox{yellow!20}{netmask}. The netmask is a 32 bit value that has \texttt{x} bits set to 1 and the rest set to 0.
+
+  \begin{itemize}
+    \item \texttt{200.23.16.0 / 23}: prefix length notation
+    \item \texttt{200.23.16.0   255.255.254.0}: netmask notation
+  \end{itemize}
+
+  \subsection{Table of Valid Netmask}
+
+  \begin{table}[h]
+    \centering
+    \begin{tabular}{lll}
+      \hline
+      Netmask & Prefix & Number of Usable IDs \\
+      \hline
+      \texttt{255.255.255.0} & \texttt{/24} & 254 \\
+      \texttt{255.255.255.128} & \texttt{/25} & 126 \\
+      \texttt{255.255.255.192} & \texttt{/26} & 62 \\
+      \texttt{255.255.255.224} & \texttt{/27} & 30 \\
+      \texttt{255.255.255.240} & \texttt{/28} & 14 \\
+      \texttt{255.255.255.248} & \texttt{/29} & 6 \\
+      \texttt{255.255.255.252} & \texttt{/30} & 2 \colorbox{green!20}{Smallest usable netmask} \\
+      \texttt{255.255.255.254} & \texttt{/31} & \colorbox{red!20}{Useless} \\
+      \texttt{255.255.255.255} & \texttt{/32} & \colorbox{yellow!20}{Represents the single device} \\
+      \hline
+    \end{tabular}
+    \caption{Valid Netmask Table}
+  \end{table}
+
+\input{../../../../lib/_postamble.tex}

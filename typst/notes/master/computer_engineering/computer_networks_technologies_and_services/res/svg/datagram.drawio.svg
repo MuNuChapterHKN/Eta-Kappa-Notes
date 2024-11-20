@@ -1,0 +1,50 @@
+<svg host="65bd71144e" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="401px" height="181px" viewBox="-0.5 -0.5 401 181" content="&lt;mxfile&gt;&lt;diagram id=&quot;mXw4rZ839-Rm2tDiU6O3&quot; name=&quot;Page-1&quot;&gt;5ZfZbuIwFIafJvexzZbLkKQFqQOodDSaSzcxwaoTR44pME8/duMAWRhQJ6Wz3CD793J8vuM/Mhbykt29wNn6C48Is6Ad7SzkWxD2nKH61cK+EIY2KIRY0KiQToQl/UGMaBt1QyOSVyZKzpmkWVUMeZqSUFY0LATfVqetOKtGzXBMGsIyxKypfqORXBfqqG8f9Qmh8bqMDGwzkuBystkiX+OIbwvpbQ4KLOQJzmXRSnYeYZpdyaXY6O7M6OFggqTymgWwWPCK2cbktnC/P8xd3xxP7sucBd+kEdHLbAuNm3FM6FciJNmdSCbuPeEJkWKvpphRiAwUcwlQ2d8ekYKR0dYnOAdGw6aK8WHrY6KqYXJtzxs18rbgwIII6OQmgesHj7cnAEdXEuh3QKDXILCcf330ggtpr3gq73BCmT7zjGzVXI8n2UYSoZra6SK9HR2nBQ7sAE6/AccPlk/Tmfs0nc/+GEIIfh6hQYuBaljUty3TzXAj2H4scPhC1AHGR1pA9Rh+JmzBcyopV1h8RlZ6koZA1Qf3oTac0CjS+48xo7EWRJHWYYFr9MPEDjgD5zJn2MIZgA5ADxugpwvV97HEscBJg7rKSfPIpeAvxOOMC6WnPNUsVpSxmlRyDBUedUF/AfI3bnkDdUtBztOv3fLDrT+hP2ihjzqA7/wtt/zKcggusYnh2N2UB4GaOVrK02aOYQflKUNXzeFBy1UDthtFguS5eij+8x6B9S8UuJ1HAGgU4X0mWTGaTc4Ypm6Ai46pOey9humgNr0r3jFtBunikQea73sdyh7v5f9gi96ght75MFuo7vFf29vYyV9fFPwE&lt;/diagram&gt;&lt;/mxfile&gt;">
+    <defs/>
+    <g>
+        <rect x="110" y="120" width="180" height="60" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="199.5" y="154.5">
+                PAYLOAD
+            </text>
+        </g>
+        <rect x="110" y="70" width="180" height="50" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="199.5" y="106.5">
+                HEADER
+            </text>
+        </g>
+        <rect x="110" y="70" width="90" height="20" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="New Computer Modern" text-anchor="middle" font-size="12px">
+            <text x="154.5" y="84.5">
+                SOURCE
+            </text>
+        </g>
+        <rect x="200" y="70" width="90" height="20" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="New Computer Modern" text-anchor="middle" font-size="12px">
+            <text x="244.5" y="84.5">
+                DESTINATION
+            </text>
+        </g>
+        <path d="M 90 70 L 85 70 Q 80 70 80 80 L 80 115 Q 80 125 75 125 L 72.5 125 Q 70 125 75 125 L 77.5 125 Q 80 125 80 135 L 80 170 Q 80 180 85 180 L 90 180" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="0" y="110" width="60" height="30" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="New Computer Modern" text-anchor="middle" font-size="12px">
+            <text x="29.5" y="129.5">
+                IP Datagram
+            </text>
+        </g>
+        <path d="M 210 10 L 205 10 Q 200 10 200 20 L 200 35 Q 200 45 195 45 L 192.5 45 Q 190 45 195 45 L 197.5 45 Q 200 45 200 55 L 200 70 Q 200 80 205 80 L 210 80" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" transform="rotate(90,200,45)" pointer-events="all"/>
+        <rect x="170" y="0" width="60" height="30" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="New Computer Modern" text-anchor="middle" font-size="12px">
+            <text x="199.5" y="19.5">
+                IP  Addresses
+            </text>
+        </g>
+        <path d="M 330 70 L 325 70 Q 320 70 320 80 L 320 87.5 Q 320 95 315 95 L 312.5 95 Q 310 95 315 95 L 317.5 95 Q 320 95 320 105 L 320 112.5 Q 320 120 325 120 L 330 120" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" transform="translate(320,0)scale(-1,1)translate(-320,0)" pointer-events="all"/>
+        <rect x="340" y="80" width="60" height="30" fill="none" stroke="none" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="New Computer Modern" text-anchor="middle" font-size="12px">
+            <text x="369.5" y="99.5">
+                20 Bytes
+            </text>
+        </g>
+    </g>
+</svg>

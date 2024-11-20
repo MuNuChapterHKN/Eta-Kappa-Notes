@@ -2,15 +2,16 @@
 #import "../../../lib/funcs.typ": course-outline
 
 #show: degree-template.with(
-  title: [Bachelor of Science in Computer Engineering],
+  title: [Master in Computer Engineering],
   release: "0.1.0",
   authors: ("Eduard Antonovic Occhipinti",),
 )
 
 #course-outline()
 
-= First Year
+#heading(level: 1)[First Year]
 
-= Second Year
+#include "computer_networks_technologies_and_services/main.typ"
 
-= Third Year
+#heading(level: 1)[Second Year]
+

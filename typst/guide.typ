@@ -1,6 +1,6 @@
-#import "lib/template.typ": template
+#import "lib/template.typ": degree-template
 
-#show: template.with(
+#show: degree-template.with(
   title: [Guide],
   release: "0.1.0",
   authors: ("Eduard Antonovic Occhipinti, ", "Erik Scolaro"),
@@ -63,10 +63,10 @@ $ <einstein>
 And you would cite it like this:
 
 ```typ
-The famous equation by Einstein is shown in Equation @einstein.
+The famous equation by Einstein is shown in @einstein.
 ```
 
-The famous equation by Einstein is shown in Equation @einstein.
+The famous equation by Einstein is shown in @einstein.
 
 Like in LaTeX, the `&` operator can be used for alignment of equations in Typst. For example, the following code:
 

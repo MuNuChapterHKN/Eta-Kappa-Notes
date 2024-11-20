@@ -1,5 +1,8 @@
 {
     "hediet.vscode-drawio.simpleLabels": true,
+    "hediet.vscode-drawio.customFonts": [
+        "New Computer Modern"
+    ],
     "latex-workshop.latex.outDir": "%WORKSPACE_FOLDER%/build/latex/%DOCFILE%",
     "[latex]": {
         "editor.wordWrap": "on",
