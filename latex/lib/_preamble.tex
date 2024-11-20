@@ -1,13 +1,17 @@
-%% HKNtools.sty
+\documentclass[a4paper,12pt]{book}
 
-%% PACCHETTI
-\usepackage[italian]{babel}              % Lingua italiana
-\usepackage{listings}                    % Per formattare il codice
-\usepackage{xcolor}                      % Supporto per i colori
-\usepackage{graphicx}                    % Per includere immagini
-\usepackage{longtable}                   % Per tabelle su più pagine
-\usepackage{amsmath, amssymb}            % Per le espressioni matematiche
-\usepackage{svg}                         % Per includere grafici SVG
+% Nota: scrivendo draft negli aromenti di document class, si disabilita il rendering di tutti gli ambienti figure. utile per non perdere tempo se non si è interessati a verificare questo aspetto.
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}              % Used for italian language
+\usepackage{hyperref}                    % Used for hyperlinks
+\usepackage{listings}                    % Used for code highlighting
+\usepackage{xcolor}                      % Used to define custom colors
+\usepackage{graphicx}                    % Used to include images
+\usepackage{longtable}                   % Used for breakable tables
+\usepackage{amsmath, amssymb}            % Used for math expressions
+\usepackage[inkscapeversion=1]{svg}                         % Used to include svg images
+\usepackage{ulem} % Provides underline
+\usepackage{contour} % Used to add border around text (in our case used to make a custom underline command that doesn't overlap with descenders)
 
 %% IMPOSTAZIONI DEI COLORI
 \definecolor{sqlBackground}{RGB}{240, 240, 240}     % Sfondo chiaro
@@ -16,7 +20,8 @@
 \definecolor{sqlComment}{RGB}{0, 128, 0}            % Commenti in verde
 \definecolor{sqlString}{RGB}{200, 0, 0}             % Stringhe in rosso
 \definecolor{sqlNumber}{RGB}{100, 100, 100}         % Numeri di riga in grigio
-\definecolor{sqlIdentifier}{RGB}{0, 0, 100}         % Identificatori in blu scuro
+\definecolor{sqlIdentifier}{RGB}{0, 0, 100}         % Identificatori in blu scuro\
+
 
 %% COMANDI PERSONALIZZATI
 % Definizione dello stile per SQL
@@ -39,12 +44,18 @@
 	numbersep=5pt,                              % Distanza tra i numeri e il codice
 }
 
-% Altri comandi personalizzati (puoi aggiungerli qui)
-% \newcommand{\insertlicense}{\texttt{Licenza...}}
+\renewcommand{\ULdepth}{1.8pt} % underline depth
+\contourlength{0.8pt}
 
+\newcommand{\myuline}[1]{% better underline
+  \uline{\phantom{#1}}%
+  \llap{\contour{white}{#1}}%
+}
+
+\begin{document}
 
 %TODO: aggiungere altri stili per altri codici
 
 %TODO: creare il comando per l'inserimento automatico della licenza
 
-%TODO: 
+%TODO:

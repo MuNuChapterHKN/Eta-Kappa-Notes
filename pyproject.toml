@@ -1,0 +1,7 @@
+[project]
+name = "eta-kappa-notes"
+version = "0.1.0"
+dependencies = ["matplotlib", "numpy", "mpl-tools"]
+
+[tool.setuptools]
+py-modules = []
