@@ -8,6 +8,7 @@
         "editor.wordWrap": "on",
     },
     "latex-workshop.latex.autoBuild.run": "onSave",
+    "latex-workshop.latex.rootFile.useSubFile": true,
     "latex-workshop.latex.tools": [
         {
             "name": "latexmk",
