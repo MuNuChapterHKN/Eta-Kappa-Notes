@@ -3,6 +3,7 @@
 #show: degree-template.with(
   title: [Guide],
   release: "0.1.0",
+  show-outline: false,
   authors: ("Eduard Antonovic Occhipinti, ", "Erik Scolaro"),
 )
 

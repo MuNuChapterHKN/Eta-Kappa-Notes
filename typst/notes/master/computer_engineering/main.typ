@@ -7,8 +7,6 @@
   authors: ("Eduard Antonovic Occhipinti",),
 )
 
-#course-outline()
-
 #heading(level: 1)[First Year]
 
 #include "computer_networks_technologies_and_services/main.typ"

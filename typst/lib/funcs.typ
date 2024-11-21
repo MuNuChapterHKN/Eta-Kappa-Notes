@@ -17,15 +17,29 @@
   outline(
     title: "Indice Italiano",
     target: selector(
-      heading.where(outlined: true, supplement: [Sezione]).or(heading.where(outlined: true, supplement: [Chapter])),
+      heading.where(outlined: true, supplement: [Sezione]).or(
+        heading.where(outlined: true, supplement: [Capitolo]).or(
+          heading.where(outlined: true, supplement: [Corso]).or(
+            heading.where(outlined: true, supplement: [Anno di Corso]),
+          ),
+        ),
+      ),
     ),
+    depth: 2,
   )
 
   outline(
     title: "English Index",
     target: selector(
-      heading.where(outlined: true, supplement: [Section]).or(heading.where(outlined: true, supplement: [Chapter])),
+      heading.where(outlined: true, supplement: [Section]).or(
+        heading.where(outlined: true, supplement: [Chapter]).or(
+          heading.where(outlined: true, supplement: [Course]).or(
+            heading.where(outlined: true, supplement: [Course Year]),
+          ),
+        ),
+      ),
     ),
+    depth: 2,
   )
 }
 
