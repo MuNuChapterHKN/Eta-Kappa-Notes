@@ -3,7 +3,7 @@
 #import "@preview/codly:1.0.0": *
 #import "@preview/codly-languages:0.1.0": *
 #import "@preview/bytefield:0.0.6": *
-#import "palette.typ": hkn_blue
+#import "palette.typ": eta_kappa_blue
 
 #let title-page(title, subtitle, authors, release) = {
   set align(center)
@@ -83,7 +83,7 @@
         set text(1.3em, weight: "bold")
         smallcaps(it)
       } else {
-        let l = line(length: 100%, stroke: 0.5pt + hkn_blue)
+        let l = line(length: 100%, stroke: 0.5pt + eta_kappa_blue)
         let course = [
           #text(weight: "regular")[
             #smallcaps(it.supplement) #code
@@ -128,12 +128,6 @@
     number-format: it => text(fill: luma(200), str(it)),
   )
 
-  // TERMS
-
-  show terms.item: it => [
-    _*#it.term:*_ #it.description
-  ]
-
   // TABLES
 
   show table.cell.where(y: 0): strong
@@ -174,8 +168,8 @@
     } else {
       heading(level: 2)[#title #label(code)]
       show: outline(
-        target: selector.or(..range(3,7).map(l => heading.where(level: l))),
-        depth: 7,
+        target: selector.or(..range(3,11).map(l => heading.where(level: l))),
+        depth: 11,
       )
     }
   }

@@ -1,1 +1,1 @@
-#let hkn_blue = blue
+#let eta_kappa_blue = blue
