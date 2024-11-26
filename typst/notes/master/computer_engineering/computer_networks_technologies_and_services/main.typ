@@ -5,6 +5,7 @@
 
 
 #let bytefield = bytefield.with(stroke: 0.5pt)
+#let def = quotation.with(title: "Definition")
 
 #let hl = highlight.with(fill: yellow.lighten(80%))
 #let hl_green = highlight.with(fill: green.lighten(80%))
@@ -20,7 +21,7 @@
 
 = IPv4 Addressing and Routing
 
-== IPv4 Addressing
+== IPv4 Addressing <ipv4addressing>
 
 IP addresses have the goal to be "nominally unique", that means that they should be unique in the network they are in.
 
@@ -53,13 +54,19 @@ Any address can be in one of five states:
   align: center + bottom,
   inset: 1em,
   figure(image("res/svg/datagram.drawio.svg"), caption: [IP Datagram]),
-  figure(image("res/svg/router.drawio.svg"), caption: [Router - Layer 3, routes packets between networks]),
+  figure(
+    image("res/svg/router.drawio.svg"),
+    caption: [Router - Layer 3, routes packets between networks],
+  ),
 
   figure(
     image("res/svg/switch.drawio.svg"),
     caption: [Switch - Layer 2, interconnects devices. It's "transparent", it doesn't have an IP address],
   ),
-  figure(image("res/svg/access_point.drawio.svg"), caption: [Access Point - Layer 2]),
+  figure(
+    image("res/svg/access_point.drawio.svg"),
+    caption: [Access Point - Layer 2],
+  ),
 )
 
 #figure(
@@ -165,14 +172,22 @@ The network prefix is also referred to as the #hl[subnet mask] or #hl[netmask]. 
 #figure(
   table(
     columns: 3,
-    table.header([Netmask], [#text(hyphenate: false)[Prefix]], [Number of Usable IDs]),
+    table.header(
+      [Netmask],
+      [#text(hyphenate: false)[Prefix]],
+      [Number of Usable IDs],
+    ),
+
     [`255.255.255.0`], [`/24`], [254],
     [`255.255.255.128`], [`/25`], [126],
     [`255.255.255.192`], [`/26`], [62],
     [`255.255.255.224`], [`/27`], [30],
     [`255.255.255.240`], [`/28`], [14],
     [`255.255.255.248`], [`/29`], [6],
-    [`255.255.255.252`], [`/30`], [2 #hl(fill: green.lighten(80%))[Smallest usable netmask]],
+    [`255.255.255.252`],
+    [`/30`],
+    [2 #hl(fill: green.lighten(80%))[Smallest usable netmask]],
+
     [`255.255.255.254`], [`/31`], [#hl(fill: red.lighten(80%))[Useless]],
     [`255.255.255.255`], [`/32`], [#hl[Represents the single device]],
   ),
@@ -223,7 +238,16 @@ Suppose now that we receive `200.23.19.190`, the first destination does match, b
 
 #figure(
   bytefield(
-    bitheader(0, 7, 15, 19, text(hyphenate: false)[prefix \#1], 22, text(hyphenate: false)[prefix \#2], 31),
+    bitheader(
+      0,
+      7,
+      15,
+      19,
+      text(hyphenate: false)[prefix \#1],
+      22,
+      text(hyphenate: false)[prefix \#2],
+      31,
+    ),
     note(left)[Packet IP Address],
     bits(8, fill: green.lighten(80%))[200],
     bits(8, fill: green.lighten(80%))[23],
@@ -455,35 +479,110 @@ IP Addresses are organized in three main groups:
 
         node(ipv6-addresses, [IPv6 Addresses], width: 100pt)
 
-        node(unicast, [Unicast \ (@unicast)], width: 100pt, fill: green.lighten(80%))
-        node(multicast, [Multicast \ (@multicast)], width: 100pt, fill: blue.lighten(80%))
-        node(anycast, [Anycast \ (@anycast)], width: 100pt, fill: yellow.lighten(80%))
+        node(
+          unicast,
+          [Unicast \ (@unicast)],
+          width: 100pt,
+          fill: green.lighten(80%),
+        )
+        node(
+          multicast,
+          [Multicast \ (@multicast)],
+          width: 100pt,
+          fill: blue.lighten(80%),
+        )
+        node(
+          anycast,
+          [Anycast \ (@anycast)],
+          width: 100pt,
+          fill: yellow.lighten(80%),
+        )
 
-        node(well-known, [Well-Known \ *`FF00::/12`*], width: 140pt, fill: blue.lighten(95%))
-        node(transient, [Transient \ *`FF10::/12`*], width: 140pt, fill: blue.lighten(95%))
-        node(solicited-node, [Solicited-Node \ *`FF02:0:0:0:0:1:FF00::/104`*], width: 140pt, fill: blue.lighten(95%))
+        node(
+          well-known,
+          [Well-Known \ *`FF00::/12`*],
+          width: 140pt,
+          fill: blue.lighten(95%),
+        )
+        node(
+          transient,
+          [Transient \ *`FF10::/12`*],
+          width: 140pt,
+          fill: blue.lighten(95%),
+        )
+        node(
+          solicited-node,
+          [Solicited-Node \ *`FF02:0:0:0:0:1:FF00::/104`*],
+          width: 140pt,
+          fill: blue.lighten(95%),
+        )
 
-        node(global-unicast, [Global Unicast \ *`2000::/3`*], width: 100pt, fill: green.lighten(95%))
-        node(link-local, [Link-Local \ *`FE80::/10`*], width: 100pt, fill: green.lighten(95%))
-        node(loopback, [Loopback \ *`::1/128`*], width: 100pt, fill: green.lighten(95%))
-        node(unspecified, [Unspecified \ *`::/128`*], width: 100pt, fill: green.lighten(95%))
-        node(unique-local, [Unique Local \ *`FC00::/7`*], width: 100pt, fill: green.lighten(95%))
-        node(embedded-ipv4, [Embedded IPv4 \ *`::/80`*], width: 100pt, fill: green.lighten(95%))
+        node(
+          global-unicast,
+          [Global Unicast \ *`2000::/3`*],
+          width: 100pt,
+          fill: green.lighten(95%),
+        )
+        node(
+          link-local,
+          [Link-Local \ *`FE80::/10`*],
+          width: 100pt,
+          fill: green.lighten(95%),
+        )
+        node(
+          loopback,
+          [Loopback \ *`::1/128`*],
+          width: 100pt,
+          fill: green.lighten(95%),
+        )
+        node(
+          unspecified,
+          [Unspecified \ *`::/128`*],
+          width: 100pt,
+          fill: green.lighten(95%),
+        )
+        node(
+          unique-local,
+          [Unique Local \ *`FC00::/7`*],
+          width: 100pt,
+          fill: green.lighten(95%),
+        )
+        node(
+          embedded-ipv4,
+          [Embedded IPv4 \ *`::/80`*],
+          width: 100pt,
+          fill: green.lighten(95%),
+        )
 
         edge(ipv6-addresses, unicast, "-")
         edge(ipv6-addresses, multicast, "-")
         edge(ipv6-addresses, anycast, "-")
 
-        edge(unicast, (unicast.first(), global-unicast.last()), global-unicast, "-")
+        edge(
+          unicast,
+          (unicast.first(), global-unicast.last()),
+          global-unicast,
+          "-",
+        )
         edge(unicast, (unicast.first(), link-local.last()), link-local, "-")
         edge(unicast, (unicast.first(), loopback.last()), loopback, "-")
         edge(unicast, (unicast.first(), unspecified.last()), unspecified, "-")
         edge(unicast, (unicast.first(), unique-local.last()), unique-local, "-")
-        edge(unicast, (unicast.first(), embedded-ipv4.last()), embedded-ipv4, "-")
+        edge(
+          unicast,
+          (unicast.first(), embedded-ipv4.last()),
+          embedded-ipv4,
+          "-",
+        )
 
         edge(multicast, (multicast.first(), well-known.last()), well-known, "-")
         edge(multicast, (multicast.first(), transient.last()), transient, "-")
-        edge(multicast, (multicast.first(), solicited-node.last()), solicited-node, "-")
+        edge(
+          multicast,
+          (multicast.first(), solicited-node.last()),
+          solicited-node,
+          "-",
+        )
       },
     ),
     bytefield(
@@ -505,7 +604,7 @@ IP Addresses are organized in three main groups:
       bits(1)[],
     ),
   ),
-  caption: [Summary of the address space fragmentation],
+  caption: [Summary of the address space subdivision],
 ) <address-space-summary-diagram>
 
 === Multicast Addresses <multicast>
@@ -1089,7 +1188,7 @@ Based on supporting both protocols, IPv4 can be removed gradually when all hosts
 
 The problem with this approach is that it does not solve the problem of IPv4 shortage, it's costly due to the complete duplication of the stack and the choice between the two protocols is relegated to the applications. There is then the limitation of communication between IPv4-only and IPv6 hosts. While it's true that IPv6 can communicate with IPv4 hosts (see @ipv4-embedded), there is no way for an IPv4 native host to communicate with an IPv6 native host.
 
-== Tunneling
+== Tunneling <ipv6-tunneling>
 
 Not used anymore due to scalability problems. It is used to exchange IPv6 packets over an IPv4 network. In the early days this was commonplace, nowadays, there are no IPv4 only ISPs.
 
@@ -1190,7 +1289,462 @@ Interference caused by the signal attenuating with distance and interfering with
 
 - No base station
 - Mobiles communicate peer-to-peer
-- Noes can organize themselves into a network (for example mesh Wi-Fi)
+- Nodes can organize themselves into a network (for example mesh Wi-Fi)
 
+= VPN | Virtual Private Networks
 
+Enables a host in the network to be recognized as belonging to another network. Recall that in IP networks, the address is used to identify the network, different countries are assigned different IP ranges (@ipv4addressing). The way VPN works is by #hl[tunneling]. Another important concern of VPNs in security, and security is eachieved through #hl[cryptography].
 
+#def[
+  Connectivity ralized on a shared infrastructure such that policies can be enforced as in a private network.
+]
+
+VPNs are used mainly to cut costs, managing a large size private network is very costly but still done today in particular cases. For a private network you need privately leased lines and long distance dial-up solutions.
+
+== Security <vpn-security>
+
+- *Confidentiality*: data is encrypted, cannot be read by unauthorized parties
+- *Integrity*: data is not tampered with, and its origin is verified
+- *End Point Authentication*: the identity of the sender is verified
+- *Data Separation*: tunneling
+
+These four objectives are not always achieved by VPNs, for example in the case of a VPN that only encrypts the data, the data is confidential, but the identity of the sender is not verified. It's not always necessary to enforce all four objectives, it depends on the use case.
+
+== VPN Gateway
+
+Represents an intermediate device (once upon a time routers were called gateways), usually the termination device on the corporate network, sometimes it can the tunnel's endpoint.
+
+== VPN Tunnels
+
+A tunnel, in VPN, is a (secure) encapsulation of private (corporate) traffic within a public network. This is done by encapsulating packets in other packets by adding a new header at the start and placing the original packet in our new packet's payload. Recall how they were used in the IPv4 to IPv6 transitions in @ipv6-tunneling. It's #hl[not always present in all VPN solutions].
+
+=== s2s | Site-to-Site Tunneling <s2s>
+
+Case in which you have two corporate sites that need to communicate with each other to the public network. Packets are sent to an endpoint that will tunnel them to the other endpoint.
+
+#info[This simplifies the equivalent solutions that we would have by using two NATs at each end point. to make things work each NAT wuld also have to be aware of the other's mappings so that both the sender private address and the destination private address are translated correctly.]
+
+=== e2e | End-to-End Tunneling <e2e>
+
+In this case the tunnel endpoints are the device themselves. This is useful if you have some hosts on the VPN that don't need to communicate with every other host. This makes it easy to configure the tunnel in a way where communication privileges are more fine-grained.
+
+=== Remote Tunneling
+
+In this case there is a VPN Gateway as one end point and the host as the other end point.
+
+== Architectures
+
+You can have two main network architectures for a VPN solution:
+
+/ *Intranet*: classical case where one corporate network with multiple sites in intraconnected through a shared infrastructure
+/ *Extranet*: a network only partially private, for example different companies that need to interconnect their networks for certain services. There is still some level of separation, you want to enforce certain policies (think of a supplier for a company that needs to access some of the company's private resources). This type of architectures introduces more *firewalls*. This type of architecture introduces some problems, namely the issue of *Overlapping Address Spaces* that can be solved by using NAT. In Extranets, it's also crucial to have some form of *Access Control*, this is done to avoid a partner networks compromising the performance on your private network by flooding it with traffic.
+
+== Internet Access
+
+To access the internet through a VPN you can either have a *Centralized* solution, in which each device's packets are routed through one central site of the corporate network and only from there they can reach the internet. This solution is better from a security point of view (can monitor the incoming and outgoing internet traffic from your employees). This solution also forces every packet to pass through the corporate network #underline[twice] so it's more difficult to manage the traffic and more difficult to scale it.
+
+A second way of managing internet access is to allow the devices to access the internet directly, this is called *Distributed Internet Access*. Packets go through the VPN only if they need to reach the corporate network. This solution means that you need to have a firewall everywhere you have a remote corporate site, and everywhere you have a remote host.
+
+== (Virtual) VPN Topologies
+
+Depending on how you interconnect the VPNs you can have different topologies:
+
+- *Hub and Spoke*: each branch communicates directly with the central site but cannot directly communicate with another branch. This is solution has the advantages of only needing to manage a tunnel for every branch. We have the problem of the central site being a single point of failure and a bottleneck. Routing is also suboptimal because even in branches that could be directly connected, they still have to go through the central site.
+- *Mesh*: every branch can communicate with every other branch. They are all peers. This solution can provide more optimized routing, but it's more difficult to manage because of the high number of tunnels.
+
+== VPN Solutions
+
+VPN solutions are identified by three key elements:
+
+- *Deployment Model* (@deployment-model): specifies if the public infrastructure participates in the VPN
+- *Provisioning Model* (@provisioning-model): specifies if the VPN itself is managed by the client itself or by the provider.
+- *Protocol Layer* (@protocol-layer): the layer in the OSI stack of the protocol used for the encapsulation (the external packet).
+
+#figure(
+  diagram(
+    spacing: (120pt, 10pt),
+    node-stroke: 0.5pt,
+    {
+      let (
+        vpn,
+        overlay-model,
+        peer-model,
+        layer2-vpn,
+        layer3-vpn,
+        layer4-vpn,
+        dedicated-router,
+        mpls-peer,
+        shared-router,
+        frame-relay,
+        atm,
+        mpls-overlay,
+        ipsec,
+        gre,
+        pptp,
+        l2tp,
+        ssl,
+        bgp,
+        vr,
+      ) = (
+        (0, 0),
+        (-0.6, 1),
+        (0.6, 1),
+        (-1, 2),
+        (-0.6, 2),
+        (-0.2, 2),
+        (0.2, 2),
+        (0.6, 2),
+        (1, 2),
+        (-0.8, 3),
+        (-0.8, 4),
+        (-0.8, 5),
+        (-0.4, 3),
+        (-0.4, 4),
+        (-0.4, 5),
+        (-0.4, 6),
+        (0, 3),
+        (0.8, 3),
+        (0.8, 4),
+      )
+
+      node(vpn, [VPN], width: 100pt)
+
+      node(
+        overlay-model,
+        link(label("overlay-model"))[Overlay Model],
+        width: 100pt,
+      )
+      node(peer-model, link(label("peer-model"))[Peer Model], width: 100pt)
+
+      node(layer2-vpn, link(label("layer2-vpn"))[Layer 2 \ VPN], width: 60pt)
+      node(layer3-vpn, link(label("layer3-vpn"))[Layer 3 \ VPN], width: 60pt)
+      node(layer4-vpn, link(label("layer4-vpn"))[Layer 4 \ VPN], width: 60pt)
+
+      node(dedicated-router, [Dedicated Router], width: 60pt)
+      node(mpls-peer, [MPLS Peer], width: 60pt)
+      node(shared-router, [Shared Router], width: 60pt)
+
+      node(frame-relay, [Frame \ Relay], width: 60pt, fill: green.lighten(80%))
+      node(atm, [ATM], width: 60pt, fill: green.lighten(80%))
+      node(mpls-overlay, [MPLS Overlay], width: 60pt, fill: green.lighten(80%))
+
+      node(
+        gre,
+        link(label("gre"))[GRE],
+        width: 60pt,
+        fill: yellow.lighten(80%),
+      )
+      node(
+        ipsec,
+        link(label("ipsec"))[IPsec],
+        width: 60pt,
+        fill: yellow.lighten(80%),
+      )
+      node(
+        pptp,
+        link(label("pptp"))[PPTP],
+        width: 60pt,
+        fill: blue.lighten(80%),
+      )
+      node(
+        l2tp,
+        link(label("l2tp"))[L2TP],
+        width: 60pt,
+        fill: blue.lighten(80%),
+      )
+
+      node(ssl, [SSL], width: 60pt, fill: yellow.lighten(80%))
+
+      node(bgp, [BGP], width: 60pt, fill: green.lighten(80%))
+      node(vr, [Virtual Router], width: 60pt, fill: green.lighten(80%))
+
+      edge(vpn, overlay-model, "-")
+      edge(vpn, peer-model, "-")
+
+      edge(overlay-model, layer2-vpn, "-")
+      edge(overlay-model, layer3-vpn, "-")
+      edge(overlay-model, layer4-vpn, "-")
+
+      edge(peer-model, dedicated-router, "-")
+      edge(peer-model, mpls-peer, "-")
+      edge(peer-model, shared-router, "-")
+
+      edge(
+        layer2-vpn,
+        (layer2-vpn.first(), frame-relay.last()),
+        frame-relay,
+        "-",
+      )
+      edge(layer2-vpn, (layer2-vpn.first(), atm.last()), atm, "-")
+      edge(
+        layer2-vpn,
+        (layer2-vpn.first(), mpls-overlay.last()),
+        mpls-overlay,
+        "-",
+      )
+
+      edge(layer3-vpn, (layer3-vpn.first(), ipsec.last()), ipsec, "-")
+      edge(layer3-vpn, (layer3-vpn.first(), gre.last()), gre, "-")
+      edge(layer3-vpn, (layer3-vpn.first(), pptp.last()), pptp, "-")
+      edge(layer3-vpn, (layer3-vpn.first(), l2tp.last()), l2tp, "-")
+
+      edge(layer4-vpn, (layer4-vpn.first(), ssl.last()), ssl, "-")
+
+      edge(mpls-peer, (mpls-peer.first(), bgp.last()), bgp, "-")
+      edge(mpls-peer, (mpls-peer.first(), vr.last()), vr, "-")
+    },
+  ),
+  caption: [Summary of VPN Solutions, highlighted in yellow the customer provisioned solutions, in green the provider provisioned solutions, in blue solutions that offer both options],
+) <vpn-solutions-diagram>
+
+=== Deployment Model <deployment-model>
+
+==== Overlay Model <overlay-model>
+
+The public network does not participate in the creation of the VPN, it doesn't know of its presence, it just provides basic connectivity between VPN gateways. Each gateway must know how to reach the other gateways. Each pair of VPN gateways will have a tunnel, so the solution will be based on a hybrid mesh topology. Routing is done by the VPN gateways.
+
+==== Peer Model <peer-model>
+
+The public network participates in the VPN, it knows of the VPN and can provide some services. It's the public network that is in charge of routing the packets. The VPN gateways are peers.
+
+=== Provisioning Model <provisioning-model>
+
+==== Customer Provisioned VPN
+
+The customer devices (Customer Equipments, CE) are used for the implementation of the VPN solutions and coincide with the tunnel endpoints. The customers are responsible for the configuration of the VPN. Each remote host has 2 addresses, one standard one and another one assigned by the ISP. The network provider is not aware that the traffic generated by the customer is part of a VPN, so the solution can be used from any Internet connection.
+
+==== Provider Provisioned VPN
+
+The customer is not responsible for the configuration of the VPN, the network provider is. Provider Equipment (PE) terminates the tunnels. This is often preferred because it's not easy to correctly configure a VPN from a security point of view and not all CE are powerful enough to run the cryptographic algorithms required. Traffic belonging to different VPNs is kept separate. Customers are not aware of the VPN, but they are required to access only a specific ISP (centralized internet access).
+
+=== Protocol Layer <protocol-layer>
+
+==== Layer 2 VPN <layer2-vpn>
+
+/ Virtual Private LAN Service: utilizes Ethernet switches as VPN gateways, emulates the functionality of a complete Local Area Network
+/ Virtual Private Wire Service: like Virtual Private LAN Service, it utilizes Ethernet switches as VPN gateways, emulates the behavior of a direct lease line
+/ IP-Only LAN-like Service: utilizes IP routers or hosts as gateways, only IP packets can be encapsulated in the Layer 2 protocol
+
+==== Layer 3 VPN <layer3-vpn>
+
+Many VPN solutions are based on encapsulation in a layer 3 protocol, with the most common one being the IP protocol. The CE are IP routers or hosts. Routing is based on Layer 3 addresses, the customer addresses in a *peer* model, the backbone ones in an *overlay* model.
+
+===== Tunneling
+
+The external header of the tunneled packet is an IP header. The internal header does not necessarily have to be an IP header, you can have an *IP-in-IP* solution, but you can also encapsulate a Layer 2 frame within an IP packet.
+
+_IP-in-IP_
+- *GRE*
+- *IPsec*
+
+_Layer 2 in IP_
+- *L2TP*
+- *PPTP*
+
+==== Layer 4 VPN <layer4-vpn>
+
+Used when you want to encapsulate the internal packet in a Layer 4 protocol first (TCP, SSL, TLS). This can be done both *Site-to-Site* (*s2s*), with the tunnel terminating at the VPN gateways at the border of the corporate network, or *End-to-End* (*e2e*), with the tunnel terminating at the end hosts.
+
+=== GRE <gre>
+
+- GRE is a tunneling protocol that can encapsulate any protocol in an IP packet
+
+#figure(
+  box(
+    grid(row-gutter: 0.5em,
+      bytefield(
+        bpr: 5,
+        bit[MAC Header],
+        bits(2)[IP Header (Protocol number: `47`)],
+        bit(fill: yellow.lighten(80%))[GRE Header],
+        bit[Data],
+      ),
+      bytefield(
+        bitheader("offsets"),
+        bit(fill: yellow.lighten(80%))[C],
+        bit(fill: yellow.lighten(80%))[R],
+        bit(fill: yellow.lighten(80%))[K],
+        bit(fill: yellow.lighten(80%))[S],
+        bit(fill: yellow.lighten(80%))[s],
+        bits(3, fill: yellow.lighten(80%))[Recur],
+        bits(5, fill: yellow.lighten(80%))[Flags],
+        bits(3, fill: yellow.lighten(80%))[Version],
+        bits(16, fill: yellow.lighten(80%))[Protocol],
+        bits(16, fill: yellow.lighten(80%))[Checksum (optional)],
+        bits(16, fill: yellow.lighten(80%))[Offset (optional)],
+        bits(32, fill: yellow.lighten(80%))[Key (optional)],
+        bits(32, fill: yellow.lighten(80%))[Sequence Number (optional)],
+        bits(32, fill: yellow.lighten(80%))[Routing (optional)],
+      )
+    ),
+  ),
+  caption: [GRE Header Format],
+)
+
+The *Data* field is the original packet that is being encapsulated.
+
+The *IP Header* will have source and destination addresses corresponding to the tunnel endpoints.
+
+The *protocol* field in the GRE Header specify the protocol it's encapsulating, the *C*, *R*, *K* and *S* flags are used to specify the presence of optional fields (respectively *Checksum*, *Routing*, *Key* and *Sequence Number*). The *s* (Strict Source Routing) flag, if set, specifies that the packet #underline[must] follow the path specified in the *Routing* field and if destination is not reached when the source route list is exhausted, the packet is discarded. The *Recur* flag is set to zero and specifies the maximum number of additional encapsulations that are allowed. The *Sequence Number* field is used to detect out of order packets and drop them. The *Key* field specifies the length in bytes of the *Data* field (the payload length).
+
+==== Enhanced GRE
+
+- Deployed by PPTP
+
+#figure(
+  bytefield(
+    bitheader("offsets"),
+    bit[C],
+    bit[R],
+    bit[K],
+    bit[S],
+    bit[s],
+    bits(3)[Recur],
+    bit(fill: green.lighten(80%))[A],
+    bits(4)[Flags],
+    bits(3)[Version],
+    bits(16)[Protocol],
+    bits(16, fill: yellow.lighten(80%))[Key (HW) Payload Length],
+    bits(16, fill: yellow.lighten(80%))[Key (LW) Call ID],
+    bits(32)[Sequence Number (optional)],
+    bits(32, fill: green.lighten(80%))[Acknowledgment Number (optional)],
+  ),
+  caption: [Enhanced GRE Header Format, in green the new fields, in yellow the modified ones],
+)
+
+The *Key* field has been divided into two parts, the high 16 bits specify the payload length, like the original Key field, while the low 16 bits specify the *Session ID* (*Call ID*) of the packet so that the VPN gateways can identify the session the packet belongs to. Another flag, the *A* flag, for a new field, the #hl[*Acknowledgment Number* field, has been added to enable *Flow Control*] thorough sliding window mechanism. The Acknowledgment Number is highest sequence number of all of the GRE packet received in sequence in a single session (*Cumulative ACK*). It works in a similar fashion to TCP. GRE allows for lost packets but #hl[ cannot handle out-of-order packets] so they will be discarded. *Timeout Values* are re-computed each time an ACK is received. As far as *Congestion Control* is concerned, #hl[tiemouts do not cause re-transission], timeouts are used to move the sliding windows faster.
+
+=== L2TP | Layer 2 Tunneling Protocol <l2tp>
+
+- e2e (@e2e)
+
+#hl[Born as a provider provisioned solution] and then extended also to a customer provisioned one. Enables the usage of any Layer 2 protocol. Security is provided through IPsec. Using IPsec for security means using two VPN solutions, not always the most straightforward way to go.
+
+You have a tunnel between a public network access point, *L2TP Access Concentrator* (*LAC*), and the VPN network at the border of the corporate network, *L2TP Network Server* (*LNS*). Originally the LAC was a separate entity from the CE, when L2TP became utilized also for customer provisioned VPNs the LAC was integrated into the CE. When the VPN is provider provisioned, the LAC was included in a special server called *Network Access Server* (*NAS*).
+
+- Multiple sessions may exist within the same tunnels
+- To authenticate the host we use the *Challenge and Shake Authentication Protocol* (*CHAP*). It works by having the server send a "challenge" which the user uses to encrypt their password. The authentication device (which could be the LAC) completes the same process and then compares its result with the one provided by the user.
+
+#figure(
+  box(
+    grid(row-gutter: 0.5em,
+      bytefield(
+        bpr: 5,
+        bit[MAC Header],
+        bit[IP Header],
+        bit[UDP Header],
+        bit(fill: yellow.lighten(80%))[L2TP Header],
+        bit[Data],
+      ),
+      bytefield(
+        bitheader("offsets"),
+        bit(fill: yellow.lighten(80%))[T],
+        bit(fill: yellow.lighten(80%))[L],
+        bits(2, fill: yellow.lighten(80%))[`0`],
+        bit(fill: yellow.lighten(80%))[S],
+        bit(fill: yellow.lighten(80%))[`0`],
+        bit(fill: yellow.lighten(80%))[O],
+        bit(fill: yellow.lighten(80%))[P],
+        bits(4, fill: yellow.lighten(80%))[`0`],
+        bits(4, fill: yellow.lighten(80%))[Version],
+        bits(16, fill: yellow.lighten(80%))[Length],
+        bits(16, fill: yellow.lighten(80%))[Tunnel ID],
+        bits(16, fill: yellow.lighten(80%))[Session ID],
+        bits(16, fill: yellow.lighten(80%))[Ns],
+        bits(16, fill: yellow.lighten(80%))[Nr],
+        bits(16, fill: yellow.lighten(80%))[Offset Size],
+        bits(16, fill: yellow.lighten(80%))[Offset Pad],
+      )
+    ),
+  ),
+  caption: [L2TP Header Format],
+)
+
+=== PPTP | Point-to-Point Tunneling Protocol <pptp>
+
+- e2e (@e2e)
+
+#hl[Born as a customer provisioner protocol], uses proprietary algorithms for security management and provide weak encryption and authentication. It was first sponsored by device manufacturer, in particular Microsoft and Apple, to have a VPN solution that could work on-device, without a LAC. Only works with PPP protocols.
+
+- It still uses a challenge based authentication protocol: *MS CHAP*
+- It uses a *PPTP Network Server* (*PNS*)
+- Uses a *PPTP Access Concentrator* (*PAC*) for provider provisioned deployment mode
+- Uses GRE (@gre) to encapsulate the PPP packets in data messages, contrary to L2TP, where a special header is used both for data and control packets
+
+#figure(
+  bytefield(
+    bpr: 24,
+    bits(3)[Data-link Header],
+    bits(4)[IP Header],
+    bits(4)[GRE Header],
+    bits(4)[PPP Header],
+    bits(6)[Encrypted PPP Payload],
+    bits(3)[Data-link Trailer],
+  ),
+  caption: [PPTP Data Message Format],
+)
+
+Why do we put it in a PPP frame? Because software to put the packet in a PPP frame was already there and modifying it to remove the PPP header was more expensive.
+
+#figure(
+  box(
+    grid(row-gutter: 0.5em,
+      bytefield(
+        bpr: 14,
+        bits(2)[Data-link Header],
+        bits(3)[IP Header],
+        bits(3)[TCP Header],
+        bits(4, fill: yellow.lighten(80%))[PPTP Control Message],
+        bits(2)[Data-link Trailer],
+      ),
+      bytefield(
+        bpr: 32,
+        bits(16, fill: yellow.lighten(80%))[Length],
+        bits(16, fill: yellow.lighten(80%))[Message Type],
+        bits(32, fill: yellow.lighten(80%))[Magic Cookie],
+      )
+    ),
+  ),
+  caption: [PPTP Control Message Format (above) with corresponding PPTP Header (below)],
+)
+
+=== IPsec <ipsec>
+
+- s2s (@s2s)
+- protocol field `51`
+
+Another way to implement tunneling in a VPN. Used to make IP packets secure (see @vpn-security). Uses a key (*Cryptographic Digest* or *Signature*) to verify the integrity, the key could be symmetric or asymmetric. The Digest is placed in the *Authentication Header* (*AH*). In the AH Header there is also what is called a *Security Association* that tells the receiver which key and algorithm are used to compute the digest. If the recomputed digest does not match the one in the AH Header, the packet is discarded because it's considered a security threat. This way of verifying packets means that the packet cannot be routed through NAT.
+#hl[AH authenticates the entire packet].
+
+#figure(
+  bytefield(
+    bits(8)[IP Header],
+    bits(8, fill: yellow.lighten(80%))[AH Header],
+    bits(16)[Data],
+  ),
+  caption: [IPsec AH Encapsulation],
+)
+
+To encrypt the data you can encrypt the payload through the *Encapsulation Security Payload* (*ESP*). This mechanism introduces a header and a trailer. #hl[IPsec does not mandate encryption], you can also just authenticate the data. To authenticate in ESP the AH Header goes partially in the ESP Header and partially in the ESP Trailer. #hl[ESP encrypts (and optionally authenticates) only the payload].
+
+- protocol `50`
+
+#figure(
+  bytefield(
+    bpr: 28,
+    bits(8)[IP Header],
+    bits(4, fill: yellow.lighten(80%))[ESP Header],
+    bits(8)[TCP/UDP Segment],
+    bits(4, fill: yellow.lighten(80%))[ESP Trailer],
+    bits(4, fill: yellow.lighten(80%))[ESP Auth.],
+  ),
+  caption: [IPsec AH Encapsulation],
+)
+
+==== Transport Mode
+
+In transport mode the IP Header is not fully protected, only the payload is.
+
+==== Tunnel Mode
+
+In this mode you secure the whole packet by making it the payload of another IP packets that is being secured with IPsec. This is the mode that is used in VPNs to secure the addresses of the hosts.
