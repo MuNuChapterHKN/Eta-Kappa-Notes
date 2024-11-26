@@ -24,7 +24,7 @@
 
 %% COMANDI PERSONALIZZATI
 % Definizione dello stile per SQL
-\lstdefinestyle{sqlstyle}{
+\lstdefinestyle{hknsql}{
 	language=SQL,
 	backgroundcolor=\color{sqlBackground},      % Sfondo chiaro
 	basicstyle=\ttfamily\small\color{sqlText},  % Stile di base (testo nero)
@@ -41,6 +41,55 @@
 	showstringspaces=false,                     % Nasconde gli spazi nelle stringhe
 	numbers=left,                               % Numeri di riga a sinistra
 	numbersep=5pt,                              % Distanza tra i numeri e il codice
+}
+
+\lstdefinestyle{hknc}{
+  % Language
+  language=C, % Linguaggio
+  morekeywords={uint8_t, uint16_t, uint32_t, uint64_t}, % Aggiunta di parole chiave
+  % Colorsettings
+  basicstyle=\ttfamily\small, % Stile base (dimensione e font)
+  keywordstyle=\bfseries\color{blue}, % Stile delle parole chiave
+  identifierstyle=\color{black}, % Stile degli identificatori
+  commentstyle=\color{green!50!black}, % Stile dei commenti
+  stringstyle=\color{red}, % Stile delle stringhe
+  numberstyle=\ttfamily\scriptsize\color{gray}, % Stile dei numeri di riga
+  % Layout, frame, linenumbers and spacing
+  backgroundcolor=\color{white}, % Colore di sfondo
+  rulecolor=\color{gray}, % Colore del bordo
+  frame=single, % Bordo attorno al codice (single, double, shadowbox, none)
+  framerule=0.8pt, % Spessore del bordo
+  frameround=tttt,          % Arrotonda tutti gli angoli
+  framesep=5pt,             % Distanza tra il bordo e il codice
+  rulesep=2pt,              % Distanza tra il bordo e la linea del codice
+  numbers=left, % Posizione dei numeri di riga (left, right, none)
+  stepnumber=1, % Intervallo tra i numeri di riga
+  numbersep=10pt, % Distanza dei numeri di riga dal codice
+  boxpos=c,
+  %xleftmargin=20pt,
+  linewidth= 0.8\linewidth,
+  resetmargins= true,
+  %aboveskip=5mm, % Spazio sopra il blocco
+  %belowskip=5mm, % Spazio sotto il blocco
+  numberblanklines = false,
+  firstnumber=auto, % Numero di riga iniziale, se due codici condividono la stessa etichetta allora la numerazione continua
+  columns=fixed, % Fissa la larghezza delle colonne
+  showstringspaces=false, % Mostra gli spazi nelle stringhe
+  tabsize=2, % Dimensione dei tabulati
+  breaklines=true, % Ritorno a capo automatico per righe lunghe
+  breakatwhitespace=true, % Ritorno a capo solo sugli spazi
+  breakautoindent = true,
+  % other
+  escapeinside={(*@}{@*)}, % Comandi LaTeX nel codice
+}
+
+\lstdefinestyle{hkn-asm}{
+  belowcaptionskip=1\baselineskip,
+  frame=L,
+  xleftmargin=\parindent,
+  language=[x86masm]Assembler,
+  basicstyle=\footnotesize\ttfamily,
+  commentstyle=\itshape\color{purple!40!black},
 }
 
 \renewcommand{\ULdepth}{1.8pt} % underline depth
