@@ -1,3 +1,25 @@
 {
-    "hediet.vscode-drawio.simpleLabels": true
+    "hediet.vscode-drawio.simpleLabels": true,
+    "latex-workshop.latex.outDir": "%WORKSPACE_FOLDER%/build/latex/%DOCFILE%",
+    "[latex]": {
+        "editor.wordWrap": "on",
+    },
+    "latex-workshop.latex.autoBuild.run": "onSave",
+    "latex-workshop.latex.rootFile.useSubFile": true,
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-shell-escape",
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdf",
+                "-outdir=%OUTDIR%",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+    ]
 }

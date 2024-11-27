@@ -1,4 +1,7 @@
 #import "funcs.typ": *
+#import "@preview/equate:0.2.1": equate
+#import "@preview/codly:1.0.0": *
+#import "@preview/codly-languages:0.1.0": *
 
 #let title-page(title, subtitle, authors, release) = {
   set align(center)
@@ -35,11 +38,14 @@
   set document(title: title, author: authors)
   set text(font: "New Computer Modern", size: 10pt)
   set page(paper: "a4")
+  show: equate.with(breakable: true, sub-numbering: true)
+  set math.equation(numbering: "(1.1)")
 
   set heading(numbering: clean-numbering("I", "A.", "1.a.i."))
 
   show heading.where(level: 1): set heading(supplement: [Chapter])
-
+  show: codly-init
+  codly(languages: codly-languages, zebra-fill: none, number-format: it => text(fill: luma(200), str(it)))
   set outline(depth: 3, indent: true)
 
   show terms.item: it => [

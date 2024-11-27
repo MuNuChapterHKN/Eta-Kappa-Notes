@@ -1,3 +1,13 @@
+*.pdf
+*.log
+
+# Python
+*.pyc
+*.pyo
+__pycache__/
+*.egg-info/
+.venv/
+
 # LaTeX
 *.aux
 *.glo
@@ -23,4 +33,4 @@
 *.fls
 *.fdb_latexmk
 *.synctex.gz
-*.pdf
+*.synctex(busy)

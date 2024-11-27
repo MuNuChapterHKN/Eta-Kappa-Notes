@@ -8,7 +8,7 @@ Dopo aver definito lo stile, è possibile utilizzarlo per formattare il codice a
 
 \subsection{Esempio con file esterno} Puoi anche includere un file esterno contenente il codice:
 
-\lstinputlisting[language=Python, breaklines, breakautoindent]{./src/py/2d_example.py}
+\lstinputlisting[language=Python, breaklines, breakautoindent]{res/py/2d_example.py}
 
 \section{Formattare il Codice}
 
@@ -26,7 +26,7 @@ Ad esempio, per includere codice Python nel documento, puoi utilizzare il seguen
 	/end{lstlisting}
 \end{lstlisting}
 
-Risultato: 
+Risultato:
 \begin{lstlisting}[language=Python]
 	def hello_world():
 	print("Hello, World!")
@@ -77,7 +77,7 @@ Questo è il prima e dopo l'applicazione dello stile sql style definito all'inte
 	ORDER BY age DESC;
 \end{lstlisting}
 
-\begin{lstlisting}[style=sqlstyle]
+\begin{lstlisting}[language=SQL, style=hkn]
 	-- Query per selezionare i dati degli utenti
 	SELECT name, age
 	FROM users
@@ -98,7 +98,7 @@ Puoi anche configurare \texttt{listings} globalmente per applicare le stesse imp
 }
 \end{lstlisting}
 
-Questo imposterà le opzioni per tutti i blocchi di codice Python nel documento. 
+Questo imposterà le opzioni per tutti i blocchi di codice Python nel documento.
 Ecco gli effetti prima e dopo l'uso dell'istruzione:
 
 \begin{lstlisting}[language=Python]
@@ -124,3 +124,22 @@ Ulteriori stili verranno implementati man mano che ne nascerà l'esigenza da par
 \begin{itemize}
 	\item SQL: sqlstyle
 \end{itemize}
+
+\section{Esempio Completo}
+
+Qui sotto viene mostrato un esempio di programma in C, evidenziato con il pacchetto \texttt{listings}. Questo programma stampa un saluto a schermo. Come puoi notare, ho usato una \texttt{label} per poter fare riferimento al codice più facilmente in seguito.
+
+\begin{lstlisting}[language=C, style=hkn, caption={Demo}, label=code:demo]
+#include <stdio.h>
+
+int x = 10;
+uint32_t y = 10;
+
+// Programma di esempio
+int main() {
+  printf("Hello, World!\n");
+  return 0;
+}
+\end{lstlisting}
+
+Questo esempio è stato etichettato con \texttt{label=code:demo}, quindi possiamo fare riferimento a questo codice in qualsiasi punto del documento usando il comando \texttt{\ref{code:demo}}. Per esempio, vediamo come possiamo fare riferimento al codice \ref{code:demo} nel testo.
