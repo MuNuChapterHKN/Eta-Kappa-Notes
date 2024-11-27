@@ -1301,6 +1301,14 @@ Enables a host in the network to be recognized as belonging to another network. 
 
 VPNs are used mainly to cut costs, managing a large size private network is very costly but still done today in particular cases. For a private network you need privately leased lines and long distance dial-up solutions.
 
+== Cellular Networks
+
+#def[
+  A cellular network is a network where the geographical area is covered by tassellation through adjacent or overlapping areas called _cells_.
+
+  User terminals can move from one cell to another without disruption of the communication. This is called _handover_.
+]
+
 == Security <vpn-security>
 
 - *Confidentiality*: data is encrypted, cannot be read by unauthorized parties
