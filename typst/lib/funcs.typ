@@ -1,3 +1,62 @@
+#import "@preview/gentle-clues:1.0.0": *
+#import "@preview/cetz:0.3.1"
+
+#let polygon(
+  ..args,
+  num-vertices: 6,
+  center: (1, 1),
+  radius: 1,
+  orientation: "flat-top",
+) = {
+  let angle = 2 * calc.pi / num-vertices
+  let points = range(0, num-vertices).map(i => {
+    let x = center.first() + radius * calc.cos(i * angle)
+    let y = center.last() + radius * calc.sin(i * angle)
+    (x, y)
+  })
+
+  points.push(points.first())
+
+  cetz.draw.line(..points, ..args)
+}
+
+#let hexagon = polygon.with(num-vertices: 6)
+
+#let honeycomb(
+  columns: auto,
+  rows: auto,
+  radius: auto,
+  custom-args-map: ((auto, (auto,)),),
+  ..line-args,
+) = {
+  let centers = range(0, rows).map(row => {
+    range(0, columns).map(column => {
+      let x = radius * 3 / 2 * column
+      let y = radius * calc.sqrt(3) * (row + calc.rem(column, 2) / 2)
+      (x, -y)
+    })
+  })
+
+  let hex-count = 0
+  for row in centers {
+    for center in row {
+      let args = custom-args-map.find(mapping => mapping.at(0) == hex-count)
+
+      if args != none {
+        hexagon(
+          center: center,
+          radius: radius,
+          ..line-args,
+          ..args.at(1),
+        )
+      } else {
+        hexagon(center: center, radius: radius, ..line-args)
+      }
+      hex-count += 1
+    }
+  }
+}
+
 #let clean-numbering(..schemes) = {
   (..nums) => {
     let (section, ..subsections) = nums.pos()
@@ -43,6 +102,4 @@
   )
 }
 
-#let def(definition) = [
-  *_Def:_* #definition
-]
+#let def = quotation.with(title: context if text.lang == "en" [Definition] else [Definizione])

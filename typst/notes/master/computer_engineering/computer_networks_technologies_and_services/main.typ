@@ -1,11 +1,12 @@
 #import "@preview/bytefield:0.0.6": *
 #import "../../../../lib/template.typ": course-template
+#import "../../../../lib/funcs.typ": def, honeycomb
 #import "@preview/gentle-clues:1.0.0": *
 #import "@preview/fletcher:0.5.2" as fletcher: diagram, node, edge
+#import "@preview/cetz:0.3.1"
 
 
 #let bytefield = bytefield.with(stroke: 0.5pt)
-#let def = quotation.with(title: "Definition")
 
 #let hl = highlight.with(fill: yellow.lighten(80%))
 #let hl_green = highlight.with(fill: green.lighten(80%))
@@ -1291,6 +1292,165 @@ Interference caused by the signal attenuating with distance and interfering with
 - Mobiles communicate peer-to-peer
 - Nodes can organize themselves into a network (for example mesh Wi-Fi)
 
+== Cellular Networks
+
+#def[
+  A cellular network is a network where the geographical area is covered by tassellation through adjacent or overlapping areas called _cells_.
+
+  User terminals can move from one cell to another without disruption of the communication. This is called _handover_.
+]
+
+#columns(2)[
+  Cellular networks use hexagonal cells with a base station at the center of each cell. Each cell is equipped with an _isotropic_ antenna, meaning it can transmit and receive in all directions. Nowadays _sectorial antennas_ are common, with a single towaer in the center of three cells and _directional_ antennas.
+
+  Bigger cells are used when the population is sparse while smaller cells are used in urban areas where the population is denser.
+
+  #figure(
+    grid(
+      columns: 2,
+      column-gutter: 0.5em,
+      cetz.canvas({
+        honeycomb(
+          columns: 4,
+          rows: 3,
+          radius: 0.5,
+          custom-args-map: (
+            (0, (fill: red)),
+            (1, (fill: green)),
+            (2, (fill: red.lighten(85%))),
+            (3, (fill: green.lighten(85%))),
+            (4, (fill: blue)),
+            (5, (fill: red.lighten(85%))),
+            (6, (fill: blue.lighten(85%))),
+            (7, (fill: red.lighten(85%))),
+            (8, (fill: green.lighten(85%))),
+            (9, (fill: blue.lighten(85%))),
+            (10, (fill: green.lighten(85%))),
+            (11, (fill: blue.lighten(85%))),
+          ),
+          stroke: 0.5pt,
+        )
+      }),
+      cetz.canvas({
+        honeycomb(
+          columns: 4,
+          rows: 3,
+          radius: 0.5,
+          custom-args-map: (
+            (0, (fill: red.lighten(85%))),
+            (1, (fill: blue)),
+            (2, (fill: yellow.lighten(85%))),
+            (3, (fill: red.lighten(85%))),
+            (4, (fill: green)),
+            (5, (fill: aqua)),
+            (6, (fill: lime)),
+            (7, (fill: green.lighten(85%))),
+            (8, (fill: yellow)),
+            (9, (fill: red)),
+            (10, (fill: fuchsia)),
+            (11, (fill: yellow.lighten(85%))),
+          ),
+          stroke: 0.5pt,
+        )
+      }),
+    ),
+    caption: [Hexagonal Cells in a Cellular Network, the colors represent different frequencies, on the right we can see a cluster of seven cells and seven frequencies, on the left one of three cells and three frequencies],
+  ) <cellular-hexagonal-cells>
+]
+
+Cells in practice are not regular hexagons and do not have the same size. A lot of factors define the cell shape and size:
+
+- the power emitted at the antenna
+- the height of the antenna
+- the gain of the antenna
+- the morphology of the geographical area the antenna is placed in
+- the propagation conditions
+
+Generally cells are divided into *Microcells* and *Macrocells*, the idea is to have macrocells cover scarcely populated area or the zones that microcells are not able to cover.
+
+=== Channel Access
+
+Close cells are prone to interference with one another. Frequencies in the same cell are shared. Possible techniques to share resources are:
+
+- *Frequency Division Multiple Access (FDMA)*: each user has its own frequency
+- *Time Division Multiple Access (TDMA)*: each user has its own time slot
+- *Code Division Multiple Access (CDMA)*: each user has its own code
+- *Space Division Multiple Access (SDMA)*: simple idea of placing the terminals so far aart that they cannot interfere with each other, not really a resource sharing technique.
+
+With the most used ones being FDMA and TDMA.
+
+==== FDMA
+
+Frequencies are property of the government which leases their use to the operators. The price is very high, so operators are incentivized to reuse them as much as possible.
+
+We define as cluster the set of *G* adjacent cells that use all the frequencies available to one. You can see in @cellular-hexagonal-cells two different sized clusters highlighted with deeper colors.
+
+#figure(
+  grid(
+    columns: 2,
+    column-gutter: 0.5em,
+    cetz.canvas({
+      honeycomb(
+        columns: 4,
+        rows: 3,
+        radius: 0.5,
+        custom-args-map: (
+          (0, (fill: red.lighten(80%))),
+          (1, (fill: green.lighten(80%))),
+          (2, (fill: red.lighten(80%))),
+          (3, (fill: green.lighten(80%))),
+          (4, (fill: blue.lighten(80%))),
+          (5, (fill: red.lighten(80%))),
+          (6, (fill: blue.lighten(80%))),
+          (7, (fill: red.lighten(80%))),
+          (8, (fill: green.lighten(80%))),
+          (9, (fill: blue.lighten(80%))),
+          (10, (fill: green.lighten(80%))),
+          (11, (fill: blue.lighten(80%))),
+        ),
+        stroke: 0.5pt,
+      )
+    }),
+    cetz.canvas({
+      honeycomb(
+        columns: 3,
+        rows: 2,
+        radius: 0.8,
+        custom-args-map: (
+          (0, (fill: red.lighten(80%))),
+          (1, (fill: green.lighten(80%))),
+          (2, (fill: red.lighten(80%))),
+          (3, (fill: blue.lighten(80%))),
+          (4, (fill: red.lighten(80%))),
+          (5, (fill: blue.lighten(80%))),
+        ),
+        stroke: 0.5pt,
+      )
+    }),
+  ),
+  caption: [Visualization of area occupied by different cell sizes],
+) <cell-size-visualization>
+
+As we can see from @cell-size-visualization, if the cell radius increases it gets cheaper to cover the same are, because you need less cells. Notice though that each cell provides coverage for the same number of users so bigger cells also imply less capacity over the same area.
+
+#hl[Given a cluster size G]:
+- The smaller the radius R of each cell, the larger the capacity
+- The smaller the radius R of each cell, the larger the number of antennas needed to provide the same coverage
+
+#hl[Given a cell radius R]:
+- The larger the cluster size G, the smaller the number of channels for each cell, the lower the system capacity
+- The larger the cluster size G, the larger the distance between cells of the same frequency, the lower the interference, the better the quality
+
+=== Power Control
+
+Is the set of strategies enacted to regulate the power utilized by each cell, this is due to the fact that even weather conditions affect the signal strength, and you always want to reduce interference between each cell.
+
+Within a cell, not all users receive the same power. Some frequencies are used to contact the terminals with maximum power, after the terminal replies, the terminal adjusts the power to take into account the distance between them. This is another strategy that reduces power consumption, battery usage and interference.
+
+=== Frequency Allocation
+
+It's not always true that each cell only uses one frequency, some cells can have multiple frequencies to enable them to cover more densely populated areas of the city. The frequency of each cell can also be changed during the day, to aid in the management of the network.
+
 = VPN | Virtual Private Networks
 
 Enables a host in the network to be recognized as belonging to another network. Recall that in IP networks, the address is used to identify the network, different countries are assigned different IP ranges (@ipv4addressing). The way VPN works is by #hl[tunneling]. Another important concern of VPNs in security, and security is eachieved through #hl[cryptography].
@@ -1300,14 +1460,6 @@ Enables a host in the network to be recognized as belonging to another network. 
 ]
 
 VPNs are used mainly to cut costs, managing a large size private network is very costly but still done today in particular cases. For a private network you need privately leased lines and long distance dial-up solutions.
-
-== Cellular Networks
-
-#def[
-  A cellular network is a network where the geographical area is covered by tassellation through adjacent or overlapping areas called _cells_.
-
-  User terminals can move from one cell to another without disruption of the communication. This is called _handover_.
-]
 
 == Security <vpn-security>
 
