@@ -1,0 +1,230 @@
+\documentclass[12pt]{report} % Document class and font size
+
+% Packages
+\usepackage[utf8]{inputenc}   % UTF-8 encoding
+\usepackage{amsmath}          % Math symbols
+\usepackage{graphicx}         % Include images
+\usepackage{hyperref}         % Hyperlinks
+\usepackage{geometry}         % Page layout
+\usepackage{float}
+\geometry{a4paper, margin=1in}
+
+% Document starts here
+\begin{document}
+
+\title{Your Document Title} % Title
+\author{Your Name}          % Author
+\date{\today}               % Date (use \today for current date)
+\maketitle                  % Generates title
+
+\section*{Abstract}         % Optional section (unnumbered)
+This is where you write the abstract of your document.
+
+\section{Introduction}
+Why do we need another layer? Theoretically, by using a data link layer, we are already able to create a network and make possible a communication between different devices, by cable or wireless. The key reason is that link layer protocols are not able to create bigger networks, like a worldwide network. These are the main issues related to the \textit{data link layer}:
+\begin{itemize}
+    \item \textbf{Inefficient link-redundancy management}: [1]if we start from a mesh topology, the Spanning-tree Protocol will compute the minimum spanning tree of the network, reducing the redundancy and so the number of available connections between the devices. This mechanism is totally reasonable for a small network. If we apply the same solution on a geographic network (Rome, Milan, Turin) this is not efficient at all, since one of the connections (Rome-Turin) won't be used, unless a problem occurs on one of the other two connections. As a result, we need other technologies and hardwares (like router) to make the mesh topology much more effective and efficient. With this new solutions, the traffic will be balanced on all the available connections.
+    \item \textbf{Filtering-database saturation on switches in large-size networks}: [2]if we apply the datalink technologies on the topology below, after an initial configuration phase, all the devices of the network will store inside their \textit{filtering-database} the MAC addresses of the other devices of the network itself. This is needed in order to make possible the communication between every pair of devices. In a global network, the forwarding table would be filled with billions of entries, which is not reasonable at all. Our aim is to "summarize" this table, for example squeezing the addresses that have a common part (1110*). However, in this case, it's not possible to squeeze the corresponding forwarding ports, since they are all different. A possible solution is to squeeze all the addresses that are placed in the same part of the network, so that the forwarding will occur in the same port. This totally reasonable approach cannot be applied on MAC addresses, as they are not related to the graphical or logical position of the device inside the network, but they are assigned by the vendor.\\The idea is to introduce a new system of addressing (the IP address), managed by the network layer, in which each address is directly related to the physical position of the device inside the network. This new system guarantees that all the hosts located close to each other share a common part inside this address, so that it can be summarized in the corresponding table and associated to a unique port.
+    \item \textbf{Layer-2 broadcast traffic propagation}: [3]the broadcast is useful when used in a small network, but is not reasonable for a bigger one. As a result, it must be limited inside a worldwide network. This limitation will be done by a new device, the router, which is able to stop this kind of message.
+\end{itemize}
+
+\subsection{Definition of the network layer} [4]
+The network layer is above the data link layer and below the transport layer. In this layer, we can see different local networks connected together by routers. If we want the information to be transmitted between two nodes of the network, then it will pass from the application to the physical layers of the first node. At the network layer the packet is called \textit{datagram}. After that, the packet will be transfered through the routers until the last node, where it will pass from the physical to the application layer. An important thing we can note is that all the intermidiate points of this network (the routers) only need the first 3 layers (physical, data link and network layer). As a result, by means of the network layer, we can allow a communication between \textbf{every} pair of hosts in the world. The key job of the routers is to analyze the headers of the packet and understand where forwarding the packet. Let's better define the key difference between \textit{forwarding} and \textit{routing}:
+\begin{itemize}
+    \item Forwarding: move a packet from the input of a router to the output of the router itself. It's an atomic operation.
+    \item Routing: all the stuff (technology, protocols, algorithms) needed to write the routing table, and so to determine the route taken by packets from source to destination.
+\end{itemize}
+
+\subsection{Datagram network and VC network}
+In the network layer we can define two kinds of networks: the datagram network and the virtual-circuit network.
+\begin{itemize}
+    \item In the virtual-circuit network we establish a logical (virtual) connection between the source and the destination, creating a virtual path connecting them. This is an example of conenction-oriented service.
+    \begin{itemize}
+        \item ATM is based on it. It is an evolution of telephony where the service is provided only if the virtual circuit is established between all the nodes inside the network. ATM is not used anymore since it's too expensive and complex
+    \end{itemize}
+    \item In the datagram network approach (connectionless service) the information in immediately sent from the source, "hoping" that it will reach the destination. It's a kind of "best effort approach", in which the network will do all the best to make the packet to arrive.
+    \begin{itemize}
+        \item INTERNET is based on it. It's a better approach since it's much less expensive and it "only" requires routers that forward the packets they receive. The complexity is on the "edge", so on the end system (devices, routers).
+    \end{itemize}
+\end{itemize}
+
+\subsection{Structure of the network layer}[5] 
+The network layer includes the following protocols:
+\begin{itemize}
+    \item IP protocol: addressing conventions, datagram format, packet handling
+    \item Routing protocol: path selection
+    \item ICMP protocol: error reporting and router signaling
+\end{itemize}
+
+\section{IP Protocol}
+\subsection{IP Datagram format}
+Let's see the structure of the datagram. First of all, we can divide it in two parts, the header and the payload.[6]All the information needed for the IP protocol to work properly are contained in the header, which is again divided in 5 32 bits lines and 1 32 bit optional line. Let's see the fields of the header:
+\begin{itemize}
+    \item Version: IP protocol version number. Today we still use IPv4, but IPv6 will soon be used, since the number of IPv4 addresses won't be enough to cover all the possible devices in the world.
+    \item Header length: the length of the header. This is because the header can be more than 32*5 bits, so we need this number to know where the header finishes and the payload starts.
+    \item Type of service (DS): this is used to give a sort of priority to the packets, as instance a voicecall datagram must be forwarded before other datagrams.
+    \item Time to live: [7] a field set with an initial value (max 255), which is decremented every time a datagram passes through a router. This is used to ensure that no loops occur inside the network, in fact when the time to live reaches 0 the routers will avoid the forwarding of the packet.
+    \item Length: total length of the datagram (header+payload).
+    \item Header checksum: it is a checksum to check if the content of the header has been corrupted during the transmission. Only the header is checked for two reasons:
+    \begin{itemize}
+        \item We avoid the router to check the entire payload, which requires a lot of additional time. This is done directly by the end system. On the other hand, the header must be checked since if a bit is corrupted (such as the destination IP address), there is the risk to send a packet to the wrong destination.
+        \item The checksum must be recomputed every time (because of the time to live which is decremented), so by just computing it on the header (and not the entire payload) we save a lot of time.
+    \end{itemize}
+    \item Options: as instance the timestamp, which is recorded as soon as the first bit of the packet arrives at the network interface.
+\end{itemize}
+The four fields (length, 16-bit identifier, flags and fragment offset) are used for a specific problem. The MTU (Maximum Transmission Unit) is the maximum size of the frame that can be transmitted. This size can change through the network [8]: as instance from A to B a Point to Point Protocol is used and the MTU is 4000 bytes, then from B to C an ethernet protocol is used, and the MTU becomes 1500 bytes. As a result, the packet, at point B, must me fragmented in several frames. However, when the multiple packets reach the destination, it is not guaranteed that they will arrive in the same order they have been sent. The fields cited before are therefore needed to reconstruct the original frame from the fragmented ones. Today the IP framentation is not used anymore, since the nodes of source and destination are really likely to implement an ethernet or wifi protocol, and so to have the smallest MTU of the network.
+
+\subsection{IP Addressing}
+[9] The IP address is a 32-bit identifier assigned to an host or router interface, where the interface is defined as the connection between the host/router and physical link. The router is not transparent, and it has an IP address for each interface. Also the host typically has two interfaces, and so different IPs (one for Ethernet, the other for wireless 802.11). This is different from switches, which are totally transparent.\\Usually the IP address is written with the human notation, which is made of 4 bytes divided by points (255.255.255.255).\\Differently from MAC address, the IP address must be logically assigned and does not care about how one interface is connected ot another (such as the presence of switches). The IP address is divided in two parts (this ensures the summarization):
+\begin{itemize}
+    \item Subnet part (high order bits)
+    \item Host part (low order bits)
+\end{itemize}
+This division allows to create a subnet, so a set of devices that share the same subnet part of IP addresses. In the image [10] we can note that in the subnet 1 all the devices share a common subnet part in the IP address (the first 3 bytes), and they are only distinguished by the host part. Inside each subnet, all the interfaces should physically reach each other. We can then define a physical network, which is a set of devices that can physically reach each other by means of link layer mechanisms (so using MAC addresses). In the IP protocol, there must be a biunivocal correspondence between physical networks and subnets:
+\begin{itemize}
+    \item If two interfaces are in the same subnet (physical network), then we use a direct communication, based on link layer mechanisms.
+    \item If the interfaces are not in the same subnet, we use indirect communication, based on IP routing.
+\end{itemize}
+\textbf{Example}:[11] 223.1.2.1 wants to send a packet to 223.1.2.2. They have the same subnet (so also the same physical network), and so they can direclty communicate using a switch (data link mechanism). Now, 223.1.2.1 wants to communicate with 223.1.1.4. In this case the subnets are different and indirect communciation is needed. This works in different steps:
+\begin{itemize}
+    \item First step: direct communication with the router (from 223.1.2.1 to 223.1.2.2), since the 223.1.2.2 address is in the same subnet as 223.1.2.1.
+    \item Then we compare 223.1.2.6 with 223.1.1.4: they are in different subnets. The router will check the routing table and discover that the path is from 223.1.9.1 to 223.1.9.2. These two are in the same subnet, so a direct communication is used.
+    \item Finally, the router will check the path and will see that 223.1.1.3 and 223.1.1.4 (the destination) are in the same subnet. Again, a direct communication is performed and the packet arrives at its final destination.
+\end{itemize}
+The indirect communication is just a set of direct communications between routers. In this mechanism, summarization is possible by means of subnets. A specific and "strange" situation is the \textit{one-arm router} [12], where more subnets are present over a single physical network. In this case the router has just one interface within the net, but two IP addresses, corresponding to the two subnets present inside the physical network. In this case if 223.1.1.1 wants to send something to 223.1.1.2 they will use a switch (direct communication), but if 223.1.1.1. wants to communicate with 223.1.2.1 the communication will pass through the router, which will forward the packet thwough the same interface (with another IP address).
+\subsection{Special addresses}
+Some special IP addresses exist:
+\begin{itemize}
+    \item The (sub)network ID: subnet + all 0s (192.168.3.0: 192.168.3 + 0). It cannot be used for an host. This is useful for summarization: in the routing table we won't store all the possible IP addresses, but only the (sub)networks addresses, defining a set of IP addresses that can directly communicate (subnet).
+    \item Directed broadcast: subnet + all 1s (192.168.3.255: 192.168.3 + 255). It is used for directed broadcast for the subnet. Used by DHCP.
+    \item All 1s: 255.255.255.255. This message will reach all the interfaces in the same local area network (because of the limited broadcast mechanism).
+    \item 127.0.0.1: loopback address. In this case the packet is sent from the application level to the network card, and then is redirected to the webserver on the same machine. 
+\end{itemize}
+Remark that if in the IP adddress 8 bits are dedicated to the host part (24 subnet + 8 host), then the possible devices of that subnet are \(2^8-2\), since 1 address is the subnet ID, while the other is used for the directed broadcast.
+
+\subsection{LAN addresses VS IP addresses}
+The MAC address allocation is administered by IEEE, and typically the first part of the address is shared between all the devices produced by the same manufacturer. The MAC address guarantees the portability, since we can move our network card from a LAN to another without any problem (from the point of view of the data link layer). On the contrary, the IP address is not portable and strongly depends on IP subnet to which the node is attached. We will also see the approach of IP addressing is hierarchical.
+
+\subsection{IP routing table}
+Let's the take in consideration the newtork in figure [13]. We can see that 3 subnets are present (223.1.1.0, 223.1.2.0 and 223.1.3.0) and both router A and router B have their own \textit{routing} (forwarding) \textit{table}. In the routing table, instead of storing all the IP addresses of all the nodes, we just store the network IDs and the corresponding output links. Obvioulsy, this doesn't completely solve the problem of summarization, and we will do better by applying a hierarchical schema to the addressing. Why do we store the (sub)network ID and not the directed broadcast? Because the (sub)network ID represents the entire subnet, while the directed broadcast is a "usable" address, especially when we want to communicate with all the hosts of a subnet.
+
+\subsection{ARP protocol}
+[14] At this point, we need a mechanism to make network layer and data link layer work together. In fact, when we are already in our destination subnet, we are awared of the IP address of the host (since it's contained in the datagram), but we are not awared of its MAC address. As a result, we need a protocol to associate the IP address of the destination with the MAC address of the destination itself: this protocol is called ARP (\textit{Address Resolution Protocol}). Each hosts (IP node) in the subnet contains an ARP table associating the IP address of the other hosts of the subnet with their MAC address. The format of each row is the following:
+\[<\texttt{IP address, MAC address, Time to live}>\]
+where the Time to Live (TTL) is the time after which the mapping is forgotten (typically 20 min). Theoretically, this table can be generated manually, but to implement an automatic mechanism? It involves some steps:
+\begin{itemize}
+    \item A wants to communicate with B (sends it a datagram). A knows the IP address of B, but not its MAC address, so direct communicate cannot be performed at this point:
+    \[<\texttt{192.168.3.1, //-//-//-//, //}>\]
+    \item A sends a broadcast message (ARP request) to the entire subnet (MAC broadcast) containing the B's IP address:
+    \begin{itemize}
+        \item All the hosts excluded B will ignore the message, while
+        \item B will send an ARP reply to A containing its MAC address
+    \end{itemize}
+    \item A receives the ARP reply and can fill the ARP table with the new association:
+    \[<\texttt{192.168.3.1, AB-CD-AB-CD, 20}>\]
+\end{itemize}
+
+\noindent The Time to Live is quite useful in networks in which many users are present and the same IP address can be assigned to different devices (obvioulsy in different moments). In this case the ARP cache must be resetted and the association between the IP address and the new MAC address associated needs to be updated.\\The ARP protocol cannot be defined neither a network layer protocol nor a data link layer protocol: it's "in the middle". In addition, ARP packets are not IP datagrams, but are more similar to ethernet frames.
+
+\subsubsection{ARP request and ARP reply}
+[15]As we can see from the image, in the ARP request packets we find the header (containing the MAC address for the broadcast and the MAC of A, so the pair destination-source) and then the ARP packet, containing the ARP req code and two pairs of addresses corresponding to MAC A - IP A and MAC B - IP B, where MAC B is not known yet. Similarly, also the ARP reply packets show in the header the couple destination-source (MAC A and MAC B), and in the packet the ARP reply code and the two pairs MAC B - IP B and MAC A - IP A. For the sake of optimization, when B receives the ARP request, it will also save in its ARP cache the association between IP A and MAC A, that might be needed in the future:
+\[<\texttt{IP A, MAC A, 20}>\]
+This ensures that with a single request both table (in A and B) can be filled.
+
+\subsection{Routing between two different LANs}
+Let's consider a real scenario, in which an host from one LAN wants to communicate with an host in a different LAN. Let's take in consideration the network below[16] and analyze the different steps:
+\begin{enumerate}
+    \item The host A (IP 111.111.111.111) wants to send a datagram to B (IP 222.222.222.222), which is located in a different subnet. An indirect communication is needed, which will be made of two direct communications from A to R (the router) and from R to B.
+    \begin{itemize}
+        \item We assume that A knows the IP address of B
+        \item A knows the IP address of the \textit{first hop router} (also called \textit{default gateway}, which is fundamental to exit from the subnet). This is usually automatically done by means of DHCP, that provides the host with an IP address and the default gateway address.
+    \end{itemize}
+    \item A must send the datagram to R using link layer mechanism, but it doesn't know its MAC address. To do so, it uses ARP protocol and it saves the mapping IP of R and MAC of R inside its ARP table.
+    \item Now we have a datagram coming from transport layer of A containing an IP source and IP destination. The OS will create a frame with a MAC source corresponding to the MAC of A and a MAC destination corresponding to the MAC of the interface of R (not the MAC address of B!).
+    \item The frame arrives to R, that will extract the datagram and the IP destination is checked. The router finds inside the routing table that the IP address 222.222.222.222 must be forwarded to interface 222.222.222.220. Then it checks if the destination host is in the same subnet of its interface.
+    \item Since they are in the same subnet, a direct communication is performed. In this case a new frame is created, where the MAC address of the source is set to the MAC of R, while the MAC of the destination is set to the MAC of B (found in ARP cache, otherwise an ARP request is done).
+\end{enumerate}
+
+\subsection{Different kinds of IP addressing}
+Until know, we have said that IP addresses are statically divided in a subnet part (24 bits) and an host part (8 bits). This approach is quite limited, since we can build networks with up to 254 hosts. To be more general, three kinds of division are possible:
+\begin{itemize}
+    \item \textbf{Classful addressing}: static division of network part and host part of the IP address. There are three possible sizes for IP networks:
+    \begin{itemize}
+        \item 24 bits for network part and 8 bits for host part (small networks)
+        \item 16 bits for network part and 16 bits for host part (quite big networks)
+        \item 8 bits for network part and 24 bits for host part (huge networks)
+    \end{itemize}
+    This approach is not flexible at all.
+    \item \textbf{Subnetting}: we start from classuful addressing and we define smaller IP networks called subnets. We introduce the concept of subnet and subnet mask.
+    \item \textbf{Classless addressing}: we remove the concept of classes. It is the approach most used today.
+\end{itemize}
+
+\noindent Let's see the three schemes more in details.
+\subsubsection{Classful addressing}
+Let's consider a company that wants to set up 300 IPs for administrative office and 300 IPs for other purposes. By using the classful addressing, the company will need to buy 2 quite big networks of 65000 IPs addresses each, since two small networks (254 IPs) would not be enough. \textbf{Example}: the industry will buy the networks 130.192.0.0 and the network 130.193.0.0.
+
+[17]In the classful addressing, we identify three main classes of addresses:
+\begin{itemize}
+    \item \textbf{Class A}: 8 bits network, 24 bits host. The first byte starts with 0 and it must be in the range 0-127. \textbf{Example}: 12.0.0.0
+    \item \textbf{Class B}: 16 bits network, 16 bits host. The first byte starts with 10 and it must be in the range 128-191. \textbf{Example}: 130.192.0.0
+    \item \textbf{Class C}: 24 bits network, 8 bits host. The first byte starts with 110 and it must be in the range 192-223. \textbf{Example}: 210.4.56.0
+\end{itemize}
+However, we can identify two more classes:
+\begin{itemize}
+    \item \textbf{Class D}: the first byte starts with 1110 and it must be in the range 224-239. It is used for multicasting, an hybrid communication between unicasting and broadcasting in which we want to send a datagram to a specific set of hosts.
+    \item \textbf{Class E}: the first byte starts with 1111 and it must be in the range 240-255.
+\end{itemize}
+
+\subsubsection{Subnetting}
+Instead of dividing the network and host part using multiples of 8, we can simply move the "divider" in the most effective position. As instance, instead of dividing the IP address in 24 bits for the network part and 8 bits for the host part, we can simply dedicate 9 bits for the host part and 23 bits for the network part, leading to 510 possible hosts (\(2^{9}-2\)). This number is obviusoly better than 65000 hosts of before. \textbf{Example}: the industry will buy just the network 130.192.0.0 and will use the addresses from 130.192.0.0 to 130.192.1.255 for the first subnet and from 130.192.2.0 to 130.192.3.255 for the second one.
+
+How can we extract the (sub)network identifier and the limited broadcast from this new configuration? Let's see the table below:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|ccc|c|}
+    \hline
+    \multicolumn{3}{|c|}{\textbf{NETWORK PART}} & \textbf{HOST PART} \\ \hline
+    \multicolumn{1}{|c|}{\textbf{1° BYTE (base 10)}} & \multicolumn{1}{c|}{\textbf{2° BYTE (base 10)}} & \textbf{7 BITS} & \textbf{9 BITS} \\ \hline
+    \multicolumn{1}{|c|}{130.} & \multicolumn{1}{c|}{192.} & 0000000 & 0.00000000 \\ \hline
+    \multicolumn{1}{|c|}{130.} & \multicolumn{1}{c|}{192.} & 0000000 & 0.00000001 \\ \hline
+    \multicolumn{1}{|c|}{130.} & \multicolumn{1}{c|}{192.} & ... & ... \\ \hline
+    \multicolumn{1}{|c|}{130.} & \multicolumn{1}{c|}{192.} & 0000000 & 1.00000000 \\ \hline
+    \multicolumn{1}{|c|}{130.} & \multicolumn{1}{c|}{192.} & ... & ... \\ \hline
+    \multicolumn{1}{|c|}{130.} & \multicolumn{1}{c|}{192.} & 0000000 & 1.11111111 \\ \hline
+    \end{tabular}
+\end{table} 
+\noindent The total number of IP addresses is \(2^9-2\), where the first address is dedicated to the (sub)network ID (host all 0s), while the last is dedicated to the limited broadcast (host all 1s). In other words, the subnetting strategy enables the possibility to move the separator between the host and the network part.
+
+In order to specify which bits are in the subnet part and which are in the host part we need to use the \textbf{VLSM} mechanism (Variable Length Subnet Masking): in this case, the address will also need a subnet mask, which is an additional address with all 1s in the subnet part and all 0s in the host part. An example of netmask is:
+\[\texttt{11111111.11111111.11111110.00000000}\rightarrow \texttt{255.255.254.0}\]
+that specifies that the first 23 bits are (sub)network bits, while the last 9 are host bits.
+
+Because of historical reasons, also the subnetting approach is still dependent on the class division. As instance, the address 130.192.0.0 is a Class B address, and also by using a netmask, the number of host must respect the maximum of the class (in this case 65534).
+
+\subsubsection{Classless addressing}
+Today we use an optimize version of the subnetting, which is called CIDR (Classless InterDomain Routing). We can identify two main optimizations:
+\begin{itemize}
+    \item As in the subnetting approach, we are not forced to choose a class of addresses, but we just choose the number of IP addresses we need in our network (obviously a power of 2). The first byte of the address is now totally independent from the division of classes, as instance the address 200.23.16.0, that in the old approach was a Class C address (8 bits host), now can dedicate the number of bits it wants to the host part, by means of the netmask.
+    \item Instead of using a netmask, we specify the number of bits dedicated to the network part with the \textit{prefix length}. \textbf{Example}: 200.23.16.0/23 means that the first 23 bits are for network part, while the last 9 for host part.
+\end{itemize}
+
+\noindent How to understand if a classless network ID is valid? Remark that a network ID must have all the host bits set to 0, so we just need to convert our number in binary digits:
+\[\texttt{192.168.1.128/25}\rightarrow \texttt{192.168.1.1|0000000}\]
+It is a valid network ID!
+
+
+\section{Main Content}
+\subsection{Subsection Example}
+Details for this subsection.
+
+\subsubsection{Subsubsection Example}
+Even more detailed information here.
+
+\section{Conclusion}
+Your conclusion goes here.
+
+\begin{thebibliography}{9}
+\bibitem{example} Author, \textit{Title}, Publisher, Year.
+\end{thebibliography}
+
+\end{document}
