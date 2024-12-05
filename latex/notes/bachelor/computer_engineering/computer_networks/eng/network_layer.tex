@@ -23,7 +23,7 @@ This is where you write the abstract of your document.
 \section{Introduction}
 Why do we need another layer? Theoretically, by using a data link layer, we are already able to create a network and make possible a communication between different devices, by cable or wireless. The key reason is that link layer protocols are not able to create bigger networks, like a worldwide network. These are the main issues related to the \textit{data link layer}:
 \begin{itemize}
-    \item \textbf{Inefficient link-redundancy management}: [1]if we start from a mesh topology, the Spanning-tree Protocol will compute the minimum spanning tree of the network, reducing the redundancy and so the number of available connections between the devices. This mechanism is totally reasonable for a small network. If we apply the same solution on a geographic network (Rome, Milan, Turin) this is not efficient at all, since one of the connections (Rome-Turin) won't be used, unless a problem occurs on one of the other two connections. As a result, we need other technologies and hardwares (like router) to make the mesh topology much more effective and efficient. With this new solutions, the traffic will be balanced on all the available connections.
+    \item \textbf{Inefficient link-redundancy management}: [1]if we start from a mesh topology, the Spanning-tree Protocol will compute the minimum spanning tree of the network, reducing the redundancy and so the number of available connections between the devices. This mechanism is totally reasonable for a small network. If we apply the same solution on a geographic network (Rome, Milan, Turin) this is not efficient at all, since one of the connections (Rome-Turin) won't be used, unless a problem occurs on one of the other two connections. As a result, we need other technologies and hardware (like router) to make the mesh topology much more effective and efficient. With this new solutions, the traffic will be balanced on all the available connections.
     \item \textbf{Filtering-database saturation on switches in large-size networks}: [2]if we apply the datalink technologies on the topology below, after an initial configuration phase, all the devices of the network will store inside their \textit{filtering-database} the MAC addresses of the other devices of the network itself. This is needed in order to make possible the communication between every pair of devices. In a global network, the forwarding table would be filled with billions of entries, which is not reasonable at all. Our aim is to "summarize" this table, for example squeezing the addresses that have a common part (1110*). However, in this case, it's not possible to squeeze the corresponding forwarding ports, since they are all different. A possible solution is to squeeze all the addresses that are placed in the same part of the network, so that the forwarding will occur in the same port. This totally reasonable approach cannot be applied on MAC addresses, as they are not related to the graphical or logical position of the device inside the network, but they are assigned by the vendor.\\The idea is to introduce a new system of addressing (the IP address), managed by the network layer, in which each address is directly related to the physical position of the device inside the network. This new system guarantees that all the hosts located close to each other share a common part inside this address, so that it can be summarized in the corresponding table and associated to a unique port.
     \item \textbf{Layer-2 broadcast traffic propagation}: [3]the broadcast is useful when used in a small network, but is not reasonable for a bigger one. As a result, it must be limited inside a worldwide network. This limitation will be done by a new device, the router, which is able to stop this kind of message.
 \end{itemize}
@@ -72,7 +72,7 @@ Let's see the structure of the datagram. First of all, we can divide it in two p
     \end{itemize}
     \item Options: as instance the timestamp, which is recorded as soon as the first bit of the packet arrives at the network interface.
 \end{itemize}
-The four fields (length, 16-bit identifier, flags and fragment offset) are used for a specific problem. The MTU (Maximum Transmission Unit) is the maximum size of the frame that can be transmitted. This size can change through the network [8]: as instance from A to B a Point to Point Protocol is used and the MTU is 4000 bytes, then from B to C an ethernet protocol is used, and the MTU becomes 1500 bytes. As a result, the packet, at point B, must me fragmented in several frames. However, when the multiple packets reach the destination, it is not guaranteed that they will arrive in the same order they have been sent. The fields cited before are therefore needed to reconstruct the original frame from the fragmented ones. Today the IP framentation is not used anymore, since the nodes of source and destination are really likely to implement an ethernet or wifi protocol, and so to have the smallest MTU of the network.
+The four fields (length, 16-bit identifier, flags and fragment offset) are used for a specific problem. The MTU (Maximum Transmission Unit) is the maximum size of the frame that can be transmitted. This size can change through the network [8]: as instance from A to B a Point to Point Protocol is used and the MTU is 4000 bytes, then from B to C an ethernet protocol is used, and the MTU becomes 1500 bytes. As a result, the packet, at point B, must be fragmented in several frames. However, when the multiple packets reach the destination, it is not guaranteed that they will arrive in the same order they have been sent. The fields cited before are therefore needed to reconstruct the original frame from the fragmented ones. Today the IP framentation is not used anymore, since the nodes of source and destination are really likely to implement an ethernet or Wi-Fi protocol, and so to have the smallest MTU of the network.
 
 \subsection{IP Addressing}
 [9] The IP address is a 32-bit identifier assigned to an host or router interface, where the interface is defined as the connection between the host/router and physical link. The router is not transparent, and it has an IP address for each interface. Also the host typically has two interfaces, and so different IPs (one for Ethernet, the other for wireless 802.11). This is different from switches, which are totally transparent.\\Usually the IP address is written with the human notation, which is made of 4 bytes divided by points (255.255.255.255).\\Differently from MAC address, the IP address must be logically assigned and does not care about how one interface is connected ot another (such as the presence of switches). The IP address is divided in two parts (this ensures the summarization):
@@ -80,7 +80,7 @@ The four fields (length, 16-bit identifier, flags and fragment offset) are used 
     \item Subnet part (high order bits)
     \item Host part (low order bits)
 \end{itemize}
-This division allows to create a subnet, so a set of devices that share the same subnet part of IP addresses. In the image [10] we can note that in the subnet 1 all the devices share a common subnet part in the IP address (the first 3 bytes), and they are only distinguished by the host part. Inside each subnet, all the interfaces should physically reach each other. We can then define a physical network, which is a set of devices that can physically reach each other by means of link layer mechanisms (so using MAC addresses). In the IP protocol, there must be a biunivocal correspondence between physical networks and subnets:
+This division allows creating a subnet, so a set of devices that share the same subnet part of IP addresses. In the image [10] we can note that in the subnet 1 all the devices share a common subnet part in the IP address (the first 3 bytes), and they are only distinguished by the host part. Inside each subnet, all the interfaces should physically reach each other. We can then define a physical network, which is a set of devices that can physically reach each other by means of link layer mechanisms (so using MAC addresses). In the IP protocol, there must be a biunivocal correspondence between physical networks and subnets:
 \begin{itemize}
     \item If two interfaces are in the same subnet (physical network), then we use a direct communication, based on link layer mechanisms.
     \item If the interfaces are not in the same subnet, we use indirect communication, based on IP routing.
@@ -171,12 +171,12 @@ Let's consider a company that wants to set up 300 IPs for administrative office 
 \end{itemize}
 However, we can identify two more classes:
 \begin{itemize}
-    \item \textbf{Class D}: the first byte starts with 1110 and it must be in the range 224-239. It is used for multicasting, an hybrid communication between unicasting and broadcasting in which we want to send a datagram to a specific set of hosts.
-    \item \textbf{Class E}: the first byte starts with 1111 and it must be in the range 240-255.
+    \item \textbf{Class D}: the first byte starts with 1110, and it must be in the range 224-239. It is used for multicasting, a hybrid communication between unicasting and broadcasting in which we want to send a datagram to a specific set of hosts.
+    \item \textbf{Class E}: the first byte starts with 1111, and it must be in the range 240-255.
 \end{itemize}
 
 \subsubsection{Subnetting}
-Instead of dividing the network and host part using multiples of 8, we can simply move the "divider" in the most effective position. As instance, instead of dividing the IP address in 24 bits for the network part and 8 bits for the host part, we can simply dedicate 9 bits for the host part and 23 bits for the network part, leading to 510 possible hosts (\(2^{9}-2\)). This number is obviusoly better than 65000 hosts of before. \textbf{Example}: the industry will buy just the network 130.192.0.0 and will use the addresses from 130.192.0.0 to 130.192.1.255 for the first subnet and from 130.192.2.0 to 130.192.3.255 for the second one.
+Instead of dividing the network and host part using multiples of 8, we can simply move the "divider" in the most effective position. As instance, instead of dividing the IP address in 24 bits for the network part and 8 bits for the host part, we can simply dedicate 9 bits for the host part and 23 bits for the network part, leading to 510 possible hosts (\(2^{9}-2\)). This number is obviously better than 65000 hosts of before. \textbf{Example}: the industry will buy just the network 130.192.0.0 and will use the addresses from 130.192.0.0 to 130.192.1.255 for the first subnet and from 130.192.2.0 to 130.192.3.255 for the second one.
 
 How can we extract the (sub)network identifier and the limited broadcast from this new configuration? Let's see the table below:
 \begin{table}[H]
@@ -199,18 +199,31 @@ In order to specify which bits are in the subnet part and which are in the host 
 \[\texttt{11111111.11111111.11111110.00000000}\rightarrow \texttt{255.255.254.0}\]
 that specifies that the first 23 bits are (sub)network bits, while the last 9 are host bits.
 
+Let's see some examples of valid netmasks:
+\begin{itemize}
+    \item \texttt{255.255.255.0} is a valid netmask, where \(256-2=254\) hosts are present
+    \item \texttt{255.255.255.192} is a valid netmask, where \(64-2=62\) hosts are present
+    \item \texttt{255.255.255.254} is not a valid netmask, since the number of hosts would be \(2-2=0\), and so the network cannot contain any hosts
+    \item \texttt{255.255.255.255} is actually a valid netmask, and it can be associated to an IP address (topic not covered in this course)
+\end{itemize}
+
 Because of historical reasons, also the subnetting approach is still dependent on the class division. As instance, the address 130.192.0.0 is a Class B address, and also by using a netmask, the number of host must respect the maximum of the class (in this case 65534).
 
 \subsubsection{Classless addressing}
 Today we use an optimize version of the subnetting, which is called CIDR (Classless InterDomain Routing). We can identify two main optimizations:
 \begin{itemize}
-    \item As in the subnetting approach, we are not forced to choose a class of addresses, but we just choose the number of IP addresses we need in our network (obviously a power of 2). The first byte of the address is now totally independent from the division of classes, as instance the address 200.23.16.0, that in the old approach was a Class C address (8 bits host), now can dedicate the number of bits it wants to the host part, by means of the netmask.
+    \item As in the subnetting approach, we are not forced to choose a class of addresses, but we just choose the number of IP addresses we need in our network (obviously a power of 2). The first byte of the address is now totally independent of the division of classes, as instance the address 200.23.16.0, that in the old approach was a Class C address (8 bits host), now can dedicate the number of bits it wants to the host part, by means of the netmask.
     \item Instead of using a netmask, we specify the number of bits dedicated to the network part with the \textit{prefix length}. \textbf{Example}: 200.23.16.0/23 means that the first 23 bits are for network part, while the last 9 for host part.
 \end{itemize}
 
 \noindent How to understand if a classless network ID is valid? Remark that a network ID must have all the host bits set to 0, so we just need to convert our number in binary digits:
 \[\texttt{192.168.1.128/25}\rightarrow \texttt{192.168.1.1|0000000}\]
 It is a valid network ID!
+
+Let's see some examples of addresses with CIDR approach:
+\begin{itemize}
+    \item \texttt{130.192.0.0/16}: the corresponding netmask is \texttt{255.255.0.0}
+\end{itemize}
 
 
 \section{Main Content}
