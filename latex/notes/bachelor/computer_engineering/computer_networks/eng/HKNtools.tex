@@ -1,0 +1,50 @@
+%% HKNtools.sty
+
+%% PACCHETTI
+\usepackage[italian]{babel}              % Lingua italiana
+\usepackage{listings}                    % Per formattare il codice
+\usepackage{xcolor}                      % Supporto per i colori
+\usepackage{graphicx}                    % Per includere immagini
+\usepackage{longtable}                   % Per tabelle su più pagine
+\usepackage{amsmath, amssymb}            % Per le espressioni matematiche
+\usepackage{svg}                         % Per includere grafici SVG
+
+%% IMPOSTAZIONI DEI COLORI
+\definecolor{sqlBackground}{RGB}{240, 240, 240}     % Sfondo chiaro
+\definecolor{sqlText}{RGB}{0, 0, 0}                 % Testo principale nero
+\definecolor{sqlKeyword}{RGB}{0, 0, 150}            % Parole chiave in blu
+\definecolor{sqlComment}{RGB}{0, 128, 0}            % Commenti in verde
+\definecolor{sqlString}{RGB}{200, 0, 0}             % Stringhe in rosso
+\definecolor{sqlNumber}{RGB}{100, 100, 100}         % Numeri di riga in grigio
+\definecolor{sqlIdentifier}{RGB}{0, 0, 100}         % Identificatori in blu scuro
+
+%% COMANDI PERSONALIZZATI
+% Definizione dello stile per SQL
+\lstdefinestyle{sqlstyle}{
+	language=SQL,
+	backgroundcolor=\color{sqlBackground},      % Sfondo chiaro
+	basicstyle=\ttfamily\small\color{sqlText},  % Stile di base (testo nero)
+	keywordstyle=\color{sqlKeyword}\bfseries,   % Stile delle parole chiave (blu)
+	commentstyle=\color{sqlComment}\itshape,    % Stile dei commenti (verde)
+	stringstyle=\color{sqlString},              % Stile delle stringhe (rosso)
+	numberstyle=\tiny\color{sqlNumber},         % Stile dei numeri di riga (grigio)
+	identifierstyle=\color{sqlIdentifier},      % Stile degli identificatori (blu scuro)
+	breaklines=true,                            % Wrapping delle righe
+	breakautoindent,							% per l'indentazione automatica in caso di a capo
+	frame=single,                               % Bordo attorno al codice
+	rulecolor=\color{gray},                     % Colore del bordo
+	tabsize=4,                                  % Dimensione del tab
+	showstringspaces=false,                     % Nasconde gli spazi nelle stringhe
+	numbers=left,                               % Numeri di riga a sinistra
+	numbersep=5pt,                              % Distanza tra i numeri e il codice
+}
+
+% Altri comandi personalizzati (puoi aggiungerli qui)
+% \newcommand{\insertlicense}{\texttt{Licenza...}}
+
+
+%TODO: aggiungere altri stili per altri codici
+
+%TODO: creare il comando per l'inserimento automatico della licenza
+
+%TODO: 

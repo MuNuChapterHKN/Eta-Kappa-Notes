@@ -1,0 +1,27 @@
+\documentclass[a4paper,12pt]{book}
+% Nota: scrivendo draft negli aromenti di document class, si disabilita il rendering di tutti gli ambienti figure. utile per non perdere tempo se non si è interessati a verificare questo aspetto.
+\usepackage[utf8]{inputenc}
+
+\input{HKNtools.tex}
+
+\begin{document}
+	
+\title{HKNotes - template}
+\date{\today}
+%TODO: creare un frontespizio con tutti i campi necessari
+
+\frontmatter
+\maketitle
+\tableofcontents
+
+\mainmatter
+\include{./chapters/introduzione}
+\include{./chapters/grafici}
+\include{./chapters/matematica}
+\include{./chapters/codice}
+\include{./chapters/network_layer}
+
+%\backmatter
+%TODO: creare un changelog per avere una traccia delle modifiche
+
+\end{document}

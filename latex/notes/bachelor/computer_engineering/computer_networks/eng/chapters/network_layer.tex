@@ -1,21 +1,4 @@
-\documentclass[12pt]{report} % Document class and font size
-
-% Packages
-\usepackage[utf8]{inputenc}   % UTF-8 encoding
-\usepackage{amsmath}          % Math symbols
-\usepackage{graphicx}         % Include images
-\usepackage{hyperref}         % Hyperlinks
-\usepackage{geometry}         % Page layout
-\usepackage{float}
-\geometry{a4paper, margin=1in}
-
-% Document starts here
-\begin{document}
-
-\title{Your Document Title} % Title
-\author{Your Name}          % Author
-\date{\today}               % Date (use \today for current date)
-\maketitle                  % Generates title
+\chapter[Network Layer]{Network Layer}
 
 \section*{Abstract}         % Optional section (unnumbered)
 This is where you write the abstract of your document.
@@ -179,7 +162,7 @@ However, we can identify two more classes:
 Instead of dividing the network and host part using multiples of 8, we can simply move the "divider" in the most effective position. As instance, instead of dividing the IP address in 24 bits for the network part and 8 bits for the host part, we can simply dedicate 9 bits for the host part and 23 bits for the network part, leading to 510 possible hosts (\(2^{9}-2\)). This number is obviously better than 65000 hosts of before. \textbf{Example}: the industry will buy just the network 130.192.0.0 and will use the addresses from 130.192.0.0 to 130.192.1.255 for the first subnet and from 130.192.2.0 to 130.192.3.255 for the second one.
 
 How can we extract the (sub)network identifier and the limited broadcast from this new configuration? Let's see the table below:
-\begin{table}[H]
+\begin{table}[!h]
     \centering
     \begin{tabular}{|ccc|c|}
     \hline
@@ -240,4 +223,3 @@ Your conclusion goes here.
 \bibitem{example} Author, \textit{Title}, Publisher, Year.
 \end{thebibliography}
 
-\end{document}

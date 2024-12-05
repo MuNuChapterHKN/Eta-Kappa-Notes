@@ -1,0 +1,87 @@
+\chapter[Matematica avanzata]{Assegnare Etichette alle Equazioni in LaTeX e Citarle Successivamente}
+
+Non voglio parlarvi di come scrivere matematica, ci sono milioni di guide al riguardo. Vi voglio parlare invece della possibilità di assegnare etichette alle equazioni in LaTeX per poterle citare successivamente.
+
+\section{Introduzione}
+
+In LaTeX, una delle caratteristiche più potenti è la possibilità di assegnare etichette alle equazioni e poi citarle facilmente all'interno del documento. Questo è particolarmente utile in documenti scientifici e tecnici, dove spesso è necessario fare riferimento a equazioni specifiche. In questo capitolo, vedremo come etichettare le equazioni e come citarle in modo automatico, garantendo che il numero dell'equazione venga aggiornato correttamente durante la compilazione del documento.
+
+\section{Assegnare un'Etichetta a un'Equazione}
+
+Per etichettare un'equazione, bisogna usare il comando \verb|\label{}| all'interno dell'ambiente in cui si scrive l'equazione (ad esempio, \verb|equation|, \verb|align|, ecc.). L'argomento del comando \verb|\label{}| è il nome dell'etichetta, che deve essere unico nel documento.
+
+Ecco un esempio di etichettatura di un'equazione:
+
+\begin{equation}
+	E = mc^2
+	\label{eqn:energia}
+\end{equation}
+
+In questo caso, l'equazione \( E = mc^2 \) è etichettata con \texttt{eqn:energia}. Ora, LaTeX assocerà automaticamente un numero a questa equazione, che potrà essere citato successivamente nel documento.
+
+\section{Citare un'Equazione}
+
+Per fare riferimento all'equazione etichettata, si usa il comando \verb|\ref{}|. L'argomento del comando \verb|\ref{}| è il nome dell'etichetta che è stata assegnata all'equazione.
+
+Ecco come citare l'equazione precedente:
+
+\begin{quote}
+	Come mostrato nell'equazione \ref{eqn:energia}, la famosa formula di Einstein lega l'energia alla massa.
+\end{quote}
+
+Il risultato sarà:
+
+\begin{quote}
+	Come mostrato nell'equazione (1), la famosa formula di Einstein lega l'energia alla massa.
+\end{quote}
+
+LaTeX sostituirà automaticamente \verb|\ref{eqn:energia}| con il numero dell'equazione (ad esempio, \((1)\)), che si aggiornerà se altre equazioni vengono aggiunte o rimosse nel documento.
+
+\section{Citare un'Equazione con un Prefisso}
+
+Se si desidera aggiungere un prefisso al numero dell'equazione (come "Eq." o "Equation"), è possibile farlo manualmente. Ad esempio:
+
+\begin{quote}
+	Come mostrato in \text{Eq.} \ref{eqn:energia}, la famosa formula di Einstein lega l'energia alla massa.
+\end{quote}
+
+Il risultato sarà:
+
+\begin{quote}
+	Come mostrato in \text{Eq.} (1), la famosa formula di Einstein lega l'energia alla massa.
+\end{quote}
+
+\section{Citazioni con Ambiente \texttt{align}}
+
+Quando si usano ambienti come \verb|align|, che permettono di scrivere più equazioni su righe separate, è possibile etichettare ogni singola equazione. Ecco un esempio:
+
+\begin{align}
+	a + b &= c \label{eqn:somma} \\
+	x - y &= z \label{eqn:diff}
+\end{align}
+
+Per citare le singole equazioni:
+
+\begin{quote}
+	Come mostrato in \ref{eqn:somma} e \ref{eqn:diff}, le operazioni di somma e sottrazione sono definite rispettivamente.
+\end{quote}
+
+Il risultato sarà:
+
+\begin{quote}
+	Come mostrato in (1) e (2), le operazioni di somma e sottrazione sono definite rispettivamente.
+\end{quote}
+
+\section{Citare un'Equazione con il Comando \texttt{\textbackslash eqref}}
+
+Se si desidera citare un'equazione includendo automaticamente le parentesi tonde attorno al numero dell'equazione, si può usare il comando \verb|\eqref{}| al posto di \verb|\ref{}|. Ecco come:
+
+\begin{quote}
+	Come mostrato in \eqref{eqn:energia}, la formula di Einstein esprime l'energia in termini di massa.
+\end{quote}
+
+Il risultato sarà:
+
+\begin{quote}
+	Come mostrato in (1), la formula di Einstein esprime l'energia in termini di massa.
+\end{quote}
