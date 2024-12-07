@@ -205,9 +205,124 @@ It is a valid network ID!
 
 Let's see some examples of addresses with CIDR approach:
 \begin{itemize}
-    \item \texttt{130.192.0.0/16}: the corresponding netmask is \texttt{255.255.0.0}
+    \item \texttt{130.192.0.0/16}: the corresponding netmask is \texttt{255.255.0.0} and contains 65534 possible hosts. This becomes our address range, that is a set of addresses that can be used.
+    \item Inside the previous address range we can define the IP network \texttt{130.192.0.0/24}, which contains 254 possible hosts.
+    \item If we try to define a new IP network \texttt{130.192.0.0/25}, it is not possible, since it will include a subset of IP addresses of the previous network (\texttt{130.192.0.0/24}).
+    \item At the same time, the IP network \texttt{130.192.1.0/23} is not a valid network, since if we look at the binary representation:
+    \[\texttt{130.192.0000000|1.00000000}\]
+    we immediately see that the host part is not completely 0.
+    \item To have a new valid IP network we need to move to \texttt{130.192.2.0/23}, in this case:
+    \[\texttt{130.192.0000001|0.00000000}\]
+    the host part is completely 0. Now we have a network containing addresses from \texttt{130.192.2.1} to \texttt{130.192.3.254}, which is not overlapping with the \texttt{130.192.0.0/24} network, whose hosts go from \texttt{130.192.0.1} to \texttt{130.192.0.254}.
+    \item Let's consider the IP network \texttt{130.192.1.4/30}. This is a valid network since:
+    \[\texttt{130.192.1.000001|00}\]
+    and it contains two hosts: \texttt{130.192.1.1} and \texttt{130.192.1.2}, which are not overlapping with the addresses of the other networks.
 \end{itemize}
 
+\noindent Finally, to understand if an IP network is valid we need to check three conditions:
+\begin{enumerate}
+    \item Check that the host part is completely 0
+    \item Check that the number of hosts is at least 2
+    \item Check that the addresses of the network don't overlap with other addresses of another network
+\end{enumerate}
+
+\subsection{Hierarchical approach} [19]
+But what is the real advantage of using the CIDR approach? Let's consider a company that wants to create two small networks. In the classful approach, it will buy two small networks, as instance \texttt{200.3.1.0} and \texttt{220.4.5.0}. Apparently, this is not a problem, but if we look at the routing table of the gateway, we can see that in this case no summarization of the addresses is possible, and that the addresses are not related to their "physical" and "logical" position. On the other hand, if we use the hierarchical approach, an ISP (Internet Service Provider) can buy a big address range (\texttt{11.0.0.0/8}) and then sell smaller networks to the different organizations, such as \texttt{11.0.0.0/24} and \texttt{11.2.5.0/24}. From the point of view of the routing table, this is much more optimized, since we will have a unique entry (\texttt{11.0.0.0/8}) for the entire address range. This entire mechanism is called hierarchical approach.
+
+\subsection{Implementation of IP routing}
+Firstly, if a host wants to know its own IP network, it needs to perform a bit-wise AND operation between its IP address and its netmask. 
+\begin{align*}
+    \texttt{192.168.10.69:}&\texttt{ 11000000.10101000.00001010.01000101}\\
+    \texttt{AND}\\
+    \texttt{255.255.255.192:}&\texttt{ 11111111.11111111.11111111.11000000}\\
+    \texttt{=}\\
+    \texttt{192.168.10.64:}&\texttt{ 11000000.10101000.00001010.01000000}\\
+\end{align*}
+
+Then, if the host wants to understand if the destination IP address is in the same network, then it will perform a bit-wise AND operation between the IP address of the destination and its netmask (so of the sender). If the result is the same as before, then the two hosts are in the same network, otherwise they are in different networks and an indirect communication is needed (so a router).
+
+Instead, inside the router, the AND operation is performed between the destination IP address of the arriving packet and the netmask of each entry in the routing table, looking for a match. Example: I need to reach \texttt{200.23.18.1}, and I have the following routing table:
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{|cc|}
+    \hline
+    \multicolumn{2}{|c|}{\textbf{routing table}} \\ \hline
+    \multicolumn{1}{|c|}{\textbf{destination}} & \textbf{output link} \\ \hline
+    \multicolumn{1}{|c|}{200.23.16.0/20 (255.255.240.0)} & 1 \\ \hline
+    \multicolumn{1}{|c|}{199.31.0.0/16 (255.255.0.0)} & 2 \\ \hline
+    \end{tabular}
+\end{table}
+
+I perform the AND between \texttt{200.23.18.1} and the netmask of the 1° entry \texttt{255.255.240.0}: I obtain \texttt{200.23.16.0}, and so we have a match! The packet will be forwarded on output link 1. On the other hand, if we perform the AND between \texttt{200.23.18.1} and the netmask of the 2° entry \texttt{255.255.0.0} we obtain \texttt{255.23.0.0}, which doesn't correspond with the IP address \texttt{199.31.0.0}.
+
+\subsubsection{Longest prefix matching}
+Take in consideration the hierarchical schema in the image. [20]
+
+\textbf{Problem}: imagine that 8 organizations hold 8 networks from the address range of ISP1 (\texttt{200.23.16.0/20}). Then, imagine that a new ISP2 is present, whose address range is \texttt{199.31.0.0/16}. One day, the company of the network \texttt{200.23.18.0/23} decides to change its provider to ISP2, \textbf{without} changing the addresses of its network. As a result, ISP2 will "acquire" the address space \texttt{200.23.18.0/23}, in order to get the packets directed to this network. If we look at the routing table, a problem arises:
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{|cc|}
+    \hline
+    \multicolumn{2}{|c|}{\textbf{routing table}} \\ \hline
+    \multicolumn{1}{|c|}{\textbf{destination}} & \textbf{output link} \\ \hline
+    \multicolumn{1}{|c|}{200.23.16.0/20} & 1 \\ \hline
+    \multicolumn{1}{|c|}{200.23.18.0/23} & 2 \\ \hline
+    \multicolumn{1}{|c|}{199.31.0.0/16} & 2 \\ \hline
+    \end{tabular}
+\end{table}
+
+\noindent When the packet of destination address \texttt{200.23.18.1/23} arrives, it will find two different matches, one referred to the old ISP1, the other to the new ISP2. In fact, even if the company has changed its ISP, the address space of its network still belongs to ISP1! To solve this problem, we have two solutions:
+\begin{enumerate}
+    \item The first solution is "unfolding" the \texttt{200.23.16.0/20} entry of the table, declaring the output link of each network: this is not efficient at all, since it will "break" the summarization principle of the routing table.
+    \item The second solution is called \textbf{Longest Prefix Matching}, and it's based on the principle that every time multiple matches are found, the packet will be forwarded to the network with the longest address prefix, and so the set of addresses which is "more specific".
+\end{enumerate}
+
+\noindent To conclude, with the \textbf{Longest Prefix Matching} mechanism, the packets will always follow the most specific path, whose presence tells us that this portion of the address space has been moved to a new ISP. 
+
+\subsubsection{Types of routes}
+There exists different kinds of routes, which mainly divide in \textit{direct} and \textit{indirect}:
+\begin{itemize}
+    \item Direct routes: related to all the networks directly connected to the routed (in a link layer approach)
+    \item Indirect routes:
+    \begin{itemize}
+        \item Static routes: manually configured to remote networks
+        \item Dynamic routes: automatically configured according to routing protocols (specific algorithms designed to find the best path)
+    \end{itemize}
+\end{itemize}
+
+\noindent Let's write the routing table R1 of the following network:
+[21]
+First of all, we immediately see that R1 is directly connected to 4 different networks: \texttt{130.192.3.0/30}, \texttt{130.192.2.0/24}, \texttt{130.192.2.0/24} and \texttt{80.105.10.0/30}. Then, we can see the networks that can be reach only in an indirect way: \texttt{130.192.0.0/24}, \texttt{130.192.1.0/24} and \texttt{130.192.3.8/30}. The best path, according to the assigned weights, are:
+\begin{itemize}
+    \item To reach \texttt{130.192.0.0/24}: R1-R2, tot=1
+    \item To reach \texttt{130.192.1.0/24}: R1-R2-R3, tot=2
+    \item To reach \texttt{130.192.3.8/30}: R1-R2, tot=1
+\end{itemize}
+\noindent Let's see the real structure of a routing table:
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|ccc|}
+    \hline
+    \multicolumn{3}{|c|}{\textbf{routing table}} \\ \hline
+    \multicolumn{1}{|c|}{\textbf{Type}} & \multicolumn{1}{c|}{\textbf{destination}} & \textbf{next-hop router} \\ \hline
+    \multicolumn{1}{|c|}{S} & \multicolumn{1}{c|}{130.192.0.0/24} & 130.192.3.2 \\ \hline
+    \multicolumn{1}{|c|}{S} & \multicolumn{1}{c|}{130.192.1.0/24} & 130.192.3.2 \\ \hline
+    \multicolumn{1}{|c|}{S} & \multicolumn{1}{c|}{130.192.3.8/30} & 130.192.3.2 \\ \hline
+    \multicolumn{1}{|c|}{S} & \multicolumn{1}{c|}{0.0.0.0/0} & 80.105.10.2 \\ \hline
+    \multicolumn{1}{|c|}{D} & \multicolumn{1}{c|}{130.192.2.0/24} & 130.192.2.1 \\ \hline
+    \multicolumn{1}{|c|}{D} & \multicolumn{1}{c|}{130.192.3.0/30} & 130.192.3.1 \\ \hline
+    \multicolumn{1}{|c|}{D} & \multicolumn{1}{c|}{130.192.3.4/30} & 130.192.3.5 \\ \hline
+    \multicolumn{1}{|c|}{D} & \multicolumn{1}{c|}{80.105.10.0/30} & 80.105.10.1 \\ \hline
+    \end{tabular}
+\end{table}
+
+\noindent We can immediately notice that the "output link" is not specified anymore, leaving space to the "next-hop router" IP. This is because, in a real implementation, specifying the output interface is totally useless: we would forward the packet on a specific interface (ethernet/Wi-Fi), but without really specifying which is the destination of the packet. From now on, each entry will have a next-hop router, which is the IP address of the interface of the router that will actually get the packet. The fourth entry presents the destination \texttt{0.0.0.0/0}: this is the default destination, and the corresponding next-hop router is used for all the addresses that don't match with the other entries. This address, in fact, is designed to match with all the possible addresses:
+\[\texttt{x.x.x.x/x}\text{ AND }\texttt{255.255.255.255} = \texttt{0.0.0.0}\]
+\noindent If an address match with the default one, but also with another destination, according to the Longest Prefix Matching, only the second will be taken in consideration.
+
+LESSON 15/11 FIRST PART (REUNDERSTAND THE ROUTING TABLE)
 
 \section{Main Content}
 \subsection{Subsection Example}
