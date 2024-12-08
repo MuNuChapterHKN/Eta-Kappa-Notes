@@ -291,6 +291,7 @@ There exists different kinds of routes, which mainly divide in \textit{direct} a
     \end{itemize}
 \end{itemize}
 
+\subsubsection{Configuration of a routing table}
 \noindent Let's write the routing table R1 of the following network:
 [21]
 First of all, we immediately see that R1 is directly connected to 4 different networks: \texttt{130.192.3.0/30}, \texttt{130.192.2.0/24}, \texttt{130.192.2.0/24} and \texttt{80.105.10.0/30}. Then, we can see the networks that can be reach only in an indirect way: \texttt{130.192.0.0/24}, \texttt{130.192.1.0/24} and \texttt{130.192.3.8/30}. The best path, according to the assigned weights, are:
@@ -318,11 +319,71 @@ First of all, we immediately see that R1 is directly connected to 4 different ne
     \end{tabular}
 \end{table}
 
-\noindent We can immediately notice that the "output link" is not specified anymore, leaving space to the "next-hop router" IP. This is because, in a real implementation, specifying the output interface is totally useless: we would forward the packet on a specific interface (ethernet/Wi-Fi), but without really specifying which is the destination of the packet. From now on, each entry will have a next-hop router, which is the IP address of the interface of the router that will actually get the packet. The fourth entry presents the destination \texttt{0.0.0.0/0}: this is the default destination, and the corresponding next-hop router is used for all the addresses that don't match with the other entries. This address, in fact, is designed to match with all the possible addresses:
+\noindent We can immediately notice that the "output link" is not specified anymore, leaving space to the "next-hop router" IP. This is because, in a real implementation, specifying the output interface is totally useless: we would forward the packet on a specific interface (ethernet/Wi-Fi), but without really specifying which is the destination of the packet. From now on, each entry will have a next-hop router, which is the IP address of the interface of the router that will actually get the packet.
+
+The first 3 entries are for indirect communication, while the fourth entry presents the destination \texttt{0.0.0.0/0}: this is the default route, and the corresponding next-hop router is used for all the addresses that don't match with the other entries. This address, in fact, is designed to match with all the possible addresses:
 \[\texttt{x.x.x.x/x}\text{ AND }\texttt{255.255.255.255} = \texttt{0.0.0.0}\]
 \noindent If an address match with the default one, but also with another destination, according to the Longest Prefix Matching, only the second will be taken in consideration.
 
-LESSON 15/11 FIRST PART (REUNDERSTAND THE ROUTING TABLE)
+The last 4 entries, instead, are used for direct communication. In this case the destinations are the LAN directly connected to the router, while the next-hop routers are the interfaces of the router itself, connected to the LAN. As a result, the router "knows" that the LAN is directly connected to itself, and a direct communication (ARP protocol + data-link protocols) is used. To conclude, every time I need to send a packet to a remote host, two read operations must be done:
+\begin{enumerate}
+    \item From router R1, we want to send a packet to \texttt{130.192.0.3}
+    \item The first entry matches, so the next-hop is \texttt{130.192.3.2}. In other words, R1 doesn't know where \texttt{130.192.0.3} is located, but it knows that another router (R2, \texttt{130.192.3.2}) actually knows how to forward the packet!
+    \item How to reach \texttt{130.192.3.2}?
+    \item We look in the table, and we find a correspondence in the \(6^{th}\) entry
+    \item The interface to use is \texttt{130.192.3.1}
+    \item Now, we use ARP protocol + data-link protocols to discover the MAC address of the interface of R2 (with IP \texttt{130.192.3.2}) and we send the packet
+\end{enumerate}
+
+\noindent Finally, we can further optimize the routing table, noticing that for the first three entries, the next-hop router is the same. These three entries can be compressed in a unique entry:
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|ccc|}
+    \hline
+    \multicolumn{3}{|c|}{\textbf{routing table}} \\ \hline
+    \multicolumn{1}{|c|}{\textbf{Type}} & \multicolumn{1}{c|}{\textbf{destination}} & \textbf{next-hop router} \\ \hline
+    \multicolumn{1}{|c|}{S} & \multicolumn{1}{c|}{130.192.0.0/16} & 130.192.3.2\\ \hline
+    \multicolumn{1}{|c|}{...} & \multicolumn{1}{c|}{...} & ...\\ \hline
+    \end{tabular}
+\end{table}
+
+The \textbf{configuration} of a \textbf{single host}, for example connected to the LAN \texttt{130.192.0.0/24}, will be:
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|cc|}
+    \hline
+    \multicolumn{2}{|c|}{\textbf{routing table}} \\ \hline
+    \multicolumn{1}{|c|}{\textbf{destination}} & \textbf{next-hop router} \\ \hline
+    \multicolumn{1}{|c|}{130.192.0.0/24} & 130.192.0.3 \\ \hline
+    \multicolumn{1}{|c|}{0.0.0.0/0} & 130.192.0.1 \\ \hline
+    \end{tabular}
+\end{table}
+
+\noindent Where the first row is referred to all the addresses of its LAN, while the second is referred to all the addresses outside the LAN: in this case the packets will be forwarded to the interface of the next-hop router (the default gateway).
+
+\section{DHCP Protocol}
+The DHCP is an application level protocols, that allows hosts to dynamically obtain an IP address from the network server as soon as they join the network. The DHCP is much powrful, since:
+\begin{itemize}
+    \item It can renew its lease on addresses in use,
+    \item It allows the reuse of addresses and,
+    \item It supports mobile users (that dynamically enter and exit from the network) who want to join it
+\end{itemize}
+
+\noindent The DHCP is made of 4 messages (the first 2 will be optional):[22]
+\begin{enumerate}
+    \item DHCP discover: as soon as the client enters the network, it doesn't know the IP of the DHCP server. As a result, a broadcast message is sent to the IP \texttt{255.255.255.255,67}, which will be translated into a MAC address broadcast message at the data-link layer. The source is set to \texttt{0.0.0.0,68}. 67 and 68 are two numbers of the addressing schema of the transport layer, called \textit{port}. The port defines the service/application of the host we want to communicate with. More specifically, the 67 port is reserved for the DHCP protocol.
+    \item DHCP offer: the server responds with a DHCP offer. This offer is again a broadcast message to all the clients of the network. Notice that multiple DHCP servers can be present: in this case the client will receive multiple offers, and it will decide what IP address to acquire.
+    \item DHCP request: a new broadcast message with the selected IP address is sent by the client. In this way, all the DHCP servers will be notified. 
+    \item DHCP ack: finally, the DHCP server that has made the offer, send an ACK broadcast message to the clients, notifying that the IP address has been acquired. From this point, the client is reachable through this IP address. An additional information sent by the DHCP server is the lifetime, which is the number of seconds the IP address is valid.
+\end{enumerate}
+
+\noindent \textbf{Important}! Remember that each message has its own transaction ID, so even if the DHCP offer and the DHCP ACK are broadcast messages, the client knows if the packet is directed to itself or not.\\
+
+\noindent Why the first two messages are optional?
+Imagine that the client exits from the network within the lifetime. When it re-enters in the network, it can directly try to send a DHCP request to the DHCP server, trying to request the same IP address of before. If the server sees that the lifetime is not expired yet, then the ACK message is sent. On the other hand, if the lifetime is expired (and so the IP address maybe has been reassigned to someone else), then all the process of before must be done.
+
+This mechanism is quite efficient, since it allows assigning and reusing a lower number of IP addresses in a network in which the number of users is much higher. \textbf{Example}: even if the number of PoliTo student is 10000, the number of assigned IP address is just 1000, since it's very unlikely to have all the 10000 students in the same place at the same time.
 
 \section{Main Content}
 \subsection{Subsection Example}
