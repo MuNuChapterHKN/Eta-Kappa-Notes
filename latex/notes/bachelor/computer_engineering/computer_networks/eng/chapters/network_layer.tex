@@ -385,6 +385,58 @@ Imagine that the client exits from the network within the lifetime. When it re-e
 
 This mechanism is quite efficient, since it allows assigning and reusing a lower number of IP addresses in a network in which the number of users is much higher. \textbf{Example}: even if the number of PoliTo student is 10000, the number of assigned IP address is just 1000, since it's very unlikely to have all the 10000 students in the same place at the same time.
 
+\section{DNS Protocol}
+
+The DNS is a system responsible for mapping the IP address of internet hosts and routers (i.e. \texttt{192.168.30.2}) to a name (i.e. \texttt{www.polito.it}). The DNS is part of the application layer, and it's made of a distributed database, implemented in hierarchal way. A centralized DNS wouldn't be a good solution for different reasons:
+\begin{itemize}
+    \item It would represent a single point of failure
+    \item It would have to manage a huge traffic volume
+    \item It would be distant for many hosts, leading to latency
+    \item Many political problems (a country could block the URLs of other countries by just deleting a row in the database)
+    \item It doesn't scale
+\end{itemize}
+
+\subsection{Distributed database}
+[5]
+
+As we can see from the picture, the DNS is made of different levels. For example, if we want to find the IP of \texttt{didattica.polito.it}:
+\begin{itemize}
+    \item The client queries the root server to ask for the link to the \texttt{.it} TLD (Top Level Domain)
+    \item The client queries the \texttt{.it} server to get the \texttt{polito.it} DNS server
+    \item The client queries the \texttt{polito.it} server to get the IP address for \texttt{didattica.polito.it}
+\end{itemize}
+
+The DNS could be configured also with a higher number of levels (but 3 is the most common).
+
+\subsubsection{Root name servers}
+They represent the top of the DNS hierarchy, and they are responsible for storing the link to the TLDs. Multiple of them are present in the world, and they all store the same rows. In case we need to add/modify a row, the change must be propagated, but it's not a big issue, since it's likely to happen no more than once a year.
+
+\subsubsection{Top-level domain (TLD) servers}
+They are responsible for \texttt{com}, \texttt{org}, \texttt{net}, \texttt{edu} and all top-level country domains.
+
+\subsubsection{Authoritative DNS servers}
+They are the DNS servers of each organization, and they provide the mapping between the IP addresses and the organization's name hosts. These servers can be managed by organization or service providers (i.e. \texttt{aruba.it}).
+
+\subsection{Local DNS server}
+The Local DNS server is not part of the DNS hierarchy, even if it uses it. The local DNS server acts as proxy, since it's logically located between the host and the server. Every time we need to make a DNS query (to the root name servers), the query is sent to the local DNS server, which contains a cache with the recent mappings, in order to avoid multiple useless requests. Every ISP (residential, university, ecc.) has its own local DNS server.
+
+The local DNS server can interact ith the DNS hierarchy in two ways:[24a-b]
+\begin{itemize}
+    \item \textbf{Iterated query}: the local DNS is centralized and is responsible for making all the requests to the DNS hierarchy
+    \item \textbf{Recursive query}: the query is propagated through the hierarchy
+    \item \textbf{Hybrid solutions}: also hybrid solutions are possible
+\end{itemize}
+
+\noindent In all cases, at the end of the process, the local DNS server stores the mapping into its local cache, making it usable for all the hosts that request it. Another optimization is storing the DNS cache directly in the Operating System, avoiding making any requests to external servers.
+
+The main problem connected to caching is that everytime an association changes in the DNS hierarchy, all the caches containing that association become out-of-date. For this reason, every DNS record has a ttl (time to live), which is the validity duration of the association. Let's suppose that Politecnico wants to change its IP addresses:
+\begin{enumerate}
+    \item Firstly, suppose that the ttl was set to 2 days
+    \item Politecnico sets the ttl to 2 seconds, so that we are sure that in 2 days, all the caches that have made request to PoliTo DNS have records with 2 seconds ttl
+    \item As soon as Politecnico applies the change of IP, we are sure that the change has been propagated to all the caches in the world in maximum 2 seconds
+    \item The ttl can now be reset to 2 days
+\end{enumerate}
+
 \section{Main Content}
 \subsection{Subsection Example}
 Details for this subsection.
