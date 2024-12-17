@@ -437,6 +437,28 @@ The main problem connected to caching is that everytime an association changes i
     \item The ttl can now be reset to 2 days
 \end{enumerate}
 
+\subsection{DNS records}
+Every DNS record has typically 4 fields:
+\[\texttt{(key, value, type, ttl)}\]
+
+\noindent The "key" and "value" fields change according to the "type" it's used. As instance:
+\begin{itemize}
+    \item \textbf{Type A}: simple association between hostname (key) and IP address (value)
+    \item \textbf{Type CNAME}: association between an alias name (key) and the real canonical name (value)
+    \[\texttt{(www.polito.it, newserver.polito.it)}\]
+    In this way, if the IP address of \texttt{newserver.polito.it} changes, I don't need to change the A record of \texttt{www.polito.it}, but only the one of \texttt{newserver.polito.it}. Obviously, everytime we make a request to the authoritative DNS server, it will first find the real canonical name of the host (CNAME), and then its IP address (A), returning it.
+    \item \textbf{Type NS}: association between the domain (key) and the hostname for authoritative name server for this domain (value)
+    \[\texttt{(polito.it, dns.polito.it)}\]
+    It is much useful in top-level domains (in our case responsible for \texttt{.it}), where we need to redirect the request to the authoritative name server.
+    \item \textbf{Type MX}: association between hostname (key) and name of the mailserver (value)
+    \item \textbf{Type AAAA}: for IPv6 protocol. Same record as A, but instead of an IPv4 address in the value, we have an IPv6 address.
+    \item \textbf{Type PTR}: they are the inverse of type A. In this case the key is the IP address and the value is the hostname.
+
+\end{itemize}
+
+\noindent The DNS query and reply messages have the same message format, and they belong to the application layer:[25]
+An identification number is needed in order to identify the request (associating it to the correct reply), while flags are needed to understand if the message is a query or a reply. As we can see, multiple questions (and also replies), are possible in the same message.
+
 \section{Main Content}
 \subsection{Subsection Example}
 Details for this subsection.
