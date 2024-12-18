@@ -4,3 +4,67 @@
 This is where you write the abstract of your document.
 
 \section{Introduction}
+Why do we need a transport layer? We saw that a network layer is necessary to build a bigger layer, in order to reach any host in the world. The introduction of the trasport layer is related to some problems:
+\begin{itemize}
+    \item \textbf{Multiplexing/demultiplexing}: until now we have talked about hosts that try to send datagrams to other hosts. However, we recall that every host has multiple applications (browser, mail, ecc.), so we need a way to redirect each datagram to the correct application as soon as it reaches the destination (by means of the \textit{port} number).
+    \item \textbf{Reliable data transfer}: the network layer is a best-effort layer (it does its best), but it doesn't guarantee that the datagram will reach the destination host. So we need a way (in a new layer) to make this transfer fully reliable.
+    \item \textbf{Congestion control}: when too many datagrams arrive at a router, the queue might be full, leading to a drop of other packets arriving. In this case we need a new service to identify this problem and solve it, by slowing down the transmission.
+    \item \textbf{Flow control}: if the traffic arriving to a host is too big (i.e. a sensor), we need a service that allows the destination device to communicate with the sender, asking him to slow down the transmission.
+\end{itemize}
+
+\noindent The transport layer is made of two main protocols:
+\begin{itemize}
+    \item \textbf{UDP}: connectionless transport, it only offers multiplexing/demultiplexing. It is just an "IP Protocol" with the addition of the port number.
+    \item \textbf{TCP}: connection-oriented tansport, it offers all the services listed before (multiplexing/demultiplexing, reliable data transfer, congestion/flow control). For the reliability a \textit{sliding windows protocol} is often used, which introduces a lot of additional complexity. In addition, remember that the TCP is not a VC (Virtual Circuit) at all: first, TCP needs IP Protocol (and router cannot establish a VC), second, the connection is only \textit{logical} and established directly between the sender and the destination.
+\end{itemize}
+
+\noindent As said before the connection is only logical, and it doesn't involve the network connecting them. At the transport layer, the sender breaks the application layer messages into segments (it breaks them in case of MTS not respected), and then send them to the transport layer of the destination, which reassemble segments into messages and passes them to the application layer.
+
+Two services which are not provided in the transport layer are the delay guarantee and the bandwidth guarantee. However, we are still able to use properly the network thanks to some protocols (TCP), which are able to detect the congestion in the routers.
+
+\subsection{Multiplexing and demultiplexing}
+
+Both UDP and TCP header contains a 32 bits field, divided in 16 bits for the \textit{source port number} and the remaining for the \textit{destination port number}. As said before, the port identifies the application with which the source host wants to communicate.
+
+[26]
+Let's consider the structure below, valid for a connectionless (UDP) demux. If host 1 wants to send a socket (data structure between application and transport layer) to the server, it needs to specify the port number, and so the application to communicate with. In the header, also the source port is specified, in case of the server would want to send a response to host 1.
+
+[27]
+Now, let's consider the structure of a connection-oriented (TCP) demux. In this case the logical connection must be established between the two processes (from the source process of the host to the destination process of the server), and so a socket must be present for each single process. As a result, each connection/socket is identified by the source IP, the dest IP, the source port and the dest port. That makes the connection strongly reliable, since if a packet is lost, we exactly know to what process ask to resend the packet.
+
+\subsubsection{Well-known ports}
+How can a client know the correct port to contact? To do that, the \textit{Internet Corporation for Assigned Names and Number} (ICANN) has reserved for assignments the port range from 1 to 1024, which are called well-known ports. As instance, the port 80 is reserved for TCP HTTP protocol. Other examples are 67 (for UDP DHCP), 443 (for HTTPS), 53 (for UDP DNS) and 22 (for TCP SSH).
+
+\section{UDP Protocol}
+The UDP Protocol is a best effort service (based on IP Protocol, which is also a best effort). As said before, UDP is connectionless, and so no handshaking is needed between the UDP sender and the receiver. All the segments are sent independently of others.
+
+There are some specific applications that use UDP, such as videocalls and multimedia streaming, which are loss tolerant (no problem if we lose some packets), but rate sensitive (the delay must be reduced as much as possible). Another application is the DNS, where we need to avoid all the packets sent to establish the connection, which it wouldn't make sense. In this case the reliability is added at the application layer (i.e. the packet is sent, and after a timeout in which no response is received, it is sent again).
+
+Another advantage of UDP is that we can reach multiple destinations (by means of multicasting, implemented by routers at network layer). TCP can only manage with point-to-point connections.
+
+\subsubsection{UDP segment header}
+[28] In addition to the source and destination port, in the UDP header we also add a field for the length, and a field for the checksum, implementing the additional control that in the case of the IP Protocol was only done on the header.
+
+\section{TCP Protocol}
+\subsection{Principles of reliable data transfer}
+[29]In the picture we can see the service implementation of the TCP protocol. Below we find an unreliable channel (given by IP Protocol), while in the middle we find a reliable transfer protocol on the sending side and another on the receiving side. Remember that when we talk about reliability, we both refer to receiving all the packets and receiving them in the correct order.
+
+The reliability can be provided by different protocols, such as:
+\begin{itemize}
+    \item \textbf{Stop and wait}: we send a packet, and we wait for the ack. It's not so efficient.
+    \item \textbf{Sliding window protocols}:\begin{itemize}
+        \item \textbf{Go-back-N}: we send N packets, and we wait for a cumulative ack. The sender has a timer for the oldest unacked packet: when the timer expires, all the packets are retransmited. The sender is efficient and simple, but if a packet is lost, we need to resend all the window.
+        \item \textbf{Selective Repeat}: we send N packets, and we wait for individual acks. If one packet is lost, we only resent it. In this case we have a better use of the network, but the sender is more complex, since we need to have a timer for each packet.
+    \end{itemize}
+    
+\end{itemize}
+
+\subsection{TCP Overview}
+\begin{itemize}
+    \item It Enables point-to-point connection, between one sender and one receiver (no multicasting).
+    \item It's reliable, and we have an in-order byte stream.
+    \item It uses pipelined protocols (sliding windows protocols), and it set the window size (N) in order to control and reduce the congestion.
+    \item It enables a full duplex connection, so data can flow in both directions.
+    \item It's connection-oriented, through handshaking (not signalling!).
+    \item It's flow controlled, and so the sender will not overwhelm the receiver.
+\end{itemize}
