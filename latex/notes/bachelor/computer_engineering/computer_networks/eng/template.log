@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2023.4.15)  17 DEC 2024 12:28
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2023.4.15)  18 DEC 2024 09:03
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -295,7 +295,7 @@ File: pgfsysprotocol.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 File: l3backend-pdftex.def 2022-09-28 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count300
 \l__pdf_internal_box=\box62
-) (template.aux (chapters/introduzione.aux) (chapters/grafici.aux) (chapters/matematica.aux) (chapters/codice.aux) (chapters/network_layer.aux))
+) (template.aux (chapters/network_layer.aux) (chapters/transport_layer.aux))
 \openout1 = `template.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
@@ -360,113 +360,26 @@ LaTeX Warning: No \author given.
 
 {C:/Users/tedde/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2
 
-] (template.toc
-LaTeX Font Info:    Trying to load font information for OMS+cmtt on input line 11.
-LaTeX Font Info:    No file OMScmtt.fd. on input line 11.
-
-
-LaTeX Font Warning: Font shape `OMS/cmtt/m/n' undefined
-(Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textbackslash' on input line 11.
-
-[3])
+] (template.toc)
 \tf@toc=\write4
 \openout4 = `template.toc'.
 
- [4]
-\openout2 = `./chapters/introduzione.aux'.
+ [3] [4
 
- (chapters/introduzione.tex
+]
+\openout2 = `./chapters/network_layer.aux'.
+
+ (chapters/network_layer.tex
 Capitolo 1.
 [1
 
 
-
-]) [2]
-\openout2 = `./chapters/grafici.aux'.
-
-
-No file ./chapters/grafici.tex.
-\openout2 = `./chapters/matematica.aux'.
-
-(chapters/matematica.tex
-Capitolo 2.
-[3
-
-
-
-
-
-
-
-]
-LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <17.28> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 54.
- [4]
-
-LaTeX Font Warning: Font shape `OMS/cmtt/bx/n' undefined
-(Font)              using `OMS/cmtt/m/n' instead
-(Font)              for symbol `textbackslash' on input line 75.
-
-
-Overfull \hbox (16.62979pt too wide) in paragraph at lines 75--75
-[]\OT1/cmr/bx/n/17.28 Citare un'E-qua-zio-ne con il Co-man-do \OMS/cmtt/m/n/17.28 n\OT1/cmtt/m/n/17.28 eqref 
- []
-
-) [5]
-\openout2 = `./chapters/codice.aux'.
-
- (chapters/codice.tex [6
-
-
-
-
-]
-Capitolo 3.
-
-Overfull \hbox (23.7393pt too wide) in paragraph at lines 7--8
-\OT1/cmr/m/n/12 lo sti-le e il co-man-do \OMS/cmtt/m/n/12 n\OT1/cmtt/m/n/12 lstinputlisting \OT1/cmr/m/n/12 o \OMS/cmtt/m/n/12 n\OT1/cmtt/m/n/12 beginlstlisting...\OMS/cmtt/m/n/12 n\OT1/cmtt/m/n/12 endlstlisting
- []
-
-(C:\Users\tedde\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
-File: lstlang1.sty 2020/03/24 1.8d listings language file
-) (src/py/2d_example.py [7]
-LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 15.
- (C:\Users\tedde\AppData\Local\Programs\MiKTeX\tex/latex/base\omscmr.fd
-File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 15.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [8]) [9] (C:\Users\tedde\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
-File: lstlang1.sty 2020/03/24 1.8d listings language file
-)
-LaTeX Font Info:    Trying to load font information for OML+cmr on input line 54.
- (C:\Users\tedde\AppData\Local\Programs\MiKTeX\tex/latex/base\omlcmr.fd
-File: omlcmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 54.
-LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 82.
- [10]) [11]
-\openout2 = `./chapters/network_layer.aux'.
-
- (chapters/network_layer.tex [12
-
-
-
-
-]
-Capitolo 4.
-[13] [14] [15] [16] [17] [18] [19] [20]
+] [2] [3] [4] [5] [6] [7] [8]
 Overfull \hbox (1.85843pt too wide) in paragraph at lines 127--128
 \OT1/cmr/m/n/12 ad-dress 222.222.222.222 mu-st be for-war-ded to in-ter-fa-ce 222.222.222.220.
  []
 
-[21] [22]
+[9] [10]
 Overfull \hbox (4.14783pt too wide) in paragraph at lines 167--178
  [][] 
  []
@@ -474,42 +387,46 @@ Overfull \hbox (4.14783pt too wide) in paragraph at lines 167--178
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[23] [24]
+[11] [12]
 Overfull \hbox (43.81042pt too wide) in paragraph at lines 209--210
 []\OT1/cmr/m/n/12 Inside the pre-vious ad-dress ran-ge we can de-fi-ne the IP net-work \OT1/cmtt/m/n/12 130.192.0.0/24\OT1/cmr/m/n/12 ,
  []
 
-[25]
+[13]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [26] [27] [28] [29]
+ [14] [15] [16] [17]
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[30]
+[18]
 Underfull \hbox (badness 10000) in paragraph at lines 381--382
 
  []
 
-[31] [32] [33] [34] [35] [36
+[19] [20] [21] [22]) [23]
+\openout2 = `./chapters/transport_layer.aux'.
 
-]) [37] (template.aux (chapters/introduzione.aux) (chapters/grafici.aux) (chapters/matematica.aux) (chapters/codice.aux) (chapters/network_layer.aux))
+ (chapters/transport_layer.tex [24
 
-LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
- ) 
+
+
+]
+Capitolo 2.
+) [25] (template.aux (chapters/network_layer.aux) (chapters/transport_layer.aux)) ) 
 Here is how much of TeX's memory you used:
- 9350 strings out of 475385
- 164929 string characters out of 2776907
- 896789 words of memory out of 3000000
- 30505 multiletter control sequences out of 15000+600000
- 482118 words of font info for 78 fonts, out of 8000000 for 9000
+ 8491 strings out of 475385
+ 151983 string characters out of 2776907
+ 533620 words of memory out of 3000000
+ 29689 multiletter control sequences out of 15000+600000
+ 480510 words of font info for 71 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,10n,95p,1777b,1917s stack positions out of 10000i,1000n,20000p,200000b,80000s
- <C:\Users\tedde\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcbx1200.pk> <C:\Users\tedde\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcti1200.pk> <C:\Users\tedde\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmitt10.pfb><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsl12.pfb><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsltt10.pfb><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on template.pdf (41 pages, 271367 bytes).
+ 99i,10n,95p,1777b,306s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ <C:\Users\tedde\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcbx1200.pk> <C:\Users\tedde\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsl12.pfb><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on template.pdf (29 pages, 191719 bytes).
 PDF statistics:
- 225 PDF objects out of 1000 (max. 8388607)
+ 159 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
