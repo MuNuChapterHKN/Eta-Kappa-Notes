@@ -59,7 +59,7 @@ The reliability can be provided by different protocols, such as:
     
 \end{itemize}
 
-\subsection{TCP Overview}
+\subsection{TCP overview}
 \begin{itemize}
     \item It Enables point-to-point connection, between one sender and one receiver (no multicasting).
     \item It's reliable, and we have an in-order byte stream.
@@ -68,3 +68,122 @@ The reliability can be provided by different protocols, such as:
     \item It's connection-oriented, through handshaking (not signalling!).
     \item It's flow controlled, and so the sender will not overwhelm the receiver.
 \end{itemize}
+
+\subsubsection{TCP segment header}
+[30] The TCP segment header is much more complex with respect to the UDP segment header. These are the main fields:
+\begin{itemize}
+    \item \textbf{Source port} and \textbf{destination port}, as in the UDP header
+    \item \textbf{Sequence number} and \textbf{ack number}, for the sliding window protocol
+    \item \textbf{A}, is set to 1 every time the segment contains a valid ack number
+    \item \textbf{RSF}, S sets up the connection, F closes the connection in a "normal" way, R closes the connection in a forced way
+    \item \textbf{Receive window}, the number of bytes the receiver can accept
+    \item \textbf{Header length}, to understand where the header finishes and the payload begins
+    \item \textbf{Checksum}, to check the content of the segment
+    \item \textbf{Options}, the most important is the MSS
+\end{itemize}
+
+\subsection{Sequence number and ACK number}
+[31] Inside the TCP segment header, the sequence number is not the number of the segment, but it's the number of the first byte of the segment, usually starting from a random value (not 0 for security reasons). As instance, if we have 220 bytes to send and an MSS of 100 bytes, we start from a random value (500), and in the first sequence number we will write 500. In the second we will write 600, while in the last 700. The ACK number, on the other hand, is the expected byte number received. If the receiver has received the packet with sequence number 500, then in the ACK we will find 600.
+
+The used approach is similar to a hybrid between Go-back-N and selective repeat, with a cumulative ACK. In case of out-of-order segments, the choice depends on the Operating System. Most of them tends not to discard these packets.
+
+\subsection{TCP mechanism}
+As said before, the TCP is a reliable protocol, but it needs to deal with the IP's unreliable service. TCP is based on pipelined segments, cumulative acks and a single retransmission timer, where the retransmission is triggered by timeout events and duplicate ACKs. Let's see some scenarios:
+
+\subsubsection{Lost ACK scenario}
+[32] Host A sends to B the seq=92 of 8 bytes and starts the timeout. B receives it and sends ACK=100 (next expected byte), which is lost. In the meanwhile the timeout is expired, so the seq=92 is resent by host A.
+
+\subsubsection{Premature timeout}
+[33] Host A sends two segments to B, seq=92 and seq=100, the first of 8 bytes while the second of 20 bytes. B sends the two ACKs, but they arrive after timeout expiration, so A re-sends seq=92. In the meanwhile the ACKs arrive and B sends a new ACK for the new segment received. The ACK won't be for 100, but for 120, since the ACK is cumulative.
+
+\subsubsection{Cumulative ACK}
+[34] Host A sends two segments to B, seq=92 and seq=100, the first of 8 bytes while the second of 20 bytes. B sends the two ACKs, but the first one is lost: no problem, if ACK=120 is received by host A, it means that host B has received both, so seq=120 can be sent.
+
+\subsubsection{Delayed ACK}
+[35] This is an optimization to avoid sending useless ACKs. If the receiver gets many segments, and it expects to receive additional ones, it starts a timer (up to 500 ms), and at the end of the timer it sends a cumulative ACK.
+
+\subsubsection{Detected GAP (with timeout)}
+[36] The receiver gets segment 0,2,3,4, but it doesn't receive segment 1, so a gap is present in the window. After 0 it sends ACK=1, but also after 2,3,4, since the "waiting" byte is still 1. From the sender point of view, as soon as the timer expires, segment 1 is resent, and at this point the receiver will send ACK=5, since all the packets until 5 has been received.
+
+\subsubsection{Detected GAP - TCP fast retransmit}
+[37] Looking at the previous situation, an optimization is possible. Instead of waiting that the timer expires (this can require too much time), if the sender receives 4 ACKs for the same data (1+3 dup ACK), then it re-sends the unacked segment with the smallest sequence number. This is a sort of "trigger" for timer expiration.
+
+\subsection{TCP timeout}
+The timeout must be set in an optimized way: first, it must be longer than the RTT (Round Trip Time), second, it cannot be too short (causing premature timeout), or too long (slow reaction in case of lost segments). The best way is to use an "experimental approach":
+\begin{itemize}
+    \item We measure the SampleRTT over time, which is the time between segment transmission and ACK received. This value can vary from a transmission to another.
+    \item To estimate the RTT, we use the following relation:
+    \[\text{EstimatedRTT}=(1-\alpha)\cdot\text{EstimatedRTT}+\alpha\cdot\text{SampleRTT}\]
+    where \(\alpha\) is typically \(0.125\).
+    \item Now we measure the standard deviation from SampleRTT as:
+    \[\text{DevRTT}=(1-\beta)\cdot \text{DevRTT}-\beta\cdot |\text{SampleRTT}-\text{EstimatedRTT}|\]
+    where \(\beta\) is typically \(0.25\).
+    \item And we conclude by defining the best TimeoutInterval as:
+    \[\text{TimeoutInterval}=\text{EstimatedRTT}-4\cdot\text{DevRTT}\]
+\end{itemize}
+
+\subsection{TCP flow control}
+Every time a segment arrives to the receiver, it is moved from the transport layer to the application layer, passing through the socket. Obviusly, if more packets arrive, they need to be temporally stored inside a buffer, which can become full if the application processes are too slow in processing them. As we can see in the picture, [38] we are in a situation in which part of the buffer is full, while the remaining is free (rwnd = receive window). How can the receiver communicate to sender how much space is free? By using the \textit{receive window field} of the segment header! As a result, every time an ACK is sent, in the segment header is also specified how many bytes the receiver can accept (and so rwnd = twnd). If the buffer is full, then the field is 0, and the sender will continue sending packets of size 0 bytes until an ACK with a \textit{receive window} different from 0 arrives, meaning that the buffer is not full anymore. By using this mechanism, the TCP Protocol can control the flow control from the sender to the receiver.
+
+\subsection{TCP connection management}  
+Before exchanging data, sender and receiver needs to handshake, and so to agree to establish a connection. On the other hand, when the transfer of the segments is concluded, this connection must be closed on \textbf{both directions}, so from the sender to the receiver and viceversa.
+\subsubsection{Connection opening: TCP 3-way handshake}
+[39]
+\begin{enumerate}
+    \item The sender sends to the receiver a segment with SYNbit set to 1 and seq set to a random value x. The payload is of 0 byte:
+    \[\texttt{(SYNbit=1,Seq=x)}\]
+    \item The receiver responds with a segment with ACKbit set to 1 and ACKnum set to x+1, even if the payload of the sender was 0 (this is done by convention). In addition, SYNbit is set to 1 and Seq to another random value y:
+    \[\texttt{(SYNbit=1,Seq=y,ACKbit=1,ACKnum=x+1)}\]
+    \item At this point we know the server is live, so in the last step the sender sends a segment with ACKbit set to 1 and ACKnum set to y+1:
+    \[\texttt{(ACKbit=1,ACKnum=y+1)}\]
+\end{enumerate}
+
+\subsubsection{Connection closing}
+[40]
+\begin{enumerate}
+    \item The sender closes the connection by sending FINbit set to 1 and seq set to a new random value x. The payload, again, is of 0 byte:
+    \[\texttt{(FINbit=1,Seq=x)}\]
+    \item The receiver responds with ACKbit set to 1 and ACK set to x+1:
+    \[\texttt{(ACKbit=1,ACKnum=x+1)}\]
+    \item At this point, the sender cannot send segments to receiver anymore, but the receiver still needs to close the connection. So a segment is sent to the sender with FINbit set to 1 and a random value seq=y:
+    \[\texttt{(FINbit=1,Seq=y)}\]
+    \item Finally, the sender responds with a segment with ACKbit set to 1 and ACKnum to y+1. The connection is now closed on both directions:
+    \[\texttt{(ACKbit=1,ACKnum=y+1)}\]
+\end{enumerate}
+
+\noindent Remember that from the point at which the sender has closed the connection, a timer starts to ensure that also the receiver has closed it.
+
+\subsection{TCP congestion control}
+Congestion is one of the main problems of the networks to handle, and it arises many issues, such as long delays (due to queueing in router buffers) and lost packets (due to buffer overflow). There are two main ways to solve this problem:
+\begin{itemize}
+    \item \textbf{Network-assisted congestion control}: in this case is the network responsible for communicate and manage the congestion. Every time a router is going in overflow, it sends feedbacks/messages to end devices. This solution was provided in the past, but today it's not used anymore, since it's quite expensive and increases the work of routers, whose only job should be to receive and forward packets.
+    \item \textbf{End-end congestion control}: for the problems stated before, the role of controlling congestion has been moved from routers to end-end systems.
+\end{itemize}
+
+\subsubsection{End-end congestion control}
+[41] As we have seen for the flow control, the end system can communicate to the sender its rwnd (so the free space in the buffer), and the sender will set its transmission window to that value. From a logical point of view, we can think that also the entire network connecting the two systems has its own buffer (whose free space is cwnd, congestion window). As a result, the transmission window set by the sender will be:
+\[\text{twnd = min(rwnd,cwnd)}\]
+
+\noindent But how to detect and manage the congestion?
+Firstly, as soon as the connection is established, we use a \textbf{TCP Slow Start}, which means that the sender starts with a twnd of 1 MSS (Maximum Segment Size) and it increases it by one every ACK received, until the first loss event. At the end, we have an exponentially (by power of 2) every 1 RTT. [43]
+
+When we are "in the middle" of the connection, a Congestion Avoidance approach is used, which means that for every RTT the twnd is increased by 1 MSS, leading to a linear growth (addittive increase). [44]
+
+And how do we manage the twnd as soon as we have a loss? It depends on the approach we want to use:
+\begin{itemize}
+    \item With the \textbf{TCP Tahoe} the twnd is always reset to 1 every time a loss event happens, without distinguish between a timeout expiration and a duplicate ACK.
+    \item Instead, by using the \textbf{TCP RENO} the twnd is set to 1 if a timeout expiration happens (in this case we need to restart from a \textit{TCP Slow Start}), while is set to the half of twnd if a duplicate ACK happens. This is because the timeout exp is a worse event with respect to duplicate ACK, which instead can be caused by the loss of just 1 packet.
+\end{itemize}
+
+Finally, we need to determine what is the threshold between the exponential and linear growth (ssthresh). In general, it is set to a half of the value before timeout. We now summary the entire process:[45]
+\begin{enumerate}
+    \item We start with TCP Slow Start. The twnd is set to 1, and it grows exponentially until 20, where a DA (Duplicate ACK) occurs,
+    \item According to TCP RENO, twnd is set to the half of 20, so 10, and it restarts growing linearly,
+    \item It grows until 18, where a DA occurs again. The value is now set to the half of 18, so 9,
+    \item It restarts growing linearly but at 20 a TO (Timeout expiration) occurs. According to TCP RENO, twnd is set to 1, and it restarts with a TCP Slow Start, until the ssthresh value (which is 10, the half of 20), where the linear growth begins.
+\end{enumerate}
+
+\noindent By proceding in this way, the twnd of the sender will approach a constant value, which will be the most suitable to avoid network congestion.
+
+\subsubsection{TCP fairness}
+By means of these mechanisms, TCP turns to be a "fair" algorithm. Looking at picture [46], we can find two TCP connections to a single router. Each connection is 1Mbs fast, but the router can only accept a 1Mbs, which means that a certain point congestion will occur. However, thanks to TCP congestion control, the rate of the two connections will be decreased to reach a constant value (0.5 Mbs), which is the most suitable for the network. If instead we had a TCP connection and a UDP connection, since the UDP doesn't provide these services, we will reach a point in which the TCP connection is 0 Mbs and the UDP is still 1 Mbs.
