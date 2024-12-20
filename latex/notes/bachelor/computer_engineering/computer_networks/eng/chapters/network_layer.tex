@@ -459,3 +459,25 @@ Every DNS record has typically 4 fields:
 \noindent The DNS query and reply messages have the same message format, and they belong to the application layer:[25]
 An identification number is needed in order to identify the request (associating it to the correct reply), while flags are needed to understand if the message is a query or a reply. As we can see, multiple questions (and also replies), are possible in the same message.
 
+\section{NAT: network address translation}
+The main idea of the NAT is to define a subset of IP addresses reserved for private networks, that can access internet, but since they are not announced, they are not reachable from remote areas of the network. This mechanism avoids assigning an IP address for every device in the world, which is practically impossible and will rapidly exaust all the possible IP addresses.
+
+In a situation similar to the picture [47], all the devices of the local network have been assigned private IP addresses. Since they are private, these addresses can be assigned also in other local networks. So, a device of the home network can communicate with an external server, but the opposite is not possible, since the destination address would be a private address, that all the routers are configured to ignore (since it can be repeated in several networks). The only IP address that can be used is \texttt{138.176.29.7}, which is the address of the interface of the router connected to the internet. However, since the communication is now "done" by the router, we need a new table located in the router itself (NAT translation table), that redirects the packets to correct host inside the private network.
+
+[48] In the situation represented, the host \texttt{10.0.0.1} wants to communicate with an external server \texttt{128.119.40.186}:
+\begin{itemize}
+    \item As soon as the packet reaches the router, the router will override the IP source field of the packet, setting it to its own IP (\texttt{138.76.29.7}).
+    \item This correspondence will be written in the NAT table, adding a specific port:
+    \[\texttt{(138.76.29.7,\textbf{5001} ; 10.0.0.1,3345)}\]
+    3345 is the port of the host, while 5001 is a port set by the router for a specific reason: if multiple private hosts make a request to the same server, when the responses arrive, we don't know to who they are redirected. If instead the router sets a different port for each device, we can make a unique correspondence in the NAT table.
+    \item When the response arrives, the destination will be set to the router address \texttt{138.76.29.7,5001}, that in the NAT table is associated to the host \texttt{10.0.0.1,3345}. So the packet will be redirected to it.
+\end{itemize}
+
+\subsubsection{NAT traversal problem}
+Until now, by using the mechanism of before, it is possible for a NATed host to communicate with the internet, but not the inverse. If in the picture [49], the client wants to communicate with the server in the private network, this is not possible, since the server has never communicated with the client, and so the association \texttt{(138.76.29.7,port ; 10.0.0.1,3345)} is not present in the NAT table yet. To deal with this situation, we can use two different approaches:
+\begin{itemize}
+    \item The first approach is to statically configure the NAT table. If our server is a web server (and so the clients will access it through port 80), we can manually add a new entry in our router setting:
+    \[\texttt{(138.76.29.7,80 ; 10.0.0.1,3345)}\]
+    this forces the router to forward all the packets with this destination to the webserver in the private network. Obviously, this kind of operation can be done only by "expert" users.
+    \item A more used approach is the \textbf{relaying}. In the relaying (used in Skype, for example), an external client wants to communicate with another client (in a NATed network). The external client, as before, cannot send packets to the NATed client, since the NAT table is empty. A possible solution is to make both clients connect to a common server (Skype relay). As soon as both clients has been connected, the relay will create a sort of bridge between the two connections, redirecting the packets. [4-92] Other optimizations are possible, as instance by creating a unique bridge between the two clients.
+\end{itemize}
