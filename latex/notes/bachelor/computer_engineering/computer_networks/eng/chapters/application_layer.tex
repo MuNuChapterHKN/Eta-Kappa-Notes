@@ -4,3 +4,112 @@
 This is where you write the abstract of your document.
 
 \section{Introduction}
+The application layer can follow two main different approaches, the \textbf{client-server} architecture or the \textbf{peer-to-peer} architecture.
+\begin{itemize}
+    \item In the \textbf{client-server} approach, the devices of the network can assume the role of client or the role of server. The server is a host which is always available, with a permanent IP address, continuing offering a service. Since the service can be offered to a variable number of clients, servers usually need data centers to scale. The client, on the other hand, is a host that communicate with the server to obtain the service, but it's usually not contacted by it. The client can have a dynamic IP address, may be intermittently connected and doesn't communicate directly with other clients.
+    \item In the \textbf{P2P} architecture, there is a direct communication between all the hosts (peers) of the network, which can both act as a client or as a server. In most cases, peers request a service from other peers (i.e. file transfer), and then provide the same service in return to other peers. This ensures a \textit{self-scalability}, since new peers bring new service capacity. This kind of architecture can be efficient, but it's complex to manage, since many peers are intermittently connected (changing IP addresses), and so tend to request services without providing them to other peers.
+\end{itemize}
+
+\noindent At the application layer, communication is performed between two applications. The communication between them happens through messages (that can be \textit{requests} for the client and \textit{responses} for the server). Each message should have its own syntax and semantics, and rules must be defined for when and how processes send and respond to messages. In application layer we can find both open protocols (HTTP, SMTP) and proprietary protocols (i.e. Skype).
+
+In the application layer, applications can vary a lot and require totally different services:
+\begin{itemize}
+    \item \textbf{Data integrity}: some apps require a 100\% reliable data transfer (i.e. file transfer or web transactions), while others are loss-tolerant (voice calls)
+    \item \textbf{Timing}: some interactive apps (voice calls, video calls) require low delay to be effective
+    \item \textbf{Throughput}: some apps need a minimum amount of throughput (and so bandwidth) ti be effective (streaming), while others, more elastic, make use of the throughput they get (in the browser, a file can be downloaded in 1 min o 30 min)
+\end{itemize}
+
+\subsubsection{Application layer protocols}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|}
+    \hline
+    \textbf{application} & \textbf{\begin{tabular}[c]{@{}c@{}}application layer\\ protocol\end{tabular}} & \multicolumn{1}{l|}{\textbf{\begin{tabular}[c]{@{}l@{}}transport layer\\ protocol used\end{tabular}}} \\ \hline
+    e-mail & SMTP & TCP \\ \hline
+    Web & HTTP & TCP \\ \hline
+    file transfer & FTP & TCP \\ \hline
+    streaming multimedia & HTTP, RTP & TCP or UDP \\ \hline
+    Internet telephony & SIP, RTP & TCP or UDP \\ \hline
+    \end{tabular}
+\end{table}
+
+\noindent As we can see, all the services that require a 100\% data integrity use TCP protocols, while the others can also use UDP. There are some exceptions (e.g. YouTube), that use TCP, since it's based on HTTP. In this case pieces of the video are downloaded with TCP approach, and then they are streamed as if it were in real-time.
+
+\subsubsection{Securing TCP}
+As seen before, the TCP layer provides data integrity, but it provides nothing about data security and encription. For this reason, another leayer will be added, the SSL (Secure Sockets Layer), located in the middle between application layer and transport layer.
+
+\section{HTTP Protocol}
+The HTTP Protocol (hypertext transfer protocol), is the protocol mostly used to send and request web pages, where a web page consists of base HTML-file which includes several referenced objects (images, applets). Each object can be adressed by a URL, which is divided in a host name and a path name (that locates the resource).
+
+The HTTP follows a client/server model, in which the client (browser) sends a request for web objects to the server, that will respond by sending those objects, always using HTTP Protocol.
+
+\noindent The HTTP uses TCP:
+\begin{enumerate}
+    \item The client starts the TCP connection to the server, using port 80
+    \item The server accepts the TCP connection from the client
+    \item There will be an exchange of messages between the client (browser) and the web server
+    \item Finally, the connection is closed
+\end{enumerate}
+
+\noindent The original version of HTTP is "stateless", which means that the server doesn't maintain information about past clients requests. Each request is managed indipendently from the others.
+
+\subsubsection{HTTP connections}
+The HTTP connection can be non-persistent or persistent:
+\begin{itemize}
+    \item \textbf{Non-persistent}: at most one object sent over TCP connection, so for multiple objects downloaded we need multiple connections
+    \item \textbf{Persistent}: multiple objects can be sent over a single TCP connection between client and server
+\end{itemize}
+
+\subsection{HTTP messages}
+HTTP messages have the main feature to be \textit{human-readable} (in ASCII encoding). Request and response messages have different fields.
+
+\subsubsection{HTTP request message}
+[51] In the first line of an HTTP request message we can find the command (GET/POST/HEAD) that specifies the action we want to perform. Then we can find the path name of the URL (locating the resource) and the version of HTTP. In the header lines, instead, we find more information about the request, such as the host name, the user-agent (the browser), the encoding and so on. After the final carriage return, we find an entity body, which is optional and depends on the kind of command:
+\begin{itemize}
+    \item \textbf{GET}: the client just requests the web page to the server (the entity body is usually empty)
+    \item \textbf{POST}: the client requests the web page adding additional information (for example information written in a form input). This input is included in the entity body
+    \item \textbf{HEAD}: mainly used in \texttt{HTTP/1.0}, the client asks the server to not include the objects in the response. It was used to understand if the server was alive or not
+    \item \textbf{PUT}: from \texttt{HTTP/1.1}, specific for uploading file
+    \item \textbf{DELETE}: from \texttt{HTTP/1.1}, specific for deleting file
+\end{itemize}
+
+\subsubsection{HTTP response message}
+[52] In the first line (status line) of HTTP response message, we can find the HTTP version and then two fields, corresponding to the status code and the related message. Other information we find in the header lines are the date of the request, the last date in which the content has been modified. After the last carriage return, the data requested is included.
+
+About the status messages, these can be classified according to the first digit:
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|}
+    \hline
+    \textbf{1xx} & Informational \\ \hline
+    \textbf{2xx} & Success \\ \hline
+    \textbf{3xx} & Redirection \\ \hline
+    \textbf{4xx} & Client error \\ \hline
+    \textbf{5xx} & Server error \\ \hline
+    \end{tabular}
+\end{table}
+
+\noindent Some examples are:
+\begin{itemize}
+    \item \texttt{200}: OK
+    \item \texttt{301}: requested object moved
+    \item \texttt{400}: bad request (message not understood)
+    \item \texttt{404}: requested resource not found
+    \item \texttt{505}: HTTP version not supported
+\end{itemize}
+
+\subsection{Cookies}
+As said before, the original version of HTTP doesn't provide the concept of \textit{session}, since every request is managed independently. However, this can be introduced by means of \textit{cookies}. Cookies are small pieces of data stored on a user's browser by a website they visit. By using them, the server can remember the user that has done previous requests, and so personalize the responses which are sent.
+[53] This is the mechanism of cookies:
+\begin{enumerate}
+    \item The browser sends a request to the server (for the first time). The server receives the request and associates the user to an ID, stored in a backend database.
+    \item The server sends the response to the browser, including in the HTTP response the line \texttt{set-cookie: ID}. If the user has accepted to store the cookies, this ID will be saved in the browser.
+    \item The next time the same browser makes the request, in the request header the line \texttt{cookie: ID} will be added. The server will then recognize the user (looking in its database) and personalize the content of the response.
+\end{enumerate}
+
+\noindent Cookies can be used for different purposes, such as authorization, shopping carts, user session states and so on. In addition, they can be classified as:
+\begin{itemize}
+    \item \textbf{Session cookies}, which are temporary and deleted when the browser is closed.
+    \item \textbf{Persistent cookies}, which remain stored on the device for a set period.
+\end{itemize}

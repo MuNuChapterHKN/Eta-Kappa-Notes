@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2023.4.15)  20 DEC 2024 10:36
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2023.4.15)  20 DEC 2024 15:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -295,7 +295,7 @@ File: pgfsysprotocol.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 File: l3backend-pdftex.def 2022-09-28 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count300
 \l__pdf_internal_box=\box62
-) (template.aux (chapters/network_layer.aux) (chapters/transport_layer.aux))
+) (template.aux (chapters/network_layer.aux) (chapters/transport_layer.aux) (chapters/application_layer.aux))
 \openout1 = `template.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
@@ -424,19 +424,29 @@ Overfull \hbox (0.94075pt too wide) in paragraph at lines 9--10
 [27] [28]
 Underfull \vbox (badness 2057) has occurred while \output is active []
 
- [29] [30] [31] [32] [33] [34] [35]) [36] [37] (template.aux (chapters/network_layer.aux) (chapters/transport_layer.aux)) ) 
+ [29] [30] [31] [32] [33] [34] [35]) [36] [37]
+\openout2 = `./chapters/application_layer.aux'.
+
+ (chapters/application_layer.tex [38
+
+
+
+
+]
+Capitolo 3.
+[39] [40] [41] [42]) [43] (template.aux (chapters/network_layer.aux) (chapters/transport_layer.aux) (chapters/application_layer.aux)) ) 
 Here is how much of TeX's memory you used:
- 8494 strings out of 475385
- 152029 string characters out of 2776907
- 533620 words of memory out of 3000000
- 29692 multiletter control sequences out of 15000+600000
+ 8522 strings out of 475385
+ 153818 string characters out of 2776907
+ 534007 words of memory out of 3000000
+ 29713 multiletter control sequences out of 15000+600000
  480510 words of font info for 71 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,10n,95p,1777b,306s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 99i,14n,95p,1777b,337s stack positions out of 10000i,1000n,20000p,200000b,80000s
  <C:\Users\tedde\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcbx1200.pk> <C:\Users\tedde\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsl12.pfb><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/tedde/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on template.pdf (41 pages, 226147 bytes).
+Output written on template.pdf (47 pages, 238787 bytes).
 PDF statistics:
- 199 PDF objects out of 1000 (max. 8388607)
+ 218 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
