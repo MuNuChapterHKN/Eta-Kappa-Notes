@@ -113,3 +113,135 @@ As said before, the original version of HTTP doesn't provide the concept of \tex
     \item \textbf{Session cookies}, which are temporary and deleted when the browser is closed.
     \item \textbf{Persistent cookies}, which remain stored on the device for a set period.
 \end{itemize}
+
+\subsection{Proxy servers}
+When a client does multiple requests of the same web page to a server, it can be useful to implement a cache. Caching can be performed on multiple levels:
+\begin{itemize}
+    \item On the \textbf{browser}: if the same web page is requested multiple times, the browser will store it in its cache, in order to avoid useless requests.
+    \item On a \textbf{proxy server}: the proxy server is a server, typically located in the same LAN of the clients, that receives the requests of the clients, forward them to the server, and before redirecting the responsens, it saves the contents in its local cache. Doing this way, if another client requests the same web page, the proxy server can provide the version stored in its cache, without making a new request of the web page to the external server. [54]
+    The proxy server is quite useful every time the link rate inside the LAN is quite high, while the connection with the external internet is low. Instead of improving the links (which can be quite expensive), one can implement a proxy server in its own LAN, which will contain the most visited web pages of all the clients of the LAN, speeding up the responses.
+\end{itemize}
+
+\noindent But how to understand if the content in the cache is up-to-date? To do that, we actually need to send a special request to the server, called \textit{conditional GET}. In the header of the request we add a line:
+\[\texttt{If-modified-since: <date>}\]
+Where \texttt{<date>} is the last modified date returned by the server in the previous response. If the content, in the meanwhile, has been changed, the server will send to the client the new version. In the other case, a \texttt{301} response will be sent, which means that the content has not been modified. As we can see, also with caching, we need to make the request to the server, but in the case where the content is not modified, only few bytes will be received, instead of the entire web page. There are also some web pages (online newspaper, social networks), where the content continuosly changes: in this case the web server will request not to cache its content.
+
+\section{Electronic mail}
+The electronic mail system is based on two major components:
+\begin{itemize}
+    \item \textbf{User Agent}: it is responsible for composing, editing, reading mail messages. It can be installed on a client, or located on a web server.
+    \item \textbf{Mail Server}: they contain the mailboxes (one for each user) and a message queue for outgoing mail messages.
+\end{itemize}
+
+\noindent The electronic mail is based on different protocols:
+\begin{itemize}
+    \item \textbf{SMTP}: used for the communication between mail servers and for the communication from the user agent to the mail server (not the opposite!)
+    \item \textbf{POP} and \textbf{IMAP}: used for the communication from the mail server to the user agent
+\end{itemize}
+
+\subsection{SMTP}
+The \textbf{SMTP} protocol is based on TCP, in order to reliably transfer email messages from client to server (port 25) and between different mail servers. The communication is based on three phases: handshaking (SYN/SYN-ACK/ACK), exchange of messages, closure (FIN/ACK FIN/ACK). All the messages (as in HTTP) are human-readable and in 7-bit ASCII. This is a possible scenario:
+\begin{enumerate}
+    \item Alice uses her User Agent to send an email to \texttt{bob@someschool.edu}
+    \item The message arrives to the mail server \texttt{crepes.fr} and is placed in the queue
+    \item TCP connection between \texttt{crepes.fr} and \texttt{someschool.edu}:
+    \begin{enumerate}
+        \item \texttt{SYN/SYN-ACK/ACK}
+        \item -[55]
+        \item \texttt{FIN/ACK FIN/ACK}
+    \end{enumerate}
+    \item \texttt{someschool.edu} server places the message in Bob's mailbox
+    \item Bob invokes his User Agent to read the message (POP/IMAP)
+\end{enumerate}
+
+\subsubsection{RFC 822: text message format}
+In the SMTP text standard version, in the block data, we find two parts:
+\begin{itemize}
+    \item The header, containing the "To:", "From:", "Subject:" ("To" and "From" different from SMTP MAIL FROM and SMTP RCPT TO! These are set by the User Agent)
+    \item The body, containing the message in ASCII text (no images or other formats)
+\end{itemize}
+
+\subsubsection{RFC 2045,2046: MIME}
+If we want to send more complex data, we need to use the MIME, multimedia mail extension. In this case, in the header, we add additional lines:
+\[\texttt{MIME-Version: 1.0}\]
+\[\texttt{Content-Transfer-Encoding: base64}\]
+\[\texttt{Content-Type: image/jpeg}\]
+
+\noindent And then, in the body, we put the encoded data, such that no termination character appears. Obviously this mechanism can be extent also to other formats, such as HTML, video, ecc.
+
+\subsection{POP3 Protocol}
+As said before, the SMTP Protocol only works in the connection between different mail servers and in the connection from the client to the mail server. In order to retrieve the emails which are stored in the mail server mailbox, we need to use other protocols, such as POP and IMAP.
+
+POP Protocol is based on a download and delete mode. It works with TCP (data integrity) and SSL (data security) and is based on two phases, the authorization phase and the transaction phase.
+\begin{enumerate}
+    \item \texttt{SYN/SYN-ACK/ACK}
+    \item \textbf{Authorization phase}
+    \begin{enumerate}
+        \item \texttt{S: +OK POP3 server ready}: the server sends the first message
+        \item \texttt{C: user bob}: \textit{user} command to declare username
+        \item \texttt{S: +OK}: success
+        \item \texttt{C: pass hungry}: \textit{pass} command to declare password
+        \item \texttt{S: +OK}: authorization given by the server
+    \end{enumerate}
+    \item \textbf{Transaction phase}
+    \begin{enumerate}
+        \item \texttt{C: list}: with command \textit{list}, the client asks to list the emails
+        \item \texttt{S: 1 498; S: 2 912}: for each email, the size is specified
+        \item \texttt{C: retr 1}: the client retrieves the first mail
+        \item \texttt{S: <message1>}: the server returns the first message
+        \item \texttt{C: dele 1}: the client deletes the mail retrieved
+        \item \texttt{...}
+    \end{enumerate}
+    \item \texttt{FIN/ACK FIN/ACK}
+\end{enumerate}
+
+\noindent With this approach, the user cannot re-read email if he changes client, since they are immediately deleted from the mail server as soon as they are read. This was used in the past when the mailbox size was really limited. A possible solution was to store different copies on different clients. Another limitation of the POP is that is stateless, and no folder organization is provided.
+
+An evolution, much more used today, it's \textbf{IMAP} Protocol. The IMAP keeps all the messages in the server and allows the user to organize messages in folder. Every time a modification is done by the user on the User Agent, it's propagated also in the mail server. As a result, IMAP keeps the user state across sessions, and the modifications done by the user on one User Agent, can be found also in all the other User Agents.
+
+\section{P2P Architectures}
+Peer-to-peer architectures (P2P) are computer networks in which hosts (peers) request a service from other peers (i.e. file transfer), and then provide the same service in return to other peers. As we can see from the plot [56], for high number of users, the P2P system keeps a constant value of distribution time, since it's self-scalable.
+
+\subsection{BitTorrent}
+A first example of P2P architecture is BitTorrent, which is used for file sharing. In this case each file is divided in chunks of 256Kb, which are distributed between the different users of the P2P. Typically, for each resource, we have a centralized host called tracker, which stores the list (and corresponding IPs) of all the users joining the system (this group is called \textit{torrent}). [57]. If a new user wants to join the torrent, it will first send a request to the tracker, which will make it in contact with a subset of the torrent:
+\begin{itemize}
+    \item \textbf{Requesting chunks}: if the new user wants to retrieve the file, he will request them to the peers. The order of request is \textit{rarest first}, which means that we always start from the peer that holds the rarest chunks. This ensures that multiple copies of that chunks are stored also in new peers.
+    \item \textbf{Sending chunks}: if the user has to send chunks to other peers, it will follow the \textit{tit-for-tat} approach. It means that chunks are firstly sent to peers that, in their history, had the highest upload bandwidth. This is done to avoid serving free-riders, which are users that after downloading the files they need, they disconnect from the torrent. Obviously, since some users can actually have bandwidth problems, or they have simply just joined the torrent, every 30 sec one of these peers will be randomly selected.
+\end{itemize}
+
+\subsection{Distributed Hash Table (DHT)}
+While in the previous approach the \textit{tracker} was centralized and unique for each file, there is also the possibility to make distributed the set of indexes. This distributed database (among millions of peers) is made of pairs in the format:
+\[\texttt{(key,value)}\]
+\noindent where the key is the file we are looking for, while the value is the set of IP addresses (so of peers) from which the file can be downloaded. In other words, each entry of this distributed database is just equivalent to the \textit{tracker} of before. Every time we query a file, we receive in return the set of IPs to which request the file.
+
+As just explained, this database is distributed, so we need a way to assign the pairs \texttt{(key,value)} to the different peers. One way is using number: we associate each file with a number, we associate each peer with a number, and then we put the entry \texttt{(key,value)} in the peer which is closest (equal or closest successor) to the key. As instance:
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{cc|c|}
+    \cline{3-3}
+    \multicolumn{1}{l}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{Associated number} \\ \hline
+    \multicolumn{1}{|c|}{\textbf{File}} & Ubuntu12.0.4 & 1078 \\ \hline
+    \multicolumn{1}{|c|}{\textbf{Peer}} & 130.192.10.0/24 & 1079 \\ \hline
+    \end{tabular}
+\end{table}
+
+\noindent So, in this case the entry related to the Ubuntu file (1078) will be stored in the peer with the closest number, which is 1079. In order to translate each file/peer into a number, we need a specific function that is able to avoid collisions, which means not to generate the same number for two different files or peers. This function is the \textit{hash function}, and it is set on the space:
+\[[0,2^n]\text{, }n=160\]
+\noindent which is an enough big interval to ensure that every file/peer as a unique associated number.
+
+\subsubsection{Circular DHT}
+Let's start by a P2P network as in the picture [58]. Each peer is connected to the successor (so to the peer with the closest successor number). As instance, if we are looking for file 12, we can start from peer 1, and then we proceed along the circular DHT until we reach 12. Then 12 will send its entry to 1, and both peer 12 and 1 will store the same entry.
+
+\subsubsection{Circular DHT with shortcuts}
+Instead of connecting each peer only to the successor (leading each time to a linear search), we create some shortcuts that connect each peer to a successor distant of a power of 2. [59]
+
+\section{Multimedia}
+\subsection{Audio}
+Audio streaming is a kind of application which is not elastic. First, recall that every audio signal have to undergo two different processes:
+\begin{itemize}
+    \item \textbf{Sampling}: we read the signal for finite multiples of a sampling period
+    \item \textbf{Quantization}: we convert the audio from an analog value to a digital one
+\end{itemize}
+\noindent If for example our signal is made of 8000 samples, each sample is made of 8 bits, and we want to transfer the signal in 1 sec (e.g. during a call), then:
+\[8000 \text{ samples/sec}\cdot 8\text{ bit/sample}=64000\text{ bit/s}\]
+\noindent Under this bandwith, the signal cannot be transferred and so cannot be reconstructed. This feature makes the audio application not elastic.
