@@ -1,0 +1,154 @@
+\chapter[Network Fundamentals]{Network Fundamentals}
+
+\section*{Abstract}         % Optional section (unnumbered)
+This is where you write the abstract of your document.
+
+\section{Introduction}
+According to the \textbf{ITU-T} (International Telecommunication Union) the \textbf{communication} can be defined as the transfer of any information according to an agreement, which is a set of pre-established rules. Among the different kinds of communication, we can define \textbf{telecommunications} as the transmission and reception of signals (that can represent text/images/sounds) via cables, radio and optical/electromagnetic media. Any telecommunication can be described by means of \textbf{services} and \textbf{functions}:
+\begin{itemize}
+    \item \textbf{Telecommunication service}: service offered from a public or private provider to satisfy a telecommunication need
+    \item \textbf{Telecommunication function}: set of operations which are internally executed in a network to provide a service. Generally, these operations are hidden from the users
+\end{itemize}
+
+\noindent These are some examples of functions in a telephone networks (but also valid for any kind of network):
+\begin{itemize}
+    \item \textit{Signalling}: it's the set of information which is exchanged in order to start (or end) the telephone call on a telecommunications circuit. Some of the information that can be trasnferred are the digits dialed by the caller, the caller's billing number, and so on.
+    \item \textit{Switching}: in order to make possible the conversation, the network must identify the resources needed to connect the two users, finding, possibly, the shortest path. This process of interconnecting functional units, transmission channels and telecommunication circuits needed to transfer the signals is called switching. The switching is a process that happens within the network (exchange of information between nodes).
+    \item \textit{Transmission}: once the circuit is set up, the exhange information between the end users starts.
+    \item \textit{Management}: other functions are related to the management, these are some examples:
+    \begin{itemize}
+        \item Connecting new users
+        \item Adding channels and nodes in the network
+        \item Managing faults of the network
+        \item Monitoring of performance
+        \item ...
+    \end{itemize}
+\end{itemize}
+
+\section{Network topologies}
+To identify the different kinds of networks, we need to start from some definitions:
+\begin{itemize}
+    \item \textbf{Transmission medium}: physical medium able to transport the signal (fiber, coaxial cable, air)
+    \item \textbf{Channel}: can be both a single transmission medium or a chain of transmission media. As instance, the connection from our home to a host in Milan can be entirely in fiber (unique transmission medium), but the number of channels will be much higher
+\end{itemize}
+
+\noindent Each transmission medium has its own \textit{maximum transmission speed} (capacity, measured in bit/s). This speed depends on many factors, e.g. the quality of the medium and the technologies used by the transmitter and the receiver, but it's always upperbounded by the medium bandwidth. In case of the channel, the capacity is given by the medium with the lowest transmission speed, which also represents the \textbf{bottleneck}.
+
+The source will try to transmit a certain amount of data per time unit inside the network (the \textbf{offered traffic}), but the amount per time unit that the network is able to deliver is generally only a fraction of it, which is called \textbf{throughput}. The throughput must be lower or equal than the offered traffic and the channel capacity.
+
+Finally, we define the \textbf{network} as the set of nodes and segments that offers a connection among two or more points, to make possible a telecommunication. The node is where the switching occurs, while the segment can be both a trasmission medium or a channel. 
+
+\subsection{Types of channels}
+In every network, multiple types of channels are possible, and each one has its pros and cons.
+\subsubsection{Point-to-point channel}
+[64] Only two nodes are present, and they are directly connected by a single bidirectional channel, or two unidirectional channels. In the second case, the two nodes can transmit at the same time without any problems.
+
+\subsubsection{Multipoint channel}
+[65] In this case, multiple nodes are connected to a single channel, leading to some issues:
+\begin{itemize}
+    \item We need to avoid contemporary transmission, since the channel is unique
+    \item We need to specify who is the intended receiver
+\end{itemize}
+
+\noindent These two problems are generally solved by using a master-slaves structure and introducing addressing, in order to specify which is the destination of the transmitted information.
+
+\subsubsection{Broadcast channel}
+Single communication channel shared by all nodes. In this case the information is sent by one node and is received by all the other users.
+
+\subsection{Topologies of networks}
+Each network topology can be represented as a graph \(G=(V,A)\), where \textit{V} is the number of nodes and \textit{A} the number of channels. The channels can be directed (unidirectional) or undirected (bidirectionals). From now on, we define:
+\begin{align*}
+    N=|V|\\C=|A|
+\end{align*}
+
+\subsubsection{Fully meshed topology}
+[66]
+\[C=N(N-1)/2\]
+All the nodes are connected to each other:
+\begin{itemize}
+    \item \textbf{Advantages}: highly fault tolerant, i.e. in case of fault on a channel, there are several other paths connecting two nodes. In addition, there's always a minimum distance, routing choice, avoiding complicated shortest path algorithms.
+    \item \textbf{Disadvantages}: too many channels are needed
+\end{itemize}
+
+\noindent It's usually used when the number of nodes is small (e.g. for the core nodes of a national telephone network).
+
+\subsubsection{Tree topology}
+[67]
+\[C=N-1\]
+Given two nodes, there's only one path connecting them:
+\begin{itemize}
+    \item \textbf{Advantages}: it contains the smallest number of channels for a connected topology (connected: that allows any node to reach another node). In addition, there are not routing alternatives.
+    \item \textbf{Disadvantages}: it's really vulnerable to faults, in case of a single fault, one node (or an entire part of the network) is disconnected.
+\end{itemize}
+
+\noindent It's generally used to reduce costs.
+
+\subsubsection{Active star topology}
+[68]
+\[C=N\]
+All the nodes are connected to the star centre, used to enable communication. Since the star centre is active, all the packets are actively redirected from one node to another:
+\begin{itemize}
+    \item \textbf{Advantages}: the number of channels is still low. The routing choice is still unique and in case of fault of a channel, only one node is disconnected.
+    \item \textbf{Disadvantages}: vulnerability to faults of the star centre and routing complexity in the central node.
+\end{itemize}
+
+\noindent It's generally used to keep costs under control. Some applications are:
+\begin{itemize}
+    \item in LANs (star centre: switch)
+    \item in satellite networks (star centre: satellite)
+    \item in cellular mobile networks (star centre: base station)
+\end{itemize}
+
+\subsubsection{Passive star topology}
+[69]
+\[C=1\]
+There is a unique broadcast channel. In this case the signal is passively propagated from one node to all the others.
+\begin{itemize}
+    \item \textbf{Advantages}: the number of channels is still low. The routing choice is still unique and in case of fault of a channel, only one node is disconnected.
+    \item \textbf{Disadvantages}: vulnerability to faults of the star centre. The signal is sent to all nodes, not only to the destination.
+\end{itemize}
+
+\noindent It's generally used to keep costs under control.
+
+\subsubsection{Meshed topology}
+[70]
+\[N-1<C<N(N-1)/2\]
+It's the most commonly used topology, since the number of channels is variable and can be adapted to the resilience of the channels:
+\begin{itemize}
+    \item \textbf{Advantages}: fault tolerance, since in case of a fault, other possible paths can be used.
+    \item \textbf{Disadvantages}: in this case more good paths are available, so we need complex routing algorithms.
+\end{itemize}
+
+\noindent Used in the Internet, in telephone, in backbone, and so on.
+
+\subsubsection{Ring topology}
+[71]
+The ring topology can be unidirectional or birectional. It's generally used in LANs and MANs:
+\begin{itemize}
+    \item Unidirectional ring topology: only one path connecting two nodes. In case of fault of a channel, the two nodes are disconnected.
+    \item Birectional ring topology: for each node pair, there are two paths connecting them. In case of fault of a channel, there's still a path connecting the two nodes. For this reason, the birectional ring is the simplest topology that provides resilience (with maximum one fault).
+\end{itemize}
+
+\subsubsection{Bus topology}
+[72]
+The bus topology can be active or passive. For the active we have:
+\[C=N-1\]
+\noindent while for the passive:
+\[C=1\]
+\noindent since it's, again, just a unique broadcast channel. While in the passive star topology the transmission time between any pair of nodes was the same, in the passive bus topology the transmission time can vary, depending on the position of the nodes. This kind of topology was used in LANs.
+
+\subsubsection{Physical and logical topology}
+Let's remember that there is an important difference between the physical and the logical topology.
+[59]
+In the image below, for example, A and B are not physically connected (since there's not a transmission media connecting them), but they are logically connected (since each node can reach the other by means of multiple channels).
+
+\section{Network services}
+
+\begin{itemize}
+    \item \textbf{Bearer service}: enables the transmission of information between network interfaces, providing the necessary capacity for users to send signals between access points, such as user network interfaces. An example of this is a point-to-point direct circuit.
+    \item \textbf{Teleservices}: allows full communication capabilities through terminal and network functions, with additional support from dedicated centers. Examples include phone calls and telefax, and these services can be further classified into base services or supplementary services. Teleservices can be provided with two different models (better explained in section \ref{chap4_sec1}):
+    \begin{itemize}
+        \item Client-server model
+        \item Peer-to-peer mdodel
+    \end{itemize}
+\end{itemize}
