@@ -1,15 +1,46 @@
 %! TEX root = guide.tex
 
-\input{../lib/_preamble.tex}
-\selectlanguage{english}
+% Possible arguments for the HKNdocument class:
+% Language:
+%   italian (default): Sets the document language to Italian.
+%   english: Sets the document language to English.
+%
+% Table of Contents (ToC) depth:
+%   toc=chapters: Shows only chapters in the ToC (tocdepth=0).
+%   toc=sections: Shows chapters and sections in the ToC (tocdepth=1).
+%   toc=subsections: Shows up to subsections in the ToC (default, tocdepth=2).
+%   toc=subsubsections: Shows up to sub-subsections in the ToC (tocdepth=3).
+%
+% Font size:
+%   10pt: Sets the base font size to 10 points.
+%   11pt (default): Sets the base font size to 11 points.
+%   12pt: Sets the base font size to 12 points.
+%
+% Draft mode:
+%   draft: Compiles the document in draft mode (useful for proofreading, dummy images and imported files).
+\documentclass[italian,12pt,toc=sections, draft]{HKNdocument}
 
-\title{Guide}
-\date{\today}
-\author{dev}
+\input{_preamble.tex}
+
+% Document metadata
+\title{Guide to conventions and packages for the HKNotes project}
+\shorttitle{HKNotes Guide}
+% You can include multiple \autor commands to list all autors in the frontpage.
+\author{Erik Scolaro}
+% You can include multiple \editor commands to list all editors in the frontpage.
+\editor{Erik Scolaro}
+\organization{IEEE-HKN Mu Nu Chapter}
+\docdate{\today}
+\docversion{1.1}
 
 \frontmatter
+% Create the title page
 \maketitle
+
+% Table of Contents after the title page
+\clearpage
 \tableofcontents
+\clearpage
 
 \mainmatter
 \include{chapters/introduction}
@@ -19,8 +50,6 @@
 \include{chapters/boxes}
 \include{chapters/tables}
 
-\include{chapters/}
-
 \backmatter
 
-\input{../lib/_postamble.tex}
+\input{_postamble.tex}
