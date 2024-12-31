@@ -20,7 +20,7 @@
                 "%DOC%"
             ],
             "env": {
-                "TEXINPUTS": "%WORKSPACE_FOLDER%/latex/lib//;"
+                "TEXINPUTS": "%WORKSPACE_FOLDER%/latex/lib//;%WORKSPACE_FOLDER%/images//;"
             }
         },
     ]
