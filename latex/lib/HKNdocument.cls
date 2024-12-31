@@ -108,6 +108,11 @@
 }
 
 % --------------------------
+% SVG IMAGES
+% --------------------------
+\RequirePackage[inkscapeversion=1]{svg} % SVG images with Inkscape
+
+% --------------------------
 % FANCYHDR FOR CUSTOM HEADERS AND FOOTERS
 % --------------------------
 \RequirePackage{fancyhdr}
@@ -161,14 +166,11 @@
     \begin{titlepage}
         \begin{center}
 
-            % If the logo is defined, insert it
-            % \ifx\DDlogo\empty\else
-            %     \vspace*{1cm}
-            %     \IfFileExists{\DDlogo}{
-            %         \includesvg[width=0.8\textwidth,inkscapelatex=false]{\DDlogo}
-            %     }\\[1cm]
-            %     %TODO: fix
-            % \fi
+            % Logo
+            \ifx\DDlogo\empty\else
+                \vspace*{1cm}
+                \includegraphics[width=0.4\textwidth]{\DDlogo}\\[1cm]
+            \fi
 
             % Main title
             {\LARGE \textbf{\maintitle}}\\[1.5cm]
