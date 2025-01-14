@@ -130,6 +130,7 @@
 \newcommand{\docdate}{}     % Contains custom date
 \newcommand{\docversion}{}  % Contains document version
 \newcommand{\doclogo}{}     % Contains logo path
+\newcommand{\doclicense}{}  % Contains license logo path
 
 % Preserve old commands for title and author
 \let\oldtitle\title
@@ -144,6 +145,7 @@
 \def\docdate#1{\gdef\DDdate{#1}}
 \def\docversion#1{\gdef\DDversion{#1}}
 \def\doclogo#1{\gdef\DDlogo{#1}}
+\def\doclicense#1{\gdef\DDlicense{#1}}
 
 % --------------------------
 % TABLE OF CONTENTS LEVEL
@@ -254,6 +256,53 @@
 \numberwithin{figure}{chapter}
 \numberwithin{table}{chapter}
 \numberwithin{equation}{chapter}
+
+% --------------------------
+% CREATIVE COMMONS LICENSE COMMAND
+% --------------------------
+% Generates a language-sensitive Creative Commons license description with an image and hyperlink
+\newcommand{\cclicense}{%
+    % Linguaggio condizionale
+    \ifx\DocumentLanguage\italian
+        \vfill
+        Questo lavoro è distribuito con una \textbf{Licenza Creative Commons Attribuzione - Non commerciale - Non opere derivate 4.0 International}.
+        Il lavoro è stato prodotto da \DDauthors, editato da \DDeditors e pubblicizzato da \DDorganization.\\
+        \textbf{Puoi:}
+        \begin{itemize}
+            \item \textbf{Condividere:} copiare, distribuire e trasmettere il lavoro
+        \end{itemize}
+        \textbf{Alle seguenti condizioni:}
+        \begin{itemize}
+            \item \textbf{Attribuzione:} devi attribuire il lavoro nei modi indicati dall'autore o da chi ti ha dato la licenza (ma non in un modo che suggerisca che loro approvino te o il tuo uso del lavoro).
+            \item \textbf{Non commerciale:} non puoi usare questo lavoro per fini commerciali.
+            \item \textbf{Non opere derivate:} se modifichi, trasformi o sviluppi questo lavoro, non puoi distribuire il risultato.
+        \end{itemize}
+        Maggiori informazioni sul sito di \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{Creative Commons}.
+    \else
+        \vfill
+        This work is licensed under a \textbf{Creative Commons Attribution - NonCommercial - NoDerivatives 4.0 International}.
+        The work was produced by \DDauthors, edited by \DDeditors, and publicized by \DDorganization.\\
+        \textbf{You are free:}
+        \begin{itemize}
+            \item \textbf{to Share:} to copy, distribute and transmit the work
+        \end{itemize}
+        \textbf{Under the following conditions:}
+        \begin{itemize}
+            \item \textbf{Attribution:} you must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work).
+            \item \textbf{Noncommercial:} you may not use this work for commercial purposes.
+            \item \textbf{No derivatives:} if you alter, transform, or build upon this work, you may not distribute the resulting work.
+        \end{itemize}
+        More information on the \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{Creative Commons website}.
+    \fi
+    % Logo
+    \\
+    \ifx\DDlicense\empty\else
+        \vspace{1cm} % Spazio prima dell'immagine
+        \hfill\includegraphics[width=0.4\textwidth]{\DDlicense} % Immagine allineata a destra
+        \vspace{1cm} % Spazio dopo l'immagine
+    \fi
+
+}
 
 % End of class
 \endinput
