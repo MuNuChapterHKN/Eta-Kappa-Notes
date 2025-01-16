@@ -22,7 +22,9 @@
                 "-outdir=%OUTDIR%",
                 "%DOC%"
             ],
-            "env": {}
+            "env": {
+                "TEXINPUTS": "%WORKSPACE_FOLDER%/latex/lib//;%WORKSPACE_FOLDER%/resources/imgs//;"
+            }
         },
     ]
 }
