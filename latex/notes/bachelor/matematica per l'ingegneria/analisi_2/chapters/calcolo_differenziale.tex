@@ -1,0 +1,79 @@
+\chapter{Calcolo differenziale}
+
+
+\section{Definizioni}
+	\begin{definizione}{Gradiente di $f$}
+	Sia $f:\Omega \inc \R^n \rightarrow \R$ con $\Omega$ aperto e sia $\vec x_0 \in \Omega$, si dice \textbf{gradiente} di $f$ in $\vec x_0$ il vettore:
+	$$\nabla f(\vec x_0)=\left( \frac{\partial f}{\partial x_1}(\vec x_0), \dots, \frac{\partial f}{\partial x_n}(\vec x_0)\right)$$
+  \end{definizione}
+	\begin{osservazione}{}
+	La \textbf{derivata direzionale}  di $f$ lungo la direzione individuata da un vettore $\vec u$ si ottiene derivando per il vettore normalizzato $\vec v=\frac{\vec u}{|\vec u|}.$
+  \end{osservazione}
+	\begin{definizione}{Matrice Jacobiana}
+	Sia $f:\Omega \inc \R^n \rightarrow \R^m$ con $\Omega$ aperto e sia $f(\vec x)=\left(f_1(\vec x), \dots, f_m(\vec x)\right)$, si dice \textbf{matrice Jacobiana} di $f$ in $\vec x_0$ la matrice:
+	$$Jf(\vec x_0)=
+	\begin{Bmatrix}
+		\cdots & \nabla f_1(\vec x_0) & \cdots \\
+		\cdots & \vdots  & \cdots \\
+		\cdots & \nabla f_n(\vec x_0) & \cdots \\
+	\end{Bmatrix} $$
+\end{definizione}
+	\begin{definizione}{Matrice Hessiana}
+	Sia $f:\Omega \inc \R^n \rightarrow \R^m$ con $\Omega$ aperto, se $\exists \ \nabla f(\vec x)\ \forall \vec x \in B_{r_0}(\vec x_0)$ allora si dice \textbf{matrice Hessiana} di $f$ in $\vec x_0$ la matrice:
+	$$J(\nabla f))(\vec x_0)=
+	\begin{Bmatrix}
+		\cdots & \nabla (\frac{\partial f}{\partial x_1})(\vec x_0) & \cdots \\
+		\cdots & \vdots  & \cdots \\
+		\cdots & \nabla (\frac{\partial f}{\partial x_n})(\vec x_0) & \cdots \\
+	\end{Bmatrix} $$
+  \end{definizione}
+	\begin{definizione}{Classe $C^1$}
+	Sia $f:\Omega \inc \R^n \rightarrow R^m$ con $\Omega$ aperto e con $f(\vec x)=\left(f_1(\vec x),\dots,f_m(\vec x)\right)$, $f$ si dice di \textbf{classe} $C^1$ in $\Omega$ se $\exists \ \frac{\partial f_i}{\partial x_j}(\vec x) \quad \forall \vec x \in \Omega$ e se queste sono continue.
+  \end{definizione}
+	\begin{definizione}{Classe $C^2$}
+	Sia $f:\Omega \inc \R^n \rightarrow R^m$ con $\Omega$ aperto, $f$ si dice di \textbf{classe} $C^2$ in $\Omega$ se $\exists \ \frac{\partial^2 f_i}{\partial x_j x_i}(\vec x) \quad \forall \vec x \in \Omega$ e se queste sono continue.
+  \end{definizione}
+	\begin{definizione}{Differenziabilità}
+	Sia $f:\Omega \inc \R^n \rightarrow R^m$ con $\Omega$ aperto, $f$ si dice \textbf{differenziabile} in $\vec x_0  \in \Omega$ se $\exists \ \nabla f(\vec x_0)=\left(\frac{\partial f}{\partial x_1}(\vec x_0), \dots , \frac{\partial f}{\partial x_n}(\vec x_0)\right)$ e se ammette uno sviluppo di Taylor di ordine 1 in $\vec x_0$ con resto di Peano, che significa che:
+	$$f(\vec x)=f(\vec x_0)+\nabla f(\vec x_0)\cdot (\vec x - \vec x_0)+ o(|\vec x-\vec x_0|) \quad \text{per }\vec x \rightarrow \vec x_0$$
+  \end{definizione}
+
+
+	\section{Formule del piano tangente, gradiente e Taylor}
+
+
+	\begin{definizione}{Piano tangente}
+	Sia $f:\Omega \inc \R^n \rightarrow R^m$ differenziabile in $(x_0,y_0) \in \Omega$, si dice \textbf{piano tangente} al grafico di $f$ in $(x_0,y_0,f(x_0,y_0))$ il piano:
+	$$z=f(x_0,y_0)+\frac{\partial f}{\partial x}(x_0,y_0)(x-x_0)+\frac{\partial f}{\partial y}(x_0,y_0)(y-y_0)$$
+  \end{definizione}
+	\begin{teorema}{Formula del gradiente}
+	Sia $f:\Omega \inc \R^n \rightarrow \R$, con $\Omega$ aperto, differenziabile in $\vec x_0 \in \Omega$, sia poi $\vec v \in \R^n, v \ne 0$, allora:
+	$$\frac{\partial f}{\partial \vec v}(\vec x_0) = \nabla f(\vec x_0) \cdot \vec v$$
+  \end{teorema}
+	\begin{teorema}
+	Se $f:\Omega \inc \R^n \rightarrow \R$ è differenziabile in $(x_0, y_0)$, allora $\nabla f(x_0, y_0)$ individua la direzione di massima pendenza del grafico di $f$ in quel punto.
+  \end{teorema}
+	\begin{teorema}{Formula di Taylor di ordine 2  con resto di Peano}
+	Sia $f:\Omega \inc \R^n \rightarrow R$ di classe $C^2$ e sia, allora:
+	$$f(x)=f(x_0,y_0)+\frac{\partial f}{\partial x}(x_0,y_0)(x-x_0)+\frac{\partial f}{\partial y}(x_0,y_0)(y-y_0)+$$
+	$$+\frac 1 2 \frac{\partial^2 f}{\partial x^2}(x_0,y_0)(x-x_0)^2+\frac{\partial^2 f}{\partial x \partial y}(x_0,y_0)(x-x_0)(y-y_0)+\frac 1 2\frac{\partial^2 f}{\partial y^2}(x_0,y_0)(y-y_0)^2$$
+  \end{teorema}
+
+
+	\section{Massimi e minimi di una funzione}
+
+
+	\begin{definizione}{Punto stazionario}
+	Se $\nabla f (\vec x_0)=\vec 0$ allora $\vec x_0$ viene chiamato \textbf{punto stazionario}, o punto critico, di f.
+  \end{definizione}
+	\begin{definizione}{Massimi e minimi}
+	Dato il $det$ della matrice Hessiana:
+	$$detHf(x,y)=\begin{Bmatrix}
+		\frac{\partial^2 f}{\partial x^2} & \frac{\partial^2 f}{\partial x \partial y}\\
+		\frac{\partial^2 f}{\partial x \partial y} & \frac{\partial^2 f}{\partial y^2}
+	\end{Bmatrix}=\left( \frac{\partial^2 f}{\partial x^2} \frac{\partial^2 f}{\partial y^2} \right)- \left(\frac{\partial^2 f}{\partial x \partial y}\right)^2$$
+	semplificando la procedura possiamo dire che:
+	$$det Hf(\vec x_0)>0 \wedge \frac{\partial^2 f}{\partial x^2}>0 \quad \Rightarrow \quad \vec x_0 \text{ punto di minimo}$$
+	$$det Hf(\vec x_0)>0 \wedge \frac{\partial^2 f}{\partial x^2}<0 \quad \Rightarrow \quad \vec x_0 \text{ punto di massimo}$$
+	$$det Hf(\vec x_0)<0 \quad \Rightarrow \quad \vec x_0 \text{ punto di sella}$$
+  \end{definizione}

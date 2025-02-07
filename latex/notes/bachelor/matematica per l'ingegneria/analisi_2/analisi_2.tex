@@ -1,6 +1,24 @@
 %! TEX root = analisi_2.tex
 
 \input{../../../../lib/_preamble.tex}
+
+%adeguare formattazione
+\newcommand{\deff}{\subsubsection{Definizione}}
+\newcommand{\deffname}[1]{\subsubsection{Definizione ($\textit{#1}$)}}
+\newcommand{\prop}{\subsubsection{Proposizione}}
+\newcommand{\propname}[1]{\subsubsection{Proposizione ($\textit{#1}$)}}
+\newcommand{\thh}{\subsubsection{Teorema}}
+\newcommand{\thhname}[1]{\subsubsection{Teorema ($\textit{#1}$)}}
+\newcommand{\oss}{\subsubsection{Osservazione}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Ll}{\mathcal{L}}
+\newcommand{\gammadef}{\gamma:[a, b] \rightarrow \R^m}
+\newcommand{\suminf}[1]{\sum_{n=#1}^{\infty}}
+\newcommand{\suminfan}{\sum_{n=0}^{\infty}a_n}
+\newcommand{\liminff}{\lim\limits_{n->\infty}}
+\newcommand{\inc}{\subseteq}
+
 \begin{document}
 
 \title{Analisi 2}
@@ -13,7 +31,10 @@
 
 \mainmatter
 \include{chapters/introduzione}
-
+\include{chapters/calcolo_differenziale}
+\include{chapters/calcolo_integrale}
+\include{chapters/integrali_di_superficie}
+\include{chapters/serie}
 
 \backmatter
 
