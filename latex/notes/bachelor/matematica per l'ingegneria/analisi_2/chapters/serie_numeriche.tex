@@ -1,3 +1,177 @@
 \chapter{Serie numeriche}
 
+\begin{definizione}{Serie numerica}
+  Data una succesione di numeri reali $\{a_n\}_{n=1}^{\infty}$, si definisce serie degli $a_n$ il simbolo: $\sum_{n=1}^{\infty} a_n$.
+\end{definizione}
+
+\begin{definizione}{Somma parziale}
+  Si definisce somma parziale di una serie numerica la somma dei primi $n$ termini della serie: $S_N = \sum_{n=1}^{N} a_n$.
+\end{definizione}
+
+Si studia il $\lim_{N \to \infty} S_N$ e si valutano i diversi casi:
+\begin{itemize}
+  \item Se il limite esiste finito, la serie è convergente.
+  \item Se il limite è infinito, la serie è divergente.
+  \item Se il limite non esiste, la serie è indeterminata.
+\end{itemize}
+
+\begin{osservazione}{}
+  La definizione precedente si adatta anche al caso in cui la serie non parta da $n=1$.\\
+  Il comportamento di una serie numerica non cambia se modifico un numero finito di termini. Infatti il comportamento dipende soltanto dalle "code".
+\end{osservazione}
+
+Ecco un'altra osservazione importante:
+\begin{osservazione}{}
+  Se le due serie $\sum_{n=1}^{\infty} a_n$ e $\sum_{n=1}^{\infty} b_n$ sono convergenti, allora la serie $\sum_{n=1}^{\infty} (a_n + b_n)$ è convergente.\\ Se invece una delle due serie è divergente, allora la serie $\sum_{n=1}^{\infty} (a_n + b_n)$ è divergente.\\
+  Infine si ha che se $\sum_{n=1}^{\infty} a_n$ è convergente, allora per ogni $\lambda \in \R$, la serie $\sum_{n=1}^{\infty} \lambda a_n$ è convergente e vale $\sum_{n=1}^{\infty} \lambda a_n = \lambda \sum_{n=1}^{\infty} a_n$.
+\end{osservazione}
+
+Vediamo un caso particolare in cui è facile determinare oltre al comportamento anche il valore della somma della serie:
+\begin{definizione}{Serie geometrica}
+  Una serie del tipo $\sum_{n=0}^{\infty} q^n$ è detta serie geometrica.\\
+\end{definizione}
+\begin{teorema}{}
+  Si ha che:
+  \begin{itemize}
+    \item Se $|q| < 1$, allora la serie è convergente e vale $\sum_{n=0}^{\infty} q^n = \frac{1}{1-q}$.
+    \item Se $|q| \geq 1$, allora la serie è divergente.
+  \end{itemize}
+\end{teorema}
+Vediamo come generalizzarlo per una serie che non parte da $n=0$:
+\begin{osservazione}{}
+  Se $|q| < 1$, allora la serie $\sum_{n=k}^{\infty} q^n$ è convergente e vale $\sum_{n=k}^{\infty} q^n = \frac{q^k}{1-q}$.
+\end{osservazione}
+
+\section{Criteri di convergenza}
+Vediamo ora alcuni importanti criteri che ci permettono di determinare il comportamento di una serie numerica.
+\begin{teorema}{Condizione necessaria di convergenza}
+  Se la serie $\sum_{n=1}^{\infty} a_n$ è convergente, allora $\lim_{n \to \infty} a_n = 0$.
+\end{teorema}
+
+In generale è più facile studiare serie con tutti i termini positivi:
+\begin{definizione}{Serie a termini positivi}
+  Una serie $\sum_{n=1}^{\infty} a_n$ si dice a termini positivi se $a_n \geq 0$ per ogni $n$.
+\end{definizione}
+
+Vediamo subito un teorema che risolve molte patologie:
+\begin{teorema}{}
+  Una serie a termini positivi può essere convergente, divergente ma non indeterminata.\\
+\end{teorema}
+Inoltre sulle serie a termini positivi valgono i seguenti criteri:
+\begin{teorema}{Criterio del confronto integrale}
+  Sia $f:[1, +\infty) \to \R$ una funzione continua e a valori positivi. Se $a_n = f(n)$, allora la serie $\sum_{n=1}^{\infty} a_n$ è convergente se e solo se l'integrale $\int_{1}^{+\infty} f(x) \, dx$ è convergente.
+\end{teorema}
+Vediamo un esempio.\\
+
+Studiamo la serie $\sum_{n=1}^{\infty} \frac{1}{n}$.\\
+Applichiamo il criterio del confronto integrale con $f(x) = \frac{1}{x}$, ottenendo che la serie è divergente.\\
+
+Vediamo ora un altro criterio:
+\begin{teorema}{Criterio del confronto asintotico}
+  \begin{itemize}
+  \item  Siano $\{a_n\}_{n=1}^{\infty}$ e $\{b_n\}_{n=1}^{\infty}$ due successioni di numeri reali tali che $0 \leq a_n \leq b_n$ per ogni $n$. Se la serie $\sum_{n=1}^{\infty} b_n$ è convergente, allora la serie $\sum_{n=1}^{\infty} a_n$ è convergente.\\
+  Se la serie $\sum_{n=1}^{\infty} a_n$ è divergente, allora la serie $\sum_{n=1}^{\infty} b_n$ è divergente.
+  \item Siano $\{a_n\}_{n=1}^{\infty}$ e $\{b_n\}_{n=1}^{\infty}$ due successioni di numeri reali tali che $\lim_{n \to \infty} \frac{a_n}{b_n} = L$ con $0 < L < \infty$. Allora le due serie $\sum_{n=1}^{\infty} a_n$ e $\sum_{n=1}^{\infty} b_n$ sono entrambe convergenti o entrambe divergenti.
+  \item Siano $\{a_n\}_{n=1}^{\infty}$ e $\{b_n\}_{n=1}^{\infty}$ due successioni di numeri reali tali che $a_n = o(b_n)$ per $n \to \infty$. Se la serie $\sum_{n=1}^{\infty} b_n$ è convergente, allora la serie $\sum_{n=1}^{\infty} a_n$ è convergente. Se la serie $\sum_{n=1}^{\infty} a_n$ è divergente, allora la serie $\sum_{n=1}^{\infty} b_n$ è divergente.
+  \end{itemize}
+\end{teorema}
+
+Esistono inoltre altri due importanti criteri:
+\begin{teorema}{Criterio della radice}
+  Sia $\{a_n\}_{n=1}^{\infty}$ una successione di numeri reali. Se esiste il limite $\lim_{n \to \infty} \sqrt[n]{|a_n|} = L$, allora:
+  \begin{itemize}
+    \item Se $L < 1$, la serie $\sum_{n=1}^{\infty} a_n$ è convergente.
+    \item Se $L > 1$, la serie $\sum_{n=1}^{\infty} a_n$ è divergente.
+    \item Se $L = 1$, il criterio non fornisce informazioni.
+  \end{itemize}
+\end{teorema}
+\begin{teorema}{Criterio del rapporto}
+  Sia $\{a_n\}_{n=1}^{\infty}$ una successione di numeri reali. Se esiste il limite $\lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right| = L$, allora:
+  \begin{itemize}
+    \item Se $L < 1$, la serie $\sum_{n=1}^{\infty} a_n$ è convergente.
+    \item Se $L > 1$, la serie $\sum_{n=1}^{\infty} a_n$ è divergente.
+    \item Se $L = 1$, il criterio non fornisce informazioni.
+  \end{itemize}
+\end{teorema}
+
+Inoltre ecco la seguente osservazione:
+\begin{osservazione}{}
+  Si può dimostrare che se esiste il limite $\lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right| = L$ esiste anche il limite $\lim_{n \to \infty} \sqrt[n]{|a_n|} = L$.
+\end{osservazione}
+
+In alcuni casi può essere utile la formula di Stirling per il fattoriale:
+\begin{teorema}{Teorema di Stirling}
+  Si ha che $\lim_{n \to \infty} \frac{n!}{(\frac{n}{e})^n \sqrt{2\pi n}} = 1$.
+\end{teorema}
+Vediamo un esempio in cui risulta utile.\\
+Studiamo la serie $\sum_{n=1}^{\infty} \frac{n!}{n^n}$.
+
+Applichiamo il criterio della radice:
+\[
+\lim_{n \to \infty} \sqrt[n]{\left| \frac{n!}{n^n} \right|} = \lim_{n \to \infty} \frac{\sqrt[n]{n!}}{n}.
+\]
+
+Utilizziamo la formula di Stirling per approssimare $n!$:
+\[
+n! \sim \sqrt{2\pi n} \left( \frac{n}{e} \right)^n.
+\]
+
+Quindi:
+\[
+\sqrt[n]{n!} \sim \sqrt[n]{ \sqrt{2\pi n} \left( \frac{n}{e} \right)^n} = \cdot \sqrt[n]{\sqrt{2\pi n}} \cdot \frac{n}{e}.
+\]
+
+Poiché $\sqrt[n]{\sqrt{2\pi n}} \to 1$ per $n \to \infty$, abbiamo:
+\[
+\lim_{n \to \infty} \frac{\sqrt[n]{n!}}{n} = \lim_{n \to \infty} \frac{ 1 \cdot \frac{n}{e}}{n} = \frac{1}{e}.
+\]
+
+Poiché $\frac{1}{e} < 1$, la serie $\sum_{n=1}^{\infty} \frac{n!}{n^n}$ è convergente.
+
+\section{Serie con termini di segno variabile}
+Se $a_n$ cambia segno infinite volte, i criteri visti finora non sono applicabili.\\
+Un caso importante sono le serie a segni alterni:
+\begin{definizione}{Serie a segni alterni}
+  Una serie $\sum_{n=1}^{\infty} (-1)^n a_n$ è detta serie a segni alterni.
+\end{definizione}
+Vediamo in questo caso un utile criterio:
+\begin{teorema}{Criterio di Leibniz}
+  Se $\{a_n\}_{n=1}^{\infty}$ è una successione a termini positivi e decrescenti con $\lim_{n \to \infty} a_n = 0$, allora la serie $\sum_{n=1}^{\infty} (-1)^n a_n$ è convergente.
+\end{teorema}
+\begin{osservazione}{}
+  In particolare è necessario che la serie sia infinitesima. Il fatto che sia decrescente è sufficiente ma non necessario.
+\end{osservazione}
+Vediamo un esempio di applicazione del criterio di Leibniz:\\
+
+Consideriamo la serie $\sum_{n=1}^{\infty} \frac{(-1)^n}{n}$.\\
+Applichiamo il criterio di Leibniz:
+\begin{itemize}
+  \item La successione $a_n = \frac{1}{n}$ è a termini positivi.
+  \item La successione $a_n = \frac{1}{n}$ è decrescente.
+  \item $\lim_{n \to \infty} \frac{1}{n} = 0$.
+\end{itemize}
+Quindi, per il criterio di Leibniz, la serie $\sum_{n=1}^{\infty} \frac{(-1)^n}{n}$ è convergente.\\
+
+In un caso più generale però i segni non sono necessariamente alternati.\\
+Vediamo un criterio che ci permette di studiare serie con termini di segno qualunque:
+\begin{teorema}{Criterio di convergenza assoluta}
+  Se la serie $\sum_{n=1}^{\infty} |a_n|$ è convergente, allora la serie $\sum_{n=1}^{\infty} a_n$ è convergente.
+\end{teorema}
+
+Vediamo un esempio di applicazione del criterio di convergenza assoluta:\\
+
+Consideriamo la serie $\sum_{n=1}^{\infty} \frac{\sin(n)}{n^2}$.\\
+Studiamo la serie $\sum_{n=1}^{\infty} \left| \frac{\sin(n)}{n^2} \right|$.\\
+
+Poiché $|\sin(n)| \leq 1$ per ogni $n$, abbiamo:
+\[
+\left| \frac{\sin(n)}{n^2} \right| \leq \frac{1}{n^2}.
+\]
+
+La serie $\sum_{n=1}^{\infty} \frac{1}{n^2}$ è una serie a termini positivi e sappiamo che è convergente (serie p con $p = 2 > 1$).\\
+
+Quindi, per il criterio di convergenza assoluta, la serie $\sum_{n=1}^{\infty} \frac{\sin(n)}{n^2}$ è convergente.
+
+
+
 
