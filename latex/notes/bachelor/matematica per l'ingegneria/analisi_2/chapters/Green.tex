@@ -1,0 +1,84 @@
+\chapter{Green}
+Questo capitolo sarà interamente dedicato al teorema di Green nel piano. Esso è un caso particolare del teorema del rotore (o teorema di Stokes) che verrà affrontato prossimamente.\\
+
+Il teorema di Green consente di caclolare la circuitazione di un campo riducendola a un integrale doppio.
+
+\section{Teorema di Green}
+\begin{teorema}{Teorema di Green}
+Sia $\Omega \inc \R^2$ aperto limitato tale che la sua frontiera è l'unione di $N$ curve chiuse disgiunte $\gamma_1, \dots, \gamma_N$  e sia $\vec F:\Omega\rightarrow \R^2$ di classe $C^1$, allora:
+$$ \int_\Omega \left(\frac{\partial F_2}{\partial x}-\frac{\partial F_1}{\partial y}\right) dxdy = \sum_{i=1}^{N} \int_{\gamma_i} \vec{F} \cdot d\vec{r} $$,\\dove ogni $\gamma_i$ è orientata in modo da avere $\Omega$ alla sua sinistra.
+\end{teorema}
+
+Il teorema si può applicare in vari modi ad esempio:
+\begin{itemize}
+\item Calcolare la circuitazione di un campo lungo una curva chiusa.
+\item Confrontare tra loro due circuitazioni (specialmente quando $\vec F$ è irrotazionale ma non conservativo).
+\end{itemize}
+
+Inoltre grazie al teorema si ricava un utile fatto generale:
+\begin{corollario}{}
+  Se ho due curve chiuse $\gamma_1$ e $\gamma_2$ tali che $\gamma_1$ è interna a $\gamma_2$ allora: $$\int_{\gamma_1} \vec F \cdot d\vec r = \int_{\gamma_2} \vec F \cdot d\vec r$$\\
+  per ogni campo $\vec F$ irrotazionale (nella sezione di piano che contiene le curve).
+\end{corollario}
+
+Applichiamo ora il teorema al calcolo dell'area racchiusa tra curve chiuse.\\
+Se scelgo un campo $\vec F$ tale che $\frac{\partial F_2}{\partial x}-\frac{\partial F_1}{\partial y}=1$ (ad esempio $\vec F = (0,x)$)allora ottengo l'area di $\Omega$ come circuitazione di $\vec F$ lungo il bordo di $\Omega$.\\
+Riassumendo:
+\begin{teorema}{}
+  Se $\gamma(t)= (x(t), y(t)), t \in [a,b]$ è una curva chiusa semplice e regolare, allora l'area racchiusa da $\gamma$ è data da:
+  $$\text{Area}(\Omega) = \int_{a}^{b} x(t)\cdot y'(t) dt$$.\\
+  Sono possibili anche altre scelte per $\vec F$ che generano formule analogo per il calcolo dell'area di $\Omega$.
+\end{teorema}
+
+\subsection{Esempio: area del cardiode}
+
+Consideriamo il campo vettoriale $\vec{F} = (0, x)$. Utilizziamo il teorema di Green per calcolare l'area racchiusa dal cardioide. Secondo il teorema di Green, abbiamo:
+
+$$ \text{Area}(\Omega) = \oint_{\gamma} \vec{F} \cdot d\vec{r} $$
+
+Dove $\gamma$ è la curva chiusa che descrive il bordo del cardioide. In coordinate polari, il cardioide è dato da:
+
+$$ r = 1 + \cos\theta $$
+
+Le coordinate cartesiane sono:
+
+$$ x = r \cos\theta = (1 + \cos\theta) \cos\theta $$
+$$ y = r \sin\theta = (1 + \cos\theta) \sin\theta $$
+
+Il differenziale di posizione è:
+
+$$ d\vec{r} = \left( \frac{dx}{d\theta}, \frac{dy}{d\theta} \right) d\theta $$
+
+Calcoliamo le derivate:
+
+$$ \frac{dx}{d\theta} = \frac{d}{d\theta} \left( (1 + \cos\theta) \cos\theta \right) = -\cos\theta \sin\theta + \cos^2\theta - \sin^2\theta $$
+$$ \frac{dy}{d\theta} = \frac{d}{d\theta} \left( (1 + \cos\theta) \sin\theta \right) = \cos\theta \sin\theta + \sin^2\theta + \cos\theta \cos\theta $$
+
+Quindi:
+
+$$ d\vec{r} = \left( -\cos\theta \sin\theta + \cos^2\theta - \sin^2\theta, \cos\theta \sin\theta + \sin^2\theta + \cos^2\theta \right) d\theta $$
+
+Il campo $\vec{F}$ in coordinate polari è:
+
+$$ \vec{F} = (0, x) = (0, (1 + \cos\theta) \cos\theta) $$
+
+Il prodotto scalare $\vec{F} \cdot d\vec{r}$ è:
+
+$$ \vec{F} \cdot d\vec{r} = 0 \cdot \left( -\cos\theta \sin\theta + \cos^2\theta - \sin^2\theta \right) + (1 + \cos\theta) \cos\theta \cdot \left( \cos\theta \sin\theta + \sin^2\theta + \cos^2\theta \right) $$
+
+Semplificando:
+
+$$ \vec{F} \cdot d\vec{r} = (1 + \cos\theta) \cos\theta \left( \cos\theta \sin\theta + \sin^2\theta + \cos^2\theta \right) $$
+
+Integrando lungo $\theta$ da $0$ a $2\pi$:
+
+$$ \text{Area}(\Omega) = \int_{0}^{2\pi} (1 + \cos\theta) \cos\theta \left( \cos\theta \sin\theta + \sin^2\theta + \cos^2\theta \right) d\theta $$
+
+Semplificando ulteriormente e risolvendo l'integrale, otteniamo:
+
+$$ \text{Area}(\Omega) = \frac{3\pi}{2} $$
+
+Pertanto, l'area racchiusa dal cardioide è:
+
+$$ \text{Area} = \frac{3\pi}{2} $$
+

@@ -1,0 +1,40 @@
+\chapter{Integrali curvilinei}
+
+\section{Introduzione}
+In questo capitolo ci occuperemo di integrali curvilinei, ovvero integrali definiti su curve.\\
+Nel paragrafo ~\ref{sec:derivata-lungo-una-curva} abbiamo definito le curve e le derivate lungo esse.\\
+Vediamo ora un utile teorema che ci servirà per ricavare gli integrali curvilinei.
+
+\begin{teorema}{Derivata della funzione composta}
+  SIano $f(x_1, \dots, x_n): \R^n \rightarrow \R^k$ e $g(y_1, \dots, y_m): \R^m \rightarrow \R^n$ funzioni differenziabili. Allora la funzione composta $f \circ g: \R^m \rightarrow \R^k$ è differenziabile e la sua matrice Jacobiana è data da:
+  $$J(f \circ g)(y) = Jf(g(y)) \cdot Jg(y)$$
+\end{teorema}
+
+Gli integrali curvilinei possono essere di due tipi: di prima e di seconda specie.\\
+Gli integrali di prima specie sono integrali di una funzione scalare $f(x_1, \dots, x_n)$ lungo una curva $\gamma: [a, b] \rightarrow \R^n$.\\
+Gli integrali di seconda specie sono integrali di un campo vettoriale $\vec F(x_1, \dots, x_n)$ lungo una curva $\gamma: [a, b] \rightarrow \R^n$.\\
+
+\begin{osservazione}{}
+  Supporremo sempre che $\gamma$ sia $C^1$ (o $C^1$ a tratti) e che $f$ e $\vec F$ siano continue.
+\end{osservazione}
+
+\section{Integrali curvilinei di prima specie}
+\begin{definizione}{Integrale curvilineo di prima specie}
+  Sia $f: \R^n \rightarrow \R$ una funzione continua e $\gamma: [a, b] \rightarrow \R^n$ una curva $C^1$ (o $C^1$ a tratti).\\
+  L'integrale curvilineo di $f$ lungo $\gamma$ è definito come:
+  $$\int_\gamma f ds = \int_a^b f(\gamma(t)) \cdot ||\gamma'(t)|| dt$$
+\end{definizione}
+
+Capiamo meglio il significato. Posso pensare di dividere la curva in piccoli tratti di diametro $< \epsilon$. Campiono $f$ in ogni punto e moltiplico per la lunghezza del tratto. Sommo tutti i tratti e faccio tendere $\epsilon$ a 0. Ovvero:
+$$\int_\gamma f ds = \lim_{\epsilon \rightarrow 0} \sum_{i=1}^n f(\gamma(t_i)) \cdot ||\gamma(t_i) - \gamma(t_{i-1})||$$
+
+\section{Integrali curvilinei di seconda specie}\label{sec:integrali-curvilinei-di-seconda-specie}
+\begin{definizione}{Integrale curvilineo di seconda specie}
+  Sia $\vec F: \R^n \rightarrow \R^n$ un campo vettoriale continuo e $\gamma: [a, b] \rightarrow \R^n$ una curva $C^1$ (o $C^1$ a tratti).\\
+  L'integrale curvilineo di $\vec F$ lungo $\gamma$ è definito come:
+  $$\int_\gamma \vec F \cdot d\vec r = \int_a^b \vec F(\gamma(t)) \cdot \gamma'(t) dt$$
+\end{definizione}
+
+Nuovamente, il significato è quello di dividere la curva in piccoli tratti di diametro $< \epsilon$. Campiono $\vec F$ in ogni punto e moltiplico per il vettore tangente al tratto. Sommo tutti i tratti e faccio tendere $\epsilon$ a 0. Ovvero:
+$$\int_\gamma \vec F \cdot d\vec r = \lim_{\epsilon \rightarrow 0} \sum_{i=1}^n \vec F(\gamma(t_i)) \cdot (\gamma(t_i) - \gamma(t_{i-1}))$$.\\
+Questo integrale esprime il lavoro compiuto dal campo $\vec F$ lungo la curva $\gamma$. Non dipende da come parametrizzo $\gamma$ se non per il verso di percorrenza.

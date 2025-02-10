@@ -1,79 +1,544 @@
 \chapter{Calcolo differenziale}
 
-
-\section{Definizioni}
-	\begin{definizione}{Gradiente di $f$}
-	Sia $f:\Omega \inc \R^n \rightarrow \R$ con $\Omega$ aperto e sia $\vec x_0 \in \Omega$, si dice \textbf{gradiente} di $f$ in $\vec x_0$ il vettore:
-	$$\nabla f(\vec x_0)=\left( \frac{\partial f}{\partial x_1}(\vec x_0), \dots, \frac{\partial f}{\partial x_n}(\vec x_0)\right)$$
-  \end{definizione}
-	\begin{osservazione}{}
-	La \textbf{derivata direzionale}  di $f$ lungo la direzione individuata da un vettore $\vec u$ si ottiene derivando per il vettore normalizzato $\vec v=\frac{\vec u}{|\vec u|}.$
-  \end{osservazione}
-	\begin{definizione}{Matrice Jacobiana}
-	Sia $f:\Omega \inc \R^n \rightarrow \R^m$ con $\Omega$ aperto e sia $f(\vec x)=\left(f_1(\vec x), \dots, f_m(\vec x)\right)$, si dice \textbf{matrice Jacobiana} di $f$ in $\vec x_0$ la matrice:
-	$$Jf(\vec x_0)=
-	\begin{Bmatrix}
-		\cdots & \nabla f_1(\vec x_0) & \cdots \\
-		\cdots & \vdots  & \cdots \\
-		\cdots & \nabla f_n(\vec x_0) & \cdots \\
-	\end{Bmatrix} $$
+\section{Introduzione}
+\begin{definizione}{Funzione di più variabili}
+Una funzione di più variabili è una applicazione $f:\Omega \inc \R^n \rightarrow \R$, con $n\geq 1.$ $\Omega$ è detto dominio della funzione\\
 \end{definizione}
-	\begin{definizione}{Matrice Hessiana}
-	Sia $f:\Omega \inc \R^n \rightarrow \R^m$ con $\Omega$ aperto, se $\exists \ \nabla f(\vec x)\ \forall \vec x \in B_{r_0}(\vec x_0)$ allora si dice \textbf{matrice Hessiana} di $f$ in $\vec x_0$ la matrice:
-	$$J(\nabla f))(\vec x_0)=
-	\begin{Bmatrix}
-		\cdots & \nabla (\frac{\partial f}{\partial x_1})(\vec x_0) & \cdots \\
-		\cdots & \vdots  & \cdots \\
-		\cdots & \nabla (\frac{\partial f}{\partial x_n})(\vec x_0) & \cdots \\
-	\end{Bmatrix} $$
-  \end{definizione}
-	\begin{definizione}{Classe $C^1$}
-	Sia $f:\Omega \inc \R^n \rightarrow R^m$ con $\Omega$ aperto e con $f(\vec x)=\left(f_1(\vec x),\dots,f_m(\vec x)\right)$, $f$ si dice di \textbf{classe} $C^1$ in $\Omega$ se $\exists \ \frac{\partial f_i}{\partial x_j}(\vec x) \quad \forall \vec x \in \Omega$ e se queste sono continue.
-  \end{definizione}
-	\begin{definizione}{Classe $C^2$}
-	Sia $f:\Omega \inc \R^n \rightarrow R^m$ con $\Omega$ aperto, $f$ si dice di \textbf{classe} $C^2$ in $\Omega$ se $\exists \ \frac{\partial^2 f_i}{\partial x_j x_i}(\vec x) \quad \forall \vec x \in \Omega$ e se queste sono continue.
-  \end{definizione}
-	\begin{definizione}{Differenziabilità}
-	Sia $f:\Omega \inc \R^n \rightarrow R^m$ con $\Omega$ aperto, $f$ si dice \textbf{differenziabile} in $\vec x_0  \in \Omega$ se $\exists \ \nabla f(\vec x_0)=\left(\frac{\partial f}{\partial x_1}(\vec x_0), \dots , \frac{\partial f}{\partial x_n}(\vec x_0)\right)$ e se ammette uno sviluppo di Taylor di ordine 1 in $\vec x_0$ con resto di Peano, che significa che:
-	$$f(\vec x)=f(\vec x_0)+\nabla f(\vec x_0)\cdot (\vec x - \vec x_0)+ o(|\vec x-\vec x_0|) \quad \text{per }\vec x \rightarrow \vec x_0$$
-  \end{definizione}
+
+Come si visualizza una funzione di più variabili?\\
+Ci sono due strumenti principali: il grafico e le curve di livello.\\
+
+\begin{definizione}{Curve di livello}
+Data $f:\Omega \inc \R^2 \rightarrow \R$, si definisce curva di livello $\lambda$ di $f$ il luogo dei punti $L_\lambda=\{(x,y)\in \Omega : f(x,y)=\lambda\}$.\\
+\end{definizione}
+Può capitare che $L_\lambda$ sia vuoto, es: $L_{-1}$ per $f(x,y)= x^2+y^2$.\\
+Tipicamente $L_\lambda$ è una curva nel piano o l'unione di più curve.\\
 
 
-	\section{Formule del piano tangente, gradiente e Taylor}
+\begin{definizione}{Grafico}
+Data $f:\Omega \inc \R^2 \rightarrow \R$, si definisce grafico di $f$ il luogo dei punti $G_f=\{(x,y,z)\in \R^3 : z=f(x,y), (x,y)\in \Omega\}$.\\
+\end{definizione}
+In generale $\Omega \inc \R^n$ e $f:\Omega \rightarrow \R$ si definisce $G(f)=\{(x_1, \dots, x_n, z)\in \R^{n+1} : z=f(x_1, \dots, x_n), (x_1, \dots, x_n)\in \Omega\}$.\\
+
+\subsection{Esempio di grafici da sapere}
+Sono esempi di grafici da sapere i seguenti:
+\begin{itemize}
+  \item $f(x,y)=x^2+y^2$ è il grafico di un paraboloide
+  \item $f(x,y)=x^2-y^2$ è il grafico di un iperbolide
+  \item $f(x,y)=x^2$ è il grafico di un cilindro
+  \item $f(x,y)=\sqrt{1-x^2-y^2}$ è il grafico di una semisfera
+  \item $f(x,y)=\sqrt{x^2+y^2}$ è il grafico di un cono
+\end{itemize}
+
+\section{Cenni di limiti e continuità}
+
+\begin{definizione}{Intorno di un punto}
+Sia $\vec x_0 \in \R^n$ e sia $r>0$, si dice intorno di $\vec x_0$ la palla aperta $B_r(\vec x_0)=\{\vec x \in \R^n : \|\vec x - \vec x_0\|<r\}$, dove $\|\cdot\|$ denota la norma euclidea.\\
+\end{definizione}
+
+\begin{definizione}{Limite}
+Sia $f:\Omega \inc \R^n \rightarrow \R$ e sia $p_0$ un punto di accumulazione per $\Omega$. Si dice che $f$ tende a $L \in \R$ per $p$ che tende a $p_0$, e si scrive
+$$\lim_{p \to p_0} f(p) = L$$
+se per ogni $\epsilon > 0$ esiste $\delta > 0$ tale che, per ogni $p \in \Omega$, $0 < \|p - p_0\| < \delta$ implica $|f(p) - L| < \epsilon$.
+\end{definizione}
+
+\begin{definizione}{Continuità}
+Sia $f:\Omega \inc \R^n \rightarrow \R$ e sia $p_0 \in \Omega$. Si dice che $f$ è continua in $p_0$ se
+$$\lim_{p \to p_0} f(p) = f(p_0).$$
+\end{definizione}
+
+Data $f$ come faccio a capire in quali punti è continua?\\
+Si usano i seguenti fatti:
+\begin{itemize}
+  \item Una funzione di una sola variabile è continua se non presenta discontinuità nel suo dominio.
+  \item Se $f$ e $g$ sono funzioni continue, allora le seguenti funzioni sono continue:
+  \begin{itemize}
+    \item La somma: $f + g$
+    \item Il prodotto: $f \cdot g$
+    \item Il rapporto: $\frac{f}{g}$, purché $g \neq 0$
+    \item La composizione: $f \circ g$
+  \end{itemize}
+\end{itemize}
+
+\subsection{Esempio di limite lungo semirette}
+Consideriamo la funzione $f(x,y)= \frac{2xy}{x^2+y^2}$. Vogliamo studiare il limite di $f$ quando $(x,y)$ tende a $(0,0)$ lungo diverse semirette.
+
+Osserviamo prima il comportamento lungo gli assi $x$ e $y$:
+\[
+f(x,0) = \frac{2x \cdot 0}{x^2 + 0^2} = 0
+\]
+\[
+f(0,y) = \frac{2 \cdot 0 \cdot y}{0^2 + y^2} = 0
+\]
+Quindi, lungo gli assi il limite è $0$.
+
+Consideriamo ora il limite lungo la semiretta $y=mx$ con $m$ costante:
+\[
+f(x,mx) = \frac{2x(mx)}{x^2+(mx)^2} = \frac{2mx^2}{x^2(1+m^2)} = \frac{2m}{1+m^2}
+\]
+Quindi, il limite dipende da $m$ e vale $\frac{2m}{1+m^2}$.
+
+Osserviamo che il limite di $f(x,y)$ quando $(x,y)$ tende a $(0,0)$ dipende dalla direzione lungo la quale ci avviciniamo al punto $(0,0)$. Pertanto, possiamo concludere che il limite non esiste in senso assoluto.
+
+\subsection{Esempio di limite lungo parabole}
+Consideriamo la funzione $f(x,y)= \frac{xy^2}{y^2+x^4}$. Vogliamo studiare il limite di $f$ quando $(x,y)$ tende a $(0,0)$ lungo diverse curve.
+
+Lungo la semiretta $y=mx$ con $m$ costante:
+\[
+f(x,mx) = \frac{x(mx)^2}{(mx)^2+x^4} = \frac{mx^3}{m^2x^2+x^4} = \frac{mx^3}{x^2(m^2+x^2)} = \frac{mx}{m^2+x^2}
+\]
+Quando $x \to 0$, il limite di $f(x,mx)$ è $0$.
+
+Consideriamo la parabola $y=mx^2$ con $m$ costante:
+\[
+f(x,mx^2) = \frac{x(mx^2)^2}{(mx^2)^2+x^4} = \frac{m^2x^5}{m^2x^4+x^4} = \frac{m^2x^5}{x^4(m^2+1)} = \frac{m^2x}{m^2+1}
+\]
+Quando $x \to 0$, il limite di $f(x,mx^2)$ è $0$ solo se $m=0$. Per $m \neq 0$, il limite non è $0$.
+
+Osserviamo che il limite di $f(x,y)$ quando $(x,y)$ tende a $(0,0)$ dipende dalla curva lungo la quale ci avviciniamo al punto $(0,0)$. Pertanto, possiamo concludere che il limite non esiste in senso assoluto.
+
+\section{Derivate parziali}
+\begin{definizione}{Derivata in una variabile}
+Sia $f: \R \rightarrow \R$ una funzione e sia $x_0 \in \R$. La derivata di $f$ in $x_0$, indicata con $f'(x_0)$, è definita come il limite del rapporto incrementale, se esiste:
+$$f'(x_0) = \lim_{h \to 0} \frac{f(x_0 + h) - f(x_0)}{h}.$$
+Geometricamente, la derivata rappresenta il coefficiente angolare della retta tangente al grafico di $f$ nel punto $(x_0, f(x_0))$.
+\end{definizione}
+
+\begin{definizione}{Derivata parziale}
+  Sia ora $P_0 \in \R^n $ e $f(x_1, \dots, x_n)$ una funzione definita in un intorno di $P_0$. La derivata parziale di $f$ rispetto alla variabile $x_i$ in $P_0$ è definita come il limite del rapporto incrementale, se esiste: $
+\frac{\partial f}{\partial x_i}(P_0) = \lim_{h \to 0} \frac{f(P_0+e_i\cdot h) - f(P_0)}{h}$, dove $e_i$ indica il versore fondamentale lungo la componente $i$.
+\end{definizione}
+Questo equivale a derivare $f(x_1,\dots, x_n)$, rispetto alla variabile $x_i$, lasciando fissi i vettori delle altre $n-1$ componenti.
+
+In particolare, per una funzione di due variabili $f(x,y)$, esistono due derivate parziali: la derivata parziale rispetto a $x$ e la derivata parziale rispetto a $y$. Queste sono indicate rispettivamente con $\frac{\partial f}{\partial x}$ e $\frac{\partial f}{\partial y}$. \\
+Consideriamo la funzione $f(x,y) = x^2 + y^2$. Le derivate parziali di $f$ sono:
+\[
+\frac{\partial f}{\partial x} = \frac{\partial}{\partial x}(x^2 + y^2) = 2x
+\]
+\[
+\frac{\partial f}{\partial y} = \frac{\partial}{\partial y}(x^2 + y^2) = 2y
+\]
+Quindi, la derivata parziale rispetto a $x$ è $2x$ e la derivata parziale rispetto a $y$ è $2y$.\\
+
+\section{Piano tangente}
+Il piano tangente è un concetto fondamentale nel calcolo differenziale e rappresenta il piano che "tocca" una superficie in un punto dato, approssimando la superficie stessa vicino a quel punto.
+
+\begin{definizione}{Piano tangente}
+Sia $f:\Omega \inc \R^n \rightarrow \R$ differenziabile in $(x_0,y_0) \in \Omega$, si dice \textbf{piano tangente} al grafico di $f$ in $(x_0,y_0,f(x_0,y_0))$ il piano:
+$$z=f(x_0,y_0)+\frac{\partial f}{\partial x}(x_0,y_0)(x-x_0)+\frac{\partial f}{\partial y}(x_0,y_0)(y-y_0)$$
+\end{definizione}
+
+In altre parole, il piano tangente al grafico di una funzione $f(x,y)$ in un punto $(x_0, y_0)$ è dato dall'equazione lineare che approssima $f$ vicino a quel punto. Le derivate parziali $\frac{\partial f}{\partial x}$ e $\frac{\partial f}{\partial y}$ rappresentano le pendenze del piano tangente nelle direzioni $x$ e $y$, rispettivamente.
+\\
+Consideriamo la funzione $f(x,y) = x^2 + y^2$. Troviamo il piano tangente al grafico di $f$ nel punto $(1,1)$.
+
+Calcoliamo le derivate parziali:
+\[
+\frac{\partial f}{\partial x} = 2x \quad \text{e} \quad \frac{\partial f}{\partial y} = 2y
+\]
+
+Valutiamo le derivate parziali nel punto $(1,1)$:
+\[
+\frac{\partial f}{\partial x}(1,1) = 2 \quad \text{e} \quad \frac{\partial f}{\partial y}(1,1) = 2
+\]
+
+L'equazione del piano tangente è quindi:
+\[
+z = f(1,1) + \frac{\partial f}{\partial x}(1,1)(x-1) + \frac{\partial f}{\partial y}(1,1)(y-1)
+\]
+\[
+z = 1^2 + 1^2 + 2(x-1) + 2(y-1)
+\]
+\[
+z = 2 + 2(x-1) + 2(y-1)
+\]
+\[
+z = 2x + 2y - 2
+\]
+
+Quindi, il piano tangente al grafico di $f$ nel punto $(1,1)$ è dato dall'equazione $z = 2x + 2y - 2$.\\
+
+La differenza rispetto al caso in una variabile è che in due (o più) variabili può capiatre che esistanto tutte le derivate parziali ma $f$ potrebbe non solo non avere piano tangente al grafico ma addirittura essere discontinua in $P_0$.
+
+\section{Differenziabilità}
+\begin{definizione}{Differenziabilità in due variabili}
+Sia $f:\Omega \inc \R^2 \rightarrow \R$ e sia $P_0 = (x_0,y_0) \in \Omega$. Si dice che $f$ è differenziabile in $P_0$ se esistono le derivate parziali di $f$ in $P_0$ rispetto a $x$ e $y$ e se vale lo sviluppo di Taylor di ordine 1 in $P_0$ con resto di Peano, cioè: $f(x,y)=f(x_0,y_0)+\frac{\partial f}{\partial x}(x_0,y_0)(x-x_0)+\frac{\partial f}{\partial y}(x_0,y_0)(y-y_0)+o(\sqrt{(x-x_0)^2+(y-y_0)^2}) \quad \text{per }(x,y) \rightarrow (x_0,y_0)$.
+\end{definizione}
+
+\begin{osservazione}{}
+Se $f$ è differenziabile in $(x_0,y_0)$, allora il piano di equazione $z=f(x_0,y_0)+\frac{\partial f}{\partial x}(x_0,y_0)(x-x_0)+\frac{\partial f}{\partial y}(x_0,y_0)(y-y_0)$ è il piano tangente al grafico di $f$ in $(x_0,y_0,f(x_0,y_0))$.
+\end{osservazione}
+\begin{osservazione}{}
+  La differenziabilità esprime il fatto che f(x,y) è approssibile con una funzione lineare con un errore che è $o(\sqrt{(x-x_0)^2+(y-y_0)^2}) \quad \text{per }(x,y) \rightarrow (x_0,y_0)$.
+\end{osservazione}
+
+\begin{definizione}{Gradiente}
+Sia $f:\Omega \inc \R^n \rightarrow \R$ e sia $P_0 \in \Omega$. Si dice \textbf{gradiente} di $f$ in $P_0$ il vettore: $\nabla f(P_0)=\left(\frac{\partial f}{\partial x_1}(P_0), \dots, \frac{\partial f}{\partial x_n}(P_0)\right)$.
+\end{definizione}
+
+\begin{definizione}{Differenziabilità in $n$ variabili}
+Sia $f:\Omega \inc \R^n \rightarrow \R$ e sia $P_0 \in \Omega$. Si dice che $f$ è differenziabile in $P_0$ se esistono le derivate parziali di $f$ in $P_0$ rispetto a tutte le variabili e se vale lo sviluppo di Taylor di ordine 1 in $P_0$ con resto di Peano, cioè: $x_{n+1}=f(P_0)+\nabla f(P_0)\cdot (P - P_0)+o(|P-P_0|) \quad \text{per } P \rightarrow P_0$.
+\end{definizione}
+
+Per analogia il "piano" (iperpiano) tangente al grafico di $f$ in $P_0$ è dato dall'equazione $z=f(P_0)+\nabla f(P_0)\cdot (P - P_0)$. In ogni caso resta vera la proprietà di approssimazione lineare con errore $o(|P-P_0|) \quad \text{per } P \rightarrow P_0$.\\
+
+Per garantire che $f$ sia effettivamente differenziabile è utile il seguente teorema:
+\begin{teorema}{Criterio di differenziabilità}
+Se esistono le derivate parziali di $f$ in $P_0$ e sono continue in un intorno di $P_0$, allora $f$ è differenziabile in $P_0$.
+\end{teorema}
+
+\subsection{Esempio di verifica della differenziabilità e calcolo del piano tangente}
+Consideriamo la funzione $f(x,y) = \frac{e^{2x+y}}{x^2+y^2}$. Vogliamo verificare il teorema di differenziabilità e calcolare il piano tangente al grafico di $f$ nel punto $(1,1)$.
+
+Calcoliamo le derivate parziali di $f$ rispetto a $x$ e $y$:
+\[
+\frac{\partial f}{\partial x} = \frac{(2e^{2x+y})(x^2+y^2) - e^{2x+y}(2x)}{(x^2+y^2)^2} = \frac{2e^{2x+y}(x^2+y^2) - 2xe^{2x+y}}{(x^2+y^2)^2}
+\]
+\[
+\frac{\partial f}{\partial y} = \frac{(e^{2x+y})(x^2+y^2) - e^{2x+y}(2y)}{(x^2+y^2)^2} = \frac{e^{2x+y}(x^2+y^2) - 2ye^{2x+y}}{(x^2+y^2)^2}
+\]
+Osserviamo che le derivate parziali sono continue in un intorno di $(1,1)$, quindi possiamo concludere che $f$ è differenziabile in $(1,1)$.\\
+Valutiamo le derivate parziali nel punto $(1,1)$:
+\[
+\frac{\partial f}{\partial x}(1,1) = \frac{2e^{3}(1^2+1^2) - 2e^{3}}{(1^2+1^2)^2} = \frac{4e^{3} - 2e^{3}}{4} = \frac{2e^{3}}{4} = \frac{e^{3}}{2}
+\]
+\[
+\frac{\partial f}{\partial y}(1,1) = \frac{e^{3}(1^2+1^2) - 2e^{3}}{(1^2+1^2)^2} = \frac{2e^{3} - 2e^{3}}{4} = 0
+\]
+
+L'equazione del piano tangente è quindi:
+\[
+z = f(1,1) + \frac{\partial f}{\partial x}(1,1)(x-1) + \frac{\partial f}{\partial y}(1,1)(y-1)
+\]
+\[
+z = \frac{e^{3}}{2} + \frac{e^{3}}{2}(x-1) + 0(y-1)
+\]
+\[
+z = \frac{e^{3}}{2} + \frac{e^{3}}{2}(x-1)
+\]
+\[
+z = \frac{e^{3}}{2}(1 + x - 1)
+\]
+\[
+z = \frac{e^{3}}{2}x
+\]
+
+Quindi, il piano tangente al grafico di $f$ nel punto $(1,1)$ è dato dall'equazione $z = \frac{e^{3}}{2}x$.\\
+
+Dalla diiferenziabilità possiamo dunque trarre importanti conseguenze. Le più rilevanti sono riassunte nel seguente teorema:
+
+\begin{teorema}{Conseguenze della differenziabilità}
+  Sia $f$ differenziabile in $P_0 \in \R^n$. Allora:
+  \begin{itemize}
+    \item $f$ è continua in $P_0$
+    \item Il vettore $\nabla f(P_0)$ indica nel dominio di $f$ e partendo dal punto $P_0$ la direzione di massima crescita di $f$, cioè quella lungo cui $f$ cresce più velocemente.
+    \item In $P_0$ il grafico ha pendenza $\alpha$ rispetto alla direzione di $\nabla f(P_0)$, dove $\alpha =  \|\nabla f(P_0)\| = \sqrt{\left(\frac{\partial f}{\partial x_1}(P_0)\right)^2 + \cdots + \left(\frac{\partial f}{\partial x_n}(P_0)\right)^2}$.
+    \item Se $n=2$ e $\nabla f(P_0)\neq (0,0)$, allora il gradiente $\nabla f(P_0)$ è ortogonale alla curva di livello di $f$ passante per $P_0$
+\end{itemize}
+\end{teorema}
+
+\section{Derivata direzionale}
+\begin{definizione}{Derivata direzionale}
+Sia $f:\Omega \inc \R^n \rightarrow \R$ e sia $P_0 \in \Omega$. La derivata direzionale di $f$ in $P_0$ lungo il vettore $\vec v$ (di norma unitaria) è definita come il limite del rapporto incrementale, se esiste: $D_{\vec v}f(P_0) = \frac{\partial f}{\partial \vec v}(P_0) = \lim_{h \to 0} \frac{f(P_0 + h\vec v) - f(P_0)}{h}$.
+\end{definizione}
+
+\begin{osservazione}{}
+La derivata direzionale di $f$ in $P_0$ lungo il vettore $\vec v$ rappresenta la pendenza di $f$ in $P_0$ nella direzione di $\vec v$. \\
+Inoltre, definito il gradiente come in precedenza si ha: $\frac{\partial f}{\partial \vec v}(P_0) = \nabla f(P_0) \cdot \vec v $ con $\vec v$ vettore unitario e con la notazione precedente che indica il prodotto scalare.
+\end{osservazione}
+
+\section{Derivata lungo una curva}\label{sec:derivata-lungo-una-curva}
+
+\begin{definizione}{Curva in $\R^n$}
+Una curva in $\R^n$ è una funzione $\gamma: I \rightarrow \R^n$ con $I$ intervallo di $\R$.
+\end{definizione}
+
+Tipicamente considereremo curve dove l'intervallo $I$ è un intervallo chiuso e limitato, cioè $I=[a,b]$.\\
+$\gamma(a)$ e $\gamma(b)$ sono detti rispettivamente punto iniziale e punto finale della curva.\\
+Concretamente quindi, per ogni $t\in I$ si ha $\gamma(t)=(x_1(t), \dots, x_n(t))$. Gli $x_i(t)$ sono le componenti della curva. Ciascuna componente è una funzione dell'analisi 1.\\
+in seguito supporremo sempre che le componenti della curva siano funzioni di classe $C^1$.
+
+\begin{definizione}{Derivata lungo una curva}
+  La derivata di $\gamma$ in $t$ è definita come il vettore $\gamma'(t)=(x_1'(t), \dots, x_n'(t))$.\\
+  Se esiste la derivata seconda di $\gamma$ in $t$ allora si definisce $\gamma''(t)=(x_1''(t), \dots, x_n''(t))$ e così via.
+\end{definizione}
+Ora data una funzione $f:\Omega \inc \R^n \rightarrow \R$ e una curva $\gamma: [a,b] \rightarrow \R^n$ possiamo definire la derivata di $f$ lungo $\gamma$, grazie al seguente teorema:
+
+\begin{teorema}{}
+  Sia $f:\Omega \inc \R^n \rightarrow \R$ e $\gamma: [a,b] \rightarrow \R^n$ una curva. Se $f$ è differenziabile in $\gamma(t)$ per ogni $t \in [a,b]$ e se $\gamma$ è derivabile in $t$, allora la funzione composta $f \circ \gamma$ è derivabile in $t$ e si ha:
+  $\frac{d}{dt}(f \circ \gamma)(t) = \nabla f(\gamma(t)) \cdot \gamma'(t)$.
+\end{teorema}
+
+\section{Derivate successive}
+\begin{definizione}{Derivate successive}
+  Se $f$ è differenziabile in un intorno di $P_0$ allora si definiscono le derivate seconde di $f$ (nei punti in cui esistono) come le derivate parziali delle derivate parziali: $\frac{\partial^2 f}{\partial x_i \partial x_j}(P_0) = \frac{\partial}{\partial x_i} \left(\frac{\partial f}{\partial x_j}\right)(P_0)$.  \\
+  Quando le derivate seconde esistono si può provare ad andare a avanti a derivare fino a ottenrere le derivate terze e così via.
+\end{definizione}
+\begin{osservazione}{}
+  In linea di princio ci sono al più $n$ derivate prime, $n^2$ derivate seconde, $n^k$ derivate k-esime.
+\end{osservazione}
+
+Consideriamo ad esempio la funzione $f(x,y) = (x^2 + y^2)\sin(2y)$. Calcoliamo le derivate parziali prime e seconde di $f$.
 
 
-	\begin{definizione}{Piano tangente}
-	Sia $f:\Omega \inc \R^n \rightarrow R^m$ differenziabile in $(x_0,y_0) \in \Omega$, si dice \textbf{piano tangente} al grafico di $f$ in $(x_0,y_0,f(x_0,y_0))$ il piano:
-	$$z=f(x_0,y_0)+\frac{\partial f}{\partial x}(x_0,y_0)(x-x_0)+\frac{\partial f}{\partial y}(x_0,y_0)(y-y_0)$$
-  \end{definizione}
-	\begin{teorema}{Formula del gradiente}
-	Sia $f:\Omega \inc \R^n \rightarrow \R$, con $\Omega$ aperto, differenziabile in $\vec x_0 \in \Omega$, sia poi $\vec v \in \R^n, v \ne 0$, allora:
-	$$\frac{\partial f}{\partial \vec v}(\vec x_0) = \nabla f(\vec x_0) \cdot \vec v$$
-  \end{teorema}
-	\begin{teorema}
-	Se $f:\Omega \inc \R^n \rightarrow \R$ è differenziabile in $(x_0, y_0)$, allora $\nabla f(x_0, y_0)$ individua la direzione di massima pendenza del grafico di $f$ in quel punto.
-  \end{teorema}
-	\begin{teorema}{Formula di Taylor di ordine 2  con resto di Peano}
-	Sia $f:\Omega \inc \R^n \rightarrow R$ di classe $C^2$ e sia, allora:
-	$$f(x)=f(x_0,y_0)+\frac{\partial f}{\partial x}(x_0,y_0)(x-x_0)+\frac{\partial f}{\partial y}(x_0,y_0)(y-y_0)+$$
-	$$+\frac 1 2 \frac{\partial^2 f}{\partial x^2}(x_0,y_0)(x-x_0)^2+\frac{\partial^2 f}{\partial x \partial y}(x_0,y_0)(x-x_0)(y-y_0)+\frac 1 2\frac{\partial^2 f}{\partial y^2}(x_0,y_0)(y-y_0)^2$$
-  \end{teorema}
+\[
+\frac{\partial f}{\partial x} = \frac{\partial}{\partial x} \left( (x^2 + y^2)\sin(2y) \right) = 2x\sin(2y)
+\]
+\[
+\frac{\partial f}{\partial y} = \frac{\partial}{\partial y} \left( (x^2 + y^2)\sin(2y) \right) = 2y\sin(2y) + (x^2 + y^2)2\cos(2y)
+\]
+
+\[
+\frac{\partial^2 f}{\partial x^2} = \frac{\partial}{\partial x} \left( 2x\sin(2y) \right) = 2\sin(2y)
+\]
+\[
+\frac{\partial^2 f}{\partial y^2} = \frac{\partial}{\partial y} \left( 2y\sin(2y) + (x^2 + y^2)2\cos(2y) \right)
+\]
+\[
+= 2\sin(2y) + 2y \cdot 2\cos(2y) + 2\cos(2y) \cdot 2y + (x^2 + y^2) \cdot 2(-2\sin(2y))
+\]
+\[
+= 2\sin(2y) + 4y\cos(2y) + 4y\cos(2y) - 4(x^2 + y^2)\sin(2y)
+\]
+\[
+= 2\sin(2y) + 8y\cos(2y) - 4(x^2 + y^2)\sin(2y)
+\]
+\[
+= 2\sin(2y)(1 - 2(x^2 + y^2)) + 8y\cos(2y)
+\]
+
+\[
+\frac{\partial^2 f}{\partial x \partial y} = \frac{\partial}{\partial y} \left( 2x\sin(2y) \right) = 2x \cdot 2\cos(2y) = 4x\cos(2y)
+\]
+\[
+\frac{\partial^2 f}{\partial y \partial x} = \frac{\partial}{\partial x} \left( 2y\sin(2y) + (x^2 + y^2)2\cos(2y) \right) = 4x\cos(2y)
+\]
+
+Osserviamo che in questo esempio le derivate miste ($\frac{\partial^2 f}{\partial y \partial x}$,$\frac{\partial^2 f}{\partial x \partial y}$) sono uguali. In generale questo non è un caso.
+
+\begin{teorema}{Teorema di Schwarz}
+  Se le derivate miste $\frac{\partial^2 f}{\partial x \partial y}$ e $\frac{\partial^2 f}{\partial y \partial x}$ esistono e sono continue in un intorno di $P_0$ allora sono uguali.
+\end{teorema}
+
+\begin{corollario}{}
+  Se $f$ è di classe $C^k$ allora le derivate miste di ordine $k$ sono indipendenti dall'ordine di derivazione.
+\end{corollario}
+
+Vediamo ora come si calcolano le derivate direzionali di ordine 2.
+\begin{definizione}{Matrice Hessiana}
+  Se $f$ è $C^2$ allora si definisce matrice Hessiana di $f$ in $P_0$ la matrice:
+  $Hf(P_0)=\begin{Bmatrix}
+    \frac{\partial^2 f}{\partial x_1^2}(P_0) & \frac{\partial^2 f}{\partial x_1 \partial x_2}(P_0) & \cdots & \frac{\partial^2 f}{\partial x_1 \partial x_n}(P_0)\\
+    \frac{\partial^2 f}{\partial x_2 \partial x_1}(P_0) & \frac{\partial^2 f}{\partial x_2^2}(P_0) & \cdots & \frac{\partial^2 f}{\partial x_2 \partial x_n}(P_0)\\
+    \vdots & \vdots & \ddots & \vdots\\
+    \frac{\partial^2 f}{\partial x_n \partial x_1}(P_0) & \frac{\partial^2 f}{\partial x_n \partial x_2}(P_0) & \cdots & \frac{\partial^2 f}{\partial x_n^2}(P_0)
+  \end{Bmatrix}$
+\end{definizione}
+\begin{osservazione}{}
+  La matrice Hessiana è simmetrica.
+\end{osservazione}
+
+\begin{definizione}{Derivata direzionale di ordine 2}
+  Se $f$ è $C^2$ allora la derivata direzionale di ordine 2 di $f$ in $P_0$ lungo il vettore $\vec v$ è data da:
+  $D^2_{\vec v}f(P_0)=\vec v^T Hf(P_0) \vec v$
+\end{definizione}
+
+\begin{teorema}{Sviluppo di Taylor di ordine 2}
+  Se $f$ è $C^2$ allora si ha lo sviluppo di Taylor di ordine 2 di $f$ in $P_0$:
+  $f(P) = f(P_0) + \nabla f(P_0) \cdot (P - P_0) + \frac{1}{2} (P - P_0)^T Hf(P_0) (P - P_0) + o(|P - P_0|^2)$
+\end{teorema}
+
+\subsection{Esempio di calcolo dello sviluppo di Taylor di ordine 2}
+Consideriamo la funzione $f(x,y) = e^{x+y}$. Vogliamo trovare lo sviluppo di Taylor di ordine 2 di $f$ attorno al punto $(0,0)$.
+
+Calcoliamo le derivate parziali prime di $f$:
+\[
+\frac{\partial f}{\partial x} = e^{x+y}, \quad \frac{\partial f}{\partial y} = e^{x+y}
+\]
+
+Calcoliamo le derivate parziali seconde di $f$:
+\[
+\frac{\partial^2 f}{\partial x^2} = e^{x+y}, \quad \frac{\partial^2 f}{\partial y^2} = e^{x+y}, \quad \frac{\partial^2 f}{\partial x \partial y} = e^{x+y}
+\]
+
+Valutiamo le derivate parziali nel punto $(0,0)$:
+\[
+\frac{\partial f}{\partial x}(0,0) = 1, \quad \frac{\partial f}{\partial y}(0,0) = 1
+\]
+\[
+\frac{\partial^2 f}{\partial x^2}(0,0) = 1, \quad \frac{\partial^2 f}{\partial y^2}(0,0) = 1, \quad \frac{\partial^2 f}{\partial x \partial y}(0,0) = 1
+\]
+
+Lo sviluppo di Taylor di ordine 2 di $f$ attorno al punto $(0,0)$ è dato da:
+\[
+f(x,y) \approx f(0,0) + \frac{\partial f}{\partial x}(0,0)x + \frac{\partial f}{\partial y}(0,0)y + \frac{1}{2}\left( \frac{\partial^2 f}{\partial x^2}(0,0)x^2 + 2\frac{\partial^2 f}{\partial x \partial y}(0,0)xy + \frac{\partial^2 f}{\partial y^2}(0,0)y^2 \right)
+\]
+\[
+= 1 + x + y + \frac{1}{2}(x^2 + 2xy + y^2)
+\]
+\[
+= 1 + x + y + \frac{1}{2}(x^2 + 2xy + y^2)
+\]
+\[
+= 1 + x + y + \frac{1}{2}x^2 + xy + \frac{1}{2}y^2
+\]
+
+Quindi, lo sviluppo di Taylor di ordine 2 di $f(x,y) = e^{x+y}$ attorno al punto $(0,0)$ è:
+\[
+f(x,y) \approx 1 + x + y + \frac{1}{2}x^2 + xy + \frac{1}{2}y^2
+\]
+
+\section{Massimi e minimi di una funzione}
+
+Questa sezione è dedicata allo studio dei punti di massimo e minimo delle funzioni di più variabili e alla loro classificazione.
+
+\begin{definizione}{Punto di minimo}
+  Sia $f:\Omega \inc \R^n \rightarrow \R$ e sia $P_0 \in \Omega$. Si dice che $f$ ha un punto di minimo locale in $P_0$ se esiste un intorno di $P_0$ tale che $f(P) \geq f(P_0)$ per ogni $P$ nell'intorno.
+\end{definizione}
+Analogamente si definisce il punto di massimo locale.
+\begin{teorema}{}
+  Se $f$ ha un punto di minimo o massimo locale in $P_0$ e $f$ è differenziabile in $P_0$ allora $\nabla f(P_0) = 0$.
+\end{teorema}
 
 
-	\section{Massimi e minimi di una funzione}
+\begin{osservazione}{}
+  Questa condizione corrisponde a un sistema di equazioni:
+  \[
+  \frac{\partial f}{\partial x_1}(P_0) = 0, \quad \frac{\partial f}{\partial x_2}(P_0) = 0, \quad \dots, \quad \frac{\partial f}{\partial x_n}(P_0) = 0
+  \]
+\end{osservazione}
+
+\begin{definizione}{Punti stazionari}
+  I punti $P_0$ tali che $\nabla f(P_0) = 0$ sono detti punti stazionari.
+\end{definizione}
+
+Facciamo un esempio.
+Consideriamo la funzione $f(x,y) = x^3 - xy^2 + 2xy$. Vogliamo trovare i punti critici di $f$.
+
+Calcoliamo le derivate parziali prime di $f$:
+\[
+\frac{\partial f}{\partial x} = 3x^2 - y^2 + 2y
+\]
+\[
+\frac{\partial f}{\partial y} = -2xy + 2x
+\]
+
+Poniamo le derivate parziali uguali a zero per trovare i punti critici:
+\[
+3x^2 - y^2 + 2y = 0
+\]
+\[
+-2xy + 2x = 0
+\]
+
+Dalla seconda equazione, possiamo fattorizzare:
+\[
+2x(-y + 1) = 0
+\]
+
+Quindi, abbiamo due casi:
+1. $2x = 0 \implies x = 0$
+2. $-y + 1 = 0 \implies y = 1$
+
+Caso 1: $x = 0$
+\[
+3(0)^2 - y^2 + 2y = 0 \implies -y^2 + 2y = 0 \implies y(y - 2) = 0
+\]
+Quindi, $y = 0$ o $y = 2$. I punti critici sono $(0,0)$ e $(0,2)$.
+
+Caso 2: $y = 1$
+\[
+3x^2 - (1)^2 + 2(1) = 0 \implies 3x^2 - 1 + 2 = 0 \implies 3x^2 + 1 = 0
+\]
+Questa equazione non ha soluzioni reali.
+
+Quindi, i punti critici della funzione $f(x,y) = x^3 - xy^2 + 2xy$ sono $(0,0)$ e $(0,2)$.\\
+
+Come possiamo capire la natura di un punto critico?
+Se $P_0$ è un punto critico di $f$ e $f$ è $C^2$ in un intorno di $P_0$ allora si può studiare lo sviluppo al secondo ordine di $f$ in $P_0$ per capire la natura del punto critico. Lo sviluppo si riduce a: $f(P) - f(P_0) = \frac{1}{2} (P - P_0)^T Hf(P_0) (P - P_0) + o(|P - P_0|^2)$.\\
+Si tratta dunque di capire che segno ha il membro destro in un intorno di $P_0$.
+\begin{itemize}
+\item $P_0$ è un punto di massimo se e solo se il membro destro è sempre negativo in un intorno di $P_0$.
+\item $P_0$ è un punto di minimo se e solo se il membro destro è sempre positivo in un intorno di $P_0$.
+\item $P_0$ è un punto di sella se e solo se il membro destro cambia segno in un intorno di $P_0$.
+\end{itemize}
+\begin{osservazione}{}
+  Il segno del membro destro dipende solo da segno di $\frac{1}{2} (P - P_0)^T Hf(P_0) (P - P_0)$, che è uguale al segno di $\frac{1}{2} \frac{(P - P_0)^T}{\|P - P_0\|} Hf(P_0) \frac{P-P_0}{\|P - P_0\|}$, e avendo $\frac{1}{2} \frac{P - P_0}{\|P - P_0\|}$ norma 1, il segno non dipende dal raggio dell'intorno di $P_0$ considerato.
+\end{osservazione}
+
+Ricordiamo che una matrice simmetrica $A$ è definita positiva se per ogni vettore $v \neq 0$ si ha $v^T A v > 0$. Analogamente si definiscono le matrici definite negative quelle per cui $v^T A v < 0$ per ogni $v \neq 0$ e indefinite quelle per cui $v^T A v$ può assumere segni diversi a seconda di $v$.
+
+\begin{teorema}{Classificazione dei punti critici}
+  Sia $f$ una funzione $C^2$ e sia $P_0$ un punto critico di $f$. Allora:
+  \begin{itemize}
+    \item Se $Hf(P_0)$ è definita positiva allora $P_0$ è un punto di minimo locale.
+    \item Se $Hf(P_0)$ è definita negativa allora $P_0$ è un punto di massimo locale.
+    \item Se $Hf(P_0)$ è indefinita allora $P_0$ è un punto di sella.
+  \end{itemize}
+\end{teorema}
+
+\subsection{Esempio di classificazione dei punti critici}
+Consideriamo la funzione $f(x,y) = x^3 - xy^2 + 2xy$. Abbiamo già trovato i punti critici $(0,0)$ e $(0,2)$.
+
+Calcoliamo le derivate parziali seconde di $f$:
+\[
+\frac{\partial^2 f}{\partial x^2} = 6x, \quad \frac{\partial^2 f}{\partial y^2} = -2x, \quad \frac{\partial^2 f}{\partial x \partial y} = -2y + 2, \quad \frac{\partial^2 f}{\partial y \partial x} = -2y + 2
+\]
+
+Valutiamo le derivate parziali seconde nei punti critici.
+
+Per il punto $(0,0)$:
+\[
+\frac{\partial^2 f}{\partial x^2}(0,0) = 0, \quad \frac{\partial^2 f}{\partial y^2}(0,0) = 0, \quad \frac{\partial^2 f}{\partial x \partial y}(0,0) = 2, \quad \frac{\partial^2 f}{\partial y \partial x}(0,0) = 2
+\]
+
+La matrice Hessiana in $(0,0)$ è:
+\[
+Hf(0,0) = \begin{pmatrix}
+0 & 2 \\
+2 & 0
+\end{pmatrix}
+\]
+
+Il determinante della matrice Hessiana è:
+\[
+\det(Hf(0,0)) = (0)(0) - (2)(2) = -4
+\]
+
+Poiché il determinante è negativo, la matrice Hessiana è indefinita. Quindi, il punto $(0,0)$ è un punto di sella.
+
+Per il punto $(0,2)$:
+\[
+\frac{\partial^2 f}{\partial x^2}(0,2) = 0, \quad \frac{\partial^2 f}{\partial y^2}(0,2) = 0, \quad \frac{\partial^2 f}{\partial x \partial y}(0,2) = -2, \quad \frac{\partial^2 f}{\partial y \partial x}(0,2) = -2
+\]
+
+La matrice Hessiana in $(0,2)$ è:
+\[
+Hf(0,2) = \begin{pmatrix}
+0 & -2 \\
+-2 & 0
+\end{pmatrix}
+\]
+
+Il determinante della matrice Hessiana è:
+\[
+\det(Hf(0,2)) = (0)(0) - (-2)(-2) = -4
+\]
+
+Poiché il determinante è negativo, la matrice Hessiana è indefinita. Quindi, il punto $(0,2)$ è un punto di sella.
+
+In conclusione, i punti critici della funzione $f(x,y) = x^3 - xy^2 + 2xy$ sono entrambi punti di sella.
+
+\section{Massimi e minimi vincolati}
+In questa sezione ci occuperemo di trovare i massimi e i minimi di una funzione $f$ di più variabili vincolata da una o più equazioni.\\
+Esempio: vogliamo trovare i punti critici per una certa $f$ vincolati a stare su una circonferneza di equazione $x^2 + y^2 = 16$.
+
+\begin{osservazione}{}
+  Trovare i punti critici per $f$ qui non è significativo, perché potrebbero non essere sulla circonferenza.
+\end{osservazione}
+
+\begin{teorema}{Moltiplicatori di Lagrange}
+  Sia $f$ una funzione $C^1$ su $V\in \R^n$, $V={(x_1, \dots, x_n)\in \R^n | g(x_1, \dots, x_n) = 0}$, con $g$ una funzione $C^1$ su $V$ e tale che $\nabla g(p) \neq (0, 0, \dots, 0)$ per ogni $p \in V$. Sia $P_0$ un punto critico di $f$ ristretta a $V$. Allora esiste un $\lambda \in \R$ tale che $\nabla f(P_0) = \lambda \nabla g(P_0)$.
+\end{teorema}
 
 
-	\begin{definizione}{Punto stazionario}
-	Se $\nabla f (\vec x_0)=\vec 0$ allora $\vec x_0$ viene chiamato \textbf{punto stazionario}, o punto critico, di f.
-  \end{definizione}
-	\begin{definizione}{Massimi e minimi}
-	Dato il $det$ della matrice Hessiana:
-	$$detHf(x,y)=\begin{Bmatrix}
-		\frac{\partial^2 f}{\partial x^2} & \frac{\partial^2 f}{\partial x \partial y}\\
-		\frac{\partial^2 f}{\partial x \partial y} & \frac{\partial^2 f}{\partial y^2}
-	\end{Bmatrix}=\left( \frac{\partial^2 f}{\partial x^2} \frac{\partial^2 f}{\partial y^2} \right)- \left(\frac{\partial^2 f}{\partial x \partial y}\right)^2$$
-	semplificando la procedura possiamo dire che:
-	$$det Hf(\vec x_0)>0 \wedge \frac{\partial^2 f}{\partial x^2}>0 \quad \Rightarrow \quad \vec x_0 \text{ punto di minimo}$$
-	$$det Hf(\vec x_0)>0 \wedge \frac{\partial^2 f}{\partial x^2}<0 \quad \Rightarrow \quad \vec x_0 \text{ punto di massimo}$$
-	$$det Hf(\vec x_0)<0 \quad \Rightarrow \quad \vec x_0 \text{ punto di sella}$$
-  \end{definizione}

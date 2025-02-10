@@ -1,148 +1,232 @@
-\chapter{Integrali curvilinei e di superficie}
-	\section{Definizione delle curve}
-	\deff
-	Una funzione $\gamma : [ a, b ] \subseteq \R \Rightarrow \R^m$ si dice \textbf{curva} in $\R^m$ se è continua.\\
-	\\
-	L'insieme $\gamma ([a,b])= \{\gamma(t)\in \R^m : t \in [a,b] \}$ si dice sostegno di $\gamma$, cioè il sostegno è l'immagine di $\gamma$
-	\deff
-	$\gamma:[a,b]\Rightarrow \R^m$, curva, si dice \textbf{semplice} se vale l'implicazione:
-	$$t \in [a, b],\ s \in (a, b)\ \text{e} \ s\ne t \Rightarrow \gamma(t)\ne \gamma(s)$$
-	$\gamma:[a,b]\Rightarrow \R^m$, curva, si dice \textbf{chiusa} se vale l'implicazione:
-	$$\gamma(a)=\gamma(b)$$
-	Se $\gamma:[a,b]\Rightarrow \R^m$ è una curva chiusa e semplice si dice \textbf{curva di Jordan}
-	\deff
-	Sia $\gamma : [a, b] \Rightarrow \R^m$ curva con $\gamma(t) = (\gamma_1(t),\dots, \gamma_m(t))$, $\gamma$ si dice \textbf{regolare} se $\gamma \in C^1([a, b])$ e se $\gamma'(t)\ne \vec{0}, \ \forall t \in [a, b]$.\\
-	\\
-	$\gamma'(t)$ si dice \textbf{vettore tangente} a $\gamma$ in $\gamma(t)$, oppure vettore derivata o vettore velocità.\\
-	\\
-	Se $\gamma'(t)\ne \vec 0 \  \forall t$ significa che $\gamma(t)$ non si fermerà mai.
-	\deff
-	$\gamma:[a,b]\rightarrow \R^m$, curva, si dice \textbf{regolare a tratti} se $\exists a=t_0<t_1<\dots<t_{n-1}<t_{n}=b$ tale che $\gamma \in C^1([t_{k-1}, t_k]) \ \forall k \in {1, \dots, n}$ e $\gamma'(t)\ne \vec 0 \ \forall t \ne t_k$
-	\section{Integrali curvilinei di prima specie (integrali di funzione su curve)}
-	\deff
-	Sia $\gamma:[a, b] \rightarrow \R^m$ curva regolare a tratti, sia $f:D\subseteq \R^m \rightarrow \R$ tale che $\gamma([a,b])\subseteq D$, si pone:
-	$$\int_\gamma f ds = \int_\gamma \gamma f = \int_a^b f(\gamma(t))|\gamma'(t)|dt$$
-	se l'integrale esiste.\\
-	\\
-	Se $\gamma$ è di Jordan si scrive $\oint_\gamma f ds = \int_\gamma fds$.\\
-	\\
-	Si pone $L(\gamma)=\int_\gamma ds=\int_{a}^{b}|\gamma'(t)|dt$ lunghezza di $\gamma$.
-	\prop
-	Sia $\gamma:[a, b] \rightarrow \R^m$ curva regolare a tratti e sia $\phi : [c, d] \rightarrow [a, b] \ C^1$ strettamente monotone e suriettiva e sia $\tilde{\gamma} : [c, d]\rightarrow \R^m$ definita come $\tilde{\gamma}=\gamma ( \phi (r) )$, ovvero  $\phi$ è un riscalamento del parametro t e $\tilde{\gamma}$ ha la stessa traiettoria di $\gamma$ ma la percorre in modo diverso, allora:
-	$$\int_{\tilde{\gamma}} fds=\int_\gamma fds$$
-	Quindi gli integrali di prima specie non dipendo né dalla parametrizzazione $\gamma$, né dal verso di percorrenza, ma dipendono solo dal sostegno $\Gamma=\gamma([a,b])$
-	\deff
-	Sia $\Gamma \subseteq \R^m$ che si sostegno si una curva $\gammadef$ regolare a tratti semplice, allora si pone:
-	$$\int_\Gamma fds= \int_\gamma fds$$
-	Allo stesso modo $L(\Gamma)=L(\gamma)$
-	\deff
-	Sia $\gamma :  [a,b]\rightarrow \R ^3$ curva regolare a tratti semplice, alla quale è associata una \textbf{funzione di densità} (di massa) $\mu:  \Gamma =\gamma([a,b])\subseteq \R^3 \rightarrow \R$, si dice \textbf{massa} di $\gamma$ (o di $\Gamma$) il numero:
-	$$M(\Gamma)=m(\Gamma)=\int_\Gamma \mu \ d\sigma$$
-	Il \textbf{baricentro} di $\Gamma$ è il punto $(x_G, y_G, z_G)$ tale che:
-	$$x_G=\frac{1}{M(\Gamma)}\int_\Gamma x \mu (x,y,z) d \sigma$$
-	$$y_G=\frac{1}{M(\Gamma)}\int_\Gamma y \mu (x,y,z) d \sigma$$
-	$$z_G=\frac{1}{M(\Gamma)}\int_\Gamma z \mu (x,y,z) d \sigma$$
-	\section{Integrali curvilinei di seconda specie (lavori)}
-	Sia $\gammadef$ curva regolare a tratti e  sia $F:D\inc \R^m \rightarrow \R^m$ con $\gamma([a,b])\inc D$, si dice \textbf{lavoro di} $\vec F$ \textbf{lungo} $\gamma$ (o integrale di seconda specie) il numero:
-	$$\int_\gamma F \cdot dl = \int_a^bF(\gamma(t))\cdot \gamma'(t) dt$$
-	Se $\gamma$ è di Jordan si scrive $\oint_\gamma F \cdot dl = \int_\gamma F \cdot dl$ detto \textbf{circuitazione di $F$ lungo $\gamma$}.\\
-	\\
-	Sia $\vec r(t)= \frac{\gamma'(t)}{|\gamma'(t)|}\ \forall t \in [a,b]$ detto \textbf{versore tangente a} $\gamma$, si ha:
-	$$\int_\gamma F \cdot dl = \int_\gamma (F\cdot \vec r) d\sigma$$
-	\prop
-	Sia $\gamma:[a, b] \rightarrow \R^m$ curva regolare a tratti e sia $\phi : [c, d] \rightarrow [a, b] \ C^1$ strettamente crescente e suriettiva e sia $\tilde{\gamma} : [c, d]\rightarrow \R^m$ definita come $\tilde{\gamma}=\gamma ( \phi (r) )$, ovvero $\tilde{\gamma}$ percorre il sostegno di $\gamma$ lo stesso numero di volte nello stesso verso, allora:
-	$$\int_{\tilde{\gamma}} F \cdot dl = \int_\gamma F \cdot dl$$
-	Nel caso in cui $\hat \gamma$, definita come $\tilde{\gamma}$, sia strettamente decrescente, e quindi percorra il sostegno di $\gamma$ lo stesso numero di volte ma in verso opposto, allora:
-	$$\int_{\hat{\gamma}} F \cdot dl = - \int_\gamma F \cdot dl$$
-	\section{Integrali di superficie}
-	\deffname{Superfici parametrizzate}
-	Una funzione $\sigma:\bar{A} \inc \R^2 \rightarrow \R^3$ con $A \inc \R^2$ aperto e con $\sigma(u,v)=(\sigma_1(u,v),\sigma_2(u,v),\sigma_3(u,v))$ si dice \textbf{superficie parametrizzata} se $\sigma \in C^1$, $\sigma$ è iniettiva in $A$ e la matrice Jacobiana ha rango 2, allora:
-	$$\Sigma=\sigma(\bar{A})$$
-	ed è detto \textbf{sostegno} di $\sigma$.
-	\deff
-	Le derivate parziali di $\sigma$ in $u$ e $v$ generano in piano in $\R^3$ ,detto \textbf{piano tangente} a $\Sigma$ in $\sigma(u_0,v0)$, che ha equazione:
-	$$\Pi(u,v)=\sigma(u_0,v_0)+\frac{\partial \sigma}{\partial u}(u_0,v_0)(u-u_0)+\frac{\partial \sigma}{\partial v}(u_0,v_0)(v-v_0)$$
-	Definiamo il \textbf{vettore normale} a $\Sigma$ in $\sigma(u_0,v0)$:
-	$$\vec N(u_0, v_0)=\frac{\partial \sigma}{\partial u} \times \frac{\partial \sigma}{\partial v}$$
-	da cui possiamo ricavare il versore $\vec n (u_0,v_0) = \frac{\vec N (u_0,v_0)}{|\vec N (u_0,v_0)|}$.
-	\deffname{Superfici cartesiane}
-	Sia $g:\bar A \inc \R^2 \rightarrow \R$, con $A$ aperto e $g \in C^1(A)$, data una superficie $\sigma(u,v)=(u,v,g(u,v))$ si ha che $\Sigma = \sigma (\bar A)$ è il grafico di $g$. Sappiamo quindi che:
-	$$\Sigma  = \sigma(\bar A)=Gr(g)=\{(x,y,z)\in \R^3:(x,y)\in \bar A , z = g(x,y)\}$$
-	$$\vec N(x, y)=\frac{\partial \sigma}{\partial u} \times \frac{\partial \sigma}{\partial v}=\left(-\frac{\partial g}{\partial x}, -\frac{\partial g}{\partial y}, 1 \right)$$
-	$$|\vec N (x,y)|=\sqrt{1+|\nabla g|^2}$$
-	\deffname{Integrali di superficie di prima specie}
-	Sia $\sigma:\bar{A} \inc \R^2 \rightarrow \R^3$ superficie con $A$ misurabile, poniamo:
-	$$\int_\sigma f d\sigma = \int_\sigma f(x,y,z)d\sigma =\int_{\bar A} f(x,y,g(x,y))|\vec N (x,y)|dxdy$$
-	\prop
-	L'integrale è indipendente dalla parametrizzazione, infatti se due superfici sono diverse ma hanno stesso sostegno l'integrale non cambia.
-	\section{Flusso di un campo vettoriale}
-	\deffname{Superfici orientabili}
-	Una superficie $\sigma:\bar{A} \inc \R^2 \rightarrow \R^3$ si dice \textbf{orientabile} se la funzione $\Sigma \rightarrow \R^3$ è continua.
-	\oss
-	Se due superfici orientabili con lo stesso sostegno allora i versori normali possono essere solo uguali od opposti tra loro.
-	\prop
-	Se $\Sigma = \sigma (\bar A)$ è il sostegno di $\sigma:\bar{A} \inc \R^2 \rightarrow \R^3$ e se anche $\Sigma=\partial \Omega$ con $\Omega$ aperto, connesso e limitato, allora $\Sigma$ è orientabile. \\
-	\\
-	In particola re $\vec n$ punta verso l'interno di $\Omega$ allora viene detto \textbf{entrante}, altrimenti, se punta verso l'esterno, viene detto \textbf{uscente}. Il verso positivo del vettore è quello uscente dalla superficie.
-	\deffname{Flusso di un campo vettoriale}
-	Sia $\sigma:\bar{A} \inc \R^2 \rightarrow \R^3$ superficie orientabile e sia $F:D\inc \R^3 \rightarrow \R^3$ campo vettoriale continuo con $\Sigma = \sigma (\bar A)\inc D$, allora il \textbf{flusso} di $\vec F$ attraverso $\sigma$ nella direzione $\vec n$ è:
-	$$\int_\sigma (\vec F \cdot \vec n) d\sigma = \int_{\bar A}F(\sigma(u,v))\cdot \frac{\vec N(u,v)}{|\vec N(u,v)|}|\vec N(u,v)|dudv=\int_D F(x,y,g(x,y))\cdot \vec N(x,y)dxdy$$
-	\deff
-	Sia $\Sigma$ una superficie orientabile, se $\Sigma=\partial \Omega$ con $\Omega$ aperto, connesso, limitato e misurabile allora:
-	$$\int_{\partial \Omega} \vec F \cdot \\vec n$$
-	per convenzione denota il \textbf{flusso uscente} da $\Omega$ , cioè il flusso di $F$ lungo $\vec n$ uscente.
-	\thhname{Th. della divergenza di Gauss}
-	Sia $\Omega \inc \R^3$ connesso, limitato e misurabile, tale che sia $\Sigma=\partial \Omega$ una superficie orientata con $\vec n$ uscente, sia $\vec F:D \inc \R^3 \rightarrow \R^3$, allora:
-	$$\int_{\partial \Omega}(\vec F \cdot \vec n)d\sigma=\int_\Omega div \vec F dxdydz$$
-	\deffname{Aperto con bordo}
-	Sia $D \inc \R^2$ aperto, connesso e limitato. $D$ si dice \textbf{aperto con bordo} se $\partial D$ è l'unione di un numero finito di sostegni di curve di Jordan regolari a tratti a due a due disgiunti. Su $\partial D$ si definisce come orientazione positiva quella per cui percorrendo $\partial D$ vedo $D$ a sinistra.
-	\thhname{Formula di Green nel piano}
-	Sia $\vec F:E\ inc \R^2 \rightarrow \R^2$ di classe $C^1$ con $E$ aperto, sia $D\inc \R^2$ aperto con bordo con $\bar D \inc E$, allora:
-	$$\int_{\partial D} \vec F \cdot dl = \int_D \left(\frac{\partial F_2}{\partial x}-\frac{\partial F_1}{\partial y}\right)dxdy$$
-	\thhname{Th. del rotore di Stokes}
-	Sia $D \inc \R^2$ aperto con bordo e sia $\sigma : \bar D \inc \R^2 \rightarrow \R^3$ superficie orientabile iniettiva si $\bar D$, chiamiamo $\partial \sigma = \sigma (\partial D)$, l'immagine di $\partial D$ tramite $\sigma$, \textbf{frontiera della superficie} $\sigma$. Orientiamo $\partial \sigma$ con l'orientazione indotta dall'orientazione positiva di $\partial D$, ovvero quando il versore normale $\vec n$ percorre $\partial \sigma$ vede $\sigma$ a sinistra. Allora:
-	$$\int_{\partial\sigma} \vec F \cdot dl = \int_\sigma \left(rot \vec F \cdot \vec n\right)d\sigma$$
-	ovvero il lavoro di $F$ lungo $\partial \sigma$ è uguale al flusso del rotore di $\vec F$ attraverso $\sigma$.
-	\section{Campi conservativi}
-	\deffname{Campi conservativi}
-	Un campo $\vec F: \Omega \inc \R^n \rightarrow \R^n$ continuo con $\Omega$ aperto si dice \textbf{conservativo} se $\exists \ \Phi : \Omega \inc \R^n \rightarrow \R$ tale che $\nabla \Phi = \vec F$, in tal caso $\Phi$ si dice \textbf{potenziale} di $\vec F$, oppure primitiva di $\vec F$.
-	\prop
-	Sia $\gamma:[a,b]\rightarrow \Omega \inc \R^n$ curva regolare a tratti, se $F$ è \textbf{conservativo} si ha che il lavoro lungo $\gamma$ è:
-	$$\int_\gamma \vec F \cdot dl = \int_a^b \vec F(\gamma (t))\cdot \gamma'(t)dt=\int_{a}^{b} \nabla \Phi (\gamma(t))\cdot \gamma'(t)dt=\Phi(\gamma(b))-\Phi(\gamma(a))$$
-	ovvero se $F$ è conservativo ($F\nabla \Phi$) il lavoro lungo una curva $\gamma$ dipende sola dal punto iniziale e da quello finale.
-	\thh
-	Sia $\vec F: \Omega \inc \R^n \rightarrow \R^n$ conservativo ($F\nabla \Phi$), allora per ogni curva $\gamma:[a,b]\rightarrow \Omega \inc \R^3$ si ha:
-	$$\int_\gamma \vec F \cdot dl =\Phi(\gamma(b))-\Phi(\gamma(a))$$
-	Se $\gamma_1$ e $\gamma_2$ sono due curve con stesso punto iniziale e finale:
-	$$\int_{\gamma_2} \vec F \cdot dl = \int_{\gamma_1} \vec F \cdot dl$$
-	Se $gamma$ è chiusa allora:
-	$$\int_\gamma \vec F \cdot dl =0$$
-	\thh
-	Sia $\vec F: \Omega \inc \R^n \rightarrow \R^n$ continuo con $\Omega$ connesso, allora le tre affermazioni sono equivalenti:
-	$$\begin{Bmatrix}
-		F \text{ è conservativo}\\
-		  \Updownarrow\\
-		 \int_{\gamma_2} \vec F \cdot dl = \int_{\gamma_1} \vec F \cdot dl\\
-		 (\text{con } \gamma_1,\gamma_2 \text{ curve con stesso inizio e fine})\\
-		 \Updownarrow\\
-		 \int_\gamma \vec F \cdot dl =0\\
-		 (\text{con } \gamma \text{ chiusa})
-	\end{Bmatrix}$$
-	\thh
-	Sia $F: \Omega \subseteq \mathbb{R}^n \rightarrow \mathbb{R}^n$ di classe $C^1$ ($\Sigma$ aperto), se $F$ è conservativo allora:
-	$$\frac{\partial F_i}{\partial x_j} = \frac{\partial F_j}{\partial x_i} \qquad \forall i, j \in \{ 1,\dots, n\} \text{ in } \Omega$$
-	\deff
-	Se $rotF=0$, $F$ si dice \textbf{irrotazionale}.
-	\prop
-	Se $F$ è conservativo e di classe $C^1$ $\Rightarrow$ $F$ è irrotazionale.\\
-	\\
-	In generale la $\Rightarrow$ non si può invertire.
-	\deff
-	Un aperto connesso $\Omega$ si dice \textbf{semplicemente connesso} se ogni curva $\gamma$ di Jordan può essere deformata con continuità fino a contrarsi ad un punto, rimanendo sempre dentro $\Omega$.\\
-	\\
-	In $\mathbb{R}^2$ un insieme semplicemente connesso è un insieme "privo di buchi". Sono esempi di insiemi semplicemente connessi: tutti gli aperti convessi, tutti gli aperti limitati con frontiera costituita da un'unica curva e il piano privato di una semiretta. Sono esempi di insiemi non semplicemente connessi: tutti gli aperti privati di un punto, le corone circolari e il piano privato di una retta (perché non è connesso).\\
-	\\
-	In $\mathbb{R}^3$ sono esempi di insiemi semplicemente connessi: tutti gli aperti convessi, lo spazio privato di un punto e le corone sferiche. Sono esempi di insiemi non semplicemente connessi: lo spazio privato di una retta o di un piano.
-	\thh
-	Sia $\Omega \subseteq \mathbb{R}^3$ un aperto semplicemente connesso, e sia $F$ un campo
-	vettoriale di classe $C^1 $, se $rotF=0$ (irrotazionale) allora $F$ è conservativo.
+\chapter{Integrali di superficie}
+
+\section{Introduzione}
+Intuitivamente una superficie in $\R^3$ è un insieme di punti dove "ci si può muovere" con due gradi di libertà (a differenza di una curva che ne ha solo uno).
+
+\begin{definizione}{Superficie in $\R^3$}
+  Si dice superficie in $\R^3$ un'applicazione $S:\Omega\to\R^3$ dove $\Omega\inc\R^2$ è un insieme aperto (limitato e connesso) e $S$ è di classe $C^1$ su $\Omega$.
+\end{definizione}
+
+\section{Superfici}
+L'idea è quella di descrivere la geometria della superficie lavorando in $\Omega$ con le coordinate $u$ e $v$.\\
+Per fare questo definiamo i vettori fondamentali della superficie:
+\begin{definizione}{Vettori fondamentali}
+  Sia $S:\Omega\to\R^3$ una superficie in $\R^3$. Allora i vettori fondamentali sono:
+  \begin{itemize}
+    \item $P_u(u,v)=\frac{\partial S}{\partial u}(u,v)$
+    \item $P_v(u,v)=\frac{\partial S}{\partial v}(u,v)$
+  \end{itemize}
+\end{definizione}
+Essi hanno il seguente significato geometrico:
+\begin{itemize}
+  \item $P_u(u,v)$ è il vettore tangente alla curva $S(u,v)$ ottenuta fissando $v=v_0$ e facendo variare $u$.
+  \item $P_v(u,v)$ è il vettore tangente alla curva $S(u,v)$ ottenuta fissando $u=u_0$ e facendo variare $v$.
+\end{itemize}
+Perciò i vettori fondamentali sono entrambi tangenti alla superficie (a una curva della superficie) in $S(u_0,v_0)$ e se sono linearmente indipendenti allora individuano univocamente il piano tangente alla superficie in $S(u_0,v_0)$.
+
+\begin{definizione}{Superficie regolare}
+  Una superficie $S:\Omega\to\R^3$ si dice regolare se i vettori fondamentali sono linearmente indipendenti in ogni punto di $\Omega$.
+\end{definizione}
+
+\begin{osservazione}{}
+  Se $S$ è regolare allora $N(u_0,v_0) = \frac{P_u(u_0,v_0)\times P_v(u_0,v_0)}{\|P_u(u_0,v_0)\times P_v(u_0,v_0)\|}$ è un versone normale alla superficie in $S(u_0,v_0)$.\\
+  Inoltre $-N(u_0,v_0)$ è l'altro versore normale.
+\end{osservazione}
+
+\begin{definizione}{Superficie orientata}
+  Una superficie $S:\Omega\to\R^3$ si dice orientata se è regolare e se è definita una scelta di versore normale in ogni punto di $\Omega$.
+\end{definizione}
+
+\begin{osservazione}{}
+  Non tutte le superfici possono essere orientate, cioè non è detto che sia possibile definire un versore normale in ogni punto in modo che il campo risultante sulla superficie sia continuo.
+\end{osservazione}
+
+\subsection{Esempio: Sfera di raggio $R$}
+  Consideriamo la sfera di raggio $R$ parametrizzata dalle coordinate sferiche $(\theta, \phi)$ con $\theta \in [0, 2\pi]$ e $\phi \in [0, \pi]$. La parametrizzazione è data da:
+  \[
+  S(\theta, \phi) = \begin{pmatrix}
+    R \sin(\phi) \cos(\theta) \\
+    R \sin(\phi) \sin(\theta) \\
+    R \cos(\phi)
+  \end{pmatrix}
+  \]
+  Calcoliamo i vettori fondamentali:
+  \[
+  P_\theta(\theta, \phi) = \frac{\partial S}{\partial \theta} = \begin{pmatrix}
+    -R \sin(\phi) \sin(\theta) \\
+    R \sin(\phi) \cos(\theta) \\
+    0
+  \end{pmatrix}
+  \]
+  \[
+  P_\phi(\theta, \phi) = \frac{\partial S}{\partial \phi} = \begin{pmatrix}
+    R \cos(\phi) \cos(\theta) \\
+    R \cos(\phi) \sin(\theta) \\
+    -R \sin(\phi)
+  \end{pmatrix}
+  \]
+  Il prodotto vettoriale dei vettori fondamentali è:
+  \[
+  P_\theta \times P_\phi = \begin{vmatrix}
+    \mathbf{i} & \mathbf{j} & \mathbf{k} \\
+    -R \sin(\phi) \sin(\theta) & R \sin(\phi) \cos(\theta) & 0 \\
+    R \cos(\phi) \cos(\theta) & R \cos(\phi) \sin(\theta) & -R \sin(\phi)
+  \end{vmatrix}
+  = R^2 \sin(\phi) \begin{pmatrix}
+    \cos(\theta) \\
+    \sin(\theta) \\
+    \cos(\phi)
+  \end{pmatrix}
+  \]
+  Il versore normale è quindi:
+  \[
+  N(\theta, \phi) = \frac{P_\theta \times P_\phi}{\|P_\theta \times P_\phi\|} = \begin{pmatrix}
+    \cos(\theta) \sin(\phi) \\
+    \sin(\theta) \sin(\phi) \\
+    \cos(\phi)
+  \end{pmatrix}
+  \]
+  che è il versore radiale della sfera.
+
+\subsection{Esempio: Cono con angolo $\phi_0$ fissato}
+    Consideriamo un cono con angolo $\phi_0$ fissato parametrizzato dalle coordinate $(\theta, r)$ con $\theta \in [0, 2\pi]$ e $r \in [0, \infty)$. La parametrizzazione è data da:
+    \[
+    S(\theta, r) = \begin{pmatrix}
+      r \sin(\phi_0) \cos(\theta) \\
+      r \sin(\phi_0) \sin(\theta) \\
+      r \cos(\phi_0)
+    \end{pmatrix}
+    \]
+    Calcoliamo i vettori fondamentali:
+    \[
+    P_\theta(\theta, r) = \frac{\partial S}{\partial \theta} = \begin{pmatrix}
+      -r \sin(\phi_0) \sin(\theta) \\
+      r \sin(\phi_0) \cos(\theta) \\
+      0
+    \end{pmatrix}
+    \]
+    \[
+    P_r(\theta, r) = \frac{\partial S}{\partial r} = \begin{pmatrix}
+      \sin(\phi_0) \cos(\theta) \\
+      \sin(\phi_0) \sin(\theta) \\
+      \cos(\phi_0)
+    \end{pmatrix}
+    \]
+    Il prodotto vettoriale dei vettori fondamentali è:
+    \[
+    P_\theta \times P_r = \begin{vmatrix}
+      \mathbf{i} & \mathbf{j} & \mathbf{k} \\
+      -r \sin(\phi_0) \sin(\theta) & r \sin(\phi_0) \cos(\theta) & 0 \\
+      \sin(\phi_0) \cos(\theta) & \sin(\phi_0) \sin(\theta) & \cos(\phi_0)
+    \end{vmatrix}
+    = r \sin(\phi_0) \begin{pmatrix}
+      -\cos(\theta) \cos(\phi_0) \\
+      -\sin(\theta) \cos(\phi_0) \\
+      \sin(\phi_0)
+    \end{pmatrix}
+    \]
+    Il versore normale è quindi:
+    \[
+    N(\theta, r) = \frac{P_\theta \times P_r}{\|P_\theta \times P_r\|} = \begin{pmatrix}
+      -\cos(\theta) \cos(\phi_0) \\
+      -\sin(\theta) \cos(\phi_0) \\
+      \sin(\phi_0)
+    \end{pmatrix}
+    \]
+
+\subsection{Esempio: Cilindro di raggio $R$ fissato}
+  Consideriamo un cilindro di raggio $R$ fissato parametrizzato dalle coordinate $(\theta, z)$ con $\theta \in [0, 2\pi]$ e $z \in \R$. La parametrizzazione è data da:
+  \[
+  S(\theta, z) = \begin{pmatrix}
+    R \cos(\theta) \\
+    R \sin(\theta) \\
+    z
+  \end{pmatrix}
+  \]
+  Calcoliamo i vettori fondamentali:
+  \[
+  P_\theta(\theta, z) = \frac{\partial S}{\partial \theta} = \begin{pmatrix}
+    -R \sin(\theta) \\
+    R \cos(\theta) \\
+    0
+  \end{pmatrix}
+  \]
+  \[
+  P_z(\theta, z) = \frac{\partial S}{\partial z} = \begin{pmatrix}
+    0 \\
+    0 \\
+    1
+  \end{pmatrix}
+  \]
+  Il prodotto vettoriale dei vettori fondamentali è:
+  \[
+  P_\theta \times P_z = \begin{vmatrix}
+    \mathbf{i} & \mathbf{j} & \mathbf{k} \\
+    -R \sin(\theta) & R \cos(\theta) & 0 \\
+    0 & 0 & 1
+  \end{vmatrix}
+  = \begin{pmatrix}
+    R \cos(\theta) \\
+    R \sin(\theta) \\
+    0
+  \end{pmatrix}
+  \]
+  Il versore normale è quindi:
+  \[
+  N(\theta, z) = \frac{P_\theta \times P_z}{\|P_\theta \times P_z\|} = \begin{pmatrix}
+    \cos(\theta) \\
+    \sin(\theta) \\
+    0
+  \end{pmatrix}
+  \]
+
+\section{Superfici grafici di funzioni}
+Un caso particolare di superfici sono quelle ottenibili come grafico di una funzione $g(x,y)$ di due variabili, $g:\Omega \inc \R^2  \to \R$.\\
+In questo caso la superficie è data da $\Sigma = {(x,y,z)|(x,y)\in \Omega, z=g(x,y)}$.\\
+La scelta più naturale sarà in questo caso parametrizzare con $u=x$ e $v=y$ e scegliere $S(u,v)=(u,v,g(u,v))$.\\
+I vettori fondamentali sono:
+\begin{itemize}
+  \item $P_x(x,y)=(1,0,\frac{\partial g}{\partial x})$
+  \item $P_y(x,y)=(0,1,\frac{\partial g}{\partial y})$
+\end{itemize}
+Per calcolare il versore normale si calcola il prodotto vettoriale dei vettori fondamentali e si normalizza il risultato:
+$$N(x,y)=\frac{P_x(x,y)\times P_y(x,y)}{\|P_x(x,y)\times P_y(x,y)\|}$$, che in questo caso vale:
+$$N(x,y)=\frac{(-\frac{\partial g}{\partial x},-\frac{\partial g}{\partial y},1)}{\sqrt{1+(\frac{\partial g}{\partial x})^2+(\frac{\partial g}{\partial y})^2}}=\frac{(-\frac{\partial g}{\partial x},-\frac{\partial g}{\partial y},1)}{\sqrt{1+\|\nabla g\|^2}}$$.
+
+\begin{osservazione}{}
+  Un grafico è sempre orientabile.
+\end{osservazione}
+
+\section{Integrali su superfici}
+\begin{definizione}{Integrale su superficie}
+  Sia $S:\Omega\to\R^3$ una superficie regolare e orientata. Sia $f:S(\Omega)\to\R$ una funzione continua. Allora l'integrale di $f$ su $S$ è:
+  $$\int_{S} f dS = \int_{\Omega} f(x(u,v),y(u,v),z(u,v))\|P_u\times P_v\|dudv$$
+\end{definizione}
+
+Il significato è quello di:
+\begin{enumerate}
+  \item Scegliere una partizione di $\Omega$ e calcolare l'integrale di $f$ su ogni pezzo di superficie.
+  \item Sommare i risultati.
+  \item Passare al limite.
+\end{enumerate}
+Alcune possibili interpretazioni geometriche sono:
+\begin{itemize}
+\item In particolare se $f=1$ allora l'integrale di $f$ su $S$ è l'area di $S$.\\
+\item Se $f(x,y,z)=x$ allora l'integrale di $f$ su $S$ è la media di $x$ su $S$, ovvero la coordinata x del baricentro.\\
+\item In generale $\frac{\iint_S f dS}{\text{Area}(S)}$ è la media di $f$ su $S$.\\
+\end{itemize}
+
+\section{Flusso di un campo vettoriale attraverso una superficie}
+C'è un caso particolare che rientra nella definizione precedente, ovvero il flusso di un campo vettoriale attraverso una superficie.\\
+\begin{definizione}{Flusso di un campo}
+  Sia $\vec F:\R^3\to\R^3$ un campo vettoriale e sia $S:\Omega\to\R^3$ una superficie regolare e orientata. Allora si può scegliere $f(x,y,z)=N\cdot \vec F$. Allora si definisce il flusso di $\vec F$ attraverso $S$:
+  $$\int_{S} \vec F \cdot N d S = \int_{S} \vec F \cdot \vec (dS) = \int_{\Omega} \vec F(x(u,v),y(u,v),z(u,v))\cdot (P_u\times P_v)dudv$$
+\end{definizione}
+\begin{osservazione}{}
+  $\|P_u \times P_v\|$ si semplifica e di fatto non compare.
+\end{osservazione}
+
+Notiamo anche che se $S$ è il grafico di una funzione $g(x,y)$ allora la formula per l'integrale di $f(x,y,z)$ su $S$ diventa:
+$$\int_{S} f dS = \int_{\Omega} f(x,y,g(x,y))\sqrt{1+\|g(x,y)\|^2}dxdy$$.\\
+Inoltre, quando $S$ è il grafico di una funzione $g(x,y)$ allora il flusso di $\vec F$ attraverso $S$ è:
+$$\int_{S} \vec F \cdot N d S = \int_{\Omega} \vec F(x,y,g(x,y))\cdot \left(-\frac{\partial g}{\partial x},-\frac{\partial g}{\partial y},1\right)dxdy$$.\\
