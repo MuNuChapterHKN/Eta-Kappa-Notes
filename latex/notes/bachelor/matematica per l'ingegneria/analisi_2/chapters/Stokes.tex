@@ -2,20 +2,20 @@
 \section{Teorema di Stokes}
 In quest'altro breve capitolo vedremo il teorema di Stokes, che è un'estensione del teorema di Green a campi vettoriali in tre dimensioni.
 
-Il teorema di Stokes permette di legare tra loro il flusso del rotore di un campo vettoriale, attraverso una superficie, la circuitazione del campo stesso lungo il bordo della superficie.
+Il teorema di Stokes permette di legare tra loro il flusso del rotore di un campo vettoriale attraverso una superficie e la circuitazione del campo stesso lungo il bordo della superficie.
 
 Vediamo innanzitutto una definizione preliminare:\\
 
 
 \begin{definizione}{Compatibilità delle orientazioni}
-  Dati una superficie orientata $ S $ e il suo bordo orientato $\partial S $, diciamo che le due orientazioni sono compatibili se percorrendo $\gamma$ dal lato di $N$, $S$ risulta essere a sinistra.
+  Dati una superficie orientata $ S $ e una curva $\gamma$ orientata lungo il suo bordo (dove in questo caso non va inteso come frontiera della superficie in $\R^3$ ma più come "orlo" della stessa) , diciamo che le due orientazioni sono \textbf{compatibili} se percorrendo $\gamma$ dal lato di $N$, $S$ risulta essere a sinistra.
 \end{definizione}
 
 Ora possiamo enunciare il teorema di Stokes:
 \begin{teorema}{Teorema di Stokes}
-    Sia $ S $ una superficie orientata con bordo $ \partial S $ orientato compatibilmente. Sia $ \vec{F} $ un campo vettoriale di classe $ C^1 $ in un intorno aperto di $ S $. Allora vale la seguente formula:
+    Sia $ S $ una superficie orientata con una curva $\gamma$ come bordo orientata compatibilmente. Sia $ \vec{F} $ un campo vettoriale di classe $ C^1 $ in un intorno aperto di $ S $. Allora vale la seguente formula:
     \[
-        \int_S \nabla \times \vec{F} \cdot \hat{N} \, dS = \int_{\partial S} \vec{F} \cdot d\vec{r}
+        \int_S \nabla \times \vec{F} \cdot \hat{N} \, dS = \int_{\gamma} \vec{F} \cdot d\vec{r}
     \]
 \end{teorema}
 
@@ -32,44 +32,24 @@ Consideriamo il campo vettoriale $\vec{F} = (y, -x, z)$ e la superficie $S$ defi
 
 Innanzitutto, calcoliamo il rotore di $\vec{F}$:
 \[
-\nabla \times \vec{F} = \left( \frac{\partial z}{\partial y} - \frac{\partial (-x)}{\partial z}, \frac{\partial x}{\partial z} - \frac{\partial z}{\partial x}, \frac{\partial (-x)}{\partial y} - \frac{\partial y}{\partial x} \right) = (1, 0, -2)
+\nabla \times \vec{F} = \left( \frac{\partial z}{\partial y} - \frac{\partial (-x)}{\partial z}, \frac{\partial y}{\partial z} - \frac{\partial z}{\partial x}, \frac{\partial (-x)}{\partial x} - \frac{\partial y}{\partial y} \right) = (0, 0, -2)
 \]
 
-La normale unitaria alla superficie $S$ è data da:
+
+
+Sfruttando il fatto che $z$ è grafico e ricordando quanto visto in \ref{sec:flusso-superficie}, il flusso del rotore di $\vec{F}$ attraverso $S$ è quindi:
 \[
-\hat{N} = \frac{\nabla (1 - x^2 - y^2 - z)}{|\nabla (1 - x^2 - y^2 - z)|} = \frac{(-2x, -2y, -1)}{\sqrt{4x^2 + 4y^2 + 1}}
+\int_S (0, 0, -2) \cdot (-2x, -2y, -1) dx dy
 \]
 
-Il flusso del rotore di $\vec{F}$ attraverso $S$ è quindi:
+Passiamo alle coordinate polari, dove $x = r \cos \theta$ e $y = r \sin \theta$. La superficie $S$ è definita da $z = 1 - r^2$ con $0 \leq r \leq 1$ e $0 \leq \theta < 2\pi$. Otteniamo:
 \[
-\int_S \nabla \times \vec{F} \cdot \hat{N} \, dS = \int_S (1, 0, -2) \cdot \frac{(-2x, -2y, -1)}{\sqrt{4x^2 + 4y^2 + 1}} \, dS = \int_S \frac{-2x + 2}{\sqrt{4x^2 + 4y^2 + 1}} \, dS
-\]
-
-Passiamo alle coordinate polari, dove $x = r \cos \theta$ e $y = r \sin \theta$. La superficie $S$ è definita da $z = 1 - r^2$ con $0 \leq r \leq 1$ e $0 \leq \theta < 2\pi$. Il differenziale di superficie in coordinate polari è $dS = \sqrt{1 + (\frac{\partial z}{\partial r})^2} \, r \, dr \, d\theta = \sqrt{1 + 4r^2} \, r \, dr \, d\theta$.
-
-Quindi l'integrale diventa:
-\[
-\int_S \frac{-2r \cos \theta + 2}{\sqrt{4r^2 + 4r^2 + 1}} \sqrt{1 + 4r^2} \, r \, dr \, d\theta = \int_0^{2\pi} \int_0^1 \frac{-2r \cos \theta + 2}{\sqrt{4r^2 + 1}} \sqrt{4r^2 + 1} \, r \, dr \, d\theta
-\]
-
-Semplificando, otteniamo:
-\[
-\int_0^{2\pi} \int_0^1 (-2r^2 \cos \theta + 2r) \, dr \, d\theta
+\int_0^{2\pi} \int_0^1 2r \, dr \, d\theta
 \]
 
 Separiamo gli integrali:
 \[
-\int_0^{2\pi} \int_0^1 -2r^2 \cos \theta \, dr \, d\theta + \int_0^{2\pi} \int_0^1 2r \, dr \, d\theta
-\]
-
-Il primo integrale è nullo perché l'integrale di $\cos \theta`$ su $[0, 2\pi]$ è zero:
-\[
-\int_0^{2\pi} \cos \theta \, d\theta = 0
-\]
-
-Quindi rimane:
-\[
-\int_0^{2\pi} \int_0^1 2r \, dr \, d\theta = 2 \int_0^{2\pi} d\theta \int_0^1 r \, dr = 2 \cdot 2\pi \cdot \left[ \frac{r^2}{2} \right]_0^1 = 2 \cdot 2\pi \cdot \frac{1}{2} = 2\pi
+\int_0^{2\pi} d\theta \int_0^1 2r \, dr = 2 \int_0^{2\pi} d\theta \int_0^1 r \, dr = 2 \cdot 2\pi \cdot \left[ \frac{r^2}{2} \right]_0^1 = 2 \cdot 2\pi \cdot \frac{1}{2} = 2\pi
 \]
 
 Abbiamo quindi:
@@ -82,9 +62,9 @@ Calcoliamo ora la circuitazione di $\vec{F}$ lungo il bordo di $S$. Il bordo di 
 \int_{\partial S} \vec{F} \cdot d\vec{r} = \int_0^{2\pi} \vec{F}(\cos t, \sin t, 0) \cdot \frac{d\vec{r}}{dt} \, dt
 \]
 \\
-\[= \int_0^{2\pi} (\sin t, -\cos t, 0) \cdot (-\sin t, \cos t, 0) \, dt = \int_0^{2\pi} (\sin^2 t + \cos^2 t) \, dt = -2\pi
+\[= \int_0^{2\pi} (\sin t, -\cos t, 0) \cdot (-\sin t, \cos t, 0) \, dt = \int_0^{2\pi} (\sin^2 t + \cos^2 t) \, dt = 2\pi
 \]
-Tuttavia per avere una parametrizzazione coerente dovremmo considerare il flusso con la normale opposta al calcolo effettuato in precedenza così da avere un riaultato corretto.
+
 Abbiamo quindi verificato il teorema di Stokes per questo esempio.
 
 

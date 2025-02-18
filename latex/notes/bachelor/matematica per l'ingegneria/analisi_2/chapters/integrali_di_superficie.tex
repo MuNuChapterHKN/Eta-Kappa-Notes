@@ -4,14 +4,14 @@
 Intuitivamente una superficie in $\R^3$ è un insieme di punti dove "ci si può muovere" con due gradi di libertà (a differenza di una curva che ne ha solo uno).
 
 \begin{definizione}{Superficie in $\R^3$}
-  Si dice superficie in $\R^3$ un'applicazione $S:\Omega\to\R^3$ dove $\Omega\inc\R^2$ è un insieme aperto (limitato e connesso) e $S$ è di classe $C^1$ su $\Omega$.
+  Si dice \textbf{superficie} in $\R^3$ un'applicazione $S:\Omega\to\R^3$ dove $\Omega\inc\R^2$ è un insieme aperto (limitato e connesso) e $S$ è di classe $C^1$ su $\Omega$.
 \end{definizione}
 
 \section{Superfici}
 L'idea è quella di descrivere la geometria della superficie lavorando in $\Omega$ con le coordinate $u$ e $v$.\\
 Per fare questo definiamo i vettori fondamentali della superficie:
 \begin{definizione}{Vettori fondamentali}
-  Sia $S:\Omega\to\R^3$ una superficie in $\R^3$. Allora i vettori fondamentali sono:
+  Sia $S:\Omega\to\R^3$ una superficie in $\R^3$. Allora i \textbf{vettori fondamentali} sono:
   \begin{itemize}
     \item $P_u(u,v)=\frac{\partial S}{\partial u}(u,v)$
     \item $P_v(u,v)=\frac{\partial S}{\partial v}(u,v)$
@@ -25,7 +25,7 @@ Essi hanno il seguente significato geometrico:
 Perciò i vettori fondamentali sono entrambi tangenti alla superficie (a una curva della superficie) in $S(u_0,v_0)$ e se sono linearmente indipendenti allora individuano univocamente il piano tangente alla superficie in $S(u_0,v_0)$.
 
 \begin{definizione}{Superficie regolare}
-  Una superficie $S:\Omega\to\R^3$ si dice regolare se i vettori fondamentali sono linearmente indipendenti in ogni punto di $\Omega$.
+  Una superficie $S:\Omega\to\R^3$ si dice \textbf{regolare} se i vettori fondamentali sono linearmente indipendenti in ogni punto di $\Omega$.
 \end{definizione}
 
 \begin{osservazione}{}
@@ -34,7 +34,7 @@ Perciò i vettori fondamentali sono entrambi tangenti alla superficie (a una cur
 \end{osservazione}
 
 \begin{definizione}{Superficie orientata}
-  Una superficie $S:\Omega\to\R^3$ si dice orientata se è regolare e se è definita una scelta di versore normale in ogni punto di $\Omega$.
+  Una superficie $S:\Omega\to\R^3$ si dice \textbf{orientata} se è regolare e se è definita una scelta di versore normale in ogni punto di $\Omega$.
 \end{definizione}
 
 \begin{osservazione}{}
@@ -73,10 +73,17 @@ Perciò i vettori fondamentali sono entrambi tangenti alla superficie (a una cur
     R \cos(\phi) \cos(\theta) & R \cos(\phi) \sin(\theta) & -R \sin(\phi)
   \end{vmatrix}
   = R^2 \sin(\phi) \begin{pmatrix}
-    \cos(\theta) \\
-    \sin(\theta) \\
+    \sin(\phi)\cos(\theta) \\
+    \sin(\phi)\sin(\theta) \\
     \cos(\phi)
   \end{pmatrix}
+  \]
+  La norma del vettore $P_\theta \times P_\phi$ è:
+  \[
+  \|P_\theta \times P_\phi\| = R^2 \sin(\phi) \sqrt{(\sin^2(\phi) \cos^2(\theta)) + ( \sin^2(\phi) \sin^2(\theta)) + (\cos^2(\phi))}
+  \]\\
+  \[ = R^2 \sin(\phi) \sqrt{\sin^2(\phi) + \cos^2(\phi)}
+  = R^2 \sin(\phi)
   \]
   Il versore normale è quindi:
   \[
@@ -199,7 +206,7 @@ $$N(x,y)=\frac{(-\frac{\partial g}{\partial x},-\frac{\partial g}{\partial y},1)
 
 \section{Integrali su superfici}
 \begin{definizione}{Integrale su superficie}
-  Sia $S:\Omega\to\R^3$ una superficie regolare e orientata. Sia $f:S(\Omega)\to\R$ una funzione continua. Allora l'integrale di $f$ su $S$ è:
+  Sia $S:\Omega\to\R^3$ una superficie regolare e orientata. Sia $f:S(\Omega)\to\R$ una funzione continua. Allora l'\textbf{integrale di superficie} di $f$ su $S$ è:
   $$\int_{S} f dS = \int_{\Omega} f(x(u,v),y(u,v),z(u,v))\|P_u\times P_v\|dudv$$
 \end{definizione}
 
@@ -216,10 +223,10 @@ Alcune possibili interpretazioni geometriche sono:
 \item In generale $\frac{\iint_S f dS}{\text{Area}(S)}$ è la media di $f$ su $S$.\\
 \end{itemize}
 
-\section{Flusso di un campo vettoriale attraverso una superficie}
+\section{Flusso di un campo vettoriale attraverso una superficie}\label{sec:flusso-superficie}
 C'è un caso particolare che rientra nella definizione precedente, ovvero il flusso di un campo vettoriale attraverso una superficie.\\
 \begin{definizione}{Flusso di un campo}
-  Sia $\vec F:\R^3\to\R^3$ un campo vettoriale e sia $S:\Omega\to\R^3$ una superficie regolare e orientata. Allora si può scegliere $f(x,y,z)=N\cdot \vec F$. Allora si definisce il flusso di $\vec F$ attraverso $S$:
+  Sia $\vec F:\R^3\to\R^3$ un campo vettoriale e sia $S:\Omega\to\R^3$ una superficie regolare e orientata. Allora si può scegliere $f(x,y,z)=N\cdot \vec F$. Allora si definisce il \textbf{flusso} di $\vec F$ attraverso $S$:
   $$\int_{S} \vec F \cdot N d S = \int_{S} \vec F \cdot \vec (dS) = \int_{\Omega} \vec F(x(u,v),y(u,v),z(u,v))\cdot (P_u\times P_v)dudv$$
 \end{definizione}
 \begin{osservazione}{}

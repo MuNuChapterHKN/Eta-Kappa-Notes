@@ -21,17 +21,18 @@ Gli integrali di seconda specie sono integrali di un campo vettoriale $\vec F(x_
 \section{Integrali curvilinei di prima specie}
 \begin{definizione}{Integrale curvilineo di prima specie}
   Sia $f: \R^n \rightarrow \R$ una funzione continua e $\gamma: [a, b] \rightarrow \R^n$ una curva $C^1$ (o $C^1$ a tratti).\\
-  L'integrale curvilineo di $f$ lungo $\gamma$ è definito come:
+  L'\textbf{integrale curvilineo di prima specie} di $f$ lungo $\gamma$ è definito come:
   $$\int_\gamma f ds = \int_a^b f(\gamma(t)) \cdot ||\gamma'(t)|| dt$$
 \end{definizione}
 
 Capiamo meglio il significato. Posso pensare di dividere la curva in piccoli tratti di diametro $< \epsilon$. Campiono $f$ in ogni punto e moltiplico per la lunghezza del tratto. Sommo tutti i tratti e faccio tendere $\epsilon$ a 0. Ovvero:
-$$\int_\gamma f ds = \lim_{\epsilon \rightarrow 0} \sum_{i=1}^n f(\gamma(t_i)) \cdot ||\gamma(t_i) - \gamma(t_{i-1})||$$
+$$\int_\gamma f ds = \lim_{\epsilon \rightarrow 0} \sum_{i=1}^n f(\gamma(t_i)) \cdot ||\gamma(t_i) - \gamma(t_{i-1})||$$.\\
+Qui $\epsilon$ limita il valore di $||\gamma(t_i) - \gamma(t_{i-1})||$.\\
 
 \section{Integrali curvilinei di seconda specie}\label{sec:integrali-curvilinei-di-seconda-specie}
 \begin{definizione}{Integrale curvilineo di seconda specie}
   Sia $\vec F: \R^n \rightarrow \R^n$ un campo vettoriale continuo e $\gamma: [a, b] \rightarrow \R^n$ una curva $C^1$ (o $C^1$ a tratti).\\
-  L'integrale curvilineo di $\vec F$ lungo $\gamma$ è definito come:
+  L'\textbf{integrale curvilineo di seconda specie} di $\vec F$ lungo $\gamma$ è definito come:
   $$\int_\gamma \vec F \cdot d\vec r = \int_a^b \vec F(\gamma(t)) \cdot \gamma'(t) dt$$
 \end{definizione}
 

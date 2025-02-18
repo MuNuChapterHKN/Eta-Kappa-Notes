@@ -4,7 +4,7 @@
 In questo capitolo ci occuperemo delle serie di Fourier. Esse sono utilizzate per approssimare (in vari sensi che vedremo) una funzione $f:\R \to \R$ T-periodica, cioè tale che $f(T+x)=f(x)$ per un certo $T>0$ detto periodo, tramite una somma di sinusoidi di periodo $T, 2T, 3T, \dots$.
 
 \begin{definizione}{Sinusoide}
-  Si chiama sinusoide una funzione del tipo $f(x) = M\cdot \cos(\omega x +\phi)$.
+  Si chiama \textbf{sinusoide} una funzione del tipo $f(x) = M\cdot \cos(\omega x +\phi)$.
   \begin{itemize}
     \item $M$ è l'ampiezza, ovvero il valore massimo della funzione.
     \item $\omega$ è la pulsazione, definita come $\omega = \frac{2\pi}{T}$, dove $T$ è il periodo.
@@ -20,7 +20,7 @@ L'idea di base dovuta ha Fourier è questa: è possibile scrivere una generica f
 \\
 Per formalizzarla occorre la seguente definizione:
 \begin{definizione}{Polinomio trigonometrico}
-  Si chiama polinomio trigonometrico di grado $N>0$ e periodo T una funzione del tipo:
+  Si chiama \textbf{polinomio trigonometrico} di grado $N>0$ e periodo T una funzione del tipo:
   $P_N(x) = a_0 + \sum_{n=1}^{N} \left( a_n \cos\left(\frac{2\pi nx}{T}\right) + b_n \sin\left(\frac{2\pi nx}{T}\right) \right)$
 \end{definizione}
 Qui il coefficiente $a_0$ si può immaginare come sinusoide con frequenza nulla.
@@ -67,7 +67,7 @@ Ora siamo pronti a dare un risultato cruciale per le serie di Fourier.
 
 \end{teorema}
 
-\section{Convergenza nelle serie di Fourier}
+\section{Convergenza delle serie di Fourier}
 Un primo modo di vedere che qualunque $f$ periodica è sovrapposizione di sinusoidi è il seguente:
 \begin{teorema}{Teorema della convergenza in media quadratica}
   Sia $f$ una funzione integrabile su $[0, T]$. Allora la serie di Fourier di $f$ converge a $f$ in media quadratica, cioè:
@@ -88,7 +88,7 @@ Vale inoltre un'utile identità detta identità di Parseval:
 \end{osservazione}
 Oltre alla convergenza in media quadratica, esistono altri due tipi di convergenza: puntuale e uniforme. Per capire meglio cosa significano occorre introdurre il concetto di funzione regolarizzata.
 \begin{definizione}{Funzione regolarizzata}
-  Si chiama funzione regolarizzata di $f$ una funzione $\tilde{f}$ ottenuta come media del limite in ogni punto. Formalmente, per ogni $x \in \R$, la funzione regolarizzata $\tilde{f}$ è definita come:
+  Si chiama \textbf{funzione regolarizzata} di $f$ una funzione $\tilde{f}$ ottenuta come media del limite in ogni punto. Formalmente, per ogni $x \in \R$, la funzione regolarizzata $\tilde{f}$ è definita come:
   $$
   \tilde{f}(x) = \frac{1}{2}\cdot (\lim_{t \to x^+} f(t)+\lim_{t \to x^-} f(t))
   $$
@@ -107,7 +107,7 @@ L'ipotesi $C^1$ a tratti può essere sostituita con monotona a tratti.
 
 Vediamo ora cosa significa invece convergenza uniforme:
 \begin{definizione}{Convergenza uniforme}
-  Una serie di funzioni $\sum_{n=0}^{\infty} f_n(x)$ converge uniformemente ad una funzione $f(x)$ su un intervallo $I$ se, per ogni $\epsilon > 0$, esiste un intero $N$ tale che per ogni $n \geq N$ e per ogni $x \in I$ si ha:
+  Una serie di funzioni $\sum_{n=0}^{\infty} f_n(x)$ \textbf{converge uniformemente} ad una funzione $f(x)$ su un intervallo $I$ se, per ogni $\epsilon > 0$, esiste un intero $N$ tale che per ogni $n \geq N$ e per ogni $x \in I$ si ha:
   $$
   \left| \sum_{k=0}^{n} f_k(x) - f(x) \right| < \epsilon
   $$

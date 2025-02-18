@@ -74,7 +74,7 @@ $$\nabla \times \vec F = \left( \frac{\partial F_3}{\partial y} - \frac{\partial
 La seguente definizione sarà utile per trovare una condizione sufficiente di conservatività:
 
 \begin{definizione}{Semplicemente connesso}
-  Un aperto $\Omega \in \R^n$ si dice semplicemente connesso se per ogni curva chiusa $\gamma$ in $\Omega$ si ha che $\gamma$ può essere deformata con continuità fino a stringerla ottenendno un singolo punto senza mai uscire da $\Omega$.
+  Un aperto $\Omega \in \R^n$ si dice semplicemente connesso se per ogni curva chiusa $\gamma$ in $\Omega$ si ha che $\gamma$ può essere deformata con continuità fino a stringerla ottenendo un singolo punto senza mai uscire da $\Omega$.
 \end{definizione}
 
 Nel piano la condizione è equivalente a dire che $\Omega$ non ha buchi.\\
@@ -88,8 +88,9 @@ In $\R^3$ la condizione è più complessa da verificare.\\
 Vediamo un importante tipo di campi:
 
 \begin{definizione}{Campo centrale}
-  Un campo vettoriale $\vec F: \R^n \setminus \{0\} \rightarrow \R^n$ si dice \textbf{centrale} se esiste una funzione $f: \R^n \setminus \{0\} \rightarrow \R$ tale che $\vec F = \nabla f$.
+  Un campo vettoriale $\vec F: \R^n \setminus \{0\} \rightarrow \R^n$ si dice \textbf{centrale} se esiste una funzione $f: \R^n \setminus \{0\} \rightarrow \R$ tale che $\vec F(\vec{x}) = f(\|\vec{x}\|) \frac{\vec{x}}{\|\vec{x}\|}$, dove $\|\vec{x}\|$ è la norma euclidea di $\vec{x}$.
 \end{definizione}
+
 
 Esiste allora un teorema che ci permette di risolvere molte patologie:
 \begin{teorema}{Conservatività dei campi centrali}
@@ -114,7 +115,7 @@ $$F_2(x,y) = \frac{\partial f(x,y)}{\partial{y}} $$.\\
 Lo schema è il seguente:
 \begin{enumerate}
 \item Calcoliamo $f(x,y) = \int F_1(x,y)dx + g(y)$.
-\item Calcoliamo $\frac{\partial f(x,y)}{\partial{y}} =$.
+\item Calcoliamo $\frac{\partial f(x,y)}{\partial{y}}$.
 \item Imponiamo $F_2(x,y)=\frac{\partial f(x,y)}{\partial{y}}$ e troviamo $g(y)$.
 \end{enumerate}
 

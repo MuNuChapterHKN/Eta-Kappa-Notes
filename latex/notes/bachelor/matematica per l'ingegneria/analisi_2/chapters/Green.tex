@@ -27,58 +27,5 @@ Riassumendo:
 \begin{teorema}{}
   Se $\gamma(t)= (x(t), y(t)), t \in [a,b]$ è una curva chiusa semplice e regolare, allora l'area racchiusa da $\gamma$ è data da:
   $$\text{Area}(\Omega) = \int_{a}^{b} x(t)\cdot y'(t) dt$$.\\
-  Sono possibili anche altre scelte per $\vec F$ che generano formule analogo per il calcolo dell'area di $\Omega$.
+  Sono possibili anche altre scelte per $\vec F$ che generano formule analoghe per il calcolo dell'area di $\Omega$.
 \end{teorema}
-
-\subsection{Esempio: area del cardiode}
-
-Consideriamo il campo vettoriale $\vec{F} = (0, x)$. Utilizziamo il teorema di Green per calcolare l'area racchiusa dal cardioide. Secondo il teorema di Green, abbiamo:
-
-$$ \text{Area}(\Omega) = \oint_{\gamma} \vec{F} \cdot d\vec{r} $$
-
-Dove $\gamma$ è la curva chiusa che descrive il bordo del cardioide. In coordinate polari, il cardioide è dato da:
-
-$$ r = 1 + \cos\theta $$
-
-Le coordinate cartesiane sono:
-
-$$ x = r \cos\theta = (1 + \cos\theta) \cos\theta $$
-$$ y = r \sin\theta = (1 + \cos\theta) \sin\theta $$
-
-Il differenziale di posizione è:
-
-$$ d\vec{r} = \left( \frac{dx}{d\theta}, \frac{dy}{d\theta} \right) d\theta $$
-
-Calcoliamo le derivate:
-
-$$ \frac{dx}{d\theta} = \frac{d}{d\theta} \left( (1 + \cos\theta) \cos\theta \right) = -\cos\theta \sin\theta + \cos^2\theta - \sin^2\theta $$
-$$ \frac{dy}{d\theta} = \frac{d}{d\theta} \left( (1 + \cos\theta) \sin\theta \right) = \cos\theta \sin\theta + \sin^2\theta + \cos\theta \cos\theta $$
-
-Quindi:
-
-$$ d\vec{r} = \left( -\cos\theta \sin\theta + \cos^2\theta - \sin^2\theta, \cos\theta \sin\theta + \sin^2\theta + \cos^2\theta \right) d\theta $$
-
-Il campo $\vec{F}$ in coordinate polari è:
-
-$$ \vec{F} = (0, x) = (0, (1 + \cos\theta) \cos\theta) $$
-
-Il prodotto scalare $\vec{F} \cdot d\vec{r}$ è:
-
-$$ \vec{F} \cdot d\vec{r} = 0 \cdot \left( -\cos\theta \sin\theta + \cos^2\theta - \sin^2\theta \right) + (1 + \cos\theta) \cos\theta \cdot \left( \cos\theta \sin\theta + \sin^2\theta + \cos^2\theta \right) $$
-
-Semplificando:
-
-$$ \vec{F} \cdot d\vec{r} = (1 + \cos\theta) \cos\theta \left( \cos\theta \sin\theta + \sin^2\theta + \cos^2\theta \right) $$
-
-Integrando lungo $\theta$ da $0$ a $2\pi$:
-
-$$ \text{Area}(\Omega) = \int_{0}^{2\pi} (1 + \cos\theta) \cos\theta \left( \cos\theta \sin\theta + \sin^2\theta + \cos^2\theta \right) d\theta $$
-
-Semplificando ulteriormente e risolvendo l'integrale, otteniamo:
-
-$$ \text{Area}(\Omega) = \frac{3\pi}{2} $$
-
-Pertanto, l'area racchiusa dal cardioide è:
-
-$$ \text{Area} = \frac{3\pi}{2} $$
-

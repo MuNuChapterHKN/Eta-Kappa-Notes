@@ -17,7 +17,7 @@ Per arrivare all'integrale triplo effettuiamo le seguente costruzione in più pa
 \end{enumerate}
 
 \begin{definizione}{Integrale triplo}
-  Seguendo quanto detto detto prima, si chiama integrale triplo di $f$ su $\Omega$ il valore:
+  Seguendo quanto detto detto prima, si chiama \textbf{integrale triplo} di $f$ su $\Omega$ il valore:
   \[
   \lim_{\epsilon \to 0} \sum_{c_i \in C_{\epsilon}} f(P_i) \cdot \text{volume}(c_i) = \iiint_{\Omega} f(x,y,z) \, dx \, dy \, dz
   \]
@@ -29,9 +29,9 @@ Gli integrali tripli hanno diversi significati e interpretazioni, vediamone alcu
 \begin{itemize}
   \item Se $f(x,y,z)=1$ allora $\iiint_{\Omega} f(x,y,z) \, dx \, dy \, dz$ è il volume di $\Omega$.
   \item La quantità $\frac{\iiint_{\Omega} f(x,y,z) \, dx \, dy \, dz}{\text{volume}(\Omega)}$ è il valore medio pesato di $f$ su $\Omega$.
-  \item Se $f(x,y,z)=x$ allora $\iiint_{\Omega} f(x,y,z) \, dx \, dy \, dz$ è il baricentro di $\Omega$ rispetto all'asse $x$.
-  \item Se $f(x,y,z)=y$ allora $\iiint_{\Omega} f(x,y,z) \, dx \, dy \, dz$ è il baricentro di $\Omega$ rispetto all'asse $y$.
-  \item Se $f(x,y,z)=z$ allora $\iiint_{\Omega} f(x,y,z) \, dx \, dy \, dz$ è il baricentro di $\Omega$ rispetto all'asse $z$.
+  \item Se $f(x,y,z)=x$ allora $\iiint_{\Omega} f(x,y,z) \, dx \, dy \, dz$ è la coordinata $x$ del baricentro di $\Omega$.
+  \item Se $f(x,y,z)=y$ allora $\iiint_{\Omega} f(x,y,z) \, dx \, dy \, dz$ è la coordinata $y$ del baricentro di $\Omega$.
+  \item Se $f(x,y,z)=z$ allora $\iiint_{\Omega} f(x,y,z) \, dx \, dy \, dz$ è è la coordinata $z$ del baricentro di $\Omega$.
   \item Se $f(x,y,z)$ è una densità di massa allora $\iiint_{\Omega} f(x,y,z) \, dx \, dy \, dz$ è la massa di $\Omega$.
   \item Se $f(x,y,z)$ è una densità di massa allora $\iiint_{\Omega} (x^2 + y^2) f(x,y,z) \, dx \, dy \, dz$ è il momento d'inerzia di $\Omega$ rispetto all'asse $z$.
 \end{itemize}
@@ -39,12 +39,10 @@ Gli integrali tripli hanno diversi significati e interpretazioni, vediamone alcu
 
 \section{Cambiamento di variabili negli integrali tripli}
 Vediamo ora come si comportano gli integrali tripli sotto cambiamento di variabili.\\
-In 3 variabili consideriamo il seguente cambiamento di coordinate:
-\[
-  x = x(u,v,w)\\
-  y = y(u,v,w)\\
-  z = z(u,v,w)
-\]
+In 3 variabili consideriamo il seguente cambiamento di coordinate:\\
+$
+  x = x(u,v,w) \quad y = y(u,v,w)  \quad z = z(u,v,w)
+$\\
 con $(u,v,w) \in \Omega \subseteq \R^3$ e $(x,y,z) \in \Omega' \subseteq \R^3$.\\
 L'integrale triplo diventa:
 \[
