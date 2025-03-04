@@ -1,45 +1,71 @@
 %! TEX root = analisi_2.tex
 
-\input{../../../../lib/_preamble.tex}
+\documentclass[italian,12pt,toc=sections]{HKNdocument}
+\input{_preamble.tex}
 
 %adeguare formattazione
 
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\inc}{\subseteq}
 
-
 \usepackage{verbatim}
 \usepackage{hyperref}
+
+%Ho creato questi comandi personalizzati perchè nel frattempo sono cambiati, questa
+% sintassi permette di usarli in italiano senza cambiare tutte le occorrenze nel file
+\newenvironment{definizione}{\begin{definition}}{\end{definition}}
+\newenvironment{teorema}{\begin{theorem}}{\end{theorem}}
+\newenvironment{osservazione}{\begin{observation}}{\end{observation}}
+\newenvironment{esercizio}{\begin{exercise}}{\end{exercise}}
+\newenvironment{corollario}{\begin{corollary}}{\end{corollary}}
 
 \begin{document}
 
 \title{Analisi 2}
+\shorttitle{Analisi 2}
 \date{\today}
 \author{Tommaso Pignatelli}
 
+% You can include multiple \editor commands to list all editors in the frontpage.
+\editor{Paolo Gialli}
+\editor{Sofia Blu}
+\editor{Carlo Grigi}
+\editor{Elisa Marroni}
+\editor{Marco Violetti}
+
+\organization{IEEE-HKN Mu Nu Chapter}
+\docdate{Primo semestre 2024/2025}
+\docversion{1.1}
+\doclogo{hkn_logo_blu.png}
+\doclicense{CC_BYNCND.png}
+
 \frontmatter
+% Create the title page
 \maketitle
+
+% Table of Contents after the title page
+\clearpage
+\cclicense
+\clearpage
 \tableofcontents
+\clearpage
 
 \mainmatter
 \include{chapters/introduzione}
-
 \include{chapters/calcolo_differenziale}
-\include{chapters/integrali_doppi}
 \include{chapters/integrali_tripli}
+\include{chapters/integrali_doppi}
 \include{chapters/integrali_curvilinei}
 \include{chapters/campi_conservativi}
 \include{chapters/Green}
 \include{chapters/integrali_di_superficie}
-
 \include{chapters/Gauss_Green}
 \include{chapters/Stokes}
-
-
 \include{chapters/serie_numeriche}
 \include{chapters/serie_di_potenze}
 \include{chapters/serie_di_fourier}
 
 \backmatter
 
-\input{../../../../lib/_postamble.tex}
+\input{_postamble.tex}
+\end{document}

@@ -1,19 +1,12 @@
-% Nota: scrivendo draft negli aromenti di document class, si disabilita il rendering di tutti gli ambienti figure. utile per non perdere tempo se non si è interessati a verificare questo aspetto.
-\documentclass[a4paper,12pt]{book}
+% Packages
+\usepackage{listings}                    % Code highlighting
+\usepackage{xcolor}                      % Custom colors
+\usepackage{longtable}                   % Breakable tables
+\usepackage{ulem}                        % Underline
+\usepackage{contour}                     % Border around text
+\usepackage{tcolorbox}                   % Custom boxes
 
-\usepackage[italian, english]{babel}              % Used for italian language
-\usepackage{hyperref}                    % Used for hyperlinks
-\usepackage{listings}                    % Used for code highlighting
-\usepackage{xcolor}                      % Used to define custom colors
-\usepackage{graphicx}                    % Used to include images
-\usepackage{longtable}                   % Used for breakable tables
-\usepackage{amsmath, amssymb}            % Used for math expressions
-\usepackage[inkscapeversion=1]{svg}                         % Used to include svg images
-\usepackage{ulem} % Provides underline
-\usepackage{contour} % Used to add border around text (in our case used to make a custom underline command that doesn't overlap with descenders)
-\usepackage{tcolorbox}
-
-%% IMPOSTAZIONI DEI COLORI
+% Color settings
 \definecolor{backgroundColor}{RGB}{255, 255, 255}
 \definecolor{ruleColor}{RGB}{109, 160, 210}
 \definecolor{numberColor}{RGB}{109, 160, 210}
@@ -21,72 +14,61 @@
 \definecolor{identifierColor}{RGB}{2, 65, 191}
 \definecolor{stringColor}{RGB}{8, 30, 50}
 \definecolor{commentColor}{RGB}{120, 140, 160}
+
+% Listings style
 \lstdefinestyle{hkn}{
-  % Colorsettings
-  basicstyle=\ttfamily\small, % Stile base (dimensione e font)
-  keywordstyle=\bfseries\color{keywordColor}, % Stile delle parole chiave
-  identifierstyle=\color{identifierColor}, % Stile degli identificatori
-  commentstyle=\color{commentColor}, % Stile dei commenti
-  stringstyle=\color{stringColor}, % Stile delle stringhe
-  numberstyle=\ttfamily\scriptsize\color{numberColor}, % Stile dei numeri di riga
-  % Layout, frame, linenumbers and spacing
-  backgroundcolor=\color{backgroundColor}, % Colore di sfondo
-  rulecolor=\color{ruleColor}, % Colore del bordo
-  frame=single, % Bordo attorno al codice (single, double, shadowbox, none)
-  framerule=0.8pt, % Spessore del bordo
-  frameround=tttt,          % Arrotonda tutti gli angoli
-  framesep=5pt,             % Distanza tra il bordo e il codice
-  rulesep=2pt,              % Distanza tra il bordo e la linea del codice
-  numbers=left, % Posizione dei numeri di riga (left, right, none)
-  stepnumber=1, % Intervallo tra i numeri di riga
-  numbersep=10pt, % Distanza dei numeri di riga dal codice
-  xleftmargin=30pt,
-  xrightmargin=30pt,
-  resetmargins= true,
-  %aboveskip=5mm, % Spazio sopra il blocco
-  %belowskip=5mm, % Spazio sotto il blocco
-  numberblanklines = false,
-  firstnumber=auto, % Numero di riga iniziale, se due codici condividono la stessa etichetta allora la numerazione continua
-  columns=fixed, % Fissa la larghezza delle colonne
-  showstringspaces=false, % Mostra gli spazi nelle stringhe
-  tabsize=2, % Dimensione dei tabulati
-  breaklines=true, % Ritorno a capo automatico per righe lunghe
-  breakatwhitespace=true, % Ritorno a capo solo sugli spazi
-  breakautoindent = true,
-  % other
-  escapeinside={(*@}{@*)} % Comandi LaTeX nel codice
+  basicstyle=\ttfamily\small,            % Base style (size and font)
+  keywordstyle=\bfseries\color{keywordColor}, % Keyword style
+  identifierstyle=\color{identifierColor}, % Identifier style
+  commentstyle=\color{commentColor},     % Comment style
+  stringstyle=\color{stringColor},       % String style
+  numberstyle=\ttfamily\scriptsize\color{numberColor}, % Line number style
+  backgroundcolor=\color{backgroundColor}, % Background color
+  rulecolor=\color{ruleColor},           % Border color
+  frame=single,                          % Border around code (single, double, shadowbox, none)
+  framerule=0.8pt,                       % Border thickness
+  frameround=tttt,                       % Round all corners
+  framesep=5pt,                          % Distance between border and code
+  rulesep=2pt,                           % Distance between border and code line
+  numbers=left,                          % Line number position (left, right, none)
+  stepnumber=1,                          % Line number interval
+  numbersep=10pt,                        % Distance between line numbers and code
+  xleftmargin=30pt,                      % Left margin
+  xrightmargin=30pt,                     % Right margin
+  resetmargins=true,                     % Reset margins
+  numberblanklines=false,                % Number blank lines
+  firstnumber=auto,                      % Initial line number
+  columns=fixed,                         % Fixed column width
+  showstringspaces=false,                % Show spaces in strings
+  tabsize=2,                             % Tab size
+  breaklines=true,                       % Automatic line break for long lines
+  breakatwhitespace=true,                % Line break at whitespace
+  breakautoindent=true,                  % Automatic indentation after line break
+  escapeinside={(*@}{@*)}                % LaTeX commands in code
 }
 
-\renewcommand{\ULdepth}{1.8pt} % underline depth
+% Underline settings
+\renewcommand{\ULdepth}{1.8pt} % Underline depth
 \contourlength{0.8pt}
 
-\newcommand{\myuline}[1]{% better underline
+% Custom underline command
+\newcommand{\myuline}[1]{%
   \uline{\phantom{#1}}%
   \llap{\contour{white}{#1}}%
 }
 
+% tcolorbox color settings
 \definecolor{tcolorboxLeftColor}{RGB}{2, 65, 191}
 \definecolor{tcolorboxBackTitleColor}{RGB}{119, 152, 255}
 \definecolor{tcolorboxBackColor}{RGB}{210, 226, 255}
 
-% Box personalizzate
+% Custom boxes
 \newtcolorbox[auto counter, number within=chapter]{exercise}[1]{
   boxrule=0mm,
   leftrule=0.8mm,
   colframe=tcolorboxLeftColor,
   sharp corners=all,
-  title={Exercise~\arabic{\tcbcounter}.~#1},
-  colbacktitle=tcolorboxBackTitleColor,
-  colback=tcolorboxBackColor,
-  fonttitle=\bfseries
-}
-
-\newtcolorbox[auto counter, number within=chapter]{esercizio}[1]{
-  boxrule=0mm,
-  leftrule=0.8mm,
-  colframe=tcolorboxLeftColor,
-  sharp corners=all,
-  title={Esercizio~\arabic{\tcbcounter}.~#1},
+  title={\iflanguage{italian}{Esercizio}{Exercise}~\arabic{\tcbcounter}.~#1},
   colbacktitle=tcolorboxBackTitleColor,
   colback=tcolorboxBackColor,
   fonttitle=\bfseries
@@ -97,18 +79,7 @@
   leftrule=0.8mm,
   colframe=tcolorboxLeftColor,
   sharp corners=all,
-  title={Definition~\arabic{\tcbcounter}.~#1},
-  colbacktitle=tcolorboxBackTitleColor,
-  colback=tcolorboxBackColor,
-  fonttitle=\bfseries
-}
-
-\newtcolorbox[auto counter, number within=chapter]{definizione}[1]{
-  boxrule=0mm,
-  leftrule=0.8mm,
-  colframe=tcolorboxLeftColor,
-  sharp corners=all,
-  title={Definizione~\arabic{\tcbcounter}.~#1},
+  title={\iflanguage{italian}{Definizione}{Definition}~\arabic{\tcbcounter}.~#1},
   colbacktitle=tcolorboxBackTitleColor,
   colback=tcolorboxBackColor,
   fonttitle=\bfseries
@@ -119,18 +90,7 @@
   leftrule=0.8mm,
   colframe=tcolorboxLeftColor,
   sharp corners=all,
-  title={Observation~\arabic{\tcbcounter}.~#1},
-  colbacktitle=tcolorboxBackTitleColor,
-  colback=tcolorboxBackColor,
-  fonttitle=\bfseries
-}
-
-\newtcolorbox[auto counter, number within=chapter]{osservazione}[1]{
-  boxrule=0mm,
-  leftrule=0.8mm,
-  colframe=tcolorboxLeftColor,
-  sharp corners=all,
-  title={Osserazione~\arabic{\tcbcounter}.~#1},
+  title={\iflanguage{italian}{Osservazione}{Observation}~\arabic{\tcbcounter}.~#1},
   colbacktitle=tcolorboxBackTitleColor,
   colback=tcolorboxBackColor,
   fonttitle=\bfseries
@@ -141,18 +101,7 @@
   leftrule=0.8mm,
   colframe=tcolorboxLeftColor,
   sharp corners=all,
-  title={Theorem~\arabic{\tcbcounter}.~#1},
-  colbacktitle=tcolorboxBackTitleColor,
-  colback=tcolorboxBackColor,
-  fonttitle=\bfseries
-}
-
-\newtcolorbox[auto counter, number within=chapter]{teorema}[1]{
-  boxrule=0mm,
-  leftrule=0.8mm,
-  colframe=tcolorboxLeftColor,
-  sharp corners=all,
-  title={Teorema~\arabic{\tcbcounter}.~#1},
+  title={\iflanguage{italian}{Teorema}{Theorem}~\arabic{\tcbcounter}.~#1},
   colbacktitle=tcolorboxBackTitleColor,
   colback=tcolorboxBackColor,
   fonttitle=\bfseries
@@ -163,22 +112,8 @@
   leftrule=0.8mm,
   colframe=tcolorboxLeftColor,
   sharp corners=all,
-  title={Corollary~\arabic{\tcbcounter}.~#1},
+  title={\iflanguage{italian}{Corollario}{Corollary}~\arabic{\tcbcounter}.~#1},
   colbacktitle=tcolorboxBackTitleColor,
   colback=tcolorboxBackColor,
   fonttitle=\bfseries
 }
-
-\newtcolorbox[auto counter, number within=chapter]{corollario}[1]{
-  boxrule=0mm,
-  leftrule=0.8mm,
-  colframe=tcolorboxLeftColor,
-  sharp corners=all,
-  title={Corollario~\arabic{\tcbcounter}.~#1},
-  colbacktitle=tcolorboxBackTitleColor,
-  colback=tcolorboxBackColor,
-  fonttitle=\bfseries
-}
-
-
-
