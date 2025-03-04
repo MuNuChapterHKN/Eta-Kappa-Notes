@@ -1,0 +1,303 @@
+\chapter{Interferenza e diffrazione -- esercitazioni}
+
+% Definizione di intensità:
+% \begin{equation}
+%     I = \avg{\norm{\vt{S}}} = \frac{E^2}{2 \mu_0 c}
+% \end{equation}
+
+% Quando un onda piana incide uno schermo con $N$ fenditure puntiformi, tutte queste fenditure si comportano come sorgenti coerenti.
+
+% Su un secondo schermo, si vede luce là dove le $N$ sorgenti hanno interferenza costruttiva.
+
+% Ci poniamo nella condizione per cui lo schermo è a grande distanza $L$ dalle fenditure.
+
+% Definendo $I_0$ il fattore di proporzionalità,
+% \begin{equation}
+% \label{eq:intensitynsource}
+%     I = I_0 \frac{\sin^2\frac{N \pi d \sin\theta}{\lambda}}{\sin^2\frac{\pi d \sin\theta}{\lambda}}
+% \end{equation}
+% dove $d$ è la distanza tra le fenditure e $\theta$ è l'angolo rispetto all'orizzontale sullo schermo, l'unico parametro per determinare la posizione del punto di osservazione, per cui
+% \begin{equation}
+%     - \frac{\pi}{2} < \theta < \frac{\pi}{2}
+% \end{equation}
+
+% Definendo $x = \pi d \sin \theta / \lambda$, la funzione
+% \begin{equation}
+%     f(x) = \frac{\sin^2 N x}{\sin^2 x}
+% \end{equation}
+% determina il profilo dell'intensità.
+
+% $f$ ha dei massimi quando il numeratore è massimo.
+
+% Di questi, uno ogni $N$ è un massimo principale con valore $N^2 I_0$, che annulla anche il denominatore.
+
+% Tra due massimi principali, ci sono $N - 1$ minimi in cui la funzione si annulla (là dove si annulla il numeratore ma non il denominatore).
+
+% Massimi principali:
+% \begin{equation}
+%     d \sin \theta_M = m \lambda, \quad m \in \Z
+% \end{equation}
+% $m$ è detto \important{ordine del massimo}.
+
+% Minimi ($N - 1$ tra ogni coppia di massimi principali):
+% \begin{equation}
+%     N d \sin \theta_0 = m' \lambda, \quad
+%     m' \in \Z, \quad N \nmid m'
+% \end{equation}
+
+% Massimi secondari ($N - 2$ tra ogni coppia di massimi principali):
+% \begin{equation}
+%     N d \sin \theta_m = \pts{m'' + \frac{1}{2}} \lambda, \quad m'' \in \Z, \quad N, N-1 \nmid m''
+% \end{equation}
+
+Se sono richieste le posizioni $x$ sullo schermo, queste si trovano come
+\begin{equation}
+    x = L \tan \theta
+\end{equation}
+
+Se $L \gg \abs{x}$,
+\begin{equation}
+    x \approx L \sin\theta
+\end{equation}
+È per questo che i massimi e minimi delle figure di interferenza e diffrazione risultano equispaziati.
+
+\section{Inteferenza tra due sorgenti}
+
+Sorgenti isofrequenziali:
+\begin{subequations}
+\begin{gather}
+    \E_1 = \E_{01} \sin(\vt{k}_1 \cdot \p_1 - \omega t + \phi_1) \\
+    \E_2 = \E_{02} \sin(\vt{k}_2 \cdot \p_2 - \omega t + \phi_2)
+\end{gather}
+\end{subequations}
+
+Differenza di fase:
+\begin{equation}
+    \phi \coloneq \vt{k}_1 \cdot \p_1 + \phi_1 - \vt{k}_2 \cdot \p_2 - \phi_2
+\end{equation}
+
+Intensità risultante:
+\begin{equation}
+    I_\text{tot} = I_1 + I_2 + 2 \sqrt{I_1 I_2} \cos \phi
+\end{equation}
+
+Se le sorgenti sono identiche,
+\begin{gather}
+    I_1 = I_2 \eqcolon I_0 \\
+    \implies I_\text{tot} = 4 I_0 \frac{1 + \cos \phi}{2}
+    = 4 I_0 \cos^2 \frac{\phi}{2}
+\end{gather}
+
+\section{Interferenza}
+
+Esercizio: reticolo di diffrazione con $N = 100$ fenditure e una distanza tra le fenditure di $d = \qty{50}{\micro\metre}$, luce rossa con $\lambda_r = \qty{700}{\nano\metre}$ e luce blu con $\lambda_b = \qty{500}{\nano\metre}$, schermo posto a distanza $L = \qty{2}{\metre}$.
+Quanto distano i due massimi di ordine $m = 1$ per i due colori?
+\begin{equation}
+\begin{gathered}
+    \Delta x = x_r - x_b = L \pts{\tan \arcsin \theta_r - \tan \arcsin \theta_b} \approx \\
+    \approx L \pts{\arcsin \theta_r - \arcsin \theta_b}
+    = L \frac{\lambda_r}{d} m - L \frac{\lambda_b}{d} m
+    = \qty{8}{\milli\metre}
+\end{gathered}
+\end{equation}
+
+Esercizio: doppia fenditura (esperimento di Young), $d = \qty{1.5e-4}{\metre}$, $L = \qty{1.4}{\metre}$, $\lambda = \qty{643}{\nano\metre}$.
+Nel punto sullo schermo in $x = \qty{1.8e-2}{\metre}$ si ha un massimo o un minimo?
+
+$x \ll L$, quindi $\sin \theta \approx \tan \theta = x/L$:
+\begin{equation}
+    \cos^2\pts{\frac{\phi}{2}}
+    = \cos^2\pts{\pi \frac{d}{\lambda} \sin\theta}
+    \approx \cos^2\pts{\pi \frac{d}{\lambda} \frac{x}{L}} = 1
+\end{equation}
+L'interferenza è costruttiva.
+
+Esercizio: doppia fenditura (esperimento di Young), $d = \qty{e-5}{\metre}$, $L = \qty{1}{\metre}$, $\lambda = \qty{500}{\nano\metre}$.
+In che posizione $x$ si trova il terzo minimo di interferenza?
+
+Con $m = 3$,
+\begin{equation}
+    x = L \tan \theta
+    = L \tan \arcsin \pts{\frac{\lambda}{d} \pts{m - \frac{1}{2}}}
+    = \qty{12.6}{\centi\metre}
+\end{equation}
+\textit{A posteriori}, si vede che si sarebbe anche potuta usare l'approssimazione per angoli piccoli.
+
+Esercizio: reticolo di diffrazione con $4000$ tratti al centimetro.
+Il massimo di secondo ordine ($m = 2$) è deviato di $\theta = \qty{34}{\degree}$.
+Quanto vale $\lambda$?
+\begin{gather}
+    d = \pts{\qty{4000}{\per\centi\meter}}^{-1} = \qty{2.5}{\micro\metre} \\
+    \lambda = \frac{d \sin{\theta}}{m} = \qty{699}{\nano\metre}
+\end{gather}
+
+Esercizio: quattro antenne in fila a una distanza l'una dall'altra di $d = \qty{10}{\metre}$ irradiano (in un mezzo isotropo) una potenza $P = \qty{100}{\kilo\watt}$ a frequenza $\nu = \qty{30}{\mega\hertz}$.
+Come varia l'intensità a una distanza $L = \qty{10}{\kilo\metre}$?
+
+Si usa la \eqref{eq:reticolo}.
+
+Poiché il mezzo è isotropo, le sorgenti irradiano onde sferiche.
+Allora, l'intensità dovuta a una singola sorgente è
+\begin{equation}
+    I_0 = \frac{P}{4\pi L^2} = \qty{7.96e-5}{\watt\per\meter\squared}
+\end{equation}
+
+I massimi principali sono ad angoli
+\begin{equation}
+    \theta = \arcsin \frac{m \lambda}{d}
+    = \arcsin \frac{m c}{\nu d}
+    = \arcsin m
+\end{equation}
+Poiché $-\pi/2 \le \theta \le \pi/2$, $m \in \{-1, 0, 1\}$.
+Gli unici quattro massimi principali sono nelle quattro direzioni rispetto all'allineamento delle antenne.
+
+I minimi saranno $4 - 1 = 3$ per quadrante, in angoli
+\begin{gather}
+    \theta
+    = \arcsin \frac{m' c}{4 \nu d}
+    = \arcsin \frac{m'}{4} \\
+    \theta_1 = \qty{14.5}{\degree}, \quad
+    \theta_2 = \qty{30.0}{\degree}, \quad
+    \theta_3 = \qty{48.6}{\degree}
+\end{gather}
+
+I massimi secondari saranno due per quadrante:
+\begin{gather}
+    \theta
+    = \arcsin \frac{(m'' + 0.5) c}{4 \nu d}
+    = \arcsin \frac{2m'' + 1}{8} \\
+    \theta_1 = \qty{22.0}{\degree}, \quad
+    \theta_2 = \qty{38.7}{\degree}
+\end{gather}
+
+\redtext{Figura: pattern di radiazione}
+
+Esercizio: reticolo di diffrazione con $1000$ fenditure al centimetro. Due onde incidenti, $\lambda_1 = \qty{650}{\nano\metre}$ e $\lambda_2 = \qty{640}{\nano\metre}$.
+Qual è la separazione angolare tra i due massimi del primo ordine?
+\begin{gather}
+    d = \pts{\qty{1000}{\per\centi\meter}}^{-1} = \qty{e-5}{\metre} \\
+    \Delta \theta = \theta_1 - \theta_2
+    \approx \frac{m \lambda_1}{d} - \frac{m \lambda_2}{d}
+    = \frac{m}{d}(\lambda_1 - \lambda_2)
+    = \qty{e-3}{\radian}
+\end{gather}
+
+È possibile osservare la separazione tra i due picchi?
+
+\section{Risoluzione}
+
+\important{Criterio di Rayleigh}: è possibile distinguere due massimi se il secondo cade al di là dei minimi che circondano il primo, o viceversa.
+\begin{gather}
+    \theta_{\text{max}1} = \frac{\lambda_1}{d}
+    \qquad
+    \theta_{\text{max}2} = \frac{\lambda_2}{d} \\
+    \theta_{\text{min}1^+} = \frac{N+1}{N} \frac{\lambda_1}{d}
+    \qquad
+    \theta_{\text{min}2^+} = \frac{N+1}{N} \frac{\lambda_2}{d} \\
+    \theta_{\text{min}1^-} = \frac{N-1}{N} \frac{\lambda_1}{d}
+    \qquad
+    \theta_{\text{min}2^-} = \frac{N-1}{N} \frac{\lambda_2}{d}
+\end{gather}
+
+Quindi, non è indifferente quale onda scelgo per i minimi.
+
+Sia $\lambda_1 < \lambda_2$.
+Le due opzioni sono:
+\begin{itemize}
+    \item massimo di 2 sul minimo di destra di 1:
+    \begin{equation}
+        \frac{\lambda_2}{d} = \frac{N+1}{N} \frac{\lambda_1}{d}
+        = \frac{\lambda_1}{d} + \frac{\lambda_1}{N_{L1} d}
+    \end{equation}
+    \item massimo di 1 sul minimo di sinistra di 2:
+    \begin{equation}
+        \frac{\lambda_1}{d} = \frac{N-1}{N} \frac{\lambda_2}{d}
+        = \frac{\lambda_2}{d} - \frac{\lambda_2}{N_{L2} d}
+    \end{equation}
+\end{itemize}
+$N_{L1}$ e $N_{L2}$ sono gli $N$ limite per soddisfare le due condizioni.
+
+Risulta
+\begin{subequations}
+\begin{gather}
+    N_{L1} = \frac{\lambda_1}{\lambda_2 - \lambda_1} \\
+    N_{L2} = \frac{\lambda_2}{\lambda_2 - \lambda_1}
+\end{gather}
+\end{subequations}
+
+Si sceglie di considerare
+\begin{equation}
+    N_L = \frac{N_{L1} + N_{L2}}{2} = \frac{\frac{\lambda_1 + \lambda_2}{2}}{\lambda_2 - \lambda_1}
+    = \frac{\lambda}{\lambda_2 - \lambda_1}
+\end{equation}
+
+Esercizio: reticolo con $N = 50$ fenditure e $\lambda_1 = \qty{400}{\nano\metre}$.
+Quali valori può assumere $\lambda_2$ affinché non si possano distinguere i massimi di secondo ordine?
+\begin{equation}
+    \lambda_2 \in \pts{\frac{N m - 1}{N m} \lambda_1, \, \frac{N m + 1}{N m} \lambda_1}
+    = \pts{\qty{396}{\nano\metre}, \qty{404}{\nano\metre}}
+\end{equation}
+
+\section{Diffrazione}
+
+% Si parla di diffrazione quando si ha una singola fenditura di ampiezza $a > \lambda$.
+
+% Nell'ipotesi che $a \ll L$, la distribuzione dell'intensità sarà
+% \begin{equation}
+%     I_\text{tot} = I_0 \pts{\frac{\sin \frac{\pi a \sin\theta}{\lambda}}{\frac{\pi a \sin\theta}{\lambda}}}^2
+% \end{equation}
+
+% I massimi diversi da quello centrale sono subito molto flebili.
+
+% Minimi:
+% \begin{equation}
+%     a \sin\theta = m \lambda, \quad
+%     m \in \Z, \, m \ne 0
+% \end{equation}
+% Se $a < \lambda$, non ci sono minimi e non si parla di diffrazione.
+
+% Massimi secondari:
+% \begin{equation}
+%     a \sin\theta = \pts{m' + \frac{1}{2}} \lambda, \quad
+%     m' \in \Z, \, m' \ne 0
+% \end{equation}
+
+Esercizio: $a = \qty{6e-4}{\metre}$, $\lambda = \qty{400}{\nano\metre}$, $L = \qty{1.5}{\metre}$.
+A che angolo e in che posizione si trova il minimo di ordine 2?
+\begin{gather}
+    \theta = \arcsin \frac{m \lambda}{a} = \qty{1.33e-3}{\radian} \\
+    x = L \tan \theta \approx L \sin \theta = \qty{2}{\milli\metre}
+\end{gather}
+
+L'intensità nel caso del reticolo di diffrazione con $a > \lambda$ va descritta considerando sia la diffrazione che l'interferenza:
+\begin{equation}
+    I_\text{tot} = I_0
+    \underbrace{\pts{\frac{\sin\pts{\pi \frac{a}{\lambda} \sin\theta}}{\pi \frac{a}{\lambda} \sin\theta}}^2}_\text{diffrazione}
+    \underbrace{\frac{\sin^2 \pts{N \pi \frac{d}{\lambda} \sin \theta}}{\sin^2 \pts{\pi \frac{d}{\lambda} \sin \theta}}}_\text{interferenza}
+\end{equation}
+
+Esercizio: doppia fenditura con $d = \qty{30}{\micro\metre}$, $a = \qty{3}{\micro\metre}$, $\lambda = \qty{500}{\nano\metre}$.
+A occhio nudo si vedono solo le regioni con $I > \qty{5}{\percent} I_\text{max}$.
+Quanti picchi si vedono?
+
+Capiamo quali massimi di diffrazioni rispettano la condizione richiesta.
+Per $m = 1$,
+\begin{equation}
+    \frac{I}{N^2 I_0} = \pts{\frac{\sin\pts{\pi \frac{a}{\lambda} \sin\theta}}{\pi \frac{a}{\lambda} \sin\theta}}^2
+    = \pts{\frac{\sin \frac{3}{2} \pi}{\frac{3}{2} \pi}}^2
+    = \qty{4.5}{\percent} < \qty{5}{\percent}
+\end{equation}
+Quindi, si studia solo il massimo centrale di diffrazione.
+
+Il primo minimo di diffrazione è in $\theta$ tale che $\sin \theta = \lambda / a$.
+
+L'ordine $m$ maggiore del massimo di interferenza che sta entro il minimo di diffrazione si trova imponendo
+\begin{equation}
+    \frac{\lambda}{a} > m \frac{\lambda}{d}
+    \implies
+    m_\text{max} = \left\lceil \frac{d}{a} \right\rceil - 1 = 9
+\end{equation}
+Quindi, i massimi candidati sono $1 + 2 \cdot 9 = 19$.
+
+Cercando caso per caso, si osserva che il massimo di ordine 8 dà $\qty{5.5}{\percent}$ e quello di ordine 9 dà $\qty{1.2}{\percent}$.
+Quindi, si vedono $1 + 2 \cdot 8 = 17$ massimi.

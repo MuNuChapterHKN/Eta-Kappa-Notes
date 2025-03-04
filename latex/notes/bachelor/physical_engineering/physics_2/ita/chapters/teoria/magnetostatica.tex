@@ -1,0 +1,344 @@
+\chapter{Magnetostatica}
+
+\section{Principi della magnetostatica}
+
+\subsection{Campo magnetico}
+
+L'evidenza più basilare è costituita da barrette di magnetite che interagiscono reciprocamente.
+
+Queste, quando affiancate, si comportano esattamente come un dipolo elettrico:
+\begin{itemize}
+    \item In preseza di un campo elettrico, il dipolo si orienta fino a diventare parallelo.
+    \item Due dipoli affiancati si dispongono in direzione opposta.
+    \item Due dipoli adiacenti si dispongono in direzione concorde.
+\end{itemize}
+Tuttavia, mentre un dipolo elettrico genera un campo elettrico, le barrette di magnetite no (non sono cariche nemmeno localmente).
+
+Immaginiamo di riempire lo spazio con molti dipoli piccoli: si allineeranno sulle linee di campo.
+
+La limatura di ferro si dispone, attorno alle barrette, secondo linee di campo simili a quelle di un dipolo elettrico.
+
+C'è, quindi, un'altra proprietà della materia: il magnetismo
+
+Si parla (provvisoriamente) di cariche magnetiche nord e sud e di campo magnetico $\B$ (tangente a queste linee di campo).
+
+Il campo magnetico imprime una forza a cariche in movimento.
+
+\important{Forza di Lorentz}:
+\begin{equation}
+    \force = q \vt{v} \times \B
+\end{equation}
+
+Grazie alla forza di Lorentz si definisce il campo magnetico (unità di misura: tesla $\unit{\tesla} = \unit{\newton\second\per\coulomb\per\metre}$).
+
+Tuttavia, questa legge non definisce la sorgente del campo.
+Inoltre, non si può parlare di carica magnetica poiché sperimentalmente non si riescono a isolare le ``cariche'' nord e sud, vanno sempre a coppie.
+
+Poiché risultato di un prodotto vettoriale, $\force \perp \vt{v} \implies P = \force \cdot \vt{v} = 0$: il campo magnetico non svolge lavoro.
+
+Quindi, non varia l'energia cinetica e neanche il modulo della velocità.
+
+I tipi di moto possibili per una particella carica di massa $m$ in presenza di un campo magnetico sono i seguenti:
+\begin{itemize}
+    \item Se $\vt{v} \perp \B$, il moto è circolare uniforme di raggio $R$:
+        \begin{equation}
+            F = qvB = m \frac{v^2}{R} \implies R = \frac{mv}{qB}
+        \end{equation}
+    \item Se $\vt{v} \parallel \B$, il moto è rettilineo uniforme
+    \item Ogni altro caso è una combinazione dei precedenti: moto a elica con $R = mv\sin{\alpha}/(qB)$
+\end{itemize}
+
+Questo rende possibile la spettrometria di massa (vedi \autoref{sec:spettrometro_massa}).
+
+Inoltre, la Terra ha un campo magnetico e intrappola le particelle cariche che si avvicinano all'atmosfera terrestre, tranne vicino ai poli (nascono così le aurore boreali).
+
+\subsection{Esperimento di Ampère}
+
+La limatura di ferro si distribuisce secondo linee di campo in presenza di un filo conduttore attraverso cui passa corrente.
+Se la corrente viene spenta, la limatura torna uniforme.
+Quindi, la sorgente del campo magnetico è la carica in moto.
+
+\important{Legge elementare di Ampère}: il campo magnetico generato da una carica $q$ in posizione $\p'$ e in moto con velocità istantanea $\vt{v}$ è
+\begin{equation}
+    \B(\p) = \frac{\mu_0}{4\pi} \frac{q \vt{v}}{\norm{\p - \p'}^2} \times \ver{\p'}
+\end{equation}
+con $\ver{\p'} = (\p - \p')/\norm{\p - \p'}$.
+$\mu_0$ è detta \important{permeabilità magnetica del vuoto}.
+
+Osserviamo che
+\begin{itemize}
+    \item La forma di quest'equazione è molto simile a quella della legge di Coulomb.
+    \item $\B$ ha smmetria cilindrica rispetto alla retta individuata da $\vt{v}$.
+    \item Le linee di campo sono tutte chiuse.
+    \item vale la seguente relazione:
+        \begin{equation}
+            \B = \mu_0 \eps_0 \vt{v} \times \E
+        \end{equation}
+\end{itemize}
+
+\subsection{Riassunto dei principi}
+
+\begin{itemize}
+    \item Forza di Lorentz; è il principio con cui si definisce il campo magnetico e l'equivalente della forza di Coulomb.
+    \item Legge elementare di Ampère; il campo magnetico, che agisce su cariche in moto, è generato da cariche in moto.
+    \item Principio di sovrapposizione degli effetti.
+\end{itemize}
+
+La magnetostatica ha due diverse equazioni su
+\begin{itemize}
+    \item come il campo è generato, sorgenti (legge elementare di Ampère)
+    \item come il campo agisce (legge di Lorentz)
+\end{itemize}
+
+Per l'elettrostatica, invece, l'equazione è unica (la legge di Coulomb definisce sia il campo elettrico sia la carica; sia la sorgente del campo sia il suo effetto).
+
+
+\section{Campo magnetico e fili conduttori}
+
+Detta $n$ la densità volumica di cariche, la densità di carica sarà $\rho = n q$.
+Ricordando $\dcurr = \rho \vt{v}$ e considerando che un tratto infinitesimo di filo ha volume $S \, \de l$,
+\begin{equation}
+\label{eq:corrente_infinitesima}
+    \de q \, \vt{v} = \rho \, \de V \, \vt{v} = \dcurr \, \de V =  \pts{\int_S \dcurr \sde} \de \vt{l} = I \de \vt{l}
+\end{equation}
+
+\subsection{Campo magnetico generato da una corrente}
+
+A partire dalla legge elementare di Ampère e usando la \eqref{eq:corrente_infinitesima}, si ottiene la \important{Legge di Ampère-Laplace}:
+\begin{equation}
+\label{eq:ampere_laplace}
+    \de\B(\p) = \frac{\mu_0}{4\pi} \frac{I \de \vt{l} \times \ver{\p'}}{\norm{\p -\p'}^2}
+    = \frac{\mu_0}{4\pi} \frac{\dcurr \times \ver{\p'}}{\norm{\p -\p'}^2} \de V
+\end{equation}
+
+Formato integrale:
+\begin{equation}
+\label{eq:ampere_laplace_integrale}
+    \B(\p) = \frac{\mu_0 I}{4\pi} \!\int_\text{filo} \frac{\de \vt{l}' \times \ver{\p'}}{\norm{\p -\p'}^2}
+    = \frac{\mu_0}{4\pi} \!\int_\text{filo} \frac{\dcurr(\p') \times \ver{\p'}}{\norm{\p -\p'}^2} \de V'
+\end{equation}
+Correla la geometria del filo al campo magnetico generato.
+
+\subsection{Campo magnetico esercitato su un filo}
+
+Riutilizzando la \eqref{eq:corrente_infinitesima},
+\begin{equation}
+    \de\force = I \de\vt{l} \times \B
+\end{equation}
+
+Formato integrale:
+\begin{equation}
+    \force = I\!\int_\text{filo} \de\vt{l}' \times \B(\p')
+\end{equation}
+
+\subsection{Forza esercitata reciprocamente}
+\label{sec:def_ampere}
+
+\important{Legge di Biot-Savart}: considerando un filo rettilineo infinito con corrente $I$, il campo magnetico a una distanza $R$ è
+\begin{equation}
+\label{eq:biot_savart}
+    \B = \frac{\mu_0 I}{2\pi R} \ver{\theta}
+\end{equation}
+Di nuovo, ``infinito'' significa che $R \ll$ lunghezza del filo.
+
+A distanza $R$ si colloca parallelo un altro filo rettilineo di lunghezza $L'$ e con corrente $I'$.
+
+Per il principio di azione e reazione, la forza che i due fili esercitano l'uno sull'altro è la stessa.
+
+Quella esercitata sul secondo filo è
+\begin{equation}
+    \force = I'\!\int_\text{filo 2} \de\vt{l} \times \B = I' L' \norm{\B} \ver{R} = \frac{\mu_0 I I' L'}{2\pi R} \ver{R}
+\end{equation}
+con $\B$ generato dal primo filo e $\ver{R}$ rivolto dal secondo filo verso il primo (la forza è attrattiva).
+
+Poiché è molto semplice avere fili con corrente e invece molto difficile avere cariche nette stabili, storicamente è stato definito prima l'ampere e poi il coulomb.
+
+\qty{1}{\ampere} è, per definizione, la corrente che percorre due fili a distanza di \qty{1}{\metre} e che si attirano con una forza di \qty{2e-7}{\newton} per ogni metro di lunghezza dei fili.
+
+Per cui, $\mu_0 = \qty{4\pi e-7}{\newton\per\coulomb\squared\second\squared}$, e da questo si definiscono $\eps_0$ e il coulomb.
+
+Definendo una tra carica e corrente, si definiscono sia $\mu_0$ sia $\eps_0$, che non sono indipendenti.
+(In particolare, risulterà $\mu_0\eps_0 c^2 = 1$.)
+
+\section{Legge di Gauss per il magnetismo}
+
+Partendo dalla \eqref{eq:ampere_laplace_integrale} scritta con la densità di corrente, prendiamo la divergenza (rispetto alla variabile $\p$)
+\begin{equation}
+    \diver \B(\p) = \frac{\mu_0}{4\pi} \!\int_V \diver \frac{\dcurr(\p') \times \ver{\p'}}{\norm{\p - \p'}^2} \de V'
+\end{equation}
+La divergenza può entrare nell'integrale poiché è in $\p$, mentre l'integrale è in $\p'$.
+
+Si usa la formula
+\begin{equation}
+    \diver (\vt{A} \times \vt{B}) = \vt{B} \cdot (\curl \vt{A}) - \vt{A} \cdot (\curl \vt{B})
+\end{equation}
+
+\begin{equation}
+    \diver \B(\p) = \frac{\mu_0}{4\pi} \!\int_V \pts{\frac{\ver{\p'}}{\norm{\p - \p'}^2} \cdot \pts{\curl \dcurr(\p')} - \dcurr(\p') \cdot \pts{\curl \frac{\ver{\p'}}{\norm{\p - \p'}^2}}} \de V'
+\end{equation}
+
+Il primo termine è nullo perché $\dcurr$ non è funzione di $\p$, il secondo è anch'esso nullo perché è un campo centrale del tipo $1/r^2$, dunque è conservativo.
+
+Risulta
+\begin{equation}
+    \diver \B = 0
+\end{equation}
+Ovvero, $\B$ è \important{solenoidale} e tutte le linee di campo sono chiuse.
+
+Formato integrale tramite il teorema di Gauss:
+\begin{equation}
+    \oint_S \B \sde = 0
+\end{equation}
+
+\subsection{Potenziale vettore}
+
+Il fatto che il campo magnetico sia solenoidale permette di introdurre il potenziale vettore $\vpot$:
+\begin{equation}
+    \B = \curl \vpot
+\end{equation}
+
+È il corrispettivo del potenziale scalare $\spot$, che esprime $\curl \E = \vt{0}$ così come il potenziale vettore esprime $\diver \B = 0$.
+
+$\vpot$ non è unico, ma varia a meno del gradiente di un campo scalare.
+Se $\vpot$ è un possibile potenziale vettore, andrebbe bene anche $\vpot + \grad \phi$ per un campo scalare $\phi$ qualsiasi, poiché
+\begin{equation}
+    \curl (\vpot + \grad \phi) = \curl \vpot = \B
+\end{equation}
+
+Vogliamo trovarne un'espressione.
+
+Tramite la seguente relazione (gradiente in $\p$)
+\begin{equation}
+    - \grad\pts{\frac{1}{\norm{\p - \p'}}} = \frac{\ver{\p'}}{\norm{\p - \p'}^2}
+\end{equation}
+riscriviamo come segue la legge di Ampère-Laplace:
+\begin{equation}
+    \B(\p)
+    = \frac{\mu_0}{4\pi} \int_V \frac{\dcurr(\p') \times \ver{\p'}}{\norm{\p - \p'}^2} \de V'
+    = \frac{\mu_0}{4\pi} \int_V \grad\pts{\frac{1}{\norm{\p - \p'}}} \times \dcurr(\p') \, \de V'
+\end{equation}
+La perdita del segno meno è compensata dall'aver scambiato i fattori del prodotto vettoriale.
+
+Si usa la seguente indentità del calcolo vettoriale:
+\begin{equation}
+    \grad f \times \dcurr = \curl (f \dcurr)  - f \, \curl \dcurr
+\end{equation}
+con $f = 1/{\norm{\p - \p'}}$.
+\begin{gather}
+    \B(\p) =
+    \frac{\mu_0}{4\pi} \int_V \curl \pts{\frac{\dcurr(\p')}{\norm{\p - \p'}}} \de V' -
+    \frac{\mu_0}{4\pi} \int_V \frac{1}{\norm{\p - \p'}} \nabla \times \dcurr(\p') \de V' = \\
+    = \frac{\mu_0}{4\pi} \curl \int_V \frac{\dcurr(\p')}{\norm{\p - \p'}} \de V'
+\end{gather}
+
+Abbiamo espresso $\B$ come rotore di un campo vettoriale, che quindi è $\vpot$:
+\begin{equation}
+\label{eq:potenziale_vettore}
+    \vpot(\p) = \frac{\mu_0}{4\pi} \int_V \frac{\dcurr(\p')}{\norm{\p - \p'}} \de V'
+    % = \mu_0 \slp \dcurr(\p)
+\end{equation}
+
+Si ricorda l'analoga espressione per il potenziale scalare:
+\begin{equation}
+    \spot(r) = \frac{1}{4\pi \eps_0} \int_V \frac{\rho(\p')}{\norm{\p - \p'}} \de V'
+    % = \frac{1}{\eps_0} \slp \rho(\p)
+\end{equation}
+Per analogia, quindi, anche per ogni componente del potenziale vettore vale l'equazione di Poisson:
+\begin{gather}
+    \vlapl \vpot(\p) = - \mu_0 \dcurr(\p) \\
+    \lapl \spot(\p) = - \frac{1}{\eps_0} \rho(\p)
+\end{gather}
+Si tratta complessivamente di quattro equazioni differenziali scalari.
+
+\section{Legge di Ampère}
+
+Calcoliamo il rotore di $\B$:
+\begin{equation}
+    \curl \B = \curl \curl \vpot = - \vlapl \vpot + \cancel{\grad (\diver \vpot)} = \mu_0 \dcurr
+\end{equation}
+Infatti, definire $\vpot$ come in \eqref{eq:potenziale_vettore} implica che $\vpot$ è solenoidale.
+
+Formato integrale (tramite il teorema di Stokes):
+\begin{equation}
+\label{eq:legge_di_ampere}
+    \oint_\gamma \B \lde = \mu_0 I
+\end{equation}
+dove $I$ è la \textbf{corrente concatenata a $\gamma$}, ovvero la corrente attraverso una qualunque superficie $S$ che abbia bordo $\gamma$, orientata secondo il verso di percorrenza di $\gamma$.
+
+Simmetria tra campi e sorgenti:
+\begin{itemize}
+    \item divergenze: $\rho$ sorgente, quindi è nulla quella di $\B$
+    \item rotori: $\dcurr$ sorgente, quindi nullo quello di $\E$
+    \item la sorgente minima del campo elettrico è la carica
+    \item la sorgente minima del campo magnetico è un dipolo $\iff$ non esistono monopoli magnetici (è un'evidenza sperimentale, nella teoria sarebbero possibili)
+\end{itemize}
+
+\section{Esempi di calcolo}
+
+\subsection{Filo rettilineo}
+
+Per simmetria le linee di campo sono circonferenze centrate nel filo; lo si vede anche dal prodotto vettoriale nella legge di Ampère-Laplace.
+
+Si ha simmetria cilindrica e $B = \norm{\B}$ è costante se il punto dista $R$ dal filo
+
+\begin{equation}
+    \oint_\text{circ. $R$} \B \lde
+    = \oint_\text{circ. $R$} B \de l
+    = 2\pi R B
+    = \mu_0 I \implies B
+    = \frac{\mu_0 I}{2\pi R}
+\end{equation}
+
+È una conferma della legge di Biot-Savart \eqref{eq:biot_savart}.
+
+\subsection{Solenoide}
+
+= filo ``arrotolato'' attorno a un cilindro.
+
+Consideriamolo di lunghezza $L$ e formato da $N$ giri del filo.
+
+Se $L \gg$ del diametro, il campo magnetico è nullo all'esterno.
+
+Si applica la legge di Ampère su un a sezione rettangolare che interseca la superficie del cilindro.
+
+La curva è $\gamma$ e il lato parallelo all'asse del solenoide è $h \ll L$.
+
+\begin{equation}
+    \oint_\gamma \B \lde = B(R) h = \mu_0 \pts{h \frac{N}{L} I} \implies B = \mu_0 \frac{N}{L} I
+\end{equation}
+
+I contributi dei lati che attraversano il cilindro si elidono per simmetria e il lato esterno dà contributo zero.
+
+\section{Riassunto: elettrostatica e magnetostatica}
+
+Dagli esperimenti alle leggi:
+\begin{itemize}
+    \item evidenze sperimentali
+    \item principi
+    \item legge in formato integrale (valgono complessivamente rispetto a un volume o superficie), sono quelle che si ottengono con esperimenti
+    \item legge in formato differenziale (valgono punto per punto), molto più semplici da trattare
+\end{itemize}
+
+Leggi sul campo elettrico:
+\begin{itemize}
+    \item legge di Gauss: $\diver \E = \rho/\eps_0$
+    \item conservatività: $\curl \E = \vt{0}$
+    \begin{itemize}
+        \item potenziale scalare: $\E = -\grad \spot$
+    \end{itemize}
+\end{itemize}
+Riassunte nell'equazione di Poisson: $\lapl \spot = -\rho/\eps_0$.
+
+Leggi sul campo magnetico:
+\begin{itemize}
+    \item legge di Gauss: $\diver \B = 0$
+    \begin{itemize}
+        \item potenziale vettore: $\B = \curl \vpot$
+    \end{itemize}
+    \item legge di Ampère: $\curl \B = \mu_0 \dcurr$
+\end{itemize}
+Riassunte nell'equazione $\vlapl \vpot = -\mu_0 \dcurr$.
+
+Parlando della sorgente del campo magnetico, abbiamo trascurato il campo elettrico generato dalle cariche in moto poiché i fili conduttori sono complessivamente neutri.
+
+Un'altra osservazione da sospendere riguarda le contraddizioni rispetto alla relatività galileiana: il campo magnetico misurato in un sistema in quiete con una carica è nullo, ma non lo è in un sistema (sempre inerziale) in moto rispetto al primo. Risolveremo queste contraddizioni nel \autoref{sec:relativita}.

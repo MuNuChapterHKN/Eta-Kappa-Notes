@@ -1,0 +1,61 @@
+\chapter{Onde elettromagnetiche -- esercitazioni}
+
+\section{Riflessione e rifrazione}
+
+\redtext{Dimostrazione di Snell-Cartesio e angolo limite.}
+
+% \section{Vettore di Poynting}
+
+% La densità di energia dovuta alla presenza dell'onda è
+% \begin{gather}
+%     w\EM = \frac{1}{2} \eps_0 E^2 + \frac{1}{2} \frac{B^2}{\mu_0} = \eps_0 E^2 = \frac{B^2}{\mu_0}
+% \end{gather}
+% Il campo elettrico e quello magnetico contribuiscono ciascuno a metà della densità di energia.
+
+% Considerando un cilindro di base $S$ e lunghezza $c \Delta t$, la variazione di energia è
+% \begin{equation}
+%     \der[U]{t} = U S c = \eps_0 E^2 c S
+% \end{equation}
+% Si definisce quindi il vettore di Poynting:
+% \begin{equation}
+%     \vt{S} = \eps_0 E^2 \vt{c} = \frac{1}{\mu_0} \E \times \B, \quad
+%     \norm{\vt{S}} = \frac{E^2}{\mu_0 c}
+% \end{equation}
+% È una potenza per unità di superficie.
+
+
+\section{Onda sferica}
+
+Un'onda sferica di genera quando una sorgente puntiforme emette onde in un mezzo isotropo ed è caratterizzata da $\vt{k} \parallel \p$ (ponendo la sorgente nell'origine).
+\begin{gather}
+    \E(\p, t) = \E_0 \sin(k r - \omega t) \\
+    \vt{S} = \frac{E_0^2}{\mu_0 c} \sin^2(kr - \omega t) \ver{r}
+\end{gather}
+
+Il flusso di $\vt{S}$ attraverso una superficie sferica $\Sigma$ di raggio $r$ è la seguente potenza:
+\begin{equation}
+\begin{gathered}
+    P(r) = \int_\Sigma \vt{S} \sde = \int_{\Sigma} \frac{E_0^2}{\mu_0 c} \sin^2(kr - \omega t) \ver{r} \sde = \\
+    = \int_{\phi = 0}^{2\pi} \int_{\theta = 0}^{\pi} \frac{E_0^2}{\mu_0 c} \sin^2(kr - \omega t) \, r^2 \sin\theta \, \de\theta \de\phi
+    = \frac{E_0^2}{\mu_0 c} \sin^2(kr - \omega t) \, 4 \pi r^2
+\end{gathered}
+\end{equation}
+
+La potenza media in un periodo vale
+\begin{equation}
+    \avg{P} = \frac{1}{T} \int_0^T P(t) \de t
+    = \frac{E_0^2}{\mu_0 c} 4 \pi r^2 \frac{1}{T} \int_0^T \sin^2(kr - \omega t) \de t
+    = \frac{E_0^2}{2\mu_0 c} 4 \pi r^2
+    = 4 \pi r^2 I
+\end{equation}
+
+La potenza deve essere indipendente dal raggio, e questo vale se e solo se
+\begin{equation}
+    E_0 \propto \frac{1}{r}
+\end{equation}
+
+Esercizio: il campo elettrico raccolto da un ricevitore radio a una distanza $d = \qty{500}{\metre}$ dalla sorgente ha un'ampiezza massima $E_0 = \qty{0.1}{\volt\per\metre}$. Calcolare l'intensità dell'onda presso il ricevitore e la potenza emessa dalla sorgente.
+\begin{gather}
+    I = \frac{E_0^2}{2 \mu_0 c} = \qty{1.33e-5}{\watt\per\metre\squared} \\
+    \avg{P} = 4 \pi d^2 I = \qty{41.7}{\watt}
+\end{gather}

@@ -1,0 +1,809 @@
+\chapter{Meccanica quantistica -- esercitazioni}
+
+\section{Riassunto della teoria}
+
+Relazioni di de Broglie:
+\begin{equation}
+    \begin{cases}
+        E = h \nu = \hbar \omega \\
+        p = \frac{h}{\lambda} = \hbar k
+    \end{cases}
+\end{equation}
+
+Funzione d'onda di Schrödinger:
+\begin{equation}
+    \Psi = A \exp{\im (\vt{k} \cdot \p - \omega t)}
+    = A \exp{\frac{\im (\vt{p} \cdot \p - Et)}{\hbar}}
+\end{equation}
+
+Equazione di Schrödinger completa:
+\begin{equation}
+    \im \hbar \parder{t} \Psi(\p, t) = - \frac{\hbar^2}{2 m} \lapl \Psi(\p, t) + V(\p, t) \Psi(\p, t)
+\end{equation}
+Vale con le ipotesi di
+\begin{itemize}
+    \item particella puntiforme
+    \item $v \ll c$
+    \item forze conservative
+\end{itemize}
+
+Separazione delle variabili:
+\begin{equation}
+    \Psi(\p, t) = R(\p) T(t)
+\end{equation}
+
+$T$ è armonica:
+\begin{equation}
+    T(t) = \exp{-\im E t/\hbar}
+\end{equation}
+
+L'equzione di Schrödinger stazionaria è:
+\begin{equation}
+\label{eq:schrstaz}
+    \hat{H} \Psi(\p) = E \Psi(\p)
+\end{equation}
+
+$\hat{H}$ è l'hamiltoniana ed è un operatore lineare, quindi la \eqref{eq:schrstaz} è un'equazione agli autovalori.
+
+È possibile scrivere decomporre $\Psi$ nella base degli autovettori di $\hat{H}$:
+\begin{equation}
+    \Psi = \sum_i a_i \Psi_i
+\end{equation}
+
+Svolgendo la misura, lo stato $\Psi	$ collassa in uno degli autostati:
+\begin{gather}
+    \hat{H} \Psi_i = E_i \Psi_i \\
+    \abs{a_i}^2 = \mathrm{P}(\text{la particella sarà misurata nello stato $\Psi_i$})
+\end{gather}
+
+\section{Buca di potenziale}
+
+È un caso di confinamento della particella in una regione di spazio.
+
+In una dimensione,
+\begin{equation}
+    V(x) = \begin{cases}
+        0 & 0 < x < L \\
+        +\infty & \text{altrimenti}
+    \end{cases}
+\end{equation}
+Ovvero, la particella è confinata nell'intervallo $(0, L)$.
+Poiché non può uscire, $\Psi = 0$ al di fuori dell'intervallo e la rinormalizzazione interesserà solo quest'ultimo.
+
+L'hamiltoniana classica è:
+\begin{equation}
+    H = \frac{p^2}{2 m} + V(x)
+\end{equation}
+
+Per ottenere l'hamiltoniana quantistica, si sostituisce $p$ con $\hat{p} = -\im \hbar \parder{x}$:
+
+\begin{equation}
+    \hat{H} = -\frac{\hbar^2}{2 m} \parder[][2]{x} + V(x)
+\end{equation}
+
+L'equazione di Schrödinger stazionaria risulta:
+\begin{gather}
+    -\frac{\hbar^2}{2 m} \parder[][2]{x} \Psi = E \Psi \\
+    \parder[][2]{x} \Psi = -\frac{2 m E}{\hbar^2} \Psi
+\end{gather}
+
+Solitamente si definisce il fattore $\alpha$:
+\begin{equation}
+    \alpha \coloneq \frac{\sqrt{2 m E}}{\hbar}
+\end{equation}
+
+L'equazione diventa
+\begin{equation}
+    \parder[][2]{x} \Psi + \alpha^2 \Psi = 0
+\end{equation}
+
+$\Psi = A \exp{\lambda x}$, quindi l'equazione caratteristica è:
+\begin{equation}
+    \lambda^2 + \alpha^2 = 0
+    \implies
+    \lambda = \pm \im \alpha
+\end{equation}
+
+La soluzione generale è
+\begin{equation}
+    \Psi(x) = A \exp{\im \alpha x} + B \exp{-\im \alpha x}
+\end{equation}
+ovvero, la somma di un'onda progressiva e una regressiva.
+
+I valori di $A$ e $B$ si determinano imponendo le condizioni al contorno:
+\begin{gather}
+    \begin{cases}
+        \Psi(0) = 0 \implies B = -A \\
+        \Psi(L) = 0 \implies A \exp{\im \alpha L} + B \exp{-\im \alpha L} = 0
+    \end{cases} \\
+    \implies \exp{\im \alpha L} - \exp{-\im \alpha L} = 0 \\
+    \implies 2 \im \sin(\alpha L) = 0
+    \implies \alpha L = n \pi
+\end{gather}
+
+Questo mostra che i valori di energia possibili sono quantizzati:
+\begin{equation}
+    \boxed{E_n = \frac{\hbar^2 \alpha^2}{2 m} = \frac{\pi^2 \hbar^2}{2 m L^2} n^2, \quad
+    n \in \Z^+}
+\end{equation}
+Si esclude $n = 0$ \textit{a posteriori} poiché la \eqref{eq:autostati_scatola} non può essere la funzione nulla.
+
+Trovati gli autovalori, si determinano gli autostati:
+\begin{equation}
+    \hat{H} \Psi_n = E_n \Psi_n
+\end{equation}
+
+Abbiamo già mostrato che le soluzioni sono nella forma:
+\begin{equation}
+    \Psi(x) = A \exp{\im \alpha x} - A \exp{-\im \alpha x}
+    = 2 \im A \sin(\alpha x)
+\end{equation}
+Occorre imporre la normalizzazione:
+\begin{gather}
+    \int_0^L \abs{\Psi(\p)}^2 \de x
+    = \int_0^L \abs{2 A \im \sin(\alpha x)}^2 \de x
+    = 4 A^2 \int_0^L \sin^2(\alpha x) \de x
+    = 2 A^2 L = 1 \\
+    \implies
+    A = \sqrt{\frac{1}{2 L}}
+\end{gather}
+È stato usato il fatto che $\sin(\alpha L) = 0$, e quindi $L$ è multiplo del periodo di $\sin^2(\alpha x)$.
+
+Gli autostati, quindi, sono
+\begin{equation}
+\label{eq:autostati_scatola}
+    \Psi_n(x) = \im \sqrt{\frac{2}{L}} \sin\pts{\frac{n \pi}{L} x}
+\end{equation}
+
+La densità di probabilità di trovare la particella in $x$ è
+\begin{equation}
+    \abs{\Psi_n(x)}^2 = \frac{2}{L} \sin^2\pts{\frac{n \pi}{L} x}
+\end{equation}
+
+In tre dimensioni, il numero quantico diventa un vettore $\vt{n} = (n_x, n_y, n_z)$ e gli autostati sono
+\begin{equation}
+    \Psi_n(\p) = 2 A \im \sin\pts{\frac{n_x \pi}{L} x} \sin\pts{\frac{n_y \pi}{L} y} \sin\pts{\frac{n_z \pi}{L} z}
+\end{equation}
+
+Livelli energetici:
+\begin{equation}
+    E_\vt{n} = \frac{\hbar^2}{2 m L^2} \pts{n_x^2 + n_y^2 + n_z^2}
+\end{equation}
+Sono detti \important{degeneri}, poiché più stati possono corrispondere allo stesso livello energetico.
+
+
+\subsection{Molecola come buca di potenziale}
+
+Modellizziamo la molecola \ce{H2} come due protoni di carica $e$ e massa $m_p = \qty{1.67e-27}{\kilo\gram}$ e un elettrone di carica $-e$ e massa $m_e = \qty{9.11e-31}{\kilo\gram}$.
+
+L'equazione di Schrödinger stazionaria è nuovamente
+\begin{gather}
+    \parder[][2]{x} \Psi + \alpha^2 \Psi = 0
+    \implies
+    \Psi(x) = A \exp{\im \alpha x} + B \exp{-\im \alpha x} \\
+    E_n = \frac{\pi^2 \hbar^2}{2 m L^2} n^2
+\end{gather}
+
+Se vogliamo trovare le velocità:
+\begin{equation}
+    E_n = \frac{1}{2} m v_n^2 \implies v_n
+    = \frac{\pi \hbar}{m L} n \propto \frac{1}{L}
+\end{equation}
+Cioè, un confinamento maggiore porta a energie e velocità maggiori.
+
+Con $L = \qty{1}{\meter}$, le velocità dei protoni saranno dell'ordine \qty{e-7}{\metre\per\second}, quelle degli elettroni dell'ordine \qty{e-4}{\metre\per\second}.
+
+Con una buca di potenziale adatta alla descrizione di un atomo, come \qtyrange{0.5}{5}{\angstrom}, le velocità saranno dell'ordine \qty{e4}{\metre\per\second}.
+
+\subsection{Transizioni energetiche}
+
+Una particella può assorbire energia tramite un fotone e aumentare il suo livello energetico, cioè passare a uno stato eccitato.
+
+Similmente, può emettere un fotone e diminuire il proprio livello energetico.
+
+Esercizio: un ettrone in un atomo assorbe un fotone.
+Rappresentiamo l'atomo come una buca di potenziale di lato $L = \qty{5}{\angstrom}$.
+Qual è la lunghezza d'onda $\lambda$ del fotone?
+\begin{equation}
+    E_f = E_2 - E_1 = \frac{\hbar^2 \pi^2}{2 m L^2} (2^2 - 1^2), \quad
+    \lambda = \frac{h c}{E_f} = \qty{275}{\nano\metre}
+\end{equation}
+
+Esercizio: qual è la dimensione della buca di potenziale per cui la diseccitazione di un elettrone da $n_2$ a $n_1$ corrisponde a un fotone con lunghezza d'onda $\lambda$?
+\begin{equation}
+    E_f = \frac{h c}{\lambda} = E_2 - E_1 = \frac{\hbar^2 \pi^2}{2 m L^2} (n_2^2 - n_1^2)
+    \implies
+    L = \sqrt{\frac{\lambda h (n_2^2 - n_1^2)}{8 m c}}
+\end{equation}
+
+Esercizio: all'interno di un nucleo ($L = \qty{e-15}{\metre}$), un protone assorbe un fotone e passa da $n_1 = 1$ a $n_2 = 2$.
+Qual è la lunghezza d'onda del fotone?
+\begin{equation}
+    E_f = E_2 - E_1 = \frac{\hbar^2 \pi^2}{2 m L^2} (2^2 - 1^2), \quad
+    \lambda = \frac{h c}{E_f} = \qty{2e-15}{\metre}
+\end{equation}
+I fotoni scambiati dai nuclei sono raggi gamma, molto energetici.
+
+\section{Gradino di potenziale}
+
+\begin{equation}
+    V(x) = \begin{cases}
+        0 & x < 0 \text{ (regione I)} \\
+        V_0 & x \ge 0 \text{ (regione II)}
+    \end{cases}
+\end{equation}
+con $V_0 > E$.
+\begin{subequations}
+\begin{gather}
+    \hat{H}_\mathrm{I} = -\dfrac{\hbar^2}{2 m} \lapl \\
+    \hat{H}_\mathrm{II} = -\dfrac{\hbar^2}{2 m} \lapl + V_0
+\end{gather}
+\end{subequations}
+
+Definiamo i seguenti parametri
+\begin{equation}
+    \alpha = \sqrt{\frac{2 m E}{\hbar^2}}, \quad
+    \beta = \sqrt{\frac{2 m (E - V_0)}{\hbar^2}} \eqcolon \im \gamma
+\end{equation}
+in modo che $\alpha, \gamma \in \R$, mentre $\beta$ è immaginario.
+\begin{subequations}
+\begin{gather}
+    \Psi_\mathrm{I}(x) = A \exp{\im \alpha x} + B \exp{-\im \alpha x} \\
+    \Psi_\mathrm{II}(x) = C \exp{-\gamma x} + D \exp{\gamma x}
+\end{gather}
+\end{subequations}
+
+Imponiamo le seguenti condizioni:
+\begin{itemize}
+    \item $\int_{-\infty}^{+\infty} \abs{\Psi_\mathrm{I} + \Psi_\mathrm{II}}^2 \de x = 1 \implies D = 0$
+    \item $\Psi \text{ continua} \implies \Psi_\mathrm{I}(0) = \Psi_\mathrm{II}(0) \implies A + B = C$
+    \item $\Psi \text{ derivabile} \implies \Psi_\mathrm{I}'(0) = \Psi_\mathrm{II}'(0) \implies \im \alpha (A - B) = - \gamma C$
+\end{itemize}
+
+Interessano in particolare i rapporti $C/A$ e $B/A$: sono legati alle probabilità che l'onda sia trasmessa o riflessa, rispettivamente.
+
+\begin{subequations}
+\begin{align}
+    B = C - A
+    \implies \im \alpha A - \im \alpha (C - A) = - \gamma C
+    \implies C = \frac{2 \im \alpha}{\im \alpha - \gamma} A \\
+    C = A - B
+    \implies \im \alpha A - \im \alpha B = - \gamma (A + B)
+    \implies B = \frac{\im \alpha + \gamma}{\im \alpha - \gamma} A
+\end{align}
+\end{subequations}
+
+Si definisce il coefficiente di riflessione:
+\begin{equation}
+    R = \abs{\frac{B}{A}}^2 = \frac{\alpha^2 + \gamma^2}{\alpha^2 + \gamma^2} = 1
+\end{equation}
+Cioè, la particella viene sempre riflessa.
+
+Allo stesso tempo, la probabilità di trovare la particella nella regione II è
+\begin{equation}
+    \abs{\Psi_\mathrm{II}}^2 = \abs{C}^2 \exp{-2 \gamma x} \ne 0
+\end{equation}
+Non è contraddittorio poiché la particella, effettivamente, non viene trasmessa.
+
+Questo è l'\important{effetto tunnel}.
+
+\section{Buca di potenziale a pareti finite}
+
+\begin{equation}
+    V(x) = V_0 \, [x < 0 \lor x > L]
+\end{equation}
+
+A differenza del caso con pareti infinite, la probabilità di trovare la particella al di là delle pareti è non nulla, proprio a causa dell'effetto tunnel.
+
+\section{Barriera di potenziale}
+
+\begin{equation}
+    V(x) = V_0 \, [0 < x < L]
+\end{equation}
+con $V_0 > E$.
+
+Definiamo le zone I ($x < 0$), II ($0 < x < L$) e III ($x > L$).
+
+Zone I e III:
+\begin{equation}
+    \parder[][2]{x} \Psi + \frac{2 m E}{\hbar^2} \Psi
+    = \parder[][2]{x} \Psi + \alpha^2 \Psi
+    = 0
+\end{equation}
+Zona II:
+\begin{equation}
+    \parder[][2]{x} \Psi + \frac{2 m (E - V_0)}{\hbar^2} \Psi
+    = \parder[][2]{x} \Psi - \gamma^2 \Psi
+    = 0
+\end{equation}
+avendo definito
+\begin{subequations}
+\begin{gather}
+    \alpha = \sqrt{\frac{2 m E}{\hbar^2}} \\
+    \gamma = \sqrt{\frac{2 m (V_0 - E)}{\hbar^2}}
+\end{gather}
+\end{subequations}
+
+Soluzioni:
+\begin{itemize}
+    \item Regione I:
+    \begin{equation}
+        \Psi_\mathrm{I}(x) = A \exp{\im \alpha x} + B \exp{-\im \alpha x}
+    \end{equation}
+    \item Regione II:
+    \begin{equation}
+        \Psi_\mathrm{II}(x) = F \exp{-\gamma x} + G \exp{\gamma x}
+    \end{equation}
+    \item Regione III:
+    \begin{equation}
+        \Psi_\mathrm{III}(x) = C \exp{\im \alpha x}
+    \end{equation}
+\end{itemize}
+
+Imponiamo continuità e derivabilità in $0$ e $L$:
+\begin{gather}
+    \Psi_\mathrm{I}(0) = \Psi_\mathrm{II}(0)
+    \implies A + B = F + G \\
+    \Psi_\mathrm{II}(L) = \Psi_\mathrm{III}(L)
+    \implies F \exp{-\gamma L} + G \exp{\gamma L} = C \exp{\im \alpha L} \\
+    \Psi_\mathrm{I}'(0) = \Psi_\mathrm{II}'(0) \implies
+    \im \alpha A - \im \alpha B = -\gamma F + \gamma G \\
+    \Psi_\mathrm{II}'(L) = \Psi_\mathrm{III}'(L) \implies
+    -\gamma F \exp{-\gamma L} + \gamma G \exp{\gamma L} = \im \alpha C \exp{\im \alpha L}
+\end{gather}
+
+\redtext{
+Poiché
+\begin{equation}
+    \int_{-\infty}^{+\infty} \abs{\Psi_\mathrm{I} + \Psi_\mathrm{II} + \Psi_\mathrm{III}}^2 \de x = 1
+\end{equation}
+si deve avere $G = 0$.
+}
+
+Si ottiene
+\begin{equation}
+    \frac{C}{A} = \frac{4 \im \alpha \gamma \exp{(\gamma - \im \alpha) L}}{(\gamma^2 - \alpha^2) (1 - \exp{2 \gamma L}) + 2 \im \alpha \gamma (1 + \exp{2 \gamma L})}
+\end{equation}
+e la probabilità di trasmissione è
+\begin{gather}
+    T = \abs{\frac{C}{A}}^2 \sim \exp{-2 \gamma L}
+\end{gather}
+
+Se le grandezze fisiche hanno dimensioni classiche, quindi, questa probabilità è praticamente nulla.
+
+Nel caso micorscopico, invece, ad esempio con un elettrone con energia $E = \qty{5}{\electronvolt}$, $V_0 = \qty{6}{\electronvolt}$ e $L = \qty{0.5}{\angstrom}$, si ottiene $T = \qty{20}{\percent}$.
+
+Per una particella che proviene da sinistra, la funzione d'onda sarà sinusoidale nella regione I, un esponenziale decrescente nella regione II e nuovamente una sinusoide nella regione III, di ampiezza pari alla precedente.
+
+\section{Rotore rigido}
+
+È un modello che si usa per rappresentare sistemi quantistici in cui è presente una rotazione.
+
+Esempio: massa $m$ che orbita a distanza $r$ fissa intorno a un asse.
+
+Il momento angolare classico è $\vt{L} = \vt{r} \times \vt{p}$.
+
+In meccanica quantistica, il momento angolare è un operatore:
+\begin{equation}
+    \hat{\vt{L}} = \hat{\vt{r}} \times \hat{\vt{p}}
+    = -\im \hbar \vt{r} \times \grad
+\end{equation}
+
+L'energia cinetica classica è $E = L^2 / (2 I)$, con $I = m r^2$ momento di inerzia.
+Quindi,
+\begin{equation}
+    \hat{H} = \frac{\hat{L}^2}{2 I}
+\end{equation}
+
+Equazione di Schrödinger stazionaria:
+\begin{equation}
+    \hat{L}^2 \Psi = \underbrace{2 I E}_\lambda \Psi
+\end{equation}
+
+Si osserva anche che, $\forall i, j \in \{x, y, z\}, i \ne j$:
+\begin{equation}
+    [\hat{L}_i, \hat{L}_j] \ne 0
+\end{equation}
+Quindi, non è possibile conoscere due componenti del momento angolare simultaneamente (se due operatori non commutano, vale la disuguaglianza di Heisenberg).
+
+Ad esempio:
+\begin{equation}
+    [\hat{\vt{x}}, \hat{\vt{p}}] = \im \hbar \ne 0
+    \implies
+    \Delta x \Delta p \ge \frac{\hbar}{2}
+\end{equation}
+
+Però vale sempre che
+\begin{equation}
+    [\hat{L}^2, \hat{L}_i] = 0
+\end{equation}
+Quindi posso conoscere una componente e il modulo.
+
+Si può quindi associare all'equazione di Schrödinger l'equzione stazionaria per la componente $z$:
+\begin{equation}
+    \begin{cases}
+        \hat{L}^2 \Psi = \lambda \Psi \\
+        \hat{L}_z \Psi = M_z \Psi
+    \end{cases}
+\end{equation}
+
+Gli autovalori sono:
+\begin{gather}
+    \lambda = l (l + 1) \hbar^2, \quad l \in \N \\
+    M_z = m \hbar, \quad m \in \{-l, -l + 1, \ldots, l - 1, l\}
+\end{gather}
+
+Si introducono quindi i numeri quantici $l$ e $m$.
+
+Ricordando che $\lambda = 2 I E$,
+\begin{equation}
+    E = \frac{\hbar^2}{2 I} l (l + 1)
+\end{equation}
+
+Quindi, $E$ è identificato da $l$ e si possono avere $2l + 1$ stati quantici diversi (identificati da $m$) associati allo stesso livello energetico.
+
+L'energia del fotone associato alla transizione da $E_l$ a $E_{l-1}$ è
+\begin{equation}
+    h \nu = \frac{\hbar^2}{2 I} \pts{l (l + 1) - (l - 1) (l - 1 + 1)} = \frac{\hbar^2}{I} l
+\end{equation}
+
+Alla fine, abbiamo i seguenti \important{numeri quantici}:
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        Nome & Simbolo & Operatore & Autovalori \\
+        \hline
+        Numero quantico principale & $n$ & $\hat{H}$ & $E_n$ \\
+        Numero quantico azimutale & $l$ & $\hat{L}^2$ & $\hbar^2 l (l + 1)$ \\
+        Numero quantico magnetico & $m$ & $\hat{L}_z$ & $m \hbar$ \\
+        \hline
+    \end{tabular}
+    \caption{Numeri quantici e relativi operatori e autovalori}
+    \label{tab:numeri_quantici}
+\end{table}
+
+\section{Oscillatore armonico}
+
+\begin{equation}
+    V(x) = \frac{1}{2} m \omega^2 x^2
+\end{equation}
+
+Operatore hamiltoniano:
+\begin{equation}
+    \hat{H} = -\frac{\hbar^2}{2 m} \parder[][2]{x} + \frac{1}{2} m \omega^2 x^2
+\end{equation}
+
+Equazione stazionaria di Schrödinger:
+\begin{equation}
+    \parder[][2]{x} \Psi + \pts{- \frac{m^2 \omega^2}{\hbar^2} x^2 + \frac{2 m E}{\hbar^2}} \Psi = 0
+\end{equation}
+
+Autovalori:
+\begin{equation}
+    E_n = \hbar \omega \pts{n + \frac{1}{2}}
+\end{equation}
+
+Autostati:
+\begin{equation}
+    \Psi(\xi) = H_n(\xi) \exp{-\frac{\xi^2}{2}}, \quad
+    \xi = \sqrt{\frac{m \omega}{\hbar}} x
+\end{equation}
+usando i polinomi di Hermite:
+\begin{equation}
+    H_n(x) = (-1)^n \exp{x^2} \parder[][n]{x} \exp{-x^2}
+\end{equation}
+
+\redtext{Grafico di $V(x)$ con livelli energetici $E_n$}
+
+\redtext{Grafici di $\Psi$ per $n = 0, 1, 2$}
+
+Nota che $E_n \ne 0$ sempre, cioè non è possibile che l'oscillatore sia fermo, o sarebbe violato il principio di indeterminazione di Heisenberg per posizione e quantità di moto.
+
+\section{Atomo monoelettronico}
+
+Atomo con $Z$ protoni e un elettrone a distanza $r$.
+\begin{gather}
+    V(r) = -\frac{Z e^2}{4 \pi \eps_0 r} \\
+    H = \frac{p^2}{2 m} - \frac{Z e^2}{4 \pi \eps_0 r} \\
+    \hat{H} \Psi(\p) = \pts{-\frac{\hbar^2}{2 m} \lapl - \frac{Z e^2}{4 \pi \eps_0 r}} \Psi(\p) = E \Psi(\p)
+\end{gather}
+
+La soluzione in coordinate sferiche è
+\begin{equation}
+    \Psi_{n, l, m}(r, \theta, \phi) = \Phi_{n, l}(r) Y_l^m(\theta, \phi) \eqcolon \ket{n, l, m}
+\end{equation}
+le funzioni $Y_l^m$ sono le armoniche sferiche.
+
+Le tre equazioni stazionarie sono:
+\begin{equation}
+    \begin{cases}
+        \hat{H} \Psi_{n,l,m} = E_n \Psi_{n,l,m} \\
+        \hat{L}^2 \Psi_{n,l,m} = \hbar^2 l (l + 1) \Psi_{n,l,m} \\
+        \hat{L}_z \Psi_{n,l,m} = \hbar m \Psi_{n,l,m}
+    \end{cases}
+\end{equation}
+
+Ogni livello energetico $E_n$ ha $n$ possibili valori di $l$ e ogni sottolivello (individuato da $n$ ed $l$) ha $2 l + 1$ possibili valori di $m$:
+\begin{subequations}
+\begin{gather}
+    n \in \Z^+ \\
+    l \in \{0, 1, \ldots, n - 1\} \\
+    m \in \{-l, -l + 1, \ldots, l - 1, l\}
+\end{gather}
+\end{subequations}
+
+Gli autovalori $E_n$ sono
+\begin{equation}
+    E_n = -\frac{m Z^2 e^4}{2 \pts{4\pi \eps_0}^2 \hbar^2 n^2} \propto -\frac{Z^2}{n^2}
+\end{equation}
+È la stessa espressione della \eqref{eq:energia_bohr}, l'energia di un elettrone secondo il modello di Bohr (lì, con $Z = 1$).
+
+
+Ogni possibile stato $\ket{n, l, m}$ corrisponde a un orbitale.
+
+Si indicano con numeri i livelli di energetici e con $s, p, d, f$ i valori di $l = 0, 1, 2, 3$ (le lettere proseguono poi in ordine alfabetico da $g$ in avanti).
+Ad esempio, $3p$ è il sottolivello con $n = 3$, $l = 1$ e $m = -1, 0, 1$.
+
+La forma degli orbitali dipende dalle armoniche sferiche:
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        $l$ & Orbitali & Forma & Immagine \\
+        \hline
+        0 & 1 orbitale $s$ & sferica & \redtext{immagine}
+        \\
+        1 & 3 orbitali $p$ & bilobata & \redtext{immagine}
+        \\
+        \hline
+    \end{tabular}
+    \caption{Orbitali atomici per diversi valori di $l$}
+    \label{tab:orbitali}
+\end{table}
+
+\subsection{Esperimento di Stern-Gerlach e spin}
+
+Pauli introdusse un quarto numero quantico legato a una proprietà (lo \important{spin}) che esprime il momento angolare intrinseco di una particella.
+Questo numero quantico è detto \important{numero quantico di spin} e si indica con $m_s$.
+
+Consideriamo un fascio di elettroni che attraversa una regione con campo magnetico $\B(\p) = B(z) \uz$ e colpisce uno schermo.
+Classicamente, mi aspetterei una striscia continua di elettroni sullo schermo:
+\begin{gather}
+    \parder[B_z]{z} \ne 0 \\
+    U = - \vt{\mu} \cdot \B \\
+    \force = - \grad U = \mu_z \parder[\B]{z}
+\end{gather}
+Invece, si riconoscono due fasci.
+Anche lo spin, quindi, è discreto e può assumere solo due valori opposti.
+
+Questo fenomeno avviene lungo ogni direzione e non è possibile conoscere simultaneamente le componenti di spin lungo due direzioni diverse (come nel caso del momento angolare, non commutano).
+
+Lo spin (questo momento angolare intrinseco) si comporta come un momento angolare orbitale.
+\begin{gather}
+    \hat{s}^2 \Psi = \hbar^2 s (s + 1) \Psi \\
+    \hat{s}_z \Psi = \hbar m_s \Psi
+\end{gather}
+Inoltre, per gli elettroni, vale sempre
+\begin{equation}
+    s = \frac{1}{2} \implies m_s = \pm \frac{1}{2}
+\end{equation}
+
+Lo stato di un elettrone, quindi, si scrive come $\ket{n, l, m, m_s}$.
+I primi tre numeri quantici individuano l'orbitale, l'ultimo caratterizza lo spin della particella.
+
+Il principio di esclusione di Pauli afferma (in particolare) che due elettroni non possono avere lo stesso stato quantico.
+
+Esempio: i due elettroni dell'atomo di elio (che ha configurazione elettronica $1s^2$) avranno stati $\ket{1, 0, 0, \pm 1/2}$.
+
+È anche possibile distinguere due tipi di particelle:
+\begin{itemize}
+    \item \important{Fermioni}, con spin semintero, che obbediscono al principio di esclusione di Pauli
+    \item \important{Bosoni}, con spin intero, che \important{non} obbediscono al principio di esclusione di Pauli
+
+    Più bosoni possono quindi occupare lo stesso stato quantico, anche in gran numero.
+\end{itemize}
+
+\section{Nucleo atomico}
+
+Un nucleo $_Z^A X$ è identificato dal numero di protoni $Z$, dal numero di neutroni $N$ e dal numero di massa $A = Z + N$.
+
+Il nucleo è descritto da questo potenziale:
+\begin{equation}
+    V(r) = \begin{cases}
+        -E_\text{legame} & r < R \\
+        \dfrac{Z e^2}{4 \pi \eps_0 r} & r > R \\
+    \end{cases}
+\end{equation}
+
+Definiamo anche $C$, il valore per $r = R^+$:
+\begin{equation}
+    C \eqcolon \frac{Z e^2}{4 \pi \eps_0 R}
+\end{equation}
+
+L'energia di legame si esprime con la formula:
+\begin{equation}
+    E_\text{legame} = \Delta m c^2
+\end{equation}
+dove $\Delta m$ è la differenza di massa tra i nucleoni liberi e quelli legati nel nucleo.
+
+Infatti, quando delle particelle si legano a formare un nucleo, si ha una perdita di massa (\important{difetto di massa}), che si trasforma in energia di legame.
+
+\subsection{Decadimento alfa}
+
+La particella $\alpha$ è un nucleo di elio, cioè due protoni e due neutroni.
+\begin{equation}
+    \alpha = \ce{^4_2He}
+\end{equation}
+
+Decadimento alfa:
+\begin{equation}
+    \ce{^{A}_{Z}X -> ^{A-4}_{Z-2}Y + \alpha}
+\end{equation}
+
+Esempio:
+\begin{equation}
+    \ce{^{226}_{88}Ra -> ^{222}_{86}Rn + \alpha}
+\end{equation}
+
+Il radio ha $C_{\ce{Ra}} = \qty{50}{\mega\electronvolt}$ e $R_{\ce{Ra}} = \qty{e-15}{\metre}$.
+Si osserva che la particella $\alpha$ emessa ha una energia cinetica di circa \qty{10}{\mega\electronvolt}.
+
+Il problema è stato descritto da Gamow.
+\begin{gather}
+    V(R_B) = \frac{(Z - 2)e \cdot 2 e}{4 \pi \eps_0 R_B} = \qty{10}{\mega\electronvolt} \\
+    \abs{\frac{C}{A}}^2 = \num{e-31} \\
+    f_\text{urti} = \frac{v_\alpha}{2 R_{\ce{Ra}}}
+\end{gather}
+
+$v_\alpha$ si stima con il principio di indeterminazione:
+\begin{gather}
+    \Delta x \Delta p \approx \frac{\hbar}{2}
+    \implies
+    \Delta (2 R_{\ce{Ra}}) (m_\alpha \Delta v_\alpha) \approx \frac{\hbar}{2} \\
+    \implies
+    v_\alpha \sim \qty{e5}{\metre\per\second}
+    \implies
+    f_\text{urti} \sim \qty{e20}{urti\per\second}
+\end{gather}
+
+Esercizio: quanti decadimenti al secondo avvengono in un campione di \qty{1}{\gram} di radio?
+\begin{gather}
+    N = \frac{m}{{M\!M}_{\ce{Ra}}} N_A = \qty{e21}{atomi} \\
+    f_\text{urti} \cdot N \cdot \abs{\frac{C}{A}}^2 = \qty{e10}{decadimenti\per\second}
+\end{gather}
+
+\subsection{Fusione nucleare}
+
+\redtext{Grafico di $V(r)$ per la fusione nucleare}
+
+Fusione di due protoni in un nucleo di deuterio:
+\begin{equation}
+    \ce{^1_1H + ^1_1H -> ^2_1H}
+\end{equation}
+
+L'energia potenziale massima è \qty{14}{\mega\electronvolt}, quella che un protone deve avere per svolgere la fusione è \qty{1.9}{\kilo\electronvolt}, quindi il fenomeno deve avvenire per effetto tunnel.
+
+\begin{equation}
+    E_k = \frac{3}{2} k_B T = \frac{e^2}{4 \pi \eps_0 r} \implies r \sim \qty{e-13}{\metre}
+\end{equation}
+
+\begin{equation}
+    \abs{\frac{C}{A}}^2 = \num{e-36}
+\end{equation}
+
+Successivamente alla fusione di due protoni, si ha la fusione di un protone con il deuterio:
+\begin{gather}
+    \ce{^1_1H + ^1_1H -> ^2_1H} \\
+    \ce{^2_1H + ^1_1H -> ^3_2He} \\
+    \ce{^3_2He + ^1_1H -> ^4_2He}
+\end{gather}
+
+\subsection{Fissione nucleare}
+
+\begin{equation}
+    \ce{^{235}_{92}U + n -> ^{141}_{56}Ba + ^{92}_{36}Kr + 3 n + \qty{200}{\mega\electronvolt}}
+\end{equation}
+
+I tre neutroni emessi colpiscono altri nuclei di uranio e il processo si autoalimenta in una reazione a catena.
+
+Serve però un campione di uranio arricchito, cioè con una percentuale maggiore del normale di isotopi fissili.
+
+\section{Esercizi vari}
+
+Esercizio: trovare i possibili valori di energia per una particella di massa $m = \qty{e-30}{\kilo\gram}$ e carica $Q = \qty{e-19}{\coulomb}$ in moto a distanza $R = \qty{1}{\nano\metre}$ da un punto.
+\begin{gather}
+    \hat{H} \Psi = E \Psi \implies \frac{\hat{L}^2}{2 I} \Psi = E \Psi
+    \implies
+    \hat{L}^2 \Psi = 2 I E \Psi \\
+    2 I E = \hbar^2 l (l + 1) \implies E = \frac{\hbar^2}{2 m R^2} l (l + 1)
+\end{gather}
+
+Calcolare la frequenza del fotone che permette il passaggio dal secondo livello al livello fondamentale.
+\begin{equation}
+    \nu = \frac{E_2 - E_0}{h} = \frac{\hbar^2}{2 m R^2 h} \pts{2 (2 + 1) - 0 (0 + 1)}
+    = \frac{3 \hbar}{2 \pi m R^2}
+    = \qty{5e13}{\hertz}
+\end{equation}
+
+Esercizio:
+calcolare $[x, p_y]$.
+\begin{gather}
+    \Psi(\vt{x}) = \exp{\im \vt{k} \cdot \vt{x}} = \exp{\frac{\im \vt{p} \cdot \vt{x}}{\hbar}} \\
+    \grad \Psi(\vt{x}) = \im \frac{\vt{p}}{\hbar} \Psi(\vt{x})
+    \implies \vt{p} \Psi(\vt{x}) = -\im \hbar \grad \Psi(\vt{x})
+    \implies \hat{\vt{p}} = -\im \hbar \grad \\
+    [\hat{x}, \hat{p}_y] = \hat{x} \hat{p}_y - \hat{p}_y \hat{x} = -\im \hbar x \parder{y} + \im \hbar \parder{y} x = 0
+\end{gather}
+
+Esercizio:
+determinare la massa $m$ di un corpo vincolato a una molla di costante elastica $k = \qty{4e-8}{\newton\per\metre}$ se, transendo tra due livelli contigui, la lunghezza d'onda del fotone associato è $\lambda = \qty{400}{\nano\metre}$.
+\begin{gather}
+    \hat{H} = -\frac{\hbar^2}{2 m} \parder[][2]{x} + \frac{1}{2} m \omega^2 x^2 \\
+    \hat{H} \Psi = E \Psi \implies
+    \parder[][2]{x} \Psi = \pts{\frac{m^2 \omega^2}{\hbar^2} x^2 - \frac{2 m E}{\hbar^2}} \Psi \\
+    E_n = \pts{n + \frac{1}{2}} \hbar \omega \\
+    E_{n+1} - E_n = \hbar \omega = \hbar \sqrt{\frac{k}{m}} = \frac{h c}{\lambda} \\
+    m = \frac{k \lambda^2}{4 \pi^2 c^2} = \qty{1.8e-39}{\kilo\gram}
+\end{gather}
+
+Esercizio:
+un elettrone è in una buca di potenziale con barriere infinite di lato $L = \qty{0.1}{\nano\metre}$.
+Trovare l'energia del secondo livello eccitato e la lunghezza d'onda del fotone che va assorbito per saltare dal livello fondamentale al secondo livello eccitato e scrivere la funzione d'onda per questi due livelli.
+\begin{gather}
+    \hat{H} = -\frac{\hbar^2}{2 m} \lapl, \quad \text{ per } x \in [0, L] \\
+    \bigg(\parder[][2]{x} + \underbrace{\frac{2 m E}{\hbar^2}}_{\alpha^2}\bigg) \Psi = 0 \\
+    \Psi(x) = A \exp{\lambda x} \implies \lambda^2 + \alpha^2 = 0 \implies \lambda = \pm \im \alpha \\
+    \Psi(x) = A \exp{\im \alpha x} + B \exp{-\im \alpha x} \\
+    \Psi(0) = 0 \implies A + B = 0 \\
+    \Psi(L) = 0 \implies \exp{\im \alpha L} - \exp{-\im \alpha L} = 0 \implies \sin(\alpha L) = 0 \\
+    \implies \alpha = \frac{n \pi}{L}, \, n \in \N \\
+    E_n = \frac{\hbar^2 \pi^2}{2 m L^2} n^2 \\
+    \int_0^L \abs{\Psi}^2 \de x = 1 \implies 4 A^2 \int_0^L \sin^2(\alpha x) \de x = 1 \implies A = \frac{1}{\sqrt{2 L}} \\
+    \Psi_n(x) = 2 \im \frac{1}{\sqrt{2 L}} \sin\pts{\frac{n \pi x}{L}} \\
+    \implies n \ge 1
+\end{gather}
+Il secondo livello eccitato, quindi, è quello per $n = 3$.
+\begin{gather}
+    E_3 = \frac{\hbar^2 \pi^2}{2 m L^2} 3^2 = \qty{338}{\electronvolt} \\
+    \lambda = \frac{h c}{E_3 - E_1} = \frac{2 h c m L^2}{\hbar^2 \pi^2 \cdot (9 - 1)} = \qty{4.13}{\nano\metre} \\
+    \Psi_1(x) = \im \sqrt{\frac{2}{L}} \sin\pts{\frac{\pi x}{L}} \\
+    \Psi_3(x) = \im \sqrt{\frac{2}{L}} \sin\pts{\frac{3 \pi x}{L}}
+\end{gather}
+
+Esercizio:
+molecola di azoto \ce{N2} con atomi a distanza fissa $d$.
+Trovare le energie dello stato fondamentale e dei primi due stati eccitati.
+Si consideri solo la rotazione.
+
+Sia $m$ la massa di un nucleone e $M = 14 m$ la massa di un nucleo di azoto.
+\begin{gather}
+    I = 2 M \pts{\frac{d}{2}}^2 \\
+    \hat{H} = \frac{\hat{L}^2}{2 I} \\
+    \hat{L}^2 \Psi = 2 I E \Psi \\
+    2 I E = \hbar^2 l (l + 1) \implies E
+    = \frac{\hbar^2}{2 I} l (l + 1)
+    = \frac{\hbar^2}{M d^2} l (l + 1)
+    = \frac{\hbar^2}{14 m d^2} l (l + 1) \\
+    E_0 = 0 \\
+    E_1 = \frac{\hbar^2}{7 m d^2} \\
+    E_2 = \frac{3 \hbar^2}{7 m d^2}
+\end{gather}
+
+Esercizio:
+quanto vale $E_1 - E_0$ per una molecola di ossigeno \ce{O2} con atomi a distanza fissa $d = \qty{1.2}{\angstrom}$ e massa $M = \qty{2.2e-26}{\kilo\gram}$?
+\begin{gather}
+    I = 2 M \pts{\frac{d}{2}}^2 \\
+    2 I E = \hbar^2 l (l + 1) \implies E_l = \frac{\hbar^2}{2 I} l (l + 1) \\
+    E_1 - E_0 = \frac{\hbar^2}{2 I} \pts{1 (1 + 1) - 0 (0 + 1)}
+    = \frac{2 \hbar^2}{M d^2}
+    = \qty{439}{\micro\electronvolt}
+\end{gather}
+
+Esercizio:
+trovare la massa degli atomi a distanza $d = \qty{2}{\nano\metre}$ in una molecola, sapendo che la lunghezza d'onda del fotone associato al salto tra i livelli 0 e 1 è $\lambda = \qty{500}{\nano\metre}$.
+\begin{gather}
+    E_1 - E_0 = \frac{\hbar^2}{2 I} \pts{1 (1 + 1) - 0 (0 + 1)} = \frac{h c}{\lambda} \\
+    I = \frac{\hbar^2 \lambda}{hc} = \frac{\hbar \lambda}{2 \pi c} = 2 M \pts{\frac{d}{2}}^2 \\
+    M = \frac{\hbar \lambda}{\pi c d^2} = \qty{1.4e-31}{\kilo\gram}
+\end{gather}

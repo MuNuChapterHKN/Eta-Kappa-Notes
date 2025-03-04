@@ -1,0 +1,413 @@
+\chapter{Campi variabili nel tempo}
+
+\section{Induzione elettromagnetica}
+
+Campo elettrico e magnetico devono essere campi correlati, dal momento che dipendono dai sistemi di riferimento (cioè, se le cariche siano in moto o no).
+Inoltre, non sono coerenti con la relatività galileiana.
+
+Al tempo in cui si cercava il legame tra i due campi, Faraday si accorse che, quando la corrente in un circuito veniva accesa o spenta, si rilevava una corrente attraverso un secondo circuito vicino, quindi l'esistenza di un campo elettrico.
+
+Se la corrente $I(t)$ varia nel tempo, allora anche $\B \propto I(t)$ varia nel tempo.
+
+Il risultato di innumerevoli esperimenti successivi svolti da Faraday è il seguente:
+
+Consideriamo un filo conduttore chiuso su se stesso (quindi, non percorso da corrente) in presenza di un campo magnetico $\B(t)$.
+Si misura una corrente attraverso il filo, e poiché $V = RI$ è come se ci fosse una differenza di potenziale dovuta a una forza elettromotrice (f.e.m.)\ indotta $\fem_i$, definita come
+\begin{equation}
+    \fem_i \coloneq \oint_\gamma \E \lde
+\end{equation}
+Non si mette il segno meno davanti all'integrale (diversamente che nella \eqref{eq:spot_integrale}), in modo che la circuitazione sia positiva se il campo è nella direzione della corrente.
+
+Consideriamo una qualsiasi superficie aperta $S \subset \R^3$ che ha il filo chiuso $\gamma$ come bordo e il verso positivo della corrente coerente con la direzione di $\uvt{n}$.
+
+\important{Legge di induzione elettromagnetica}, o \important{legge di Faraday-Henry-Lentz} (formato integrale):
+\begin{equation}
+    \fem_i = - \der{t} \Phi_S(\B)
+\end{equation}
+È una legge sperimentale, quindi un principio.
+Inoltre, vale per ogni curva $\gamma$ nel vuoto, non è necessario che sia un reale filo conduttore.
+
+Riscrittura del formato integrale e formato differenziale (tramite il teorema di Stokes):
+\begin{gather}
+    \oint_{\partial S} \E \lde = -\der{t} \int_S \B \sde \\
+    \curl \E = - \parder[\B]{t}
+\end{gather}
+
+Quindi, \important{la presenza di campi magnetici variabili nel tempo genera campi elettrici non conservativi}.
+
+Una carica in moto accelerato genera:
+\begin{itemize}
+    \item Un campo elettrico conservativo, in quanto carica;
+    \item Un campo magnetico variabile, in quanto corrente variabile.
+    \begin{itemize}
+        \item Quindi, un campo elettrico non conservativo.
+
+        Le linee di questo campo non conservativo descrivono delle eliche intorno alle linee di campo magnetico.
+    \end{itemize}
+\end{itemize}
+
+Questi campi elettrici non conservativi hanno linee di campo chiuse, poiché non nascono da cariche.
+In seguito risulterà che, nel vuoto, sono localmente perpendicolari a quelle del campo magnetico.
+
+La legge di induzione elettromagnetica generalizza la conservatività del campo elettrostatico in presenza di campi variabili nel tempo.
+
+L'equazione ``duale'', che i fisici iniziarono subito a cercare, venne individuata solo decenni dopo da Maxwell e dimostrata da Hertz (vedi \autoref{sec:ampere_maxwell}).
+
+\subsection{Autoinduzione}
+
+Spira chiusa $\gamma$ percorsa da corrente $I$ dovuta a un generatore di tensione $V_0$ che genera un campo elettrico $\E_0$.
+
+Viene generato un campo magnetico $\B$.
+
+Se il circuito ha un interruttore, vuol dire che la corrente varia nel tempo da $I = 0$ a $I = V_0/R$.
+Quindi, varia anche $\B$ e questo genera un campo elettrico $\E_\text{ind}$ che si sovrappone a $\E_0$.
+
+Il campo magnetico in $\p$ è (legge di Ampère-Laplace):
+\begin{equation}
+    \B(\p) = \frac{\mu_0 I}{4\pi} \oint_\gamma \frac{\de \vt{l}' \times \ver{r'}}{\norm{\p - \p'}^2}
+\end{equation}
+
+Considerando una superficie $S$ delimitata da $\gamma$, il flusso di $\B$ attraverso $S$ è
+\begin{equation}
+    \Phi_S(\B) = I \underbrace{\frac{\mu_0}{4\pi} \int_S \oint_\gamma \frac{\de \vt{l}' \times \ver{r'}}{\norm{\p - \p'}^2} \sde}_L = L I
+\end{equation}
+$L$ si dice \important{coefficiente di autoinduzione} e dipende solo dalla geometria del circuito. L'unità di misura è l'henry, $[L] = \unit{\henry}$.
+Il flusso del campo magnetico si misura in weber, $[\Phi(\B)] = \unit{\weber}$.
+
+$L$ quantifica l'effetto che un circuito percorso da corrente variabile ha su se stesso.
+
+Quando l'interruttore viene chiuso, $\B$ cresce nella direzione concorde col verso della corrente, quindi aumenta anche il suo flusso.
+\begin{equation}
+    \fem_i = - \der{t} \Phi_S(\B) = - L \der[I]{t}
+\end{equation}
+Il campo elettrico indotto, quindi, si oppone a quello originario.
+
+\subsection{Circuiti RL}
+
+Il lavoro del generatore è speso in calore e nella generazione del campo magnetico.
+Descriviamo il bilancio energetico per una carica $\de q$ in moto:
+\begin{itemize}
+    \item lavoro erogato dal generatore di tensione: $V_0 \de q$
+    \item lavoro dissipato in calore per effetto Joule: $R I \de q$
+    \item lavoro speso per generare il campo magnetico: $-\fem_i \de q = L \der[I]{t} \de q$
+\end{itemize}
+Semplificando $\de q$,
+\begin{equation}
+    V_0 = R I + L \der[I]{t}
+\end{equation}
+
+La soluzione di questa equazione differenziale in $I$ con condizione iniziale $I(0) = 0$ è
+\begin{equation}
+    I(t) = \frac{V_0}{R} \pts{1 - \exp{-\frac{R}{L} t}}
+\end{equation}
+Ha pendenza $V_0/L$ per $t \to 0^+$ e tende a $V_0/R$ per $t \to +\infty$.
+
+Alla fine, l'effetto autoinduttivo svanisce e il campo magnetico rimane costante.
+
+\subsection{Energia di campo magnetico}
+\label{sec:energia_campo_magnetico}
+
+Circuito RL in cui l'induttore è un solenoide
+
+Il coefficiente di autoinduzione è
+\begin{equation}
+    L = \frac{\Phi(\B)}{I} = \frac{S N B}{I} = \mu_0 S \frac{N^2}{l}
+\end{equation}
+$S$ è la sezione del solenoide, $l$ la lunghezza, $N$ il numero di spire.
+
+L'energia assorbita nel transitorio dall'induttore è
+\begin{equation}
+    W = \int_0^t P(t') \de t'
+    = \int_0^t \der{t'}(L I) I \de t'
+    = \frac{1}{2} L I^2
+    = \frac{1}{2} \frac{1}{\mu_0} \underbrace{\mu_0^2 \frac{N^2}{l^2} I^2}_{B^2} l S = \frac{1}{2} \frac{B^2}{\mu_0} l S
+\end{equation}
+
+Quindi, la densità di energia del campo magnetico è:
+\begin{equation}
+    w_B = \frac{1}{2} \frac{\norm{\B}^2}{\mu_0}
+\end{equation}
+Questo risultato è generale, per qualunque campo magnetico.
+
+L'energia accumulata nel campo magnetico viene restituita al circuito quando si spegne il generatore di tensione, continuando a generare della corrente (analogamente al processo di scarica del condensatore, che restituisce l'energia di campo elettrico).
+
+\subsection{Mutua induzione}
+
+Due circuiti con fili $\gamma_1$ e $\gamma_2$ percorsi da corrente $I_1 = V_1/R_1$, $I_2 = V_2/R_2$.
+
+Il campo magnetico generato da $I_1$ è
+\begin{equation}
+    \B_1(\p) = \frac{\mu_0 I_1}{4\pi} \oint_{\gamma_1} \frac{\de \vt{l}_1 \times \ver{r_1}}{\norm{\p - \p_1}^2}
+\end{equation}
+Il suo flusso attraverso una superficie $S_2$ che abbia bordo $\gamma_2$ è
+\begin{equation}
+    \Phi_{S_2}(\B_1) = I_1 \underbrace{\frac{\mu_0}{4\pi} \int_{S_2} \oint_{\gamma_1} \frac{\de \vt{l}_1 \times \ver{r_1}}{\norm{\p_2 - \p_1}^2} \sde_2}_{M_{21}} = M_{21} I_1
+\end{equation}
+$M_{21}$ è il \important{coefficiente di mutua induzione}.
+
+Questo vuol dire che, accendendo il circuito 1, questo genera un campo magnetico attraverso $S_2$, e quindi una f.e.m.\ indotta nel circuito 2.
+Finito il transitorio, sia $I_1$ sia $I_2$ sono costanti.
+
+Svolgiamo alcuni bilanci energetici.
+
+L'energia spesa dal generatore di tensione del circuito 1 per accendere la corrente nel circuito 2 è
+\begin{equation}
+\begin{gathered}
+    \energy_{21}
+    = \int \de \energy_{21}
+    = \int \abs{\fem_2} \de q_2 = \\
+    = \int M_{21} \der[I_1]{t} \de q_2
+    = \int_0^{I_1} M_{21} I_2 \de I_1
+    = M_{21} I_1 I_2
+\end{gathered}
+\end{equation}
+Analogamente, l'energia spesa per accendere la corrente di mutua induzione nel circuito 1 è
+\begin{equation}
+    \energy_{12} = M_{12} I_1 I_2
+\end{equation}
+Nel caso dell'autoinduzione,
+\begin{equation}
+\begin{gathered}
+    \energy_1
+    = \int \de \energy_1
+    = \int \abs{\fem_1} \de q_1 = \\
+    = \int L_1 \der[I_1]{t} \de q_1
+    = \int_0^{I_1} L_1 I_1 \de I_1
+    = \frac{1}{2} L_1 I_1^2
+\end{gathered}
+\end{equation}
+
+Mostriamo ora che $M_{12} = M_{21}$.
+
+Consideriamo uno scenario 1:
+\begin{itemize}
+    \item Accendo $I_1$ con $I_2 = 0$
+        \begin{equation}
+            W_1 = \frac{1}{2} L_1 I_1^2
+        \end{equation}
+    \item Accendo $I_2$ con $I_1$ costante
+        \begin{equation}
+            W_{12} + W_2 = M_{12} I_1 I_2 + \frac{1}{2} L_2 I_2^2
+        \end{equation}
+        $W_{12}$ serve a mantenere $I_1$ costante mentre $I_2$ varia.
+\end{itemize}
+
+Scenario 2:
+\begin{itemize}
+    \item Accendo $I_2$ con $I_1 = 0$
+        \begin{equation}
+            W_2 = \frac{1}{2} L_2 I_2^2
+        \end{equation}
+    \item Accendo $I_1$ con $I_2$ costante
+        \begin{equation}
+            W_{21} + W_1 = M_{21} I_1 I_2 + \frac{1}{2} L_1 I_1^2
+        \end{equation}
+        $W_{21}$ serve a mantenere $I_2$ costante mentre $I_1$ varia.
+\end{itemize}
+
+Poiché alla fine ho raggiunto la stessa situazone,
+\begin{equation}
+    W_1 + W_{12} + W_2 = W_2 + W_{21} + W_1
+    \implies
+    M_{12} = M_{21} \eqcolon M
+\end{equation}
+
+Con $\B = \B_1 + \B_2$,
+\begin{subequations}
+\begin{gather}
+    \begin{bmatrix} \Phi_{S_1}(\B) \\ \Phi_{S_2}(\B) \end{bmatrix} =
+    \begin{bmatrix}
+        L_1 & M \\ M & L_2
+    \end{bmatrix}
+    \begin{bmatrix} I_1 \\ I_2 \end{bmatrix}
+    \\
+    \begin{bmatrix} \fem_{i,1} \\ \fem_{i,2} \end{bmatrix} =
+    - \begin{bmatrix}
+        L_1 & M \\ M & L_2
+    \end{bmatrix}
+    \der{t} \begin{bmatrix} I_1 \\ I_2 \end{bmatrix}
+\end{gather}
+\end{subequations}
+
+Questo rivela che i due circuiti sono accoppiati ed è possibile comunicare informazione trasportando energia da un circuito all'altro.
+
+Ciò è realizzato con antenne (per trasferire informazione) e trasformatori (per trasferire energia).
+
+
+\section{Principio di conservazione della carica}
+
+Consideriamo un volume $V$ delimitato da una superficie $S = \partial V$.
+La carica $q$ all'interno può aumentare o diminuire a seconda che le cariche escano o entrino.
+$\uvt{n}$ è definito.
+
+La carica netta che attraversa $S$ per unità di tempo è la corrente uscente:
+\begin{equation}
+    I = \oint_S \dcurr \sde
+\end{equation}
+Questa deve essere opposto alla variazione di carica all'interno di $V$ per unità di tempo.
+
+Il principio di conservazione della carica, in formato integrale e differenziale, è dunque il seguente:
+\begin{subequations}
+\begin{gather}
+    \der[q]{t} + I = 0 \\
+    \parder[\rho]{t} + \diver \dcurr = 0
+\end{gather}
+\end{subequations}
+
+Si passa dall'una all'altra forma tramite il teorema di Gauss e le definizioni di densità di carica e densità di corrente:
+\begin{equation}
+\begin{gathered}
+    \der[q]{t} + I
+    = \der{t} \int_V \rho \, \de V + \oint_S \dcurr \sde = \\
+    = \int_V \parder[\rho]{t} \de V + \int_V \diver \dcurr \, \de V
+    = \int_V \pts{\parder[\rho]{t} + \diver \dcurr} \de V
+    = 0
+\end{gathered}
+\end{equation}
+
+Considerando la legge di Gauss:
+\begin{gather}
+\begin{gathered}
+    \eps_0 \oint_S \E \sde = q \\
+    \implies
+    \eps_0 \der{t} \oint_S \E \sde = -\der[q]{t} = -\oint_S \dcurr \sde \\
+    \implies
+    \oint_S \eps_0 \parder[\E]{t} \sde + \oint_S \dcurr \sde
+\end{gathered} \\
+\label{eq:flusso_corrente_generalizzata}
+    \implies \oint_S \pts{\dcurr + \eps_0 \parder[\E]{t}} \sde = 0
+\end{gather}
+È una riscrittura della legge di conservazione della carica.
+
+Inoltre, si osserva che $\eps_0 \parder[\E]{t}$ è dimensionalmente una densità di carica:
+\begin{equation}
+    \dimension \eps_0 \parder[\E]{t} = \dimension \dcurr = \mathsf{L}^{-2} \mathsf{I}
+\end{equation}
+Si definisce la \important{densità di corrente generalizzata}:
+\begin{equation}
+    \dcurr + \eps_0 \parder[\E]{t}
+\end{equation}
+Il suo flusso, che è nullo attraverso una superficie chiusa, è la \important{corrente generalizzata}.
+
+Si pensi a un condensatore che si carica.
+Considerando una superficie chiusa che include l'armatura positiva, la corrente è negativa (poiché entrante) ma il flusso (uscente) del campo elettrico aumenta, quindi la variazione nel tempo di tale flusso è positiva.
+
+\subsection{Circuito RC}
+
+Consideriamo un circuito con
+un generatore di tensione $V_0$,
+un condensatore a facce piane parallele di capacità $C$
+e un resistore di resistenza $R$.
+
+Per ogni carica $\de q$, l'energia erogata dal generatore viene dissipata in calore e spesa per generare un campo elettrico.
+Semplificando i $\de q$,
+\begin{equation}
+    V_0 = R \der[q]{t} + \frac{1}{C} q
+\end{equation}
+
+La soluzione con condizione iniziale $q(0) = 0$ è
+\begin{subequations}
+\begin{gather}
+    q(t) = C V_0 \pts{1 - \exp{-\frac{t}{RC}}} \\
+    I(t) = \frac{V_0}{R} \exp{-\frac{t}{RC}}
+\end{gather}
+\end{subequations}
+
+È ora possibile dare un'interpretazione fisica alle leggi di Kirchhoff:
+\begin{itemize}
+    \item KVL $\longleftrightarrow$ legge di conservazione dell'energia.
+    \item KCL $\longleftrightarrow$ legge di conservazione della carica.
+\end{itemize}
+
+\section{Legge di Ampère-Maxwell}
+\label{sec:ampere_maxwell}
+
+% Applichiamo la legge di Ampère a una curva $\gamma$, usando una superficie $S$ che passa attraverso le armature del condensatore.
+
+La legge di Ampère \eqref{eq:legge_di_ampere} è valida solo se i campi sono statici, altrimenti viola la conservazione della carica.
+
+Infatti, applichiamola a una superficie $S$ che tende a chiudersi, cosicché il suo bordo $\gamma$ tenda a diventare un punto.
+La circuitazione di $\B$ dovrà anch'essa tendere a zero:
+\begin{gather}
+    \oint_\gamma \B \lde \to 0
+    \implies \mu_0 \int_S \dcurr \sde \to 0
+    \implies \oint_S \dcurr \sde = 0
+\end{gather}
+Al limite, infatti, la superficie diventa chiusa.
+
+Ma questo contraddice la \eqref{eq:flusso_corrente_generalizzata} e vale solo se la corrente è stazionaria.
+
+La legge di Ampère, ora, viola la legge di conservazione della carica.
+
+Per correggere l'assurdo, si sostituisce alla densità di corrente la densità di corrente generalizzata nella legge di Ampère.
+
+\begin{equation}
+    \mu_0 \int_S \pts{\dcurr + \eps_0 \parder[\E]{t}} \sde
+    = \mu_0 I + \mu_0\eps_0 \der{t} \Phi_S(\E)
+\end{equation}
+
+\important{Legge di Ampère-Maxwell}:
+\begin{subequations}
+\begin{gather}
+    \oint_\gamma \B \lde
+    = \mu_0 I + \mu_0\eps_0 \der{t} \Phi_S(\E) \\
+    \curl \B = \mu_0 \pts{\dcurr + \eps_0 \parder[\E]{t}}
+\end{gather}
+\end{subequations}
+
+Il segno $+$, diversamente dalla legge di induzione elettromagnetica, indica che $\B$ aumenta con verso concorde alla regola della mano destra quando il flusso di $\E$ aumenta.
+
+L'esempio del condensatore citato sopra mostra anche che, tra le armature di un condensatore in carica, si genera un campo magnetico.
+
+\section{Equazioni di Maxwell}
+
+Principi:
+\begin{itemize}
+    \item Legge di Coulomb
+    \item Conservazione della carica
+    \item Sovrapposizione per $\E$
+    \item Sovrapposizione per $\B$
+    \item Legge elementare di Ampère
+    \item Legge di Faraday-Henry
+    \item Corrente di spostamento
+    \item Forza di Lorentz
+\end{itemize}
+\medskip
+
+Formato differenziale:
+\begin{align}
+    \diver \E & = \frac{\rho}{\eps_0} \\
+    \diver \B & = 0 \\
+    \curl \E & = - \parder[\B]{t} \\
+    \curl \B & = \mu_0 \pts{\dcurr + \eps_0 \parder[\E]{t}}
+\end{align}
+
+Formato integrale:
+\begin{gather}
+    \oint_S \E \sde = \frac{q}{\eps_0} \\
+    \oint_S \B \sde = 0 \\
+    \oint_\gamma \E \lde = - \der{t} \int_{S(\gamma)} \B \sde \\
+    \oint_\gamma \B \lde = \mu_0 I + \mu_0\eps_0 \der{t} \int_{S(\gamma)} \E \sde
+\end{gather}
+dove $S(\gamma)$ è una superficie aperta con bordo $\gamma$.
+
+Sorgenti:
+\begin{gather}
+    q = \int_V \rho \, \de V \\
+    I = \int_S \dcurr \sde
+\end{gather}
+
+Nel mezzo:
+\begin{align}
+    \diver \D & = \rho\free \\
+    \diver \B & = 0 \\
+    \curl \E & = - \parder[\B]{t} \\
+    \curl \H & = \dcurr\free + \parder[\D]{t}
+\end{align}
+% Ovvero, $\E$ e $\H$ per le circuitazioni, $\D$ e $\B$ per i flussi.
+Equazioni costitutive:
+\begin{gather}
+    \D = \eps_0 \E + \vt{P} = \eps \E \\
+    \B = \mu_0 \H + \mu_0 \vt{M} = \mu \H
+\end{gather}
+% Le seconde uguaglianze valgono se il mezzo è lineare.

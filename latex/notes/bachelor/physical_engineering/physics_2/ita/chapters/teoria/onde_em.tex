@@ -1,0 +1,542 @@
+\chapter{Onde elettromagnetiche}
+
+\begin{itemize}
+    \item Legge di induzione elettromagnetica $\to$ campi magnetici variabili generano campi elettrici perpendicolari ai campi inducenti.
+    \item Legge di Ampère-Maxwell $\to$ campi elettrici variabili generano campi magnetici perpendicolari ai campi inducenti.
+\end{itemize}
+
+In un punto $\p$ nel vuoto, siano $\E(\p) \parallel \uy \perp \B(\p) \parallel \uz$.
+
+Si applica Ampère-Maxwell per un piccolo quadrato $\perp \uy$:
+\begin{equation}
+\label{eq:ampere_maxwell_quadratino}
+\begin{gathered}
+    \oint_\gamma \B \lde
+    = \mu_0\eps_0 \der{t} \Phi_S(\E) \\
+    \implies
+    -\pts{\B + \parder[\B]{x} \de x} \cdot \de z \uz + \B \cdot \de z \uz
+    = \mu_0 \eps_0 \parder[\E]{t} \cdot \de z \de x \uy \\
+    \implies
+    - \parder[\B]{x} \cdot \de x \de z \uz
+    = \mu_0 \eps_0 \parder[\E]{t} \cdot \de x \de z \uy \\
+    \implies
+    - \parder[B]{x} = \mu_0 \eps_0 \parder[E]{t}
+\end{gathered}
+\end{equation}
+
+Si applica Faraday-Henry per un piccolo quadrato $\parallel \uz$:
+\begin{equation}
+\label{eq:faraday_henry_quadratino}
+\begin{gathered}
+    \oint_\gamma \E \lde
+    = -\der{t} \Phi_S(\B) \\
+    \implies
+    \pts{\E + \parder[\E]{x} \de x} \cdot \de y \uy - \E \cdot \de y \uy
+    = - \parder[\B]{t} \cdot \de x \de y \uz \\
+    \implies
+    \parder[\E]{x} \cdot \de x \de y \uy
+    = - \parder[\B]{t} \cdot \de x \de y \uz \\
+    \implies
+    \parder[E]{x} = - \parder[B]{t}
+\end{gathered}
+\end{equation}
+
+Riassumendo,
+\begin{equation}
+    \begin{cases}
+        - \parder[B]{x} = \mu_0 \eps_0 \parder[E]{t} \\
+        \parder[E]{x} = - \parder[B]{t}
+    \end{cases}
+\end{equation}
+
+Derivando ulteriormente la \eqref{eq:ampere_maxwell_quadratino} (AM) rispetto a $t$ e la \eqref{eq:faraday_henry_quadratino} (FH) rispetto a $x$,
+\begin{equation}
+    \begin{cases}
+        - \partial^2_{tx} B = \mu_0 \eps_0 \parder[E][2]{t} \\
+        \parder[E][2]{x} = - \partial^2_{xt} B
+    \end{cases}
+    \implies \parder[E][2]{x} = \mu_0 \eps_0 \parder[E][2]{t}
+\end{equation}
+
+Derivando ulteriormente AM rispetto a $x$ e FH rispetto a $t$,
+\begin{equation}
+    \begin{cases}
+        - \parder[B][2]{x} = \mu_0 \eps_0 \partial^2_{tx} E \\
+        \partial^2_{xt} E = - \parder[B][2]{t}
+    \end{cases}
+    \implies \parder[B][2]{x} = \mu_0 \eps_0 \parder[B][2]{t}
+\end{equation}
+
+Cioè
+\begin{gather}
+    \parder[E][2]{x} = \mu_0 \eps_0 \parder[E][2]{t} \\
+    \parder[B][2]{x} = \mu_0 \eps_0 \parder[B][2]{t}
+\end{gather}
+
+$\E$ e $\B$ sono nuovamente disaccoppiati, e per ciascuno vale l'\important{equazione di d'Alembert}:
+\begin{equation}
+\label{eq:dalembert_1d}
+    \parder[y][2]{x} = \frac{1}{v^2} \parder[y][2]{t}
+\end{equation}
+
+con $\mu_0 \eps_0 = 1/v^2$.
+
+\section{Derivazione in forma differenziale}
+
+Usando la seguente identità dell'analisi vettoriale
+\begin{equation}
+    \curl \curl \vt{F} = \grad \pts{\diver \vt{F}} - \vlapl \vt{F}
+\end{equation}
+si giunge alla forma generale dell'equazione di d'Alembert per $\E$ e $\B$ nel vuoto:
+\begin{gather}
+    \curl \E = - \parder[\B]{t} \\
+    \implies
+    \curl \curl \E = - \curl \parder[\B]{t} \\
+    \implies
+    \cancel{\grad \pts{\diver \E}} - \vlapl \E = - \parder{t} \curl \B \\
+    \implies
+    \vlapl \E = \parder{t} \pts{\mu_0 \eps_0 \parder[\E]{t}} \\
+    \implies
+    \vlapl \E = \frac{1}{c^2} \parder[\E][2]{t}
+\end{gather}
+
+Analogamente per $\B$.
+
+\section{Soluzioni dell'equazione di d'Alembert}
+
+La soluzione della \eqref{eq:dalembert_1d}, in una dimensione, è
+\begin{equation}
+    y(x, t) = f_1(x - vt) + f_2(x + vt)
+\end{equation}
+Ovvero, la somma di funzioni $f_1$ e $f_2$ generiche che traslano nello spazio in direzione $x$ con una certa velocità.
+Si tratta di onde, segnali che si spostano nello spazio.
+
+Quindi, $\E$ e $\B$ si propagano nello spazio come onde, con velocità
+\begin{equation}
+    c = \frac{1}{\sqrt{\mu_0 \eps_0}} = \qty{299792458}{\metre\per\second}
+\end{equation}
+$c$ è la \important{velocità dell'onda elettromagnetica nel vuoto}.
+
+Mentre le altre onde hanno un supporto, queste si propagano nel vuoto e sono perturbazioni di campi.
+Storicamente, vi furono due reazioni:
+\begin{itemize}
+    \item Si tratta solo di un risultato matematico senza realtà fisica
+    \item Esiste un supporto, l'\textit{etere}, che permette la propagazione delle onde elettromagnetiche
+\end{itemize}
+
+Le onde elettromagnetiche sono sempre solo trasversali (cioè, perpendicolari alla direzione di propagazione), non longitudinali.
+Se la direzione di propagazione varia, $\E$ e $\B$ rimangono perpendicolari tra loro e alla direzione di propagazione.
+
+Le funzioni $f_1$ e $f_2$ vengono considerate sinusoidali:
+\begin{equation}
+    f(x - c t) = A \sin\pts{k (x - c t)} = A \sin(k x - \omega t)
+    = A \sin\pts{2\pi \pts{\frac{x}{\lambda} - \frac{t}{T}}}
+\end{equation}
+$A$ è l'ampiezza, $k = 2\pi / \lambda$ è il \important{numero d'onda}, $\omega = 2\pi / T$ è la $\important{pulsazione}$, $k x - \omega t$ è la \important{fase}.
+Segue che
+\begin{equation}
+    c = \frac{\omega}{k} = \frac{\lambda}{T}
+\end{equation}
+Infatti, grazie alla legge di Fourier, qualunque funzione si può scrivere come serie di seni e coseni.
+
+Le onde con $f$ sinusoidale sono dette \important{onde armoniche}.
+Ogni moto di carica non rettilineo si può approssimare moto circolare (poiché la traiettoria si può approssimare come arco di circonferenza), quindi ogni carica in moto emette ``localmente'' onde elettromagnetiche sinusoidali.
+
+Anche le cariche nei materiali emettono onde elettromagnetiche sinusoidali, poiché sono in moti oscillatori.
+\begin{subequations}
+\begin{gather}
+    \E(x, t) = \E_0 \sin(k x - \omega t) \\
+    \B(x, t) = \B_0 \sin(k x - \omega t)
+\end{gather}
+\end{subequations}
+
+Usando la \eqref{eq:faraday_henry_quadratino},
+\begin{equation}
+\begin{gathered}
+    \parder[E]{x} = - \parder[B]{t}
+    \implies
+    \der[E]{(x - c t)} \der[(x - c t)]{x} = - \der[B]{(x - c t)} \der[(x - c t)]{t} \\
+    \implies
+    \der[E]{(x - c t)} = c \der[B]{(x - c t)}
+    \implies
+    E = c B
+\end{gathered}
+\end{equation}
+
+\important{Fronte d'onda}: superficie a fase costante.
+È $\parallel \E \times \B$ (cioè perpendicolare sia a $\E$ si a $\B$) e si sposta a velocità $c$.
+
+In conclusione, nel vuoto:
+\begin{subequations}
+\begin{gather}
+    \vlapl \E = \frac{1}{c^2} \parder[\E][2]{t} \\
+    \vlapl \B = \frac{1}{c^2} \parder[\B][2]{t} \\
+    \E \perp \B \\
+    \norm{\E} = c\norm{\B}
+\end{gather}
+\end{subequations}
+
+
+\section{Tipi di onde}
+
+\subsection{Onda sferica}
+
+Un'onda sferica si genera quando una sorgente puntiforme emette onde in un mezzo isotropo ed è caratterizzata da $\vt{k} \parallel \p$ (ponendo la sorgente nell'origine).
+Infatti, la direzione di propagazione è necessariamente radiale rispetto alla sorgente.
+\begin{equation}
+    \E(\p, t) = \E_0(r) \sin(k r - \omega t)
+\end{equation}
+L'ampiezza dipende da $r$ per ragioni di conservazione dell'energia (vedi \autoref{sec:intensita_onda_sferica}).
+La fase dipende solo dal modulo di $\p$ poiché i fronti d'onda sono, appunto, a simmetria sferica.
+
+Per conoscere l'onda dovuta a una sorgente generica, occorre considerare varie sorgenti puntiformi e integrare sulle onde sferiche che queste generano.
+
+\subsection{Onda piana}
+
+Sono le soluzioni (non banali) più semplici alle equazioni di Maxwell nel vuoto.
+
+Un'onda piana è tale che le direzioni di $\E$ e $\B$ sono costanti.
+\begin{subequations}
+\begin{gather}
+    \E(\vt{x}, t) = \E_0 \sin(\vt{k} \cdot \vt{x} - \omega t)
+    = \imag{\E_0 \exp{\im(\vt{k} \cdot \vt{x} - \omega t)}} \\
+    \B(\vt{x}, t) = \B_0 \sin(\vt{k} \cdot \vt{x} - \omega t)
+    = \imag{\B_0 \exp{\im(\vt{k} \cdot \vt{x} - \omega t)}}
+\end{gather}
+\end{subequations}
+$\vt{k}$ è il \important{vettore d'onda}, di modulo $k$ (il numero d'onda) e che ha per direzione la direzione di propagazione.
+Nel caso di un'onda piana, è costante.
+
+Un'onda piana è \important{polarizzata linearmente}, cioè sia $\E$ sia $\B$ oscillano in piani fissi.
+
+Onda \important{polarizzata circolarmente}: $\E$ e $\B$, anziché oscillare in modulo, ruotano in moto circolare uniforme.
+
+Le onde piane non esistono, visto che le sorgenti non sono mai infinite.
+Sono approssimazioni di onde sferiche per percorsi brevi rispetto alla distanza dalla sorgente.
+
+\subsection{Onda generica}
+
+Nello spazio, l'equazione di un onda è
+\begin{equation}
+    A = f(\phi) = f(\vt{r} \cdot \uvt{u} - vt)
+\end{equation}
+$A$ è la quantità perturbata, $\vt{r}$ è il punto sul fronte d'onda, $\uvt{u}$ ha la direzione verso cui l'onda si propaga a velocità $v$.
+
+I \important{raggi} sono le curve tangenti a $\uvt{u}$.
+$\uvt{u}$ e i raggi sono ovunque normali ai fronti d'onda.
+
+\section{Onde elettromagnetiche nel mezzo}
+
+Se il mezzo in cui l'onda si propaga è \important{isotropo}, i raggi sono rette.
+
+In un mezzo omogeneo isotropo (in assenza di cariche o correnti nette), è sufficiente sostituire $\mu_0$ ed $\eps_0$ con $\mu$ ed $\eps$.
+
+La velocità dell'onda è
+\begin{equation}
+    v = \frac{1}{\sqrt{\mu \eps}} = \frac{c}{\sqrt{\mu_r \eps_r}}
+\end{equation}
+
+Molto spesso $\mu_r \approx 1$ (in tutti i materiali tranne quelli ferromagnetici, che però sono spesso anche conduttori).
+Quindi, $\eps_r$ ha la maggiore importanza.
+
+Si definisce l'\important{indice di rifrazione}:
+\begin{equation}
+    n \coloneq \sqrt{\mu_r \eps_r} \approx \sqrt{\eps_r} > 1
+\end{equation}
+
+Per cui
+\begin{equation}
+    v = \frac{c}{n}
+\end{equation}
+
+Considerando un'onda piana, nel mezzo variano ampiezza e lunghezza d'onda/numero d'onda, ma non pulsazione/frequenza/periodo.
+\begin{gather}
+    v = \frac{c}{n} \\
+    k = n k_0
+    \quad \iff \quad
+    \lambda = \frac{\lambda_0}{n} \\
+    \omega = \omega_0
+    \quad \iff \quad
+    T = T_0
+    \quad \iff \quad
+    \nu = \nu_0
+\end{gather}
+
+Per dimostrarlo, si considera una carica $q$ nell'origine con velocità $\vt{v}_p(t) = v_0 \sin(\omega t) \uy$.
+In un punto sull'asse $x$, si ha che $\B(x, 0, 0) \parallel \uz$ e $\E(x, 0, 0) \parallel \uy \parallel \vt{v}$.
+Questo vale sempre: il campo elettrico è parallelo al moto della carica.
+
+Detta $v$ la velocità di propagazione dei campi, possiamo valutare l'andamento di $B$ (e quindi di $E = c B$) grazie alla legge elementare di Ampère:
+\begin{equation}
+    B(x, t) \propto q v_p\pts{t - \frac{x}{v}} = - q v_0 \sin(k x - \omega t)
+\end{equation}
+Il termine $k x$ è dovuto all'\important{effetto di ritardo}.
+
+Si può concludere che:
+\begin{itemize}
+    \item La pulsazione $\omega$ del campo deriva dal moto della carica, non dal mezzo di propagazione.
+    \item Il numero d'onda $k = \omega / v$ deriva dall'effetto di ritardo, e quindi dipende dal mezzo.
+\end{itemize}
+
+
+\section{Energia del campo elettromagnetico}
+
+Siano $E \coloneq \norm{\E}$ e $B \coloneq \norm{\B}$.
+
+Densità di energia totale del campo elettromagnetico è la somma delle densità di energia dei campi elettrostatico e magnetostatico (anche se non sono statici):
+\begin{equation}
+    w\EM = \frac{1}{2} \eps_0 E^2 + \frac{1}{2} \frac{B^2}{\mu_0}
+\end{equation}
+Inoltre,
+\begin{equation}
+    \eps_0 E^2 = \eps_0 c^2 B^2 = \frac{B^2}{\mu_0}
+\end{equation}
+Quindi ciascuno dei due campi contribuisce per metà energia.
+Allora,
+\begin{equation}
+    w\EM = \eps_0 E^2 = \frac{B^2}{\mu_0}
+\end{equation}
+
+\section{Esperimento di Hertz}
+
+Svolto nel 1888, serve a dimostrare l'esistenza delle onde elettromagnetiche.
+
+Si collegano due sfere metalliche a un trasformatore, in modo che si carichino e scarichino ripetutamente.
+
+Alla rottura del dielettrico (aria), avviene un arco elettrico e le sfere si scaricano.
+
+Ponendo una spira con amperometro in un punto tra tra le sfere e una lastra di metallo posta lontano si può capire se si propagano campi.
+Una lastra metallica svolge il ruolo di uno specchio riflettente per le onde elettromagnetiche.
+
+Presso la spira, si sovrappongono onde progressive (incidenti) e regressive (riflesse):
+\begin{subequations}
+\begin{gather}
+    E(x, t) = E_{0,i}\exp{\im(kx - \omega t)} + E_{0,r}\exp{-\im(kx + \omega t)} \\
+    B(x, t) = B_{0,i}\exp{\im(kx - \omega t)} + B_{0,r}\exp{-\im(kx + \omega t)}
+\end{gather}
+\end{subequations}
+$\omega t$ è sempre con segno meno perché l'onda torna indietro nello spazio, non nel tempo.
+
+Sulla superficie del metallo il campo elettrico totale deve essere nullo (poiché non ha componente normale alla lastra).
+
+Questo, con $x = 0$ (cioè sulla lastra), implica $E_{0,i} = - E_{0,r} \eqcolon E_0$.
+
+La direzione di propagazione, che è $\parallel \E \times \B$, deve invece cambiare verso.
+Quindi, se $\E$ diventa opposto, $\B$ deve rimanere quale è: $B_{0,i} = B_{0,r} \eqcolon B_0$.
+\begin{subequations}
+\label{eq:onde_stazionarie}
+\begin{gather}
+    E(x, t) = E_0\exp{\im(kx - \omega t)} - E_0\exp{-\im(kx + \omega t)}
+    = 2 E_0 \sin(kx) \cos(\omega t) \\
+    B(x, t) = B_0\exp{\im(kx - \omega t)} + B_0\exp{-\im(kx + \omega t)}
+    = 2 B_0 \cos(kx) \cos(\omega t)
+\end{gather}
+\end{subequations}
+
+Usando il fatto che
+\begin{equation}
+\begin{gathered}
+    \exp{\im (A + B)} = \cos(A + B) + \im \sin(A + B)
+    = \\
+    = \cos(A) \cos(B) - \sin(A) \sin(B) + \im \cos(A) \sin(B) + \im \sin(A) \cos(B)
+\end{gathered}
+\end{equation}
+
+Le \eqref{eq:onde_stazionarie} sono \important{onde stazionarie}, quindi esistono dei nodi.
+Posizionando lì la spira, se questa è sufficientemente piccola, l'amperometro non legge mai corrente.
+
+La spira deve essere piccola rispetto alla lunghezza d'onda, quindi occorre scegliere una frequenza sufficientemente bassa.
+
+In questo modo si misura anche la velocità della luce, poiché $\omega$ è scelta e $\lambda/2$ è la distanza tra i nodi.
+Questa può essere misurata spostando la spira via da un nodo e trovando il successivo.
+
+
+
+\section{Pressione di radiazione}
+
+Il campo elettromagnetico trasporta non solo energia, ma anche quantità di moto.
+
+Lo si verifica con un dinamometro a torsione, illuminando degli specchi dopo averli chiusi in una bolla di vetro per evitare altre perturbazioni.
+
+Consideriamo un'onda piana che incide perpendicolarmente un materiale.
+Un'elettrone del materiale (di carica elementare $e$) viene accelerato dal campo elettrico in verso opposto a $\E$ acquisendo una velocità $v$.
+Viene poi accelerato dal campo magnetico verso l'interno del materiale.
+
+La forza perpendicolare risultante $F_x$ genera il trasferimento della quantità di moto $p$:
+\begin{gather}
+    F_x = \der[p_x]{t} = e v B \\
+    \der[U]{t} = F_E v = e E v = e c B v = c \der[p]{t}
+    \implies \Delta U = c \Delta p
+\end{gather}
+$U$ è l'energia dell'elettrone e varia solo in funzione della forza elettrica poiché $\B$ non compie lavoro.
+
+La densità di quantità di moto di un'onda elettromagnetica, quindi, è
+\begin{equation}
+    p\EM = \frac{w\EM}{c}
+\end{equation}
+
+Se l'onda è totalmente assorbita dal materiale, la pressione esercitata sul materiale è
+\begin{equation}
+    \text{pressione} = \frac{F_\perp}{A} = \frac{1}{A} \frac{\Delta p}{\Delta t}
+    = \frac{1}{A} \frac{p\EM A c \Delta t}{\Delta t}
+    = w\EM
+\end{equation}
+$A c \Delta t = A \Delta x$ è il volume che incide sulla superficie in un tempo $\Delta t$.
+
+Se l'onda viene totalmente riflessa la pressione è doppia, poiché è doppia la variazione di quantità di moto.
+
+Se la radiazione incide con un angolo $\theta$ rispetto alla normale, occorre moltiplicare per $\cos^2\theta$ (un coseno viene dalla forza, l'altro dal volume che incide sulla superficie nel tempo $\Delta t$).
+\begin{equation}
+    \text{pressione} = \frac{F \cos\theta}{A} = \frac{1}{A} \frac{\Delta p \cos \theta}{\Delta t}
+    = \frac{1}{A} \frac{p\EM \pts{A c \Delta t \cos \theta} \cos \theta}{\Delta t}
+    = \cos^2(\theta) w\EM
+\end{equation}
+
+
+\section{Vettore di Poynting}
+
+Volume $V$ con $S = \partial V$ in presenza di campi elettrico e magnetico e con, all'interno, delle cariche $q$ in densità volumica $n$ in moto con velocità $\vt{v}$.
+
+La densità di carica è $\rho = qn$, la densità di corrente $\dcurr = qn\vt{v}$.
+
+Qual è la potenza che il campo elettromagnetico trasferisce alle cariche in moto?
+\begin{gather}
+    \de P = n q \de V \E \cdot \vt{v} = n q \vt{v} \cdot \E \,\de V = \dcurr \cdot \E \,\de V \\
+    \implies P = \int_V \dcurr \cdot \E \,\de V
+\end{gather}
+
+Dalla quarta equazione di Maxwell:
+\begin{equation}
+    \curl \B = \mu_0 \dcurr + \mu_0 \eps_0 \parder[\E]{t}
+    \implies
+    \dcurr = \frac{1}{\mu_0} \curl \B - \eps_0 \parder[\E]{t}
+\end{equation}
+
+Per cui
+\begin{equation}
+\label{eq:potenza1}
+\begin{gathered}
+    P = \int_V \pts{\frac{1}{\mu_0} \curl \B - \eps_0 \parder[\E]{t}} \cdot \E \,\de V = \\
+    = \frac{1}{\mu_0} \int_V (\curl \B) \cdot \E \,\de V - \eps_0 \int_V \parder[\E]{t} \cdot \E \,\de V
+\end{gathered}
+\end{equation}
+
+Si usa la seguente identità:
+\begin{equation}
+    \diver (\E \times \B) = (\curl \E) \cdot \B - \E \cdot (\curl \B)
+\end{equation}
+
+La \eqref{eq:potenza1} prosegue come:
+\begin{equation}
+\begin{gathered}
+    P = \frac{1}{\mu_0} \int_V (\curl \E) \cdot \B \,\de V
+    - \frac{1}{\mu_0} \int_V \diver (\E \times \B) \,\de V
+    - \eps_0 \int_V \parder[\E]{t} \cdot \E \,\de V = \\
+    = - \frac{1}{\mu_0} \int_V \parder[\B]{t} \cdot \B \,\de V
+    - \frac{1}{\mu_0} \int_V \diver (\E \times \B) \,\de V
+    - \eps_0 \int_V \parder[\E]{t} \cdot \E \,\de V = \\
+    = - \int_V \pts{\frac{1}{2 \mu_0} \parder[\B^2]{t} + \frac{\eps_0}{2} \parder[\E^2]{t}} \de V
+    - \frac{1}{\mu_0} \int_V \diver (\E \times \B) \,\de V = \\
+    = - \der{t} \int_V \pts{\frac{1}{2 \mu_0} \B^2 + \frac{\eps_0}{2} \E^2} \de V
+    - \oint_{\partial V} \frac{\E \times \B}{\mu_0} \sde = \\
+    = -\der[U\EM]{t} - \flux{\partial V}{\poy}
+\end{gathered}
+\end{equation}
+
+Nell'ultimo passaggio è stato definito il \important{vettore di Poynting}:
+\begin{gather}
+    \poy \coloneq \frac{\E \times \B}{\mu_0} \\
+    \norm{\poy} = \frac{E B}{\mu_0} = \frac{E^2}{\mu_0 c} = \eps_0 c E^2
+\end{gather}
+Si tratta della potenza per unità di superficie di un'onda elettromagnetica.
+
+Il bilancio energetico che ne risulta costituiscce il \important{teorema di Poynting}:
+\begin{gather}
+    -\der[U\EM]{t} = P + \flux{\partial V}{\poy}
+\end{gather}
+Ovvero, la perdita di energia di campo elettromagnetico (a sinistra) è dovuta a
+\begin{itemize}
+    \item lavoro svolto sulle cariche
+    \item uscita dell'onda attraverso la superficie
+\end{itemize}
+
+Inoltre, l'energia ``stanziale'' (per unità di volume) $w\EM$ e l'energia (per unità di tempo e si superficie) espressa dal vettore di Poynting sono la stessa a meno di costanti: entrambe proporzionali al quadrato dell'ampiezza dell'onda.
+
+Un altro modo di derivare il vettore di Poynting è il seguente: si considera un cilindro di base $A$ e lunghezza $c \Delta t$ con asse parallelo alla velocità dell'onda $\vt{c}$.
+
+la potenza per unità di superficie che esce da una faccia del cilindro è
+\begin{equation}
+    \frac{1}{A} \der[U]{t} = \frac{w\EM A c \de t}{A \de t} = w\EM c = \eps_0 E^2 c
+\end{equation}
+Considerare questa potenza come vettore:
+\begin{equation}
+    \eps_0 E^2 \vt{c} = \frac{\E \times \B}{\mu_0} = \poy
+\end{equation}
+
+Il vettore di Poynting permette inoltre di definire l'\important{intensità} di un'onda elettromagnetica:
+\begin{equation}
+    I \coloneq \avg{\norm{\poy}}
+\end{equation}
+La media è considerata sul periodo dell'onda (sinusoidale).
+Se l'onda elettromagnetica è visibile, si tratta proprio dell'intensità avvertita dall'occhio.
+
+\subsection{Intensità di un'onda piana}
+
+Onda piana con direzione di propagazione $x$ con polarizzazione rettilinea lungo $y$.
+\begin{equation}
+    \E(\p, t) = \E_0 \sin(\vt{k} \cdot \p - \omega t)
+\end{equation}
+Calcoliamo il valore medio nel tempo del vettore di Poynting:
+\begin{equation}
+\begin{gathered}
+    \avg{\vt{S}} = \frac{1}{T} \int_0^T \vt{S} \, \de t
+    = \frac{1}{T} \int_0^T \frac{E^2}{\mu_0 c} \ver{k} \, \de t = \\
+    = \frac{1}{T} \int_0^T \frac{E_0^2}{\mu_0 c} \sin^2(\vt{k} \cdot \p - \omega t) \ver{k} \, \de t
+    = \frac{1}{T} \frac{E_0^2}{\mu_0 c} \ver{k} \int_0^T \sin^2(\vt{k} \cdot \p - \omega t) \, \de t
+\end{gathered}
+\end{equation}
+Sostituzione:
+\begin{equation}
+\begin{gathered}
+    y(t) = \vt{k} \cdot \p - \omega t, \quad
+    \de y = -\omega \de t = -\frac{2 \pi}{T} \de t, \quad \\
+    t \in [0, \, T] \implies y \in [a, \, a - 2\pi]
+    \text{ con } a \coloneq \vt{k} \cdot \p
+\end{gathered}
+\end{equation}
+Segue
+\begin{gather}
+    \avg{\poy} = \frac{E_0^2}{2 \pi \mu_0 c} \ver{k} \int_{a - 2\pi}^a \sin^2(y) \, \de y
+    = \frac{E_0^2}{2 \mu_0 c} \ver{k}
+    = \frac{1}{2} \eps_0 c E_0^2 \ver{k}
+\end{gather}
+
+Analogamente,
+\begin{equation}
+    I = \avg{\norm{\poy}} = \frac{E_0^2}{2 \mu_0 c}
+    = \frac{1}{2} \eps_0 c E_0^2
+\end{equation}
+È l'intensità di un'onda piana, \important{proporzionale al quadrato dell'ampiezza} dell'onda.
+
+
+\subsection{Intensità di un'onda sferica}
+\label{sec:intensita_onda_sferica}
+
+Presso un certo punto dello spazio in presenza di un'onda sferica, l'energia per unità di tempo e di superficie è
+\begin{equation}
+    \norm{\poy} = \frac{1}{\mu_0 c} E^2 = \frac{1}{\mu_0 c} E_0^2 \sin^2(kr - \omega t)
+\end{equation}
+
+Se la sorgente dell'onda è puntiforme a distanza $r$ ed emette una potenza $W(t)$, la potenza che fuoriesce da una sfera di raggio $r$ dopo essere stata emessa dalla sorgente è
+\begin{equation}
+    4 \pi r^2 \norm{\poy} = \frac{4 \pi r^2}{\mu_0 c} E_0^2 \sin^2(kr - \omega t)
+\end{equation}
+
+Questa non è sempre uguale alla potenza emessa dalla sorgente perché c'è un ritardo temporale $r/v$.
+Tuttavia, si può considerare la potenza media su un periodo:
+\begin{gather}
+    W_\text{avg} = \avg{W(t)} = \avg{\frac{4 \pi r^2}{\mu_0 c} E_0^2 \sin^2(kr - \omega t)}
+    = 4\pi r^2 I
+    = \frac{2 \pi r^2}{\mu_0 c} E_0^2 \\
+    \implies E_0 = \sqrt{\frac{W_\text{avg} \mu_0 c}{2\pi}} \frac{1}{r}
+\end{gather}

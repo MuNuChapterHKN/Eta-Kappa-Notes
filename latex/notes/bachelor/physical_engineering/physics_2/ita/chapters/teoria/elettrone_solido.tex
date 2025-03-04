@@ -1,0 +1,541 @@
+\chapter{Fisica dello stato solido}
+
+Abbiamo risolto l'equazione di Schrödinger nel caso di una particella che
+\begin{itemize}
+    \item trasla (conferma la discretizzazione)
+    \item oscilla (conferma l'ipotesi \textit{ad hoc} di Planck, giusta: $\Delta E = \hbar \omega n$)
+    \item ruota (conferma l'ipotesi \textit{ad hoc} di Bohr, sbagliata: $L = \hbar \sqrt{l (l + 1)}$, e non $L = \hbar l$).
+\end{itemize}
+Nel caso dell'effetto tunnel non si ha alcuna discretizzazione perché, dal momento che la particella può essere in tutto $\R$, non ci sono condizioni al contorno.
+
+Studiamo ora il comportamento degli elettroni nei solidi.
+
+\section{Modellizzazione}
+
+Consideriamo un cristallo (struttura ordinata e periodica) a struttura cubica (ogni atomo è circondato da sei atomi, secondo i vertici di un cubo).
+
+Non è possibile risolvere analiticamente il problema descrivendo tutti gli elettroni del sistema, poiché sono in numero dell'ordine di grandezza del numero di Avogadro.
+
+Per non perdere di vista il messaggio fisico, si svolgono cinque ipotesi semplificative.
+\begin{enumerate}
+    \item $V$ non è l'energia potenziale coulombiana, ma una schiera di buche di potenziale.
+
+    $V$ dovrebbe essere:
+    \begin{equation}
+        V(\p) = \sum_i -\frac{Z e^2}{4 \pi \eps_0 \norm{\p - \p_i}}
+    \end{equation}
+    Tuttavia, l'elettrone si trova in uno stato fondamentale molto profondo (tanto più quanto maggiore è $Z$), quindi vede una barriera praticamente verticale che può superare solo in caso di ionizzazione.
+
+    L'energia potenziale si può quindi approssimare con una buca di potenziale a pareti finite per ogni nucleo.
+
+    \item Il problema è monodimensionale (si può scegliere una direzione arbitraria poiché lo spazio è isotropo).
+    \item Il solido ha dimensione infinita, per garantire la periodicità e limitare le definizioni a tratti
+    \item Il solido contiene un solo elettrone, oltre ai nuclei positivi.
+    \item Il solido è a temperatura $T = \qty{0}{\kelvin}$, così che i nuclei siano fermi.
+\end{enumerate}
+
+Descriveremo la soluzione nel caso di questo ``solido'', e poi elimineremo queste semplificazioni per avvicinarci al comportamento di un solido reale.
+
+Questo solido è quindi rappresentabile tramite una disposizione di buche di potenziale profonde $V_0$, di ampiezza $a$ e a distanza $b$.
+\begin{equation}
+    % V(x) = V_0 \sum_{k = -\infty}^{\infty} [(a + b)k + a < x < (a + b)k + a + b] \\
+    V(x) = \begin{cases}
+        0 & x \in [0, a] \\
+        V_0 & x \in [a, a + b]
+    \end{cases}
+\end{equation}
+estesa per periodicità a tutto $\R$.
+Qui, $V_0$ è l'\important{energia di ionizzazione} e $a + b \approx a$ è il \important{passo reticolare}.
+
+% Si potrà rappresentare un cristallo a struttura cubica definendo un vettore $\vt{a}$ in modo che tutti i nuclei siano in posizioni $n \vt{a}$.
+% Le tre componenti di $\vt{a}$ sono i passi reticolari nelle tre direzioni.
+
+Condizioni:
+\begin{subequations}
+\label{eq:condcristallo}
+    \begin{gather}
+        V_0 \gg E \\
+        b \ll a
+    \end{gather}
+\end{subequations}
+con $E$ energia dell'elettrone.
+Inoltre, $V$ è periodico di periodo $a + b$.
+
+\section{Soluzione dell'equazione di Schrödinger}
+
+Siano ``regione I'' le barriere e ``regione II'' le buche.
+
+Equazioni di Schrödinger nelle regioni 1 e 2:
+\begin{subequations}
+\label{eq:schrcristallo}
+    \begin{gather}
+        -\frac{\hbar^2}{2 m} \parder[][2]{x} \Psi_\mathrm{I} = E \Psi_\mathrm{I}
+        \implies
+        \parder[][2]{x} \Psi_\mathrm{I} = - \underbrace{\frac{2 m E}{\hbar^2}}_{\alpha^2} \Psi_\mathrm{I} \\
+        -\frac{\hbar^2}{2 m} \parder[][2]{x} \Psi_\mathrm{II} + V_0 \Psi_\mathrm{II} = E \Psi_\mathrm{II}
+        \implies
+        \parder[][2]{x} \Psi_\mathrm{II} = \underbrace{\frac{2 m (V_0 - E)}{\hbar^2}}_{\gamma^2} \Psi_\mathrm{II}
+    \end{gather}
+\end{subequations}
+
+Un elettrone che si trova inizialmente in una buca, dopo un certo tempo ha probabilità finita di trovarsi ovunque.
+
+Quindi, mi aspetto una collettività di elettroni che interagiscono con una collettività di nuclei.
+
+Bloch dimostrò (\important{teorema di Bloch}) che quando l'equazione di Schrödinger ha un potenziale periodico, la soluzione è del tipo
+\begin{equation}
+\label{eq:bloch}
+    \Psi(x) = u(x) \exp{\im k x}
+\end{equation}
+dove $k \in \R$ è un parametro di adimensionamento con dimensioni $\dimension{k} = \mathsf{L}^{-1}$ e $u$ ha la stessa periodicità del potenziale:
+\begin{equation}
+    u(x + a + b) = u(x) \quad \forall x \in \R
+\end{equation}
+
+Sostituendo nelle due soluzioni $\Psi_\mathrm{I}$ e $\Psi_\mathrm{II}$ nella \eqref{eq:schrcristallo}, si ottiengono due equazioni differenziali in $u_\mathrm{I}$ e $u_\mathrm{II}$
+\begin{subequations}
+    \begin{gather}
+        \parder[][2]{x} u_\mathrm{I} + 2\im k \parder{x} u_\mathrm{I} - (k^2 - \alpha^2) u_\mathrm{I} = 0 \\
+        \parder[][2]{x} u_\mathrm{II} + 2\im k \parder{x} u_\mathrm{II} - (k^2 + \gamma^2) u_\mathrm{II} = 0
+    \end{gather}
+\end{subequations}
+con soluzioni
+\begin{subequations}
+    \begin{gather}
+        u_\mathrm{I}(x) = \exp{-\im k x} \pts{A \exp{\im \alpha x} + B \exp{-\im \alpha x}} \\
+        u_\mathrm{II}(x) = \exp{-\im k x} \pts{C \exp{\gamma x} + D \exp{-\gamma x}}
+    \end{gather}
+\end{subequations}
+
+Condizioni al contorno: continuità di $\Psi$ e della sua derivata prima all'inizio e alla fine di ogni barriera.
+\begin{subequations}
+    \begin{gather}
+        u_\mathrm{I}(0) = u_\mathrm{II}(0) \qquad
+        \evalat{\der[u_\mathrm{I}]{x}}{x = 0} = \evalat{\der[u_\mathrm{II}]{x}}{x = 0} \\
+    \label{eq:boundaryuii}
+        u_\mathrm{I}(a) = u_\mathrm{II}(-b) \qquad
+        \evalat{\der[u_\mathrm{I}]{x}}{x = a} = \evalat{\der[u_\mathrm{II}]{x}}{x = -b}
+    \end{gather}
+\end{subequations}
+
+Sostituire $a$ con $-b$ per $u_\mathrm{II}$ nella \eqref{eq:boundaryuii} permette di tenere automaticamente in considerazione il fatto che $u$ è periodica e che le condizioni al contorno vanno imposte per ogni buca.
+
+Risulta un sistema lineare omogeneo di quattro equazioni in quattro incognite:
+\begin{equation}
+    \begin{bmatrix}
+        a_{11} & a_{22} & a_{13} & a_{14} \\
+        a_{21} & a_{22} & a_{23} & a_{24} \\
+        a_{31} & a_{32} & a_{33} & a_{34} \\
+        a_{41} & a_{42} & a_{43} & a_{44}
+    \end{bmatrix}
+    \begin{bmatrix}
+        A \\ B \\ C \\ D
+    \end{bmatrix}
+    = \begin{bmatrix}
+        0 \\ 0 \\ 0 \\ 0
+    \end{bmatrix}
+\end{equation}
+I coefficienti dipendono da $k$, $\alpha$ e $\gamma$.
+
+Perché il sistema abbia soluzioni non banali è necessario che la matrice dei coefficienti non abbia rango massimo.
+Porre il determinante uguale a zero corrisponde alla seguente equazione:
+\begin{equation}
+    \frac{\gamma^2 - \alpha^2}{2 \alpha \gamma} \sinh(\gamma b) \sin(\alpha a) + \cosh(\gamma b) \cos(\alpha a) = \cos\pts{k(a + b)}
+\end{equation}
+Si usano le seguenti approssimazioni derivate dalle condizioni nella \eqref{eq:condcristallo}:
+\begin{subequations}
+    \begin{gather}
+        b \ll a \implies \cosh(\gamma b) \approx 1, \ \sinh(\gamma b) \approx \gamma b \\
+        E \ll V_0 \implies \alpha \ll \gamma
+    \end{gather}
+\end{subequations}
+che risultano in
+\begin{equation}
+\label{eq:bande}
+    \begin{gathered}
+        \frac{\gamma^2 - \cancel{\alpha^2}}{2 \alpha \cancel{\gamma}} \cancel{\gamma} b \sin(\alpha a) + \cancel{\cosh(\gamma b)} \cos(\alpha a) = \cos\pts{k(a + \cancel{b})} \\
+        \implies \frac{\gamma^2 b}{2 \alpha} \sin(\alpha a) + \cos(\alpha a) = \underbrace{\frac{m a b V_0}{\hbar^2}}_P \frac{\sin(\alpha a)}{\alpha a} + \cos(\alpha a) = \cos(ka) \\
+        \implies
+        \boxed{P \, \frac{\sin(\alpha a)}{\alpha a} + \cos(\alpha a) = \cos(ka)}
+    \end{gathered}
+\end{equation}
+Questa è la condizione che l'elettrone deve rispettare per esistere nel solido e indica quanto devono valere il parametro di Bloch $k$ e l'energia $E$ dell'elettrone (implicita in $\alpha$).
+
+Se $V_0 = 0$, l'elettrone non vedrebbe alcun potenziale e sarebbe libero.
+Varrebbe $P = 0$ e la \eqref{eq:bande} diventerebbe
+\begin{gather}
+    \cos(\alpha a) = \cos(k a)
+    \implies
+    k^2 = \alpha^2 = \frac{2 m E}{\hbar^2} = \frac{2 m}{\hbar^2} \frac{p^2}{2 m}
+    \implies
+    p = \hbar k
+\end{gather}
+$k$ ha quindi un significato fisico legato alla quantità di moto dell'elettrone.
+
+\section{Schema a bande}
+
+In generale, la \eqref{eq:bande} relaziona $E$ e $k$ (ma non è si può esplicitare rispetto a nessuna delle due variabili).
+Non è quindi possibile che l'elettrone abbia energia e quantità di moto arbitrarie.
+Il luogo dei punti $(k, E)$ che soddisfano la \eqref{eq:bande} (non nel caso di elettrone libero) è:
+
+\redtext{Figura}
+
+Il periodo delle curve è $2 \pi / a$, quindi i punti di massimo e minimo di $E$ rispetto a $k$ sono per
+\begin{equation}
+    k = \frac{\pi}{a} n, \quad n \in \N
+\end{equation}
+
+Lo stesso grafico sarebbe da interpretare in tre dimensioni, con $\vt{k} = (k_x, k_y, k_z)$.
+Ogni elettrone sarà caratterizzato da una quaterna $(E, \vt{k})$.
+
+Sono le informazioni contenute della funzione d'onda.
+Questo significa che, di un elettrone in un solido, posso misurare solamente energia e quantità di moto senza indeterminazione.
+
+In realtà manca lo spin, che non è considerato dall'equazione di Schrödinger, poiché questa tratta solo masse puntiformi e questo sarebbe contraddittorio con il concetto di momento angolare intrinseco.
+
+Quindi, lo stato è caratterizzato da
+\begin{equation}
+    (E, \vt{k}, s) \longleftrightarrow \ket{\Psi, \uparrow}
+\end{equation}
+A destra è rappresentata la notazione di Dirac, che evidenzia come $\Psi$ e $\uparrow$ siamo elementi di spazi vettoriali diversi.
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+        Elettrone in un... & Caratteristiche fisiche \\
+        \hline
+        atomo & 4: $(n, l, m, m_s)$ \\
+        solido & 5: $(E, k_x, k_y, k_z, s)$ \\
+        \hline
+    \end{tabular}
+    \caption{Caratteristiche fisiche degli elettroni in un atomo e in un solido}
+    \label{tab:caratteristiche}
+\end{table}
+
+Un elettrone in un solido, ora, è propriamente un onda (lo si vede dalla forma della \eqref{eq:bloch}).
+
+La ``posizione'' di un onda è meglio descritta nello \important{spazio reciproco}, in cui ``vive'' il numero d'onda $k$, anziché nello spazio reale dove  ``vive'' la posizione.
+
+La periodicità in $k$ vuol dire che
+\begin{equation}
+    \Psi(x; k) = \Psi\pts{x; k + \frac{2\pi}{a}}
+\end{equation}
+$k$ è un parametro, non l'argomento della funzione.
+Questo vuol dire che al crescere della quantità di moto l'energia non necessariamente aumenta, ma si ripete.
+La funzione d'onda, inoltre, si ripeterà anch'essa.
+
+Per questa ragione, la quantità sull'asse delle ascisse viene talvolta chiamata ``pseudo-quantità di moto''.
+
+È quindi possibile studiare $\Psi(x)$ in un unica oscillazione fondamentale: per $k \in [-\pi / a, \pi / a]$, regione detta \important{prima zona di Brillouin}.
+
+Il grafico $E$ vs. $k$ nella prima zona di Brillouin è detto \important{schema a bande}:
+
+\redtext{Figura}
+
+Ogni curva rappresenta una \important{banda di energia} ``nel senso della fisica'': ci sono zone di energia in cui l'elettrone può esistere (bande di energia \important{permesse}) e zone in cui non può (bande di energia \important{proibite}).
+
+Le proiezioni delle bande sull'asse $E$ costituiscono le bande ``nel senso dell'elettronica''.
+
+Ogni banda, inoltre, corrisponde fisicamente da un livello energetico nel senso degli orbitali (la prima banda all'$1s$, la seconda a $2s$ e $2p$ ecc.).
+
+\section{Solido finito}
+
+Ora rimuoviamo l'ipotesi di estensione infinita del solido.
+
+Un solido unidimensionale infinito, poiché periodico, può essere descritto come un'infinità di solidi uguali di lunghezza $L = N a$, che è un multiplo intero del passo reticolare $a$:
+\begin{gather}
+    \Psi(x) = \Psi(x + L) = \Psi(x + N a) \\
+    \implies u(x) \exp{\im k x} = u(x + L) \exp{\im k (x + L)} \\
+    \implies 1 = \exp{\im k L} \implies 2\pi \mid k L \\
+    \implies k = \frac{2\pi}{L} n, \quad n \in \Z
+\end{gather}
+Poiché siamo in una dimensione,
+\begin{equation}
+    k_x = \frac{2\pi}{L} n_x
+\end{equation}
+
+In un intervallo $[-\pi / a, \pi / a]$ ci sono quindi solo alcuni valori discreti di $k$ possibili, separati a distanza $2\pi / L$.
+I valori ammessi sono in numero
+\begin{equation}
+    N = \frac{\frac{2\pi}{a}}{\frac{2\pi}{L}} = \frac{L}{a}
+\end{equation}
+Ovvero, il rapporto tra la lunghezza del cristallo e il passo reticolare.
+Questo numero è tanto alto che il carattere discreto delle bande non è osservabile sperimentalmente.
+
+\section{Più elettroni}
+
+Rimuoviamo l'ipotesi di un solo elettrone.
+
+Un elettrone solo, nello schema a bande, si collocherà nel punto di minima energia, in $(E = 0, \, \vt{k} = \vt{0}, \, \uparrow)$.
+Un secondo elettrone si collocherà nella stessa posizione ma, per il principio di Pauli, con spin opposto: $(E = 0, \, \vt{k} = \vt{0}, \, \downarrow)$.
+Nota che ogni elettrone introdotto vede la periodicità del potenziale, quindi non ha senso pensare che possa scegliere un altro dei minimi periodici.
+
+Come si aggiungono altri elettroni?
+Il terzo si dovrà collocare in un punto contiguo (le bande sono discrete se il solido è finito) e avrà energia non nulla.
+Questo vuol dire che allo zero assoluto possiamo immaginare i nuclei fermi ma gli elettroni avranno comunque energia e quantità di moto non nulle.
+
+Se la banda ha un massimo di energia al centro anziché un minimo, allora quattro elettroni potranno posizionarsi a energia minima negli estremi della banda.
+
+In tutto, ogni banda può ospitare $2 N$ elettroni.
+
+Esempio: un atomo di sodio \ce{Na} ha 11 elettroni.
+Se ne posizionano $2 N$ in ciascuna delle prime cinque bande e $N$ nell'ultima.
+L'ultima banda sarà piena a metà e l'energia massima occupata si chiama \important{energia di Fermi} $E_F$.
+I materiali cristallini che si riempiono come il sodio sono i \important{conduttori}.
+
+Altro esempio: silicio \ce{Si}, 14 elettroni.
+$2 N$ in ciascuna delle prime sette bande.
+L'ottava è del tutto vuota.
+I materiali cristallini che si riempiono come il silicio sono gli \important{isolanti}.
+L'ultima banda piena si chiama banda di valenza (BV), la prima banda vuota si chiama banda di conduzione (BC).
+La distanza tra il minimo della banda di conduzione ($E_c$) e il massimo della banda di valenza ($E_v$) si chiama \important{energy gap} o banda proibita ($E_g = E_c - E_v$).
+
+Un semiconduttore è un materiale cristallino di ``tipo isolante'' che ha basso energy gap e può essere drogato (cioè, le sue cariche possono essere modulate tramite la sostituzione di alcuni atomi con altri elementi).
+
+\subsection{Approssimazione parabolica}
+
+Ora, svolgiamo lo sviluppo in serie della funzione $E(k)$ per una certa banda:
+\begin{equation}
+    E(k) = E(0) + \evalat{\der[E]{k}}{k = 0} k + \frac{1}{2} \evalat{\der[E][2]{k}}{k = 0} k^2 + o(k^2), \quad k \to 0
+\end{equation}
+
+In un minimo la derivata prima è nulla, quindi se la banda ha un minimo in $k = 0$ e si sceglie lì il riferimento per l'energia, si ha
+\begin{equation}
+\label{eq:approssparabolica}
+    \boxed{
+    E(k) \approx \frac{1}{2} \evalat{\der[E][2]{k}}{0} k^2
+    }
+\end{equation}
+Questa approssimazione è detta \important{approssimazione parabolica} ed è buona per ogni punto della banda tranne la zona in cui la curva flette, agli estremi.
+Si può riscrivere come
+\begin{equation}
+    E(k) \approx p^2 \pts{\frac{1}{2 \hbar^2} \evalat{\der[E][2]{k}}{0}} \\
+    \implies \frac{1}{2 m} \approx \frac{1}{2 m^*} \coloneq \frac{1}{2 \hbar^2} \evalat{\der[E][2]{k}}{0}
+\end{equation}
+$m^*$ si chiama \important{massa efficace} ed è una massa surrettizia definita in modo che la particella si possa descrivere come libera.
+\begin{equation}
+    m^* = \frac{\hbar^2}{\evalat{\der[E][2]{k}}{0}}
+\end{equation}
+
+Normalmente la massa efficace è dello stesso ordine di grandezza della massa dell'elettrone, ma può essere anche molto diversa, soprattutto con semiconduttori particolari.
+
+\subsection{Densità degli stati}
+
+Definiamo ora il numero di stati energetici disponibili in un internallo $\Delta E$ intorno all'energia $E$.
+Al $\Delta E$ corrisponde un $\Delta k_x$ con $2 \cdot \Delta k_x / (2\pi / L)$ stati (il fattore due è dovuto ai due possibili valori di spin).
+Per considerare tutte le direzioni, immaginiamo un cubetto nello spazio reciproco che ha per vertici otto valori di $\vt{k}$ possibili.
+
+Il numero di stati $N(k)$ che hanno quantità di moto minore di $k = \norm{\vt{k}}$, ovvero in $[0, \, k]$, è il numero di tali cubetti in una sfera di raggio $k$:
+\begin{equation}
+    N(k) = 2 \cdot \frac{\frac{4}{3} \pi k^3}{\pts{\frac{2\pi}{L}}^3}
+\end{equation}
+
+A energia $E(k)$,
+\begin{gather}
+    E(k) = \frac{\hbar^2 k^2}{2 m^*}
+    \implies k = \sqrt{\frac{2 m^* E}{\hbar^2}} \\
+    \implies N(k) = 2 \cdot \frac{\frac{4}{3} \pi \pts{\frac{2 m^* E}{\hbar^2}}^{3/2}}{\pts{\frac{2\pi}{L}}^3}
+    = \frac{L^3}{3 \pi^2} \pts{\frac{2 m^* E}{\hbar^2}}^{3/2} \\
+    \implies g(E) \coloneq \der[N]{E} = \frac{L^3}{2 \pi^2} \pts{\frac{2 m^*}{\hbar}}^{3/2} \sqrt{E} \propto \sqrt{E}
+\end{gather}
+$g(E)$ è la densità degli stati elettronici all'energia $E$.
+
+\redtext{Grafico $E$ vs. $g(E)$}
+
+\section{Distribuzione di Fermi-Dirac}
+
+Rimuoviamo ora l'ultima ipotesi, quella della temperatura allo zero assoluto.
+
+Consideriamo l'ultima banda di un conduttore.
+
+Suddividiamo l'intervallo di energia della banda in intervallini $\Delta E_i$ alle energie $E_i$.
+Il numero di stati in ogni intervallino è $g_i \coloneq g(E_i) \Delta E_i$.
+
+Se $T > \qty{0}{\kelvin}$, i nuclei iniziano a muoversi e urtano gli elettroni.
+Allo zero assoluto gli elettroni erano in equilibrio termodinamico con i nuclei, pur avendo energia non nulla.
+Adesso, invece, deve avvernire un trasferimento di energia dai nuclei agli elettroni.
+Con l'energia ricevuta dagli urti, alcuni elettroni saltano oltre il livello di Fermi.
+
+Ogni intervallino è caratterizzato da un energia per elettrone $E_i$, numero di stati $g_i$ e numero di elettroni $n_i$.
+Usiamo gli unici tre vincoli fisici indiscutibili in questa situazione:
+\begin{itemize}
+    \item Principio di Pauli (quantistico)
+
+    Il numero di elettroni in un intervallino di energia non può eccedere il numero di stati disponibili:
+    \begin{equation}
+        n_i \leq g_i
+    \end{equation}
+    \item Conservazione del numero di elettroni (classico)
+    \begin{equation}
+        N = \sum_i n_i \text{ costante}
+    \end{equation}
+    \item Conservazione dell'energia (classico)
+
+    L'energia totale deve essere pari alla somma delle energie di ogni livello:
+    \begin{equation}
+        U = \sum_i E_i n_i \text{ costante}
+    \end{equation}
+\end{itemize}
+
+Se non si raggiungesse un equilibrio dinamico, osserveremmo i materiali variare la loro disposizione di elettroni (e quindi anche la loro chimica e le loro proprietà) nel tempo, ma così non è.
+Fermi, allora, postula l'esistenza di una distribuzione (oggi detta distribuzione di Fermi-Dirac) degli elettroni negli stati disponibili che si può realizzare in un numero grandissimo di combinazioni, in modo da trascurare le altre:
+\begin{equation}
+    f(E_i; T) = \frac{n_i}{g_i}
+\end{equation}
+
+Il ragionamento è analogo al caso classico della teoria cinetica dei gas: la distribuzione uniforme nello spazio è la più probabile;
+non è impossibile che, ad esempio, metà contenitore sia vuoto, ma questo si realizza in un modo solo.
+% La situazione che osserviamo sempre è quella immensamente più probabile.
+
+Per ricavare la distribuzione, aggiungeremo un quarto vincolo non classico: l'indistinguibilità delle particelle.
+
+Il numero di modi in cui posso disporre $n_i$ elettroni \important{indistinguibili} in $g_i$ stati è
+\begin{equation}
+    \binom{g_i}{n_i} = \frac{g_i!}{n_i! (g_i - n_i)!}
+\end{equation}
+
+Il numero totale di modi $W$ di disporre gli elettroni in tutti i livelli è una funzione delle variabili $\{n_i\}$:
+\begin{equation}
+    % W(\{n_i\}) = \prod_i \binom{g_i}{n_i}
+    W(\ldots, n_i, \ldots) = \prod_i \binom{g_i}{n_i}
+\end{equation}
+Questa funzione va massimizzata sotto i vincoli dati prima.
+
+Usiamo il primo principio della termodinamica e la definizione di variazione di entropia:
+\begin{equation}
+    \de U = \delta Q = T \de S
+    \implies \de U - T \de S = \de (U - T S) = 0
+\end{equation}
+L'entropia è una misura del disordine di un sistema:
+\begin{equation}
+    S = k_B \ln W
+\end{equation}
+Definiamo l'\important{energia libera} $F$:
+\begin{equation}
+\begin{gathered}
+    F \coloneq U - T S = \sum_i n_i E_i - k_B T \ln \prod_i \binom{g_i}{n_i} = \\
+    = \sum_i n_i E_i - k_B T \sum_i \pts{\ln g_i! - \ln n_i! - \ln{(g_i - n_i)!}}
+\end{gathered}
+\end{equation}
+L'energia libera deve essere costante:
+\begin{equation}
+    \de F = \sum_i \parder[F]{n_i} \delta n_i = 0
+\end{equation}
+$\delta n_i$, dal punto di vista fisico, rappresenta lo spostamento degli elettroni da uno stato all'altro, quindi la loro somma deve essere nulla (poiché il numero totale di elettroni è costante):
+\begin{equation}
+    \sum_i \delta n_i = 0
+\end{equation}
+Fermi intuì che, allora, la derivata di $F$ rispetto a ciascuna variabile $n_i$ deve essere una costante, il \important{potenziale chimico} $\mu$:
+\begin{gather}
+    \mu = \parder[F]{n_i} \quad \text{costante } \forall i \\
+    \implies \de F = \sum_i \parder[F]{n_i} \delta n_i = \mu \sum \delta n_i = 0
+\end{gather}
+
+
+Tenendo presente l'equivalenza asintotica per $n \to+\infty$ nota come approssimazione di Stirling,
+\begin{gather}
+    n! \sim \sqrt{2 \pi n} \pts{\frac{n}{e}}^n \\
+    \implies \ln n! \sim \frac{1}{2} \ln(2 \pi n) +  n \ln n - n \sim n \ln n
+\end{gather}
+imponiamo che la derivata di $F$ rispetto a $n_i$ sia $\mu$:
+\begin{gather}
+\begin{gathered}
+    \mu = \parder[F]{n_i}
+    = E_i + k_B T \parder{n_i} \pts{\ln n_i! + \ln{(g_i - n_i)!}} \approx \\
+    \approx E_i + k_B T \parder{n_i} \pts{n_i \ln n_i + (g_i - n_i) \ln(g_i - n_i)} = \\
+    = E_i + k_B T \ln \frac{n_i}{g_i - n_i}
+\end{gathered} \\
+    \implies n_i = \frac{g_i}{1 + \exp{\dfrac{E_i - \mu}{k_B T}}}
+\end{gather}
+Per cui la distribuzione di Fermi-Dirac cercata è
+\begin{equation}
+    f(E_i; T) = \frac{1}{1 + \exp{\dfrac{E_i - \mu}{k_B T}}}
+\end{equation}
+Tornando a valori di energia continui:
+\begin{equation}
+    \boxed{
+    f(E; T) = \frac{1}{1 + \exp{\dfrac{E - \mu}{k_B T}}}
+    }
+\end{equation}
+È una sigmoide decrescente centrata in $\mu$:
+
+\redtext{Grafico $f(E; T)$ vs. $E$ per $E \ge 0$ e segnati $\mu$ in ascissa e $1/2$ e $1$ in ordinata}
+
+Per $T \to 0$, la distribuzione diventa una funzione a gradino centrata in $\mu$.
+Quindi, $\mu$ è proprio l'energia di Fermi.
+
+Consideriamo l'ultima banda (quella semipiena) per un cristallo conduttore.
+Possiamo ora determinare la densità di elettroni rispetto all'energia, moltiplicando la densità degli stati e la distrinuzione di Fermi-Dirac:
+
+\redtext{Grafici $E$ vs. $g(E)$, $f(E)$ e $g(E) f(E)$}
+
+La regione in cui $f(E)$ passa da $1$ a $0$ è ampia solo circa $2 k_B T$ attorno a $E_F$.
+A $T = \qty{300}{\kelvin}$, questo valore corrisponde a circa \qty{0.05}{\electronvolt}.
+
+\section{Calcolo del livello di Fermi}
+
+Supponiamo di essere a $T = \qty{0}{\kelvin}$.
+
+Detto $n_\text{el}$ il numero di elettroni nell'ultima banda per ogni atomo, il numero di elettroni totali nell'ultima banda è
+\begin{gather}
+    N = n_\text{el} N_\text{atomi} = \int_0^{E_F} g(E) \de E = \\
+    = \frac{L^3}{2 \pi^2} \pts{\frac{2 m^*}{\hbar}}^{3/2} \int_0^{E_F} \sqrt{E} \de E
+    = \frac{L^3}{2 \pi^2} \pts{\frac{2 m^* E_F}{\hbar}}^{3/2}
+\end{gather}
+Qui, lo zero dell'energia corrisponde all'inizio dell'ultima banda.
+Si può quindi trovare il livello di Fermi:
+\begin{equation}
+    \boxed{
+    E_F = \frac{\hbar^2}{2 m^*} \pts{3 \pi^2 n_\text{el} \frac{N_\text{atomi}}{L^3}}^{2/3}
+    }
+\end{equation}
+
+% Nel caso del sodio, ad esempio, $n_\text{el} = 1$ e risulta $E_F = \qty{4.7}{\electronvolt}$.
+
+Si osserva anche che, in questa scala e nel caso di un conduttore, la distribuzione di Fermi-Dirac è approssimabile con una funzione a gradino centrata in $E_F$.
+
+\section{Conduttore in un campo elettrico}
+
+Accendiamo un campo elettrico $\vt{C}$ nel verso $-\uy$.
+La forza elettrica determina una variazione di quantità di moto di ogni elettrone:
+\begin{equation}
+\label{eq:campocristallo}
+    e C = \frac{\Delta p_x}{\Delta t}
+    \implies
+    \frac{e C}{\hbar} \Delta t = \frac{\Delta p_x}{\hbar} = \Delta k_x
+\end{equation}
+Le quantità di moto aumentano tutte nel verso positivo di $k_x$.
+
+Si sposta prima l'elettrone con $k_x$ maggiore liberando il suo stato, poi quello successivo, e così via.
+Gli stati con $k_x$ più negativi vengono lasciati liberi.
+Lo schema a bande, alla fine, è riempito in modo asimmetrico.
+Gli elettroni che hanno stati appaiati con uno stato con $k_x$ opposto non contribuiscono a quantità di moto netta.
+Gli elettroni spaiati, invece, danno origine a una corrente elettrica netta (in direzione opposta al ``moto'' degli elettroni, che hanno carica negativa).
+
+Il $\Delta t$ nella \eqref{eq:campocristallo} è un tempo di urto $\tau$: il tempo medio prima di urtare contro un nucleo.
+Dopo ogni urto, gli elettroni vengono accelerati nuovamente.
+Per questa ragione, le quantità di moto variano ralativamente poco e la velocità di deriva è circa quella che corrisponde al livello di Fermi (interpretato come energia cinetica):
+\begin{equation}
+    v_F = \sqrt{\frac{2 E_F}{m}} \sim \qty{e5}{\metre\per\second}
+\end{equation}
+Da quest'ordine di grandezza, considerando la distanza tra i nuclei, risulta $\tau \sim \qty{e-12}{\second}$.
+
+È anche possibile stimare il tempo di urto in modo non classico.
+Infatti, la frequenza di urto $1/\tau$ è proporzionale alla densità dei nuclei.
+I nuclei, che sono in vibrazione, corrispondono a onde elastiche.
+Si introducono quindi delle particelle, dette \important{fononi}, che rappresentano le onde con cui gli elettroni interagiscono (cioè, contro cui ``urtano'').
+
+L'energia media di oscillazione di un atomo in un solido è
+\begin{equation}
+    E_\text{osc} = \frac{3}{\exp{\frac{h \nu}{k_B T}} - 1} h \nu
+\end{equation}
+Se ho $N$ nuclei, il numero di fononi può essere considerato
+\begin{equation}
+    N_\text{fon} = \frac{3 N}{\exp{\frac{h \nu}{k_B T}} - 1}
+\end{equation}
+ognuno con energia $h \nu$.
+
+$\tau$ si stima quindi come
+\begin{equation}
+    \tau \propto \frac{1}{N_\text{fon}}
+\end{equation}

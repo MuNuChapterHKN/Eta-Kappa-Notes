@@ -1,0 +1,194 @@
+% !TEX root = Fisica_II.tex
+
+% Possible arguments for the HKNdocument class:
+% Language:
+%   italian (default): Sets the document language to Italian.
+%   english: Sets the document language to English.
+%
+% Table of Contents (ToC) depth:
+%   toc=chapters: Shows only chapters in the ToC (tocdepth=0).
+%   toc=sections: Shows chapters and sections in the ToC (tocdepth=1).
+%   toc=subsections: Shows up to subsections in the ToC (default, tocdepth=2).
+%   toc=subsubsections: Shows up to sub-subsections in the ToC (tocdepth=3).
+%
+% Font size:
+%   10pt: Sets the base font size to 10 points.
+%   11pt (default): Sets the base font size to 11 points.
+%   12pt: Sets the base font size to 12 points.
+%
+% Draft mode:
+%   draft: Compiles the document in draft mode (useful for proofreading, dummy images and imported files).
+\documentclass[italian,12pt,toc=sections]{HKNdocument}
+\input{_preamble.tex}
+
+\usepackage{parskip}
+
+% Math
+\usepackage{cancel}  % \cancel
+\usepackage{mleftright}
+\mleftright  % remove extra space before and after \left and \right delimiters
+\usepackage[version=4]{mhchem}  % \ce
+\usepackage{siunitx}
+\sisetup{
+    exponent-product = \cdot,
+    input-digits = 0123456789\pi\pi^2,
+    per-mode = single-symbol,
+    range-open-phrase = {\text{da} },
+}
+\DeclareSIUnit\angstrom{\text{\AA}}
+
+%%% Command definitions
+\usepackage{xparse}  % \NewDocumentCommand
+
+% Classes
+\newcommand{\vt}[1]{\mathbf{#1}}  % vectors
+\newcommand{\mat}[1]{\mathrm{#1}}  % matrices
+\newcommand{\uvt}[1]{\hat{\vt{#1}}}  % unit vectors
+\newcommand{\ver}[1]{\uvt{u}_{#1}}  % unit vectors
+\newcommand{\func}[1]{\operatorname{#1}}  % functions
+
+% Functions and operations
+\newcommand{\pts}[1]{\left( #1 \right)}  % parentheses
+% \renewcommand{\exp}[1]{e^{#1}}  % exponential
+\renewcommand{\exp}[1]{\func{exp}\pts{#1}}  % exponential
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}  % norm
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}  % absolute value
+\newcommand{\avg}[1]{\left\langle #1 \right\rangle}  % average
+\newcommand{\inner}[2]{\left\langle #1, #2 \right\rangle}  % inner product
+\newcommand{\evalat}[2]{\left. #1 \right\rvert_{#2}}  % evaluation at
+\newcommand{\dimension}{\func{dim}}  % physical dimension
+\newcommand{\sgn}[1]{\func{sgn}(#1)}  % sign function
+\newcommand{\flux}[2]{\Phi_{#1}\pts{#2}}  % flux
+
+% Complex numbers
+\newcommand{\im}{i}  % imaginary unit
+\newcommand{\real}[1]{\func{Re}\pts{#1}}  % real part
+\newcommand{\imag}[1]{\func{Im}\pts{#1}}  % imaginary part
+\newcommand{\conj}[1]{#1^*}  % complex conjugate
+\newcommand{\herm}[1]{#1^\dagger}  % conjugate transpose
+
+% General entities
+\newcommand{\p}{\vt{r}}  % generic point
+\newcommand{\N}{\mathbb{N}}  % set of natural numbers
+\newcommand{\Z}{\mathbb{Z}}  % set of integer numbers
+\newcommand{\R}{\mathbb{R}}  % set of real numbers
+\newcommand{\C}{\mathbb{C}}  % set of complex numbers
+\newcommand{\ux}{\ver{x}}  % x unit vector
+\newcommand{\uy}{\ver{y}}  % y unit vector
+\newcommand{\uz}{\ver{z}}  % z unit vector
+% \newcommand{\ux}{\hat{\text{\bfseries\i}}}
+% \newcommand{\uy}{\hat{\text{\bfseries\j}}}
+% \newcommand{\uz}{\hat{\vt{k}}}
+
+% Calculus
+\newcommand{\de}{\mathrm{d}}  % symbol of differential
+\newcommand{\lde}{\cdot \de \vt{l}}  % line integral differential
+\newcommand{\sde}{\cdot \de \vt{S}}  % flux differential
+\NewDocumentCommand{\der}{O{} O{} m}{  % total derivative
+    \mathchoice
+        {\frac{\de^{#2} #1}{\de #3^{#2}}}  % displaystyle
+        {\frac{\de^{#2}}{\de #3^{#2}} #1}  % textstyle
+        {\frac{\de^{#2}}{\de #3^{#2}} #1}  % scriptstyle
+        {\frac{\de^{#2}}{\de #3^{#2}} #1}  % scriptscriptstyle
+}
+\NewDocumentCommand{\parder}{O{} O{} m}{  % partial derivative
+    \mathchoice
+        {\frac{\partial^{#2} #1}{\partial #3^{#2}}}  % displaystyle
+        {\partial^{#2}_{#3} #1}  % textstyle
+        {\partial^{#2}_{#3} #1}  % scriptstyle
+        {\partial^{#2}_{#3} #1}  % scriptscriptstyle
+}
+\newcommand{\grad}{\nabla}  % gradient
+\newcommand{\diver}{\nabla \cdot}  % divergence
+\newcommand{\curl}{\nabla \times}  % curl
+\newcommand{\lapl}{\nabla^2}  % Laplacian
+\newcommand{\vlapl}{\boldsymbol{\nabla}^2}  % vector Laplacian
+
+% Physical entities
+\newcommand{\eps}{\varepsilon}  % permittivity
+\newcommand{\E}{\vt{E}}  % electric field
+\newcommand{\B}{\vt{B}}  % magnetic flux density
+\newcommand{\D}{\vt{D}}  % displacement field
+\renewcommand{\H}{\vt{H}}  % magnetizing field
+\newcommand{\dcurr}{\vt{J}}  % current density
+\newcommand{\spot}{V}  % scalar potential
+\newcommand{\vpot}{\vt{A}}  % vector potential
+\newcommand{\force}{\vt{F}}  % force
+\newcommand{\fem}{\mathcal{E}}  % electromotive force
+\newcommand{\poy}{\vt{S}}  % Poynting vector
+\newcommand{\energy}{{E_n}}  % energy
+% Subscripts
+\newcommand{\free}{_f}  % free
+\newcommand{\bound}{_b}  % bound
+\newcommand{\eff}{_\mathrm{eff}}  % effective quantity
+\newcommand{\EM}{_\mathrm{EM}}  % 'electromagnetic' subscript
+
+% Bra-ket notation
+\newcommand{\ket}[1]{\left\lvert #1 \right\rangle}  % ket
+\newcommand{\bra}[1]{\left\langle #1 \right\rvert}  % bra
+\makeatletter
+\newcommand{\braket}[3][]{  % braket
+    \ifx\relax#1\relax
+        \left\langle #2 \middle\vert #3 \right\rangle
+    \else
+        \left\langle #2 \middle\vert #1 \middle\vert #3 \right\rangle
+    \fi
+}
+\makeatother
+
+% Formatting
+\newcommand{\redtext}[1]{{\color{red} #1}}
+\newcommand{\important}[1]{\textbf{#1}}
+
+\begin{document}
+% Document metadata
+\title{Fisica II}
+\shorttitle{HKNotes Guide}
+% You can include multiple \autor commands to list all autors in the frontpage.
+\author{Giulio Cosentino}
+
+% You can include multiple \editor commands to list all editors in the frontpage.
+\editor{Paolo Gialli}
+\editor{Sofia Blu}
+\editor{Carlo Grigi}
+\editor{Elisa Marroni}
+\editor{Marco Violetti}
+
+\organization{IEEE-HKN Mu Nu Chapter}
+\docdate{Primo semestre 2024/2025}
+\docversion{1.1}
+\doclogo{hkn_logo_blu.png}
+\doclicense{CC_BYNCND.png}
+
+\frontmatter
+% Create the title page
+\maketitle
+
+% Table of Contents after the title page
+\clearpage
+\cclicense
+\clearpage
+\tableofcontents
+\clearpage
+
+\mainmatter
+\include{chapters/teoria/elettrostatica}
+\include{chapters/esercitazioni/ex-elettrostatica}
+\include{chapters/teoria/magnetostatica}
+\include{chapters/esercitazioni/ex-magnetostatica}
+\include{chapters/teoria/campi_variabili}
+\include{chapters/esercitazioni/ex-campi_variabili}
+\include{chapters/teoria/onde_em}
+\include{chapters/esercitazioni/ex-onde_em}
+\include{chapters/teoria/interferenza}
+\include{chapters/esercitazioni/ex-interferenza}
+\include{chapters/esercitazioni/ex-relativita}
+\include{chapters/teoria/fisica_moderna}
+\include{chapters/teoria/quantistica}
+\include{chapters/esercitazioni/ex-quantistica}
+\include{chapters/teoria/elettrone_solido}
+
+\backmatter
+
+\input{_postamble.tex}
+\end{document}

@@ -1,0 +1,580 @@
+\chapter{Magnetostatica -- esercitazioni}
+
+\section{Dispositivi con campo magnetico}
+
+Scomponendo $\vt{v}$ nelle componenti $\vt{v}_\parallel \parallel \B$ e $\vt{v}_\perp \perp \B$,
+\begin{equation}
+    \force = q\vt{v} \times \B, \qquad
+    F = \abs{q}vB \sin\theta = \abs{q} v_\perp B
+\end{equation}
+
+Il moto di una particella carica nel piano $\perp \B$ è circolare uniforme:
+\begin{subequations}
+\begin{gather}
+    r = \frac{m v_\perp}{\abs{q}B} \\
+    \omega = \frac{v_\perp}{r} = \frac{\abs{q} B}{m} \\
+    T = \frac{2\pi}{\omega} = \frac{2\pi m}{\abs{q} B}
+\end{gather}
+\end{subequations}
+Nella direzione $\parallel \B$, il moto è rettilineo uniforme di velocità $v_\parallel$.
+
+Considerando entrambi i moti, il passo dell'elica è $v_\parallel T$.
+
+
+
+\subsection{Selettore di velocità}
+
+Consideriamo una sorgente di ioni in varie velocità.
+% Facendo passare le particelle attraverso un condensatore a facce piane parallele perpendicolari alla velocità delle particelle, è possibile accelerarle.
+Impostiamo una regione di spazio con campo elettrico e magnetico perpendicolari tra loro e alla velocità.
+Le uniche particelle ad attraversare completamente questa regione saranno quelle che non deviano, ovvero per cui
+\begin{equation}
+    \force = q(\E + \vt{v} \times \B) = \vt{0}
+    \implies \vt{v} \times \B = - \E
+\end{equation}
+In modulo e supponendo $\vt{v} \parallel \B$,
+\begin{equation}
+    vB = E \implies v = \frac{E}{B}
+\end{equation}
+$\B$ è probabilmente fornito da un magnete, quindi è difficile da modificare.
+Per questo, si opera su $\E$ tramite un condensatore a facce piane parallele.
+
+Esempio: vogliamo selezionare il catione argon \ce{Ar+}, che ha una massa $m = \qty{39.9}{\dalton}$ e una carica pari alla carica elementare.
+
+Accelerando gli ioni con una differenza di potenziale $\Delta V = \qty{e3}{\volt}$, la velocità di \ce{Ar+} risulta
+\begin{equation}
+    v = \sqrt{\frac{2q\Delta V}{m}} = \qty{7e4}{\metre\per\second}
+\end{equation}
+Con $B = \qty{0.1}{\tesla}$, occorre impostare $E = vB = \qty{7e3}{\volt\per\metre}$.
+
+\subsection{Spettrometro di massa}
+\label{sec:spettrometro_massa}
+
+È possibile misurare le masse degli ioni, nota la carica, misurando il raggio della semicirconferenza che percorrono in una regione con campo magnetico.
+
+Se la velocità $v$ è dovuta a una d.d.p. $\Delta V$,
+\begin{equation}
+    v = \sqrt{\frac{2 \abs{q} \Delta V}{m}}
+    \quad \implies \quad
+    r = \frac{mv}{\abs{q}B} = \frac{1}{B}\sqrt{\frac{2 m \Delta V}{\abs{q}}}
+\end{equation}
+
+Consideriamo argon-40 e argon-38 ionizzati, $\Delta V = \qty{1}{\kilo\volt}$, $B = \qty{0.1}{\tesla}$:
+\begin{equation}
+    r_{40} = \qty{28.8}{\centi\metre}, \quad r_{38} = \qty{28.0}{\centi\metre}
+\end{equation}
+La distanza tra le due misure sul rilevatore è $2 \abs{r_{40} - r_{38}} = \qty{1.6}{\centi\metre}$.
+
+In realtà, lo spettrometro di massa dà informazioni sul rapporto carica/massa, quindi bisogna conoscere la carica (spesso dovuta a ionizzazione singola).
+
+
+\subsection{Ciclotrone}
+
+Permette di accelerare molto le particelle.
+
+Due armature a semicerchio (``semicilindro'') pieno di raggio $R$ con una differenza di potenziale e un campo elettrico esterno.
+Uno ione che parte dalla superficie di una delle armature accelera verso l'altra, con la stessa velocità descrive una semicirconferenza e accelera ulteriormente verso la prima; lì, descrive una semicirconferenza di raggio maggiore, e così via fino a un'uscita.
+
+La differenza di potenziale tra le armature deve invertirsi ogni mezzo giro.
+Questo è facile, poiché il tempo di percorrenza in un'armatura è metà del periodo del moto circolare e non dipende dalla velocità:
+\begin{equation}
+    t = \frac{T}{2} = \frac{\pi m}{\abs{q} B}
+\end{equation}
+È sufficiente
+\begin{equation}
+    V(t) = V_0 \sin(\omega_{RF} t), \quad \omega_{RF} = \frac{\abs{q}B}{m}
+\end{equation}
+$\omega_{RF}$ si chiama \important{frequenza ciclotronica}.
+
+La velocità massima di uscita è limtiata dalla dimensione del ciclotrone:
+\begin{gather}
+    v_\mathrm{max} = \frac{\abs{q}B R}{m} \\
+    K_\mathrm{max} = \frac{q^2 B^2 R^2}{2m}
+\end{gather}
+
+Il raggio dei ciclotroni più grandi non misura più di qualche metro, poiché è difficile imporre $B$ esattamente uniforme in un'area grande.
+
+Esempio: un protone con $R = \qty{1}{\metre}$ e $B = \qty{1}{\tesla}$ (generato, ad esempio, con bobine):
+\begin{equation}
+    v_\mathrm{max} \approx \qty{e8}{\metre\per\second}, \quad K_\mathrm{max} \approx \qty{e-11}{\joule} \approx \qty{50}{\mega\electronvolt}
+\end{equation}
+In realtà, poiché la velocità è relativistica, in questo caso questo il calcolo risulta sbagliato.
+
+
+
+
+
+\section{Campo magnetico generato da corrente}
+
+Legge di Ampère-Laplace:
+\begin{subequations}
+\begin{gather}
+    \de \B(\p) = \frac{\mu_0}{4\pi} \frac{I \de \vt{l}' \times \ver{r'}}{\norm{\p - \p'}^2} \\
+    \B(\p) = \frac{\mu_0 I}{4\pi} \int_\mathrm{filo} \frac{\de \vt{l}' \times \ver{r'}}{\norm{\p - \p'}^2}
+\end{gather}
+\end{subequations}
+
+\subsection{Spira circolare}
+
+Spira circolare di raggio $R$ sul piano $yz$ con centro nell'origine percorsa da corrente $I$ nel verso concorde con l'asse $x$.
+Calcoliamo il campo magnetico $\B(x, 0, 0)$.
+
+Per simmetria, $\B(x, 0, 0) \parallel \ux$, cioè $\B(x, 0, 0) = B_x(x, 0, 0)\ux$.
+
+Usando $\de \vt{l} \perp \ver{r'}$,
+
+\begin{equation}
+\begin{gathered}
+\label{eq:campo_spira}
+    B_x(x, 0, 0) = \frac{\mu_0}{4\pi} \int_\mathrm{anello} \frac{\norm{I \de \vt{l} \times \ver{r'}} \cos \theta}{\norm{\p - \p'}^2}
+    = \frac{\mu_0 I}{4\pi} \int_\mathrm{anello} \frac{\de l \frac{R}{\sqrt{x^2 + R^2}}}{x^2 + R^2} = \\
+    = \frac{\mu_0 I}{4\pi} \frac{R}{\pts{x^2 + R^2}^{3/2}} \int_\mathrm{anello} \de l
+    = \frac{\mu_0 I}{4\pi} \frac{R}{\pts{x^2 + R^2}^{3/2}} 2 \pi R
+    = \frac{\mu_0 I}{2} \frac{R^2}{\pts{x^2 + R^2}^{3/2}}
+\end{gathered}
+\end{equation}
+
+La funzione è pari in $x$, quindi $\B$ sull'asse $x$ è sempre diretto nel verso delle $x$ positive.
+$B_x(x, 0, 0)$ è massimo per $x = 0$, al centro della spira:
+\begin{equation}
+    \B(\vt{0}) = \frac{\mu_0 I}{2 R} \ux
+\end{equation}
+
+
+
+\subsection{Solenoide}
+
+Solenoide di raggio $R$ lungo $d$ con $N$ spire, cioè con una densità di spire $n = N/d$, e percorso da corrente $I$.
+È centrato nell'origine e orientato lungo l'asse $x$
+
+Dal momento che si tratta di spire affiancate, il campo magnetico sull'asse $x$ sarà parallelo all'asse $x$. Detta $r' = \sqrt{(x - x')^2 + R^2}$, sarà
+\begin{equation}
+    \B_\text{spira in $x'$}(x, 0, 0) = \frac{\mu_0 I R^2}{2 (r')^3} \ux
+\end{equation}
+In termini di densità,
+\begin{equation}
+    \de\B(x, 0, 0) = \frac{\mu_0 I R^2}{2 (r')^3} n \, \de x' \, \ux
+\end{equation}
+
+Si opera il cambio di variabile da $x'$ a $\phi$ (l'angolo tra il segmento di lunghezza $r'$ e l'asse $x$):
+\begin{gather}
+    x - x' = R \cot\phi \implies \de x' = \frac{R}{\sin^2\phi} \, \de \phi \\
+    r' = \sqrt{(x - x')^2 + R^2} = \sqrt{R^2 \cot^2\phi + R^2} = \frac{R}{\sin\phi}
+\end{gather}
+
+Per cui
+\begin{gather}
+    \de\B(x, 0, 0) = \frac{\mu_0 n I}{2} \sin\phi \, \de \phi \, \ux \\
+\begin{gathered}
+    \implies \B(x, 0, 0) = \int_\mathrm{solenoide} \de\B(x, 0, 0)
+    = \frac{\mu_0 n I}{2} \int_{\phi_1}^{\phi_2} \sin\phi \, \de \phi \, \ux = \\
+    = \frac{\mu_0 n I}{2} \pts{\cos\phi_1 - \cos\phi_2} \ux
+    = \frac{\mu_0 n I}{2} \pts{
+        \frac{\frac{d}{2} + x}{\sqrt{\pts{\frac{d}{2}+x}^2 + R^2}}
+        + \frac{\frac{d}{2} - x}{\sqrt{\pts{\frac{d}{2}-x}^2 + R^2}}
+    } \ux
+\end{gathered}
+\end{gather}
+
+Per $x = 0$ si ha il campo massimo:
+\begin{equation}
+    \B(\vt{0}) = \mu_0 n I \frac{\frac{d}{2}}{\sqrt{\pts{\frac{d}{2}}^2 + R^2}} \ux
+\end{equation}
+
+Per $R \ll d$ si ha il limite del \important{solenoide ideale}:
+\begin{equation}
+    \B(\p) = \mu_0 n I \ux, \quad \text{$\p$ all'interno del solenoide}
+\end{equation}
+
+Meno il solenoide è ideale, più è forte il campo all'esterno del solenoide lungo l'asse $x$.
+Nei solenoidi reali, $\B$ ha carattere ideale soprattutto al centro (e solo se vicino all'asse del solenoide).
+
+Nei solenoidi ideali le linee di campo sono rette parallele, quindi $\B = \vt{0}$ all'esterno.
+
+Nei solenoidi reali, il campo all'esterno è scarso ma presente.
+
+
+
+\section{Forza magnetica su fili}
+
+\begin{subequations}
+\begin{gather}
+    \force = I \!\int \de \vt{l} \times \B \\
+    \de \force = I \de \vt{l} \times \B
+\end{gather}
+\end{subequations}
+
+Se $\de \vt{l} \perp \B$,
+\begin{equation}
+    \force = I \vt{L} \times \B
+    \implies
+    F = I L B
+\end{equation}
+
+
+\subsection{Dinamometro a bilancia}
+
+Bilancia con massa su un piatto e un circuito presso l'altro braccio.
+
+Il circuito consiste in una spira rigida per cui passa una corrente nota $I$ in presenza di un campo magnetico uniforme perpendicolare.
+Poiché i due lati verticali danno contributi opposti, la forza risultante sulla spira è pari a quella sul solo lato orizzontale: $F = ILB$, e il verso della corrente è scelto in modo che la forza sia verso il basso.
+
+È quindi possibile misurare la massa con grande precisione (e tarare lo strumento, nota la massa, con grande precisione).
+
+Esempio: se $m = \qty{0.5}{\gram}$, $I = \qty{1}{\ampere}$ e $L = \qty{5}{\centi\metre}$, allora $B = \qty{0.1}{\tesla}$.
+
+\subsection{Spira in un campo magnetico}
+
+Spira che segue il perimetro di un semicerchio di raggio $R$ poggiato sull'asse $x$ e nel piano $xy$, in presenza di un campo magnetico $\B = B \uy$.
+Una corrente $I$ scorre in verso antiorario. Siano $P$ e $Q$ gli estremi del lato orizzontale.
+
+La forza sul lato orizzontale è
+\begin{equation}
+    I \!\int_P^Q \de \vt{l} \times \B
+    = I \!\int_P^Q \de l \ux \times B \uy
+    = I B \!\int_P^Q \de l \, \uz
+    = I B \!\int_{-R}^R \de x \, \uz
+    = 2IBR \uz
+\end{equation}
+
+La forza sulla semicirconferenza è
+\begin{equation}
+\begin{gathered}
+    I \!\int_Q^P \de \vt{l} \times \B
+    = I \!\int_Q^P \de l \ver{\theta} \times B \uy
+    = -IB \int_Q^P \sin\theta dl \, \uz = \\
+    = -IB \int_0^\pi \sin\theta R \de \theta \, \uz
+    = -2IBR \uz
+\end{gathered}
+\end{equation}
+
+Il modulo è lo stesso.
+Infatti, la forza dipende solo dalla distanza tra gli estremi del filo nella direzione perpendicolare a $\B$.
+
+Ogni circuito chiuso percorso da corrente sente una forza totale $\force = \vt{0}$.
+Tuttavia, sente una coppia di forze.
+Considerando una spira rettangolare di lati $a$ e $b$ percorsa da corrente nel verso $ABCD$, con $\overline{AB} = b$ e $\overline{AD} = a$, per cui la forza netta sia sentita dai lati lunghi $a$,
+\begin{equation}
+    \vt{M} = \vt{b} \times \force_{AD} = \vt{b} \times \pts{I\vt{a}  \times \B}
+    = I \vt{S} \times \B
+\end{equation}
+$\vt{S}$ è il vettore superficie (normale a essa).
+
+Il risultato è generale e vale per ogni circuito piano chiuso in un campo magnetico uniforme.
+
+Si definisce il momento di dipolo magnetico:
+\begin{equation}
+    \vt{m} = I \vt{S}
+\end{equation}
+Quindi
+\begin{equation}
+    \vt{M} = \int_S \de\vt{m} \times \B
+\end{equation}
+
+Per la \eqref{eq:campo_spira}, il campo magnetico di una spira con $\vt{m} \parallel \ux$, per $x \gg R$, è
+\begin{equation}
+    \B(x, 0, 0) = \frac{\mu_0 I R^2}{2 x^3} \ux = \frac{\mu_0}{4\pi} \frac{2\vt{m}}{x^3}
+\end{equation}
+
+Si noti l'analogia con il campo elettrico di un dipolo elettrico con $\vt{p} \parallel \ux$ (vedi \eqref{eq:campo_dipolo_elettrico}):
+\begin{equation}
+    \E(x, 0, 0) = \frac{1}{4\pi\eps_0} \frac{2\vt{p}}{x^3}
+\end{equation}
+
+Energia potenziale:
+\begin{equation}
+    U = - \vt{m} \cdot \B = - I \vt{S} \cdot \B = -I \Phi(\B)
+\end{equation}
+
+Oltre a queste analogie con il dipolo elettrico, le linee di campo tendono a diventare identiche se i dipoli tendono a essere ideali.
+
+
+\subsection{Dipolo magnetico}
+
+Rappresentiamo il dipolo magnetico come una spira quadrata con corrente $I$, lato $L$ e area $S = L^2$ che giace sul piano $xy$ nell'origine.
+
+Potenziale vettore:
+\begin{equation}
+    \vpot = \frac{\mu_0}{4\pi} \int_V \frac{\dcurr(\p')}{\norm{\p - \p'}} \de V'
+\end{equation}
+La componente $\alpha$ è
+\begin{equation}
+    A_\alpha(\p) = \frac{\mu_0}{4\pi} \int_V \frac{J_\alpha(\p')}{\norm{\p - \p'}} \de V'
+\end{equation}
+
+Se $\p$ è nel piano $yz$, ad esempio, i contributi dovuti ai lati $\parallel \uy$ sono uguali in modulo e si elidono.
+Anche la componente $z$ è nulla, poiché $\dcurr$ giace su $xy$.
+\begin{equation}
+    \vpot(\p) = A_x(\p) \ux, \quad \text{se $\p \in$ piano $yz$}
+\end{equation}
+
+Con $r = \norm{\p - \p'} \gg L$,
+\begin{equation}
+\begin{gathered}
+    A_x(\p) = \frac{\mu_0}{4\pi} \int_V \frac{J_x(\p')}{\norm{\p - \p'}} \de V'
+    = \frac{\mu_0}{4\pi} \int_V \pts{\frac{J_x(\p')}{r_+} - \frac{J_x(\p')}{r_-}} \de V' = \\
+    = \frac{\mu_0}{4\pi} \pts{\frac{J_x}{r_+} - \frac{J_x}{r_-}} SL
+    = \frac{\mu_0}{4\pi} J_x S L \frac{r_- - r_+}{r_- r_+}
+    = \frac{\mu_0}{4\pi} I L \frac{r_- - r_+}{r_- r_+}
+\end{gathered}
+\end{equation}
+
+Detto $\theta$ l'angolo tra $\p$ e $\uz$, $r_+ - r_- \approx L \sin \theta$.
+Inoltre $r_- r_+ \approx r^2$
+
+\begin{gather}
+    A_x = -\frac{\mu_0}{4\pi} I L^2 \frac{\sin\theta}{r^2}
+\end{gather}
+
+Ricordando $\vt{m} = IL^2 \uz$ e $\vt{m} \times \ver{r} = -IL^2 \sin\theta \ux$,
+
+\begin{gather}
+    \vpot(\p) = \frac{\mu_0}{4\pi} \frac{\vt{m} \times \ver{r}}{r^2}
+\end{gather}
+
+Questo vuol dire che a grande distanza la forma del circuito non ha importanza, è sufficiente conoscere il momento magnetico.
+
+Il campo magnetico sarà
+\begin{equation}
+\begin{gathered}
+    \B(\p) = \curl \vpot(\p) = \frac{\mu_0}{4\pi} \curl \pts{\vt{m} \times \frac{\ver{r}}{r^2}}
+    % = \frac{\mu_0}{4\pi} \pts{\vt{m} \pts{\diver \frac{\ver{r}}{r^2}} - \vt{m} \cdot \grad \frac{\ver{r}}{r^2}} = \\
+    = \frac{\mu_0}{4\pi} I S \curl \pts{\uz \times \frac{\p}{r^3}} = \\
+    = \frac{\mu_0}{4\pi} I S \curl \frac{-y\ux + x\uy}{r^3}
+\end{gathered}
+\end{equation}
+
+Ci concentriamo ora sul rotore.
+Si nota che, per $\alpha \in \{x, y, z\}$,
+\begin{equation}
+    \parder{\alpha} \frac{1}{r^3} = -3 \frac{\alpha}{r^5}
+\end{equation}
+
+Allora,
+\begin{equation}
+\begin{gathered}
+    \curl \pts{-\frac{y}{r^3} \ux + \frac{x}{r^3}\uy}
+    = \begin{vmatrix}
+        \ux & \uy & \uz \\
+        \parder{x} & \parder{y} & \parder{z} \\
+        -\frac{y}{r^3} & \frac{x}{r^3} & 0
+    \end{vmatrix} = \\
+    = \frac{3 x z}{r^5} \ux + \frac{3 y z}{r^5} \uy + \pts{\frac{2}{r^3} - \frac{3 x^2}{r^5} - \frac{3 y^2}{r^5}} \uz = \\
+    = \frac{1}{r^3} \pts{
+        3 \frac{x}{r} \frac{z}{r} \ux +
+        3 \frac{y}{r} \frac{z}{r} \uy +
+        2 \uz
+        - 3 \frac{x^2}{r^2} \uz
+        - 3 \frac{y^2}{r^2} \uz
+        - 3 \frac{z^2}{r^2} \uz
+        + 3 \frac{z^2}{r^2} \uz
+    } = \\
+    = \frac{1}{r^3} \pts{
+        3 \frac{z}{r} \pts{
+            \frac{x}{r} \ux +
+            \frac{y}{r} \uy +
+            \frac{z}{r} \uz
+        } - \uz
+    } = \\
+    = \frac{1}{r^3} \pts{3 \frac{z}{r} \ver{r} - \uz}
+    = \frac{3 \pts{\uz \cdot \ver{r}} \ver{r} - \uz}{r^3}
+\end{gathered}
+\end{equation}
+
+Pertanto, ricordando $\vt{m} = I S \uz$,
+\begin{equation}
+    \B(\p) = \frac{\mu_0}{4\pi} I S \frac{3 \pts{\uz \cdot \ver{r}} \ver{r} - \uz}{r^3}
+    = \frac{\mu_0}{4\pi} \frac{3 \pts{\vt{m} \cdot \ver{r}} \ver{r} - \vt{m}}{r^3}
+\end{equation}
+
+La formula è analoga a quella per il campo elettrico generato da un dipolo elettrico:
+\begin{equation}
+    \E(\p) = \frac{1}{4\pi\eps_0} \frac{3 (\vt{p} \cdot \ver{r}) \ver{r} - \vt{p}}{r^3}
+\end{equation}
+
+
+
+\section{Circuitazione del campo magnetico}
+
+Legge di Ampère-Laplace:
+\begin{equation}
+    \de \B(\p) = \frac{\mu_0}{4\pi} \frac{I \de \vt{l}' \times \ver{r'}}{\norm{\p - \p'}^2}
+\end{equation}
+Ricorda la \eqref{eq:corrente_infinitesima}:
+\begin{equation}
+    \dcurr = n q \vt{v} = \rho \vt{v}, \quad \de Q \, \vt{v} = \dcurr \de V = I \de\vt{l}
+\end{equation}
+con $n$ densità volumica di particelle di carica $q$.
+
+La circuitazione del campo magnetico in una circonferenza intorno a un filo rettilineo per cui passa corrente $I$ è
+\begin{equation}
+    \oint_\gamma \B \lde = \oint_\gamma \frac{\mu_0 I}{2\pi R} \ver{\theta} \lde = \frac{\mu_0 I}{2\pi R} \oint_\gamma \de l = \mu_0 I
+\end{equation}
+Il primo passaggio è la \important{legge di Biot-Savart}.
+
+In realtà, il risultato è generale $\to$ \important{legge di Ampère}:
+\begin{equation}
+    \oint_{\partial S} \B \lde = \mu_0 I
+\end{equation}
+dove $I$ è la corrente totale attraverso la superficie aperta $S$ (cioè la corrente concatenata alla curva chiusa $\partial S$).
+
+In forma differenziale:
+\begin{equation}
+    \curl \B = \mu_0 \dcurr
+\end{equation}
+
+\subsection{Campo magnetico all'interno di un filo conduttore}
+
+Filo rettilineo infinito di raggio $R$ e corrente $I$, cosicché $I = \pi R^2\dcurr$.
+
+Si applica la legge di Ampère per una circonferenza perpendicolare al filo di raggio $r < R$.
+Sia $\B(\p) = B(r) \ver{\theta}$.
+
+\begin{equation}
+    \oint_\gamma \B \lde = 2\pi r B(r)
+    = \mu_0 \pi r^2 \dcurr
+    = \mu_0 \frac{r^2}{R^2} I
+    \implies B(r) = \frac{\mu_0 I}{2\pi R^2} r
+\end{equation}
+
+Ovvero, $B(r) \propto r$ per $r < R$ e $\propto 1/r$ per $r > R$.
+
+\subsection{Cavo coassiale}
+
+Usato per connessioni, perché permette di isolare i campi elettromagnetici.
+
+Cavo di raggio $R_2$ sulla cui superficie esterna scorre una corrente $-I$ e con un cavo interno di raggio $R_1 < R_2$ sulla cui superficie scorre una corrente $I$.
+
+Poiché la corrente concatenata è nulla, $\B = \vt{0}$ sia all'esterno che all'interno del cavo più interno.
+
+Tra i due cilindri, $B(r) = \frac{\mu_0 I}{2\pi r}$.
+
+In sintesi:
+\begin{equation}
+    B(r) = \frac{\mu_0 I}{2\pi r} \, [R_1 < r < R_2]
+\end{equation}
+
+\subsection{Solenoide toroidale}
+
+È un solenoide chiuso a toro di raggio interno $a$ e raggio esterno $b$.
+Ha $N$ spire, ciascuna con corrente $I$.
+
+\begin{equation}
+    B(r) = \frac{\mu_0 N I}{2\pi r} \, [a < r < b]
+\end{equation}
+Se $b - a \ll a$, allora $a \approx b$ e il tratto non nullo si può approssimare costante.
+
+\section{Magnetismo nei materiali}
+
+In presenza di un campo magnetico esterno, i dipoli magnetici si allineano concordemente.
+
+\important{Magnetizzazione}:
+\begin{equation}
+    \vt{M} = n\vt{m}
+\end{equation}
+con $n$ densità volumica di dipoli magnetici.
+
+Momento magnetico totale (considerando un cilindro):
+\begin{equation}
+    \int_V \vt{M} \de V = \vt{M} S l
+\end{equation}
+$\vt{M} l$ corrisponde a una corrente che scorre attorno al cilindro seguendo la regola della mano destra rispetto al verso di $\vt{M}$, la \important{corrente di magnetizzazione}:
+\begin{equation}
+    \vt{I}_\text{mag} = l\vt{M} \times \uvt{n}, \quad
+    I_\text{mag} = M l
+\end{equation}
+
+La corrente totale sarà
+\begin{equation}
+    I_\text{tot} = I\free + I_\text{mag}
+\end{equation}
+Immaginiamo di avvolgere il cilindro in un solenoide con densità lineare di spire $n$.
+La corrente per unità di lunghezza sarà
+\begin{gather}
+    \frac{I_\text{tot}}{l} = n I\free + M \\
+    \implies B = \mu_0(nI\free + M)
+\end{gather}
+
+\important{Campo magnetizzante}:
+\begin{equation}
+    \H \coloneq \frac{1}{\mu_0} \B_0 = \frac{1}{\mu_0} \B - \vt{M}, \quad \norm{\H} = n I\free
+\end{equation}
+cosicché
+\begin{equation}
+    \B = \mu_0 (\H + \vt{M}) = \B_0 + \mu_0\vt{M}
+\end{equation}
+
+Magnetizzazione e campo magnetizzante sono collegati dalla \important{suscettività magnetica} $\chi_m$:
+\begin{gather}
+    \vt{M} = \chi_m \vt{H} \\
+    \B = \mu_0 (\H + \vt{M}) = \mu_0 \underbrace{(1 + \chi_m)}_{\mu_r} \H = \mu \H
+\end{gather}
+$\mu_r$ è la \important{permeabilità magnetica relativa}, $\mu = \mu_r \mu_0$ la permeabilità magnetica nel mezzo.
+
+Se $\mu_r \ge 1$, allora $\chi_m \ge 0$.
+
+\important{Legge di Curie}:
+\begin{equation}
+    \chi_m \propto \frac{1}{T}
+\end{equation}
+
+Circuitazioni:
+\begin{gather}
+    \frac{1}{\mu_0} \oint_\gamma \B \lde = I_\text{tot} = I\free + I_\text{mag} \\
+    \oint_\gamma \H \lde = I\free \\
+    \oint_\gamma \vt{M} \lde = I_\text{mag}
+\end{gather}
+Ma anche
+\begin{gather}
+    \oint_\gamma \B \lde = \mu I\free \\
+    \oint_\gamma \vt{M} \lde = \chi_m \oint_\gamma \H \lde = \chi_m I\free
+\end{gather}
+
+Formato differenziale:
+\begin{gather}
+    \curl \B = \mu_0 \dcurr_\text{tot} = \mu \dcurr\free \\
+    \curl \H = \dcurr\free \\
+    \curl \vt{M} = \dcurr_\text{mag} = \chi_m \dcurr\free
+\end{gather}
+
+\subsection{Tipi di materiali}
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+Materiali & $\chi_m$ & $\mu_r$ & Esempi \\
+\hline
+diamagnetici & $< 0$ & $\approx 1$ & molti materiali \\
+% \hline
+paramagnetici & $> 0$ & $\approx 1$ & \ce{O2}, alcuni metalli \\
+% \hline
+ferromagnetici & $\gg 0$ & $\gg 1$ & \ce{Fe}, \ce{Ni}, \ce{Co} \\
+% \hline
+antiferromagnetici & $= 0$ & $= 1$ & {FeO}, \ce{MnO}, \ce{CoO} \\
+% \hline
+ferrimagnetici & $> 0$ & $> 1$ & alcuni ossidi complessi\\
+\hline
+\end{tabular}
+\caption{Tipi di materiali magnetici}
+\label{tab:materiali_magnetici}
+\end{table}
+
+La risposta dei materiali diamagnetici, $\mu_r < 1$ di poco, è quella generica che si ottiene con ogni elettrone (che è una carica negativa).
+$\B$ è meno intenso di $\B_0$.
+
+Anche i paramagneti hanno normalmente $\vt{M} = \vt{0}$, ma in presenza di un campo magnetico esterno i dipoli si orientano, per cui $\mu_r > 1$ di poco.
+$\B$ è più intenso di $\B_0$.
+
+Nei ferromagneti, esistono delle regioni dette $\important{domini}$ in cui i dipoli sono allineati, per cui $\vt{M} \ne \vt{0}$.
+In presenza di $\B_0$ i domini si orientano e $\B$ risulta molto più intenso.
+Talvolta generano autonomamente un campo magnetico.
+
+Gli antiferromagneti hanno domini con dipoli orientati in senso opposto, per cui $\vt{M} = \vt{0}$.
+
+I materiali ferrimagnetici combinano effetti ferromagnetici (più intensi) e antiferromagnetici (più debili).
+
+Vedi \important{ciclo di isteresi} con variabili $\H$ e $\vt{M}$.
+
+Le calamite si creano spegnendo $\H$ dopo aver raggiunto una forte magnetizzazione.
+Per distruggere una calamita, l'unica possibilità è scaldarla in modo da disordinare i dipoli.

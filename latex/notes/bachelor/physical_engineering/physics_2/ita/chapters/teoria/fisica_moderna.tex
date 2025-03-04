@@ -1,0 +1,605 @@
+\chapter{Inadeguatezza della fisica classica}
+
+Fine Ottocento, nel contesto della seconda Rivoluzione industriale e dopo aver definito le equazioni di Maxwell.
+Fino ad allora, le teorie fisiche (di Newton e Maxwell) non avevano fallito.
+
+La meccanica classica descrive oggetti materiali che possono essere descritti come scomponibili e portano proprietà che possono essere descritte come onde.
+
+L'elettromagnetismo introduce la carica, una proprietà ulteriore.
+Le interazioni si risolvono comunque in forze, che quindi possono essere meccaniche o elettromagnetiche.
+
+Essendo un onda, il campo elettromagnetico lo si interpreta come perturbazione di un mezzo chiamato ``etere''.
+
+L'esperimento di Michelson e Morley, tuttavia, mostra che questo tessuto connettivo non esiste.
+
+Inoltre, nelle equazioni di Maxwell esiste un parametro velocità ($c$) che non cambia mai.
+Un dipolo in moto e uno in quiete generano campi elettromagnetici che si muovono alla stessa velocità: la velocità della luce non si compone secondo la relatività galileiana.
+
+Einstein derivò le trasformazioni di Lorentz partendo dalla meccanica e non dall'elettromagnetismo, principalmente perché la meccanica era ritenuta vera da tre secoli mentre l'elettromagnetismo era una teoria  più nuova.
+Il ragionamento dalla meccanica, però, è più complicato.
+
+Caveat: l'applicazione di una teoria (che è assoluta, matematica) presuppone la modellizzazione del sistema fisico.
+I fisici, per questo, pensavano che non fossero sbagliate le teorie, ma i modelli della materia.
+
+
+\section{Corpo nero}
+
+Tutti i corpi a temperatura finita ($T > 0$) emettono un campo elettromagnetico, poiché le cariche nella materia si muovono di moto accelerato (con oscillazioni meccaniche).
+
+Quando questa radiazione diventa visibile si ha incandescenza e all'aumentare della temperatura il colore passa dal rosso al giallo, perché aumenta la frequenza delle onde emesse.
+
+Maxwell definì il corpo nero per modellizzare una lampadina a incandescenza.
+
+\important{Corpo nero}: cavità di conduttore ideale (pareti perfettamente riflettenti) a temperatura fissa.
+
+Il campo elettromagnetico emesso dalle pareti è continuamente riassorbito e riemesso (cioè, riflesso), quindi \important{è in equilibrio termodinamico con le pareti} stesse.
+
+Per misurare l'energia emessa, il corpo nero è dotato di un piccolo foro (sufficientemente piccolo da non perturbare l'equilibrio).
+
+L'energia emessa viene misurata per ogni frequenza.
+L'energia per unità di volume a una certa frequenza si scrive come
+\begin{equation}
+\label{eq:densita_frequenza}
+    I(\nu) \de \nu = g(\nu) \avg{\energy} \de \nu
+\end{equation}
+dove $g(\nu) \de \nu$ indica il numero di onde a frequenza $\nu$ per unità di volume e $\avg{\energy}$ è l'energia media di un onda a frequenza $\nu$.
+
+Assumiamo che il corpo nero sia un cubo di lato $L$.
+Lungo ogni direzione si avranno un'onda progressiva e una regressiva con stessa frequenza e polarizzazione.
+
+Per il principio di sovrapposizione degli effetti, nella direzione $x$,
+\begin{equation}
+    E(x, t) = E_p \exp{\im (k x - \omega t)} + E_r \exp{-\im (k x + \omega t)}
+\end{equation}
+
+Presso il conduttore ci sarebbe dissipazione di energia per effetto Joule, a meno che
+\begin{equation}
+    E(0, t) = E(L, t) \equiv 0
+\end{equation}
+
+Imponendo queste condizioni al contorno, risulta
+\begin{gather}
+    E_p + E_r = 0 \\
+    \exp{\im k L} = \exp{-\im k L} \implies \frac{k L}{\pi} \in \Z
+\end{gather}
+
+Riassumendo, lungo la direzione $x$,
+\begin{equation}
+    k_x = \frac{\pi}{L} n_x, \quad n_x \in \Z^+
+\end{equation}
+Ci limitiamo a $n_x > 0$ poiché $n_x = 0$ non ha senso e i valori negativi corrispondono a scambiare le onde progressive e regressive. Inoltre, onde che avessero $k$ diverso si eliderebbero per interferenza distruttiva.
+
+Per contare le onde, si ragiona nello \important{spazio reciproco}, con i numeri d'onda presso gli assi $k_x$, $k_y$, $k_z$.
+
+Ogni punto dello spazio reciproco corrisponde a un vettore d'onda.
+
+Le onde ammesse sono quelle con vettore d'onda $\vt{k} = (n_x, n_y, n_z) \pi/L$, nell'ottante positivo. A ogni onda corrisponde un punto, a cui corrisponde (asintoticamente) un cubetto.
+
+A ogni frequenza corrisponde un modulo di $\vt{k}$.
+Il numero di onde di frequenza compresa tra $0$ e $\nu$ è il numero di cubetti di lato $\pi / L$ in un'ottante di sfera di raggio $k = \norm{\vt{k}} = 2\pi \nu / c$.
+In realtà, queste sono solo le onde polarizzate in una certa direzione.
+Serve almeno un'altra direzione di polarizzazione per ottenere tutte le onde, quindi occorre moltiplicare per due.
+\begin{equation}
+    N = 2 \cdot \frac{1}{8} \cdot \frac{\frac{4}{3} \pi k^3}{\pts{\frac{\pi}{L}}^3}
+    % = \frac{1}{3 \pi^2 c^3} \omega^3 L^3
+    = \frac{8 \pi}{3 c^3} \nu^3 L^3
+\end{equation}
+
+La densità, rispetto alla frequenza, di onde per unità di volume è:
+\begin{equation}
+    g(\nu) = \der{\nu} \pts{\frac{N}{L^3}}
+    = \frac{8 \pi}{c^3} \nu^2
+\end{equation}
+% \begin{equation}
+%     g(\omega) = \der{\omega} \pts{\frac{N}{L^3}}
+%     = \frac{1}{\pi^2 c^3} \omega^2
+% \end{equation}
+
+La \eqref{eq:densita_frequenza} ora è
+\begin{equation}
+    I(\nu) = \frac{8 \pi}{c^3} \nu^2 \avg{\energy}
+\end{equation}
+
+Poiché l'onda viene generata da un'oscillazione armonica di cariche, la sua energia deve corrispondere all'energia meccanica (potenziale e cinetica) media di un oscillatore armonico a temperatura $T$.
+
+La frequenza $\omega$ degli oscillatori è un parametro puramente meccanico e dipende dalla costante elastica e dalla massa delle cariche ($k = m \omega^2$).
+
+L'energia media del sistema termodinamico è
+\begin{equation}
+\label{eq:energia_media}
+    \avg{\energy} = \int_0^{+\infty} \energy \, F(\energy) \, \de \energy
+\end{equation}
+dove $F(\energy) \, \de \energy$ è la frazione di particelle che hanno energia in $[\energy, \, \energy + \de \energy]$.
+
+La densità $F$ è funzione della velocità, poiché lo è l'energia: $F = F(v_x, v_y, v_z)$.
+Queste tre componenti sono statisticamente indipendenti, per cui esistono densità $f$ per cui
+\begin{equation}
+    F(v_x, v_y, v_z) = f_x(v_x) f_y(v_z) f_z(v_z)
+\end{equation}
+Poiché lo spazio è isotropo, $f_x = f_y = f_z \eqcolon f$.
+
+Per la stessa ragione, poiché non può dipendere dalla scelta delle coordinate, $F$ deve dipendere solo dal modulo di $\vt{v}$ o, equivalentemente, dal suo quadrato, cioè $v_x^2 + v_y^2 + v_z^2$:
+\begin{equation}
+    F(v_x^2 + v_y^2 + v_z^2) = f(v_x) f(v_z) f(v_z)
+\end{equation}
+L'unica funzione che soddisfa è l'esponenziale:
+\begin{equation}
+    F(\vt{v}) = A \exp{B \pts{v_x^2 + v_y^2 + v_z^2}}
+\end{equation}
+con $\dimension{B} = \mathsf{T}^2 \mathsf{L}^{-2}$.
+
+Nel caso del gas ideale,
+\begin{gather}
+    \int_0^{+\infty} \frac{1}{2} m \vt{v}^2 F(\vt{v}) \, \de \vt{v} = \frac{3}{2} k_B T \\
+    \implies F(\vt{v}) = A \exp{-\frac{m}{2 k_B T} \vt{v}^2}
+\end{gather}
+È la \important{distribuzione di Maxwell}.
+In termini di energia ($A$ è diversa), si chiama \important{distribuzione di Boltzmann} ed è soddisfatta da qualunque sistema termodinamico all'equilibrio:
+\begin{gather}
+    F(\energy) = A \exp{-\frac{\energy}{k_B T}} \\
+    \int_0^{+\infty} F(\energy) \de \energy = 1
+    \implies A = \frac{1}{\int_0^{+\infty} \exp{-\frac{\energy}{k_B T}} \de \energy}
+\end{gather}
+
+Segue che
+\begin{equation}
+    \avg{\energy} = \int_0^{+\infty} A \energy \exp{-\frac{\energy}{k_B T}} \de \energy
+    = \frac{\int_0^{+\infty} \energy \exp{-\frac{\energy}{k_B T}} \de \energy}{\int_0^{+\infty} \exp{-\frac{\energy}{k_B T}} \de \energy}
+    = k_B T
+\end{equation}
+
+Infatti, classicamente a ogni grado di libertà (cioè a ogni termine quadratico nell'espressione dell'energia meccanica totale) corrisponde un'energia $\frac{1}{2} k_B T$, e l'oscillatore armonico monodimensionale ha due gradi di libertà: energia cinetica e potenziale.
+
+La \eqref{eq:densita_frequenza} ora è
+\begin{equation}
+    I(\nu) = \frac{8\pi}{c^3} k_B T \nu^2
+\end{equation}
+
+Sperimentalmente, $I(\nu)$ ha una forma a campana.
+Questa legge, invece, indica una parabola ed è adeguata solo per la regione a frequenze basse (fin quasi al massimo della curva sperimentale).
+
+Nelle curve sperimentali si osserva anche che il massimo di $I(\nu)$ è direttamente proporzionale alla temperatura.
+
+Le frequenze in cui si trova il massimo se la temperatura è circa quella della superficie solare sono quelle della luce visibile.
+
+Planck, per far tornare i risultati teorici con i dati sperimentali, ipotizza la seguente distribuzione di energia:
+\begin{equation}
+    \energy = j h \nu, \quad j \in \N
+\end{equation}
+
+Sostituendo nella \eqref{eq:energia_media} e passando al discreto:
+\begin{equation}
+    \avg{\energy} = \sum_{j = 0}^{\infty} j h \nu A \exp{-\frac{j h \nu}{k_B T}}
+\end{equation}
+Si impone la condizione di normalizzazione sulla distribuzione $F$:
+\begin{equation}
+    \sum_{j = 0}^{\infty} A \exp{-\frac{j h \nu}{k_B T}} = 1
+    \implies A = \frac{1}{\sum_j \exp{-\frac{j h \nu}{k_B T}}}
+\end{equation}
+Dunque, definendo $\beta \coloneq 1/(k_B T)$:
+\begin{equation}
+    \avg{\energy} = \frac{\sum_j j h \nu \exp{-\beta j h \nu}}{\sum_j \exp{-\beta j h \nu}}
+\end{equation}
+
+Osserviamo che la derivata rispetto a $\beta$ del denominatore è
+\begin{equation}
+    \parder{\beta} \sum_{j = 0}^\infty \exp{-\beta j h \nu}
+    = - \sum_{j = 0}^\infty j h \nu \exp{-\beta j h \nu} \implies \avg{\energy}
+    = -\frac{\parder{\beta} \sum_j \exp{-\beta j h \nu}}{\sum_j \exp{-\beta j h \nu}}
+\end{equation}
+
+La somma è una serie geometrica e vale:
+\begin{gather}
+    \sum_{j = 0}^\infty \exp{-\beta j h \nu} = \frac{1}{1 - \exp{-\beta h \nu}} \\
+    \implies
+    \avg{\energy} = -\frac{\displaystyle\parder{\beta} \dfrac{1}{1 - \exp{-\beta h \nu}}}{\dfrac{1}{1 - \exp{-\beta h \nu}}}
+    = \frac{h \nu}{\exp{\dfrac{h \nu}{k_B T}} - 1}
+\end{gather}
+
+Aggiorniamo $I(\nu)$:
+\begin{equation}
+    I(\nu) = \frac{8\pi h}{c^3} \frac{\nu^3}{\exp{\dfrac{h \nu}{k_B T}} - 1}
+\end{equation}
+
+Fittando $h$ ai dati sperimentali, si ottiene lo stesso valore per tutte le curve (cioè per ogni temperatura):
+\begin{equation}
+    h = 2\pi \cdot \qty{1.05e-34}{\joule\second}
+\end{equation}
+
+La distribuzione corretta arriva al prezzo di aver violato la continuità della fisica classica, aver introdotto un oscillatore che assume solo valori discreti di energia.
+
+
+
+\section{Effetto fotoelettrico}
+
+È l'effetto per cui, quando un'onda elettromagnetica colpisce una superficie metallica, quest'ultima emette elettroni.
+È dovuto al fatto che questi sentono la forza di Lorentz dovuta al campo elettrico e possono essere strappati se il campo è sufficientemente forte.
+
+L'onda è caratterizzata da
+\begin{itemize}
+    \item ampiezza (quindi, intensità $I$)
+    \item frequenza $\nu$
+\end{itemize}
+
+L'effetto è caratterizzato da
+\begin{itemize}
+    \item energia cinetica $E_k$ degli elettroni emessi
+    \item numero di elettroni emessi $N_e$
+    \item tempo di uscita (o di attesa) $t$
+\end{itemize}
+
+Classicamente, ci si aspetta:
+\begin{itemize}
+    \item $E_k$ in uscita che cresce all'aumentare dell'intensità dell'onda.
+    \item $t$ che diminuisce all'aumentare dell'intensità dell'onda.
+    \item $N_e$ legato all'intensità (in modo anche complicato).
+    \item che $\nu$ sia ininfluente.
+\end{itemize}
+
+Invece, Hertz trovò che:
+\begin{itemize}
+    \item Esiste una \important{frequenza di soglia}...
+    \begin{itemize}
+        \item al di sotto della quale gli elettroni non sono mai emessi, per ogni intensità
+        \item al di sopra della quale sono sempre emessi, per ogni intensità.
+    \end{itemize}
+    \item L'energia cinetica degli elettroni
+    \begin{itemize}
+        \item dipende linearmente dalla frequenza
+        \item non dipende dall'intensità
+    \end{itemize}
+        \begin{equation}
+        \label{eq:fotoelettrico}
+            E_k = h \nu - \phi
+        \end{equation}
+    \item Il tempo di uscita è sempre nullo:
+        \begin{equation}
+            t = 0
+        \end{equation}
+    \item Il numero di elettroni emessi ha il seguente andamento:
+        \begin{equation}
+            N_e \propto \frac{I}{h \nu}
+        \end{equation}
+\end{itemize}
+
+A trovare che la costante di proporzionalità era proprio $h$ fu Einstein.
+
+Fu chiaro che $h$ era una costante fondamentale, e venne detta \important{costante di Planck}.
+
+Osservando la \eqref{eq:fotoelettrico}, sembra un urto elastico con una particella in cui l'elettrone guadagna energia $h \nu$.
+
+In un certo senso, è il campo elettromagnetico (e non solo l'oscillatore armonico) a essere discreto.
+
+L'entità che discretizza l'onda elettromagnetica si chiama \important{fotone}, immaginabile come la particella di energia $h \nu$ che urta gli elettroni.
+
+\section{Quantità di moto di un'onda elettromagnetica}
+
+Richiamiamo l'equazione per la densità di quantità di moto di un'onda elettromagnetica:
+\begin{equation}
+    p\EM  = \frac{w\EM}{c}
+\end{equation}
+
+La quantità di moto, classicamente, è associata a una massa.
+
+Ora è possibile immaginare che il campo elettromagnetico sia costituito da fotoni, particelle di energia $h \nu$.
+Quando queste urtano il materiale, ``si attaccano'' all'elettrone e gli trasferiscono energia e quantità di moto.
+
+La massa dell'elettrone non varia nel processo, quindi il fotone non ha massa.
+
+Detta $n_f$ la densità volumica di fotoni, la quantità di moto del singolo fotone è
+\begin{equation}
+\label{eq:momento_fotone}
+    p = \frac{p\EM}{n_f} = \frac{w\EM}{n_f c} = \frac{h \nu}{c} = \frac{h}{\lambda} = \hbar k
+\end{equation}
+
+\subsection{Momento angolare di un'onda elettromagnetica}
+
+Consideriamo un disco con sfere cariche sul bordo e un solenoide presso l'asse collegato a un interruttore tramite un timer.
+
+Quando il circuito si accende, il flusso del campo magnetico genera un campo elettrico che agisce sulle cariche, mettendo il disco in rotazione con una certa velocità angolare.
+Quindi, poiché il disco ha momento d'inerzia non nullo, il sistema acquisisce un momento angolare anche se ce l'aveva originariamente apparentemente nullo.
+
+Quindi, il campo elettromagnetico deve avere anche un momento angolare.
+
+Da queste considerazioni seguirà che:
+\begin{itemize}
+    \item Massa ed energia sono equivalenti.
+    \item Un fotone non può che muoversi a velocità $c$.
+\end{itemize}
+
+
+\section{Modello atomico}
+
+\subsection{Esperimento di Rutherford}
+
+I chimici erano convinti che la materia fosse discreta, mentre le teorie fisiche la descrivevano come continua.
+
+Vigeva il \important{modello di Thomson}: gran parte della massa della materia deve essere costituita di una componente positiva, in cui erano immersi gli elettroni di massa molto trascurabile.
+
+Rutherford svolse un esperimento con una lamina d'oro sottilissima ($\sim \unit{\micro\metre}$).
+Bombardò la lamina con particelle $\alpha$, positive: sarebbero dovute passare attraverso senza grandi deviazioni, invece una piccola frazione (dell'ordine di una su $10^4$) veniva riflessa.
+Rutherford concluse che la carica positiva era raggruppata in nuclei di grande massa.
+
+Il rapporto tra le dimensioni di queste particelle positive rispetto a quelle degli elettroni doveva essere paragonabile al rapporto tra le particelle $\alpha$ riflesse.
+
+La distanza tra due nuclei risultava dell'ordine di \qty{e-10}{\metre}, le dimensioni dei nuclei \qty{e-15}{\metre}.
+
+La materia è essenzialmente vuota, il fatto che sembri ``piena'' deriva dai campi elettromagnetici.
+
+Viene sviluppato un \important{modello planetario} per gli atomi, in moto circolare uniforme dovuto alla legge di Coulomb.
+
+Tuttavia, nel suo modo accelerato, l'elettrone dovrebbe generare campo elettromagnetico e perdere energia, infine collassando sul nucleo.
+
+
+\subsection{Spettri di emissione e assorbimento}
+
+In un gas scaldato gli urti tra le molecole che hanno energia differente trasferiscono energia da un atomo all'altro.
+Questa energia viene emessa o assorbita dagli elettroni degli atomi, che emettono o assorbono onde elettromagnetiche.
+
+Rydberg identificò una legge empirica per le righe spettrali dell'idrogeno:
+\begin{equation}
+\label{eq:rydberg}
+    \frac{1}{\lambda} = R \pts{\frac{1}{m^2} - \frac{1}{n^2}}, \quad n > m, \quad n, m \in \Z^+
+\end{equation}
+$R$ è detta \important{costante di Rydberg}:
+\begin{equation}
+    R = \qty{1.09e7}{\per\metre}
+\end{equation}
+Quindi, gli spettri di emissione sono righe discrete, mentre quelli di assorbimento sono i loro complementari.
+
+\subsection{Modello atomico di Bohr}
+
+Il modello di Bohr vuole spiegare:
+\begin{itemize}
+    \item Le dimensioni dell'atomo
+    \item La stabilità dell'atomo
+    \item L'energia di ionizzazione e l'effetto fotoelettrico
+    \item Il carattere discreto degli spettri di emissione e di assorbimento
+\end{itemize}
+
+Consideriamo l'atomo di idrogeno, costituito da un protone di carica $e > 0$ e massa $m_p$ e un'elettrone di carica $-e$ e massa $m \ll m_p$ che orbita attorno al protone in moto circolare uniforme a distanza $r$ e con velocità $v$, grazie a una forza centripeta elettrostatica (la forza di Coulomb):
+\begin{equation}
+    F = m \frac{v^2}{r} = \frac{e^2}{4 \pi \eps_0 r^2}
+\end{equation}
+Momento angolare:
+\begin{equation}
+    L = r m v
+\end{equation}
+Energia meccanica totale ($H$ per Hamilton):
+\begin{equation}
+    H = \frac{1}{2} m v^2 + (-e) \frac{e}{4 \pi \eps_0 r} = - \frac{e^2}{8 \pi \eps_0 r}
+\end{equation}
+
+
+Gli spettri di emissione suggerivano una discretizzazione.
+Bohr impose la discretizzazione del momento angolare dell'elettrone:
+\begin{equation}
+    L = n \hbar, \quad n \in \Z
+\end{equation}
+Si introduce qui la \important{costante di Planck ridotta}:
+\begin{equation}
+    \hbar \coloneq \frac{h}{2\pi}
+\end{equation}
+
+Si ricava la velocità
+\begin{gather}
+    r m v = n \hbar
+    \implies
+    m v^2 = \frac{e^2}{4 \pi \eps_0} \frac{m v}{n \hbar}
+    \implies v = \frac{e^2}{4 \pi \eps_0 \hbar} \frac{1}{n}
+\end{gather}
+
+Si ricava il raggio dell'orbita:
+\begin{gather}
+    r = \frac{n \hbar}{m v} = \frac{n \hbar}{m} \frac{4 \pi \eps_0 \hbar}{e^2} n = \frac{4\pi \eps_0 \hbar^2}{m e^2} n^2 = r_1 n^2
+\end{gather}
+
+Si ricava l'energia meccanica:
+\begin{equation}
+\label{eq:energia_bohr}
+    H = - \frac{e^2}{8 \pi \eps_0} \frac{m e^2}{4\pi \eps_0 \hbar^2} \frac{1}{n^2} = - \frac{m e^4}{2 (4\pi \eps_0)^2 \hbar^2} \frac{1}{n^2} = -\frac{H_1}{n^2}
+\end{equation}
+
+Quindi dobbiamo avere $n \ne 0$.
+Inoltre, il segno influisce solo sul verso della velocità.
+Consideriamo quindi $n$ intero positivo:
+\begin{equation}
+    n \in \Z^+
+\end{equation}
+
+Per $n \to +\infty$, $H \to 0^-$.
+Per $n = 1$, l'energia è minima e l'elettrone ruota con la velocità massima e lungo l'orbita minore, il cui raggio (\important{raggio di Bohr}) è $r_1 = \qty{5.3e-11}{\metre}$.
+
+Non è possibile che l'elettrone abbia energia minore di $-H_1$: l'ipotesi \textit{ad hoc} di Bohr implica la discretizzazione anche dell'energia e il fatto che gli elettroni non possono perdere energia indefinitamente.
+$H_1$ vale
+\begin{equation}
+    H_1 = \qty{13.6}{\electronvolt}
+\end{equation}
+e corrisponde all'energia necessaria per portare l'elettrone dallo stato fondamentale a un punto lontano dall'atomo ($H = 0$).
+È l'energia di ionizzazione per l'idrogeno allo stato fondamentale.
+
+L'unità di misura \important{elettronvolt} (\unit{\electronvolt}) è l'energia di un elettrone che attraversa la differenza di potenziale di \qty{1}{\volt}.
+\begin{equation}
+    \qty{1}{\electronvolt}
+    = e \cdot \qty{1}{\volt}
+    = (\qty{1.6e-19}{\coulomb}) (\qty{1}{\volt})
+\end{equation}
+
+La formula di Rydberg, nel caso dell'emissione, corrisponde alla variazione di energia dal livello $n$ al livello $m$:
+\begin{equation}
+    H_n - H_m = H_1 \pts{\frac{1}{m^2} - \frac{1}{n^2}}, \quad 1 \le m < n
+\end{equation}
+Questa differenza di energia diventa radiazione elettromagnetica, quindi viene emessa come fotone:
+\begin{equation}
+    h \nu = \frac{h c}{\lambda} = H_1 \pts{\frac{1}{m^2} - \frac{1}{n^2}}
+\end{equation}
+La costante di Rydberg, calcolata empiricamente, risulta correttamente prevista dalla teoria.
+Confrontando con la \eqref{eq:rydberg}, infatti, risulta
+\begin{equation}
+    R = \frac{H_1}{h c}
+\end{equation}
+
+
+\section{Calore specifico}
+
+La capacità termica $C$ di un corpo alla temperatura $T$ è il rapporto tra il calore $\delta Q$ fornito al corpo e la variazione di temperatura $\de T$ che ne risulta:
+\begin{equation}
+    C = \frac{\delta Q}{\de T} = \frac{\de U + \delta L}{\de T}
+\end{equation}
+Il calore specifico è la capacità termica per unità di massa, o quantità di sostanza $n$, o numero di particelle $N$.
+
+Si definisce il calore specifico isocoro molare per le trasformazioni isocore (per un solido o liquido, quasi sempre):
+\begin{equation}
+    c_V = \frac{1}{n} \der[U]{T}
+\end{equation}
+
+\subsection{Molecola biatomica}
+
+Nel caso della molecola di idrogeno \ce{H2} allineata lungo l'asse $x$, l'energia totale è
+\begin{equation}
+    U = \frac{1}{2} M v^2
+    + \frac{1}{2} I_y \omega_y^2
+    + \frac{1}{2} I_z \omega_z^2
+    + \frac{1}{2} M v_r^2
+    + \frac{1}{2} k_e x^2
+\end{equation}
+$M$ è la massa di entrambi i nuclei, mentre il momento d'inerzia $I_x$ è trascurabile. Il sistema, quindi, ha sette gradi di libertà.
+
+Quindi,
+\begin{equation}
+    U = n N_A \frac{7}{2} k_B T \implies c_V = \frac{7}{2} R
+\end{equation}
+$R = N_A k_B$ qui è la costante universale dei gas perfetti.
+
+La fisica classica prevede questo valore sempre.
+Tuttavia, i due gradi di libertà corrispondenti alle oscillazioni si misurano solo per temperatura molto alte (purché non sufficientemente alte da rompere le molecole).
+A temperatura ambiente $c_V = 5/2 \, R$. A temperature ancora più basse si perdono anche i gradi di libertà della rotazione: $c_V = 3/2 \, R$.
+
+\redtext{Grafico $c_V(T)$}
+
+Si svolge un'ipotesi \textit{ad hoc}, sostituendo al momento angolare e all'energia dell'oscillatore armonico le espressioni con le ipotesi di Planck e Bohr:
+\begin{equation}
+    U = \frac{1}{2} M v^2 + \frac{(n \hbar)^2}{2 I} + j \hbar \omega
+\end{equation}
+
+Consideriamo un termostato a temperatura $T = T_0 + \de T$, mentre la molecola di idrogeno ha temperatura $T_0$.
+
+Dopo l'interazione con il termostato, la molecola avrà temperatura $T$.
+Al massimo, il termostato potrà trasferire energia $3/2 \, k_B T$ (i gas monoatomici non mostrano problemi, quindi usiamo un termostato classico a gas monoatomico).
+\begin{equation}
+    \Delta U \le \frac{3}{2} k_B T
+\end{equation}
+Quest'energia deve distribuirsi equamente su tutti i gradi di libertà della molecola.
+
+Ma questo è contraddetto dagli esperimenti, come detto sopra.
+
+Il modo di far quadrare i conti prevede che
+\begin{itemize}
+    \item l'energia di traslazione vari nel continuo
+    \item l'energia di rotazione assuma valori discreti $(n \hbar)^2 / (2 I)$
+    \item l'energia di vibrazione assuma valori discreti $j \hbar \omega$
+\end{itemize}
+Ma allora, la ragione per il fenomeno sopra è che l'energia, per poter andare distribuita sulla rotazione o vibrazione, deve superare una soglia minima dovuta ai ``salti''.
+È anche possibile calcolare le temperature di transizione.
+
+\subsection{Solido cristallino}
+
+Consideriamo un cristallo atomico con struttura cubica.
+Ogni atomo è circondato da sei atomi.
+
+Se un atomo riceve energia termica, inizia a oscillare lungo una direzione, respinto dalle coppie di atomi nella direzione lungo cui oscilla.
+L'energia media di oscillazione vale il triplo di quella di un singolo oscillatore, poiché corrisponde a tre oscillatori arminici (uno per ogni direzione):
+\begin{equation}
+    \avg{\energy} = \frac{3 h \nu}{\exp{\dfrac{h \nu}{k_B T}} - 1}
+\end{equation}
+Ma quindi, il calore specifico isocoro molare vale
+\begin{equation}
+    c_V = \der{T} \frac{3 N_A h \nu}{\exp{\dfrac{h \nu}{k_B T}} - 1}
+\end{equation}
+
+\redtext{Grafico $c_V(T)$}
+
+In particolare,
+\begin{gather}
+    c_V
+    % \propto \frac{1}{T^2} \exp{- \frac{h \nu}{k_B T}}
+    \to 0, \quad \text{per } T \to 0^+ \\
+    c_V \to 3 R, \quad \text{per } T \to +\infty
+\end{gather}
+Il modello classico darebbe invece $c_V = 3 R$ per ogni temperatura.
+
+
+\section{Diffrazione nei cristalli}
+
+\subsection{Diffrazione di raggi X}
+
+Consideriamo un cristallo con struttura cubica e passo reticolare $d \sim \qty{e0}{\angstrom}$.
+Mandando un'onda elettromagnetica a una angolo $\theta$ dal piano, si osserva diffrazione su uno schermo lontano perpendicolare all'onda riflessa.
+
+Similmente al caso di diffrazione da doppia fenditura (vedi \autoref{sec:doubleslit}),
+\begin{equation}
+    I = 4 I_0 \cos^2 \frac{k (r_2 - r_1)}{2}
+\end{equation}
+La differenza dei cammini stavolta è
+\begin{gather}
+    r_2 - r_1 = 2 d \sin \theta \\
+    \implies I = 4 I_0 \cos^2 \pts{\pi \frac{2 d \sin \theta}{\lambda}}
+\end{gather}
+
+La condizione per i massimi di interferenza è nota come \important{legge di Bragg}:
+\begin{equation}
+    2 d \sin \theta_M= \lambda n, \quad n \in \Z
+\end{equation}
+
+\subsection{Diffrazione di elettroni}
+
+Si tentò di replicare la diffrazione nei cristalli con gli elettroni.
+Era difficile poiché occorreva mandare un elettrone alla volta e creare il vuoto per distanze relativamente lunghe.
+
+Gli elettroni vengono accelerati con un condensatore a facce piane parallele (vedi \autoref{sec:acceleratore_carica}) fino ad avere una certa energia cinetica $E_k$.
+
+Si osserva una figura di interferenza da cui è possibile calcolare la lunghezza d'onda tramite la legge di Bragg, come se si trattasse di un'onda elettromagnetica.
+Graficando la quantità di moto degli elettroni $p = \sqrt{2 m E_k}$ rispetto a $1 / \lambda$ si ottiene una retta di pendenza $h$ e quindi la seguente ralazione:
+\begin{equation}
+    p = \frac{h}{\lambda}
+\end{equation}
+
+Questo risultato è coerente con la \eqref{eq:momento_fotone} per i fotoni e indica che anche l'elettrone esibisce dualismo onda-particella: a seconda del constesto, può essere descritto come un'onda o come una particella.
+
+Le stesse conclusioni si potrebbero svolgere in generale, affermando che ogni particella (caratterizzata da $E$ e $p$) può anche essere descritta come un'onda (caratterizzata da $\nu$ e $\lambda$) e viceversa e che valgano le \important{relazioni di de Broglie}
+\begin{subequations}
+\begin{gather}
+    E = h \nu \\
+    p = \frac{h}{\lambda}
+\end{gather}
+\end{subequations}
+
+Ma allora, è opportuno introdurre una \important{funzione d'onda} $\Psi(\p, t)$ che descriva la dinamica dell'elettrone in quanto onda, così come la legge oraria $\p(t)$ ne descrive la dinamica in quanto particella.
+
+
+\section{Conclusione}
+
+Caratteristiche comuni alle osservazioni discusse:
+\begin{itemize}
+    \item Gli effetti avvengono per dimensioni su scala atomica o subatomica.
+    \item Nuova costante universale $h$, dal valore numerico piccolissimo.
+    \item Grandezze fisiche quantizzate (cioè discretizzate):
+    \begin{itemize}
+        \item energia di un oscillatore armonico
+        \item momento angolare
+        \item energia del campo elettromagnetico
+        \item quantità di moto del campo elettromagnetico
+    \end{itemize}
+    \item Dualismo onda-particella:
+    \begin{itemize}
+        \item onde descritte come particelle (effetto fotoelettrico e quantità di moto dei fotoni)
+        \item particelle descritte come onde (diffrazione di elettroni)
+    \end{itemize}
+\end{itemize}
+
+Discretizzando il momento angolare e l'energia dell'oscillatore armonico si spiegano tutti questi fenomeni.
+
+Rimane da spiegare da cosa derivano queste discretizzazioni e che significato fisico abbia la funzione d'onda (cosa si propaga?).
+
+La discretizzazione significa, ad esempio, che non ha neanche senso \textit{immaginare} un elettrone che disti dal nucleo una certa distanza $r$ qualsiasi.
+Nel caso dell'oscillatore, significa che una massa che oscilla non può assumere determinate ampiezze e determinate velocità massime.

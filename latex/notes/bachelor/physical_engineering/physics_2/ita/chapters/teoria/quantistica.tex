@@ -1,0 +1,536 @@
+\chapter{Meccanica quantistica}
+
+\section{Equazione di Schrödinger}
+
+Occore ora indicare un'equazione differenziale che definisca la funzione d'onda $\Psi(\p, t)$, analogamente a come la legge di Newton definisce la legge oraria $\p(t)$.
+
+% Descriviamo la diffrazione di elettroni in termini di $\Psi$:
+% \begin{subequations}
+% \begin{gather}
+%     \Psi_1(r_1, t) = A \exp{\im (k r_1 - \omega t)} \\
+%     \Psi_2(r_2, t) = A \exp{\im (k r_2 - \omega t)}
+% \end{gather}
+% \end{subequations}
+% \begin{gather}
+%     \phi = k r_1 - \omega t - k r_2 + \omega t = k (r_1 - r_2) \\
+%     I \propto \norm{\Psi_1 + \Psi_2}^2 = 4 A^2 \cos^2 \frac{k (r_1 - r_2)}{2}
+% \end{gather}
+
+Bisogna partire dal presupposto che l'elettrone sia un'onda, quindi deve valere l'equazione di d'Alembert:
+\begin{equation}
+    \lapl \Psi = \frac{1}{v_f^2} \parder[\Psi][2]{t}
+\end{equation}
+$v_f$ è la velocità di fase dell'onda, non la velocità della particella $v_p$.
+
+Presupponiamo per $\Psi$ la seguente forma:
+\begin{equation}
+    \Psi(\p, t) = A \exp{\im (k r - \omega t)}
+\end{equation}
+Bisogna ora usare il principio di de Broglie.
+
+Si calcola la derivata seconda rispetto al tempo di $\Psi$:
+\begin{equation}
+    \parder[\Psi][2]{t} = - \omega^2 \Psi
+    \implies \lapl \Psi = - \frac{\omega^2}{v_f^2} \Psi
+\end{equation}
+
+Per il principio di de Broglie,
+\begin{gather}
+    p = k \hbar \implies
+    \frac{\omega^2}{v_f^2} = k^2 = \frac{p^2}{\hbar^2} \\
+    \lapl \Psi = - \frac{p^2}{\hbar^2} \Psi
+\end{gather}
+
+Sia $E = T + V$ l'energia meccanica totale della particella, con $T$ energia cinetica e $V$ energia potenziale.
+
+Se $v_p \ll c$ allora non è necessario usare le relazioni relativistiche per energia cinetica e quantità di moto.
+Se la particella è puntiforme, vale
+\begin{equation}
+    p = m v_p, \quad
+    T = \frac{1}{2} m v_p^2 = \frac{p^2}{2 m}
+\end{equation}
+
+Quindi,
+\begin{gather}
+    \lapl \Psi = - \frac{2 m T}{\hbar^2} \Psi = - \frac{2 m}{\hbar^2} (E - V) \Psi \\
+    \implies - \frac{\hbar}{2 m} \lapl \Psi + V \Psi = E \Psi
+\end{gather}
+
+Inoltre, usando nuovamente il principio di de Broglie nella forma $E = \hbar \omega$,
+\begin{equation}
+    \parder[\Psi]{t}
+    = - \im \omega \Psi
+    = - \im \frac{E}{\hbar} \Psi
+    \implies
+    E \Psi = \im \hbar \parder[\Psi]{t}
+\end{equation}
+
+Sostituendo, si ottiene l'\important{equazione di Schrödinger}:
+\begin{equation}
+    \boxed{
+    -\frac{\hbar^2}{2 m} \lapl \Psi(\p, t) + V(\p, t) \Psi(\p, t) = \im \hbar \parder{t} \Psi(\p, t)
+    }
+\end{equation}
+valida per
+\begin{itemize}
+    \item masse puntiformi
+    \item velocità non relativistiche
+\end{itemize}
+
+Le ``forze'' (o meglio, l'ambiente) sono codificate nel termine dell'energia potenziale $V$, quindi è necessario che siano tutte conservative (ma tutte le interazioni fondamentali sono conservative, quindi su scala microscopica questa richiesta è sempre rispettata).
+
+L'equazione di Schrödinger sostituisce l'equazione di Newton:
+\begin{itemize}
+    \item Secondo Newton, un sistema fisico evolve in quanto i punti materiali che lo costituiscono si muovono lungo curve $\p(t)$ nello spazio euclideo $\R^3$.
+    \item Secondo l'equazione di Schrödinger, il sistema fisico evolve secondo la funzione d'onda $\Psi(\p, t)$.
+\end{itemize}
+
+Heisenberg aveva contemporaneamente prodotto una descrizione analoga ma differente, un diverso formalismo basato sull'algebra lineare che forniva le stesse previsioni.
+
+\section{Interpretazione di Copenhagen}
+
+Sorge la necessità di interpretare $\Psi$: a cosa corrisponde?
+
+La prima cosa che viene in mente è che $\Psi$ rappresenti comunque il ``corpo'' della particella, come se la sua massa fosse dispersa in un volume maggiore, ma questo porterebbe a paradossi.
+
+Born fornì una migliore interpretazione confrontando la diffrazione della luce e quella degli elettroni.
+
+Nello scenario della doppia fenditura (\autoref{sec:doubleslit}), il campo elettrico in $P$ è
+\begin{equation}
+    \E(P) = \E_1 + \E_2
+\end{equation}
+
+Sullo schermo si vede l'intensità dell'onda:
+\begin{equation}
+    I(P) \propto \norm{\E}^2 = \norm{\E_1 + \E_2}^2
+\end{equation}
+
+La sorgente emette potenza $W$.
+Quindi, $I(P)/W$ è la frazione di potenza per unità di superficie che arriva in $P$:
+\begin{equation}
+\label{eq:probphot}
+    \frac{I(P)}{W}
+    = \frac{N_f(P) h \nu}{N_0 h \nu}
+    = \boxed{\frac{N_f(P)}{N_0}
+    \propto \norm{\E_1 + \E_2}^2}
+\end{equation}
+dove $N_f(P)$ è il numero di fotoni per unità di superficie in $P$ e $N_0$ è il numero di fotoni emessi dalla sorgente.
+
+$N_f(P)/N_0$ può anche essere interpretata come densità di probabilità (rispetto alla superficie sullo schermo) che un fotone emesso dalla sorgente arrivi in $P$.
+
+Questa è un'interpretazione ``termodinamica'': la si può svolgere poiché i fotoni emessi dalla sorgente sono moltissimi, è una considerazione statistica.
+
+Se al posto dei fotoni consideriamo gli elettroni, la \eqref{eq:probphot} diventa:
+\begin{equation}
+    \frac{N_e(P)}{N_0} = \abs{\Psi_1 + \Psi_2}^2
+\end{equation}
+
+Quindi, il modulo quadro di $\Psi$ rappresenta (almeno) la densità di probabilità in senso frequentistico (cioè, la frazione delle osservazioni sui casi totali) di trovare elettroni in $P$.
+
+Ovvero,
+\begin{equation}
+    \mathrm{P}(\text{particella} \in \de\p) = \abs{\Psi(\p, t)}^2 \de\p
+\end{equation}
+$\de\p$ rappresenta un elemento di volume.
+
+Questa interpretazione, ad oggi, è l'unica che è coerente con gli esperimenti.
+
+Ogni altro tentativo di dare un significato fisico a $\Psi$ risulta contraddittorio logicamente o sperimentalmente.
+
+In particolare, non è vero che la particella ha, ad esempio, una traiettoria che non si può conoscere per motivi pratici (come nel caso della termodinamica).
+Il concetto di traiettoria risulta inadeguato in un senso fondamentale.
+Non è in alcun modo possibile studiare con certezza la dinamica della particella: la statistica, in questo caso, non entra in gioco per circoscrivere i limiti di chi sta studiando il sistema, ma quelli del sistema stesso.
+
+L'interpretazione di Born, poiché adottata anche da Heisenberg e discussa a Copenhagen, viene detta \important{interpretazione di Copenhagen}.
+
+
+\section{Vettore di stato}
+
+Nella meccanica classica, tutte le grandezze fisiche sono funzione della posizione e della quantità di moto, cioè le si ricava dalla legge oraria.
+
+Come è possibile, allora, estrarre da $\Psi$ le grandezze fisiche?
+A questa domanda risposero Heisenberg e Dirac.
+
+Matematicamente, $\Psi$ è non nulla nella regione in cui è possibile trovare l'elettrone e deve essere derivabile rispetto a $\p$ e a $t$.
+
+Se è possibile che l'elettrone sia solo nella regione $\Omega$, allora
+\begin{equation}
+    \p \notin \Omega \lor \p \in \partial \Omega \implies \Psi(\p, t) = 0
+\end{equation}
+
+Poiché la probabilità deve essere complessivamente $1$,
+\begin{equation}
+    \int_\Omega \abs{\Psi}^2 \de\p = 1
+\end{equation}
+
+In particolare, $\Psi$ deve essere una funzione \important{a quadrato sommabile} in $\Omega$.
+Si scrive anche $\Psi \in L^2(\Omega)$.
+
+Mentre il precedente integrale era reale, il seguente è in generale un numero complesso:
+\begin{equation}
+    \inner{\Psi_1}{\Psi_2} \coloneqq \int_\Omega \conj{\Psi_1} \Psi_2 \de\p \in \C
+\end{equation}
+Questa espressione costituisce un prodotto scalare.
+Le funzioni d'onda, quindi, sono elementi dello spazio di Hilbert $L^2(\Omega)$.
+
+Il formalismo di Heisenberg si basava sulla versione in vettori colonna $\C^{n,1}$ di questo spazio vettoriale.
+Le formulazioni sono equivalenti poiché l'algebra lineare garantisce che due spazi vettoriali con la stessa dimensione siano isomorfi.
+
+Dirac indica gli elementi di questo spazio vettoriale come \textit{ket} $\ket{\Psi}$, in modo che giustapposti ai \textit{bra} $\bra{\Psi}$ diano i prodotti scalari $\braket{\Psi_1}{\Psi_2}$.
+
+Comunque sia interpretato (come funzione di uno spazio di Hilbert, vettore colonna complesso o ket), $\Psi$ è elemento di uno spazio vettoriale dotato di prodotto scalare e identifica lo stato del sistema: è un \important{vettore di stato}.
+
+\section{Informazioni fisiche}
+
+Le particelle sono descritte da uno vettore di stato che ``vive'' in uno spazio vettoriale e l'evoluzione di un sistema fisico corrisponde a una traiettoria in questo spazio vettoriale.
+È la proiezione di questi stati a dare le informazioni fisiche nello spazio fisico $\R^3$.
+
+Questa teoria fisica non è mai stata falsificata sperimentalmente (da fine anni '30 del Novecento).
+
+Ogni misura della posizione della particella fornisce una posizione $\p_i$.
+Prese $N$ misure, posso definire la posizione media
+\begin{equation}
+    \avg{\p} = \frac{1}{N} \sum_{j = 1}^N \p_j
+\end{equation}
+
+Il numero di volte in cui si trova l'elettrone in $\p_i$ è $N \abs{\Psi(\p_i)}^2$, per cui
+\begin{equation}
+    \avg{\p} = \frac{1}{N} \sum_{j = 1}^N \p_j N \abs{\Psi(\p_i)}^2 = \sum_{i = 1}^N \p_i \abs{\Psi(\p_i)}^2
+\end{equation}
+Nel continuo:
+\begin{equation}
+    \avg{\p} = \int_\Omega \p \abs{\Psi(\p)}^2 \de\p
+    = \int_\Omega \conj{\Psi(\p)} \pts{\p \Psi(\p)} \de\p
+    = \inner{\Psi}{\p \Psi}
+\end{equation}
+Questa è un'espressione per estrarre da $\Psi$ il valor medio della posizione.
+
+Per quanto riguarda la quantità di moto:
+\begin{equation}
+    \avg{\vt{p}} = m \der{t} \inner{\Psi}{\p \Psi}
+\end{equation}
+In una dimensione, $\Omega = [a, b] \subset \R$ e:
+\begin{equation}
+    \avg{p_x} = m \der{t} \inner{\Psi}{x \Psi}
+    = m \int_a^b x \parder{t}\pts{\conj{\Psi} \Psi} \de x
+\end{equation}
+
+Ora, consideriamo l'equazione di Schrödinger, moltiplichiamo per $\conj{\Psi}$ e prendiamo il complesso coniugato:
+\begin{gather}
+    \im \hbar \parder{t} \Psi = -\frac{\hbar^2}{2 m} \lapl \Psi + V \Psi \\
+\label{eq:conj1}
+    \implies \im \hbar \conj{\Psi} \parder{t} \Psi = -\frac{\hbar^2}{2 m} \conj{\Psi} \lapl \Psi + \conj{\Psi} V \Psi \\
+\label{eq:conj2}
+    \implies -\im \hbar \Psi \parder{t} \conj{\Psi} = -\frac{\hbar^2}{2 m} \Psi \lapl \conj{\Psi} + \Psi V \conj{\Psi}
+\end{gather}
+Sottraendo membro a membro la \eqref{eq:conj2} dalla \eqref{eq:conj1},
+\begin{gather}
+    \im \hbar \pts{\conj{\Psi} \parder{t} \Psi + \Psi \parder{t} \conj{\Psi}}
+    = -\frac{\hbar^2}{2 m} \pts{\conj{\Psi} \lapl \Psi - \Psi \lapl \conj{\Psi}} \\
+    \implies \im \hbar \parder{t} \pts{\conj{\Psi} \Psi}
+    = -\frac{\hbar^2}{2 m} \pts{\conj{\Psi} \lapl \Psi - \Psi \lapl \conj{\Psi}} \\
+    \implies  \parder{t} \pts{\conj{\Psi} \Psi} = \frac{\im \hbar}{2 m} \pts{\conj{\Psi} \lapl \Psi - \Psi \lapl \conj{\Psi}}
+\end{gather}
+
+Per cui,
+\begin{gather}
+    \avg{p_x}
+    = m \int_a^b x \parder{t}\pts{\conj{\Psi} \Psi} \de x = \\
+    = \frac{\im \hbar}{2} \int_a^b x \pts{\conj{\Psi} \parder[][2]{x} \Psi - \Psi \parder[][2]{x} \conj{\Psi}} \de x = \\
+    = \frac{\im \hbar}{2} \int_a^b x \, \parder{x} \pts{\conj{\Psi} \parder{x} \Psi - \Psi \parder{x} \conj{\Psi}} \de x = \\
+    = \frac{\im \hbar}{2} \pts{
+        \left[
+            x \pts{
+                \conj{\Psi} \parder{x} \Psi
+                - \Psi \parder{x} \conj{\Psi}
+            }
+        \right]_{x = a}^b
+        - \int_a^b \pts{
+            \conj{\Psi} \parder{x} \Psi
+            - \Psi \parder{x} \conj{\Psi}
+        } \de x
+    } = \\
+    = -\frac{\im \hbar}{2} \int_a^b \pts{
+        \conj{\Psi} \parder{x} \Psi
+        - \Psi \parder{x} \conj{\Psi}
+    } \de x = \\
+    = -\frac{\im \hbar}{2} \pts{
+        \int_a^b \conj{\Psi} \parder{x} \Psi \,\de x
+        - \left[\Psi \conj{\Psi}\right]_{x = a}^b
+        + \int_a^b \conj{\Psi} \parder{x} \Psi \,\de x
+    } = \\
+    = - \im \hbar \int_a^b \conj{\Psi} \parder{x} \Psi \,\de x
+    = \inner{\Psi}{-\im \hbar \parder{x} \Psi}
+\end{gather}
+I termini da valutare nelle integrazioni per parti sono nulli poiché $\Psi$ è nulla agli estremi dell'intervallo.
+
+In tre dimensioni,
+\begin{equation}
+    \avg{\vt{p}} = \inner{\Psi}{-\im \hbar \grad \Psi}
+\end{equation}
+
+In generale, i valori medi delle grandezze fisiche si estraggono applicando degli operatori lineari a $\Psi$ e poi prendendo il prodotto scalare con $\conj{\Psi}$.
+
+Risulta che è sempre questo il caso, anche per altre grandezze fisiche.
+Infatti, ogni grandezza fisica è funzione di $\p$ e $\vt{p}$.
+Quindi basta sostituire gli operatori per $\p$ e $\vt{p}$, che abbiamo visto essere $\p$ stessa e $-\im \hbar \grad$.
+\begin{align}
+    \p & \to \hat{\p} = \p \\
+    \vt{p} & \to \hat{\vt{p}} = -\im \hbar \grad \\
+    F(\p, \vt{p}) & \to \hat{F}(\p, -\im \hbar \grad)
+\end{align}
+
+Inoltre, i valori medi delle grandezze fisiche devono essere reali.
+Cioè, per una grandezza fisica $F$ associata a un operatore $\hat{F}$,
+\begin{gather}
+    \conj{\avg{F}} = \avg{F}
+    \implies
+    \inner{\Psi}{\hat{F} \Psi} = \conj{\inner{\Psi}{\hat{F} \Psi}} = \inner{\hat{F} \Psi}{\Psi}
+\end{gather}
+Poiché, detto $\herm{\hat{F}}$ l'aggiunto di $\hat{F}$, vale in generale
+\begin{equation}
+    \inner{\Psi}{\hat{F} \Psi} = \inner{\herm{\hat{F}} \Psi}{\Psi}
+\end{equation}
+allora per gli operatori che corrispondono a grandezze fisiche deve valere $\hat{F} = \herm{\hat{F}}$, ovvero devono essere \textbf{hermitiani} (si dice anche ``\textbf{autoaggiunti}'').
+
+Operatori hermitiani hanno autovalori reali.
+
+In conclusione,
+\begin{itemize}
+    \item Le grandezze fisiche classiche diventano operatori lineari hermitiani.
+    \item Il valore medio delle misure di una grandezza fisica $F$ è
+        \begin{equation}
+            \avg{F} = \inner{\Psi}{\hat{F} \Psi}
+            = \int_\Omega \conj{\Psi} \hat{F} \Psi \de\p
+            \in \R
+        \end{equation}
+\end{itemize}
+
+
+\section{Equazione di Schrödinger stazionaria}
+
+Otteniamo l'operatore associato all'energia totale (hamiltoniana) di un sistema:
+\begin{gather}
+    H = \frac{p^2}{2 m} + V(\p, t) \\
+    \hat{H} = \frac{(-\im \hbar \grad)^2}{2 m} + V(\p, t)
+    = -\frac{\hbar^2}{2 m} \lapl + V(\p, t)
+\end{gather}
+Sostituendo nell'equazione di Schrödinger,
+\begin{equation}
+\label{eq:schr_hamiltoniana}
+    \hat{H} \Psi(\p, t) = \im \hbar \parder{t} \Psi(\p, t)
+\end{equation}
+L'energia di un sistema, quindi, è legata all'evoluzione del sistema nel tempo.
+
+$\hat{H}$ dipende dal tempo, ma solo in quanto $V$ dipende dal tempo.
+Un esempio di energia potenziale che dipende dal tempo è quella dovuta alla presenza di un campo elettromagnetico variabile nel tempo.
+Occupiamoci ora di potenziali statici, che esprimono il fatto che l'ambiente è statico.
+Possiamo supporre che la \eqref{eq:schr_hamiltoniana} abbia soluzione a variabili separabili:
+\begin{gather}
+    \Psi(\p, t) = T(t) R(\p) \\
+    T \hat{H} R = \im \hbar R \der[T]{t} \\
+\label{eq:variabili_separate}
+    \frac{\im \hbar}{T} \der[T]{t} = \frac{\hat{H} R}{R}
+\end{gather}
+Poiché nella \eqref{eq:variabili_separate} i due membri sono funzioni di variabili diverse ma sempre costanti, allora ciascuno dei due è uguale alla stessa costante $A$:
+\begin{equation}
+    \begin{cases}
+        \frac{1}{T} \der[T]{t} = -\im \frac{A}{\hbar} \\
+        \hat{H} R = A R
+    \end{cases}
+\end{equation}
+Si risolve la prima equazione differenziale:
+\begin{equation}
+    T(t) = B \exp{-\im \frac{A}{\hbar} t}
+\end{equation}
+Al variare di $V(\p)$, quindi, la componente temporale in $\Psi$ è sempre la stessa.
+
+La seconda equazione, invece, è un'equazione agli autovalori per l'operatore $\hat{H}$.
+Le soluzioni $R$ sono gli sutostati di $\hat{H}$.
+
+Calcoliamo il valor medio dell'energia:
+\begin{equation}
+\begin{gathered}
+    \avg{E} = \int_\Omega \conj{\Psi} \hat{H} \Psi \de\p
+    = \int_\Omega \conj{\Psi} T(t) \hat{H} R(\p) \de\p = \\
+    = \int_\Omega \conj{\Psi} T(t) A R(\p) \de\p
+    = A \int_\Omega \conj{\Psi} \Psi \de\p
+    = A
+\end{gathered}
+\end{equation}
+$A$, quindi, è l'energia media totale del sistema;
+rinominiamola $E$.
+
+Nel caso in cui l'energia potenziale $V$ sia statica, quindi, si risolve l'\important{equazione di Schrödinger stazionaria}:
+\begin{equation}
+    \hat{H} \Psi(\p) = E \Psi(\p)
+\end{equation}
+che ha per autovalori le possibili energie del sistema e in modo che le funzioni d'onda che risolvono l'equazione di Schrödinger completa siano:
+\begin{equation}
+    \Psi(\p, t) = \exp{-\im \frac{E}{\hbar} t} \Psi(\p)
+\end{equation}
+
+
+\section{Misura fisica}
+
+Immaginiamo di voler misurare una grandezza $F$.
+Il valore medio previsto dalla teoria è
+\begin{equation}
+    \avg{F} = \inner{\Psi}{\hat{F}\Psi}
+\end{equation}
+
+Il valore medio ottenuto sperimentalmente dopo aver svolto $N$ misure è
+\begin{equation}
+    \avg{F}_s = \frac{1}{N} \sum_{j = 1}^N n_j f_j
+\end{equation}
+Dove $\{f_j\}$ sono gli esiti delle misure e $\{n_j\}$ sono le frequenze con cui si ottengono gli esiti.
+Analogamente, $n_j / N$ è la probabilità (frequentistica) di ottenere l'esito $f_j$.
+
+Tra i due risultati ci sarà un errore $\Delta F$:
+\begin{equation}
+    \avg{F} = \avg{F}_s \pm \Delta F
+\end{equation}
+Trattiamo $\Delta F$ come deviazione standard:
+\begin{equation}
+    \pts{\Delta F}^2 = \frac{1}{N} \sum_{j = 1}^N \pts{f_j - \avg{F}_s}^2
+\end{equation}
+
+Oltre all'indeterminazione sperimentale (casuale, strumentale e sistematica) c'è un'indeterminazione intrinseca alla meccanica quantistica, che non è epistemica ma un elemento del sistema fisico.
+\begin{equation}
+    \pts{\Delta F}^2 = \inner{\Psi}{\pts{\hat{F} - \avg{F}}^2 \Psi}
+\end{equation}
+
+L'operatore sopra deve essere hermitiano:
+\begin{equation}
+    \inner{\Psi}{\pts{\hat{F} - \avg{F}}^2 \Psi}
+    = \inner{\pts{\hat{F} - \avg{F}} \Psi}{\pts{\hat{F} - \avg{F}} \Psi}
+    = \abs{\pts{\hat{F} - \avg{F}} \Psi}^2
+\end{equation}
+Quindi, l'indeterminazione quantistica è nulla se e solo se è nullo l'argomento del modulo:
+\begin{equation}
+\label{eq:indeterminazione_nulla}
+\begin{gathered}
+    \Delta F = 0
+    \iff \hat{F} \Psi = \avg{F} \Psi \iff \\
+    \iff \avg{F} \text{ è un autovalore di } \hat{F}
+    \iff \Psi \text{ è un autostato di } \hat{F}
+\end{gathered}
+\end{equation}
+
+Poiché $\hat{F}$ è hermitiano, i suoi autostati $\{\Psi_i\}$ possono essere scelti ortonormali rispetto al prodotto scalare $\inner{\cdot}{\cdot}$ e costituiscono quindi una base per i vettori di stato possibili.
+Ogni soluzione $\Psi$ si può quindi scrivere come combinazione lineare degli autostati:
+\begin{gather}
+    \Psi = \sum_i a_i \Psi_i \\
+\begin{gathered}
+    \avg{F}
+    = \inner{\Psi}{\hat{F} \Psi}
+    = \inner{\sum_i a_i \Psi_i}{\hat{F} \sum_i a_i \Psi_i}
+    = \inner{\sum_i a_i \Psi_i}{\sum_i a_i \hat{F} \Psi_i} = \\
+    = \sum_{i,j} \conj{a_j} a_i \inner{\Psi_j}{\hat{F} \Psi_i}
+    = \sum_{i,j} \conj{a_j} a_i f_i \inner{\Psi_j}{\Psi_i}
+    = \sum_{i,j} \conj{a_j} a_i f_i \delta_{j,i}
+    = \sum_i \abs{a_i}^2 f_i
+\end{gathered}
+\end{gather}
+$\inner{\Psi_j}{\Psi_i} = \delta_{j,i}$ poiché ortonormali.
+
+Abbiamo, ora,
+\begin{subequations}
+\begin{gather}
+    \avg{F} = \sum_i \abs{a_i}^2 f_i \\
+    \avg{F}_s = \sum_i \frac{n_i}{N} f_i
+\end{gather}
+\end{subequations}
+\important{Ogni misura fisica è un autovalore}, anche perché una misura determina esattamente lo stato e deve valere la \eqref{eq:indeterminazione_nulla}.
+
+Dopo aver effettuato una misura, quindi, \important{il sistema è collassato in un autostato}.
+
+Prima della misura, invece, lo stato del sistema non era necessariamente un autostato e si avevano solo dei pesi probabilistici $\{\abs{a_i}^2\}$ sull'esito della misura.
+La grandezza fisica, quindi, non era definita.
+
+\section{Indeterminazione}
+
+Se una misura altera lo stato del sistema, è possibile misurare due grandezze fisiche $F$ e $G$ contemporaneamente e con precisione arbitraria?
+Poiché lo stato del sistema è unico, deve valere:
+\begin{equation}
+    \begin{cases}
+        \hat{F} \Psi = f \Psi \\
+        \hat{G} \Psi = g \Psi
+    \end{cases}
+\end{equation}
+Le grandezze devono quindi avere autostati comuni.
+
+Inoltre,
+\begin{gather}
+    \begin{cases}
+        \hat{F} \hat{G} \Psi_i = \hat{F} g_i \Psi_i = g_i \hat{F} \Psi_i = f_i g_i \Psi_i \\
+        \hat{G} \hat{F} \Psi_i = \hat{G} f_i \Psi_i = f_i \hat{G} \Psi_i = f_i g_i \Psi_i
+    \end{cases} \\
+    \implies
+    \hat{F} \hat{G} \Psi_i = \hat{G} \hat{F} \Psi_i
+    \implies \pts{\hat{F} \hat{G} - \hat{G} \hat{F}} \Psi_i = 0
+\end{gather}
+Questo vale per ogni autostato, quindi l'operatore deve essere identicamente nullo.
+
+Definiamo le \important{parentesi di commutazione} $[\cdot, \cdot]$:
+\begin{equation}
+    [\hat{F}, \hat{G}] \coloneq \hat{F} \hat{G} - \hat{G} \hat{F}
+\end{equation}
+
+Si conclude che deve valere:
+\begin{equation}
+    [\hat{F}, \hat{G}] = 0
+\end{equation}
+Due grandezze fisiche possono essere misurate contemporaneamente con precisione arbitraria se e solo se gli operatori associati commutano.
+
+Ad esempio:
+\begin{gather}
+    [\hat{x}, \hat{p}_x] \Psi = - x \im \hbar \parder{x} \Psi - \pts{-\im \hbar \parder{x} \pts{x \Psi}} = \im \hbar \Psi
+    \implies [\hat{x}, \hat{p}_x] = \im \hbar
+\end{gather}
+Quindi, posizione e quantità di moto lungo la stessa componente non commutano.
+
+Vale, in particolare, il \important{principio di indeterminazione di Heisenberg}:
+\begin{equation}
+    \Delta x \Delta p_x \ge \frac{\hbar}{2}
+\end{equation}
+
+% \begin{equation}
+%     \Delta F \Delta G \geq \frac{1}{2} \abs{\avg{[\hat{F}, \hat{G}]}}
+% \end{equation}
+
+
+\section{Principi della meccanica quantistica}
+
+\begin{itemize}
+    \item Principio di corrispondenza: la meccanica quantistica deve tendere alla meccanica classica per sistemi macroscopici.
+    \item Assioma dell'osservabile: i sistemi fisici sono descritti da un vettore di stato (nell'equazione di Schrödinger, è una funzione a valori complessi; nella formulazione di Dirac, un \textit{ket}; Heisenberg ha usato un altro formalismo).
+    \begin{itemize}
+        \item Interpretazione di Copenhagen: il vettore di stato è connesso alla probabilità in senso frequentistico, cioè la frazione di volte in cui una misura dà un certo risultato.
+    \end{itemize}
+    \item Assioma dell'operatore: le grandezze fisiche sono associate a operatori lineari hermitiani.
+    Questi, come le grandezze classiche, sono funzione degli operatori posizione e quantità di moto.
+
+    Il valore medio di una grandezza fisica si estrae applicando l'operatore e prendendo il prodotto scalare con il vettore di stato.
+    \item Principio del collasso: una misura fa collassare il vettore di stato in un autostato dell'operatore associato alla grandezza misurata.
+
+    Ne seguono:
+    \begin{itemize}
+        \item Principio di indeterminazione
+        \item Principio di complementarietà: esistono diversi massimi insiemi di informazioni che posso conoscere di un sistema fisico, poiché serve che il sistema collassi in uno stato che sia autostato di ogni grandezza misurata.
+    \end{itemize}
+    \item Principio di Pauli: due fermioni (particelle che hanno spin semintero) non possono occupare lo stesso stato quantico.
+    Si basa interamente su evidenza sperimentale, non può essere dedotto teoricamente.
+    \item Principio di indistinguibilità delle particelle: due particelle identiche non possono essere distinte, ``etichettate''.
+    Si pensi alle onde: non ha senso chiedersi se due onde che collidono si sovrappongono o si riflettono.
+
+    È per questo che non vale più la distribuzione di Maxwell-Boltzmann: si basa sul fatto che ogni particella abbia un'``identità''.
+\end{itemize}
+
+
+Fondazione assiomatica della meccanica quantistica:
+\begin{itemize}
+    \item Principio dell'osservabile
+    \item Principio dell'operatore
+    \item Principio dell'evoluzione temporale: lo stato fisico evolve in quanto evolve il vettore di stato, purché inizialmente si conosca l'informazione massima sul sistema.
+\end{itemize}

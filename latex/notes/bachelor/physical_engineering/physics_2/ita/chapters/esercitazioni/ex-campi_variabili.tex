@@ -1,0 +1,316 @@
+\chapter{Campi variabili nel tempo -- esercitazioni}
+
+\section{Autoinduzione}
+
+\begin{subequations}
+\begin{gather}
+    \oint_\gamma \E \lde = - \der{t} \Phi(\B) \\
+    \curl \E = - \parder[\B]{t}
+\end{gather}
+\end{subequations}
+
+Nei circuiti:
+\begin{equation}
+    \fem_i = - \der{t} \Phi(\B) = - L \der[I]{t}
+\end{equation}
+% se vale l'approssimazione a parametri concentrati: $\Delta t \gg d/c$.
+
+Secondo la forza di Lorentz, vale anche
+\begin{equation}
+    \fem_i = \int_\gamma \E_i \lde
+    = \int_\gamma \pts{\vt{v} \times \B} \lde
+\end{equation}
+
+Esempio:
+
+Bobina di $N = 100$ spire di raggio $A = \qty{10}{\centi\metre}$ e resistenza $R = \qty{1}{\ohm}$.
+Campo magnetico $\B(t) = \alpha t \uvt{n}$, con $\alpha = \qty{e-3}{\tesla\per\second}$.
+Calcolare la corrente $I$ indotta nel circuito.
+
+\begin{equation}
+\begin{gathered}
+    I = \frac{\fem}{R}
+    = - \frac{1}{R} \der{t} \Phi(\B)
+    = - \frac{1}{R} \der{t} \int_S \B \sde
+    = - \frac{1}{R} \der{t}\pts{B \int_S \de S} = \\
+    = - \frac{1}{R} \der{t}\pts{\alpha t N \pi A^2}
+    = - \frac{\alpha N \pi A^2}{R}
+    = -\qty{3.14}{\milli\ampere}
+\end{gathered}
+\end{equation}
+misurata in verso antiorario se $\uvt{n}$ è uscente.
+
+La corrente indotta genera un campo magnetico che contrasta la variazione di flusso.
+
+Quanta carica scorre nella spira in $\Delta t = \qty{100}{\second}$?
+\begin{equation}
+    q = \int_{0}^{\Delta t} I(t) \de t = I \Delta t = \qty{3.14e-1}{\coulomb}
+\end{equation}
+
+La potenza dissipata dalla spira è
+\begin{equation}
+    P = \fem_i I = \qty{9e-6}{\watt}
+\end{equation}
+
+
+\subsection{Generatore di corrente alternata}
+
+Campo magnetico uniforme $\B$ di modulo $B$ (generato, ad esempio, da un magnete) e spira di area $A$ la cui normale forma un angolo $\theta$ con $\B$.
+La spira è messa in moto di rotazione uniforme con legge oraria $\theta(t) = \omega t$.
+
+\begin{equation}
+    \fem_i = - \der{t} \Phi(\B)
+    = - \der{t} \pts{A B \cos(\omega t)}
+    = A B \omega \sin(\omega t)
+\end{equation}
+
+Alternativamente, si può usare la forza di Lorentz:
+\begin{equation}
+    \fem_i = \int_\gamma \pts{\vt{v} \times \B} \lde
+\end{equation}
+Se la spira è rettangolare, i lati (lunghi $a$) perpendicolari all'asse di rotazione danno ciascuno contributo nullo, poiché $\vt{v}$ varia da un certo valore in corrispondenza di un estremo al suo opposto presso l'altro estremo del lato.
+I lati (lunghi $b$) paralleli all'asse di rotazione hanno valore
+\begin{equation}
+    \int_A^B (\vt{v} \times \B) \lde
+    = \int_A^B \pts{\frac{a}{2}\omega} B \sin(\omega t) \ver{AB} \lde
+    = \frac{1}{2} abB \omega \sin\omega
+\end{equation}
+Analogamente,
+\begin{equation}
+    \int_C^D (\vt{v} \times \B) \lde
+    = \frac{1}{2} abB \omega \sin\omega
+\end{equation}
+Quindi, $\fem_i = abB \omega \sin\omega$.
+
+Si ottengono una tensione alternata e una corrente alternata:
+\begin{subequations}
+\begin{gather}
+    V(t) = A B \omega \sin(\omega t) = V_0 \sin(\omega t) \\
+    I(t) = \frac{\fem_i}{R} = \frac{AB \omega}{R} \sin(\omega t) = I_0 \sin(\omega t)
+\end{gather}
+\end{subequations}
+
+Ruotando la spira, la forza di Lorentz (proporzionale alla velocità) fa sì che si senta una forza di attrito.
+Bisogna fornire un lavoro meccanico con continuità, che sia convertito in energia elettrica.
+
+Esempio:
+
+$N = 20$ spire circolari con raggio $r = \qty{20}{\centi\metre}$, frequenza $f = \qty{50}{\hertz}$ e campo magnetico $B = \qty{0.4}{\tesla}$.
+
+\begin{equation}
+    \fem_i = N \pi r^2 \cdot B \cdot 2\pi f \cdot \sin(2\pi f t)
+    = (\qty{316}{\volt}) \sin(\qty{314}{\per\second} \cdot t)
+\end{equation}
+
+Il \important{valore efficace} di una grandezza $X(t)$ periodica nel tempo di periodo $T$ è
+\begin{equation}
+    X\eff = \sqrt{\langle X(t)^2 \rangle_T}
+    = \sqrt{\frac{1}{T} \int_0^T X(t)^2 \de t}
+\end{equation}
+
+\begin{equation}
+    V\eff = AB\omega \sqrt{\frac{1}{\pi} \int_0^\pi \sin^2(\omega t) \de t}
+    = \frac{1}{\sqrt{2}} A B \omega
+    = \frac{V_0}{\sqrt{2}}
+\end{equation}
+
+Nell'esempio sopra, $V\eff = \qty{223}{\volt}$.
+
+\subsection{Barretta in moto}
+
+Circuito rettangolare con resistenza $R$ e una barretta lunga $L$ in moto a velocità $v$ espandendo il rettangolo.
+Campo magnetico $B$ perpendicolare al circuito.
+
+La f.e.m.\ è misurata con segno tale che $\uvt{n}$ ha lo stesso verso di $\B$.
+
+Legge di autoinduzione:
+\begin{equation}
+    \fem_i = - \der{t} \Phi(B) = - v L B
+\end{equation}
+
+Forza di Lorentz:
+\begin{equation}
+    \fem_i = \int_\gamma \pts{\vt{v} \times \B} \lde
+    = \int_\text{barretta} v B (-\ver{l}) \lde
+    = - v L B
+\end{equation}
+
+Con la convenzione degli utilizzatori:
+\begin{equation}
+    I = \frac{v L B}{R}
+\end{equation}
+
+La forza esterna $\force$ per mantenere la barretta in moto rettilineo uniforme deve compensare la forza magnetica sulla barretta:
+\begin{equation}
+    \force = - I \vt{L} \times \B
+    = \frac{vLB}{R} (L B \ver{v})
+    = \frac{L^2 B^2}{R} \vt{v}
+\end{equation}
+
+La potenza da fornire è
+\begin{equation}
+    P = \force \cdot \vt{v} = \frac{v^2 L^2 B^2}{R}
+\end{equation}
+
+È proprio la potenza dissipata per effetto Joule:
+\begin{equation}
+    P = V_\text{resistore} I = - \fem_i I = \frac{v^2 L^2 B^2}{R}
+\end{equation}
+
+\subsection{Autoinduzione di secondo ordine}
+
+Spira di raggio $A = \qty{10}{\centi\metre}$, resistenza $R = \qty{1}{\ohm}$ e attraversata da un campo magnetico perpendicolare $B = \alpha t^2$, con $\alpha = \qty{e-3}{\tesla\per\second\squared}$.
+\begin{equation}
+    \fem_i = - \pi A^2 \cdot 2 \alpha t
+    \quad \implies \quad
+    I = - \frac{2\pi A^2 \alpha}{R} t
+\end{equation}
+
+La corrente è variabile nel tempo e genera un campo magnetico indotto $B_i$.
+Supponiamo per semplicità che il suo valore sulla superficie della spira sia ovunque uguale a quello nel centro:
+\begin{equation}
+    B_i = \frac{\mu_0 I}{2A} = - \frac{\mu_0 \pi A \alpha}{R}t
+\end{equation}
+La corrente indotta da un fenomeno secondario di autoinduzione è
+\begin{equation}
+    I_2 = -\frac{1}{R} \cdot \pi A^2 \cdot \pts{- \frac{\mu_0 \pi A \alpha}{R}}
+    = \frac{\mu_0 \pi^2 A^3 \alpha}{R^2}
+\end{equation}
+$I_2$ scorre in modo da rafforzare il campo magnetico $B$ originario e genera a sua volta un campo magnetico $B_2$ con lo stesso verso di $B$ ma costante, e che quindi non induce altre correnti.
+\begin{equation}
+    B_2 = \frac{\mu_0 I_2}{2 A} = \frac{\mu_0^2 \pi^2 A^2 \alpha}{2 R^2}
+\end{equation}
+
+Calcoliamo i rapporti tra le grandezze per $t = \qty{0.1}{\second}$:
+\begin{gather}
+    \frac{I_2}{I} = \frac{B_2}{B_i} = -\frac{\mu_0 \pi A}{2 R t}
+    = \num{2e-6}
+\end{gather}
+Inoltre, $I_2$ è sovrastimata.
+Per questo, i fenomeni autoinduttivi di secondo ordine sono spesso trascurabili.
+Il campo magnetico terrestre è dell'ordine di $\qty{e-5}{\tesla}$, quindi oscura tutti i campi magnetici dovuti ad autoinduzione di secondo ordine.
+
+\subsection{Legge di Felici}
+
+Spira in moto in presenza di un campo magnetico.
+La carica che attraversa la spira tra i tempi $t_1$ e $t_2$ è
+\begin{equation}
+    q = \int_{t_1}^{t_2} \pts{-\frac{1}{R} \der[\Phi(\B)]{t}}\de t
+    = -\frac{1}{R} \int_{\Phi_1}^{\Phi_2} \de \Phi
+    = \frac{\Phi_1 - \Phi_2}{R}
+\end{equation}
+
+Esempio:
+
+Spira di area $S$ e resistenza $R$ in un campo magnetico $\B$ non uniforme, ma che si può considerare uniforme sull'area della spira istante per istante.
+Se ribalto la spira, la carica netta spostata è
+\begin{equation}
+    q = \frac{\Phi_1 - \Phi_2}{R} = \frac{2 B S}{R}
+\end{equation}
+È quindi possibile misurare un campo magnetico misurando (e integrando) la corrente che si genera mentre si ribalta una piccola spira:
+\begin{equation}
+    B = \frac{qR}{2S}
+\end{equation}
+
+\section{Mutua induzione}
+
+\begin{gather}
+    \Phi_{S_1}(\B_2) = M I_2 \\
+    M = \frac{\mu_0}{4\pi} \int_{S_1} \oint_{\gamma_2} \frac{\de \vt{l}_2 \times \ver{r_2}}{\norm{\p_1 - \p_2}^2} \sde_1
+\end{gather}
+con $\ver{r_2} = (\p_1 - \p_2) / \norm{\p_1 - \p_2}$.
+
+L'energia magnetica per accendere entrambi i circuiti è
+\begin{equation}
+    E_m = \frac{1}{2} \Phi_1 I_1 + \frac{1}{2} \Phi_2 I_2
+    = \frac{1}{2} L_1 I_1^2 + \frac{1}{2} L_2 I_2^2 + M I_1 I_2
+\end{equation}
+
+Avendo $N$ circuiti,
+\begin{equation}
+    E_m = \frac{1}{2} \sum_{i = 1}^N \Phi_i I_i
+    = \frac{1}{2} \sum_{i = 1}^N \sum_{j = 1}^N M_{ij} I_i I_j
+\end{equation}
+dove, per ogni $i, j = 1, \ldots, N$, $M_{ii} = L_i$ e $M_{ij} = M_{ji}$.
+
+\subsection{Filo e spira}
+
+Filo rettilineo infinito e spira di raggio $R = \qty{1}{\milli\metre}$ a distanza $r = \qty{1}{\metre}$.
+Calcolare il coefficiente di mutua induzione.
+
+Si suppone una corrente $I$ attraverso il filo e si calcola il flusso attraverso la superficie $S$ della spira:
+\begin{equation}
+\begin{gathered}
+    M = \frac{\Phi_S(\B_\text{filo})}{I}
+    = \int_S \frac{\mu_0}{2\pi r'} \de S'
+    \approx \frac{\mu_0 R^2}{2 r}
+    = \qty{6.28e-13}{\henry}
+\end{gathered}
+\end{equation}
+L'approssimazione $r' \approx r$ segue da $R \ll r$.
+
+\subsection{Spire concentriche}
+
+Spire concentriche di raggi $R_1 = \qty{1}{\metre}$ e $R_2 = \qty{1}{\centi\metre}$.
+Calcolare il coefficiente di mutua induzione.
+
+Si calcola il flusso attraverso la superficie $S$ della spira piccola del campo dovuto a una corrente nella spira grande.
+
+\begin{equation}
+    M = \frac{\Phi_S(\B_\text{grande})}{I}
+    \approx \int_S \frac{\mu_0}{2 R_1} \ver{n} \sde
+    = \int_S \frac{\mu_0}{2 R_1} \de S
+    = \frac{\mu_0 \pi R_2^2}{2 R_1}
+    = \qty{2\pi^2 e-11}{\henry}
+\end{equation}
+
+Si approssima il campo magnetico nella spira piccola come se fosse uniforme e uguale al suo valore nel centro.
+
+\subsection{Solenoide e spira}
+
+Solenoide ideale lungo $L = \qty{5}{\metre}$ e con $N = 500$ spire.
+Spira parallela alla sezione del solenoide e al suo interno, di diametro $d = \qty{10}{\milli\metre}$.
+
+Flusso del campo nel solenoide attraverso la superficie $S$ della spira:
+\begin{equation}
+    M = \frac{\Phi_S(\B_\text{sol})}{I}
+    = \int_S \mu_0 \frac{N}{L} \de S
+    = \frac{\mu_0 N \pi d^2}{4 L}
+    = \qty{9.87e-9}{\henry}
+\end{equation}
+
+\subsection{Spire concentriche in moto}
+
+$R_1 = \qty{50}{\centi\metre}$, $R_2 = \qty{3}{\centi\metre}$, $I_1 = \qty{20}{\ampere}$ nella spira grande.
+La spira piccola ha resistenza $Z = \qty{0.02}{\ohm}$ ed è in moto in direzione perpendicolare al piano su cui giace con $v = \qty{0.02}{\metre\per\second}$.
+Quanto vale la f.e.m.\ nella spira piccola dopo $t_0 = \qty{2}{\second}$?
+\begin{gather}
+    M(t) = \frac{\Phi_{S_2}(\B)}{I_1}
+    \approx \int_{S_2} \frac{\mu_0 R_1^2}{2 (R_1^2 + z(t)^2)^{3/2}} \uz \sde
+    = \frac{\mu_0 \pi R_1^2 R_2^2}{2 (R_1^2 + z(t)^2)^{3/2}} \\
+    \fem_2 = \evalat{\der{t} \pts{M(t) I_1}}{t_0}
+    = -\frac{\mu_0 I_1 \pi R_1^2 R_2^2}{2}
+    \frac{3}{2}
+    \frac{2 z(t_0) v}{(R_1^2 + z(t_0)^2)^{5/2}}
+    = -\qty{6.7e-10}{\volt}
+\end{gather}
+
+Si può mostrare che l'autoinduzione nella spira piccola è del tutto trascurabile.
+
+
+\subsection{Spira quadrata e due fili}
+
+Trovare il coefficiente di mutua induzione $M$ tra i fili a distanza $d$ e la spira quadrata di lato $h$ (ovvero, tra la spira e un filo e tra la spira e l'altro filo).
+
+Spira con uno qualsiasi dei due fili:
+\begin{equation}
+\begin{gathered}
+    M = \frac{\Phi_S(\B)}{I}
+    = \int_S \frac{\mu_0}{2\pi r'} \de S'
+    = \frac{\mu_0}{2\pi} \int_{x = d/2 - h/2}^{d/2 + h/2} \int_{y = 0}^h \frac{1}{x} \, \de y \, \de x = \\
+    = \frac{\mu_0 h}{2\pi} \Big[\!\ln x\Big]_{d/2 - h/2}^{d/2 + h/2}
+    = \frac{\mu_0 h}{2\pi} \ln \frac{d + h}{d - h}
+\end{gathered}
+\end{equation}
+
+Se nei due fili la corrente scorre in versi opposti, l'induzione totale è nulla.

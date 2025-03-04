@@ -1,0 +1,226 @@
+\chapter{Relatività -- esercitazioni}
+\label{sec:relativita}
+
+\section{Esperimento di Michelson e Morley}
+
+La differenza di fase tra due onde coerenti in un certo punto a distanza $r_1$ dalla prima sorgente e a $r_2$ dalla seconda è
+\begin{equation}
+    \Delta \phi = (k r_2 - \omega t + \phi_2) - (k r_2 - \omega t + \phi_1) = k (r_2 - r_1) + \phi_2 - \phi_1
+\end{equation}
+
+\redtext{Immagine interferometro}
+
+La lastra D serve a compensare la dispersione del raggio verso l'alto dovuta alla riflessione presso la lastra B.
+
+La direzione orizzontale è coerente con la velocità della Terra, quindi l'interferenza risultante doveva dipendere dalla velocità della terra, che determina la differenza dei cammini.
+
+Riguardo il raggio $L_2$:
+\begin{gather}
+    (c t_3)^2 = L_2^2 + (u t_3)^2 \implies t_3 = \frac{L}{\sqrt{c^2 - u^2}} \\
+    t_4 = t_3 \\
+    \implies \Delta t_2 = t_3 + t_4  = \frac{2 L}{c} \frac{1}{\sqrt{1 - \frac{u^2}{c^2}}}
+\end{gather}
+
+Riguardo il raggio $L_1$
+\begin{gather}
+    c t_1 = L_1 + u t_1 \implies t_1 = \frac{L}{c - u} \\
+    c t_2 = L_1 - u t_2 \implies t_2 = \frac{L}{c + u} \\
+    \implies \Delta t_1 = t_1 + t_2 = \frac{2 L}{c} \frac{1}{1 - \frac{u^2}{c^2}}
+\end{gather}
+
+Sperimentalmente, però, non si osservò nessuno sfasamento.
+
+Questo perché la composizione delle velocità non avviene come previsto dalle trasformazioni di Galileo.
+
+Si definisce il \important{fattore di Lorentz}:
+\begin{gather}
+    \gamma(v) \coloneq \frac{1}{\sqrt{1 - \frac{v^2}{c^2}}}
+    = 1 + \frac{1}{2} \frac{v^2}{c^2} + o\pts{\frac{v^2}{c^2}}, \quad \text{per } \frac{v}{c} \to 0 \\
+    \abs{v} \ll c \implies \gamma \approx 1
+\end{gather}
+
+Ma se $c$ è invariante rispetto ai sistemi di riferimento, allora non può esserlo lo spazio.
+Ipotizzando la seguente contrazione delle lunghezze per i sistemi in moto a velocità $v$,
+\begin{equation}
+    L' = \frac{L}{\gamma}
+\end{equation}
+Effettivamente si ottiene l'uguaglianza tra $\Delta t_1$ e $\Delta t_2$:
+\begin{equation}
+    \implies \Delta t_1 = \frac{2 L'}{c} \frac{1}{1 - \frac{u^2}{c^2}}
+    = \frac{2 L}{c} \frac{\sqrt{1 - \frac{u^2}{c^2}}}{1 - \frac{u^2}{c^2}}
+    = \frac{2 L}{c} \frac{1}{\sqrt{1 - \frac{u^2}{c^2}}}
+    = \Delta t_2
+\end{equation}
+Ne segue anche una dilatazione dei tempi:
+\begin{equation}
+    \Delta t = \gamma \Delta t'
+\end{equation}
+
+\section{Trasformazioni di Galileo}
+
+Consideriamo due sistemi di riferimento $S_1: x, y, z$ e $S_2: x', y', z'$.
+$S_2$ è in moto con velocità $\vt{v}$ rispetto a $S_1$.
+In fisica classica valgono le trasformazioni di Galileo:
+\begin{itemize}
+    \item Osservatore 1:
+        \begin{equation}
+            \begin{cases}
+                x = x' + v_x t \\
+                y = y' + v_y t \\
+                z = z' + v_z t \\
+                t = t'
+            \end{cases}
+        \end{equation}
+    \item Osservatore 2:
+        \begin{equation}
+            \begin{cases}
+                x' = x - v_x t \\
+                y' = y - v_y t \\
+                z' = z - v_z t \\
+                t' = t
+            \end{cases}
+        \end{equation}
+\end{itemize}
+
+Le equazioni di Maxwell non sono compatibili con queste trasformazioni.
+
+Consideriamo un filo rettilineo con densità di carica $\lambda$ e, a distanza $r$, una carica $q$.
+La forza di Coulomb è
+\begin{equation}
+    F = \frac{q \lambda}{2\pi \eps_0 r}
+\end{equation}
+Tuttavia, da un sistema di riferimento in moto a velocità $v$, vedo il filo carico in moto, e dunque una corrente elettrica $\lambda v$ e una forza magnetica attrattiva dovuta a un campo magnetico $\mu_0 \lambda v / (2\pi r)$:
+\begin{equation}
+\label{eq:frel}
+    F = \frac{q \lambda}{2\pi \eps_0 r} - q v \frac{\mu_0 \lambda v}{2\pi r}
+    = \frac{q \lambda}{2\pi r \eps_0} \pts{1 - \frac{v^2}{c^2}}
+    = \frac{q \lambda}{2\pi r \eps_0} \gamma^{-2}
+\end{equation}
+
+Poiché le equazioni di Maxwell non sono valide in ogni sistema di riferimento inerziale, vorrebbe dire che ne esiste uno privilegiato.
+
+In realtà, risulta che le trasformazioni di Galileo valgono solo a velocità $\abs{v} \ll c$ e sono un caso limite delle trasformazioni di Lorentz.
+Con $\vt{v} = v \ux$,
+\begin{itemize}
+    \item Osservatore 1:
+    \begin{equation}
+        \begin{cases}
+            x = \gamma (x' + v t) \\
+            t = \gamma \pts{t' + \dfrac{v}{c^2} x'}
+        \end{cases}
+    \end{equation}
+    \item Osservatore 2:
+    \begin{equation}
+        \begin{cases}
+            x' = \gamma (x - v t) \\
+            t' = \gamma \pts{t - \dfrac{v}{c^2} x}
+        \end{cases}
+    \end{equation}
+\end{itemize}
+
+Con queste trasformazioni, $c$ è la stessa in tutti i sistemi di riferimento.
+
+Immaginiamo due specchi paralleli a distanza $d$ con un raggio di luce che va da uno all'altro dei due.
+
+In un sistema di riferimento in cui il raggio è verticale, il raggio percorre una distanza $d$ in un tempo $\Delta t$.
+
+In uno in cui il raggio ha un angolo, questo percorre una distanza $L > d$ in un tempo $\Delta t'$.
+
+Il cateto parallelo agli specchi si misura nel sistema di riferimento in moto.
+
+Inoltre,
+\begin{gather}
+    L^2 = d^2 + (v \Delta t')^2 \\
+    \implies c^2 \Delta t'^2 = c^2 \Delta t^2 + v^2 \Delta t'^2 \\
+    \implies \Delta t'^2 = \Delta t^2 + \frac{v^2}{c^2} \Delta t'^2 \\
+    \implies \Delta t' = \gamma \Delta t > \Delta t
+\end{gather}
+
+Si ha una \important{dilatazione dei tempi} e si perde il concetto di simultaneità degli eventi: lo stesso evento può avvenire in momenti diversi a seconda dell'osservatore.
+
+Analogamente, vale la \important{contrazione delle lunghezze}:
+\begin{equation}
+    c = \frac{L}{\Delta t} = \frac{L'}{\Delta t'}
+    \implies L' = \frac{L}{\gamma} < L
+\end{equation}
+
+È solo per $v > c/2$ circa che $\gamma$ diventa percettibilmente maggiore di 1.
+La relatività, quindi, vale solo per velocità elevatissime.
+
+Per quanto riguarda l'esempio precedente, a dover essere corrette sono
+\begin{itemize}
+    \item la densità di carica, poiché è diversa la lunghezza:
+    \begin{equation}
+        \lambda' = \gamma \lambda
+    \end{equation}
+    \item la forza, che è derivata della quantità di moto rispetto al tempo:
+    \begin{equation}
+        \Delta p' = \frac{q \lambda'}{2\pi \eps_0 r} \gamma^{-2} \Delta t'
+        = \frac{q \lambda \gamma}{2\pi \eps_0 r} \gamma^{-2} \gamma \Delta t
+        = \frac{q \lambda}{2\pi \eps_0 r} \Delta t
+        = \Delta p
+    \end{equation}
+\end{itemize}
+
+In conclusione, il comportamento del sistema non cambia tra i due sistemi di riferimento.
+
+\section{Equivalenza massa-energia}
+
+Nel sistema $O$, due onde elettromagnetiche colpiscono una particella di massa $m$, propagandosi l'una contro l'altra in verticale.
+In un sistema $O'$ in moto $v$ orizzontale, i raggi sono a un angolo $\alpha$ con la verticale.
+
+In $O$, la particella non cambia la sua quantità di moto.
+
+In $O'$, le quantità di moto iniziale e finale sono
+\begin{gather}
+    p_i = m v_i + 2 \frac{E}{c} \sin\alpha \\
+    p_f = m v_f
+\end{gather}
+
+Poiché in $O$ la particella non cambia velocità, non deve farlo neanche in $O'$.
+
+Del resto, come in $O$, anche in $O'$ deve valere $p_i = p_f$.
+
+Si ottiene l'assurdo $E = 0$.
+
+L'errore risiede nell'assumere che la massa sia la stessa.
+Invece,
+\begin{equation}
+    p_f = p_i, \, v_f = v_i \eqcolon v
+    \implies m_f v = m_i v + 2 \frac{E}{c} \sin\alpha
+\end{equation}
+
+Usando anche $\sin \alpha = v/c$,
+\begin{equation}
+    m_f = m_i + 2 \frac{E}{c^2}
+    \implies
+    2E = (m_f - m_i) c^2
+\end{equation}
+La massa della particella aumenta di una quantità equivalente all'energia delle due onde.
+
+In generale, la massa finale dopo un trasferimento di energia che porta il corpo a velocità $v$ per una particella di massa a riposo $m_0$ è
+\begin{equation}
+    m = \gamma m_0
+\end{equation}
+Nel limite $v \ll c$,
+\begin{equation}
+    m = m_0 + \frac{1}{c^2} \frac{1}{2} m_0 v^2 + o\pts{\frac{v^2}{c^2}}
+\end{equation}
+cioè si ottiene l'espressione dell'energia cinetica
+
+\section{Paradosso dei gemelli}
+
+Di due gemelli di 20 anni sulla Terra uno parte per un lontano pianeta, viaggiando a velocità $v = 0.8 c$ per un tempo $\Delta t = \qty{10}{anni}$.
+
+Considerando andata e ritorno, al ritorno il gemello rimasto sulla terra avrà 40 anni.
+Il gemello che torna, invece, avrà 32 anni.
+
+Tuttavia, nel sistema di riferimento dell'astronave, la situazione dovrebbe essere opposta: è il gemello sulla terra a essere invecchiato meno, poiché è la Terra a essere in moto rispetto all'astronave.
+
+Quindi, dovrei essere in grado di scegliere un sistema di riferimento corretto, mentre l'altro sarà sbagliato (perché uno dei due gemelli è effettivamente invecchiato di più).
+
+Il problema sta nel presupporre il concetto di simultaneità.
+
+Siano $T: (x, t)$ il sistema di riferimento della Terra, $A: (x', t')$ quello dell'andata e $R: (x'', t'')$ quello del ritorno.
+
+Il tempo in cui il gemello che parte arriva sul pianeta è diverso in $T$ e in $A$ e quello in cui il gemello arriva e inizia a tornare è diverso tra $A$ e $R$.

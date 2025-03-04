@@ -1,0 +1,470 @@
+\chapter{Elettrostatica}
+
+\section{Principi dell'elettrostatica}
+
+L'elettrostatica nasce dalla constatazione che esiste una proprietà della materia diversa dalla massa che si manifesta attraverso forze attrattive e repulsive.
+Questa proprietà è detta \important{carica elettrica}, posseduta da un corpo materiale come è posseduta la massa, e ha un segno.
+
+\subsection{Legge di Coulomb}
+
+La forza elettrica è evidentemente più forte di quella gravitazionale e per quantificarla devo raggiungere il limite della carica puntiforme: sferette cariche poste a grande distanza (come fossero masse puntiformi).
+
+Così facendo, si scopre la \important{legge di Coulomb}: due cariche $q_1$ e $q_2$ poste a distanza $r$ esercitano l'una sull'altra una forza pari a
+\begin{equation}
+    \force = k_e \frac{q_1 q_2}{r^2} \ver{r}
+\end{equation}
+dove $k_e$ è una costante di proporzionalità e di conversione tra unità di misura e $\ver{r}$ è il vettore unitario che punta dalla carica che esercita la forza a quella che la sente.
+Se la forza è attrattiva, allora le cariche sono di segno opposto (cioè $q_1 q_2 < 0$).
+
+La legge di Coulomb permette di definire la grandezza fisica ``carica elettrica'' e la sua unità di misura.
+Questo è possibile poiché nell'equazione figurano solo grandezze fisiche già definite, come la forza e la distanza.
+
+Si fissa il valore numerico di $k_e$ a $\{k_e\} = 10^{-7} (c / (\qty{1}{\metre\per\second}))^2$ (dove $c$ è la velocità della luce nel vuoto) e si ottiene l'unità di carica \qty{1}{\coulomb}.
+
+La costante ha un valore numerico ``brutto'' perché in realtà il coulomb è stato definito dopo l'ampere (vedi \autoref{sec:def_ampere}).
+
+Fatto questo, l'unità di misura di $k_e$ risulta essere $[k_e] = \unit{\newton\metre\squared\per\coulomb\squared}$.
+
+Si definisce anche $\eps_0$, la \important{costante dielettrica del vuoto}, in modo che valga
+\begin{equation}
+    k_e = \frac{1}{4\pi \eps_0}
+\end{equation}
+
+Fatto ciò, la legge di Coulomb, da legge empirica, diventa un principio.
+
+(Le leggi empiriche sono quelle che non si dimostrano, ma si osservano direttamente.)
+
+\subsection{Conservazione della carica}
+
+Si osserva anche un'altra proprietà: \important{la carica elettrica si conserva}.
+Cioè, considerando un volume $V \subset \R^3$ delimitato da una superficie $S$, le cariche entrano o escono attraverso $S$, ma non nascono né spariscono lì dentro.
+
+Di preciso, a conservarsi è la carica netta (cioè, considerata con segno).
+
+\subsection{Principio di sovrapposizione degli effetti}
+
+Un terzo principio è il \important{principio di sovrapposizione degli effetti}: se in presenza di una carica $q_0$ in posizione $\p_0$ ci sono altre $n$ cariche $q_i$ in posizioni $\p_i$, per $i = 1, \ldots, n$, la forza totale su $q_0$ è la somma vettoriale delle forze che le altre cariche esprimono singolarmente su $q_0$.
+\begin{equation}
+    \force_0 = \sum_{i=1}^n \frac{q_0 q_i}{4 \pi \eps_0 \norm{\p_0 - \p_i}^2} \ver{r_i}
+\end{equation}
+dove $\ver{r_i}$ è il versore che va da $\p_i$ a $\p_0$:
+\begin{equation}
+    \ver{r_i} = \frac{\p_0 - \p_i}{\norm{\p_0 - \p_i}}
+\end{equation}
+
+Attenzione: il principio di sovrapposizione non è qualcosa di implicito nella legge di Coulomb, ma va verificato sperimentalmente.
+Infatti, in generale, ci sono interazioni che non lo rispettano.
+
+Grazie al principio di sivrapposizione, di può definire il \important{campo elettrico}: la forza che agisce per unità di carica in un punto dello spazio, con unità di misura $\unit{\newton\per\coulomb}$.
+
+Il campo elettrico generato dalle $n$ cariche di prima valutato in $\p_0$ è
+\begin{equation}
+    \E(\p_0) = \frac{\force_0}{q_0} = \sum_{i=1}^n \frac{q_i}{4 \pi \eps_0 \norm{\p_0 - \p_i}^2} \ver{r_i}
+\end{equation}
+
+È una proprietà definita in ogni punto dello spazio, e si misura tramite cariche campione.
+
+Il campo elettrico venne introdotto da Faraday come semplice strumento matematico.
+Tuttavia, sembra che sia molto più fondamentale di così dal punto di vista fisico, così come altri campi che incontreremo in seguito.
+Sembra infatti che sia una proprietà non solo nello spazio, ma \textit{dello} spazio.
+
+In sintesi:
+
+L'elettrostatica è lo studio delle proprietà elettriche della materia ferma nello spazio.
+Si basa su tre principi:
+\begin{itemize}
+    \item legge di Coulomb
+    \item conservazione della carica
+    \item principio di sovrapposizione degli effetti
+\end{itemize}
+
+\section{Conservatività del campo elettrico}
+
+Se la carica $q$ che genera il campo è nell'origine, il campo elettrico in un punto generico $P$ a distanza $r$ dall'origine è
+\begin{equation}
+    \E(P) = \frac{q}{4\pi\eps_0 r^2} \ver{r}
+\end{equation}
+con $\ver{r}$ versore radiale verso $P$.
+
+Se vi è una carica $q_0$ in $P$, la forza che agisce su essa è $q_0 \E(P)$.
+
+Se la carica viene spostata lungo un arco $\gamma$ dal punto $A$ al punto $B$ a distanze $r_A$ e $r_B$ dall'origine, la forza elettrica svolge un lavoro e si dimostra che questo lavoro dipende solo dalla componente radiale dello spostamento:
+\begin{equation}
+\label{eq:potenziale_elettrostatico}
+    \begin{gathered}
+        L_{AB, \gamma} = \int_\gamma \force \lde = \frac{q_0 q}{4\pi \eps_0} \int_{r_A}^{r_B} \frac{1}{r^2} \de r = - \frac{q_0 q}{4\pi \eps_0} \pts{\frac{1}{r_B} - \frac{1}{r_A}} = \\
+        = -q_0 \pts{\frac{q}{4\pi \eps_0 r_B} - \frac{q}{4\pi \eps_0 r_A}}
+    \end{gathered}
+\end{equation}
+
+Poiché $L_{AB,\gamma}$ non dipende da $\gamma$, \important{il campo elettrico è conservativo} (cioè genera forze conservative).
+
+I due termini nella \eqref{eq:potenziale_elettrostatico}, se moltiplicati per $q_0$, sono energie che determinano una variazione di energia potenziale.
+
+Trascurando la carica campione, si ottiene il potenziale elettrico $\spot(P)$: l'energia potenziale per unità di carica, con unità di misura volt: $\unit{\volt} = \unit{\joule\per\coulomb}$.
+
+Si ha quindi
+\begin{equation}
+\label{eq:spot_integrale}
+    \int_A^B \E \lde = -\int_A^B \de \spot
+\end{equation}
+% \begin{equation}
+%     \int_A^B \E \lde = \frac{1}{q_0} \int_A^B \force \lde = \frac{1}{q_0} (- q_0) \pts{\frac{q}{4\pi \eps_0 r_B} - \frac{q}{4\pi \eps_0 r_A}} = - (\spot_B - \spot_A) = -\int_A^B \de \spot
+% \end{equation}
+In termini di differenziali,
+\begin{equation}
+\label{eq:spot_differenziali}
+    \E \lde = - \de \spot
+\end{equation}
+Questa è una legge di conservazione dell'energia (energia cinetica a sinistra, ``meno energia potenziale'' a destra).
+
+Quindi, $[\E] = \unit{\volt\per\metre}$, preferito a \unit{\newton\per\coulomb}, che non è usato.
+
+Risolvendo la \eqref{eq:spot_integrale} per $\spot$ si ottiene
+\begin{equation}
+    \spot = \frac{q}{4\pi \eps_0 r} + \text{costante}
+\end{equation}
+
+Dal punto di vista ficico, ha senso porre a zero l'energia potenziale quando la carica di prova è a distanza infinita, poiché essa non subisce più lavoro.
+Pertanto, la costante arbitraria si sceglie pari a $0$.
+
+L'energia potenziale soddisfa il principio di conservazione degli effetti, quindi anche il potenziale lo soddisfa: se ci sono più cariche, i potenziali si sommano (come scalari)
+\begin{equation}
+    \spot(\p) = \sum_{i=1}^n \frac{q_i}{4\pi \eps_0 \norm{\p - \p_i}}
+\end{equation}
+
+Come si calcola $\E$ a partire da $\spot$?
+La \eqref{eq:spot_differenziali} si riscrive come
+\begin{equation}
+    E_x \de x + E_y \de y + E_z \de z = - \de \spot
+\end{equation}
+Fissando $y$ e $z$,
+\begin{equation}
+    E_x \de x = - \de \spot \implies E_x = - \parder[\spot]{x}
+\end{equation}
+Ripetendo per $y$ e $z$ si ottiene
+\begin{equation}
+\label{eq:meno_grad_spot}
+    \E = - \grad \spot
+\end{equation}
+
+Dal fatto che $\E$ è conservativo, si deduce che la circuitazione di $\E$ (il lavoro della forza elettrica per unità di carica lungo una curva chiusa) è sempre nulla.
+
+Inoltre, poiché $\E$ è conservativo, allora è anche irrotazionale:
+\begin{equation}
+    \curl \E = \vt{0}
+\end{equation}
+
+Fisicamente, questo si intuisce tramite il teorema di Stokes: se ogni circuitazione è nulla, allora è nullo anche il flusso del rotore attraverso qualunque superficie.
+
+In particolare, calcoliamo la circuitazione lungo una spira rettangolare infinitesima perpendicolare all'asse $x$:
+\begin{equation}
+    \oint_\gamma \E \lde = \pts{\parder[E_z]{y} - \parder[E_y]{z}} \de y \de z = \pts{\curl \E} \sde
+\end{equation}
+È il teorema di Stokes per una curva chiusa infinitesima.
+L'integrale a destra è sempre nullo, quindi deve essere sempre nullo anche il rotore.
+
+
+% ## Interazione a distanza
+
+% A seguito della scoperta della legge di gravitazione universale, non piaceva l'interazione a distanza
+% L'introduzione di un campo permette invece di spiegare ciò tramite la propagazione di una proprietà dello spazio
+
+\section{Distribuzione continua di carica}
+
+Densità di carica $\rho$:
+\begin{equation}
+    \de q = \rho \, \de V
+\end{equation}
+definendo
+\begin{equation}
+    \ver{r'} \coloneq \frac{\p - \p'}{\norm{\p - \p'}}
+\end{equation}
+Si ottengono delle espressioni per $\E$ e $\spot$ in funzione della distribuzione di carica nello spazio:
+\begin{gather}
+    \de \E(\p) = \frac{\de q}{4\pi \eps_0 \norm{\p - \p'}^2} \ver{r'}
+    \implies
+    \E(\p) = \frac{1}{4\pi \eps_0} \int_V \frac{\rho(\p')}{\norm{\p - \p'}^2} \ver{r'} \, \de V' \\
+    \de \spot(\p) = \frac{\de q}{4\pi \eps_0 \norm{\p - \p'}}
+    \implies
+    V(\p) = \frac{1}{4\pi \eps_0} \int_V \frac{\rho(\p')}{\norm{\p - \p'}} \de V'
+\end{gather}
+$V$ è il volume all'interno del quale la densità di carica è non nulla (ciò su cui occorre integrare).
+
+\section{Legge di Gauss}
+
+Sia $V$ un volume tale che $S = \partial V$ sia una superficie chiusa connessa.
+
+Flusso di $\E$ attraverso $S$:
+\begin{equation}
+    \de \Phi = \E \sde, \qquad \Phi = \oint_S \E \sde
+\end{equation}
+
+Calcolo per una carica $q$ in $\p' \in V$ con $R = \norm{\p - \p'}$:
+\begin{equation}
+    \de \Phi = \frac{q}{4\pi \eps_0} \frac{\ver{r'} \cdot \uvt{n}}{R^2} \de S = \frac{q}{4\pi \eps_0} \frac{\de S \cos \theta}{R^2} = \frac{q}{4\pi \eps_0} \de \Omega
+\end{equation}
+$\Omega$ è l'angolo solido.
+\begin{equation}
+    \Phi = \oint_S \frac{q}{4\pi \eps_0} \de \Omega
+    = \frac{q}{4\pi \eps_0} 4\pi
+    = \frac{q}{\eps_0}
+\end{equation}
+
+Se ci sono più cariche o un volume di carica, per il principio di sovrapposizione degli effetti, è sufficiente considerare la carica totale.
+Si ottiene quindi il formato integrale della legge di Gauss:
+\begin{equation}
+\label{eq:gauss_integrale}
+    \Phi = \oint_S \E \sde = \frac{1}{\eps_0} \int_V \rho \, \de V
+\end{equation}
+
+Il teorema di Gauss applicato al flusso del campo elettrico risulta in
+\begin{equation}
+    \oint_S \E \sde = \int_V \diver \E \, \de V
+\end{equation}
+Poiché la \eqref{eq:gauss_integrale} deve valere per ogni volume $V$, occorre eguagliare gli integrandi e si ottiene il formato differenziale della legge di Gauss:
+\begin{equation}
+    \diver \E = \frac{\rho}{\eps_0}
+\end{equation}
+
+Attenzione: legge di Gauss $\ne$ teorema di Gauss $=$ teorema della divergenza.
+
+Diamo un'idea del perché valga il teorema di Gauss.
+
+Consideriamo un volume infinitesimo cubico con vertice di coordinate minori $\p$, di lati $\de x$, $\de y$, $\de z$ e volume $\de V = \de x \de y \de z$.
+Se $\de \p \parallel \ux$,
+\begin{equation}
+    E_x(\p + \de \p) \approx E_x(\p) + \grad E_x(\p) \cdot \de \p = E_x(\p) + \parder[E_x(\p)]{x} \de x
+\end{equation}
+Il flusso attraverso le facce parallele al piano $zy$ è
+\begin{equation}
+    E_x(\p + \de \p) \de y \de z - E_x(\p) \de y \de z = \parder[E_x(\p)]{x} \de x \de y \de z
+\end{equation}
+Ripetendo per $y$ e $z$ e sommando si ottiene il flusso totale:
+\begin{equation}
+    \de \Phi = (\diver \E) \de V
+\end{equation}
+
+Ora, accostando piccoli volumi, i contributi adiacenti dei flussi si semplificano. Per un volume generico vale
+\begin{equation}
+    \Phi = \int_V \diver \E \, \de V
+\end{equation}
+
+\section{Equazione di Poisson}
+
+Osserva che le due seguenti leggi:
+\begin{gather}
+\label{eq:gauss_differenziale}
+    \diver \E = \frac{\rho}{\eps_0} \\
+    \curl \E = \vt{0}
+\end{gather}
+sono conseguenze dei soli tre principi dell'elettrostatica e sono equivalenti a essi, ne sono una riscrittura analitica.
+
+Dai tre principi siamo passati alle due leggi sopra.
+Ora, è possibile ridurre queste leggi in un'unica equazione, sostituendo la \eqref{eq:meno_grad_spot} nella \eqref{eq:gauss_differenziale}:
+\begin{equation}
+    \lapl \spot = - \frac{\rho}{\eps_0}
+\end{equation}
+La soluzione di quest'equazione differenziale è proprio
+\begin{equation}
+    \spot(\p) = \frac{1}{4\pi \eps_0} \int_V \frac{\rho(\p')}{\norm{\p - \p'}} \de V'
+    % = \frac{1}{\eps_0} \mathcal{S} \rho(r)
+\end{equation}
+
+% Tuttavia, la forma differenziale è più usata numericamente (:-/)
+
+\section{Conduttori e condensatori}
+
+Conduttore: materiale in cui le cariche possono muoversi liberamente.
+
+In un conduttore, le cariche si posizionano sulla superficie.
+Per questo, all'interno, $\E = \vt{0}$ e $\rho = 0$.
+Ne segue anche che il potenziale è costante per l'intero conduttore.
+
+Sulla superficie, $\E \parallel \uvt{n}$.
+Se non fosse così, si avrebbe una componente tangenziale del campo elettrico e le cariche si muoverebbero sulla superficie.
+
+È conveniente definire la densità superficiale (o ``areica'') $\sigma = \de q / \de S$.
+
+Il potenziale a cui è il conduttore è
+\begin{equation}
+    \spot(\p) = \frac{1}{4\pi \eps_0} \int_S \frac{\sigma(\p')}{\norm{\p - \p'}} \de S'
+\end{equation}
+
+Rapporto potenziale/carica per le cariche sulla superficie:
+\begin{equation}
+    \frac{1}{C} = \frac{\spot(\p)}{Q} = \frac{1}{4\pi \eps_0} \int_S \frac{\sigma(\p')/Q}{\norm{\p - \p'}} \de S', \quad \p \in S
+\end{equation}
+$C$ è detta \important{capacità} ed è una costante che dipende solo dalla forma della cuperficie $S$ poiché l'integrale è puramente geometrico.
+
+Consideriamo due conduttori con lo stesso quantitativo di carica di segno opposto $Q = Q_+ = -Q_- > 0$.
+Si definiscono
+\begin{itemize}
+    \item armetura: ciascuno dei due conduttori
+    \item condensatore: il sistema completo
+\end{itemize}
+
+Le linee di campo escono dall'armatura positiva ed entrano in quella negativa.
+
+La differenza di potenziale (d.d.p.) vale
+
+\begin{equation}
+    \Delta \spot = \frac{Q_+}{C_+} - \frac{Q_-}{C_-} = Q \underbrace{\pts{\frac{1}{C_+} + \frac{1}{C_-}}}_{1/C}
+\end{equation}
+
+$C$ è la capacità del condensatore e si misura in farad: $[C] = \unit{\farad} = \unit{\coulomb\per\volt}$.
+
+\subsection{Condensatore a facce piane parallele}
+
+Consideriamo due piani conduttori infiniti paralleli di superficie $S$ a distanza $d$.
+
+``Infiniti'' significa che $d$ è trascurabile rispetto alla loro superficie, $d \ll \sqrt{S}$.
+
+Le distribuzioni di densità di carica superficiale sono uguali in modulo: $\sigma = \sigma_+ = -\sigma_- > 0$.
+
+Per calcolare $C$, serve calcolare $V = V_+ - V_-$.
+
+Poiché il piano è infinito, il campo elettrico è perpendicolare al piano.
+
+Considerando un cilindro di area di base $A$ perpendicolare al piano e che lo attraversa.
+Detto $E$ il modulo del campo elettrico presso le basi del cilindro, si applica la legge di Gauss:
+\begin{equation}
+    \Phi = 2 E A = \frac{\sigma A}{\eps_0} \implies E = \frac{\sigma}{2 \eps_0}
+\end{equation}
+In particolare, il campo è uniforme da ognuna delle due parti del piano.
+
+Sommando il contributo dell'altro piano (che, tra le armature, è concorde), il campo tra le armature è, in modulo,
+\begin{equation}
+    E = \frac{\sigma}{\eps_0}
+\end{equation}
+Otteniamo la capacità del condensatore:
+\begin{equation}
+    V = - \int_{-,\gamma}^+ \E \lde = \frac{\sigma d}{\eps_0} \implies
+    C = \frac{Q}{V} = \frac{\sigma S}{\frac{\sigma d}{\eps_0}} = \eps_0 \frac{S}{d}
+\end{equation}
+
+\subsection{Energia del campo elettrico}
+
+Quale lavoro serve per spostare una carica $Q > 0$ da un'armatura all'altra?
+\begin{gather}
+    \de L = V \de q \\
+    L = \int_0^Q V \de q = \int_0^Q \frac{q}{C} \de q = \frac{Q^2}{2 C} = \frac{1}{2} C V^2
+\end{gather}
+Nel caso di un condensatore a facce piane parallele:
+\begin{equation}
+    L = \frac{1}{2} \underbrace{\eps_0 \frac{S}{d}}_C {\underbrace{(E d)}_V}^2 = \frac{1}{2} \eps_0 S d E^2
+\end{equation}
+Osservando che $S d$ è il volume tra le facce del condensatore, l'energia per unità di volume è
+\begin{equation}
+    w_E = \frac{1}{2} \eps_0 E^2
+\end{equation}
+
+Questa è l'energia del campo elettrico.
+Questa formula, in realtà, vale sempre, non solo per questo specifico caso.
+Alla presenza di campo elettrico nello spazio è associata una certa densità di energia elettrica $w_E$.
+
+Il lavoro svolto per spostare le cariche (ad esempio, da generatori di tensione o di corrente) risulta nella creazione di un campo elettrico, quindi si trasforma in questa forma di energia.
+
+\section{Corrente elettrica}
+
+Consideriamo un cilindro con due facce cariche in modo opposto: al suo interno ho un campo elettrico uniforme.
+Sia $n$ il numero di cariche libere $q$ per unità di volume.
+Messe in moto dal campo elettrico, hanno velocità $\vt{v}$.
+
+% ($\vt{v}$ dovrebbe aumentare linearmente, in quanto il moto è uniformemente accelerato.
+% In realtà è costante, poiché gli elettroni perdono energia urtando gli atomi del conduttore. Vedi \autoref{sec:legge_ohm}.)
+
+La quantità di carica $\Delta Q$ che attraversa una sezione $S$ in un tempo $\Delta t$ è
+\begin{equation}
+    \Delta Q = n q \Delta t \vt{v} \cdot \vt{S}
+\end{equation}
+poiché il volume delle cariche che raggiungono la superficie è $(\vt{v}\Delta t) \cdot \vt{S}$.
+
+Corrente elettrica: quantità di carica che attraversa una sezione per unità di tempo:
+\begin{equation}
+    I \coloneq \frac{\Delta Q}{\Delta t} = nq\vt{v} \cdot \vt{S}
+\end{equation}
+Unità di misura: ampere $\unit{\ampere} = \unit{\coulomb\per\second}$.
+
+Densità di corrente: corrente per unità di superficie:
+\begin{equation}
+    \dcurr = nq\vt{v}
+\end{equation}
+
+$I$ è il flusso di $\dcurr$ attraverso $S$:
+\begin{equation}
+    \de I = \dcurr \sde, \qquad I = \int_S \dcurr \sde
+\end{equation}
+
+\subsection{Principio di conservazione della carica}
+
+Se all'interno di un volume $V$ la carica è costante, la corrente totale attraverso la superficie è nulla:
+\begin{equation}
+    I = \oint_{\partial V} \dcurr \sde = 0
+\end{equation}
+
+\subsection{Legge di Ohm}
+\label{sec:legge_ohm}
+
+Consideriamo un conduttore e accendiamo un campo elettrico (lo si fa mettendo cariche positive da una parte e negative dall'altra).
+Le cariche nel conduttore vengono messe in moto e si genera una corrente $\de I = \dcurr \sde$.
+
+La corrente fa sì che le cariche positive interne si avvicinino a quelle negative che generano il campo, e viceversa.
+Alla fine, il campo si sarà annullato.
+
+Per permettere che attraverso un conduttore scorra corrente indefinitamente, serve svolgere del lavoro per riportare le cariche dall'altra parte (rispettando il principio di conservazione dell'energia).
+
+Il lavoro svolto dal campo elettrico è
+\begin{equation}
+    \de L = \force \lde = q \E \lde = - q \de \spot
+\end{equation}
+Considerando una quantità di carica positiva $\Delta Q$ (che si muove verso le cariche negative) e definendo $V = \spot_+ - \spot_-$, il lavoro risulta direttamente proporzionale alla corrente.
+
+Chiamiamo $R$ la costante di proporzionalità:
+\begin{equation}
+    L = \Delta Q \, V = \Delta Q  R I
+\end{equation}
+
+Si ottiene la \important{legge di Ohm}:
+\begin{equation}
+    V = R I
+\end{equation}
+
+$R$ è detta \important{resistenza} e l'unità di misura è l'ohm: $[R] = \unit{\ohm} = \unit{\volt\per\ampere}$.
+
+Se il conduttore è un filo, si misura che in tutte le sezioni del filo la corrente è la stessa.
+Poiché $I = \rho v S$ e la sezione del filo è costante, la velocità sarà la stessa.
+Quindi, \important{la velocità delle cariche è costante}, è detta \important{velocità di deriva} e non aumenta linearmente come ci si aspetterebbe da un moto uniformemente accelerato (dovuto a un campo elettrico costante).
+Parte dell'energia del campo elettrico, infatti, viene \important{dissipata in calore} per \important{effetto Joule}, che ha l'effetto di scaldare il filo.
+
+Questo meccanismo può essere modellizzato tramite urti delle cariche in moto contro gli atomi del materiale.
+È un modello ``sbagliato'', ma dà risultati corretti.
+
+Tra un urto e l'altro, il moto è uniformemente accelerato, ma la velocità acquisita viene persa a ogni urto.
+
+La legge di Ohm è una legge di conservazione dell'energia: $V$ quantifica il lavoro del campo elettrico, $RI$ la dissipazione termica.
+$R$ svolge il ruolo della viscosità.
+
+Per garantire che scorra una corrente $I$, è necessario un generatore di tensione che compensi l'energia dissipata.
+Questo può essere chimico (pila o batteria) o meccanico (forza elettromotrice).
+
+La resistenza è una grandezza estensiva e dipende dalla geometria del materiale.
+Dette $l$ la lunghezza del conduttore e $S$ la sezione,
+\begin{gather}
+    V = RI
+    \implies E l = R J S \\
+    \implies J = \frac{l}{RS} E = \sigma E
+\end{gather}
+$\sigma$ non dipende dalla geometria ed è una proprietà del materiale: \important{conducibilità elettrica}, $[\sigma] = \unit{\per\ohm\per\metre}$
+
+Posso anche calcolare la velocità:
+\begin{equation}
+    v = \frac{J}{nq} = \frac{l}{n q R S} E \sim \qty{e-4}{\metre\per\second}
+\end{equation}
+Quest'ordine di grandezza vale per molti materiali.
+
+Per $T = \qty{300}{\kelvin}$, la velocità termica (cioè la velocità quadratica media) di un ``gas ideale di elettroni'' sarebbe:
+\begin{equation}
+    v_\text{th} = \sqrt{\frac{3 k_B T}{m_e}} \sim \qty{e5}{\metre\per\second}
+\end{equation}
+Questo mostra che la velocità netta delle cariche è molto minore della velocità termica e che la corrente elettrica deriva da un moto additivo dovuto al campo elettrico, debolissimo rispetto al moto termico.

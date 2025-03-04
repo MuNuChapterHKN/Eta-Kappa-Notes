@@ -1,0 +1,699 @@
+\chapter{Elettrostatica -- esercitazioni}
+
+\section{Ripasso sull'elettrostatica}
+
+\begin{equation}
+    \E(\p) = \frac{1}{4\pi\eps_0} \int_V \frac{\rho(\p')}{\norm{\p - \p'}^2} \ver{\p'} \, \de V'
+\end{equation}
+\begin{equation}
+    \spot(\p) = \frac{1}{4\pi\eps_0} \int_V \frac{\rho(\p')}{\norm{\p - \p'}} \de V'
+\end{equation}
+La singola componente $\alpha \in \{x, y, z\}$ del campo elettrico è:
+\begin{equation}
+    E_\alpha(x,y,z) = \frac{1}{4\pi\eps_0} \int_V \frac{\rho(x',y',z')}{(x - x')^2 + (y - y')^2 + (z - z')^2} (\ver{\p'})_\alpha \, \de V'
+\end{equation}
+
+Conservatività:
+\begin{gather}
+    \E = - \grad \spot \\
+    \E \lde = - \de V \iff \int_A^B \E \lde = \spot(\p_A) - \spot(\p_B) \\
+    \curl \E = \vt{0}
+    \iff
+    \oint_\gamma \E \lde = 0
+\end{gather}
+
+Legge di Gauss ($S$ superficie chiusa):
+\begin{equation}
+    \diver \E = \frac{\rho}{\eps_0}
+    \iff
+    \Phi_S(\E) \coloneq \oint_S \E \sde = \frac{q}{\eps_0}
+\end{equation}
+
+\section{Campo elettrico dovuto a distribuzioni di carica}
+
+\subsection{Anello}
+
+Anello $C$ di raggio $R$ e carica totale $q$ distribuita uniformemente.
+Ha centro $\vt{0}$ e giace sul piano $yz$.
+Trovare $\E(x, 0, 0)$ e $\spot(x, 0, 0)$.
+
+Per simmetria, $\E(x, 0, 0) \parallel \ux$, cioè $\E(x, 0, 0) = E_x(x, 0, 0) \ux$.
+
+Per trovare $E_x(x, 0, 0)$,
+\begin{itemize}
+    \item L'integrale è di linea e la densità lineare è $q / (2\pi R)$
+    \item La componente $x$ di $\ver{\p'}$ è $\cos \theta = \frac{x}{\sqrt{x^2 + R^2}}$, con $\theta$ l'angolo tra l'asse $x$ e le rette tra i punti su $C$ e $(x, 0, 0)$.
+    \item $x' = 0$
+    \item $y = z = 0$
+    \item $(y')^2 + (z')^2 = R^2$
+\end{itemize}
+
+\begin{equation}
+\begin{aligned}
+    E_x(x, 0, 0) & = \frac{1}{4\pi\eps_0} \int_C \frac{q/(2 \pi R)}{x^2 + R^2} \frac{x}{\sqrt{x^2 + R^2}} \de l' = \\
+    & = \frac{qx}{8\pi^2\eps_0 R (x^2 + R^2)^{3/2}} \int_C \de l' = \\
+    & = \frac{qx}{8\pi^2\eps_0 R (x^2 + R^2)^{3/2}} 2\pi R = \\
+    & = \frac{q}{4\pi\eps_0} \frac{x}{(x^2 + R^2)^{3/2}}
+\end{aligned}
+\end{equation}
+
+Analogamente, il potenziale risulta:
+\begin{equation}
+    \spot(x, 0, 0) = \frac{q}{4\pi\eps_0} \frac{1}{\sqrt{x^2 + R^2}}
+\end{equation}
+
+Si osserva $\E = - \grad \spot$.
+
+Inoltre, per $x \gg R$,
+\begin{gather}
+    E_x(x, 0, 0) \approx \frac{q}{4\pi\eps_0 x^2} \\
+    V(x, 0, 0) \approx \frac{q}{4\pi\eps_0 \abs{x}} \\
+\end{gather}
+ovvero, campo e potenziale dovuti a una carica puntiforme $q$.
+
+\subsection{Disco}
+
+Come prima, ma con carica di superficie su un disco $D$.
+
+Ricaviamo prima il potenziale.
+
+L'integrale si svolge in coordinate polari:
+\begin{gather}
+    \de S = r \, \de r \, \de \phi \\
+\begin{aligned}
+    \spot(x, 0, 0) & = \frac{1}{4\pi\eps_0} \int_D \frac{q / (\pi R^2)}{\sqrt{x^2 + (y')^2 + (z')^2}} \de S' = \\
+    & = \frac{1}{4\pi\eps_0} \int_{\phi = 0}^{2\pi} \int_{r = 0}^R \frac{q / (\pi R^2)}{\sqrt{x^2 + r^2}} r \, \de r \, \de \phi = \\
+    & = \frac{q}{4\pi^2\eps_0 R^2} \int_{0}^{2\pi} \de \phi \int_0^R \frac{r}{\sqrt{x^2 + r^2}} \, \de r = \\
+    & = \frac{q}{2\pi\eps_0 R^2} \int_0^R \frac{r}{\sqrt{x^2 + r^2}} \, \de r
+\end{aligned}
+\end{gather}
+
+L'integrale in $r$ è
+\begin{equation}
+    \int_0^R \frac{r}{\sqrt{x^2 + r^2}} \, \de r
+    = \frac{1}{2} \int_0^R \frac{2r}{\sqrt{x^2 + r^2}} \, \de r
+    = \frac{1}{2} \left[ 2 \sqrt{x^2 + r^2} \right]_{r=0}^R
+    = \sqrt{x^2 + R^2} - \abs{x}
+\end{equation}
+
+Per cui,
+\begin{equation}
+    \spot(x, 0, 0) = \frac{q}{2\pi\eps_0} \frac{\sqrt{x^2 + R^2} - \abs{x}}{R^2}
+\end{equation}
+Poiché $\E(x, 0, 0) = E_x(x, 0, 0) \ux$,
+\begin{equation}
+    E_x(x, 0, 0) = - \parder[\spot]{x}(x, 0, 0) = \frac{q}{2\pi\eps_0 R^2} \pts{\sgn{x} - \frac{x}{\sqrt{x^2 + R^2}}}
+\end{equation}
+Per studiare $x \gg R$, qui serve andare al secondo ordine in $R / x$:
+\begin{equation}
+\begin{gathered}
+    E_x(x, 0, 0) = \frac{q}{2\pi\eps_0 R^2} \pts{1 - \frac{x}{\abs{x}\sqrt{1 + \frac{R^2}{x^2}}}} \approx \\
+    \approx \frac{q}{2\pi\eps_0 R^2} \pts{1 - \pts{1 - \frac{1}{2} \frac{R^2}{x^2}}}
+    = \frac{q}{4\pi\eps_0 x^2}
+\end{gathered}
+\end{equation}
+
+Per $\abs{x} \ll R$ o $R \to +\infty$,
+\begin{equation}
+    E_x(x, 0, 0) \approx \frac{q}{2\pi\eps_0 R^2} \sgn{x} = \frac{\sigma}{2\eps_0} \sgn{x}
+\end{equation}
+È il campo di un piano infinito con densità di carica superficiale $\sigma = q / (\pi R^2)$.
+
+\subsection{Piano infinito}
+
+Piano infinito che giace nel piano $yz$ e ha densità di carica superficiale $\sigma$.
+
+Come mostrato in precedenza:
+\begin{gather}
+    \E(x, y, z) = \frac{\sigma}{2\eps_0} \sgn{x} \ux \\
+    \spot(x, y, z) = -\frac{\sigma}{2\eps_0} \abs{x}
+\end{gather}
+
+\subsubsection{Acceleratore di carica}
+\label{sec:acceleratore_carica}
+
+Un acceleratore di carica permette di accelerare cariche nel vuoto e determinarne la velocità.
+
+Svolgiamo il bilancio energetico per una particella di carica $-q$ inizialmente sull'armatura A (negativa) di un condensatore a facce piane parallele.
+La differenza di potenziale tra le armeture è $\Delta V = V_B - V_A > 0$.
+\begin{equation}
+    -q V_A = \frac{1}{2} m v^2 - q V_B
+    \implies K = \frac{1}{2} m v^2 = q \Delta V
+    \implies v = \sqrt{\frac{2 q \Delta V}{m}}
+\end{equation}
+$v$ è la velocità della particella quando raggiunge o supera l'armatura B.
+
+Per $\Delta V = \qty{10}{\volt}$, si avranno $K = \qty{10}{\electronvolt}$ e $v = \qty{1.9e6}{\metre\per\second} \approx \num{e-2} c_0$.
+
+\subsubsection{Separatore di carica}
+
+È possibile deviare una particella di carica $-q$ di massa $m$ dopo averla accelerata fino a una velocità iniziale $v_i$, facendola passare attraverso armature perpendicolari alle prime a una distanza $h$ dall'armatura positiva.
+Il moto sarà parabolico.
+
+Siano $l$ la lunghezza del separatore e $L$ una lunghezza successiva.
+Ci si chiede la differenza di quota $d$.
+
+Poniamo l'armatura negativa in basso.
+Il campo e la forza sono $\E = -E \uy$ e $\force = q E \uy$.
+
+Con l'origine all'inizio del separatore, la traiettoria è
+\begin{gather}
+    y(x) = \frac{1}{2} \frac{q E}{m} t^2 = \frac{q E x^2}{2 m v_i^2} \\
+    \tan \alpha = \evalat{\der[y]{x}}{x = l} = \frac{qEl}{m v_i^2}, \qquad d = L \tan \alpha + h
+\end{gather}
+
+\redtext{FIGURA}
+
+\subsection{Sfera}
+
+Si consideri una sfera di carica $q$, raggio $R$ e centro nell'origine.
+
+Per simmetria, il campo è radiale: $\E(\p) = E(r)\ver{r}$
+
+Consideriamo una superficie sferica $\Sigma$ di raggio $r$.
+Allora,
+\begin{equation}
+\begin{gathered}
+    \Phi_\Sigma(\E) = \oint_\Sigma \E \sde = \oint_\Sigma E(r) \de S= 4\pi r^2 E(r) = \frac{q_r}{\eps_0} \\
+    \implies E(r) = \frac{q_r}{4\pi\eps_0 r^2}
+\end{gathered}
+\end{equation}
+dove $q_r$ è la carica all'interno di $\Sigma$.
+Quindi,
+\begin{equation}
+    E(r) = \begin{cases}
+        0 & \text{se } r < R \\
+        \dfrac{q}{4\pi\eps_0 r^2} & \text{se } r > R
+    \end{cases}
+\end{equation}
+Ovvero, se si è all'esterno, è come se tutta la carica fosse nel centro della sfera.
+
+Il salto attraverso la superficie è $[E(r)]_R = \sigma/\eps_0$, quello di un piano infinito con campo nullo da una delle due parti.
+
+Il potenziale è costante all'interno della sfera (poiché il campo è nullo) e, per determinare \textit{quale} costante, lo si impone continuo attraverso $r = R$:
+\begin{equation}
+\label{eq:potenziale_sfera}
+    V(r) = \begin{cases}
+        \frac{q}{4\pi\eps_0 R} & \text{se } r \le R \\
+        \frac{q}{4\pi\eps_0 r} & \text{se } r > R
+    \end{cases}
+\end{equation}
+
+
+\subsection{Palla}
+
+Palla omogenea di carica $q$, raggio $R$ e centro nell'origine.
+
+All'esterno, è tutto identico al caso della sfera carica.
+
+Ora, se $r < R$, $q_r$ non è più nulla, ma
+\begin{equation}
+    q_r = q \frac{r^3}{R^3}
+\end{equation}
+Per cui
+\begin{equation}
+    E(r) = \frac{q_r}{4\pi\eps_0 r^2}
+    = \frac{q}{4\pi\eps_0 R^3} r
+    = \frac{\rho}{3\eps_0} r
+\end{equation}
+dove $\rho = q / (\frac{4}{3} \pi R^3)$ è la densità di carica.
+
+Calcoliamo il potenziale all'interno:
+\begin{equation}
+\begin{gathered}
+    \spot(r) - \spot(R) = \int_r^R \E \lde = \int_r^R E(r') \, dr' = \frac{\rho}{6\eps_0} \pts{R^2 - r^2} \\
+    \implies \spot(r) = \frac{\rho}{6\eps_0} \pts{R^2 - r^2} + \frac{q}{4\pi\eps_0 R} = \frac{q}{8\pi\eps_0 R} \pts{3 - \frac{r^2}{R^2}}
+\end{gathered}
+\end{equation}
+
+
+\subsection{Cilindro}
+
+Cilindro infinito di raggio $R$ con asse coincidente con $\uz$ e densità di carica $\rho$.
+
+Poiché il cilindro è infinito, il campo non ha componente $z$.
+
+Sia $\lambda = \pi R^2 \rho$ la densità lineare di carica.
+Si considera il flusso attraverso un cilindro (limitato) $\Sigma$ di raggio $r$ e altezza $h$, in modo che il flusso sia nullo sulle basi:
+\begin{equation}
+    q_r = h \lambda, \quad \text{se } r > R
+\end{equation}
+\begin{equation}
+\begin{gathered}
+    \Phi_\Sigma(\E) = \oint_\Sigma \E \sde = \oint_\Sigma E(r) \de S = 2\pi r h E(r) = \frac{q_r}{\eps_0} \\
+    \implies E(r) = \frac{\lambda}{2\pi\eps_0 r}
+\end{gathered}
+\end{equation}
+
+Se $r < R$,
+\begin{equation}
+    E(r) = \frac{\lambda}{2\pi\eps_0 R^2} r
+\end{equation}
+
+Il potenziale all'interno è
+\begin{equation}
+    V(r) = \frac{\lambda}{4\pi\eps_0 R^2} \pts{R^2 - r^2}
+\end{equation}
+
+All'esterno non si può fissare nullo il potenziale in $r = +\infty$.
+È comunque possibile quantificare le differenze di potenziale:
+\begin{equation}
+    \spot(r_A) - \spot(r_B) = \int_A^B \E \lde = \frac{\lambda}{2\pi\eps_0} \ln\frac{r_B}{r_A}
+\end{equation}
+
+In un certo senso vale:
+\begin{equation}
+    V(r) = \begin{cases}
+        \frac{\lambda}{4\pi\eps_0 R^2} \pts{R^2 - r^2} & r \le R \\
+        - \frac{\lambda}{2\pi\eps_0} \ln\frac{r}{R} & r > R
+    \end{cases}
+\end{equation}
+
+\section{Coordinate sferiche}
+
+\begin{subequations}
+\begin{gather}
+    r \in \left[0, +\infty\right), \quad \theta \in \left[0, \pi\right], \quad \phi \in \left[0, 2\pi\right) \\
+    \begin{cases}
+        x = r \sin \theta \cos \phi \\
+        y = r \sin \theta \sin \phi \\
+        z = r \cos \theta
+    \end{cases} \\
+    \begin{cases}
+        r = \sqrt{x^2 + y^2 + z^2} \\
+        \theta = \arccos\pts{z/\!\sqrt{x^2 + y^2 + z^2}} \\
+        \tan \phi = y/x
+    \end{cases}
+\end{gather}
+\end{subequations}
+
+Matrice jacobiana:
+\begin{equation}
+    J = \begin{bmatrix}
+        \parder[x]{r} & \parder[x]{\theta} & \parder[x]{\phi} \\
+        \parder[y]{r} & \parder[y]{\theta} & \parder[y]{\phi} \\
+        \parder[z]{r} & \parder[z]{\theta} & \parder[z]{\phi}
+    \end{bmatrix}\!, \qquad
+    \abs{\det J} = r^2 \sin \theta
+\end{equation}
+
+Differenziale di volume:
+\begin{equation}
+    \de V = \de x \, \de y \, \de z
+    = \abs{\det J} \, \de r \, \de \theta \, \de \phi
+    = r^2 \sin \theta \, \de r \, \de \theta \, \de \phi
+\end{equation}
+
+Gradiente:
+\begin{gather}
+    \grad f(r, \theta, \phi) = \parder[f(r, \theta, \phi)]{x} \ux + \parder[f(r, \theta, \phi)]{y} \uy + \parder[f(r, \theta, \phi)]{z} \uz \\
+    \parder[f(r, \theta, \phi)]{x} =
+    \parder[r]{x} \, \parder[f]{r} +
+    \parder[\theta]{x} \, \parder[f]{\theta} +
+    \parder[\phi]{x} \, \parder[f]{\phi}
+\end{gather}
+Risulta:
+\begin{equation}
+    \grad f(r, \theta, \phi) = \parder[f]{r} \ver{r} + \frac{1}{r}\parder[f]{\theta} \ver{\theta} + \frac{1}{r \sin \theta} \parder[f]{\phi} \ver{\phi}
+\end{equation}
+
+
+
+
+\section{Dipolo elettrico}
+
+\subsection{Definizione}
+
+Momento di dipolo elettrico per due cariche $-q$ e $q$ con $q > 0$ in posizioni $\p^-$ e $\p^+$ poste a distanza $a$ fissa:
+\begin{equation}
+    \vt{p} \coloneq q \vt{a} = q (\p^+ - \p^-) = q a \ver{- \to +}
+\end{equation}
+
+Il momento di dipolo $\vt{P}$ di un oggetto carico, intuitivamente, va dal ``centro di massa" delle cariche negative a quello delle positive.
+
+\begin{equation}
+    \vt{P} = \int_V \rho(\p) \, \p \, \de V
+\end{equation}
+
+
+\subsection{Potenziale e campo}
+
+Potenziale dovuto a un dipolo elettrico con $\vt{p} \parallel \uz$.
+Siano $r_1 = \norm{\p - \p^+}$, $r_2 = \norm{\p - \p^-}$:
+\begin{equation}
+    \spot(\p) = \frac{q}{4\pi\eps_0} \pts{\frac{1}{r_1} - \frac{1}{r_2}}
+    = \frac{q}{4\pi\eps_0} \frac{r_2 - r_1}{r_1 r_2}
+\end{equation}
+
+
+Considerando $r \gg a$, otteniamo l'approssimazione al primo ordine in $a/r$ per $r_1 r_2$ e $r_2 - r_1$.
+\begin{subequations}
+\begin{gather}
+    r_1 = \norm{\p - \frac{1}{2}\vt{a}} = \sqrt{r^2 + \frac{1}{4} a^2 - r a \cos \theta} \approx r \sqrt{1 - \frac{a}{r}\cos\theta} \\
+    r_2 = \norm{\p + \frac{1}{2}\vt{a}} = \sqrt{r^2 + \frac{1}{4} a^2 + r a \cos \theta} \approx r \sqrt{1 + \frac{a}{r}\cos\theta}
+\end{gather}
+\end{subequations}
+
+Quindi
+\begin{subequations}
+\begin{gather}
+    r_1 r_2 \approx r^2 \sqrt{1 - \frac{a^2}{r^2}\cos^2 \theta} \approx r^2 \\
+\begin{gathered}
+    r_2 - r_1 \approx r \pts{\sqrt{1 + \frac{a}{r}\cos\theta} - \sqrt{1 - \frac{a}{r}\cos\theta}} \approx \\
+    \approx r \pts{1 + \frac{1}{2} \frac{a}{r} \cos \theta - 1 + \frac{1}{2} \frac{a}{r} \cos \theta}
+    = a \cos \theta
+\end{gathered}
+\end{gather}
+\end{subequations}
+
+Dunque, per $r \gg a$ (\important{dipolo ideale}),
+\begin{gather}
+    \spot(\p) = \frac{q}{4\pi \eps_0} \frac{r_2 - r_1}{r_1 r_2}
+    \approx \frac{q}{4\pi \eps_0} \frac{a \cos \theta}{r^2}
+    = \frac{1}{4\pi \eps_0} \frac{\vt{p} \cdot \ver{r}}{r^2} \\
+\begin{gathered}
+\label{eq:campo_dipolo_elettrico}
+    \E(\p) = - \grad \spot(\p)
+    = -\parder[\spot]{r} \ver{r} - \frac{1}{r}\parder[\spot]{\theta} \ver{\theta} - \cancel{\frac{1}{r \sin \theta} \parder[\spot]{\phi} \ver{\phi}} = \\
+    = \frac{q a \cos\theta}{2\pi \eps_0 r^3} \ver{r} + \frac{q a \sin\theta}{4\pi \eps_0 r^3} \ver{\theta}
+    = \frac{p}{4\pi \eps_0 r^3} \pts{2 \cos\theta \, \ver{r} + \sin\theta \, \ver{\theta}}
+\end{gathered}
+\end{gather}
+
+$\parder[\spot]{\phi}$ è nulla per simmetria cilindrica.
+
+Si osserva che:
+\begin{itemize}
+    \item Sull'asse $z$, $\E(\p) \parallel \uz$ con lo stesso verso (in quanto $\theta = 0$ e $\ver{r} = \uz$).
+    \item Sul piano $xy$, $\E(\p) \parallel \uz$ con verso opposto (in quanto $\theta = \pi/2$ e $\ver{\theta} = -\uz$).
+\end{itemize}
+
+Se si considera il campo esatto, senza l'approssimazione, si parla di \important{dipolo fisico}.
+Con il dipolo ideale non è possibile descrivere il campo tra le due cariche.
+
+
+\subsection{Potenziale a grandi distanze}
+
+Calcoliamo il potenziale a grande distanza da un corpo carico caratterizzato da una densità di carica $\rho$ in un colume $V$.
+
+Usiamo la seguente espressione per la distanza tra due punti $\p$ e $\p'$:
+\begin{equation}
+    \norm{\p - \p'} = \sqrt{\norm{\p - \p'}^2} = \sqrt{r^2 + (r')^2 - 2 \p \cdot \p'} = r \pts{1 + \frac{(r')^2}{r^2} - 2 \frac{\p \cdot \p'}{r^2}}^{\!1/2}
+\end{equation}
+
+Se il corpo è vicino all'origine, possiamo usare l'approssimazione $r \gg r'$.
+Risulta
+\begin{equation}
+\begin{gathered}
+    \spot(\p)
+    % = \frac{1}{\eps_0} \slp \rho(\p)
+    = \frac{1}{4\pi\eps_0} \int_V \frac{\rho(\p')}{r} \pts{1 + \frac{(r')^2}{r^2} - 2 \frac{\p \cdot \p'}{r^2}}^{\!-1/2} \de V' \approx \\
+    \approx \frac{1}{4\pi\eps_0} \int_V \frac{\rho(\p')}{r} \pts{1 + \frac{\p \cdot \p'}{r^2}} \de V' = \\
+    = \frac{1}{4\pi\eps_0} \int_V \frac{\rho(\p')}{r} \de V' + \frac{1}{4\pi\eps_0} \int_V \frac{\rho(\p') \p \cdot \p'}{r^3} \de V' = \\
+    = \frac{1}{4\pi\eps_0 r} \int_V \rho(\p') \, \de V' + \frac{1}{4\pi\eps_0 r^2} \frac{\p}{r} \cdot \int_V \rho(\p') \, \p' \, \de V'= \\
+    = \frac{Q}{4\pi\eps_0 r} + \frac{\vt{P} \cdot \ver{r}}{4\pi\eps_0 r^2}
+\end{gathered}
+\end{equation}
+
+Il momento di dipolo $\vt{P}$ è il responsabile del potenziale elettrostatico a grande distanza per oggetti complessivamente neutri.
+Ogni oggetto neutro, a grande distanza, si può quindi rappresentare come un dipolo.
+
+
+\subsection{Dipolo in campo elettrico}
+
+Considerando un dipolo in un campo $\E$ uniforme, la forza totale $\force$ sul dipolo è nulla e il momento della coppia di forze sulle cariche è
+\begin{equation}
+    \vt{M} = (\vt{r}^+ - \vt{r}^-) \times \force
+    = \vt{a} \times q \E
+    = \vt{p} \times \E
+\end{equation}
+
+Lavoro ed energia potenziale relativi alla rotazione dall'angolo $\theta_0$ all'angolo $\theta$ rispetto alla direzione del campo elettrico:
+\begin{equation}
+    W = \int_{\theta_0}^\theta \norm{\vt{M}(\theta')} \de \theta'
+    = \int_{\theta_0}^\theta p E \sin\theta' \de \theta'
+    = - pE \pts{\cos\theta - \cos\theta_0}
+\end{equation}
+\begin{equation}
+    U_e(\theta) = - \vt{p} \cdot \E = - p E \cos\theta
+\end{equation}
+La configurazione più stabile è quella con $\vt{p} \parallel \E$ con verso concorde.
+
+Se il campo elettrico non è uniforme, $\vt{E}(\p^+) = \vt{E}(\p^-) + (J \E) \vt{a}$, dove $J \E$ è la matrice jacobiana del campo elettrico valutata in $\p^+ \approx \p^-$, che agisce tramite prodotto matrice-vettore.
+\begin{gather}
+    \force = q \vt{E}(\p^+) - q \vt{E}(\p^-) = q (J \E) \vt{a} = (J \E) \vt{p} \iff \\
+    \iff \begin{cases}
+        F_x = \vt{p} \cdot \grad E_x = p_x \parder[E_x]{x} + p_y \parder[E_x]{y} + p_z \parder[E_x]{z} \\
+        F_y = \vt{p} \cdot \grad E_y = p_x \parder[E_y]{x} + p_y \parder[E_y]{y} + p_z \parder[E_y]{z} \\
+        F_z = \vt{p} \cdot \grad E_z = p_x \parder[E_z]{x} + p_y \parder[E_z]{y} + p_z \parder[E_z]{z}
+    \end{cases}
+\end{gather}
+coerentemente con $\force = - \grad U_e$.
+
+
+\section{Condensatori}
+
+\subsection{Condensatore sferico}
+
+Ricordando la \eqref{eq:potenziale_sfera}, la capacità di una sfera carica di raggio $R$ è
+\begin{equation}
+    C = \frac{q}{V} = 4\pi\eps_0 R
+\end{equation}
+Se $R = \qty{6e6}{\metre}$ (il raggio della Terra), allora $C = \qty{6e-4}{\farad}$.
+
+Sembrerebbe difficile raggiungere alte capacità con piccoli dispositivi, eppure esistono in commercio dispositivi con capacità \qty{e3}{\farad}.
+
+Consideriamo una sfera e guscio sferico concentrici con raggi $R_1 < R_2 < R_3$.
+Caricando con $+q$ la sfera interna, le cariche sulle superfici saranno $+q$, $-q$ e $+q$ (nulle all'interno dei conduttori).
+Il campo tra le armature è radiale e dipende solo dalla sfera interna.
+\begin{equation}
+    \E(\p) = \frac{q}{4\pi\eps_0 r^2} \ver{r}
+\end{equation}
+La differenza di potenziale tra le armature è
+\begin{equation}
+    V_1 - V_2 = \frac{q}{4\pi\eps_0} \pts{\frac{1}{R_1} - \frac{1}{R_2}}
+\end{equation}
+Per cui,
+\begin{equation}
+    C = 4\pi\eps_0 \frac{R_1 R_2}{R_2 - R_1}
+\end{equation}
+\begin{itemize}
+    \item Per $R_2 \to +\infty$, fisicamente si ha il caso della sfera isolata e $C = 4\pi\eps_0 R_1$.
+    \item Per $R_2 - R_1 \eqcolon h \ll R_1$, si ha $R_1 \approx R_2 \approxcolon R$ e
+    \begin{equation}
+        C = 4\pi\eps_0 \frac{R^2}{h} = \eps_0 \frac{A}{h} \to +\infty
+    \end{equation}
+    e si ha la stessa capacità che nel caso del condensatore a facce piane parallele.
+\end{itemize}
+
+Per ottenere dispositivi con enorme capacità, si creano nanostrutture che rendono l'area effettiva dell'ordine dei \unit{\kilo\metre\squared} per ogni \unit{\centi\metre\squared} di area ``apparente''.
+
+``Condensatore'' = condensa energia elettrostatica in un volume.
+
+
+\subsection{Condensatore cilindrico}
+
+Per considerazioni analoghe, il campo tra le armature è
+\begin{gather}
+    E(r) = \frac{\lambda}{2\pi\eps_0 r} \\
+    V_1 - V_2 = \frac{\lambda}{2\pi\eps_0} \ln\frac{R_2}{R_1} \\
+    C = \frac{2\pi\eps_0 d}{\ln(R_2/R_1)}
+\end{gather}
+$d$ è la lunghezza del condensatore, per cui $q = \lambda d$.
+
+Per $R_2 - R_1 \eqcolon h \ll R_1$, $R_1 \approx R_2 \approxcolon R$ e
+\begin{equation}
+    C = \frac{2\pi\eps_0 d}{\ln(1 + h/R)} = \frac{2\pi\eps_0 d R}{h}
+    = \eps_0 \frac{A}{h}
+\end{equation}
+di nuovo come un condensatore a facce piane parallele.
+
+\subsection{Energia elettrostatica}
+
+\begin{equation}
+    U_e = \frac{1}{2} C V^2 = \frac{1}{2} Q V = \frac{1}{2} \frac{Q^2}{C}
+\end{equation}
+
+\begin{equation}
+    U_e = \int_V w_E \, \de V = \int_V \frac{1}{2}\eps_0 E^2 \de V
+\end{equation}
+Verifichiamo l'uguaglianza per un condensatore sferico:
+\begin{equation}
+\begin{gathered}
+    U_e = \int_V \frac{1}{2}\eps_0 \frac{q^2}{16\pi^2\eps_0^2 r^4} \de V
+    = \frac{q^2}{32\pi^2\eps_0} \int_V \frac{1}{r^4} \de V = \\
+    = \frac{q^2}{32\pi^2\eps_0} 4\pi \int_{R_1}^{R_2} \frac{1}{r^2} \de r
+    = \frac{q^2}{8\pi\eps_0} \pts{\frac{1}{R_1} - \frac{1}{R_2}}
+    = \frac{1}{2} q V
+\end{gathered}
+\end{equation}
+usando $\de V = 4\pi r^2 \de r$.
+
+\section{Materiale dielettrico}
+
+Finora, abbiamo trattato l'elettrostatica nel vuoto o per i conduttori.
+Ora trattiamo i dielettrici: materiali isolanti (cioè che non perettono il moto di cariche libere) che modificano alcune proprietà elettrostatiche.
+
+Consideriamo due condensatori a facce piane parallele identici.
+Se tra le armature del secondo è inserito un dielettrico, le capacità non saranno uguali:
+\begin{equation}
+    \frac{C}{C_0} = \eps_r > 1
+\end{equation}
+$\eps_r$ è la \important{costante dielettrica relativa} e dipende dal materiale.
+Inserire un dielettrico, quindi, permette di ``condensare'' meglio l'energia.
+
+\important{Rigidità dielettrica} $E_\mathrm{max}$: campo al quale avviene la \important{rottura del dielettrico}, cioè per cui il dielettrico è costretto a condurre corrente (e si brucia).
+
+Nel mezzo (= non nel vuoto), è sufficiente sostituire ovunque la costante dielettrica nel vuoto $\eps_0$ con la costante dielettrica $\eps = \eps_r \eps_0$.
+
+A parità di carica $Q$, la differenza di potenziale tra le armature è minore che nel vuoto:
+\begin{equation}
+    V = \frac{Q}{C} = \frac{Q}{\eps_r C_0} = \frac{V_0}{\eps_r} < V_0
+\end{equation}
+
+A parità di potenziale $V$ la carica accumulata è maggiore:
+\begin{equation}
+    Q = CV = \eps_r C_0 V = \eps_r Q_0 > Q_0
+\end{equation}
+Ovvero, per ottenere lo stesso potenziale occorre spostare più carica.
+
+Sempre a parità di potenziale, l'energia accumulata è maggiore, poiché si accumula più carica elettrica:
+\begin{equation}
+    U = \eps_r U_0 > U_0
+\end{equation}
+
+Un dielettrico è neutro e non conduttore, ma le sue particelle possono essere dipoli.
+Classifichiamo i dielettrici in
+\begin{itemize}
+    \item dielettrici polari, con momento di dipolo intrinseco (ad esempio, sostanze con molecole polari come \ce{H2O});
+    \item dielettrici apolari (ad esempio, sostanze con molecole apolari come \ce{CO2}).
+\end{itemize}
+
+Applicando un campo $\E_0$ a un dielettrico, i dipoli tendono a orientarsi secondo il campo.
+Il campo elettrico totale sarà la somma di $\E_0$ e del campo generato dai dipoli, che ha verso opposto: $\E = \E_0 + \E'$, $E = E_0 - E' < E_0$.
+
+Nel caso di dielettrici apolari, il campo $\E_0$ può generare dei dipoli indotti (e orientarli).
+
+\important{Polarizzazione}:
+\begin{equation}
+    \vt{P}(\p) = n(\p) \vt{p}(\p)
+\end{equation}
+$n$ è la densità volumica dei dipoli.
+
+I dipoli, sulle superfici dei dielettrici, espongono delle cariche ``spaiate'' e non mobili.
+Quindi, si può scrivere il momento di dipolo totale
+\begin{equation}
+    \int_V \vt{P} \de V = \vt{P} S l
+\end{equation}
+dove $S$ è la superficie delle armature e $l$ è la distanza reciproca.
+$\vt{P} S$, dimensionalmente, è una carica: quella che si vede sulla superficie del dielettrico.
+
+Quindi il momento di dipolo totale è anche $Ql$.
+
+Se le due armature hanno tra loro un angolo $\theta$ ma sono sufficientemente lontane, si può considerare ancora $\vt{P}$ uniforme e
+\begin{equation}
+    \int_V \vt{P} \de V = \vt{P} S l \cos \theta
+\end{equation}
+
+In generale, la densità di carica del dielettrico sulla superficie è
+\begin{equation}
+    \sigma\bound = \vt{P} \cdot \uvt{n}
+\end{equation}
+dove $\uvt{n}$ è la normale uscente dal dielettrico.
+
+La densità totale sulla superficie delle armature, quindi, è $\sigma = \sigma\free - \sigma\bound$ ($\sigma\free$ è la carica libera).
+
+Il campo elettrico nel dielettrico è
+\begin{equation}
+    E = \frac{\sigma}{\eps_0} = \frac{\sigma\free - \sigma\bound}{\eps_0}
+\end{equation}
+Ricordando $\sigma\free = \eps_0 E_0$, definiamo il campo di spostamento $\D$:
+\begin{equation}
+    \D \coloneq \eps_0 \E_0 = \eps_0 \E + \vt{P}
+\end{equation}
+
+Valgono le seguenti relazioni:
+\begin{subequations}
+\begin{alignat}{2}
+    \sigma\bound & = \vt{P} \cdot \uvt{n}
+    & \qquad & \text{$\uvt{n}$ uscente dal dielettrico} \\
+    \sigma\free & = \pts{\D_2 - \D_1} \cdot \uvt{n}
+    & \qquad & \text{$\uvt{n}$ dal mezzo 1 al mezzo 2}
+\end{alignat}
+\end{subequations}
+
+La polarizzazione $\vt{P}$ è legata alle proprietà del dielettrico:
+\begin{equation}
+    \vt{P} = \eps_0 \chi_e \E
+\end{equation}
+$\chi_e$ è la \important{suscettività elettrica} e misura la risposta del dielettrico.
+È adimensionata.
+
+\begin{equation}
+    \D = \eps_0\E + \eps_0 \chi_e \E = \eps_0 \underbrace{(1 + \chi_e)}_{\eps_r} \E = \eps \E
+\end{equation}
+Poiché $\eps_r \ge 1$, allora $\chi_e \ge 0$.
+
+Flussi
+\begin{subequations}
+\begin{gather}
+    \eps_0 \oint_S \E \sde = q = q\free + q\bound \\
+    \oint_S \D \sde = \eps_0 \oint_S \E_0 \sde = q\free \\
+    \oint_S \vt{P} \sde = -q\bound
+\end{gather}
+\end{subequations}
+Ma anche
+\begin{gather}
+    \eps \oint_S \E \sde = q\free \\
+    \oint_S \vt{P} \sde = \eps_0 \chi_e \oint \E \sde = \chi_e q
+\end{gather}
+Formati differenziali:
+\begin{subequations}
+\begin{gather}
+    \diver \E = \frac{\rho}{\eps_0} = \frac{\rho\free}{\eps} \\
+    \diver \D = \rho\free \\
+    \diver \vt{P} = -\rho\bound = \chi_e \rho
+\end{gather}
+\end{subequations}
+
+\subsection{Legge di Curie}
+
+La suscettività dipende dalla temperatura secondo la legge di Curie:
+\begin{equation}
+    \chi_e = A + \frac{B}{T}
+\end{equation}
+per opportuni coefficienti $A$ e $B$.
+Questo significa che scaldando il mezzo, la risposta dielettrica diminuisce.
+Infatti, più difficilmente i dipoli del mezzo riescono a mantenersi orientati.
+
+Considerando un singolo dipolo, la forza elastica di richiamo eguaglia la forza elettrica, che tende a separare le cariche
+\begin{equation}
+    q E = k x = \omega_0^2 m x
+\end{equation}
+La risposta è oscillatoria e determina un momento di dipolo di modulo
+\begin{equation}
+    p = q x = \frac{q^2 E}{\omega_0^2 m}
+\end{equation}
+Considerando una densità volumica $n$ di dipoli, la polarizzazione sarà
+\begin{equation}
+    n p = \frac{n q^2 E}{\omega_0^2 m} = \eps_0 \frac{n q^2}{\eps_0 \omega_0^2 m} E = \eps_0 \chi_{e,\text{apolare}} E
+\end{equation}
+
+Il coefficiente $A$ è quindi legato alla componente apolare del mezzo.
+La componente polare della suscettività elettrica, invece, è quella che dipende dalla temperatura.
+
+\subsection{Esempio di calcolo}
+
+Considerando una sfera carica immersa in un dielettrico, questo schermerà le cariche sulla superficie della sfera orientandovi le cariche negative dei dipoli.
+Il campo elettrico all'esterno sarà minore di un fattore $\eps_r$ e
+\begin{gather}
+    \vt{P} = \frac{\eps_r - 1}{\eps_r} \frac{q}{4\pi r^2} \ver{r} \\
+    \implies \sigma\bound = \vt{P} \cdot \uvt{n}
+    = -\frac{\eps_r - 1}{\eps_r} \frac{q}{4\pi r^2}
+\end{gather}
+Nota che $\uvt{n} = - \ver{r}$, cioè entrante, poiché la superficie è dal punto di vista del dielettrico.
+
+Moltiplicando per $4\pi r^2$ si ottiene la carica affacciata sul dielettrico:
+\begin{equation}
+    q\bound = \sigma\bound 4\pi r^2 = - \frac{\eps_r - 1}{\eps_r} q
+\end{equation}
