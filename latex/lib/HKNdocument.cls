@@ -129,8 +129,9 @@
 \newcommand{\organization}{}% Contains organization
 \newcommand{\docdate}{}     % Contains custom date
 \newcommand{\docversion}{}  % Contains document version
-\newcommand{\doclogo}{}     % Contains logo path
-\newcommand{\doclicense}{}  % Contains license logo path
+\newcommand{\doclogofrontpage}{hkn_skyline_blu.png}      % Contains logo big path
+\newcommand{\doclogoupperpage}{hkn_ideogramma_blu.png}    % Contains logo big path
+\newcommand{\doclicence}{ccbyncnd.png}  % Contains license logo path
 
 % Preserve old commands for title and author
 \let\oldtitle\title
@@ -138,14 +139,12 @@
 \let\oldauthor\author
 \renewcommand{\author}[1]{\ifx\DDauthors\undefined\gdef\DDauthors{#1}\else\g@addto@macro\DDauthors{, #1}\fi}
 
-% Define commands for short title, short author, editors, organization, date, version, and logo.
+% Define commands for short title, short author, editors, organization, date, version.
 \def\shorttitle#1{\gdef\STtitle{#1}}
 \def\editor#1{\ifx\DDeditors\undefined\gdef\DDeditors{#1}\else\g@addto@macro\DDeditors{, #1}\fi}
 \def\organization#1{\gdef\DDorganization{#1}\gdef\organization{#1}}
 \def\docdate#1{\gdef\DDdate{#1}}
 \def\docversion#1{\gdef\DDversion{#1}}
-\def\doclogo#1{\gdef\DDlogo{#1}}
-\def\doclicense#1{\gdef\DDlicense{#1}}
 
 % --------------------------
 % TABLE OF CONTENTS LEVEL
@@ -169,10 +168,8 @@
         \begin{center}
 
             % Logo
-            \ifx\DDlogo\empty\else
-                \vspace*{1cm}
-                \includegraphics[width=0.4\textwidth]{\DDlogo}\\[1cm]
-            \fi
+            \vspace*{1cm}
+            \includegraphics[width=0.4\textwidth]{\doclogofrontpage}\\[1cm]
 
             % Main title
             {\LARGE \textbf{\maintitle}}\\[1.5cm]
@@ -233,11 +230,23 @@
 % Footer: page number centered (C)
 \fancyhead{}
 \fancyfoot{}
-\fancyhead[RE, LO]{\STtitle}
-\fancyhead[Ro, LE]{\DDorganization}
+\renewcommand\headrule{%
+  \vspace{-14.5pt}  % Aggiungi spazio negativo per posizionare la linea
+  \hrulefill     % Crea una linea orizzontale a sinistra
+  \hspace{50pt}  % Aggiungi uno spazio orizzontale (regola la dimensione a piacere)
+  \hrulefill     % Crea una linea orizzontale a destra
+}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\DDorganization}
+\fancyhead[C]{%
+  \raisebox{-0.6\height}{%
+    \includegraphics[height=1cm]{\doclogoupperpage}%
+  }%
+}
 \fancyfoot[C]{\thepage}
-\setlength{\headheight}{15pt} % Avoids warnings about head height
-\addtolength{\topmargin}{-2.5pt} % Corrects top margin for header
+\setlength{\headheight}{30pt} % Avoids warnings about head height
+\addtolength{\topmargin}{-20pt} % Corrects top margin for header
 
 % Chapter start pages will not have headers (only page number in "plain" style)
 % Redefine \chapter to force plain style on the first page of each chapter.
@@ -262,46 +271,47 @@
 % --------------------------
 % Generates a language-sensitive Creative Commons license description with an image and hyperlink
 \newcommand{\cclicense}{%
-    % Linguaggio condizionale
-    \ifx\DocumentLanguage\italian
-        \vfill
-        Questo lavoro è distribuito con una \textbf{Licenza Creative Commons Attribuzione - Non commerciale - Non opere derivate 4.0 International}.
-        Il lavoro è stato prodotto da \DDauthors, editato da \DDeditors e pubblicizzato da \DDorganization.\\
-        \textbf{Puoi:}
-        \begin{itemize}
-            \item \textbf{Condividere:} copiare, distribuire e trasmettere il lavoro
-        \end{itemize}
-        \textbf{Alle seguenti condizioni:}
-        \begin{itemize}
-            \item \textbf{Attribuzione:} devi attribuire il lavoro nei modi indicati dall'autore o da chi ti ha dato la licenza (ma non in un modo che suggerisca che loro approvino te o il tuo uso del lavoro).
-            \item \textbf{Non commerciale:} non puoi usare questo lavoro per fini commerciali.
-            \item \textbf{Non opere derivate:} se modifichi, trasformi o sviluppi questo lavoro, non puoi distribuire il risultato.
-        \end{itemize}
-        Maggiori informazioni sul sito di \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{Creative Commons}.
-    \else
-        \vfill
-        This work is licensed under a \textbf{Creative Commons Attribution - NonCommercial - NoDerivatives 4.0 International}.
-        The work was produced by \DDauthors, edited by \DDeditors, and publicized by \DDorganization.\\
-        \textbf{You are free:}
-        \begin{itemize}
-            \item \textbf{to Share:} to copy, distribute and transmit the work
-        \end{itemize}
-        \textbf{Under the following conditions:}
-        \begin{itemize}
-            \item \textbf{Attribution:} you must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work).
-            \item \textbf{Noncommercial:} you may not use this work for commercial purposes.
-            \item \textbf{No derivatives:} if you alter, transform, or build upon this work, you may not distribute the resulting work.
-        \end{itemize}
-        More information on the \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{Creative Commons website}.
-    \fi
-    % Logo
-    \\
-    \ifx\DDlicense\empty\else
-        \vspace{1cm} % Spazio prima dell'immagine
-        \hfill\includegraphics[width=0.4\textwidth]{\DDlicense} % Immagine allineata a destra
-        \vspace{1cm} % Spazio dopo l'immagine
-    \fi
-
+    \thispagestyle{empty}
+        % Linguaggio condizionale
+        \ifx\DocumentLanguage\italian
+            \vfill
+            Questo lavoro è distribuito con una \textbf{Licenza Creative Commons Attribuzione - Non commerciale - Non opere derivate 4.0 International}.
+            Il lavoro è stato prodotto da \DDauthors, editato da \DDeditors e pubblicizzato da \DDorganization.\\
+            \textbf{Puoi:}
+            \begin{itemize}
+                \item \textbf{Condividere:} copiare, distribuire e trasmettere il lavoro
+            \end{itemize}
+            \textbf{Alle seguenti condizioni:}
+            \begin{itemize}
+                \item \textbf{Attribuzione:} devi attribuire il lavoro nei modi indicati dall'autore o da chi ti ha dato la licenza (ma non in un modo che suggerisca che loro approvino te o il tuo uso del lavoro).
+                \item \textbf{Non commerciale:} non puoi usare questo lavoro per fini commerciali.
+                \item \textbf{Non opere derivate:} se modifichi, trasformi o sviluppi questo lavoro, non puoi distribuire il risultato.
+            \end{itemize}
+            Maggiori informazioni sul sito di \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{Creative Commons}.
+        \else
+            \vfill
+            This work is licensed under a \textbf{Creative Commons Attribution - NonCommercial - NoDerivatives 4.0 International}.
+            The work was produced by \DDauthors, edited by \DDeditors, and publicized by \DDorganization.\\
+            \textbf{You are free:}
+            \begin{itemize}
+                \item \textbf{to Share:} to copy, distribute and transmit the work
+            \end{itemize}
+            \textbf{Under the following conditions:}
+            \begin{itemize}
+                \item \textbf{Attribution:} you must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work).
+                \item \textbf{Noncommercial:} you may not use this work for commercial purposes.
+                \item \textbf{No derivatives:} if you alter, transform, or build upon this work, you may not distribute the resulting work.
+            \end{itemize}
+            More information on the \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{Creative Commons website}.
+        \fi
+        % Logo
+        \\
+        \ifx\DDlicense\empty\else
+            \vspace{1cm} % Spazio prima dell'immagine
+            \hfill\includegraphics[width=0.4\textwidth]{\doclicence} % Immagine allineata a destra
+            \vspace{1cm} % Spazio dopo l'immagine
+        \fi
+    \clearpage
 }
 
 % End of class
