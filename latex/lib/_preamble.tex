@@ -6,25 +6,35 @@
 \usepackage{contour}                     % Border around text
 \usepackage{tcolorbox}                   % Custom boxes
 
-% Color settings
-\definecolor{backgroundColor}{RGB}{255, 255, 255}
-\definecolor{ruleColor}{RGB}{109, 160, 210}
-\definecolor{numberColor}{RGB}{109, 160, 210}
-\definecolor{keywordColor}{RGB}{2, 143, 191}
-\definecolor{identifierColor}{RGB}{2, 65, 191}
-\definecolor{stringColor}{RGB}{8, 30, 50}
-\definecolor{commentColor}{RGB}{120, 140, 160}
+% Primary (Accent) Colors
+% Primary (Accent) Colors
+\definecolor{accentYellow}{RGB}{254, 196, 41}  % #FEC421
+\definecolor{accentRed}{RGB}{236, 45, 36}      % #EC2D24
+
+% Secondary Colors
+\definecolor{supportOrange}{RGB}{242, 183, 5}  % #F2B705
+\definecolor{supportDarkBlue}{RGB}{55, 81, 113} % #375171
+
+% Background Colors
+\definecolor{backgroundLight}{RGB}{242, 242, 242} % #F2F2F2
+
+% Text & Border Colors
+\definecolor{textGrayBlue}{RGB}{100, 117, 140}   % #64758C
+\definecolor{textGrayMedium}{RGB}{146, 154, 166}  % #929AA6
+\definecolor{textGrayLight}{RGB}{184, 187, 191}   % #B8BBBF
+
+
 
 % Listings style
 \lstdefinestyle{hkn}{
-  basicstyle=\ttfamily\small,            % Base style (size and font)
-  keywordstyle=\bfseries\color{keywordColor}, % Keyword style
-  identifierstyle=\color{identifierColor}, % Identifier style
-  commentstyle=\color{commentColor},     % Comment style
-  stringstyle=\color{stringColor},       % String style
-  numberstyle=\ttfamily\scriptsize\color{numberColor}, % Line number style
-  backgroundcolor=\color{backgroundColor}, % Background color
-  rulecolor=\color{ruleColor},           % Border color
+  basicstyle=\ttfamily\small\color{textGrayBlue},                         % Base style (size and font)
+  keywordstyle=\bfseries\color{accentRed},           % Keywords in red (important, eye-catching)
+  identifierstyle=\color{supportDarkBlue},               % Identifiers in blue (clear distinction)
+  commentstyle=\color{textGrayMedium},                 % Comments in gray-blue (less prominent)
+  stringstyle=\color{supportOrange},                 % Strings in orange (warm and readable)
+  numberstyle=\ttfamily\scriptsize\color{textGrayMedium}, % Line numbers in gray (non-intrusive)
+  backgroundcolor=\color{backgroundLight},           % Light background for contrast
+  rulecolor=\color{textGrayLight},                   % Soft gray border for structure
   frame=single,                          % Border around code (single, double, shadowbox, none)
   framerule=0.8pt,                       % Border thickness
   frameround=tttt,                       % Round all corners
@@ -53,8 +63,8 @@
 
 % Custom underline command
 \newcommand{\myuline}[1]{%
-  \uline{\phantom{#1}}%
-  \llap{\contour{white}{#1}}%
+\uline{\phantom{#1}}%
+\llap{\contour{white}{#1}}%
 }
 
 % tcolorbox color settings
@@ -63,58 +73,64 @@
 \definecolor{tcolorboxBackColor}{RGB}{210, 226, 255}
 
 % Custom boxes
-\newtcolorbox[auto counter, number within=chapter]{exercise}[1]{
-  boxrule=0mm,
-  leftrule=0.8mm,
-  colframe=tcolorboxLeftColor,
-  sharp corners=all,
-  title={\iflanguage{italian}{Esercizio}{Exercise}~\arabic{\tcbcounter}.~#1},
-  colbacktitle=tcolorboxBackTitleColor,
-  colback=tcolorboxBackColor,
-  fonttitle=\bfseries
-}
-
 \newtcolorbox[auto counter, number within=chapter]{definition}[1]{
-  boxrule=0mm,
-  leftrule=0.8mm,
-  colframe=tcolorboxLeftColor,
-  sharp corners=all,
   title={\iflanguage{italian}{Definizione}{Definition}~\arabic{\tcbcounter}.~#1},
-  colbacktitle=tcolorboxBackTitleColor,
-  colback=tcolorboxBackColor,
-  fonttitle=\bfseries
-}
-
-\newtcolorbox[auto counter, number within=chapter]{observation}[1]{
-  boxrule=0mm,
-  leftrule=0.8mm,
-  colframe=tcolorboxLeftColor,
-  sharp corners=all,
-  title={\iflanguage{italian}{Osservazione}{Observation}~\arabic{\tcbcounter}.~#1},
-  colbacktitle=tcolorboxBackTitleColor,
-  colback=tcolorboxBackColor,
-  fonttitle=\bfseries
-}
+  boxrule=0mm,                       % Bordo principale (disabilitato)
+  leftrule=1mm,                    % Bordo sinistro principale
+  arc=2mm,
+  colframe=accentRed,       % Colore bordo
+  colbacktitle=textGrayMedium,
+  colback=backgroundLight,        % Colore sfondo
+  fonttitle=\bfseries,
+  rounded corners=all,               % Bordi arrotondati
+  }
 
 \newtcolorbox[auto counter, number within=chapter]{theorem}[1]{
-  boxrule=0mm,
-  leftrule=0.8mm,
-  colframe=tcolorboxLeftColor,
-  sharp corners=all,
   title={\iflanguage{italian}{Teorema}{Theorem}~\arabic{\tcbcounter}.~#1},
-  colbacktitle=tcolorboxBackTitleColor,
-  colback=tcolorboxBackColor,
-  fonttitle=\bfseries
+  boxrule=0mm,                       % Bordo principale (disabilitato)
+  leftrule=1mm,                    % Bordo sinistro principale
+  arc=2mm,
+  colframe=accentYellow,       % Colore bordo
+  colbacktitle=textGrayMedium,
+  colback=backgroundLight,        % Colore sfondo
+  fonttitle=\bfseries,
+  rounded corners=all,               % Bordi arrotondati
 }
 
 \newtcolorbox[auto counter, number within=chapter]{corollary}[1]{
-  boxrule=0mm,
-  leftrule=0.8mm,
-  colframe=tcolorboxLeftColor,
-  sharp corners=all,
   title={\iflanguage{italian}{Corollario}{Corollary}~\arabic{\tcbcounter}.~#1},
-  colbacktitle=tcolorboxBackTitleColor,
-  colback=tcolorboxBackColor,
-  fonttitle=\bfseries
+  boxrule=0mm,                       % Bordo principale (disabilitato)
+  leftrule=1mm,                    % Bordo sinistro principale
+  arc=2mm,
+  colframe=supportOrange,       % Colore bordo
+  colbacktitle=textGrayMedium,
+  colback=backgroundLight,        % Colore sfondo
+  fonttitle=\bfseries,
+  rounded corners=all,               % Bordi arrotondati
 }
+
+\newtcolorbox[auto counter, number within=chapter]{exercise}[1]{
+  title={\iflanguage{italian}{Esercizio}{Exercise}~\arabic{\tcbcounter}.~#1},
+  boxrule=0mm,                       % Bordo principale (disabilitato)
+  leftrule=1mm,                    % Bordo sinistro principale
+  arc=2mm,
+  colframe=supportDarkBlue,       % Colore bordo
+  colbacktitle=textGrayMedium,
+  colback=backgroundLight,        % Colore sfondo
+  fonttitle=\bfseries,
+  rounded corners=all,               % Bordi arrotondati
+}
+
+\newtcolorbox[auto counter, number within=chapter]{observation}[1]{
+  title={\iflanguage{italian}{Osservazione}{Observation}~\arabic{\tcbcounter}.~#1},
+  boxrule=0mm,                       % Bordo principale (disabilitato)
+  leftrule=1mm,                    % Bordo sinistro principale
+  arc=2mm,
+  colframe=textGrayBlue,       % Colore bordo
+  colbacktitle=textGrayMedium,
+  colback=backgroundLight,        % Colore sfondo
+  fonttitle=\bfseries,
+  rounded corners=all,               % Bordi arrotondati
+  }
+
 
