@@ -1,0 +1,189 @@
+\chapter{Interferenza e diffrazione}
+
+\section{Interferenza}
+
+A grande distanza da una sorgente di onde sferiche si pone uno schermo con $N$ fenditure allineate a reciproca distanza $d$.
+
+Ciascuna delle fenditure agisce come sorgente puntiforme di onde sferiche.
+% uno schermo parallelo alla congiungente tra le sorgenti a distanza $D$.
+
+Poiché provengono dallo stesso fronte d'onda della stessa onda (che si approssima a onda piana data la grande distanza delle fenditure dalla sorgente), le nuove onde sferiche saranno \important{coerenti}, cioè:
+\begin{itemize}
+    \item Stessa polarizzazione (i campi elettrici sono tutti paralleli al piano)
+    % perpendicolari alla congiungente
+    \item Stessa ampiezza massima $\E_0$.
+    \item Stessa pulsazione $\omega$.
+    \item Stessa fase iniziale $\phi_0 = 0$.
+\end{itemize}
+
+Consideriamo i raggi $r_1, \ldots, r_N$ dalle sorgenti allo stesso punto $P$ posto su un ulteriore schermo paralleo al primo e a distanza $L \gg N d$ dalle fenditure.
+
+I campi elettrici in $P$ sono, per $i = 1, \ldots, N$:
+\begin{equation}
+    \E_i(P, t) = \E_0 \exp{\im (k r_i - \omega t)}
+\end{equation}
+
+In virtù del principio di sovrapposizione degli effetti, il campo elettrico totale in $P$ è
+\begin{equation}
+    \E(P, t) = \E_0 \sum_{i = 1}^N \exp{\im (k r_i - \omega t)}
+\end{equation}
+
+Si definiscono le fasi
+\begin{equation}
+    \phi_i = k r_i - \omega t
+\end{equation}
+Le differenze di fase (ad esempio, tra le prime due, $\phi \coloneq \phi_2 - \phi_1 = k(r_2 - r_1)$) sono costanti nel tempo.
+Inoltre, poiché le fenditure sono equispaziate, allora le differenze di fase tra onde successive sono approssimativamente uguali tra loro (e uguali a $\phi$ come appena definita).
+
+I campi elettrici $\E_i(P, t)$ si possono rappresentare sul piano complesso e, visto che la differenza di fase è costante, si fissa $t$ in modo da mette $\E_1$ sull'asse reale per semplicità.
+
+Per sommare dei complessi, disponiamo i vettori in punta-coda e consideriamo il circocentro delle punte e code.
+Detto $R$ il raggio della circoscritta, si può ottenere l'ampiezza $E_R$ del campo elettrico risultante:
+\begin{equation}
+    E_R = 2 R \sin\pts{\frac{N \phi}{2}}, \quad E_0 = 2 R \sin\frac{\phi}{2}
+    \implies E_R = E_0 \frac{\sin N \frac{\phi}{2}}{\sin \frac{\phi}{2}}
+\end{equation}
+
+L'intensità, quindi, è
+\begin{equation}
+    I(P) = \avg{\norm{\poy(P)}} = \frac{E_R^2}{2 \mu_0 c} = \frac{E_0^2}{2 \mu_0 c} \frac{\sin^2 N\frac{\phi}{2}}{\sin^2 \frac{\phi}{2}} = I_0 \frac{\sin^2 N\frac{\phi}{2}}{\sin^2 \frac{\phi}{2}}
+\end{equation}
+
+Inoltre, poiché $L \gg d$, definendo $\theta \in [-\pi / 2, \pi / 2]$ come l'angolo a cui si trova $P$ rispetto alla perpendicolare allo schermo,
+\begin{gather}
+    r_2 - r_1 \approx d \sin \theta \\
+    \implies \frac{\phi}{2} = \frac{k (r_2 - r_1)}{2} = \frac{\pi}{\lambda} (r_2 - r_1) \approx \pi \frac{d}{\lambda} \sin \theta
+\end{gather}
+
+Quindi
+\begin{equation}
+\label{eq:reticolo}
+    I(\theta) = I_0 \frac{\sin^2 \pts{\pi \frac{N d}{\lambda} \sin \theta}}{\sin^2 \pts{\pi \frac{d}{\lambda} \sin \theta}}
+\end{equation}
+
+Questa funzione quantifica quanta luce si vede sullo schermo in funzione di $\theta$.
+
+Va notato che il tempo non compare nell'equazione, quindi questa intensità si osserva fissa sullo schermo.
+
+Inoltre, le figure di interferenza sono distinte per ogni lunghezza d'onda proveniente dalla sorgente: le lunghezze d'onda maggiori vengono deviate di più.
+Il prisma, invece, fa il contrario: devia maggiormente le lunghezze d'onda minori.
+
+\subsection{Reticolo di interferenza}
+
+Si parla di reticolo di interferenza quando si hanno $N$ sorgenti separate da una distanza $d$, ovvero esattamente il caso descritto dalla \eqref{eq:reticolo}.
+
+Si osservano:
+\begin{itemize}
+    \item Massimi principali in cui $I = N^2 I_0$ intervallati da regioni scure:
+        \begin{equation}
+            \sin\theta_M = \frac{\lambda}{d} m, \quad m \in \Z
+        \end{equation}
+        Sono i punti in cui numeratore e denominatore si annullano a dare una forma indeterminata $[0/0]$, che risulta essere un massimo.
+
+        $m$ è detto \important{ordine del massimo}.
+    \item $N - 1$ minimi in cui $I = 0$ tra ogni coppia di massimi principali:
+        \begin{equation}
+            \sin\theta_0 = \frac{\lambda}{N d} m', \quad
+            m' \in \Z, \quad
+            N \nmid m'
+        \end{equation}
+        Sono i punti in cui si annulla il numeratore ma non il denominatore, poiché in quei casi si ha un massimo principale.
+    \item $N - 2$ massimi secondari tra ogni coppia di massimi principali:
+        \begin{equation}
+            \sin\theta_m \approx \frac{\lambda}{N d} \pts{m'' + \frac{1}{2}}, \quad
+            m'' \in Z, \quad
+            N \nmid m'', \, N \nmid m''+1
+        \end{equation}
+        Vanno esclusi quelli che sarebbero in prossimità di un massimo principale.
+\end{itemize}
+
+Infine,
+\begin{gather}
+    \abs{\sin\theta_M} < 1 \implies \abs{m} < \frac{d}{\lambda} \\
+    \abs{\sin\theta_0} < 1 \implies \abs{m'} < \frac{N d}{\lambda}
+\end{gather}
+ovvero, esistono un numero finito di massimi e minimi.
+
+\subsection{Doppia fenditura}
+\label{sec:doubleslit}
+
+Con $N = 2$ e $d$ la distanza tra le fenditure, la \eqref{eq:reticolo} si semplifica come
+\begin{equation}
+    I = I_0 \frac{\sin^2 \phi}{\sin^2 \frac{\phi}{2}}
+    = 4 I_0 \cos^2 \frac{\phi}{2}
+    = 4 I_0 \cos^2 \pts{\pi \frac{d}{\lambda} \sin\theta}
+\end{equation}
+
+Si osservano:
+\begin{itemize}
+    \item Massimi principali in cui $I = 4 I_0$:
+        \begin{equation}
+            \sin\theta_M = \frac{\lambda}{d} m, \quad m \in \Z
+        \end{equation}
+        Si tratta dei punti in cui $\cos^2(\cdots) = 1$.
+    \item Un minimo in cui $I = 0$ tra ogni coppia di massimi principali:
+        \begin{equation}
+            \sin\theta_0 = \frac{\lambda}{d} \pts{m + \frac{1}{2}}, \quad
+            m \in \Z
+        \end{equation}
+        % $m'$ non può assumere valori multipli di $N$, poiché in quei casi si ha una forma indeterminata $[0/0]$ che in realtà è un massimo.
+\end{itemize}
+
+L'\important{esperimento di Young} consiste nel mostrare la figura di interferenza a bande luminose dovuta a una doppia fenditura.
+Fu svolto all'inizio dell'Ottocento sulla base della teoria di Huygens (che risaliva al Seicento), poiché diventò possibile produrre onde coerenti.
+Per ottenere delle onde coerenti, il fronte d'onda proveniente da una singola fenditura veniva diviso in due fronti d'onda, che quindi erano coerenti tra loro.
+In questo modo si mostrava la natura ondulatoria della luce.
+
+
+\section{Singola fenditura}
+
+Considerando una singola fenditura di ampiezza $a$ molto grande, un'onda piana che le vada contro passerebbe oltre.
+Diminuendo $a$, inizialmente la zona illuminata diminuisce.
+Al di sotto di una certa dimensione (quando $a$ è confrontabile della lunghezza d'onda) la fenditura si comporta come una sorgente puntiforme e illumina tutto lo schermo.
+
+Huygens aveva osservato questo fenomeno con le onde del mare.
+
+\important{Principio di Huygens}: ogni fronte d'onda si propaga come se ogni tratto infinitesimo del fronte d'onda fosse una sorgente puntiforme.
+
+Applicando questo principio a una piccola fenditura, ogni punto diventa sorgente di un'onda con ampiezza $\de\E$ e differenza di fase $\de\phi$ con la sorgente successiva.
+Sommando i fasori come prima, la spezzata diventa un arco di circonferenza su cui insiste un angolo $\phi = k a \sin\theta$.
+Sia $E_\text{max}$ la lunghezza dell'arco di circonferenza:
+\begin{gather}
+    E_R = 2 R \sin \frac{\phi}{2}, \quad
+    E_\text{max} = R \phi
+    \implies
+    E_R = E_\text{max} \frac{\sin\frac{\phi}{2}}{\frac{\phi}{2}} \\
+    I = I_0 \pts{\frac{\sin\pts{\pi \frac{a}{\lambda} \sin\theta}}{\pi \frac{a}{\lambda} \sin\theta}}^{\!2}
+\end{gather}
+
+Si osservano:
+\begin{itemize}
+    \item Minimi in cui $I = 0$:
+        \begin{equation}
+            \sin \theta_0 = \pm \frac{\lambda}{a} m, \quad
+            m \in \Z^+
+        \end{equation}
+    \item Un massimo centrale in $\theta = 0$ in cui $I = I_0$.
+    Questo massimo identifica una regione luminosa delimitata dai due minimi di ordine 1, cioè per
+        \begin{equation}
+            -\frac{\lambda}{a} < \theta < \frac{\lambda}{a}
+        \end{equation}
+    \item Flebili massimi tra i minimi:
+        \begin{equation}
+            \sin \theta_M \approx \pm \frac{\lambda}{a} \pts{m + \frac{1}{2}}, \quad
+            m \in \Z^+
+        \end{equation}
+\end{itemize}
+
+
+Questo fenomeno è detto \important{diffrazione} e si verifica sempre, anche per $a / \lambda$ molto grande o molto piccolo.
+\begin{itemize}
+    \item Se $a \gg \lambda$ si vede solo e distintamente il massimo centrale e l'ombra intorno.
+    \item Per $a \to \lambda^+$, $\theta_0 \to \pm \pi/2$, cioè la fenditura tende a illuminare tutto lo schermo.
+    \item Per $a \le \lambda$, la fenditura tende a diventare una sorgente puntiforme.
+\end{itemize}
+Negli ultimi due casi non ci sono minimi.
+Per questo, solitamente, si parla di diffrazione solo per $a > \lambda$.
+
+La diffrazione è la ragione per cui non vediamo oggetti troppo piccoli: la pupilla funge da fenditura e la retina rileva solo la figura di diffrazione.
+Esiste un limite alla capacità di risolvere i punti vicini, che si supera aumentando le dimensioni delle fenditure (siano queste pupille o lenti di telescopi).

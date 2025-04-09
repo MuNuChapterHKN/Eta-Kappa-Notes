@@ -4,21 +4,9 @@
     "[latex]": {
         "editor.wordWrap": "on",
     },
-    "latex-workshop.latex.autoBuild.run": "onSave",
+    "latex-workshop.latex.autoBuild.run": "never",
     "latex-workshop.latex.rootFile.useSubFile": true,
     "latex-workshop.latex.tools": [
-        {
-            "name": "setup",
-            "command": "bash",
-            "args": [
-                "${env:SCRIPT_PATH}",
-                "%DOC%",
-                "%OUTDIR"
-            ],
-            "env": {
-                "SCRIPT_PATH": "${workspaceFolder}/latex/lib/setup.bash" // path to the script providing folders to latex compilator, fix bug compiling the file.
-            }
-        },
         {
             "name": "latexmk",
             "command": "latexmk",
@@ -33,8 +21,74 @@
             ],
             "env": {
                 "TEXINPUTS": "%WORKSPACE_FOLDER%/latex/lib//;%WORKSPACE_FOLDER%/resources/imgs//;",
-                "SCRIPT_PATH": "${workspaceFolder}/latex/lib/setup.bash" // path to the script providing folders to latex compilator, fix bug compiling the file.
             }
+        },
+        {
+          "name": "pandoc-html",
+          "command": "pandoc",
+          "args": [
+            "%DOCFILE%.tex",
+            "-s",
+            "--from=latex",
+            "--to=html",
+            "--output=%WORKSPACE_FOLDER%/build/html/%DOCFILE%.html",
+            "--data-dir=%APPDATA%/pandoc",
+            "--verbose",
+            "--mathjax",
+            "--metadata=lang:en",
+            "--trace",
+            "--resource-path=.;./lib;latex/lib;%WORKSPACE_FOLDER%/resources/imgs",
+            "--listings=false",
+            "--section-div=false"
+          ],
+          "env": {
+            "OUTDIR_DOCX": "%WORKSPACE_FOLDER%/build/docx/%DOCFILE%"
+          }
+        },
+        {
+          "name": "pandoc-docx",
+          "command": "pandoc",
+          "args": [
+            "%DOCFILE%.tex",
+            "-s",
+            "--from=latex",
+            "--to=docx",
+            "--output=%WORKSPACE_FOLDER%/build/html/%DOCFILE%.docx",
+            "--data-dir=%APPDATA%/pandoc",
+            "--verbose",
+            "--metadata=charset=utf-8",
+            "--metadata=lang:en",
+            "--trace",
+            "--resource-path=.;./lib;latex/lib;%WORKSPACE_FOLDER%/resources/imgs",
+            "--listings",
+            "--section-div=false"
+          ],
+          "env": {
+            "OUTDIR_DOCX": "%WORKSPACE_FOLDER%/build/docx/%DOCFILE%"
+          }
         }
-    ]
+
+    ],
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "Compile Pdf",
+            "tools": [
+                "latexmk"
+            ]
+        },
+        {
+            "name": "Pandoc HTML",
+            "tools": [
+              "pandoc-html"
+            ]
+        },
+        {
+          "name": "Pandoc DOCX",
+          "tools": [
+            "pandoc-docx"
+          ]
+      }
+
+    ],
+    "latex-workshop.latex.recipe.default": "Compile Pdf"
 }
