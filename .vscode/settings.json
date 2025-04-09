@@ -36,5 +36,14 @@
                 "SCRIPT_PATH": "${workspaceFolder}/latex/lib/setup.bash" // path to the script providing folders to latex compilator, fix bug compiling the file.
             }
         }
-    ]
+    ],
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "latexmk",
+            "tools": [
+                "latexmk"
+            ]
+        }
+    ],
+    "latex-workshop.latex.recipe.default": "latexmk"
 }
