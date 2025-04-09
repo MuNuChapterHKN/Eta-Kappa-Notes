@@ -1,0 +1,519 @@
+\chapter{Canonical transformations}
+\section{Point transformations}
+Let's now focus on the possible transformations of coordinates.\\
+In Lagrangian formalism a generic transformation is:
+\begin{equation}
+    \{q_{\alpha}\} \longrightarrow \{Q_{\alpha}\}\quad \text{s.t.}\quad Q_{\alpha} = Q_{\alpha}\brackets{q_1,q_2,\dots,q_n,t}
+\end{equation}
+This is a \textbf{point transformation} in configuration space. We move from $n$ spatial coordinates to $n$ spatial coordinates.\\
+In Hamiltonian formalism a generic transformation is:
+\begin{equation}
+    \begin{Bmatrix}
+        q_{\alpha}\\[8pt]
+        p_{\alpha}
+    \end{Bmatrix} \longrightarrow
+    \begin{Bmatrix}
+        Q_{\alpha}\\[8pt]
+        P_{\alpha}
+    \end{Bmatrix}\quad \text{s.t} \quad
+    \begin{cases}
+        Q_{\alpha} = Q_{\alpha}\brackets{q_1,q_2,\dots,q_n,p_1,p_2,\dots,p_n,t}\\
+        P_{\alpha} = P_{\alpha}\brackets{q_1,q_2,\dots,q_n,p_1,p_2,\dots,p_n,t}
+    \end{cases}
+\end{equation}
+This is also a point transformation, but since we are in the phase space the new coordinates can be a mix of both $q_{\alpha}$ and $p_{\alpha}$. Now we can try to figure out if the relations found for $q_{\alpha}$ and $p_{\alpha}$ related to the Poisson's brackets are also true for $Q_{\alpha}$ and $P_{\alpha}$.
+We want:
+\begin{equation}
+    \begin{split}
+        \pb{q_{\alpha}}{q_{\beta}} &= 0\\
+        \pb{p_{\alpha}}{p_{\beta}} &= 0\\
+        \pb{q_{\alpha}}{p_{\beta}} &= \delta_{\alpha \beta}
+    \end{split} \implies
+    \begin{split}
+        \pb{Q_{\alpha}}{Q_{\beta}} &= 0\\
+        \pb{P_{\alpha}}{P_{\beta}} &= 0\\
+        \pb{Q_{\alpha}}{P_{\beta}} &= \delta_{\alpha \beta}
+    \end{split}
+\end{equation}
+For example we want $\pb{Q_{\alpha}}{Q_{\beta}} = 0$. If we explicit the Poisson's brackets we have:
+\begin{equation}
+    \pb{Q_{\alpha}}{Q_{\beta}} = \bigsum_{\gamma} \left(\partialD{Q_{\alpha}}{q_{\gamma}} \partialD{Q_{\beta}}{p_{\gamma}} - \partialD{Q_{\alpha}}{p_{\gamma}} \partialD{Q_{\beta}}{q_{\gamma}} \right)
+\end{equation}
+This is not always zero, therefor we will look for transformations such that:
+\begin{equation}
+    \begin{cases}
+        \dot{Q}_{\alpha} = \partialD{\tilde{\hamfun}}{P_{\alpha}} \\[8pt]
+        \dot{P}_{\alpha} = -\partialD{\tilde{\hamfun}}{Q_{\alpha}}
+    \end{cases}
+\end{equation}
+Transformations that preserve those properties are called \textbf{canonical transformations}. The new Hamiltonian associated to those transformations is sometimes called \textit{k-Hamiltonian}.\\
+In which condition this is true?\\
+Recall that the \hamiltonref\;come from the \hpquotemath :
+\begin{equation}
+    \delta S = \delta \int_{t_1}^{t_2}\lagr \diff{t} = \int_{t_1}^{t_2} \brackets{\bigsum_{\alpha}\dot{q}_{\alpha}p_{\alpha} - \hamfun} \diff{t} =0
+\end{equation}
+We want the same for the new Hamiltonian:
+\begin{equation}
+    \delta \tilde{S} = \delta \int_{t_1}^{t_2}\tilde{\lagr} \diff{t} \int_{t_1}^{t_2} \brackets{\bigsum_{\alpha}\dot{Q}_{\alpha}P_{\alpha} - \tilde{\hamfun}} \diff{t} \overset{!}{=} 0
+\end{equation}
+\section{Generating functions}
+We also know that the new Lagrangian and the old Lagrangian must describe the same system and they have this relation:
+\begin{equation}
+    \lagr = \tilde{\lagr}+\totalD{F}{t}
+\end{equation}
+So there must exist a function $F$ such that this is true for a transformation to be canonical. These functions are called \textbf{generating functions}.
+In principle a generic $F$ can depend on both the old and the new coordinates:
+\begin{equation}
+    F = F(\vec{q},\vec{p},\vec{Q},\vec{P},t)
+\end{equation}
+But if all the coordinates were independent we would have $4n$ variables plus time. The maximum number of variables is $2n$ hence there must be at least $2n$ dependent variables.\\
+If we know the expression for both the generating function and the transformation equations we are done. This of course is not the interesting case. We can reconstruct the transformation equations just from the expression of $F$. We can distinguish 4 categories of generating functions:
+\begin{enumerate}
+    \item $F_1 = F_1(\vec{q},\vec{Q},t)$ (\nth{1} type functions)
+    \item $F_2 = F_2(\vec{q},\vec{P},t)$ (\nth{2}  type functions)
+    \item $F_3 = F_3(\vec{p},\vec{Q},t)$ (\nth{3}  type functions)
+    \item $F_4 = F_4(\vec{p},\vec{P},t)$ (\nth{4}  type functions)
+\end{enumerate}
+From the relation between the Lagrangians we have:
+\begin{equation}
+    \begin{split}
+        \lagr &= \tilde{\lagr}+\totalD{F}{t}\\
+        \bigsum_{\alpha}p_{\alpha}\diff{q_{\alpha}} - \hamfun\diff{t} &= \bigsum_{\alpha}P_{\alpha}\diff{Q_{\alpha}} - \tilde{\hamfun}\diff{t} + \diff{F}\\
+        &\Downarrow \\
+        \diff{F} = \bigsum_{\alpha}p_{\alpha}\diff{q_{\alpha}} &- \bigsum_{\alpha}P_{\alpha}\diff{Q_{\alpha}} + \brackets{\tilde{\hamfun}- \hamfun}\diff{t}\\
+        &\Downarrow \\
+        F &= F(\vec{q},\vec{Q})
+    \end{split}
+\end{equation}
+This means that the generating function in the relation with the Lagrangians is a first type function $F = F_1$. In this case the differential of $F_1$ is:
+\begin{equation}
+    \diff{F_1} = \bigsum_{\alpha} \partialD{F_1}{q_{\alpha}} \diff{q_{\alpha}} + \bigsum_{\alpha} \partialD{F_1}{Q_{\alpha}} \diff{Q_{\alpha}} + \partialD{F_1}{t} \diff{t}
+\end{equation}
+And so we get:
+\begin{equation} \label{F1_Canonical}
+    \begin{cases}
+        \partialD{F_1}{q_{\alpha}} = p_{\alpha}\\[8pt]
+        \partialD{F_1}{Q_{\alpha}} = -P_{\alpha}\\[8pt]
+        \partialD{F_1}{t} = \brackets{\tilde{\hamfun}- \hamfun}
+    \end{cases}
+\end{equation}
+Hence:
+\begin{equation}
+    \begin{cases}
+        p = p(\vec{q},\vec{Q},t)\\
+        P = P(\vec{q},\vec{Q},t)
+    \end{cases}
+\end{equation}
+By inverting the first equation we can get:
+\begin{equation}
+    Q = Q(\vec{q},\vec{p},t)\\
+\end{equation}
+Substituting this into the second equation we finally get the transformation equations:
+\begin{equation}
+    \begin{cases}
+        Q = Q(\vec{q},\vec{p},t)\\
+        P = P(\vec{q},\vec{p},t)
+    \end{cases}
+\end{equation}
+Also from the third equation in \eqref{F1_Canonical} we have:
+\begin{equation}
+    \tilde{\hamfun} = \hamfun + \partialD{F_1}{t}
+\end{equation}
+And so if $F_1$ does not depend on time explicitly:
+\begin{equation}
+    \tilde{\hamfun} = \hamfun
+\end{equation}
+This means that the Hamiltonians are equal, but we need to keep in mind that $\tilde{\hamfun}$ depends on the new coordinates so if we have a generic $\hamfun$ substituting $Q$ and $P$ instead of $q$ and $p$ \underline{does not} give $\tilde{\hamfun}$. For example:
+\begin{equation}
+    \hamfun = \dfrac{p^2}{2m} + \dfrac{\alpha}{q} \notimplies \tilde{\hamfun} = \dfrac{P^2}{2m} + \dfrac{\alpha}{Q}
+\end{equation}
+Instead we need to substitute the expression of the old coordinates in terms of the new one (or viceversa if we have $\tilde{\hamfun}$).\\
+Now let $F$ be a generating function of the first type but with:
+\begin{equation}
+    \begin{cases}
+        Q = q\\
+        P = P(\vec{q},\vec{p},t)
+    \end{cases}
+\end{equation}
+Then $q$ and $Q$ are not independent, therefor we should have only $n$ independent variables in $F$, but this is not what we want. In order to write $F$ in terms of only independent coordinates we must find a way to express $F$ as a second type function:
+\begin{equation}
+    F_1(\vec{q},\vec{Q},t) \longrightarrow F_2(\vec{q},\vec{P},t)
+\end{equation}
+This is just an application of the Legendre transformations:
+\begin{equation}
+    \begin{split}
+        \diff{F_1} &= \bigsum_{\alpha}p_{\alpha}\diff{q_{\alpha}} - \bigsum_{\alpha}P_{\alpha}\diff{Q_{\alpha}} + \brackets{\tilde{\hamfun}- \hamfun}\diff{t}\\
+        \diff{\brackets{F_1 + \bigsum_{\alpha}P_{\alpha}Q_{\alpha}}} &= \bigsum_{\alpha}p_{\alpha}\diff{q_{\alpha}}  + \bigsum_{\alpha}Q_{\alpha}\diff{P_{\alpha}} + \brackets{\tilde{\hamfun}- \hamfun}\diff{t}
+    \end{split}
+\end{equation}
+And so:
+\begin{equation}
+    F_2 = F_1 + \bigsum_{\alpha}P_{\alpha}Q_{\alpha}
+\end{equation}
+From this, we obtain the relations:
+\begin{equation}
+    \begin{cases}
+        \partialD{F_2}{q_{\alpha}} = p_{\alpha}\\[8pt]
+        \partialD{F_2}{P_{\alpha}} = Q_{\alpha}\\[8pt]
+        \partialD{F_2}{t} = \partialD{F_1}{t}
+    \end{cases}
+\end{equation}
+As for the first type this means that:
+\begin{equation}
+    \begin{cases}
+        p = p(\vec{q},\vec{P},t)\\
+        Q = P(\vec{q},\vec{P},t)
+    \end{cases}
+\end{equation}
+By inverting the first equation we can get:
+\begin{equation}
+    P = P(\vec{q},\vec{p},t)\\
+\end{equation}
+Substituting this into the second equation we get the transformation equations:
+\begin{equation}
+    \begin{cases}
+        Q = Q(\vec{q},\vec{p},t)\\
+        P = P(\vec{q},\vec{p},t)
+    \end{cases}
+\end{equation}
+Similarly we can find a way to express $F_1$ as a third type function $F_3$. This is again an application of the Legendre transformations:
+\begin{equation}
+    \begin{split}
+        \diff{F_1} = \bigsum_{\alpha}p_{\alpha}\diff{q_{\alpha}} - \bigsum_{\alpha}P_{\alpha}\diff{Q_{\alpha}} + \brackets{\tilde{\hamfun}- \hamfun}\diff{t}\\
+    \diff{\brackets{F_1 - \bigsum_{\alpha}q_{\alpha}p_{\alpha}}} = -\bigsum_{\alpha}q_{\alpha}\diff{p_{\alpha}} - \bigsum_{\alpha}P_{\alpha}\diff{Q_{\alpha}} + \brackets{\tilde{\hamfun}- \hamfun}\diff{t}
+    \end{split}
+\end{equation}
+And so:
+\begin{equation}
+    F_3 = F_1 - \bigsum_{\alpha}q_{\alpha}p_{\alpha}
+\end{equation}
+From this, we obtain the relations:
+\begin{equation}
+    \begin{cases}
+        \partialD{F_3}{p_{\alpha}} = -q_{\alpha}\\[8pt]
+        \partialD{F_3}{Q_{\alpha}} = -P_{\alpha}\\[8pt]
+        \partialD{F_3}{t} = \partialD{F_1}{t}
+    \end{cases}
+\end{equation}
+As for the first type, this means that:
+\begin{equation}
+    \begin{cases}
+        q = q(\vec{p},\vec{Q},t)\\
+        P = P(\vec{p},\vec{Q},t)
+    \end{cases}
+\end{equation}
+By inverting the first equation, we can get:
+\begin{equation}
+    Q = Q(\vec{q},\vec{p},t)
+\end{equation}
+Substituting this into the second equation, we get the transformation equations:
+\begin{equation}
+    \begin{cases}
+        Q = Q(\vec{q},\vec{p},t)\\
+        P = P(\vec{q},\vec{p},t)
+    \end{cases}
+\end{equation}
+Finally we can find a way to express $F_1$ as a fourth type function $F_4$. This is a double application of the Legendre transformations (we can think to pass through second type first or third type first and then go to fourth type):
+\begin{equation}
+    \begin{split}
+        \diff{F_1} &= \bigsum_{\alpha}p_{\alpha}\diff{q_{\alpha}} - \bigsum_{\alpha}P_{\alpha}\diff{Q_{\alpha}} + \brackets{\tilde{\hamfun}- \hamfun}\diff{t}\\
+        \diff{\brackets{F_1 + \bigsum_{\alpha}P_{\alpha}Q_{\alpha} - \bigsum_{\alpha}q_{\alpha}p_{\alpha}}} &= -\bigsum_{\alpha}q_{\alpha}\diff{p_{\alpha}} + \bigsum_{\alpha}Q_{\alpha}\diff{P_{\alpha}} + \brackets{\tilde{\hamfun}- \hamfun}\diff{t}
+    \end{split}
+\end{equation}
+And so:
+\begin{equation}
+    F_4 = F_1 + \bigsum_{\alpha}P_{\alpha}Q_{\alpha} - \bigsum_{\alpha}q_{\alpha}p_{\alpha}
+\end{equation}
+From this, we obtain the relations:
+\begin{equation}
+    \begin{cases}
+        \partialD{F_4}{p_{\alpha}} = -q_{\alpha}\\[8pt]
+        \partialD{F_4}{P_{\alpha}} = Q_{\alpha}\\[8pt]
+        \partialD{F_4}{t} = \partialD{F_1}{t}
+    \end{cases}
+\end{equation}
+As for the first type, this means that:
+\begin{equation}
+    \begin{cases}
+        q = q(\vec{p},\vec{P},t)\\
+        Q = Q(\vec{p},\vec{P},t)
+    \end{cases}
+\end{equation}
+By inverting the first equation, we can get:
+\begin{equation}
+    P = P(\vec{q},\vec{p},t)
+\end{equation}
+Substituting this into the second equation, we get the transformation equations:
+\begin{equation}
+    \begin{cases}
+        Q = Q(\vec{q},\vec{p},t)\\
+        P = P(\vec{q},\vec{p},t)
+    \end{cases}
+\end{equation}
+\section{Poisson's brackets and canonical transformations}
+As we anticipated before we want to know how the Poisson's brackets act on the new coordinates. In particular, we state this theorem:
+\begin{theorem}
+  A transformation is canonical if and only if the canonical Poisson's brackets are invariant
+\end{theorem}
+This means that they are the same in the old and new coordinates. For example:
+\begin{equation}
+    \pb{Q_{\alpha}}{P_{\beta}}_{QP} = \delta_{\alpha \beta} \implies \pb{Q_{\alpha}}{P_{\beta}}_{qp} = \delta_{\alpha \beta}
+\end{equation}
+The subscript represents in respect to what coordinates we are calculating the Poisson's brackets. This theorem also as an important corollary:
+\begin{corollary}
+    If the canonical Poisson's brackets are invariant then all Poisson's brackets are invariant
+\end{corollary}
+Which means that for any functions $f$ and $g$ in the phase space:
+\begin{equation}
+    \pb{f}{g}_{QP} = \pb{f}{g}_{qp} = \pb{f}{g}
+\end{equation}
+In the last notation (which is the usual one) we do not specify the coordinates since it makes no difference.\\
+Another relation that is true in general is:
+\begin{equation}
+    \totalD{f}{t} = \pb{f}{\hamfun} + \partialD{f}{t}
+\end{equation}
+If we are dealing with a function that is also a constant of the motion then:
+\begin{equation}
+    \pb{f}{\hamfun} = - \partialD{f}{t}
+\end{equation}
+If this function also does not depend on time explicitly:
+\begin{equation}
+    \pb{f}{\hamfun} = 0
+\end{equation}
+\section{Examples}
+We will now show some examples of the application of the Legendre transformations and in general of the utility of the generating functions.
+\subsection{Ex. 1}
+Given a generating function of the first type $F_1 = F_1(\vec{q},\vec{Q},t)$ such that:
+\begin{equation}
+    F_1 = \bigsum_{\alpha} q_{\alpha}Q_{\alpha}
+\end{equation}
+By applying \hamiltonref\;and Legendre transformations we get:
+\begin{equation}
+    \begin{cases}
+        Q_{\beta} = \partialD{F_1}{q_{\beta}} = p_{\beta}\\
+        q_{\beta} = \partialD{F_1}{Q_{\beta}} = -P_{\beta}
+    \end{cases}
+\end{equation}
+And so the transformation equations are:
+\begin{equation}
+    \begin{cases}
+        Q_{\alpha} = p_{\alpha}\\
+        P_{\alpha} = -q_{\alpha}
+    \end{cases}
+\end{equation}
+So this transformation just swaps the momentum and the position coordinates (taking into account some sign changes).
+\subsection{Ex. 2}
+Given a generating function of the second type $F_2 = F_2(\vec{q},\vec{P},t)$ such that:
+\begin{equation}
+    F_2 = \bigsum_{\alpha} q_{\alpha}P_{\alpha}
+\end{equation}
+By applying \hamiltonref\;and Legendre transformations we get:
+\begin{equation}
+    \begin{cases}
+        P_{\beta} = \partialD{F_2}{q_{\beta}} = p_{\beta}\\
+        q_{\beta} = \partialD{F_2}{P_{\beta}} = Q_{\beta}
+    \end{cases}
+\end{equation}
+And so the transformation equations are:
+\begin{equation}
+    \begin{cases}
+        Q_{\alpha} = q_{\alpha}\\
+        P_{\alpha} = p_{\alpha}
+    \end{cases}
+\end{equation}
+So this transformation is the \textbf{identity transformation} since the new momenta and positions are equal to the old ones.
+\begin{equation}
+    \underset{\text{Identity}}{\boxed{F_2 = \bigsum_{\alpha} q_{\alpha}P_{\alpha}}}
+\end{equation}
+\subsection{Ex. 3}
+Given a generating function of the second type $F_2 = F_2(\vec{q},\vec{P},t)$ such that:
+\begin{equation}
+    F_2 = \bigsum_{\alpha} f_{\alpha}(\vec{q},t) P_{\alpha}
+\end{equation}
+By applying \hamiltonref\;and Legendre transformations we get:
+\begin{equation}
+    \begin{split}
+        p_{\beta} = \partialD{F_2}{q_{\beta}} = \dots\\
+        Q_{\beta} = \partialD{F_2}{P_{\beta}} = f_{\beta}(\vec{q},t)
+    \end{split}
+\end{equation}
+So new positions only depend on old positions, hence this is actually a point transformation in configuration space. This is why any point transformation in configuration space is always canonical.
+\subsection{Ex. 4}
+Now let the Hamiltonian of a system be:
+\begin{equation}
+    \hamfun = \dfrac{p^2}{2m} + mgq
+\end{equation}
+\hamiltonref\;give:
+\begin{equation}
+    \begin{cases}
+        \dot{q} = \partialD{\hamfun}{p} = \dfrac{p}{m}\\[8pt]
+        \dot{p} = -\partialD{\hamfun}{q} = -mg
+    \end{cases}
+\end{equation}
+Those are just the Newton's equations for a particle in the gravitational potential. Now let's make a transformation:
+\begin{equation}
+    F_1 = -\dfrac{Q}{q}
+\end{equation}
+From this we get:
+\begin{equation}
+    \begin{cases}
+        p = \partialD{F_1}{q} = \dfrac{Q}{q^2}\\[8pt]
+        P = -\partialD{F_1}{Q} = \dfrac{1}{q}
+    \end{cases}
+\end{equation}
+From this getting the transformation equations is trivial:
+\begin{equation}
+    \begin{cases}
+        Q = pq^2\\[8pt]
+        P = \dfrac{1}{q}
+    \end{cases}
+\end{equation}
+We can invert these relations:
+\begin{equation}
+    \begin{cases}
+        q = \dfrac{1}{P}\\
+        p = QP^2
+    \end{cases}
+\end{equation}
+And if we substitute back into the old Hamiltonian we get the new expression:
+\begin{equation}
+    \tilde{\hamfun} = \dfrac{P^4 Q^2}{2m} + \dfrac{mg}{P}
+\end{equation}
+This again shows that to get the new Hamiltonian we cannot just substitute $Q$ instead of $q$ and $P$ instead of $p$.\\
+Also for the new Lagrangian we have:
+\begin{equation}
+    \begin{split}
+        \lagr &= \tilde{\lagr} + \totalD{F_1}{t} =\\
+        &= \tilde{\lagr} + \totalD{}{t}\brackets{-QP} =\\
+        &=\tilde{\lagr} - \dot{Q}P - Q\dot{P}
+    \end{split}
+\end{equation}
+Which gives:
+\begin{equation}
+    \tilde{\lagr} = \lagr + \dot{Q}P + Q\dot{P}
+\end{equation}
+We want to check that this is a canonical transformation. We can do this by calculating the canonical Poisson's brackets in the new and old coordinates. For the new ones:
+\begin{equation}
+    \begin{split}
+        \pb{Q}{P}_{QP} &= \left(\partialD{Q}{Q} \partialD{P}{P} - \cancel{\partialD{Q}{P}} \cancel{\partialD{P}{Q}} \right) = 1\\
+        \pb{Q}{Q}_{QP} &= \left(\partialD{Q}{Q} \cancel{\partialD{Q}{P}} - \cancel{\partialD{Q}{P}} \partialD{Q}{Q} \right) = 0\\
+        \pb{P}{P}_{QP} &= \left(\cancel{\partialD{P}{Q}} \partialD{P}{P}  -  \partialD{P}{P} \cancel{\partialD{P}{Q}}\right) = 0
+    \end{split}
+\end{equation}
+For the old ones:
+\begin{equation}
+    \begin{split}
+        \pb{Q}{P}_{qp} &= \left(\partialD{Q}{q} \partialD{P}{p} - \partialD{Q}{p} \partialD{P}{q} \right) = \\
+        &= \left(\partialD{}{q}(pq^2) \cancel{\partialD{}{p}\left(\dfrac{1}{q}\right)} - \partialD{}{p}(pq^2) \partialD{}{q}\left(\dfrac{1}{q}\right) \right) = \\
+        &= \left(- q^2  \left(-\dfrac{1}{q^2}\right) \right) = 1
+    \end{split}
+\end{equation}
+\begin{equation}
+    \begin{split}
+        \pb{Q}{Q}_{qp} &= \left(\partialD{}{q}(pq^2) \partialD{}{p}(pq^2) - \partialD{}{p}(pq^2) \partialD{}{q}(pq^2) \right) = \\
+        &= \left(2pq  q^2 - q^2  2pq \right) = 0
+    \end{split}
+\end{equation}
+\begin{equation}
+    \begin{split}
+        \pb{P}{P}_{qp} &= \bigsum_{\alpha} \left(\partialD{P}{q_{\alpha}} \partialD{P}{p_{\alpha}} - \partialD{P}{p_{\alpha}} \partialD{P}{q_{\alpha}} \right) = \\
+        &= \left(\partialD{}{q}\left(\dfrac{1}{q}\right) \cancel{\partialD{}{p}\left(\dfrac{1}{q}\right)} - \cancel{\partialD{}{p}\left(\dfrac{1}{q}\right)} \partialD{}{q}\left(\dfrac{1}{q}\right) \right) = 0
+    \end{split}
+\end{equation}
+And so we verified that the canonical Poisson's brackets are invariant.
+\subsection{Ex. 5}
+Now given a transformation we want to prove that it is a canonical transformation:
+\begin{equation}
+    \begin{cases}
+        Q = \ln \brackets{\dfrac{p}{q}}\\
+        P = \brackets{-\dfrac{q^2}{2}-1}\dfrac{p}{1}
+    \end{cases}
+\end{equation}
+We have two methods:\\
+The \textbf{first method} will just be calculating all the Poisson's brackets and verifying that they are invariant.\\
+The Poisson's brackets in the new coordinates will always be trivial:
+\begin{equation}
+    \begin{split}
+        \pb{Q}{P}_{QP} &= 1\\
+        \pb{Q}{Q}_{QP} &= 0\\
+        \pb{P}{P}_{QP} &= 0
+    \end{split}
+\end{equation}
+Now we can evaluate the Poisson's brackets with respect to the old coordinates:
+\begin{equation}
+    \begin{split}
+        \pb{Q}{P}_{qp} &= \left(\partialD{Q}{q} \partialD{P}{p} - \partialD{Q}{p} \partialD{P}{q} \right) = \\
+        &= \bigg(\partialD{}{q}\left(\ln\brackets{\dfrac{p}{q}}\right) \partialD{}{p}\left(\brackets{-\dfrac{q^2}{2}-1}\dfrac{p}{q}\right) -\\
+        &- \partialD{}{p}\left(\ln\brackets{\dfrac{p}{q}}\right) \partialD{}{q}\left(\brackets{-\dfrac{q^2}{2}-1}\dfrac{p}{q}\right) \bigg) = \\
+        &= \left(-\dfrac{1}{q}  \brackets{-\dfrac{q^2}{2}-1}  \dfrac{1}{q} - \dfrac{1}{p}  \brackets{-q  \dfrac{p}{q} + \brackets{-\dfrac{q^2}{2}-1}  \dfrac{1}{q}} \right) = \\
+        &= \left(\cancel{\dfrac{\dfrac{q^2}{2} + 1}{q^2}} + 1 - \cancel{\dfrac{\dfrac{q^2}{2} + 1}{q^2}} \right) = 1
+    \end{split}
+\end{equation}
+The other ones are trivial:
+\begin{equation}
+    \pb{Q}{Q}_{qp} = \left(\partialD{Q}{q} \partialD{Q}{p} - \partialD{Q}{p} \partialD{Q}{q} \right) = 0
+\end{equation}
+\begin{equation}
+    \pb{P}{P}_{qp} = \left(\partialD{P}{q} \partialD{P}{p} - \partialD{P}{p} \partialD{P}{q} \right) = 0
+\end{equation}
+
+\section{Active canonical transformations}
+Up to now we used "passive" transformations, which means that the transformation does not affect the state of the system. Instead, now we will make use of \textbf{active transformations} which are transformations that do not change the axes, but they change the state of the system.\\
+First we need to introduce \textbf{infinitesimal canonical transformations}:
+\begin{quote}
+    \textit{transformations that differ from the identity transformation for an infinitesimal amount}
+\end{quote}
+This definition is equivalent to:
+\begin{equation}
+    F_2 = \bigsum_{\alpha} q_{\alpha}P_{\alpha} + \varepsilon G(\vec{q},\vec{P},t)
+\end{equation}
+And so we have:
+\begin{equation}
+    \begin{cases}
+        p_{\gamma} = \partialD{F_2}{q_{\gamma}} = P_{\gamma} + \varepsilon\partialD{ G}{q_{\gamma}}\\[10pt]
+        Q_{\gamma} = \partialD{F_2}{P_{\gamma}} = Q_{\gamma} + \varepsilon\partialD{ G}{P_{\gamma}}
+    \end{cases}
+\end{equation}
+The term depending on the function $G$ are the infinitesimal changes. Let us define:
+\begin{equation}
+    \begin{split}
+        \delta_{p_{\gamma}} &\defineeq -\varepsilon\partialD{ G}{q_{\gamma}}\\[8pt]
+        \delta_{q_{\gamma}} &\defineeq \varepsilon\partialD{ G}{P_{\gamma}}
+    \end{split}
+\end{equation}
+We want to substitute the partial derivative of $G$ with respect to $P_{\gamma}$ with the partial derivative of $G$ with respect to $p_{\gamma}$:
+\begin{equation}
+    \partialD{G}{p_{\gamma}} = \bigsum_{\alpha} \brackets{\partialD{G}{P_{\alpha}}\partialD{P_{\alpha}}{p_{\gamma}} + \partialD{G}{q_{\alpha}}\cancel{\partialD{q_{\alpha}}{p_{\gamma}}}}
+\end{equation}
+So from the equation of the generating function:
+\begin{equation}
+    \begin{split}
+        \partialD{P_{\alpha}}{p_{\gamma}} &= \partialD{}{p_{\gamma}}\brackets{p_{\alpha} - \varepsilon\partialD{ G}{q_{\alpha}}} = \\
+        &= \delta_{\alpha \gamma} - \underbrace{\varepsilon\partialD{ G}{q_{\alpha}}}_{\text{infinitesimal}}
+    \end{split}
+\end{equation}
+The term underlined is infinitesimal and can be disregarded. This leads to:
+\begin{equation}
+    \partialD{G}{p_{\gamma}} = \bigsum_{\alpha} \partialD{G}{P_{\alpha}}\delta_{\alpha \gamma} = \partialD{G}{P_{\gamma}}
+\end{equation}
+Now let's define a new vector containing all the coordinates and momentum:
+\begin{equation}
+    \vec{\eta} \defineeq \begin{pmatrix}
+        q_1\\\dots\\q_n\\p_1\\\dots\\p_n
+    \end{pmatrix}
+    \quad n+n = 2n \quad \text{elements}
+\end{equation}
+In this way we can write in a compact form:
+\begin{equation}
+    \delta \vec{\eta} = \varepsilon \pb{\eta}{G}
+\end{equation}
+Where by using the Poisson's brackets on the vector we mean that we apply them between every component and $G$. Let's for example choose a particular form of $G$:
+\begin{equation}
+    G = p_i
+\end{equation}
+Then only the $q_i$ component of the vector $\delta \vec{\eta}$ has value, the rest of the components are zero:
+\begin{equation}
+    \delta \vec{\eta} = \begin{pmatrix}
+        0\\\dots\\\varepsilon\\0\\\dots\\0
+    \end{pmatrix}
+\end{equation}

@@ -20,6 +20,51 @@
 %   draft: Compiles the document in draft mode (useful for proofreading, dummy images and imported files).
 \documentclass[english,12pt,toc=sections]{HKNdocument}
 \input{_preamble.tex}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{subfig}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{cancel}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{centernot}
+\usepackage[super]{nth}
+\counterwithin{equation}{section}
+\counterwithin{figure}{section}
+\newcommand{\diff}[1]{\mathrm{d}#1}
+\newcommand{\dvec}[1]{\dot{\vec{#1}}}
+\newcommand{\muz}{\mu_0}
+\newcommand{\epsz}{\varepsilon_0}
+\newcommand{\crossout}[1]{\cancel{#1}\raisebox{14pt}{\scriptsize = 0}}
+\newcommand{\bigsum}{\displaystyle\sum}
+\newcommand{\brackets}[1]{\left(#1\right)}
+\newcommand{\dalambertref}{\hyperref[D'Alambert_principle]{D'Alambert's principle}}
+\newcommand{\lagrangeref}{\hyperref[Lagrange_equations]{Lagrange equations}}
+\newcommand{\eleref}{\hyperref[Euler_Lagrange_equations]{Euler-Lagrange equations}}
+\newcommand{\hpquoteref}{\hyperref[q:Hamilton_principle_quote]{Hamilton's principle}}
+\newcommand{\hpquotemath}{\hyperref[e:Hamilton_principle]{Hamilton's principle}}
+\newcommand{\hamiltonref}{\hyperref[hamilton_equations]{Hamilton's equations}}
+\newcommand{\defineeq}{\coloneqq}
+\newcommand{\partialD}[2]{\dfrac{\partial #1}{\partial #2}}
+\newcommand{\partialDD}[2]{\dfrac{\partial^2 #1}{\partial #2^2}}
+\newcommand{\totalD}[2]{\dfrac{\diff{#1} }{\diff{#2}}}
+\newcommand{\lagr}{\mathcal{L}}
+\newcommand{\hamfun}{\mathcal{H}}
+\newcommand{\efunction}{\mathrm{e}}
+\newcommand{\pb}[2]{\left\{#1,#2\right\}}
+\newcommand{\Velegant}{\mathcal{V}} %Aka V-sexy
+\newcommand{\Telegant}{\mathcal{T}} %Aka T-sexy
+\newcommand{\transpose}[1]{#1^{\;T}}
+\newcommand{\notimplies}{\centernot\implies}
 
 
 \begin{document}
@@ -57,12 +102,12 @@
 \clearpage
 
 \mainmatter
-\include{chapters/introduction}
-\include{chapters/graphs}
-\include{chapters/math}
-\include{chapters/formatting_code}
-\include{chapters/boxes}
-\include{chapters/tables}
+\include{chapters/Introduction_to_analytical_mechanics}
+\include{chapters/Constraints}
+\include{chapters/Lagrange_and_Euler-Lagrange_mechanics}
+\include{chapters/Hamilton's_mechanics}
+\include{chapters/Applications_of_Lagrange_formalism}
+\include{chapters/Canonical_transformations}
 
 \backmatter
 
