@@ -28,7 +28,6 @@
           "command": "pandoc",
           "args": [
             "%DOCFILE%.tex",
-            "-s",
             "--from=latex",
             "--to=html",
             "--output=%WORKSPACE_FOLDER%/build/html/%DOCFILE%.html",
@@ -39,7 +38,8 @@
             "--trace",
             "--resource-path=.;./lib;latex/lib;%WORKSPACE_FOLDER%/resources/imgs",
             "--listings=false",
-            "--section-div=false"
+            "--section-div=false",
+            "--standalone"
           ],
           "env": {
             "OUTDIR_DOCX": "%WORKSPACE_FOLDER%/build/docx/%DOCFILE%"
