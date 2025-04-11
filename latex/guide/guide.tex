@@ -38,6 +38,8 @@
 \usepackage{amsfonts}
 \usepackage{centernot}
 \usepackage[super]{nth}
+\usepackage{physics}
+\usepackage{siunitx}
 \counterwithin{equation}{section}
 \counterwithin{figure}{section}
 \newcommand{\diff}[1]{\mathrm{d}#1}
@@ -54,17 +56,19 @@
 \newcommand{\hpquotemath}{\hyperref[e:Hamilton_principle]{Hamilton's principle}}
 \newcommand{\hamiltonref}{\hyperref[hamilton_equations]{Hamilton's equations}}
 \newcommand{\defineeq}{\coloneqq}
-\newcommand{\partialD}[2]{\dfrac{\partial #1}{\partial #2}}
-\newcommand{\partialDD}[2]{\dfrac{\partial^2 #1}{\partial #2^2}}
-\newcommand{\totalD}[2]{\dfrac{\diff{#1} }{\diff{#2}}}
 \newcommand{\lagr}{\mathcal{L}}
 \newcommand{\hamfun}{\mathcal{H}}
 \newcommand{\efunction}{\mathrm{e}}
-\newcommand{\pb}[2]{\left\{#1,#2\right\}}
 \newcommand{\Velegant}{\mathcal{V}} %Aka V-sexy
 \newcommand{\Telegant}{\mathcal{T}} %Aka T-sexy
 \newcommand{\transpose}[1]{#1^{\;T}}
 \newcommand{\notimplies}{\centernot\implies}
+\renewcommand{\dv}{%%%
+ \def\flatfrac{\let\flatfrac\savedfrac\dfrac}\derivative*%%%
+}
+\renewcommand{\pdv}{%%%
+ \def\flatfrac{\let\flatfrac\savedfrac\dfrac}\partialderivative*%%%
+}
 
 
 \begin{document}
@@ -75,7 +79,7 @@
 \author{Simone Odetto}
 
 % You can include multiple \editor commands to list all editors in the frontpage.
-%\editor{}
+\editor{}
 
 \organization{IEEE-HKN Mu Nu Chapter}
 \docdate{\today}
@@ -101,6 +105,7 @@
 \include{chapters/Hamilton's_mechanics}
 \include{chapters/Applications_of_Lagrange_formalism}
 \include{chapters/Canonical_transformations}
+\include{chapters/Hamilton_Jacobi}
 
 \backmatter
 

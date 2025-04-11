@@ -4,7 +4,7 @@ Now let's recap what we established with the differente pictures of classical me
 \begin{itemize}
     \item \eleref\;are a set of $n$ differential equations of $2^\circ$ order with $2n$ initial conditions
     \item When a coordinate is cyclic then: \begin{equation}
-        p_{\alpha} = \partialD{\lagr}{\dot{q}_{\alpha}}\;\text{is conserved}
+        p_{\alpha} = \pdv{\lagr}{\dot{q}_{\alpha}}\;\text{is conserved}
     \end{equation}
     but $p_{\alpha}$ is not a quantity of the Lagrangian
     \item even if $p_\alpha$ is conserved we still have $\dot{q}_{\alpha}$ as an "extra" term in the Lagrangian
@@ -24,70 +24,70 @@ Here are the fundamental differences between Lagrange formulation and Hamilton f
 Since we want to find a new function related to the Lagrangian that contains $p_{\alpha}$ as a variable instead of $\dot{q}_{\alpha}$, we need to introduce a certain type of transformation.\\
 \textbf{Legendre transformations} are able to write a function $f(x,y)$ as a function $g(u,y)$ where:
 \begin{equation}
-    \diff{f} = \underbrace{\partialD{f}{x}}_u \diff{x} + \underbrace{\partialD{f}{y}}_v \diff{y} = u\diff{x} + v\diff{y}
+    \dd{f} = \underbrace{\pdv{f}{x}}_u \dd{x} + \underbrace{\pdv{f}{y}}_v \dd{y} = u\dd{x} + v\dd{y}
 \end{equation}
-From this first relation we can work on the term $u\diff{x}$:
+From this first relation we can work on the term $u\dd{x}$:
 \begin{equation}
-    \diff{(ux)} = u\diff{x} + x\diff{u} \Rightarrow u\diff{x} = \diff{(ux)} - x\diff{u}
+    \dd{(ux)} = u\dd{x} + x\dd{u} \Rightarrow u\dd{x} = \dd{(ux)} - x\dd{u}
 \end{equation}
 Then it is easy to see that a function $g = f-ux$ satisfies our conditions and so we have:
 \begin{equation}
-    \diff{g} = \diff{(f-ux)} = - x\diff{u} + v\diff{y} \Rightarrow \begin{cases}
+    \dd{g} = \dd{(f-ux)} = - x\dd{u} + v\dd{y} \Rightarrow \begin{cases}
         \partial_{u} g = -x\\
         \partial_{y} g = v
     \end{cases}
 \end{equation}
 Let's try to apply Légendre transformations to the Lagrangian:
 \begin{equation}
-    \diff{\lagr} = \bigsum_{\alpha} \partialD{\lagr}{q_{\alpha}}\diff{q_{\alpha}} + \bigsum_{\alpha} \underbrace{\partialD{\lagr}{\dot{q}_{\alpha}}}_{p_{\alpha}}\diff{\dot{q}_{\alpha}} + \partialD{\lagr}{t}\diff{t}
+    \dd{\lagr} = \bigsum_{\alpha} \pdv{\lagr}{q_{\alpha}}\dd{q_{\alpha}} + \bigsum_{\alpha} \underbrace{\pdv{\lagr}{\dot{q}_{\alpha}}}_{p_{\alpha}}\dd{\dot{q}_{\alpha}} + \pdv{\lagr}{t}\dd{t}
 \end{equation}
 We then applied Légendre transformations to $\lagr$:
 \begin{equation} \label{e:legendre_hamilton}
-    \diff{\brackets{\lagr - \bigsum_{\alpha} p_{\alpha}\diff{\dot{q}_{\alpha}}}} = \bigsum_{\alpha} \partialD{\lagr}{q_{\alpha}}\diff{q_{\alpha}} - \bigsum_{\alpha} \dot{q}_{\alpha}\diff{p_{\alpha}} + \partialD{\lagr}{t}\diff{t}
+    \dd{\brackets{\lagr - \bigsum_{\alpha} p_{\alpha}\dd{\dot{q}_{\alpha}}}} = \bigsum_{\alpha} \pdv{\lagr}{q_{\alpha}}\dd{q_{\alpha}} - \bigsum_{\alpha} \dot{q}_{\alpha}\dd{p_{\alpha}} + \pdv{\lagr}{t}\dd{t}
 \end{equation}
 And so if we define a function $\hamfun$ called \textbf{Hamiltonian} (or Hamilton function):
 \begin{equation}
-    \hamfun \defineeq \bigsum_{\alpha} p_{\alpha}\diff{\dot{q}_{\alpha}} -\lagr
+    \hamfun \defineeq \bigsum_{\alpha} p_{\alpha}\dd{\dot{q}_{\alpha}} -\lagr
 \end{equation}
 Then \eqref{e:legendre_hamilton} becomes:
 \begin{equation}
     \begin{split}
-        -\diff{\hamfun} = \bigsum_{\alpha} \underbrace{\partialD{\lagr}{q_{\alpha}}}_{\dot{p}_{\alpha}}\diff{q_{\alpha}} - \bigsum_{\alpha} \dot{q}_{\alpha}\diff{p_{\alpha}} + \partialD{\lagr}{t}\diff{t}\\
-        \diff{\hamfun} = -\bigsum_{\alpha} \dot{p}_{\alpha}\diff{q_{\alpha}} + \bigsum_{\alpha} \dot{q}_{\alpha}\diff{p_{\alpha}} - \partialD{\lagr}{t}\diff{t}\\
+        -\dd{\hamfun} = \bigsum_{\alpha} \underbrace{\pdv{\lagr}{q_{\alpha}}}_{\dot{p}_{\alpha}}\dd{q_{\alpha}} - \bigsum_{\alpha} \dot{q}_{\alpha}\dd{p_{\alpha}} + \pdv{\lagr}{t}\dd{t}\\
+        \dd{\hamfun} = -\bigsum_{\alpha} \dot{p}_{\alpha}\dd{q_{\alpha}} + \bigsum_{\alpha} \dot{q}_{\alpha}\dd{p_{\alpha}} - \pdv{\lagr}{t}\dd{t}\\
     \end{split}
 \end{equation}
 But also it is genrally true that:
 \begin{equation}
-    \diff{\hamfun} = \bigsum_{\alpha} \partialD{\hamfun}{q_{\alpha}}\diff{q_{\alpha}} + \bigsum_{\alpha} \partialD{\hamfun}{p_{\alpha}}\diff{p_{\alpha}} + \partialD{\hamfun}{t}\diff{t}
+    \dd{\hamfun} = \bigsum_{\alpha} \pdv{\hamfun}{q_{\alpha}}\dd{q_{\alpha}} + \bigsum_{\alpha} \pdv{\hamfun}{p_{\alpha}}\dd{p_{\alpha}} + \pdv{\hamfun}{t}\dd{t}
 \end{equation}
 The two equations must be equal so we get \textbf{Hamilton's canonical equations}:
 \begin{equation} \label{hamilton_equations}
     \boxed{
     \begin{aligned}
-        \partialD{\hamfun}{q_{\alpha}} &= -\dot{p}_{\alpha}\\
-        \partialD{\hamfun}{p_{\alpha}} &=\;\;\;\dot{q}_{\alpha}\\
-        \partialD{\hamfun}{t} &= -\partialD{\lagr}{t}
+        \pdv{\hamfun}{q_{\alpha}} &= -\dot{p}_{\alpha}\\
+        \pdv{\hamfun}{p_{\alpha}} &=\;\;\;\dot{q}_{\alpha}\\
+        \pdv{\hamfun}{t} &= -\pdv{\lagr}{t}
     \end{aligned}}
 \end{equation}
-This is a system of $2n (+1)$ equations, but they are first order ODEs so we have $2n$ initial conditions as in \lagrangeref. With this formulation we have one important advantage: if $q_j$ is cyclic then $\dot{p} = 0$ and we don't need to solve one of the differential equations.
+This is a system of $2n (+1)$ equations, but they are first order ODEs so we have $2n$ initial conditions as in \lagrangeref. With this formulation we have one important advantage: if $q_j$ is cyclic then $\dot{p} = 0$, and we don't need to solve one of the differential equations.
 This means that we only need $2n-1$ initial conditions. Same goes for any other cyclic coordinate and so we have $2n-p$ initial conditions with $p$ being the number of cyclic coordinates.\\
 Now let's remember the definition of the energy function:
 \begin{equation}
-    h = \bigsum_{\alpha}\underbrace{\partialD{\lagr}{q_{\alpha}}}_{p_{\alpha}}\dot{q}_{\alpha} - \lagr
+    h = \bigsum_{\alpha}\underbrace{\pdv{\lagr}{q_{\alpha}}}_{p_{\alpha}}\dot{q}_{\alpha} - \lagr
 \end{equation}
 So we can say that the only difference between the energy function $h$ and the Hamiltonian $\hamfun$ is the fact that the first lives in the configuration space, the latter instead lives in the phase space.
 To further convince ourselves of this fact we can evaluate the total derivative of $\hamfun$ over time:
 \begin{equation}
     \begin{split}
-        \totalD{\hamfun}{t} &= \bigsum_{\alpha}\underbrace{\partialD{\hamfun}{q_{\alpha}}}_{-\dot{p}_{\alpha}}\dot{q}_{\alpha} + \bigsum_{\alpha}\underbrace{\partialD{\hamfun}{p_{\alpha}}}_{\dot{q}_{\alpha}}\dot{p}_{\alpha} + \partialD{\hamfun}{t} \\
-        \totalD{\hamfun}{t} &= \partialD{\hamfun}{t} = -\partialD{\lagr}{t}
+        \dv{\hamfun}{t} &= \bigsum_{\alpha}\underbrace{\pdv{\hamfun}{q_{\alpha}}}_{-\dot{p}_{\alpha}}\dot{q}_{\alpha} + \bigsum_{\alpha}\underbrace{\pdv{\hamfun}{p_{\alpha}}}_{\dot{q}_{\alpha}}\dot{p}_{\alpha} + \pdv{\hamfun}{t} \\
+        \dv{\hamfun}{t} &= \pdv{\hamfun}{t} = -\pdv{\lagr}{t}
     \end{split}
 \end{equation}
 So we get that $\hamfun$ will be the energy and/or will be conserved in the same situations of the energy function.
 \section{Hamilton's equations through Hamilton's principle}
 To derive \hamiltonref\;we can also exploit \hpquotemath\;starting from:
 \begin{equation}
-    S = \int_{t_1}^{t_2}\lagr \diff{t}
+    S = \int_{t_1}^{t_2}\lagr \dd{t}
 \end{equation}
 Using the same definition for $\hamfun$ that we previously used:
 \begin{equation}
@@ -95,21 +95,21 @@ Using the same definition for $\hamfun$ that we previously used:
 \end{equation}
 We get:
 \begin{equation} \label{e:deltaS_hamilton}
-    \delta S = \int_{t_1}^{t_2}\bigg(\bigsum_{\alpha}\delta p_{\alpha}\dot{q}_{\alpha} + \bigsum_{\alpha} p_{\alpha} \underbrace{\delta \dot{q}_{\alpha}}_{\frac{\diff{}}{\diff{t}}\delta q_{\alpha}} - \bigsum_{\alpha} \partialD{\hamfun}{q_{\alpha}} \delta q_{\alpha}- \bigsum_{\alpha} \partialD{\hamfun}{p_{\alpha}} \delta p_{\alpha}\bigg) \diff{t}
+    \delta S = \int_{t_1}^{t_2}\bigg(\bigsum_{\alpha}\delta p_{\alpha}\dot{q}_{\alpha} + \bigsum_{\alpha} p_{\alpha} \underbrace{\delta \dot{q}_{\alpha}}_{\frac{\dd{}}{\dd{t}}\delta q_{\alpha}} - \bigsum_{\alpha} \pdv{\hamfun}{q_{\alpha}} \delta q_{\alpha}- \bigsum_{\alpha} \pdv{\hamfun}{p_{\alpha}} \delta p_{\alpha}\bigg) \dd{t}
 \end{equation}
 We apply the product rule on the second member:
 \begin{equation}
-    \bigsum_{\alpha} p_{\alpha} \totalD{}{t}\delta q_{\alpha} = \bigsum_{\alpha} \bigg[ \totalD{}{t}(p_{\alpha} \delta q_{\alpha}) -  \delta q_{\alpha}\totalD{}{t}p_{\alpha}\bigg]
+    \bigsum_{\alpha} p_{\alpha} \dv{}{t}\delta q_{\alpha} = \bigsum_{\alpha} \bigg[ \dv{}{t}(p_{\alpha} \delta q_{\alpha}) -  \delta q_{\alpha}\dv{}{t}p_{\alpha}\bigg]
 \end{equation}
 Integrating the first term we get:
 \begin{equation}
-    \int_{t_1}^{t_2} \bigsum_{\alpha} \totalD{}{t}(p_{\alpha} \delta q_{\alpha}) \diff{t} = \bigsum_{\alpha} p_{\alpha} \delta q_{\alpha} \bigg|_{t_1}^{t_2} = 0
+    \int_{t_1}^{t_2} \bigsum_{\alpha} \dv{}{t}(p_{\alpha} \delta q_{\alpha}) \dd{t} = \bigsum_{\alpha} p_{\alpha} \delta q_{\alpha} \bigg|_{t_1}^{t_2} = 0
 \end{equation}
 This is zero because in \hpquotemath\;we assumed that the virtual displacement at the extreme points is zero. So we can rewrite \eqref{e:deltaS_hamilton} putting in evidence the common terms:
 \begin{equation}
     \begin{split}
-        \delta S &= \int_{t_1}^{t_2}\bigg(\bigsum_{\alpha}\delta p_{\alpha}\dot{q}_{\alpha} - \bigsum_{\alpha} \delta q_{\alpha}\dot{p}_{\alpha} - \bigsum_{\alpha} \partialD{\hamfun}{q_{\alpha}} \delta q_{\alpha}- \bigsum_{\alpha} \partialD{\hamfun}{p_{\alpha}} \delta p_{\alpha}\bigg) \diff{t} \\
-        \delta S &= \int_{t_1}^{t_2}\bigg(\bigsum_{\alpha}\bigg[\dot{q}_{\alpha} - \partialD{\hamfun}{p_{\alpha}}\bigg] \delta p_{\alpha} - \bigsum_{\alpha} \bigg[\dot{p}_{\alpha} + \partialD{\hamfun}{q_{\alpha}} \bigg]\delta q_{\alpha}\bigg) \diff{t} = 0
+        \delta S &= \int_{t_1}^{t_2}\bigg(\bigsum_{\alpha}\delta p_{\alpha}\dot{q}_{\alpha} - \bigsum_{\alpha} \delta q_{\alpha}\dot{p}_{\alpha} - \bigsum_{\alpha} \pdv{\hamfun}{q_{\alpha}} \delta q_{\alpha}- \bigsum_{\alpha} \pdv{\hamfun}{p_{\alpha}} \delta p_{\alpha}\bigg) \dd{t} \\
+        \delta S &= \int_{t_1}^{t_2}\bigg(\bigsum_{\alpha}\bigg[\dot{q}_{\alpha} - \pdv{\hamfun}{p_{\alpha}}\bigg] \delta p_{\alpha} - \bigsum_{\alpha} \bigg[\dot{p}_{\alpha} + \pdv{\hamfun}{q_{\alpha}} \bigg]\delta q_{\alpha}\bigg) \dd{t} = 0
     \end{split}
 \end{equation}
 Since all the terms are independent by construction all the brackets must be zero. In this way we get the same set of equation as we did before.
@@ -124,7 +124,7 @@ Consider two functions $f,g$ in the phase space:
 \end{equation}
 We define Poisson brackets as follows:
 \begin{equation}
-    \pb{f}{g} = \bigsum_{\alpha}\brackets{\partialD{f}{q_{\alpha}}\partialD{g}{p_\alpha} - \partialD{f}{p_{\alpha}}\partialD{g}{q_{\alpha}}}
+    \pb{f}{g} = \bigsum_{\alpha}\brackets{\pdv{f}{q_{\alpha}}\pdv{g}{p_\alpha} - \pdv{f}{p_{\alpha}}\pdv{g}{q_{\alpha}}}
 \end{equation}
 Notice that $\pb{f}{g}$ is still a function in the phase space.\\
 Now we can give some \underline{properties} of the Poisson brackets:
@@ -138,18 +138,18 @@ Now we can give some \underline{properties} of the Poisson brackets:
 \end{enumerate}
 Given this definition let's evaluate the total time derivative of a function $f$ in the phase space:
 \begin{equation}
-    \totalD{f}{t} = \bigsum_{\alpha}\brackets{\partialD{f}{q_{\alpha}}\dot{q}_{\alpha} + \partialD{f}{p_{\alpha}}\dot{p}_{\alpha}} + \partialD{f}{t}
+    \dv{f}{t} = \bigsum_{\alpha}\brackets{\pdv{f}{q_{\alpha}}\dot{q}_{\alpha} + \pdv{f}{p_{\alpha}}\dot{p}_{\alpha}} + \pdv{f}{t}
 \end{equation}
 Using \hamiltonref\;we can rewrite this as:
 \begin{equation}
     \begin{split}
-        \totalD{f}{t} &= \bigsum_{\alpha}\brackets{\partialD{f}{q_{\alpha}}\partialD{\hamfun}{p_{\alpha}} - \partialD{f}{p_{\alpha}}\partialD{\hamfun}{q_{\alpha}}} + \partialD{f}{t}\\
-        \totalD{f}{t} &= \pb{f}{\hamfun} + \partialD{f}{t}
+        \dv{f}{t} &= \bigsum_{\alpha}\brackets{\pdv{f}{q_{\alpha}}\pdv{\hamfun}{p_{\alpha}} - \pdv{f}{p_{\alpha}}\pdv{\hamfun}{q_{\alpha}}} + \pdv{f}{t}\\
+        \dv{f}{t} &= \pb{f}{\hamfun} + \pdv{f}{t}
     \end{split}
 \end{equation}
 And so we can get a new condition for any generic function $f$ to be a constant of motion:
 \begin{equation}
-    f\;\text{is conserved} \iff \totalD{f}{t} = 0 \iff \pb{f}{\hamfun} = -\partialD{f}{t}
+    f\;\text{is conserved} \iff \dv{f}{t} = 0 \iff \pb{f}{\hamfun} = -\pdv{f}{t}
 \end{equation}
 Furter more if $f$ is independent of time the condition is:
 \begin{equation}

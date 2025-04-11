@@ -18,7 +18,7 @@ We take in consideration the system near point of local minimum for the potentia
 \end{figure}
 Given this we can approximate the potential to it's second order Taylor expansion near the point $q_0$ (local minimum):
 \begin{equation}
-    V \simeq V(q_0) + \crossout{\partialD{V}{q}\bigg|_{q_0}}(q-q_0) + \dfrac{1}{2}\partialDD{V}{q}\bigg|_{q_0}(q-q_0)^2
+    V \simeq V(q_0) + \crossout{\pdv{V}{q}\bigg|_{q_0}}(q-q_0) + \dfrac{1}{2}\pdv[2]{V}{q}\bigg|_{q_0}(q-q_0)^2
 \end{equation}
 The first derivative is zero since we are at a minimum, we can also ignore the value of the potential $V(q_0)$ and set it equal to zero, since we can always change the potential reference. Finally, we define:
 \begin{equation}
@@ -26,7 +26,7 @@ The first derivative is zero since we are at a minimum, we can also ignore the v
 \end{equation}
 And so we get:
 \begin{equation} \label{e:potential_1D_oscillation}
-    V(\eta) \simeq \dfrac{1}{2}\underbrace{\partialDD{V}{\eta}\bigg|_{q_0}}_{\Velegant}\eta^2 = \dfrac{1}{2}\Velegant\eta^2
+    V(\eta) \simeq \dfrac{1}{2}\underbrace{\pdv[2]{V}{\eta}\bigg|_{q_0}}_{\Velegant}\eta^2 = \dfrac{1}{2}\Velegant\eta^2
 \end{equation}
 Where we defined the second order partial derivative as a known quantity $\Velegant$. We also know that, since $q$ and $\eta$ are different only for a constant term:
 \begin{equation} \label{e:kinetic_1D_oscillation}
@@ -35,14 +35,14 @@ Where we defined the second order partial derivative as a known quantity $\Veleg
 From this we can write the \eleref :
 \begin{equation}
     \begin{split}
-        \totalD{}{t}\partialD{\lagr}{\dot{\eta}} -\partialD{\lagr}{\eta} = 0 \\
-        \totalD{}{t}\partialD{T}{\dot{\eta}} + \partialD{V}{\eta} = 0
+        \dv{}{t}\pdv{\lagr}{\dot{\eta}} -\pdv{\lagr}{\eta} = 0 \\
+        \dv{}{t}\pdv{T}{\dot{\eta}} + \pdv{V}{\eta} = 0
     \end{split}
 \end{equation}
 Substituting what we got in \eqref{e:potential_1D_oscillation} and \eqref{e:kinetic_1D_oscillation}:
 \begin{equation}
     \begin{split}
-        \totalD{}{t}(m\dot{\eta}) + \Velegant\eta &= 0\\
+        \dv{}{t}(m\dot{\eta}) + \Velegant\eta &= 0\\
         m\ddot{\eta} + \Velegant\eta &= 0
     \end{split}
 \end{equation}
@@ -79,7 +79,7 @@ Now we want to discuss a more general type of system with $n\geq2$ degrees of fr
 \end{figure}
 In this case the potential can be approximated near the point with the Taylor formula for multivariable scalar functions:
 \begin{equation} \label{e:taylor_potential_scalar_product}
-    V(\vec{q}) \simeq \underbrace{V(\vec{q}_0)}_{\text{constant}} + \crossout{\langle \nabla V(\vec{q}_0), \vec{q}-\vec{q}_0\rangle} + \dfrac{1}{2}\langle H V(\vec{q}_0)(\vec{q}-\vec{q}_0), (\vec{q}-\vec{q}_0)\rangle
+    V(\vec{q}) \simeq \underbrace{V(\vec{q}_0)}_{\text{constant}} + \crossout{\langle \gradient V(\vec{q}_0), \vec{q}-\vec{q}_0\rangle} + \dfrac{1}{2}\langle H V(\vec{q}_0)(\vec{q}-\vec{q}_0), (\vec{q}-\vec{q}_0)\rangle
 \end{equation}
 Again we exploit the fact that we can choose an arbitrary level for the potential, and we define:
 \begin{equation}
@@ -99,13 +99,13 @@ For the kinetic energy $T$ we assume that the transformation equations do not de
 \end{equation}
 We consider the Taylor expansion of $\Telegant'_{\alpha \beta}$. In this case we can stop at the first order because there is no reason to assume that the kinetic energy and the potential energy have a minimum at the same point:
 \begin{equation}
-    \Telegant'_{\alpha \beta} \simeq \Telegant'_{\alpha \beta}(\vec{0}) + \bigsum_{\gamma}\partialD{\Telegant'_{\alpha \beta}}{\eta_{\gamma}}\bigg|_{\vec{0}}\eta_{\gamma}
+    \Telegant'_{\alpha \beta} \simeq \Telegant'_{\alpha \beta}(\vec{0}) + \bigsum_{\gamma}\pdv{\Telegant'_{\alpha \beta}}{\eta_{\gamma}}\bigg|_{\vec{0}}\eta_{\gamma}
 \end{equation}
 Going back to the general expression for $T$ we get:
 \begin{equation}
     \begin{split}
-        T &\simeq \dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}\brackets{\Telegant'_{\alpha \beta}(\vec{0}) + \bigsum_{\gamma}\partialD{\Telegant'_{\alpha \beta}}{\eta_{\gamma}}\bigg|_{\vec{0}}\eta_{\gamma}} \dot{\eta}_{\alpha}\dot{\eta}_{\beta} =\\
-        &= \dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}\bigsum_{\gamma}\underbrace{\partialD{\Telegant'_{\alpha \beta}}{\eta_{\gamma}}\bigg|_{\vec{0}}\eta_{\gamma} \dot{\eta}_{\alpha}\dot{\eta}_{\beta}}_{o(\eta \dot{\eta}^2)} + \dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}\underbrace{\Telegant'_{\alpha \beta}(\vec{0})\dot{\eta}_{\alpha}\dot{\eta}_{\beta}}_{o(\dot{\eta}^2)}
+        T &\simeq \dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}\brackets{\Telegant'_{\alpha \beta}(\vec{0}) + \bigsum_{\gamma}\pdv{\Telegant'_{\alpha \beta}}{\eta_{\gamma}}\bigg|_{\vec{0}}\eta_{\gamma}} \dot{\eta}_{\alpha}\dot{\eta}_{\beta} =\\
+        &= \dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}\bigsum_{\gamma}\underbrace{\pdv{\Telegant'_{\alpha \beta}}{\eta_{\gamma}}\bigg|_{\vec{0}}\eta_{\gamma} \dot{\eta}_{\alpha}\dot{\eta}_{\beta}}_{o(\eta \dot{\eta}^2)} + \dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}\underbrace{\Telegant'_{\alpha \beta}(\vec{0})\dot{\eta}_{\alpha}\dot{\eta}_{\beta}}_{o(\dot{\eta}^2)}
     \end{split}
 \end{equation}
 We can neglect the first term since it is small with respect to the second term. Now we define:
@@ -143,14 +143,14 @@ So the Lagrangian for the system is:
 The terms of the \eleref\;are:
 \begin{equation}
     \begin{split}
-        \partialD{\lagr}{\eta_{\gamma}} &= -\partialD{V}{\eta_{\gamma}} = -\dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}\Velegant_{\alpha \beta} \partialD{}{\eta_{\gamma}}\brackets{\eta_{\alpha}\eta_{\beta}}\\
-        \partialD{\lagr}{\dot{\eta}_{\gamma}} &= \partialD{T}{\dot{\eta}_{\gamma}} = \dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}\Telegant_{\alpha \beta}\partialD{}{\dot{\eta}_{\gamma}}\brackets{\dot{\eta}_{\alpha}\dot{\eta}_{\beta}}
+        \pdv{\lagr}{\eta_{\gamma}} &= -\pdv{V}{\eta_{\gamma}} = -\dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}\Velegant_{\alpha \beta} \pdv{}{\eta_{\gamma}}\brackets{\eta_{\alpha}\eta_{\beta}}\\
+        \pdv{\lagr}{\dot{\eta}_{\gamma}} &= \pdv{T}{\dot{\eta}_{\gamma}} = \dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}\Telegant_{\alpha \beta}\pdv{}{\dot{\eta}_{\gamma}}\brackets{\dot{\eta}_{\alpha}\dot{\eta}_{\beta}}
     \end{split}
 \end{equation}
 Evaluating the partial derivatives we get:
 \begin{equation}
     \begin{split}
-        \partialD{\lagr}{\eta_{\gamma}} &= -\dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}\Velegant_{\alpha \beta} \bigg(\eta_{\beta}\underbrace{\partialD{\eta_{\alpha}}{\eta_{\gamma}}}_{\delta_{\gamma \alpha}} + \eta_{\alpha}\underbrace{\partialD{\eta_{\beta}}{\eta_{\gamma}}}_{\delta_{\gamma \beta}}\bigg) =\\
+        \pdv{\lagr}{\eta_{\gamma}} &= -\dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}\Velegant_{\alpha \beta} \bigg(\eta_{\beta}\underbrace{\pdv{\eta_{\alpha}}{\eta_{\gamma}}}_{\delta_{\gamma \alpha}} + \eta_{\alpha}\underbrace{\pdv{\eta_{\beta}}{\eta_{\gamma}}}_{\delta_{\gamma \beta}}\bigg) =\\
         &= -\dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}\Velegant_{\alpha \beta} \eta_{\beta}\delta_{\gamma \alpha} - \dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}\Velegant_{\alpha \beta} \eta_{\alpha}\delta_{\gamma \beta} = \\
         &= -\dfrac{1}{2}\bigsum_{\beta}\Velegant_{\gamma \beta} \eta_{\beta} - \dfrac{1}{2}\bigsum_{\alpha}\Velegant_{\alpha \gamma} \eta_{\alpha} =\\
         &= -\bigsum_{\alpha}\Velegant_{\alpha \gamma} \eta_{\alpha}
@@ -158,11 +158,11 @@ Evaluating the partial derivatives we get:
 \end{equation}
 We simplified the summation in the second line because of the Kronecker delta, and we can notice that in the third line the two terms are actually identical due to the fact that $\Velegant_{\alpha \gamma} = \Velegant_{\gamma \beta}$ and we are summing over all indices. The calculation for the kinetic energy is the same and we get:
 \begin{equation}
-    \partialD{\lagr}{\dot{\eta}_{\gamma}} = \bigsum_{\alpha}\Telegant_{\alpha \gamma} \dot{\eta}_{\alpha}
+    \pdv{\lagr}{\dot{\eta}_{\gamma}} = \bigsum_{\alpha}\Telegant_{\alpha \gamma} \dot{\eta}_{\alpha}
 \end{equation}
 Hence we evaluate the total time derivative:
 \begin{equation}
-    \totalD{}{t}\partialD{\lagr}{\dot{\eta}_{\gamma}} = \totalD{}{t}\bigsum_{\alpha}\Telegant_{\alpha \gamma} \eta_{\alpha} = \bigsum_{\alpha}\Telegant_{\alpha \gamma} \ddot{\eta}_{\alpha}
+    \dv{}{t}\pdv{\lagr}{\dot{\eta}_{\gamma}} = \dv{}{t}\bigsum_{\alpha}\Telegant_{\alpha \gamma} \eta_{\alpha} = \bigsum_{\alpha}\Telegant_{\alpha \gamma} \ddot{\eta}_{\alpha}
 \end{equation}
 So the \eleref\;are:
 \begin{equation} \label{e:ele_for_gamma}
@@ -487,7 +487,7 @@ The potential is the sum of the gravitational potentials of the masses and of th
         &+ \dfrac{1}{2}k\left[\sqrt{(l\sin\theta_2+d-l\sin\theta_1)^2+(l\cos\theta_1-l\cos\theta_2)^2}-d\right]^2\\
     \end{split}
 \end{equation}
-To find the minimum value of the potential we should theoretically evaluate the gradient and solve for $\nabla V = \vec{0}$, but if we look at the configuration we can easily notice that the potential is minimum when the pendulums are in the vertical position and the spring is at rest as shown:
+To find the minimum value of the potential we should theoretically evaluate the gradient and solve for $\gradient V = \vec{0}$, but if we look at the configuration we can easily notice that the potential is minimum when the pendulums are in the vertical position and the spring is at rest as shown:
 \\\textbf{IMMAGINE}\\
 Thus we can expand the potential at $(0,0)$. Notice that the coordinates $\eta_1$ and $\eta_2$ in this case are equivalent to the ones we chose:
 \begin{equation}

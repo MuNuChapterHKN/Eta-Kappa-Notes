@@ -6,7 +6,7 @@ For a single particle system of mass \textit{m}, which is moving along a traject
     \item Velocity: $\vec{v} = \dfrac{\mathrm{d} \vec{r}}{\mathrm{d} t}=\dot{\vec{r}}$, which magnitude is called \textit{speed}
     \item Acceleration: $\vec{a}=\dfrac{\mathrm{d}^2 \vec{r}}{\mathrm{d} t^2}=\dot{\vec{v}}=\ddot{\vec{r}}$
 \end{itemize}
-\begin{figure}[!ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{res/svg/onepartsys.drawio}
     \caption{One particle system}
@@ -23,7 +23,7 @@ From that we can derive some quantities:
         \vec{L_{\Omega}} = \left(\vec{r}-\vec{r}_{\Omega}\right) \wedge m\vec{v} = \left(\vec{r}-\vec{r}_{\Omega}\right) \wedge \vec{p}
     \end{equation}
     The angular momentum is a pseudo-vector and it is always calculated with reference to a generic point $\Omega$.
-    \begin{figure}[!ht]
+    \begin{figure}[H]
         \centering
         \includegraphics[width=0.6\textwidth]{res/svg/omegareference.drawio}
         \caption{Reference point for angular momentum}
@@ -45,7 +45,7 @@ From that we can derive some quantities:
         \vec{\tau}_{\Omega} = 0 \iff\vec{L}_{\Omega}\;\mathrm{is\;constant}
     \end{equation}
     If $\vec{L}_{\Omega}$ is fixed then the trajectory happens on a plane.
-    \begin{figure}[!ht]
+    \begin{figure}[H]
         \centering
         \includegraphics[width=0.6\textwidth]{res/svg/singleplanemotion.drawio}
         \caption{Motion on a single plane}
@@ -54,7 +54,7 @@ From that we can derive some quantities:
 \end{itemize}
 \section{One particle systems - Work}
 The work done by the total force on a particle from point $P_1$ to $P_2$ along a generic path can be visualized as:
-\begin{figure}[!ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{res/svg/work.drawio}
     \caption{Work of the total force}
@@ -188,15 +188,15 @@ Since we restrict our cases we have:
     \vec{F} = \bigsum_{i=1}\vec{F}_i = \bigsum_{i=1}\vec{F}_i^{\;(ext)} + \cancel{\bigsum_{i=1}\bigsum_{j\neq i}\vec{F}_i}\raisebox{14pt}{\scriptsize = 0}
 \end{equation}
 \begin{equation}
-    \vec{F} = \bigsum_{i=1}\vec{F}_i = \bigsum_{i=1}\dfrac{\diff{\vec{p}_i}}{\diff{t}} = \dfrac{\diff{}}{\diff{t}}\bigsum_{i=1}\vec{p}_i = \dfrac{\diff{\vec{P}}}{\diff{t}}
+    \vec{F} = \bigsum_{i=1}\vec{F}_i = \bigsum_{i=1}\dfrac{\dd{\vec{p}_i}}{\dd{t}} = \dfrac{\dd{}}{\dd{t}}\bigsum_{i=1}\vec{p}_i = \dfrac{\dd{\vec{P}}}{\dd{t}}
 \end{equation}
 But also:
 \begin{equation}
-    \dfrac{\diff{\vec{P}}}{\diff{t}} = \bigsum_{i=1}\vec{F}_i^{\;(ext)}
+    \dfrac{\dd{\vec{P}}}{\dd{t}} = \bigsum_{i=1}\vec{F}_i^{\;(ext)}
 \end{equation}
 So (only if weak action law holds):
 \begin{equation}
-    \vec{F} = \dfrac{\diff{\vec{P}}}{\diff{t}}
+    \vec{F} = \dfrac{\dd{\vec{P}}}{\dd{t}}
 \end{equation}
 \section{Multiple particles systems - Angular momentum}
 Starting from the definition:
@@ -204,7 +204,7 @@ Starting from the definition:
     \vec{L}_{\Omega} = \bigsum_{i}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\wedge\vec{p}_i
 \end{equation}
 \begin{equation}
-    \dfrac{\diff{\vec{L}_{\Omega}}}{\diff{t}} = \bigsum_{i}\dfrac{\diff{}}{\diff{t}}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\wedge\vec{p}_i + \bigsum_{i}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\wedge\dfrac{\diff{\vec{p}_i}}{\diff{t}} =
+    \dfrac{\dd{\vec{L}_{\Omega}}}{\dd{t}} = \bigsum_{i}\dfrac{\dd{}}{\dd{t}}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\wedge\vec{p}_i + \bigsum_{i}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\wedge\dfrac{\dd{\vec{p}_i}}{\dd{t}} =
 \end{equation}
 \begin{equation}
     = \crossout{\bigsum_{i}\vec{v}_i\wedge\vec{p}_i}-\bigsum_{i}\vec{v}_{\Omega}\wedge\vec{p}_i + \bigsum_{i}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\wedge\vec{F}_i =
@@ -214,7 +214,7 @@ Starting from the definition:
 \end{equation}
 We can simplify the first term since $\vec{v}_i \parallel \vec{p}_i$ and we can also see that the last term is the \textbf{total torque} $\vec{\tau}_{\Omega}$, which is the result of both the internal and external forces.
 \begin{equation} \label{e:first_angular_expression}
-    \dfrac{\diff{\vec{L}_{\Omega}}}{\diff{t}} = -\vec{v}_{\Omega}\wedge\vec{P} + \vec{\tau}_{\Omega}
+    \dfrac{\dd{\vec{L}_{\Omega}}}{\dd{t}} = -\vec{v}_{\Omega}\wedge\vec{P} + \vec{\tau}_{\Omega}
 \end{equation}
 If we restrict to the strong action law we get:
 \begin{equation}
@@ -234,7 +234,7 @@ So we get:
 \end{equation}
 Going back to \eqref{e:first_angular_expression} we get:
 \begin{equation}
-    \dfrac{\diff{\vec{L}_{\Omega}}}{\diff{t}} = -\vec{v}_{\Omega}\wedge\vec{P} + \vec{\tau}^{\;(ext)}
+    \dfrac{\dd{\vec{L}_{\Omega}}}{\dd{t}} = -\vec{v}_{\Omega}\wedge\vec{P} + \vec{\tau}^{\;(ext)}
 \end{equation}
 The first term can be 0 if:
 \begin{itemize}
@@ -244,7 +244,7 @@ The first term can be 0 if:
 \end{itemize}
 So in the case of $\Omega = \mathrm{CM}$ we have:
 \begin{equation} \label{e:first_cardinal}
-    \dfrac{\diff{\vec{L}_{\Omega}}}{\diff{t}} = \vec{\tau}_{\Omega}
+    \dfrac{\dd{\vec{L}_{\Omega}}}{\dd{t}} = \vec{\tau}_{\Omega}
 \end{equation}
 Then:
 \begin{equation}
@@ -270,29 +270,29 @@ From this we can state \textbf{Konig's theorem}:
 Where $T'$ is the kinetic energy associated to the motion with respect to the centre of mass.\\
 Now we can analyze the work of the system of particles:
 \begin{equation}
-    W_{12} = \bigsum_i\int_{1}^{2}\vec{F}_i = \int_{1}^{2}\bigsum_i\vec{F}_i = \int_{1}^{2}\bigsum_i\brackets{\vec{F}_i^{\;(ext)} + \bigsum_{j\neq i}\vec{F}_{ji}}\cdot \diff{\vec{r}_i} =
+    W_{12} = \bigsum_i\int_{1}^{2}\vec{F}_i = \int_{1}^{2}\bigsum_i\vec{F}_i = \int_{1}^{2}\bigsum_i\brackets{\vec{F}_i^{\;(ext)} + \bigsum_{j\neq i}\vec{F}_{ji}}\cdot \dd{\vec{r}_i} =
 \end{equation}
 \begin{equation}
-    = \int_{1}^{2}\brackets{\bigsum_i\vec{F}_i^{\;(ext)} + \bigsum_i\bigsum_{j\neq i}\vec{F}_{ji}}\cdot \diff{\vec{r}_i}
+    = \int_{1}^{2}\brackets{\bigsum_i\vec{F}_i^{\;(ext)} + \bigsum_i\bigsum_{j\neq i}\vec{F}_{ji}}\cdot \dd{\vec{r}_i}
 \end{equation}
-The term $\bigsum_i\bigsum_{j\neq i}\vec{F}_{ji}\cdot \diff{\vec{r}_i}$ is not necessarily 0, but it is 0 in the case of rigid bodies.\\
+The term $\bigsum_i\bigsum_{j\neq i}\vec{F}_{ji}\cdot \dd{\vec{r}_i}$ is not necessarily 0, but it is 0 in the case of rigid bodies.\\
 If external forces are conservative:
 \begin{equation}
     \vec{F}_i^{\;(ext)} = -\nabla_i V_i
 \end{equation}
 The gradient with respect to i is $\nabla_i = \brackets{\partial_{x_i}, \partial_{y_i}, \partial_{z_i}}$. So the work of external forces is just:
 \begin{equation}
-    W_{12}^{\;(ext)} = \int_{1}^{2}\bigsum_i\brackets{\vec{F}_i\cdot\diff{\vec{r}_i}} = -\bigsum_i\int_{1}^{2}\nabla_i V_i\cdot\diff{\vec{r}_i} =
+    W_{12}^{\;(ext)} = \int_{1}^{2}\bigsum_i\brackets{\vec{F}_i\cdot\dd{\vec{r}_i}} = -\bigsum_i\int_{1}^{2}\nabla_i V_i\cdot\dd{\vec{r}_i} =
 \end{equation}
 \begin{equation}
-    = -\bigsum_i\int_{1}^{2}\diff{V_i} = -\bigsum_i V_i\bigg|_1^2
+    = -\bigsum_i\int_{1}^{2}\dd{V_i} = -\bigsum_i V_i\bigg|_1^2
 \end{equation}
 Now defining $V^{\;(ext)} = \bigsum_i V_i$ we get:
 \begin{equation}
     W_{12}^{\;(ext)} = V^{\;(ext)}_1 - V^{\;(ext)}_2
 \end{equation}
 Now we can see that if forces obey both the strong and the weak action law both $\vec{F}_{ji}$ and $\vec{F}_{ij}$ lie on the line of $\vec{r}_{ij} = \vec{r}_i-\vec{r}_j$ as shown in this example:
-\begin{figure}[!ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{res/svg/forcesstronglaw.drawio}
     \caption{Forces with strong action law}
@@ -339,15 +339,15 @@ Doing the same for $\vec{F}_{ij}$ we get:
 \end{equation}
 If the internal forces are conservative $V$ must depend only on the magnitude of the distance ($r_{ij}$). Hence:
 \begin{equation}
-    W^{(int)}=\dfrac{1}{2}\int_{1}^{2}\bigsum_i\bigsum_j\vec{F}_{ji}\cdot\diff{\vec{r}_i}
+    W^{(int)}=\dfrac{1}{2}\int_{1}^{2}\bigsum_i\bigsum_j\vec{F}_{ji}\cdot\dd{\vec{r}_i}
 \end{equation}
 The double summation contains terms such as:
 \begin{equation}
-    \vec{F}_{ji}\cdot\diff{\vec{r}_i} + \vec{F}_{ij}\cdot\diff{\vec{r}_j} = \nabla_{ij}V\cdot\diff{\vec{r}_i} + -\nabla_{ij}V\cdot\diff{\vec{r}_j} = -\nabla_{ij}V\cdot\brackets{\diff{\vec{r}_i}-\diff{\vec{r}_j}}
+    \vec{F}_{ji}\cdot\dd{\vec{r}_i} + \vec{F}_{ij}\cdot\dd{\vec{r}_j} = \nabla_{ij}V\cdot\dd{\vec{r}_i} + -\nabla_{ij}V\cdot\dd{\vec{r}_j} = -\nabla_{ij}V\cdot\brackets{\dd{\vec{r}_i}-\dd{\vec{r}_j}}
 \end{equation}
-Now naming the differential $\diff{\vec{r}_{ij}}=\diff{\vec{r}_i}-\diff{\vec{r}_j}$ and recalling that $-\nabla_{ij}V\cdot\diff{\vec{r}_{ij}} = -\diff{V_{ij}}$ we get:
+Now naming the differential $\dd{\vec{r}_{ij}}=\dd{\vec{r}_i}-\dd{\vec{r}_j}$ and recalling that $-\nabla_{ij}V\cdot\dd{\vec{r}_{ij}} = -\dd{V_{ij}}$ we get:
 \begin{equation}
-    W^{(int)}=-\dfrac{1}{2}\int_{1}^{2}\bigsum_i\bigsum_j\diff{V_{ij}} = -\dfrac{1}{2}\bigsum_i\bigsum_j V_{ij}\bigg|_{1}^{2}
+    W^{(int)}=-\dfrac{1}{2}\int_{1}^{2}\bigsum_i\bigsum_j\dd{V_{ij}} = -\dfrac{1}{2}\bigsum_i\bigsum_j V_{ij}\bigg|_{1}^{2}
 \end{equation}
 So the total work is:
 \begin{equation}
@@ -359,7 +359,7 @@ Defining $V=-\bigsum_i V_i -\dfrac{1}{2}\bigsum_i\bigsum_j V_{ij}$ the total wor
 \end{equation}
 But the total work is also:
 \begin{equation}
-    W = \int_{1}^{2}\bigsum_i \vec{F}_i \cdot \diff{r_i}= \bigsum_i \int_{1}^{2} \vec{F}_i \cdot \diff{r_i} = T_2 - T_1
+    W = \int_{1}^{2}\bigsum_i \vec{F}_i \cdot \dd{r_i}= \bigsum_i \int_{1}^{2} \vec{F}_i \cdot \dd{r_i} = T_2 - T_1
 \end{equation}
 So, for conservative systems we get:
 \begin{equation}

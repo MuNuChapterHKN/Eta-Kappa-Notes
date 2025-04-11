@@ -7,7 +7,7 @@ Going back to \dalambertref, expressing in generalized coordinates:
 \end{equation}
 We drop the (a) term for an easier notation, from now on we will write $\vec{F}_i$ knowing that we are indicating the applied force.
 \begin{equation}
-    \delta \vec{r}_i = \bigsum_{\alpha} \dfrac{\partial \vec{r}_i}{\partial q_{\alpha}} \delta q_{\alpha} + \crossout{\dfrac{\partial \vec{r}_i}{\partial t} \diff{t}}
+    \delta \vec{r}_i = \bigsum_{\alpha} \dfrac{\partial \vec{r}_i}{\partial q_{\alpha}} \delta q_{\alpha} + \crossout{\dfrac{\partial \vec{r}_i}{\partial t} \dd{t}}
 \end{equation}
 The partial derivative over time is zero since we are considering a fixed moment in time. The force term in \dalambertref\;becomes:
 \begin{equation}
@@ -16,16 +16,16 @@ The partial derivative over time is zero since we are considering a fixed moment
 The terms $Q_{\alpha}$ are called \textbf{generalized components of the forces}.
 Now let's consider the expression $\bigsum_i \dvec{p}_i \cdot \delta \vec{r}_i$. We know that:
 \begin{itemize}
-    \item $\dvec{p}_i = \totalD{}{t}\brackets{m_i\vec{v_i}}$
+    \item $\dvec{p}_i = \dv{}{t}\brackets{m_i\vec{v_i}}$
     \item $\delta \vec{r}_i = \bigsum_{\alpha} \dfrac{\partial \vec{r}_i}{\partial q_{\alpha}}\delta q_{\alpha}$
 \end{itemize}
 Now, from the product rule:
 \begin{equation} \label{e:total_deriv}
-    \totalD{}{t}\brackets{m_i\vec{v_i} \cdot \dfrac{\partial \vec{r}_i}{\partial q_{\alpha}}} = \totalD{}{t}\brackets{m_i\vec{v_i}}\cdot \dfrac{\partial \vec{r}_i}{\partial q_{\alpha}} + m_i\vec{v_i} \cdot \totalD{}{t}\brackets{\dfrac{\partial \vec{r}_i}{\partial q_{\alpha}}}
+    \dv{}{t}\brackets{m_i\vec{v_i} \cdot \dfrac{\partial \vec{r}_i}{\partial q_{\alpha}}} = \dv{}{t}\brackets{m_i\vec{v_i}}\cdot \dfrac{\partial \vec{r}_i}{\partial q_{\alpha}} + m_i\vec{v_i} \cdot \dv{}{t}\brackets{\dfrac{\partial \vec{r}_i}{\partial q_{\alpha}}}
 \end{equation}
 From the last term we get:
 \begin{equation}
-    m_i\vec{v_i} \cdot \totalD{}{t}\brackets{\dfrac{\partial \vec{r}_i}{\partial q_{\alpha}}} = m_i\vec{v_i} \cdot \bigsum_{\beta} \dfrac{\partial}{\partial \dot{q}_{\beta} }\brackets{\dfrac{\partial \vec{r}_i}{\partial q_{\alpha}}} q_{\beta} + \dfrac{\partial}{\partial t}\brackets{\dfrac{\partial \vec{r}_i}{\partial q_{\alpha}}} =
+    m_i\vec{v_i} \cdot \dv{}{t}\brackets{\dfrac{\partial \vec{r}_i}{\partial q_{\alpha}}} = m_i\vec{v_i} \cdot \bigsum_{\beta} \dfrac{\partial}{\partial \dot{q}_{\beta} }\brackets{\dfrac{\partial \vec{r}_i}{\partial q_{\alpha}}} q_{\beta} + \dfrac{\partial}{\partial t}\brackets{\dfrac{\partial \vec{r}_i}{\partial q_{\alpha}}} =
 \end{equation}
 \begin{equation} \label{e:funny_derivative_p1}
     = m_i\vec{v_i} \cdot \dfrac{\partial}{\partial q_{\alpha} }\underbrace{\left[\bigsum_{\beta} \dfrac{\partial \vec{r}_i}{\partial q_{\beta}} \dot{q}_{\beta} + \dfrac{\partial \vec{r}_i}{\partial t}\right]}_{\dvec{v}_i} = m_i\vec{v}_i \cdot \dfrac{\partial \vec{v}_i}{\partial q_{\alpha}}
@@ -43,7 +43,7 @@ Deriving what we got in \eqref{e:funny_derivative_p1} we get:
 \end{equation}
 Again, the first term of \eqref{e:total_deriv} can be rewritten as:
 \begin{equation}
-    \bigsum_i \totalD{}{t}\brackets{m_i\vec{v_i} \cdot \dfrac{\partial \vec{r}_i}{\partial q_{\alpha}}} = \bigsum_i\totalD{}{t}\brackets{m_i\vec{v_i} \cdot \dfrac{\partial \vec{v}_i}{\partial \dot{q}_{\alpha}}} = \totalD{}{t}\left[\dfrac{\partial }{\partial \dot{q}_{\alpha}} \underbrace{\bigsum_i \brackets{\dfrac{1}{2}m_i \vec{v_i} \cdot \vec{v_i}}}_{T}\right]
+    \bigsum_i \dv{}{t}\brackets{m_i\vec{v_i} \cdot \dfrac{\partial \vec{r}_i}{\partial q_{\alpha}}} = \bigsum_i\dv{}{t}\brackets{m_i\vec{v_i} \cdot \dfrac{\partial \vec{v}_i}{\partial \dot{q}_{\alpha}}} = \dv{}{t}\left[\dfrac{\partial }{\partial \dot{q}_{\alpha}} \underbrace{\bigsum_i \brackets{\dfrac{1}{2}m_i \vec{v_i} \cdot \vec{v_i}}}_{T}\right]
 \end{equation}
 Similarly the last term in \eqref{e:total_deriv} is:
 \begin{equation}
@@ -51,21 +51,21 @@ Similarly the last term in \eqref{e:total_deriv} is:
 \end{equation}
 So we get:
 \begin{equation}
-    \bigsum_i \totalD{}{t}\brackets{m_i\vec{v_i}}\cdot \dfrac{\partial \vec{r}_i}{\partial q_{\alpha}} = \totalD{}{t}\dfrac{\partial T}{\partial \dot{q}_{\alpha}} - \dfrac{\partial T}{\partial q_{\alpha}}
+    \bigsum_i \dv{}{t}\brackets{m_i\vec{v_i}}\cdot \dfrac{\partial \vec{r}_i}{\partial q_{\alpha}} = \dv{}{t}\dfrac{\partial T}{\partial \dot{q}_{\alpha}} - \dfrac{\partial T}{\partial q_{\alpha}}
 \end{equation}
 Going back to \dalambertref\;we get:
 \begin{equation}
-    \bigsum_i \brackets{\vec{F}_i - \dvec{p}_i} \cdot \delta \vec{r}_i = \bigsum_{\alpha}Q_{\alpha}\delta q_{\alpha} - \bigsum_i \totalD{}{t}\brackets{m_i\vec{v_i}} \cdot \bigsum_{\alpha}\dfrac{\partial \vec{r}_i}{\partial q_{\alpha}}\delta q_{\alpha} =
+    \bigsum_i \brackets{\vec{F}_i - \dvec{p}_i} \cdot \delta \vec{r}_i = \bigsum_{\alpha}Q_{\alpha}\delta q_{\alpha} - \bigsum_i \dv{}{t}\brackets{m_i\vec{v_i}} \cdot \bigsum_{\alpha}\dfrac{\partial \vec{r}_i}{\partial q_{\alpha}}\delta q_{\alpha} =
 \end{equation}
 \begin{equation}
-    = \bigsum_{\alpha}Q_{\alpha}\delta q_{\alpha} - \bigsum_{\alpha}\bigsum_i \totalD{}{t}\brackets{m_i\vec{v_i}} \cdot \dfrac{\partial \vec{r}_i}{\partial q_{\alpha}}\delta q_{\alpha} =
+    = \bigsum_{\alpha}Q_{\alpha}\delta q_{\alpha} - \bigsum_{\alpha}\bigsum_i \dv{}{t}\brackets{m_i\vec{v_i}} \cdot \dfrac{\partial \vec{r}_i}{\partial q_{\alpha}}\delta q_{\alpha} =
 \end{equation}
 \begin{equation}
-    = \bigsum_{\alpha}Q_{\alpha}\delta q_{\alpha} - \bigsum_{\alpha}\brackets{\totalD{}{t}\dfrac{\partial T}{\partial \dot{q}_{\alpha}} - \dfrac{\partial T}{\partial q_{\alpha}}}\delta q_{\alpha} = 0
+    = \bigsum_{\alpha}Q_{\alpha}\delta q_{\alpha} - \bigsum_{\alpha}\brackets{\dv{}{t}\dfrac{\partial T}{\partial \dot{q}_{\alpha}} - \dfrac{\partial T}{\partial q_{\alpha}}}\delta q_{\alpha} = 0
 \end{equation}
 All the terms are independent by construction so we get a set of equations which are called \textbf{Lagrange equations} $\heartsuit$:
 \begin{equation} \label{Lagrange_equations}
-    \boxed{\totalD{}{t}\dfrac{\partial T}{\partial \dot{q}_{\alpha}} - \dfrac{\partial T}{\partial q_{\alpha}} = Q_{\alpha}}
+    \boxed{\dv{}{t}\dfrac{\partial T}{\partial \dot{q}_{\alpha}} - \dfrac{\partial T}{\partial q_{\alpha}} = Q_{\alpha}}
 \end{equation}
 which must be satisfied $\forall \alpha$s.
 Here are some basic properties of \lagrangeref :
@@ -85,11 +85,11 @@ Since $V$ (the total potential) must be a function of only the coordinates $V = 
 \end{equation}
 Rewriting \lagrangeref\;we get:
 \begin{equation}
-    \totalD{}{t}\dfrac{\partial T}{\partial \dot{q}_{\alpha}} - \dfrac{\partial T}{\partial q_{\alpha}} + \partial{V}{q_{\alpha}} = 0
+    \dv{}{t}\dfrac{\partial T}{\partial \dot{q}_{\alpha}} - \dfrac{\partial T}{\partial q_{\alpha}} + \partial{V}{q_{\alpha}} = 0
 \end{equation}
 If the potential does not depend on the generalized velocities we can subtract its derivative with respect to $\dot{q}_{\alpha}$, which will just be 0:
 \begin{equation}
-    \totalD{}{t}\dfrac{\partial }{\partial \dot{q}_{\alpha}}[\underbrace{T-V}_\lagr ] - \dfrac{\partial}{\partial q_{\alpha}}[\underbrace{T-V}_\lagr ] = 0
+    \dv{}{t}\dfrac{\partial }{\partial \dot{q}_{\alpha}}[\underbrace{T-V}_\lagr ] - \dfrac{\partial}{\partial q_{\alpha}}[\underbrace{T-V}_\lagr ] = 0
 \end{equation}
 We define the Lagrange function or \textbf{Lagrangian} as:
 \begin{equation}
@@ -97,7 +97,7 @@ We define the Lagrange function or \textbf{Lagrangian} as:
 \end{equation}
 Finally we can write the \textbf{Euler-Lagrange equations}:
 \begin{equation} \label{Euler_Lagrange_equations}
-    \boxed{\totalD{}{t}\partialD{\lagr}{\dot{q}_{\alpha}} = \partialD{\lagr}{q_{\alpha}}}
+    \boxed{\dv{}{t}\pdv{\lagr}{\dot{q}_{\alpha}} = \pdv{\lagr}{q_{\alpha}}}
 \end{equation}
 Here are some basic properties of \eleref :
 \begin{itemize}
@@ -121,30 +121,30 @@ If the potential $V$ \underline{does not} depend on time explicitly then the sys
     \delta W = \bigsum_i \vec{F}_i \delta \vec{r}_i = \bigsum_i \vec{F}_i \bigsum_{\alpha}\dfrac{\partial \vec{r}_i}{\partial q_{\alpha}}\delta q_{\alpha} = \bigsum_{\alpha} Q_{\alpha}\delta q_{\alpha} =
 \end{equation}
 \begin{equation}
-    = -\bigsum_{\alpha} \partial{V}{q_{\alpha}}\delta q_{\alpha} = -\diff{V}
+    = -\bigsum_{\alpha} \partial{V}{q_{\alpha}}\delta q_{\alpha} = -\dd{V}
 \end{equation}
 Instead if $V$ \underline{depends} on time explicitly we have that:
 \begin{equation}
-    \diff{V} = \bigsum_{\alpha} \partial{V}{q_{\alpha}}\delta q_{\alpha} + \dfrac{\partial V}{\partial t}\diff{t}
+    \dd{V} = \bigsum_{\alpha} \partial{V}{q_{\alpha}}\delta q_{\alpha} + \dfrac{\partial V}{\partial t}\dd{t}
 \end{equation}
-The extra term appearing in $\diff{V}$ is not present in the expression for work, meaning that:
+The extra term appearing in $\dd{V}$ is not present in the expression for work, meaning that:
 \begin{equation}
-    W_{12} \neq -\int_{1}^{2}\diff{V} = V_1 - V_2
+    W_{12} \neq -\int_{1}^{2}\dd{V} = V_1 - V_2
 \end{equation}
 so the system is not conservative.\\
 In some cases (ex. Lorentz force) the force does not come from a "real" potential, we can then rewrite \eleref\;for a function called \textbf{generalized potential} $\mu$ such that:
 \begin{equation}
-    Q_{\alpha} = -\dfrac{\partial \mu}{\partial q_{\alpha}} +\totalD{}{t}\dfrac{\partial \mu}{\partial \dot{q}_{\alpha}}
+    Q_{\alpha} = -\dfrac{\partial \mu}{\partial q_{\alpha}} +\dv{}{t}\dfrac{\partial \mu}{\partial \dot{q}_{\alpha}}
 \end{equation}
 Indeed, from \lagrangeref\;we get:
 \begin{equation}
-    \totalD{}{t}\dfrac{\partial T}{\partial \dot{q}_{\alpha}} - \dfrac{\partial T}{\partial q_{\alpha}} = -\dfrac{\partial \mu}{\partial q_{\alpha}} +\totalD{}{t}\dfrac{\partial \mu}{\partial \dot{q}_{\alpha}}
+    \dv{}{t}\dfrac{\partial T}{\partial \dot{q}_{\alpha}} - \dfrac{\partial T}{\partial q_{\alpha}} = -\dfrac{\partial \mu}{\partial q_{\alpha}} +\dv{}{t}\dfrac{\partial \mu}{\partial \dot{q}_{\alpha}}
 \end{equation}
 \begin{equation}
-    \totalD{}{t}\dfrac{\partial }{\partial \dot{q}_{\alpha}}[\underbrace{T-\mu}_L] - \dfrac{\partial}{\partial q_{\alpha}}[\underbrace{T-\mu}_L] = 0
+    \dv{}{t}\dfrac{\partial }{\partial \dot{q}_{\alpha}}[\underbrace{T-\mu}_L] - \dfrac{\partial}{\partial q_{\alpha}}[\underbrace{T-\mu}_L] = 0
 \end{equation}
 \begin{equation}
-    \totalD{}{t}\partialD{\lagr}{\dot{q}_{\alpha}} = \partialD{\lagr}{q_{\alpha}}
+    \dv{}{t}\pdv{\lagr}{\dot{q}_{\alpha}} = \pdv{\lagr}{q_{\alpha}}
 \end{equation}
 where we defined a generalized Lagrangian $\lagr = T-\mu$. These are called \textbf{generalized Euler-Lagrange equations}.
 \section{Derivation of Euler-Lagrange equations from Hamilton's principle}
@@ -152,7 +152,7 @@ A \textbf{monogenic system} is any system in which all the forces can be express
 \textbf{Configuration space} is the set of all $q_{\alpha}$s. It completly describes the position of each particle of the system at a givent ime which, indeed, is the \textit{configuration} of the system itself. We can imagine the configuration space as an $n$-dimensional space in which the axes are the various $q_{\alpha}$.
 Since each $q_{\alpha}$ changes with respect to time, the system describes a curve in the configuration space.\\
 Let us consider two instants of time $t_1$ and $t_2$:
-\begin{figure}[!ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.6\linewidth]{res/svg/leastactionpath.drawio}
     \caption{Path of least action}
@@ -164,7 +164,7 @@ Then \textbf{Hamilton's principle} states that:
 \end{quote}
 The action is defined as:
 \begin{equation}
-    S = \int_{t_1}^{t_2}\lagr(q_{\alpha},\dot{q}_{\alpha},t) \diff{t}
+    S = \int_{t_1}^{t_2}\lagr(q_{\alpha},\dot{q}_{\alpha},t) \dd{t}
 \end{equation}
 The units for actions are $[S] = \mathrm{J\cdot s}$.\\S is a \underline{functional} which is a "number" that depends on $q_{\alpha}$. Saying that $S$ is stationary means that slightly changing the path does not change the action.\\
 Now we aim to prove that the \hyperref[q:Hamilton_principle_quote]{Hamilton's principle} is true if and only if the \eleref\;are true.\\
@@ -180,17 +180,17 @@ For the second point we need to change the real path of a small virtual displace
 \end{equation}
 However after varying the whole path, for the real path we get:
 \begin{equation}
-    \dot{q}_{\alpha} = \dfrac{\diff{q_{\alpha}}}{\diff{t}}
+    \dot{q}_{\alpha} = \dfrac{\dd{q_{\alpha}}}{\dd{t}}
 \end{equation}
 for the changed path instead:
 \begin{equation}
-    \dot{q}_{\alpha} + \delta \dot{q}_{\alpha}(t) = \totalD{}{t}\brackets{q_{\alpha}(t) + \delta q_{\alpha}(t)}
+    \dot{q}_{\alpha} + \delta \dot{q}_{\alpha}(t) = \dv{}{t}\brackets{q_{\alpha}(t) + \delta q_{\alpha}(t)}
 \end{equation}
 \begin{equation}
-    \cancel{\dot{q}_{\alpha}} + \delta \dot{q}_{\alpha}(t) = \cancel{\dot{q}_{\alpha}} + \totalD{}{t}\brackets{\delta q_{\alpha}(t)}
+    \cancel{\dot{q}_{\alpha}} + \delta \dot{q}_{\alpha}(t) = \cancel{\dot{q}_{\alpha}} + \dv{}{t}\brackets{\delta q_{\alpha}(t)}
 \end{equation}
 \begin{equation}
-    \delta \dot{q}_{\alpha}(t) = \totalD{}{t}\brackets{\delta q_{\alpha}(t)}
+    \delta \dot{q}_{\alpha}(t) = \dv{}{t}\brackets{\delta q_{\alpha}(t)}
 \end{equation}
 Now let's evaluate the change on S and apply \hpquoteref\;which can be mathematically expressed as follows.\\\textbf{Hamilton's principle}:
 \begin{equation} \label{e:Hamilton_principle}
@@ -198,15 +198,15 @@ Now let's evaluate the change on S and apply \hpquoteref\;which can be mathemati
 \end{equation}
 For the real path:
 \begin{equation}
-    S = \int_{t_1}^{t_2}\lagr(q_{\alpha},\dot{q}_{\alpha},t) \diff{t}
+    S = \int_{t_1}^{t_2}\lagr(q_{\alpha},\dot{q}_{\alpha},t) \dd{t}
 \end{equation}
 For the changed path:
 \begin{equation}
-    \tilde{S} = \int_{t_1}^{t_2}\lagr(q_{\alpha}+\delta q_{\alpha},\dot{q}_{\alpha} + \delta \dot{q}_{\alpha},t) \diff{t}
+    \tilde{S} = \int_{t_1}^{t_2}\lagr(q_{\alpha}+\delta q_{\alpha},\dot{q}_{\alpha} + \delta \dot{q}_{\alpha},t) \dd{t}
 \end{equation}
 And so we get:
 \begin{equation}
-    \delta S = \tilde{S} - S = \int_{t_1}^{t_2}\brackets{\lagr(q_{\alpha}+\delta q_{\alpha},\dot{q}_{\alpha} + \delta \dot{q}_{\alpha},t) - \lagr(q_{\alpha},\dot{q}_{\alpha},t)} \diff{t}
+    \delta S = \tilde{S} - S = \int_{t_1}^{t_2}\brackets{\lagr(q_{\alpha}+\delta q_{\alpha},\dot{q}_{\alpha} + \delta \dot{q}_{\alpha},t) - \lagr(q_{\alpha},\dot{q}_{\alpha},t)} \dd{t}
 \end{equation}
 The right-hand side of the equation basically has the numerator of the difference quotient:
 \begin{equation}
@@ -214,41 +214,41 @@ The right-hand side of the equation basically has the numerator of the differenc
 \end{equation}
 for arbitrarily small values of h, which in our case is the value of the virtual displacement $\delta$. Hence, we get:
 \begin{equation}
-    \delta S = \int_{t_1}^{t_2}\bigsum_{\alpha}\brackets{\partialD{\lagr}{q_{\alpha}}\delta q_{\alpha} + \partialD{\lagr}{\dot{q}_{\alpha}} \underbrace{\delta \dot{q}_{\alpha}}_{\frac{\diff{}}{\diff{t}}\delta q_{\alpha}}} \diff{t} = 0
+    \delta S = \int_{t_1}^{t_2}\bigsum_{\alpha}\brackets{\pdv{\lagr}{q_{\alpha}}\delta q_{\alpha} + \pdv{\lagr}{\dot{q}_{\alpha}} \underbrace{\delta \dot{q}_{\alpha}}_{\frac{\dd{}}{\dd{t}}\delta q_{\alpha}}} \dd{t} = 0
 \end{equation}
 Let's evaluate the second using integration by parts:
 \begin{equation}
-    \int_{t_1}^{t_2}\bigsum_{\alpha}\partialD{\lagr}{\dot{q}_{\alpha}} \totalD{}{t}\delta q_{\alpha} \diff{t} = \crossout{\bigsum_{\alpha}\partialD{\lagr}{\dot{q}_{\alpha}} \delta q_{\alpha}\bigg|_{t_1}^{t_2}} - \int_{t_1}^{t_2}\bigsum_{\alpha}\totalD{}{t}\brackets{\partialD{\lagr}{\dot{q}_{\alpha}}} \delta q_{\alpha} \diff{t}
+    \int_{t_1}^{t_2}\bigsum_{\alpha}\pdv{\lagr}{\dot{q}_{\alpha}} \dv{}{t}\delta q_{\alpha} \dd{t} = \crossout{\bigsum_{\alpha}\pdv{\lagr}{\dot{q}_{\alpha}} \delta q_{\alpha}\bigg|_{t_1}^{t_2}} - \int_{t_1}^{t_2}\bigsum_{\alpha}\dv{}{t}\brackets{\pdv{\lagr}{\dot{q}_{\alpha}}} \delta q_{\alpha} \dd{t}
 \end{equation}
 The term cancelled is zero since the displacement is zero in $t_1$ and $t_2$ for hypotesis. Hence, we get:
 \begin{equation}
-    \int_{t_1}^{t_2}\bigsum_{\alpha}\partialD{\lagr}{q_{\alpha}}\delta q_{\alpha} \diff{t} - \int_{t_1}^{t_2}\bigsum_{\alpha}\totalD{}{t}\brackets{\partialD{\lagr}{\dot{q}_{\alpha}}} \delta q_{\alpha} \diff{t} = 0
+    \int_{t_1}^{t_2}\bigsum_{\alpha}\pdv{\lagr}{q_{\alpha}}\delta q_{\alpha} \dd{t} - \int_{t_1}^{t_2}\bigsum_{\alpha}\dv{}{t}\brackets{\pdv{\lagr}{\dot{q}_{\alpha}}} \delta q_{\alpha} \dd{t} = 0
 \end{equation}
 Since all the $\delta q_{\alpha}$ are independent we can pick any index $k$ and say that all the virtual displacements are zero except for the $k$-displacement, and we get:
 \begin{equation}
-    \int_{t_1}^{t_2}\dfrac{\partial \lagr}{\partial q_{k}}\delta q_{k} \diff{t} - \int_{t_1}^{t_2}\totalD{}{t}\brackets{\dfrac{\partial \lagr}{\partial \dot{q}_{k}}} \delta q_{k} \diff{t} = 0
+    \int_{t_1}^{t_2}\dfrac{\partial \lagr}{\partial q_{k}}\delta q_{k} \dd{t} - \int_{t_1}^{t_2}\dv{}{t}\brackets{\dfrac{\partial \lagr}{\partial \dot{q}_{k}}} \delta q_{k} \dd{t} = 0
 \end{equation}
 Now we need a result which is called \textbf{Fundamental Lemma of the calculus of variation} which states that:\\
 Taking any continuous function $M\in\mathcal{C}^0([a,b])$ and any function $\eta \in \mathcal{C}^2([a,b])$ such that $\eta(a) = \eta(b) = 0$ then it is true that:
 \begin{equation} \label{e:Fundamental_lemma_variation_calculus}
-    \int_{a}^{b}M(x)\eta(x)\diff{x} = 0 \Rightarrow M(x) = 0
+    \int_{a}^{b}M(x)\eta(x)\dd{x} = 0 \Rightarrow M(x) = 0
 \end{equation}
 For the proof of this lemma we refer to the section (TBD).\\
 In our case \eqref{e:Fundamental_lemma_variation_calculus} is satisfied for:
 \begin{equation}
-    \int_{t_1}^{t_2}\underbrace{\left[\dfrac{\partial \lagr}{\partial q_{k}} - \totalD{}{t}\brackets{\dfrac{\partial \lagr}{\partial \dot{q}_{k}}}\right]}_{M} \underbrace{\delta q_{k}}_{\eta} \diff{t} = 0
+    \int_{t_1}^{t_2}\underbrace{\left[\dfrac{\partial \lagr}{\partial q_{k}} - \dv{}{t}\brackets{\dfrac{\partial \lagr}{\partial \dot{q}_{k}}}\right]}_{M} \underbrace{\delta q_{k}}_{\eta} \dd{t} = 0
 \end{equation}
 Hence:
 \begin{equation}
-    \partialD{\lagr}{q_{\alpha}} - \totalD{}{t}\brackets{\partialD{\lagr}{\dot{q}_{\alpha}}} = 0
+    \pdv{\lagr}{q_{\alpha}} - \dv{}{t}\brackets{\pdv{\lagr}{\dot{q}_{\alpha}}} = 0
 \end{equation}
 \begin{equation}
-    \partialD{\lagr}{q_{\alpha}} = \totalD{}{t}\brackets{\partialD{\lagr}{\dot{q}_{\alpha}}}
+    \pdv{\lagr}{q_{\alpha}} = \dv{}{t}\brackets{\pdv{\lagr}{\dot{q}_{\alpha}}}
 \end{equation}
 For any arbitrary $\alpha$. Hence, we proved that \hpquotemath\;implies \eleref.\\
 It's trivial to prove the opposite since, repeating the passages of the first proof we arrive to:
 \begin{equation}
-    \delta S = \int_{t_1}^{t_2}\bigsum_{\alpha}\left[\partialD{\lagr}{q_{\alpha}} - \totalD{}{t}\brackets{\partialD{\lagr}{\dot{q}_{\alpha}}}\right] \delta q_{\alpha}
+    \delta S = \int_{t_1}^{t_2}\bigsum_{\alpha}\left[\pdv{\lagr}{q_{\alpha}} - \dv{}{t}\brackets{\pdv{\lagr}{\dot{q}_{\alpha}}}\right] \delta q_{\alpha}
 \end{equation}
 But the terms in the brackets are all zero because of the \eleref. So we get:
 \begin{equation}
@@ -257,18 +257,18 @@ But the terms in the brackets are all zero because of the \eleref. So we get:
 Which is precisely \hpquotemath.\\
 Now that we established the relations between the \eleref\;and the \hpquotemath\;we are ready to prove that if $\lagr$ is a Lagrangian:
 \begin{equation}
-    \tilde{\lagr} = \lagr + \dfrac{\diff{F}}{\diff{t}}
+    \tilde{\lagr} = \lagr + \dfrac{\dd{F}}{\dd{t}}
 \end{equation}
 is a Lagrangian for the system. Evaluating the action for both Lagrangians we get:
 \begin{equation}
-    \tilde{S} = \int_{t_1}^{t_2}\lagr \diff{t} + \int_{t_1}^{t_2}\dfrac{\diff{F}}{\diff{t}} \diff{t}
+    \tilde{S} = \int_{t_1}^{t_2}\lagr \dd{t} + \int_{t_1}^{t_2}\dfrac{\dd{F}}{\dd{t}} \dd{t}
 \end{equation}
 \begin{equation}
-    S = \int_{t_1}^{t_2}\lagr \diff{t}
+    S = \int_{t_1}^{t_2}\lagr \dd{t}
 \end{equation}
 The difference of action for the new Lagrangian is:
 \begin{equation}
-    \delta \tilde{S} = \int_{t_1}^{t_2}\dfrac{\diff{F}}{\diff{t}} \diff{t} = F(t_2) - F(t_1)
+    \delta \tilde{S} = \int_{t_1}^{t_2}\dfrac{\dd{F}}{\dd{t}} \dd{t} = F(t_2) - F(t_1)
 \end{equation}
 And so we get:
 \begin{equation}
@@ -287,30 +287,30 @@ Let's now discuss the energy of a system. The Lagrangian $\lagr$ has the dimensi
 \end{equation}
 We can evaluate the derivative of the Lagrangian and see what we get:
 \begin{equation}
-    \dfrac{\diff{\lagr}}{\diff{t}} = \bigsum_{\alpha}\brackets{\partialD{\lagr}{q_{\alpha}}\dot{q}_{\alpha} + \partialD{\lagr}{\dot{q}_{\alpha}}\ddot{q}_{\alpha}} + \dfrac{\partial \lagr}{\partial t}
+    \dfrac{\dd{\lagr}}{\dd{t}} = \bigsum_{\alpha}\brackets{\pdv{\lagr}{q_{\alpha}}\dot{q}_{\alpha} + \pdv{\lagr}{\dot{q}_{\alpha}}\ddot{q}_{\alpha}} + \dfrac{\partial \lagr}{\partial t}
 \end{equation}
 If \eleref\;hold then we have:
 \begin{equation}
-    \dfrac{\diff{\lagr}}{\diff{t}} = \bigsum_{\alpha}\underbrace{\left[\totalD{}{t}\brackets{\partialD{\lagr}{\dot{q}_{\alpha}}}\dot{q}_{\alpha} + \partialD{\lagr}{\dot{q}_{\alpha}}\ddot{q}_{\alpha}\right]}_{\text{total time derivative}} + \dfrac{\partial \lagr}{\partial t} =
+    \dfrac{\dd{\lagr}}{\dd{t}} = \bigsum_{\alpha}\underbrace{\left[\dv{}{t}\brackets{\pdv{\lagr}{\dot{q}_{\alpha}}}\dot{q}_{\alpha} + \pdv{\lagr}{\dot{q}_{\alpha}}\ddot{q}_{\alpha}\right]}_{\text{total time derivative}} + \dfrac{\partial \lagr}{\partial t} =
 \end{equation}
 \begin{equation}
- = \totalD{}{t}\bigsum_{\alpha}\partialD{\lagr}{\dot{q}_{\alpha}}\dot{q}_{\alpha} + \dfrac{\partial \lagr}{\partial t}
+ = \dv{}{t}\bigsum_{\alpha}\pdv{\lagr}{\dot{q}_{\alpha}}\dot{q}_{\alpha} + \dfrac{\partial \lagr}{\partial t}
 \end{equation}
 So in general:
 \begin{equation}
-    \dfrac{\diff{\lagr}}{\diff{t}} \neq 0
+    \dfrac{\dd{\lagr}}{\dd{t}} \neq 0
 \end{equation}
 even if the partial derivative of $\lagr$ with respect to time is zero. But we can define a quantity $h$ called \textbf{energy function}:
 \begin{equation}
-    h \defineeq \bigsum_{\alpha}\partialD{\lagr}{\dot{q}_{\alpha}}\dot{q}_{\alpha} - \lagr
+    h \defineeq \bigsum_{\alpha}\pdv{\lagr}{\dot{q}_{\alpha}}\dot{q}_{\alpha} - \lagr
 \end{equation}
 and so we have:
 \begin{equation}
-    \dfrac{\diff{h}}{\diff{t}} = -\dfrac{\partial \lagr}{\partial t}
+    \dfrac{\dd{h}}{\dd{t}} = -\dfrac{\partial \lagr}{\partial t}
 \end{equation}
 Obviously $h$ is a constant of motion if and only if the partial derivative with respect to time of the Lagrangian is 0:
 \begin{equation}
-    h\;\text{is conserved} \iff \dfrac{\diff{h}}{\diff{t}} = 0 \iff \dfrac{\partial \lagr}{\partial t} = 0
+    h\;\text{is conserved} \iff \dfrac{\dd{h}}{\dd{t}} = 0 \iff \dfrac{\partial \lagr}{\partial t} = 0
 \end{equation}
 Saying that $\lagr$ does not depend on time explicitly means that the potential $V$ does not depend on time and also:
 \begin{itemize}
@@ -328,7 +328,7 @@ Let's further analyse condition (1). Writing the kinetic energy $T$ we get:
 \end{equation}
 The time derivative of $r_i(q_{\alpha},t)$ is:
 \begin{equation}
-    \dvec{r}_i = \dfrac{\diff{\vec{r}_i}}{\diff{t}} = \bigsum_{\alpha}\dfrac{\partial \vec{r}_i}{\partial q_{\alpha}}\dot{q}_{\alpha} + \dfrac{\partial \vec{r}_i}{\partial t}
+    \dvec{r}_i = \dfrac{\dd{\vec{r}_i}}{\dd{t}} = \bigsum_{\alpha}\dfrac{\partial \vec{r}_i}{\partial q_{\alpha}}\dot{q}_{\alpha} + \dfrac{\partial \vec{r}_i}{\partial t}
 \end{equation}
 Hence we have:
 \begin{equation}
@@ -359,7 +359,7 @@ The quantities $T_{\alpha}$ and $T_0$ are zero if the transformation equations d
 And so $T$ is a quadratic function of the generalized velocities.\\
 Now let's analyse condition (2). To start we can remember this:
 \begin{equation}
-    \partialD{\lagr}{\dot{q}_{\alpha}} = \dfrac{\partial T}{\partial \dot{q}_{\alpha}} - \crossout{\partial{V}{\dot{q}_{\alpha}}}
+    \pdv{\lagr}{\dot{q}_{\alpha}} = \dfrac{\partial T}{\partial \dot{q}_{\alpha}} - \crossout{\partial{V}{\dot{q}_{\alpha}}}
 \end{equation}
 since $V$ does not depend on the generalized velocities. Now substituting \eqref{e:kinetic_energy} we get:
 \begin{equation}
@@ -387,7 +387,7 @@ And so conditions (1) and (2) really are the conditions for $h$ to be the total 
 \section{Conservation of the total linear momentum}
 Let's now talk about the conservation of linear momenta. In the Lagrange formalism the role of linear momentum is done by the \textbf{generalized momentum} conjugate to $q_{\alpha}$:
 \begin{equation}
-    p_{\alpha} \defineeq \partialD{\lagr}{\dot{q}_{\alpha}}
+    p_{\alpha} \defineeq \pdv{\lagr}{\dot{q}_{\alpha}}
 \end{equation}
 which can also be called \textbf{canonical momentum}. The generalized momentum may not correspond to the linear momentum we get from Newton's equations. We can show that for an easy example the two quantities correspond.\\
 Let's define the Lagrangian as:
@@ -401,37 +401,37 @@ This might be an example for an easy "Physics I-like" system (for example a fall
 which is indeed the linear momentum found by using Newton's equations.\\
 If we go back to \eleref\;and \lagrangeref\;we can identify the term $p_{\alpha}$ inside those equations. If they hold (remember we need to ask for a potential independent of the velocities) then we can write:
 \begin{equation}
-    \dfrac{\diff{p_{\alpha}}}{\diff{t}} = \partialD{\lagr}{q_{\alpha}} \Rightarrow \dot{p}_{\alpha} = \partialD{\lagr}{q_{\alpha}}
+    \dfrac{\dd{p_{\alpha}}}{\dd{t}} = \pdv{\lagr}{q_{\alpha}} \Rightarrow \dot{p}_{\alpha} = \pdv{\lagr}{q_{\alpha}}
 \end{equation}
 If only the potential does depend on the coordinates and $T$ does not then we can also write:
 \begin{equation}
-    \dot{p}_{\alpha} = \partialD{[\cancel{T}-V]}{q_{\alpha}} = -\partialD{V}{q_{\alpha}}
+    \dot{p}_{\alpha} = \pdv{[\cancel{T}-V]}{q_{\alpha}} = -\pdv{V}{q_{\alpha}}
 \end{equation}
 If $V$ does not depend on the velocities we also have:
 \begin{equation}
-    -\partialD{V}{q_{\alpha}} = Q_{\alpha}
+    -\pdv{V}{q_{\alpha}} = Q_{\alpha}
 \end{equation}
 \begin{equation}
     \boxed{\dot{p}_{\alpha} = Q_{\alpha}}
 \end{equation}
 This is the corresponding relation for $\vec{F} = \dvec{p}$ in Newton's equations. If $V$ depends on $\dot{q}_{\alpha}$ we get:
 \begin{equation}
-    \totalD{}{t}\partialD{V}{\dot{q}_{\alpha}}-\partialD{V}{q_{\alpha}} = Q_{\alpha}
+    \dv{}{t}\pdv{V}{\dot{q}_{\alpha}}-\pdv{V}{q_{\alpha}} = Q_{\alpha}
 \end{equation}
 Let us now define what \textbf{cyclic coordinates} are.
 \begin{equation}
-    q_{\alpha}\;\text{is cyclic} \iff \partialD{\lagr}{q_{\alpha}} = 0
+    q_{\alpha}\;\text{is cyclic} \iff \pdv{\lagr}{q_{\alpha}} = 0
 \end{equation}
 If $q_{\alpha}$ is cyclic and \eleref\;are true we have:
 \begin{equation}
-    \totalD{}{t} \partialD{\lagr}{\dot{q}_j} - \crossout{\partialD{\lagr}{q_{\alpha}}} = 0
+    \dv{}{t} \pdv{\lagr}{\dot{q}_j} - \crossout{\pdv{\lagr}{q_{\alpha}}} = 0
 \end{equation}
 \begin{equation}
     \dot{p}_{\alpha} = 0
 \end{equation}
 This means that if a coordinate is cyclic its corresponding generalized momentum is conserved.\\
 Now let $q_j$ be a \textbf{collective coordinate} such that $\delta q_j$ represents an infinitesimal displacement of the system \underline{as a whole}.
-\begin{figure}[!ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.4\linewidth]{res/svg/collectivecoord.drawio}
     \caption{Collective coordinate}
@@ -445,41 +445,41 @@ If this is the case all the particles are moving parallel to a single unit vecto
 \end{equation}
 Also $q_j$ cannot appear in the expression of $T$, hence:
 \begin{equation}
-    \partialD{T}{q_j}=0
+    \pdv{T}{q_j}=0
 \end{equation}
 Changing $q_j$ is a translation that leaves everything untouched (like moving the origini of the axis). Now consider $V=V(q_{\alpha},\cancel{\dot{q}_{\alpha}},t)$:
 \begin{equation}
-    -\partialD{V}{q_{\alpha}} = Q_{\alpha}
+    -\pdv{V}{q_{\alpha}} = Q_{\alpha}
 \end{equation}
 Let's consider \eleref\;for $q_j$:
 \begin{equation}
-    \totalD{}{t}\underbrace{\partialD{\lagr}{\dot{q}_j}}_{p_j} - \underbrace{\partialD{\lagr}{q_j}}_{-\frac{\partial V}{\partial q_j}} = 0
+    \dv{}{t}\underbrace{\pdv{\lagr}{\dot{q}_j}}_{p_j} - \underbrace{\pdv{\lagr}{q_j}}_{-\frac{\partial V}{\partial q_j}} = 0
 \end{equation}
 \begin{equation} \label{e:ele_for_qj}
-    \totalD{}{t}p_j = -\partialD{V}{q_j} = Q_j
+    \dv{}{t}p_j = -\pdv{V}{q_j} = Q_j
 \end{equation}
 Remembering the definition of $Q_j$:
 \begin{equation}
-    Q_j = \bigsum_i \vec{F}_i \cdot \underbrace{\partialD{\vec{r}_i}{q_j}}_{\hat{u}} = \vec{F}\cdot \hat{u}
+    Q_j = \bigsum_i \vec{F}_i \cdot \underbrace{\pdv{\vec{r}_i}{q_j}}_{\hat{u}} = \vec{F}\cdot \hat{u}
 \end{equation}
 Similarly from the definition of $p_j$:
 \begin{equation}
-    p_j = \partialD{\lagr}{\dot{q}_j} = \partialD{}{\dot{q}_j}\brackets{\dfrac{1}{2}\bigsum_i m_i \vec{r}_i^{\;2}} = \dfrac{1}{2}\bigsum_i m_i \partialD{}{\dot{q}_j}(\vec{r}_i^2) = \bigsum_i m_i \vec{r}_i \cdot \underbrace{\partialD{\vec{r}_i}{\dot{q}_j}}_{\hat{u}}
+    p_j = \pdv{\lagr}{\dot{q}_j} = \pdv{}{\dot{q}_j}\brackets{\dfrac{1}{2}\bigsum_i m_i \vec{r}_i^{\;2}} = \dfrac{1}{2}\bigsum_i m_i \pdv{}{\dot{q}_j}(\vec{r}_i^2) = \bigsum_i m_i \vec{r}_i \cdot \underbrace{\pdv{\vec{r}_i}{\dot{q}_j}}_{\hat{u}}
 \end{equation}
 \begin{equation}
     p_j = \vec{P}\cdot\hat{u}
 \end{equation}
 Going back to \eqref{e:ele_for_qj}:
 \begin{equation}
-    \totalD{}{t}(\vec{P}\cdot\hat{u}) = \vec{F}\cdot \hat{u}
+    \dv{}{t}(\vec{P}\cdot\hat{u}) = \vec{F}\cdot \hat{u}
 \end{equation}
 If $q_j$ is also a cyclic coordinate we have:
 \begin{equation}
-    \partialD{\lagr}{q_j} = 0 \Rightarrow \partialD{[\cancel{T}-V]}{q_j} = \partialD{V}{q_j} = 0
+    \pdv{\lagr}{q_j} = 0 \Rightarrow \pdv{[\cancel{T}-V]}{q_j} = \pdv{V}{q_j} = 0
 \end{equation}
 From this immediately follows:
 \begin{equation}
-    Q_j = 0 \Rightarrow \totalD{}{t}(p_j) = \totalD{}{t}(\vec{P}\cdot\hat{u}) = 0
+    Q_j = 0 \Rightarrow \dv{}{t}(p_j) = \dv{}{t}(\vec{P}\cdot\hat{u}) = 0
 \end{equation}
 So if $q_j$ is a cyclic and collective coordinate the generalized momentum conjugate to $q_j$ si conserved.
 \section{Conservation of the total angular momentum}
@@ -487,26 +487,26 @@ Let's consider a specific coordinate $q_j$ such that $\delta q_j$ is a rigid rot
 \\\textbf{IMAGE}\\
 We can see that $\delta \vec{r}_i$ is a tangential displacement. If we use the angle $\theta$ as our coordinate we can write:
 \begin{equation}
-    \totalD{\vec{r}_i}{t} = \totalD{\theta}{t} \hat{u} \wedge \vec{r}_i = \dot{q}_j \hat{u} \wedge \vec{r}_i
+    \dv{\vec{r}_i}{t} = \dv{\theta}{t} \hat{u} \wedge \vec{r}_i = \dot{q}_j \hat{u} \wedge \vec{r}_i
 \end{equation}
 From which follows:
 \begin{equation}
-    \delta \vec{r}_i = \delta q_j \hat{u} \wedge \vec{r}_i \Rightarrow \partialD{\vec{r}_i}{q_j} = \hat{u} \wedge \vec{r}_i
+    \delta \vec{r}_i = \delta q_j \hat{u} \wedge \vec{r}_i \Rightarrow \pdv{\vec{r}_i}{q_j} = \hat{u} \wedge \vec{r}_i
 \end{equation}
 Also $q_j$ cannot appear in the expression of $T$, hence:
 \begin{equation}
-    \partialD{T}{q_j} = 0
+    \pdv{T}{q_j} = 0
 \end{equation}
 Now we consider a system such that $V = V(q_{\alpha},\cancel{\dot{q}_{\alpha}},t)$ and write \eleref\;for $q_j$:
 \begin{equation} \label{e:ele_for_angular_momentum}
     \begin{split}
-        \totalD{}{t}\partialD{\lagr}{\dot{q}_j} - \partialD{\lagr}{q_j} = 0\\
-        \totalD{}{t}\underbrace{\partialD{T}{\dot{q}_j}}_{p_j} - \bigg(\underbrace{- \partialD{V}{q_j}}_{Q_j}\bigg) = 0
+        \dv{}{t}\pdv{\lagr}{\dot{q}_j} - \pdv{\lagr}{q_j} = 0\\
+        \dv{}{t}\underbrace{\pdv{T}{\dot{q}_j}}_{p_j} - \bigg(\underbrace{- \pdv{V}{q_j}}_{Q_j}\bigg) = 0
     \end{split}
 \end{equation}
 Let's explicitly write $Q_j$:
 \begin{equation}
-    Q_j = \bigsum_i \vec{F}_i \cdot \partialD{\vec{r}_i}{q_j} = \bigsum_i \vec{F}_i \cdot \hat{u} \wedge \vec{r}_i
+    Q_j = \bigsum_i \vec{F}_i \cdot \pdv{\vec{r}_i}{q_j} = \bigsum_i \vec{F}_i \cdot \hat{u} \wedge \vec{r}_i
 \end{equation}
 Inside the summation we have a triple product, hence we can exploit the fact that $\hat{u}$ does not depend on $i$ and also the invariance of the triple product with respect to circular shifts:
 \begin{equation}
@@ -518,15 +518,15 @@ And so we get:
 \end{equation}
 Now let's analyse the partial derivative of the kinetic energy:
 \begin{equation}
-    \partialD{T}{\dot{q}_j} = \partialD{}{\dot{q}_j}\brackets{\dfrac{1}{2}\bigsum_i m_i \vec{r}_i^{\;2}} = \bigsum_i m_i \vec{r}_i \cdot \partialD{\vec{r}_i}{\dot{q}_j} = \bigsum_i m_i \vec{r}_i \cdot \hat{u} \wedge \vec{r}_i
+    \pdv{T}{\dot{q}_j} = \pdv{}{\dot{q}_j}\brackets{\dfrac{1}{2}\bigsum_i m_i \vec{r}_i^{\;2}} = \bigsum_i m_i \vec{r}_i \cdot \pdv{\vec{r}_i}{\dot{q}_j} = \bigsum_i m_i \vec{r}_i \cdot \hat{u} \wedge \vec{r}_i
 \end{equation}
 Again we exploit the properties of the triple product and get:
 \begin{equation}
-    \partialD{T}{\dot{q}_j} =   \hat{u} \cdot \underbrace{\bigsum_i \vec{r}_i \wedge m_i \vec{r}_i}_{\vec{L}_0} = \hat{u} \cdot \vec{L}_0
+    \pdv{T}{\dot{q}_j} =   \hat{u} \cdot \underbrace{\bigsum_i \vec{r}_i \wedge m_i \vec{r}_i}_{\vec{L}_0} = \hat{u} \cdot \vec{L}_0
 \end{equation}
 Finally we can substitute back into \eqref{e:ele_for_angular_momentum}:
 \begin{equation}
-    \totalD{}{t}\brackets{\vec{L}_0 \cdot \hat{u}} = \vec{\tau} \cdot \hat{u}
+    \dv{}{t}\brackets{\vec{L}_0 \cdot \hat{u}} = \vec{\tau} \cdot \hat{u}
 \end{equation}
 This means that if the total torque about a generic axis is zero, then the total angular momentum about that axis is conserved. For example if we let $\hat{u} = \hat{z}$:
 \begin{equation}
@@ -534,7 +534,7 @@ This means that if the total torque about a generic axis is zero, then the total
 \end{equation}
 We then notice that if $q_j$ is a cyclic coordinate we have:
 \begin{equation}
-    Q_j = -\partialD{V}{q_j} = 0 \Rightarrow \vec{\tau} \cdot \hat{u} = 0 \Rightarrow \vec{L}_0 \cdot \hat{u}\;\text{is conserved}
+    Q_j = -\pdv{V}{q_j} = 0 \Rightarrow \vec{\tau} \cdot \hat{u} = 0 \Rightarrow \vec{L}_0 \cdot \hat{u}\;\text{is conserved}
 \end{equation}
 \section{Noether's theorem}
 In the last two sections we arrived to these conclusions:
