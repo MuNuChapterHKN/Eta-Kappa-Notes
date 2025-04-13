@@ -38,8 +38,8 @@
 \usepackage{amsfonts}
 \usepackage{centernot}
 \usepackage[super]{nth}
-\usepackage{physics}
 \usepackage{siunitx}
+\usepackage{physics}
 \counterwithin{equation}{section}
 \counterwithin{figure}{section}
 \newcommand{\diff}[1]{\mathrm{d}#1}
@@ -49,15 +49,18 @@
 \newcommand{\crossout}[1]{\cancel{#1}\raisebox{14pt}{\scriptsize = 0}}
 \newcommand{\bigsum}{\displaystyle\sum}
 \newcommand{\brackets}[1]{\left(#1\right)}
+\newcommand{\bbrackets}[1]{\bigg(#1\bigg)}
 \newcommand{\dalambertref}{\hyperref[D'Alambert_principle]{D'Alambert's principle}}
 \newcommand{\lagrangeref}{\hyperref[Lagrange_equations]{Lagrange equations}}
 \newcommand{\eleref}{\hyperref[Euler_Lagrange_equations]{Euler-Lagrange equations}}
 \newcommand{\hpquoteref}{\hyperref[q:Hamilton_principle_quote]{Hamilton's principle}}
 \newcommand{\hpquotemath}{\hyperref[e:Hamilton_principle]{Hamilton's principle}}
 \newcommand{\hamiltonref}{\hyperref[hamilton_equations]{Hamilton's equations}}
+\newcommand{\hamjacref}{\hyperref[e:hamiltonjacobi]{Hamilton-Jacobi equation}}
 \newcommand{\defineeq}{\coloneqq}
 \newcommand{\lagr}{\mathcal{L}}
 \newcommand{\hamfun}{\mathcal{H}}
+\newcommand{\lap}{\laplacian}
 \newcommand{\efunction}{\mathrm{e}}
 \newcommand{\Velegant}{\mathcal{V}} %Aka V-sexy
 \newcommand{\Telegant}{\mathcal{T}} %Aka T-sexy
@@ -69,6 +72,8 @@
 \renewcommand{\pdv}{%%%
  \def\flatfrac{\let\flatfrac\savedfrac\dfrac}\partialderivative*%%%
 }
+\renewcommand{\grad}{\vec{\nabla}}
+\renewcommand{\div}{\vec{\nabla} \cdot}
 
 
 \begin{document}

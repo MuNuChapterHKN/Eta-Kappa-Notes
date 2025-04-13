@@ -21,7 +21,7 @@ In Hamiltonian formalism a generic transformation is:
         P_{\alpha} = P_{\alpha}\brackets{q_1,q_2,\dots,q_n,p_1,p_2,\dots,p_n,t}
     \end{cases}
 \end{equation}
-This is also a point transformation, but since we are in the phase space the new coordinates can be a mix of both $q_{\alpha}$ and $p_{\alpha}$. Now we can try to figure out if the relations found for $q_{\alpha}$ and $p_{\alpha}$ related to the Poisson's brackets are also true for $Q_{\alpha}$ and $P_{\alpha}$.
+This is also a point transformation, but since we are in the phase space the new coordinates can be a mix of both $q_{\alpha}$ and $p_{\alpha}$. Now we can try to figure out if the relations found for $q_{\alpha}$ and $p_{\alpha}$ related to the Poisson brackets are also true for $Q_{\alpha}$ and $P_{\alpha}$.
 We want:
 \begin{equation}
     \begin{split}
@@ -35,7 +35,7 @@ We want:
         \pb{Q_{\alpha}}{P_{\beta}} &= \delta_{\alpha \beta}
     \end{split}
 \end{equation}
-For example we want $\pb{Q_{\alpha}}{Q_{\beta}} = 0$. If we explicit the Poisson's brackets we have:
+For example we want $\pb{Q_{\alpha}}{Q_{\beta}} = 0$. If we explicit the Poisson brackets we have:
 \begin{equation}
     \pb{Q_{\alpha}}{Q_{\beta}} = \bigsum_{\gamma} \left(\pdv{Q_{\alpha}}{q_{\gamma}} \pdv{Q_{\beta}}{p_{\gamma}} - \pdv{Q_{\alpha}}{p_{\gamma}} \pdv{Q_{\beta}}{q_{\gamma}} \right)
 \end{equation}
@@ -250,18 +250,18 @@ Substituting this into the second equation, we get the transformation equations:
         P = P(\vec{q},\vec{p},t)
     \end{cases}
 \end{equation}
-\section{Poisson's brackets and canonical transformations}
-As we anticipated before we want to know how the Poisson's brackets act on the new coordinates. In particular, we state this theorem:
-\begin{theorem}
-  A transformation is canonical if and only if the canonical Poisson's brackets are invariant
+\section{Poisson brackets and canonical transformations}
+As we anticipated before we want to know how the Poisson brackets act on the new coordinates. In particular, we state this theorem:
+\begin{theorem}{}
+  A transformation is canonical if and only if the canonical Poisson brackets are invariant
 \end{theorem}
 This means that they are the same in the old and new coordinates. For example:
 \begin{equation}
     \pb{Q_{\alpha}}{P_{\beta}}_{QP} = \delta_{\alpha \beta} \implies \pb{Q_{\alpha}}{P_{\beta}}_{qp} = \delta_{\alpha \beta}
 \end{equation}
-The subscript represents in respect to what coordinates we are calculating the Poisson's brackets. This theorem also as an important corollary:
-\begin{corollary}
-    If the canonical Poisson's brackets are invariant then all Poisson's brackets are invariant
+The subscript represents in respect to what coordinates we are calculating the Poisson brackets. This theorem also as an important corollary:
+\begin{corollary}{}
+    If the canonical Poisson brackets are invariant then all Poisson brackets are invariant
 \end{corollary}
 Which means that for any functions $f$ and $g$ in the phase space:
 \begin{equation}
@@ -392,7 +392,7 @@ Which gives:
 \begin{equation}
     \tilde{\lagr} = \lagr + \dot{Q}P + Q\dot{P}
 \end{equation}
-We want to check that this is a canonical transformation. We can do this by calculating the canonical Poisson's brackets in the new and old coordinates. For the new ones:
+We want to check that this is a canonical transformation. We can do this by calculating the canonical Poisson brackets in the new and old coordinates. For the new ones:
 \begin{equation}
     \begin{split}
         \pb{Q}{P}_{QP} &= \left(\pdv{Q}{Q} \pdv{P}{P} - \cancel{\pdv{Q}{P}} \cancel{\pdv{P}{Q}} \right) = 1\\
@@ -420,7 +420,7 @@ For the old ones:
         &= \left(\pdv{}{q}\left(\dfrac{1}{q}\right) \cancel{\pdv{}{p}\left(\dfrac{1}{q}\right)} - \cancel{\pdv{}{p}\left(\dfrac{1}{q}\right)} \pdv{}{q}\left(\dfrac{1}{q}\right) \right) = 0
     \end{split}
 \end{equation}
-And so we verified that the canonical Poisson's brackets are invariant.
+And so we verified that the canonical Poisson brackets are invariant.
 \subsection{Ex. 5}
 Now given a transformation we want to prove that it is a canonical transformation:
 \begin{equation}
@@ -430,8 +430,8 @@ Now given a transformation we want to prove that it is a canonical transformatio
     \end{cases}
 \end{equation}
 We have two methods:\\
-The \textbf{first method} will just be calculating all the Poisson's brackets and verifying that they are invariant.\\
-The Poisson's brackets in the new coordinates will always be trivial:
+The \textbf{first method} will just be calculating all the Poisson brackets and verifying that they are invariant.\\
+The Poisson brackets in the new coordinates will always be trivial:
 \begin{equation}
     \begin{split}
         \pb{Q}{P}_{QP} &= 1\\
@@ -439,12 +439,12 @@ The Poisson's brackets in the new coordinates will always be trivial:
         \pb{P}{P}_{QP} &= 0
     \end{split}
 \end{equation}
-Now we can evaluate the Poisson's brackets with respect to the old coordinates:
+Now we can evaluate the Poisson brackets with respect to the old coordinates:
 \begin{equation}
     \begin{split}
         \pb{Q}{P}_{qp} &= \left(\pdv{Q}{q} \pdv{P}{p} - \pdv{Q}{p} \pdv{P}{q} \right) = \\
-        &= \bigg(\pdv{}{q}\left(\ln\brackets{\dfrac{p}{q}}\right) \pdv{}{p}\left(\brackets{-\dfrac{q^2}{2}-1}\dfrac{p}{q}\right) -\\
-        &- \pdv{}{p}\left(\ln\brackets{\dfrac{p}{q}}\right) \pdv{}{q}\left(\brackets{-\dfrac{q^2}{2}-1}\dfrac{p}{q}\right) \bigg) = \\
+        &= \bbrackets{\pdv{}{q}\left(\ln\brackets{\dfrac{p}{q}}\right) \pdv{}{p}\left(\brackets{-\dfrac{q^2}{2}-1}\dfrac{p}{q}\right) -\\
+        &- \pdv{}{p}\left(\ln\brackets{\dfrac{p}{q}}\right) \pdv{}{q}\left(\brackets{-\dfrac{q^2}{2}-1}\dfrac{p}{q}\right) } = \\
         &= \left(-\dfrac{1}{q}  \brackets{-\dfrac{q^2}{2}-1}  \dfrac{1}{q} - \dfrac{1}{p}  \brackets{-q  \dfrac{p}{q} + \brackets{-\dfrac{q^2}{2}-1}  \dfrac{1}{q}} \right) = \\
         &= \left(\cancel{\dfrac{\dfrac{q^2}{2} + 1}{q^2}} + 1 - \cancel{\dfrac{\dfrac{q^2}{2} + 1}{q^2}} \right) = 1
     \end{split}
@@ -459,10 +459,10 @@ The other ones are trivial:
 
 \section{Active canonical transformations}
 Up to now we used "passive" transformations, which means that the transformation does not affect the state of the system. Instead, now we will make use of \textbf{active transformations} which are transformations that do not change the axes, but they change the state of the system.\\
-First we need to introduce \textbf{infinitesimal canonical transformations}:
-\begin{quote}
-    \textit{transformations that differ from the identity transformation for an infinitesimal amount}
-\end{quote}
+First we need to introduce a new definition:
+\begin{definition}{Infinitesimal canonical transformations}
+    Are transformations that differ from the identity transformation for an infinitesimal amount
+\end{definition}
 This definition is equivalent to:
 \begin{equation}
     F_2 = \bigsum_{\alpha} q_{\alpha}P_{\alpha} + \varepsilon G(\vec{q},\vec{P},t)
@@ -507,7 +507,7 @@ In this way we can write in a compact form:
 \begin{equation}
     \delta \vec{\eta} = \varepsilon \pb{\eta}{G}
 \end{equation}
-Where by using the Poisson's brackets on the vector we mean that we apply them between every component and $G$. Let's for example choose a particular form of $G$:
+Where, by using the Poisson brackets on the vector we mean that we apply them between every component and $G$. Let's for example choose a particular form of $G$:
 \begin{equation}
     G = p_i
 \end{equation}
@@ -592,4 +592,4 @@ And so we can write the Taylor series as:
   \end{split}
 \end{equation}
 Keep in mind that the last step is more of a "definition" consistent with the fact that we would get exactly the Taylor series of the exponential if we replaced $\hat{H}$ with a usual variable.
-This formula is the classical counterpart of the quantum mechanical "propagator". In particular, we notice that in both cases the formula contains the Hamiltonian (the operator made from the Poisson's brackets in the classical case and the operator associated to the Hamiltonian in the quantum case) and also that both are used to get the time evolution of something.
+This formula is the classical counterpart of the quantum mechanical "propagator". In particular, we notice that in both cases the formula contains the Hamiltonian (the operator made from the Poisson brackets in the classical case and the operator associated to the Hamiltonian in the quantum case) and also that both are used to get the time evolution of something.

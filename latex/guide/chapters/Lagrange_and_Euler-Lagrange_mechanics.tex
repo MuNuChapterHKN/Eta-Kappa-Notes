@@ -7,7 +7,7 @@ Going back to \dalambertref, expressing in generalized coordinates:
 \end{equation}
 We drop the (a) term for an easier notation, from now on we will write $\vec{F}_i$ knowing that we are indicating the applied force.
 \begin{equation}
-    \delta \vec{r}_i = \bigsum_{\alpha} \dfrac{\partial \vec{r}_i}{\partial q_{\alpha}} \delta q_{\alpha} + \crossout{\dfrac{\partial \vec{r}_i}{\partial t} \dd{t}}
+    \delta \vec{r}_i = \bigsum_{\alpha} \dfrac{\partial \vec{r}_i}{\partial q_{\alpha}} \delta q_{\alpha} + \\cancel{\dfrac{\partial \vec{r}_i}{\partial t} \dd{t}}
 \end{equation}
 The partial derivative over time is zero since we are considering a fixed moment in time. The force term in \dalambertref\;becomes:
 \begin{equation}
@@ -39,7 +39,7 @@ Deriving what we got in \eqref{e:funny_derivative_p1} we get:
     \dfrac{\partial \vec{v}_i}{\partial \dot{q}_{\alpha}} = \dfrac{\partial }{\partial \dot{q}_{\alpha}} \brackets{\bigsum_{\beta}\dfrac{\partial \vec{r}_i}{\partial q_{\beta}} \dot{q}_{\beta} + \dfrac{\partial \vec{r}_i}{\partial t}} =
 \end{equation}
 \begin{equation}
-     = \bigsum_{\beta}\dfrac{\partial \vec{r}_i}{\partial q_{\beta}} \underbrace{\dfrac{\partial \dot{q}_{\beta}}{\partial \dot{q}_{\alpha}}}_{\delta_{\alpha \beta}}  + \crossout{\dfrac{\partial }{\partial \dot{q}_{\alpha}}\brackets{\dfrac{\partial \vec{r}_i}{\partial t}}} = \dfrac{\partial \vec{r}_i}{\partial q_{\alpha}}
+     = \bigsum_{\beta}\dfrac{\partial \vec{r}_i}{\partial q_{\beta}} \underbrace{\dfrac{\partial \dot{q}_{\beta}}{\partial \dot{q}_{\alpha}}}_{\delta_{\alpha \beta}}  + \\cancel{\dfrac{\partial }{\partial \dot{q}_{\alpha}}\brackets{\dfrac{\partial \vec{r}_i}{\partial t}}} = \dfrac{\partial \vec{r}_i}{\partial q_{\alpha}}
 \end{equation}
 Again, the first term of \eqref{e:total_deriv} can be rewritten as:
 \begin{equation}
@@ -159,7 +159,7 @@ Let us consider two instants of time $t_1$ and $t_2$:
     \label{fig:image9}
 \end{figure}
 Then \textbf{Hamilton's principle} states that:
-\begin{quote} \label{q:Hamilton_principle_quote}
+\begin{quote} \label{q:Hamilton_principle_quote} %Need to add principle ambient
     The path followed by a monogenic system in configuration space between $t_1$ and $t_2$ is the one for which the action $S$ is stationary
 \end{quote}
 The action is defined as:
@@ -218,7 +218,7 @@ for arbitrarily small values of h, which in our case is the value of the virtual
 \end{equation}
 Let's evaluate the second using integration by parts:
 \begin{equation}
-    \int_{t_1}^{t_2}\bigsum_{\alpha}\pdv{\lagr}{\dot{q}_{\alpha}} \dv{}{t}\delta q_{\alpha} \dd{t} = \crossout{\bigsum_{\alpha}\pdv{\lagr}{\dot{q}_{\alpha}} \delta q_{\alpha}\bigg|_{t_1}^{t_2}} - \int_{t_1}^{t_2}\bigsum_{\alpha}\dv{}{t}\brackets{\pdv{\lagr}{\dot{q}_{\alpha}}} \delta q_{\alpha} \dd{t}
+    \int_{t_1}^{t_2}\bigsum_{\alpha}\pdv{\lagr}{\dot{q}_{\alpha}} \dv{}{t}\delta q_{\alpha} \dd{t} = \\cancel{\bigsum_{\alpha}\pdv{\lagr}{\dot{q}_{\alpha}} \delta q_{\alpha}\bigg|_{t_1}^{t_2}} - \int_{t_1}^{t_2}\bigsum_{\alpha}\dv{}{t}\brackets{\pdv{\lagr}{\dot{q}_{\alpha}}} \delta q_{\alpha} \dd{t}
 \end{equation}
 The term cancelled is zero since the displacement is zero in $t_1$ and $t_2$ for hypotesis. Hence, we get:
 \begin{equation}
@@ -272,7 +272,7 @@ The difference of action for the new Lagrangian is:
 \end{equation}
 And so we get:
 \begin{equation}
-    \delta \tilde{S} = \delta S + \crossout{\delta(F(t_2) - F(t_1))}
+    \delta \tilde{S} = \delta S + \\cancel{\delta(F(t_2) - F(t_1))}
 \end{equation}
 The variation between the values of $F$ is obviously zero since their difference is just a constant number that comes from the integral. So if \hpquotemath\;holds for $\lagr$ we have:
 \begin{equation}
@@ -351,7 +351,7 @@ The terms on the second line are actually the same since summing over $\alpha$ o
 \end{equation}
 The quantities $T_{\alpha}$ and $T_0$ are zero if the transformation equations do not depend on time explicitly since the partial derivative with respect to time of $\vec{r}_i$ is zero. Rewriting the kinetic energy we have:
 \begin{equation}
-    T = \dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}T_{\alpha \beta}\dot{q}_{\alpha}\dot{q}_{\beta} + \crossout{\bigsum_{\alpha}T_{\alpha}\dot{q}_{\alpha}} + \crossout{T_0}
+    T = \dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}T_{\alpha \beta}\dot{q}_{\alpha}\dot{q}_{\beta} + \\cancel{\bigsum_{\alpha}T_{\alpha}\dot{q}_{\alpha}} + \\cancel{T_0}
 \end{equation}
 \begin{equation} \label{e:kinetic_energy}
     T = \dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}T_{\alpha \beta}\dot{q}_{\alpha}\dot{q}_{\beta}
@@ -359,15 +359,15 @@ The quantities $T_{\alpha}$ and $T_0$ are zero if the transformation equations d
 And so $T$ is a quadratic function of the generalized velocities.\\
 Now let's analyse condition (2). To start we can remember this:
 \begin{equation}
-    \pdv{\lagr}{\dot{q}_{\alpha}} = \dfrac{\partial T}{\partial \dot{q}_{\alpha}} - \crossout{\partial{V}{\dot{q}_{\alpha}}}
+    \pdv{\lagr}{\dot{q}_{\alpha}} = \dfrac{\partial T}{\partial \dot{q}_{\alpha}} - \\cancel{\partial{V}{\dot{q}_{\alpha}}}
 \end{equation}
 since $V$ does not depend on the generalized velocities. Now substituting \eqref{e:kinetic_energy} we get:
 \begin{equation}
-    h = \bigsum_{\gamma}\dfrac{\partial T}{\partial \dot{q}_{\gamma}} - \lagr = \bigsum_{\gamma}\dfrac{\partial}{\partial \dot{q}_{\gamma}}\bigg(\dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}\underbrace{T_{\alpha \beta}}_{\cancel{\propto} \dot{q}_{\alpha}, \dot{q}_{\beta}}\dot{q}_{\alpha}\dot{q}_{\beta}\bigg)  - \lagr =
+    h = \bigsum_{\gamma}\dfrac{\partial T}{\partial \dot{q}_{\gamma}} - \lagr = \bigsum_{\gamma}\dfrac{\partial}{\partial \dot{q}_{\gamma}}\bbrackets{\dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}\underbrace{T_{\alpha \beta}}_{\cancel{\propto} \dot{q}_{\alpha}, \dot{q}_{\beta}}\dot{q}_{\alpha}\dot{q}_{\beta}}  - \lagr =
 \end{equation}
 We can bring the partial derivative inside the sum:
 \begin{equation}
-    h = \dfrac{1}{2}\bigsum_{\gamma}\bigsum_{\alpha}\bigsum_{\beta}T_{\alpha \beta}\bigg(\underbrace{\dfrac{\partial \dot{q}_{\alpha}}{\partial \dot{q}_{\gamma}}}_{\delta_{\alpha \gamma}}\dot{q}_{\beta} + \underbrace{\dfrac{\partial \dot{q}_{\beta}}{\partial \dot{q}_{\gamma}}}_{\delta_{\beta \gamma}}\dot{q}_{\alpha}\bigg) - \lagr
+    h = \dfrac{1}{2}\bigsum_{\gamma}\bigsum_{\alpha}\bigsum_{\beta}T_{\alpha \beta}\bbrackets{\underbrace{\dfrac{\partial \dot{q}_{\alpha}}{\partial \dot{q}_{\gamma}}}_{\delta_{\alpha \gamma}}\dot{q}_{\beta} + \underbrace{\dfrac{\partial \dot{q}_{\beta}}{\partial \dot{q}_{\gamma}}}_{\delta_{\beta \gamma}}\dot{q}_{\alpha}} - \lagr
 \end{equation}
 If we split out the terms of the sum we can cancel out the sum over $\alpha$ in the first term due to the Kronecker delta. Similarly, we can cancel out the sum over $\beta$. We need to remind that we also need to switch the cancelled indexes with $\gamma$ since those are the remaining terms.
 \begin{equation}
@@ -424,7 +424,7 @@ Let us now define what \textbf{cyclic coordinates} are.
 \end{equation}
 If $q_{\alpha}$ is cyclic and \eleref\;are true we have:
 \begin{equation}
-    \dv{}{t} \pdv{\lagr}{\dot{q}_j} - \crossout{\pdv{\lagr}{q_{\alpha}}} = 0
+    \dv{}{t} \pdv{\lagr}{\dot{q}_j} - \\cancel{\pdv{\lagr}{q_{\alpha}}} = 0
 \end{equation}
 \begin{equation}
     \dot{p}_{\alpha} = 0
@@ -501,7 +501,7 @@ Now we consider a system such that $V = V(q_{\alpha},\cancel{\dot{q}_{\alpha}},t
 \begin{equation} \label{e:ele_for_angular_momentum}
     \begin{split}
         \dv{}{t}\pdv{\lagr}{\dot{q}_j} - \pdv{\lagr}{q_j} = 0\\
-        \dv{}{t}\underbrace{\pdv{T}{\dot{q}_j}}_{p_j} - \bigg(\underbrace{- \pdv{V}{q_j}}_{Q_j}\bigg) = 0
+        \dv{}{t}\underbrace{\pdv{T}{\dot{q}_j}}_{p_j} - \bbrackets{\underbrace{- \pdv{V}{q_j}}_{Q_j}} = 0
     \end{split}
 \end{equation}
 Let's explicitly write $Q_j$:
@@ -545,7 +545,7 @@ In the last two sections we arrived to these conclusions:
     \item The conservation of the angular momentum along an axis is due to an invariance of $\lagr$ to rotations along that axis
     \item If $\lagr$ is invariant with respect to time the energy function is conserved
 \end{itemize}
-We can easily see the "pattern" arising from those conclusions. Those are all examples of the \textbf{Noether's theorem} which can be stated as:
-\begin{quotation}
-    \textit{For every invariance of $\lagr$ there is a conserved quantity}
-\end{quotation}
+We can easily see the "pattern" arising from those conclusions. Those are all examples of a famous theorem which states:
+\begin{theorem}{Noether's theorem}
+    For every invariance of $\lagr$ there is a conserved quantity
+\end{theorem}
