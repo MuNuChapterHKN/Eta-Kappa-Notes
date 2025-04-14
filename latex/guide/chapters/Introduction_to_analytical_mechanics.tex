@@ -209,7 +209,7 @@ Starting from the definition:
     \dfrac{\dd{\vec{L}_{\Omega}}}{\dd{t}} = \bigsum_{i}\dfrac{\dd{}}{\dd{t}}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\wedge\vec{p}_i + \bigsum_{i}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\wedge\dfrac{\dd{\vec{p}_i}}{\dd{t}} =
 \end{equation}
 \begin{equation}
-    = \\cancel{\bigsum_{i}\vec{v}_i\wedge\vec{p}_i}-\bigsum_{i}\vec{v}_{\Omega}\wedge\vec{p}_i + \bigsum_{i}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\wedge\vec{F}_i =
+    = \cancel{\bigsum_{i}\vec{v}_i\wedge\vec{p}_i}-\bigsum_{i}\vec{v}_{\Omega}\wedge\vec{p}_i + \bigsum_{i}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\wedge\vec{F}_i =
 \end{equation}
 \begin{equation}
     = -\vec{v}_{\Omega}\wedge\bigsum_{i}\vec{p}_i + \bigsum_{i}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\wedge\vec{F}_i = -\vec{v}_{\Omega}\wedge\vec{P} + \bigsum_{i}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\wedge\vec{F}_i
@@ -223,11 +223,11 @@ If we restrict to the strong action law we get:
     \vec{\tau}_{\Omega} = \bigsum_{i}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\wedge\vec{F}_i = \bigsum_{i}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\wedge\brackets{\vec{F}_i^{\;(ext)}+ \bigsum_{i\neq j}\vec{F}_{ji}} =
 \end{equation}
 \begin{equation}
-    = \bigsum_{i}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\wedge\vec{F}_i^{\;(ext)} + \\cancel{\bigsum_{i}\brackets{\brackets{\vec{r}_i-\vec{r}_{\Omega}}\wedge\bigsum_{i\neq j}\vec{F}_{ji}}} = \vec{\tau}^{\;(ext)}
+    = \bigsum_{i}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\wedge\vec{F}_i^{\;(ext)} + \cancel{\bigsum_{i}\brackets{\brackets{\vec{r}_i-\vec{r}_{\Omega}}\wedge\bigsum_{i\neq j}\vec{F}_{ji}}} = \vec{\tau}^{\;(ext)}
 \end{equation}
 We can cross out the second term since the sum only has terms such as:
 \begin{equation}
-    \vec{r}_i\wedge\vec{F}_{ji} + \vec{r}_j\wedge\vec{F}_{ij}-\\cancel{{\vec{r}_{\Omega}\wedge\vec{F}_{ij}+\vec{r}_{\Omega}\wedge\vec{F}_{ji}}}
+    \vec{r}_i\wedge\vec{F}_{ji} + \vec{r}_j\wedge\vec{F}_{ij}- \cancel{{\vec{r}_{\Omega}\wedge\vec{F}_{ij}+\vec{r}_{\Omega}\wedge\vec{F}_{ji}}}
 \end{equation}
 This first simplification is a trivial consequence of weak action law. In order to simplify the other term we can realize that if strong action law holds then both $\vec{F}_{ij}$ and $\vec{F}_{ji}$ lie on the line of $\vec{r}_i-\vec{r}_j$ and have opposite directions.
 So we get:

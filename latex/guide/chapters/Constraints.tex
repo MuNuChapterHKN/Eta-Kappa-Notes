@@ -25,10 +25,12 @@ T_1=T_2=m_1a \\
 m_2g -T =m_2a \\
 \end{cases} \Rightarrow a = \dfrac{m_2}{m_1+m_2}g
 \end{equation}
-A constraint is said to be \textbf{holomonic} if it can be expressed as a function:
-\begin{equation}
+\begin{definition}{Holomonic constraint}
+  A constraint is said to be holomonic if it can be expressed as a function:
+  \begin{equation}
     f(\vec{r}_1,\vec{r}_2,\dots,\vec{r}_n,t) = 0
-\end{equation}
+  \end{equation}
+\end{definition}
 For the inextensible rope the constraint can be expressed as $\dd{x}=\dd{y}$, but if we choose an appropriate frame of reference the condition can also simply be $x=y$, so the rope is a holomonic constraint such that:
 \begin{equation}
     f(x,y)=0 \Rightarrow x-y=0
@@ -44,10 +46,12 @@ There are two main types of holomonic constraints:
 \end{itemize}
 A constraint allows us to express any coordinate as a function of the others, so, if we have $N$ particle we should have $3N$ coordinates, but if we have $K$ constraints the actual number of independent coordinates is:
 \begin{equation}
-    n = 3N-K = \mathrm{dof\;(degrees\;of\;freedom)}
+    n = 3N-K = \text{dof (degrees of freedom)}
 \end{equation}
 \section{Virtual displacement}
-\textit{Def}: A \textbf{virtual displacement} is an infinitesimal change in the configuration of the system that results in a change in the particle position compatible with the forces of constraint of the system \underline{at a given time}.\\
+\begin{definition}{Virtual displacement}
+  A virtual displacement is an infinitesimal change in the configuration of the system that results in a change in the particle position compatible with the forces of constraint of the system \underline{at a given time}
+\end{definition}
 To explain the difference between a virtual displacement and an actual displacement we can analyze the displacement of a moving object on an inclined plane with the angle changing over time:
 \begin{figure}[H]
   \centering
@@ -78,7 +82,7 @@ At equilibrium we get:
 \end{equation}
 Now we consider only system with zero total virtual work and we get:
 \begin{equation}
-    \bigsum_i \vec{F}^{(a)}_i \cdot \delta \vec{r}_i + \\cancel{\bigsum_i \vec{f}_i \cdot \delta \vec{r}_i} = 0
+    \bigsum_i \vec{F}^{(a)}_i \cdot \delta \vec{r}_i + \cancel{\bigsum_i \vec{f}_i \cdot \delta \vec{r}_i} = 0
 \end{equation}
 \begin{equation}
     \bigsum_i \vec{F}^{(a)}_i \cdot \delta \vec{r}_i = 0
@@ -94,7 +98,7 @@ From which follows:
 \end{equation}
 Now if the total virtual work of constraints is 0:
 \begin{equation}
-    \bigsum_i \brackets{\vec{F}^{(a)}_i - \dvec{p}_i} \cdot \delta \vec{r}_i + \\cancel{\bigsum_i \vec{f}_i \cdot \delta \vec{r}_i} = 0
+    \bigsum_i \brackets{\vec{F}^{(a)}_i - \dvec{p}_i} \cdot \delta \vec{r}_i + \cancel{\bigsum_i \vec{f}_i \cdot \delta \vec{r}_i} = 0
 \end{equation}
 And we get the so called \textbf{D'Alembert's principle}:
 \begin{equation}  \label{D'Alambert_principle}
