@@ -37,6 +37,31 @@ Vediamo un caso particolare in cui è facile determinare oltre al comportamento 
     \item Se $|q| \geq 1$, allora la serie è divergente.
   \end{itemize}
 \end{teorema}
+
+\begin{proof}
+  Consideriamo la serie $\sum_{n=k}^{\infty} q^n$. Possiamo riscriverla come:
+  \[
+  \sum_{n=k}^{\infty} q^n = q^k + q^{k+1} + q^{k+2} + \dots
+  \]
+
+  Fattorizziamo $q^k$:
+  \[
+  \sum_{n=k}^{\infty} q^n = q^k \left( 1 + q + q^2 + \dots \right).
+  \]
+
+  La serie tra parentesi è una serie geometrica con primo termine $1$ e ragione $q$. Poiché $|q| < 1$, sappiamo che questa serie converge e vale:
+  \[
+  \sum_{n=0}^{\infty} q^n = \frac{1}{1-q}.
+  \]
+
+  Sostituendo, otteniamo:
+  \[
+  \sum_{n=k}^{\infty} q^n = q^k \cdot \frac{1}{1-q} = \frac{q^k}{1-q}.
+  \]
+
+  Quindi, se $|q| < 1$, la serie $\sum_{n=k}^{\infty} q^n$ è convergente e vale $\frac{q^k}{1-q}$.
+\end{proof}
+
 Vediamo come generalizzarlo per una serie che non parte da $n=0$:
 \begin{osservazione}{}
   Se $|q| < 1$, allora la serie $\sum_{n=k}^{\infty} q^n$ è convergente e vale $\sum_{n=k}^{\infty} q^n = \frac{q^k}{1-q}$.
@@ -48,6 +73,27 @@ Vediamo ora alcuni importanti criteri che ci permettono di determinare il compor
   Se la serie $\sum_{n=1}^{\infty} a_n$ è convergente, allora $\lim_{n \to \infty} a_n = 0$.
 \end{teorema}
 
+\begin{proof}
+  Sia $S_N = \sum_{n=1}^{N} a_n$ la somma parziale della serie. Poiché la serie $\sum_{n=1}^{\infty} a_n$ è convergente, esiste il limite $\lim_{N \to \infty} S_N = S$, con $S \in \R$.
+
+  Consideriamo la differenza tra due somme parziali consecutive:
+  \[
+  S_{N+1} - S_N = a_{N+1}.
+  \]
+
+  Passando al limite per $N \to \infty$, otteniamo:
+  \[
+  \lim_{N \to \infty} (S_{N+1} - S_N) = \lim_{N \to \infty} a_{N+1}.
+  \]
+
+  Poiché $\lim_{N \to \infty} S_N = S$ e $\lim_{N \to \infty} S_{N+1} = S$, si ha:
+  \[
+  \lim_{N \to \infty} (S_{N+1} - S_N) = S - S = 0.
+  \]
+
+  Quindi $\lim_{N \to \infty} a_{N+1} = 0$, e pertanto $\lim_{n \to \infty} a_n = 0$.
+\end{proof}
+
 In generale è più facile studiare serie con tutti i termini positivi:
 \begin{definizione}{Serie a termini positivi}
   Una serie $\sum_{n=1}^{\infty} a_n$ si dice \textbf{a termini positivi} se $a_n \geq 0$ per ogni $n$.
@@ -57,10 +103,47 @@ Vediamo subito un teorema che risolve molte patologie:
 \begin{teorema}{}
   Una serie a termini positivi può essere convergente, divergente ma non indeterminata.\\
 \end{teorema}
+
+\begin{proof}
+Le somme parziali sono una successione crescente, quindi $S_N$ ammette limite (finito o infinito).
+\end{proof}
 Inoltre sulle serie a termini positivi valgono i seguenti criteri:
 \begin{teorema}{Criterio del confronto integrale}
   Sia $f:[1, +\infty) \to \R$ una funzione continua e a valori positivi. Se $a_n = f(n)$, allora la serie $\sum_{n=1}^{\infty} a_n$ è convergente se e solo se l'integrale $\int_{1}^{+\infty} f(x) \, dx$ è convergente.
 \end{teorema}
+
+\begin{proof}
+  Consideriamo la funzione $f(x)$ continua, positiva e decrescente per $x \geq 1$, e confrontiamo la serie $\sum_{n=1}^{\infty} f(n)$ con l'integrale $\int_{1}^{+\infty} f(x) \, dx$.
+
+  \begin{itemize}
+    \item **Sottostima**: Per ogni $n \geq 1$, l'area del rettangolo di base $[n, n+1]$ e altezza $f(n)$ è minore dell'area sottesa dalla curva $f(x)$ sull'intervallo $[n, n+1]$. Quindi:
+    \[
+    f(n) \leq \int_{n}^{n+1} f(x) \, dx.
+    \]
+
+    Sommando per $n$ da $1$ a $N$, otteniamo:
+    \[
+    \sum_{n=1}^{N} f(n) \leq \int_{1}^{N+1} f(x) \, dx.
+    \]
+
+    \item **Sovrastima**: Analogamente, per ogni $n \geq 1$, l'area del rettangolo di base $[n-1, n]$ e altezza $f(n)$ è maggiore dell'area sottesa dalla curva $f(x)$ sull'intervallo $[n-1, n]$. Quindi:
+    \[
+    \int_{n-1}^{n} f(x) \, dx \leq f(n).
+    \]
+
+    Sommando per $n$ da $1$ a $N$, otteniamo:
+    \[
+    \int_{1}^{N} f(x) \, dx \leq \sum_{n=1}^{N} f(n).
+    \]
+  \end{itemize}
+
+  Combinando le due disuguaglianze, otteniamo:
+  \[
+  \int_{1}^{N} f(x) \, dx \leq \sum_{n=1}^{N} f(n) \leq \int_{1}^{N+1} f(x) \, dx.
+  \]
+
+  Passando al limite per $N \to \infty$, si ha che la serie $\sum_{n=1}^{\infty} f(n)$ converge se e solo se l'integrale $\int_{1}^{+\infty} f(x) \, dx$ converge.
+\end{proof}
 Vediamo un esempio.\\
 
 Studiamo la serie $\sum_{n=1}^{\infty} \frac{1}{n}$.\\
@@ -75,6 +158,15 @@ Vediamo ora un altro criterio:
   \item Siano $\{a_n\}_{n=1}^{\infty}$ e $\{b_n\}_{n=1}^{\infty}$ due successioni di numeri reali tali che $a_n = o(b_n)$ per $n \to \infty$. Se la serie $\sum_{n=1}^{\infty} b_n$ è convergente, allora la serie $\sum_{n=1}^{\infty} a_n$ è convergente. Se la serie $\sum_{n=1}^{\infty} a_n$ è divergente, allora la serie $\sum_{n=1}^{\infty} b_n$ è divergente.
   \end{itemize}
 \end{teorema}
+
+\begin{proof}
+  \begin{itemize}
+    \item Modificando i primi termini delle due serie posso supporre che $a_n\leq b_n \forall n$. Allora: $S_N = a_1+\dots+a_N\leq \tilde{S_N}=b_1+\dots+b_N$. E quindi $\lim_{N\to\infty} S_N \leq \lim_{N\to\infty} \tilde{S_N}$.\\
+    \item Supponiamo che $\lim_{n \to \infty} \frac{a_n}{b_n} = L$ con $0 < L < \infty$. Allora esiste un $N$ tale che per ogni $n \geq N$ si ha $\frac{1}{2}L b_n \leq a_n \leq 2L b_n$. Questo implica che le due serie $\sum_{n=1}^{\infty} a_n$ e $\sum_{n=1}^{\infty} b_n$ hanno lo stesso comportamento (entrambe convergenti o entrambe divergenti).
+
+    \item Se $\lim_{n \to \infty} \frac{a_n}{b_n} = 0$, allora per $n$ sufficientemente grande si ha $a_n\leq b_n$ e si può applicare il primo punto.
+  \end{itemize}
+  \end{proof}
 
 Esistono inoltre altri due importanti criteri:
 \begin{teorema}{Criterio della radice}
@@ -93,6 +185,7 @@ Esistono inoltre altri due importanti criteri:
     \item Se $L = 1$, il criterio non fornisce informazioni.
   \end{itemize}
 \end{teorema}
+
 
 Inoltre ecco la seguente osservazione:
 \begin{osservazione}{}
@@ -138,6 +231,27 @@ Vediamo in questo caso un utile criterio:
 \begin{teorema}{Criterio di Leibniz}
   Se $\{a_n\}_{n=1}^{\infty}$ è una successione a termini positivi e decrescenti con $\lim_{n \to \infty} a_n = 0$, allora la serie $\sum_{n=1}^{\infty} (-1)^n a_n$ è convergente.
 \end{teorema}
+
+\begin{proof}
+Consideriamo la serie $\sum_{n=1}^{\infty} (-1)^n a_n$, dove $a_n$ è una successione a termini positivi, decrescenti e infinitesimi. Definiamo le somme parziali $S_N = \sum_{n=1}^{N} (-1)^n a_n$.
+
+Separiamo i termini pari e dispari:
+\[
+S_{2N} = a_1 - a_2 + a_3 - \dots + a_{2N-1} - a_{2N},
+\]
+\[
+S_{2N+1} = a_1 - a_2 + a_3 - \dots + a_{2N-1} - a_{2N} + a_{2N+1}.
+\]
+
+Osserviamo che $S_{2N+1} = S_{2N} + a_{2N+1}$. Poiché $a_n$ è decrescente e infinitesima, abbiamo $a_{2N+1} \to 0$ per $N \to \infty$. Quindi:
+\[
+\lim_{N \to \infty} S_{2N+1} = \lim_{N \to \infty} S_{2N}.
+\]
+
+Inoltre, poiché $a_n$ è decrescente, si ha $S_{2N} \leq S_{2N+1} \leq S_{2N} + a_{2N+1}$. Passando al limite per $N \to \infty$, otteniamo che $S_N$ converge a un valore finito $S$.
+
+Pertanto, la serie $\sum_{n=1}^{\infty} (-1)^n a_n$ è convergente.
+\end{proof}
 \begin{osservazione}{}
   In particolare è necessario che la serie sia infinitesima. Il fatto che sia decrescente è sufficiente ma non necessario.
 \end{osservazione}

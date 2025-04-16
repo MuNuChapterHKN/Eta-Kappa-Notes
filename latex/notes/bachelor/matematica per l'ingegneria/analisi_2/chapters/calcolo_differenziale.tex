@@ -226,27 +226,64 @@ z = \frac{e^{3}}{2}x
 
 Quindi, il piano tangente al grafico di $f$ nel punto $(1,1)$ è dato dall'equazione $z = \frac{e^{3}}{2}x$.\\
 
-Dalla diiferenziabilità possiamo dunque trarre importanti conseguenze. Le più rilevanti sono riassunte nel seguente teorema:
-
-\begin{teorema}{Conseguenze della differenziabilità}
-  Sia $f$ differenziabile in $P_0 \in \R^n$. Allora:
-  \begin{itemize}
-    \item $f$ è continua in $P_0$
-    \item Il vettore $\nabla f(P_0)$ indica nel dominio di $f$ e partendo dal punto $P_0$ la direzione di massima crescita di $f$, cioè quella lungo cui $f$ cresce più velocemente.
-    \item In $P_0$ il grafico ha pendenza $\alpha$ rispetto alla direzione di $\nabla f(P_0)$, dove $\alpha =  \|\nabla f(P_0)\| = \sqrt{\left(\frac{\partial f}{\partial x_1}(P_0)\right)^2 + \cdots + \left(\frac{\partial f}{\partial x_n}(P_0)\right)^2}$.
-    \item Se $n=2$ e $\nabla f(P_0)\neq (0,0)$, allora il gradiente $\nabla f(P_0)$ è ortogonale alla curva di livello di $f$ passante per $P_0$
-\end{itemize}
-\end{teorema}
-
 \section{Derivata direzionale}
+Osserviamo che in due o più dimensioni non siamo vincolati a derivare lungo gli assi canonici $x$ e $y$, ma possiamo in generale calcolare la derivata lungo una direzione qualsiasi.
 \begin{definizione}{Derivata direzionale}
 Sia $f:\Omega \inc \R^n \rightarrow \R$ e sia $P_0 \in \Omega$. La \textbf{derivata direzionale} di $f$ in $P_0$ lungo il vettore $\vec v$ (di norma unitaria) è definita come il limite del rapporto incrementale, se esiste: $D_{\vec v}f(P_0) = \frac{\partial f}{\partial \vec v}(P_0) = \lim_{h \to 0} \frac{f(P_0 + h\vec v) - f(P_0)}{h}$.
 \end{definizione}
 
 \begin{osservazione}{}
 La derivata direzionale di $f$ in $P_0$ lungo il vettore $\vec v$ rappresenta la pendenza di $f$ in $P_0$ nella direzione di $\vec v$. \\
-Inoltre, definito il gradiente come in precedenza, se $f$ è differenziabile, si ha: $\frac{\partial f}{\partial \vec v}(P_0) = \nabla f(P_0) \cdot \vec v $ con $\vec v$ vettore unitario e con la notazione precedente che indica il prodotto scalare.
 \end{osservazione}
+
+
+\section{Conseguenze della differenzaibilità}
+Dalla diiferenziabilità possiamo infine trarre importanti conseguenze. Le più rilevanti sono riassunte nel seguente teorema:
+
+\begin{teorema}{Conseguenze della differenziabilità}
+  Sia $f$ differenziabile in $P_0 \in \R^n$. Allora:
+  \begin{itemize}
+    \item $(1) f$ è continua in $P_0$
+    \item $(2)$ Il vettore $\nabla f(P_0)$ indica nel dominio di $f$ e partendo dal punto $P_0$ la direzione di massima crescita di $f$, cioè quella lungo cui $f$ cresce più velocemente.
+    \item $(3)$ In $P_0$ il grafico ha pendenza $\alpha$ rispetto alla direzione di $\nabla f(P_0)$, dove $\alpha =  \|\nabla f(P_0)\| = \sqrt{\left(\frac{\partial f}{\partial x_1}(P_0)\right)^2 + \cdots + \left(\frac{\partial f}{\partial x_n}(P_0)\right)^2}$.
+    \item $(4)$ Se $\vec{v}\in \R^n$ è un vettore unitario, allora la derivata direzionale di $f$ in $P_0$ lungo $\vec{v}$ è data da $D_{\vec{v}}f(P_0) = \nabla f(P_0) \cdot \vec{v}$.
+    \item $(5) $Se $n=2$ e $\nabla f(P_0)\neq (0,0)$, allora il gradiente $\nabla f(P_0)$ è ortogonale alla curva di livello di $f$ passante per $P_0$
+\end{itemize}
+\end{teorema}
+
+
+
+\begin{proof}
+  Vediamo i vari punti.\\
+  $(1)$\\
+  L'ipotesi è equivalente a:
+  $f(P)=f(P_0)+\nabla f(P_0)\cdot (P-P_0)+o(||P-P_0||) \quad \text{per } P \rightarrow P_0$\\
+  \begin{gather*}
+ |f(P) - f(P_0)|= |\nabla f(P_0)*(P-P_0)+O(||P-P_0||)\leq\\||\nabla f(P_0) ||\cdot|| P-P_0||+\frac{O(||P-P_0||)}{||P-P_0|}\cdot ||(P-P_0)||
+  \end{gather*}
+  dove il primo termine va a zero per $P\rightarrow P_0$ e il secondo fa 0 per definizione di O. Da cui segue che $f$ è continua in $P_0$.\\
+  \newline
+  $(4)$
+  Se scelgo $\vec{v}\in \R^n, ||v||=1$, per definizione di derivata direzionale ho: $\frac{\partial f}{\partial \vec{v}}(P_0) = \lim_{h \to 0} \frac{f(P_0 + h\vec{v}) - f(P_0)}{h}$. Uso lo sviluppo di Taylor con  $P=P_0 + h\vec{v}$:
+  \begin{gather*}
+  f(P_0 + h\vec{v}) = f(P_0) + \nabla f(P_0)\cdot (hv) + o(||h||)\\
+  \end{gather*}
+  Quindi:
+  \begin{gather*}
+  \frac{\partial f}{\partial \vec{v}}(P_0)=\frac {\nabla f(P_0)\cdot (hv)+ o(h)}{h}\\=\nabla f(P_0)\cdot \vec{v}
+  \end{gather*}\\
+  \newline
+  $(2)$ Segue da $(4)$, in quanto la funzione in una direzione $v$, $||v||=1$, cresce partendo da $P_0$ con velocità data da $\frac{\delta f}{\delta v}(P_0) = \nabla f(P_0)\cdot v = ||\nabla f(P_0)||\cdot ||v||\cdot \cos{\alpha}$, che è massima per $\cos{\alpha}=1$, cioè quando $v$ ha la direzione del vettore gradiente. Questo dimostra analogamente (3)\\
+
+\end{proof}
+
+Per la dimostrazione del punto $(5)$, ci dotiamo del seguente teorema:
+
+\begin{teorema}{Teorema di Dini}
+  Sia $f:\Omega \inc \R^n \rightarrow \R$ e sia $P_0 \in \Omega$. Se $f$ è continua in $P_0$ e se esistono le derivate parziali di $f$ in $P_0$ e sono continue in un intorno di $P_0$, allora $f$ è differenziabile in $P_0$.
+\end{teorema}
+
+Tuttavia per concludere bene la dimostrazione serve introdurre la successiva sezione.
 
 \section{Derivata lungo una curva}\label{sec:derivata-lungo-una-curva}
 
@@ -269,6 +306,65 @@ Ora data una funzione $f:\Omega \inc \R^n \rightarrow \R$ e una curva $\gamma: [
   Sia $f:\Omega \inc \R^n \rightarrow \R$ e $\gamma: [a,b] \rightarrow \R^n$ una curva. Se $f$ è differenziabile in $\gamma(t)$ per ogni $t \in [a,b]$ e se $\gamma$ è derivabile in $t$, allora la funzione composta $f \circ \gamma$ è derivabile in $t$ e si ha:
   $\frac{d}{dt}(f \circ \gamma)(t) = \nabla f(\gamma(t)) \cdot \gamma'(t)$.
 \end{teorema}
+
+\begin{proof}
+Sia $f:\Omega \subset \R^n \to \R$ una funzione differenziabile in $\gamma(t)$ e sia $\gamma:[a,b] \to \R^n$ una curva derivabile in $t$. Consideriamo la funzione composta $h(t) = f(\gamma(t))$. Vogliamo dimostrare che $h(t)$ è derivabile in $t$ e che $\frac{d}{dt} h(t) = \nabla f(\gamma(t)) \cdot \gamma'(t)$.
+
+Per definizione di derivata, abbiamo:
+\[
+\frac{d}{dt} h(t) = \lim_{h \to 0} \frac{f(\gamma(t+h)) - f(\gamma(t))}{h}.
+\]
+
+Poiché $f$ è differenziabile in $\gamma(t)$, possiamo scrivere lo sviluppo di Taylor di $f$ attorno a $\gamma(t)$:
+\[
+f(\gamma(t+h)) = f(\gamma(t)) + \nabla f(\gamma(t)) \cdot (\gamma(t+h) - \gamma(t)) + o(\|\gamma(t+h) - \gamma(t)\|).
+\]
+
+Sostituendo nello sviluppo di $h(t)$, otteniamo:
+\[
+\frac{f(\gamma(t+h)) - f(\gamma(t))}{h} = \frac{\nabla f(\gamma(t)) \cdot (\gamma(t+h) - \gamma(t))}{h} + \frac{o(\|\gamma(t+h) - \gamma(t)\|)}{h}.
+\]
+
+Poiché $\gamma$ è derivabile in $t$, possiamo scrivere:
+\[
+\gamma'(t) = \lim_{h \to 0} \frac{\gamma(t+h) - \gamma(t)}{h}.
+\]
+
+Quindi, $\gamma(t+h) - \gamma(t) = h \gamma'(t) + o(h)$, e sostituendo:
+\[
+\frac{\nabla f(\gamma(t)) \cdot (\gamma(t+h) - \gamma(t))}{h} = \nabla f(\gamma(t)) \cdot \gamma'(t).
+\]
+
+Infine, il termine $o(\|\gamma(t+h) - \gamma(t)\|)/h$ tende a $0$ per $h \to 0$, poiché $\|\gamma(t+h) - \gamma(t)\| = O(h)$. Pertanto:
+\[
+\frac{d}{dt} h(t) = \nabla f(\gamma(t)) \cdot \gamma'(t).
+\]
+\end{proof}
+
+Possiamo ora dimostrare il punto $(5)$ del teorema precedente.\\
+$(5)$\\
+Sia $f$ differenziabile in $P_0 \in \R^2$ e supponiamo che $\nabla f(P_0) \neq (0, 0)$. Consideriamo la curva di livello di $f$ passante per $P_0$, definita come $L = \{P \in \R^2 : f(P) = f(P_0)\}$. Vogliamo dimostrare che $\nabla f(P_0)$ è ortogonale a $L$ in $P_0$.
+
+Poiché $f$ è differenziabile in $P_0$, possiamo parametrizzare localmente $L$ attorno a $P_0$ tramite una curva $\gamma(t)$ tale che $\gamma(0) = P_0$ e $\gamma(t) \in L$ per ogni $t$.
+
+Poiché $\gamma(t) \in L$, abbiamo che $f(\gamma(t)) = f(P_0)$ per ogni $t$. Derivando rispetto a $t$, otteniamo:
+\[
+\frac{d}{dt} f(\gamma(t)) = \nabla f(\gamma(t)) \cdot \gamma'(t).
+\]
+
+In particolare, valutando in $t = 0$, si ha:
+\[
+\frac{d}{dt} f(\gamma(t)) \big|_{t=0} = \nabla f(P_0) \cdot \gamma'(0).
+\]
+
+Poiché $f(\gamma(t)) = f(P_0)$ è costante, la derivata rispetto a $t$ è zero:
+\[
+\nabla f(P_0) \cdot \gamma'(0) = 0.
+\]
+
+Quindi, $\nabla f(P_0)$ è ortogonale al vettore tangente $\gamma'(0)$ alla curva $L$ in $P_0$. Poiché $\gamma'(0)$ rappresenta un vettore tangente a $L$, concludiamo che $\nabla f(P_0)$ è ortogonale a $L$ in $P_0$.
+
+
 
 \section{Derivate successive}
 \begin{definizione}{Derivate successive}

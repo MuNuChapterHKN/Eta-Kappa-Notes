@@ -21,6 +21,13 @@ Vediamo la seguente proposizione:
   $$\int_\gamma \vec F \cdot d\vec r = f(\gamma(b)) - f(\gamma(a))$$.
 \end{teorema}
 
+\begin{proof}
+  Sia $\gamma(t) = (x_1(t), \ldots, x_n(t))$ la parametrizzazione della curva $\gamma$.\\
+  Allora:
+  $$\int_\gamma \vec F \cdot d\vec r = \int_a^b \vec F(\gamma(t)) \cdot \gamma'(t) dt = \int_a^b \nabla f(\gamma(t)) \cdot \gamma'(t) dt =$$\\
+  $$= \int_a^b \frac{d}{dt} f(\gamma(t)) dt = f(\gamma(b)) - f(\gamma(a))$$.
+\end{proof}
+
 Questo motiva la seguente definizione:
 \begin{definizione}{Campo conservativo}
   Nelle ipotesi precedenti, un campo vettoriale $\vec F: \Omega \rightarrow \R^n$ è detto \textbf{conservativo} se esiste una funzione $f: \Omega \rightarrow \R$ tale che $\vec F = \nabla f$. \\ In tal caso la funzione $f$ si chiama potenziale di $\vec F$ in $\Omega$.
@@ -55,6 +62,22 @@ Enunciamo ora il seguente teorema:
   \end{enumerate}
 \end{teorema}
 
+\begin{proof}
+  Dimostriamo le implicazioni tra le affermazioni.
+
+  \textbf{(1) $\implies$ (2):} Se $\vec F$ è conservativo, esiste una funzione $f: \Omega \rightarrow \R$ tale che $\vec F = \nabla f$. Per una curva chiusa $\gamma$, il punto iniziale coincide con il punto finale, quindi:
+  $$ \int_\gamma \vec F \cdot d\vec r = f(\gamma(b)) - f(\gamma(a)) = 0. $$
+
+  \textbf{(2) $\implies$ (3):} Supponiamo che per ogni curva chiusa $\gamma$ in $\Omega$ si abbia $\int_\gamma \vec F \cdot d\vec r = 0$. Siano $\gamma_1$ e $\gamma_2$ due curve con lo stesso punto iniziale e finale. Consideriamo la curva chiusa $\gamma$ ottenuta percorrendo $\gamma_1$ e poi $\gamma_2$ in senso inverso. Allora:
+  $$ \int_\gamma \vec F \cdot d\vec r = \int_{\gamma_1} \vec F \cdot d\vec r - \int_{\gamma_2} \vec F \cdot d\vec r. $$
+  Poiché $\int_\gamma \vec F \cdot d\vec r = 0$, segue che:
+  $$ \int_{\gamma_1} \vec F \cdot d\vec r = \int_{\gamma_2} \vec F \cdot d\vec r. $$
+
+  \textbf{(3) $\implies$ (1):} Supponiamo che $\int_{\gamma_1} \vec F \cdot d\vec r = \int_{\gamma_2} \vec F \cdot d\vec r$ per ogni coppia di curve $\gamma_1$ e $\gamma_2$ con lo stesso punto iniziale e finale. Fissiamo un punto $P_0 \in \Omega$ e definiamo $f(P) = \int_{\gamma} \vec F \cdot d\vec r$, dove $\gamma$ è una curva da $P_0$ a $P$. La definizione è ben posta perché il valore dell'integrale non dipende dalla curva scelta (per ipotesi). Inoltre, derivando $f$ lungo una direzione, si ottiene $\nabla f = \vec F$, quindi $\vec F$ è conservativo.
+
+  Concludiamo che le tre affermazioni sono equivalenti.
+\end{proof}
+
 Enunciamo ora condizioni necessarie e sufficienti per la conservatività:
 
 
@@ -70,6 +93,17 @@ $$\nabla \times \vec F = \left( \frac{\partial F_3}{\partial y} - \frac{\partial
   Sia $\Omega \in \R^n$ un aperto connesso per archi e $\vec F: \Omega \rightarrow \R^n$ un campo vettoriale di classe $C^1$. Se $\vec F$ è conservativo in $\Omega$ allora $\frac{\partial F_i}{\partial x_j} = \frac{\partial F_j}{\partial x_i}$ per ogni $i,j = 1, \ldots, n$. \\
   Ciò significa che la matrice jacobiana di $\vec F$ è simmetrica e che il campo $\vec F$ è irrotazionale.
 \end{teorema}
+
+\begin{proof}
+  Se $\vec F$ è conservativo, esiste una funzione $f: \Omega \rightarrow \R$ tale che $\vec F = \nabla f$. Questo implica che $F_i = \frac{\partial f}{\partial x_i}$ per ogni $i = 1, \ldots, n$.
+
+  Poiché $f$ è di classe $C^2$ (essendo $\vec F$ di classe $C^1$), possiamo applicare il teorema di Schwarz sulla commutatività delle derivate parziali miste. Pertanto, per ogni $i, j = 1, \ldots, n$, si ha:
+  $$ \frac{\partial F_i}{\partial x_j} = \frac{\partial^2 f}{\partial x_j \partial x_i} = \frac{\partial^2 f}{\partial x_i \partial x_j} = \frac{\partial F_j}{\partial x_i}. $$
+
+  Questo dimostra che la matrice jacobiana di $\vec F$ è simmetrica, ovvero $\frac{\partial F_i}{\partial x_j} = \frac{\partial F_j}{\partial x_i}$ per ogni $i, j$. Inoltre, ciò implica che $\vec F$ è irrotazionale.
+\end{proof}
+
+
 
 La seguente definizione sarà utile per trovare una condizione sufficiente di conservatività:
 
@@ -96,6 +130,29 @@ Esiste allora un teorema che ci permette di risolvere molte patologie:
 \begin{teorema}{Conservatività dei campi centrali}
   Un campo centrale $\vec F: \R^n \setminus \{0\} \rightarrow \R^n$ è conservativo.
 \end{teorema}
+
+\begin{proof}
+  Per definizione, un campo centrale $\vec F$ è dato da:
+  $$ \vec F(\vec{x}) = h(\|\vec{x}\|) \frac{\vec{x}}{\|\vec{x}\|}, $$
+  dove $\|\vec{x}\|$ è la norma euclidea di $\vec{x}$ e $h$ è una funzione scalare.
+
+  Consideriamo la funzione $H: \R^n \rightarrow \R$ definita da:
+  $$ H(\|\vec{x}\|) = \int h(r) \, dr, $$
+  dove $r = \|\vec{x}\|$. La funzione $H$ dipende solo dalla norma di $\vec{x}$.
+
+  Calcoliamo il gradiente di $H(\|\vec{x}\|)$. Poiché $\|\vec{x}\| = \sqrt{x_1^2 + x_2^2 + \cdots + x_n^2}$, abbiamo:
+  $$ \nabla \|\vec{x}\| = \frac{\vec{x}}{\|\vec{x}\|}. $$
+
+  Applicando la regola della catena, otteniamo:
+  $$ \nabla H(\|\vec{x}\|) = H'(\|\vec{x}\|) \nabla \|\vec{x}\| = H'(\|\vec{x}\|) \frac{\vec{x}}{\|\vec{x}\|}. $$
+
+  Poiché $H'(\|\vec{x}\|) = h(\|\vec{x}\|)$, segue che:
+  $$ \nabla H(\|\vec{x}\|) = h(\|\vec{x}\|) \frac{\vec{x}}{\|\vec{x}\|}. $$
+
+  Pertanto, $\vec F = \nabla H(\|\vec{x}\|)$, il che dimostra che $\vec F$ è conservativo, con potenziale dato da $H(\|\vec{x}\|)$.
+\end{proof}
+
+
 
 \begin{osservazione}{}
   Da quanto detto riguardo alla condizione necessaria di conservatività segue che campo centrale $\vec F: \R^n \setminus \{0\} \rightarrow \R^n$ è irrotazionale.

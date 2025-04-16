@@ -34,6 +34,41 @@ La teoria si basa inizialmente sul seguente teorema:
   La serie converge assolutamente per ogni $x$ tale che $\lvert x - x_0 \rvert < \lvert \bar{x} - x_0 \rvert$.\\
 \end{teorema}
 
+\begin{proof}
+  Consideriamo la serie di potenze $\sum_{n=0}^{+\infty} a_n (x-x_0)^n$ con raggio di convergenza $R > 0$. Per dimostrare il teorema, sfruttiamo la serie geometrica.
+
+  La serie geometrica $\sum_{n=0}^{+\infty} r^n$ converge per $\lvert r \rvert < 1$ e la sua somma è data da
+  \[
+      \sum_{n=0}^{+\infty} r^n = \frac{1}{1-r}, \quad \text{per } \lvert r \rvert < 1.
+  \]
+
+  Ora, consideriamo la funzione somma $f(x)$ associata alla serie di potenze:
+  \[
+      f(x) = \sum_{n=0}^{+\infty} a_n (x-x_0)^n, \quad \text{per } x \in (x_0-R, x_0+R).
+  \]
+
+  Per ogni $x$ tale che $\lvert x - x_0 \rvert < R$, possiamo riscrivere la serie come
+  \[
+      f(x) = \sum_{n=0}^{+\infty} a_n (x-x_0)^n = \sum_{n=0}^{+\infty} a_n \left( \frac{x-x_0}{R} \cdot R \right)^n.
+  \]
+
+  Poniamo $r = \frac{x-x_0}{R}$, con $\lvert r \rvert < 1$. La serie diventa
+  \[
+      f(x) = \sum_{n=0}^{+\infty} \left( a_n R^n \right) r^n.
+  \]
+
+  Questa è una serie geometrica in $r$, con coefficienti $a_n R^n$. Poiché $\lvert r \rvert < 1$, possiamo applicare la formula della somma della serie geometrica:
+  \[
+      f(x) = \frac{1}{1-r}, \quad \text{dove } r = \frac{x-x_0}{R}.
+  \]
+
+  Tornando alla variabile $x$, otteniamo
+  \[
+      f(x) = \frac{1}{1 - \frac{x-x_0}{R}} = \frac{R}{R - (x-x_0)}.
+  \]
+
+  Questo dimostra che la funzione somma $f(x)$ è ben definita e derivabile infinite volte in $(x_0-R, x_0+R)$, e che la serie converge assolutamente per $\lvert x - x_0 \rvert < R$.
+\end{proof}
 \begin{definizione}{Raggio di convergenza}
   Il \textbf{raggio di convergenza} $R$ di una serie di potenze è il numero
   \[
@@ -77,7 +112,30 @@ Esistono due criteri principali: il criterio della radice e del rapporto.
       R = \frac{1}{L}
   \]
 \end{teorema}
-
+\begin{proof}
+  Consideriamo la serie numerica $\sum_{n=0}^{+\infty} \lvert a_n \rvert r^n$, dove $r = \lvert x - x_0 \rvert$.\\
+  Applichiamo il criterio della radice per determinare il raggio di convergenza.\\
+  Calcoliamo il limite
+  \[
+      L = \lim_{n \to +\infty} \sqrt[n]{\lvert a_n \rvert r^n} = \lim_{n \to +\infty} \left( \sqrt[n]{\lvert a_n \rvert} \cdot \sqrt[n]{r^n} \right) = \lim_{n \to +\infty} \sqrt[n]{\lvert a_n \rvert} \cdot r
+  \]
+  Poiché $\sqrt[n]{r^n} = r$, il limite diventa
+  \[
+      L = r \cdot \lim_{n \to +\infty} \sqrt[n]{\lvert a_n \rvert}.
+  \]
+  Indichiamo con $L_a = \lim_{n \to +\infty} \sqrt[n]{\lvert a_n \rvert}$.\\
+  La serie converge se e solo se $L < 1$, cioè
+  \[
+      r \cdot L_a < 1 \quad \implies \quad r < \frac{1}{L_a}.
+  \]
+  Pertanto, il raggio di convergenza è
+  \[
+      R = \frac{1}{L_a}.
+  \]
+  Se $L_a = 0$, allora $R = +\infty$, e la serie converge per ogni $x \in \R$.\\
+  Se $L_a = +\infty$, allora $R = 0$, e la serie converge solo per $x = x_0$.\\
+  Questo conclude la dimostrazione.
+\end{proof}
 \begin{teorema}{Criterio del rapporto}
   Sia data una serie di potenze $\sum_{n=0}^{+\infty} a_n (x-x_0)^n$.\\
   Se esiste il limite
@@ -89,7 +147,7 @@ Esistono due criteri principali: il criterio della radice e del rapporto.
       R = \frac{1}{L}
   \]
 \end{teorema}
-
+La dimostrazione è analoga a quella appena vista per il criterio della radice.\\
 Vediamo un esempio di applicazione del criterio del rapporto.\\
   Consideriamo la serie di potenze
   \[

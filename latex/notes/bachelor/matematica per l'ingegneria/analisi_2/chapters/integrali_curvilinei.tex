@@ -6,9 +6,23 @@ Nel paragrafo ~\ref{sec:derivata-lungo-una-curva} abbiamo definito le curve e le
 Vediamo ora un utile teorema che ci servirà per ricavare gli integrali curvilinei.
 
 \begin{teorema}{Derivata della funzione composta}
-  SIano $f(x_1, \dots, x_n): \R^n \rightarrow \R^k$ e $g(y_1, \dots, y_m): \R^m \rightarrow \R^n$ funzioni differenziabili. Allora la funzione composta $f \circ g: \R^m \rightarrow \R^k$ è differenziabile e la sua matrice Jacobiana è data da:
+  Siano $f(x_1, \dots, x_n): \R^n \rightarrow \R^k$ e $g(y_1, \dots, y_m): \R^m \rightarrow \R^n$ funzioni differenziabili. Allora la funzione composta $f \circ g: \R^m \rightarrow \R^k$ è differenziabile e la sua matrice Jacobiana è data da:
   $$J(f \circ g)(y) = Jf(g(y)) \cdot Jg(y)$$
 \end{teorema}
+
+\begin{proof}
+Siano $f: \R^n \rightarrow \R^k$ e $g: \R^m \rightarrow \R^n$ funzioni differenziabili. Per definizione, la funzione composta $f \circ g: \R^m \rightarrow \R^k$ è data da $(f \circ g)(y) = f(g(y))$.\\
+Per calcolare la derivata di $f \circ g$, consideriamo la variazione infinitesima di $y$ in $\R^m$. La variazione di $g(y)$ è data da:
+$$dg(y) = Jg(y) \, dy,$$
+dove $Jg(y)$ è la matrice Jacobiana di $g$ in $y$.\\
+Analogamente, la variazione di $f(g(y))$ è data da:
+$$df(g(y)) = Jf(g(y)) \, dg(y).$$
+Sostituendo $dg(y)$ nella relazione precedente, otteniamo:
+$$df(g(y)) = Jf(g(y)) \cdot Jg(y) \, dy.$$
+Pertanto, la matrice Jacobiana di $f \circ g$ è:
+$$J(f \circ g)(y) = Jf(g(y)) \cdot Jg(y).$$
+Questo conclude la dimostrazione.
+\end{proof}
 
 Gli integrali curvilinei possono essere di due tipi: di prima e di seconda specie.\\
 Gli integrali di prima specie sono integrali di una funzione scalare $f(x_1, \dots, x_n)$ lungo una curva $\gamma: [a, b] \rightarrow \R^n$.\\
