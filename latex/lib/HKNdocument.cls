@@ -60,7 +60,7 @@
 % --------------------------
 % Load the base book class, inheriting its structure
 % and setting the determined options: font size, a4paper, twoside.
-\LoadClass[\HK@classfontsize,a4paper,twoside]{book}
+\LoadClass[\HK@classfontsize,a4paper,twoside,openany]{book}
 
 % --------------------------
 % BASE TYPOGRAPHY AND INPUT PACKAGES
@@ -126,12 +126,12 @@
 % \title, \author: standard LaTeX definitions, here we capture them to save the data.
 % \shorttitle, \docdate, \docversion, \doclogo: additional commands for extra data.
 \newcommand{\shorttitle}{}  % Contains short title for header
-\newcommand{\organization}{}% Contains organization
 \newcommand{\docdate}{}     % Contains custom date
 \newcommand{\docversion}{}  % Contains document version
-\newcommand{\doclogofrontpage}{hkn_skyline_blu.png}      % Contains logo big path
-\newcommand{\doclogoupperpage}{hkn_ideogramma_blu.png}    % Contains logo big path
+\newcommand{\doclogofrontpage}{hkn_logo.pdf}      % Contains logo big path
+\newcommand{\doclogoupperpage}{hkn_ideogramma.pdf}    % Contains logo big path
 \newcommand{\doclicence}{ccbyncnd.png}  % Contains license logo path
+\newcommand{\DDorganization}{IEEE - MuNu Chapter}
 
 % Preserve old commands for title and author
 \let\oldtitle\title
@@ -142,7 +142,6 @@
 % Define commands for short title, short author, editors, organization, date, version.
 \def\shorttitle#1{\gdef\STtitle{#1}}
 \def\editor#1{\ifx\DDeditors\undefined\gdef\DDeditors{#1}\else\g@addto@macro\DDeditors{, #1}\fi}
-\def\organization#1{\gdef\DDorganization{#1}\gdef\organization{#1}}
 \def\docdate#1{\gdef\DDdate{#1}}
 \def\docversion#1{\gdef\DDversion{#1}}
 
@@ -165,37 +164,46 @@
 \renewcommand{\maketitle}{
     \thispagestyle{empty} % No header/footer on title page
     \begin{titlepage}
+        % Logo e titoli centrati
         \begin{center}
+            \vspace*{0.5cm}
+            \includegraphics[scale = 0.2]{\doclogofrontpage}\\[1.0 cm]  % HKN Logo
+            \textsc{\Large Mu Nu Chapter of IEEE-HKN}\\[-0.2 cm]  % Name
+            \rule{0.80\linewidth}{0.1 mm} \\
+            \textsc{\large Politecnico di Torino - Honor Society}\\[2.0 cm]  % Branch
+            \rule{\linewidth}{0.2 mm} \\[0.4 cm]
+            {\LARGE \textbf{\maintitle}}\\
+            \rule{\linewidth}{0.2 mm} \\[2 cm]
+        \end{center}
 
-            % Logo
-            \vspace*{1cm}
-            \includegraphics[width=0.4\textwidth]{\doclogofrontpage}\\[1cm]
-
-            % Main title
-            {\LARGE \textbf{\maintitle}}\\[1.5cm]
-
-            % Author(s)
-            \@ifundefined{DDauthors}{}{
-                \ifx\DocumentLanguage\italian
-                    {\Large Autori: \DDauthors\\[0.5cm]}
-                \else
-                    {\Large Authors: \DDauthors\\[0.5cm]}
-                \fi
-            }
-
-            % Editor(s)
-            \@ifundefined{DDeditors}{}{
-                \ifx\DocumentLanguage\italian
-                    {\Large Editori: \DDeditors\\[0.5cm]}
-                \else
-                    {\Large Editors: \DDeditors\\[0.5cm]}
-                \fi
-            }
-            % Organization
-            \ifx\DDorganization\empty\else
-                {\Large \DDorganization\\[0.5cm]}
+        \noindent
+        % Author(s) left
+        \begin{minipage}[t]{0.4\textwidth}
+            \raggedright
+            \ifx\DocumentLanguage\italian
+                {\Large\textit{Autori:}\\[0.5cm]}%
+            \else
+                {\Large\textit{Authors:}\\[0.5cm]}%
             \fi
-
+            \@ifundefined{DDauthors}{}{%
+                \DDauthors\\[0.5cm]%
+            }%
+        \end{minipage}\hfill% <-- nessun blank line qui
+        % Editor (s) right
+        \begin{minipage}[t]{0.4\textwidth}
+            \raggedleft
+            \ifx\DocumentLanguage\italian
+                {\Large\textit{Editori:}\\[0.5cm]}%
+            \else
+                {\Large\textit{Editors:}\\[0.5cm]}%
+            \fi
+            \@ifundefined{DDeditors}{}{%
+                \DDeditors\\[0.5cm]%
+            }%
+        \end{minipage}
+        \vfill
+        % Opzionale: Versione e Data centrati
+        \begin{center}
             % Optional version
             \ifx\DDversion\empty\else
                 \ifx\DocumentLanguage\italian
@@ -213,8 +221,8 @@
             \fi
 
             \vfill
-
         \end{center}
+
     \end{titlepage}
     \clearpage
 }
@@ -272,7 +280,7 @@
 % Generates a language-sensitive Creative Commons license description with an image and hyperlink
 \newcommand{\cclicense}{%
     \thispagestyle{empty}
-        % Linguaggio condizionale
+    \vspace*{\fill} 
         \ifx\DocumentLanguage\italian
             \vfill
             Questo lavoro è distribuito con una \textbf{Licenza Creative Commons Attribuzione - Non commerciale - Non opere derivate 4.0 International}.
@@ -304,14 +312,25 @@
             \end{itemize}
             More information on the \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{Creative Commons website}.
         \fi
-        % Logo
-        \\
+        \par\vspace{1cm} % Spazio verticale dopo il testo
         \ifx\DDlicense\empty\else
-            \vspace{1cm} % Spazio prima dell'immagine
-            \hfill\includegraphics[width=0.4\textwidth]{\doclicence} % Immagine allineata a destra
-            \vspace{1cm} % Spazio dopo l'immagine
+            \hfill\includegraphics[width=0.4\textwidth]{\doclicence}
+            \par\vspace{1cm} % Spazio dopo l'immagine
         \fi
     \clearpage
+}
+
+
+% Redefines \clearpage and \cleardoublepage to remove headers/footers on blank pages.
+\let\originalclearpage\clearpage
+\renewcommand{\clearpage}{%
+    \originalclearpage%
+    \thispagestyle{empty}%
+}
+\let\originalcleardoublepage\cleardoublepage
+\renewcommand{\cleardoublepage}{%
+    \originalcleardoublepage%
+    \thispagestyle{empty}%
 }
 
 % End of class
