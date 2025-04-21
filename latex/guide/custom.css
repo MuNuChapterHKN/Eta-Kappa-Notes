@@ -1,0 +1,84 @@
+:root {
+  /* Colori primari */
+  --color-blue: #375171;      /* Blu scuro */
+  --color-blue-two: #375171;
+  --color-red: #EC2D24;    /* Rosso */
+  --color-yellow: #FEC421;       /* Giallo */
+  --color-yellow-two: #F2B705;
+
+  /* Colori di sfondo */
+  --color-background: #F2F2F2;   /* Grigio chiaro */
+  --color-backgorund-text: #929AA6;
+
+  /*stondo angoli */
+  --border-radius: 10px;
+  --border-size: 5px;
+}
+
+.definition,
+.theorem,
+.corollary,
+.exercise,
+.observation {
+  border: none;
+  border-left: 2px solid;
+  background-color: var(--color-background);
+  border-radius: var(--border-radius);
+  margin: 10px auto; /* Center align horizontally */
+  width: 90%;
+  display: block; /* Ensure block-level element for centering */
+  box-sizing: content-box;
+  /* padding: 5px; /* Add 10px margin inside the content */
+}
+
+.definition {
+  border-left: var(--border-size) solid var(--color-red);
+}
+
+.theorem {
+  border-left: var(--border-size) solid var(--color-yellow);
+}
+
+.corollary {
+  border-left: var(--border-size) solid var(--color-yellow-two);
+}
+
+.exercise {
+  border-left: var(--border-size) solid var(--color-blue);
+}
+
+.observation {
+  border-left: var(--border-size) solid var(--color-blue-two);
+}
+
+
+.definition p,
+.theorem p,
+.corollary p,
+.exercise p,
+.observation p {
+  margin: 0;
+  padding: 10px;
+  position: relative;
+  overflow: visible; /* Importante per permettere allo span di uscire */
+}
+
+.definition p span,
+.theorem p span,
+.corollary p span,
+.exercise p span,
+.observation p span {
+  background-color: var(--color-backgorund-text);
+  font-weight: bold;
+  display: block;
+  color: white;
+  position: relative;
+  margin-left: -10px; /* Negativo del padding del paragrafo */
+  margin-right: -10px; /* Negativo del padding del paragrafo */
+  margin-top: -10px; /* Per allinearlo con il bordo superiore */
+  width: 100%; /* Compensazione per i margini negativi */
+  padding: 0.25ch 10px; /* Mantenere il padding orizzontale come il paragrafo */
+  height: 2.5ch;
+  overflow: visible;
+  border-radius: calc(var(--border-radius) - var(--border-size) / 2) calc(var(--border-radius) - var(--border-size) / 2) 0 0;
+}
