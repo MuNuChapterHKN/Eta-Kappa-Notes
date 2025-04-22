@@ -1,4 +1,5 @@
-\chapter{Introduction to analytical mechanics}
+\part{Analytical mechanics}
+\chapter{Introduction}
 \section{One particle systems}
 \subsection{Definitions}
 For a single particle system of mass \textit{m}, which is moving along a trajectory we can define some properties:
@@ -21,7 +22,7 @@ From that we can derive some quantities:
     \begin{equation}\vec{F}=0 \iff\dot{\vec{p}}=0 \iff\vec{p}\;\mathrm{is\;constant} \iff\vec{v}\;\mathrm{is\;constant}\end{equation}
     \item Angular momentum:
     \begin{equation}
-        \vec{L_{\Omega}} = \left(\vec{r}-\vec{r}_{\Omega}\right) \wedge m\vec{v} = \left(\vec{r}-\vec{r}_{\Omega}\right) \wedge \vec{p}
+        \vec{L_{\Omega}} = \left(\vec{r}-\vec{r}_{\Omega}\right) \cross m\vec{v} = \left(\vec{r}-\vec{r}_{\Omega}\right) \cross \vec{p}
     \end{equation}
     The angular momentum is a pseudo-vector and it is always calculated with reference to a generic point $\Omega$.
     \begin{figure}[H]
@@ -32,10 +33,10 @@ From that we can derive some quantities:
     \end{figure}
     Trying to differentiate the angular momentum we get:
     \begin{equation}
-        \dfrac{\mathrm{d}\vec{L}_{\Omega}}{\mathrm{d}t} = \dfrac{\mathrm{d}}{\mathrm{d}t}\left(\left(\vec{r}-\vec{r}_{\Omega}\right) \wedge \vec{p}\right) = \dot{\vec{r}}\wedge\vec{p} - \dot{\vec{r}}_{\Omega}\wedge\vec{p} + \left(\vec{r}-\vec{r}_{\Omega}\right) \wedge \vec{F}
-    \end{equation}
-    \begin{equation}
-        \dfrac{\mathrm{d}\vec{L}_{\Omega}}{\mathrm{d}t} = - \vec{v}_{\Omega}\wedge\vec{p} + \vec{\tau}_{\Omega}
+      \begin{split}
+        \dfrac{\mathrm{d}\vec{L}_{\Omega}}{\mathrm{d}t} &= \dfrac{\mathrm{d}}{\mathrm{d}t}\left(\left(\vec{r}-\vec{r}_{\Omega}\right) \cross \vec{p}\right) = \dot{\vec{r}}\cross\vec{p} - \dot{\vec{r}}_{\Omega}\cross\vec{p} + \left(\vec{r}-\vec{r}_{\Omega}\right) \cross \vec{F} = \\[8pt]
+        &= - \vec{v}_{\Omega}\cross\vec{p} + \vec{\tau}_{\Omega}
+      \end{split}
     \end{equation}
     If $\Omega$ is at rest we can choose $\Omega = O$ which implies:
     \begin{equation}
@@ -62,14 +63,12 @@ The work done by the total force on a particle from point $P_1$ to $P_2$ along a
     \label{fig:image4}
 \end{figure}
 and is evaluated as:
-\begin{equation}
-    W_{12} = \int_{P_1}^{P_2}\vec{F}\cdot\mathrm{d}\vec{r} = \int_{P_1}^{P_2}\dfrac{\mathrm{d}}{\mathrm{d}t}(m\vec{v})\cdot\mathrm{d}\vec{r} = \int_{P_1}^{P_2}\dfrac{\mathrm{d}}{\mathrm{d}t}(m\vec{v})\cdot\vec{v}\mathrm{d}t =
-\end{equation}
-\begin{equation}
-    = m\int_{P_1}^{P_2}\vec{v}\mathrm{d}v = \dfrac{1}{2}mv^2\bigg|_{P_1}^{P_2} = \dfrac{1}{2}mv_2^2 - \dfrac{1}{2}mv_1^2 = T_2 -T_1
-\end{equation}
 \begin{equation} \label{e:total_work}
-    W_{12} = T_2 -T_1
+  \begin{split}
+    W_{12} &= \int_{P_1}^{P_2}\vec{F}\cdot\mathrm{d}\vec{r} = \int_{P_1}^{P_2}\dfrac{\mathrm{d}}{\mathrm{d}t}(m\vec{v})\cdot\mathrm{d}\vec{r} = \int_{P_1}^{P_2}\dfrac{\mathrm{d}}{\mathrm{d}t}(m\vec{v})\cdot\vec{v}\mathrm{d}t = \\[8pt]
+    &= m\int_{P_1}^{P_2}\vec{v}\mathrm{d}v = \dfrac{1}{2}mv^2\bigg|_{P_1}^{P_2} = \dfrac{1}{2}mv_2^2 - \dfrac{1}{2}mv_1^2 = T_2 -T_1\\[8pt]
+    &\boxed{W_{12} = T_2 -T_1}
+  \end{split}
 \end{equation}
 So the work done by the total force is the difference of the kinetic energy $T$ from point $P_1$ to $P_2$.\\
 A force $\vec{f}$ is \textbf{conservative} if its work does not depend on the path:
@@ -78,13 +77,11 @@ A force $\vec{f}$ is \textbf{conservative} if its work does not depend on the pa
 \end{equation}
 \[\Updownarrow \]
 \begin{equation}
-    \int_{P_1,\gamma_1}^{P_2}\vec{f}\cdot\mathrm{d}\vec{r} - \int_{P_1,\gamma_2}^{P_2}\vec{f}\cdot\mathrm{d}\vec{r} = 0
-\end{equation}
-\begin{equation}
-    \int_{P_1,\gamma_1}^{P_2}\vec{f}\cdot\mathrm{d}\vec{r} + \int_{P_2,\gamma_2}^{P_1}\vec{f}\cdot\mathrm{d}\vec{r} = 0
-\end{equation}
-\begin{equation}
-    \oint\vec{f}\cdot\mathrm{d}\vec{r} = 0
+  \begin{split}
+    \int_{P_1,\gamma_1}^{P_2}\vec{f}\cdot\mathrm{d}\vec{r} - \int_{P_1,\gamma_2}^{P_2}\vec{f}\cdot\mathrm{d}\vec{r} &= 0 \\[8pt]
+    \int_{P_1,\gamma_1}^{P_2}\vec{f}\cdot\mathrm{d}\vec{r} + \int_{P_2,\gamma_2}^{P_1}\vec{f}\cdot\mathrm{d}\vec{r} &= 0 \\[8pt]
+    \oint\vec{f}\cdot\mathrm{d}\vec{r} &= 0
+  \end{split}
 \end{equation}
 So if a force is conservative then its circulation is always 0 for any closed path.\\
 Also if $\vec{f}$ is conservative we can find a scalar function such that:
@@ -116,10 +113,10 @@ There can be cases such that:
 \end{equation}
 then $\vec{F}$ cannot be conservative. We can show this by computing $\mathrm{d}V$:
 \begin{equation}
-    -\mathrm{d}V = -\left(\dfrac{\partial V}{\partial x}\mathrm{d}x + \dfrac{\partial V}{\partial y}\mathrm{d}y + \dfrac{\partial V}{\partial z}\mathrm{d}z + \dfrac{\partial V}{\partial t}\mathrm{d}t\right) =
-\end{equation}
-\begin{equation}
-    = -\grad V \cdot\mathrm{d}\vec{r} - \dfrac{\partial V}{\partial t}\mathrm{d}t \neq \vec{F}\cdot\mathrm{d}\vec{r} \Rightarrow \int_{P_1}^{P_2}\vec{F}\cdot\mathrm{d}\vec{r} \neq V_1-V_2
+    \begin{split}
+      -\mathrm{d}V &= -\left(\dfrac{\partial V}{\partial x}\mathrm{d}x + \dfrac{\partial V}{\partial y}\mathrm{d}y + \dfrac{\partial V}{\partial z}\mathrm{d}z + \dfrac{\partial V}{\partial t}\mathrm{d}t\right) = \\[8pt]
+    &= -\grad V \cdot\mathrm{d}\vec{r} - \dfrac{\partial V}{\partial t}\mathrm{d}t \neq \vec{F}\cdot\mathrm{d}\vec{r} \Rightarrow \int_{P_1}^{P_2}\vec{F}\cdot\mathrm{d}\vec{r} \neq V_1-V_2
+    \end{split}
 \end{equation}
 \section{Multiple particles systems}
 \subsection{Definitions}
@@ -132,20 +129,18 @@ Similarly to what we established for one particle systems we can define some mai
         \vec{P} = \bigsum_{i=1}^{N} \vec{p}_i
     \end{equation}
     \item Angular momentum (with respect to $\Omega$):\begin{equation}
-        \vec{L}_{\Omega} = \bigsum_{i=1}^{N} \left(\left(\vec{r}_i-\vec{r}_{\Omega}\right) \wedge \vec{p}_i\right)
+        \vec{L}_{\Omega} = \bigsum_{i=1}^{N} \left(\left(\vec{r}_i-\vec{r}_{\Omega}\right) \cross \vec{p}_i\right)
     \end{equation}
     \item Average position (centre of mass): \begin{equation} \label{e:centre_of_mass}
         \vec{R} = \dfrac{\bigsum_{i=1}^{N}m_i\vec{r}_i}{\bigsum_{i=1}^{N}m_i}
     \end{equation}
     From this trivially follows:
     \begin{equation}
-        M \vec{R} = \bigsum_{i=1}^{N}m_i\vec{r}_i
-    \end{equation}
-    \begin{equation}
-        \dfrac{\mathrm{d}}{\mathrm{d}t}(M \vec{R}) = \dfrac{\mathrm{d}}{\mathrm{d}t}\left(\bigsum_{i=1}^{N}m_i\vec{r}_i\right)
-    \end{equation}
-    \begin{equation}
-        M \dot{\vec{R}} = \vec{P}
+        \begin{split}
+          M \vec{R} &= \bigsum_{i=1}^{N}m_i\vec{r}_i \\[8pt]
+          \dfrac{\mathrm{d}}{\mathrm{d}t}(M \vec{R}) &= \dfrac{\mathrm{d}}{\mathrm{d}t}\left(\bigsum_{i=1}^{N}m_i\vec{r}_i\right) \\[8pt]
+          M \dot{\vec{R}} &= \vec{P}
+        \end{split}
     \end{equation}
     Where $\vec{v}_{CM} = \dot{\vec{R}}$ is the velocity of the centre of mass.
 \end{itemize}
@@ -171,26 +166,26 @@ Let there be two charges $q_1,q_2$ with velocity $v_1,v_2$ such that $v_1\perp v
 \end{equation}
 So these forces satisfy both action laws, but these are not the only forces on the charges. Let's analyse the Lorentz's forces. Particle 1 feels a magnetic field:
 \begin{equation}
-    \vec{B}_{21} = \dfrac{\muz}{4\pi}\dfrac{q_2\vec{v}_2\wedge\vec{r}_{21}}{r} \neq 0
+    \vec{B}_{21} = \dfrac{\muz}{4\pi}\dfrac{q_2\vec{v}_2\cross\vec{r}_{21}}{r} \neq 0
 \end{equation}
 Instead particle 2 does not feel any magnetic field since in the chosen moment it is in the direction of motion of the other charge so we have:
 \begin{equation}
-    \vec{B}_{12} = \dfrac{\muz}{4\pi}\dfrac{q_1\vec{v}_1\wedge\vec{r}_{12}}{r} = 0
+    \vec{B}_{12} = \dfrac{\muz}{4\pi}\dfrac{q_1\vec{v}_1\cross\vec{r}_{12}}{r} = 0
 \end{equation}
 This means that the Lorentz's forces are:
 \begin{equation}
-    \vec{F}_{21} = q_1\vec{v}_1\wedge\vec{B}_{21} \neq 0
+    \vec{F}_{21} = q_1\vec{v}_1\cross\vec{B}_{21} \neq 0
 \end{equation}
 \begin{equation}
-    \vec{F}_{12} = q_2\vec{v}_2\wedge\vec{B}_{12} = 0
+    \vec{F}_{12} = q_2\vec{v}_2\cross\vec{B}_{12} = 0
 \end{equation}
 Hence $\vec{F}_{21} \neq \vec{F}_{12}$ and Newton's thrid law is not satisfied.\\
 Since we restrict our cases we have:
 \begin{equation}
-    \vec{F} = \bigsum_{i=1}\vec{F}_i = \bigsum_{i=1}\vec{F}_i^{\;(ext)} + \cancel{\bigsum_{i=1}\bigsum_{j\neq i}\vec{F}_i}
-\end{equation}
-\begin{equation}
-    \vec{F} = \bigsum_{i=1}\vec{F}_i = \bigsum_{i=1}\dfrac{\dd{\vec{p}_i}}{\dd{t}} = \dfrac{\dd{}}{\dd{t}}\bigsum_{i=1}\vec{p}_i = \dfrac{\dd{\vec{P}}}{\dd{t}}
+    \begin{split}
+      \vec{F} &= \bigsum_{i=1}\vec{F}_i = \bigsum_{i=1}\vec{F}_i^{\;(ext)} + \cancel{\bigsum_{i=1}\bigsum_{j\neq i}\vec{F}_i} \\[8pt]
+      \vec{F} &= \bigsum_{i=1}\vec{F}_i = \bigsum_{i=1}\dfrac{\dd{\vec{p}_i}}{\dd{t}} = \dfrac{\dd{}}{\dd{t}}\bigsum_{i=1}\vec{p}_i = \dfrac{\dd{\vec{P}}}{\dd{t}}
+    \end{split}
 \end{equation}
 But also:
 \begin{equation}
@@ -203,40 +198,38 @@ So (only if weak action law holds):
 \subsection{Angular momentum}
 Starting from the definition:
 \begin{equation}
-    \vec{L}_{\Omega} = \bigsum_{i}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\wedge\vec{p}_i
+    \vec{L}_{\Omega} = \bigsum_{i}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\cross\vec{p}_i
 \end{equation}
 \begin{equation}
-    \dfrac{\dd{\vec{L}_{\Omega}}}{\dd{t}} = \bigsum_{i}\dfrac{\dd{}}{\dd{t}}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\wedge\vec{p}_i + \bigsum_{i}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\wedge\dfrac{\dd{\vec{p}_i}}{\dd{t}} =
-\end{equation}
-\begin{equation}
-    = \cancel{\bigsum_{i}\vec{v}_i\wedge\vec{p}_i}-\bigsum_{i}\vec{v}_{\Omega}\wedge\vec{p}_i + \bigsum_{i}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\wedge\vec{F}_i =
-\end{equation}
-\begin{equation}
-    = -\vec{v}_{\Omega}\wedge\bigsum_{i}\vec{p}_i + \bigsum_{i}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\wedge\vec{F}_i = -\vec{v}_{\Omega}\wedge\vec{P} + \bigsum_{i}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\wedge\vec{F}_i
+    \begin{split}
+      \dfrac{\dd{\vec{L}_{\Omega}}}{\dd{t}} &= \bigsum_{i}\dfrac{\dd{}}{\dd{t}}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\cross\vec{p}_i + \bigsum_{i}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\cross\dfrac{\dd{\vec{p}_i}}{\dd{t}} = \\[8pt]
+      &= \cancel{\bigsum_{i}\vec{v}_i\cross\vec{p}_i}-\bigsum_{i}\vec{v}_{\Omega}\cross\vec{p}_i + \bigsum_{i}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\cross\vec{F}_i = \\[8pt]
+      &= -\vec{v}_{\Omega}\cross\bigsum_{i}\vec{p}_i + \bigsum_{i}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\cross\vec{F}_i = -\vec{v}_{\Omega}\cross\vec{P} + \bigsum_{i}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\cross\vec{F}_i
+    \end{split}
 \end{equation}
 We can simplify the first term since $\vec{v}_i \parallel \vec{p}_i$ and we can also see that the last term is the \textbf{total torque} $\vec{\tau}_{\Omega}$, which is the result of both the internal and external forces.
 \begin{equation} \label{e:first_angular_expression}
-    \dfrac{\dd{\vec{L}_{\Omega}}}{\dd{t}} = -\vec{v}_{\Omega}\wedge\vec{P} + \vec{\tau}_{\Omega}
+    \dfrac{\dd{\vec{L}_{\Omega}}}{\dd{t}} = -\vec{v}_{\Omega}\cross\vec{P} + \vec{\tau}_{\Omega}
 \end{equation}
 If we restrict to the strong action law we get:
 \begin{equation}
-    \vec{\tau}_{\Omega} = \bigsum_{i}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\wedge\vec{F}_i = \bigsum_{i}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\wedge\brackets{\vec{F}_i^{\;(ext)}+ \bigsum_{i\neq j}\vec{F}_{ji}} =
-\end{equation}
-\begin{equation}
-    = \bigsum_{i}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\wedge\vec{F}_i^{\;(ext)} + \cancel{\bigsum_{i}\brackets{\brackets{\vec{r}_i-\vec{r}_{\Omega}}\wedge\bigsum_{i\neq j}\vec{F}_{ji}}} = \vec{\tau}^{\;(ext)}
+    \begin{split}
+      \vec{\tau}_{\Omega} &= \bigsum_{i}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\cross\vec{F}_i = \bigsum_{i}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\cross\brackets{\vec{F}_i^{\;(ext)}+ \bigsum_{i\neq j}\vec{F}_{ji}} = \\[8pt]
+    &= \bigsum_{i}\brackets{\vec{r}_i-\vec{r}_{\Omega}}\cross\vec{F}_i^{\;(ext)} + \cancel{\bigsum_{i}\brackets{\brackets{\vec{r}_i-\vec{r}_{\Omega}}\cross\bigsum_{i\neq j}\vec{F}_{ji}}} = \vec{\tau}^{\;(ext)}
+    \end{split}
 \end{equation}
 We can cross out the second term since the sum only has terms such as:
 \begin{equation}
-    \vec{r}_i\wedge\vec{F}_{ji} + \vec{r}_j\wedge\vec{F}_{ij}- \cancel{{\vec{r}_{\Omega}\wedge\vec{F}_{ij}+\vec{r}_{\Omega}\wedge\vec{F}_{ji}}}
+    \vec{r}_i\cross\vec{F}_{ji} + \vec{r}_j\cross\vec{F}_{ij}- \cancel{{\vec{r}_{\Omega}\cross\vec{F}_{ij}+\vec{r}_{\Omega}\cross\vec{F}_{ji}}}
 \end{equation}
 This first simplification is a trivial consequence of weak action law. In order to simplify the other term we can realize that if strong action law holds then both $\vec{F}_{ij}$ and $\vec{F}_{ji}$ lie on the line of $\vec{r}_i-\vec{r}_j$ and have opposite directions.
 So we get:
 \begin{equation}
-    \bigsum_{i}\brackets{\brackets{\vec{r}_i-\vec{r}_{\Omega}}\wedge\bigsum_{i\neq j}\vec{F}_{ji}} = 0
+    \bigsum_{i}\brackets{\brackets{\vec{r}_i-\vec{r}_{\Omega}}\cross\bigsum_{i\neq j}\vec{F}_{ji}} = 0
 \end{equation}
 Going back to \eqref{e:first_angular_expression} we get:
 \begin{equation}
-    \dfrac{\dd{\vec{L}_{\Omega}}}{\dd{t}} = -\vec{v}_{\Omega}\wedge\vec{P} + \vec{\tau}^{\;(ext)}
+    \dfrac{\dd{\vec{L}_{\Omega}}}{\dd{t}} = -\vec{v}_{\Omega}\cross\vec{P} + \vec{\tau}^{\;(ext)}
 \end{equation}
 The first term can be 0 if:
 \begin{itemize}
@@ -258,11 +251,11 @@ The centre of mass also satisfies:
 \end{equation}
 as if the mass was all concentrated in the CM. But for angular momentum:
 \begin{equation}
-    \vec{L}_{\Omega} \neq (\vec{R}-\vec{r}_{\Omega})\wedge\vec{P}
+    \vec{L}_{\Omega} \neq (\vec{R}-\vec{r}_{\Omega})\cross\vec{P}
 \end{equation}
 instead this is true:
 \begin{equation}
-    \vec{L}_{\Omega} = (\vec{R}-\vec{r}_{\Omega})\wedge\vec{P} + \vec{L}'_{CM}
+    \vec{L}_{\Omega} = (\vec{R}-\vec{r}_{\Omega})\cross\vec{P} + \vec{L}'_{CM}
 \end{equation}
 Where $\vec{L}'_{CM}$ is the total angular momentum evaluated in the frame of reference of the centre of mass.\\
 From this we can state \textbf{Konig's theorem}:
@@ -272,10 +265,10 @@ From this we can state \textbf{Konig's theorem}:
 Where $T'$ is the kinetic energy associated to the motion with respect to the centre of mass.\\
 Now we can analyse the work of the system of particles:
 \begin{equation}
-    W_{12} = \bigsum_i\int_{1}^{2}\vec{F}_i = \int_{1}^{2}\bigsum_i\vec{F}_i = \int_{1}^{2}\bigsum_i\brackets{\vec{F}_i^{\;(ext)} + \bigsum_{j\neq i}\vec{F}_{ji}}\cdot \dd{\vec{r}_i} =
-\end{equation}
-\begin{equation}
-    = \int_{1}^{2}\brackets{\bigsum_i\vec{F}_i^{\;(ext)} + \bigsum_i\bigsum_{j\neq i}\vec{F}_{ji}}\cdot \dd{\vec{r}_i}
+    \begin{split}
+      W_{12} &= \bigsum_i\int_{1}^{2}\vec{F}_i = \int_{1}^{2}\bigsum_i\vec{F}_i = \int_{1}^{2}\bigsum_i\brackets{\vec{F}_i^{\;(ext)} + \bigsum_{j\neq i}\vec{F}_{ji}}\cdot \dd{\vec{r}_i} = \\[8pt]
+    &= \int_{1}^{2}\brackets{\bigsum_i\vec{F}_i^{\;(ext)} + \bigsum_i\bigsum_{j\neq i}\vec{F}_{ji}}\cdot \dd{\vec{r}_i}
+    \end{split}
 \end{equation}
 The term $\bigsum_i\bigsum_{j\neq i}\vec{F}_{ji}\cdot \dd{\vec{r}_i}$ is not necessarily 0, but it is 0 in the case of rigid bodies.\\
 If external forces are conservative:
@@ -284,10 +277,10 @@ If external forces are conservative:
 \end{equation}
 The gradient with respect to i is $\grad_i = \brackets{\partial_{x_i}, \partial_{y_i}, \partial_{z_i}}$. So the work of external forces is just:
 \begin{equation}
-    W_{12}^{\;(ext)} = \int_{1}^{2}\bigsum_i\brackets{\vec{F}_i\cdot\dd{\vec{r}_i}} = -\bigsum_i\int_{1}^{2}\grad_i V_i\cdot\dd{\vec{r}_i} =
-\end{equation}
-\begin{equation}
-    = -\bigsum_i\int_{1}^{2}\dd{V_i} = -\bigsum_i V_i\bigg|_1^2
+    \begin{split}
+      W_{12}^{\;(ext)} &= \int_{1}^{2}\bigsum_i\brackets{\vec{F}_i\cdot\dd{\vec{r}_i}} = -\bigsum_i\int_{1}^{2}\grad_i V_i\cdot\dd{\vec{r}_i} =\\[8pt]
+    &= -\bigsum_i\int_{1}^{2}\dd{V_i} = -\bigsum_i V_i\bigg|_1^2
+    \end{split}
 \end{equation}
 Now defining $V^{\;(ext)} = \bigsum_i V_i$ we get:
 \begin{equation}
@@ -315,17 +308,17 @@ We can also express both forces with a unique gradient:
 \end{equation}
 For the first force we have:
 \begin{equation}
-    \vec{F}_{ji}=-\grad_iV_{ij}=-\brackets{\dfrac{\partial V_i}{\partial x_i },\dfrac{\partial V_i}{\partial y_i },\dfrac{\partial V_i}{\partial z_i }} =
-\end{equation}
-\begin{equation}
-    =-\brackets{\dfrac{\partial V_i}{\partial x_i}\dfrac{\partial r_{ij}}{\partial r_{ij}},\dfrac{\partial V_i}{\partial y_i }\dfrac{\partial r_{ij}}{\partial r_{ij}},\dfrac{\partial V_i}{\partial z_i }\dfrac{\partial r_{ij}}{\partial r_{ij}}}
+    \begin{split}
+      \vec{F}_{ji} &= -\grad_iV_{ij}=-\brackets{\dfrac{\partial V_i}{\partial x_i },\dfrac{\partial V_i}{\partial y_i },\dfrac{\partial V_i}{\partial z_i }} = \\[8pt]
+      &=-\brackets{\dfrac{\partial V_i}{\partial x_i}\dfrac{\partial r_{ij}}{\partial r_{ij}},\dfrac{\partial V_i}{\partial y_i }\dfrac{\partial r_{ij}}{\partial r_{ij}},\dfrac{\partial V_i}{\partial z_i }\dfrac{\partial r_{ij}}{\partial r_{ij}}}
+    \end{split}
 \end{equation}
 The partial derivatives of $r_{ij}$ are in the form of:
 \begin{equation}
-    \dfrac{\partial r_{ij}}{\partial x_i} = \dfrac{\partial }{\partial x_i}\sqrt{(x_j-x_i)^2 + (y_j-y_i)^2+ (z_j-z_i)^2} =
-\end{equation}
-\begin{equation}
-    = \dfrac{(x_j-x_i)}{\sqrt{(x_j-x_i)^2 + (y_j-y_i)^2+ (z_j-z_i)^2}}
+    \begin{split}
+      \dfrac{\partial r_{ij}}{\partial x_i} &= \dfrac{\partial }{\partial x_i}\sqrt{(x_j-x_i)^2 + (y_j-y_i)^2+ (z_j-z_i)^2} = \\[8pt]
+      &= \dfrac{(x_j-x_i)}{\sqrt{(x_j-x_i)^2 + (y_j-y_i)^2+ (z_j-z_i)^2}}
+    \end{split}
 \end{equation}
 So the sum becomes:
 \begin{equation}

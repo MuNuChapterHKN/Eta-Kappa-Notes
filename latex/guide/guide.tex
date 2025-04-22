@@ -42,6 +42,7 @@
 \usepackage{physics}
 \counterwithin{equation}{section}
 \counterwithin{figure}{section}
+\renewcommand{\vec}{\vb}
 \newcommand{\diff}[1]{\mathrm{d}#1}
 \newcommand{\dvec}[1]{\dot{\vec{#1}}}
 \newcommand{\muz}{\mu_0}
@@ -50,13 +51,14 @@
 \newcommand{\bigsum}{\displaystyle\sum}
 \newcommand{\brackets}[1]{\left(#1\right)}
 \newcommand{\bbrackets}[1]{\bigg(#1\bigg)}
-\newcommand{\dalambertref}{\hyperref[D'Alambert_principle]{D'Alambert's principle}}
+\newcommand{\dalembertref}{\hyperref[D'Alembert_principle]{D'Alembert's principle}}
 \newcommand{\lagrangeref}{\hyperref[Lagrange_equations]{Lagrange equations}}
 \newcommand{\eleref}{\hyperref[Euler_Lagrange_equations]{Euler-Lagrange equations}}
 \newcommand{\hpquoteref}{\hyperref[q:Hamilton_principle_quote]{Hamilton's principle}}
 \newcommand{\hpquotemath}{\hyperref[e:Hamilton_principle]{Hamilton's principle}}
 \newcommand{\hamiltonref}{\hyperref[hamilton_equations]{Hamilton's equations}}
 \newcommand{\hamjacref}{\hyperref[e:hamiltonjacobi]{Hamilton-Jacobi equation}}
+\newcommand{\maxwellref}{\hyperref[e:diff_Maxwell_eq]{Maxwell's equations}}
 \newcommand{\defineeq}{\coloneqq}
 \newcommand{\lagr}{\mathcal{L}}
 \newcommand{\hamfun}{\mathcal{H}}
@@ -68,14 +70,16 @@
 \newcommand{\Telegant}{\mathcal{T}} %Aka T-sexy
 \newcommand{\transpose}[1]{#1^{\;T}}
 \newcommand{\notimplies}{\centernot\implies}
+\newcommand{\potE}{\varphi}
+\newcommand{\dalop}{\square}
 \renewcommand{\dv}{%%%
  \def\flatfrac{\let\flatfrac\savedfrac\dfrac}\derivative*%%%
 }
 \renewcommand{\pdv}{%%%
  \def\flatfrac{\let\flatfrac\savedfrac\dfrac}\partialderivative*%%%
 }
-\renewcommand{\grad}{\vec{\nabla}}
-\renewcommand{\div}{\vec{\nabla} \cdot}
+%\renewcommand{\grad}{\vec{\nabla}}
+%\renewcommand{\div}{\vec{\nabla} \cdot}
 
 
 \begin{document}
@@ -106,6 +110,7 @@
 \clearpage
 
 \mainmatter
+\setlength{\parindent}{0pt}
 \include{chapters/Introduction_to_analytical_mechanics}
 \include{chapters/Constraints}
 \include{chapters/Lagrange_and_Euler-Lagrange_mechanics}
@@ -113,6 +118,8 @@
 \include{chapters/Applications_of_Lagrange_formalism}
 \include{chapters/Canonical_transformations}
 \include{chapters/Hamilton_Jacobi}
+\include{chapters/Electromagnetism}
+\include{chapters/Introduction_to_special_relativity}
 
 \backmatter
 

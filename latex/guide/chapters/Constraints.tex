@@ -4,14 +4,14 @@ Any physical system has constraints which limit the motion of parts of the syste
 \textbf{Ex.} Normal forces:
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\linewidth]{res/svg/idealpulley.drawio}
+    \includegraphics[width=0.5\linewidth]{res/svg/normalforce.drawio}
     \caption{Normal force on a plane}
     \label{fig:image6}
 \end{figure}
 Let's look deeper with another example. Imagine taking two masses $m_1$ and $m_2$ attached with an inextensible rope through an ideal pulley (massless and frictionless). Also consider the plane frictionless, we get this type of situation:
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\linewidth]{res/svg/leastactionpath.drawio}
+    \includegraphics[width=0.6\linewidth]{res/svg/idealpulley.drawio}
     \caption{Normal force on a plane}
     \label{fig:image7}
 \end{figure}
@@ -75,17 +75,17 @@ The total force is composed of two separated parts:
 \end{itemize}
 At equilibrium we get:
 \begin{equation}
-    \bigsum_i \vec{F}_i \cdot \delta \vec{r}_i = 0
+    \begin{split}
+      &\bigsum_i \vec{F}_i \cdot \delta \vec{r}_i = 0 \\[8pt]
+      &\bigsum_i \brackets{\vec{F}^{(a)}_i + \vec{f}_i} \cdot \delta \vec{r}_i = \bigsum_i \vec{F}^{(a)}_i \cdot \delta \vec{r}_i + \bigsum_i \vec{f}_i \cdot \delta \vec{r}_i = 0
+    \end{split}
 \end{equation}
+Now we consider only system with zero total virtual work, and we get:
 \begin{equation}
-    \bigsum_i \brackets{\vec{F}^{(a)}_i + \vec{f}_i} \cdot \delta \vec{r}_i = \bigsum_i \vec{F}^{(a)}_i \cdot \delta \vec{r}_i + \bigsum_i \vec{f}_i \cdot \delta \vec{r}_i = 0
-\end{equation}
-Now we consider only system with zero total virtual work and we get:
-\begin{equation}
-    \bigsum_i \vec{F}^{(a)}_i \cdot \delta \vec{r}_i + \cancel{\bigsum_i \vec{f}_i \cdot \delta \vec{r}_i} = 0
-\end{equation}
-\begin{equation}
-    \bigsum_i \vec{F}^{(a)}_i \cdot \delta \vec{r}_i = 0
+    \begin{split}
+      &\bigsum_i \vec{F}^{(a)}_i \cdot \delta \vec{r}_i + \cancel{\bigsum_i \vec{f}_i \cdot \delta \vec{r}_i} = 0 \\[8pt]
+      &\bigsum_i \vec{F}^{(a)}_i \cdot \delta \vec{r}_i = 0
+    \end{split}
 \end{equation}
 The last equation represents the condition of equilibrium for a system such that $\bigsum_i \vec{f}_i \cdot \delta \vec{r}_i = 0$ and is called \textbf{principle of virtual work}.
 If the system \underline{is not} at equilibrium then we have:
@@ -101,7 +101,7 @@ Now if the total virtual work of constraints is 0:
     \bigsum_i \brackets{\vec{F}^{(a)}_i - \dvec{p}_i} \cdot \delta \vec{r}_i + \cancel{\bigsum_i \vec{f}_i \cdot \delta \vec{r}_i} = 0
 \end{equation}
 And we get the so called \textbf{D'Alembert's principle}:
-\begin{equation}  \label{D'Alambert_principle}
+\begin{equation}  \label{D'Alembert_principle}
     \boxed{\bigsum_i \brackets{\vec{F}^{(a)}_i - \dvec{p}_i} \cdot \delta \vec{r}_i = 0}
 \end{equation}
 Now a problem arises. Since the $\delta \vec{r}_i$ are not independent in these coordinates we need to find a new set of coordinates that makes us able to make all the terms in the sum independent so we can establish that every single term is independently zero.
