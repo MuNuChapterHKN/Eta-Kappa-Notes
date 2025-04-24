@@ -92,7 +92,7 @@ dove $k \in \R$ è un parametro di adimensionamento con dimensioni $\dimension{k
     u(x + a + b) = u(x) \quad \forall x \in \R
 \end{equation}
 
-Sostituendo nelle due soluzioni $\Psi_\mathrm{I}$ e $\Psi_\mathrm{II}$ nella \eqref{eq:schrcristallo}, si ottiengono due equazioni differenziali in $u_\mathrm{I}$ e $u_\mathrm{II}$
+Sostituendo nelle due soluzioni $\Psi_\mathrm{I}$ e $\Psi_\mathrm{II}$ nell'\cref{eq:schrcristallo}, si ottiengono due equazioni differenziali in $u_\mathrm{I}$ e $u_\mathrm{II}$
 \begin{subequations}
     \begin{gather}
         \parder[][2]{x} u_\mathrm{I} + 2\im k \parder{x} u_\mathrm{I} - (k^2 - \alpha^2) u_\mathrm{I} = 0 \\
@@ -118,7 +118,7 @@ Condizioni al contorno: continuità di $\Psi$ e della sua derivata prima all'ini
     \end{gather}
 \end{subequations}
 
-Sostituire $a$ con $-b$ per $u_\mathrm{II}$ nella \eqref{eq:boundaryuii} permette di tenere automaticamente in considerazione il fatto che $u$ è periodica e che le condizioni al contorno vanno imposte per ogni buca.
+Sostituire $a$ con $-b$ per $u_\mathrm{II}$ nell'\cref{eq:boundaryuii} permette di tenere automaticamente in considerazione il fatto che $u$ è periodica e che le condizioni al contorno vanno imposte per ogni buca.
 
 Risulta un sistema lineare omogeneo di quattro equazioni in quattro incognite:
 \begin{equation}
@@ -142,7 +142,7 @@ Porre il determinante uguale a zero corrisponde alla seguente equazione:
 \begin{equation}
     \frac{\gamma^2 - \alpha^2}{2 \alpha \gamma} \sinh(\gamma b) \sin(\alpha a) + \cosh(\gamma b) \cos(\alpha a) = \cos\pts{k(a + b)}
 \end{equation}
-Si usano le seguenti approssimazioni derivate dalle condizioni nella \eqref{eq:condcristallo}:
+Si usano le seguenti approssimazioni derivate dalle condizioni nell'\cref{eq:condcristallo}:
 \begin{subequations}
     \begin{gather}
         b \ll a \implies \cosh(\gamma b) \approx 1, \ \sinh(\gamma b) \approx \gamma b \\
@@ -162,7 +162,7 @@ che risultano in
 Questa è la condizione che l'elettrone deve rispettare per esistere nel solido e indica quanto devono valere il parametro di Bloch $k$ e l'energia $E$ dell'elettrone (implicita in $\alpha$).
 
 Se $V_0 = 0$, l'elettrone non vedrebbe alcun potenziale e sarebbe libero.
-Varrebbe $P = 0$ e la \eqref{eq:bande} diventerebbe
+Varrebbe $P = 0$ e l'\cref{eq:bande} diventerebbe
 \begin{gather}
     \cos(\alpha a) = \cos(k a)
     \implies
@@ -174,9 +174,9 @@ $k$ ha quindi un significato fisico legato alla quantità di moto dell'elettrone
 
 \section{Schema a bande}
 
-In generale, la \eqref{eq:bande} relaziona $E$ e $k$ (ma non è si può esplicitare rispetto a nessuna delle due variabili).
+In generale, l'\cref{eq:bande} relaziona $E$ e $k$ (ma non è si può esplicitare rispetto a nessuna delle due variabili).
 Non è quindi possibile che l'elettrone abbia energia e quantità di moto arbitrarie.
-Il luogo dei punti $(k, E)$ che soddisfano la \eqref{eq:bande} (non nel caso di elettrone libero) è:
+Il luogo dei punti $(k, E)$ che soddisfano l'\cref{eq:bande} (non nel caso di elettrone libero) è:
 
 \redtext{Figura}
 
@@ -212,7 +212,7 @@ A destra è rappresentata la notazione di Dirac, che evidenzia come $\Psi$ e $\u
     \label{tab:caratteristiche}
 \end{table}
 
-Un elettrone in un solido, ora, è propriamente un onda (lo si vede dalla forma della \eqref{eq:bloch}).
+Un elettrone in un solido, ora, è propriamente un onda (lo si vede dalla forma dell'\cref{eq:bloch}).
 
 La ``posizione'' di un onda è meglio descritta nello \important{spazio reciproco}, in cui ``vive'' il numero d'onda $k$, anziché nello spazio reale dove  ``vive'' la posizione.
 
@@ -512,7 +512,7 @@ Lo schema a bande, alla fine, è riempito in modo asimmetrico.
 Gli elettroni che hanno stati appaiati con uno stato con $k_x$ opposto non contribuiscono a quantità di moto netta.
 Gli elettroni spaiati, invece, danno origine a una corrente elettrica netta (in direzione opposta al ``moto'' degli elettroni, che hanno carica negativa).
 
-Il $\Delta t$ nella \eqref{eq:campocristallo} è un tempo di urto $\tau$: il tempo medio prima di urtare contro un nucleo.
+Il $\Delta t$ nell'\cref{eq:campocristallo} è un tempo di urto $\tau$: il tempo medio prima di urtare contro un nucleo.
 Dopo ogni urto, gli elettroni vengono accelerati nuovamente.
 Per questa ragione, le quantità di moto variano ralativamente poco e la velocità di deriva è circa quella che corrisponde al livello di Fermi (interpretato come energia cinetica):
 \begin{equation}

@@ -59,6 +59,8 @@ Se la velocità $v$ è dovuta a una d.d.p. $\Delta V$,
     r = \frac{mv}{\abs{q}B} = \frac{1}{B}\sqrt{\frac{2 m \Delta V}{\abs{q}}}
 \end{equation}
 
+\adddrawio[][0.7]{mass_spectrometry}
+
 Consideriamo argon-40 e argon-38 ionizzati, $\Delta V = \qty{1}{\kilo\volt}$, $B = \qty{0.1}{\tesla}$:
 \begin{equation}
     r_{40} = \qty{28.8}{\centi\metre}, \quad r_{38} = \qty{28.0}{\centi\metre}
@@ -69,6 +71,8 @@ In realtà, lo spettrometro di massa dà informazioni sul rapporto carica/massa,
 
 
 \subsection{Ciclotrone}
+
+\addfigure[Da \shorturl{commons.wikimedia.org/wiki/File:Ciclotrone.png}.][0.8]{wikimedia/ciclotrone}
 
 Permette di accelerare molto le particelle.
 
@@ -116,6 +120,8 @@ Legge di Ampère-Laplace:
 
 \subsection{Spira circolare}
 
+\adddrawio[][0.8]{bfield_ring}
+
 Spira circolare di raggio $R$ sul piano $yz$ con centro nell'origine percorsa da corrente $I$ nel verso concorde con l'asse $x$.
 Calcoliamo il campo magnetico $\B(x, 0, 0)$.
 
@@ -155,6 +161,8 @@ In termini di densità,
 \begin{equation}
     \de\B(x, 0, 0) = \frac{\mu_0 I R^2}{2 (r')^3} n \, \de x' \, \ux
 \end{equation}
+
+\adddrawio[][0.9]{solenoid}
 
 Si opera il cambio di variabile da $x'$ a $\phi$ (l'angolo tra il segmento di lunghezza $r'$ e l'asse $x$):
 \begin{gather}
@@ -214,6 +222,8 @@ Se $\de \vt{l} \perp \B$,
 
 \subsection{Dinamometro a bilancia}
 
+\addfigure[][0.4]{book/dinamometro_a_bilancia}
+
 Bilancia con massa su un piatto e un circuito presso l'altro braccio.
 
 Il circuito consiste in una spira rigida per cui passa una corrente nota $I$ in presenza di un campo magnetico uniforme perpendicolare.
@@ -224,6 +234,8 @@ Poiché i due lati verticali danno contributi opposti, la forza risultante sulla
 Esempio: se $m = \qty{0.5}{\gram}$, $I = \qty{1}{\ampere}$ e $L = \qty{5}{\centi\metre}$, allora $B = \qty{0.1}{\tesla}$.
 
 \subsection{Spira in un campo magnetico}
+
+\addfigure[][0.4]{book/spira_semicircolare}
 
 Spira che segue il perimetro di un semicerchio di raggio $R$ poggiato sull'asse $x$ e nel piano $xy$, in presenza di un campo magnetico $\B = B \uy$.
 Una corrente $I$ scorre in verso antiorario. Siano $P$ e $Q$ gli estremi del lato orizzontale.
@@ -271,12 +283,12 @@ Quindi
     \vt{M} = \int_S \de\vt{m} \times \B
 \end{equation}
 
-Per la \eqref{eq:campo_spira}, il campo magnetico di una spira con $\vt{m} \parallel \ux$, per $x \gg R$, è
+Per l'\cref{eq:campo_spira}, il campo magnetico di una spira con $\vt{m} \parallel \ux$, per $x \gg R$, è
 \begin{equation}
     \B(x, 0, 0) = \frac{\mu_0 I R^2}{2 x^3} \ux = \frac{\mu_0}{4\pi} \frac{2\vt{m}}{x^3}
 \end{equation}
 
-Si noti l'analogia con il campo elettrico di un dipolo elettrico con $\vt{p} \parallel \ux$ (vedi \eqref{eq:campo_dipolo_elettrico}):
+Si noti l'analogia con il campo elettrico di un dipolo elettrico con $\vt{p} \parallel \ux$ (vedi \cref{eq:campo_dipolo_elettrico}):
 \begin{equation}
     \E(x, 0, 0) = \frac{1}{4\pi\eps_0} \frac{2\vt{p}}{x^3}
 \end{equation}
@@ -291,13 +303,15 @@ Oltre a queste analogie con il dipolo elettrico, le linee di campo tendono a div
 
 \subsection{Dipolo magnetico}
 
+\adddrawio[][0.6]{magnetic_dipole}
+
 Rappresentiamo il dipolo magnetico come una spira quadrata con corrente $I$, lato $L$ e area $S = L^2$ che giace sul piano $xy$ nell'origine.
 
 Potenziale vettore:
 \begin{equation}
     \vpot = \frac{\mu_0}{4\pi} \int_V \frac{\dcurr(\p')}{\norm{\p - \p'}} \de V'
 \end{equation}
-La componente $\alpha$ è
+La componente $\alpha \in \set{x, y, z}$ è
 \begin{equation}
     A_\alpha(\p) = \frac{\mu_0}{4\pi} \int_V \frac{J_\alpha(\p')}{\norm{\p - \p'}} \de V'
 \end{equation}
@@ -400,7 +414,7 @@ Legge di Ampère-Laplace:
 \begin{equation}
     \de \B(\p) = \frac{\mu_0}{4\pi} \frac{I \de \vt{l}' \times \ver{r'}}{\norm{\p - \p'}^2}
 \end{equation}
-Ricorda la \eqref{eq:corrente_infinitesima}:
+Ricorda l'\cref{eq:corrente_infinitesima}:
 \begin{equation}
     \dcurr = n q \vt{v} = \rho \vt{v}, \quad \de Q \, \vt{v} = \dcurr \de V = I \de\vt{l}
 \end{equation}
@@ -440,6 +454,8 @@ Sia $\B(\p) = B(r) \ver{\theta}$.
 Ovvero, $B(r) \propto r$ per $r < R$ e $\propto 1/r$ per $r > R$.
 
 \subsection{Cavo coassiale}
+
+\adddrawio{coaxial_cable}
 
 Usato per connessioni, perché permette di isolare i campi elettromagnetici.
 
@@ -574,7 +590,9 @@ Gli antiferromagneti hanno domini con dipoli orientati in senso opposto, per cui
 
 I materiali ferrimagnetici combinano effetti ferromagnetici (più intensi) e antiferromagnetici (più debili).
 
-Vedi \important{ciclo di isteresi} con variabili $\H$ e $\vt{M}$.
-
 Le calamite si creano spegnendo $\H$ dopo aver raggiunto una forte magnetizzazione.
 Per distruggere una calamita, l'unica possibilità è scaldarla in modo da disordinare i dipoli.
+
+\addfigure[\important{Ciclo di isteresi} con variabili $\H$ e $\vt{M}$. \\
+Da \href{https://commons.wikimedia.org/wiki/File:Isteresi.png}{TFra6}, \href{https://creativecommons.org/licenses/by-sa/4.0}{CC BY-SA 4.0}, tramite Wikimedia Commons.
+]{wikimedia/isteresi}

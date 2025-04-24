@@ -104,7 +104,7 @@ Ricordando $\dcurr = \rho \vt{v}$ e considerando che un tratto infinitesimo di f
 
 \subsection{Campo magnetico generato da una corrente}
 
-A partire dalla legge elementare di Ampère e usando la \eqref{eq:corrente_infinitesima}, si ottiene la \important{Legge di Ampère-Laplace}:
+A partire dalla legge elementare di Ampère e usando l'\cref{eq:corrente_infinitesima}, si ottiene la \important{Legge di Ampère-Laplace}:
 \begin{equation}
 \label{eq:ampere_laplace}
     \de\B(\p) = \frac{\mu_0}{4\pi} \frac{I \de \vt{l} \times \ver{\p'}}{\norm{\p -\p'}^2}
@@ -121,7 +121,7 @@ Correla la geometria del filo al campo magnetico generato.
 
 \subsection{Campo magnetico esercitato su un filo}
 
-Riutilizzando la \eqref{eq:corrente_infinitesima},
+Riutilizzando l'\cref{eq:corrente_infinitesima},
 \begin{equation}
     \de\force = I \de\vt{l} \times \B
 \end{equation}
@@ -133,6 +133,8 @@ Formato integrale:
 
 \subsection{Forza esercitata reciprocamente}
 \label{sec:def_ampere}
+
+\adddrawio[][0.3]{biot_savart}
 
 \important{Legge di Biot-Savart}: considerando un filo rettilineo infinito con corrente $I$, il campo magnetico a una distanza $R$ è
 \begin{equation}
@@ -162,7 +164,7 @@ Definendo una tra carica e corrente, si definiscono sia $\mu_0$ sia $\eps_0$, ch
 
 \section{Legge di Gauss per il magnetismo}
 
-Partendo dalla \eqref{eq:ampere_laplace_integrale} scritta con la densità di corrente, prendiamo la divergenza (rispetto alla variabile $\p$)
+Partendo dall'\cref{eq:ampere_laplace_integrale} scritta con la densità di corrente, prendiamo la divergenza (rispetto alla variabile $\p$)
 \begin{equation}
     \diver \B(\p) = \frac{\mu_0}{4\pi} \!\int_V \diver \frac{\dcurr(\p') \times \ver{\p'}}{\norm{\p - \p'}^2} \de V'
 \end{equation}
@@ -256,7 +258,7 @@ Calcoliamo il rotore di $\B$:
 \begin{equation}
     \curl \B = \curl \curl \vpot = - \vlapl \vpot + \cancel{\grad (\diver \vpot)} = \mu_0 \dcurr
 \end{equation}
-Infatti, definire $\vpot$ come in \eqref{eq:potenziale_vettore} implica che $\vpot$ è solenoidale.
+Infatti, definire $\vpot$ come nell'\cref{eq:potenziale_vettore} implica che $\vpot$ è solenoidale.
 
 Formato integrale (tramite il teorema di Stokes):
 \begin{equation}
@@ -289,7 +291,7 @@ Si ha simmetria cilindrica e $B = \norm{\B}$ è costante se il punto dista $R$ d
     = \frac{\mu_0 I}{2\pi R}
 \end{equation}
 
-È una conferma della legge di Biot-Savart \eqref{eq:biot_savart}.
+È una conferma della legge di Biot-Savart (\cref{eq:biot_savart}).
 
 \subsection{Solenoide}
 

@@ -33,6 +33,8 @@ Legge di Gauss ($S$ superficie chiusa):
 
 \subsection{Anello}
 
+\adddrawio[][0.9]{efield_ring}
+
 Anello $C$ di raggio $R$ e carica totale $q$ distribuita uniformemente.
 Ha centro $\vt{0}$ e giace sul piano $yz$.
 Trovare $\E(x, 0, 0)$ e $\spot(x, 0, 0)$.
@@ -145,12 +147,14 @@ $v$ è la velocità della particella quando raggiunge o supera l'armatura B.
 
 Per $\Delta V = \qty{10}{\volt}$, si avranno $K = \qty{10}{\electronvolt}$ e $v = \qty{1.9e6}{\metre\per\second} \approx \num{e-2} c_0$.
 
-\subsubsection{Separatore di carica}
+\subsubsection{Separatore elettrostatico}
 
-È possibile deviare una particella di carica $-q$ di massa $m$ dopo averla accelerata fino a una velocità iniziale $v_i$, facendola passare attraverso armature perpendicolari alle prime a una distanza $h$ dall'armatura positiva.
+\addfigure[][0.8]{book/separatore_elettrostatico}
+
+È possibile deviare una particella di carica $-q$ di massa $m$ dopo averla accelerata fino a una velocità iniziale $v_0$, facendola passare attraverso armature perpendicolari alle prime a una distanza $h$ dall'armatura positiva.
 Il moto sarà parabolico.
 
-Siano $l$ la lunghezza del separatore e $L$ una lunghezza successiva.
+Siano $a$ la lunghezza del separatore e $L$ una lunghezza successiva.
 Ci si chiede la differenza di quota $d$.
 
 Poniamo l'armatura negativa in basso.
@@ -158,11 +162,9 @@ Il campo e la forza sono $\E = -E \uy$ e $\force = q E \uy$.
 
 Con l'origine all'inizio del separatore, la traiettoria è
 \begin{gather}
-    y(x) = \frac{1}{2} \frac{q E}{m} t^2 = \frac{q E x^2}{2 m v_i^2} \\
-    \tan \alpha = \evalat{\der[y]{x}}{x = l} = \frac{qEl}{m v_i^2}, \qquad d = L \tan \alpha + h
+    y(x) = \frac{1}{2} \frac{q E}{m} t^2 = \frac{q E x^2}{2 m v_0^2} \\
+    \tan \alpha = \evalat{\der[y]{x}}{x = a} = \frac{q E a}{m v_0^2}, \qquad d = L \tan \alpha + h
 \end{gather}
-
-\redtext{FIGURA}
 
 \subsection{Sfera}
 
@@ -229,7 +231,9 @@ Calcoliamo il potenziale all'interno:
 
 \subsection{Cilindro}
 
-Cilindro infinito di raggio $R$ con asse coincidente con $\uz$ e densità di carica $\rho$.
+\adddrawio[Il cilindro di raggio $R$ è da intendersi infinito.]{efield_cylinder}
+
+Cilindro infinito di raggio $R$ con asse coincidente con l'asse $z$ e densità di carica $\rho$.
 
 Poiché il cilindro è infinito, il campo non ha componente $z$.
 
@@ -270,6 +274,8 @@ In un certo senso vale:
 \end{equation}
 
 \section{Coordinate sferiche}
+
+\addfigure[Da \shorturl{commons.wikimedia.org/wiki/File:3D\_Spherical.svg}.][0.4]{wikimedia/spherical_coordinates.svg.png}
 
 \begin{subequations}
 \begin{gather}
@@ -455,7 +461,9 @@ coerentemente con $\force = - \grad U_e$.
 
 \subsection{Condensatore sferico}
 
-Ricordando la \eqref{eq:potenziale_sfera}, la capacità di una sfera carica di raggio $R$ è
+\adddrawio{spherical_capacitor}
+
+Ricordando l'\cref{eq:potenziale_sfera}, la capacità di una sfera carica di raggio $R$ è
 \begin{equation}
     C = \frac{q}{V} = 4\pi\eps_0 R
 \end{equation}
@@ -530,6 +538,8 @@ Verifichiamo l'uguaglianza per un condensatore sferico:
 usando $\de V = 4\pi r^2 \de r$.
 
 \section{Materiale dielettrico}
+
+\addfigure[Da \href{https://commons.wikimedia.org/wiki/File:Dielettrico.png}{Papa November Brendy}, \href{https://creativecommons.org/licenses/by-sa/3.0}{CC BY-SA 3.0}, tramite Wikimedia Commons.][0.35]{wikimedia/dielettrico}
 
 Finora, abbiamo trattato l'elettrostatica nel vuoto o per i conduttori.
 Ora trattiamo i dielettrici: materiali isolanti (cioè che non perettono il moto di cariche libere) che modificano alcune proprietà elettrostatiche.
