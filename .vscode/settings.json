@@ -29,16 +29,20 @@
           "args": [
             "%DOCFILE%.tex",
             "--from=latex",
-            "--to=html",
+            "--to=html5",
             "--output=%WORKSPACE_FOLDER%/build/html/%DOCFILE%.html",
             "--data-dir=%APPDATA%/pandoc",
             "--verbose",
-            "--mathjax",
+            "--mathjax=http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML",
             "--metadata=lang:en",
             "--trace",
-            "--resource-path=.;./lib;latex/lib;%WORKSPACE_FOLDER%/resources/imgs",
+            "--template=%WORKSPACE_FOLDER%/latex/lib/template.html",
+            "--resource-path=%WORKSPACE_FOLDER%/latex/lib:%WORKSPACE_FOLDER%/resources/imgs",
             "--listings=false",
             "--section-div=false",
+            "--css=https://fonts.googleapis.com/css2?family=Roboto+Slab&Open-Sans",
+            "--css=%WORKSPACE_FOLDER%/latex/lib/custom.css",
+            "--shift-heading-level-by=1",
             "--standalone"
           ],
           "env": {

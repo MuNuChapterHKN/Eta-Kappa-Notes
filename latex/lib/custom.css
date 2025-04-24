@@ -1,3 +1,5 @@
+/* variables */
+
 :root {
   /* Colori primari */
   --color-blue: #375171;      /* Blu scuro */
@@ -5,6 +7,7 @@
   --color-red: #EC2D24;    /* Rosso */
   --color-yellow: #FEC421;       /* Giallo */
   --color-yellow-two: #F2B705;
+  --color-black: #222222;      /* Nero */
 
   /* Colori di sfondo */
   --color-background: #F2F2F2;   /* Grigio chiaro */
@@ -15,6 +18,56 @@
   --border-size: 5px;
 }
 
+/*file formatting */
+
+body {
+  display: flex;
+  justify-content: center;
+}
+
+.mainclass {
+  max-width: 794px;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.2em;
+  line-height: 1.6;
+  margin: 2em;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 2.5em;
+  text-align: center;
+  color: var(--color-black);
+  margin-bottom: 1em;
+  padding-bottom: 0.5em;
+}
+
+h2 {
+  font-size: 2em;
+  color: var(--color-blue);
+  margin-top: 1.5em;
+}
+
+h3 {
+  font-size: 1.5em;
+  color: var(--color-blue-two);
+  margin-top: 1.2em;
+}
+
+h4 {
+  font-size: 1.2em;
+  color: var(--color-backgorund-text);
+  margin-top: 1em;
+}
+
+/* other */
 .definition,
 .theorem,
 .corollary,

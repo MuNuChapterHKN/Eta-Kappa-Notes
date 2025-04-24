@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html $if(lang)$ lang="$lang$" $endif$>
+<head>
+  <meta charset="utf-8">
+  <meta name="license" content="CC BY-ND-NC 4.0; https://creativecommons.org/licenses/by-nd-nc/4.0/">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  $if(title)$
+  <title>$title$</title>
+  $endif$
+  $if(description)$
+  <meta name="description" content="$description$">
+  $else$
+  <meta name="description" content="These notes, created by the IEEE HKN community, aim to support academic excellence, leadership, and service in the field of electrical and computer engineering. They are part of our commitment to fostering knowledge and helping students succeed academically and professionally.">
+  $endif$
+  $for(author)$
+  <meta name="author" content="$author$">
+  $endfor$
+  $for(css)$
+  <link rel="stylesheet" href="$css$">
+  $endfor$
+  $if(header-includes)$
+  <meta name="date" content="$date$">
+  $header-includes$
+  $endif$
+</head>
+<body>
+<div class="mainclass">
+  <h1>$title$</h1>
+$body$
+</div>
+</body>
+
+</html>
