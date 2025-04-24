@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="license" content="CC BY-ND-NC 4.0; https://creativecommons.org/licenses/by-nd-nc/4.0/">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script type="text/javascript" async
+  <script type="text/javascript" defer
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <title>Guide to conventions and packages for the HKNotes
 project</title>
@@ -114,6 +114,11 @@ and sections in the Table of Contents, and sets the base font size to
 <h2 id="graphs">Graphs</h2>
 <p>Here, I will simply show you how to import graphs in .svg format, add
 captions to them, and resize them properly.</p>
+<figure id="fig:pdf-example">
+<embed src="./../../latex/guide/svg-inkscape/esempio_geogebra_svg-raw.pdf"
+style="width:80.0%" />
+<figcaption>Example of including a PDF document.</figcaption>
+</figure>
 <figure id="graph:esempiografico">
 <img src="res/svg/esempio_geogebra" style="width:80.0%" />
 <figcaption>This is the example graph I created with Geogebra, with a
@@ -165,7 +170,7 @@ with an associated label:</p>
 associated with the label, such as a figure, table, section, etc.
 (example: Figure <a href="#graph:esempiografico"
 data-reference-type="ref"
-data-reference="graph:esempiografico">2.1</a>).</p></li>
+data-reference="graph:esempiografico">2.2</a>).</p></li>
 <li><p><code>\pageref{graph:esempiografico}</code>: To refer to the page
 number where the labeled object appears (example: See page ).</p></li>
 <li><p><code>\hyperref{graph:esempiografico}</code>: If you use the

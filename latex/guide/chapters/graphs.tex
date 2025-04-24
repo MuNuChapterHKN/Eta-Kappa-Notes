@@ -2,6 +2,14 @@
 Here, I will simply show you how to import graphs in .svg format, add captions to them, and resize them properly.
 
 \begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.8\textwidth]{svg-inkscape/esempio_geogebra_svg-raw.pdf}
+  \caption{Example of including a PDF document.}
+  \label{fig:pdf-example}
+\end{figure}
+
+
+\begin{figure}[!ht]
 	\centering
 	% Import the SVG image, applying cropping and resizing
 	\includesvg[width=0.8\textwidth,inkscapelatex=false]{res/svg/esempio_geogebra}
