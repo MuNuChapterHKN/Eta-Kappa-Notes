@@ -50,6 +50,14 @@
           }
         },
         {
+          "name": "copy-resources",
+          "command": "sh",
+          "args": [
+            "-c",
+            "echo ${fileDirname}/res/svg"
+          ]
+        },
+        {
           "name": "pandoc-docx",
           "command": "pandoc",
           "args": [
@@ -71,7 +79,6 @@
             "OUTDIR_DOCX": "%WORKSPACE_FOLDER%/build/docx/%DOCFILE%"
           }
         }
-
     ],
     "latex-workshop.latex.recipes": [
         {
@@ -86,6 +93,13 @@
               "pandoc-html"
             ]
         },
+        {
+          "name": "Pandoc HTML with copy",
+          "tools": [
+            "pandoc-html",
+            "copy-resources"
+          ]
+      },
         {
           "name": "Pandoc DOCX",
           "tools": [

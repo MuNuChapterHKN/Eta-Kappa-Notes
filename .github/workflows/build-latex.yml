@@ -1,0 +1,46 @@
+name: Pandoc HTML
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc texlive-full
+
+      - name: Convert .tex to .html with Pandoc
+        run: |
+          pandoc latex/guide/guide.tex \
+          --from=latex \
+          --to=html5 \
+          --output=build/html/main.html \
+          --data-dir=$HOME/.pandoc \
+          --verbose \
+          --mathjax=http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML \
+          --metadata=lang:en \
+          --trace \
+          --template=latex/lib/template.html \
+          --resource-path=latex/lib:resources/imgs \
+          --listings=false \
+          --section-div=false \
+          --css=https://fonts.googleapis.com/css2?family=Roboto+Slab&Open-Sans \
+          --css=latex/lib/custom.css \
+          --shift-heading-level-by=1 \
+          --standalone
+
+      - name: Upload HTML
+        uses: actions/upload-artifact@v3
+        with:
+          name: page-html
+          path: build/html/main.html

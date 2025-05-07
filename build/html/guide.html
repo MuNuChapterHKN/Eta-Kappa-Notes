@@ -14,7 +14,7 @@ project</title>
     <meta name="author" content="Anna Verdi">
     <meta name="author" content="Giulia Neri">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Slab&Open-Sans">
-    <link rel="stylesheet" href="c:/Users/eriks/OneDrive - Politecnico di Torino/Magistrale/HKN/Eta-Kappa-Notes/latex/lib/custom.css">
+    <link rel="stylesheet" href="/home/fabio/Dev/HKN/Eta-Kappa-Notes/latex/lib/custom.css">
     </head>
 <body>
 <div class="mainclass">
@@ -115,7 +115,7 @@ and sections in the Table of Contents, and sets the base font size to
 <p>Here, I will simply show you how to import graphs in .svg format, add
 captions to them, and resize them properly.</p>
 <figure id="fig:pdf-example">
-<embed src="./../../latex/guide/svg-inkscape/esempio_geogebra_svg-raw.pdf"
+<embed src="svg-inkscape/esempio_geogebra_svg-raw.pdf"
 style="width:80.0%" />
 <figcaption>Example of including a PDF document.</figcaption>
 </figure>
@@ -315,7 +315,7 @@ colored box with the title "Observation" in English.</p>
 <table>
 <caption>Example of a Longtable with Caption and Label</caption>
 <thead>
-<tr>
+<tr class="header">
 <th style="text-align: left;"><strong>Concetto</strong></th>
 <th style="text-align: center;"><strong>Tipo</strong></th>
 <th style="text-align: center;"><strong>Volume</strong></th>
@@ -323,66 +323,66 @@ colored box with the title "Observation" in English.</p>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td style="text-align: left;"><strong>Concetto</strong></td>
 <td style="text-align: center;"><strong>Tipo</strong></td>
 <td style="text-align: center;"><strong>Volume</strong></td>
 <td style="text-align: left;"><strong>Motivazione</strong></td>
 </tr>
-<tr>
+<tr class="even">
 <td colspan="4" style="text-align: right;"><span>Continua all pagina
 successiva</span></td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;">Utente</td>
 <td style="text-align: center;">E</td>
 <td style="text-align: center;">30.000.000</td>
 <td style="text-align: left;"><span>Ipotizziamo una piattaforma in cui
 sono iscritte 30 milioni di utenti</span></td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;">Host</td>
 <td style="text-align: center;">E</td>
 <td style="text-align: center;">150.000</td>
 <td style="text-align: left;"><span>Ipotizziamo che sulla piattaforma si
 iscriveranno circa 150 mila host</span></td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;">Alloggio</td>
 <td style="text-align: center;">E</td>
 <td style="text-align: center;">169.000</td>
 <td style="text-align: left;"><span>Ipotizziamo che nella piattaforma
 verranno registrati circa 169 mila alloggi</span></td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;">Prenotazione</td>
 <td style="text-align: center;">E</td>
 <td style="text-align: center;">36.000.000</td>
 <td style="text-align: left;"><span>Ipotizziamo che sulla piattaforma
 siano state effettuate circa 36 milioni di prenotazioni</span></td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;">Soggiorno</td>
 <td style="text-align: center;">E</td>
 <td style="text-align: center;">34.920.000</td>
 <td style="text-align: left;"><span>Ipotizziamo che sulla piattaforma ci
 siano stati circa 35 milioni di soggiorni</span></td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;">Recensione</td>
 <td style="text-align: center;">E</td>
 <td style="text-align: center;">12.000.000</td>
 <td style="text-align: left;"><span>Ipotizziamo che sulla piattaforma
 vengano scritte circa 12 milioni di recensioni</span></td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;">Commento</td>
 <td style="text-align: center;">E</td>
 <td style="text-align: center;">16.000.000</td>
 <td style="text-align: left;"><span>Ipotizziamo che sulla piattaforma
 vengano scritti circa 16 milioni di commenti</span></td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;">Lista</td>
 <td style="text-align: center;">E</td>
 <td style="text-align: center;">45.000.000</td>
@@ -390,14 +390,14 @@ vengano scritti circa 16 milioni di commenti</span></td>
 vengano create circa 45 milioni di liste di alloggi
 preferiti</span></td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;">Servizio</td>
 <td style="text-align: center;">E</td>
 <td style="text-align: center;">20</td>
 <td style="text-align: left;"><span>Ipotizziamo che sulla piattaforma
 vengano messi a disposizione circa 20 servizi differenti</span></td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;">Possedimento</td>
 <td style="text-align: center;">R</td>
 <td style="text-align: center;">169.000</td>
@@ -405,7 +405,7 @@ vengano messi a disposizione circa 20 servizi differenti</span></td>
 ogni host abbia almeno un alloggio, e che 1 host su 8 abbia 2-3
 alloggi</span></td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;">Richiesta</td>
 <td style="text-align: center;">R</td>
 <td style="text-align: center;">36.000.000</td>
@@ -413,7 +413,7 @@ alloggi</span></td>
 utenti registrati su 5 abbiano fatto almeno una prenotazione, e 1 su 5
 ne abbia fatto almeno 3</span></td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;">Generazione</td>
 <td style="text-align: center;">R</td>
 <td style="text-align: center;">34.920.000</td>
@@ -421,14 +421,14 @@ ne abbia fatto almeno 3</span></td>
 prenotazioni, circa il 2% vengano cancellate. Tutte le altre diventano
 soggiorni effettivi</span></td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;">Elaborazione</td>
 <td style="text-align: center;">R</td>
 <td style="text-align: center;">12.000.000</td>
 <td style="text-align: left;"><span>Ipotizziamo che 1 utente su 3 che ha
 effettuato una prenotazione poi scriva una recensione</span></td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;">Contenuto</td>
 <td style="text-align: center;">R</td>
 <td style="text-align: center;">16.000.000</td>
@@ -436,7 +436,7 @@ effettuato una prenotazione poi scriva una recensione</span></td>
 su 3 abbia un thread con almeno 3 commenti e 1 su 3 abbia un solo
 commento</span></td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;">Creazione</td>
 <td style="text-align: center;">R</td>
 <td style="text-align: center;">45.000.000</td>
@@ -444,7 +444,7 @@ commento</span></td>
 creino delle liste, con una media di 2-3 liste per ciascuno di questi
 utenti</span></td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;">Scritto</td>
 <td style="text-align: center;">R</td>
 <td style="text-align: center;">16.000.000</td>
@@ -452,7 +452,7 @@ utenti</span></td>
 abbia scritto un commento, e di questi uno ne abbia scritto circa
 2-3</span></td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;">Correlazione</td>
 <td style="text-align: center;">R</td>
 <td style="text-align: center;">12.000.000</td>
@@ -460,7 +460,7 @@ abbia scritto un commento, e di questi uno ne abbia scritto circa
 6 riceva una recensione da parte dell’utente o dell’host, e che 1 su 6
 la riceva da parte di entrambi</span></td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;">Riserva</td>
 <td style="text-align: center;">R</td>
 <td style="text-align: center;">36.000.000</td>
@@ -468,14 +468,14 @@ la riceva da parte di entrambi</span></td>
 vengano riservati circa 36 milioni di volte, una volta per ogni
 prenotazione</span></td>
 </tr>
-<tr>
+<tr class="odd">
 <td style="text-align: left;">Offerto</td>
 <td style="text-align: center;">R</td>
 <td style="text-align: center;">250.000</td>
 <td style="text-align: left;"><span>Ipotizziamo che ogni alloggio offra
 più di una decina di servizi</span></td>
 </tr>
-<tr>
+<tr class="even">
 <td style="text-align: left;">Valutazione</td>
 <td style="text-align: center;">R</td>
 <td style="text-align: center;">2.000.000</td>
