@@ -50,11 +50,20 @@
           }
         },
         {
-          "name": "copy-resources",
-          "command": "sh",
+          "name": "setup-outdir",
+          "command": "mkdir",
           "args": [
-            "-c",
-            "echo ${fileDirname}/res/svg"
+            "-p",
+            "%WORKSPACE_FOLDER%/build/html/res",
+          ]
+        },
+        {
+          "name": "copy-resources",
+          "command": "cp",
+          "args": [
+            "-r",
+            "%DIR%/res/svg",
+            "%WORKSPACE_FOLDER%/build/html/res/svg"
           ]
         },
         {
@@ -96,6 +105,7 @@
         {
           "name": "Pandoc HTML with copy",
           "tools": [
+            "setup-outdir",
             "pandoc-html",
             "copy-resources"
           ]
