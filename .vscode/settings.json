@@ -63,7 +63,7 @@
           "args": [
             "-r",
             "%DIR%/res/svg",
-            "%WORKSPACE_FOLDER%/build/html/res/svg"
+            "%WORKSPACE_FOLDER%/build/html/res/"
           ]
         },
         {
