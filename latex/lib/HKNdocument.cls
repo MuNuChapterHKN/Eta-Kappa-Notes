@@ -81,6 +81,7 @@
 \RequirePackage{graphicx} % For including images (including logo)
 \RequirePackage{array}    % Advanced columns in tables
 \RequirePackage{booktabs} % Typographically better tables (\toprule, \midrule, \bottomrule)
+\RequirePackage{enumitem} % For customizing list spacing
 
 % --------------------------
 % MATHEMATICAL PACKAGES
@@ -128,22 +129,30 @@
 \newcommand{\shorttitle}{}  % Contains short title for header
 \newcommand{\docdate}{}     % Contains custom date
 \newcommand{\docversion}{}  % Contains document version
-\newcommand{\doclogofrontpage}{hkn_logo.pdf}      % Contains logo big path
-\newcommand{\doclogoupperpage}{hkn_ideogramma.pdf}    % Contains logo big path
-\newcommand{\doclicence}{ccbyncnd.png}  % Contains license logo path
+\newcommand{\doclogofrontpage}{../../resources/imgs/hkn_logo.pdf}      % Contains logo big path
+\newcommand{\doclogoupperpage}{../../resources/imgs/hkn_ideogramma.pdf}    % Contains logo big path
+\newcommand{\doclicence}{../../resources/imgs/ccbyncnd.png}  % Contains license logo path
 \newcommand{\DDorganization}{IEEE - MuNu Chapter}
 
 % Preserve old commands for title and author
 \let\oldtitle\title
 \renewcommand{\title}[1]{\oldtitle{#1}\gdef\maintitle{#1}}
 \let\oldauthor\author
-\renewcommand{\author}[1]{\ifx\DDauthors\undefined\gdef\DDauthors{#1}\else\g@addto@macro\DDauthors{, #1}\fi}
+\renewcommand{\author}[1]{\ifx\DDauthors\empty\gdef\DDauthors{#1}\else\g@addto@macro\DDauthors{, #1}\fi}
 
 % Define commands for short title, short author, editors, organization, date, version.
 \def\shorttitle#1{\gdef\STtitle{#1}}
-\def\editor#1{\ifx\DDeditors\undefined\gdef\DDeditors{#1}\else\g@addto@macro\DDeditors{, #1}\fi}
+\def\editor#1{\ifx\DDeditors\empty\gdef\DDeditors{#1}\else\g@addto@macro\DDeditors{, #1}\fi}
 \def\docdate#1{\gdef\DDdate{#1}}
 \def\docversion#1{\gdef\DDversion{#1}}
+
+% Initialize variables to prevent undefined errors
+\gdef\maintitle{}
+\gdef\DDauthors{}
+\gdef\DDeditors{}
+\gdef\DDdate{}
+\gdef\DDversion{}
+\gdef\DDlicense{}
 
 % --------------------------
 % TABLE OF CONTENTS LEVEL
@@ -185,9 +194,9 @@
             \else
                 {\Large\textit{Authors:}\\[0.5cm]}%
             \fi
-            \@ifundefined{DDauthors}{}{%
+            \ifx\DDauthors\empty\else
                 \DDauthors\\[0.5cm]%
-            }%
+            \fi
         \end{minipage}\hfill% <-- nessun blank line qui
         % Editor (s) right
         \begin{minipage}[t]{0.4\textwidth}
@@ -197,9 +206,9 @@
             \else
                 {\Large\textit{Editors:}\\[0.5cm]}%
             \fi
-            \@ifundefined{DDeditors}{}{%
+            \ifx\DDeditors\empty\else
                 \DDeditors\\[0.5cm]%
-            }%
+            \fi
         \end{minipage}
         \vfill
         % Opzionale: Versione e Data centrati
@@ -249,7 +258,7 @@
 \fancyhead[R]{\DDorganization}
 \fancyhead[C]{%
   \raisebox{-0.6\height}{%
-    \includegraphics[height=1cm]{\doclogoupperpage}%
+    \href{https://hknpolito.org/}{\includegraphics[height=1cm]{\doclogoupperpage}}%
   }%
 }
 \fancyfoot[C]{\thepage}
@@ -280,43 +289,117 @@
 % Generates a language-sensitive Creative Commons license description with an image and hyperlink
 \newcommand{\cclicense}{%
     \thispagestyle{empty}
-    \vspace*{\fill} 
-        \ifx\DocumentLanguage\italian
+    \setlength{\parindent}{0pt}% Remove paragraph indentation
+        \def\tempa{italian}%
+        \ifx\DocumentLanguage\tempa
+            {\Large\textbf{\#WeAreHKN}}
+            \vspace{0.2cm}
+
+            Il \textbf{Mu Nu Chapter} di \textbf{IEEE-Eta Kappa Nu (HKN)} è la Honor Society del Politecnico di Torino dedicata agli studenti di eccellenza nei campi dell'ingegneria elettrica, elettronica, informatica e delle telecomunicazioni. IEEE-HKN è la più antica e prestigiosa honor society internazionale per ingegneri elettrici ed elettronici, fondata nel 1904. Il nostro capitolo promuove l'eccellenza accademica, il servizio alla comunità e lo sviluppo professionale attraverso attività di tutoring, workshop e progetti collaborativi.
+
+            \vspace{0.3cm}
+            {\large\textbf{Progetto Gratuito per la Condivisione della Conoscenza}}
+            \vspace{0.1cm}
+
+            Questo è un progetto completamente gratuito volto alla distribuzione libera di materiale didattico di qualità. Crediamo nell'importanza di rendere accessibile a tutti una formazione di eccellenza e offriamo gratuitamente queste risorse per supportare il percorso di studio di ogni studente.
+
+            \vspace{0.2cm}
+            {\large\textbf{Scopri le nostre iniziative:}}
+            \vspace{0.1cm}
+            \begin{itemize}[topsep=0pt,itemsep=0pt,parsep=0pt,partopsep=0pt]
+                \item \textbf{Sito web:} \href{https://hknpolito.org/}{https://hknpolito.org/}
+                \item \textbf{Instagram:} \href{https://www.instagram.com/hknpolito/}{@hknpolito}
+                \item \textbf{Repository GitHub:} \href{https://github.com/MuNuChapterHKN/Eta-Kappa-Notes/}{https://github.com/MuNuChapterHKN/Eta-Kappa-Notes/}
+            \end{itemize}
+
+            \vspace{0.3cm}
+            \textbf{Segnalazioni ed Errori}
+            \vspace{0.1cm}
+
+            Hai trovato un errore o vorresti contribuire al miglioramento di questo materiale? Consulta il documento \href{https://github.com/MuNuChapterHKN/Eta-Kappa-Notes/blob/main/CONTRIBUTING.md}{CONTRIBUTING.md} nella nostra repository GitHub oppure scrivici a: \href{mailto:responsabile.tutoring@hknpolito.it}{responsabile.tutoring@hknpolito.it}
+
             \vfill
+
+            {\Large\textbf{Licenza Creative Commons}}
+            \vspace{0.2cm}
+
             Questo lavoro è distribuito con una \textbf{Licenza Creative Commons Attribuzione - Non commerciale - Non opere derivate 4.0 International}.
-            Il lavoro è stato prodotto da \DDauthors, editato da \DDeditors e pubblicizzato da \DDorganization.\\
+            Il lavoro è stato prodotto da \DDauthors\ifx\DDeditors\empty\else, editato da \DDeditors\fi{} e pubblicizzato da \DDorganization.
+
+            \vspace{0.2cm}
             \textbf{Puoi:}
-            \begin{itemize}
+            \begin{itemize}[topsep=0pt,itemsep=0pt,parsep=0pt,partopsep=0pt]
                 \item \textbf{Condividere:} copiare, distribuire e trasmettere il lavoro
             \end{itemize}
+
+            \vspace{0.1cm}
             \textbf{Alle seguenti condizioni:}
-            \begin{itemize}
+            \begin{itemize}[topsep=0pt,itemsep=0pt,parsep=0pt,partopsep=0pt]
                 \item \textbf{Attribuzione:} devi attribuire il lavoro nei modi indicati dall'autore o da chi ti ha dato la licenza (ma non in un modo che suggerisca che loro approvino te o il tuo uso del lavoro).
                 \item \textbf{Non commerciale:} non puoi usare questo lavoro per fini commerciali.
                 \item \textbf{Non opere derivate:} se modifichi, trasformi o sviluppi questo lavoro, non puoi distribuire il risultato.
             \end{itemize}
+
+            \vspace{0.2cm}
             Maggiori informazioni sul sito di \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{Creative Commons}.
         \else
+            % Information about HKN organization
+            {\Large\textbf{\#WeAreHKN}}
+            \vspace{0.2cm}
+
+            The \textbf{Mu Nu Chapter} of \textbf{IEEE-Eta Kappa Nu (HKN)} is the Honor Society of Politecnico di Torino dedicated to outstanding students in electrical, electronic, computer, and telecommunications engineering. IEEE-HKN is the oldest and most prestigious international honor society for electrical and electronic engineers, founded in 1904. Our chapter promotes academic excellence, community service, and professional development through tutoring activities, workshops, and collaborative projects.
+
+            \vspace{0.3cm}
+            {\large\textbf{Free Project for Knowledge Sharing}}
+            \vspace{0.1cm}
+
+            This is a completely free project aimed at the open distribution of high-quality educational materials. We believe in the importance of making excellent education accessible to everyone and offer these resources free of charge to support every student's learning journey.
+
+            \vspace{0.2cm}
+            {\large\textbf{Discover our initiatives:}}
+            \vspace{0.1cm}
+            \begin{itemize}[topsep=0pt,itemsep=0pt,parsep=0pt,partopsep=0pt]
+                \item \textbf{Website:} \href{https://hknpolito.org/}{https://hknpolito.org/}
+                \item \textbf{Instagram:} \href{https://www.instagram.com/hknpolito/}{@hknpolito}
+                \item \textbf{GitHub Repository:} \href{https://github.com/MuNuChapterHKN/Eta-Kappa-Notes/}{https://github.com/MuNuChapterHKN/Eta-Kappa-Notes/}
+            \end{itemize}
+
+            \vspace{0.3cm}
+            \textbf{Error Reports and Contributions}
+            \vspace{0.1cm}
+
+            Found an error or would like to contribute to improving this material? Check the \href{https://github.com/MuNuChapterHKN/Eta-Kappa-Notes/blob/main/CONTRIBUTING.md}{CONTRIBUTING.md} document in our GitHub repository or write to us at: \href{mailto:responsabile.tutoring@hknpolito.it}{responsabile.tutoring@hknpolito.it}
+
             \vfill
+
+            {\Large\textbf{Creative Commons License}}
+            \vspace{0.2cm}
+
             This work is licensed under a \textbf{Creative Commons Attribution - NonCommercial - NoDerivatives 4.0 International}.
-            The work was produced by \DDauthors, edited by \DDeditors, and publicized by \DDorganization.\\
+            The work was produced by \DDauthors\ifx\DDeditors\empty\else, edited by \DDeditors\fi{}, and publicized by \DDorganization.
+
+            \vspace{0.2cm}
             \textbf{You are free:}
-            \begin{itemize}
+            \begin{itemize}[topsep=0pt,itemsep=0pt,parsep=0pt,partopsep=0pt]
                 \item \textbf{to Share:} to copy, distribute and transmit the work
             \end{itemize}
+
+            \vspace{0.1cm}
             \textbf{Under the following conditions:}
-            \begin{itemize}
+            \begin{itemize}[topsep=0pt,itemsep=0pt,parsep=0pt,partopsep=0pt]
                 \item \textbf{Attribution:} you must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work).
                 \item \textbf{Noncommercial:} you may not use this work for commercial purposes.
                 \item \textbf{No derivatives:} if you alter, transform, or build upon this work, you may not distribute the resulting work.
             \end{itemize}
+
+            \vspace{0.2cm}
             More information on the \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{Creative Commons website}.
         \fi
-        \par\vspace{1cm} % Spazio verticale dopo il testo
-        \ifx\DDlicense\empty\else
-            \hfill\includegraphics[width=0.4\textwidth]{\doclicence}
-            \par\vspace{1cm} % Spazio dopo l'immagine
-        \fi
+        \par % Spazio verticale dopo il testo
+        \begin{center}
+            \includegraphics[width=0.3\textwidth]{\doclicence}
+        \end{center}
+        \par % Spazio dopo l'immagine
     \clearpage
 }
 
