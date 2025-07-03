@@ -40,6 +40,19 @@
 \usepackage[super]{nth}
 \usepackage{siunitx}
 \usepackage{physics}
+\usepackage{nicematrix}
+\usepackage{tikz}
+\usepackage{marvosym}
+\usepackage{tensor}
+\usepackage{esint}
+\usepackage{bigints}
+\sisetup{
+    range-open-phrase =,
+    range-units = single,
+    range-phrase = \divisionsymbol
+}
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\DeclareMathAlphabet\mathbfcal{OMS}{cmsy}{b}{n}
 \counterwithin{equation}{section}
 \counterwithin{figure}{section}
 \renewcommand{\vec}{\vb}
@@ -51,6 +64,10 @@
 \newcommand{\bigsum}{\displaystyle\sum}
 \newcommand{\brackets}[1]{\left(#1\right)}
 \newcommand{\bbrackets}[1]{\bigg(#1\bigg)}
+\newcommand{\sqbr}[1]{\left[#1\right]}
+\newcommand{\bigsqbr}[1]{\bigg[#1\bigg]}
+\newcommand{\grbr}[1]{\left{#1\right}}
+\newcommand{\biggrbr}[1]{\bigg{#1\bigg}}
 \newcommand{\dalembertref}{\hyperref[D'Alembert_principle]{D'Alembert's principle}}
 \newcommand{\lagrangeref}{\hyperref[Lagrange_equations]{Lagrange equations}}
 \newcommand{\eleref}{\hyperref[Euler_Lagrange_equations]{Euler-Lagrange equations}}
@@ -72,14 +89,21 @@
 \newcommand{\notimplies}{\centernot\implies}
 \newcommand{\potE}{\varphi}
 \newcommand{\dalop}{\square}
+\newcommand{\irf}[1]{\mathcal{#1}}
+\newcommand{\lm}{\Lambda}
+\newcommand{\invlm}{\Lambda^{-1}}
+\newcommand{\by}{\times}
+\newcommand{\mink}{\mathbb{M}^4}
 \renewcommand{\dv}{%%%
  \def\flatfrac{\let\flatfrac\savedfrac\dfrac}\derivative*%%%
 }
 \renewcommand{\pdv}{%%%
  \def\flatfrac{\let\flatfrac\savedfrac\dfrac}\partialderivative*%%%
 }
-%\renewcommand{\grad}{\vec{\nabla}}
-%\renewcommand{\div}{\vec{\nabla} \cdot}
+\newcommand{\STOP}{
+\begin{center}
+\scalebox{2}{\raisebox{-0.5ex}{\Stopsign}} This argument was not done during the lecture, but it may be helpful.
+\end{center}}
 
 
 \begin{document}
@@ -120,7 +144,11 @@
 \include{chapters/Hamilton_Jacobi}
 \include{chapters/Electromagnetism}
 \include{chapters/Introduction_to_special_relativity}
-
+\include{chapters/Fundamentals_of_relativity}
+\include{chapters/Tensors}
+\include{chapters/Representation_of_spacetime}
+\include{chapters/Classical_quantities_in_Special_Relativity}
+\include{chapters/Relativistic_formulation_of_electromagnetism}
 \backmatter
 
 % input{_postamble.tex}

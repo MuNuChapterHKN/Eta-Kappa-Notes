@@ -3,7 +3,7 @@
 Let's now focus on the possible transformations of coordinates.\\
 In Lagrangian formalism a generic transformation is:
 \begin{equation}
-    \{q_{\alpha}\} \longrightarrow \{Q_{\alpha}\}\quad \text{s.t.}\quad Q_{\alpha} = Q_{\alpha}\brackets{q_1,q_2,\dots,q_n,t}
+    \{q_{\alpha}\} \longrightarrow \{Q_{\alpha}\}\quad \text{s.t.}\quad Q_{\alpha} = Q_{\alpha}\brackets{q_1,q_2, \,\dots\, ,q_n,t}
 \end{equation}
 This is a \textbf{point transformation} in configuration space. We move from $n$ spatial coordinates to $n$ spatial coordinates.\\
 In Hamiltonian formalism a generic transformation is:
@@ -15,23 +15,23 @@ In Hamiltonian formalism a generic transformation is:
     \begin{Bmatrix}
         Q_{\alpha}\\[8pt]
         P_{\alpha}
-    \end{Bmatrix}\quad \text{s.t} \quad
+    \end{Bmatrix}\quad \text{s.t.} \quad
     \begin{cases}
-        Q_{\alpha} = Q_{\alpha}\brackets{q_1,q_2,\dots,q_n,p_1,p_2,\dots,p_n,t}\\
-        P_{\alpha} = P_{\alpha}\brackets{q_1,q_2,\dots,q_n,p_1,p_2,\dots,p_n,t}
+        Q_{\alpha} = Q_{\alpha}\brackets{q_1,q_2, \,\dots\, ,q_n,p_1,p_2, \,\dots\, ,p_n,t}\\[8pt]
+        P_{\alpha} = P_{\alpha}\brackets{q_1,q_2, \,\dots\, ,q_n,p_1,p_2, \,\dots\, ,p_n,t}
     \end{cases}
 \end{equation}
 This is also a point transformation, but since we are in the phase space the new coordinates can be a mix of both $q_{\alpha}$ and $p_{\alpha}$. Now we can try to figure out if the relations found for $q_{\alpha}$ and $p_{\alpha}$ related to the Poisson brackets are also true for $Q_{\alpha}$ and $P_{\alpha}$.
 We want:
 \begin{equation}
     \begin{split}
-        \pb{q_{\alpha}}{q_{\beta}} &= 0\\
-        \pb{p_{\alpha}}{p_{\beta}} &= 0\\
+        \pb{q_{\alpha}}{q_{\beta}} &= 0\\[8pt]
+        \pb{p_{\alpha}}{p_{\beta}} &= 0\\[8pt]
         \pb{q_{\alpha}}{p_{\beta}} &= \delta_{\alpha \beta}
     \end{split} \implies
     \begin{split}
-        \pb{Q_{\alpha}}{Q_{\beta}} &= 0\\
-        \pb{P_{\alpha}}{P_{\beta}} &= 0\\
+        \pb{Q_{\alpha}}{Q_{\beta}} &= 0\\[8pt]
+        \pb{P_{\alpha}}{P_{\beta}} &= 0\\[8pt]
         \pb{Q_{\alpha}}{P_{\beta}} &= \delta_{\alpha \beta}
     \end{split}
 \end{equation}
@@ -57,7 +57,7 @@ We want the same for the new Hamiltonian:
     \delta \tilde{\action} = \delta \int_{t_1}^{t_2}\tilde{\lagr} \dd{t} \int_{t_1}^{t_2} \brackets{\bigsum_{\alpha}\dot{Q}_{\alpha}P_{\alpha} - \tilde{\hamfun}} \dd{t} \overset{!}{=} 0
 \end{equation}
 \section{Generating functions}
-We also know that the new Lagrangian and the old Lagrangian must describe the same system and they have this relation:
+We also know that the new Lagrangian and the old Lagrangian must describe the same system, and they have this relation:
 \begin{equation}
     \lagr = \tilde{\lagr}+\dv{F}{t}
 \end{equation}
@@ -77,11 +77,11 @@ If we know the expression for both the generating function and the transformatio
 From the relation between the Lagrangians we have:
 \begin{equation}
     \begin{split}
-        \lagr &= \tilde{\lagr}+\dv{F}{t}\\
-        \bigsum_{\alpha}p_{\alpha}\dd{q_{\alpha}} - \hamfun\dd{t} &= \bigsum_{\alpha}P_{\alpha}\dd{Q_{\alpha}} - \tilde{\hamfun}\dd{t} + \dd{F}\\
-        &\Downarrow \\
-        \dd{F} = \bigsum_{\alpha}p_{\alpha}\dd{q_{\alpha}} &- \bigsum_{\alpha}P_{\alpha}\dd{Q_{\alpha}} + \brackets{\tilde{\hamfun}- \hamfun}\dd{t}\\
-        &\Downarrow \\
+        \lagr &= \tilde{\lagr}+\dv{F}{t}\\[8pt]
+        \bigsum_{\alpha}p_{\alpha}\dd{q_{\alpha}} - \hamfun\dd{t} &= \bigsum_{\alpha}P_{\alpha}\dd{Q_{\alpha}} - \tilde{\hamfun}\dd{t} + \dd{F}\\[8pt]
+        &\Downarrow \\[8pt]
+        \dd{F} = \bigsum_{\alpha}p_{\alpha}\dd{q_{\alpha}} &- \bigsum_{\alpha}P_{\alpha}\dd{Q_{\alpha}} + \brackets{\tilde{\hamfun}- \hamfun}\dd{t}\\[8pt]
+        &\Downarrow \\[8pt]
         F &= F(\vec{q},\vec{Q})
     \end{split}
 \end{equation}
@@ -100,18 +100,18 @@ And so we get:
 Hence:
 \begin{equation}
     \begin{cases}
-        p = p(\vec{q},\vec{Q},t)\\
+        p = p(\vec{q},\vec{Q},t)\\[8pt]
         P = P(\vec{q},\vec{Q},t)
     \end{cases}
 \end{equation}
 By inverting the first equation we can get:
 \begin{equation}
-    Q = Q(\vec{q},\vec{p},t)\\
+    Q = Q(\vec{q},\vec{p},t)\\[8pt]
 \end{equation}
 Substituting this into the second equation we finally get the transformation equations:
 \begin{equation}
     \begin{cases}
-        Q = Q(\vec{q},\vec{p},t)\\
+        Q = Q(\vec{q},\vec{p},t)\\[8pt]
         P = P(\vec{q},\vec{p},t)
     \end{cases}
 \end{equation}
@@ -131,7 +131,7 @@ Instead we need to substitute the expression of the old coordinates in terms of 
 Now let $F$ be a generating function of the first type but with:
 \begin{equation}
     \begin{cases}
-        Q = q\\
+        Q = q\\[8pt]
         P = P(\vec{q},\vec{p},t)
     \end{cases}
 \end{equation}
@@ -142,7 +142,7 @@ Then $q$ and $Q$ are not independent, therefor we should have only $n$ independe
 This is just an application of the Legendre transformations:
 \begin{equation}
     \begin{split}
-        \dd{F_1} &= \bigsum_{\alpha}p_{\alpha}\dd{q_{\alpha}} - \bigsum_{\alpha}P_{\alpha}\dd{Q_{\alpha}} + \brackets{\tilde{\hamfun}- \hamfun}\dd{t}\\
+        \dd{F_1} &= \bigsum_{\alpha}p_{\alpha}\dd{q_{\alpha}} - \bigsum_{\alpha}P_{\alpha}\dd{Q_{\alpha}} + \brackets{\tilde{\hamfun}- \hamfun}\dd{t}\\[8pt]
         \dd{\brackets{F_1 + \bigsum_{\alpha}P_{\alpha}Q_{\alpha}}} &= \bigsum_{\alpha}p_{\alpha}\dd{q_{\alpha}}  + \bigsum_{\alpha}Q_{\alpha}\dd{P_{\alpha}} + \brackets{\tilde{\hamfun}- \hamfun}\dd{t}
     \end{split}
 \end{equation}
@@ -161,18 +161,18 @@ From this, we obtain the relations:
 As for the first type this means that:
 \begin{equation}
     \begin{cases}
-        p = p(\vec{q},\vec{P},t)\\
+        p = p(\vec{q},\vec{P},t)\\[8pt]
         Q = P(\vec{q},\vec{P},t)
     \end{cases}
 \end{equation}
 By inverting the first equation we can get:
 \begin{equation}
-    P = P(\vec{q},\vec{p},t)\\
+    P = P(\vec{q},\vec{p},t)
 \end{equation}
 Substituting this into the second equation we get the transformation equations:
 \begin{equation}
     \begin{cases}
-        Q = Q(\vec{q},\vec{p},t)\\
+        Q = Q(\vec{q},\vec{p},t)\\[8pt]
         P = P(\vec{q},\vec{p},t)
     \end{cases}
 \end{equation}
@@ -198,7 +198,7 @@ From this, we obtain the relations:
 As for the first type, this means that:
 \begin{equation}
     \begin{cases}
-        q = q(\vec{p},\vec{Q},t)\\
+        q = q(\vec{p},\vec{Q},t)\\[8pt]
         P = P(\vec{p},\vec{Q},t)
     \end{cases}
 \end{equation}
@@ -209,7 +209,7 @@ By inverting the first equation, we can get:
 Substituting this into the second equation, we get the transformation equations:
 \begin{equation}
     \begin{cases}
-        Q = Q(\vec{q},\vec{p},t)\\
+        Q = Q(\vec{q},\vec{p},t)\\[8pt]
         P = P(\vec{q},\vec{p},t)
     \end{cases}
 \end{equation}
@@ -235,7 +235,7 @@ From this, we obtain the relations:
 As for the first type, this means that:
 \begin{equation}
     \begin{cases}
-        q = q(\vec{p},\vec{P},t)\\
+        q = q(\vec{p},\vec{P},t)\\[8pt]
         Q = Q(\vec{p},\vec{P},t)
     \end{cases}
 \end{equation}
@@ -246,7 +246,7 @@ By inverting the first equation, we can get:
 Substituting this into the second equation, we get the transformation equations:
 \begin{equation}
     \begin{cases}
-        Q = Q(\vec{q},\vec{p},t)\\
+        Q = Q(\vec{q},\vec{p},t)\\[8pt]
         P = P(\vec{q},\vec{p},t)
     \end{cases}
 \end{equation}
@@ -290,14 +290,14 @@ Given a generating function of the first type $F_1 = F_1(\vec{q},\vec{Q},t)$ suc
 By applying \hamiltonref\;and Legendre transformations we get:
 \begin{equation}
     \begin{cases}
-        Q_{\beta} = \pdv{F_1}{q_{\beta}} = p_{\beta}\\
+        Q_{\beta} = \pdv{F_1}{q_{\beta}} = p_{\beta}\\[8pt]
         q_{\beta} = \pdv{F_1}{Q_{\beta}} = -P_{\beta}
     \end{cases}
 \end{equation}
 And so the transformation equations are:
 \begin{equation}
     \begin{cases}
-        Q_{\alpha} = p_{\alpha}\\
+        Q_{\alpha} = p_{\alpha}\\[8pt]
         P_{\alpha} = -q_{\alpha}
     \end{cases}
 \end{equation}
@@ -310,14 +310,14 @@ Given a generating function of the second type $F_2 = F_2(\vec{q},\vec{P},t)$ su
 By applying \hamiltonref\;and Legendre transformations we get:
 \begin{equation}
     \begin{cases}
-        P_{\beta} = \pdv{F_2}{q_{\beta}} = p_{\beta}\\
+        P_{\beta} = \pdv{F_2}{q_{\beta}} = p_{\beta}\\[8pt]
         q_{\beta} = \pdv{F_2}{P_{\beta}} = Q_{\beta}
     \end{cases}
 \end{equation}
 And so the transformation equations are:
 \begin{equation}
     \begin{cases}
-        Q_{\alpha} = q_{\alpha}\\
+        Q_{\alpha} = q_{\alpha}\\[8pt]
         P_{\alpha} = p_{\alpha}
     \end{cases}
 \end{equation}
@@ -333,7 +333,7 @@ Given a generating function of the second type $F_2 = F_2(\vec{q},\vec{P},t)$ su
 By applying \hamiltonref\;and Legendre transformations we get:
 \begin{equation}
     \begin{split}
-        p_{\beta} = \pdv{F_2}{q_{\beta}} = \dots\\
+        p_{\beta} = \pdv{F_2}{q_{\beta}} =  \,\dots\, \\[8pt]
         Q_{\beta} = \pdv{F_2}{P_{\beta}} = f_{\beta}(\vec{q},t)
     \end{split}
 \end{equation}
@@ -371,7 +371,7 @@ From this getting the transformation equations is trivial:
 We can invert these relations:
 \begin{equation}
     \begin{cases}
-        q = \dfrac{1}{P}\\
+        q = \dfrac{1}{P}\\[8pt]
         p = QP^2
     \end{cases}
 \end{equation}
@@ -383,8 +383,8 @@ This again shows that to get the new Hamiltonian we cannot just substitute $Q$ i
 Also for the new Lagrangian we have:
 \begin{equation}
     \begin{split}
-        \lagr &= \tilde{\lagr} + \dv{F_1}{t} =\\
-        &= \tilde{\lagr} + \dv{}{t}\brackets{-QP} =\\
+        \lagr &= \tilde{\lagr} + \dv{F_1}{t} =\\[8pt]
+        &= \tilde{\lagr} + \dv{}{t}\brackets{-QP} =\\[8pt]
         &=\tilde{\lagr} - \dot{Q}P - Q\dot{P}
     \end{split}
 \end{equation}
@@ -395,28 +395,28 @@ Which gives:
 We want to check that this is a canonical transformation. We can do this by calculating the canonical Poisson brackets in the new and old coordinates. For the new ones:
 \begin{equation}
     \begin{split}
-        \pb{Q}{P}_{QP} &= \left(\pdv{Q}{Q} \pdv{P}{P} - \cancel{\pdv{Q}{P}} \cancel{\pdv{P}{Q}} \right) = 1\\
-        \pb{Q}{Q}_{QP} &= \left(\pdv{Q}{Q} \cancel{\pdv{Q}{P}} - \cancel{\pdv{Q}{P}} \pdv{Q}{Q} \right) = 0\\
+        \pb{Q}{P}_{QP} &= \left(\pdv{Q}{Q} \pdv{P}{P} - \cancel{\pdv{Q}{P}} \cancel{\pdv{P}{Q}} \right) = 1\\[8pt]
+        \pb{Q}{Q}_{QP} &= \left(\pdv{Q}{Q} \cancel{\pdv{Q}{P}} - \cancel{\pdv{Q}{P}} \pdv{Q}{Q} \right) = 0\\[8pt]
         \pb{P}{P}_{QP} &= \left(\cancel{\pdv{P}{Q}} \pdv{P}{P}  -  \pdv{P}{P} \cancel{\pdv{P}{Q}}\right) = 0
     \end{split}
 \end{equation}
 For the old ones:
 \begin{equation}
     \begin{split}
-        \pb{Q}{P}_{qp} &= \left(\pdv{Q}{q} \pdv{P}{p} - \pdv{Q}{p} \pdv{P}{q} \right) = \\
-        &= \left(\pdv{}{q}(pq^2) \cancel{\pdv{}{p}\left(\dfrac{1}{q}\right)} - \pdv{}{p}(pq^2) \pdv{}{q}\left(\dfrac{1}{q}\right) \right) = \\
+        \pb{Q}{P}_{qp} &= \left(\pdv{Q}{q} \pdv{P}{p} - \pdv{Q}{p} \pdv{P}{q} \right) = \\[8pt]
+        &= \left(\pdv{}{q}(pq^2) \cancel{\pdv{}{p}\left(\dfrac{1}{q}\right)} - \pdv{}{p}(pq^2) \pdv{}{q}\left(\dfrac{1}{q}\right) \right) = \\[8pt]
         &= \left(- q^2  \left(-\dfrac{1}{q^2}\right) \right) = 1
     \end{split}
 \end{equation}
 \begin{equation}
     \begin{split}
-        \pb{Q}{Q}_{qp} &= \left(\pdv{}{q}(pq^2) \pdv{}{p}(pq^2) - \pdv{}{p}(pq^2) \pdv{}{q}(pq^2) \right) = \\
+        \pb{Q}{Q}_{qp} &= \left(\pdv{}{q}(pq^2) \pdv{}{p}(pq^2) - \pdv{}{p}(pq^2) \pdv{}{q}(pq^2) \right) = \\[8pt]
         &= \left(2pq  q^2 - q^2  2pq \right) = 0
     \end{split}
 \end{equation}
 \begin{equation}
     \begin{split}
-        \pb{P}{P}_{qp} &= \bigsum_{\alpha} \left(\pdv{P}{q_{\alpha}} \pdv{P}{p_{\alpha}} - \pdv{P}{p_{\alpha}} \pdv{P}{q_{\alpha}} \right) = \\
+        \pb{P}{P}_{qp} &= \bigsum_{\alpha} \left(\pdv{P}{q_{\alpha}} \pdv{P}{p_{\alpha}} - \pdv{P}{p_{\alpha}} \pdv{P}{q_{\alpha}} \right) = \\[8pt]
         &= \left(\pdv{}{q}\left(\dfrac{1}{q}\right) \cancel{\pdv{}{p}\left(\dfrac{1}{q}\right)} - \cancel{\pdv{}{p}\left(\dfrac{1}{q}\right)} \pdv{}{q}\left(\dfrac{1}{q}\right) \right) = 0
     \end{split}
 \end{equation}
@@ -425,7 +425,7 @@ And so we verified that the canonical Poisson brackets are invariant.
 Now given a transformation we want to prove that it is a canonical transformation:
 \begin{equation}
     \begin{cases}
-        Q = \ln \brackets{\dfrac{p}{q}}\\
+        Q = \ln \brackets{\dfrac{p}{q}}\\[8pt]
         P = \brackets{-\dfrac{q^2}{2}-1}\dfrac{p}{1}
     \end{cases}
 \end{equation}
@@ -434,18 +434,18 @@ The \textbf{first method} will just be calculating all the Poisson brackets and 
 The Poisson brackets in the new coordinates will always be trivial:
 \begin{equation}
     \begin{split}
-        \pb{Q}{P}_{QP} &= 1\\
-        \pb{Q}{Q}_{QP} &= 0\\
+        \pb{Q}{P}_{QP} &= 1\\[8pt]
+        \pb{Q}{Q}_{QP} &= 0\\[8pt]
         \pb{P}{P}_{QP} &= 0
     \end{split}
 \end{equation}
 Now we can evaluate the Poisson brackets with respect to the old coordinates:
 \begin{equation}
     \begin{split}
-        \pb{Q}{P}_{qp} &= \left(\pdv{Q}{q} \pdv{P}{p} - \pdv{Q}{p} \pdv{P}{q} \right) = \\
-        &= \bbrackets{\pdv{}{q}\left(\ln\brackets{\dfrac{p}{q}}\right) \pdv{}{p}\left(\brackets{-\dfrac{q^2}{2}-1}\dfrac{p}{q}\right) -\\
-        &- \pdv{}{p}\left(\ln\brackets{\dfrac{p}{q}}\right) \pdv{}{q}\left(\brackets{-\dfrac{q^2}{2}-1}\dfrac{p}{q}\right) } = \\
-        &= \left(-\dfrac{1}{q}  \brackets{-\dfrac{q^2}{2}-1}  \dfrac{1}{q} - \dfrac{1}{p}  \brackets{-q  \dfrac{p}{q} + \brackets{-\dfrac{q^2}{2}-1}  \dfrac{1}{q}} \right) = \\
+        \pb{Q}{P}_{qp} &= \left(\pdv{Q}{q} \pdv{P}{p} - \pdv{Q}{p} \pdv{P}{q} \right) = \\[8pt]
+        &= \bbrackets{\pdv{}{q}\left(\ln\brackets{\dfrac{p}{q}}\right) \pdv{}{p}\left(\brackets{-\dfrac{q^2}{2}-1}\dfrac{p}{q}\right) -\\[8pt]
+        &- \pdv{}{p}\left(\ln\brackets{\dfrac{p}{q}}\right) \pdv{}{q}\left(\brackets{-\dfrac{q^2}{2}-1}\dfrac{p}{q}\right) } = \\[8pt]
+        &= \left(-\dfrac{1}{q}  \brackets{-\dfrac{q^2}{2}-1}  \dfrac{1}{q} - \dfrac{1}{p}  \brackets{-q  \dfrac{p}{q} + \brackets{-\dfrac{q^2}{2}-1}  \dfrac{1}{q}} \right) = \\[8pt]
         &= \left(\cancel{\dfrac{\dfrac{q^2}{2} + 1}{q^2}} + 1 - \cancel{\dfrac{\dfrac{q^2}{2} + 1}{q^2}} \right) = 1
     \end{split}
 \end{equation}
@@ -458,10 +458,10 @@ The other ones are trivial:
 \end{equation}
 
 \section{Active canonical transformations}
-Up to now we used "passive" transformations, which means that the transformation does not affect the state of the system. Instead, now we will make use of \textbf{active transformations} which are transformations that do not change the axes, but they change the state of the system.\\
+Up to now we used ``passive'' transformations, which means that the transformation does not affect the state of the system. Instead, now we will make use of \textbf{active transformations} which are transformations that do not change the axes, but they change the state of the system.\\
 First we need to introduce a new definition:
 \begin{definition}{Infinitesimal canonical transformations}
-    Are transformations that differ from the identity transformation for an infinitesimal amount
+    Are transformations that differ from the identity transformation for an infinitesimal amount.
 \end{definition}
 This definition is equivalent to:
 \begin{equation}
@@ -470,7 +470,7 @@ This definition is equivalent to:
 And so we have:
 \begin{equation}
     \begin{cases}
-        p_{\gamma} = \pdv{F_2}{q_{\gamma}} = P_{\gamma} + \varepsilon\pdv{ G}{q_{\gamma}}\\[10pt]
+        p_{\gamma} = \pdv{F_2}{q_{\gamma}} = P_{\gamma} + \varepsilon\pdv{ G}{q_{\gamma}}\\[8pt]
         Q_{\gamma} = \pdv{F_2}{P_{\gamma}} = Q_{\gamma} + \varepsilon\pdv{ G}{P_{\gamma}}
     \end{cases}
 \end{equation}
@@ -488,7 +488,7 @@ We want to substitute the partial derivative of $G$ with respect to $P_{\gamma}$
 So from the equation of the generating function:
 \begin{equation}
     \begin{split}
-        \pdv{P_{\alpha}}{p_{\gamma}} &= \pdv{}{p_{\gamma}}\brackets{p_{\alpha} - \varepsilon\pdv{ G}{q_{\alpha}}} = \\
+        \pdv{P_{\alpha}}{p_{\gamma}} &= \pdv{}{p_{\gamma}}\brackets{p_{\alpha} - \varepsilon\pdv{ G}{q_{\alpha}}} = \\[8pt]
         &= \delta_{\alpha \gamma} - \underbrace{\varepsilon\pdv{ G}{q_{\alpha}}}_{\text{infinitesimal}}
     \end{split}
 \end{equation}
@@ -499,7 +499,7 @@ The term underlined is infinitesimal and can be disregarded. This leads to:
 Now let's define a new vector containing all the coordinates and momentum:
 \begin{equation}
     \vec{\eta} \defineeq \begin{pmatrix}
-        q_1\\\dots\\q_n\\p_1\\\dots\\p_n
+        q_1\\[8pt] \,\dots\, \\[8pt]q_n\\[8pt]p_1\\[8pt] \,\dots\, \\[8pt]p_n
     \end{pmatrix}
     \quad n+n = 2n \quad \text{elements}
 \end{equation}
@@ -514,7 +514,7 @@ Where, by using the Poisson brackets on the vector we mean that we apply them be
 Then only the $q_i$ component of the vector $\delta \vec{\eta}$ has value, the rest of the components are zero:
 \begin{equation}
     \delta \vec{\eta} = \begin{pmatrix}
-        0\\\dots\\\varepsilon\\0\\\dots\\0
+        0\\[8pt] \,\dots\, \\[8pt]\varepsilon\\[8pt]0\\[8pt] \,\dots\, \\[8pt]0
     \end{pmatrix}
 \end{equation}
 What if $q_i$ is a collective coordinate? Let's take for example $x_{CM}$ then $p_i = P_x$ which is the $x$ component of the total linear momentum. $P_x$ generates a translation of the system as a whole along the $x$ axis. In general $\vec{P}$ generates a translation along his direction (in real space). Let's also notice that if $q_i = x_{CM}$ is a collective coordinate and is cyclic then its corresponding momentum $p_i = P_x$ is conserved and also:
@@ -536,7 +536,7 @@ And also:
 \end{equation}
 If we have a function $[F_2] = \unit{\joule  \cdot \second}$ then $F_2$ will be in the form:
 \begin{equation}
-  F_2 = \bigsum_{\alpha}\brackets{\dots} + \varepsilon \hamfun
+  F_2 = \bigsum_{\alpha}\brackets{ \,\dots\, } + \varepsilon \hamfun
 \end{equation}
 And so the infinitesimal term $\varepsilon$ is an infinitesimal displacement in time. And so we can understand that the Hamiltonian is the generator of the infinitesimal time evolution.\\
 Now let's notice one more thing about the Hamiltonian. If we let the Hamiltonian be the generating function we can either have $\hamfun$ to be explicitly depend on time or not. If $\hamfun$ does depend on time explicitly then:
@@ -552,7 +552,7 @@ Let us now consider a generic function $u(q,p,t)$ in the phase space such that $
 \begin{equation}
   \dv{u}{t} = \pb{u}{\hamfun} + \cancel{\pdv{u}{t}} \quad \implies \quad  \dv{u}{t} = \pb{u}{\hamfun}
 \end{equation}
-We now express $u$ as dependent on time, but we know that its "dependence" on time is due to $q$ and $p$ and instead time does not directly appear in the equation fo $u$. And so for an infinitesimal time change we have:
+We now express $u$ as dependent on time, but we know that its ``dependence'' on time is due to $q$ and $p$ and instead time does not directly appear in the equation fo $u$. And so for an infinitesimal time change we have:
 \begin{equation}
   u(t+\dd{t}) - u(t) = \dot{u}\dd{t}
 \end{equation}
@@ -568,15 +568,15 @@ So to reconstruct the time evolution of $u$ we just need to know the time evolut
 \end{figure}
 In particular, we can write the Taylor expansion of $u$ and get:
 \begin{equation}
-  u(t) = u(t_0) + \dv{u}{t}\bigg|_{t_0} (t - t_0) + \frac{1}{2!} \dv[2]{u}{t}\bigg|_{t_0} (t - t_0)^2 + \dots
+  u(t) = u(t_0) + \dv{u}{t}\bigg|_{t_0} (t - t_0) + \frac{1}{2!} \dv[2]{u}{t}\bigg|_{t_0} (t - t_0)^2 +  \,\dots\,
 \end{equation}
 We can express the multiple derivatives as:
 \begin{equation}
   \begin{split}
-    \dv{u}{t} &= \pb{u}{\hamfun}\\
-    \dv[2]{u}{t} &= \pb{\pb{u}{\hamfun}}{\hamfun}\\
-    \dv[3]{u}{t} &= \pb{\pb{\pb{u}{\hamfun}}{\hamfun}}{\hamfun}\\
-    &\dots
+    \dv{u}{t} &= \pb{u}{\hamfun}\\[8pt]
+    \dv[2]{u}{t} &= \pb{\pb{u}{\hamfun}}{\hamfun}\\[8pt]
+    \dv[3]{u}{t} &= \pb{\pb{\pb{u}{\hamfun}}{\hamfun}}{\hamfun}\\[8pt]
+    & \,\dots\,
   \end{split}
 \end{equation}
 We then define the operator $\hat{H}$ such that:
@@ -586,10 +586,10 @@ We then define the operator $\hat{H}$ such that:
 And so we can write the Taylor series as:
 \begin{equation}
   \begin{split}
-    u(t) &= u(t_0) + \hat{H}u(t)\bigg|_{t_0} (t - t_0) + \frac{1}{2!} \hat{H}^2u(t)\bigg|_{t_0} (t - t_0)^2 + \dots =\\
-    &= \bigsum_{k=0}^\infty \dfrac{1}{k!} \hat{H}^k u(t)\bigg|_{t_0}(t - t_0)^k =\\
+    u(t) &= u(t_0) + \hat{H}u(t)\bigg|_{t_0} (t - t_0) + \frac{1}{2!} \hat{H}^2u(t)\bigg|_{t_0} (t - t_0)^2 +  \,\dots\,  =\\[8pt]
+    &= \bigsum_{k=0}^\infty \dfrac{1}{k!} \hat{H}^k u(t)\bigg|_{t_0}(t - t_0)^k =\\[8pt]
     &= u(t_0)\bigsum_{k=0}^\infty \dfrac{1}{k!} \hat{H}^k (t - t_0)^k \defineeq u(t_0) \efunction^{\brackets{t-t_0}\hat{H}}
   \end{split}
 \end{equation}
-Keep in mind that the last step is more of a "definition" consistent with the fact that we would get exactly the Taylor series of the exponential if we replaced $\hat{H}$ with a usual variable.
-This formula is the classical counterpart of the quantum mechanical "propagator". In particular, we notice that in both cases the formula contains the Hamiltonian (the operator made from the Poisson brackets in the classical case and the operator associated to the Hamiltonian in the quantum case) and also that both are used to get the time evolution of something.
+Keep in mind that the last step is more of a ``definition'' consistent with the fact that we would get exactly the Taylor series of the exponential if we replaced $\hat{H}$ with a usual variable.
+This formula is the classical counterpart of the quantum mechanical ``propagator''. In particular, we notice that in both cases the formula contains the Hamiltonian (the operator made from the Poisson brackets in the classical case and the operator associated to the Hamiltonian in the quantum case) and also that both are used to get the time evolution of something.

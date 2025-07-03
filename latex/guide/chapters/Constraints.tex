@@ -21,14 +21,14 @@ This is the effect of the inextensible rope which is a \textbf{constraint} for t
 \begin{equation}
     \centering
 \begin{cases}
-T_1=T_2=m_1a \\
-m_2g -T =m_2a \\
+T_1=T_2=m_1a \\[8pt]
+m_2g -T =m_2a \\[8pt]
 \end{cases} \Rightarrow a = \dfrac{m_2}{m_1+m_2}g
 \end{equation}
 \begin{definition}{Holomonic constraint}
   A constraint is said to be holomonic if it can be expressed as a function:
   \begin{equation}
-    f(\vec{r}_1,\vec{r}_2,\dots,\vec{r}_n,t) = 0
+    f(\vec{r}_1,\vec{r}_2, \,\dots\, ,\vec{r}_n,t) = 0
   \end{equation}
 \end{definition}
 For the inextensible rope the constraint can be expressed as $\dd{x}=\dd{y}$, but if we choose an appropriate frame of reference the condition can also simply be $x=y$, so the rope is a holomonic constraint such that:
@@ -37,12 +37,12 @@ For the inextensible rope the constraint can be expressed as $\dd{x}=\dd{y}$, bu
 \end{equation}
 If a constraint can be expressed as a function of the velocities it is said to be \textbf{semi-holomonic} and has a form such as:
 \begin{equation}
-    f(\dvec{r}_1,\dvec{r}_2,\dots,\dvec{r}_n,t) = 0
+    f(\dvec{r}_1,\dvec{r}_2, \,\dots\, ,\dvec{r}_n,t) = 0
 \end{equation}
 There are two main types of holomonic constraints:
 \begin{itemize}
-    \item \textbf{scleromonic} if it \underline{does not} depend on time explicitly \[f(\vec{r}_1,\vec{r}_2,\dots,\vec{r}_n) = 0\]
-    \item \textbf{rheomonic} if it \underline{does} depend on time explicitly \[f(\vec{r}_1,\vec{r}_2,\dots,\vec{r}_n,t) = 0\]
+    \item \textbf{scleromonic} if it \underline{does not} depend on time explicitly \[f(\vec{r}_1,\vec{r}_2, \,\dots\, ,\vec{r}_n) = 0\]
+    \item \textbf{rheomonic} if it \underline{does} depend on time explicitly \[f(\vec{r}_1,\vec{r}_2, \,\dots\, ,\vec{r}_n,t) = 0\]
 \end{itemize}
 A constraint allows us to express any coordinate as a function of the others, so, if we have $N$ particle we should have $3N$ coordinates, but if we have $K$ constraints the actual number of independent coordinates is:
 \begin{equation}
@@ -50,7 +50,7 @@ A constraint allows us to express any coordinate as a function of the others, so
 \end{equation}
 \section{Virtual displacement}
 \begin{definition}{Virtual displacement}
-  A virtual displacement is an infinitesimal change in the configuration of the system that results in a change in the particle position compatible with the forces of constraint of the system \underline{at a given time}
+  A virtual displacement is an infinitesimal change in the configuration of the system that results in a change in the particle position compatible with the forces of constraint of the system \underline{at a given time}.
 \end{definition}
 To explain the difference between a virtual displacement and an actual displacement we can analyze the displacement of a moving object on an inclined plane with the angle changing over time:
 \begin{figure}[H]
@@ -113,18 +113,18 @@ Let us now consider only holomonic constraints so we have:
 \end{itemize}
 So we actually have $n = 3N-K$ independent coordinates as we stated while talking about constraints in general. So we define the general coordinates:
 \begin{equation}
-    q_{\alpha}\;\forall\;\alpha = 1,\dots,n
+    q_{\alpha}\;\forall\;\alpha = 1, \,\dots\, ,n
 \end{equation}
 As we stated all the original coordinates must only depend on the $q_{\alpha}$'s and (eventually) on time.
 \begin{equation} \label{equations_of_transformation}
     \begin{cases}
-        \vec{r}_1 = \vec{r}_1\brackets{q_1,\dots,q_n,t}\\
-        \vec{r}_2 = \vec{r}_2\brackets{q_1,\dots,q_n,t}\\
-        \dots \\
-        \vec{r}_N = \vec{r}_N\brackets{q_1,\dots,q_n,t}
+        \vec{r}_1 = \vec{r}_1\brackets{q_1, \,\dots\, ,q_n,t}\\[8pt]
+        \vec{r}_2 = \vec{r}_2\brackets{q_1, \,\dots\, ,q_n,t}\\[8pt]
+         \,\dots\,  \\[8pt]
+        \vec{r}_N = \vec{r}_N\brackets{q_1, \,\dots\, ,q_n,t}
     \end{cases}
 \end{equation}
-These are called the \textbf{equations of transformation} and they have some properties:
+These are called the \textbf{equations of transformation}, and they have some properties:
 \begin{itemize}
     \item explicitly contain the constraints
     \item can depend on time or not
@@ -137,9 +137,9 @@ An example of the use of generalized coordinates is the use of polar coordinates
 Obviously it is possible to express general coordinates in terms of regular coordinates:
 \begin{equation} \label{inverse_equations_of_transformation}
     \begin{cases}
-        q_1 = q_1\brackets{\vec{r}_1,\dots,\vec{r}_N,t}\\
-        q_2 = q_2\brackets{\vec{r}_1,\dots,\vec{r}_N,t}\\
-        \dots \\
-        q_n = q_n\brackets{\vec{r}_1,\dots,\vec{r}_N,t}
+        q_1 = q_1\brackets{\vec{r}_1, \,\dots\, ,\vec{r}_N,t}\\[8pt]
+        q_2 = q_2\brackets{\vec{r}_1, \,\dots\, ,\vec{r}_N,t}\\[8pt]
+         \,\dots\,  \\[8pt]
+        q_n = q_n\brackets{\vec{r}_1, \,\dots\, ,\vec{r}_N,t}
     \end{cases}
 \end{equation}

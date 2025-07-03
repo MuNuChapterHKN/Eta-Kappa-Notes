@@ -22,7 +22,7 @@ From that we can derive some quantities:
     \begin{equation}\vec{F}=0 \iff\dot{\vec{p}}=0 \iff\vec{p}\;\mathrm{is\;constant} \iff\vec{v}\;\mathrm{is\;constant}\end{equation}
     \item Angular momentum:
     \begin{equation}
-        \vec{L_{\Omega}} = \left(\vec{r}-\vec{r}_{\Omega}\right) \cross m\vec{v} = \left(\vec{r}-\vec{r}_{\Omega}\right) \cross \vec{p}
+        \vec{L_{\Omega}} = \bbrackets{\vec{r}-\vec{r}_{\Omega}} \cross m\vec{v} = \bbrackets{\vec{r}-\vec{r}_{\Omega}} \cross \vec{p}
     \end{equation}
     The angular momentum is a pseudo-vector and it is always calculated with reference to a generic point $\Omega$.
     \begin{figure}[H]
@@ -34,7 +34,7 @@ From that we can derive some quantities:
     Trying to differentiate the angular momentum we get:
     \begin{equation}
       \begin{split}
-        \dfrac{\mathrm{d}\vec{L}_{\Omega}}{\mathrm{d}t} &= \dfrac{\mathrm{d}}{\mathrm{d}t}\left(\left(\vec{r}-\vec{r}_{\Omega}\right) \cross \vec{p}\right) = \dot{\vec{r}}\cross\vec{p} - \dot{\vec{r}}_{\Omega}\cross\vec{p} + \left(\vec{r}-\vec{r}_{\Omega}\right) \cross \vec{F} = \\[8pt]
+        \dfrac{\mathrm{d}\vec{L}_{\Omega}}{\mathrm{d}t} &= \dfrac{\mathrm{d}}{\mathrm{d}t}\bbrackets{\bbrackets{\vec{r}-\vec{r}_{\Omega}} \cross \vec{p}} = \dot{\vec{r}}\cross\vec{p} - \dot{\vec{r}}_{\Omega}\cross\vec{p} + \bbrackets{\vec{r}-\vec{r}_{\Omega}} \cross \vec{F} = \\[8pt]
         &= - \vec{v}_{\Omega}\cross\vec{p} + \vec{\tau}_{\Omega}
       \end{split}
     \end{equation}
@@ -114,7 +114,7 @@ There can be cases such that:
 then $\vec{F}$ cannot be conservative. We can show this by computing $\mathrm{d}V$:
 \begin{equation}
     \begin{split}
-      -\mathrm{d}V &= -\left(\dfrac{\partial V}{\partial x}\mathrm{d}x + \dfrac{\partial V}{\partial y}\mathrm{d}y + \dfrac{\partial V}{\partial z}\mathrm{d}z + \dfrac{\partial V}{\partial t}\mathrm{d}t\right) = \\[8pt]
+      -\mathrm{d}V &= -\bbrackets{\dfrac{\partial V}{\partial x}\mathrm{d}x + \dfrac{\partial V}{\partial y}\mathrm{d}y + \dfrac{\partial V}{\partial z}\mathrm{d}z + \dfrac{\partial V}{\partial t}\mathrm{d}t} = \\[8pt]
     &= -\grad V \cdot\mathrm{d}\vec{r} - \dfrac{\partial V}{\partial t}\mathrm{d}t \neq \vec{F}\cdot\mathrm{d}\vec{r} \Rightarrow \int_{P_1}^{P_2}\vec{F}\cdot\mathrm{d}\vec{r} \neq V_1-V_2
     \end{split}
 \end{equation}
@@ -129,7 +129,7 @@ Similarly to what we established for one particle systems we can define some mai
         \vec{P} = \bigsum_{i=1}^{N} \vec{p}_i
     \end{equation}
     \item Angular momentum (with respect to $\Omega$):\begin{equation}
-        \vec{L}_{\Omega} = \bigsum_{i=1}^{N} \left(\left(\vec{r}_i-\vec{r}_{\Omega}\right) \cross \vec{p}_i\right)
+        \vec{L}_{\Omega} = \bigsum_{i=1}^{N} \bbrackets{\bbrackets{\vec{r}_i-\vec{r}_{\Omega}} \cross \vec{p}_i}
     \end{equation}
     \item Average position (centre of mass): \begin{equation} \label{e:centre_of_mass}
         \vec{R} = \dfrac{\bigsum_{i=1}^{N}m_i\vec{r}_i}{\bigsum_{i=1}^{N}m_i}
@@ -138,7 +138,7 @@ Similarly to what we established for one particle systems we can define some mai
     \begin{equation}
         \begin{split}
           M \vec{R} &= \bigsum_{i=1}^{N}m_i\vec{r}_i \\[8pt]
-          \dfrac{\mathrm{d}}{\mathrm{d}t}(M \vec{R}) &= \dfrac{\mathrm{d}}{\mathrm{d}t}\left(\bigsum_{i=1}^{N}m_i\vec{r}_i\right) \\[8pt]
+          \dfrac{\mathrm{d}}{\mathrm{d}t}(M \vec{R}) &= \dfrac{\mathrm{d}}{\mathrm{d}t}\bbrackets{\bigsum_{i=1}^{N}m_i\vec{r}_i} \\[8pt]
           M \dot{\vec{R}} &= \vec{P}
         \end{split}
     \end{equation}
