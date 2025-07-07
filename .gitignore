@@ -1,7 +1,7 @@
 
 *.log
 vscode
-build/*.pdf
+build/
 
 # Python
 *.pyc
