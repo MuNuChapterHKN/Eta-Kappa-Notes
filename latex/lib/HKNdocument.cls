@@ -172,6 +172,7 @@
 % - Date (if defined, otherwise today)
 \renewcommand{\maketitle}{
     \thispagestyle{empty} % No header/footer on title page
+    \def\tempa{italian}% Define comparison variable like in copyright section
     \begin{titlepage}
         % Logo e titoli centrati
         \begin{center}
@@ -189,7 +190,7 @@
         % Author(s) left
         \begin{minipage}[t]{0.4\textwidth}
             \raggedright
-            \ifx\DocumentLanguage\italian
+            \ifx\DocumentLanguage\tempa
                 {\Large\textit{Autori:}\\[0.5cm]}%
             \else
                 {\Large\textit{Authors:}\\[0.5cm]}%
@@ -201,7 +202,7 @@
         % Editor (s) right
         \begin{minipage}[t]{0.4\textwidth}
             \raggedleft
-            \ifx\DocumentLanguage\italian
+            \ifx\DocumentLanguage\tempa
                 {\Large\textit{Editori:}\\[0.5cm]}%
             \else
                 {\Large\textit{Editors:}\\[0.5cm]}%
@@ -215,7 +216,7 @@
         \begin{center}
             % Optional version
             \ifx\DDversion\empty\else
-                \ifx\DocumentLanguage\italian
+                \ifx\DocumentLanguage\tempa
                     {\large Versione: \DDversion}\\[0.5cm]
                 \else
                     {\large Version: \DDversion}\\[0.5cm]
