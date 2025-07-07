@@ -289,24 +289,23 @@
 % Generates a language-sensitive Creative Commons license description with an image and hyperlink
 \newcommand{\cclicense}{%
     \thispagestyle{empty}
-    \setlength{\parindent}{0pt}% Remove paragraph indentation
-    \setlength{\parskip}{0pt}% Suspend parskip package effects for this section
+    % \setlength{\parindent}{0pt}% Remove paragraph indentation
+    % \setlength{\parskip}{0pt}% Suspend parskip package effects for this section
         \def\tempa{italian}%
         \ifx\DocumentLanguage\tempa
             {\Large\textbf{\#WeAreHKN}}
             \vspace{0.2cm}
-
+            \par
             Il \textbf{Mu Nu Chapter} di \textbf{IEEE-Eta Kappa Nu (HKN)} è la Honor Society del Politecnico di Torino dedicata agli studenti di eccellenza nei campi dell'ingegneria elettrica, elettronica, informatica e delle telecomunicazioni. IEEE-HKN è la più antica e prestigiosa honor society internazionale per ingegneri elettrici ed elettronici, fondata nel 1904. Il nostro capitolo promuove l'eccellenza accademica, il servizio alla comunità e lo sviluppo professionale attraverso attività di tutoring, workshop e progetti collaborativi.
 
             \vspace{0.3cm}
             {\large\textbf{Progetto Gratuito per la Condivisione della Conoscenza}}
-            \vspace{0.1cm}
-
+            \par
             Questo è un progetto completamente gratuito volto alla distribuzione libera di materiale didattico di qualità. Crediamo nell'importanza di rendere accessibile a tutti una formazione di eccellenza e offriamo gratuitamente queste risorse per supportare il percorso di studio di ogni studente.
 
-            \vspace{0.2cm}
+            \vspace{0.3cm}
             {\large\textbf{Scopri le nostre iniziative:}}
-            \vspace{0.1cm}
+            \par
             \begin{itemize}[topsep=0pt,itemsep=0pt,parsep=0pt,partopsep=0pt]
                 \item \textbf{Sito web:} \href{https://hknpolito.org/}{https://hknpolito.org/}
                 \item \textbf{Instagram:} \href{https://www.instagram.com/hknpolito/}{@hknpolito}
@@ -315,25 +314,31 @@
 
             \vspace{0.3cm}
             \textbf{Segnalazioni ed Errori}
-            \vspace{0.1cm}
-
+            \par
             Hai trovato un errore o vorresti contribuire al miglioramento di questo materiale? Consulta il documento \href{https://github.com/MuNuChapterHKN/Eta-Kappa-Notes/blob/main/CONTRIBUTING.md}{CONTRIBUTING.md} nella nostra repository GitHub oppure scrivici a: \href{mailto:responsabile.tutoring@hknpolito.it}{responsabile.tutoring@hknpolito.it}
 
             \vfill
 
-            {\Large\textbf{Licenza Creative Commons}}
-            \vspace{0.2cm}
+            \begin{center}
+                \begin{minipage}{\linewidth}
+                    \begin{minipage}{0.6\textwidth}
+                        {\Large\textbf{Licenza Creative Commons}}
+                    \end{minipage}
+                    \begin{minipage}{0.39\linewidth}
+                        \raggedleft
+                        \includegraphics[width=0.65\textwidth]{\doclicence}
+                    \end{minipage}
+                \end{minipage}
+            \end{center}
 
             Questo lavoro è distribuito con una \textbf{Licenza Creative Commons Attribuzione - Non commerciale - Non opere derivate 4.0 International}.
             Il lavoro è stato prodotto da \DDauthors\ifx\DDeditors\empty\else, editato da \DDeditors\fi{} e pubblicizzato da \DDorganization.
 
-            \vspace{0.2cm}
             \textbf{Puoi:}
             \begin{itemize}[topsep=0pt,itemsep=0pt,parsep=0pt,partopsep=0pt]
                 \item \textbf{Condividere:} copiare, distribuire e trasmettere il lavoro
             \end{itemize}
 
-            \vspace{0.1cm}
             \textbf{Alle seguenti condizioni:}
             \begin{itemize}[topsep=0pt,itemsep=0pt,parsep=0pt,partopsep=0pt]
                 \item \textbf{Attribuzione:} devi attribuire il lavoro nei modi indicati dall'autore o da chi ti ha dato la licenza (ma non in un modo che suggerisca che loro approvino te o il tuo uso del lavoro).
@@ -341,24 +346,22 @@
                 \item \textbf{Non opere derivate:} se modifichi, trasformi o sviluppi questo lavoro, non puoi distribuire il risultato.
             \end{itemize}
 
-            \vspace{0.2cm}
             Maggiori informazioni sul sito di \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{Creative Commons}.
         \else
             % Information about HKN organization
             {\Large\textbf{\#WeAreHKN}}
             \vspace{0.2cm}
-
+            \par
             The \textbf{Mu Nu Chapter} of \textbf{IEEE-Eta Kappa Nu (HKN)} is the Honor Society of Politecnico di Torino dedicated to outstanding students in electrical, electronic, computer, and telecommunications engineering. IEEE-HKN is the oldest and most prestigious international honor society for electrical and electronic engineers, founded in 1904. Our chapter promotes academic excellence, community service, and professional development through tutoring activities, workshops, and collaborative projects.
 
             \vspace{0.3cm}
             {\large\textbf{Free Project for Knowledge Sharing}}
-            \vspace{0.1cm}
-
+            \par
             This is a completely free project aimed at the open distribution of high-quality educational materials. We believe in the importance of making excellent education accessible to everyone and offer these resources free of charge to support every student's learning journey.
 
-            \vspace{0.2cm}
+            \vspace{0.3cm}
             {\large\textbf{Discover our initiatives:}}
-            \vspace{0.1cm}
+            \par
             \begin{itemize}[topsep=0pt,itemsep=0pt,parsep=0pt,partopsep=0pt]
                 \item \textbf{Website:} \href{https://hknpolito.org/}{https://hknpolito.org/}
                 \item \textbf{Instagram:} \href{https://www.instagram.com/hknpolito/}{@hknpolito}
@@ -367,25 +370,31 @@
 
             \vspace{0.3cm}
             \textbf{Error Reports and Contributions}
-            \vspace{0.1cm}
-
+            \par
             Found an error or would like to contribute to improving this material? Check the \href{https://github.com/MuNuChapterHKN/Eta-Kappa-Notes/blob/main/CONTRIBUTING.md}{CONTRIBUTING.md} document in our GitHub repository or write to us at: \href{mailto:responsabile.tutoring@hknpolito.it}{responsabile.tutoring@hknpolito.it}
 
             \vfill
 
-            {\Large\textbf{Creative Commons License}}
-            \vspace{0.2cm}
+            \begin{center}
+                \begin{minipage}{\linewidth}
+                    \begin{minipage}{0.6\textwidth}
+                        {\Large\textbf{Licenza Creative Commons}}
+                    \end{minipage}
+                    \begin{minipage}{0.39\linewidth}
+                        \raggedleft
+                        \includegraphics[width=0.65\textwidth]{\doclicence}
+                    \end{minipage}
+                \end{minipage}
+            \end{center}
 
             This work is licensed under a \textbf{Creative Commons Attribution - NonCommercial - NoDerivatives 4.0 International}.
             The work was produced by \DDauthors\ifx\DDeditors\empty\else, edited by \DDeditors\fi{}, and publicized by \DDorganization.
 
-            \vspace{0.2cm}
             \textbf{You are free:}
             \begin{itemize}[topsep=0pt,itemsep=0pt,parsep=0pt,partopsep=0pt]
                 \item \textbf{to Share:} to copy, distribute and transmit the work
             \end{itemize}
 
-            \vspace{0.1cm}
             \textbf{Under the following conditions:}
             \begin{itemize}[topsep=0pt,itemsep=0pt,parsep=0pt,partopsep=0pt]
                 \item \textbf{Attribution:} you must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work).
@@ -393,14 +402,8 @@
                 \item \textbf{No derivatives:} if you alter, transform, or build upon this work, you may not distribute the resulting work.
             \end{itemize}
 
-            \vspace{0.2cm}
             More information on the \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{Creative Commons website}.
         \fi
-        \par % Spazio verticale dopo il testo
-        \begin{center}
-            \includegraphics[width=0.3\textwidth]{\doclicence}
-        \end{center}
-        \par % Spazio dopo l'immagine
     \clearpage
 }
 
