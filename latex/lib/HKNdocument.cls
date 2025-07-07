@@ -129,9 +129,9 @@
 \newcommand{\shorttitle}{}  % Contains short title for header
 \newcommand{\docdate}{}     % Contains custom date
 \newcommand{\docversion}{}  % Contains document version
-\newcommand{\doclogofrontpage}{../../resources/imgs/hkn_logo.pdf}      % Contains logo big path
-\newcommand{\doclogoupperpage}{../../resources/imgs/hkn_ideogramma.pdf}    % Contains logo big path
-\newcommand{\doclicence}{../../resources/imgs/ccbyncnd.png}  % Contains license logo path
+\newcommand{\doclogofrontpage}{hkn_logo.pdf}      % Contains logo big path
+\newcommand{\doclogoupperpage}{hkn_ideogramma.pdf}    % Contains logo big path
+\newcommand{\doclicence}{ccbyncnd.png}  % Contains license logo path
 \newcommand{\DDorganization}{IEEE - MuNu Chapter}
 
 % Preserve old commands for title and author
