@@ -1,7 +1,10 @@
 
 *.log
 vscode
-build/*.pdf
+build
+build/
+**/svg-inkscape/
+**/svg-inkscape/**
 
 # Python
 *.pyc
