@@ -290,6 +290,7 @@
 \newcommand{\cclicense}{%
     \thispagestyle{empty}
     \setlength{\parindent}{0pt}% Remove paragraph indentation
+    \setlength{\parskip}{0pt}% Suspend parskip package effects for this section
         \def\tempa{italian}%
         \ifx\DocumentLanguage\tempa
             {\Large\textbf{\#WeAreHKN}}
