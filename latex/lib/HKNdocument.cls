@@ -267,12 +267,43 @@
 
 % Chapter start pages will not have headers (only page number in "plain" style)
 % Redefine \chapter to force plain style on the first page of each chapter.
+% Also modify chapter marking to support short titles
 \makeatletter
 \def\chapter{\clearpage%
   \thispagestyle{plain}% Plain page style (no fancy header, only page number)
   \global\@topnum\z@%
   \@afterindentfalse%
   \secdef\@chapter\@schapter}
+
+% Redefine \@chapter to handle optional short titles for headers
+\def\@chapter[#1]#2{%
+  \ifnum \c@secnumdepth >\m@ne
+    \refstepcounter{chapter}%
+    \typeout{\@chapapp\space\thechapter.}%
+    \addcontentsline{toc}{chapter}%
+                     {\protect\numberline{\thechapter}#2}%  % Use full title (#2) for TOC
+  \else
+    \addcontentsline{toc}{chapter}{#2}%  % Use full title (#2) for TOC
+  \fi
+  \chaptermark{#1}%  % Use the optional argument (short title) for the header
+  \addtocontents{lof}{\protect\addvspace{10\p@}}%
+  \addtocontents{lot}{\protect\addvspace{10\p@}}%
+  \if@twocolumn
+    \@topnewpage[\@makechapterhead{#2}]%
+  \else
+    \@makechapterhead{#2}%
+    \@afterheading
+  \fi}
+
+% Redefine \@schapter (for starred chapters) to also support header marking
+\def\@schapter#1{%
+  \if@twocolumn
+    \@topnewpage[\@makeschapterhead{#1}]%
+  \else
+    \@makeschapterhead{#1}%
+    \@afterheading
+  \fi
+  \chaptermark{#1}}  % Use the full title for starred chapters
 \makeatother
 
 % --------------------------
