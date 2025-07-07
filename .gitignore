@@ -36,3 +36,7 @@ __pycache__/
 *.fdb_latexmk
 *.synctex.gz
 *.synctex(busy)
+
+# Build directories
+build/
+svg-inkscape/

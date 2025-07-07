@@ -16,7 +16,7 @@ Si misura una corrente attraverso il filo, e poiché $V = RI$ è come se ci foss
 \begin{equation}
     \fem_i \coloneq \oint_\gamma \E \lde
 \end{equation}
-Non si mette il segno meno davanti all'integrale (diversamente che nella \eqref{eq:spot_integrale}), in modo che la circuitazione sia positiva se il campo è nella direzione della corrente.
+Non si mette il segno meno davanti all'integrale (diversamente che nell'\cref{eq:spot_integrale}), in modo che la circuitazione sia positiva se il campo è nella direzione della corrente.
 
 Consideriamo una qualsiasi superficie aperta $S \subset \R^3$ che ha il filo chiuso $\gamma$ come bordo e il verso positivo della corrente coerente con la direzione di $\uvt{n}$.
 
@@ -132,6 +132,8 @@ Questo risultato è generale, per qualunque campo magnetico.
 L'energia accumulata nel campo magnetico viene restituita al circuito quando si spegne il generatore di tensione, continuando a generare della corrente (analogamente al processo di scarica del condensatore, che restituisce l'energia di campo elettrico).
 
 \subsection{Mutua induzione}
+
+\addfigure{book/mutua_induzione}
 
 Due circuiti con fili $\gamma_1$ e $\gamma_2$ percorsi da corrente $I_1 = V_1/R_1$, $I_2 = V_2/R_2$.
 
@@ -324,7 +326,7 @@ La soluzione con condizione iniziale $q(0) = 0$ è
 
 % Applichiamo la legge di Ampère a una curva $\gamma$, usando una superficie $S$ che passa attraverso le armature del condensatore.
 
-La legge di Ampère \eqref{eq:legge_di_ampere} è valida solo se i campi sono statici, altrimenti viola la conservazione della carica.
+La legge di Ampère (\cref{eq:legge_di_ampere}) è valida solo se i campi sono statici, altrimenti viola la conservazione della carica.
 
 Infatti, applichiamola a una superficie $S$ che tende a chiudersi, cosicché il suo bordo $\gamma$ tenda a diventare un punto.
 La circuitazione di $\B$ dovrà anch'essa tendere a zero:
@@ -335,7 +337,7 @@ La circuitazione di $\B$ dovrà anch'essa tendere a zero:
 \end{gather}
 Al limite, infatti, la superficie diventa chiusa.
 
-Ma questo contraddice la \eqref{eq:flusso_corrente_generalizzata} e vale solo se la corrente è stazionaria.
+Ma questo contraddice l'\cref{eq:flusso_corrente_generalizzata} e vale solo se la corrente è stazionaria.
 
 La legge di Ampère, ora, viola la legge di conservazione della carica.
 

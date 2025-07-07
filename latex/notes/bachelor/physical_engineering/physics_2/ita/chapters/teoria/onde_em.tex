@@ -7,6 +7,8 @@
 
 In un punto $\p$ nel vuoto, siano $\E(\p) \parallel \uy \perp \B(\p) \parallel \uz$.
 
+\addfigure{book/waves_proof_2}
+
 Si applica Ampère-Maxwell per un piccolo quadrato $\perp \uy$:
 \begin{equation}
 \label{eq:ampere_maxwell_quadratino}
@@ -23,6 +25,8 @@ Si applica Ampère-Maxwell per un piccolo quadrato $\perp \uy$:
     - \parder[B]{x} = \mu_0 \eps_0 \parder[E]{t}
 \end{gathered}
 \end{equation}
+
+\addfigure{book/waves_proof_1}
 
 Si applica Faraday-Henry per un piccolo quadrato $\parallel \uz$:
 \begin{equation}
@@ -49,7 +53,7 @@ Riassumendo,
     \end{cases}
 \end{equation}
 
-Derivando ulteriormente la \eqref{eq:ampere_maxwell_quadratino} (AM) rispetto a $t$ e la \eqref{eq:faraday_henry_quadratino} (FH) rispetto a $x$,
+Derivando ulteriormente l'\cref{eq:ampere_maxwell_quadratino} (AM) rispetto a $t$ e l'\cref{eq:faraday_henry_quadratino} (FH) rispetto a $x$,
 \begin{equation}
     \begin{cases}
         - \partial^2_{tx} B = \mu_0 \eps_0 \parder[E][2]{t} \\
@@ -104,7 +108,7 @@ Analogamente per $\B$.
 
 \section{Soluzioni dell'equazione di d'Alembert}
 
-La soluzione della \eqref{eq:dalembert_1d}, in una dimensione, è
+La soluzione dell'\cref{eq:dalembert_1d}, in una dimensione, è
 \begin{equation}
     y(x, t) = f_1(x - vt) + f_2(x + vt)
 \end{equation}
@@ -150,7 +154,7 @@ Anche le cariche nei materiali emettono onde elettromagnetiche sinusoidali, poic
 \end{gather}
 \end{subequations}
 
-Usando la \eqref{eq:faraday_henry_quadratino},
+Usando l'\cref{eq:faraday_henry_quadratino},
 \begin{equation}
 \begin{gathered}
     \parder[E]{x} = - \parder[B]{t}
@@ -209,10 +213,14 @@ Nel caso di un'onda piana, è costante.
 
 Un'onda piana è \important{polarizzata linearmente}, cioè sia $\E$ sia $\B$ oscillano in piani fissi.
 
+\addfigure[Onda elettromagnetica polarizzata circolarmente.]{book/polarizzazione_circolare}
+
 Onda \important{polarizzata circolarmente}: $\E$ e $\B$, anziché oscillare in modulo, ruotano in moto circolare uniforme.
 
 Le onde piane non esistono, visto che le sorgenti non sono mai infinite.
 Sono approssimazioni di onde sferiche per percorsi brevi rispetto alla distanza dalla sorgente.
+
+\addfigure[Onde piane, cilindriche e sferiche che si propagano in un mezzo isotropo.]{book/onde_isotropo}
 
 \subsection{Onda generica}
 
@@ -324,7 +332,7 @@ Questo, con $x = 0$ (cioè sulla lastra), implica $E_{0,i} = - E_{0,r} \eqcolon 
 La direzione di propagazione, che è $\parallel \E \times \B$, deve invece cambiare verso.
 Quindi, se $\E$ diventa opposto, $\B$ deve rimanere quale è: $B_{0,i} = B_{0,r} \eqcolon B_0$.
 \begin{subequations}
-\label{eq:onde_stazionarie}
+\label[pluralequation]{eq:onde_stazionarie}
 \begin{gather}
     E(x, t) = E_0\exp{\im(kx - \omega t)} - E_0\exp{-\im(kx + \omega t)}
     = 2 E_0 \sin(kx) \cos(\omega t) \\
@@ -342,7 +350,7 @@ Usando il fatto che
 \end{gathered}
 \end{equation}
 
-Le \eqref{eq:onde_stazionarie} sono \important{onde stazionarie}, quindi esistono dei nodi.
+\Cref{eq:onde_stazionarie} sono \important{onde stazionarie}, quindi esistono dei nodi.
 Posizionando lì la spira, se questa è sufficientemente piccola, l'amperometro non legge mai corrente.
 
 La spira deve essere piccola rispetto alla lunghezza d'onda, quindi occorre scegliere una frequenza sufficientemente bassa.
@@ -385,6 +393,8 @@ $A c \Delta t = A \Delta x$ è il volume che incide sulla superficie in un tempo
 
 Se l'onda viene totalmente riflessa la pressione è doppia, poiché è doppia la variazione di quantità di moto.
 
+\addfigure{book/pressione_di_radiazione}
+
 Se la radiazione incide con un angolo $\theta$ rispetto alla normale, occorre moltiplicare per $\cos^2\theta$ (un coseno viene dalla forza, l'altro dal volume che incide sulla superficie nel tempo $\Delta t$).
 \begin{equation}
     \text{pressione} = \frac{F \cos\theta}{A} = \frac{1}{A} \frac{\Delta p \cos \theta}{\Delta t}
@@ -426,7 +436,7 @@ Si usa la seguente identità:
     \diver (\E \times \B) = (\curl \E) \cdot \B - \E \cdot (\curl \B)
 \end{equation}
 
-La \eqref{eq:potenza1} prosegue come:
+\Cref{eq:potenza1} prosegue come:
 \begin{equation}
 \begin{gathered}
     P = \frac{1}{\mu_0} \int_V (\curl \E) \cdot \B \,\de V

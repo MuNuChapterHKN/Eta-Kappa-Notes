@@ -88,6 +88,8 @@ con $\ver{r}$ versore radiale verso $P$.
 
 Se vi è una carica $q_0$ in $P$, la forza che agisce su essa è $q_0 \E(P)$.
 
+\adddrawio[Carica $q_0$ in moto lungo una curva $\gamma$ in presenza del campo elettrico generato dalla carica $q$.]{efield_work}
+
 Se la carica viene spostata lungo un arco $\gamma$ dal punto $A$ al punto $B$ a distanze $r_A$ e $r_B$ dall'origine, la forza elettrica svolge un lavoro e si dimostra che questo lavoro dipende solo dalla componente radiale dello spostamento:
 \begin{equation}
 \label{eq:potenziale_elettrostatico}
@@ -99,7 +101,7 @@ Se la carica viene spostata lungo un arco $\gamma$ dal punto $A$ al punto $B$ a 
 
 Poiché $L_{AB,\gamma}$ non dipende da $\gamma$, \important{il campo elettrico è conservativo} (cioè genera forze conservative).
 
-I due termini nella \eqref{eq:potenziale_elettrostatico}, se moltiplicati per $q_0$, sono energie che determinano una variazione di energia potenziale.
+I due termini nell'\cref{eq:potenziale_elettrostatico}, se moltiplicati per $q_0$, sono energie che determinano una variazione di energia potenziale.
 
 Trascurando la carica campione, si ottiene il potenziale elettrico $\spot(P)$: l'energia potenziale per unità di carica, con unità di misura volt: $\unit{\volt} = \unit{\joule\per\coulomb}$.
 
@@ -120,7 +122,7 @@ Questa è una legge di conservazione dell'energia (energia cinetica a sinistra, 
 
 Quindi, $[\E] = \unit{\volt\per\metre}$, preferito a \unit{\newton\per\coulomb}, che non è usato.
 
-Risolvendo la \eqref{eq:spot_integrale} per $\spot$ si ottiene
+Risolvendo l'\cref{eq:spot_integrale} per $\spot$ si ottiene
 \begin{equation}
     \spot = \frac{q}{4\pi \eps_0 r} + \text{costante}
 \end{equation}
@@ -134,7 +136,7 @@ L'energia potenziale soddisfa il principio di conservazione degli effetti, quind
 \end{equation}
 
 Come si calcola $\E$ a partire da $\spot$?
-La \eqref{eq:spot_differenziali} si riscrive come
+\Cref{eq:spot_differenziali} si riscrive come
 \begin{equation}
     E_x \de x + E_y \de y + E_z \de z = - \de \spot
 \end{equation}
@@ -200,7 +202,10 @@ Flusso di $\E$ attraverso $S$:
     \de \Phi = \E \sde, \qquad \Phi = \oint_S \E \sde
 \end{equation}
 
-Calcolo per una carica $q$ in $\p' \in V$ con $R = \norm{\p - \p'}$:
+\adddrawio{gauss_proof}
+
+Calcolo per una carica $q$ in $\p' \in V$ con $R = \norm{\p - \p'}$
+(una rappresentazione bidimensionale è data in \cref{fig:gauss_proof})
 \begin{equation}
     \de \Phi = \frac{q}{4\pi \eps_0} \frac{\ver{r'} \cdot \uvt{n}}{R^2} \de S = \frac{q}{4\pi \eps_0} \frac{\de S \cos \theta}{R^2} = \frac{q}{4\pi \eps_0} \de \Omega
 \end{equation}
@@ -222,7 +227,7 @@ Il teorema di Gauss applicato al flusso del campo elettrico risulta in
 \begin{equation}
     \oint_S \E \sde = \int_V \diver \E \, \de V
 \end{equation}
-Poiché la \eqref{eq:gauss_integrale} deve valere per ogni volume $V$, occorre eguagliare gli integrandi e si ottiene il formato differenziale della legge di Gauss:
+Poiché l'\cref{eq:gauss_integrale} deve valere per ogni volume $V$, occorre eguagliare gli integrandi e si ottiene il formato differenziale della legge di Gauss:
 \begin{equation}
     \diver \E = \frac{\rho}{\eps_0}
 \end{equation}
@@ -231,7 +236,9 @@ Attenzione: legge di Gauss $\ne$ teorema di Gauss $=$ teorema della divergenza.
 
 Diamo un'idea del perché valga il teorema di Gauss.
 
-Consideriamo un volume infinitesimo cubico con vertice di coordinate minori $\p$, di lati $\de x$, $\de y$, $\de z$ e volume $\de V = \de x \de y \de z$.
+\adddrawio[][0.6]{gauss_cube}
+
+Consideriamo un volume infinitesimo cubico come in \cref{fig:gauss_cube}, con vertice di coordinate minori $\p$, di lati $\de x$, $\de y$, $\de z$ e volume $\de V = \de x \de y \de z$.
 Se $\de \p \parallel \ux$,
 \begin{equation}
     E_x(\p + \de \p) \approx E_x(\p) + \grad E_x(\p) \cdot \de \p = E_x(\p) + \parder[E_x(\p)]{x} \de x
@@ -261,7 +268,7 @@ Osserva che le due seguenti leggi:
 sono conseguenze dei soli tre principi dell'elettrostatica e sono equivalenti a essi, ne sono una riscrittura analitica.
 
 Dai tre principi siamo passati alle due leggi sopra.
-Ora, è possibile ridurre queste leggi in un'unica equazione, sostituendo la \eqref{eq:meno_grad_spot} nella \eqref{eq:gauss_differenziale}:
+Ora, è possibile ridurre queste leggi in un'unica equazione, sostituendo l'\cref{eq:meno_grad_spot} nell'\cref{eq:gauss_differenziale}:
 \begin{equation}
     \lapl \spot = - \frac{\rho}{\eps_0}
 \end{equation}
@@ -326,7 +333,9 @@ Per calcolare $C$, serve calcolare $V = V_+ - V_-$.
 
 Poiché il piano è infinito, il campo elettrico è perpendicolare al piano.
 
-Considerando un cilindro di area di base $A$ perpendicolare al piano e che lo attraversa.
+\adddrawio[][0.3]{gauss_plane}
+
+Considerando un cilindro di area di base $A$ perpendicolare al piano e che lo attraversa, come in \cref{fig:gauss_plane}.
 Detto $E$ il modulo del campo elettrico presso le basi del cilindro, si applica la legge di Gauss:
 \begin{equation}
     \Phi = 2 E A = \frac{\sigma A}{\eps_0} \implies E = \frac{\sigma}{2 \eps_0}
