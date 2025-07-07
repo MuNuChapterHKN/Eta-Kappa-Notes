@@ -1,5 +1,7 @@
-*.pdf
+
 *.log
+vscode
+build/*.pdf
 
 # Python
 *.pyc
