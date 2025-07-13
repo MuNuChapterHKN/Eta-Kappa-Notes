@@ -1,0 +1,973 @@
+\chapter[Lagrange formalism applied]{Applications of Lagrange formalism}
+In this chapter we will discuss some potential applications of the Lagrange picture of classical mechanics.
+\section{Theory of small oscillations}
+Many physical problems have an oscillatory nature but, when we try to solve those problems, we usually encounter difficult (sometimes impossible) differential equations.
+For this reason we now introduce a systematic way to deal with oscillatory problems in the case of a small oscillation.
+\subsection{$\mathbf{n = 1}$ degree of freedom systems}
+Let's start with a 1 degree of freedom system. In this case the Lagrangian may look something like this:
+\begin{equation}
+    \lagr = \dfrac{1}{2}m\dot{q}^2 - V(q)
+\end{equation}
+Notice that we asked for a potential that only depends on the coordinate $q$.
+We take in consideration the system near point of local minimum for the potential.
+\begin{figure}[!ht]
+    \centering
+    \includesvg[width=0.6\textwidth]{res/svg/potential1Dapprox}
+    \caption{1-D potential}
+    \label{fig:image10}
+\end{figure}
+Given this we can approximate the potential to it's second order Taylor expansion near the point $q_0$ (local minimum):
+\begin{equation}
+    V \simeq V(q_0) + \cancel{\pdv{V}{q}\bigg|_{q_0}}(q-q_0) + \dfrac{1}{2}\pdv[2]{V}{q}\bigg|_{q_0}(q-q_0)^2
+\end{equation}
+The first derivative is zero since we are at a minimum, we can also ignore the value of the potential $V(q_0)$ and set it equal to zero, since we can always change the potential reference. Finally, we define:
+\begin{equation}
+    \eta \defineeq q-q_0
+\end{equation}
+And so we get:
+\begin{equation} \label{e:potential_1D_oscillation}
+    V(\eta) \simeq \dfrac{1}{2}\underbrace{\pdv[2]{V}{\eta}\bigg|_{q_0}}_{\Velegant}\eta^2 = \dfrac{1}{2}\Velegant\eta^2
+\end{equation}
+Where we defined the second order partial derivative as a known quantity $\Velegant$. We also know that, since $q$ and $\eta$ are different only for a constant term:
+\begin{equation} \label{e:kinetic_1D_oscillation}
+    T = \dfrac{1}{2}m\dot{q}^2 = \dfrac{1}{2}m\dot{\eta}^2
+\end{equation}
+From this we can write the \eleref :
+\begin{equation}
+    \begin{split}
+        \dv{}{t}\pdv{\lagr}{\dot{\eta}} -\pdv{\lagr}{\eta} = 0 \\[8pt]
+        \dv{}{t}\pdv{T}{\dot{\eta}} + \pdv{V}{\eta} = 0
+    \end{split}
+\end{equation}
+Substituting what we got in \eqref{e:potential_1D_oscillation} and \eqref{e:kinetic_1D_oscillation}:
+\begin{equation}
+    \begin{split}
+        \dv{}{t}(m\dot{\eta}) + \Velegant\eta &= 0\\[8pt]
+        m\ddot{\eta} + \Velegant\eta &= 0
+    \end{split}
+\end{equation}
+From which we get this condition:
+\begin{equation} \label{e:condition_1D_oscillation}
+    \ddot{\eta} =- \dfrac{\Velegant\eta}{m}
+\end{equation}
+We are searching for solutions of this type:
+\begin{equation}
+    \eta (t) = a\efunction^{-i\omega t}
+\end{equation}
+And so we evaluate the second order derivative:
+\begin{eqnarray}
+    \ddot{\eta} (t) = -a\omega^2\efunction^{-i\omega t}
+\end{eqnarray}
+We now impose the condition that $a\neq 0$ which is reasonable since $a=0$ would correspond to the absence of motion, so from \eqref{e:condition_1D_oscillation} we get:
+\begin{equation}
+    \begin{split}
+        m\omega^2\cancel{a\efunction^{-i\omega t}} &= \Velegant\cancel{a\efunction^{-i\omega t}}\\[8pt]
+        \omega &= \pm \sqrt{\dfrac{\Velegant}{m}}
+    \end{split}
+\end{equation}
+By convention we usually take the $+$ sign and refer to the other solution as $-\omega$. The general solution for $\eta$ will be of this form:
+\begin{equation}
+    \eta (t) = ca\efunction^{-i\omega t} + c'a\efunction^{i\omega t} = A \sin(\omega t + \varphi) = A \sin\brackets{\sqrt{\dfrac{\Velegant}{m}} t + \varphi}
+\end{equation}
+\subsection{$\mathbf{n\geq 2}$ degrees of freedom systems}
+Now we want to discuss a more general type of system with $n\geq2$ degrees of freedom. Again we take in consideration a point $\vec{q}_0 = (q_{1,0}, q_{2,0}, \,\dots\, ,q_{n,0})$ of local minimum for the potential $V$ which now is a function of all the coordinates $q_{\alpha}$.
+\begin{figure}[!ht]
+    \centering
+    \includesvg[width=0.6\textwidth]{res/svg/potential2Dapprox}
+    \caption{2-D potential}
+    \label{fig:image11}
+\end{figure}
+In this case the potential can be approximated near the point with the Taylor formula for multivariable scalar functions:
+\begin{equation} \label{e:taylor_potential_scalar_product}
+    V(\vec{q}) \simeq \underbrace{V(\vec{q}_0)}_{\text{constant}} + \cancel{\langle \grad V(\vec{q}_0), \vec{q}-\vec{q}_0\rangle} + \dfrac{1}{2}\langle H V(\vec{q}_0)(\vec{q}-\vec{q}_0), (\vec{q}-\vec{q}_0)\rangle
+\end{equation}
+Again we exploit the fact that we can choose an arbitrary level for the potential, and we define:
+\begin{equation}
+    \eta_{\alpha} = q_{\alpha} - q_{\alpha,0}
+\end{equation}
+Expanding \eqref{e:taylor_potential_scalar_product} we get:
+\begin{equation}
+    \begin{split}
+        V(\vec{q}) &\simeq \dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}\dfrac{\partial^2 V}{\partial q_{\alpha} \partial q_{\beta}}\bigg|_{\vec{0}}(q_{\alpha} - q_{\alpha,0})(q_{\beta} - q_{\beta,0})\\[8pt]
+        V(\vec{\eta}) &\simeq \dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}\underbrace{\dfrac{\partial^2 V}{\partial \eta_{\alpha} \partial \eta_{\beta}}\bigg|_{\vec{0}}}_{\Velegant_{\alpha \beta} = \Velegant_{\beta \alpha}}\eta_{\alpha}\eta_{\beta}\\[8pt]
+        V(\vec{\eta}) &\simeq \dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}\Velegant_{\alpha \beta}\eta_{\alpha}\eta_{\beta}
+    \end{split}
+\end{equation}
+For the kinetic energy $T$ we assume that the transformation equations do not depend on time:
+\begin{equation}
+    T = \dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}\Telegant'_{\alpha \beta} \dot{\eta}_{\alpha}\dot{\eta}_{\beta}
+\end{equation}
+We consider the Taylor expansion of $\Telegant'_{\alpha \beta}$. In this case we can stop at the first order because there is no reason to assume that the kinetic energy and the potential energy have a minimum at the same point:
+\begin{equation}
+    \Telegant'_{\alpha \beta} \simeq \Telegant'_{\alpha \beta}(\vec{0}) + \bigsum_{\gamma}\pdv{\Telegant'_{\alpha \beta}}{\eta_{\gamma}}\bigg|_{\vec{0}}\eta_{\gamma}
+\end{equation}
+Going back to the general expression for $T$ we get:
+\begin{equation}
+    \begin{split}
+        T &\simeq \dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}\brackets{\Telegant'_{\alpha \beta}(\vec{0}) + \bigsum_{\gamma}\pdv{\Telegant'_{\alpha \beta}}{\eta_{\gamma}}\bigg|_{\vec{0}}\eta_{\gamma}} \dot{\eta}_{\alpha}\dot{\eta}_{\beta} =\\[8pt]
+        &= \dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}\bigsum_{\gamma}\underbrace{\pdv{\Telegant'_{\alpha \beta}}{\eta_{\gamma}}\bigg|_{\vec{0}}\eta_{\gamma} \dot{\eta}_{\alpha}\dot{\eta}_{\beta}}_{o(\eta \dot{\eta}^2)} + \dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}\underbrace{\Telegant'_{\alpha \beta}(\vec{0})\dot{\eta}_{\alpha}\dot{\eta}_{\beta}}_{o(\dot{\eta}^2)}
+    \end{split}
+\end{equation}
+We can neglect the first term since it is small with respect to the second term. Now we define:
+\begin{equation}
+    \Telegant_{\alpha \beta} \defineeq \Telegant'_{\alpha \beta}(\vec{0})
+\end{equation}
+Those are just numbers which correspond to the value of the kinetic energy at the origin. We can put those numbers into a matrix:
+\begin{equation}
+    \hat{\Telegant}=
+    \begin{pmatrix}
+        \Telegant_{1 1} & \Telegant_{1 2} &  \,\dots\,  & \Telegant_{1 n}\\[8pt]
+        \Telegant_{2 1} & \Telegant_{2 2} &  \,\dots\,  &  \,\dots\, \\[8pt]
+         \,\dots\,  &  \,\dots\,  &  \,\dots\,  &  \,\dots\, \\[8pt]
+        \Telegant_{n 1} &  \,\dots\,  &  \,\dots\,  & \Telegant_{n n}\\[8pt]
+    \end{pmatrix}
+\end{equation}
+Similarly we can put the values of $\Velegant_{\alpha \beta}$ into a matrix:
+\begin{equation}
+    \hat{\Velegant}=
+    \begin{pmatrix}
+        \Velegant_{1 1} & \Velegant_{1 2} &  \,\dots\,  & \Velegant_{1 n}\\[8pt]
+        \Velegant_{2 1} & \Velegant_{2 2} &  \,\dots\,  &  \,\dots\, \\[8pt]
+         \,\dots\,  &  \,\dots\,  &  \,\dots\,  &  \,\dots\, \\[8pt]
+        \Velegant_{n 1} &  \,\dots\,  &  \,\dots\,  & \Velegant_{n n}\\[8pt]
+    \end{pmatrix}
+\end{equation}
+Also we have that:
+\begin{equation}
+    \dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}\Telegant_{\alpha \beta}\dot{\eta}_{\alpha}\dot{\eta}_{\beta}
+\end{equation}
+So the Lagrangian for the system is:
+\begin{equation}
+    \lagr = \dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}\brackets{\Telegant_{\alpha \beta}\dot{\eta}_{\alpha}\dot{\eta}_{\beta} - \Velegant_{\alpha \beta}\eta_{\alpha}\eta_{\beta}}
+\end{equation}
+The terms of the \eleref\;are:
+\begin{equation}
+    \begin{split}
+        \pdv{\lagr}{\eta_{\gamma}} &= -\pdv{V}{\eta_{\gamma}} = -\dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}\Velegant_{\alpha \beta} \pdv{}{\eta_{\gamma}}\brackets{\eta_{\alpha}\eta_{\beta}}\\[8pt]
+        \pdv{\lagr}{\dot{\eta}_{\gamma}} &= \pdv{T}{\dot{\eta}_{\gamma}} = \dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}\Telegant_{\alpha \beta}\pdv{}{\dot{\eta}_{\gamma}}\brackets{\dot{\eta}_{\alpha}\dot{\eta}_{\beta}}
+    \end{split}
+\end{equation}
+Evaluating the partial derivatives we get:
+\begin{equation}
+    \begin{split}
+        \pdv{\lagr}{\eta_{\gamma}} &= -\dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}\Velegant_{\alpha \beta} \bbrackets{\eta_{\beta}\underbrace{\pdv{\eta_{\alpha}}{\eta_{\gamma}}}_{\delta_{\gamma \alpha}} + \eta_{\alpha}\underbrace{\pdv{\eta_{\beta}}{\eta_{\gamma}}}_{\delta_{\gamma \beta}}} =\\[8pt]
+        &= -\dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}\Velegant_{\alpha \beta} \eta_{\beta}\delta_{\gamma \alpha} - \dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}\Velegant_{\alpha \beta} \eta_{\alpha}\delta_{\gamma \beta} = \\[8pt]
+        &= -\dfrac{1}{2}\bigsum_{\beta}\Velegant_{\gamma \beta} \eta_{\beta} - \dfrac{1}{2}\bigsum_{\alpha}\Velegant_{\alpha \gamma} \eta_{\alpha} =\\[8pt]
+        &= -\bigsum_{\alpha}\Velegant_{\alpha \gamma} \eta_{\alpha}
+    \end{split}
+\end{equation}
+We simplified the summation in the second line because of the Kronecker delta, and we can notice that in the third line the two terms are actually identical due to the fact that $\Velegant_{\alpha \gamma} = \Velegant_{\gamma \beta}$ and we are summing over all indices. The calculation for the kinetic energy is the same, and we get:
+\begin{equation}
+    \pdv{\lagr}{\dot{\eta}_{\gamma}} = \bigsum_{\alpha}\Telegant_{\alpha \gamma} \dot{\eta}_{\alpha}
+\end{equation}
+Hence we evaluate the total time derivative:
+\begin{equation}
+    \dv{}{t}\pdv{\lagr}{\dot{\eta}_{\gamma}} = \dv{}{t}\bigsum_{\alpha}\Telegant_{\alpha \gamma} \eta_{\alpha} = \bigsum_{\alpha}\Telegant_{\alpha \gamma} \ddot{\eta}_{\alpha}
+\end{equation}
+So the \eleref\;are:
+\begin{equation} \label{e:ele_for_gamma}
+    \bigsum_{\alpha}\brackets{\Telegant_{\alpha \gamma} \ddot{\eta}_{\alpha} + \Velegant_{\alpha \gamma} \eta_{\alpha}} = 0
+\end{equation}
+for all the possible $\gamma$.\\
+Taking into account the fact that we look for solutions like:
+\begin{equation}
+    \eta_{\alpha} (t) = a_{\alpha}\efunction^{-i\omega t}
+\end{equation}
+\textbf{N.B.} The coefficients $a_{\alpha}$ may be complex numbers.\\
+Substituting into \eqref{e:ele_for_gamma} we get:
+\begin{equation} \label{e:eigenvalue_alpha}
+    \begin{split}
+        \bigsum_{\alpha}\brackets{-\omega^2\Telegant_{\alpha \gamma} a_{\alpha}\cancel{\efunction^{-i\omega t}} + \Velegant_{\alpha \gamma}a_{\alpha}\cancel{\efunction^{-i\omega t}}} &= 0\\[8pt]
+        \bigsum_{\alpha}\brackets{-\omega^2\Telegant_{\alpha \gamma} + \Velegant_{\alpha \gamma}}a_{\alpha} &= 0
+    \end{split}
+\end{equation}
+This is true for any $\gamma$ so we are obtaining a set of \textit{homogeneous first order equations}. We know from linear algebra that the only way for this system to allow solutions different from the trivial solution is to ask for at least one equation to be a linear combination of the others.
+In other terms we want the determinant of the coefficient matrix to be zero. We can now express the system as follows:
+\begin{equation}
+    \brackets{-\omega^2\hat{\Telegant} + \hat{\Velegant}}\vec{a} = \vec{0}
+\end{equation}
+Let $\lambda = \omega^2$:
+\begin{equation}
+    \boxed{\hat{\Velegant}\vec{a} = \lambda\hat{\Telegant}\vec{a}}
+\end{equation}
+This equation is called \textbf{generalized eigenvalue equation}. In fact if we have $\hat{\Telegant} = \mathbb{I}$ we return to the ``regular'' eigenvalue equation. In order to find the coefficients $\lambda$ we must solve this equation:
+\begin{equation}
+    \det(\hat{\Velegant}-\lambda\hat{\Telegant}) = 0
+\end{equation}
+This is an $n$ degree polynomial with $n$ solutions $\lambda_i$ with $i=1,2, \,\dots\, ,n$. The solutions satisfy some properties:
+\begin{itemize}
+    \item $\lambda_i \in \mathbb{R}$
+    \item $\lambda_i > 0$
+\end{itemize}
+This means that $\omega_i = \pm \sqrt{\lambda_i}$ is real for any $i$. Putting $\lambda_i$ back into \eqref{e:eigenvalue_alpha} we get an expression depending on $\gamma$, thus we have a system of equations:
+\begin{equation}
+    \begin{cases}
+        \bigsum_{\alpha}\brackets{-\lambda_i\Telegant_{\alpha 1} + \Velegant_{\alpha 1}}a_{\alpha}^{(i)} &= 0\\[10pt]
+        \bigsum_{\alpha}\brackets{-\lambda_i\Telegant_{\alpha 2} + \Velegant_{\alpha 2}}a_{\alpha}^{(i)} &= 0\\[10pt]
+         \,\dots\, \\[10pt]
+        \bigsum_{\alpha}\brackets{-\lambda_i\Telegant_{\alpha n} + \Velegant_{\alpha n}}a_{\alpha}^{(i)} &= 0
+    \end{cases}
+\end{equation}
+In this system at least one equation is linearly dependent on the others since we asked that the determinant of the coefficient matrix is zero. In this way we can find all the components of the vector $\vec{a}^{(i)}$, which is called \textbf{generalized eigenvector}.
+Those vectors must satisfy a condition:
+\begin{equation}
+    [\vec{a}^{(i)}]^{\dagger}\;\hat{\Telegant}\;[\vec{a}^{(j)}] = 0
+\end{equation}
+This condition is called $\hat{\Telegant}$-orthogonality and is a generalization of the concept of orthogonality. In fact this condition reduces to the ``usual'' case if $\hat{\Telegant} = \mathbb{I}$ and the vectors are real valued:
+\begin{equation}
+    \begin{split}
+        [\vec{a}^{(i)}]^{\dagger}\;\mathbb{I}\;[\vec{a}^{(j)}] &= 0\\[8pt]
+        \transpose{[\vec{a}^{(i)}]} [\vec{a}^{(j)}] &= 0 \\[8pt]
+        \vec{a}^{(i)}\cdot \vec{a}^{(j)} &= 0
+    \end{split}
+\end{equation}
+We also want to normalize the vectors. Again the concept of normalization is generalized as follows:
+\begin{equation}
+    [\vec{a}^{(i)}]^{\dagger}\;\hat{\Telegant}\;[\vec{a}^{(i)}] = 1
+\end{equation}
+A solution to the system is:
+\begin{equation}
+    \vec{\eta} = \begin{pmatrix}
+        \eta_1\\[8pt]
+        \eta_2\\[8pt]
+         \,\dots\, \\[8pt]
+        \eta_n
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        a_1\\[8pt]
+        a_2\\[8pt]
+         \,\dots\, \\[8pt]
+        a_n
+    \end{pmatrix}\efunction^{-i\omega t}
+\end{equation}
+Actually a more general solution is given by a linear combination of this solution:
+\begin{equation}
+    \begin{split}
+        \vec{\eta} &= \bigsum_i\brackets{c_i \vec{a}^{(i)} \efunction^{-i\omega_i t} + c_i' \vec{a}^{(i)} \efunction^{i\omega_i t}} =\\[8pt]
+        &= \bigsum_i \underbrace{\brackets{c_i \efunction^{-i\omega_i t} + c_i' \efunction^{i\omega_i t}}}_{\text{components of $\vec{\eta}$ along $\vec{a}^{(i)}$}}\vec{a}^{(i)}
+    \end{split}
+\end{equation}
+For each component we have:
+\begin{equation}
+    \begin{split}
+        \eta_{\alpha} &= \bigsum_i \brackets{c_i \efunction^{-i\omega_i t} + c_i' \efunction^{i\omega_i t}}a_{\alpha}^{(i)} =\\[8pt]
+        &=  \underbrace{\bigsum_i A_i \sin(\omega_i t + \varphi_i)}_{\text{non monochromatic}}
+    \end{split}
+\end{equation}
+The terms $\omega_i$ are called \textbf{normal mode frequencies}, and generally they are all different.\\
+It is possible to express the solutions as pure harmonic motions (monochromatic) if one uses the eigenvectors as basis vectors. We can also notice that both $\hat{\Velegant}$ and $\hat{\Telegant}$ are diagonalized by the eigenvectors $\vec{a}^{(i)}$.
+In this base solution is in the form:
+\begin{equation}
+    u_i = A_i \sin(\omega_i t + \varphi_i)
+\end{equation}
+Which indeed is monochromatic. Writing the \eleref\;in this basis we have:
+\begin{equation}
+    \ddot{u}_i +\lambda_i u_i = 0 \;\;\forall i=1, \,\dots\, ,n
+\end{equation}
+\subsection{2-D systems. General example}
+Let's assume we are dealing with a two-dimensional system with a minimum for the potential at $(q_{10},q_{20})$. Also assume that the kinetic energy taxes the form of:
+\begin{equation}
+    \hat{\Telegant} = m\begin{pmatrix}
+        1 & 0\\[8pt]
+        0 & 1
+    \end{pmatrix} \Rightarrow \Telegant_{\alpha \beta} = m\delta_{\alpha \beta}
+\end{equation}
+Expanding the potential in terms of $\eta_1 = q_1-q_{10}$ and $\eta_2 = q_2-q_{20}$ gives:
+\begin{equation}
+    \begin{split}
+        V &\simeq \dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}\brackets{\dfrac{\partial^2 V}{\partial \eta_{\alpha} \partial \eta_{\beta}}\bigg|_{(0,0)}\eta_{\alpha}\eta_{\beta}} =\\[8pt]
+        &= \dfrac{1}{2}(\Velegant_{11}\eta_1^2 + \Velegant_{22}\eta_2^2 + \underbrace{\Velegant_{12}\eta_1\eta_2 + \Velegant_{21}\eta_2\eta_1}_{\text{same term}}) =\\[8pt]
+        &= \dfrac{1}{2}(\Velegant_{11}\eta_1^2 + \Velegant_{22}\eta_2^2 + 2\Velegant_{12}\eta_1\eta_2 )
+    \end{split}
+\end{equation}
+The kinetic energy instead becomes:
+\begin{equation}
+    \begin{split}
+        T &= \dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}m \delta_{\alpha \beta} \dot{\eta}_{\alpha}\dot{\eta}_{\beta} =\\[8pt]
+        &= \dfrac{1}{2}m(\dot{\eta}_1^2 + \dot{\eta}_2^2)
+    \end{split}
+\end{equation}
+The Lagrangian then becomes:
+\begin{equation}
+    \lagr = \dfrac{1}{2}m(\dot{\eta}_1^2 + \dot{\eta}_2^2) - \dfrac{1}{2}(\Velegant_{11}\eta_1^2 + \Velegant_{22}\eta_2^2 + 2\Velegant_{12}\eta_1\eta_2 )
+\end{equation}
+Let us divide the Lagrangian by $m$ and define:
+\begin{equation}
+    \lagr' = \dfrac{1}{m}\lagr
+\end{equation}
+\begin{equation}
+    \hat{\Telegant}' = \dfrac{1}{m}\hat{\Telegant} = \begin{pmatrix}
+        1 & 0\\[8pt]
+        0 & 1
+    \end{pmatrix}
+\end{equation}
+\begin{equation}
+    \hat{\Velegant}' = \dfrac{1}{m}\hat{\Velegant} = \begin{pmatrix}
+        \dfrac{\Velegant_{11}}{m} & \dfrac{\Velegant_{12}}{m}\\[8pt]
+        \dfrac{\Velegant_{21}}{m} & \dfrac{\Velegant_{22}}{m}
+    \end{pmatrix} = \begin{pmatrix}
+        \Velegant_{11}' & \Velegant_{12}'\\[8pt]
+        \Velegant_{21}' & \Velegant_{22}'
+    \end{pmatrix}
+\end{equation}
+The new Lagrangian becomes:
+\begin{equation}
+    \lagr' = \dfrac{1}{2}\transpose{\dvec{\eta}} \dvec{\eta} - \dfrac{1}{2}\transpose{\vec{\eta}} \Velegant' \vec{\eta}
+\end{equation}
+From \eleref\;we get two equations:
+\begin{equation}
+    \begin{cases}
+        \ddot{\eta}_1 + \Velegant'_{11}\eta_1 + \Velegant'_{12}\eta_2 = 0\\[8pt]
+        \ddot{\eta}_2 + \Velegant'_{22}\eta_2 + \Velegant'_{12}\eta_1 = 0
+    \end{cases} \bigg|\;\text{coupled equations}
+\end{equation}
+Now impose that the solutions are in the form:
+\begin{equation}
+    \begin{split}
+        \eta_1 = a_1\efunction^{-i\omega t} \\[8pt]
+        \eta_2 = a_2\efunction^{-i\omega t}
+    \end{split}
+\end{equation}
+The system becomes:
+\begin{equation}
+    \begin{cases}
+        -\omega^2 a_1 + \Velegant'_{11}a_1 + \Velegant'_{12}a_2 = 0\\[8pt]
+        \Velegant'_{12}a_1 -\omega^2 a_2 + \Velegant'_{22}a_2 = 0
+    \end{cases}
+\end{equation}
+In this case the generalized eigenvalue equation reduces to the usual case, and we get the two solutions $\lambda_1$ and $\lambda_2$. Substituting $\lambda_1$ into the eigenvalue equation we get:
+\begin{equation}
+    \begin{cases}
+        \brackets{\Velegant'_{11}-\lambda_1}a_1^{(1)} + \Velegant'_{12}a_2^{(1)} = 0\\[8pt]
+        \Velegant'_{12}a_1^{(1)} + \brackets{\Velegant'_{22}-\lambda_1}a_2^{(1)} = 0
+    \end{cases}
+\end{equation}
+One of the two equation must depend on the other. Since we have two equations we can arbitrarily pick one and get the relation between the coefficients:
+\begin{equation}
+    a_2^{(1)} = a_1^{(1)}\dfrac{\lambda_1 - \Velegant'_{11}}{\Velegant'_{12}}
+\end{equation}
+And so we have:
+\begin{equation}
+    \vec{a}^{\;(1)} = a_1^{(1)}\begin{pmatrix}
+        1 \\[8pt] \dfrac{\lambda_1 - \Velegant'_{11}}{\Velegant'_{12}}
+    \end{pmatrix}
+\end{equation}
+Similarly for $\lambda_2$ we get:
+\begin{equation}
+    \vec{a}^{\;(2)} = a_1^{(2)}\begin{pmatrix}
+        1 \\[8pt] \dfrac{\lambda_2 - \Velegant'_{11}}{\Velegant'_{12}}
+    \end{pmatrix}
+\end{equation}
+Now let's define:
+\begin{equation}
+    \begin{split}
+        K_1\;\text{s.t.}\; a^{(1)} = K_1\Velegant'_{12}\\[8pt]
+        K_2\;\text{s.t.}\; a^{(2)} = K_2\Velegant'_{12}
+    \end{split}
+\end{equation}
+And the vectors can be rewritten as:
+\begin{equation}
+    \begin{split}
+        \vec{a}^{\;(1)} = K_1\begin{pmatrix}
+            \Velegant'_{12} \\[8pt] \lambda_1 - \Velegant'_{11}
+        \end{pmatrix}\\[8pt]
+        \vec{a}^{\;(2)} = K_2\begin{pmatrix}
+            \Velegant'_{12} \\[8pt] \lambda_2 - \Velegant'_{11}
+        \end{pmatrix}
+    \end{split}
+\end{equation}
+The most general solution is a linear combination of all the single solutions:
+\begin{equation}
+    \vec{\eta} = \begin{pmatrix}
+        c_1 a_1^{(1)}\efunction^{-i\omega_1 t} + c_1' a_1^{(1)}\efunction^{i\omega_1 t} + c_2 a_1^{(2)}\efunction^{-i\omega_2 t} + c_2' a_1^{(2)}\efunction^{i\omega_2 t}\\[8pt]
+        c_1 a_2^{(1)}\efunction^{-i\omega_1 t} + c_1' a_2^{(1)}\efunction^{i\omega_1 t} + c_2 a_2^{(2)}\efunction^{-i\omega_2 t} + c_2' a_2^{(2)}\efunction^{i\omega_2 t}
+    \end{pmatrix}
+\end{equation}
+Substituting the components of the vectors $\vec{a}$:
+\begin{equation}
+    \begin{split}
+        \vec{\eta} = \begin{pmatrix}
+            c_1 K_1\Velegant'_{12}\efunction^{-i\omega_1 t} + c_1' K_1\Velegant'_{12}\efunction^{i\omega_1 t} +  \,\dots\, \\[8pt]
+            c_1 K_1\Velegant'_{12}\efunction^{-i\omega_1 t} + c_1' K_1\Velegant'_{12}\efunction^{i\omega_1 t} +  \,\dots\,
+        \end{pmatrix}\\[8pt]
+        \vec{\eta} = \begin{pmatrix}
+            A_1 \sin(\omega_1 t + \varphi_1) + A_2 \sin(\omega_2 t + \varphi_2)\\[8pt]
+            A_1 \sin(\omega_1 t + \varphi_1) + A_2 \sin(\omega_2 t + \varphi_2)
+        \end{pmatrix}
+    \end{split}
+\end{equation}
+But if we change basis we get:
+\begin{equation}
+    \vec{\eta} = u_1 \vec{a}^{\;(1)} + u_2 \vec{a}^{\;(2)}
+\end{equation}
+Where:
+\begin{equation}
+    \begin{split}
+        u_1 = A_1 \sin(\omega_1 t + \varphi_1)\\[8pt]
+        u_2 = A_2 \sin(\omega_2 t + \varphi_2)
+    \end{split}
+\end{equation}
+Which are monochromatic signals. Also in this new basis we have:
+\begin{equation}
+    \begin{split}
+        \hat{\Telegant}' = \begin{pmatrix}
+            1 & 0\\[8pt]
+            0 & 1
+        \end{pmatrix}\\[8pt]
+        \hat{\Velegant}' = \begin{pmatrix}
+            \lambda_1 & 0\\[8pt]
+            0 & \lambda_2
+        \end{pmatrix}
+    \end{split}
+\end{equation}
+And so the \eleref\;become:
+\begin{equation}
+    \begin{cases}
+        \ddot{u}_1+\lambda_1 u_1 = 0\\[8pt]
+        \ddot{u}_2+\lambda_2 u_2 = 0
+    \end{cases}
+\end{equation}
+Those are not coupled equations, and so they can be solved separately.
+
+
+\subsection{2-D systems. Coupled pendulums}
+Now let's take a particular system composed of two ideal pendulums in which the masses are attached by a spring as shown:
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.6\textwidth]{res/svg/couple_pendulum_1.drawio}
+    \caption{Coupled pendulums}
+\end{figure}
+The rest length of the spring is $d$. Since we have two particles, in principle we have at least $N=3\cdot2=6$ coordinates. Two coordinates can be neglected because the motion only occurs in the $xy$-plane.
+The two ropes are a constraint on the position of the particles. In particular both constraints are holomonic and sclermonic:
+\begin{equation}
+    \begin{cases}
+        x_1^2 + y_1^2 = l & \text{(first rope)}\\[8pt]
+        (x_2-d)^2 + y_2^2 = l & \text{(second rope)}
+    \end{cases}
+\end{equation}
+We can write the transformation equations as follows:
+\begin{equation}
+    \begin{cases}
+        x_1 = l\sin\theta_1\\[8pt]
+        y_1 = -l\cos\theta_1
+    \end{cases}\;\;
+    \begin{cases}
+        x_2 = l\sin\theta_2+d\\[8pt]
+        y_2 = -l\cos\theta_2
+    \end{cases}
+\end{equation}
+Since transformation equations do not depend on time the kinetic energy will be a quadratic function of the velocities:
+\begin{equation}
+    \begin{split}
+        T &= \dfrac{1}{2}m(\underbrace{\dot{x}_1^2+\dot{y}_1^2}_{(l\dot{\theta}_1)^2}) + \dfrac{1}{2}m(\underbrace{\dot{x}_2^2+\dot{y}_2^2}_{(l\dot{\theta}_2)^2}) \\[8pt]
+        &= \dfrac{1}{2}ml^2(\dot{\theta}_1^2+\dot{\theta}_2^2)
+    \end{split}
+\end{equation}
+We can express this in a matrix form as:
+\begin{equation}
+    \begin{split}
+        T &= \dfrac{1}{2}(\dot{\theta}_1 \dot{\theta}_2)\hat{\Telegant}\begin{pmatrix}
+            \dot{\theta}_1 \\[8pt]\dot{\theta}_2
+        \end{pmatrix} = \\[8pt]
+        &= \dfrac{1}{2}(\dot{\theta}_1 \dot{\theta}_2)ml^2\begin{pmatrix}
+            1 & 0\\[8pt]
+            0 & 1
+        \end{pmatrix}
+        \begin{pmatrix}
+            \dot{\theta}_1 \\[8pt]\dot{\theta}_2
+        \end{pmatrix} = \\[8pt]
+    \end{split}
+\end{equation}
+The potential is the sum of the gravitational potentials of the masses and of the elastic potential of the spring:
+\begin{equation}
+    \begin{split}
+        V &= \underbrace{mgy_1 + mgy_2}_{-mgl(\cos\theta_1+\cos\theta_1)} + \dfrac{1}{2}k\left[\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}-d\right]^2\\[8pt]
+        &= -mgl(\cos\theta_1+\cos\theta_1) +\\[8pt]
+        &+ \dfrac{1}{2}k\left[\sqrt{(l\sin\theta_2+d-l\sin\theta_1)^2+(l\cos\theta_1-l\cos\theta_2)^2}-d\right]^2\\[8pt]
+    \end{split}
+\end{equation}
+To find the minimum value of the potential we should theoretically evaluate the gradient and solve for $\grad V = \vec{0}$, but if we look at the configuration we can easily notice that the potential is minimum when the pendulums are in the vertical position and the spring is at rest as shown:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{res/svg/couple_pendulum_still.drawio}
+\end{figure}
+Thus we can expand the potential at $(0,0)$. Notice that the coordinates $\eta_1$ and $\eta_2$ in this case are equivalent to the ones we chose:
+\begin{equation}
+    \begin{split}
+        V &\simeq V(0,0) +\dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta} \dfrac{\partial^2 V}{\partial \theta_{\alpha} \partial \theta_{\beta}}\bigg|_{(0,0)}\theta_{\alpha}\theta_{\beta} = \\[8pt]
+        &= V(0,0) +\dfrac{1}{2}\brackets{\Velegant_{11}\theta_1^2 + \Velegant_{22}\theta_2^2 + 2\Velegant_{12}\theta_1\theta_2}
+    \end{split}
+\end{equation}
+This can be expressed in matrix form:
+\begin{equation}
+    \begin{split}
+        V &= \dfrac{1}{2}(\theta_1\;\theta_2)\hat{\Velegant}\begin{pmatrix}
+            \theta_1 \\[8pt]
+            \theta_2
+        \end{pmatrix}\\[8pt]
+        V &= \dfrac{1}{2}(\theta_1\;\theta_2)\begin{pmatrix}
+            \Velegant_{11} & \Velegant_{12}\\[8pt]
+            \Velegant_{12} & \Velegant_{22}
+        \end{pmatrix} \begin{pmatrix}
+            \theta_1 \\[8pt]
+            \theta_2
+        \end{pmatrix}
+    \end{split}
+\end{equation}
+If we evaluate all the partial derivatives we get that the matrix $\hat{\Velegant}$ is:
+\begin{equation}
+    \hat{\Velegant} = \begin{pmatrix}
+        mgl+kl^2 & -kl^2\\[8pt]
+        -kl^2 & mgl+kl^2
+    \end{pmatrix}
+\end{equation}
+The Lagrangian finally looks like this:
+\begin{equation}
+    \lagr = \dfrac{1}{2}ml^2(\dot{\theta}_1^2+\dot{\theta}_2^2) - \dfrac{1}{2}\left[(mgl+kl^2)\theta_1^2 + 2(-kl^2)\theta_1\theta_2 + (mgl+kl^2)\theta_2^2 \right]
+\end{equation}
+And the \eleref\;are:
+\begin{equation}
+    \begin{cases}
+        ml^2\ddot{\theta}_1 + (mgl + kl^2)\theta_1 - kl^2\theta_2 = 0\\[8pt]
+        ml^2\ddot{\theta}_2 + (mgl + kl^2)\theta_2 - kl^2\theta_1 = 0
+    \end{cases}
+\end{equation}
+Dividing by $ml^2$ we get:
+\begin{equation} \label{e:ode_system_double_pendulum}
+    \begin{cases}
+        \ddot{\theta}_1 + \brackets{\dfrac{g}{l} + \dfrac{k}{m}}\theta_1 - \dfrac{k}{m}\theta_2 = 0\\[8pt]
+        \ddot{\theta}_2 + \brackets{\dfrac{g}{l} + \dfrac{k}{m}}\theta_2 - \dfrac{k}{m}\theta_1 = 0
+    \end{cases}
+\end{equation}
+And so we define a new matrix for the potential:
+\begin{equation}
+    \hat{\Velegant}' = \dfrac{\hat{\Velegant}}{ml^2}\begin{pmatrix}
+        \dfrac{g}{l} + \dfrac{k}{m} & - \dfrac{k}{m}\\[10pt]
+        - \dfrac{k}{m} & \dfrac{g}{l} + \dfrac{k}{m}
+    \end{pmatrix}
+\end{equation}
+and for the kinetic energy:
+\begin{equation}
+    \hat{\Telegant}' = \dfrac{\hat{\Telegant}}{ml^2}\begin{pmatrix}
+        1 & 0\\[8pt]
+        0 & 1
+    \end{pmatrix}
+\end{equation}
+To find the eigenvalues we need to solve:
+\begin{equation}
+    \det(\hat{\Velegant}'-\lambda\mathbb{I}) = 0
+\end{equation}
+From which we get:
+\begin{equation}
+    \begin{split}
+        \begin{vmatrix}
+            \dfrac{g}{l} + \dfrac{k}{m} - \lambda & - \dfrac{k}{m}\\[10pt]
+            - \dfrac{k}{m} & \dfrac{g}{l} + \dfrac{k}{m} - \lambda
+        \end{vmatrix} &= 0\\[8pt]
+        \brackets{\dfrac{g}{l} + \dfrac{k}{m} - \lambda}^2 -\brackets{\dfrac{k}{m}}^2 & = 0\\[8pt]
+        \brackets{\dfrac{g}{l} + \cancel{\dfrac{k}{m}} - \lambda-\cancel{\dfrac{k}{m}}}\brackets{\dfrac{g}{l} + \dfrac{k}{m} - \lambda+\dfrac{k}{m}} &=0\\[8pt]
+        \brackets{\dfrac{g}{l} - \lambda}\brackets{\dfrac{g}{l} + 2\dfrac{k}{m} - \lambda} &=0
+    \end{split}
+\end{equation}
+So we get the values for $\lambda_1$ and $\lambda_2$:
+\begin{equation}
+    \begin{split}
+        \lambda_1 &= \dfrac{g}{l}\\
+        \lambda_2 &= \dfrac{g}{l} + 2\dfrac{k}{m}
+    \end{split}
+\end{equation}
+We want solutions like $\theta_i = a_i\efunction^{-i\omega t}$. Substituting this into \eqref{e:ode_system_double_pendulum} we get:
+\begin{equation}
+    \begin{cases}
+        -\omega^2 a_1 \efunction^{-i\omega t} + \brackets{\dfrac{g}{l} + \dfrac{k}{m}} a_1 \efunction^{-i\omega t} - \dfrac{k}{m} a_2 \efunction^{-i\omega t} = 0\\[8pt]
+        -\omega^2 a_2 \efunction^{-i\omega t} + \brackets{\dfrac{g}{l} + \dfrac{k}{m}} a_2 \efunction^{-i\omega t} - \dfrac{k}{m} a_1 \efunction^{-i\omega t} = 0
+    \end{cases}
+\end{equation}
+Dividing by $\efunction^{-i\omega t}$ and remembering that $\omega^2 = \lambda$ we get:
+\begin{equation}
+    \begin{cases}
+        \brackets{\dfrac{g}{l} + \dfrac{k}{m} - \lambda} a_1 - \dfrac{k}{m} a_2 = 0\\[8pt]
+        -\dfrac{k}{m} a_1 + \brackets{\dfrac{g}{l} + \dfrac{k}{m} - \lambda} a_2 = 0
+    \end{cases}
+\end{equation}
+Substituting $\lambda_1$ gives the eigenvector:
+\begin{equation}
+    \begin{cases}
+        \brackets{\dfrac{g}{l} + \dfrac{k}{m} - \dfrac{g}{l}} a_1 - \dfrac{k}{m} a_2 = 0\\[8pt]
+        -\dfrac{k}{m} a_1 + \brackets{\dfrac{g}{l} + \dfrac{k}{m} - \dfrac{g}{l}} a_2 = 0
+    \end{cases}
+\end{equation}
+Simplifying, we get:
+\begin{equation}
+    \begin{cases}
+        \dfrac{k}{m} a_1 - \dfrac{k}{m} a_2 = 0\\[8pt]
+        -\dfrac{k}{m} a_1 + \dfrac{k}{m} a_2 = 0
+    \end{cases}
+\end{equation}
+This implies:
+\begin{equation}
+    a_1 = a_2
+\end{equation}
+So the eigenvector corresponding to $\lambda_1$ is:
+\begin{equation}
+    \vec{a}^{\;(1)} = \begin{pmatrix}
+        1\\
+        1
+    \end{pmatrix}
+\end{equation}
+Substituting $\lambda_2$ gives the eigenvector:
+\begin{equation}
+    \begin{cases}
+        \brackets{\dfrac{g}{l} + \dfrac{k}{m} - \dfrac{g}{l} - 2\dfrac{k}{m}} a_1 - \dfrac{k}{m} a_2 = 0\\[8pt]
+        -\dfrac{k}{m} a_1 + \brackets{\dfrac{g}{l} + \dfrac{k}{m} - \dfrac{g}{l} - 2\dfrac{k}{m}} a_2 = 0
+    \end{cases}
+\end{equation}
+Simplifying, we get:
+\begin{equation}
+    \begin{cases}
+        -\dfrac{k}{m} a_1 - \dfrac{k}{m} a_2 = 0\\[8pt]
+        -\dfrac{k}{m} a_1 - \dfrac{k}{m} a_2 = 0
+    \end{cases}
+\end{equation}
+This implies:
+\begin{equation}
+    a_1 = -a_2
+\end{equation}
+So the eigenvector corresponding to $\lambda_2$ is:
+\begin{equation}
+    \vec{a}^{\;(2)} = \begin{pmatrix}
+        1\\[8pt]
+        -1
+    \end{pmatrix}
+\end{equation}
+Any other vector which is a multiple of those vectors is an eigenvector. We want the normalized eigenvectors in order to construct an orthonormal basis. In this case the generalized normalization reduces to the regular one, and we have:
+\begin{equation}
+    \vec{a}^{\;(1)} = \dfrac{1}{\sqrt{2}}\begin{pmatrix}
+        1\\[8pt]
+        1
+    \end{pmatrix}
+\end{equation}
+\begin{equation}
+    \vec{a}^{\;(2)} = \dfrac{1}{\sqrt{2}}\begin{pmatrix}
+        1\\[8pt]
+        -1
+    \end{pmatrix}
+\end{equation}
+The solution can be written has:
+\begin{equation}
+    \vec{\theta} = u_1\vec{a}^{\;(1)}+u_2\vec{a}^{\;(2)}
+\end{equation}
+The orthonormality of the eigenvectors leads to:
+\begin{equation}
+    \begin{split}
+        \vec{\theta} \cdot \vec{a}^{\;(1)} = u_1\\[8pt]
+        \vec{\theta} \cdot \vec{a}^{\;(2)} = u_2
+    \end{split}
+\end{equation}
+We call $u_1$ and $u_2$ \textbf{normal modes} of the system.\\
+If $u_1 =0$
+\begin{equation}
+    \vec{\theta} \cdot \vec{a}^{\;(1)} = (\theta_1\;\theta_2)\dfrac{1}{\sqrt{2}}\begin{pmatrix}
+        1\\[8pt]
+        1
+    \end{pmatrix} = \dfrac{\theta_1 + \theta_2}{\sqrt{2}} = 0
+\end{equation}
+Which implies:
+\begin{equation}
+    \theta_1 = -\theta_2
+\end{equation}
+Instead if we put $u_2=0$ we get:
+\begin{equation}
+    \vec{\theta} \cdot \vec{a}^{\;(2)} = (\theta_1\;\theta_2)\dfrac{1}{\sqrt{2}}\begin{pmatrix}
+        1\\[8pt]
+        -1
+    \end{pmatrix} = \dfrac{\theta_1 - \theta_2}{\sqrt{2}} = 0
+\end{equation}
+Which implies:
+\begin{equation}
+    \theta_1 = \theta_2
+\end{equation}
+This means that the first normal mode corresponds to a motion where the spring is never contracted, and the pendulums move identically. The second normal mode corresponds to a motion of the pendulums in counterphase. Any other combination of the two modes is possible, and we will have moments where the first mode is dominant and viceversa.
+\section{The two body problem}
+Now we will discuss a fundamental problem in analytical mechanics, which is the \textbf{two body problem}. The setup is the following:
+\begin{itemize}
+    \item Two objects with mass $m_1$ and $m_2$ interact through an internal potential
+    \item The potential $V(r)$ creates a central force, is conservative and it is such that both strong and weak action law hold
+    \item There are no external forces
+    \item There is no constraint
+\end{itemize}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\linewidth]{res/svg/two_body_problem_start.drawio}
+  \caption{Two body problem}
+\end{figure}
+In principle we start from $3n= 6$ degrees of freedom, which means that $\vec{r}_1$ and $\vec{r}_2$ can be used as $q_{\alpha}$, but, in order to use Kőnig's theorem we can define the coordinate of the centre of mass:
+\begin{equation}
+  \vec{R} = \dfrac{m_1\vec{r}_1 + m_2\vec{r}_2}{m_1 + m_2}
+\end{equation}
+Since the potential $V(r)$ only depends on the distance between the objects we can define the vector that goes from $m_1$ to $m_2$ as:
+\begin{equation}
+  \vec{r} = \vec{r}_2 - \vec{r}_1
+\end{equation}
+From this we can obtain the transformation equations. First we find $\vec{r_1}$:
+\begin{equation}
+  \begin{split}
+    \vec{R} &= \dfrac{m_1\vec{r}_1 + m_2\vec{r}_2}{m_1 + m_2} \\[8pt]
+    \vec{R} - \vec{r}_1 &= \dfrac{m_1\vec{r}_1 + m_2\vec{r}_2}{m_1 + m_2} - \vec{r}_1 \\[8pt]
+    \vec{R} - \vec{r}_1 &= \dfrac{\cancel{m_1\vec{r}_1} - \cancel{m_1\vec{r}_1} + m_2\vec{r}_2 - m_2\vec{r}_1}{m_1 + m_2} \\[8pt]
+    \vec{R} - \vec{r}_1 &= \dfrac{m_2(\overbrace{\vec{r}_2 - \vec{r}_1}^{\vec{r}})}{m_1 + m_2} \\[8pt]
+    \vec{r}_1 &= \vec{R} - \dfrac{m_2}{m_1 + m_2}\vec{r}
+  \end{split}
+\end{equation}
+Same goes for $\vec{r}_2$
+\begin{equation}
+  \begin{split}
+    \vec{R} &= \dfrac{m_1\vec{r}_1 + m_2\vec{r}_2}{m_1 + m_2} \\[8pt]
+    \vec{R} - \vec{r}_2 &= \dfrac{m_1\vec{r}_1 + m_2\vec{r}_2}{m_1 + m_2} - \vec{r}_2 \\[8pt]
+    \vec{R} - \vec{r}_2 &= \dfrac{\cancel{m_2\vec{r}_2} - \cancel{m_2\vec{r}_2} + m_1\vec{r}_1 - m_1\vec{r}_2}{m_1 + m_2} \\[8pt]
+    \vec{R} - \vec{r}_2 &= -\dfrac{m_1(\overbrace{\vec{r}_2 - \vec{r}_1}^{\vec{r}})}{m_1 + m_2} \\[8pt]
+    \vec{r}_2 &= \vec{R} + \dfrac{m_1}{m_1 + m_2}\vec{r}
+  \end{split}
+\end{equation}
+We can further simplify those equations by introducing the \textbf{reduced mass} $\mu$:
+\begin{equation}
+  \mu \defineeq \dfrac{m_1 m_2}{m_2 + m_1}
+\end{equation}
+And so the transformation equations can be written as:
+\begin{equation}
+  \begin{cases}
+    \vec{r}_1 = \vec{R} - \dfrac{\mu}{m_1}\vec{r} \\[8pt]
+    \vec{r}_2 = \vec{R} + \dfrac{\mu}{m_2}\vec{r}
+  \end{cases}
+\end{equation}
+The transformation equations do not depend on time, so the Hamiltonian is the energy and it is conserved. The kinetic energy $T$ is a quadratic function of the velocity since the system does not have any external force and so we can finally apply Kőnig's theorem:
+\begin{equation}
+  T = T_{CM} + T'
+\end{equation}
+$T'$ is the kinetic energy in the reference frame of the centre of mass. If we use the transformation equations we can recover those terms:
+\begin{equation}
+  \begin{split}
+    T &= \dfrac{1}{2}m_1\dvec{r}_1^2 + \dfrac{1}{2}m_1\dvec{r}_1^2 = \\[8pt]
+    &= \dfrac{1}{2}m_1\brackets{\dvec{R} - \dfrac{\mu}{m_1}\dvec{r}}^2 + \dfrac{1}{2}m_2\brackets{\dvec{R} + \dfrac{\mu}{m_2}\dvec{r}}^2 = \\[8pt]
+    &= \dfrac{1}{2}m_1\brackets{\dvec{R}^2 - 2\dfrac{\mu}{m_1}\dvec{r}\dvec{R} + \dfrac{\mu^2}{m_1^2}\dvec{r}^2} + \dfrac{1}{2}m_2\brackets{\dvec{R}^2 + 2\dfrac{\mu}{m_2}\dvec{r}\dvec{R} + \dfrac{\mu^2}{m_2^2}\dvec{r}^2} = \\[8pt]
+    &= \dfrac{1}{2}m_1\dvec{R}^2 - \cancel{\mu\dvec{r}\dvec{R}} + \dfrac{\mu^2}{2m_1}\dvec{r}^2 + \dfrac{1}{2}m_2\dvec{R}^2 + \cancel{\mu \dvec{r}\dvec{R}} + \dfrac{\mu^2}{2m_2}\dvec{r}^2 = \\[8pt]
+    &= \dfrac{1}{2}\brackets{m_1 + m_2}\dvec{R}^2 + \dfrac{1}{2}\brackets{\mu^2\underbrace{\dfrac{m_1 + m_2}{m_1m_2}}_{\mu}}\dvec{r}^2 = \\[8pt]
+    &= \dfrac{1}{2}M\dvec{R}^2 + \dfrac{1}{2}\mu\dvec{r}^2
+  \end{split}
+\end{equation}
+Clearly we have:
+\begin{equation}
+  \begin{split}
+    &T_{CM} = \dfrac{1}{2}M\dvec{R}^2 \\[8pt]
+    &T' = \dfrac{1}{2}\mu\dvec{r}^2
+  \end{split}
+\end{equation}
+We can thus construct the Lagrangian of the system for a general potential $V(r)$:
+\begin{equation}
+  \lagr = T - V = \dfrac{1}{2}M\dvec{R}^2 + \dfrac{1}{2}\mu\dvec{r}^2 - V(r)
+\end{equation}
+The components of the centre of mass $X, Y, Z$ do not appear in the Lagrangian and so we immediately find that their conjugate momenta $p_X, p_Y, p_Z$ are conserved, thus the total momentum of the centre of mass $\vec{P}$ is conserved, but we know that:
+\begin{equation}
+  \vec{P} = M\dvec{R}
+\end{equation}
+And since the mass is constant also $\dvec{R}$ will be a conserved quantity and the centre of mass moves with constant velocity, thus we can ignore this term in the Lagrangian. We define the new Lagrangian as:
+\begin{equation}
+  \lagr ' = \dfrac{1}{2}\mu\dvec{r}^2 - V(r)
+\end{equation}
+Since the potential $V(r)$ only depends on the distance of the masses it is spherically simmetric, which implies that the Lagrangian is spherically simmetric and so $L_x, L_y, L_z$ are conserved quantities, but also $\vec{L}$ is conserved. $\vec{L}$ is the angular momentum about the centre of mass:
+\begin{equation}
+  \vec{L} = \vec{r}\cross \mu\dvec{r}
+\end{equation}
+And so the orbit must take place in the plane perpendicular to $\vec{L}$.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\linewidth]{res/svg/two_body_problem_angular.drawio}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\linewidth]{res/svg/two_body_problem_angular_plane.drawio}
+  \caption{Plane orbit}
+\end{figure}
+Using this fact we can switch to radial coordinates and rewrite the Lagrangian as:
+\begin{equation}
+  \lagr' = \dfrac{1}{2}\mu\brackets{\dot{r}^2 + r^2\dot{\theta}^2} - V(r)
+\end{equation}
+Here $\theta$ does not appear and so it is a cyclic coordinate, which means that $p_{\theta}$ is conserved:
+\begin{equation}
+  p_{\theta} = \pdv{\lagr'}{\dot{\theta}} = \mu r^2 \dot{\theta}
+\end{equation}
+But this is also the $z$ component of the angular momentum:
+\begin{equation}
+  \begin{split}
+    L_z &= \brackets{\vec{r}\cross \mu\dvec{r}} \cdot \hat{u}_z = \\[8pt]
+    &= \sqbr{r\hat{u}_r \cross \mu\brackets{\dot{r}\hat{u}_r + r\dot{\theta}\hat{u}_{\theta}}} \cdot \hat{u}_z = \\[8pt]
+    &= \bbrackets{\mu r\dot{r} \cancel{\hat{u}_r \cross \hat{u}_r} + \mu r^2\dot{\theta}\underbrace{\hat{u}_r \cross \hat{u}_{\theta}}_{\hat{u}_z}} \cdot \hat{u}_z = \\[8pt]
+    &= \mu r^2\dot{\theta} \hat{u}_z \cdot \hat{u}_z = \mu r^2\dot{\theta}
+  \end{split}
+\end{equation}
+And thus we have:
+\begin{equation}
+  \dot{\theta} = \dfrac{L_z}{\mu \dot{r}^2}
+\end{equation}
+Now we can apply \eleref\;to $\lagr'$ for $q_{\alpha} = r$ and see what we get:
+\begin{equation}
+  \begin{split}
+    &\dv{}{t}\pdv{}{\dot{r}}\brackets{\dfrac{1}{2}\mu\brackets{\dot{r}^2 + r^2\dot{\theta}^2} - V(r)} - \pdv{}{r}\brackets{\dfrac{1}{2}\mu\brackets{\dot{r}^2 + r^2\dot{\theta}^2} - V(r)} = \\[8pt]
+    &= \mu\dv{\dot{r}}{t} - \mu r\dot{\theta}^2 + \pdv{V}{r}  = \\[8pt]
+    &= \mu \ddot{r} - \mu r\dot{\theta}^2 + \pdv{V}{r}
+  \end{split}
+\end{equation}
+Now we can substitute what we got for $\dot{\theta}$:
+\begin{equation} \label{ele_twobody}
+  \boxed{\mu \ddot{r} - \dfrac{L_z^2}{\mu \dot{r}^3} + \pdv{V}{r} = 0}
+\end{equation}
+Remember that we want to write this problem as a one dimensional problem, so we need to find a potential of the type:
+\begin{equation}
+  m\dot{q} = -\pdv{V}{q}
+\end{equation}
+We can rewrite the term with $L_z$ as:
+\begin{equation}
+  - \dfrac{L_z^2}{\mu \dot{r}^3} = \pdv{}{r}\brackets{\dfrac{L_z^2}{2\mu \dot{r}^2}}
+\end{equation}
+From \eqref{ele_twobody} we get:
+\begin{equation}
+  \mu \ddot{r} = -\pdv{}{r}\brackets{V - \dfrac{L_z^2}{2\mu \dot{r}^2}}
+\end{equation}
+By multiplying both sides by $\dot{r}$ we get the total time derivative of $\dfrac{1}{2}\mu \dot{r}^2$ on the left side and the total time derivative of the quantity in brackets of the right side since it only depends on $r$. We will that quantity \textbf{effective potential} $V_{\text{eff}}$, since it is not a real potential, but it will serve the purpose of the one dimensional potential that we want to find. We can write:
+\begin{equation}
+    \begin{split}
+        &\mu \ddot{r}\dot{r} = -\pdv{V_{\text{eff}}(r)}{r}\dot{r} \\[8pt]
+        &\dv{}{t}\brackets{\dfrac{1}{2}\mu \dot{r}^2} = -\dv{V_{\text{eff}}}{t} \\[8pt]
+        &\dv{}{t}\brackets{\dfrac{1}{2}\mu \dot{r}^2 + V_{\text{eff}}} = 0
+    \end{split}
+\end{equation}
+From the last equation we know that the quantity in brackets is conserved. We still have not used the conservation of energy. The total energy is:
+\begin{equation}
+    E = \dfrac{1}{2}\mu \dot{r}^2 + V - \dfrac{L_z^2}{2\mu \dot{r}^2}
+\end{equation}
+And so we can find $r$ by integrating. We have:
+\begin{equation}
+    \begin{split}
+        \dfrac{1}{2}\mu \dot{r}^2 = E - V + \dfrac{L_z^2}{2\mu \dot{r}^2} \\[8pt]
+        \dot{r}^2 = \dfrac{2}{\mu}\brackets{E - V + \dfrac{L_z^2}{2\mu \dot{r}^2}} \\[8pt]
+        \dv{r}{t} = \pm\sqrt{\dfrac{2}{\mu}\brackets{E - V + \dfrac{L_z^2}{2\mu \dot{r}^2}}} \\[8pt]
+        \int_{r(0)}^{r(t)}\pm\sqrt{\dfrac{\mu}{2\brackets{E - V + \frac{L_z^2}{2\mu \dot{r}^2}}}}\diff{r} = \int_{0}^{t}\diff{t}
+    \end{split}
+\end{equation}
+If $V(r)$ is known we can solve this integral and get $t$ as a function of $r(t)$:
+\begin{equation}
+  t = f(r(t)) \xrightarrow{\text{invert}} r = r(t)
+\end{equation}
+We also need to find $\theta(t)$ to get the transverse velocity:
+\begin{equation}
+  \begin{split}
+    &\dv{\theta}{t} = \dfrac{L_z^2}{\mu \dot{r}^2} \\[8pt]
+    &\int_{\theta(0)}^{\theta}\diff{\theta} = \int_{0}^{t}\dfrac{L_z^2}{\mu \dot{r}^2}\diff{t} \\[8pt]
+    &\theta(t) = \theta(0) + \int_{0}^{t}\dfrac{L_z^2}{\mu \dot{r}^2}\diff{t}
+  \end{split}
+\end{equation}
+Now we can use the fact that:
+\begin{equation}
+  \diff{t} = \pm\sqrt{\dfrac{\mu}{2\brackets{E - V + \frac{L_z^2}{2\mu \dot{r}^2}}}}\diff{r}
+\end{equation}
+We can limit ourselves to the case of $+$ since $L_z$ has a constant sign and so we can ``absorb'' the $\pm$ with the choice of $L_z$. We arrive to the expression:
+\begin{equation}
+  \theta(t) = \theta(0) + \int_{a}^{b}\dfrac{L_z^2}{\mu \dot{r}^2}\sqrt{\dfrac{\mu}{2\brackets{E - V + \frac{L_z^2}{2\mu \dot{r}^2}}}}\diff{r}
+\end{equation}
+The limits of the integral change since we made a change of variable. They are unkown for the moment since we have no form of $V$. Now we need the intial conditions:
+\begin{itemize}
+  \item $r(0) = r_0$
+  \item $\dot{r}(0) = \dot{r}_0$
+  \item $\theta(0) = \theta_0$
+  \item $\dot{\theta}(0) = \dot{\theta}_0$
+\end{itemize}
+We can fix $\dot{r}_0$ and $\dot{\theta}_0$ with $L_z$ and $E$ since they are conserved:
+\begin{equation}
+  L_z = \mu r_0^2 \dot{\theta}_0^2 \implies \dot{\theta}_0^2 = \dfrac{L_z}{\mu r_0^2}
+\end{equation}
+\begin{equation}
+  E = \dfrac{1}{2}\mu\dot{r}_0^2 + V_{\text{eff}}(r_0) \implies \dot{r}_0 = \pm\sqrt{\dfrac{2}{\mu}\brackets{E - V_{\text{eff}}(r_0)}}
+\end{equation}
+In general we have:
+\begin{equation}
+    \dot{r}(t) = \pm\sqrt{\dfrac{2}{\mu}\brackets{E - V_{\text{eff}}(t)}}
+\end{equation}
+And so $r(t)$ cannot be a monotonic function, but there must exist a point of inversion. This point is found when the time derivative is zero:
+\begin{equation}
+    \pm\sqrt{\dfrac{2}{\mu}\brackets{E - V_{\text{eff}}(t)}} = 0 \implies E = V_{\text{eff}}
+\end{equation}
+This means that when $V_{\text{eff}}$ is equal to the energy we have a point of inversion. Since $V_{\text{eff}} = V + \dfrac{L_z}{2\mu r^2}$ depending on $V$ and $E$ we can have either $1$ or $2$ points of inversion.
+\begin{itemize}
+    \item If only $1$ point is present we just have a one time motion. The object comes from infinity, orbits the other one for a certain period and then goes away.
+    \item If two points of inversion are present the motion of $\mu$ is limited in a certain angular region with a maximum and a minimum
+\end{itemize}
+Notice that the orbits are not necessarily closed.
+\subsection{The Kepler problem}
+As an example we will discuss the Kepler problem, which describes how orbits work in the case of a potential of the type:
+\begin{equation}
+    V(r) = -\dfrac{\alpha}{r}
+\end{equation}
+This could be for example the gravitational potential or the Coulomb potential. Given this form of $V$ we know that:
+\begin{equation}
+    V_{\text{eff}} = \dfrac{L_z^2}{2 \mu r^2} - \dfrac{\alpha}{r}
+\end{equation}
+Qualitatively speaking we know the asymptotic behavior of the effective potential:
+\begin{itemize}
+    \item At $r \rightarrow 0$ the term with $\dfrac{1}{r^2}$ dominates so $V_{\text{eff}} \rightarrow +\infty$ for $r \rightarrow 0$
+    \item For $r \rightarrow +\infty$ the term with $-\dfrac{1}{r}$ dominates so $V_{\text{eff}} \rightarrow -$ for $r \rightarrow 0$ with negative values
+    \item There must be a point where $V_{\text{eff}}$ stops decreasing and starts increasing, this is a point of minimum for the effective potential
+\end{itemize}
+\begin{figure}[H]
+  \centering
+  \includesvg[width=0.8\linewidth]{res/svg/effectivepotential_sum}
+\end{figure}
+Let's find the minimum:
+\begin{equation}
+  \pdv{}{r}\brackets{\dfrac{L_z^2}{2 \mu r^2} - \dfrac{\alpha}{r}} =  \dfrac{\alpha}{r^2} -\dfrac{L_z^2}{\mu r^3}
+\end{equation}
+Setting this to zero gives:
+\begin{equation}
+  \dfrac{\alpha}{\cancel{r^2}} =\dfrac{L_z^2}{\mu r^{\cancel{3}}} \implies r = \dfrac{L_z^2}{\mu \alpha}
+\end{equation}
+If we compare $V_{\text{eff}}$ to a constant value of energy we find that the point of intersection is where $E = V_{\text{eff}}$ and so where $\dot{r} = 0$, which is the inversion point of the orbit. We can distinguish 4 cases.\\
+\textbf{Case 1.} In the first case we have $E > 0$.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\linewidth]{res/svg/hyperbolic_orbit.drawio}
+\end{figure}
+There is only one point of inversion and the orbit is hyperbolic.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.2\linewidth]{res/svg/hyperbolic_orbit_drawing.drawio}
+\end{figure}
+\textbf{Case 2.} In the second case we have $E = 0$.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\linewidth]{res/svg/parabolic_orbit.drawio}
+\end{figure}
+Here we have one point of inversion and we also have that $E=V_{\text{eff}}$ at infinity. This creates a parabolic orbit.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.2\linewidth]{res/svg/parabolic_orbit_drawing.drawio}
+\end{figure}
+\textbf{Case 3.} In the third case $E<0$ but it is greater than the minimum of $V_{\text{eff}}$.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\linewidth]{res/svg/elliptic_orbit.drawio}
+\end{figure}
+We have two distinct inversion points $r_0$ and $r_1$ which create an elliptical orbit.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\linewidth]{res/svg/elliptic_orbit._drawing.drawio}
+\end{figure}
+\textbf{Case 4.} In the fourth case $E<0$ and it is equal to the minimum of $V_{\text{eff}}$.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\linewidth]{res/svg/circular_orbit.drawio}
+\end{figure}
+We have two coincident inversion points which create a circular orbit.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.4\linewidth]{res/svg/circular_orbit_drawing.drawio}
+\end{figure}
