@@ -84,7 +84,7 @@ as the base for our transformations we encounter a problem. If we make a transfo
 \end{equation}
 And so we will call a 4-vector anything that transforms like $\diff{x^{\mu}}$:
 \begin{equation}
-  x'^{\mu} = \pdv{x'^{\mu}}{x^{\nu}} x^{\nu}
+  \diff{x'^{\mu}} = \pdv{x'^{\mu}}{x^{\nu}} \diff{x^{\nu}}
 \end{equation}
 Recall that the elements $\pdv{x'^{\mu}}{x^{\nu}}$ are the elements of the Lorentz matrix and so they can be written as:
 \begin{equation}
@@ -92,7 +92,7 @@ Recall that the elements $\pdv{x'^{\mu}}{x^{\nu}}$ are the elements of the Loren
 \end{equation}
 Leading to the transformations equations of a 4-vector in the desired form:
 \begin{equation}
-  \boxed{x'^{\mu} = \lm^{\mu}_{\nu} x^{\nu}}
+  \boxed{\diff{x'^{\mu}} = \lm^{\mu}_{\nu} \diff{x^{\nu}}}
 \end{equation}
 Finally we can say:
 \begin{equation}
@@ -238,8 +238,8 @@ From the definition of the metric tensor follows:
 So $\tensor{g}{^\mu^\nu} = \tensor{g}{_\mu_\nu}$ and the metric tensor is equal to its inverse. This connects covariant and contravariant tensors with the following relations:
 \begin{equation}
   \begin{split}
-    \tensor{A}{^{\mu}} = \tensor{g}{_\mu_\nu} \tensor{A}{^{\mu}} = \tensor{A}{_{\nu}} \\[8pt]
-    \tensor{A}{_{\mu}} = \tensor{g}{^\mu^\nu} \tensor{A}{_{\mu}} = \tensor{A}{^{\nu}}
+    \tensor{A}{^{\mu}} = \tensor{g}{_\mu_\nu} \tensor{A}{^{\mu}} = (\,\dots) \tensor{A}{_{\nu}} \\[8pt]
+    \tensor{A}{_{\mu}} = \tensor{g}{^\mu^\nu} \tensor{A}{_{\mu}} = (\,\dots) \tensor{A}{^{\nu}}
   \end{split}
 \end{equation}
 This operation is sometimes also called \textbf{index lowering} and the effect on the components is:
@@ -255,8 +255,8 @@ This operation is sometimes also called \textbf{index lowering} and the effect o
 So in general the metric tensor $\tensor{g}{_\mu_\nu}$ allows us to lower an index by switching sign to the spatial component $i = 1,2,3$. For example:
 \begin{equation}
   \begin{split}
-    \partial_{\mu} \phi \quad \text{is a covector} \\[8pt]
-    \partial^{\mu} \phi \quad \text{is a contravariant vecor}
+    &\partial_{\mu} \phi \quad \text{is a covector} \\[8pt]
+    &\partial^{\mu} \phi \quad \text{is a contravariant vecor}
   \end{split}
 \end{equation}
 And they are connected by the following relation:
@@ -276,7 +276,7 @@ We define the magnitude of a 4-vector in the same way as $\diff{x}^{\mu} \righta
 \end{equation}
 Thus, for a generic tensor:
 \begin{equation}
-  \boxed{A^2 = A^{\mu} A_{\nu}}
+  \boxed{A^2 = A^{\mu} A_{\mu}}
 \end{equation}
 In fact, if we expand term by term we get:
 \begin{equation}

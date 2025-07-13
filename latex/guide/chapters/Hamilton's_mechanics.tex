@@ -32,7 +32,7 @@ From this first relation we can work on the term $u\dd{x}$:
 \begin{equation}
     \dd{(ux)} = u\dd{x} + x\dd{u} \Rightarrow u\dd{x} = \dd{(ux)} - x\dd{u}
 \end{equation}
-Then it is easy to see that a function $g = f-ux$ satisfies our conditions and so we have:
+Then it is easy to see that a function $g = f-ux$ satisfies our conditions, and so we have:
 \begin{equation}
     \dd{g} = \dd{(f-ux)} = - x\dd{u} + v\dd{y} \Rightarrow \begin{cases}
         \partial_{u} g = -x\\
@@ -72,7 +72,7 @@ The two equations must be equal so we get \textbf{Hamilton's canonical equations
     \end{aligned}}
 \end{equation}
 This is a system of $2n (+1)$ equations, but they are first order ODEs so we have $2n$ initial conditions as in \lagrangeref. With this formulation we have one important advantage: if $q_j$ is cyclic then $\dot{p} = 0$, and we don't need to solve one of the differential equations.
-This means that we only need $2n-1$ initial conditions. Same goes for any other cyclic coordinate and so we have $2n-p$ initial conditions with $p$ being the number of cyclic coordinates.\\
+This means that we only need $2n-1$ initial conditions. Same goes for any other cyclic coordinate, and so we have $2n-p$ initial conditions with $p$ being the number of cyclic coordinates.\\
 Now let's remember the definition of the energy function:
 \begin{equation}
     h = \bigsum_{\alpha}\underbrace{\pdv{\lagr}{q_{\alpha}}}_{p_{\alpha}}\dot{q}_{\alpha} - \lagr
@@ -101,11 +101,11 @@ We get:
 \end{equation}
 We apply the product rule on the second member:
 \begin{equation}
-    \bigsum_{\alpha} p_{\alpha} \dv{}{t}\delta q_{\alpha} = \bigsum_{\alpha} \bigg[ \dv{}{t}(p_{\alpha} \delta q_{\alpha}) -  \delta q_{\alpha}\dv{}{t}p_{\alpha}\bigg]
+    \bigsum_{\alpha} p_{\alpha} \dv{}{t}\delta q_{\alpha} = \bigsum_{\alpha} \bigg[ \dv{}{t} \brackets{p_{\alpha} \delta q_{\alpha}} -  \delta q_{\alpha}\dv{}{t}p_{\alpha}\bigg]
 \end{equation}
 Integrating the first term we get:
 \begin{equation}
-    \int_{t_1}^{t_2} \bigsum_{\alpha} \dv{}{t}(p_{\alpha} \delta q_{\alpha}) \dd{t} = \bigsum_{\alpha} p_{\alpha} \delta q_{\alpha} \bigg|_{t_1}^{t_2} = 0
+    \int_{t_1}^{t_2} \bigsum_{\alpha} \dv{}{t} \brackets{p_{\alpha} \delta q_{\alpha}} \dd{t} = \bigsum_{\alpha} p_{\alpha} \delta q_{\alpha} \bigg|_{t_1}^{t_2} = 0
 \end{equation}
 This is zero because in \hpquotemath\;we assumed that the virtual displacement at the extreme points is zero. So we can rewrite \eqref{e:deltaS_hamilton} putting in evidence the common terms:
 \begin{equation}

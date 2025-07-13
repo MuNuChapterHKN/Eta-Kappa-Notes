@@ -6,7 +6,7 @@ In this final section regarding analytical mechanics we aim to prove and underst
 \end{equation}
 Which means that we think about action as a functional. Now we want to express the same quantity as a function of time and to do so, we need to slightly change our definition:
 \begin{equation}
-  \action \defineeq \int_{t_0}^{t}\lagr\brackets{\vec{q},\dvec{q},t} \dd{t}
+  \action \defineeq \int_{t_0}^{t}\lagr\brackets{\vec{q},\dvec{q},\tau} \dd{\tau}
 \end{equation}
 We need to remember that the integral of action \underline{must} be calulated along the actual path of the system we are dealing with, but with this definition, in principle, we can obtain $\action$ as a function of time. In particular, we want to prove that $\action$ is a function of both time and all the $q_{\alpha}$.
 \begin{proof}
@@ -14,7 +14,7 @@ We need to remember that the integral of action \underline{must} be calulated al
   \begin{equation}
     \dv{\action}{t} = \lagr
   \end{equation}
-  For the dependence on $q_{\alpha}$ we can imagine to chang the coordinates without changing the actual path and the time:
+  For the dependence on $q_{\alpha}$ we can imagine changing the coordinates without changing the actual path and the time:
   \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{res/svg/path_change_hamjac.drawio}
@@ -22,15 +22,15 @@ We need to remember that the integral of action \underline{must} be calulated al
 \end{figure}
 How does $\action$ change for the two trajectories?
 \begin{equation}
-  \delta \action = \int_{t_0}^{t}\cancel{\bigsum_{\alpha}\brackets{\pdv{\lagr}{q_{\alpha}}-\dv{}{t}\pdv{\lagr}{\dot{q}_{\alpha}}}}\delta q_{\alpha} + \int_{t_0}^{t} \dv{}{t} \brackets{\bigsum_{\alpha} \pdv{\lagr}{\dot{q}_{\alpha}}\delta q_{\alpha}}
+  \delta \action = \int_{t_0}^{t}\cancel{\bigsum_{\alpha}\brackets{\pdv{\lagr}{q_{\alpha}}-\dv{}{\tau}\pdv{\lagr}{\dot{q}_{\alpha}}}}\delta q_{\alpha} \dd{\tau} + \int_{t_0}^{t} \dv{}{\tau} \brackets{\bigsum_{\alpha} \pdv{\lagr}{\dot{q}_{\alpha}}\delta q_{\alpha}} \dd{\tau}
 \end{equation}
 We cancel the first part since when we are integrating over the actual path the \eleref\;are true. We then get:
 \begin{equation}
   \begin{split}
-    \delta \action &= \int_{t_0}^{t}\dv{}{t}\brackets{\bigsum_{\alpha} \pdv{\lagr}{\dot{q}_{\alpha}}\delta q_{\alpha}}\\
-    &= \bigsum_{\alpha} \pdv{\lagr}{\dot{q}_{\alpha}}\delta q_{\alpha}\bigg|_{t_0}^t =\\
-    &= \bigsum_{\alpha} \pdv{\lagr(t)}{\dot{q}_{\alpha}}\delta q_{\alpha}(t) =\\
-    &= \bigsum_{\alpha} p_{\alpha} \dd{q_{\alpha}}
+    \delta \action &= \int_{t_0}^{t}\dv{}{\tau}\brackets{\bigsum_{\alpha} \pdv{\lagr}{\dot{q}_{\alpha}}\delta q_{\alpha}} \dd{\tau}\\[8pt]
+    &= \bigsum_{\alpha} \pdv{\lagr}{\dot{q}_{\alpha}}\delta q_{\alpha}\bigg|_{t_0}^t =\\[8pt]
+    &= \bigsum_{\alpha} \pdv{\lagr(t)}{\dot{q}_{\alpha}}\delta q_{\alpha}(t) =\\[8pt]
+    &= \bigsum_{\alpha} p_{\alpha} \delta {q_{\alpha}}
   \end{split}
 \end{equation}
 When we evaluate at $t_0$ the variation is zero since the extremes are fixed. From the final result we have that:

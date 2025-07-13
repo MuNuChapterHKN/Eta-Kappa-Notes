@@ -151,7 +151,7 @@ We can group the terms to find something like:
 \end{equation}
 But in general this is only true if $A=B=C=0$. Setting $C$ to zero gives:
 \begin{equation}
-  C = c^2 t^2 - c^2\gamma(v)^2 + \gamma(v)^2v^2 = 0 \implies \gamma(v) = \dfrac{1}{\sqrt{1 - \dfrac{v^2}{c^2}}}
+  C = c^2 - c^2\gamma(v)^2 + \gamma(v)^2v^2 = 0 \implies \gamma(v) = \dfrac{1}{\sqrt{1 - \dfrac{v^2}{c^2}}}
 \end{equation}
 This is exactly the Lorentz factor we introduced in the previous chapter.
 \begin{figure}[H]
@@ -252,7 +252,7 @@ If we have three IRFs $\irf{R}$, $\irf{R'}$ and $\irf{R''}$ such that $\irf{R'}$
 \begin{equation}
   v'' \neq v' + v
 \end{equation}
-But, by applying the Lorentz transformations two time we get:
+But, by applying the Lorentz transformations two times we get:
 \begin{equation}
   v'' = \dfrac{v + v'}{1 + \dfrac{vv'}{c^2}}
 \end{equation}
@@ -384,8 +384,8 @@ These new transformations implicitly imply that there could be some ``weird'' st
 Let's start from two events only separated along the $x$ component. Defining the time interval $\Delta t = t_B - t_A$ we want that:
 \begin{equation}
   \begin{split}
-    \Delta t > 0 \quad \text{in} \irf{R} \\[8pt]
-    \Delta t' < 0 \quad \text{in} \irf{R}'
+    &\Delta t > 0 \quad \text{in} \;\irf{R} \\[8pt]
+    &\Delta t' < 0 \quad \text{in} \;\irf{R}'
   \end{split}
 \end{equation}
 We can just apply Lorentz transformations in the second equation and see what we find. Since they are linear we can substite $\Delta x$ instead of $x$ and $\Delta t$ instead of $t$, but in principle we should substite every single term and then group. We have:
@@ -489,7 +489,7 @@ And so $u'_x$ becomes:
 \begin{equation}
   \begin{split}
     u'_x = \dv{x'}{t'} &= \dfrac{\cancel{\gamma} \brackets{\diff{x} - v \diff{t}}}{\cancel{\gamma} \brackets{\diff{t} - \dfrac{v}{c^2} \diff{x}}} =\\[8pt]
-    &= \cancel{\dv{t}{t}}\dfrac{\brackets{\dv{x}{t} - v}}{\brackets{1 - \dfrac{v}{c^2} \dv{x}{t}}} = \dfrac{\brackets{u_x - v}}{1 - \dfrac{v u_x}{c^2} }
+    &= \cancel{\dv{t}{t}}\dfrac{\brackets{\dv{x}{t} - v}}{\brackets{1 - \dfrac{v}{c^2} \dv{x}{t}}} = \dfrac{u_x - v}{1 - \dfrac{v u_x}{c^2} }
   \end{split}
 \end{equation}
 Instead for $u_y$ we have:
@@ -503,10 +503,10 @@ The same derivation leads to $u'_z$:
 \begin{equation}
   u'_z = \dfrac{u_z\sqrt{1-\dfrac{v^2}{c^2}}}{1 - \dfrac{v u_x}{c^2}}
 \end{equation}
-And so the Lorentz transformation of the velocities for a boost along the x axis are:
+And so the Lorentz transformation of the velocities for a boost along the x-axis are:
 \begin{equation}
   \begin{cases}
-    u'_x = \dfrac{\brackets{u_x - v}}{1 - \dfrac{v u_x}{c^2}} \\[18pt]
+    u'_x = \dfrac{u_x - v}{1 - \dfrac{v u_x}{c^2}} \\[18pt]
     u'_y = \dfrac{u_y\sqrt{1-\dfrac{v^2}{c^2}}}{1 - \dfrac{v u_x}{c^2}} \\[18pt]
     u'_z = \dfrac{u_z\sqrt{1-\dfrac{v^2}{c^2}}}{1 - \dfrac{v u_x}{c^2}}
   \end{cases}
@@ -514,14 +514,14 @@ And so the Lorentz transformation of the velocities for a boost along the x axis
 If we want to invert the equations and get $u_x, u_y, u_z$ as functions of the new coordinates we simply substitute $v \rightarrow -v$ since the only thing that changes is the direction of $v$:
 \begin{equation}
   \begin{cases}
-    u_x = \dfrac{\brackets{u'_x + v}}{1 + \dfrac{v u'_x}{c^2}} \\[18pt]
+    u_x = \dfrac{u'_x + v}{1 + \dfrac{v u'_x}{c^2}} \\[18pt]
     u_y = \dfrac{u'_y\sqrt{1-\dfrac{v^2}{c^2}}}{1 + \dfrac{v u'_x}{c^2}} \\[18pt]
     u_z = \dfrac{u'_z\sqrt{1-\dfrac{v^2}{c^2}}}{1 + \dfrac{v u'_x}{c^2}}
   \end{cases}
 \end{equation}
 Now we can see how the magnitude of $u$ changes with a Lorentz transformation. After some calculations it is possible to arrive to:
 \begin{equation}
-  c^2 - u^2 = \dfrac{c^2\brackets{c^2 - u^{'^2}}\brackets{c^2 - v^2}}{\brackets{c^2 + u'_x v}}
+  c^2 - u^2 = \dfrac{c^2\brackets{c^2 - u'^{^2}}\brackets{c^2 - v^2}}{\brackets{c^2 + u'_x v}}
 \end{equation}
 If we write $u_x$ as:
 \begin{equation}
@@ -737,7 +737,7 @@ If we write down both the relativistic and the classical Doppler effect we have:
 \end{equation}
 The two phenomenona cannot be really compared since the EM waves which generate the relativistic version of the Doppler effect do not require a medium to travel, but if we see that $-v \cos \theta_S$ is actually the tangential component of $v$ in the IRF $\irf{R}'$, thus it is similar to $v_R$ and we can write:
 \begin{equation}
-  \omega_R  = \omega_S \gamma\dfrac{c - v_R}{c}
+  \omega_R  = \omega_S \gamma\dfrac{c - v}{c}
 \end{equation}
 This relation is similar to the classical one with two exceptions:
 \begin{enumerate}
@@ -766,7 +766,7 @@ Which leads to:
     &= \omega_S \sqrt{\dfrac{\brackets{1 - \dfrac{v}{c}}}{\brackets{1 + \dfrac{v}{c}}}}
   \end{split}
 \end{equation}
-This means that $\omega_R < \omega_S$ and so we have a higher wavelength. This phenomenon is called \textbf{Red shift}.
+This means that $\omega_R < \omega_S$, and so we have a higher wavelength. This phenomenon is called \textbf{Red shift}.
 \begin{figure}[H]
     \begin{minipage}{0.5\textwidth}
      \centering
