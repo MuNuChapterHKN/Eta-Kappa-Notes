@@ -131,7 +131,7 @@
 \newcommand{\docversion}{}  % Contains document version
 \newcommand{\doclogofrontpage}{hkn_logo.pdf}      % Contains logo big path
 \newcommand{\doclogoupperpage}{hkn_ideogramma.pdf}    % Contains logo big path
-\newcommand{\doclicence}{ccbyncnd.png}  % Contains license logo path
+\newcommand{\doclicense}{ccbyncnd.png}  % Contains license logo path
 \newcommand{\DDorganization}{IEEE - MuNu Chapter}
 
 % Preserve old commands for title and author
@@ -370,7 +370,7 @@
                     \end{minipage}
                     \begin{minipage}{0.39\linewidth}
                         \raggedleft
-                        \includegraphics[width=0.65\textwidth]{\doclicence}
+                        \includegraphics[width=0.65\textwidth]{\doclicense}
                     \end{minipage}
                 \end{minipage}
             \end{center}
@@ -422,11 +422,11 @@
             \begin{center}
                 \begin{minipage}{\linewidth}
                     \begin{minipage}{0.6\textwidth}
-                        {\Large\textbf{Licenza Creative Commons}}
+                        {\Large\textbf{Creative Commons License}}
                     \end{minipage}
                     \begin{minipage}{0.39\linewidth}
                         \raggedleft
-                        \includegraphics[width=0.65\textwidth]{\doclicence}
+                        \includegraphics[width=0.65\textwidth]{\doclicense}
                     \end{minipage}
                 \end{minipage}
             \end{center}
