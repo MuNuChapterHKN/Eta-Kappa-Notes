@@ -315,15 +315,27 @@
 \numberwithin{table}{chapter}
 \numberwithin{equation}{chapter}
 
+% Reproduce parskip package behaviour
+\makeatletter
+\newcommand{\setupparskip}{
+    \@ifpackageloaded{parskip}{}{
+        \setlength{\parskip}{.5\baselineskip plus 2pt}  % space between paragraphs
+        \setlength{\parindent}{0pt}  % remove paragraph indentation
+        \BeforeBeginEnvironment{center}{\vspace{-\parskip}}
+        \AfterEndEnvironment{center}{\vspace{-\parskip}}
+    }
+}
+\makeatother
+
 % --------------------------
 % CREATIVE COMMONS LICENSE COMMAND
 % --------------------------
 % Generates a language-sensitive Creative Commons license description with an image and hyperlink
 \newcommand{\cclicense}{%
     \thispagestyle{empty}
-    % \setlength{\parindent}{0pt}% Remove paragraph indentation
-    % \setlength{\parskip}{0pt}% Suspend parskip package effects for this section
-        \def\tempa{italian}%
+    \def\tempa{italian}
+
+    \begingroup \setupparskip
         \ifx\DocumentLanguage\tempa
             {\Large\textbf{\#WeAreHKN}}
             \vspace{0.2cm}
@@ -436,6 +448,7 @@
 
             More information on the \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{Creative Commons website}.
         \fi
+    \endgroup  % parskip package behaviour
     \clearpage
 }
 
