@@ -5,6 +5,7 @@
         "EditorConfig.EditorConfig",
         "SimonSiefke.svg-preview",
         "hediet.vscode-drawio",
-        "ltex-plus.vscode-ltex-plus"
+        "ltex-plus.vscode-ltex-plus",
+        "yzhang.markdown-all-in-one"
     ]
 }
