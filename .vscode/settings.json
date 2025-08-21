@@ -1,48 +1,48 @@
 {
-    // Text Editor
-    "files.trimFinalNewlines": true,
+  // Text editor
+  "files.trimFinalNewlines": true,
 
-    // Editor Associations
-    "workbench.editorAssociations": {
-        "*.drawio.svg": "hediet.vscode-drawio-text",
-        "*.svg": "imagePreview.previewEditor"
+  // Editor associations
+  "workbench.editorAssociations": {
+      "*.drawio.svg": "hediet.vscode-drawio-text",
+      "*.svg": "imagePreview.previewEditor"
+  },
+
+  // Draw.io
+  "hediet.vscode-drawio.simpleLabels": true,
+
+  // LaTeX
+  "latex-workshop.latex.outDir": "%DIR%/build/",
+  "latex-workshop.latex.rootFile.useSubFile": true,
+  "latex-workshop.latex.tools": [
+    {
+      "name": "setup",
+      "command": "bash",
+      "args": [
+        "${env:SCRIPT_PATH}",
+        "%DOC%",
+        "%OUTDIR"
+      ],
+      "env": {
+        "SCRIPT_PATH": "${workspaceFolder}/latex/lib/setup.bash" // path to the script providing folders to latex compilator, fix bug compiling the file.
+      }
     },
-
-    // Draw.io
-    "hediet.vscode-drawio.simpleLabels": true,
-
-    // LaTeX
-    "latex-workshop.latex.outDir": "%DIR%/build/",
-    "latex-workshop.latex.rootFile.useSubFile": true,
-    "latex-workshop.latex.tools": [
-        {
-            "name": "setup",
-            "command": "bash",
-            "args": [
-                "${env:SCRIPT_PATH}",
-                "%DOC%",
-                "%OUTDIR"
-            ],
-            "env": {
-                "SCRIPT_PATH": "${workspaceFolder}/latex/lib/setup.bash" // path to the script providing folders to latex compilator, fix bug compiling the file.
-            }
-        },
-        {
-            "name": "latexmk",
-            "command": "latexmk",
-            "args": [
-                "-shell-escape",
-                "-synctex=1",
-                "-interaction=nonstopmode",
-                "-file-line-error",
-                "-pdf",
-                "-outdir=%OUTDIR%",
-                "%DOC%"
-            ],
-            "env": {
-                "TEXINPUTS": "%WORKSPACE_FOLDER%/latex/lib//;%WORKSPACE_FOLDER%/resources/imgs//;",
-                "SCRIPT_PATH": "${workspaceFolder}/latex/lib/setup.bash" // path to the script providing folders to latex compilator, fix bug compiling the file.
-            }
-        }
-    ]
+    {
+      "name": "latexmk",
+      "command": "latexmk",
+      "args": [
+        "-shell-escape",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-pdf",
+        "-outdir=%OUTDIR%",
+        "%DOC%"
+      ],
+      "env": {
+        "TEXINPUTS": "%WORKSPACE_FOLDER%/latex/lib//;%WORKSPACE_FOLDER%/resources/imgs//;",
+        "SCRIPT_PATH": "${workspaceFolder}/latex/lib/setup.bash" // path to the script providing folders to latex compilator, fix bug compiling the file.
+      }
+    }
+  ]
 }
