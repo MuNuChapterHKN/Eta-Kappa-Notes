@@ -1,10 +1,18 @@
 {
-    "hediet.vscode-drawio.simpleLabels": true,
-    "latex-workshop.latex.outDir": "%WORKSPACE_FOLDER%/build/latex/%DOCFILE%",
-    "[latex]": {
-        "editor.wordWrap": "on",
+    // Text Editor
+    "files.trimFinalNewlines": true,
+
+    // Editor Associations
+    "workbench.editorAssociations": {
+        "*.drawio.svg": "hediet.vscode-drawio-text",
+        "*.svg": "imagePreview.previewEditor"
     },
-    "latex-workshop.latex.autoBuild.run": "onSave",
+
+    // Draw.io
+    "hediet.vscode-drawio.simpleLabels": true,
+
+    // LaTeX
+    "latex-workshop.latex.outDir": "%DIR%/build/",
     "latex-workshop.latex.rootFile.useSubFile": true,
     "latex-workshop.latex.tools": [
         {
