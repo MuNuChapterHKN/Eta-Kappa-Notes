@@ -51,7 +51,7 @@ We are always looking for new contributors! If you want to add your notes or imp
 
 ### 📄 License
 
-This project is released under the GPL-3.0 license. See the [`LICENSE`](LICENSE) file for more details.
+This project is released under the GPL-3.0 license. See the [`COPYING`](COPYING) file for more details.
 
 ### 📞 Contact
 
@@ -107,7 +107,7 @@ Siamo sempre alla ricerca di nuovi contributori! Se vuoi aggiungere i tuoi appun
 
 ### 📄 Licenza
 
-Questo progetto è rilasciato sotto licenza GPL-3.0. Vedi il file [`LICENSE`](LICENSE) per maggiori dettagli.
+Questo progetto è rilasciato sotto licenza GPL-3.0. Vedi il file [`COPYING`](COPYING) per maggiori dettagli.
 
 ### 📞 Contatti
 
