@@ -24,14 +24,14 @@
 
 The project is organized into several sections:
 
-- **`latex/`**: Notes and guides formatted with LaTeX
-- **`typst/`**: Notes and templates formatted with Typst
-- **`resources/`**: Shared resources (images, diagrams, etc.)
+- [**`latex/`**](latex/): Notes and guides formatted with LaTeX
+- [**`typst/`**](typst/): Notes and templates formatted with Typst
+- [**`resources/`**](resources/): Shared resources (images, diagrams, etc.)
 - **`build/`**: Compiled files and output
 
 ### 🚀 Getting Started
 
-For installation and compilation instructions, please refer to the `CONTRIBUTING.md` file which contains all detailed instructions for prerequisites, installation, and compilation.
+For installation and compilation instructions, please refer to the [`CONTRIBUTING.md`](CONTRIBUTING.md) file which contains all detailed instructions for prerequisites, installation, and compilation.
 
 ### 📖 Available Courses
 
@@ -44,14 +44,14 @@ Currently, the project includes notes for:
 
 We are always looking for new contributors! If you want to add your notes or improve existing ones:
 
-1. Read the `CONTRIBUTING.md` file for complete guidelines on installation, compilation, and contribution process
+1. Read the [`CONTRIBUTING.md`](CONTRIBUTING.md) file for complete guidelines on installation, compilation, and contribution process
 2. Follow the project's standardized structure
 3. Use the provided templates to maintain consistency
 4. Submit a Pull Request
 
 ### 📄 License
 
-This project is released under the GPL-3.0 license. See the `LICENSE` file for more details.
+This project is released under the GPL-3.0 license. See the [`LICENSE`](LICENSE) file for more details.
 
 ### 📞 Contact
 
@@ -80,14 +80,14 @@ For questions, suggestions, or reports:
 
 Il progetto è organizzato in diverse sezioni:
 
-- **`latex/`**: Appunti e guide formattati con LaTeX
-- **`typst/`**: Appunti e template formattati con Typst
-- **`resources/`**: Risorse condivise (immagini, diagrammi, ecc.)
+- [**`latex/`**](latex/): Appunti e guide formattati con LaTeX
+- [**`typst/`**](typst/): Appunti e template formattati con Typst
+- [**`resources/`**](resources/): Risorse condivise (immagini, diagrammi, ecc.)
 - **`build/`**: File compilati e output
 
 ### 🚀 Come Iniziare
 
-Per installare e compilare il progetto, consulta il file `CONTRIBUTING.md` che contiene tutte le istruzioni dettagliate per prerequisiti, installazione e compilazione.
+Per installare e compilare il progetto, consulta il file [`CONTRIBUTING.md`](CONTRIBUTING.md) che contiene tutte le istruzioni dettagliate per prerequisiti, installazione e compilazione.
 
 ### 📖 Corsi Disponibili
 
@@ -100,14 +100,14 @@ Attualmente il progetto include appunti per:
 
 Siamo sempre alla ricerca di nuovi contributori! Se vuoi aggiungere i tuoi appunti o migliorare quelli esistenti:
 
-1. Leggi il file `CONTRIBUTING.md` per le linee guida complete su installazione, compilazione e processo di contribuzione
+1. Leggi il file [`CONTRIBUTING.md`](CONTRIBUTING.md) per le linee guida complete su installazione, compilazione e processo di contribuzione
 2. Segui la struttura standardizzata del progetto
 3. Utilizza i template forniti per mantenere la coerenza
 4. Invia una Pull Request
 
 ### 📄 Licenza
 
-Questo progetto è rilasciato sotto licenza GPL-3.0. Vedi il file `LICENSE` per maggiori dettagli.
+Questo progetto è rilasciato sotto licenza GPL-3.0. Vedi il file [`LICENSE`](LICENSE) per maggiori dettagli.
 
 ### 📞 Contatti
 
