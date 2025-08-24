@@ -7,4 +7,5 @@ from pathlib import Path
 
 METADATA_FILENAME = "metadata.yaml"
 NOTES_DIR = Path("notes")
+INDEX_PATH = Path("metadata") / "index.json"
 SCHEMA_FILE = Path("metadata") / "metadata_schema.json"
