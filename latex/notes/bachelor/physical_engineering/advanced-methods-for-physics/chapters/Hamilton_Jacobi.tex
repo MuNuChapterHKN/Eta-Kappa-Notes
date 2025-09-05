@@ -272,8 +272,8 @@ Where $\action = a + ib$ is a complex number. Using Schrödinger equation, for t
 For the part with the Hamiltonian operator we have:
 \begin{equation}
   \begin{split}
-    \pdv{\Psi}{t} &= \brackets{\dfrac{i}{\hbar}}\efunction^{(i/ \hbar) \action} \pdv{\action}{q}\\[8pt]
-    \pdv[2]{\Psi}{t} &= \brackets{\dfrac{i}{\hbar}}^2\efunction^{(i/ \hbar) \action}\brackets{\pdv{\action}{q}}^2 + \brackets{\dfrac{i}{\hbar}}\efunction^{(i/ \hbar) \action} \pdv[2]{\action}{q}=\\
+    \pdv{\Psi}{q} &= \brackets{\dfrac{i}{\hbar}}\efunction^{(i/ \hbar) \action} \pdv{\action}{q}\\[8pt]
+    \pdv[2]{\Psi}{q} &= \brackets{\dfrac{i}{\hbar}}^2\efunction^{(i/ \hbar) \action}\brackets{\pdv{\action}{q}}^2 + \brackets{\dfrac{i}{\hbar}}\efunction^{(i/ \hbar) \action} \pdv[2]{\action}{q}=\\
     &= \brackets{\dfrac{i}{\hbar}}^2\brackets{\pdv{\action}{q}}^2 \Psi + \brackets{\dfrac{i}{\hbar}}\pdv[2]{\action}{q} \Psi
   \end{split}
 \end{equation}
@@ -384,8 +384,8 @@ Finally, by substituting in the expressions for $q_{\alpha}$ and $p_{\alpha}$ we
 Now we aim to show that if $\hamfun$ is a constant of the motion the function $\hamch$ generates a transformation in which every new coordinate $Q_{\alpha}$ is cyclic and so:
 \begin{equation}
   \begin{split}
-    \dot{P}_{\alpha} = -\pdv{\tilde{\hamfun}}{Q_{\alpha}} = 0\\[8pt]
-    \tilde{\hamfun} - \hamfun = \pdv{\hamch}{t} = 0 \implies \hamfun = \tilde{\hamfun} \quad \quad (\hamfun \text{ is unchanged})
+    &\dot{P}_{\alpha} = -\pdv{\tilde{\hamfun}}{Q_{\alpha}} = 0\\[8pt]
+    &\tilde{\hamfun} - \hamfun = \pdv{\hamch}{t} = 0 \implies \hamfun = \tilde{\hamfun} \quad \quad (\hamfun \text{ is unchanged})
   \end{split}
 \end{equation}
 Let's suppose that a generic type two function leads to this transformation:
@@ -495,7 +495,7 @@ And so we have that:
 And for the partial derivative with respect to $P$ we can use the fact that $P=E$:
 \begin{equation}
   \begin{split}
-    \pdv{\action}{P} &= \pdv{\hamch}{E} = -t \pm \int \pdv{}{E} \sqrt{2m\brackets{E - \dfrac{1}{2}m\omega^2q^2}} \dd{q}\\[8pt]
+    \pdv{\action}{P} &= -t + \pdv{\hamch}{E} = -t \pm \int \pdv{}{E} \sqrt{2m\brackets{E - \dfrac{1}{2}m\omega^2q^2}} \dd{q}\\[8pt]
       &= -t \pm \int \dfrac{m}{\sqrt{2m\brackets{E - \dfrac{1}{2}m\omega^2q^2}}} \dd{q}
   \end{split}
 \end{equation}

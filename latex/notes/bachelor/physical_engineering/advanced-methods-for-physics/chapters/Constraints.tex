@@ -1,7 +1,7 @@
 \chapter{Constraints}
 \section{Definitions}
 Any physical system has constraints which limit the motion of parts of the system. They act through forces (forces of constraint). Those forces are unknown and must be obtained through Newton's laws from the effects on other forces.\\
-\textbf{Ex.} Normal forces:
+\subsection{\textbf{Ex.} Normal forces:}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\linewidth]{res/svg/normalforce.drawio}
@@ -25,24 +25,24 @@ T_1=T_2=m_1a \\[8pt]
 m_2g -T =m_2a \\[8pt]
 \end{cases} \Rightarrow a = \dfrac{m_2}{m_1+m_2}g
 \end{equation}
-\begin{definition}{Holomonic constraint}
-  A constraint is said to be holomonic if it can be expressed as a function:
+\begin{definition}{Holonomic constraint}
+  A constraint is said to be holonomic if it can be expressed as a function:
   \begin{equation}
     f(\vec{r}_1,\vec{r}_2, \,\dots\, ,\vec{r}_n,t) = 0
   \end{equation}
 \end{definition}
-For the inextensible rope the constraint can be expressed as $\dd{x}=\dd{y}$, but if we choose an appropriate frame of reference the condition can also simply be $x=y$, so the rope is a holomonic constraint such that:
+For the inextensible rope the constraint can be expressed as $\dd{x}=\dd{y}$, but if we choose an appropriate frame of reference the condition can also simply be $x=y$, so the rope is a holonomic constraint such that:
 \begin{equation}
     f(x,y)=0 \Rightarrow x-y=0
 \end{equation}
-If a constraint can be expressed as a function of the velocities it is said to be \textbf{semi-holomonic} and has a form such as:
+If a constraint can be expressed as a function of the velocities it is said to be \textbf{semi-holonomic} and has a form such as:
 \begin{equation}
     f(\dvec{r}_1,\dvec{r}_2, \,\dots\, ,\dvec{r}_n,t) = 0
 \end{equation}
-There are two main types of holomonic constraints:
+There are two main types of holonomic constraints:
 \begin{itemize}
-    \item \textbf{scleromonic} if it \underline{does not} depend on time explicitly \[f(\vec{r}_1,\vec{r}_2, \,\dots\, ,\vec{r}_n) = 0\]
-    \item \textbf{rheomonic} if it \underline{does} depend on time explicitly \[f(\vec{r}_1,\vec{r}_2, \,\dots\, ,\vec{r}_n,t) = 0\]
+    \item \textbf{scleronomic} if it \underline{does not} depend on time explicitly \[f(\vec{r}_1,\vec{r}_2, \,\dots\, ,\vec{r}_n) = 0\]
+    \item \textbf{rheonomic} if it \underline{does} depend on time explicitly \[f(\vec{r}_1,\vec{r}_2, \,\dots\, ,\vec{r}_n,t) = 0\]
 \end{itemize}
 A constraint allows us to express any coordinate as a function of the others, so, if we have $N$ particle we should have $3N$ coordinates, but if we have $K$ constraints the actual number of independent coordinates is:
 \begin{equation}
@@ -106,7 +106,7 @@ And we get the so called \textbf{D'Alembert's principle}:
 \end{equation}
 Now a problem arises. Since the $\delta \vec{r}_i$ are not independent in these coordinates we need to find a new set of coordinates that makes us able to make all the terms in the sum independent so we can establish that every single term is independently zero.
 Those coordinates are called \textbf{generalized coordinates}.\\
-Let us now consider only holomonic constraints so we have:
+Let us now consider only holonomic constraints so we have:
 \begin{itemize}
     \item $N$ particles $\Rightarrow$ $3N$ coordinates
     \item $K$ constraints

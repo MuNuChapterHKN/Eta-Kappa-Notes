@@ -163,7 +163,7 @@ Now from equation \eqref{gamma_transformation} we have:
 Substituting back we get:
 \begin{equation}
   \begin{split}
-    m(u') = m(u)\dfrac{\gamma(u')}{\gamma(u)} \\[8pt]
+    m(u_y') = m(u_y)\dfrac{\gamma(u')}{\gamma(u)} \\[8pt]
     \boxed{\dfrac{m(u'_y)}{\gamma(u')} = \dfrac{m(u_y)}{\gamma(u)}}
   \end{split}
 \end{equation}
@@ -219,14 +219,14 @@ After this brief discussion about energy we can define in an alternative way the
 Notice that this definition does not contain mass anymore in the first term, this will be useful in just a moment.\\
 Let us calculate again $p_{\mu}p^{\mu}$:
 \begin{equation}
-  p_{\mu}p^{\mu} = \dfrac{E^2}{c^2} - \vec{p}^2 = m_0c^2
+  p_{\mu}p^{\mu} = \dfrac{E^2}{c^2} - \vec{p}^2 = m_0^2c^2
 \end{equation}
 And so we get an alternative definiton of energy:
 \begin{equation}
   \begin{split}
-    &\dfrac{E^2}{c^2} - \vec{p}^2 = m_0c^2 \\[8pt]
-    &E^2 = \vec{p}^2c^2 + m_0c^4 \\[8pt]
-    &E = \sqrt{\vec{p}^2c^2 + m_0c^4}
+    &\dfrac{E^2}{c^2} - \vec{p}^2 = m_0^2c^2 \\[8pt]
+    &E^2 = \vec{p}^2c^2 + m_0^2c^4 \\[8pt]
+    &E = \sqrt{\vec{p}^2c^2 + m_0^2c^4}
   \end{split}
 \end{equation}
 This is a very important formula and is the base to solve many problems in Special Relativity.\\
@@ -242,7 +242,7 @@ Which implies that:
   \end{split}
 \end{equation}
 \subsection{Photons}
-Since photons travel at speed $c$ they must be massless ($m_0 =0$). Actually it does not even make sense to define a mass for photons since, by definition, there is no IRF where light is at rest. We also know that the energy of a photon is $E = h\nu$, from the equation of energy we just got we have:
+Since photons travel at speed $c$ they must be massless ($m_0 = 0$). Actually it does not even make sense to define a mass for photons since, by definition, there is no IRF where light is at rest. We also know that the energy of a photon is $E = h\nu$, from the equation of energy we just got we have:
 \begin{equation}
   E = \sqrt{\vec{p}^2c^2 + 0} = \norm{\vec{p}}c
 \end{equation}
@@ -320,7 +320,7 @@ The parenthesis gives:
 \end{equation}
 The term $\vec{F}\cdot\vec{u}$ has the dimension of power and substituting in the general formula for the 4-force gives:
 \begin{equation}
-  F^{\mu} = \brackets{\dfrac{\vec{F}\cdot\vec{u}}{c}, \vec{F}}
+  F^{\mu} = \gamma (u) \brackets{\dfrac{\vec{F}\cdot\vec{u}}{c}, \vec{F}}
 \end{equation}
 Now we need to find the relation between the classical vectors $\vec{F}$ and $\vec{a}$. We know that:
 \begin{equation}
@@ -347,9 +347,9 @@ Recalling the vector transformation of the position $\vec{r}$ we can get to the 
 If $\vec{u} \parallel \vec{v} \rightarrow (u, 0, 0) \parallel (v, 0, 0)$ we have:
 \begin{equation}
   \begin{split}
-    F'_x = F_x \\[8pt]
-    F'_y = \dfrac{F_y}{\gamma(v)\brackets{1-\dfrac{uv}{c^2}}}\\[8pt]
-    F'_z = \dfrac{F_z}{\gamma(v)\brackets{1-\dfrac{uv}{c^2}}}
+    F'_x &= F_x \\[8pt]
+    F'_y &= \dfrac{F_y}{\gamma(v)\brackets{1-\dfrac{uv}{c^2}}}\\[8pt]
+    F'_z &= \dfrac{F_z}{\gamma(v)\brackets{1-\dfrac{uv}{c^2}}}
   \end{split}
 \end{equation}
 \section{Examples (WIP)}

@@ -166,7 +166,7 @@ Which leads to:
 \begin{equation}
   \boxed{\partial_{\mu}A^{\mu} = 0}
 \end{equation}
-We can observe that this is very similar to the equation of the conservation of charge $\partial_{mu}J^{\mu} = 0$.\\
+We can observe that this is very similar to the equation of the conservation of charge $\partial_{\mu}J^{\mu} = 0$.\\
 If we are already in the Lorenz gauge and we want to remain inside the Lorenz gauge the condition that $\xi$ must obey was previously derived to be:
 \begin{equation}
   \begin{split}
@@ -298,12 +298,12 @@ So the indeces $\alpha,\beta=2,3$ give no contribution. Also the $\alpha \neq \b
   \begin{split}
     F'_{10} &= \tensor{\brackets{\lm^{-1}}}{^{1}_{1}}\tensor{\brackets{\lm^{-1}}}{^{0}_{0}}F_{10} + \tensor{\brackets{\lm^{-1}}}{^{0}_{1}}\tensor{\brackets{\lm^{-1}}}{^{1}_{0}}F_{01} \\[8pt]
     &= \gamma^2\brackets{-\dfrac{E_x}{c}} + \beta^2\gamma^2\brackets{\dfrac{E_x}{c}} = \\[8pt]
-    &= \dfrac{E_x}{c}\gamma^2\brackets{1-\beta^2} = \dfrac{E_x}{c}
+    &= -\dfrac{E_x}{c}\gamma^2\brackets{1-\beta^2} = -\dfrac{E_x}{c}
   \end{split}
 \end{equation}
 So this implies that along the $x$ direction the electric field stays the same:
 \begin{equation}
-  F'_{10} = \dfrac{E'_x}{c} = \dfrac{E_x}{c} \implies E'_x = E_x
+  F'_{10} = -\dfrac{E'_x}{c} = -\dfrac{E_x}{c} \implies E'_x = E_x
 \end{equation}
 Now for $F'_{20} = -\dfrac{E'_y}{c}$ we do the same reasoning, but now the rows of the ivnerse Lorentz matrix are:
 \begin{equation}
@@ -410,8 +410,8 @@ And from this we can obtain $u$ knowing that $a = \dfrac{u^2}{R}$:
     &\sqrt{1-\dfrac{u^2}{c^2}} = \dfrac{m_0u}{qBR} \\[8pt]
     &1-\dfrac{u^2}{c^2} = \dfrac{m_0^2u^2}{q^2B^2R^2} \\[8pt]
     &\dfrac{1}{u^2} = \dfrac{m_0^2}{q^2B^2R^2} + \dfrac{1}{c^2} \\[8pt]
-    &\dfrac{1}{u^2} = \dfrac{m_0^2c^2 + q^2B^2R^2}{q^2B^2R^2} \\[8pt]
-    &\dfrac{1}{u^2} = \dfrac{m_0^2c^2\brackets{1 + \dfrac{q^2B^2R^2}{m_0^2c^2}}}{q^2B^2R^2} \\[8pt]
-    &\boxed{u = \dfrac{\dfrac{qBR}{m_0c}}{\sqrt{1 + \dfrac{q^2B^2R^2}{m_0^2c^2}}}}
+    &\dfrac{1}{u^2} = \dfrac{m_0^2c^2 + q^2B^2R^2}{q^2B^2R^2c^2} \\[8pt]
+    &\dfrac{1}{u^2} = \dfrac{m_0^2\cancel{c^2}\brackets{1 + \dfrac{q^2B^2R^2}{m_0^2c^2}}}{q^2B^2R^2\cancel{c^2}} \\[8pt]
+    &\boxed{u = \dfrac{\dfrac{qBR}{m_0}}{\sqrt{1 + \dfrac{q^2B^2R^2}{m_0^2c^2}}}}
   \end{split}
 \end{equation}
