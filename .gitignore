@@ -4,6 +4,11 @@
 
 *.pdf
 *.log
+vscode
+build
+build/
+**/svg-inkscape/
+**/svg-inkscape/**
 
 # Python
 *.pyc
