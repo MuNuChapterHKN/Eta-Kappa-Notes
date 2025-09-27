@@ -11,7 +11,7 @@
 
   v(1fr)
 
-  figure(image("../../resources/imgs/hkn_logo_blu.png", width: 40%))
+  figure(image("../../resources/imgs/hkn_logo.svg", width: 40%))
 
   smallcaps(text(weight: "bold", size: 2em, title))
 
