@@ -1,0 +1,247 @@
+<svg host="65bd71144e" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1421px" height="421px" viewBox="-0.5 -0.5 1421 421" content="&lt;mxfile&gt;&lt;diagram id=&quot;BMPB_i0FHtddYOgthNs_&quot; name=&quot;Page-1&quot;&gt;7Vvbbts4EP0aA9uHGrpfHm3HaRdoAqNO0d2ngJEYm4gsGhTt2Pv1S1qkblRSq0tX7kJ5iMWRKA2H58wMR9TInm0OnwjYru9wDJORZcSHkX0zsiwz8Nh/LjjmgsBycsGKoFhcUwqW6B8ohIaQ7lAMs9qFFOOEom1dGOE0hRGtyQAh+LV+2TNO6k/dghVUBMsIJKr0O4rpWozCNUr5Z4hWa/lk0xBnNkBeLATZGsT4tSKy5yN7RjCm+dHmMIMJt520S97v9o2zhWIEpvScDr7QYw+SnRicUIwe5WgJ3qUx5B3MkT19ximd4QQT1o7hM9gllEtRkkhpilPWcxqDbF30UvUSqu4hofBQEQk9P0G8gZQc2SUHqarQ9dgw92s5BcV41lXzy45ATPuquHdpGXYgjPOGZS3FUF9wumKSB0g27Ge+x8mOIpyy4z8mUQSzjB3dQ/qKycsHLpx//PbwdXL/4UcGVk3JjYQY/CYJWqVM/IQpxRs9ZnXrVvUd1aqO3WJV29ZgVddUjAFjRjXRFMOHB0T/Yk1j7Pmi+fep6YrWDR+LIRvHSmMBCWJaQSJk7eh904wZ3pFIKCZ8FgVkBcVVjpvLuM7v2prABFC0r7uP/2I4T0HjJIVpCjjO2LxbxvRhqQKtffRNdFG8rUi/gCeYLHCGTtiuYC9pnIiY8bidp0DcpxDgHU1QCmeFNzYaMB9Z9uz0x+QZJfgFVs54QWBObXZmRUCMYDkCgQ4pvkGE3T3XJcWEg1fcTPpoi0vWYMutsTmseGgapzlBszG/C36k+PWksgZiFVFOMst3FWa57oXclRN0IZbZH6t8lVVeX6TyFVJ9mw8c6sChDX5C3E5a6NMI936oBibbH7cQyNcRmNQ06GoDU9gSmHrjUNgSmOgQma46MoWGSq3LRabwN4lMjq3yKuyLVlKZITZdY2wKTTW1u2BscvtnUMZYQSe8lFI+8SS7RVzvU8/zWOaqLHOd3mjmKjSD9ziG0zJ6LWdD9OrCu/XuSQ/pioKDrP+YatQqiFmrVOjgnOp/Dx1TRLdKxEvQMEpAlqGowcR3q281Jl5VgcP1/k9OrsW0PTo5tXg0OLkrdXKhrWYWF3Ny3hUUjc7hHExj1ecxYVePJylYpaVv6qal6LrAiKlSvs3wGtEsLPJFeZNcLdGvMYuFIudNbKc11y8IVT1MrOv3Fsocxd/e3Q2Lty7+NQXZI9NJVwHEbZIvODeVdDXAQS0zf14uBzh0gEMGyV4bFuRrmaMMgioW2t4qBzpWFYEChcXs6+2AhQ5Y2CNCdyB51ImJAgMSEy2v7oIWTIQ6krCzFj4XXrD4lhpAvV+UGYXNdb6aGeWqasmMnG6ZUXjlK005SbWJs/vKfLxOlcpG3jk2gt/CulZv1pV+rbp3i3kP28wHVBwuQPQCOcPEbiS+zp8sWjYi/dDhF8brx9dHCd7Fb06zBsdvGmbD+biF86nmhm3OX0dCIMFUmdI/74bc8GfygW2kCxJOAYEiRbTaQGG0ve/RsGDw1Nrzu4hgtjYMzzvNwoAJjgltWLCthnvw2pHQ4h50vPnz7S7x9DKpSqVGI59XFGjOzy9bAqnMOXvY96UG0mEZ1nWTCtNS1/LLb64Azi7P6OCYGoIHMPQIhsDpEwxq6Zbv89/DmAmLtHqGCeQ5tfit7flftLxJ63e/f4NcXstnFKHTYk/H6m5Q1iy/ZcmX5+UHQfb8Xw==&lt;/diagram&gt;&lt;/mxfile&gt;">
+    <defs/>
+    <g>
+        <rect x="650" y="200" width="270" height="100" rx="15" ry="15" fill="none" stroke="rgb(0, 0, 0)" stroke-dasharray="3 3" pointer-events="all"/>
+        <rect x="0" y="90" width="430" height="330" rx="49.5" ry="49.5" fill="none" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="214.5" y="414.5">
+                Long Term Evolution (Access Network) (E-UTRAN)
+            </text>
+        </g>
+        <path d="M 172.85 175 L 273.63 175" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 278.88 175 L 271.88 178.5 L 273.63 175 L 271.88 171.5 Z" fill="rgb(0, 0, 0)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 140.82 225 L 163.5 141.5 L 186.18 225" fill="none" stroke="#6881b3" stroke-width="2.02" stroke-linejoin="round" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 185.15 219.43 L 147 202.73 L 176.9 191.6 L 153.7 180.47 L 170.72 169.84 L 158.86 160.22" fill="none" stroke="#6881b3" stroke-width="2.02" stroke-linejoin="round" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="136" y="125" width="0" height="0" fill="none" stroke="#6881b3" stroke-width="2.02" pointer-events="all"/>
+        <ellipse cx="163.5" cy="143.52" rx="4.1244844394450695" ry="4.048582995951417" fill="#cccccc" stroke="#6881b3" stroke-width="2.02" pointer-events="all"/>
+        <path d="M 170.51 136.64 L 171.96 134.92 C 176.67 139.64 176.67 147.2 171.96 151.92 L 170.51 150.3 C 174.12 146.44 174.12 140.51 170.51 136.64 Z M 175.67 131.58 L 177.11 130.16 C 184.44 137.61 184.44 149.43 177.11 156.88 L 175.67 155.47 C 182.21 148.8 182.21 138.24 175.67 131.58 Z M 180.82 126.52 L 182.27 125 C 187.81 129.62 191 136.39 191 143.52 C 191 150.66 187.81 157.43 182.27 162.04 L 180.82 160.53 C 186.09 156.4 189.16 150.14 189.16 143.52 C 189.16 136.91 186.09 130.65 180.82 126.52 Z M 156.49 136.64 L 155.04 134.92 C 150.33 139.64 150.33 147.2 155.04 151.92 L 156.49 150.3 C 152.88 146.44 152.88 140.51 156.49 136.64 Z M 151.33 131.58 L 149.89 130.16 C 142.56 137.61 142.56 149.43 149.89 156.88 L 151.33 155.47 C 144.79 148.8 144.79 138.24 151.33 131.58 Z M 146.18 126.52 L 144.73 125 C 139.19 129.62 136 136.39 136 143.52 C 136 150.66 139.19 157.43 144.73 162.04 L 146.18 160.53 C 140.91 156.4 137.84 150.14 137.84 143.52 C 137.84 136.91 140.91 130.65 146.18 126.52 Z" fill="#cccccc" stroke="#6881b3" stroke-width="2.02" stroke-miterlimit="10" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="163" y="242.5">
+                Anenna (ex BTS)
+            </text>
+        </g>
+        <path d="M 87.5 175 L 129.63 175" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 134.88 175 L 127.88 178.5 L 129.63 175 L 127.88 171.5 Z" fill="rgb(0, 0, 0)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 50 146.65 C 50 144.89 50.73 143.19 52.03 141.95 C 53.33 140.7 55.09 140 56.93 140 L 80.64 140 C 84.44 140.04 87.5 143 87.5 146.65 L 87.5 203.35 C 87.5 207 84.44 209.96 80.64 210 L 56.93 210 C 55.09 210 53.33 209.3 52.03 208.05 C 50.73 206.81 50 205.11 50 203.35 Z" fill="#cccccc" stroke="#6881b3" stroke-width="1.4" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 51.46 146.3 L 51.46 203.7 L 86.04 203.78 L 86.04 146.3 Z" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <rect x="64.23" y="205.66" width="8.97" height="2.52" rx="1.26" ry="1.26" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="68.25" y="227.5">
+                UE
+            </text>
+        </g>
+        <path d="M 172.85 300 L 273.63 300" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 278.88 300 L 271.88 303.5 L 273.63 300 L 271.88 296.5 Z" fill="rgb(0, 0, 0)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 140.82 350 L 163.5 266.5 L 186.18 350" fill="none" stroke="#6881b3" stroke-width="2.02" stroke-linejoin="round" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 185.15 344.43 L 147 327.73 L 176.9 316.6 L 153.7 305.47 L 170.72 294.84 L 158.86 285.22" fill="none" stroke="#6881b3" stroke-width="2.02" stroke-linejoin="round" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="136" y="250" width="0" height="0" fill="none" stroke="#6881b3" stroke-width="2.02" pointer-events="all"/>
+        <ellipse cx="163.5" cy="268.52" rx="4.1244844394450695" ry="4.048582995951417" fill="#cccccc" stroke="#6881b3" stroke-width="2.02" pointer-events="all"/>
+        <path d="M 170.51 261.64 L 171.96 259.92 C 176.67 264.64 176.67 272.2 171.96 276.92 L 170.51 275.3 C 174.12 271.44 174.12 265.51 170.51 261.64 Z M 175.67 256.58 L 177.11 255.16 C 184.44 262.61 184.44 274.43 177.11 281.88 L 175.67 280.47 C 182.21 273.8 182.21 263.24 175.67 256.58 Z M 180.82 251.52 L 182.27 250 C 187.81 254.62 191 261.39 191 268.52 C 191 275.66 187.81 282.43 182.27 287.04 L 180.82 285.53 C 186.09 281.4 189.16 275.14 189.16 268.52 C 189.16 261.91 186.09 255.65 180.82 251.52 Z M 156.49 261.64 L 155.04 259.92 C 150.33 264.64 150.33 272.2 155.04 276.92 L 156.49 275.3 C 152.88 271.44 152.88 265.51 156.49 261.64 Z M 151.33 256.58 L 149.89 255.16 C 142.56 262.61 142.56 274.43 149.89 281.88 L 151.33 280.47 C 144.79 273.8 144.79 263.24 151.33 256.58 Z M 146.18 251.52 L 144.73 250 C 139.19 254.62 136 261.39 136 268.52 C 136 275.66 139.19 282.43 144.73 287.04 L 146.18 285.53 C 140.91 281.4 137.84 275.14 137.84 268.52 C 137.84 261.91 140.91 255.65 146.18 251.52 Z" fill="#cccccc" stroke="#6881b3" stroke-width="2.02" stroke-miterlimit="10" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="163" y="367.5">
+                Antenna (ex BTS)
+            </text>
+        </g>
+        <path d="M 87.5 300 L 129.63 300" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 134.88 300 L 127.88 303.5 L 129.63 300 L 127.88 296.5 Z" fill="rgb(0, 0, 0)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 50 271.65 C 50 269.89 50.73 268.19 52.03 266.95 C 53.33 265.7 55.09 265 56.93 265 L 80.64 265 C 84.44 265.04 87.5 268 87.5 271.65 L 87.5 328.35 C 87.5 332 84.44 334.96 80.64 335 L 56.93 335 C 55.09 335 53.33 334.3 52.03 333.05 C 50.73 331.81 50 330.11 50 328.35 Z" fill="#cccccc" stroke="#6881b3" stroke-width="1.4" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 51.46 271.3 L 51.46 328.7 L 86.04 328.78 L 86.04 271.3 Z" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <rect x="64.23" y="330.66" width="8.97" height="2.52" rx="1.26" ry="1.26" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="68.25" y="352.5">
+                UE
+            </text>
+        </g>
+        <path d="M 380 175 L 510.64 227.62" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 515.51 229.58 L 507.71 230.21 L 510.64 227.62 L 510.33 223.72 Z" fill="rgb(0, 0, 0)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="280" y="160" width="100" height="25.86" rx="5.17" ry="5.17" fill="#cccccc" stroke="#6881b3" stroke-width="2" pointer-events="all"/>
+        <rect x="290" y="185.86" width="80" height="4.14" fill="#cccccc" stroke="#6881b3" stroke-width="2" pointer-events="all"/>
+        <path d="M 283 167.24 L 289 167.24 L 289 170.34 L 287 170.34 L 287 171.38 L 285 171.38 L 285 170.34 L 283 170.34 Z" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="368" cy="172.93" rx="8" ry="8.275862068965518" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="355" cy="165.17" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="355" cy="180.69" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="355" cy="172.93" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <path d="M 291.5 167.24 L 297.5 167.24 L 297.5 170.34 L 295.5 170.34 L 295.5 171.38 L 293.5 171.38 L 293.5 170.34 L 291.5 170.34 Z M 300 167.24 L 306 167.24 L 306 170.34 L 304 170.34 L 304 171.38 L 302 171.38 L 302 170.34 L 300 170.34 Z M 308.5 167.24 L 314.5 167.24 L 314.5 170.34 L 312.5 170.34 L 312.5 171.38 L 310.5 171.38 L 310.5 170.34 L 308.5 170.34 Z M 317 167.24 L 323 167.24 L 323 170.34 L 321 170.34 L 321 171.38 L 319 171.38 L 319 170.34 L 317 170.34 Z M 325.5 167.24 L 331.5 167.24 L 331.5 170.34 L 329.5 170.34 L 329.5 171.38 L 327.5 171.38 L 327.5 170.34 L 325.5 170.34 Z M 334 167.24 L 340 167.24 L 340 170.34 L 338 170.34 L 338 171.38 L 336 171.38 L 336 170.34 L 334 170.34 Z M 342.5 167.24 L 348.5 167.24 L 348.5 170.34 L 346.5 170.34 L 346.5 171.38 L 344.5 171.38 L 344.5 170.34 L 342.5 170.34 Z" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="345.5" cy="177.59" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="337" cy="177.59" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="328.5" cy="177.59" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="320" cy="177.59" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="311.5" cy="177.59" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="303" cy="177.59" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="294.5" cy="177.59" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="286" cy="177.59" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <rect x="280" y="160" width="0" height="0" fill="none" stroke="#6881b3" stroke-width="2" pointer-events="all"/>
+        <path d="M 363 172.93 L 372 172.93" fill="#cccccc" stroke="#6881b3" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 370 170.86 L 372 172.93 L 370 175" fill="none" stroke="#6881b3" stroke-miterlimit="10" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="329.5" y="207.5">
+                eNodeB (ex BSC)
+            </text>
+        </g>
+        <path d="M 330 278.63 L 330 196.37" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 330 283.88 L 326.5 276.88 L 330 278.63 L 333.5 276.88 Z" fill="rgb(0, 0, 0)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 330 191.12 L 333.5 198.12 L 330 196.37 L 326.5 198.12 Z" fill="rgb(0, 0, 0)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="11px">
+            <rect fill="rgb(255, 255, 255)" stroke="none" x="324" y="231" width="14" height="14" stroke-width="0"/>
+            <text x="329.5" y="241">
+                x2
+            </text>
+        </g>
+        <path d="M 380 300 L 503.89 263.87" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 508.93 262.4 L 503.19 267.72 L 503.89 263.87 L 501.23 261 Z" fill="rgb(0, 0, 0)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="280" y="285" width="100" height="25.86" rx="5.17" ry="5.17" fill="#cccccc" stroke="#6881b3" stroke-width="2" pointer-events="all"/>
+        <rect x="290" y="310.86" width="80" height="4.14" fill="#cccccc" stroke="#6881b3" stroke-width="2" pointer-events="all"/>
+        <path d="M 283 292.24 L 289 292.24 L 289 295.34 L 287 295.34 L 287 296.38 L 285 296.38 L 285 295.34 L 283 295.34 Z" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="368" cy="297.93" rx="8" ry="8.275862068965518" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="355" cy="290.17" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="355" cy="305.69" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="355" cy="297.93" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <path d="M 291.5 292.24 L 297.5 292.24 L 297.5 295.34 L 295.5 295.34 L 295.5 296.38 L 293.5 296.38 L 293.5 295.34 L 291.5 295.34 Z M 300 292.24 L 306 292.24 L 306 295.34 L 304 295.34 L 304 296.38 L 302 296.38 L 302 295.34 L 300 295.34 Z M 308.5 292.24 L 314.5 292.24 L 314.5 295.34 L 312.5 295.34 L 312.5 296.38 L 310.5 296.38 L 310.5 295.34 L 308.5 295.34 Z M 317 292.24 L 323 292.24 L 323 295.34 L 321 295.34 L 321 296.38 L 319 296.38 L 319 295.34 L 317 295.34 Z M 325.5 292.24 L 331.5 292.24 L 331.5 295.34 L 329.5 295.34 L 329.5 296.38 L 327.5 296.38 L 327.5 295.34 L 325.5 295.34 Z M 334 292.24 L 340 292.24 L 340 295.34 L 338 295.34 L 338 296.38 L 336 296.38 L 336 295.34 L 334 295.34 Z M 342.5 292.24 L 348.5 292.24 L 348.5 295.34 L 346.5 295.34 L 346.5 296.38 L 344.5 296.38 L 344.5 295.34 L 342.5 295.34 Z" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="345.5" cy="302.59" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="337" cy="302.59" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="328.5" cy="302.59" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="320" cy="302.59" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="311.5" cy="302.59" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="303" cy="302.59" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="294.5" cy="302.59" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="286" cy="302.59" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <rect x="280" y="285" width="0" height="0" fill="none" stroke="#6881b3" stroke-width="2" pointer-events="all"/>
+        <path d="M 363 297.93 L 372 297.93" fill="#cccccc" stroke="#6881b3" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 370 295.86 L 372 297.93 L 370 300" fill="none" stroke="#6881b3" stroke-miterlimit="10" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="329.5" y="332.5">
+                eNodeB (ex BSC)
+            </text>
+        </g>
+        <path d="M 610 247.5 L 673.63 246.17" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 678.88 246.06 L 671.96 249.71 L 673.63 246.17 L 671.81 242.71 Z" fill="rgb(0, 0, 0)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 560 230 L 560 116.37" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 560 111.12 L 563.5 118.12 L 560 116.37 L 556.5 118.12 Z" fill="rgb(0, 0, 0)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="510" y="246.47" width="100" height="18.53" fill="#cccccc" stroke="#6881b3" stroke-width="2" pointer-events="all"/>
+        <path d="M 514 243.38 L 535 230 L 585 230 L 606 243.38 Z" fill="#cccccc" stroke="#6881b3" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 514 265 L 514 246.47 L 519 246.47 L 519 248.53 L 527 251.1 L 531 251.1 L 531 246.47 L 533.5 246.47 L 533.5 251.1 L 549 251.1 L 549 246.47 L 551.5 246.47 L 551.5 251.1 L 567.5 251.1 L 567.5 246.47 L 570 246.47 L 570 251.1 L 586 251.1 L 586 246.47 L 588.5 246.47 L 588.5 251.1 L 592.5 251.1 L 600.5 248.53 L 600.5 246.47 L 605.5 246.47 L 605.5 265 L 600.5 265 L 600.5 262.94 L 592.5 260.37 L 588.5 260.37 L 588.5 265 L 586 265 L 586 260.37 L 570 260.37 L 570 265 L 567.5 265 L 567.5 260.37 L 551.5 260.37 L 551.5 265 L 549 265 L 549 260.37 L 533.5 260.37 L 533.5 265 L 531 265 L 531 260.37 L 527 260.37 L 519 262.94 L 519 265 Z" fill="#ffffff" stroke="#6881b3" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="559.5" y="282.5">
+                MME
+            </text>
+        </g>
+        <rect x="525" y="98" width="70" height="12" rx="1.6" ry="1.6" fill="#cccccc" stroke="#6881b3" stroke-width="1.56" pointer-events="all"/>
+        <rect x="525" y="84" width="70" height="12" rx="1.6" ry="1.6" fill="#cccccc" stroke="#6881b3" stroke-width="1.56" pointer-events="all"/>
+        <rect x="525" y="70" width="70" height="12" rx="1.6" ry="1.6" fill="#cccccc" stroke="#6881b3" stroke-width="1.56" pointer-events="all"/>
+        <rect x="525" y="56" width="70" height="12" rx="1.6" ry="1.6" fill="#cccccc" stroke="#6881b3" stroke-width="1.56" pointer-events="all"/>
+        <rect x="525" y="42" width="70" height="12" rx="1.6" ry="1.6" fill="#cccccc" stroke="#6881b3" stroke-width="1.56" pointer-events="all"/>
+        <path d="M 528.11 40.4 L 544.44 30 L 575.56 30 L 591.89 40.4 Z" fill="#cccccc" stroke="#6881b3" stroke-width="1.56" stroke-miterlimit="10" pointer-events="all"/>
+        <ellipse cx="588.78" cy="104" rx="3.111111111111111" ry="3.2" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="588.52" cy="90" rx="3.111111111111111" ry="3.2" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="588.78" cy="76" rx="3.111111111111111" ry="3.2" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="588.78" cy="62" rx="3.111111111111111" ry="3.2" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="588.78" cy="48" rx="3.111111111111111" ry="3.2" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <path d="M 528.89 108.4 L 532.78 99.6 L 536.67 99.6 L 532.78 108.4 Z M 536.67 108.4 L 540.56 99.6 L 544.44 99.6 L 540.56 108.4 Z M 544.44 108.4 L 548.33 99.6 L 552.22 99.6 L 548.33 108.4 Z M 552.22 108.4 L 556.11 99.6 L 560 99.6 L 556.11 108.4 Z M 560 108.4 L 563.89 99.6 L 567.78 99.6 L 563.89 108.4 Z M 567.78 108.4 L 571.67 99.6 L 575.56 99.6 L 571.67 108.4 Z M 528.89 94.4 L 532.78 85.6 L 536.67 85.6 L 532.78 94.4 Z M 536.67 94.4 L 540.56 85.6 L 544.44 85.6 L 540.56 94.4 Z M 544.44 94.4 L 548.33 85.6 L 552.22 85.6 L 548.33 94.4 Z M 552.22 94.4 L 556.11 85.6 L 560 85.6 L 556.11 94.4 Z M 560 94.4 L 563.89 85.6 L 567.78 85.6 L 563.89 94.4 Z M 567.78 94.4 L 571.67 85.6 L 575.56 85.6 L 571.67 94.4 Z M 528.89 80.4 L 532.78 71.6 L 536.67 71.6 L 532.78 80.4 Z M 536.67 80.4 L 540.56 71.6 L 544.44 71.6 L 540.56 80.4 Z M 544.44 80.4 L 547.94 71.6 L 551.83 71.6 L 547.94 80.4 Z M 552.22 80.4 L 556.11 71.6 L 560 71.6 L 556.11 80.4 Z M 560 80.4 L 563.89 71.6 L 567.78 71.6 L 563.89 80.4 Z M 567.78 80.4 L 571.67 71.6 L 575.56 71.6 L 571.67 80.4 Z M 528.89 66.4 L 532.78 57.6 L 536.67 57.6 L 532.78 66.4 Z M 536.67 66.4 L 540.56 57.6 L 544.44 57.6 L 540.56 66.4 Z M 544.44 66.4 L 548.33 57.6 L 552.22 57.6 L 548.33 66.4 Z M 552.22 66.4 L 556.11 57.6 L 560 57.6 L 556.11 66.4 Z M 560 66.4 L 563.89 57.6 L 567.78 57.6 L 563.89 66.4 Z M 567.78 66.4 L 571.67 57.6 L 575.56 57.6 L 571.67 66.4 Z M 528.89 52.4 L 532.78 43.6 L 536.67 43.6 L 532.78 52.4 Z M 536.67 52.4 L 540.56 43.6 L 544.44 43.6 L 540.56 52.4 Z M 544.44 52.4 L 548.33 43.6 L 552.22 43.6 L 548.33 52.4 Z M 552.22 52.4 L 556.11 43.6 L 560 43.6 L 556.11 52.4 Z M 560 52.4 L 563.89 43.6 L 567.78 43.6 L 563.89 52.4 Z M 567.78 52.4 L 571.67 43.6 L 575.56 43.6 L 571.67 52.4 Z" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="559.5" y="127.5">
+                HSS
+            </text>
+        </g>
+        <rect x="637.27" y="96.25" width="65.45" height="11.25" rx="1.5" ry="1.5" fill="#cccccc" stroke="#6881b3" stroke-width="1.45" pointer-events="all"/>
+        <rect x="637.27" y="83.13" width="65.45" height="11.25" rx="1.5" ry="1.5" fill="#cccccc" stroke="#6881b3" stroke-width="1.45" pointer-events="all"/>
+        <rect x="637.27" y="70" width="65.45" height="11.25" rx="1.5" ry="1.5" fill="#cccccc" stroke="#6881b3" stroke-width="1.45" pointer-events="all"/>
+        <rect x="637.27" y="56.88" width="65.45" height="11.25" rx="1.5" ry="1.5" fill="#cccccc" stroke="#6881b3" stroke-width="1.45" pointer-events="all"/>
+        <rect x="637.27" y="43.75" width="65.45" height="11.25" rx="1.5" ry="1.5" fill="#cccccc" stroke="#6881b3" stroke-width="1.45" pointer-events="all"/>
+        <path d="M 640.18 42.25 L 655.45 32.5 L 684.55 32.5 L 699.82 42.25 Z" fill="#cccccc" stroke="#6881b3" stroke-width="1.45" stroke-miterlimit="10" pointer-events="all"/>
+        <ellipse cx="696.91" cy="101.88" rx="2.909090909090909" ry="3" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="696.91" cy="88.75" rx="2.909090909090909" ry="3" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="696.91" cy="75.63" rx="2.909090909090909" ry="3" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="696.91" cy="62.5" rx="2.909090909090909" ry="3" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="696.91" cy="49.38" rx="2.909090909090909" ry="3" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <path d="M 640.91 106 L 644.55 97.75 L 648.18 97.75 L 644.55 106 Z M 648.18 106 L 651.82 97.75 L 655.45 97.75 L 651.82 106 Z M 655.45 106 L 659.09 97.75 L 662.73 97.75 L 659.09 106 Z M 662.73 106 L 666.36 97.75 L 670 97.75 L 666.36 106 Z M 670 106 L 673.64 97.75 L 677.27 97.75 L 673.64 106 Z M 677.27 106 L 680.91 97.75 L 684.55 97.75 L 680.91 106 Z M 640.91 92.88 L 644.55 84.63 L 648.18 84.63 L 644.55 92.88 Z M 648.18 92.88 L 651.82 84.63 L 655.45 84.63 L 651.82 92.88 Z M 655.45 92.88 L 659.09 84.63 L 662.73 84.63 L 659.09 92.88 Z M 662.73 92.88 L 666.36 84.63 L 670 84.63 L 666.36 92.88 Z M 670 92.88 L 673.64 84.63 L 677.27 84.63 L 673.64 92.88 Z M 677.27 92.88 L 680.91 84.63 L 684.55 84.63 L 680.91 92.88 Z M 640.91 79.75 L 644.55 71.5 L 648.18 71.5 L 644.55 79.75 Z M 648.18 79.75 L 651.82 71.5 L 655.45 71.5 L 651.82 79.75 Z M 655.45 79.75 L 658.73 71.5 L 662.36 71.5 L 658.73 79.75 Z M 662.73 79.75 L 666.36 71.5 L 670 71.5 L 666.36 79.75 Z M 670 79.75 L 673.64 71.5 L 677.27 71.5 L 673.64 79.75 Z M 677.27 79.75 L 680.91 71.5 L 684.55 71.5 L 680.91 79.75 Z M 640.91 66.63 L 644.55 58.38 L 648.18 58.38 L 644.55 66.63 Z M 648.18 66.63 L 651.82 58.38 L 655.45 58.38 L 651.82 66.63 Z M 655.45 66.63 L 659.09 58.38 L 662.73 58.38 L 659.09 66.63 Z M 662.73 66.63 L 666.36 58.38 L 670 58.38 L 666.36 66.63 Z M 670 66.63 L 673.64 58.38 L 677.27 58.38 L 673.64 66.63 Z M 677.27 66.63 L 680.91 58.38 L 684.55 58.38 L 680.91 66.63 Z M 640.91 53.5 L 644.55 45.25 L 648.18 45.25 L 644.55 53.5 Z M 648.18 53.5 L 651.82 45.25 L 655.45 45.25 L 651.82 53.5 Z M 655.45 53.5 L 659.09 45.25 L 662.73 45.25 L 659.09 53.5 Z M 662.73 53.5 L 666.36 45.25 L 670 45.25 L 666.36 53.5 Z M 670 53.5 L 673.64 45.25 L 677.27 45.25 L 673.64 53.5 Z M 677.27 53.5 L 680.91 45.25 L 684.55 45.25 L 680.91 53.5 Z" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <rect x="630" y="25" width="80" height="90" rx="3.64" ry="3.64" fill="none" stroke="#6881b3" stroke-width="1.45" stroke-dasharray="5.2892561983471085 5.2892561983471085" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="669.5" y="132.5">
+                PCRF
+            </text>
+        </g>
+        <path d="M 890 245.6 L 953.63 246.35" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 958.88 246.42 L 951.84 249.83 L 953.63 246.35 L 951.92 242.83 Z" fill="rgb(0, 0, 0)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 1123.8 247.5 L 1263.63 247.5" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 1268.88 247.5 L 1261.88 251 L 1263.63 247.5 L 1261.88 244 Z" fill="rgb(0, 0, 0)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 1050 213.9 L 1050 113.87" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <path d="M 1050 108.62 L 1053.5 115.62 L 1050 113.87 L 1046.5 115.62 Z" fill="rgb(0, 0, 0)" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 1116.9 287.5 C 1130.39 286.13 1140.02 275.8 1138.4 264.41 C 1136.78 253.03 1124.53 244.91 1111.04 246.27 C 1110.89 229.27 1096.76 214.63 1077.05 211.07 C 1057.34 207.5 1037.35 215.97 1028.95 231.43 C 1022.73 225.43 1012.85 223.16 1003.88 225.68 C 994.91 228.2 988.62 235.02 987.91 242.97 C 973.34 242.52 961.09 252.12 960.55 264.41 C 960.01 276.71 971.38 287.04 985.95 287.5 Z" fill="none" stroke="#6881b3" stroke-width="3.3" stroke-miterlimit="10" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="1049.5" y="266">
+                Packet Network (APN)
+            </text>
+        </g>
+        <rect x="1004.74" y="39.48" width="27.16" height="52.33" rx="1.81" ry="1.81" fill="#cccccc" stroke="#6881b3" stroke-width="1.74" pointer-events="all"/>
+        <path d="M 1004.74 48.2 L 1031.9 48.2 M 1004.74 65.64 L 1031.9 65.64" fill="none" stroke="#6881b3" stroke-width="1.74" stroke-linejoin="round" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="1022.84" y="43.84" width="72.41" height="39.24" fill="#cccccc" stroke="#6881b3" stroke-width="1.74" pointer-events="all"/>
+        <rect x="1050" y="83.08" width="18.1" height="8.72" fill="#cccccc" stroke="#6881b3" stroke-width="1.74" pointer-events="all"/>
+        <path d="M 1036.42 90.93 L 1081.68 90.93 L 1090.73 100.52 L 1027.37 100.52 Z" fill="#cccccc" stroke="#6881b3" stroke-width="1.74" stroke-linejoin="round" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 1049.09 98.34 L 1065.39 98.34 M 1037.33 95.73 L 1072.63 95.73 M 1039.14 93.11 L 1071.72 93.11 M 1074.44 93.11 L 1080.78 93.11 M 1076.25 95.73 L 1082.59 95.73 M 1078.06 98.34 L 1084.4 98.34" fill="#cccccc" stroke="#6881b3" stroke-width="1.74" stroke-linejoin="round" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="1025.56" y="46.45" width="66.08" height="34.01" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="1009.27" cy="70" rx="1.8103448275862069" ry="1.744186046511628" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <rect x="997.5" y="32.5" width="105" height="75" rx="4.36" ry="4.36" fill="none" stroke="#6881b3" stroke-width="1.74" stroke-dasharray="7.605462412114656 7.605462412114656" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="1049.5" y="125">
+                IMS
+            </text>
+        </g>
+        <rect x="1270" y="212.5" width="30" height="60" rx="2" ry="2" fill="#cccccc" stroke="#6881b3" stroke-width="2" pointer-events="all"/>
+        <path d="M 1270 222.5 L 1300 222.5 M 1270 242.5 L 1300 242.5" fill="none" stroke="#6881b3" stroke-width="2" stroke-linejoin="round" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="1290" y="217.5" width="80" height="45" fill="#cccccc" stroke="#6881b3" stroke-width="2" pointer-events="all"/>
+        <rect x="1320" y="262.5" width="20" height="10" fill="#cccccc" stroke="#6881b3" stroke-width="2" pointer-events="all"/>
+        <path d="M 1305 271.5 L 1355 271.5 L 1365 282.5 L 1295 282.5 Z" fill="#cccccc" stroke="#6881b3" stroke-width="2" stroke-linejoin="round" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 1319 280 L 1337 280 M 1306 277 L 1345 277 M 1308 274 L 1344 274 M 1347 274 L 1354 274 M 1349 277 L 1356 277 M 1351 280 L 1358 280" fill="none" stroke="#6881b3" stroke-width="2" stroke-linejoin="round" stroke-miterlimit="10" pointer-events="all"/>
+        <rect x="1293" y="220.5" width="73" height="39" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="1275" cy="247.5" rx="2" ry="2" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <path d="M 780 245 L 790 245" fill="none" stroke="rgb(0, 0, 0)" stroke-miterlimit="10" pointer-events="stroke"/>
+        <rect x="680" y="230" width="100" height="25.86" rx="5.17" ry="5.17" fill="#cccccc" stroke="#6881b3" stroke-width="2" pointer-events="all"/>
+        <rect x="690" y="255.86" width="80" height="4.14" fill="#cccccc" stroke="#6881b3" stroke-width="2" pointer-events="all"/>
+        <path d="M 683 237.24 L 689 237.24 L 689 240.34 L 687 240.34 L 687 241.38 L 685 241.38 L 685 240.34 L 683 240.34 Z M 691.5 237.24 L 697.5 237.24 L 697.5 240.34 L 695.5 240.34 L 695.5 241.38 L 693.5 241.38 L 693.5 240.34 L 691.5 240.34 Z M 700 237.24 L 706 237.24 L 706 240.34 L 704 240.34 L 704 241.38 L 702 241.38 L 702 240.34 L 700 240.34 Z M 708.5 237.24 L 714.5 237.24 L 714.5 240.34 L 712.5 240.34 L 712.5 241.38 L 710.5 241.38 L 710.5 240.34 L 708.5 240.34 Z M 717 237.24 L 723 237.24 L 723 240.34 L 721 240.34 L 721 241.38 L 719 241.38 L 719 240.34 L 717 240.34 Z M 725.5 237.24 L 731.5 237.24 L 731.5 240.34 L 729.5 240.34 L 729.5 241.38 L 727.5 241.38 L 727.5 240.34 L 725.5 240.34 Z M 734 237.24 L 740 237.24 L 740 240.34 L 738 240.34 L 738 241.38 L 736 241.38 L 736 240.34 L 734 240.34 Z M 742.5 237.24 L 748.5 237.24 L 748.5 240.34 L 746.5 240.34 L 746.5 241.38 L 744.5 241.38 L 744.5 240.34 L 742.5 240.34 Z" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="768" cy="242.93" rx="8" ry="8.275862068965518" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="755" cy="235.17" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="755" cy="250.69" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="755" cy="242.93" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="745.5" cy="247.59" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="737" cy="247.59" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="728.5" cy="247.59" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="720" cy="247.59" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="711.5" cy="247.59" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="703" cy="247.59" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="694.5" cy="247.59" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="686" cy="247.59" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <path d="M 768 237.24 L 768 248.62 M 761.5 242.93 L 765.5 242.93 M 770.5 242.93 L 774.5 242.93 M 766 239.31 L 768 237.24 L 770 239.31 M 766 246.55 L 768 248.62 L 770 246.55 M 763.5 240.86 L 765.5 242.93 L 763.5 245 M 772.5 240.86 L 770.5 242.93 L 772.5 245" fill="none" stroke="#6881b3" stroke-miterlimit="10" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="729.5" y="277.5">
+                PCRF
+            </text>
+        </g>
+        <rect x="790" y="230" width="100" height="25.86" rx="5.17" ry="5.17" fill="#cccccc" stroke="#6881b3" stroke-width="2" pointer-events="all"/>
+        <rect x="800" y="255.86" width="80" height="4.14" fill="#cccccc" stroke="#6881b3" stroke-width="2" pointer-events="all"/>
+        <path d="M 793 237.24 L 799 237.24 L 799 240.34 L 797 240.34 L 797 241.38 L 795 241.38 L 795 240.34 L 793 240.34 Z M 801.5 237.24 L 807.5 237.24 L 807.5 240.34 L 805.5 240.34 L 805.5 241.38 L 803.5 241.38 L 803.5 240.34 L 801.5 240.34 Z M 810 237.24 L 816 237.24 L 816 240.34 L 814 240.34 L 814 241.38 L 812 241.38 L 812 240.34 L 810 240.34 Z M 818.5 237.24 L 824.5 237.24 L 824.5 240.34 L 822.5 240.34 L 822.5 241.38 L 820.5 241.38 L 820.5 240.34 L 818.5 240.34 Z M 827 237.24 L 833 237.24 L 833 240.34 L 831 240.34 L 831 241.38 L 829 241.38 L 829 240.34 L 827 240.34 Z M 835.5 237.24 L 841.5 237.24 L 841.5 240.34 L 839.5 240.34 L 839.5 241.38 L 837.5 241.38 L 837.5 240.34 L 835.5 240.34 Z M 844 237.24 L 850 237.24 L 850 240.34 L 848 240.34 L 848 241.38 L 846 241.38 L 846 240.34 L 844 240.34 Z M 852.5 237.24 L 858.5 237.24 L 858.5 240.34 L 856.5 240.34 L 856.5 241.38 L 854.5 241.38 L 854.5 240.34 L 852.5 240.34 Z" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="878" cy="242.93" rx="8" ry="8.275862068965518" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="865" cy="235.17" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="865" cy="250.69" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="865" cy="242.93" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="855.5" cy="247.59" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="847" cy="247.59" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="838.5" cy="247.59" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="830" cy="247.59" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="821.5" cy="247.59" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="813" cy="247.59" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="804.5" cy="247.59" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <ellipse cx="796" cy="247.59" rx="2" ry="2.0689655172413794" fill="#ffffff" stroke="none" pointer-events="all"/>
+        <path d="M 878 237.24 L 878 248.62 M 871.5 242.93 L 875.5 242.93 M 880.5 242.93 L 884.5 242.93 M 876 239.31 L 878 237.24 L 880 239.31 M 876 246.55 L 878 248.62 L 880 246.55 M 873.5 240.86 L 875.5 242.93 L 873.5 245 M 882.5 240.86 L 880.5 242.93 L 882.5 245" fill="none" stroke="#6881b3" stroke-miterlimit="10" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="839.5" y="277.5">
+                PCRF
+            </text>
+        </g>
+        <rect x="480" y="0" width="940" height="420" rx="63" ry="63" fill="none" stroke="rgb(0, 0, 0)" pointer-events="all"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" text-anchor="middle" font-size="12px">
+            <text x="949.5" y="414.5">
+                Evolved Packet Core (Core Network) (EPC)
+            </text>
+        </g>
+    </g>
+</svg>

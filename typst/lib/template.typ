@@ -1,8 +1,9 @@
 #import "funcs.typ": *
-#import "@preview/equate:0.2.1": equate
-#import "@preview/codly:1.0.0": *
-#import "@preview/codly-languages:0.1.0": *
-#import "@preview/bytefield:0.0.6": *
+#import "deps.typ"
+#import deps.codly: *
+#import deps.codly-languages: *
+#import deps.bytefield: *
+#import deps.equate: equate
 #import "palette.typ": eta_kappa_blue
 
 #let title-page(title, subtitle, authors, release) = {
@@ -10,7 +11,7 @@
 
   v(1fr)
 
-  figure(image("../../resources/imgs/hkn_logo.svg", width: 40%))
+  figure(image("../../resources/imgs/hkn_logo_blu.png", width: 40%))
 
   smallcaps(text(weight: "bold", size: 2em, title))
 
@@ -62,9 +63,12 @@
 
   set heading(numbering: clean-numbering("I", "A)", "1.1"))
 
-  show heading.where(level: 1): set heading(supplement: if lang == "en" [Course Year] else [Anno di Corso])
-  show heading.where(level: 2): set heading(supplement: if lang == "en" [Course] else [Corso])
-  show heading.where(level: 3): set heading(supplement: if lang == "en" [Chapter] else [Capitolo])
+  show heading.where(level: 1): set heading(supplement: if lang
+    == "en" [Course Year] else [Anno di Corso])
+  show heading.where(level: 2): set heading(supplement: if lang
+    == "en" [Course] else [Corso])
+  show heading.where(level: 3): set heading(supplement: if lang
+    == "en" [Chapter] else [Capitolo])
 
   show heading.where(level: 1, outlined: true): it => {
     set page(numbering: none, header: none)
@@ -121,7 +125,7 @@
 
   // CODE
 
-  show: codly-init
+  show: codly-init.with()
   codly(
     languages: codly-languages,
     zebra-fill: none,
@@ -152,7 +156,7 @@
 
   // OUTLINE
 
-  set outline(fill: repeat[ #sym.space ⋅ ], indent: true)
+  // set outline.entry(fill: repeat(gap: .2em)[#sym.dot.c])
   show outline.entry.where(level: if _type == "degree" {
     1
   } else {
@@ -164,11 +168,11 @@
 
   if show-outline {
     if _type == "degree" {
-      show: course-outline()
+      course-outline()
     } else {
       heading(level: 2)[#title #label(code)]
-      show: outline(
-        target: selector.or(..range(3,11).map(l => heading.where(level: l))),
+      outline(
+        target: selector.or(..range(3, 11).map(l => heading.where(level: l))),
         depth: 11,
       )
     }

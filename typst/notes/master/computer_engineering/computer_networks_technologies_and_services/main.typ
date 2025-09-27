@@ -1,16 +1,18 @@
-#import "@preview/bytefield:0.0.6": *
+#import "../../../../lib/deps.typ"
+#import deps.bytefield: *
+#import deps.gentle-clues: *
+#import deps.cetz
+#import deps.cetz-plot
+#import deps.fletcher: diagram, node, edge
 #import "../../../../lib/template.typ": course-template
 #import "../../../../lib/funcs.typ": def, honeycomb
-#import "@preview/gentle-clues:1.0.0": *
-#import "@preview/fletcher:0.5.2" as fletcher: diagram, node, edge
-#import "@preview/cetz:0.3.1"
-
 
 #let bytefield = bytefield.with(stroke: 0.5pt)
 
 #let hl = highlight.with(fill: yellow.lighten(80%))
 #let hl_green = highlight.with(fill: green.lighten(80%))
-#let hl_reed = highlight.with(fill: red.lighten(80%))
+#let hl_red = highlight.with(fill: red.lighten(80%))
+#let hl_blue = highlight.with(fill: blue.lighten(80%))
 
 #show: course-template.with(
   title: [Computer Networks Technologies and Services],
@@ -95,9 +97,7 @@ Any address can be in one of five states:
   ),
   [/ The (sub)network ID: not to be confused with the interface ID],
 
-  bytefield(
-    bits(32)[All ones],
-  ),
+  bytefield(bits(32)[All ones]),
   [/ Limited broadcast (local net): Broadcast packet becomes a L2 packet. It's received by #underline[all] devices on the same network],
 
   bytefield(
@@ -107,7 +107,7 @@ Any address can be in one of five states:
   [/ Directed broadcast for network: (usually restricted). It implies that everyone on another network receives the packet],
 
   bytefield(
-    bitheader("bounds"),
+    bitheader("offsets"),
     bits(8)[127],
     bits(24)[Anything (often ones)],
   ),
@@ -122,7 +122,7 @@ Any address can be in one of five states:
   align: horizon,
   figure(
     bytefield(
-      bitheader("bounds"),
+      bitheader("offsets"),
       bits(1, fill: yellow.lighten(80%))[`0`],
       bits(7)[Network],
       bits(24)[Host],
@@ -133,7 +133,7 @@ Any address can be in one of five states:
 
   figure(
     bytefield(
-      bitheader("bounds"),
+      bitheader("offsets"),
       bits(2, fill: yellow.lighten(80%))[`10`],
       bits(14)[Network],
       bits(16)[Host],
@@ -144,7 +144,7 @@ Any address can be in one of five states:
 
   figure(
     bytefield(
-      bitheader("bounds"),
+      bitheader("offsets"),
       bits(3, fill: yellow.lighten(80%))[`110`],
       bits(21)[Network],
       bits(8)[Host],
@@ -291,7 +291,7 @@ Multicast is a procedure by which one source can send one IP packet to multiple 
   align: horizon,
   figure(
     bytefield(
-      bitheader("bounds"),
+      bitheader("offsets"),
       bits(4, fill: yellow.lighten(80%))[`1110`],
       bits(28)[Network],
     ),
@@ -328,7 +328,7 @@ To map a multicast IPv4 address to a multicast MAC address we map the 23 least s
       columns: 2,
       [#h(150pt)],
       bytefield(
-        bitheader("bounds"),
+        bitheader("offsets"),
         bits(4)[`1110`],
         bits(5)[],
         bits(23, fill: blue.lighten(80%))[],
@@ -337,7 +337,7 @@ To map a multicast IPv4 address to a multicast MAC address we map the 23 least s
 
     #bytefield(
       bpr: 48,
-      bitheader("bounds"),
+      bitheader("offsets"),
       bits(25)[`01-00-5E-0`],
       bits(23, fill: blue.lighten(80%))[],
     )
@@ -877,7 +877,6 @@ The *Code* field specifies the error type.
     inset: 0.5em,
     align: horizon,
     figure(
-
       bytefield(
         bitheader("offsets"),
         bits(8)[Type],
@@ -1368,7 +1367,7 @@ Cells in practice are not regular hexagons and do not have the same size. A lot 
 
 Generally cells are divided into *Microcells* and *Macrocells*, the idea is to have macrocells cover scarcely populated area or the zones that microcells are not able to cover.
 
-=== Channel Access
+=== Channel Access <channel-access>
 
 Close cells are prone to interference with one another. Frequencies in the same cell are shared. Possible techniques to share resources are:
 
@@ -1379,7 +1378,7 @@ Close cells are prone to interference with one another. Frequencies in the same 
 
 With the most used ones being FDMA and TDMA.
 
-==== FDMA
+==== FDMA <fdma>
 
 Frequencies are property of the government which leases their use to the operators. The price is very high, so operators are incentivized to reuse them as much as possible.
 
@@ -1451,12 +1450,172 @@ Within a cell, not all users receive the same power. Some frequencies are used t
 
 It's not always true that each cell only uses one frequency, some cells can have multiple frequencies to enable them to cover more densely populated areas of the city. The frequency of each cell can also be changed during the day, to aid in the management of the network.
 
+=== Basic Procedures
+
+==== Registration
+
+It's not performed very often nowadays because we tend not to turn off our phones. It allows the mobile terminal to connect to the network and identify and authenticate itself. You can imagine having the device talking with the provider and scanning for nearby antennas, after a certain amount of time the antenna with the strongest signal is chosen (a registration packet is sent). Registration can also be done periodically to update the network on the terminal's position.
+
+==== Mobility Management
+
+Remember that #underline[mobility] is _the_ property that characterizes cellular network. Mobility is characterized by a series of procedures.
+
+===== Roaming <roaming>
+
+The common definition is an improper one, roaming in general is the requirement of having the user be _traceable_ in the network, not just the ability to connect to a cellular network abroad. The position of the user is stored in a database. To avoid having to update the position in an excessively granular way, multiple cells can be grouped together in a *Location Area* (LA) which is identified by a *Location Area Identifier* (LAI).
+
+===== Location Updating
+
+As previously mentioned in @roaming, the user location must be periodically updated. The device is the one that is responsible of communicating its location updates to the network. The cell periodically broadcasts on a specific channel messages identifying itself, as long as the device is receiving a strong enough signal from a cell, it will communicate its location as corresponding to the cell's LAI.
+
+===== Paging <paging>
+
+Procedure through which a system notifies a mobile terminal about an incoming call/data delivery. It does so by broadcasting a paging message whiting the LA where the user is.
+
+===== Handover <handover>
+
+Is the procedure that enables the transfer of an #underline[active] connection (for example a call) from one cell to the other. It differs from location updating because in this circumnstance the terminal is not idle.
+
+There are several types of handover, in general they can be classified as:
+
+/ Intra-cell/Inter-cell: the terminal moves within the same cell/from one cell to another. For example the terminal may ask the cell to change frequency if too much interference is detected in an intra-cell handover situation.
+
+/ Soft/Hard: the terminal is connected to multiple cells at the same time/only one cell at a time. Soft handover enables smoother transitions between one cell and another.
+
+/ MT/BS initiated: the first control message to start a handover is sent by the terminal/the base station. Usually it's the terminal that initiates the handover.
+
+/ Backward/Forward: the handover signaling occurs via the origin BS/the destination BS.
+
+=== History of the Standards
+
+// TODO: graph of the evolution of the standards
+
+The first experimental trials started in the '70s with the first commercially available standards (e.g. *TACS*) being available from the mid '80s. This was called the "First generation", *1G*, networks and they were analog. Cellphones were big and bulky and the connection was slow and low quality.
+
+With the second generation, *2G*, cellular connections took off. The standard that was used was *GSM*. The compatibility between different networks was not still there, even in Europe two different bands were used, in the USA a third band was used instead so a different phone was required. GSM is also still used for voice calls.
+
+The third generation, *3G*, was called *UMTS* with the _U_ standing for "Universal", this solved the compatibility issues that were present with GSM. Other standards were *GPRS* and *HSPA*. 3G is not utilized anymore, at least in Italy it has been switched off.
+
+The fourth generation, *4G*, called *LTE* was the first one to mix both voice/text and data in the same network. The speed was at first comparable to that of 3G but gradually improved throughout the years and introduced new applications like streaming, gaming, etc.
+
+The fifth generation, *5G*, is the current standard. It's still in the process of being rolled out, it's expected to be faster than 4G and to enable new applications like IoT, autonomous driving, etc. The name of the standard is "New Radio" (*NR*). A change of paradigm was introduced with 5G, with the network introducing not only consumer oriented improvements but also industrial ones.
+
+==== GSM <gsm>
+
+There are multiple reasons why GSM is still used today, fro starters, huge investments were made in the '90s to achieve extremely high coverage of the territory. The GSM network is also a good option to free up bands that are used for data, voice calls don't require a high bandwidth to be considered "good enough" and, in particular, GSM offers a "full rate" voice connection at 13 kbps and an "half rate" connection at 6.5 kbps. GSM, other than voice, offers SMS services, as well as various others like call forwarding, recall on busy tone etc.
+
+====== Network Architecture
+
+#figure(
+  image("res/svg/gsm.drawio.svg"),
+  caption: [GSM Network Architecture],
+)
+
+======= MS | Mobile Station
+
+They are referred as "User Equipment" (UE) nowadays. They are the devices that communicate with the network.
+
+======= SIM | Subscriber Identity Module
+
+It's a smart card that contains the user's identity and the encryption keys. It's used to authenticate the user to the network.
+
+======= BSS | Base Station Subsystem
+
+A Base Station is made up of two parts: the Base Transceiver Station (*BTS*) and the Base Station Controller (*BSC*). The BTS is the physical antenna, differently from a TV antenna though, it only broadcasts in a specific area and "focuses" the transmission only to the specific user itś communicating with. Every BTS uses 32 frequencies (FDM channels, see @fdma), 16 for uplink and 16 downlink. The BSC is the one that controls the BTSs (hundreds at a time) over a wired link. It's responsible for voice transcoding, paging (see @paging), monitors the signal and manages handover between BTSs controlled by the same BSC (see @handover).
+
+======= NSS | Network and Switching Subsystem
+
+The NSS is the "deeper" part of the network, it is part of the Core Network. It provides services like call routing, service support, mobility support, authentication.
+
+The Mobile Switching Center (*MSC*) is the component that handles mobility support. The MSC queries the Visitor Location Register (*VLR*) that stores the location of the user (In which BSC the user can be found). Usually there are 2/3 MSCs in every operator's network, one, called the "gateway" MSC, responsible for communicating with other operators.
+
+The Home Location Register (*HLR*) is a database where the user information is stored, it's connected to the Authentication Center (*AuC*), the counterpart to the SIM, that manages the challenge & response protocol to authenticate the user "over the air". The encryption is not End to End, it's only between the user and the MSC. The information traverls encrypted but it's then decrypted at the MSC.
+
+The Equipment Identity Register (*EIR*) stores the IMEI (unique identifier) of stolen devices.
+
+===== Frequencies (in Europe)
+
+It uses a technique called Frequency Division Duplex (*FDD*), meaning that different frequencies are used for Uplink (UL) and Downlink (DL). If you recall, the higher the frequencies, the greater the attenuation of the signal, this is the reason that UE uses lower frequencies, to allow using less power.
+
+#figure(
+  bytefield(
+    bpr: 1880,
+    bitheader(880, 1710, 1805),
+    bits(880)[],
+    bits(10, fill: green.lighten(80%))[],
+    bits(25, fill: green.lighten(20%))[],
+    bits(10)[],
+    bits(10, fill: red.lighten(80%))[],
+    bits(25, fill: red.lighten(20%))[],
+    bits(750)[],
+    bits(75, fill: yellow.lighten(20%))[],
+    bits(20)[],
+    bits(75, fill: blue.lighten(20%))[],
+  ),
+  caption: [
+    Frequency division of GSM, in #hl_green[green] GSM-900 #underline[uplink] frequencies (890 to 915) are highlighted, with the extended uplink (880 to 890) in lighter color. In #hl_red[red], GSM-900 #underline[downlink] frequencies (935 to 960), with the extended frequencies in lighter color (925 to 935). In #hl[yellow] DCS/1800 #underline[uplink] (1710 to 1785), in #hl_blue[blue] DCS/1800 #underline[downlink] (1805 to 1880).
+  ],
+)
+
+===== Physical Channels
+
+GSM defines channels, the place where a user sends and receives its data. Specifically, we have an UL and a DL channel. The #hl[channel acces is a combination of FDMA and TDMA] (see @channel-access). The spectrum is divided in 200 KHz portions (FDM channels) with each of them divided in 8 slots (a slot is called a TDM frame). This means that multiple users use the same frequencies but send/receive their packets at different time intervals. The combination of frequency and time slot is called "*Physical Channel*". Transmission is organized in "bursts", similar to pakcets but effectively still circuit switching.
+
+The transmission speed is 271 kbps, but, as we mentioned in @gsm, the effective throughput is only 13 kbps. This is due to the fact that you are assigned only one slot every 8, and even then, there are diagnostic informations that have to be accounted for in each slot.
+
+Frames in UL and DL are shifted by 3 slots, this is done to allow a bit of time to turn off/on the receiver/transmitter for the next slot. This allows using one single transceiver instead of two.
+
+Users at different distances from the same BTS might cause synchronization problems due to the propagation time of the signal. In particular, closer users might overlap another user's signal. To solve this issue, the solution proposed in GSM is called #hl[Timing Advance] and work by having the MT communicating to the BTS to start the transmission with an offset equal to the propagation time. Meaning that the BTS starts transmission _before_ the real timeslot begins. When a MT connects to an antenna, the first information that is exchanged between the two is, indeed, the timing advance. Timing advance is also recomputed periodically to take into account a user's movements.
+
+===== Logical Channels
+
+Logical channels specify "what" information is transmitted, for example wether the data is a phone call or an SMS (_Traffic Channels_) or a diagnostic message, for example to perform handover (_Control Channels_).
+
+==== LTE
+
+It was first release around 2012 as Release 8 of 3GPP, an entity that standardizes these protocols, which each generation generally covering #sym.approx 5/6 releases. The speed is up to 300 Mbps in UL and 50 Mbps in DL with modulation of 64 QAM (a combination of amplitude and phase modulation with 64 different simbols, meaning 6 bits). Latency is supposed to be around 10ms but in practice it's usually higher.
+
+In LTE we have a distinction between *User plane*, also called the *Access Stratum*, meaning user data (what in GSM we called _Traffic Channels_) and *Control plane*, also called the *Non Access Stratum*, meaning all the operations related to set-up, control and maintenance of the communications between users user and network (in GSM, the _Control Channels_).
+
+===== Frequencies
+
+Similarly to GSM, it uses the 1800 MHz and 800 MHz frequency bands but, additionally, we also have the #hl[2800 MHz band], that is uses to maximize capacity.
+
+===== Network Architecture
+
+The network is still split in Radio Access Network (RAN) and Core Network (CN), in particular, the RN is called *E-UTRAN* and the CN is called *EPC*.
+
+#figure(
+  image("res/svg/lte.drawio.svg"),
+  caption: [LTE Network Architecture],
+)
+
+Some of the work of the BSC has been moved to the Mobility Management Entity (*MME*), a component that is similar to the MSC in GSM. The Serving Gateway (*SGW*) and Packet Data Network Gateway (*PGW*) are routers that serve slightly different functions, in particular the SGW has to deal with routing packets #underline[inside] the operator's network, while the PGW with routing packets #underline[outside] the operator's network.
+
+The design principle of the EPC is so called "_Clean Slate_" design, meaning that there are no legacy components from the previous generations. It's a #hl[packet switched transport network], meaning that everything is switched through packets, including voice calls (VoLTE), differently from GSM. The EPC performs _Radio Resource Management_, meaning that it allocates different frequencies to different eNodeBs to load/balance the network.
+
+Network access control in EPC might include also _lawful interception_ of traffic (for example, a search warrant by the police).
+
+====== MME | Mobility Management Entity
+
+Resides in the _Control Plane_, it does not carry data but managemes mobility, identity of the users, etc. It support _UE Context_, meaning that it matches the identity of the UE and "talks" with the HSS to authenticate and authorize the user. This is important because a user moves from one eNodeB to another everytime so the MME acts as a fast way of authenticating the user without having to go through the HSS everytime.
+
+It performs functions related to _bearer_ management.
+
+====== SGW | Serving Gateway
+
+It's part of the _User Plane_, meaning that it handles data. It's responsible for routing packets between the eNodeB and the rest of the network. It's the anchor point for intra LTE mobility, meaning that it's a part of the architecture where one end of the connection of the Mobile Terminal is fixed (anchored).
+
+====== PGW | Paket Network Gateway
+
+It's another router, part of the _User Plane_, it connects the EPC with #underline[external] network (kind of like a border gateway). It performs IP assigned, packet filtering and NAT. It's an anchor point for mobility with non-3GPP networks (like Wi-Fi) and other visited networks (for example when you are abroad).
+
 = VPN | Virtual Private Networks
 
-Enables a host in the network to be recognized as belonging to another network. Recall that in IP networks, the address is used to identify the network, different countries are assigned different IP ranges (@ipv4addressing). The way VPN works is by #hl[tunneling]. Another important concern of VPNs in security, and security is eachieved through #hl[cryptography].
+Enables a host in the network to be recognized as belonging to another network. Recall that in IP networks, the address is used to identify the network, different countries are assigned different IP ranges (@ipv4addressing). The way VPN works is by #hl[tunneling]. Another important concern of VPNs in security, and security is achieved through #hl[cryptography].
 
 #def[
-  Connectivity ralized on a shared infrastructure such that policies can be enforced as in a private network.
+  Connectivity realized on a shared infrastructure such that policies can be enforced as in a private network.
 ]
 
 VPNs are used mainly to cut costs, managing a large size private network is very costly but still done today in particular cases. For a private network you need privately leased lines and long distance dial-up solutions.
@@ -1482,7 +1641,7 @@ A tunnel, in VPN, is a (secure) encapsulation of private (corporate) traffic wit
 
 Case in which you have two corporate sites that need to communicate with each other to the public network. Packets are sent to an endpoint that will tunnel them to the other endpoint.
 
-#info[This simplifies the equivalent solutions that we would have by using two NATs at each end point. to make things work each NAT wuld also have to be aware of the other's mappings so that both the sender private address and the destination private address are translated correctly.]
+#info[This simplifies the equivalent solutions that we would have by using two NATs at each end point. to make things work each NAT would also have to be aware of the other's mappings so that both the sender private address and the destination private address are translated correctly.]
 
 === e2e | End-to-End Tunneling <e2e>
 
@@ -1496,7 +1655,7 @@ In this case there is a VPN Gateway as one end point and the host as the other e
 
 You can have two main network architectures for a VPN solution:
 
-/ *Intranet*: classical case where one corporate network with multiple sites in intraconnected through a shared infrastructure
+/ *Intranet*: classical case where one corporate network with multiple sites in interconnected through a shared infrastructure
 / *Extranet*: a network only partially private, for example different companies that need to interconnect their networks for certain services. There is still some level of separation, you want to enforce certain policies (think of a supplier for a company that needs to access some of the company's private resources). This type of architectures introduces more *firewalls*. This type of architecture introduces some problems, namely the issue of *Overlapping Address Spaces* that can be solved by using NAT. In Extranets, it's also crucial to have some form of *Access Control*, this is done to avoid a partner networks compromising the performance on your private network by flooding it with traffic.
 
 == Internet Access
@@ -1711,7 +1870,8 @@ Used when you want to encapsulate the internal packet in a Layer 4 protocol firs
 
 #figure(
   box(
-    grid(row-gutter: 0.5em,
+    grid(
+      row-gutter: 0.5em,
       bytefield(
         bpr: 5,
         bit[MAC Header],
@@ -1787,7 +1947,8 @@ You have a tunnel between a public network access point, *L2TP Access Concentrat
 
 #figure(
   box(
-    grid(row-gutter: 0.5em,
+    grid(
+      row-gutter: 0.5em,
       bytefield(
         bpr: 5,
         bit[MAC Header],
@@ -1848,7 +2009,8 @@ Why do we put it in a PPP frame? Because software to put the packet in a PPP fra
 
 #figure(
   box(
-    grid(row-gutter: 0.5em,
+    grid(
+      row-gutter: 0.5em,
       bytefield(
         bpr: 14,
         bits(2)[Data-link Header],

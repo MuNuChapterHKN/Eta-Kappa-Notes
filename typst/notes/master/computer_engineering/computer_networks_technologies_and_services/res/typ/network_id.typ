@@ -1,4 +1,5 @@
-#import "@preview/bytefield:0.0.6": *
+#import "../../../../../../../typst/lib/deps.typ"
+#import deps.bytefield: *
 
 #set page(width: 200mm, height: 12mm, fill: none)
 #set text(font: "New Computer Modern", size: 10pt)

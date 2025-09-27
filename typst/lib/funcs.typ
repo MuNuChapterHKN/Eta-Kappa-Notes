@@ -1,5 +1,6 @@
-#import "@preview/gentle-clues:1.0.0": *
-#import "@preview/cetz:0.3.1"
+#import "deps.typ"
+#import deps.cetz
+#import deps.gentle-clues: *
 
 #let polygon(
   ..args,

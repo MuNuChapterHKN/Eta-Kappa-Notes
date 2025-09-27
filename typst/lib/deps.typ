@@ -1,0 +1,8 @@
+#import "@preview/cetz:0.4.2"
+#import "@preview/cetz-plot:0.1.3"
+#import "@preview/bytefield:0.0.7"
+#import "@preview/gentle-clues:1.2.0"
+#import "@preview/fletcher:0.5.8"
+#import "@preview/codly:1.3.0"
+#import "@preview/codly-languages:0.1.8"
+#import "@preview/equate:0.3.2"
