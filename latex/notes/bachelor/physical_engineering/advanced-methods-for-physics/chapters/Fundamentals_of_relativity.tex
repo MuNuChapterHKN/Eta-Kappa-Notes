@@ -825,8 +825,12 @@ Notice that for the various cases of rotations of $\dfrac{n\pi}{2}$ we have:
   \end{tabular}
 \end{table}
 (End of optional material)
-\section{Examples (WIP)}
+\section{Examples}
 \subsection{Ex. 1}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\linewidth]{res/svg/moving_rod_relativity.drawio}
+\end{figure}
 A camera is taking the photo of an object moving at $v = 0.8 c$ when its end alignes with the camera. The length of the object in the photo is $\qty{0.9}{\meter}$ and we want to find the actual length. Suppose that the distance between the camera and the end of the object is negligible. We know that when we take the photo the light that reaches the camera cannot be the light coming from the full length of the object so we are seeing a contracted version of it. The length we see is $c \Delta t$ where $\Delta t$ is unknown, but we also know that in the same $\Delta t$ the bar traveled an extra $0.8 c \Delta t$ meters and so:
 \begin{equation}
   \Delta t = \dfrac{\qty{0.9}{\meter}}{c}
@@ -839,7 +843,44 @@ But this is not the actual length since we are measuring the length of a moving 
   L_0 = L \gamma(v) = \qty{2.7}{\meter}
 \end{equation}
 \subsection{Ex. 2}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\linewidth]{res/svg/angles_relativity.drawio}
+\end{figure}
+Imagine an object moving at speed $v$ at distance $\qty{1}{\meter}$ from the origin of a moving IRF $\irf{R}'$ at an angle of $\ang{30}$ from the x'-axis. The angle on the stationary IRF $\irf{R}$ is $\ang{45}$ and we want to find at wich speed the object is moving.\\
+First, from Lorentz transformations we have:
+\begin{equation}
+  \begin{split}
+    y' &= y \\[8pt]
+    L_0\sin \theta' &= L\sin \theta \\[8pt]
+    L &= L_0\dfrac{\sin \theta'}{\sin \theta}
+  \end{split}
+\end{equation}
+So:
+\begin{equation}
+  L = L_0\dfrac{\sin \theta'}{\sin \theta} = \qty{1}{\meter} \dfrac{\sin \ang{30}}{\sin \ang{45}} = \dfrac{\sqrt{2}}{2}
+\end{equation}
+Now the Lorentz transformation of the $x$ component gives:
+\begin{equation}
+  \begin{split}
+    x &= \dfrac{x'}{\gamma(v)} \\[8pt]
+    L\cos \ang{45} &= L_0 \cos \ang{30}\sqrt{1-\dfrac{v^2}{c^2}} \\[8pt]
+    \brackets{\dfrac{L\cos \ang{45}}{L_0 \cos \ang{30}}}^2 &= 1-\dfrac{v^2}{c^2}
+  \end{split}
+\end{equation}
+And so:
+\begin{equation}
+  \begin{split}
+    v &= c\sqrt{1-\brackets{\dfrac{L\cos \ang{45}}{L_0 \cos \ang{30}}}^2} \\[8pt]
+    &= c\sqrt{1-\brackets{\dfrac{\sqrt{2}}{2}\dfrac{\dfrac{\sqrt{2}}{2}}{\dfrac{\sqrt{3}}{2}}}^2} \\[8pt]
+    &= c\sqrt{\dfrac{2}{3}} \simeq 0.816c
+  \end{split}
+\end{equation}
 \subsection{Ex. 3}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\linewidth]{res/svg/plane_relativity.drawio}
+\end{figure}
 A plane is traveling at $v = \qty{600}{\meter\per\second}$. We want to know after how much time an observer on Earth sees that the clock of the plane is $\qty{2}{\micro\second}$ late. Essentially we want that the dilated time is:
 \begin{equation}
   \Delta t' = \Delta t - \qty{2}{\micro\second}

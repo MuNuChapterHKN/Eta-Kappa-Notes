@@ -275,7 +275,86 @@ The variation between the values of $F$ is obviously zero since their difference
     \delta \tilde{\action} = \delta \action = 0
 \end{equation}
 And so $\tilde{\lagr}$ is a Lagrangian for the system.\\
-\section{Examples (WIP)}
+\section{Examples}
+\subsection{\textbf{Ex. 1}}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{res/svg/unconstrained_3D_particle.drawio}
+    \caption{Unconstrained particle in 3-D space}
+\end{figure}
+Let us analyze the description of an unconstrained particle in the 3-D space under the action of a force $\vec{F}$ in terms of the Lagrangian picture of mechanics. Since there is no constraint we can expect to have an essentially equal description to Newtonian mechanics. In fact we can just use the three cartesian coordinates $x,y,z$ since $n = 3$. The kinetic energy is just:
+\begin{equation}
+  T = \dfrac{1}{2}mv^2 = \dfrac{1}{2}m\brackets{\dot{x}^2 + \dot{y}^2 + \dot{z}^2}
+\end{equation}
+And as expected we have:
+\begin{equation}
+  Q_x = \dv{}{t}\pdv{T}{\dot{x}} -\pdv{T}{x}= m\ddot{x} = F_x
+\end{equation}
+And so the generalized components of the force are just the ordinary components of $\vec{F}$.
+\subsection{\textbf{Ex. 2}}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{res/svg/polar_coordinates_free.drawio}
+    \caption{Polar coordinates}
+\end{figure}
+We can also describe the generic path of a particle moving in a 2-D plane using polar coordinates as our set of generalized coordinates. In this case:
+\begin{equation}
+  \begin{split}
+    q_1 &= \theta \\[8pt]
+    q_2 &= r
+  \end{split}
+\end{equation}
+Thus:
+\begin{equation}
+  \begin{split}
+    x &= r\cos\theta \\[8pt]
+    y &= r\sin\theta
+  \end{split}
+\end{equation}
+Which leads to:
+\begin{equation}
+  T = \dfrac{1}{2}mv^2 = \dfrac{1}{2}m\brackets{\dot{x}^2 + \dot{y}^2} = \dfrac{1}{2}m\brackets{\dot{r}^2 + r^2\dot{\theta}^2}
+\end{equation}
+Now the generalized components of the forces are:
+\begin{equation}
+  \begin{split}
+    Q_r &= \dv{}{t}\pdv{T}{\dot{r}} - \pdv{T}{r} = m\brackets{\ddot{r} - r\dot{\theta}^2} \\[8pt]
+    Q_\theta &= \dv{}{t}\pdv{T}{\dot{x}} -\pdv{T}{x} = mr^2\ddot{\theta}
+  \end{split}
+\end{equation}
+Again we found something that recalls the results of Newtonian mechanics since $\ddot{r} - r\dot{\theta}^2$ is just the radial acceleration and so $Q_r = F_r$ and $Q_\theta$ is the total time derivative of the quantity $L_z = mr^2\dot{\theta}$, which means that $Q_\theta = \tau_z$.
+\subsection{\textbf{Ex. 3}}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{res/svg/atwood_machine.drawio}
+    \caption{Atwood machine}
+\end{figure}
+The Atwood machine is another classical example when studying mechanics. An idealized version of the system can be described as follows:
+\begin{itemize}
+  \item frictionless and massless pulley of radius $R$
+  \item inextensible rope of length $\ell$
+  \item 2 particles of mass $m_1, m_2$
+\end{itemize}
+Since we have 2 particles we start from $N = 6$, but there is no motion in the $y$ and $x$ direction. Also the inextensible rope acts as a holonomic constraint which reduces the total degrees of freedom to $n = 1$. Since we need only one coordinate we can pick $z_1$. The constraint equation can be written as:
+\begin{equation}
+  z_1 + z_2 + \pi R - \ell = 0
+\end{equation}
+The only force acting on the particles is the gravitational force, so the potential is:
+\begin{equation}
+  V = -m_1gz_1 - m_2gz_2 = -m_1gz_1 + m_2gz_1 + m_2g\brackets{\pi R - \ell}
+\end{equation}
+And so the generalized component of the forces is:
+\begin{equation}
+  Q_1 = -\pdv{V}{z_1} = m_1g - m_2g \\[8pt]
+\end{equation}
+The only Lagrange equation that we need to solve is:
+\begin{equation}
+  \begin{split}
+    &\dv{}{t}\pdv{T}{\dot{z}_1} - \pdv{T}{z_1} = Q_1 \\[8pt]
+    &\brackets{m_1 + m_2}\ddot{z}_1 - m_1g + m_2g = 0 \\[8pt]
+    &\ddot{z}_1 = \dfrac{m_1 - m_2}{m_1 + m_2}g
+  \end{split}
+\end{equation}
 \section{The energy function}
 Let's now discuss the energy of a system. The Lagrangian $\lagr$ has the dimensions of an energy, but it \underline{is not} the total energy.
 \begin{equation}
@@ -318,7 +397,7 @@ Now we want to prove that $h$ is the total energy if these conditions hold:
     \item Transformation equations do not depend on time
     \item The potential $V$ does not depend on time
 \end{enumerate}
-Let's further analyse condition (1). Writing the kinetic energy $T$ we get:
+Let's further analyze condition (1). Writing the kinetic energy $T$ we get:
 \begin{equation}
     T = \dfrac{1}{2}\bigsum_i m_i v_i^2 = \dfrac{1}{2}\bigsum_i m_i \dvec{r}_i \cdot \dvec{r}_i
 \end{equation}
@@ -353,7 +432,7 @@ The quantities $T_{\alpha}$ and $T_0$ are zero if the transformation equations d
     T = \dfrac{1}{2}\bigsum_{\alpha}\bigsum_{\beta}T_{\alpha \beta}\dot{q}_{\alpha}\dot{q}_{\beta}
 \end{equation}
 And so $T$ is a quadratic function of the generalized velocities.\\
-Now let's analyse condition (2). To start we can remember this:
+Now let's analyze condition (2). To start we can remember this:
 \begin{equation}
     \pdv{\lagr}{\dot{q}_{\alpha}} = \pdv{ T}{ \dot{q}_{\alpha}} - \cancel{\pdv{V}{\dot{q}_{\alpha}}}
 \end{equation}
@@ -515,7 +594,7 @@ And so we get:
 \begin{equation}
     Q_j = \hat{u} \cdot \underbrace{\bigsum_i \vec{r}_i \cross \vec{F}_i}_{\boldsymbol{\tau}} = \hat{u} \cdot \boldsymbol{\tau}
 \end{equation}
-Now let's analyse the partial derivative of the kinetic energy:
+Now let's analyze the partial derivative of the kinetic energy:
 \begin{equation}
     \pdv{T}{\dot{q}_j} = \pdv{}{\dot{q}_j}\brackets{\dfrac{1}{2}\bigsum_i m_i \vec{r}_i^{\;2}} = \bigsum_i m_i \vec{r}_i \cdot \pdv{\vec{r}_i}{\dot{q}_j} = \bigsum_i m_i \vec{r}_i \cdot \hat{u} \cross \vec{r}_i
 \end{equation}

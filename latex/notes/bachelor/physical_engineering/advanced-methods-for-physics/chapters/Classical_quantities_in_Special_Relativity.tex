@@ -352,8 +352,73 @@ If $\vec{u} \parallel \vec{v} \rightarrow (u, 0, 0) \parallel (v, 0, 0)$ we have
     F'_z &= \dfrac{F_z}{\gamma(v)\brackets{1-\dfrac{uv}{c^2}}}
   \end{split}
 \end{equation}
-\section{Examples (WIP)}
-\subsection{Ex.1} (TO DO)\\
-\subsection{Ex.2} (TO DO)\\
-\subsection{Ex.3} (TO DO)\\
-\subsection{Ex.4} (TO DO)\\
+\section{Examples}
+\subsection{Ex.1}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{res/svg/photon_absorbtion.drawio}
+\end{figure}
+A photon hits an electron moving inside an atom. After the impact the photon is completely absorbed by the electron, which gains speed. We want to find the new speed of the electron. The data of the problem is:
+\begin{itemize}
+  \item $E_\gamma = \qty{1}{\mega\electronvolt}$
+  \item $\gamma_e \simeq 1$
+  \item $\gamma_n \simeq 1$
+\end{itemize}
+This means that the velocity of the nucleus and the electron are non-relativistic before the impact. At the start the total energy is:
+\begin{equation}
+  E_i = E_\gamma + m_0c^2 + M_0c^2
+\end{equation}
+After the impact we have:
+\begin{equation}
+  E_f \simeq m_0\gamma (v) c^2 + M_0c^2
+\end{equation}
+Here we assume that the recoil speed of the nucleus is negligible with respect to that of the electron given that $M_0 \gg m_0$. Using the conservation of energy we have:
+\begin{equation}
+  \begin{split}
+    &E_i = E_f \\[8pt]
+    &E_\gamma + m_0c^2 + \cancel{M_0c^2} = m_0\gamma (v) c^2 + \cancel{M_0c^2} \\[8pt]
+    &\gamma (v) = \dfrac{E_\gamma + m_0c^2}{m_0c^2} = 1 + \dfrac{E_\gamma}{m_0c^2} \\[8pt]
+  \end{split}
+\end{equation}
+Since $m_0c^2 \simeq \qty{0.511}{\mega\electronvolt}$ we have:
+\begin{equation}
+  \gamma \simeq 3 \implies \dfrac{v^2}{c^2} = \dfrac{8}{9} \implies v \simeq 0.94c
+\end{equation}
+\subsection{Ex.2}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{res/svg/compton_effect.drawio}
+\end{figure}
+A photon with wavelenght $\lambda_1$ hits an electron at rest. Both the electron and the photon get recoiled in different directions with angle $\theta$ for the electron and $\varphi$ for the photon. This is known as the \textbf{Compton effect}
+Because of the conservation of energy the photon must change wavelenght to $\lambda_2$. The energy before the collision is:
+\begin{equation}
+  E_i = m_0c^2 + h\nu_1
+\end{equation}
+Instead the energy at the end is:
+\begin{equation}
+  E_f = m_0\gamma (u) c^2 + h\nu_2
+\end{equation}
+The momentum instead was:
+\begin{equation}
+  \vec{P}_i = \begin{pmatrix}
+    \dfrac{h\nu_1}{c} \\[8pt]
+    0\\[8pt]
+    0
+  \end{pmatrix}
+\end{equation}
+And at the end:
+\begin{equation}
+  \vec{P}_f = \begin{pmatrix}
+    \dfrac{h\nu_2}{c}\cos\varphi + m_0u\gamma(u)  \cos\theta \\[8pt]
+    -\dfrac{h\nu_2}{c}\sin\varphi + m_0u\gamma(u)  \sin\theta \\[8pt]
+    0
+  \end{pmatrix}
+\end{equation}
+Given this we can find that:
+\begin{equation}
+  \lambda_2 - \lambda_1 = \dfrac{h}{m_0c}\brackets{1-\cos\theta}
+\end{equation}
+And so this means that $\lambda_2 > \lambda_1$ because the photon loses energy. The quantity $\dfrac{h}{m_0c}$ is called \textbf{Compton wavelenght} $\lambda_c$. In the case of maximum reduction we have $\cos\theta = -1$:
+\begin{equation}
+  \lambda_2-\lambda_1 = 2\lambda_c
+\end{equation}
