@@ -1,0 +1,29 @@
+% !TEX root = main.tex
+
+\documentclass[english,12pt,toc=sections]{HKNdocument}
+\input{_preamble.tex}
+
+\usepackage{parskip}
+
+\begin{document}
+
+\title{Computer Networks}
+\author{Matteo Tedde}
+\docdate{First semester 2024/2025}
+
+\frontmatter
+\maketitle
+\cclicense
+\tableofcontents
+\clearpage
+
+\mainmatter
+\include{chapters/network_fundamentals}
+\include{chapters/network_layer}
+\include{chapters/transport_layer}
+\include{chapters/application_layer}
+
+\backmatter
+
+\input{_postamble.tex}
+\end{document}
