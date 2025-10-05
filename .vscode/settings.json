@@ -24,7 +24,7 @@
         "%OUTDIR"
       ],
       "env": {
-        "SCRIPT_PATH": "${workspaceFolder}/latex/lib/setup.bash" // path to the script providing folders to latex compilator, fix bug compiling the file.
+        "SCRIPT_PATH": "${workspaceFolder}/lib/latex/setup.bash" // path to the script providing folders to latex compilator, fix bug compiling the file.
       }
     },
     {
@@ -40,8 +40,8 @@
         "%DOC%"
       ],
       "env": {
-        "TEXINPUTS": "%WORKSPACE_FOLDER%/latex/lib//;%WORKSPACE_FOLDER%/resources/imgs//;",
-        "SCRIPT_PATH": "${workspaceFolder}/latex/lib/setup.bash" // path to the script providing folders to latex compilator, fix bug compiling the file.
+        "TEXINPUTS": "%WORKSPACE_FOLDER%/lib/latex//;%WORKSPACE_FOLDER%/resources/imgs//;",
+        "SCRIPT_PATH": "${workspaceFolder}/lib/latex/setup.bash" // path to the script providing folders to latex compilator, fix bug compiling the file.
       }
     }
   ]

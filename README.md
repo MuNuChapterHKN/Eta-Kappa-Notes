@@ -24,10 +24,10 @@
 
 The project is organized into several sections:
 
-- [**`latex/`**](latex/): Notes and guides formatted with LaTeX
-- [**`typst/`**](typst/): Notes and templates formatted with Typst
-- [**`resources/`**](resources/): Shared resources (images, diagrams, etc.)
-- **`build/`**: Compiled files and output
+- [**`notes/`**](notes/): class notes
+- [**`lib/`**](lib/): templates
+- [**`resources/`**](resources/): shared resources (images, diagrams, etc.)
+- **`build/`**: compiled files and output
 
 ### 🚀 Getting Started
 
@@ -80,10 +80,10 @@ For questions, suggestions, or reports:
 
 Il progetto è organizzato in diverse sezioni:
 
-- [**`latex/`**](latex/): Appunti e guide formattati con LaTeX
-- [**`typst/`**](typst/): Appunti e template formattati con Typst
-- [**`resources/`**](resources/): Risorse condivise (immagini, diagrammi, ecc.)
-- **`build/`**: File compilati e output
+- [**`notes/`**](notes/): appunti delle lezioni
+- [**`lib/`**](lib/): template
+- [**`resources/`**](resources/): risorse condivise (immagini, grafici ecc.)
+- **`build/`**: file compilati e output
 
 ### 🚀 Come Iniziare
 
