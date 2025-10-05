@@ -1,0 +1,12 @@
+course_code: "01TUSOD"
+course_name: "Advanced methods for physics"
+teacher: "Daghero, Dario"
+start_academic_year: 2024
+program_level: "bachelor"
+program: "Physical Engineering"
+language: "eng"
+formats:
+  - "latex"
+authors:
+  - "Odetto, Simone"
+editors: []

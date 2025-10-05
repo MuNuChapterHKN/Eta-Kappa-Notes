@@ -1,0 +1,12 @@
+course_code: "08KSILM"
+course_name: "Computer networks"
+teacher: "Zunino, Claudio"
+start_academic_year: 2024
+program_level: "bachelor"
+program: "Computer Engineering"
+language: "eng"
+formats:
+  - "latex"
+authors:
+  - "Tedde, Matteo"
+editors: []

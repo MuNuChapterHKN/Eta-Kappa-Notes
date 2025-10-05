@@ -1,0 +1,12 @@
+course_code: "19AXPOD"
+course_name: "Fisica II"
+teacher: "Pirri, Candido"
+start_academic_year: 2024
+program_level: "bachelor"
+program: "Physical Engineering"
+language: "ita"
+formats:
+  - "latex"
+authors:
+  - "Cosentino, Giulio"
+editors: []

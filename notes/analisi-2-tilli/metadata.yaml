@@ -1,0 +1,12 @@
+course_code: "23ACIMQ"
+course_name: "Analisi matematica II"
+teacher: "Tilli, Paolo"
+start_academic_year: 2024
+program_level: "bachelor"
+program: "Mathematics for Engineering"
+language: "ita"
+formats:
+  - "latex"
+authors:
+  - "Pignatelli, Tommaso"
+editors: []
