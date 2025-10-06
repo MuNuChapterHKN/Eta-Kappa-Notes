@@ -1,0 +1,142 @@
+%! TEX root = guide.tex
+
+% Possible arguments for the HKNdocument class:
+% Language:
+%   italian (default): Sets the document language to Italian.
+%   english: Sets the document language to English.
+%
+% Table of Contents (ToC) depth:
+%   toc=chapters: Shows only chapters in the ToC (tocdepth=0).
+%   toc=sections: Shows chapters and sections in the ToC (tocdepth=1).
+%   toc=subsections: Shows up to subsections in the ToC (default, tocdepth=2).
+%   toc=subsubsections: Shows up to sub-subsections in the ToC (tocdepth=3).
+%
+% Font size:
+%   10pt: Sets the base font size to 10 points.
+%   11pt (default): Sets the base font size to 11 points.
+%   12pt: Sets the base font size to 12 points.
+%
+% Draft mode:
+%   draft: Compiles the document in draft mode (useful for proofreading, dummy images and imported files).
+\documentclass[english,12pt,toc=sections]{HKNdocument}
+\input{_preamble.tex}
+\usepackage[english]{babel}
+\usepackage{epstopdf}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{subfig}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{cancel}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{centernot}
+\usepackage[super]{nth}
+\usepackage{siunitx}
+\usepackage{physics}
+\usepackage{nicematrix}
+\usepackage{tikz}
+\usepackage{marvosym}
+\usepackage{tensor}
+\usepackage{esint}
+\usepackage{bigints}
+\sisetup{
+    range-open-phrase =,
+    range-units = single,
+    range-phrase = \divisionsymbol
+}
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\DeclareMathAlphabet\mathbfcal{OMS}{cmsy}{b}{n}
+\counterwithin{equation}{section}
+\counterwithin{figure}{section}
+\renewcommand{\vec}{\vb}
+\newcommand{\diff}[1]{\mathrm{d}#1}
+\newcommand{\dvec}[1]{\dot{\vec{#1}}}
+\newcommand{\muz}{\mu_0}
+\newcommand{\epsz}{\varepsilon_0}
+\newcommand{\crossout}[1]{\cancel{#1}\raisebox{14pt}{\scriptsize = 0}}
+\newcommand{\bigsum}{\displaystyle\sum}
+\newcommand{\brackets}[1]{\left(#1\right)}
+\newcommand{\bbrackets}[1]{\bigg(#1\bigg)}
+\newcommand{\sqbr}[1]{\left[#1\right]}
+\newcommand{\bigsqbr}[1]{\bigg[#1\bigg]}
+\newcommand{\grbr}[1]{\left{#1\right}}
+\newcommand{\biggrbr}[1]{\bigg{#1\bigg}}
+\newcommand{\dalembertref}{\hyperref[D'Alembert_principle]{D'Alembert's principle}}
+\newcommand{\lagrangeref}{\hyperref[Lagrange_equations]{Lagrange equations}}
+\newcommand{\eleref}{\hyperref[Euler_Lagrange_equations]{Euler-Lagrange equations}}
+\newcommand{\hpquoteref}{\hyperref[q:Hamilton_principle_quote]{Hamilton's principle}}
+\newcommand{\hpquotemath}{\hyperref[e:Hamilton_principle]{Hamilton's principle}}
+\newcommand{\hamiltonref}{\hyperref[hamilton_equations]{Hamilton's equations}}
+\newcommand{\hamjacref}{\hyperref[e:hamiltonjacobi]{Hamilton-Jacobi equation}}
+\newcommand{\maxwellref}{\hyperref[e:diff_Maxwell_eq]{Maxwell's equations}}
+\newcommand{\defineeq}{\coloneqq}
+\newcommand{\lagr}{\mathcal{L}}
+\newcommand{\hamfun}{\mathcal{H}}
+\newcommand{\hamch}{\mathcal{W}}
+\newcommand{\action}{\mathcal{S}}
+\newcommand{\lap}{\laplacian}
+\newcommand{\efunction}{\mathrm{e}}
+\newcommand{\Velegant}{\mathcal{V}} %Aka V-sexy
+\newcommand{\Telegant}{\mathcal{T}} %Aka T-sexy
+\newcommand{\transpose}[1]{#1^{\;T}}
+\newcommand{\notimplies}{\centernot\implies}
+\newcommand{\potE}{\varphi}
+\newcommand{\dalop}{\square}
+\newcommand{\irf}[1]{\mathcal{#1}}
+\newcommand{\lm}{\Lambda}
+\newcommand{\invlm}{\Lambda^{-1}}
+\newcommand{\by}{\times}
+\newcommand{\mink}{\mathbb{M}^4}
+\renewcommand{\dv}{%%%
+ \def\flatfrac{\let\flatfrac\savedfrac\dfrac}\derivative*%%%
+}
+\renewcommand{\pdv}{%%%
+ \def\flatfrac{\let\flatfrac\savedfrac\dfrac}\partialderivative*%%%
+}
+\newcommand{\STOP}{
+\begin{center}
+\scalebox{2}{\raisebox{-0.5ex}{\Stopsign}} This argument was not done during the lecture, but it may be helpful.
+\end{center}}
+
+
+\begin{document}
+% Document metadata
+\title{Advanced methods for physics}
+\shorttitle{Advanced methods}
+% You can include multiple \autor commands to list all autors in the frontpage.
+\author{Simone Odetto}
+\docdate{First semester 2024/2025}
+\docversion{1.0}
+
+\frontmatter
+\maketitle
+\cclicense
+\tableofcontents
+\clearpage
+
+\mainmatter
+\setlength{\parindent}{0pt}
+\include{chapters/Introduction_to_analytical_mechanics}
+\include{chapters/Constraints}
+\include{chapters/Lagrange_and_Euler-Lagrange_mechanics}
+\include{chapters/Hamilton's_mechanics}
+\include{chapters/Applications_of_Lagrange_formalism}
+\include{chapters/Canonical_transformations}
+\include{chapters/Hamilton_Jacobi}
+\include{chapters/Electromagnetism}
+\include{chapters/Introduction_to_special_relativity}
+\include{chapters/Fundamentals_of_relativity}
+\include{chapters/Tensors}
+\include{chapters/Representation_of_spacetime}
+\include{chapters/Classical_quantities_in_Special_Relativity}
+\include{chapters/Relativistic_formulation_of_electromagnetism}
+\backmatter
+
+% input{_postamble.tex}
+\end{document}
