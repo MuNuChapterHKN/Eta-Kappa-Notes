@@ -1,4 +1,4 @@
-#import "lib/template.typ": template
+#import "../../lib/typst/template.typ": template
 
 #show: template.with(
   title: [Guide],

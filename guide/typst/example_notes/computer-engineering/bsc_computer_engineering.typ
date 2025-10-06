@@ -1,5 +1,5 @@
-#import "../../../lib/template.typ": template
-#import "../../../lib/funcs.typ": course-outline
+#import "../../../../lib/typst/template.typ": template
+#import "../../../../lib/typst/funcs.typ": course-outline
 
 #show: template.with(
   title: [Bachelor of Science in Computer Engineering],
