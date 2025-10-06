@@ -16,21 +16,11 @@
   "latex-workshop.latex.rootFile.useSubFile": true,
   "latex-workshop.latex.tools": [
     {
-      "name": "setup",
-      "command": "bash",
-      "args": [
-        "${env:SCRIPT_PATH}",
-        "%DOC%",
-        "%OUTDIR"
-      ],
-      "env": {
-        "SCRIPT_PATH": "${workspaceFolder}/lib/latex/setup.bash" // path to the script providing folders to latex compilator, fix bug compiling the file.
-      }
-    },
-    {
       "name": "latexmk",
       "command": "latexmk",
       "args": [
+        "-cd",
+        "-r", "%WORKSPACE_FOLDER%/lib/latex/latexmkrc",
         "-shell-escape",
         "-synctex=1",
         "-interaction=nonstopmode",
@@ -40,8 +30,7 @@
         "%DOC%"
       ],
       "env": {
-        "TEXINPUTS": "%WORKSPACE_FOLDER%/lib/latex//;%WORKSPACE_FOLDER%/resources/imgs//;",
-        "SCRIPT_PATH": "${workspaceFolder}/lib/latex/setup.bash" // path to the script providing folders to latex compilator, fix bug compiling the file.
+        "TEXINPUTS": "%WORKSPACE_FOLDER%/lib/latex//;%WORKSPACE_FOLDER%/resources/imgs//;"
       }
     }
   ]

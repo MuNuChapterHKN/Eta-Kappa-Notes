@@ -1,0 +1,5 @@
+$out_dir = 'build';
+
+# Automatically create directories if missing
+mkdir $out_dir unless -d $out_dir;
+mkdir "$out_dir/chapters" unless -d "$out_dir/chapters";
