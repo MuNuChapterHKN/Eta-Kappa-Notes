@@ -21,16 +21,16 @@ The \texttt{listings} package allows you to display source code within a LaTeX d
 For example, to include Python code in the document, you can use the following command:
 
 \begin{lstlisting}
-	\begin{lstlisting}[language=Python]
-		def hello_world():
-		print("Hello, World!")
+    \begin{lstlisting}[language=Python]
+        def hello_world():
+        print("Hello, World!")
   \end {lstlisting}
 \end{lstlisting}
 
 Result:
 \begin{lstlisting}[language=Python]
-	def hello_world():
-	print("Hello, World!")
+    def hello_world():
+    print("Hello, World!")
 \end{lstlisting}
 
 In this example, the \texttt{listings} package automatically recognizes Python syntax and highlights it correctly.
@@ -40,20 +40,20 @@ In this example, the \texttt{listings} package automatically recognizes Python s
 \texttt{listings} supports many programming languages, so you can use automatic syntax highlighting for a wide range of languages. Just specify the language using the \texttt{language} option within the \texttt{lstlisting} environment. Some supported languages include:
 
 \begin{itemize}
-	\item Python: \texttt{language=Python}
-	\item C/C++: \texttt{language=C}
-	\item Java: \texttt{language=Java}
-	\item SQL: \texttt{language=SQL}
-	\item HTML: \texttt{language=HTML}
-	\item CSS: \texttt{language=CSS}
-	\item JavaScript: \texttt{language=JavaScript}
-	\item XML: \texttt{language=XML}
+    \item Python: \texttt{language=Python}
+    \item C/C++: \texttt{language=C}
+    \item Java: \texttt{language=Java}
+    \item SQL: \texttt{language=SQL}
+    \item HTML: \texttt{language=HTML}
+    \item CSS: \texttt{language=CSS}
+    \item JavaScript: \texttt{language=JavaScript}
+    \item XML: \texttt{language=XML}
 \end{itemize}
 
 Example of SQL code:
 
 \begin{lstlisting}[language=SQL]
-	SELECT * FROM users WHERE age > 18;
+    SELECT * FROM users WHERE age > 18;
 \end{lstlisting}
 
 \subsection{Customizing Styles}
@@ -61,32 +61,32 @@ Example of SQL code:
 Although the package offers predefined styles, it is possible to customize the appearance of the code. If there is a need to create new styles, contact the responsible person. Some customizable parameters, listed here to highlight the potential of the styles, include:
 
 \begin{itemize}
-	\item \texttt{language}: Defines the language of the code.
-	\item \texttt{basicstyle}: Sets the base font for the code.
-	\item \texttt{keywordstyle}: Modifies the style of keywords.
-	\item \texttt{stringstyle}: Modifies the style of strings.
-	\item \texttt{commentstyle}: Defines the style for comments.
-	\item \texttt{numbers}: Displays line numbers.
-	\item \texttt{frame}: Adds a border around the code.
-	\item \texttt{backgroundcolor}: Sets the background color of the code.
+    \item \texttt{language}: Defines the language of the code.
+    \item \texttt{basicstyle}: Sets the base font for the code.
+    \item \texttt{keywordstyle}: Modifies the style of keywords.
+    \item \texttt{stringstyle}: Modifies the style of strings.
+    \item \texttt{commentstyle}: Defines the style for comments.
+    \item \texttt{numbers}: Displays line numbers.
+    \item \texttt{frame}: Adds a border around the code.
+    \item \texttt{backgroundcolor}: Sets the background color of the code.
 \end{itemize}
 
 This is the before and after applying the SQL style defined in HKNtools.tex:
 
 \begin{lstlisting}[language=SQL]
-	-- Query to select user data
-	SELECT name, age
-	FROM users
-	WHERE age > 18
-	ORDER BY age DESC;
+    -- Query to select user data
+    SELECT name, age
+    FROM users
+    WHERE age > 18
+    ORDER BY age DESC;
 \end{lstlisting}
 
 \begin{lstlisting}[language=SQL, style=hkn]
-	-- Query to select user data
-	SELECT name, age
-	FROM users
-	WHERE age > 18
-	ORDER BY age DESC;
+    -- Query to select user data
+    SELECT name, age
+    FROM users
+    WHERE age > 18
+    ORDER BY age DESC;
 \end{lstlisting}
 
 \subsection{Global Configuration}
@@ -95,11 +95,11 @@ You can also configure \texttt{listings} globally to apply the same style settin
 
 \begin{lstlisting}
 \lstset{
-	language=Python,
-	numbers=left,
-	frame=single,
-	backgroundcolor=\color{lightgray},
-	stepnumber=1
+    language=Python,
+    numbers=left,
+    frame=single,
+    backgroundcolor=\color{lightgray},
+    stepnumber=1
 }
 \end{lstlisting}
 
@@ -107,21 +107,21 @@ This will set the options for all Python code blocks in the document.
 Here are the effects before and after using the instruction:
 
 \begin{lstlisting}[language=Python]
-	def hello_world():
-	print("Hello, World!")
+    def hello_world():
+    print("Hello, World!")
 \end{lstlisting}
 
 \lstset{
-	language=Python,
-	numbers=left,
-	frame=single,
-	backgroundcolor=\color{lightgray},
-	stepnumber=1
+    language=Python,
+    numbers=left,
+    frame=single,
+    backgroundcolor=\color{lightgray},
+    stepnumber=1
 }
 
 \begin{lstlisting}[language=Python]
-	def hello_world():
-	print("Hello, World!")
+    def hello_world():
+    print("Hello, World!")
 \end{lstlisting}
 
 \section{Currently Defined Custom Styles}
@@ -129,7 +129,7 @@ Here are the effects before and after using the instruction:
 Additional styles will be implemented as needed by collaborators. For now, the following styles are currently defined:
 
 \begin{itemize}
-	\item SQL: sqlstyle
+    \item SQL: sqlstyle
 \end{itemize}
 
 \section{Complete Example}
