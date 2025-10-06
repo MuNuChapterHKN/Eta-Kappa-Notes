@@ -1,0 +1,83 @@
+\chapter{Tables with longtables}
+
+\section{Longtable Example}
+\begin{longtable}{|l|c|c|p{6.2cm}|}
+    \caption{Example of a Longtable with Caption and Label}
+    \label{tab:longtable_example}\\
+    \hline \textbf{Concetto} & \textbf{Tipo} & \textbf{Volume} & \textbf{Motivazione}\\\hline
+    \endfirsthead
+
+    \hline \textbf{Concetto} & \textbf{Tipo} & \textbf{Volume} & \textbf{Motivazione}\\\hline
+    \endhead
+
+    \hline \multicolumn{4}{|r|}{{Continua all pagina successiva}}\\\hline
+    \endfoot
+
+    \hline
+    \endlastfoot
+    Utente                   & E             & 30.000.000      & {Ipotizziamo una piattaforma in cui sono iscritte 30 milioni di utenti}
+    \\\hline
+    Host                     & E             & 150.000         & {Ipotizziamo che sulla piattaforma si iscriveranno circa 150 mila host}
+    \\\hline
+    Alloggio                 & E             & 169.000         & {Ipotizziamo che nella piattaforma verranno registrati circa 169 mila alloggi}                                                                    \\\hline
+    Prenotazione             & E             & 36.000.000      & {Ipotizziamo che sulla piattaforma siano state effettuate circa 36 milioni di prenotazioni}                                                               \\\hline
+    Soggiorno                & E             & 34.920.000      & {Ipotizziamo che sulla piattaforma ci siano stati circa 35 milioni di soggiorni}                                                                  \\\hline
+    Recensione               & E             & 12.000.000      & {Ipotizziamo che sulla piattaforma vengano scritte circa 12 milioni di recensioni}                                                                 \\\hline
+    Commento                 & E             & 16.000.000      & {Ipotizziamo che sulla piattaforma vengano scritti circa 16 milioni di commenti}                                                                   \\\hline
+    Lista                    & E             & 45.000.000      & {Ipotizziamo che sulla piattaforma vengano create circa 45 milioni di liste di alloggi preferiti}                                                                  \\\hline
+    Servizio                 & E             & 20              & {Ipotizziamo che sulla piattaforma vengano messi a disposizione circa 20 servizi differenti}                                                                 \\\hline
+    Possedimento             & R             & 169.000         & {Ipotizziamo che nella piattaforma ogni host abbia almeno un alloggio, e che 1 host su 8 abbia 2-3 alloggi}                                                                    \\\hline
+    Richiesta                & R             & 36.000.000      & {Ipotizziamo che nella piattaforma 4 utenti registrati su 5 abbiano fatto almeno una prenotazione, e 1 su 5 ne abbia fatto almeno 3}                                                    \\\hline
+    Generazione              & R             & 34.920.000      & {Ipotizziamo che sul totale delle prenotazioni, circa il 2\% vengano cancellate. Tutte le altre diventano soggiorni effettivi}                                                        \\\hline
+    Elaborazione             & R             & 12.000.000      & {Ipotizziamo che 1 utente su 3 che ha effettuato una prenotazione poi scriva una recensione}                                                                 \\\hline
+    Contenuto                & R             & 16.000.000      & {Ipotizziamo che circa 1 recensione su 3 abbia un thread con almeno 3 commenti e 1 su 3 abbia un solo commento}                                                                   \\\hline
+    Creazione                & R             & 45.000.000      & {Ipotizziamo che circa 6 utenti su 10 creino delle liste, con una media di 2-3 liste per ciascuno di questi utenti}                                                                     \\\hline
+    Scritto                  & R             & 16.000.000      & {Ipotizziamo che circa 1 utente su 5 abbia scritto un commento, e di questi uno ne abbia scritto circa 2-3}                                                                        \\\hline
+    Correlazione             & R             & 12.000.000      & {Ipotizziamo che circa 1 soggiorno su 6 riceva una recensione da parte dell'utente o dell'host, e che 1 su 6 la riceva da parte di entrambi}                                           \\\hline
+    Riserva                  & R             & 36.000.000      & {Ipotizziamo che tutti gli alloggi vengano riservati circa 36 milioni di volte, una volta per ogni prenotazione}                                                               \\\hline
+    Offerto                  & R             & 250.000         & {Ipotizziamo che ogni alloggio offra più di una decina di servizi}                                                                    \\\hline
+    Valutazione              & R             & 2.000.000       & {Ipotizziamo che circa 1 recensione su 3 viene scritta verso un alloggio}                                                                   \\\hline
+\end{longtable}
+
+\section{Syntax exaplanation}
+The syntax used in LaTeX for the table \ref{tab:longtable_example} with the \texttt{longtable} package is as follows:
+
+\begin{itemize}
+    \item \textbf{Table Declaration}:
+    \begin{verbatim}
+    \begin{longtable}{|l|c|c|p{6.2cm}|}
+    \end{verbatim}
+    Here, a table is declared with 4 columns. The first column is left-aligned (\texttt{l}), the second and third columns are centered (\texttt{c}), while the fourth column has a width of 6.2 cm and adjusts to the content (\texttt{p\{6.2cm\}}).
+
+    \item \textbf{Table Header}:
+    \begin{verbatim}
+    \hline \textbf{Concept} & \textbf{Type} & \textbf{Volume}
+    & \textbf{Reason} \\\hline
+    \end{verbatim}
+    These lines are used to define the header of the table and separate it from the subsequent rows with a horizontal line.
+
+    \item \textbf{Commands for Different Table Sections}:
+    \begin{itemize}
+        \item \texttt{endfirsthead}: Defines the header to be used on the first page of the table.
+        \item \texttt{endhead}: Defines the header to be used on the following pages of the table.
+        \item \texttt{endfoot}: Defines the footer for each page of the table.
+        \item \texttt{endlastfoot}: Defines the final footer of the table.
+    \end{itemize}
+
+    \item \textbf{Data Rows}:
+    Each data row is separated by \texttt{\\} and ends with \texttt{hline} to add a horizontal line after each row. The data in each cell is separated by \texttt{\&}.
+
+    Example:
+    \begin{verbatim}
+    User & E & 30.000.000 & {Let's assume a platform with 30
+    million users} \\\hline
+    \end{verbatim}
+
+
+
+
+
+
+
+    This structure allows the creation of tables that can span multiple pages and contains horizontal lines in both the headers and between the data, maintaining a clear and readable format.
+\end{itemize}
