@@ -1,10 +1,6 @@
-
-*.log
-vscode
-build
-build/
+**/build/
 **/svg-inkscape/
-**/svg-inkscape/**
+*.log
 
 # Python
 *.pyc

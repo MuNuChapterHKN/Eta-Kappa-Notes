@@ -1,0 +1,113 @@
+\chapter[Advanced Mathematics]{Assigning Labels to Equations in LaTeX and Citing Them Later}
+
+I don't want to talk to you about how to write mathematics, there are millions of guides on this topic. Instead, I want to talk about the ability to assign labels to equations in LaTeX so that they can be cited later.
+
+\section{Introduction}
+
+One of LaTeX's most powerful features is the ability to assign labels to equations and then easily cite them within the document. This is particularly useful in scientific and technical documents, where it's often necessary to refer to specific equations. In this chapter, we will see how to label equations and how to cite them automatically, ensuring that the equation number is updated correctly during the document compilation.
+
+\section{Assigning a Label to an Equation}
+
+To label an equation, you need to use the \verb|\label{}| command within the environment where the equation is written (e.g., \verb|equation|, \verb|align|, etc.). The argument of the \verb|\label{}| command is the name of the label, which must be unique in the document.
+
+Here's an example of labeling an equation:
+\begin{quote}
+\begin{verbatim}
+\begin{equation}
+\label{eq:energy}
+    E = m c^2
+\end{equation}
+\end{verbatim}
+\end{quote}
+
+\begin{equation}
+\label{eq:energy}
+    E = m c^2
+\end{equation}
+
+In this case, the equation is labeled with \texttt{eq:energy}. Now, LaTeX will automatically assign a number to this equation, which can be cited later in the document.
+
+\section{Citing an Equation}
+
+To reference the labeled equation, use the \verb|\ref{}| command. The argument of the \verb|\ref{}| command is the name of the label that was assigned to the equation.
+
+Here's how to cite the previous equation:
+
+\begin{quote}
+\begin{verbatim}
+As shown in equation \ref{eq:energy},
+Einstein's famous formula relates energy to mass.
+\end{verbatim}
+\end{quote}
+
+The result will be:
+
+\begin{quote}
+    As shown in equation \ref{eq:energy},
+    Einstein's famous formula relates energy to mass.
+\end{quote}
+
+LaTeX will automatically replace \verb|\ref{eq:energy}| with the equation number (e.g., \((1)\)), which will update if other equations are added or removed from the document.
+
+\section{Citing an Equation with a Prefix}
+
+If you want to add a prefix to the equation number (like ``Eq.'' or ``Equation''), you can do so manually. For example:
+
+\begin{quote}
+\begin{verbatim}
+As shown in Eq.~\ref{eq:energy},
+Einstein's famous formula relates energy to mass.
+\end{verbatim}
+\end{quote}
+
+The result will be:
+
+\begin{quote}
+    As shown in Eq.~\ref{eq:energy},
+    Einstein's famous formula relates energy to mass.
+\end{quote}
+
+\section{Citations with the \texorpdfstring{\texttt{align}}{align} Environment}
+
+When using environments like \verb|align|, which allow you to write multiple equations on separate lines, you can label each individual equation. Here's an example:
+\begin{align}
+\label{eq:sum}
+    a + b & = c \\
+\label{eq:diff}
+    x - y & = z
+\end{align}
+
+To cite the individual equations:
+
+\begin{quote}
+\begin{verbatim}
+As shown in \ref{eq:sum} and \ref{eq:diff}, the operations of
+addition and subtraction are defined respectively.
+\end{verbatim}
+\end{quote}
+
+The result will be:
+
+\begin{quote}
+    As shown in \ref{eq:sum} and \ref{eq:diff},
+    the operations of addition and subtraction
+    are defined respectively.
+\end{quote}
+
+\section{Citing an Equation with the \texorpdfstring{\texttt{\textbackslash eqref}}{eqref} Command}
+
+If you want to cite an equation including the parentheses around the equation number automatically, you can use the \verb|\eqref{}| command instead of \verb|\ref{}|. Here's how:
+
+\begin{quote}
+\begin{verbatim}
+As shown in \eqref{eq:energy},
+Einstein's formula expresses energy in terms of mass.
+\end{verbatim}
+\end{quote}
+
+The result will be:
+
+\begin{quote}
+    As shown in \eqref{eq:energy},
+    Einstein's formula expresses energy in terms of mass.
+\end{quote}

@@ -1,0 +1,59 @@
+\chapter{Introduction}
+
+In this file, which has the same structure as the notes you will have to write, I will show you the basic usage of some packages and explain the structure of the project.
+
+\section{Project Structure}
+
+The project contains several folders:
+\begin{itemize}
+    \item \texttt{chapters}, where you will insert a .tex file for each chapter with the same name (you can also name them chapter 1, 2, but trust me, if you name them sensibly, it will be much easier to reorder them later);
+    \item \texttt{res}, this folder will contain any source files of type \texttt{.gbb} from Geogebra and \texttt{.py} if you want to use Python for creating graphs. Every time you create a graph, you must save the source file in the corresponding folder. Additional folders will be added based on the future tools chosen for generating graphs or other resources.
+    \begin{itemize}
+        \item \texttt{gbb}, contains the Geogebra source file. It must be saved to ensure you can modify the corresponding graph in the future.
+        \item \texttt{py}, I've prepared some .py scripts to evaluate the potential of using matplotlib for creating your graphs. Inside, you will also find a file named \texttt{run\_all\_scripts.py}, which allows you to run all other .py files in the folder and automatically generate all the graphs. Note that this solution avoids the issue of saving the graphs; in fact, the various examples you can take as base templates for your graphs automatically save in the \texttt{./res/svg} folder, with the same name as the .py file and in svg format.
+        \item \texttt{svg}: this is where all the resources used within your notes will be placed, such as any svg files generated from Geogebra or Python or draw.io. draw.io is a powerful tool that allows you to intuitively and graphically create diagrams and electrical circuits. In this specific case, you don't need to save both the source and the svg, just the file in .drawio.svg format, because it can be used both in LaTeX as svg and in draw.io for future modifications.
+    \end{itemize}
+    \item \texttt{template.tex}, this is where the magic happens. Basically, you only need to focus on organizing the chapters in the order you prefer, and you may need to modify a few small things that will be indicated to you as the project takes shape, such as inserting your information if you want to be credited and a brief explanation of the changes made to the document.
+    \item Other files you don't need to worry about are generated automatically by the compiler. The only significant one will be \texttt{main.pdf} or whatever you named the main file, which will be the compiled .pdf file and and it is located in the build folder in a folder named the same as the one that contains the project you are compiling.
+\end{itemize}
+
+
+\section{Document Class Attributes}
+
+When creating a LaTeX document, you can specify various attributes in the \texttt{\textbackslash documentclass} command to customize the appearance and behavior of your document. Here are the attributes you can use with the \texttt{HKNdocument} class:
+
+\subsection{Language}
+
+You can set the language of the document to either Italian or English. The default language is Italian. To set the language, use one of the following options:
+\begin{itemize}
+  \item \texttt{italian} (default)
+  \item \texttt{english}
+\end{itemize}
+
+\subsection{Table of Contents (ToC) Depth}
+
+You can control the depth of the Table of Contents (ToC) by specifying one of the following options:
+\begin{itemize}
+  \item \texttt{toc=chapters}: Shows only chapters in the ToC (tocdepth=0)
+  \item \texttt{toc=sections}: Shows chapters and sections (tocdepth=1)
+  \item \texttt{toc=subsections} (default): Shows up to subsections (tocdepth=2)
+  \item \texttt{toc=subsubsections}: Shows up to sub-subsections (tocdepth=3)
+\end{itemize}
+
+\subsection{Font Size}
+
+You can set the base font size of the document using one of the following options:
+\begin{itemize}
+  \item \texttt{10pt}
+  \item \texttt{11pt} (default)
+  \item \texttt{12pt}
+\end{itemize}
+
+\subsection{Example Usage}
+
+Here is an example of how to use the \texttt{\textbackslash documentclass} command with the \texttt{HKNdocument} class and some of the attributes mentioned above:
+\begin{verbatim}
+\documentclass[english, toc=sections, 12pt]{HKNdocument}
+\end{verbatim}
+
+This command sets the document language to English, includes chapters and sections in the Table of Contents, and sets the base font size to 12pt.
