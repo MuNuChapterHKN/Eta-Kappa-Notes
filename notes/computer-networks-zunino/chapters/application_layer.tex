@@ -1,0 +1,364 @@
+\chapter[Application Layer]{Application Layer}
+
+\section*{Abstract}         % Optional section (unnumbered)
+This is where you write the abstract of your document.
+
+\section{Introduction}
+\label{chap4_sec1}
+The application layer can follow two main different approaches, the \textbf{client-server} architecture or the \textbf{peer-to-peer} architecture.
+\begin{itemize}
+    \item In the \textbf{client-server} approach, the devices of the network can assume the role of client or the role of server. The server is a host which is always available, with a permanent IP address, continuing offering a service. Since the service can be offered to a variable number of clients, servers usually need data centers to scale. The client, on the other hand, is a host that communicate with the server to obtain the service, but it's usually not contacted by it. The client can have a dynamic IP address, may be intermittently connected and doesn't communicate directly with other clients.
+    \item In the \textbf{P2P} architecture, there is a direct communication between all the hosts (peers) of the network, which can both act as a client or as a server. In most cases, peers request a service from other peers (i.e. file transfer), and then provide the same service in return to other peers. This ensures a \textit{self-scalability}, since new peers bring new service capacity. This kind of architecture can be efficient, but it's complex to manage, since many peers are intermittently connected (changing IP addresses), and so tend to request services without providing them to other peers.
+\end{itemize}
+
+\noindent At the application layer, communication is performed between two applications. The communication between them happens through messages (that can be \textit{requests} for the client and \textit{responses} for the server). Each message should have its own syntax and semantics, and rules must be defined for when and how processes send and respond to messages. In application layer we can find both open protocols (HTTP, SMTP) and proprietary protocols (i.e. Skype).
+
+In the application layer, applications can vary a lot and require totally different services:
+\begin{itemize}
+    \item \textbf{Data integrity}: some apps require a 100\% reliable data transfer (i.e. file transfer or web transactions), while others are loss-tolerant (voice calls)
+    \item \textbf{Timing}: some interactive apps (voice calls, video calls) require low delay to be effective
+    \item \textbf{Throughput}: some apps need a minimum amount of throughput (and so bandwidth) ti be effective (streaming), while others, more elastic, make use of the throughput they get (in the browser, a file can be downloaded in 1 min o 30 min)
+\end{itemize}
+
+\subsubsection{Application layer protocols}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|}
+    \hline
+    \textbf{application} & \textbf{\begin{tabular}[c]{@{}c@{}}application layer\\ protocol\end{tabular}} & \multicolumn{1}{l|}{\textbf{\begin{tabular}[c]{@{}l@{}}transport layer\\ protocol used\end{tabular}}} \\ \hline
+    e-mail & SMTP & TCP \\ \hline
+    Web & HTTP & TCP \\ \hline
+    file transfer & FTP & TCP \\ \hline
+    streaming multimedia & HTTP, RTP & TCP or UDP \\ \hline
+    Internet telephony & SIP, RTP & TCP or UDP \\ \hline
+    \end{tabular}
+\end{table}
+
+\noindent As we can see, all the services that require a 100\% data integrity use TCP protocols, while the others can also use UDP. There are some exceptions (e.g. YouTube), that use TCP, since it's based on HTTP. In this case pieces of the video are downloaded with TCP approach, and then they are streamed as if it were in real-time.
+
+\subsubsection{Securing TCP}
+As seen before, the TCP layer provides data integrity, but it provides nothing about data security and encription. For this reason, another leayer will be added, the SSL (Secure Sockets Layer), located in the middle between application layer and transport layer.
+
+\section{HTTP Protocol}
+The HTTP Protocol (hypertext transfer protocol), is the protocol mostly used to send and request web pages, where a web page consists of base HTML-file which includes several referenced objects (images, applets). Each object can be adressed by a URL, which is divided in a host name and a path name (that locates the resource).
+
+The HTTP follows a client/server model, in which the client (browser) sends a request for web objects to the server, that will respond by sending those objects, always using HTTP Protocol.
+
+\noindent The HTTP uses TCP:
+\begin{enumerate}
+    \item The client starts the TCP connection to the server, using port 80
+    \item The server accepts the TCP connection from the client
+    \item There will be an exchange of messages between the client (browser) and the web server
+    \item Finally, the connection is closed
+\end{enumerate}
+
+\noindent The original version of HTTP is "stateless", which means that the server doesn't maintain information about past clients requests. Each request is managed indipendently from the others.
+
+\subsubsection{HTTP connections}
+The HTTP connection can be non-persistent or persistent:
+\begin{itemize}
+    \item \textbf{Non-persistent}: at most one object sent over TCP connection, so for multiple objects downloaded we need multiple connections
+    \item \textbf{Persistent}: multiple objects can be sent over a single TCP connection between client and server
+\end{itemize}
+
+\subsection{HTTP messages}
+HTTP messages have the main feature to be \textit{human-readable} (in ASCII encoding). Request and response messages have different fields.
+
+\subsubsection{HTTP request message}
+[51] In the first line of an HTTP request message we can find the command (GET/POST/HEAD) that specifies the action we want to perform. Then we can find the path name of the URL (locating the resource) and the version of HTTP. In the header lines, instead, we find more information about the request, such as the host name, the user-agent (the browser), the encoding and so on. After the final carriage return, we find an entity body, which is optional and depends on the kind of command:
+\begin{itemize}
+    \item \textbf{GET}: the client just requests the web page to the server (the entity body is usually empty)
+    \item \textbf{POST}: the client requests the web page adding additional information (for example information written in a form input). This input is included in the entity body
+    \item \textbf{HEAD}: mainly used in \texttt{HTTP/1.0}, the client asks the server to not include the objects in the response. It was used to understand if the server was alive or not
+    \item \textbf{PUT}: from \texttt{HTTP/1.1}, specific for uploading file
+    \item \textbf{DELETE}: from \texttt{HTTP/1.1}, specific for deleting file
+\end{itemize}
+
+\subsubsection{HTTP response message}
+[52] In the first line (status line) of HTTP response message, we can find the HTTP version and then two fields, corresponding to the status code and the related message. Other information we find in the header lines are the date of the request, the last date in which the content has been modified. After the last carriage return, the data requested is included.
+
+About the status messages, these can be classified according to the first digit:
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|}
+    \hline
+    \textbf{1xx} & Informational \\ \hline
+    \textbf{2xx} & Success \\ \hline
+    \textbf{3xx} & Redirection \\ \hline
+    \textbf{4xx} & Client error \\ \hline
+    \textbf{5xx} & Server error \\ \hline
+    \end{tabular}
+\end{table}
+
+\noindent Some examples are:
+\begin{itemize}
+    \item \texttt{200}: OK
+    \item \texttt{301}: requested object moved
+    \item \texttt{400}: bad request (message not understood)
+    \item \texttt{404}: requested resource not found
+    \item \texttt{505}: HTTP version not supported
+\end{itemize}
+
+\subsection{Cookies}
+As said before, the original version of HTTP doesn't provide the concept of \textit{session}, since every request is managed independently. However, this can be introduced by means of \textit{cookies}. Cookies are small pieces of data stored on a user's browser by a website they visit. By using them, the server can remember the user that has done previous requests, and so personalize the responses which are sent.
+[53] This is the mechanism of cookies:
+\begin{enumerate}
+    \item The browser sends a request to the server (for the first time). The server receives the request and associates the user to an ID, stored in a backend database.
+    \item The server sends the response to the browser, including in the HTTP response the line \texttt{set-cookie: ID}. If the user has accepted to store the cookies, this ID will be saved in the browser.
+    \item The next time the same browser makes the request, in the request header the line \texttt{cookie: ID} will be added. The server will then recognize the user (looking in its database) and personalize the content of the response.
+\end{enumerate}
+
+\noindent Cookies can be used for different purposes, such as authorization, shopping carts, user session states and so on. In addition, they can be classified as:
+\begin{itemize}
+    \item \textbf{Session cookies}, which are temporary and deleted when the browser is closed.
+    \item \textbf{Persistent cookies}, which remain stored on the device for a set period.
+\end{itemize}
+
+\subsection{Proxy servers}
+When a client does multiple requests of the same web page to a server, it can be useful to implement a cache. Caching can be performed on multiple levels:
+\begin{itemize}
+    \item On the \textbf{browser}: if the same web page is requested multiple times, the browser will store it in its cache, in order to avoid useless requests.
+    \item On a \textbf{proxy server}: the proxy server is a server, typically located in the same LAN of the clients, that receives the requests of the clients, forward them to the server, and before redirecting the responsens, it saves the contents in its local cache. Doing this way, if another client requests the same web page, the proxy server can provide the version stored in its cache, without making a new request of the web page to the external server. [54]
+    The proxy server is quite useful every time the link rate inside the LAN is quite high, while the connection with the external internet is low. Instead of improving the links (which can be quite expensive), one can implement a proxy server in its own LAN, which will contain the most visited web pages of all the clients of the LAN, speeding up the responses.
+\end{itemize}
+
+\noindent But how to understand if the content in the cache is up-to-date? To do that, we actually need to send a special request to the server, called \textit{conditional GET}. In the header of the request we add a line:
+\[\texttt{If-modified-since: <date>}\]
+Where \texttt{<date>} is the last modified date returned by the server in the previous response. If the content, in the meanwhile, has been changed, the server will send to the client the new version. In the other case, a \texttt{301} response will be sent, which means that the content has not been modified. As we can see, also with caching, we need to make the request to the server, but in the case where the content is not modified, only few bytes will be received, instead of the entire web page. There are also some web pages (online newspaper, social networks), where the content continuosly changes: in this case the web server will request not to cache its content.
+
+\section{Electronic mail}
+The electronic mail system is based on two major components:
+\begin{itemize}
+    \item \textbf{User Agent}: it is responsible for composing, editing, reading mail messages. It can be installed on a client, or located on a web server.
+    \item \textbf{Mail Server}: they contain the mailboxes (one for each user) and a message queue for outgoing mail messages.
+\end{itemize}
+
+\noindent The electronic mail is based on different protocols:
+\begin{itemize}
+    \item \textbf{SMTP}: used for the communication between mail servers and for the communication from the user agent to the mail server (not the opposite!)
+    \item \textbf{POP} and \textbf{IMAP}: used for the communication from the mail server to the user agent
+\end{itemize}
+
+\subsection{SMTP}
+The \textbf{SMTP} protocol is based on TCP, in order to reliably transfer email messages from client to server (port 25) and between different mail servers. The communication is based on three phases: handshaking (SYN/SYN-ACK/ACK), exchange of messages, closure (FIN/ACK FIN/ACK). All the messages (as in HTTP) are human-readable and in 7-bit ASCII. This is a possible scenario:
+\begin{enumerate}
+    \item Alice uses her User Agent to send an email to \texttt{bob@someschool.edu}
+    \item The message arrives to the mail server \texttt{crepes.fr} and is placed in the queue
+    \item TCP connection between \texttt{crepes.fr} and \texttt{someschool.edu}:
+    \begin{enumerate}
+        \item \texttt{SYN/SYN-ACK/ACK}
+        \item -[55]
+        \item \texttt{FIN/ACK FIN/ACK}
+    \end{enumerate}
+    \item \texttt{someschool.edu} server places the message in Bob's mailbox
+    \item Bob invokes his User Agent to read the message (POP/IMAP)
+\end{enumerate}
+
+\subsubsection{RFC 822: text message format}
+In the SMTP text standard version, in the block data, we find two parts:
+\begin{itemize}
+    \item The header, containing the "To:", "From:", "Subject:" ("To" and "From" different from SMTP MAIL FROM and SMTP RCPT TO! These are set by the User Agent)
+    \item The body, containing the message in ASCII text (no images or other formats)
+\end{itemize}
+
+\subsubsection{RFC 2045,2046: MIME}
+If we want to send more complex data, we need to use the MIME, multimedia mail extension. In this case, in the header, we add additional lines:
+\[\texttt{MIME-Version: 1.0}\]
+\[\texttt{Content-Transfer-Encoding: base64}\]
+\[\texttt{Content-Type: image/jpeg}\]
+
+\noindent And then, in the body, we put the encoded data, such that no termination character appears. Obviously this mechanism can be extent also to other formats, such as HTML, video, ecc.
+
+\subsection{POP3 Protocol}
+As said before, the SMTP Protocol only works in the connection between different mail servers and in the connection from the client to the mail server. In order to retrieve the emails which are stored in the mail server mailbox, we need to use other protocols, such as POP and IMAP.
+
+POP Protocol is based on a download and delete mode. It works with TCP (data integrity) and SSL (data security) and is based on two phases, the authorization phase and the transaction phase.
+\begin{enumerate}
+    \item \texttt{SYN/SYN-ACK/ACK}
+    \item \textbf{Authorization phase}
+    \begin{enumerate}
+        \item \texttt{S: +OK POP3 server ready}: the server sends the first message
+        \item \texttt{C: user bob}: \textit{user} command to declare username
+        \item \texttt{S: +OK}: success
+        \item \texttt{C: pass hungry}: \textit{pass} command to declare password
+        \item \texttt{S: +OK}: authorization given by the server
+    \end{enumerate}
+    \item \textbf{Transaction phase}
+    \begin{enumerate}
+        \item \texttt{C: list}: with command \textit{list}, the client asks to list the emails
+        \item \texttt{S: 1 498; S: 2 912}: for each email, the size is specified
+        \item \texttt{C: retr 1}: the client retrieves the first mail
+        \item \texttt{S: <message1>}: the server returns the first message
+        \item \texttt{C: dele 1}: the client deletes the mail retrieved
+        \item \texttt{...}
+    \end{enumerate}
+    \item \texttt{FIN/ACK FIN/ACK}
+\end{enumerate}
+
+\noindent With this approach, the user cannot re-read email if he changes client, since they are immediately deleted from the mail server as soon as they are read. This was used in the past when the mailbox size was really limited. A possible solution was to store different copies on different clients. Another limitation of the POP is that is stateless, and no folder organization is provided.
+
+An evolution, much more used today, it's \textbf{IMAP} Protocol. The IMAP keeps all the messages in the server and allows the user to organize messages in folder. Every time a modification is done by the user on the User Agent, it's propagated also in the mail server. As a result, IMAP keeps the user state across sessions, and the modifications done by the user on one User Agent, can be found also in all the other User Agents.
+
+\section{P2P Architectures}
+Peer-to-peer architectures (P2P) are computer networks in which hosts (peers) request a service from other peers (i.e. file transfer), and then provide the same service in return to other peers. As we can see from the plot [56], for high number of users, the P2P system keeps a constant value of distribution time, since it's self-scalable.
+
+\subsection{BitTorrent}
+A first example of P2P architecture is BitTorrent, which is used for file sharing. In this case each file is divided in chunks of 256Kb, which are distributed between the different users of the P2P. Typically, for each resource, we have a centralized host called tracker, which stores the list (and corresponding IPs) of all the users joining the system (this group is called \textit{torrent}). [57]. If a new user wants to join the torrent, it will first send a request to the tracker, which will make it in contact with a subset of the torrent:
+\begin{itemize}
+    \item \textbf{Requesting chunks}: if the new user wants to retrieve the file, he will request them to the peers. The order of request is \textit{rarest first}, which means that we always start from the peer that holds the rarest chunks. This ensures that multiple copies of that chunks are stored also in new peers.
+    \item \textbf{Sending chunks}: if the user has to send chunks to other peers, it will follow the \textit{tit-for-tat} approach. It means that chunks are firstly sent to peers that, in their history, had the highest upload bandwidth. This is done to avoid serving free-riders, which are users that after downloading the files they need, they disconnect from the torrent. Obviously, since some users can actually have bandwidth problems, or they have simply just joined the torrent, every 30 sec one of these peers will be randomly selected.
+\end{itemize}
+
+\subsection{Distributed Hash Table (DHT)}
+While in the previous approach the \textit{tracker} was centralized and unique for each file, there is also the possibility to make distributed the set of indexes. This distributed database (among millions of peers) is made of pairs in the format:
+\[\texttt{(key,value)}\]
+\noindent where the key is the file we are looking for, while the value is the set of IP addresses (so of peers) from which the file can be downloaded. In other words, each entry of this distributed database is just equivalent to the \textit{tracker} of before. Every time we query a file, we receive in return the set of IPs to which request the file.
+
+As just explained, this database is distributed, so we need a way to assign the pairs \texttt{(key,value)} to the different peers. One way is using numbers: we associate each file to a number, we associate each peer to a number, and then we put the entry \texttt{(key,value)} in the peer which is closest (equal or closest successor) to the key. As instance:
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{cc|c|}
+    \cline{3-3}
+    \multicolumn{1}{l}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{Associated number} \\ \hline
+    \multicolumn{1}{|c|}{\textbf{File}} & Ubuntu12.0.4 & 1078 \\ \hline
+    \multicolumn{1}{|c|}{\textbf{Peer}} & 130.192.10.0/24 & 1079 \\ \hline
+    \end{tabular}
+\end{table}
+
+\noindent So, in this case the entry related to the Ubuntu file (1078) will be stored in the peer with the closest number, which is 1079. In order to translate each file/peer into a number, we need a specific function that is able to avoid collisions, which means not to generate the same number for two different files or peers. This function is the \textit{hash function}, and it is set on the space:
+\[[0,2^n]\text{, }n=160\]
+\noindent which is an enough big interval to ensure that every file/peer has a unique associated number.
+
+\subsubsection{Circular DHT}
+Let's start by a P2P network as in the picture [58]. Each peer is connected to the successor (so to the peer with the closest successor number). As instance, if we are looking for file 12, we can start from peer 1, and then we proceed along the circular DHT until we reach 12. Then 12 will send its entry to 1, and both peer 12 and 1 will store the same entry.
+
+\subsubsection{Circular DHT with shortcuts}
+Instead of connecting each peer only to the successor (leading each time to a linear search), we create some shortcuts that connect each peer to a successor distant of a power of 2. [59]
+
+\section{Multimedia}
+\subsubsection{Audio}
+Audio streaming is a kind of application which is not elastic. First, recall that every audio signal have to undergo two different processes:
+\begin{itemize}
+    \item \textbf{Sampling}: we read the signal for finite multiples of a sampling period
+    \item \textbf{Quantization}: we convert the audio from an analog value to a digital one
+\end{itemize}
+\noindent If for example our signal is made of 8000 samples, each sample is made of 8 bits, and we want to transfer the signal in 1 sec (e.g. during a call), then:
+\[8000 \text{ samples/sec}\cdot 8\text{ bit/sample}=64000\text{ bit/s}\]
+\noindent Under this bandwith, the signal cannot be transferred and so cannot be reconstructed. This feature makes the audio application not elastic.
+
+\subsubsection{Video}
+Also video streaming applications are not elastic. If we see a video as a set of images (each of 1 Mb), and we want to transfer 10 of these images every sec, then the total bandwidth requested will be:
+\[1 \text{ Mb/image}\cdot 10 \text{ images/s}=10 \text{ Mb/s}\]
+
+\noindent Below this rate, the image cannot be reconstructed from the receiver side. One way to transfer the images at a lower rate is passing from a \textbf{CBR} (constant bit rate) to a \textbf{VBR} (variable bit rate). In this coding is used, which is simply based on redundancy:
+\begin{itemize}
+    \item \textit{Spatial coding}: instead of sending N elements of same color, we just send two values (the color and N)
+    \item \textit{Temporal coding}: instead of sending two complete frames, we just send the difference between the two
+\end{itemize}
+
+\subsection{Streaming audio/video}
+First, we define streaming as the possibility to playout a content before downloading the entire file. Streaming can be classified as:
+\begin{itemize}
+    \item \textit{Streaming of stored content}, (e.g. YouTube) the content is already present in a remote server, which can transmit faster
+    \item \textit{Streaming live audio/video}, (e.g. live events) the content is transmitted as soon as the content is live recorded. Delay must be minimized as much as possible
+    \item \textit{Voice/video over IP}, video or voice conversation using routing. Also in this case the delay and the RTT must be reducted to a range between 150 ms and 400 ms, in order to make the conversation fluent
+\end{itemize}
+
+\subsubsection{Streaming of stored content}
+[60] In a theoretical and ideal situation, every time we want to stream a stored content, the server will start to send us the different frames at a constant rate. Since this situation is ideal, the frame will arrive to the client with a constant network delay, and so the content can be played as soon as it arrives without any problems. However, in a real context, this is not possible: the network delay between the frame transmitted and the frame received is not constant at all, and it can change over time. A good approach, in this case, is to introduce a buffer in the client. This buffer can contain multiple frames, and every time inside the buffer a certain threshold is reached, the video can be played. The objective is to avoid that the "playout line" (on the right) intersects with the "reception line" (in the middle). This buffer, obviously, will introduce a delay (playout delay), necessary to fill it.
+
+What protocols can we use in streming of a stored content?
+One possible solution is using UDP, since it's much faster than TCP and it requires a short playout delay. The main problem related to UDP is that the error recovery (some frames lost) must be done on the application level, time-permitting. Another possible issue is that UDP may not go through firewalls.
+
+Another solution is using HTTP, which is based on TCP. In fact, TCP will offer more services than UDP, like congestion control and retransmission. Since the transmission will require more time, also the playout delay must be increased, in order to make the playout smoother. In addition, TCP can pass more easily through firewall.
+
+A possible optimization of the streaming of stored content is the \textbf{DASH}, Dynamic Adaptive Streaming over HTTP. As said before, video streaming is not elastic, since a minimum bandwidth is always requested. However, there is also the possibility to stream a content with different resolutions, according to the bandwidth of the client. Thanks to \textbf{DASH}, inside the server, every frame of the video is stored with different rates (resolutions). The client, from its side, and according to its bandwidth, will require every time the maximum coding rate which is sustainable given the current bandwidth. Doing this way, the video can be seen without interruptions, with a quality that will change according to the performances of the network.
+
+\subsubsection{Streaming live audio/video}
+Streaming live audio/video requires much more performances with respect to stored contents. In this case the resource must be recorded, processed and sent to the clients with a very low delay and very low losses, in order to ensure a good quality. If we prefer a low-loss approach, we need to use TCP (with the implementation of DASH). On the other hand, if we want low-delay, and we don't care about possible losses, we will use UDP. It all depends on the kind of application we are using.
+
+\subsubsection{Content distribution network}
+In the streaming of both live and stored content, one of the main issues is dealing with hundreds of simultaneous users. We have two options:
+\begin{itemize}
+    \item One possibility is to provide the service with a unique mega-server. This arises many other issues:
+    \begin{itemize}
+        \item A mega-server is a single point of failure
+        \item It creates a point of network congestion
+        \item Some clients can be really distant from it
+        \item The same content in multiple copies is sent over output links
+        \item It's not scalable at all
+    \end{itemize}
+\end{itemize}
+
+\noindent For all the previous reasons, one of the main solutions used today is \textbf{CDN}. With this solution, the same content is stored in multiple copies over multiple geographically distributed sites (e.g. Akamai). In this way, we reduce the congestion of each of these servers, and we make them much closer to the user.
+
+\subsection{Voice-over-IP (VoIP)}
+One ofe the main requirements to establish a VoIP conversation is the low end-to-end delay. When this delay is over 400 ms, in fact, it can be seen as annoying from the point of view of the users. Nowadays VoIP is mostly used because it adds many services to the traditional calls (like the e-presence), and it leads to some cost reduction to users (e.g. international calls) and for companies (e.g. ToIP, where the traditional calls are redirected on the network). One of the main tasks of the VoIP is the \textit{session initialization}: while in a traditional call the phone number is unique and associated to the office/house where it's placed, in a VoIP call we generally use an identifier (email, username), that must be associated to a variable IP, since the person can move during a call or from a call to another.
+
+\subsubsection{Skype}
+An example of VoIP mechanism is the Skype mechanism, which is actually a proprietary application-layer protocol inferred via reverse engineering. In the original version, Skype was structured as a P2P architecture. As soon as a new client wants to join, it needs to register through a \textit{Skype login server}. After that, it is connected to a \textit{supernode}: the supernode acts both as a distributed indexing system and as a relay (like a NAT). Every time a client wants to contact another client, it will send a message to the nearest supernode, that will contact the other supernodes in order to find the final client (its IP is not public but shared between the different supernodes). After that, the two users are made in contact. [2-22]
+
+As just said, Skype is a set of proprietary protocols. The most important public protocols which are used for real-time conversational application are, instead, the \textbf{RTP} Protocol (for data exchange) and the \textbf{SIP} Protocol (for session establishment).
+
+\subsubsection{RTP (Real-Time Protocol)}
+The RTP Protocol is an application-layer protocol that extends the functionalities of the UDP Protocol, adding some of the services that were not offered, like the payload type identification, the packet sequence numbering and the time stamping. All these additional information are included in the RTP header:
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|ccccc|c|}
+    \hline
+    \multicolumn{5}{|c|}{\textbf{RTP header}} &  \\ \hline
+    \multicolumn{1}{|c|}{\begin{tabular}[c]{@{}c@{}}payload\\ type\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}sequence\\ number\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}time\\ stamp\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}syncr.\\ source ID\end{tabular}} & \begin{tabular}[c]{@{}c@{}}miscell.\\ fields\end{tabular} & payload \\ \hline
+    \end{tabular}
+\end{table}
+
+\noindent The payload type indicates the type of encoding currently being used, while the sequence number is incremented by one for each RTP packet sent, so it helps to detect packet losses and restore the packet sequence.
+
+\subsubsection{SIP (Session Initiation Protocol)}
+The SIP provides different mechanisms:
+\begin{itemize}
+    \item To let users know that other callers want to \textbf{establish a connection}. It makes them agree on the media type and on the type of encoding.
+    \item To determine the \textbf{current IP address} of the caller, and so it maps its identifier (email or username) with its current IP address.
+    \item To \textbf{manage the call}: add new media streams during the call, invite others, transfer and hold calls.
+\end{itemize}
+
+\noindent The SIP Protocol works by means of SIP server, which act both as a registrar and as a proxy. Every time a new caller wants to start a SIP client, it needs to register to the registrar server. This is done through a register message, whose content is
+\begin{align*}
+    &\texttt{REGISTER sip:domain.com SIP/2.0}\\
+    &\texttt{Via: SIP/2.0/UDP 193.64.210.89}\\
+    &\texttt{From: sip:bob@domain.com}\\
+    &\texttt{To: sip:bob@domain.com}\\
+    &\texttt{Expires: 3600}
+\end{align*}
+
+\noindent With this message, the client informs the SIP server that its identifier is \texttt{sip:bob@domain.com}, and that its current IP is \texttt{193.64.210.89}.
+But the SIP server is also a proxy, so if a client wants to contact \texttt{sip:bob@domain.com}, it will send a message to its SIP server:
+\begin{align*}
+    &\texttt{INVITE sip:bob@domain.com SIP/2.0}\\
+    &\texttt{Via: SIP/2.0/UDP 167.180.112.24}\\
+    &\texttt{From: sip:alice@hereway.com}\\
+    &\texttt{To: sip:bob@domain.com}\\
+    &\texttt{Call-ID: ...}\\
+    &\texttt{Content-Type: application/sdp}\\
+    &\texttt{...}\\
+    &\texttt{m=audio 38060 RTP/AVP 0}
+\end{align*}
+
+\noindent The client will inform the server of the user that wants to contact, and also to the kind of media and application protocol that will be used (for example RTP). At this moment, the caller doesn't know the IP address of the callee, the entire process is this one:
+[62]
+\begin{enumerate}
+    \item A wants to call B
+    \item A sends the invite message to the nearest SIP server, that acting as a proxy, will search for the SIP server where B is registered
+    \item The SIP server sends an invite message to the next proxy, and a trying message to the caller (to make it awared that is trying to contact the callee)
+    \item The final SIP server redirect the invite message to the callee, that will respond with a ringing, that will be redirected and arrive to the caller
+    \item If the call is accepted, the callee sends a \texttt{200 OK} message to the caller, again through the proxies. Inside this message a specific header line is included:
+    \[\texttt{contact-header: IP address}\]
+    such that the caller is finally awared of the IP address of the callee, and can directly contact him
+    \item The caller sends an ACK (at application layer, not TCP ACK), directly to the callee, using the given IP address
+    \item The direct communication between the two can start
+    \item At the end of the call, a \texttt{BYE} message is sent from B to A, and a \texttt{200 OK} from A to B
+\end{enumerate}
+
+\subsubsection{Final considerations}
+[table 63]
