@@ -1,0 +1,239 @@
+\chapter{Integrali di superficie}
+
+\section{Introduzione}
+Intuitivamente una superficie in $\R^3$ è un insieme di punti dove "ci si può muovere" con due gradi di libertà (a differenza di una curva che ne ha solo uno).
+
+\begin{definizione}{Superficie in $\R^3$}
+  Si dice \textbf{superficie} in $\R^3$ un'applicazione $S:\Omega\to\R^3$ dove $\Omega\inc\R^2$ è un insieme aperto (limitato e connesso) e $S$ è di classe $C^1$ su $\Omega$.
+\end{definizione}
+
+\section{Superfici}
+L'idea è quella di descrivere la geometria della superficie lavorando in $\Omega$ con le coordinate $u$ e $v$.\\
+Per fare questo definiamo i vettori fondamentali della superficie:
+\begin{definizione}{Vettori fondamentali}
+  Sia $S:\Omega\to\R^3$ una superficie in $\R^3$. Allora i \textbf{vettori fondamentali} sono:
+  \begin{itemize}
+    \item $P_u(u,v)=\frac{\partial S}{\partial u}(u,v)$
+    \item $P_v(u,v)=\frac{\partial S}{\partial v}(u,v)$
+  \end{itemize}
+\end{definizione}
+Essi hanno il seguente significato geometrico:
+\begin{itemize}
+  \item $P_u(u,v)$ è il vettore tangente alla curva $S(u,v)$ ottenuta fissando $v=v_0$ e facendo variare $u$.
+  \item $P_v(u,v)$ è il vettore tangente alla curva $S(u,v)$ ottenuta fissando $u=u_0$ e facendo variare $v$.
+\end{itemize}
+Perciò i vettori fondamentali sono entrambi tangenti alla superficie (a una curva della superficie) in $S(u_0,v_0)$ e se sono linearmente indipendenti allora individuano univocamente il piano tangente alla superficie in $S(u_0,v_0)$.
+
+\begin{definizione}{Superficie regolare}
+  Una superficie $S:\Omega\to\R^3$ si dice \textbf{regolare} se i vettori fondamentali sono linearmente indipendenti in ogni punto di $\Omega$.
+\end{definizione}
+
+\begin{osservazione}{}
+  Se $S$ è regolare allora $N(u_0,v_0) = \frac{P_u(u_0,v_0)\times P_v(u_0,v_0)}{\|P_u(u_0,v_0)\times P_v(u_0,v_0)\|}$ è un versone normale alla superficie in $S(u_0,v_0)$.\\
+  Inoltre $-N(u_0,v_0)$ è l'altro versore normale.
+\end{osservazione}
+
+\begin{definizione}{Superficie orientata}
+  Una superficie $S:\Omega\to\R^3$ si dice \textbf{orientata} se è regolare e se è definita una scelta di versore normale in ogni punto di $\Omega$.
+\end{definizione}
+
+\begin{osservazione}{}
+  Non tutte le superfici possono essere orientate, cioè non è detto che sia possibile definire un versore normale in ogni punto in modo che il campo risultante sulla superficie sia continuo.
+\end{osservazione}
+
+\subsection{Esempio: Sfera di raggio $R$}
+  Consideriamo la sfera di raggio $R$ parametrizzata dalle coordinate sferiche $(\theta, \phi)$ con $\theta \in [0, 2\pi]$ e $\phi \in [0, \pi]$. La parametrizzazione è data da:
+  \[
+  S(\theta, \phi) = \begin{pmatrix}
+    R \sin(\phi) \cos(\theta) \\
+    R \sin(\phi) \sin(\theta) \\
+    R \cos(\phi)
+  \end{pmatrix}
+  \]
+  Calcoliamo i vettori fondamentali:
+  \[
+  P_\theta(\theta, \phi) = \frac{\partial S}{\partial \theta} = \begin{pmatrix}
+    -R \sin(\phi) \sin(\theta) \\
+    R \sin(\phi) \cos(\theta) \\
+    0
+  \end{pmatrix}
+  \]
+  \[
+  P_\phi(\theta, \phi) = \frac{\partial S}{\partial \phi} = \begin{pmatrix}
+    R \cos(\phi) \cos(\theta) \\
+    R \cos(\phi) \sin(\theta) \\
+    -R \sin(\phi)
+  \end{pmatrix}
+  \]
+  Il prodotto vettoriale dei vettori fondamentali è:
+  \[
+  P_\theta \times P_\phi = \begin{vmatrix}
+    \mathbf{i} & \mathbf{j} & \mathbf{k} \\
+    -R \sin(\phi) \sin(\theta) & R \sin(\phi) \cos(\theta) & 0 \\
+    R \cos(\phi) \cos(\theta) & R \cos(\phi) \sin(\theta) & -R \sin(\phi)
+  \end{vmatrix}
+  = R^2 \sin(\phi) \begin{pmatrix}
+    \sin(\phi)\cos(\theta) \\
+    \sin(\phi)\sin(\theta) \\
+    \cos(\phi)
+  \end{pmatrix}
+  \]
+  La norma del vettore $P_\theta \times P_\phi$ è:
+  \[
+  \|P_\theta \times P_\phi\| = R^2 \sin(\phi) \sqrt{(\sin^2(\phi) \cos^2(\theta)) + ( \sin^2(\phi) \sin^2(\theta)) + (\cos^2(\phi))}
+  \]\\
+  \[ = R^2 \sin(\phi) \sqrt{\sin^2(\phi) + \cos^2(\phi)}
+  = R^2 \sin(\phi)
+  \]
+  Il versore normale è quindi:
+  \[
+  N(\theta, \phi) = \frac{P_\theta \times P_\phi}{\|P_\theta \times P_\phi\|} = \begin{pmatrix}
+    \cos(\theta) \sin(\phi) \\
+    \sin(\theta) \sin(\phi) \\
+    \cos(\phi)
+  \end{pmatrix}
+  \]
+  che è il versore radiale della sfera.
+
+\subsection{Esempio: Cono con angolo $\phi_0$ fissato}
+    Consideriamo un cono con angolo $\phi_0$ fissato parametrizzato dalle coordinate $(\theta, r)$ con $\theta \in [0, 2\pi]$ e $r \in [0, \infty)$. La parametrizzazione è data da:
+    \[
+    S(\theta, r) = \begin{pmatrix}
+      r \sin(\phi_0) \cos(\theta) \\
+      r \sin(\phi_0) \sin(\theta) \\
+      r \cos(\phi_0)
+    \end{pmatrix}
+    \]
+    Calcoliamo i vettori fondamentali:
+    \[
+    P_\theta(\theta, r) = \frac{\partial S}{\partial \theta} = \begin{pmatrix}
+      -r \sin(\phi_0) \sin(\theta) \\
+      r \sin(\phi_0) \cos(\theta) \\
+      0
+    \end{pmatrix}
+    \]
+    \[
+    P_r(\theta, r) = \frac{\partial S}{\partial r} = \begin{pmatrix}
+      \sin(\phi_0) \cos(\theta) \\
+      \sin(\phi_0) \sin(\theta) \\
+      \cos(\phi_0)
+    \end{pmatrix}
+    \]
+    Il prodotto vettoriale dei vettori fondamentali è:
+    \[
+    P_\theta \times P_r = \begin{vmatrix}
+      \mathbf{i} & \mathbf{j} & \mathbf{k} \\
+      -r \sin(\phi_0) \sin(\theta) & r \sin(\phi_0) \cos(\theta) & 0 \\
+      \sin(\phi_0) \cos(\theta) & \sin(\phi_0) \sin(\theta) & \cos(\phi_0)
+    \end{vmatrix}
+    = r \sin(\phi_0) \begin{pmatrix}
+      -\cos(\theta) \cos(\phi_0) \\
+      -\sin(\theta) \cos(\phi_0) \\
+      \sin(\phi_0)
+    \end{pmatrix}
+    \]
+    Il versore normale è quindi:
+    \[
+    N(\theta, r) = \frac{P_\theta \times P_r}{\|P_\theta \times P_r\|} = \begin{pmatrix}
+      -\cos(\theta) \cos(\phi_0) \\
+      -\sin(\theta) \cos(\phi_0) \\
+      \sin(\phi_0)
+    \end{pmatrix}
+    \]
+
+\subsection{Esempio: Cilindro di raggio $R$ fissato}
+  Consideriamo un cilindro di raggio $R$ fissato parametrizzato dalle coordinate $(\theta, z)$ con $\theta \in [0, 2\pi]$ e $z \in \R$. La parametrizzazione è data da:
+  \[
+  S(\theta, z) = \begin{pmatrix}
+    R \cos(\theta) \\
+    R \sin(\theta) \\
+    z
+  \end{pmatrix}
+  \]
+  Calcoliamo i vettori fondamentali:
+  \[
+  P_\theta(\theta, z) = \frac{\partial S}{\partial \theta} = \begin{pmatrix}
+    -R \sin(\theta) \\
+    R \cos(\theta) \\
+    0
+  \end{pmatrix}
+  \]
+  \[
+  P_z(\theta, z) = \frac{\partial S}{\partial z} = \begin{pmatrix}
+    0 \\
+    0 \\
+    1
+  \end{pmatrix}
+  \]
+  Il prodotto vettoriale dei vettori fondamentali è:
+  \[
+  P_\theta \times P_z = \begin{vmatrix}
+    \mathbf{i} & \mathbf{j} & \mathbf{k} \\
+    -R \sin(\theta) & R \cos(\theta) & 0 \\
+    0 & 0 & 1
+  \end{vmatrix}
+  = \begin{pmatrix}
+    R \cos(\theta) \\
+    R \sin(\theta) \\
+    0
+  \end{pmatrix}
+  \]
+  Il versore normale è quindi:
+  \[
+  N(\theta, z) = \frac{P_\theta \times P_z}{\|P_\theta \times P_z\|} = \begin{pmatrix}
+    \cos(\theta) \\
+    \sin(\theta) \\
+    0
+  \end{pmatrix}
+  \]
+
+\section{Superfici grafici di funzioni}
+Un caso particolare di superfici sono quelle ottenibili come grafico di una funzione $g(x,y)$ di due variabili, $g:\Omega \inc \R^2  \to \R$.\\
+In questo caso la superficie è data da $\Sigma = {(x,y,z)|(x,y)\in \Omega, z=g(x,y)}$.\\
+La scelta più naturale sarà in questo caso parametrizzare con $u=x$ e $v=y$ e scegliere $S(u,v)=(u,v,g(u,v))$.\\
+I vettori fondamentali sono:
+\begin{itemize}
+  \item $P_x(x,y)=(1,0,\frac{\partial g}{\partial x})$
+  \item $P_y(x,y)=(0,1,\frac{\partial g}{\partial y})$
+\end{itemize}
+Per calcolare il versore normale si calcola il prodotto vettoriale dei vettori fondamentali e si normalizza il risultato:
+$$N(x,y)=\frac{P_x(x,y)\times P_y(x,y)}{\|P_x(x,y)\times P_y(x,y)\|}$$, che in questo caso vale:
+$$N(x,y)=\frac{(-\frac{\partial g}{\partial x},-\frac{\partial g}{\partial y},1)}{\sqrt{1+(\frac{\partial g}{\partial x})^2+(\frac{\partial g}{\partial y})^2}}=\frac{(-\frac{\partial g}{\partial x},-\frac{\partial g}{\partial y},1)}{\sqrt{1+\|\nabla g\|^2}}$$.
+
+\begin{osservazione}{}
+  Un grafico è sempre orientabile.
+\end{osservazione}
+
+\section{Integrali su superfici}
+\begin{definizione}{Integrale su superficie}
+  Sia $S:\Omega\to\R^3$ una superficie regolare e orientata. Sia $f:S(\Omega)\to\R$ una funzione continua. Allora l'\textbf{integrale di superficie} di $f$ su $S$ è:
+  $$\int_{S} f dS = \int_{\Omega} f(x(u,v),y(u,v),z(u,v))\|P_u\times P_v\|dudv$$
+\end{definizione}
+
+Il significato è quello di:
+\begin{enumerate}
+  \item Scegliere una partizione di $\Omega$ e calcolare l'integrale di $f$ su ogni pezzo di superficie.
+  \item Sommare i risultati.
+  \item Passare al limite.
+\end{enumerate}
+Alcune possibili interpretazioni geometriche sono:
+\begin{itemize}
+\item In particolare se $f=1$ allora l'integrale di $f$ su $S$ è l'area di $S$.\\
+\item Se $f(x,y,z)=x$ allora l'integrale di $f$ su $S$ è la media di $x$ su $S$, ovvero la coordinata x del baricentro.\\
+\item In generale $\frac{\iint_S f dS}{\text{Area}(S)}$ è la media di $f$ su $S$.\\
+\end{itemize}
+
+\section{Flusso di un campo vettoriale attraverso una superficie}\label{sec:flusso-superficie}
+C'è un caso particolare che rientra nella definizione precedente, ovvero il flusso di un campo vettoriale attraverso una superficie.\\
+\begin{definizione}{Flusso di un campo}
+  Sia $\vec F:\R^3\to\R^3$ un campo vettoriale e sia $S:\Omega\to\R^3$ una superficie regolare e orientata. Allora si può scegliere $f(x,y,z)=N\cdot \vec F$. Allora si definisce il \textbf{flusso} di $\vec F$ attraverso $S$:
+  $$\int_{S} \vec F \cdot N d S = \int_{S} \vec F \cdot \vec (dS) = \int_{\Omega} \vec F(x(u,v),y(u,v),z(u,v))\cdot (P_u\times P_v)dudv$$
+\end{definizione}
+\begin{osservazione}{}
+  $\|P_u \times P_v\|$ si semplifica e di fatto non compare.
+\end{osservazione}
+
+Notiamo anche che se $S$ è il grafico di una funzione $g(x,y)$ allora la formula per l'integrale di $f(x,y,z)$ su $S$ diventa:
+$$\int_{S} f dS = \int_{\Omega} f(x,y,g(x,y))\sqrt{1+\|g(x,y)\|^2}dxdy$$.\\
+Inoltre, quando $S$ è il grafico di una funzione $g(x,y)$ allora il flusso di $\vec F$ attraverso $S$ è:
+$$\int_{S} \vec F \cdot N d S = \int_{\Omega} \vec F(x,y,g(x,y))\cdot \left(-\frac{\partial g}{\partial x},-\frac{\partial g}{\partial y},1\right)dxdy$$.\\

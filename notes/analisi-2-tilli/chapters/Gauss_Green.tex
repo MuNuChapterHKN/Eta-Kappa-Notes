@@ -1,0 +1,51 @@
+\chapter{Gauss-Green}
+\section{Teorema di Gauss-Green}
+Questo breve capitolo è interamente dedicato al teorema di Gauss-Green anche noto come teorema della divergenza.\\
+Diamo intanto la definizione di divergenza di un campo vettoriale.
+\begin{definizione}{Divergenza di un campo vettoriale}
+  Sia $\vec{F} \in C^1(\Omega, \R^3)$ un campo vettoriale definito su un insieme aperto $\Omega \inc \R^3$. La \textbf{divergenza} di $\vec{F}$ è la funzione $\nabla \cdot \vec{F} : \Omega \to \R$ definita come:
+  $$
+    \nabla \cdot \vec{F} = \frac{\partial F_1}{\partial x} + \frac{\partial F_2}{\partial y} + \frac{\partial F_3}{\partial z}
+  $$
+\end{definizione}
+Ora possiamo enunciare il teorema di Gauss-Green.
+\begin{teorema}{Teorema di Gauss-Green}
+ Sia $\Omega \inc \R^3$ un solido (aperto e limitato) la cui frontiera $\partial \Omega$ è una superficie regolare orientata con la scelta della normale uscente. Sia $\vec{F} \in C^1(\Omega, \R^3)$ un campo vettoriale. Allora vale la seguente formula:
+  $$
+    \int_{\Omega} \nabla \cdot \vec{F} \, dV = \int_{\partial \Omega} \vec{F} \cdot \vec{n} \, dS$$
+  dove $\nabla \cdot \vec{F}$ è la divergenza di $\vec{F}$ e $\vec{n}$ è il vettore normale alla superficie $\partial \Omega$.
+\end{teorema}
+
+Vediamone alcune applicazioni.
+\begin{itemize}
+\item Se ad esempio $\vec{F} = (0, 0, z)$, allora $\nabla \cdot \vec{F} = 1$ e il teorema di Gauss-Green diventa:
+  $$
+    \int_{\Omega} 1 \, dV = \int_{\partial \Omega} z \, dS
+  $$
+  cioè l'integrale del volume di $\Omega$ è uguale all'integrale della funzione $z$ sulla superficie $\partial \Omega$.
+\item Possiamo usarlo per calcolare il volume di una sfera considerando un campo vettoriale $F(x,y,z)=(x,y,z)$: la divergenza di $F$ è $3$ e quindi:
+  $$
+    \int_{\Omega} 3 \, dV = 3 \cdot \text{Volume}(\Omega) = \int_{\partial \Omega} \vec{F} \cdot \vec{n} \, dS = \int_{\partial \Omega} (x,y,z) \cdot \vec{n} \, dS
+  $$
+  ma $(x,y,z) \cdot \vec{n} = r$ e quindi:
+  $$
+    3 \cdot \text{Volume}(\Omega) = \int_{\partial \Omega} r \, dS
+  $$
+  e quindi:
+  $$
+    \text{Volume}(\Omega) = \frac{1}{3} \int_{\partial \Omega} r \, dS
+  $$
+  Per una sfera di raggio $R$, la superficie $\partial \Omega$ è una sfera di raggio $R$ e quindi:
+  $$
+    \text{Volume}(\Omega) = \frac{1}{3} \int_{\partial \Omega} r \, dS = \frac{1}{3} \int_{\partial \Omega} R \, dS = \frac{R}{3} \int_{\partial \Omega} dS
+  $$
+  L'integrale $\int_{\partial \Omega} dS$ è semplicemente l'area della superficie della sfera, che è $4 \pi R^2$. Quindi:
+  $$
+    \text{Volume}(\Omega) = \frac{R}{3} \cdot 4 \pi R^2 = \frac{4 \pi R^3}{3}
+  $$
+  che è la ben nota formula per il volume di una sfera di raggio $R$.
+\end{itemize}
+
+In generale nei casi in cui la divergenza del campo ha un'espressione semplice, il teorema di Gauss-Green può essere molto utile per calcolare integrali di volume.
+
+

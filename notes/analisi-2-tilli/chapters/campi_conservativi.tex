@@ -1,0 +1,208 @@
+\chapter{Campi conservativi}
+
+\section{Introduzione}\label{sec:introduzione}
+Vediamo come prima cosa un importante esempio di integrale curvilineo che ci servirà nella spiegazione dei campi conservativi.\\
+Consideriamo il campo (magnetico) $\vec F (x,y) = (\frac{-y}{x^2+y^2}, \frac{x}{x^2+y^2})$ e il cammino $\gamma$ che è la circonferenza di raggio $1$ centrata nell'origine.\\
+Come spiegato nel paragrafo ~\ref{sec:integrali-curvilinei-di-seconda-specie}, considerata la parametrizzazione di $\gamma$ data da $\gamma(t) = (\cos t, \sin t)$ con $t \in [0, 2\pi]$, possiamo calcolare l'integrale curvilineo di $\vec F$ lungo $\gamma$:
+$$\int_\gamma \vec F \cdot d\vec r = \int_0^{2\pi} \vec F(\gamma(t)) \cdot \gamma'(t) dt =$$\\
+$$\int_0^{2\pi} \left( \frac{-\sin t}{\cos^2 t + \sin^2 t}, \frac{\cos t}{\cos^2 t + \sin^2 t} \right) \cdot (-\sin t, \cos t) dt = \int_0^{2\pi} 1 dt =2\pi$$.
+
+\begin{osservazione}{}
+  Il valore dell'integrale vale $2\pi$ indipendentemente dal raggio della circonferenza.\\
+\end{osservazione}
+
+In qualche caso tuttavia $\int_\gamma \vec F \cdot d\vec r$ è calcolabile in altro modo (senza integrale).\\
+
+\section{Campi conservativi}
+Vediamo la seguente proposizione:
+
+\begin{teorema}{}
+  Sia $\Omega$ un aperto in $\R^n$ e $\gamma: [a,b] \rightarrow \R^n$ una curva $C^1$ a tratti contenuta in $\Omega$. Sia $\vec F: \Omega \rightarrow \R^n$ un campo vettoriale di classe $C^1$ e sia $f: \Omega \rightarrow \R$ tale che $\vec F = \nabla f$. Allora:
+  $$\int_\gamma \vec F \cdot d\vec r = f(\gamma(b)) - f(\gamma(a))$$.
+\end{teorema}
+
+\begin{proof}
+  Sia $\gamma(t) = (x_1(t), \ldots, x_n(t))$ la parametrizzazione della curva $\gamma$.\\
+  Allora:
+  $$\int_\gamma \vec F \cdot d\vec r = \int_a^b \vec F(\gamma(t)) \cdot \gamma'(t) dt = \int_a^b \nabla f(\gamma(t)) \cdot \gamma'(t) dt =$$\\
+  $$= \int_a^b \frac{d}{dt} f(\gamma(t)) dt = f(\gamma(b)) - f(\gamma(a))$$.
+\end{proof}
+
+Questo motiva la seguente definizione:
+\begin{definizione}{Campo conservativo}
+  Nelle ipotesi precedenti, un campo vettoriale $\vec F: \Omega \rightarrow \R^n$ è detto \textbf{conservativo} se esiste una funzione $f: \Omega \rightarrow \R$ tale che $\vec F = \nabla f$. \\ In tal caso la funzione $f$ si chiama potenziale di $\vec F$ in $\Omega$.
+\end{definizione}
+
+\begin{osservazione}{}
+  Dire che un campo è o non è conservativo senza specificare dove è definito non ha significato.\\
+\end{osservazione}
+
+Consideriamo ad esempio il campo visto nel paragrafo precedente $\vec F(x,y) = (\frac{-y}{x^2+y^2}, \frac{x}{x^2+y^2})$. Questa volta però consideriamo come $\Omega_1$ il primo quadrante.\\
+Vediamo che $\vec F$ è conservativo in $\Omega_1$ in quanto $\vec F = \nabla \arctan \frac{y}{x}$.\\
+Tuttavia abbiamo già calcolato che l'integrale di questo campo lungo una circonferenza di raggio generico centrata nell'origine è $2\pi$. Perciò possiamo concludere che il campo non è conservativo in qualunque aperto $\Omega_2 \in \R^2$ che contenga una circonferenza centrata nell'origine.\\
+
+\begin{osservazione}{}
+  Se $\vec F$ è conservativo in $\Omega$ e $\gamma$ è una curva chiusa in $\Omega$ allora $\int_\gamma \vec F \cdot d\vec r = 0$.\\
+  Se $\gamma$ è chiusa l'integrale si chiama circuitazione di $\vec F$ lungo $\gamma$.
+\end{osservazione}
+
+Capiamo allora cosa manca al campo precendente per essere conservativo in $\R^2 \setminus \{0\}$.\\
+
+\begin{definizione}{Connessione per archi}
+  Un aperto $\Omega \in \R^n$ si dice connesso per archi se per ogni coppia di punti $P,Q \in \Omega$ esiste una curva $C^1$ a tratti $\gamma: [a,b] \rightarrow \Omega$ tale che $\gamma(a) = P$ e $\gamma(b) = Q$.
+\end{definizione}
+
+Enunciamo ora il seguente teorema:
+\begin{teorema}{}
+  Sia $\Omega \in \R^n$ un aperto connesso per archi e $\vec F: \Omega \rightarrow \R^n$ un campo vettoriale di classe $C^1$. Allora le seguenti affermazioni sono equivalenti:
+  \begin{enumerate}
+    \item $\vec F$ è conservativo in $\Omega$.
+    \item Per ogni curva chiusa $\gamma$ in $\Omega$ si ha $\int_\gamma \vec F \cdot d\vec r = 0$.
+    \item Se $\gamma_1$ e $\gamma_2$ sono curve con lo stesso punto iniziale e finale in $\Omega$ allora $\int_{\gamma_1} \vec F \cdot d\vec r = \int_{\gamma_2} \vec F \cdot d\vec r$.
+  \end{enumerate}
+\end{teorema}
+
+\begin{proof}
+  Dimostriamo le implicazioni tra le affermazioni.
+
+  \textbf{(1) $\implies$ (2):} Se $\vec F$ è conservativo, esiste una funzione $f: \Omega \rightarrow \R$ tale che $\vec F = \nabla f$. Per una curva chiusa $\gamma$, il punto iniziale coincide con il punto finale, quindi:
+  $$ \int_\gamma \vec F \cdot d\vec r = f(\gamma(b)) - f(\gamma(a)) = 0. $$
+
+  \textbf{(2) $\implies$ (3):} Supponiamo che per ogni curva chiusa $\gamma$ in $\Omega$ si abbia $\int_\gamma \vec F \cdot d\vec r = 0$. Siano $\gamma_1$ e $\gamma_2$ due curve con lo stesso punto iniziale e finale. Consideriamo la curva chiusa $\gamma$ ottenuta percorrendo $\gamma_1$ e poi $\gamma_2$ in senso inverso. Allora:
+  $$ \int_\gamma \vec F \cdot d\vec r = \int_{\gamma_1} \vec F \cdot d\vec r - \int_{\gamma_2} \vec F \cdot d\vec r. $$
+  Poiché $\int_\gamma \vec F \cdot d\vec r = 0$, segue che:
+  $$ \int_{\gamma_1} \vec F \cdot d\vec r = \int_{\gamma_2} \vec F \cdot d\vec r. $$
+
+  \textbf{(3) $\implies$ (1):} Supponiamo che $\int_{\gamma_1} \vec F \cdot d\vec r = \int_{\gamma_2} \vec F \cdot d\vec r$ per ogni coppia di curve $\gamma_1$ e $\gamma_2$ con lo stesso punto iniziale e finale. Fissiamo un punto $P_0 \in \Omega$ e definiamo $f(P) = \int_{\gamma} \vec F \cdot d\vec r$, dove $\gamma$ è una curva da $P_0$ a $P$. La definizione è ben posta perché il valore dell'integrale non dipende dalla curva scelta (per ipotesi). Inoltre, derivando $f$ lungo una direzione, si ottiene $\nabla f = \vec F$, quindi $\vec F$ è conservativo.
+
+  Concludiamo che le tre affermazioni sono equivalenti.
+\end{proof}
+
+Enunciamo ora condizioni necessarie e sufficienti per la conservatività:
+
+
+\begin{definizione}{Irrotazionale}
+  Un campo vettoriale $\vec F: \Omega \rightarrow \R^n$ si dice \textbf{irrotazionale} se $\nabla \times \vec F = 0$. \\
+\end{definizione}
+In due variabili è equivalente a:
+$$\frac{\partial F_2}{\partial x} - \frac{\partial F_1}{\partial y}=0$$.
+In tre variabili questo significa:
+$$\nabla \times \vec F = \left( \frac{\partial F_3}{\partial y} - \frac{\partial F_2}{\partial z}, \frac{\partial F_1}{\partial z} - \frac{\partial F_3}{\partial x}, \frac{\partial F_2}{\partial x} - \frac{\partial F_1}{\partial y} \right) = (0,0,0)$$.
+
+\begin{teorema}{Condizione necessaria per la conservatività}
+  Sia $\Omega \in \R^n$ un aperto connesso per archi e $\vec F: \Omega \rightarrow \R^n$ un campo vettoriale di classe $C^1$. Se $\vec F$ è conservativo in $\Omega$ allora $\frac{\partial F_i}{\partial x_j} = \frac{\partial F_j}{\partial x_i}$ per ogni $i,j = 1, \ldots, n$. \\
+  Ciò significa che la matrice jacobiana di $\vec F$ è simmetrica e che il campo $\vec F$ è irrotazionale.
+\end{teorema}
+
+\begin{proof}
+  Se $\vec F$ è conservativo, esiste una funzione $f: \Omega \rightarrow \R$ tale che $\vec F = \nabla f$. Questo implica che $F_i = \frac{\partial f}{\partial x_i}$ per ogni $i = 1, \ldots, n$.
+
+  Poiché $f$ è di classe $C^2$ (essendo $\vec F$ di classe $C^1$), possiamo applicare il teorema di Schwarz sulla commutatività delle derivate parziali miste. Pertanto, per ogni $i, j = 1, \ldots, n$, si ha:
+  $$ \frac{\partial F_i}{\partial x_j} = \frac{\partial^2 f}{\partial x_j \partial x_i} = \frac{\partial^2 f}{\partial x_i \partial x_j} = \frac{\partial F_j}{\partial x_i}. $$
+
+  Questo dimostra che la matrice jacobiana di $\vec F$ è simmetrica, ovvero $\frac{\partial F_i}{\partial x_j} = \frac{\partial F_j}{\partial x_i}$ per ogni $i, j$. Inoltre, ciò implica che $\vec F$ è irrotazionale.
+\end{proof}
+
+
+
+La seguente definizione sarà utile per trovare una condizione sufficiente di conservatività:
+
+\begin{definizione}{Semplicemente connesso}
+  Un aperto $\Omega \in \R^n$ si dice semplicemente connesso se per ogni curva chiusa $\gamma$ in $\Omega$ si ha che $\gamma$ può essere deformata con continuità fino a stringerla ottenendo un singolo punto senza mai uscire da $\Omega$.
+\end{definizione}
+
+Nel piano la condizione è equivalente a dire che $\Omega$ non ha buchi.\\
+In $\R^3$ la condizione è più complessa da verificare.\\
+
+\begin{teorema}{Condizione sufficiente per la conservatività}
+  Sia $\Omega \in \R^n$ un aperto semplicemente connesso e $\vec F: \Omega \rightarrow \R^n$ un campo vettoriale di classe $C^1$. Se $\vec F$ è irrotazionale in $\Omega$ allora $\vec F$ è conservativo in $\Omega$.
+\end{teorema}
+
+\section{Campi centrali}
+Vediamo un importante tipo di campi:
+
+\begin{definizione}{Campo centrale}
+  Un campo vettoriale $\vec F: \R^n \setminus \{0\} \rightarrow \R^n$ si dice \textbf{centrale} se esiste una funzione $f: \R^n \setminus \{0\} \rightarrow \R$ tale che $\vec F(\vec{x}) = f(\|\vec{x}\|) \frac{\vec{x}}{\|\vec{x}\|}$, dove $\|\vec{x}\|$ è la norma euclidea di $\vec{x}$.
+\end{definizione}
+
+
+Esiste allora un teorema che ci permette di risolvere molte patologie:
+\begin{teorema}{Conservatività dei campi centrali}
+  Un campo centrale $\vec F: \R^n \setminus \{0\} \rightarrow \R^n$ è conservativo.
+\end{teorema}
+
+\begin{proof}
+  Per definizione, un campo centrale $\vec F$ è dato da:
+  $$ \vec F(\vec{x}) = h(\|\vec{x}\|) \frac{\vec{x}}{\|\vec{x}\|}, $$
+  dove $\|\vec{x}\|$ è la norma euclidea di $\vec{x}$ e $h$ è una funzione scalare.
+
+  Consideriamo la funzione $H: \R^n \rightarrow \R$ definita da:
+  $$ H(\|\vec{x}\|) = \int h(r) \, dr, $$
+  dove $r = \|\vec{x}\|$. La funzione $H$ dipende solo dalla norma di $\vec{x}$.
+
+  Calcoliamo il gradiente di $H(\|\vec{x}\|)$. Poiché $\|\vec{x}\| = \sqrt{x_1^2 + x_2^2 + \cdots + x_n^2}$, abbiamo:
+  $$ \nabla \|\vec{x}\| = \frac{\vec{x}}{\|\vec{x}\|}. $$
+
+  Applicando la regola della catena, otteniamo:
+  $$ \nabla H(\|\vec{x}\|) = H'(\|\vec{x}\|) \nabla \|\vec{x}\| = H'(\|\vec{x}\|) \frac{\vec{x}}{\|\vec{x}\|}. $$
+
+  Poiché $H'(\|\vec{x}\|) = h(\|\vec{x}\|)$, segue che:
+  $$ \nabla H(\|\vec{x}\|) = h(\|\vec{x}\|) \frac{\vec{x}}{\|\vec{x}\|}. $$
+
+  Pertanto, $\vec F = \nabla H(\|\vec{x}\|)$, il che dimostra che $\vec F$ è conservativo, con potenziale dato da $H(\|\vec{x}\|)$.
+\end{proof}
+
+
+
+\begin{osservazione}{}
+  Da quanto detto riguardo alla condizione necessaria di conservatività segue che campo centrale $\vec F: \R^n \setminus \{0\} \rightarrow \R^n$ è irrotazionale.
+\end{osservazione}
+
+\section{Potenziale di un campo}
+
+Dato un aperto $\Omega \inc \R^n$ e un campo vettoriale $\vec F: \Omega \rightarrow \R^n$ conservativo (oppure almeno irrotazionale) in $\Omega$, vediamo come si può ricostruire (quando esiste) un potenziale $f$ in $\Omega$.
+
+\begin{definizione}{Potenziale}
+  Nelle condizioni precedenti una funzione $f: \Omega \rightarrow \R$ tale che $\vec F = \nabla f$ si chiama \textbf{potenziale} di $\vec F$ in $\Omega$.
+\end{definizione}
+
+In due variabili $\Omega \in \R^2$ abbiamo che $\vec F = (F_1, F_2)$ e vogliamo\\
+$$F_1(x,y) = \frac{\partial f(x,y)}{\partial{x}} $$
+$$F_2(x,y) = \frac{\partial f(x,y)}{\partial{y}} $$.\\
+Lo schema è il seguente:
+\begin{enumerate}
+\item Calcoliamo $f(x,y) = \int F_1(x,y)dx + g(y)$.
+\item Calcoliamo $\frac{\partial f(x,y)}{\partial{y}}$.
+\item Imponiamo $F_2(x,y)=\frac{\partial f(x,y)}{\partial{y}}$ e troviamo $g(y)$.
+\end{enumerate}
+
+In 3 variabili il processo è analogo.\\
+\subsection{Esempio di calcolo del potenziale}
+
+Consideriamo il campo vettoriale $\vec F(x,y) = (2xy, x^2 + 1)$. Vogliamo trovare un potenziale $f(x,y)$ tale che $\vec F = \nabla f$.
+
+\begin{enumerate}
+\item Calcoliamo $f(x,y)$ integrando $F_1$ rispetto a $x$:
+$$ f(x,y) = \int 2xy \, dx = x^2 y + g(y) $$
+dove $g(y)$ è una funzione da determinare.
+
+\item Calcoliamo la derivata parziale di $f(x,y)$ rispetto a $y$:
+$$ \frac{\partial f(x,y)}{\partial y} = x^2 + g'(y) $$
+
+\item Imponiamo che questa derivata sia uguale a $F_2(x,y)$:
+$$ x^2 + g'(y) = x^2 + 1 $$
+da cui otteniamo:
+$$ g'(y) = 1 $$
+
+Integrando rispetto a $y$, troviamo:
+$$ g(y) = y + C $$
+
+Quindi il potenziale è:
+$$ f(x,y) = x^2 y + y + C $$
+\end{enumerate}
+
+Abbiamo quindi trovato che il potenziale del campo $\vec F(x,y) = (2xy, x^2 + 1)$ è $f(x,y) = x^2 y + y + C$.\\
+
+
+
+

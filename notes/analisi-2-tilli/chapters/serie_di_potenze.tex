@@ -1,0 +1,198 @@
+
+\chapter{Serie di potenze}
+\section{Introduzione}
+In questo capitolo vedremo le serie di potenze.
+\begin{definizione}{Serie di potenze}
+    Una \textbf{serie di potenze} è una serie della forma
+    \[
+        \sum_{n=0}^{+\infty} a_n (x-x_0)^n
+    \]
+    dove $a_n \in \R$ e $x,x_0 \in \R$.\\
+    $x_0$ è detto il centro della serie.\\
+    I numeri $a_n$ sono detti coefficienti della serie.\\
+    Per ogni $x$ fissato, la serie è una serie numerica.
+\end{definizione}
+
+Può essere utile sapere per quali valori di $x$ la serie converge.\\
+
+\begin{definizione}{Insieme di convergenza}
+    Sia data una serie di potenze $\sum_{n=0}^{+\infty} a_n (x-x_0)^n$.\\
+    L'\textbf{insieme di convergenza} della serie è l'insieme
+    \[
+        D=\left\{ x \in \R \mid \sum_{n=0}^{+\infty} a_n (x-x_0)^n \text{ converge} \right\}
+    \]
+\end{definizione}
+
+\begin{osservazione}{}
+    L'insieme di convergenza $D$ di una serie di potenze non è mai vuoto, in quanto la serie converge sempre per $x=x_0$.
+\end{osservazione}
+
+
+La teoria si basa inizialmente sul seguente teorema:
+\begin{teorema}{}
+  Data una serie di potenze $\sum_{n=0}^{+\infty} a_n (x-x_0)^n$, se esiste $\bar{x} \in D, \bar{x}\neq x_0$, allora:
+  La serie converge assolutamente per ogni $x$ tale che $\lvert x - x_0 \rvert < \lvert \bar{x} - x_0 \rvert$.\\
+\end{teorema}
+
+\begin{proof}
+  Consideriamo la serie di potenze $\sum_{n=0}^{+\infty} a_n (x-x_0)^n$ con raggio di convergenza $R > 0$. Per dimostrare il teorema, sfruttiamo la serie geometrica.
+
+  La serie geometrica $\sum_{n=0}^{+\infty} r^n$ converge per $\lvert r \rvert < 1$ e la sua somma è data da
+  \[
+      \sum_{n=0}^{+\infty} r^n = \frac{1}{1-r}, \quad \text{per } \lvert r \rvert < 1.
+  \]
+
+  Ora, consideriamo la funzione somma $f(x)$ associata alla serie di potenze:
+  \[
+      f(x) = \sum_{n=0}^{+\infty} a_n (x-x_0)^n, \quad \text{per } x \in (x_0-R, x_0+R).
+  \]
+
+  Per ogni $x$ tale che $\lvert x - x_0 \rvert < R$, possiamo riscrivere la serie come
+  \[
+      f(x) = \sum_{n=0}^{+\infty} a_n (x-x_0)^n = \sum_{n=0}^{+\infty} a_n \left( \frac{x-x_0}{R} \cdot R \right)^n.
+  \]
+
+  Poniamo $r = \frac{x-x_0}{R}$, con $\lvert r \rvert < 1$. La serie diventa
+  \[
+      f(x) = \sum_{n=0}^{+\infty} \left( a_n R^n \right) r^n.
+  \]
+
+  Questa è una serie geometrica in $r$, con coefficienti $a_n R^n$. Poiché $\lvert r \rvert < 1$, possiamo applicare la formula della somma della serie geometrica:
+  \[
+      f(x) = \frac{1}{1-r}, \quad \text{dove } r = \frac{x-x_0}{R}.
+  \]
+
+  Tornando alla variabile $x$, otteniamo
+  \[
+      f(x) = \frac{1}{1 - \frac{x-x_0}{R}} = \frac{R}{R - (x-x_0)}.
+  \]
+
+  Questo dimostra che la funzione somma $f(x)$ è ben definita e derivabile infinite volte in $(x_0-R, x_0+R)$, e che la serie converge assolutamente per $\lvert x - x_0 \rvert < R$.
+\end{proof}
+\begin{definizione}{Raggio di convergenza}
+  Il \textbf{raggio di convergenza} $R$ di una serie di potenze è il numero
+  \[
+      R = \sup \left\{ r \in \R \mid \sum_{n=0}^{+\infty} a_n r^n \text{ converge} \right\}
+  \]
+  Se $R = +\infty$, si dice che la serie ha raggio di convergenza infinito.\\
+  Se $R = 0$, si dice che la serie ha raggio di convergenza nullo.\\
+  Se $0 < R < +\infty$, si dice che la serie ha raggio di convergenza finito.
+\end{definizione}
+
+Da questo, si ricava il seguente corollario:
+\begin{corollario}{}
+  L'insieme di convergenza D di una serie di potenze è sempre un intervallo.\\
+  Più precisamente sono possibili 3 casi (a seconda del raggio di convergenza $R$):
+  \begin{itemize}
+  \item $D = \R$ se $R = +\infty$
+  \item $D = [x_0,x_0]$ se $R = 0$
+  \item Se invece $R \inc (0,+\infty)$, allora ci sono altri quattro possibili casi:
+  \begin{itemize}
+  \item $D = (x_0-R,x_0+R)$
+  \item $D = [x_0-R,x_0+R)$
+  \item $D = (x_0-R,x_0+R]$
+  \item $D = [x_0-R,x_0+R]$
+  \end{itemize}
+  \end{itemize}
+\end{corollario}
+
+\section{Calcolo del raggio di convergenza}
+In questa sezione vedremo delle tecniche per il calcolo del raggio di convergenze per le serie di potenze.
+
+Esistono due criteri principali: il criterio della radice e del rapporto.
+
+\begin{teorema}{Criterio della radice}
+  Sia data una serie di potenze $\sum_{n=0}^{+\infty} a_n (x-x_0)^n$.\\
+  Se esiste il limite
+  \[
+      L = \lim_{n \to +\infty} \sqrt[n]{\lvert a_n \rvert}
+  \]
+  allora il raggio di convergenza $R$ della serie è
+  \[
+      R = \frac{1}{L}
+  \]
+\end{teorema}
+\begin{proof}
+  Consideriamo la serie numerica $\sum_{n=0}^{+\infty} \lvert a_n \rvert r^n$, dove $r = \lvert x - x_0 \rvert$.\\
+  Applichiamo il criterio della radice per determinare il raggio di convergenza.\\
+  Calcoliamo il limite
+  \[
+      L = \lim_{n \to +\infty} \sqrt[n]{\lvert a_n \rvert r^n} = \lim_{n \to +\infty} \left( \sqrt[n]{\lvert a_n \rvert} \cdot \sqrt[n]{r^n} \right) = \lim_{n \to +\infty} \sqrt[n]{\lvert a_n \rvert} \cdot r
+  \]
+  Poiché $\sqrt[n]{r^n} = r$, il limite diventa
+  \[
+      L = r \cdot \lim_{n \to +\infty} \sqrt[n]{\lvert a_n \rvert}.
+  \]
+  Indichiamo con $L_a = \lim_{n \to +\infty} \sqrt[n]{\lvert a_n \rvert}$.\\
+  La serie converge se e solo se $L < 1$, cioè
+  \[
+      r \cdot L_a < 1 \quad \implies \quad r < \frac{1}{L_a}.
+  \]
+  Pertanto, il raggio di convergenza è
+  \[
+      R = \frac{1}{L_a}.
+  \]
+  Se $L_a = 0$, allora $R = +\infty$, e la serie converge per ogni $x \in \R$.\\
+  Se $L_a = +\infty$, allora $R = 0$, e la serie converge solo per $x = x_0$.\\
+  Questo conclude la dimostrazione.
+\end{proof}
+\begin{teorema}{Criterio del rapporto}
+  Sia data una serie di potenze $\sum_{n=0}^{+\infty} a_n (x-x_0)^n$.\\
+  Se esiste il limite
+  \[
+      L = \lim_{n \to +\infty} \left\lvert \frac{a_{n+1}}{a_n} \right\rvert
+  \]
+  allora il raggio di convergenza $R$ della serie è
+  \[
+      R = \frac{1}{L}
+  \]
+\end{teorema}
+La dimostrazione è analoga a quella appena vista per il criterio della radice.\\
+Vediamo un esempio di applicazione del criterio del rapporto.\\
+  Consideriamo la serie di potenze
+  \[
+      \sum_{n=0}^{+\infty} \frac{x^n}{2^n}
+  \]
+  Applichiamo il criterio del rapporto per determinare il raggio di convergenza.\\
+  Calcoliamo il limite
+  \[
+      L = \lim_{n \to +\infty} \left\lvert \frac{a_{n+1}}{a_n} \right\rvert = \lim_{n \to +\infty} \left\lvert \frac{\frac{1}{2^{n+1}}}{\frac{1}{2^n}} \right\rvert = \lim_{n \to +\infty} \frac{1}{2} = \frac{1}{2}
+  \]
+  Poiché $L = \frac{1}{2}$, il raggio di convergenza $R$ è
+  \[
+      R = \frac{1}{L} = 2
+  \]
+  Quindi, la serie converge per ogni $x$ tale che $\lvert x \rvert < 2$.
+
+  Verifichiamo il comportamento agli estremi dell'intervallo di convergenza.\\
+  Per $x = 2$, la serie diventa
+  \[
+      \sum_{n=0}^{+\infty} \frac{2^n}{2^n} = \sum_{n=0}^{+\infty} 1
+  \]
+  che è divergente.\\
+  Per $x = -2$, la serie diventa
+  \[
+      \sum_{n=0}^{+\infty} \frac{(-2)^n}{2^n} = \sum_{n=0}^{+\infty} (-1)^n
+  \]
+  che è anch'essa divergente.\\
+  Pertanto, la serie converge per $\lvert x \rvert < 2$ e diverge per $x = \pm 2$.\\
+
+  \section{Studio della funzione somma}
+  In questa sezione vedremo come studiare la funzione somma di una serie di potenze.\\
+  Ad una serie di potenze $\sum_{n=0}^{+\infty} a_n (x-x_0)^n$ è associata una funzione somma $f(x): (x_0-R,x_0+R) \to \R$ definita come segue: per ogni $x \in (x_0-R,x_0+R)$, si ha
+  \[
+      f(x) = \sum_{n=0}^{+\infty} a_n (x-x_0)^n
+  \]
+  Vediamo ora un importante teorema che ci dà diverse informazioni sullo studio della funzione somma:
+
+  \begin{teorema}{}
+    Sia data una serie di potenze $\sum_{n=0}^{+\infty} a_n (x-x_0)^n$ con raggio di convergenza $R>0$.\\
+    Allora la funzione somma $f$ è derivabile infinite volte in $(x_0-R,x_0+R)$ e:
+    \begin{itemize}
+    \item $f'(x) = \sum_{n=1}^{+\infty} n a_n (x-x_0)^{n-1}$ in $(x_0-R,x_0+R)$, e ogni serie di potenze così ottenuta ha lo stesso raggio di convergenza $R$ della serie originale. Inoltre $f^{(n)}(x_0)=n!a_n$ per ogni $n$ naturale.
+    \item Si può integrare termine a termine centrandosi in $x_0$: $\int f(x) \, dx = \sum_{n=0}^{+\infty} \frac{a_n}{n+1} (x-x_0)^{n+1}$ in $(x_0-R,x_0+R)$, e ogni serie di potenze così ottenuta ha lo stesso raggio di convergenza $R$ della serie originale.
+    \end{itemize}
+  \end{teorema}
+
+
+

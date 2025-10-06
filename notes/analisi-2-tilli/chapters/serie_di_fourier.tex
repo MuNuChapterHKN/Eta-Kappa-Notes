@@ -1,0 +1,128 @@
+\chapter{Serie di Fourier}
+
+\section{Serie di Fourier}
+In questo capitolo ci occuperemo delle serie di Fourier. Esse sono utilizzate per approssimare (in vari sensi che vedremo) una funzione $f:\R \to \R$ T-periodica, cioè tale che $f(T+x)=f(x)$ per un certo $T>0$ detto periodo, tramite una somma di sinusoidi di periodo $T, 2T, 3T, \dots$.
+
+\begin{definizione}{Sinusoide}
+  Si chiama \textbf{sinusoide} una funzione del tipo $f(x) = M\cdot \cos(\omega x +\phi)$.
+  \begin{itemize}
+    \item $M$ è l'ampiezza, ovvero il valore massimo della funzione.
+    \item $\omega$ è la pulsazione, definita come $\omega = \frac{2\pi}{T}$, dove $T$ è il periodo.
+    \item $\phi$ è la fase, che rappresenta uno spostamento orizzontale della funzione.
+    \item $\nu$ è la frequenza, definita come $\nu = \frac{1}{T}$, ovvero il numero di cicli per unità di tempo.
+    \item $T$ è il periodo, il tempo necessario affinché la funzione completi un ciclo completo.
+  \end{itemize}
+\end{definizione}
+Una formulazione equivalente ma spesso più utile per la sinusoide è:\\
+$f(x) = A\cos(\omega x) + B\sin(\omega x)$.\\
+
+L'idea di base dovuta ha Fourier è questa: è possibile scrivere una generica funzione come somma di sinusoidi con periodo diverso?
+\\
+Per formalizzarla occorre la seguente definizione:
+\begin{definizione}{Polinomio trigonometrico}
+  Si chiama \textbf{polinomio trigonometrico} di grado $N>0$ e periodo T una funzione del tipo:
+  $P_N(x) = a_0 + \sum_{n=1}^{N} \left( a_n \cos\left(\frac{2\pi nx}{T}\right) + b_n \sin\left(\frac{2\pi nx}{T}\right) \right)$
+\end{definizione}
+Qui il coefficiente $a_0$ si può immaginare come sinusoide con frequenza nulla.
+
+\begin{osservazione}{}
+  Valgono le relazioni di ortogonalità:
+  \begin{itemize}
+    \item $\int_{0}^{T} \cos\left(\frac{2\pi nx}{T}\right) \cos\left(\frac{2\pi mx}{T}\right) \, dx =$
+    \begin{itemize}
+      \item $T$ se $n = m = 0$
+      \item $\frac{T}{2}$ se $n = m \neq 0$
+      \item $0$ se $n \neq m$
+    \end{itemize}
+    \item $\int_{0}^{T} \sin\left(\frac{2\pi nx}{T}\right) \sin\left(\frac{2\pi mx}{T}\right) \, dx =$
+    \begin{itemize}
+      \item $0$ se $n = 0$ o $m = 0$
+      \item $\frac{T}{2}$ se $n = m \neq 0$
+      \item $0$ se $n \neq m$
+    \end{itemize}
+    \item $\int_{0}^{T} \cos\left(\frac{2\pi nx}{T}\right) \sin\left(\frac{2\pi mx}{T}\right) \, dx = 0$ per ogni $n, m$
+  \end{itemize}
+\end{osservazione}
+Ora siamo pronti a dare un risultato cruciale per le serie di Fourier.
+
+\begin{teorema}{Teorema di miglior approssimazione quadratica}
+
+  Sia $f$ una funzione integrabile su $[0, T]$. Allora esiste un unico polinomio trigonometrico $P_N$ di grado $N$ tale che
+  $$
+  \int_{0}^{T} \left| f(x) - P_N(x) \right|^2 \, dx
+  $$
+  è minimo tra tutti i polinomi trigonometrici di grado $N$ e periodo $T$.
+  I coefficienti $a_n$ e $b_n$ che minimizzano l'integrale sono dati da:
+  $$
+  a_n = \frac{2}{T} \int_{0}^{T} f(x) \cos\left(\frac{2\pi nx}{T}\right) \, dx
+  $$
+  e
+  $$
+  b_n = \frac{2}{T} \int_{0}^{T} f(x) \sin\left(\frac{2\pi nx}{T}\right) \, dx
+  $$
+  Il coefficiente $a_0$ è dato da:
+  $$
+  a_0 = \frac{1}{T} \int_{0}^{T} f(x) \, dx
+  $$
+
+\end{teorema}
+
+\section{Convergenza delle serie di Fourier}
+Un primo modo di vedere che qualunque $f$ periodica è sovrapposizione di sinusoidi è il seguente:
+\begin{teorema}{Teorema della convergenza in media quadratica}
+  Sia $f$ una funzione integrabile su $[0, T]$. Allora la serie di Fourier di $f$ converge a $f$ in media quadratica, cioè:
+  $$
+  \lim_{N \to \infty} \int_{0}^{T} \left| f(x) - S_N(f)(x) \right|^2 \, dx = 0
+  $$
+  dove $S_N(f)(x)$ è la somma parziale della serie di Fourier di $f$ di grado $N$:
+  $$
+  S_N(f)(x) = a_0 + \sum_{n=1}^{N} \left( a_n \cos\left(\frac{2\pi nx}{T}\right) + b_n \sin\left(\frac{2\pi nx}{T}\right) \right)
+  $$
+\end{teorema}
+Vale inoltre un'utile identità detta identità di Parseval:
+\begin{osservazione}{Identità di Parseval}
+  L'identità di Parseval afferma che:
+  $$
+  \int_{0}^{T} \left| f(x) \right|^2 \, dx = T \left( a_0^2 + \frac{1}{2} \sum_{n=1}^{\infty} \left( a_n^2 + b_n^2 \right) \right)
+  $$
+\end{osservazione}
+Oltre alla convergenza in media quadratica, esistono altri due tipi di convergenza: puntuale e uniforme. Per capire meglio cosa significano occorre introdurre il concetto di funzione regolarizzata.
+\begin{definizione}{Funzione regolarizzata}
+  Si chiama \textbf{funzione regolarizzata} di $f$ una funzione $\tilde{f}$ ottenuta come media del limite in ogni punto. Formalmente, per ogni $x \in \R$, la funzione regolarizzata $\tilde{f}$ è definita come:
+  $$
+  \tilde{f}(x) = \frac{1}{2}\cdot (\lim_{t \to x^+} f(t)+\lim_{t \to x^-} f(t))
+  $$
+
+\end{definizione}
+In particolare nei punti in cui $f$ è continua si ha $\tilde{f}=f$, negli altri punti $\tilde{f}$ assume un valore intermedio dove c'è un salto.\\
+Vediamo un importante teorema:
+\begin{teorema}{Teorema di convergena puntuale}
+  Se $f$ è una funzione T-periodica, continua a tratti e $C^1$ a tratti, allora la serie di Fourier di $f$ converge puntualmente alla regolarizzata $\tilde{f}$, cioè per ogni $x \inc \R$ vale: $\lim_{N \to \infty} P_N(x) = \tilde{f}(x)$.
+\end{teorema}
+
+L'ipotesi $C^1$ a tratti può essere sostituita con monotona a tratti.
+\begin{osservazione}{}
+  Le ipotesi $C^1$ a tratti o monotona a tratti sono sufficienti ma non necessarie
+\end{osservazione}
+
+Vediamo ora cosa significa invece convergenza uniforme:
+\begin{definizione}{Convergenza uniforme}
+  Una serie di funzioni $\sum_{n=0}^{\infty} f_n(x)$ \textbf{converge uniformemente} ad una funzione $f(x)$ su un intervallo $I$ se, per ogni $\epsilon > 0$, esiste un intero $N$ tale che per ogni $n \geq N$ e per ogni $x \in I$ si ha:
+  $$
+  \left| \sum_{k=0}^{n} f_k(x) - f(x) \right| < \epsilon
+  $$
+  In altre parole, la convergenza uniforme richiede che la serie converga a $f(x)$ in modo uniforme su tutto l'intervallo $I$, indipendentemente dal punto $x$ scelto.
+\end{definizione}
+
+Diamo ora un teorema sulla convergenza uniforme:
+\begin{teorema}{Teorema di convergenza uniforme}
+  Se $f$ è T-periodica, continua su $\R$ (non solamente a tratti) e $C^1$ a tratti, allora la serie di Fourier di $f$ converge uniformemente a $f$, cioè vale:\\
+  $ \lim_{n \to \infty} \max_{x \inc \R} |P_N(x)-f(x)|=0$
+\end{teorema}
+
+Vediamo ora un ultimo risultato che ci permette di dire qualcosa sulla convergenza della serie di Fourier di $f$ senza conoscere esplicitamente la funzione ma solo attraverso i coefficienti della serie:
+\begin{teorema}{}
+  Se ${a_n,b_n}$ sono i coefficienti della serie di Fourier di una funzione $f$ T-periodica (continua a tratti) e se la serie numerica:\\
+  $\sum_{n=1}^{\infty} |a_n|+|b_n|$\\
+  è convergente, allora la $\tilde{f}$ da cui la serie di Fourier proviene è continua e la serie di Fourier converge uniformemente.
+\end{teorema}

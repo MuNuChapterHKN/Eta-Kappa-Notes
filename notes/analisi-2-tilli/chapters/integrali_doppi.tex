@@ -1,0 +1,197 @@
+\chapter{Integrali doppi}
+
+\section{Introduzione}
+In questo capitolo ci occuperemo dello studio degli integrali doppi, ovvero integrali di funzioni di due variabili reali.\\
+
+Gli ingredienti necessari per un integrale doppio sono:
+\begin{itemize}
+\item Un insieme $\Omega \in \R^2$, aperto e limitato su cui integrare la funzione.
+\item Una funzione $f:\Omega \rightarrow \R$ continua e limitata.
+\end{itemize}
+
+L'obiettivo è definire l'integrale doppio di $f$ su $\Omega$
+\[
+\iint_{\Omega} f(x,y) \, dx \, dy
+\]
+e capirne il significato.\\
+
+Per arrivare all'integrale doppio effettuiamo le seguente costruzione in più passaggi:
+\begin{enumerate}
+  \item Scelgo $\epsilon>0$ e divido $\R^2$ in quadrati di lato $\epsilon$.
+  \item Chiamo $Q_{\epsilon}$ la famiglia di quadrati interamente contenuti in $\Omega$. (Saranno in numero finito poichè $\Omega$ è limitato).
+  \item Campiono $f(x,y)$ su ogni quadratino della famiglia, cioè prendo un punto $P_i$ in ogni quadratino $q_i\in Q_{\epsilon}$ e calcolo la somma: $S(\epsilon)= \sum_{q_i \in Q_{\epsilon}} f(P_i) \cdot \text{area}(q_i)$.
+  \item Si dimostra che esiste finito il limite: $\lim_{\epsilon \to 0} S(\epsilon)$.
+\end{enumerate}
+
+\begin{definizione}{Integrale doppio}
+  Seguendo quanto detto detto prima, si chiama \textbf{integrale doppio} di $f$ su $\Omega$ il valore:
+  \[
+  \lim_{\epsilon \to 0} \sum_{q_i \in Q_{\epsilon}} f(P_i) \cdot \text{area}(q_i) = \iint_{\Omega} f(x,y) \, dx \, dy
+  \]
+\end{definizione}
+
+\section{Significati dell'integrale doppio}
+Diamo ora alcuni possibili significati e interpretazioni dell'integrale doppio di una funzione $f(x,y)$ su un insieme $\Omega$:
+
+\begin{itemize}
+  \item Se $f(x,y)=1$ allora $\iint_{\Omega} f(x,y) \, dx \, dy$ è l'area di $\Omega$.
+  \item La quantità $\frac{\iint_{\Omega} f(x,y) \, dx \, dy}{\text{area}(\Omega)}$ è il valore medio pesato di $f$ su $\Omega$.
+  \item Se $f(x,y)=x$ allora $\iint_{\Omega} f(x,y) \, dx \, dy$ è la coordinata $x$ del baricentro di $\Omega$.
+  \item Se $f(x,y)=y$ allora $\iint_{\Omega} f(x,y) \, dx \, dy$ è la  coordinata $y$ del baricentro di $\Omega$.
+  \item Se $f(x,y)$ è una densità di massa allora $\iint_{\Omega} f(x,y) \, dx \, dy$ è la massa di $\Omega$.
+  \item Se $f(x,y)=x^2+y^2$ allora $\iint_{\Omega} f(x,y) \, dx \, dy$ è il momento di inerzia di $\Omega$ rispetto all'origine.
+\end{itemize}
+
+\section{Calcolo dell'integrale doppio}
+In questa sezione vedremo alcuni metodi per il calcolo degli integrali doppi.\\
+
+\begin{definizione}{Semplice per fili verticali}
+  $\Omega$ si dice \textbf{semplice per fili verticali} se è del tipo: $\Omega = \{ (x,y) \in \R^2 : a \leq x \leq b, g(x) \leq y \leq h(x) \}$, dove $g,h:[a,b] \rightarrow \R$ sono continue e $g(x) \leq h(x) \ \forall x \in [a,b]$.
+\end{definizione}
+
+Se $\Omega$ è semplice per fili verticali allora:
+\[
+\iint_{\Omega} f(x,y) \, dx \, dy = \int_{a}^{b} \left( \int_{g(x)}^{h(x)} f(x,y) \, dy \right) \, dx
+\]
+
+\begin{osservazione}{}
+  Nell'integrale più interno la $x$ ha il ruolo di un parametro.
+\end{osservazione}
+
+\begin{definizione}{Semplice per fili orizzontali}
+  $\Omega$ si dice \textbf{semplice per fili orizzontali} se è del tipo: $\Omega = \{ (x,y) \in \R^2 : c \leq y \leq d, p(y) \leq x \leq q(y) \}$, dove $p,q:[c,d] \rightarrow \R$ sono continue e $p(y) \leq q(y) \ \forall y \in [c,d]$.
+\end{definizione}
+
+Se $\Omega$ è semplice per fili orizzontali allora:
+\[
+\iint_{\Omega} f(x,y) \, dx \, dy = \int_{c}^{d} \left( \int_{p(y)}^{q(y)} f(x,y) \, dx \right) \, dy
+\]
+
+Tuttavia, per quanto i due metodi sembrino molto simili, ci sono casi in cui l'asimmetria del problema rende uno dei due inutile e l'altro molto comodo.\\
+
+
+Ad esempio, onsideriamo il triangolo $\Omega$ con vertici $(0,0)$, $(2,0)$ e $(2,4)$. Vogliamo calcolare l'integrale doppio $\iint_{\Omega} e^{x^2} \, dx \, dy$.
+
+Proviamo prima con il metodo dei fili orizzontali.\\
+Dobbiamo esprimere $\Omega$ come:
+\[
+\Omega = \{ (x,y) \in \R^2 : 0 \leq y \leq 4, p(y) \leq x \leq q(y) \}
+\]
+Nel nostro caso, $p(y) = 0$ e $q(y) = 2$ per $0 \leq y \leq 4$. Quindi:
+\[
+\iint_{\Omega} e^{x^2} \, dx \, dy = \int_{0}^{4} \left( \int_{0}^{2} e^{x^2} \, dx \right) \, dy
+\]
+Tuttavia, l'integrale interno $\int_{0}^{2} e^{x^2} \, dx$ non è elementare, quindi questo metodo non è conveniente.\\
+
+Proviamo invece con il metodo dei fili verticali.\\
+In questo caso, dobbiamo esprimere $\Omega$ come:
+\[
+\Omega = \{ (x,y) \in \R^2 : 0 \leq x \leq 2, g(x) \leq y \leq h(x) \}
+\]
+Nel nostro caso, $g(x) = 0$ e $h(x) = 2x$ per $0 \leq x \leq 2$. Quindi:
+\[
+\iint_{\Omega} e^{x^2} \, dx \, dy = \int_{0}^{2} \left( \int_{0}^{2x} e^{x^2} \, dy \right) \, dx
+\]
+Poiché $e^{x^2}$ è costante rispetto a $y$, possiamo semplificare l'integrale interno:
+\[
+\int_{0}^{2x} e^{x^2} \, dy = e^{x^2} \int_{0}^{2x} \, dy = e^{x^2} \cdot 2x
+\]
+Quindi l'integrale doppio diventa:
+\[
+\iint_{\Omega} e^{x^2} \, dx \, dy = \int_{0}^{2} 2x e^{x^2} \, dx
+\]
+Facciamo il cambio di variabile $u = x^2$, quindi $du = 2x \, dx$:
+\[
+\int_{0}^{2} 2x e^{x^2} \, dx = \int_{0}^{4} e^u \, du = e^u \bigg|_{0}^{4} = e^4 - e^0 = e^4 - 1
+\]
+Quindi:
+\[
+\iint_{\Omega} e^{x^2} \, dx \, dy = e^4 - 1
+\]
+Abbiamo visto dunque che il metodo dei fili verticali è molto più conveniente in questo caso.
+
+\section{Cambiamento di variabile}
+In questa sezione ci occupiamo di definire i cambiamenti di variabili in due variabili.\\
+Vorremmo descrivere un integrale doppio $\iint_{\Omega} f(x,y) \, dx \, dy$ tramite due nuove variabili $u$ e $v$.\\
+Date $x = g_1(u,v)$ e $y = g_2(u,v)$, $\varphi(u,v)=(g_1(u,v)$,$y = g_2(u,v))$ è una funzione invertibili e di classe $C^1$.
+
+\begin{teorema}{Teorema di cambiamento di variabile}
+  Nelle ipotesi precedenti si ha: $\iint_{\Omega} f(x,y) \, dx \, dy = \iint_{\Omega'} f(g_1(u,v),g_2(u,v)) \cdot |J_{\varphi}(u,v)| \, du \, dv$, dove $J_{\varphi}(u,v)$ è il determinante della matrice jacobiana di $\varphi$.
+\end{teorema}
+
+\begin{definizione}{Matrice Jacobiana}
+  La \textbf{matrice Jacobiana} di una funzione $\varphi: \R^m \rightarrow \R^n$ è la matrice $n \times m$ delle derivate parziali:
+  \[
+  J_{\varphi}(u_1, u_2, \ldots, u_m) = \begin{pmatrix}
+  \frac{\partial g_1}{\partial u_1} & \frac{\partial g_1}{\partial u_2} & \cdots & \frac{\partial g_1}{\partial u_m} \\
+  \frac{\partial g_2}{\partial u_1} & \frac{\partial g_2}{\partial u_2} & \cdots & \frac{\partial g_2}{\partial u_m} \\
+  \vdots & \vdots & \ddots & \vdots \\
+  \frac{\partial g_n}{\partial u_1} & \frac{\partial g_n}{\partial u_2} & \cdots & \frac{\partial g_n}{\partial u_m}
+  \end{pmatrix}
+  \]
+\end{definizione}
+
+\begin{osservazione}{}
+  $|J_{\varphi}(u,v)|$ si può vedere geometricamente come il fattore di scala del cambiamento di variabile.
+\end{osservazione}
+
+\subsection{Coordinate polari}
+Consideriamo il passaggio alle coordinate polari $(r, \theta)$, dove $x = r \cos \theta$ e $y = r \sin \theta$.\\
+Il determinante della matrice Jacobiana in questo caso è:
+\[
+J_{\varphi}(r,\theta) = \begin{vmatrix}
+\frac{\partial x}{\partial r} & \frac{\partial x}{\partial \theta} \\
+\frac{\partial y}{\partial r} & \frac{\partial y}{\partial \theta}
+\end{vmatrix} = \begin{vmatrix}
+\cos \theta & -r \sin \theta \\
+\sin \theta & r \cos \theta
+\end{vmatrix} = r (\cos^2 \theta + \sin^2 \theta) = r
+\]
+
+Quindi, l'integrale doppio in coordinate polari diventa:
+\[
+\iint_{\Omega} f(x,y) \, dx \, dy = \iint_{\Omega'} f(r \cos \theta, r \sin \theta) \cdot r \, dr \, d\theta
+\]
+
+Ad esempio, calcoliamo l'integrale doppio $\iint_{\Omega} (x^2 + y^2) \, dx \, dy$ dove $\Omega$ è il cerchio di raggio $R$ centrato nell'origine.\\
+In coordinate polari, abbiamo $x^2 + y^2 = r^2$ e $\Omega' = \{ (r, \theta) : 0 \leq r \leq R, 0 \leq \theta \leq 2\pi \}$. Quindi:
+\[
+\iint_{\Omega} (x^2 + y^2) \, dx \, dy = \iint_{\Omega'} r^2 \cdot r \, dr \, d\theta = \int_{0}^{2\pi} \int_{0}^{R} r^3 \, dr \, d\theta
+\]
+
+Calcoliamo l'integrale interno:
+\[
+\int_{0}^{R} r^3 \, dr = \frac{r^4}{4} \bigg|_{0}^{R} = \frac{R^4}{4}
+\]
+
+Quindi l'integrale doppio diventa:
+\[
+\iint_{\Omega} (x^2 + y^2) \, dx \, dy = \int_{0}^{2\pi} \frac{R^4}{4} \, d\theta = \frac{R^4}{4} \cdot 2\pi = \frac{\pi R^4}{2}
+\]
+
+\subsection{Coordinate ellittiche}
+Consideriamo il passaggio alle coordinate ellittiche $(r, \theta)$, dove $x = a r \cos \theta$ e $y = b r \cos \theta$.\\
+Il determinante della matrice Jacobiana in questo caso è:
+\[
+J_{\varphi}(r,\theta) = \begin{vmatrix}
+\frac{\partial x}{\partial r} & \frac{\partial x}{\partial \theta} \\
+\frac{\partial y}{\partial r} & \frac{\partial y}{\partial \theta}
+\end{vmatrix} = \begin{vmatrix}
+a \cos \theta & -a r \sin \theta \\
+b \cos \theta & -b r \sin \theta
+\end{vmatrix} = ab r (\cos^2 \theta + \sin^2 \theta) = abr
+\]
+
+Utilizzando l'identità trigonometrica $\cos^2 \theta + \sin^2 \theta = 1$, possiamo semplificare il determinante:
+\[
+J_{\varphi}(r,\theta) = abr
+\]
+
+Quindi, l'integrale doppio in coordinate ellittiche diventa:
+\[
+\iint_{\Omega} f(x,y) \, dx \, dy = \iint_{\Omega'} f(a r \cos \theta, b r \cos \theta) \cdot abr \, dr \, d\theta
+\]
+
+
+
+

@@ -1,0 +1,70 @@
+\chapter{Stokes}
+\section{Teorema di Stokes}
+In quest'altro breve capitolo vedremo il teorema di Stokes, che è un'estensione del teorema di Green a campi vettoriali in tre dimensioni.
+
+Il teorema di Stokes permette di legare tra loro il flusso del rotore di un campo vettoriale attraverso una superficie e la circuitazione del campo stesso lungo il bordo della superficie.
+
+Vediamo innanzitutto una definizione preliminare:\\
+
+
+\begin{definizione}{Compatibilità delle orientazioni}
+  Dati una superficie orientata $ S $ e una curva $\gamma$ orientata lungo il suo bordo (dove in questo caso non va inteso come frontiera della superficie in $\R^3$ ma più come "orlo" della stessa) , diciamo che le due orientazioni sono \textbf{compatibili} se percorrendo $\gamma$ dal lato di $N$, $S$ risulta essere a sinistra.
+\end{definizione}
+
+Ora possiamo enunciare il teorema di Stokes:
+\begin{teorema}{Teorema di Stokes}
+    Sia $ S $ una superficie orientata con una curva $\gamma$ come bordo orientata compatibilmente. Sia $ \vec{F} $ un campo vettoriale di classe $ C^1 $ in un intorno aperto di $ S $. Allora vale la seguente formula:
+    \[
+        \int_S \nabla \times \vec{F} \cdot \hat{N} \, dS = \int_{\gamma} \vec{F} \cdot d\vec{r}
+    \]
+\end{teorema}
+
+Un'importante applicazione del teorema di Stokes è la seguente:\\
+Se $S_1$ e $S_2$ sono due superfici orientate con bordo $\partial S_1=\partial S_2 =\gamma$ orientati compatibilmente, allora:
+\[
+    \int_{\gamma} \vec{F} \cdot d\vec{r}=
+\int_{S_1} \nabla \times \vec{F} \cdot \hat{N} \, dS + \int_{S_2} \nabla \times \vec{F} \cdot \hat{N} \, dS
+\]
+
+\subsection{Esempio di applicazione del teorema di Stokes}
+
+Consideriamo il campo vettoriale $\vec{F} = (y, -x, z)$ e la superficie $S$ definita dal paraboloide $z = 1 - x^2 - y^2$ con $z \geq 0$. Calcoliamo il flusso del rotore di $\vec{F}$ attraverso $S$ e la circuitazione di $\vec{F}$ lungo il bordo di $S$.
+
+Innanzitutto, calcoliamo il rotore di $\vec{F}$:
+\[
+\nabla \times \vec{F} = \left( \frac{\partial z}{\partial y} - \frac{\partial (-x)}{\partial z}, \frac{\partial y}{\partial z} - \frac{\partial z}{\partial x}, \frac{\partial (-x)}{\partial x} - \frac{\partial y}{\partial y} \right) = (0, 0, -2)
+\]
+
+
+
+Sfruttando il fatto che $z$ è grafico e ricordando quanto visto in \ref{sec:flusso-superficie}, il flusso del rotore di $\vec{F}$ attraverso $S$ è quindi:
+\[
+\int_S (0, 0, -2) \cdot (-2x, -2y, -1) dx dy
+\]
+
+Passiamo alle coordinate polari, dove $x = r \cos \theta$ e $y = r \sin \theta$. La superficie $S$ è definita da $z = 1 - r^2$ con $0 \leq r \leq 1$ e $0 \leq \theta < 2\pi$. Otteniamo:
+\[
+\int_0^{2\pi} \int_0^1 2r \, dr \, d\theta
+\]
+
+Separiamo gli integrali:
+\[
+\int_0^{2\pi} d\theta \int_0^1 2r \, dr = 2 \int_0^{2\pi} d\theta \int_0^1 r \, dr = 2 \cdot 2\pi \cdot \left[ \frac{r^2}{2} \right]_0^1 = 2 \cdot 2\pi \cdot \frac{1}{2} = 2\pi
+\]
+
+Abbiamo quindi:
+\[
+\int_S \nabla \times \vec{F} \cdot \hat{N} \, dS = 2\pi
+\]
+
+Calcoliamo ora la circuitazione di $\vec{F}$ lungo il bordo di $S$. Il bordo di $S$ è la circonferenza $x^2 + y^2 = 1$ nel piano $z = 0$. Parametrizziamo il bordo come $\vec{r}(t) = (\cos t, \sin t, 0)$ con $t \in [0, 2\pi]$. La circuitazione di $\vec{F}$ lungo il bordo è:
+\[
+\int_{\partial S} \vec{F} \cdot d\vec{r} = \int_0^{2\pi} \vec{F}(\cos t, \sin t, 0) \cdot \frac{d\vec{r}}{dt} \, dt
+\]
+\\
+\[= \int_0^{2\pi} (\sin t, -\cos t, 0) \cdot (-\sin t, \cos t, 0) \, dt = \int_0^{2\pi} (\sin^2 t + \cos^2 t) \, dt = 2\pi
+\]
+
+Abbiamo quindi verificato il teorema di Stokes per questo esempio.
+
+

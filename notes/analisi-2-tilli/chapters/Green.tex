@@ -1,0 +1,69 @@
+\chapter{Green}
+Questo capitolo sarà interamente dedicato al teorema di Green nel piano. Esso è un caso particolare del teorema del rotore (o teorema di Stokes) che verrà affrontato prossimamente.\\
+
+Il teorema di Green consente di caclolare la circuitazione di un campo riducendola a un integrale doppio.
+
+\section{Teorema di Green}
+\begin{teorema}{Teorema di Green}
+Sia $\Omega \inc \R^2$ aperto limitato tale che la sua frontiera è l'unione di $N$ curve chiuse disgiunte $\gamma_1, \dots, \gamma_N$  e sia $\vec F:\Omega\rightarrow \R^2$ di classe $C^1$, allora:
+$$ \int_\Omega \left(\frac{\partial F_2}{\partial x}-\frac{\partial F_1}{\partial y}\right) dxdy = \sum_{i=1}^{N} \int_{\gamma_i} \vec{F} \cdot d\vec{r} $$,\\dove ogni $\gamma_i$ è orientata in modo da avere $\Omega$ alla sua sinistra.
+\end{teorema}
+
+\begin{proof}
+Dimostriamo il teorema di Green per un triangolo rettangolo arbitrario con un vertice nell'origine. Sia $\Delta$ il triangolo rettangolo con vertici $(0,0)$, $(a,0)$ e $(0,b)$.
+
+Il bordo $\partial \Delta$ è costituito da tre segmenti:
+\begin{itemize}
+  \item $\gamma_1$: il segmento da $(0,0)$ a $(a,0)$.
+  \item $\gamma_2$: il segmento da $(a,0)$ a $(0,b)$.
+  \item $\gamma_3$: il segmento da $(0,b)$ a $(0,0)$.
+\end{itemize}
+
+Calcoliamo il lato sinistro del teorema di Green:
+$$ \int_\Delta \left(\frac{\partial F_2}{\partial x} - \frac{\partial F_1}{\partial y}\right) dxdy. $$
+
+Sia $\vec{F} = (F_1, F_2)$ un campo di classe $C^1$. All'interno del triangolo $\Delta$, possiamo parametrizzare l'integrale doppio come:
+$$ \int_\Delta \left(\frac{\partial F_2}{\partial x} - \frac{\partial F_1}{\partial y}\right) dxdy = \int_0^a \int_0^{b(1 - \frac{x}{a})} \left(\frac{\partial F_2}{\partial x} - \frac{\partial F_1}{\partial y}\right) dydx. $$
+
+Ora calcoliamo il lato destro del teorema di Green, ovvero la circuitazione lungo $\partial \Delta$:
+$$ \int_{\partial \Delta} \vec{F} \cdot d\vec{r} = \int_{\gamma_1} \vec{F} \cdot d\vec{r} + \int_{\gamma_2} \vec{F} \cdot d\vec{r} + \int_{\gamma_3} \vec{F} \cdot d\vec{r}. $$
+
+\begin{itemize}
+  \item Per $\gamma_1$: $\vec{r}(t) = (t, 0)$ con $t \in [0, a]$, quindi $d\vec{r} = (1, 0) dt$. Abbiamo:
+  $$ \int_{\gamma_1} \vec{F} \cdot d\vec{r} = \int_0^a F_1(t, 0) dt. $$
+
+  \item Per $\gamma_2$: $\vec{r}(t) = (a - t, \frac{b}{a}t)$ con $t \in [0, a]$, quindi $d\vec{r} = (-1, \frac{b}{a}) dt$. Abbiamo:
+  $$ \int_{\gamma_2} \vec{F} \cdot d\vec{r} = \int_0^a \left[ F_1(a - t, \frac{b}{a}t)(-1) + F_2(a - t, \frac{b}{a}t)\frac{b}{a} \right] dt. $$
+
+  \item Per $\gamma_3$: $\vec{r}(t) = (0, b - t)$ con $t \in [0, b]$, quindi $d\vec{r} = (0, -1) dt$. Abbiamo:
+  $$ \int_{\gamma_3} \vec{F} \cdot d\vec{r} = \int_0^b F_2(0, b - t)(-1) dt = -\int_0^b F_2(0, b - t) dt. $$
+\end{itemize}
+
+Sommando i contributi, otteniamo:
+$$ \int_{\partial \Delta} \vec{F} \cdot d\vec{r} = \int_0^a F_1(t, 0) dt + \int_0^a \left[ -F_1(a - t, \frac{b}{a}t) + F_2(a - t, \frac{b}{a}t)\frac{b}{a} \right] dt - \int_0^b F_2(0, b - t) dt. $$
+
+Confrontando i due lati, si verifica che il teorema di Green è soddisfatto per il triangolo rettangolo $\Delta$.
+
+Inoltre, per un trinagolo qualsiasi, possiamo sempre tracciare un'altezza e suddisviderlo in triangoli rettangoli, su cui abbiamo appena dimostrato che vale il teorema di Green. Per un qualsiasi poligono possiamo suddividerlo in triangoli su cui vale il teorema. In generale su una qualsiasi superficie racchiusa da curve chiuse possiamo sempre suddividere in triangoli e applicare il teorema di Green.\\
+\end{proof}
+
+Il teorema si può applicare in vari modi ad esempio:
+\begin{itemize}
+\item Calcolare la circuitazione di un campo lungo una curva chiusa.
+\item Confrontare tra loro due circuitazioni (specialmente quando $\vec F$ è irrotazionale ma non conservativo).
+\end{itemize}
+
+Inoltre grazie al teorema si ricava un utile fatto generale:
+\begin{corollario}{}
+  Se ho due curve chiuse $\gamma_1$ e $\gamma_2$ tali che $\gamma_1$ è interna a $\gamma_2$ allora: $$\int_{\gamma_1} \vec F \cdot d\vec r = \int_{\gamma_2} \vec F \cdot d\vec r$$\\
+  per ogni campo $\vec F$ irrotazionale (nella sezione di piano che contiene le curve).
+\end{corollario}
+
+Applichiamo ora il teorema al calcolo dell'area racchiusa tra curve chiuse.\\
+Se scelgo un campo $\vec F$ tale che $\frac{\partial F_2}{\partial x}-\frac{\partial F_1}{\partial y}=1$ (ad esempio $\vec F = (0,x)$)allora ottengo l'area di $\Omega$ come circuitazione di $\vec F$ lungo il bordo di $\Omega$.\\
+Riassumendo:
+\begin{teorema}{}
+  Se $\gamma(t)= (x(t), y(t)), t \in [a,b]$ è una curva chiusa semplice e regolare, allora l'area racchiusa da $\gamma$ è data da:
+  $$\text{Area}(\Omega) = \int_{a}^{b} x(t)\cdot y'(t) dt$$.\\
+  Sono possibili anche altre scelte per $\vec F$ che generano formule analoghe per il calcolo dell'area di $\Omega$.
+\end{teorema}

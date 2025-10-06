@@ -1,0 +1,128 @@
+\chapter{Integrali tripli}
+
+\section{Introduzione}
+La costruzione è la stessa degli integrali doppi, ma stavolta siamo in $\R^3$ e non in $\R^2$.\\
+Ingredienti: un dominio $\Omega \subseteq \R^3$ e una funzione $f:\Omega \rightarrow \R$ continua e limitata.\\
+L'obiettivo è definire l'integrale triplo di $f$ su $\Omega$:
+\[
+\iiint_{\Omega} f(x,y,z) \, dx \, dy \, dz
+\]
+e capirne il significato.\\
+Per arrivare all'integrale triplo effettuiamo le seguente costruzione in più passaggi:
+\begin{enumerate}
+  \item Scelgo $\epsilon>0$ e divido $\R^3$ in cubetti di lato $\epsilon$.
+  \item Chiamo $C_{\epsilon}$ la famiglia di cubetti interamente contenuti in $\Omega$. (Saranno in numero finito poichè $\Omega$ è limitato).
+  \item Campiono $f(x,y,z)$ su ogni cubetto della famiglia, cioè prendo un punto $P_i$ in ogni cubetto $c_i\in C_{\epsilon}$ e calcolo la somma: $S(\epsilon)= \sum_{c_i \in C_{\epsilon}} f(P_i) \cdot \text{volume}(c_i)$.
+  \item Si dimostra che esiste finito il limite: $\lim_{\epsilon \to 0} S(\epsilon)$.
+\end{enumerate}
+
+\begin{definizione}{Integrale triplo}
+  Seguendo quanto detto detto prima, si chiama \textbf{integrale triplo} di $f$ su $\Omega$ il valore:
+  \[
+  \lim_{\epsilon \to 0} \sum_{c_i \in C_{\epsilon}} f(P_i) \cdot \text{volume}(c_i) = \iiint_{\Omega} f(x,y,z) \, dx \, dy \, dz
+  \]
+\end{definizione}
+
+
+\section{Significati degli integrali tripli}
+Gli integrali tripli hanno diversi significati e interpretazioni, vediamone alcuni:
+\begin{itemize}
+  \item Se $f(x,y,z)=1$ allora $\iiint_{\Omega} f(x,y,z) \, dx \, dy \, dz$ è il volume di $\Omega$.
+  \item La quantità $\frac{\iiint_{\Omega} f(x,y,z) \, dx \, dy \, dz}{\text{volume}(\Omega)}$ è il valore medio pesato di $f$ su $\Omega$.
+  \item Se $f(x,y,z)=x$ allora $\iiint_{\Omega} f(x,y,z) \, dx \, dy \, dz$ è la coordinata $x$ del baricentro di $\Omega$.
+  \item Se $f(x,y,z)=y$ allora $\iiint_{\Omega} f(x,y,z) \, dx \, dy \, dz$ è la coordinata $y$ del baricentro di $\Omega$.
+  \item Se $f(x,y,z)=z$ allora $\iiint_{\Omega} f(x,y,z) \, dx \, dy \, dz$ è è la coordinata $z$ del baricentro di $\Omega$.
+  \item Se $f(x,y,z)$ è una densità di massa allora $\iiint_{\Omega} f(x,y,z) \, dx \, dy \, dz$ è la massa di $\Omega$.
+  \item Se $f(x,y,z)$ è una densità di massa allora $\iiint_{\Omega} (x^2 + y^2) f(x,y,z) \, dx \, dy \, dz$ è il momento d'inerzia di $\Omega$ rispetto all'asse $z$.
+\end{itemize}
+
+
+\section{Cambiamento di variabili negli integrali tripli}
+Vediamo ora come si comportano gli integrali tripli sotto cambiamento di variabili.\\
+In 3 variabili consideriamo il seguente cambiamento di coordinate:\\
+$
+  x = x(u,v,w) \quad y = y(u,v,w)  \quad z = z(u,v,w)
+$\\
+con $(u,v,w) \in \Omega \subseteq \R^3$ e $(x,y,z) \in \Omega' \subseteq \R^3$.\\
+L'integrale triplo diventa:
+\[
+\iiint_{\Omega'} f(x,y,z) \, dx \, dy \, dz = \iiint_{\Omega} f(x(u,v,w),y(u,v,w),z(u,v,w)) \cdot |J(u,v,w)| \, du \, dv \, dw
+\]
+dove $J(u,v,w)$ è il determinante della matrice jacobiana del cambio di variabili:
+\[
+J(u,v,w) = \begin{vmatrix}
+  \frac{\partial x}{\partial u} & \frac{\partial x}{\partial v} & \frac{\partial x}{\partial w}\\
+  \frac{\partial y}{\partial u} & \frac{\partial y}{\partial v} & \frac{\partial y}{\partial w}\\
+  \frac{\partial z}{\partial u} & \frac{\partial z}{\partial v} & \frac{\partial z}{\partial w}
+\end{vmatrix}
+\]
+
+\subsection{Coordinate cilindriche}
+Consideriamo il cambiamento di coordinate cilindriche:
+\[
+\begin{cases}
+  x = \rho \cos \theta \\
+  y = \rho \sin \theta \\
+  z = z
+\end{cases}
+\]
+con $\rho \geq 0$, $0 \leq \theta < 2\pi$ e $-\infty < z < \infty$.\\
+Il determinante della matrice jacobiana è:
+\[
+J(\rho, \theta, z) = \begin{vmatrix}
+  \frac{\partial x}{\partial \rho} & \frac{\partial x}{\partial \theta} & \frac{\partial x}{\partial z} \\
+  \frac{\partial y}{\partial \rho} & \frac{\partial y}{\partial \theta} & \frac{\partial y}{\partial z} \\
+  \frac{\partial z}{\partial \rho} & \frac{\partial z}{\partial \theta} & \frac{\partial z}{\partial z}
+\end{vmatrix} = \begin{vmatrix}
+  \cos \theta & -\rho \sin \theta & 0 \\
+  \sin \theta & \rho \cos \theta & 0 \\
+  0 & 0 & 1
+\end{vmatrix} = \rho
+\]
+Quindi l'integrale triplo in coordinate cilindriche diventa:
+\[
+\iiint_{\Omega'} f(x,y,z) \, dx \, dy \, dz = \iiint_{\Omega} f(\rho \cos \theta, \rho \sin \theta, z) \cdot \rho \, d\rho \, d\theta \, dz
+\]
+
+\subsection{Coordinate sferiche}
+Consideriamo il cambiamento di coordinate sferiche:
+\[
+\begin{cases}
+  x = \rho \sin \phi \cos \theta \\
+  y = \rho \sin \phi \sin \theta \\
+  z = \rho \cos \phi
+\end{cases}
+\]
+con $\rho \geq 0$, $0 \leq \theta < 2\pi$ e $0 \leq \phi \leq \pi$.\\
+Il determinante della matrice jacobiana è:
+\[
+J(\rho, \theta, \phi) = \begin{vmatrix}
+  \frac{\partial x}{\partial \rho} & \frac{\partial x}{\partial \theta} & \frac{\partial x}{\partial \phi} \\
+  \frac{\partial y}{\partial \rho} & \frac{\partial y}{\partial \theta} & \frac{\partial y}{\partial \phi} \\
+  \frac{\partial z}{\partial \rho} & \frac{\partial z}{\partial \theta} & \frac{\partial z}{\partial \phi}
+\end{vmatrix} = \begin{vmatrix}
+  \sin \phi \cos \theta & -\rho \sin \phi \sin \theta & \rho \cos \phi \cos \theta \\
+  \sin \phi \sin \theta & \rho \sin \phi \cos \theta & \rho \cos \phi \sin \theta \\
+  \cos \phi & 0 & -\rho \sin \phi
+\end{vmatrix} = \rho^2 \sin \phi
+\]
+Quindi l'integrale triplo in coordinate sferiche diventa:
+\[
+\iiint_{\Omega'} f(x,y,z) \, dx \, dy \, dz = \iiint_{\Omega} f(\rho \sin \phi \cos \theta, \rho \sin \phi \sin \theta, \rho \cos \phi) \cdot \rho^2 \sin \phi \, d\rho \, d\theta \, d\phi
+\]
+
+\section{Calcolo degli integrali tripli}
+Per calcolare gli integrali tripli possiamo procedere in due modi: per fili e per strati.
+Per fili significa pensare $\Omega$ come un insieme di fili paralleli ad un asse.\\
+Se esistono due funzioni $g_1(x,y,z)$ e $g_2(x,y,z)$ tali che $\Omega = {(x,y,z)\in \R^3|(x,y)\in D, g_1(x,y,z) \leq z \leq g_2(x,y,z)}$ allora:
+\[
+\iiint_{\Omega} f(x,y,z) \, dx \, dy \, dz = \iint_{D} \left( \int_{g_1(x,y)}^{g_2(x,y)} f(x,y,z) \, dz \right) \, dx \, dy
+\]
+
+Per strati invece significa pensare $\Omega$ come un insieme di strati paralleli ad un piano, cioè di sezioni orizontali.\\
+Dato $\Omega$ definiamo le sezioni a quota $z$: $S(z) = \{(x,y)\in \R^2 | (x,y,z)\in \Omega\}$.\\
+Possiamo dunque ricavare la seguente formula di integrazione per strati:
+\[
+\iiint_{\Omega} f(x,y,z) \, dx \, dy \, dz = \int_{-\infty}^{+\infty} \left( \iint_{S(z)} f(x,y,z) \, dx \, dy \right) \, dz
+\]
+ma di fatto gli estremi di integrazione su $z$ sono quelli che definiscono l'altezza di $\Omega$ e si riducono perciò a quelli per cui $S(z)\neq 0$ (esistono di fatto uno $Z_{\text{min}}$ e uno $Z_{\text{max}}$).
