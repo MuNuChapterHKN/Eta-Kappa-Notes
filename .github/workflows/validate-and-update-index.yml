@@ -1,0 +1,45 @@
+name: Validate and Update Metadata Index
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate-and-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # needed to push back
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r metadata/requirements.txt
+
+      - name: Run metadata validation and index update
+        id: validate
+        run: python metadata/script.py
+
+      - name: Commit and push updated index if needed
+        if: ${{ steps.validate.outputs.index_updated == 'true' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add metadata/index.json
+          git commit -m "chore: update index [auto]" || echo "No changes to commit"
+          git push
+
+      - name: Fail if validation errors occurred
+        if: ${{ steps.validate.outcome == 'failure' }}
+        run: |
+          echo "❌ Metadata validation failed. Check the logs above for details."
+          exit 1
