@@ -60,7 +60,7 @@
 % --------------------------
 % Load the base book class, inheriting its structure
 % and setting the determined options: font size, a4paper, twoside.
-\LoadClass[\HK@classfontsize,a4paper,twoside,openany]{book}
+\LoadClass[\HK@classfontsize,a4paper,openany]{book}
 
 % --------------------------
 % BASE TYPOGRAPHY AND INPUT PACKAGES
