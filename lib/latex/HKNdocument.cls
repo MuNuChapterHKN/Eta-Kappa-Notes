@@ -76,42 +76,11 @@
 \RequirePackage[\DocumentLanguage]{babel}
 
 % --------------------------
-% GRAPHICS AND TABLE PACKAGES
-% --------------------------
-\RequirePackage{graphicx} % For including images (including logo)
-\RequirePackage{array}    % Advanced columns in tables
-\RequirePackage{booktabs} % Typographically better tables (\toprule, \midrule, \bottomrule)
-\RequirePackage{enumitem} % For customizing list spacing
-
-% --------------------------
-% MATHEMATICAL PACKAGES
-% --------------------------
-\RequirePackage{amsmath,amssymb,amsthm} % Enhancements for mathematics (Theorems, symbols)
-\RequirePackage{mathtools}              % Extensions to amsmath
-
-% --------------------------
 % DOCUMENT LAYOUT
 % --------------------------
 \RequirePackage[a4paper,margin=3cm]{geometry}
 % Set margins and page size to A4 with 3cm margins.
 % Modifiable as desired.
-
-% --------------------------
-% HYPERREF FOR INTERNAL AND EXTERNAL LINKS
-% --------------------------
-% Create clickable links in PDF and set link colors
-\RequirePackage{hyperref}
-\hypersetup{
-    colorlinks=true,
-    linkcolor=black,
-    citecolor=black,
-    urlcolor=blue
-}
-
-% --------------------------
-% SVG IMAGES
-% --------------------------
-\RequirePackage[inkscapeversion=1]{svg} % SVG images with Inkscape
 
 % --------------------------
 % FANCYHDR FOR CUSTOM HEADERS AND FOOTERS
@@ -307,14 +276,6 @@
   \chaptermark{#1}}  % Use the full title for starred chapters
 \makeatother
 
-% --------------------------
-% NUMBERING OF FIGURES, TABLES, AND EQUATIONS
-% --------------------------
-% Makes numbering dependent on the chapter (Fig. 1.1, 1.2... ; Eq. (1.1), (1.2)...)
-\numberwithin{figure}{chapter}
-\numberwithin{table}{chapter}
-\numberwithin{equation}{chapter}
-
 % Reproduce parskip package behaviour
 \makeatletter
 \newcommand{\setupparskip}{
@@ -464,6 +425,141 @@
     \originalcleardoublepage%
     \thispagestyle{empty}%
 }
+
+% --------------------------
+% STYLE
+% --------------------------
+\RequirePackage{xcolor}  % custom colors
+\RequirePackage{tcolorbox}  % custom boxes
+
+% Primary (Accent) Colors
+\definecolor{accentYellow}{RGB}{254, 196, 41}  % #FEC421
+\definecolor{accentRed}{RGB}{236, 45, 36}      % #EC2D24
+
+% Secondary Colors
+\definecolor{supportOrange}{RGB}{242, 183, 5}  % #F2B705
+\definecolor{supportDarkBlue}{RGB}{55, 81, 113} % #375171
+
+% Background Colors
+\definecolor{backgroundLight}{RGB}{242, 242, 242} % #F2F2F2
+
+% Text & Border Colors
+\definecolor{textGrayBlue}{RGB}{100, 117, 140}   % #64758C
+\definecolor{textGrayMedium}{RGB}{146, 154, 166}  % #929AA6
+\definecolor{textGrayLight}{RGB}{184, 187, 191}   % #B8BBBF
+
+% Listings style
+\RequirePackage{listings}  % code highlighting
+\lstdefinestyle{hkn}{
+    basicstyle=\ttfamily\small\color{textGrayBlue},                         % Base style (size and font)
+    keywordstyle=\bfseries\color{accentRed},           % Keywords in red (important, eye-catching)
+    identifierstyle=\color{supportDarkBlue},               % Identifiers in blue (clear distinction)
+    commentstyle=\color{textGrayMedium},                 % Comments in gray-blue (less prominent)
+    stringstyle=\color{supportOrange},                 % Strings in orange (warm and readable)
+    numberstyle=\ttfamily\scriptsize\color{textGrayMedium}, % Line numbers in gray (non-intrusive)
+    backgroundcolor=\color{backgroundLight},           % Light background for contrast
+    rulecolor=\color{textGrayLight},                   % Soft gray border for structure
+    frame=single,                          % Border around code (single, double, shadowbox, none)
+    framerule=0.8pt,                       % Border thickness
+    frameround=tttt,                       % Round all corners
+    framesep=5pt,                          % Distance between border and code
+    rulesep=2pt,                           % Distance between border and code line
+    numbers=left,                          % Line number position (left, right, none)
+    stepnumber=1,                          % Line number interval
+    numbersep=10pt,                        % Distance between line numbers and code
+    xleftmargin=30pt,                      % Left margin
+    xrightmargin=30pt,                     % Right margin
+    resetmargins=true,                     % Reset margins
+    numberblanklines=false,                % Number blank lines
+    firstnumber=auto,                      % Initial line number
+    columns=fixed,                         % Fixed column width
+    showstringspaces=false,                % Show spaces in strings
+    tabsize=2,                             % Tab size
+    breaklines=true,                       % Automatic line break for long lines
+    breakatwhitespace=true,                % Line break at whitespace
+    breakautoindent=true,                  % Automatic indentation after line break
+    escapeinside={(*@}{@*)}                % LaTeX commands in code
+}
+
+% Underline settings
+
+\RequirePackage{ulem}  % underline
+\RequirePackage{contour}  % border around text
+
+\renewcommand{\ULdepth}{1.8pt} % Underline depth
+\contourlength{0.8pt}
+
+% Custom underline command
+\newcommand{\myuline}[1]{%
+\uline{\phantom{#1}}%
+\llap{\contour{white}{#1}}%
+}
+
+% tcolorbox color settings
+\definecolor{tcolorboxLeftColor}{RGB}{2, 65, 191}
+\definecolor{tcolorboxBackTitleColor}{RGB}{119, 152, 255}
+\definecolor{tcolorboxBackColor}{RGB}{210, 226, 255}
+
+% Custom boxes
+\newtcolorbox[auto counter, number within=chapter]{definition}[1]{
+  title={\iflanguage{italian}{Definizione}{Definition}~\arabic{\tcbcounter}.~#1},
+  boxrule=0mm,                       % Bordo principale (disabilitato)
+  leftrule=1mm,                    % Bordo sinistro principale
+  arc=2mm,
+  colframe=accentRed,       % Colore bordo
+  colbacktitle=textGrayMedium,
+  colback=backgroundLight,        % Colore sfondo
+  fonttitle=\bfseries,
+  rounded corners=all,               % Bordi arrotondati
+  }
+
+\newtcolorbox[auto counter, number within=chapter]{theorem}[1]{
+  title={\iflanguage{italian}{Teorema}{Theorem}~\arabic{\tcbcounter}.~#1},
+  boxrule=0mm,                       % Bordo principale (disabilitato)
+  leftrule=1mm,                    % Bordo sinistro principale
+  arc=2mm,
+  colframe=accentYellow,       % Colore bordo
+  colbacktitle=textGrayMedium,
+  colback=backgroundLight,        % Colore sfondo
+  fonttitle=\bfseries,
+  rounded corners=all,               % Bordi arrotondati
+}
+
+\newtcolorbox[auto counter, number within=chapter]{corollary}[1]{
+  title={\iflanguage{italian}{Corollario}{Corollary}~\arabic{\tcbcounter}.~#1},
+  boxrule=0mm,                       % Bordo principale (disabilitato)
+  leftrule=1mm,                    % Bordo sinistro principale
+  arc=2mm,
+  colframe=supportOrange,       % Colore bordo
+  colbacktitle=textGrayMedium,
+  colback=backgroundLight,        % Colore sfondo
+  fonttitle=\bfseries,
+  rounded corners=all,               % Bordi arrotondati
+}
+
+\newtcolorbox[auto counter, number within=chapter]{exercise}[1]{
+  title={\iflanguage{italian}{Esercizio}{Exercise}~\arabic{\tcbcounter}.~#1},
+  boxrule=0mm,                       % Bordo principale (disabilitato)
+  leftrule=1mm,                    % Bordo sinistro principale
+  arc=2mm,
+  colframe=supportDarkBlue,       % Colore bordo
+  colbacktitle=textGrayMedium,
+  colback=backgroundLight,        % Colore sfondo
+  fonttitle=\bfseries,
+  rounded corners=all,               % Bordi arrotondati
+}
+
+\newtcolorbox[auto counter, number within=chapter]{observation}[1]{
+  title={\iflanguage{italian}{Osservazione}{Observation}~\arabic{\tcbcounter}.~#1},
+  boxrule=0mm,                       % Bordo principale (disabilitato)
+  leftrule=1mm,                    % Bordo sinistro principale
+  arc=2mm,
+  colframe=textGrayBlue,       % Colore bordo
+  colbacktitle=textGrayMedium,
+  colback=backgroundLight,        % Colore sfondo
+  fonttitle=\bfseries,
+  rounded corners=all,               % Bordi arrotondati
+  }
 
 % End of class
 \endinput
