@@ -143,65 +143,46 @@
     \thispagestyle{empty} % No header/footer on title page
     \def\tempa{italian}% Define comparison variable like in copyright section
     \begin{titlepage}
-        % Logo e titoli centrati
-        \begin{center}
-            \vspace*{0.5cm}
-            \includegraphics[scale = 0.2]{\doclogofrontpage}\\[1.0 cm]  % HKN Logo
-            \textsc{\Large Mu Nu Chapter of IEEE-HKN}\\[-0.2 cm]  % Name
-            \rule{0.80\linewidth}{0.1 mm} \\
-            \textsc{\large Politecnico di Torino - Honor Society}\\[2.0 cm]  % Branch
-            \rule{\linewidth}{0.2 mm} \\[0.4 cm]
-            {\LARGE \textbf{\maintitle}}\\
-            \rule{\linewidth}{0.2 mm} \\[2 cm]
-        \end{center}
+    \begin{center}
+        % Logo e titoli
+        \vspace*{0.5cm}
+        \includegraphics[scale = 0.2]{\doclogofrontpage}\\[1.0 cm]  % HKN Logo
+        \textsc{\Large Mu Nu Chapter of IEEE-HKN}\\[-0.2 cm]  % Name
+        \rule{0.80\linewidth}{0.1 mm} \\
+        \textsc{\large Politecnico di Torino -- Honor Society}\\[2.0 cm]  % Branch
+        \rule{\linewidth}{0.2 mm} \\[0.4 cm]
+        {\LARGE \textbf{\maintitle}}\\
+        \rule{\linewidth}{0.2 mm} \\[1.5 cm]
 
-        \noindent
-        % Author(s) left
-        \begin{minipage}[t]{0.4\textwidth}
-            \raggedright
+        \if\DDauthors\empty\else
+            \Large\DDauthors
+        \fi
+
+        \vspace{0.3cm}
+
+        \if\DDeditors\empty\else
             \ifx\DocumentLanguage\tempa
-                {\Large\textit{Autori:}\\[0.5cm]}%
+                \Large \textit{Revisionato da:}
             \else
-                {\Large\textit{Authors:}\\[0.5cm]}%
+                \Large \textit{Edited by:}
             \fi
-            \ifx\DDauthors\empty\else
-                \DDauthors\\[0.5cm]%
-            \fi
-        \end{minipage}\hfill% <-- nessun blank line qui
-        % Editor (s) right
-        \begin{minipage}[t]{0.4\textwidth}
-            \raggedleft
+            \DDeditors
+        \fi
+
+        \vspace{1.5cm}
+
+        % Date, required
+        \Large \DDdate
+
+        % Optional version
+        \ifx\DDversion\empty\else
             \ifx\DocumentLanguage\tempa
-                {\Large\textit{Editori:}\\[0.5cm]}%
+                {\large Versione \DDversion}
             \else
-                {\Large\textit{Editors:}\\[0.5cm]}%
+                {\large Version \DDversion}
             \fi
-            \ifx\DDeditors\empty\else
-                \DDeditors\\[0.5cm]%
-            \fi
-        \end{minipage}
-        \vfill
-        % Opzionale: Versione e Data centrati
-        \begin{center}
-            % Optional version
-            \ifx\DDversion\empty\else
-                \ifx\DocumentLanguage\tempa
-                    {\large Versione: \DDversion}\\[0.5cm]
-                \else
-                    {\large Version: \DDversion}\\[0.5cm]
-                \fi
-            \fi
-
-            % Date: if not defined, use today's date
-            \ifx\DDdate\empty
-                {\large \today}
-            \else
-                {\large \DDdate}
-            \fi
-
-            \vfill
-        \end{center}
-
+        \fi
+    \end{center}
     \end{titlepage}
     \clearpage
 }
