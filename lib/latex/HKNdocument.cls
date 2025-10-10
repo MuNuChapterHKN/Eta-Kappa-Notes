@@ -31,7 +31,7 @@
 % Default values
 \def\DocumentLanguage{italian} % Default language
 \newcommand{\HK@tocdepth}{2}   % Default ToC depth: chapters, sections, subsections
-\def\HK@classfontsize{11pt}    % Default font size
+\def\HK@classfontsize{12pt}    % Default font size
 
 % --------------------------
 % DECLARATION OF OPTIONS
