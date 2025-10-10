@@ -375,66 +375,23 @@
 \definecolor{tcolorboxBackTitleColor}{RGB}{119, 152, 255}
 \definecolor{tcolorboxBackColor}{RGB}{210, 226, 255}
 
-% Custom boxes
-\newtcolorbox[auto counter, number within=chapter]{definition}[1]{
-  title={\iflanguage{italian}{Definizione}{Definition}~\arabic{\tcbcounter}.~#1},
-  boxrule=0mm,                       % Bordo principale (disabilitato)
-  leftrule=1mm,                    % Bordo sinistro principale
-  arc=2mm,
-  colframe=accentRed,       % Colore bordo
-  colbacktitle=textGrayMedium,
-  colback=backgroundLight,        % Colore sfondo
-  fonttitle=\bfseries,
-  rounded corners=all,               % Bordi arrotondati
-  }
-
-\newtcolorbox[auto counter, number within=chapter]{theorem}[1]{
-  title={\iflanguage{italian}{Teorema}{Theorem}~\arabic{\tcbcounter}.~#1},
-  boxrule=0mm,                       % Bordo principale (disabilitato)
-  leftrule=1mm,                    % Bordo sinistro principale
-  arc=2mm,
-  colframe=accentYellow,       % Colore bordo
-  colbacktitle=textGrayMedium,
-  colback=backgroundLight,        % Colore sfondo
-  fonttitle=\bfseries,
-  rounded corners=all,               % Bordi arrotondati
+% Factory macro for custom boxes
+\newcommand{\DeclareHKNBox}[4]{
+    \newtcolorbox[auto counter, number within=chapter]{#1}[1]{
+        title={\iflanguage{italian}{#2}{#3}~\arabic{\tcbcounter}.~##1},
+        boxrule=0mm,  % Bordo principale (disabilitato)
+        leftrule=1mm,  % Bordo sinistro principale
+        arc=2mm,
+        colframe=#4,  % Colore bordo
+        colbacktitle=textGrayMedium,
+        colback=backgroundLight,  % Colore sfondo
+        fonttitle=\bfseries,
+        rounded corners=all  % Bordi arrotondati
+    }
 }
 
-\newtcolorbox[auto counter, number within=chapter]{corollary}[1]{
-  title={\iflanguage{italian}{Corollario}{Corollary}~\arabic{\tcbcounter}.~#1},
-  boxrule=0mm,                       % Bordo principale (disabilitato)
-  leftrule=1mm,                    % Bordo sinistro principale
-  arc=2mm,
-  colframe=supportOrange,       % Colore bordo
-  colbacktitle=textGrayMedium,
-  colback=backgroundLight,        % Colore sfondo
-  fonttitle=\bfseries,
-  rounded corners=all,               % Bordi arrotondati
-}
-
-\newtcolorbox[auto counter, number within=chapter]{exercise}[1]{
-  title={\iflanguage{italian}{Esercizio}{Exercise}~\arabic{\tcbcounter}.~#1},
-  boxrule=0mm,                       % Bordo principale (disabilitato)
-  leftrule=1mm,                    % Bordo sinistro principale
-  arc=2mm,
-  colframe=supportDarkBlue,       % Colore bordo
-  colbacktitle=textGrayMedium,
-  colback=backgroundLight,        % Colore sfondo
-  fonttitle=\bfseries,
-  rounded corners=all,               % Bordi arrotondati
-}
-
-\newtcolorbox[auto counter, number within=chapter]{observation}[1]{
-  title={\iflanguage{italian}{Osservazione}{Observation}~\arabic{\tcbcounter}.~#1},
-  boxrule=0mm,                       % Bordo principale (disabilitato)
-  leftrule=1mm,                    % Bordo sinistro principale
-  arc=2mm,
-  colframe=textGrayBlue,       % Colore bordo
-  colbacktitle=textGrayMedium,
-  colback=backgroundLight,        % Colore sfondo
-  fonttitle=\bfseries,
-  rounded corners=all,               % Bordi arrotondati
-  }
-
-% End of class
-\endinput
+\DeclareHKNBox{definition}{Definizione}{Definition}{accentRed}
+\DeclareHKNBox{theorem}{Teorema}{Theorem}{accentYellow}
+\DeclareHKNBox{corollary}{Corollario}{Corollary}{supportOrange}
+\DeclareHKNBox{exercise}{Esercizio}{Exercise}{supportDarkBlue}
+\DeclareHKNBox{observation}{Osservazione}{Observation}{textGrayBlue}
