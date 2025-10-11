@@ -376,3 +376,19 @@
 \DeclareHKNBox{corollary}{Corollario}{Corollary}{supportOrange}
 \DeclareHKNBox{exercise}{Esercizio}{Exercise}{supportDarkBlue}
 \DeclareHKNBox{observation}{Osservazione}{Observation}{textGrayBlue}
+
+% Frontmatter and backmatter
+\input{_preamble.tex}
+\AtBeginDocument{
+    \frontmatter
+    \maketitle
+    \input{cclicense.tex}
+    \tableofcontents
+    \clearpage
+
+    \mainmatter
+}
+\AfterEndDocument{
+    \backmatter
+    \input{_postamble.tex}
+}
