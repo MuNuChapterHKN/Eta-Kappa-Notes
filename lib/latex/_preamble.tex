@@ -1,134 +1,41 @@
 % Packages
-\usepackage{listings}                    % Code highlighting
-\usepackage{xcolor}                      % Custom colors
 \usepackage{longtable}                   % Breakable tables
-\usepackage{ulem}                        % Underline
-\usepackage{contour}                     % Border around text
-\usepackage{tcolorbox}                   % Custom boxes
 
-% Primary (Accent) Colors
-% Primary (Accent) Colors
-\definecolor{accentYellow}{RGB}{254, 196, 41}  % #FEC421
-\definecolor{accentRed}{RGB}{236, 45, 36}      % #EC2D24
+% --------------------------
+% GRAPHICS AND TABLE PACKAGES
+% --------------------------
+\usepackage{graphicx} % For including images (including logo)
+\usepackage{array}    % Advanced columns in tables
+\usepackage{booktabs} % Typographically better tables (\toprule, \midrule, \bottomrule)
+\usepackage{enumitem} % For customizing list spacing
 
-% Secondary Colors
-\definecolor{supportOrange}{RGB}{242, 183, 5}  % #F2B705
-\definecolor{supportDarkBlue}{RGB}{55, 81, 113} % #375171
+% --------------------------
+% MATHEMATICAL PACKAGES
+% --------------------------
+\usepackage{amsmath,amssymb,amsthm} % Enhancements for mathematics (Theorems, symbols)
+\usepackage{mathtools}              % Extensions to amsmath
 
-% Background Colors
-\definecolor{backgroundLight}{RGB}{242, 242, 242} % #F2F2F2
+% --------------------------
+% NUMBERING OF FIGURES, TABLES, AND EQUATIONS
+% --------------------------
+% Makes numbering dependent on the chapter (Fig. 1.1, 1.2... ; Eq. (1.1), (1.2)...)
+\numberwithin{figure}{chapter}
+\numberwithin{table}{chapter}
+\numberwithin{equation}{chapter}
 
-% Text & Border Colors
-\definecolor{textGrayBlue}{RGB}{100, 117, 140}   % #64758C
-\definecolor{textGrayMedium}{RGB}{146, 154, 166}  % #929AA6
-\definecolor{textGrayLight}{RGB}{184, 187, 191}   % #B8BBBF
-
-
-
-% Listings style
-\lstdefinestyle{hkn}{
-  basicstyle=\ttfamily\small\color{textGrayBlue},                         % Base style (size and font)
-  keywordstyle=\bfseries\color{accentRed},           % Keywords in red (important, eye-catching)
-  identifierstyle=\color{supportDarkBlue},               % Identifiers in blue (clear distinction)
-  commentstyle=\color{textGrayMedium},                 % Comments in gray-blue (less prominent)
-  stringstyle=\color{supportOrange},                 % Strings in orange (warm and readable)
-  numberstyle=\ttfamily\scriptsize\color{textGrayMedium}, % Line numbers in gray (non-intrusive)
-  backgroundcolor=\color{backgroundLight},           % Light background for contrast
-  rulecolor=\color{textGrayLight},                   % Soft gray border for structure
-  frame=single,                          % Border around code (single, double, shadowbox, none)
-  framerule=0.8pt,                       % Border thickness
-  frameround=tttt,                       % Round all corners
-  framesep=5pt,                          % Distance between border and code
-  rulesep=2pt,                           % Distance between border and code line
-  numbers=left,                          % Line number position (left, right, none)
-  stepnumber=1,                          % Line number interval
-  numbersep=10pt,                        % Distance between line numbers and code
-  xleftmargin=30pt,                      % Left margin
-  xrightmargin=30pt,                     % Right margin
-  resetmargins=true,                     % Reset margins
-  numberblanklines=false,                % Number blank lines
-  firstnumber=auto,                      % Initial line number
-  columns=fixed,                         % Fixed column width
-  showstringspaces=false,                % Show spaces in strings
-  tabsize=2,                             % Tab size
-  breaklines=true,                       % Automatic line break for long lines
-  breakatwhitespace=true,                % Line break at whitespace
-  breakautoindent=true,                  % Automatic indentation after line break
-  escapeinside={(*@}{@*)}                % LaTeX commands in code
+% --------------------------
+% HYPERREF FOR INTERNAL AND EXTERNAL LINKS
+% --------------------------
+% Create clickable links in PDF and set link colors
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    urlcolor=blue
 }
 
-% Underline settings
-\renewcommand{\ULdepth}{1.8pt} % Underline depth
-\contourlength{0.8pt}
-
-% Custom underline command
-\newcommand{\myuline}[1]{%
-\uline{\phantom{#1}}%
-\llap{\contour{white}{#1}}%
-}
-
-% tcolorbox color settings
-\definecolor{tcolorboxLeftColor}{RGB}{2, 65, 191}
-\definecolor{tcolorboxBackTitleColor}{RGB}{119, 152, 255}
-\definecolor{tcolorboxBackColor}{RGB}{210, 226, 255}
-
-% Custom boxes
-\newtcolorbox[auto counter, number within=chapter]{definition}[1]{
-  title={\iflanguage{italian}{Definizione}{Definition}~\arabic{\tcbcounter}.~#1},
-  boxrule=0mm,                       % Bordo principale (disabilitato)
-  leftrule=1mm,                    % Bordo sinistro principale
-  arc=2mm,
-  colframe=accentRed,       % Colore bordo
-  colbacktitle=textGrayMedium,
-  colback=backgroundLight,        % Colore sfondo
-  fonttitle=\bfseries,
-  rounded corners=all,               % Bordi arrotondati
-  }
-
-\newtcolorbox[auto counter, number within=chapter]{theorem}[1]{
-  title={\iflanguage{italian}{Teorema}{Theorem}~\arabic{\tcbcounter}.~#1},
-  boxrule=0mm,                       % Bordo principale (disabilitato)
-  leftrule=1mm,                    % Bordo sinistro principale
-  arc=2mm,
-  colframe=accentYellow,       % Colore bordo
-  colbacktitle=textGrayMedium,
-  colback=backgroundLight,        % Colore sfondo
-  fonttitle=\bfseries,
-  rounded corners=all,               % Bordi arrotondati
-}
-
-\newtcolorbox[auto counter, number within=chapter]{corollary}[1]{
-  title={\iflanguage{italian}{Corollario}{Corollary}~\arabic{\tcbcounter}.~#1},
-  boxrule=0mm,                       % Bordo principale (disabilitato)
-  leftrule=1mm,                    % Bordo sinistro principale
-  arc=2mm,
-  colframe=supportOrange,       % Colore bordo
-  colbacktitle=textGrayMedium,
-  colback=backgroundLight,        % Colore sfondo
-  fonttitle=\bfseries,
-  rounded corners=all,               % Bordi arrotondati
-}
-
-\newtcolorbox[auto counter, number within=chapter]{exercise}[1]{
-  title={\iflanguage{italian}{Esercizio}{Exercise}~\arabic{\tcbcounter}.~#1},
-  boxrule=0mm,                       % Bordo principale (disabilitato)
-  leftrule=1mm,                    % Bordo sinistro principale
-  arc=2mm,
-  colframe=supportDarkBlue,       % Colore bordo
-  colbacktitle=textGrayMedium,
-  colback=backgroundLight,        % Colore sfondo
-  fonttitle=\bfseries,
-  rounded corners=all,               % Bordi arrotondati
-}
-
-\newtcolorbox[auto counter, number within=chapter]{observation}[1]{
-  title={\iflanguage{italian}{Osservazione}{Observation}~\arabic{\tcbcounter}.~#1},
-  boxrule=0mm,                       % Bordo principale (disabilitato)
-  leftrule=1mm,                    % Bordo sinistro principale
-  arc=2mm,
-  colframe=textGrayBlue,       % Colore bordo
-  colbacktitle=textGrayMedium,
-  colback=backgroundLight,        % Colore sfondo
-  fonttitle=\bfseries,
-  rounded corners=all,               % Bordi arrotondati
-  }
+% --------------------------
+% SVG IMAGES
+% --------------------------
+\usepackage[inkscapeversion=1]{svg} % SVG images with Inkscape

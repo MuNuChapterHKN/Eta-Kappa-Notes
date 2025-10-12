@@ -11,6 +11,9 @@
   // Draw.io
   "hediet.vscode-drawio.simpleLabels": true,
 
+  // Markdown
+  "markdown.extension.toc.updateOnSave": false,
+
   // LaTeX
   "latex-workshop.latex.outDir": "%DIR%/build/",
   "latex-workshop.latex.rootFile.useSubFile": true,
