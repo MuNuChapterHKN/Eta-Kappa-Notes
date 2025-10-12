@@ -3,8 +3,6 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Version](https://img.shields.io/badge/version-0.1.0-green.svg)](https://github.com/MuNuChapterHKN/Eta-Kappa-Notes)
 
-## Description
-
 **Eta Kappa Notes** is an academic note-taking project developed by the Mu Nu Chapter of IEEE-HKN at Politecnico di Torino. The project collects study notes for various university courses, providing high-quality resources for engineering students and beyond.
 
 ## 🎯 Goals
