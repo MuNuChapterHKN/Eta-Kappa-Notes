@@ -2,11 +2,11 @@
 
 **Thank you for considering contributing to this repository!**
 
-- [🤝 Ways of contributing](#ways-of-contributing)
-- [✍️ How to create new notes](#how-to-create-new-notes)
+- [🤝 Ways of contributing](#-ways-of-contributing)
+- [✍️ How to create new notes](#-how-to-create-new-notes)
   - [Workspace setup](#workspace-setup)
   - [Notes directory](#notes-directory)
-- [🔄 Repository workflow](#repository-workflow)
+- [🔄 Repository workflow](#-repository-workflow)
   - [Branches](#branches)
   - [Merges](#merges)
   - [Roles](#roles)
@@ -14,13 +14,13 @@
 
 ## 🤝 Ways of contributing
 
-✍️ **Create new notes**: see the [section below](#how-to-create-new-notes).
+✍️ **Create new notes**: see the [section below](#-how-to-create-new-notes).
 
 🔧 **Improve existing ones**: fork the repository and create a pull request.
 
 ❗**Report errors** or 💡**make suggestions**:
 
-- [Contact the project manager](README.md#contact), or
+- [Contact the project manager](README.md#-contact), or
 - [Create a GitHub Issue](https://github.com/MuNuChapterHKN/Eta-Kappa-Notes/issues/new), or
 - Fork the repository and create a pull request
 
@@ -29,7 +29,7 @@
 ### Workspace setup
 
 1. Choose a course for which you will take notes.
-2. [Tell the project manager](readme.md#contact)
+2. [Tell the project manager](README.md#-contact)
 3. The project manager will create a branch and tell you to fork it.
 
 ### Notes directory
