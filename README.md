@@ -45,7 +45,38 @@ We are always looking for new contributors! If you want to add your notes or imp
 
 ## 📄 License
 
-This project is released under the GPL-3.0 license. See the [`COPYING`](COPYING) file for more details.
+This repository contains both source code and textual content (class notes), distributed under different licenses.
+
+### Source code
+
+The project's source code is **Copyright © 2024-2025 Erik Scolaro, Eduard Occhipinti, Giulio Cosentino**,
+and is distributed under the [GNU GPL 3.0 or later](https://www.gnu.org/licenses/gpl-3.0.html).
+
+See the [`COPYING`](COPYING) file for more details.
+
+License notice:
+
+    Copyright (C) 2024-2025 Erik Scolaro, Eduard Occhipinti, Giulio Cosentino
+    SPDX-License-Identifier: GPL-3.0-or-later
+
+    Eta-Kappa-Notes is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Eta-Kappa-Notes is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Eta-Kappa-Notes.  If not, see <https://www.gnu.org/licenses/>.
+
+### Notes
+
+The notes (in the `notes/` directory) and the guide (in the `guide/` directory) are distributed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0/).
+
+Credit for the notes must be attributed to the **authors and editors** of each respective document.
 
 ## 📞 Contact
 
