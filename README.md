@@ -25,12 +25,6 @@ The project is organized into several sections:
 
 For installation and compilation instructions, please refer to the [`CONTRIBUTING.md`](CONTRIBUTING.md) file which contains all detailed instructions for prerequisites, installation, and compilation.
 
-## 📖 Available Courses
-
-Currently, the project includes notes for:
-
-- **Mathematical Analysis 1** (Analisi Matematica 1)
-- Other courses in development...
 
 ## 🤝 Contributing
 
