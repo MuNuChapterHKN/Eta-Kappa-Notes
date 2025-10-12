@@ -78,14 +78,11 @@ Credit for the notes must be attributed to the **authors and editors** of each r
 
 ## 📞 Contact
 
-For questions, suggestions, or reports:
-- **Sito web:** [hknpolito.org](https://hknpolito.org/)
-- **Instagram:** [@hknpolito](https://www.instagram.com/hknpolito/)
-- **GitHub Issues:** [Report an issue](https://github.com/MuNuChapterHKN/Eta-Kappa-Notes/issues)
-- **Repository GitHub:** [Eta-Kappa-Notes](https://github.com/MuNuChapterHKN/Eta-Kappa-Notes/)
+- **Project manager:** responsabile.publishing@hknpolito.org (italian language is preferred in emails)
+- **GitHub repository:** [MuNuChapterHKN/Eta-Kappa-Notes](https://github.com/MuNuChapterHKN/Eta-Kappa-Notes/)
 
-## 🔗 Links
+## 🧭 About us
 
-- [IEEE-HKN International](https://hkn.ieee.org/)
-- [Politecnico di Torino](https://www.polito.it/)
-- [Typst Documentation](https://typst.app/docs/)
+- **Mu Nu Chapter:** [hknpolito.org](https://hknpolito.org/) (website), [@hknpolito](https://www.instagram.com/hknpolito/) (instagram)
+- **IEEE-Eta Kappa Nu:** [hkn.ieee.org](https://hkn.ieee.org/)
+- **Politecnico di Torino:** [polito.it](https://www.polito.it/)
