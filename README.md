@@ -20,14 +20,19 @@
 - Standardize note formatting and structure
 - Support both LaTeX and Typst for document composition
 
+## 🤝 Contributing
+
+We are always looking for new contributors!
+See the **[`CONTRIBUTING.md`](CONTRIBUTING.md)** file for more information.
+
 ## 📚 Project Structure
 
-The project is organized into several sections:
+The project is organized as follows:
 
 - [**`notes/`**](notes/): class notes
+- [**`guide/`**](guide/): a simple guide to get started with the project
 - [**`lib/`**](lib/): templates
 - [**`resources/`**](resources/): shared resources (images, diagrams, etc.)
-- **`build/`**: compiled files and output
 
 ## 🚀 Installation and compilation
 
@@ -63,12 +68,7 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-## 🤝 Contributing
-
-We are always looking for new contributors!
-See the **[`CONTRIBUTING.md`](CONTRIBUTING.md)** file for more information.
-
-## 📄 License
+## ⚖️ License
 
 This repository contains both source code and textual content (class notes), distributed under different licenses.
 
