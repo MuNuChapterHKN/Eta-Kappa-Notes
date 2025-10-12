@@ -5,6 +5,14 @@
 
 **Eta Kappa Notes** is an academic note-taking project developed by the Mu Nu Chapter of IEEE-HKN at Politecnico di Torino. The project collects study notes for various university courses, providing high-quality resources for engineering students and beyond.
 
+- [🎯 Goals](#🎯-goals)
+- [📚 Project Structure](#📚-project-structure)
+- [🚀 Installation and compilation](#🚀-installation-and-compilation)
+- [🤝 Contributing](#🤝-contributing)
+- [📄 License](#📄-license)
+- [📞 Contact](#📞-contact)
+- [🧭 About us](#🧭-about-us)
+
 ## 🎯 Goals
 
 - Provide quality notes for Politecnico di Torino courses

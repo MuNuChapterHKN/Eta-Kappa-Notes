@@ -2,6 +2,16 @@
 
 **Thank you for considering contributing to this repository!**
 
+- [🤝 Ways of contributing](#🤝-ways-of-contributing)
+- [✍️ How to create new notes](#️✍️-how-to-create-new-notes)
+  - [Workspace setup](#workspace-setup)
+  - [Notes directory](#notes-directory)
+- [🔄 Repository workflow](#🔄-repository-workflow)
+  - [Branches](#branches)
+  - [Merges](#merges)
+  - [Roles](#roles)
+  - [Commits](#commits)
+
 ## 🤝 Ways of contributing
 
 ✍️ **Create new notes**: see the [section below](#️✍️-how-to-create-new-notes).
