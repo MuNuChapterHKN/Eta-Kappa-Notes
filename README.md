@@ -57,12 +57,8 @@ pip install -r requirements.txt
 
 ## 🤝 Contributing
 
-We are always looking for new contributors! If you want to add your notes or improve existing ones:
-
-1. Read the [`CONTRIBUTING.md`](CONTRIBUTING.md) file for complete guidelines on installation, compilation, and contribution process
-2. Follow the project's standardized structure
-3. Use the provided templates to maintain consistency
-4. Submit a Pull Request
+We are always looking for new contributors!
+See the **[`CONTRIBUTING.md`](CONTRIBUTING.md)** file for more information.
 
 ## 📄 License
 
