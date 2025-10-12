@@ -21,10 +21,39 @@ The project is organized into several sections:
 - [**`resources/`**](resources/): shared resources (images, diagrams, etc.)
 - **`build/`**: compiled files and output
 
-## 🚀 Getting Started
+## 🚀 Installation and compilation
 
-For installation and compilation instructions, please refer to the [`CONTRIBUTING.md`](CONTRIBUTING.md) file which contains all detailed instructions for prerequisites, installation, and compilation.
+### LaTeX
 
+We encourage using the **[LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop) VS Code extension**.
+In order to use it you need a TeX installation (see https://github.com/James-Yu/LaTeX-Workshop/wiki/Install).
+They "*strongly recommend **TeX Live***".
+
+You may also need **Inkscape**.
+
+> [!TIP]
+> If VS Code is not your code editor of choice, you can mimic the intended compilation by reproducing the `latexmk` tool in [`.vscode/settings.json`](.vscode/settings.json).
+
+### Typst
+
+Version 0.12.0 or higher, see https://typst.app/
+
+Compile with
+``` bash
+typst compile typst/guide.typ
+```
+
+### Python
+
+In case you want to create figures with Python, use Python 3.x with dependencies from [`requirements.txt`](requirements.txt).
+
+For example, to create a **virtual environment** on Windows, run the following from the project root:
+
+``` powershell
+python -m venv .venv
+.\.venv\Scripts\activate
+pip install -r requirements.txt
+```
 
 ## 🤝 Contributing
 
