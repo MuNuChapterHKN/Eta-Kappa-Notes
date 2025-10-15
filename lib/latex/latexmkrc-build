@@ -1,0 +1,38 @@
+use File::Find;
+
+# Generate PDF output
+$pdf_mode = 1;
+
+# Set output directory
+$out_dir = 'build';
+
+# Enable -shell-escape
+$shell_escape = 1;
+
+# Enable SyncTeX
+$synctex = 1;
+
+# Add compiler flags
+$pdflatex = 'pdflatex -interaction=nonstopmode -file-line-error %O %S';
+
+# Add search paths for inputs
+# The '//' at the end searches subdirectories
+ensure_path('TEXINPUTS', '/workdir/lib/latex/');
+ensure_path('TEXINPUTS', '/workdir/resources/imgs/');
+
+# Paths
+my $chapters_src = abs_path('chapters');  # source chapters directory
+my $build = abs_path('build');  # output directory
+my $chapters_build = "$build/chapters";  # build chapters directory
+
+# Ensure build directory exists
+mkdir $build unless -d $build;
+mkdir $chapters_build unless -d $chapters_build;
+
+# Recursively create subfolders in build/
+find(sub {
+    return unless -d;  # only directories
+    my $rel = File::Spec->abs2rel($File::Find::name, $chapters_src);
+    return if $rel eq '.';  # skip root
+    mkdir "$chapters_build/$rel" unless -d "$chapters_build/$rel";
+}, $chapters_src);
