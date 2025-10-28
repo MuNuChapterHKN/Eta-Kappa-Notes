@@ -31,7 +31,7 @@ We start with de Broglie's revolutionary hypothesis, which associates a waveleng
 \begin{cases}\lambda=\frac{h}{p} & \text { de Broglie's principle }  \label{eq:1.1}\\ \Psi(\vec{x}, t)=A \mathrm{e}^{i(k \vec{x}-\omega t)} & \text { wave function }\end{cases}
 \]
 
-Here, Planck's constant $h \simeq 6.602 \cdot 10^{-34} \mathrm{~J} \cdot \mathrm{s}$ appears as a fundamental quantum parameter. Since we're treating particles as waves, a natural starting point might be the classical d'Alembert wave equation:
+Here, Planck's constant $h \simeq 6.602 \cdot 10^{-34} \, \mathrm{J} \cdot \mathrm{s}$ appears as a fundamental quantum parameter. Since we're treating particles as waves, a natural starting point might be the classical d'Alembert wave equation:
 
 \begin{equation}
 \frac{\partial^{2} \Psi}{\partial t^{2}}=\sigma \nabla^{2} \Psi \label{eq:1.2}
@@ -266,7 +266,7 @@ This probabilistic interpretation was initially controversial but has withstood 
 For a finite volume $V_{0}$, the probability of finding the particle within that region is calculated by integrating the probability density over the entire volume:
 
 \begin{equation}
-P\left(V_{0}\right)=\int_{V_{0}} \rho \mathrm{~d} V \label{eq:1.25}
+P\left(V_{0}\right)=\int_{V_{0}} \rho \, \mathrm{d} V \label{eq:1.25}
 \end{equation}
 
 This integral represents a key connection between the mathematical formalism and experimental measurements. When we perform position measurements on identically prepared quantum systems, the statistical distribution of results approaches this probability distribution in the limit of many measurements.
@@ -274,7 +274,7 @@ This integral represents a key connection between the mathematical formalism and
 If the particle is confined within a volume $V$ (for example, in a potential well with infinite barriers), then the particle must be found somewhere within this volume. This leads to the normalization condition:
 
 \begin{equation}
-\int_{V} \rho \mathrm{~d} V \stackrel{!}{=} 1 \label{eq:1.26}
+\int_{V} \rho \, \mathrm{d} V \stackrel{!}{=} 1 \label{eq:1.26}
 \end{equation}
 
 The exclamation mark above the equal sign emphasizes that this is a constraint on physically acceptable wave functions rather than a derived result. Wave functions that don't satisfy this normalization condition don't represent physically realizable quantum states. This requirement guides the selection of appropriate solutions to Schrödinger's equation when boundary conditions allow for multiple mathematical solutions.
@@ -377,14 +377,14 @@ We can now prove that the total probability $P$ remains constant over time.
 Proof. The time derivative of the total probability in volume $V$ is:
 
 \begin{align}
-\frac{\partial}{\partial t} \int_{V} \rho \mathrm{~d}^{3} \vec{x} &= \int_{V} \frac{\partial \rho}{\partial t} \mathrm{~d}^{3} \vec{x} \label{eq:1.37} \\
-&= -\int_{V} \vec{\nabla} \cdot \vec{j} \mathrm{~d}^{3} \vec{x}
+\frac{\partial}{\partial t} \int_{V} \rho \, \mathrm{d}^{3} \vec{x} &= \int_{V} \frac{\partial \rho}{\partial t} \, \mathrm{d}^{3} \vec{x} \label{eq:1.37} \\
+&= -\int_{V} \vec{\nabla} \cdot \vec{j} \, \mathrm{d}^{3} \vec{x}
 \end{align}
 
 Applying the divergence theorem (Gauss's theorem), this becomes:
 
 \begin{align}
-\frac{\partial}{\partial t} \int_{V} \rho \mathrm{~d}^{3} \vec{x} &= -\oint_{\partial V} \vec{j} \cdot \mathrm{d} \vec{\Sigma} = 0
+\frac{\partial}{\partial t} \int_{V} \rho \, \mathrm{d}^{3} \vec{x} &= -\oint_{\partial V} \vec{j} \cdot \mathrm{d} \vec{\Sigma} = 0
 \end{align}
 
 The surface integral vanishes because for physically relevant wave functions, $|\Psi|^2$ approaches zero at the boundaries of the volume (for bound states) or falls off rapidly enough (for scattering states). Consequently, $\vec{j}$ also vanishes at the boundary, making the surface integral zero.
@@ -394,7 +394,7 @@ This proves that the total probability within the volume remains constant during
 For proper normalization, we require the total probability to be exactly 1. If a wave function yields:
 
 \begin{equation}
-\int_{V} \mathrm{~d}^{3} x|\Psi|^{2}=c \label{eq:1.38}
+\int_{V} \, \mathrm{d}^{3} x|\Psi|^{2}=c \label{eq:1.38}
 \end{equation}
 
 where $c$ is some positive constant, we normalize by scaling the wave function:
@@ -403,7 +403,7 @@ $\Psi \rightarrow \frac{\Psi}{\sqrt{c}}$
 This ensures:
 
 \begin{equation}
-\int_{V} \mathrm{~d}^{3} x\left|\frac{\Psi}{\sqrt{c}}\right|^{2}=1 \label{eq:1.39}
+\int_{V} \, \mathrm{d}^{3} x\left|\frac{\Psi}{\sqrt{c}}\right|^{2}=1 \label{eq:1.39}
 \end{equation}
 
 The normalization procedure is essential for maintaining the probabilistic interpretation, allowing us to interpret $|\Psi|^2$ as a proper probability density.
@@ -439,14 +439,14 @@ The terms containing $\hat{r}$ cancel, leaving:
 To analyze whether the total probability is conserved in an infinite volume, we examine the flux through a large sphere surrounding the origin:
 
 \begin{align}
-\frac{\partial}{\partial t} \int_{\mathbb{R}^{3}} \rho \mathrm{~d}^{3} \vec{x} &= -\oint_{\partial V} \vec{j} \cdot \mathrm{d} \vec{\Sigma} \\
+\frac{\partial}{\partial t} \int_{\mathbb{R}^{3}} \rho \, \mathrm{d}^{3} \vec{x} &= -\oint_{\partial V} \vec{j} \cdot \mathrm{d} \vec{\Sigma} \\
 &= -\oint_{S} \vec{j} \cdot \hat{r} \, r^{2} \sin\theta \, d\theta \, d\phi
 \end{align}
 
 Substituting our expression for $\vec{j}$:
 
 \begin{align}
-\frac{\partial}{\partial t} \int_{\mathbb{R}^{3}} \rho \mathrm{~d}^{3} \vec{x} &= -\oint_{S}\left[\frac{\hbar}{2 m i}\left(\frac{f^{*}(r) \vec{\nabla} f(r)-f(r) \vec{\nabla} f^{*}(r)}{r^{2 k}}\right) \cdot \hat{r} \, r^{2}\right] \sin\theta \, d\theta \, d\phi \label{eq:1.42} \\
+\frac{\partial}{\partial t} \int_{\mathbb{R}^{3}} \rho \, \mathrm{d}^{3} \vec{x} &= -\oint_{S}\left[\frac{\hbar}{2 m i}\left(\frac{f^{*}(r) \vec{\nabla} f(r)-f(r) \vec{\nabla} f^{*}(r)}{r^{2 k}}\right) \cdot \hat{r} \, r^{2}\right] \sin\theta \, d\theta \, d\phi \label{eq:1.42} \\
 &= -\oint_{S} \frac{\hbar}{2 m i}\left(\frac{f^{*}(r) \frac{\partial f(r)}{\partial r}-f(r) \frac{\partial f^{*}(r)}{\partial r}}{r^{2 k-2}}\right) \sin\theta \, d\theta \, d\phi
 \end{align}
 
@@ -2304,25 +2304,25 @@ I understand now. Here's the revised LaTeX code with a different structure and e
 The key expression we need to evaluate is:
 
 \begin{equation}
-\left(\exp \left(\frac{-y^{2}}{2}\right) y^{s}, \exp \left(\frac{y^{2}}{2}\right) \frac{\mathrm{d}^{n}}{\mathrm{~d} y^{n}} \exp \left(-y^{2}\right)\right) \label{eq:5.70}
+\left(\exp \left(\frac{-y^{2}}{2}\right) y^{s}, \exp \left(\frac{y^{2}}{2}\right) \frac{\mathrm{d}^{n}}{\, \mathrm{d} y^{n}} \exp \left(-y^{2}\right)\right) \label{eq:5.70}
 \end{equation}
 
 When written as an integral, this becomes:
 
 \begin{equation}
-\int_{-\infty}^{+\infty} \mathrm{d} y \exp \left(\frac{-y^{2}}{2}\right) y^{s} \exp \left(\frac{y^{2}}{2}\right) \frac{\mathrm{d}^{n}}{\mathrm{~d} y^{n}} \exp \left(-y^{2}\right)=\int_{-\infty}^{+\infty} \mathrm{d} y y^{s} \frac{\mathrm{d}^{n}}{\mathrm{~d} y^{n}} \exp \left(-y^{2}\right) \label{eq:5.71}
+\int_{-\infty}^{+\infty} \mathrm{d} y \exp \left(\frac{-y^{2}}{2}\right) y^{s} \exp \left(\frac{y^{2}}{2}\right) \frac{\mathrm{d}^{n}}{\, \mathrm{d} y^{n}} \exp \left(-y^{2}\right)=\int_{-\infty}^{+\infty} \mathrm{d} y y^{s} \frac{\mathrm{d}^{n}}{\, \mathrm{d} y^{n}} \exp \left(-y^{2}\right) \label{eq:5.71}
 \end{equation}
 
 Applying integration by parts gives:
 
 \begin{equation}
-\int_{-\infty}^{+\infty} \mathrm{d} y y^{s} \frac{\mathrm{d}^{n}}{\mathrm{~d} y^{n}} \exp \left(-y^{2}\right)=\left.y^{s} \frac{\mathrm{~d}^{n}}{\mathrm{~d} y^{n}} \exp \left(-y^{2}\right)\right|_{-\infty} ^{+\infty}+s \int_{-\infty}^{+\infty} \mathrm{d} y y^{s-1} \frac{\mathrm{~d}^{n-1}}{\mathrm{~d} y^{n-1}} \exp \left(-y^{2}\right) \label{eq:5.72}
+\int_{-\infty}^{+\infty} \mathrm{d} y y^{s} \frac{\mathrm{d}^{n}}{\, \mathrm{d} y^{n}} \exp \left(-y^{2}\right)=\left.y^{s} \frac{\, \mathrm{d}^{n}}{\, \mathrm{d} y^{n}} \exp \left(-y^{2}\right)\right|_{-\infty} ^{+\infty}+s \int_{-\infty}^{+\infty} \mathrm{d} y y^{s-1} \frac{\, \mathrm{d}^{n-1}}{\, \mathrm{d} y^{n-1}} \exp \left(-y^{2}\right) \label{eq:5.72}
 \end{equation}
 
 With repeated integration by parts, we obtain:
 
 \begin{equation}
-s!\int_{-\infty}^{+\infty} \mathrm{d} y \frac{\mathrm{d}^{n-s}}{\mathrm{~d} y^{n-s}} \exp \left(-y^{2}\right) \label{eq:5.73}
+s!\int_{-\infty}^{+\infty} \mathrm{d} y \frac{\mathrm{d}^{n-s}}{\, \mathrm{d} y^{n-s}} \exp \left(-y^{2}\right) \label{eq:5.73}
 \end{equation}
 
 For cases where $n \neq s$, this integral vanishes. With $s \leq m$ and $m \leq n$, we can only have $s = n$ when:
@@ -3189,7 +3189,7 @@ The commutation relation $[\hat{A}, \hat{B}]=0$ yields several significant conse
 \subsection{Consequences of Operator Commutation}
 
 \begin{equation}
-i \hbar \frac{\mathrm{~d}\langle\hat{A}\rangle}{\mathrm{d} t}=\langle[\hat{A}, \hat{H}]\rangle=0 \Longrightarrow \frac{\mathrm{~d}\langle\hat{A}\rangle}{\mathrm{d} t}=0 \label{eq:7.36}
+i \hbar \frac{\, \mathrm{d}\langle\hat{A}\rangle}{\mathrm{d} t}=\langle[\hat{A}, \hat{H}]\rangle=0 \Longrightarrow \frac{\, \mathrm{d}\langle\hat{A}\rangle}{\mathrm{d} t}=0 \label{eq:7.36}
 \end{equation}
 
 This demonstrates that when an operator commutes with the Hamiltonian, its expectation value remains constant over time.
@@ -3942,7 +3942,7 @@ This relation connects associated Legendre functions with negative and positive 
 \section{Property 2.}
 
 \begin{equation}
-\int_{-1}^{1} \mathrm{~d} \xi P_{\ell, m} P_{n, m}=\frac{2}{2 l+1} \frac{(\ell+m)!}{(\ell-m)!} \delta_{l n} \label{eq:8.48}
+\int_{-1}^{1} \, \mathrm{d} \xi P_{\ell, m} P_{n, m}=\frac{2}{2 l+1} \frac{(\ell+m)!}{(\ell-m)!} \delta_{l n} \label{eq:8.48}
 \end{equation}
 
 This orthogonality relation is crucial for establishing the completeness of the spherical harmonic basis.
@@ -3964,7 +3964,7 @@ The spherical harmonics form a complete orthonormal basis for functions on the s
 Proof. To prove this we explicit the integral:
 
 \begin{equation}
-\int_{0}^{\pi} \mathrm{d} \theta \sin \theta \int_{0}^{2 \pi} \mathrm{~d} \varphi Y_{h, n}^{*}(\theta, \varphi) Y_{\ell, m}(\theta, \varphi) \label{eq:8.51}
+\int_{0}^{\pi} \mathrm{d} \theta \sin \theta \int_{0}^{2 \pi} \, \mathrm{d} \varphi Y_{h, n}^{*}(\theta, \varphi) Y_{\ell, m}(\theta, \varphi) \label{eq:8.51}
 \end{equation}
 
 This integral represents the inner product of two spherical harmonics over the entire spherical surface.
@@ -3972,13 +3972,13 @@ This integral represents the inner product of two spherical harmonics over the e
 Separating the two contributions:
 
 \begin{equation}
-N_{\ell, m} N_{h, n}(-1)^{n}(-1)^{m} \int_{0}^{\pi} \mathrm{d} \theta \sin \theta P_{h, n}(\cos \theta) P_{\ell, m}(\cos \theta) \int_{0}^{2 \pi} \mathrm{~d} \varphi \Phi_{n}^{*}(\varphi) \Phi_{m}(\varphi) \label{eq:8.52}
+N_{\ell, m} N_{h, n}(-1)^{n}(-1)^{m} \int_{0}^{\pi} \mathrm{d} \theta \sin \theta P_{h, n}(\cos \theta) P_{\ell, m}(\cos \theta) \int_{0}^{2 \pi} \, \mathrm{d} \varphi \Phi_{n}^{*}(\varphi) \Phi_{m}(\varphi) \label{eq:8.52}
 \end{equation}
 
 The integral separates into independent azimuthal and polar components.
 
 \begin{equation}
-\int_{0}^{2 \pi} \mathrm{~d} \varphi \Phi_{n}^{*}(\varphi) \Phi_{m}(\varphi)=\int_{0}^{2 \pi} \mathrm{~d} \varphi \frac{\mathrm{e}^{-i n \varphi} \mathrm{e}^{i m \varphi}}{2 \pi}=\delta_{n m} \label{eq:8.53}
+\int_{0}^{2 \pi} \, \mathrm{d} \varphi \Phi_{n}^{*}(\varphi) \Phi_{m}(\varphi)=\int_{0}^{2 \pi} \, \mathrm{d} \varphi \frac{\mathrm{e}^{-i n \varphi} \mathrm{e}^{i m \varphi}}{2 \pi}=\delta_{n m} \label{eq:8.53}
 \end{equation}
 
 The orthogonality of complex exponentials ensures that different azimuthal modes do not overlap.
@@ -3990,7 +3990,7 @@ The orthogonality of complex exponentials ensures that different azimuthal modes
 When $m=n$, the phase factors combine to yield unity.
 
 \begin{equation}
-\int_{0}^{\pi} \mathrm{d} \theta \sin \theta P_{h, m}(\cos \theta) P_{\ell, m}(\cos \theta)=\int_{-1}^{1} \mathrm{~d} \xi P_{h, m}(\xi) P_{\ell, m}(\xi) \label{eq:8.55}
+\int_{0}^{\pi} \mathrm{d} \theta \sin \theta P_{h, m}(\cos \theta) P_{\ell, m}(\cos \theta)=\int_{-1}^{1} \, \mathrm{d} \xi P_{h, m}(\xi) P_{\ell, m}(\xi) \label{eq:8.55}
 \end{equation}
 
 A change of variable transforms the polar integral into the standard form for associated Legendre functions.
@@ -4074,19 +4074,19 @@ This separates the translational motion of the center of mass from the rotationa
 The unit vector $\hat{u}$ specifies the orientation of the molecular axis in spherical coordinates.
 
 \begin{equation}
-\frac{\mathrm{d} \hat{u}}{\mathrm{~d} t}=\dot{\phi} \sin \theta(-\sin \phi, \cos \phi, 0)+\dot{\theta}(\cos \phi \cos \theta, \sin \phi \cos \theta,-\sin \theta) \label{eq:8.65}
+\frac{\mathrm{d} \hat{u}}{\, \mathrm{d} t}=\dot{\phi} \sin \theta(-\sin \phi, \cos \phi, 0)+\dot{\theta}(\cos \phi \cos \theta, \sin \phi \cos \theta,-\sin \theta) \label{eq:8.65}
 \end{equation}
 
 The time derivative of this unit vector captures the rotational motion of the molecule.
 
 \begin{equation}
-E_{R}=\frac{1}{2} m \sum_{i} \vec{v}_{i}^{2}=\frac{1}{2} m \sum_{i}\left[\frac{\mathrm{d}}{\mathrm{~d} t}\left(r_{i} \hat{u}\right)\right]^{2} \label{eq:8.66}
+E_{R}=\frac{1}{2} m \sum_{i} \vec{v}_{i}^{2}=\frac{1}{2} m \sum_{i}\left[\frac{\mathrm{d}}{\, \mathrm{d} t}\left(r_{i} \hat{u}\right)\right]^{2} \label{eq:8.66}
 \end{equation}
 
 The rotational kinetic energy depends on the velocities of both atoms relative to the center of mass.
 
 \begin{equation}
-E=\frac{1}{2} m \sum_{i}\left[\frac{\mathrm{~d}}{\mathrm{~d} t}\left(r_{i} \hat{u}\right)\right]^{2}=\frac{1}{2} m \sum_{i} r_{i}^{2}\left(\frac{\mathrm{~d} \hat{u}}{\mathrm{~d} t}\right)^{2} \label{eq:8.67}
+E=\frac{1}{2} m \sum_{i}\left[\frac{\, \mathrm{d}}{\, \mathrm{d} t}\left(r_{i} \hat{u}\right)\right]^{2}=\frac{1}{2} m \sum_{i} r_{i}^{2}\left(\frac{\, \mathrm{d} \hat{u}}{\, \mathrm{d} t}\right)^{2} \label{eq:8.67}
 \end{equation}
 
 For a rigid molecule (no vibrations), the interatomic distances remain constant, simplifying the rotational energy expression.
@@ -4094,7 +4094,7 @@ For a rigid molecule (no vibrations), the interatomic distances remain constant,
 The derivative term is thus:
 
 \begin{align}
-\left(\frac{\mathrm{d} \hat{u}}{\mathrm{~d} t}\right)^{2} & =\dot{\phi}^{2} \sin ^{2} \theta \underbrace{(-\sin \phi, \cos \phi, 0) \cdot(-\sin \phi, \cos \phi, 0)}_{=1}+ \\
+\left(\frac{\mathrm{d} \hat{u}}{\, \mathrm{d} t}\right)^{2} & =\dot{\phi}^{2} \sin ^{2} \theta \underbrace{(-\sin \phi, \cos \phi, 0) \cdot(-\sin \phi, \cos \phi, 0)}_{=1}+ \\
 & +\dot{\theta}^{2} \underbrace{(\cos \phi \cos \theta, \sin \phi \cos \theta,-\sin \theta) \cdot(\cos \phi \cos \theta, \sin \phi \cos \theta,-\sin \theta)}_{=1}+ \\
 & +2 \dot{\theta} \dot{\phi} \underbrace{(-\sin \phi, \cos \phi, 0) \cdot(\cos \phi \cos \theta, \sin \phi \cos \theta,-\sin \theta)}_{=0}= \\
 & =\dot{\phi}^{2} \sin ^{2} \theta+\dot{\theta}^{2} \label{eq:8.68}
@@ -4109,19 +4109,19 @@ E_{R}=m r^{2}\left(\dot{\phi}^{2} \sin ^{2} \theta+\dot{\theta}^{2}\right)=\frac
 For identical atoms at equal distances, the moment of inertia $I=2mr^2$ simplifies the rotational energy expression.
 
 \begin{equation}
-\vec{L}=\sum_{i} \vec{r}_{i} \wedge m \vec{v}_{i}=m \sum_{i} r_{i}^{2} \hat{u} \wedge \frac{\mathrm{d} \hat{u}}{\mathrm{~d} t}=2 m r^{2} \hat{u} \wedge \frac{\mathrm{d} \hat{u}}{\mathrm{~d} t}=I \hat{u} \wedge \frac{\mathrm{d} \hat{u}}{\mathrm{~d} t} \label{eq:8.70}
+\vec{L}=\sum_{i} \vec{r}_{i} \wedge m \vec{v}_{i}=m \sum_{i} r_{i}^{2} \hat{u} \wedge \frac{\mathrm{d} \hat{u}}{\, \mathrm{d} t}=2 m r^{2} \hat{u} \wedge \frac{\mathrm{d} \hat{u}}{\, \mathrm{d} t}=I \hat{u} \wedge \frac{\mathrm{d} \hat{u}}{\, \mathrm{d} t} \label{eq:8.70}
 \end{equation}
 
 The angular momentum vector emerges naturally from the cross product of position and velocity vectors.
 
 \begin{equation}
-\vec{L}^{2}=I^{2}\left(\hat{u} \wedge \frac{\mathrm{~d} \hat{u}}{\mathrm{~d} t}\right) \cdot\left(\hat{u} \wedge \frac{\mathrm{~d} \hat{u}}{\mathrm{~d} t}\right) \label{eq:8.71}
+\vec{L}^{2}=I^{2}\left(\hat{u} \wedge \frac{\, \mathrm{d} \hat{u}}{\, \mathrm{d} t}\right) \cdot\left(\hat{u} \wedge \frac{\, \mathrm{d} \hat{u}}{\, \mathrm{d} t}\right) \label{eq:8.71}
 \end{equation}
 
 The square of angular momentum determines the rotational energy of the molecule.
 
 \begin{equation}
-\vec{L}^{2}=I^{2}\left[\frac{\mathrm{~d} \hat{u}}{\mathrm{~d} t} \wedge\left(\hat{u} \wedge \frac{\mathrm{~d} \hat{u}}{\mathrm{~d} t}\right)\right] \cdot \hat{u}=I^{2}\left(\frac{\mathrm{~d} \hat{u}}{\mathrm{~d} t}\right)^{2} \label{eq:8.72}
+\vec{L}^{2}=I^{2}\left[\frac{\, \mathrm{d} \hat{u}}{\, \mathrm{d} t} \wedge\left(\hat{u} \wedge \frac{\, \mathrm{d} \hat{u}}{\, \mathrm{d} t}\right)\right] \cdot \hat{u}=I^{2}\left(\frac{\, \mathrm{d} \hat{u}}{\, \mathrm{d} t}\right)^{2} \label{eq:8.72}
 \end{equation}
 
 Through vector identities, we establish the relationship between angular momentum and the angular velocity terms.
@@ -4219,19 +4219,19 @@ These Poisson brackets (which become commutators in quantum mechanics) indicate 
 This reformulation of the Hamiltonian separates the radial and angular contributions to the energy.
 
 \begin{equation}
-\mathcal{H}=\frac{1}{2} m \sum_{i} \vec{v}_{i}^{2}=\frac{1}{2} m \vec{v}^{2}=\frac{1}{2} m\left(\frac{\mathrm{~d} \vec{r}}{\mathrm{~d} t}\right)^{2} \label{eq:9.4}
+\mathcal{H}=\frac{1}{2} m \sum_{i} \vec{v}_{i}^{2}=\frac{1}{2} m \vec{v}^{2}=\frac{1}{2} m\left(\frac{\, \mathrm{d} \vec{r}}{\, \mathrm{d} t}\right)^{2} \label{eq:9.4}
 \end{equation}
 
 Starting from the kinetic energy expression, we need to transform to spherical coordinates.
 
 \begin{equation}
-\frac{\mathrm{~d} \vec{r}_{i}}{\mathrm{~d} t}=\frac{\mathrm{~d}}{\mathrm{~d} t}(r \hat{u})=\dot{r} \hat{u}+r \dot{\hat{u}} \label{eq:9.5}
+\frac{\, \mathrm{d} \vec{r}_{i}}{\, \mathrm{d} t}=\frac{\, \mathrm{d}}{\, \mathrm{d} t}(r \hat{u})=\dot{r} \hat{u}+r \dot{\hat{u}} \label{eq:9.5}
 \end{equation}
 
 Unlike the rigid diatomic molecule, the radial coordinate can now vary, adding a radial velocity component.
 
 \begin{align}
-\left(\frac{\mathrm{~d} \vec{r}}{\mathrm{~d} t}\right)^{2} & =(\dot{r} \hat{u}+r \dot{\hat{u}}) \cdot(\dot{r} \hat{u}+r \dot{\hat{u}})= \\
+\left(\frac{\, \mathrm{d} \vec{r}}{\, \mathrm{d} t}\right)^{2} & =(\dot{r} \hat{u}+r \dot{\hat{u}}) \cdot(\dot{r} \hat{u}+r \dot{\hat{u}})= \\
 & =\dot{r}^{2} \hat{u} \cdot \hat{u}+2 \dot{r} r \hat{u} \cdot \hat{\hat{u}}+r^{2} \dot{\hat{u}} \cdot \dot{\hat{u}}=  \label{eq:9.6}\\
 & =\dot{r}^{2}+r^{2}(\dot{\hat{u}})^{2}=\dot{r}^{2}+r^{2}\left(\dot{\theta}^{2}+\dot{\varphi}^{2} \sin ^{2} \varphi\right)
 \end{align}
@@ -4239,7 +4239,7 @@ Unlike the rigid diatomic molecule, the radial coordinate can now vary, adding a
 The velocity squared decomposes into radial and angular components in spherical coordinates.
 
 \begin{equation}
-\vec{L}^{2}=m^{2} r^{4}\left(\frac{\mathrm{~d} \hat{u}}{\mathrm{~d} t}\right)^{2}=m^{2} r^{4}\left(\dot{\theta}^{2}+\dot{\varphi}^{2} \sin ^{2} \varphi\right) \label{eq:9.7}
+\vec{L}^{2}=m^{2} r^{4}\left(\frac{\, \mathrm{d} \hat{u}}{\, \mathrm{d} t}\right)^{2}=m^{2} r^{4}\left(\dot{\theta}^{2}+\dot{\varphi}^{2} \sin ^{2} \varphi\right) \label{eq:9.7}
 \end{equation}
 
 The angular momentum squared relates directly to the angular velocity components.
@@ -4307,14 +4307,14 @@ The radial momentum operator takes this specific form to ensure hermiticity in s
 To verify hermiticity, we must prove this inner product relation.
 
 \begin{align}
-\left(\phi, \hat{p}_{r} \varphi\right) & =-i \hbar \int_{\mathbb{R}^{3}} \mathrm{~d}^{3} x \phi^{*}\left(\frac{\partial \varphi}{\partial r}+\varphi \frac{1}{r}\right)=  \label{eq:9.18}\\
-& =-i \hbar \int_{\mathbb{R}^{3}} \mathrm{~d}^{3} x \phi^{*} \frac{\partial \varphi}{\partial r}-i \hbar \int_{\mathbb{R}^{3}} \mathrm{~d}^{3} x \phi^{*} \varphi \frac{1}{r}
+\left(\phi, \hat{p}_{r} \varphi\right) & =-i \hbar \int_{\mathbb{R}^{3}} \, \mathrm{d}^{3} x \phi^{*}\left(\frac{\partial \varphi}{\partial r}+\varphi \frac{1}{r}\right)=  \label{eq:9.18}\\
+& =-i \hbar \int_{\mathbb{R}^{3}} \, \mathrm{d}^{3} x \phi^{*} \frac{\partial \varphi}{\partial r}-i \hbar \int_{\mathbb{R}^{3}} \, \mathrm{d}^{3} x \phi^{*} \varphi \frac{1}{r}
 \end{align}
 
 Expanding the inner product in Cartesian coordinates.
 
 \begin{equation}
--i \hbar \iint_{\mathbb{R}^{2}} \mathrm{~d} \Omega \int_{0}^{\infty} \mathrm{d} r \phi^{*} \frac{\partial \varphi}{\partial r} r^{2}-i \hbar \iint_{\mathbb{R}^{2}} \mathrm{~d} \Omega \int_{0}^{\infty} \mathrm{d} r \phi^{*} \varphi r \label{eq:9.19}
+-i \hbar \iint_{\mathbb{R}^{2}} \, \mathrm{d} \Omega \int_{0}^{\infty} \mathrm{d} r \phi^{*} \frac{\partial \varphi}{\partial r} r^{2}-i \hbar \iint_{\mathbb{R}^{2}} \, \mathrm{d} \Omega \int_{0}^{\infty} \mathrm{d} r \phi^{*} \varphi r \label{eq:9.19}
 \end{equation}
 
 Converting to spherical coordinates introduces volume elements appropriate for this geometry.
@@ -4334,27 +4334,27 @@ So:
 Rearranging terms to prepare for integration by parts.
 
 \begin{equation}
--i \hbar \iint_{\mathbb{R}^{2}} \mathrm{~d} \Omega \int_{0}^{\infty} \mathrm{d} r \frac{\partial}{\partial r}\left(\phi^{*} \varphi r\right) r+i \hbar \iint_{\mathbb{R}^{2}} \mathrm{~d} \Omega \int_{0}^{\infty} \mathrm{d} r \frac{\partial \phi^{*}}{\partial r} \varphi r^{2} \label{eq:9.22}
+-i \hbar \iint_{\mathbb{R}^{2}} \, \mathrm{d} \Omega \int_{0}^{\infty} \mathrm{d} r \frac{\partial}{\partial r}\left(\phi^{*} \varphi r\right) r+i \hbar \iint_{\mathbb{R}^{2}} \, \mathrm{d} \Omega \int_{0}^{\infty} \mathrm{d} r \frac{\partial \phi^{*}}{\partial r} \varphi r^{2} \label{eq:9.22}
 \end{equation}
 
 Substituting the rearranged terms into the original integral.
 
 \begin{align}
-& -i \hbar \iint_{\mathbb{R}^{2}} \mathrm{~d} \Omega \int_{0}^{\infty} \mathrm{d} r \frac{\partial}{\partial r}\left(\phi^{*} \varphi r\right) r \\
-& =\left.i \hbar \iint_{\mathbb{R}^{2}} \mathrm{~d} \Omega \phi^{*} \varphi r^{2}\right|_{0} ^{\infty}+i \hbar \iint_{\mathbb{R}^{2}} \mathrm{~d} \Omega \int_{0}^{\infty} \mathrm{d} r \phi^{*} \varphi r \label{eq:9.23}
+& -i \hbar \iint_{\mathbb{R}^{2}} \, \mathrm{d} \Omega \int_{0}^{\infty} \mathrm{d} r \frac{\partial}{\partial r}\left(\phi^{*} \varphi r\right) r \\
+& =\left.i \hbar \iint_{\mathbb{R}^{2}} \, \mathrm{d} \Omega \phi^{*} \varphi r^{2}\right|_{0} ^{\infty}+i \hbar \iint_{\mathbb{R}^{2}} \, \mathrm{d} \Omega \int_{0}^{\infty} \mathrm{d} r \phi^{*} \varphi r \label{eq:9.23}
 \end{align}
 
 Integrating by parts, with boundary terms that vanish due to the behavior of well-behaved wavefunctions.
 
 \begin{align}
-\left(\phi, \hat{p}_{r} \varphi\right) & =i \hbar \iint_{\mathbb{R}^{2}} \mathrm{~d} \Omega \int_{0}^{\infty} \mathrm{d} r \phi^{*} \varphi r+i \hbar \iint_{\mathbb{R}^{2}} \mathrm{~d} \Omega \int_{0}^{\infty} \mathrm{d} r \frac{\partial \phi^{*}}{\partial r} \varphi r^{2}=  \label{eq:9.24}\\
-& =i \hbar \int_{\mathbb{R}^{3}} \mathrm{~d}^{3} x\left(\frac{\partial \phi^{*}}{\partial r}+\phi^{*} \frac{1}{r}\right) \varphi
+\left(\phi, \hat{p}_{r} \varphi\right) & =i \hbar \iint_{\mathbb{R}^{2}} \, \mathrm{d} \Omega \int_{0}^{\infty} \mathrm{d} r \phi^{*} \varphi r+i \hbar \iint_{\mathbb{R}^{2}} \, \mathrm{d} \Omega \int_{0}^{\infty} \mathrm{d} r \frac{\partial \phi^{*}}{\partial r} \varphi r^{2}=  \label{eq:9.24}\\
+& =i \hbar \int_{\mathbb{R}^{3}} \, \mathrm{d}^{3} x\left(\frac{\partial \phi^{*}}{\partial r}+\phi^{*} \frac{1}{r}\right) \varphi
 \end{align}
 
 Recombining terms and converting back to a volume integral.
 
 \begin{equation}
-\left(\phi, \hat{p}_{r} \varphi\right)^{*}=-i \hbar \int_{\mathbb{R}^{3}} \mathrm{~d}^{3} x\left(\frac{\partial \phi}{\partial r}+\phi \frac{1}{r}\right) \varphi^{*} \label{eq:9.25}
+\left(\phi, \hat{p}_{r} \varphi\right)^{*}=-i \hbar \int_{\mathbb{R}^{3}} \, \mathrm{d}^{3} x\left(\frac{\partial \phi}{\partial r}+\phi \frac{1}{r}\right) \varphi^{*} \label{eq:9.25}
 \end{equation}
 
 Taking the complex conjugate of the inner product.
@@ -4446,7 +4446,7 @@ The transformed equation resembles a one-dimensional Schrödinger equation with 
 The normalization condition constrains the acceptable solutions.
 
 \begin{align}
-\underbrace{\iint_{4 \pi} \mathrm{~d} \Omega\left|Y_{\ell, m}\right|^{2}}_{=1} \int_{0}^{+\infty} \mathrm{d} r |u|^{2} = \int_{0}^{+\infty} \mathrm{d} r|u|^{2} \label{eq:9.38}
+\underbrace{\iint_{4 \pi} \, \mathrm{d} \Omega\left|Y_{\ell, m}\right|^{2}}_{=1} \int_{0}^{+\infty} \mathrm{d} r |u|^{2} = \int_{0}^{+\infty} \mathrm{d} r|u|^{2} \label{eq:9.38}
 \end{align}
 
 The normalization condition for the radial function simplifies due to the orthonormality of spherical harmonics.
@@ -4699,7 +4699,7 @@ L_{N}^{s}(y)=\sum_{k=0}^{N} \frac{(-1)^{k}(N+s)!}{k!(k+s)!(N-k)!} y^{k} \label{e
 The explicit form of the associated Laguerre polynomials as a finite series.
 
 \begin{equation}
-L_{N}^{s}(y)=(-1)^{s} \frac{\mathrm{~d}^{s}}{\mathrm{~d} y^{s}} L_{N+s} \quad \text { with } \quad L_{r}=\mathrm{e}^{y} \frac{\mathrm{~d}^{r}}{\mathrm{~d} y^{r}} \mathrm{e}^{-y} y^{r} \label{eq:9.74}
+L_{N}^{s}(y)=(-1)^{s} \frac{\, \mathrm{d}^{s}}{\, \mathrm{d} y^{s}} L_{N+s} \quad \text { with } \quad L_{r}=\mathrm{e}^{y} \frac{\, \mathrm{d}^{r}}{\, \mathrm{d} y^{r}} \mathrm{e}^{-y} y^{r} \label{eq:9.74}
 \end{equation}
 
 An alternative definition relating associated Laguerre polynomials to derivatives of standard Laguerre polynomials.
@@ -4708,7 +4708,7 @@ An alternative definition relating associated Laguerre polynomials to derivative
 \section{Property 1.}
 
 \begin{equation}
-L_{N}^{s}(y)=(-1)^{s} \frac{\mathrm{~d}^{s}}{\mathrm{~d} y^{s}} L_{N+s} \quad \text { with } \quad L_{r}=\mathrm{e}^{y} \frac{\mathrm{~d}^{r}}{\mathrm{~d} y^{r}} \mathrm{e}^{-y} y^{r} \label{eq:9.75}
+L_{N}^{s}(y)=(-1)^{s} \frac{\, \mathrm{d}^{s}}{\, \mathrm{d} y^{s}} L_{N+s} \quad \text { with } \quad L_{r}=\mathrm{e}^{y} \frac{\, \mathrm{d}^{r}}{\, \mathrm{d} y^{r}} \mathrm{e}^{-y} y^{r} \label{eq:9.75}
 \end{equation}
 
 This property connects associated Laguerre polynomials to derivatives of standard Laguerre polynomials.
@@ -4744,7 +4744,7 @@ A specific weighted integral of squared associated Laguerre polynomials.
 The complete hydrogen atom wavefunction with normalization constant $D_{n\ell}$.
 
 \begin{align}
-& \left(\Psi_{n \ell m}, \Psi_{n^{\prime} \ell^{\prime} m^{\prime}}\right)=\underbrace{\iint_{4 \pi} \mathrm{~d} \Omega Y_{l m}^{*} Y_{\ell^{\prime} m^{\prime}}}_{\delta_{l l^{\prime}} \delta_{m m^{\prime}}} \\
+& \left(\Psi_{n \ell m}, \Psi_{n^{\prime} \ell^{\prime} m^{\prime}}\right)=\underbrace{\iint_{4 \pi} \, \mathrm{d} \Omega Y_{l m}^{*} Y_{\ell^{\prime} m^{\prime}}}_{\delta_{l l^{\prime}} \delta_{m m^{\prime}}} \\
 & \int_{0}^{+\infty} \mathrm{d} r r^{2} D_{n l}^{*} D_{n^{\prime} \ell^{\prime}}\left(2 k_{n} r\right)^{\ell}\left(2 k_{n^{\prime}} r\right)^{\ell^{\prime}} \mathrm{e}^{-k_{n} r} \mathrm{e}^{-k_{n^{\prime}} r} L_{n-\ell-1}^{2 l+1}\left(2 k_{n} r\right) L_{n^{\prime}-\ell^{\prime}-1}^{2 l^{\prime}+1}\left(2 k_{n^{\prime}} r\right) \label{eq:9.80}
 \end{align}
 
@@ -4781,7 +4781,7 @@ The normalization constant determined to ensure that the wavefunction has unit n
 The energy of a Hydrogen atom $E_{n}$ can be written in terms of a quantity called the Bohr radius $a$ :
 
 \begin{equation}
-a=\frac{\hbar^{2}}{m_{e} e^{2}} \approx 0.529 \times 10^{-10} \mathrm{~m} \label{eq:9.85}
+a=\frac{\hbar^{2}}{m_{e} e^{2}} \approx 0.529 \times 10^{-10} \, \mathrm{m} \label{eq:9.85}
 \end{equation}
 
 The Bohr radius represents the most probable distance of the electron from the nucleus in the ground state.
@@ -4863,13 +4863,13 @@ The probability density is the square of the wavefunction's magnitude.
 The normalization condition ensures that the total probability is 1.
 
 \begin{equation}
-\underbrace{\iint_{4 \pi} \mathrm{~d} \Omega\left|Y_{\ell, m}\right|^{2}}_{=1} \int_{0}^{+\infty} \mathrm{d} r r^{2} R_{n l}^{2}=\int_{0}^{+\infty} \mathrm{d} r r^{2} R_{n l}^{2} \label{eq:9.98}
+\underbrace{\iint_{4 \pi} \, \mathrm{d} \Omega\left|Y_{\ell, m}\right|^{2}}_{=1} \int_{0}^{+\infty} \mathrm{d} r r^{2} R_{n l}^{2}=\int_{0}^{+\infty} \mathrm{d} r r^{2} R_{n l}^{2} \label{eq:9.98}
 \end{equation}
 
 The spherical symmetry allows separation of the radial and angular parts of the normalization integral.
 
 \begin{equation}
-\mathrm{d} P=P_{n l} \mathrm{~d} r \label{eq:9.99}
+\mathrm{d} P=P_{n l} \, \mathrm{d} r \label{eq:9.99}
 \end{equation}
 
 The radial probability density $P_{nl} = r^2 R_{nl}^2$ gives the probability of finding the electron in a spherical shell of radius $r$ and thickness $dr$. This resolves the apparent paradox for $\ell=0$ states, as the probability density properly approaches zero at the nucleus due to the $r^2$ factor, even though $R_{nl}$ remains finite there.
@@ -4911,7 +4911,7 @@ The uncertainty in radial position calculated from the variance.
 The relative uncertainty decreases with increasing quantum number, approaching classical behavior for large $n$.
 
 \begin{equation}
-P_{n, n-1}=C r^{2 n} \mathrm{e}^{-2 k_{n} r} \Longrightarrow \frac{\mathrm{~d} P_{n, n-1}}{\mathrm{~d} r}=C r^{2 n} \mathrm{e}^{-2 k_{n} r}\left(\frac{2 n}{r}-2 k_{n}\right) \label{eq:9.105}
+P_{n, n-1}=C r^{2 n} \mathrm{e}^{-2 k_{n} r} \Longrightarrow \frac{\, \mathrm{d} P_{n, n-1}}{\, \mathrm{d} r}=C r^{2 n} \mathrm{e}^{-2 k_{n} r}\left(\frac{2 n}{r}-2 k_{n}\right) \label{eq:9.105}
 \end{equation}
 
 The radial probability density and its derivative for maximum angular momentum states.
@@ -5285,35 +5285,35 @@ These expressions can be written compactly as $\operatorname{Tr}(\rho A)$, where
 For time-dependent operators in the Heisenberg picture, $A_t = U^\dagger A U$, the equation of motion is:
 
 \begin{equation}
-\frac{\mathrm{d} A_{t}}{\mathrm{~d} t}=\frac{1}{i \hbar}\left[A_{t}, H\right]+\left(\partial_{t} A\right)_{t} \label{eq:10.38}
+\frac{\mathrm{d} A_{t}}{\, \mathrm{d} t}=\frac{1}{i \hbar}\left[A_{t}, H\right]+\left(\partial_{t} A\right)_{t} \label{eq:10.38}
 \end{equation}
 
 
 Proof. Starting from:
 
 \begin{equation}
-\frac{\mathrm{d} A_{t}}{\mathrm{~d} t}=\frac{\mathrm{d}}{\mathrm{~d} t}\left(U^{\dagger} A U\right) \label{eq:10.39}
+\frac{\mathrm{d} A_{t}}{\, \mathrm{d} t}=\frac{\mathrm{d}}{\, \mathrm{d} t}\left(U^{\dagger} A U\right) \label{eq:10.39}
 \end{equation}
 
 The time derivatives of the evolution operators are:
 
 \begin{align}
-\frac{\mathrm{d} U}{\mathrm{~d} t} & =-\frac{i}{\hbar} H U \\
-\frac{\mathrm{d} U^{\dagger}}{\mathrm{~d} t} & =\frac{i}{\hbar} U^{\dagger} H \label{eq:10.40}
+\frac{\mathrm{d} U}{\, \mathrm{d} t} & =-\frac{i}{\hbar} H U \\
+\frac{\mathrm{d} U^{\dagger}}{\, \mathrm{d} t} & =\frac{i}{\hbar} U^{\dagger} H \label{eq:10.40}
 \end{align}
 
 Applying the product rule:
 
 \begin{align}
-\frac{\mathrm{d}}{\mathrm{~d} t}\left(U^{\dagger} A U\right) & =\frac{\mathrm{d}}{\mathrm{~d} t}\left(U^{\dagger}\right) A U+U^{\dagger} \frac{\mathrm{d}}{\mathrm{~d} t}(A) U+U^{\dagger} A \frac{\mathrm{~d}}{\mathrm{~d} t}(U)=  \label{eq:10.41}\\
-& =\frac{i}{\hbar} U^{\dagger} H A U+U^{\dagger} \frac{\mathrm{~d}}{\mathrm{~d} t}(A) U-\frac{i}{\hbar} U^{\dagger} A H U
+\frac{\mathrm{d}}{\, \mathrm{d} t}\left(U^{\dagger} A U\right) & =\frac{\mathrm{d}}{\, \mathrm{d} t}\left(U^{\dagger}\right) A U+U^{\dagger} \frac{\mathrm{d}}{\, \mathrm{d} t}(A) U+U^{\dagger} A \frac{\, \mathrm{d}}{\, \mathrm{d} t}(U)=  \label{eq:10.41}\\
+& =\frac{i}{\hbar} U^{\dagger} H A U+U^{\dagger} \frac{\, \mathrm{d}}{\, \mathrm{d} t}(A) U-\frac{i}{\hbar} U^{\dagger} A H U
 \end{align}
 
 Since $H$ commutes with $U$ (which can be shown using Taylor expansion), we have:
 
 \begin{align}
-\frac{\mathrm{d}}{\mathrm{~d} t}\left(U^{\dagger} A U\right) & =\frac{i}{\hbar} \underbrace{\left(U^{\dagger} H A U-U^{\dagger} A H U\right)}_{\left[U^{\dagger}HU, U^{\dagger}AU\right]}+U^{\dagger} \frac{\mathrm{~d}}{\mathrm{~d} t}(A) U= \\
-& =\frac{i}{\hbar} U^{\dagger}[H,A]U + U^{\dagger} \frac{\mathrm{d}}{\mathrm{~d} t}(A) U= \\
+\frac{\mathrm{d}}{\, \mathrm{d} t}\left(U^{\dagger} A U\right) & =\frac{i}{\hbar} \underbrace{\left(U^{\dagger} H A U-U^{\dagger} A H U\right)}_{\left[U^{\dagger}HU, U^{\dagger}AU\right]}+U^{\dagger} \frac{\, \mathrm{d}}{\, \mathrm{d} t}(A) U= \\
+& =\frac{i}{\hbar} U^{\dagger}[H,A]U + U^{\dagger} \frac{\mathrm{d}}{\, \mathrm{d} t}(A) U= \\
 & =\frac{1}{i \hbar}\left[A_{t}, H\right]+\left(\partial_{t} A\right)_{t} \label{eq:10.42}
 \end{align}
 
