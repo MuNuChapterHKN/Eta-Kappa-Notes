@@ -1,0 +1,12 @@
+course_code: "01TUSOD"
+course_name: "Quantum physics"
+teacher: "Penna, Vittorio"
+start_academic_year: 2024
+program_level: "bachelor"
+program: "Physical Engineering"
+language: "eng"
+formats:
+  - "latex"
+authors:
+  - "Oddenino, Luca"
+editors: []
