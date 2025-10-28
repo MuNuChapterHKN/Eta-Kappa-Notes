@@ -1,28 +1,23 @@
-\documentclass[10pt]{article}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage[version=4]{mhchem}
-\usepackage{stmaryrd}
-\usepackage{graphicx}
-\usepackage[export]{adjustbox}
-\graphicspath{ {./images/} }
-\usepackage{caption}
-\usepackage{bbold}
+% !TEX root = main.tex
+
+\documentclass[italian]{HKNdocument}
+\input{_preamble.tex}
+
 \usepackage{mathrsfs}
 
-\title{Quantum physics <3}
+\title{Quantum physics}
+\author{Luca Oddenino}
+\docdate{Second semester 2024/2025}
+\docversion{1.0}
 
-\author{Oddenino Luca }
-\date{}
-
-
-\def\AA{\mathring{\mathrm{A}}}
 \begin{document}
+
+\frontmatter
 \maketitle
-\captionsetup{singlelinecheck=false}
+\input{cclicense.tex}
+\tableofcontents
+\clearpage
+\mainmatter
 
 \section*{1 Introduction}
 Let's begin with a concise introduction to quantum mechanics and its fundamental principles.
@@ -7501,5 +7496,8 @@ Where $N$ is the total number of photons. We can verify that:
 \end{equation*}
 
 This commutation relation confirms that the total number of photons is conserved in free electromagnetic field evolution.
+
+\backmatter
+\input{_postamble.tex}
 
 \end{document}
