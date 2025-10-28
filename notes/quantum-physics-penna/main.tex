@@ -3,8 +3,6 @@
 \documentclass[italian]{HKNdocument}
 \input{_preamble.tex}
 
-\usepackage{mathrsfs}
-
 \title{Quantum physics}
 \author{Luca Oddenino}
 \docdate{Second semester 2024/2025}
@@ -4467,8 +4465,7 @@ The transformed equation resembles a one-dimensional Schrödinger equation with 
 The normalization condition constrains the acceptable solutions.
 
 \begin{align*}
-& \underbrace{\iint_{4 \pi} \mathrm{~d} \Omega\left|Y_{\ell, m}\right|^{2}}_{=1} \int_{0}^{+\infty} \mathrm{d} r \not \mathscr{P}^{2} \frac{|u|^{2}}{\mathscr{P}^{2}}=  \tag{9.38}\\
-& =\int_{0}^{+\infty} \mathrm{d} r|u|^{2}
+\underbrace{\iint_{4 \pi} \mathrm{~d} \Omega\left|Y_{\ell, m}\right|^{2}}_{=1} \int_{0}^{+\infty} \mathrm{d} r |u|^{2} = \int_{0}^{+\infty} \mathrm{d} r|u|^{2} \tag{9.38}
 \end{align*}
 
 The normalization condition for the radial function simplifies due to the orthonormality of spherical harmonics.
@@ -4585,7 +4582,7 @@ And so (9.52) becomes:
 & \left(\frac{\ell(\ell+1)}{x^{2}}-\frac{2(\ell+1)}{x}+1\right) x^{\ell+1} e^{-x} W+2\left(\frac{\ell+1}{x}-1\right) x^{\ell+1} e^{-x} \frac{\partial W}{\partial x}+x^{\ell+1} e^{-x} \frac{\partial^{2} W}{\partial x^{2}}- \\
 & -\frac{\ell(\ell+1)}{x^{2}} x^{\ell+1} e^{-x} W+\frac{x_{0}}{x} x^{\ell+1} e^{-x} W-x^{\ell+1} e^{-x} W=0 \\
 & \left.\left(\frac{\ell(\ell+1)}{x^{2}}-\frac{2(\ell+1)}{x}+\not\right)\right) W+2\left(\frac{\ell+1}{x}-1\right) \frac{\partial W}{\partial x}+\frac{\partial^{2} W}{\partial x^{2}}- \\
-& -\frac{\ell(\ell+1)}{x^{2}} W(x)+\frac{x_{0}}{x} W-\mathscr{W}=0 \\
+& -\frac{\ell(\ell+1)}{x^{2}} W(x)+\frac{x_{0}}{x} W- W = 0 \\
 & -\frac{2(\ell+1)}{x} W+2\left(\frac{\ell+1}{x}-1\right) \frac{\partial W}{\partial x}+\frac{\partial^{2} W}{\partial x^{2}}+\frac{x_{0}}{x} W=0 \\
 & 2(\ell+1-x) \frac{\partial W}{\partial x}+x \frac{\partial^{2} W}{\partial x^{2}}+\left(x_{0}-2(\ell+1)\right) W=0 \tag{9.55}
 \end{align*}
