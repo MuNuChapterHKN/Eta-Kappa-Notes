@@ -19,10 +19,10 @@
 \clearpage
 \mainmatter
 
-\section*{1 Introduction}
+\section{Introduction}
 Let's begin with a concise introduction to quantum mechanics and its fundamental principles.
 
-\subsection*{1.1 Heuristic derivation of Schrödinger's equation}
+\subsection{Heuristic derivation of Schrödinger's equation}
 The cornerstone of quantum mechanics is Schrödinger's equation. As a fundamental postulate of quantum theory, it cannot be rigorously derived from more basic principles. However, we can develop intuition for its form through heuristic arguments that connect classical and quantum concepts.
 
 We start with de Broglie's revolutionary hypothesis, which associates a wavelength with any particle. While classical mechanics characterizes particles by mass $m$, position $\vec{r}$, and velocity $\dot{\vec{r}}$ (allowing for deterministic predictions), quantum mechanics describes particles with wave-like properties and probabilistic behavior. These principles can be expressed as:
@@ -155,7 +155,7 @@ The Hamiltonian operator encapsulates both kinetic energy (through the Laplacian
 
 With these operators defined, we can express the complete form of the time-dependent Schrödinger equation:
 
-\section*{Schrödinger's equation:}
+\section{Schrödinger's equation:}
 
 \begin{equation*}
 i \hbar \frac{\partial \Psi(\vec{x}, t)}{\partial t}=-\frac{\hbar^{2}}{2 m} \nabla^{2} \Psi(\vec{x}, t)+U(\vec{x}) \Psi(\vec{x}, t) \tag{1.15}
@@ -192,7 +192,7 @@ This expression includes three distinct contributions:
 
 The resulting many-body Schrödinger equation poses formidable mathematical challenges. For a system of $n$ particles in three dimensions, the wave function depends on $3n$ spatial coordinates, making exact solutions computationally intractable for more than a few particles. This "exponential wall" necessitates approximation methods like the Hartree-Fock approach, density functional theory, and various numerical techniques that form the basis of computational quantum chemistry and condensed matter physics.
 
-\subsection*{1.2 Superposition}
+\subsection{Superposition}
 The superposition principle represents another fundamental aspect of quantum mechanics, arising directly from the linearity of the Schrödinger equation. This principle has no classical analog and leads to many counterintuitive quantum phenomena.
 
 When we solve Schrödinger's equation for a particular system, we often obtain multiple wavefunctions $\Psi_{j}$ (where $j=1,2, \ldots, n$) that satisfy the equation. The superposition principle states that any linear combination of these solutions also represents a valid quantum state. This follows mathematically from the linearity of the differential operators in the Schrödinger equation.
@@ -239,7 +239,7 @@ By induction, this extends to any number of solutions:
 
 The superposition principle has profound implications, explaining quantum interference and the behavior seen in the double-slit experiment.
 
-\subsection*{1.3 Quantum representation of dynamics}
+\subsection{Quantum representation of dynamics}
 What is the meaning of the wave function?
 
 In classical physics, dynamics follows a deterministic framework. When we solve Hamilton's equations:
@@ -469,7 +469,7 @@ However, for the wave function to be normalizable, we need:
 
 This integral converges only if $2k-2 > 1$, which means $k > \frac{3}{2}$. Since this condition is stronger than $k > 1$, we need $k > \frac{3}{2}$ to satisfy both requirements.
 
-\subsection*{1.4 Physical operators}
+\subsection{Physical operators}
 In quantum mechanics, mathematical operators represent physical observables. These operators can be classified into three main categories based on how they act on wave functions:
 
 \begin{enumerate}
@@ -611,7 +611,7 @@ Quantum operators satisfy several important algebraic properties:
 The non-commutativity of operators is particularly significant in quantum mechanics, as it leads directly to uncertainty principles and complementarity between conjugate observables.
 
 
-\subsection*{1.5 Commutators}
+\subsection{Commutators}
 
 In quantum mechanics, the commutator is a fundamental mathematical tool that captures the non-commutative nature of physical observables. For two operators $\hat{A}$ and $\hat{B}$, the commutator is defined as:
 
@@ -866,7 +866,7 @@ These relations have profound physical implications:
 - $[\hat{L}_j, x^2] = 0$ demonstrates that angular momentum components commute with the square of position
 - $[\hat{L}_j, \hat{L}_k] = i\hbar\epsilon_{jkm}\hat{L}_m$ reveals that angular momentum components do not commute with each other, forming an $SU(2)$ algebra
 
-\subsection*{1.6 Canonical quantization rule}
+\subsection{Canonical quantization rule}
 
 The pattern emerging from our calculations leads to a fundamental principle in quantum mechanics:
 
@@ -899,7 +899,7 @@ This principle, formulated by Dirac, provides a systematic way to convert classi
 
 However, the canonical quantization rule faces ordering ambiguities when quantizing products of non-commuting observables (e.g., $xp$ could become $\hat{x}\hat{p}$ or $\hat{p}\hat{x}$ or some combination). Various prescriptions exist to resolve these ambiguities, including Weyl ordering and normal ordering.
 
-\subsection*{1.7 Expectation value}
+\subsection{Expectation value}
 
 To connect quantum operators with measurable quantities, we need to define how to extract physical predictions from wave functions. This begins with defining an appropriate scalar product on the Hilbert space $L^2(V)$ of square-integrable functions.
 
@@ -946,7 +946,7 @@ For operator products, we have:
 
 This shows that $(\hat{A}\hat{B})^\dagger = \hat{B}^\dagger\hat{A}^\dagger$, a fundamental property of adjoint operators.
 
-\subsection*{1.8 The Ehrenfest Theorem}
+\subsection{The Ehrenfest Theorem}
 
 To establish the Ehrenfest theorem, we first verify that the Hamiltonian operator is Hermitian. A Hermitian operator must satisfy:
 
@@ -1091,11 +1091,11 @@ This equality wouldn't hold for potentials with higher-order terms. However, in 
 
 This aligns with Bohr's Correspondence Principle, which states that quantum mechanics must reduce to classical mechanics in the limit of large quantum numbers or macroscopic systems.
 
-\section*{2 Solutions to the Schrödinger's equation}
+\section{Solutions to the Schrödinger's equation}
 
 This section explores general solutions to the Schrödinger equation and their physical interpretation.
 
-\subsection*{2.1 Stationary solution}
+\subsection{Stationary solution}
 
 The separation of variables technique is a powerful method for solving partial differential equations like the Schrödinger equation. This approach assumes that solutions can be expressed as products of functions, each depending on a single variable.
 
@@ -1135,7 +1135,7 @@ The first equation has the solution $f(t) = e^{-\frac{iE}{\hbar}t}$, while the s
 
 These solutions, called stationary states, have special significance in quantum mechanics as they represent states of definite energy. While the spatial probability distribution $|\Psi_E(\vec{x})|^2$ remains constant in time, the phase evolves uniformly.
 
-\subsection*{2.2 Superposition principle}
+\subsection{Superposition principle}
 
 The stationary solution has the form:
 
@@ -1180,7 +1180,7 @@ Using the eigenvalue equation $\hat{H}\Psi_{E_n} = E_n\Psi_{E_n}$:
 
 Comparing equations (2.7) and (2.10), we see they are identical, confirming that the superposition indeed satisfies the Schrödinger equation.
 
-\subsection*{2.3 Formal solution to the Schrödinger's equation}
+\subsection{Formal solution to the Schrödinger's equation}
 
 The time evolution of quantum states can be elegantly expressed using the quantum propagator, which connects the initial state to its future evolution:
 
@@ -1250,7 +1250,7 @@ For systems with continuous energy spectra (rather than discrete eigenvalues), t
 This continuous spectrum formulation is particularly relevant for unbound states, such as free particles, where energy can take any value in a continuous range.
 
 
-\section*{3 Free particle}
+\section{Free particle}
 
 The free particle represents a foundational problem in quantum mechanics. While classically a free particle follows a simple trajectory:
 
@@ -1427,8 +1427,8 @@ Finally, we can evaluate one component of the probability density:
 
 This represents a Gaussian wave packet that moves with velocity $v_j$ along the $x_j$-axis while spreading out over time. At $t=0$, it is centered at $x=0$, and as time progresses, it both translates and spreads until it becomes essentially flat.
 
-\section*{4 Hilbert spaces}
-\subsection*{4.1 Vector space definition and properties}
+\section{Hilbert spaces}
+\subsection{Vector space definition and properties}
 
 We begin with a theoretical introduction to Hilbert spaces. First, let's recall the definition of a vector space:
 
@@ -1560,7 +1560,7 @@ If we choose $F$ as the set of real numbers $\mathbb{R}$ and the basis of vector
 we are dealing with the Euclidean vector space which is the usual 3D physical space.
 
 
-\subsection*{4.2 Hilbert space}
+\subsection{Hilbert space}
 
 Let's finally give the definition of a Hilbert space:
 
@@ -1647,7 +1647,7 @@ The completeness relation in Hilbert space provides a powerful framework for und
 \Psi = \sum_{k=1}^{\infty} c_k\phi_k \tag{4.23}
 \end{equation*}
 
-\subsection*{4.3 Completeness relation}
+\subsection{Completeness relation}
 
 For a finite-dimensional vector space $L$ with complete basis $\mathcal{B} = \{|k\rangle: k \in [1,N]\}$, the scalar product of any vector with a basis element yields that vector's component along the basis direction:
 
@@ -1724,8 +1724,8 @@ Thus, the completeness relation in Hilbert space takes the form:
 \sum_{k=1}^{\infty} \phi_k^*(\vec{y})\phi_k(\vec{x}) = \delta^3(\vec{y}-\vec{x}) \tag{4.33}
 \end{equation*}
 
-\subsection*{4.4 Examples}
-\subsection*{4.4.1 Plane wave basis (finite volume)}
+\subsection{Examples}
+\subsection{Plane wave basis (finite volume)}
 Let's examine a box of volume $V = L^3$ to verify if the basis:
 
 
@@ -1789,8 +1789,8 @@ The completeness relation requires:
 
 This identity, a fundamental result in functional analysis, confirms that our basis is complete.
 
-\section*{5 Harmonic oscillator}
-\subsection*{5.1 Description of the problem}
+\section{Harmonic oscillator}
+\subsection{Description of the problem}
 
 The harmonic oscillator represents one of the most important models in quantum mechanics. Its classical Hamiltonian is given by:
 
@@ -1818,7 +1818,7 @@ The quantum harmonic oscillator represents one of the most elegant problems in q
 \hat{H}\Psi_E = E\Psi_E \tag{5.4}
 \end{equation*}
 
-\subsection*{5.2 Solution of the eigenvalue equation}
+\subsection{Solution of the eigenvalue equation}
 
 Rather than directly solving the differential equation, we'll employ the powerful spectrum generating algebra method by introducing ladder operators. These operators allow us to navigate between energy states with remarkable simplicity:
 
@@ -2109,7 +2109,7 @@ Solving for $C$:
 C = \sqrt{\frac{1}{\lambda\sqrt{\pi}}} = \left(\frac{m\omega}{\hbar\pi}\right)^{-\frac{1}{4}} \tag{5.43}
 \end{equation*}
 
-\subsection*{5.3 Hermite polynomials}
+\subsection{Hermite polynomials}
 
 To find the functional form of all energy eigenstates, we need to evaluate the expression:
 
@@ -2214,7 +2214,7 @@ A_n = \sqrt{\frac{2\hbar\omega(n+\frac{1}{2})}{m\omega^2}} \approx \sqrt{\frac{2
 
 In the semiclassical limit (large $n$), the distance between probability peaks becomes smaller, and the overall distribution increasingly resembles the classical parabolic potential.
 
-\subsection*{5.4 Uncertainty of the Harmonic oscillator}
+\subsection{Uncertainty of the Harmonic oscillator}
 
 For any observable $\hat{A}$, the expected value $\langle\hat{A}\rangle$ is subject to uncertainty in measurement:
 
@@ -2260,7 +2260,7 @@ And for $\hat{p}^2$:
 
 These results show that the uncertainty in both position and momentum increases with the energy level $n$. Notably, the product of uncertainties $\Delta x \cdot \Delta p = \frac{\hbar}{2}(2n+1)$ exceeds the minimum value allowed by the uncertainty principle.
 
-\subsection*{5.5 Orthogonality of Hermite polynomials}
+\subsection{Orthogonality of Hermite polynomials}
 
 We now want to prove that the set of eigenfunctions $\Psi_n$ are orthonormal:
 
@@ -2307,7 +2307,7 @@ Therefore:
 I understand now. Here's the revised LaTeX code with a different structure and explanations, keeping all mathematical expressions intact, without comments, and without adding content at the end:
 
 
-\section*{Analysis of Inner Products in Harmonic Oscillator States}
+\section{Analysis of Inner Products in Harmonic Oscillator States}
 
 The key expression we need to evaluate is:
 
@@ -2345,8 +2345,8 @@ This establishes the orthogonality relation:
 \left(\Psi_{m}, \Psi_{n}\right)=\delta_{m n} \tag{5.75}
 \end{equation*}
 
-\section*{6 Elementary Potential Problems}
-\subsection*{6.1 Definiton of elementary potentials}
+\section{Elementary Potential Problems}
+\subsection{Definiton of elementary potentials}
 
 In quantum mechanics, we often approximate complex potentials with simpler forms. For instance, a smooth transition potential:
 
@@ -2395,7 +2395,7 @@ W(x)=\frac{V_{0}}{\cosh \left(\frac{x}{d}\right)} \tag{6.7}
 Here's the revised LaTeX code with a different structure while maintaining all mathematical expressions:
 
 
-\subsection*{6.2 Step Potential: Solving the Eigenvalue Problem}
+\subsection{Step Potential: Solving the Eigenvalue Problem}
 
 The step potential divides space into two regions with different energy characteristics. Starting with the Hamiltonian eigenvalue equation:
 
@@ -2475,7 +2475,7 @@ Substituting into our wavefunction gives:
 \end{equation*}
 
 
-\subsection*{6.2 Probability Current Analysis for Step Potential}
+\subsection{Probability Current Analysis for Step Potential}
 
 To verify the condition $j_{1}(0)=j_{2}(0)$, we need to calculate the probability currents in both regions. Beginning with region I:
 
@@ -2559,7 +2559,7 @@ q=\sqrt{\frac{2 m\left(E-V_{0}\right)}{\hbar^{2}}} \simeq \sqrt{\frac{2 m E}{\hb
 \end{equation*}
 
 
-\subsection*{6.2.1 Analysis of Energy Regimes for Step Potential}
+\subsection{Analysis of Energy Regimes for Step Potential}
 
 For the high-energy case ($E \gg V_{0}$), the transmission and reflection ratios become:
 
@@ -2629,7 +2629,7 @@ i k A-i k R=-q T
 \]
 
 
-\subsection*{6.2.2 Derivation of Coefficients for Sub-barrier Case}
+\subsection{Derivation of Coefficients for Sub-barrier Case}
 
 Solving the boundary condition equations for the case where $E<V_0$:
 
@@ -2719,7 +2719,7 @@ j_{1}= & \frac{\hbar}{2 m i}\left[\left(A^{*} e^{-i k x}+R^{*} e^{i k x}\right)\
 \end{align*}
 
 
-\subsection*{6.2.3 Current Conservation and Physical Interpretation}
+\subsection{Current Conservation and Physical Interpretation}
 
 Taking $A$ as real, the current conservation condition gives:
 
@@ -2729,7 +2729,7 @@ j_{1}=\frac{\hbar k}{m}\left(A^{2}-|R|^{2}\right)=0 \Longrightarrow|A|=|R| \tag{
 
 This equality between incident and reflected amplitudes indicates complete reflection for the sub-barrier case.
 
-\subsection*{6.3 Finite Potential Barrier Analysis}
+\subsection{Finite Potential Barrier Analysis}
 
 For a rectangular potential barrier, we divide space into three distinct regions:
 
@@ -2798,7 +2798,7 @@ Solving this system of equations, we obtain the reflection and transmission ampl
 \end{equation*}
 
 
-\subsection*{6.3.1 Probability Current Analysis for Barrier Problem}
+\subsection{Probability Current Analysis for Barrier Problem}
 
 For the finite barrier, we can express the probability currents in each region. For region I:
 
@@ -2833,7 +2833,7 @@ The reflection and transmission coefficients become:
 \frac{j_{T}}{j_{i n}} & =\frac{|T|^{2}}{A^{2}}=\frac{4 k^{2} q^{2}}{4 k^{2} q^{2}+\left(k^{2}-q^{2}\right) \sin ^{2}(2 q a)} \tag{6.65}
 \end{align*}
 
-\subsection*{6.3.2 Limiting Cases for Barrier Transmission}
+\subsection{Limiting Cases for Barrier Transmission}
 
 In the high-energy limit where $E \gg V_0$, we find $q \approx k$, resulting in:
 
@@ -2888,7 +2888,7 @@ A particularly interesting case occurs when $q=\frac{\pi n}{a}$, where the refle
 \end{align*}
 
 
-\subsection*{6.4 Quantum Tunneling Analysis}
+\subsection{Quantum Tunneling Analysis}
 
 When the particle energy is below the potential barrier height ($E < V_0$), classical physics predicts total reflection. However, quantum mechanics allows for the tunneling effect. To analyze this phenomenon, we redefine the parameter $q$ as:
 
@@ -2935,8 +2935,8 @@ In the limit where the barrier height greatly exceeds the particle energy ($V_0 
 & \frac{T}{A} \simeq 0
 \end{align*}
 
-\section*{7 Heisenberg Uncertainty Principle}
-\subsection*{7.1 Mathematical Foundation of Uncertainty Relations}
+\section{Heisenberg Uncertainty Principle}
+\subsection{Mathematical Foundation of Uncertainty Relations}
 
 Unlike classical mechanics, where a particle's position and momentum can be simultaneously determined with arbitrary precision, quantum mechanics imposes fundamental limitations on measurement precision. We can only specify:
 
@@ -2952,7 +2952,7 @@ This inherent uncertainty is not due to technological limitations or experimenta
 \end{equation*}
 
 
-\subsection*{7.1.1 Derivation of the General Uncertainty Principle}
+\subsection{Derivation of the General Uncertainty Principle}
 
 Let's consider two physical observables represented by Hermitian operators $\hat{A}_1$ and $\hat{A}_2$:
 
@@ -3039,7 +3039,7 @@ Defining $\hat{D}_{1} \Psi=\phi_{1}$ and $\hat{D}_{2} \Psi=\phi_{2}$, we can app
 \end{equation*}
 
 
-\subsection*{7.1 Deriving the Uncertainty Relation}
+\subsection{Deriving the Uncertainty Relation}
 This analysis leads to:
 
 \begin{align*}
@@ -3060,7 +3060,7 @@ Thus we arrive at the fundamental uncertainty relation:
 \sigma_{A_{1}}^{2} \sigma_{A_{2}}^{2} \geq \frac{1}{4}\left|\left\langle\left[\hat{A}_{1}, \hat{A}_{2}\right]\right\rangle\right|^{2} \tag{7.17}
 \end{equation*}
 
-\subsection*{7.2 Physical Implications}
+\subsection{Physical Implications}
 The Heisenberg uncertainty principle reveals a fundamental limitation: increasing measurement precision for one observable necessarily reduces precision for another non-commuting observable. The only exception occurs when operators commute, yielding $\sigma_{A_{1}}^{2} \sigma_{A_{2}}^{2} \geq 0$, allowing simultaneous precise measurements.
 
 The classical notion of simultaneously determining a particle's position and momentum with arbitrary precision fails in quantum mechanics. From the commutation relation:
@@ -3081,7 +3081,7 @@ For the same coordinate direction ($i=j$), we obtain the iconic inequality:
 \Delta x \Delta p \geq \frac{\hbar}{2} \tag{7.20}
 \end{equation*}
 
-\subsection*{7.3 Properties of Commuting Operators}
+\subsection{Properties of Commuting Operators}
 For a wavefunction characterized by two quantum numbers $\alpha_1$ and $\alpha_2$, the following eigenvalue equations hold simultaneously if and only if the operators commute:
 
 \begin{align*}
@@ -3099,7 +3099,7 @@ For this relation to hold, $\hat{A}_1$ and $\hat{A}_2$ must have eigenvalues $\a
 
 Theorem 7.1. If two operators $\hat{A}$ and $\hat{B}$ satisfy $[\hat{A}, \hat{B}]=0$, they possess a common basis of eigenfunctions.
 
-\section*{Non-degenerate case}
+\section{Non-degenerate case}
 Proof. For an eigenstate $\Psi$ of $\hat{A}$ with $\hat{A} \Psi=\alpha \Psi$, consider $\Psi_{B}=\hat{B} \Psi$. Then:
 
 \begin{equation*}
@@ -3114,7 +3114,7 @@ Thus $\Psi_{B}$ is also an eigenstate of $\hat{A}$. Since $\Psi_B$ is an eigenst
 
 Therefore, $\Psi$ must be a simultaneous eigenstate of both $\hat{A}$ and $\hat{B}$.
 
-\section*{Degenerate case}
+\section{Degenerate case}
 Proof. For the degenerate case, we consider the basis:
 
 \begin{equation*}
@@ -3122,7 +3122,7 @@ Proof. For the degenerate case, we consider the basis:
 \end{equation*}
 
 
-\subsection*{7.3 Analyzing Commuting Operators}
+\subsection{Analyzing Commuting Operators}
 Continuing with the degenerate case:
 
 \begin{equation*}
@@ -3186,7 +3186,7 @@ Confirming $\phi_{i}$ is an eigenstate of $\hat{B}$ with eigenvalue $d_i$. Addit
 
 Thus $\phi_{i}$ is a simultaneous eigenstate of both $\hat{A}$ and $\hat{B}$.
 
-\subsection*{7.4 Key Implications}
+\subsection{Key Implications}
 The commutation relation $[\hat{A}, \hat{B}]=0$ yields several significant consequences:
 
 \begin{enumerate}
@@ -3194,7 +3194,7 @@ The commutation relation $[\hat{A}, \hat{B}]=0$ yields several significant conse
 \end{enumerate}
 
 
-\subsection*{7.4 Consequences of Operator Commutation}
+\subsection{Consequences of Operator Commutation}
 
 \begin{equation*}
 i \hbar \frac{\mathrm{~d}\langle\hat{A}\rangle}{\mathrm{d} t}=\langle[\hat{A}, \hat{H}]\rangle=0 \Longrightarrow \frac{\mathrm{~d}\langle\hat{A}\rangle}{\mathrm{d} t}=0 \tag{7.36}
@@ -3218,7 +3218,7 @@ Additional consequences include:
 
 We now examine the last two points in detail.
 
-\subsection*{7.5 Complete Observable Sets}
+\subsection{Complete Observable Sets}
 A collection of Hermitian operators $\hat{A}, \hat{B}, \ldots, \hat{P}$ forms a complete set when it contains the maximum possible number of mutually commuting operators.
 
 Example 1: For a free particle Hamiltonian:
@@ -3272,7 +3272,7 @@ Example 3: For a spherically symmetric potential:
 
 The set $\hat{L}_{3}, \hat{L}^{2}, \hat{H}$ becomes particularly advantageous due to rotational symmetry. Note that since $\left[\hat{L}_{i}, \hat{L}_{j}\right]=i \hbar \epsilon_{i j k} \hat{L}_{k}$, we cannot simultaneously include both $\hat{L}_{2}$ and $\hat{L}_{3}$, but must use $\hat{L}^{2}$.
 
-\subsection*{7.6 Quantum Coherent States}
+\subsection{Quantum Coherent States}
 Coherent states minimize the uncertainty relation:
 
 \begin{equation*}
@@ -3286,7 +3286,7 @@ These states exhibit quasi-classical behavior with minimal observable uncertaint
 \end{equation*}
 
 
-\subsection*{7.6 Analysis of Quantum Coherent States}
+\subsection{Analysis of Quantum Coherent States}
 Coherent states satisfy the uncertainty relation with the minimal possible product:
 
 \begin{equation*}
@@ -3490,7 +3490,7 @@ Through algebraic simplification, we find that the uncertainties in position and
 
 This remarkable result demonstrates that coherent states achieve the minimum possible uncertainty product allowed by quantum mechanics.
 
-\subsection*{7.7 Construction of coherent states via eigenfunctions}
+\subsection{Construction of coherent states via eigenfunctions}
 We may alternatively build coherent states beginning with the harmonic oscillator eigenfunctions:
 
 \begin{equation*}
@@ -3572,7 +3572,7 @@ Solving for the normalization constant yields a characteristic exponential form 
 
 The complete coherent state representation elegantly combines the basis states with coefficients determined by the parameter $z$.
 
-\subsection*{7.8 Temporal evolution of coherent states}
+\subsection{Temporal evolution of coherent states}
 We now examine how coherent states evolve under the influence of the harmonic oscillator Hamiltonian:
 
 \begin{align*}
@@ -3595,7 +3595,7 @@ $\langle x\rangle=\sqrt{\frac{\hbar}{2 m \omega}}\left(\Psi_{z},\left(a^{\dagger
 
 These expressions demonstrate that coherent states exhibit dynamics remarkably similar to classical harmonic oscillation with amplitude $A=\sqrt{\frac{2 \hbar}{m \omega}}\left|z_{0}\right|$.
 
-\subsection*{7.9 Complementary approach to coherent state dynamics}
+\subsection{Complementary approach to coherent state dynamics}
 An alternative derivation of coherent state evolution begins with the ansatz:
 
 \begin{equation*}
@@ -3645,8 +3645,8 @@ Comparing terms in the Schrödinger equation determines the phase evolution of o
 
 The phase accumulates linearly with time, reflecting the zero-point energy contribution to the coherent state dynamics.
 
-\section*{8 Quantum angular momentum theory}
-\subsection*{8.1 Angular momentum operators and properties}
+\section{Quantum angular momentum theory}
+\subsection{Angular momentum operators and properties}
 We now explore the quantum mechanical treatment of angular momentum, a fundamental concept with wide-ranging applications. The angular momentum operator is defined as:
 
 \begin{equation*}
@@ -3679,7 +3679,7 @@ For notational simplicity, we'll now refer to the operators without hats. Angula
 
 While $L^2$ commutes with each component $L_j$, the components themselves do not commute with each other. This allows us to simultaneously specify eigenvalues of $L^2$ and only one component (conventionally $L_3$), creating a complete set of commuting observables with the Hamiltonian.
 
-\subsection*{8.2 Angular momentum eigenvalue structure}
+\subsection{Angular momentum eigenvalue structure}
 To analyze the angular momentum spectrum, we introduce ladder operators analogous to those used in the harmonic oscillator:
 
 \begin{align*}
@@ -3819,7 +3819,7 @@ L_{-}^{s} Y_{\ell, 0} & =\hbar^{s} \sqrt{\frac{(\ell+s)!}{(\ell-s)!}} Y_{\ell, s
 
 Starting from the $m=0$ state, we can generate all other states symmetrically through appropriate applications of raising and lowering operators.
 
-\subsection*{8.3 Spherical coordinate representation}
+\subsection{Spherical coordinate representation}
 For problems with rotational symmetry, spherical coordinates provide the most natural framework:
 
 \[
@@ -3946,7 +3946,7 @@ From the definition of $\Phi(\varphi)$ we can understand that the choice of $\el
 
 This periodicity constraint demonstrates why $m$ must be an integer, as the wavefunction must return to its original value after a complete rotation of $2\pi$.
 
-\section*{Property 1.}
+\section{Property 1.}
 
 \begin{equation*}
 P_{\ell, m}=(-1)^{m} \frac{(\ell+m)!}{(\ell-m)!} P_{\ell,|m|} \tag{8.47}
@@ -3954,7 +3954,7 @@ P_{\ell, m}=(-1)^{m} \frac{(\ell+m)!}{(\ell-m)!} P_{\ell,|m|} \tag{8.47}
 
 This relation connects associated Legendre functions with negative and positive values of $m$, providing a complete characterization for all integer values of $m$.
 
-\section*{Property 2.}
+\section{Property 2.}
 
 \begin{equation*}
 \int_{-1}^{1} \mathrm{~d} \xi P_{\ell, m} P_{n, m}=\frac{2}{2 l+1} \frac{(\ell+m)!}{(\ell-m)!} \delta_{l n} \tag{8.48}
@@ -4029,7 +4029,7 @@ This determines the normalization constant needed to ensure that spherical harmo
 
 The completed proof confirms that spherical harmonics satisfy the orthonormality condition, making them ideal basis functions for angular problems.
 
-\subsection*{8.4 Probability density distributions}
+\subsection{Probability density distributions}
 The probability density associated with spherical harmonics reveals the spatial distribution of quantum states:
 
 \begin{equation*}
@@ -4063,7 +4063,7 @@ For $\ell=2$ (d-orbital) states:
 
 These more complex angular distributions correspond to the characteristic shapes of d-orbitals in atomic physics, demonstrating how quantum numbers determine orbital geometry.
 
-\subsection*{8.5 Application to diatomic molecules}
+\subsection{Application to diatomic molecules}
 We now apply our understanding of angular momentum to analyze diatomic molecules. In the classical approach, such a system consists of:
 
 \begin{itemize}
@@ -4213,8 +4213,8 @@ E=\frac{\hbar^{2} K^{2}}{2 M}+\frac{\hbar^{2} \ell(\ell+1)}{2 I}+\gamma \hbar m 
 
 This energy expression describes Zeeman splitting, where degenerate levels separate in the presence of a magnetic field.
 
-\section*{9 Hydrogen atom}
-\subsection*{9.1 Problem formulation}
+\section{Hydrogen atom}
+\subsection{Problem formulation}
 The hydrogen atom represents one of the most fundamental quantum mechanical systems. Classically, it consists of an electron orbiting a positively charged nucleus:
 
 \begin{equation*}
@@ -4385,7 +4385,7 @@ Taking the complex conjugate of the inner product.
 
 This confirms that the radial momentum operator is indeed Hermitian, validating our choice of operator form.
 
-\subsection*{9.2 Schrödinger equation solution}
+\subsection{Schrödinger equation solution}
 Now we can evaluate the square of the radial momentum operator:
 
 \begin{align*}
@@ -4728,8 +4728,8 @@ L_{N}^{s}(y)=(-1)^{s} \frac{\mathrm{~d}^{s}}{\mathrm{~d} y^{s}} L_{N+s} \quad \t
 
 An alternative definition relating associated Laguerre polynomials to derivatives of standard Laguerre polynomials.
 
-\subsection*{9.3 Properties of the Laguerre polynomials}
-\section*{Property 1.}
+\subsection{Properties of the Laguerre polynomials}
+\section{Property 1.}
 
 \begin{equation*}
 L_{N}^{s}(y)=(-1)^{s} \frac{\mathrm{~d}^{s}}{\mathrm{~d} y^{s}} L_{N+s} \quad \text { with } \quad L_{r}=\mathrm{e}^{y} \frac{\mathrm{~d}^{r}}{\mathrm{~d} y^{r}} \mathrm{e}^{-y} y^{r} \tag{9.75}
@@ -4746,7 +4746,7 @@ Property 2. Recursive formula:
 The recurrence relation allows efficient computation of higher-order polynomials from lower ones.
 
 ```
-\section*{Property 3.}
+\section{Property 3.}
 
 \begin{equation*}
 \int_{0}^{+\infty} \mathrm{d} y \mathrm{e}^{-y} y^{s} L_{r}^{s} L_{q}^{s}=\delta_{r q} \frac{(r+s)!}{r!} \tag{9.77}
@@ -4754,7 +4754,7 @@ The recurrence relation allows efficient computation of higher-order polynomials
 
 The orthogonality relation for associated Laguerre polynomials with respect to the weight function $e^{-y}y^s$.
 
-\section*{Property 4.}
+\section{Property 4.}
 
 \begin{equation*}
 \int_{0}^{+\infty} \mathrm{d} y \mathrm{e}^{-y} y^{s+1}\left(L_{N}^{s}\right)^{2}=(2 N+s+1) \frac{(N+s)!}{N!} \tag{9.78}
@@ -4802,7 +4802,7 @@ D_{n \ell}=\sqrt{\frac{\left(2 k_{n}\right)^{3}(n-\ell-1)!}{2 n(n+\ell)!}} \tag{
 
 The normalization constant determined to ensure that the wavefunction has unit norm.
 
-\subsection*{9.4 Energy spectrum}
+\subsection{Energy spectrum}
 The energy of a Hydrogen atom $E_{n}$ can be written in terms of a quantity called the Bohr radius $a$ :
 
 \begin{equation*}
@@ -4868,7 +4868,7 @@ Relating the wavelength of emitted or absorbed light to energy level differences
 
 This is the Rydberg formula, which predicts the wavelengths of spectral lines with remarkable accuracy.
 
-\subsection*{9.5 Radial probability density}
+\subsection{Radial probability density}
 
 \begin{equation*}
 \Psi_{n \ell m}=R_{n l}(r) Y_{\ell, m}(\varphi, \theta) \tag{9.95}
@@ -4903,7 +4903,7 @@ The radial probability density $P_{nl} = r^2 R_{nl}^2$ gives the probability of 
 ```
 This is the probability of finding an electron in a shell of $r$ radius and $\mathrm{d} r$ thickness.
 
-\subsection*{9.6 Radial position expectation values}
+\subsection{Radial position expectation values}
 By using the recursion formula of the Laguerre polynomials we can show that:
 
 \begin{equation*}
@@ -4955,7 +4955,7 @@ The radius at which the probability density reaches its maximum.
 
 For large $n$, the most probable radius approaches the expectation value, consistent with classical orbits.
 
-\subsection*{9.7 Two body problem}
+\subsection{Two body problem}
 The system given by an electron orbiting a proton is essentially a two body problem. In the discussion of the Hydrogen atom we have only discussed the orbital problem at rest, but the proton is, in general, moving.
 
 The centre of mass is essentially the proton since $m_{p} \gg m_{e}$, instead the reduced mass will be approximately the one of the electron $\mu \approx m_{e}$.
@@ -5013,8 +5013,8 @@ H \Psi_{\vec{K} n \ell m} & =\left(\frac{\hat{P}^{2}}{2 M}+H_{rel}\right) \phi_{
 & =\Psi_{n \ell m} \phi_{\vec{K}} \frac{\hbar^{2} K^{2}}{2 M}+\phi_{\vec{K}} \Psi_{n \ell m} E_{n}=\left(\frac{\hbar^{2} K^{2}}{2 M}+E_{n}\right) \Psi_{n \ell m} \phi_{\vec{K}}
 \end{align*}
 
-\section*{10 Equivalent formulations of quantum theory}
-\subsection*{10.1 Dirac's vector notation}
+\section{Equivalent formulations of quantum theory}
+\subsection{Dirac's vector notation}
 
 Comparing Schrödinger's wave mechanics with Dirac's abstract vector formalism:
 
@@ -5111,7 +5111,7 @@ Where $a_n$ are the eigenvalues satisfying:
 A \phi_{n}=a_{n} \phi_{n} \tag{10.10}
 \end{equation*}
 
-\subsection*{10.2 Basis transformations}
+\subsection{Basis transformations}
 When working with a different basis $\mathcal{B}^{\prime}=\left\{\phi_{k}^{\prime}: k \in[0,+\infty]\right\}$, we need transformation rules between bases.
 
 Lemma 10.1. Two complete orthonormal bases $\mathcal{B}$ and $\mathcal{B}^{\prime}$ are connected by a unitary transformation.
@@ -5183,7 +5183,7 @@ Proof. Starting with $\sum_{i}\left|v_{i}\right|^{2}=\left(\Psi_{v}, \Psi_{v}\ri
 & =\sum_{i} \sum_{j} \delta_{i j} v_{i}^{\prime*} v_{j}^{\prime}=\sum_{i}\left|v_{i}^{\prime}\right|^{2}
 \end{align*}
 
-\subsection*{10.3 Practical implementations}
+\subsection{Practical implementations}
 The Dirac formulation provides elegant representations of quantum dynamics. For the Schrödinger equation:
 
 \begin{equation*}
@@ -5241,7 +5241,7 @@ And so:
 |\Psi\rangle=\sum_{m} c_{m}(0) \exp \left(-i \frac{t}{\hbar} E_{m}\right)|m\rangle \tag{10.27}
 \end{equation*}
 
-\subsection*{10.4 The Heisenberg representation}
+\subsection{The Heisenberg representation}
 In Heisenberg's alternative formulation, we focus on the time evolution of observables rather than states. The expectation value of an operator is:
 
 \begin{equation*}
@@ -5268,7 +5268,7 @@ For notational clarity:
 & \Psi(x, 0)=\Psi_{0}
 \end{align*}
 
-\subsection*{10.5 Statistical description with density matrices}
+\subsection{Statistical description with density matrices}
 To calculate expectation values, we expand the wavefunction in the energy eigenbasis:
 
 \begin{equation*}
@@ -5308,7 +5308,7 @@ In statistical mechanics, the probability distribution follows Boltzmann statist
 
 These expressions can be written compactly as $\operatorname{Tr}(\rho A)$, where $\rho$ is the density matrix.
 
-\subsection*{10.6 Dynamics of observables}
+\subsection{Dynamics of observables}
 For time-dependent operators in the Heisenberg picture, $A_t = U^\dagger A U$, the equation of motion is:
 
 \begin{equation*}
@@ -5346,7 +5346,7 @@ Since $H$ commutes with $U$ (which can be shown using Taylor expansion), we have
 
 This equation closely resembles Ehrenfest's theorem and provides the dynamics of operators in the Heisenberg picture.
 
-\subsection*{10.7 Harmonic oscillator example}
+\subsection{Harmonic oscillator example}
 For the harmonic oscillator, we define time-evolving operators:
 
 \begin{align*}
@@ -5374,7 +5374,7 @@ H\left(p_{t}, x_{t}\right)=U^{\dagger}\left(\frac{p^{2}}{2 m}+\frac{1}{2} m \ome
 
 Thus, the Hamiltonian remains time-independent in the Heisenberg picture.
 
-\subsection*{10.8 Important unitary transformations}
+\subsection{Important unitary transformations}
 Several unitary transformations play key roles in quantum mechanics.
 
 Spatial translation operator:
@@ -5389,7 +5389,7 @@ Applying this to a wavefunction yields:
 T(\lambda) \Psi(x)=\sum_{n} \frac{\lambda^{n}}{n!} \frac{\partial^{n} \Psi(x)}{\partial x^{n}}=\Psi(x+\lambda) \tag{10.48}
 \end{equation*}
 
-\section*{Rotational transformations}
+\section{Rotational transformations}
 
 The angular momentum operator for rotation around the z-axis:
 
@@ -5470,8 +5470,8 @@ H \Psi(x, t) & =i \hbar \frac{\partial \Psi(x, t)}{\partial t}
 
 Thus recovering the Schrödinger equation.
 
-\section*{11 Quantum spin}
-\subsection*{11.1 The Stern-Gerlach experiment}
+\section{Quantum spin}
+\subsection{The Stern-Gerlach experiment}
 The Stern-Gerlach experiment (1922) demonstrated that a beam of silver atoms, despite having zero orbital angular momentum, splits into two distinct beams when passing through a non-uniform magnetic field $\vec{B}$. Silver atoms have this property because, except for a single external electron, their electronic configuration has spherical symmetry with $\vec{L}_{\text{TOT}}=0$. The external electron is in the $5s$ state ($\ell=0$), also contributing zero orbital angular momentum.
 
 
@@ -5495,7 +5495,7 @@ With $m=0$ being the only possible eigenvalue for $L_3$ in s-orbital states. The
 
 Numerous other experiments, including the anomalous Zeeman effect and helium spectroscopy, confirmed that spin is fundamental to atomic structure. This led to the spin-statistics theorem, which classifies elementary particles into fermions (half-integer spin particles like electrons, protons, and neutrons) and bosons (integer spin particles like photons or composite particles with even numbers of fermions).
 
-\subsection*{11.2 Mathematical formulation of spin}
+\subsection{Mathematical formulation of spin}
 While spin operators $S$ and angular momentum operators $L$ share similar algebraic properties, they differ fundamentally in their definitions:
 
 \begin{itemize}
@@ -5764,7 +5764,7 @@ Setting $\vec{\alpha}=e \vec{B} / 2 m_{e} c$, we obtain the Pauli equation, whic
 \end{array}\right]
 \]
 
-\subsection*{11.3 Spin-1/2 free particle in a magnetic field}
+\subsection{Spin-1/2 free particle in a magnetic field}
 For a point-like particle with spin 1/2 and mass $m$ in a magnetic field, the Hamiltonian simplifies to:
 
 \begin{equation*}
@@ -5860,7 +5860,7 @@ E(\vec{k}, \mu)=\frac{\hbar^{2} k^{2}}{2 m}+\mu \frac{\hbar}{2} k B \tag{11.35}
 
 This shows how the energy splits into two levels due to the magnetic field, with the separation proportional to the field strength.
 
-\subsection*{11.4 Addition of angular momenta}
+\subsection{Addition of angular momenta}
 When two angular momenta interact in a quantum system, we need to understand how to combine them. Classically, we can add vectors $\vec{J}=\vec{L}+\vec{S}$ or $\vec{J}=\vec{S}_1+\vec{S}_2$. In quantum mechanics, this corresponds to the operator $\vec{J}=\vec{L}+\vec{S}$, which satisfies:
 
 \begin{align*}
@@ -5994,7 +5994,7 @@ Verifying normalization:
 \left|\alpha_{+}\right|^{2}+\left|\beta_{+}\right|^{2}=\frac{\ell+m_{j}+\frac{1}{2}}{2\ell+1}+\frac{\ell-m_{j}+\frac{1}{2}}{2\ell+1}=\frac{2\ell+1}{2\ell+1}=1 \tag{11.52}
 \end{equation*}
 
-\subsection*{11.5 Coupling arbitrary angular momenta}
+\subsection{Coupling arbitrary angular momenta}
 For two general angular momentum operators $J_{a}$ and $J_{b}$ with eigenstates:
 
 \begin{align*}
@@ -6017,7 +6017,7 @@ J_{3}\left|j, m_{j}, j_{a}, j_{b}\right\rangle &= \hbar m_{j}\left|j, m_{j}, j_{
 J^{2}\left|j, m_{j}, j_{a}, j_{b}\right\rangle &= \hbar^2 j(j+1)\left|j, m_{j}, j_{a}, j_{b}\right\rangle \tag{11.55}
 \end{align*}
 
-\subsection*{11.6 Spin coupling illustration}
+\subsection{Spin coupling illustration}
 As an illustrative example, consider coupling two spin-$\frac{1}{2}$ systems $S_{a}$ and $S_{b}$. Here $j_{a}=j_{b}=\frac{1}{2}$, so the possible values of total angular momentum $j$ are:
 
 \begin{equation*}
@@ -6031,7 +6031,7 @@ m_{j}=-1,0,1 \tag{11.57}
 \end{equation*}
 
 
-\subsection*{11.6.1 Analysis of coupled spin states}
+\subsection{Analysis of coupled spin states}
 For the case $j=0$, we have $m_j=0$. This state can be formed from two combinations: $m_a=\frac{1}{2}, m_b=-\frac{1}{2}$ or $m_a=-\frac{1}{2}, m_b=\frac{1}{2}$. This configuration yields the singlet state:
 
 \begin{equation*}
@@ -6118,7 +6118,7 @@ The complete set of triplet states is:
 \]
 
 
-\subsection*{11.7 Matrix formulation for angular momentum operators}
+\subsection{Matrix formulation for angular momentum operators}
 The spectrum-generating algebra approach naturally leads to matrix representations of angular momentum operators. The dimension of these matrices depends on the representation index $j$, requiring $(2j+1)\times(2j+1)$ matrices. For spin-$\frac{1}{2}$ systems, this yields $2\times2$ matrices (the familiar Pauli matrices).
 
 For the case $j=1$, we need $3\times3$ matrices to represent the operators, corresponding to the three basis states with $m_j=-1,0,1$. These basis vectors can be written as:
@@ -6236,8 +6236,8 @@ This reveals the origin of the $\sqrt{2}$ factor encountered in our triplet stat
 
 This explains the structure of the spin raising and lowering operators.
 
-\section*{12 Quantum dynamics in electromagnetic fields}
-\subsection*{12.1 Particle motion in uniform magnetic fields}
+\section{Quantum dynamics in electromagnetic fields}
+\subsection{Particle motion in uniform magnetic fields}
 The classical motion of a charged particle in an electromagnetic field is governed by the Lorentz force:
 
 \begin{equation*}
@@ -6414,7 +6414,7 @@ For uniform circular motion, $\dot{\phi}=\frac{2\pi}{T}$, giving:
 
 This matches the classical formula for a current loop's magnetic moment.
 
-\subsection*{12.2 Zeeman effect energy spectrum}
+\subsection{Zeeman effect energy spectrum}
 Considering the allowed quantum numbers:
 
 $$
@@ -6447,7 +6447,7 @@ E_3+2\mu_B B
 
 This splitting pattern, known as the normal Zeeman effect, does not fully match experimental observations. The discrepancy arises because we have not yet accounted for electron spin.
 
-\subsection*{12.3 Transition selection rules}
+\subsection{Transition selection rules}
 The allowed transitions between energy levels follow specific selection rules:
 
 \begin{align*}
@@ -6485,7 +6485,7 @@ I_{\nu\nu'} &=\frac{2e^2}{3c^3}\left|\frac{d^2}{dt^2}\exp\left(-i\frac{t}{\hbar}
 
 The selection rules determine when the matrix element $\langle n',\ell',m'|\vec{r}|n,\ell,m\rangle$ is non-zero, thus identifying allowed transitions.
 
-\subsection*{12.4 Spin-orbit coupling and anomalous Zeeman effect}
+\subsection{Spin-orbit coupling and anomalous Zeeman effect}
 To account for electron spin, we introduce an additional magnetic moment:
 
 \begin{equation*}
@@ -6560,7 +6560,7 @@ For the relativistic correction term:
 &= \frac{1}{4}\underbrace{\frac{\hbar^2}{2m_e}\frac{2}{e^2}}_a\frac{\alpha^2}{a}\underbrace{\frac{e^2}{2a}}_{|E_1|}=\frac{\alpha^2}{4}|E_1| \tag{12.42}
 \end{align*}
 
-\subsection*{12.5 Anomalous Zeeman effect and Paschen-Back effect}
+\subsection{Anomalous Zeeman effect and Paschen-Back effect}
 As a first approximation, we consider only:
 
 \begin{equation*}
@@ -6697,8 +6697,8 @@ E_2(1+1/2,\pm 3/2)=E_2+\mu_B B(\pm 3/2)\frac{4}{3}
 
 $\cdots$
 
-\section*{13 Perturbation theory}
-\subsection*{13.1 General methodology}
+\section{Perturbation theory}
+\subsection{General methodology}
 In quantum mechanics, we often solve problems by finding solutions to simpler systems and then determining how these solutions change when the system is modified. When the modification is small, we call it a perturbation.
 
 
@@ -6836,7 +6836,7 @@ C_k(n)&=-\frac{\langle k|V|b_n\rangle}{E_k^0-E_n^0}+E_n^1\frac{\langle k|b_n\ran
 D_k(n)&=-\frac{\langle k|V|c_n\rangle}{E_k^0-E_n^0}+E_n^1\frac{\langle k|c_n\rangle}{E_k^0-E_n^0}+E_n^2\frac{\langle k|b_n\rangle}{E_k^0-E_n^0}
 \end{align*}
 
-\subsection*{13.2 Application to the harmonic oscillator}
+\subsection{Application to the harmonic oscillator}
 Consider a harmonic oscillator with Hamiltonian:
 
 \begin{equation*}
@@ -6915,8 +6915,8 @@ The exact result should be $\hbar\omega=\hbar\frac{\sqrt{k}}{m}$, and with the p
 
 This confirms that our perturbation approach correctly reproduces the exact solution.
 
-\section*{14 Identical particles and Spin-Statistics Theorem}
-\subsection*{14.1 Many-particle systems}
+\section{Identical particles and Spin-Statistics Theorem}
+\subsection{Many-particle systems}
 In classical physics, we can theoretically track each particle's position and momentum at all times. In quantum mechanics, however, the uncertainty principle creates an effective "error box" around each particle. When particles are close enough that their error boxes overlap, we cannot distinguish them individually.
 
 Quantum mechanics reveals that only two types of particle statistics are possible:
@@ -6957,7 +6957,7 @@ Where:
   \item $H_{SS}$ is the spin-spin coupling: $H_{SS}=\frac{1}{2}\sum_{j=1}^{N}\sum_{i\neq j}^{N}\eta_{ji}S_j\cdot S_i$
 \end{itemize}
 
-\subsection*{14.2 Construction of symmetrized states}
+\subsection{Construction of symmetrized states}
 We introduce the permutation operator $P$ that exchanges particle labels:
 
 \begin{equation*}
@@ -7041,7 +7041,7 @@ Both $\phi_s$ and $\phi_a$ are indeed eigenstates of the Hamiltonian, and their 
 &=\sum_{k}^{\infty}(\frac{-i}{\hbar})^k t^k H^kP\Psi(1,2,\ldots,N)=\exp(-i\frac{t}{\hbar}H)P\Psi(1,2,\ldots,N) \tag{14.17}
 \end{align*}
 
-\subsection*{14.3 Bosons, Fermions, Pauli's principle and Spin-Statistics Theorem}
+\subsection{Bosons, Fermions, Pauli's principle and Spin-Statistics Theorem}
 For many systems, the Hamiltonian can be separated into single-particle terms:
 
 \begin{equation*}
@@ -7062,7 +7062,7 @@ When these Hamiltonians commute ($[H_j,H_i]=0$ for $i\neq j$), the wavefunction 
 
 Where $\alpha_j$ represents the quantum numbers for the $j$-th particle.
 
-\subsection*{14.3.1 Symmetric wavefunctions for a separable Hamiltonian}
+\subsection{Symmetric wavefunctions for a separable Hamiltonian}
 For symmetric states, we can distinguish three cases:
 
 Case 1: All quantum numbers are different ($\alpha_i\neq\alpha_j$ for all $i\neq j$). The symmetric state is:
@@ -7089,7 +7089,7 @@ The normalization factor $Q$ is a multinomial coefficient:
 Q=\binom{N}{N_1,N_2,\ldots,N_r}=\frac{N!}{N_1!N_2!\ldots N_r!} \tag{14.24}
 \end{equation*}
 
-\subsection*{14.3.2 Antisymmetric wavefunctions}
+\subsection{Antisymmetric wavefunctions}
 For the simplest case of $N=2$, the antisymmetric wavefunction is:
 
 \begin{equation*}
@@ -7125,7 +7125,7 @@ From the Slater determinant representation of antisymmetric wavefunctions, we ca
   \item Exchanging any two positions ($\vec{x}_i \leftrightarrow \vec{x}_j$) is equivalent to swapping columns in the determinant, which multiplies the result by $-1$
 \end{itemize}
 
-\subsection*{14.3.3 Spin-Statistics Theorem}
+\subsection{Spin-Statistics Theorem}
 The Spin-Statistics Theorem (also called the symmetrization principle) establishes a profound connection between a particle's intrinsic spin and its quantum statistical behavior:
 
 Theorem 14.1 (Spin-Statistics Theorem): A system of identical particles with integer spin is characterized by symmetric wavefunctions. These particles are called bosons and obey Bose-Einstein statistics.
@@ -7162,7 +7162,7 @@ Making it a boson. However, $^{40}$K, also with 19 protons:
 
 Is therefore a fermion.
 
-\subsection*{14.4 Helium atom}
+\subsection{Helium atom}
 For the helium atom, the Hamiltonian can be written as:
 
 \begin{equation*}
@@ -7299,7 +7299,7 @@ E_0=E_{PH}=2E_n+2I_C \tag{14.47}
 
 This confirms that the helium atom ground state has both electrons in the same orbital with opposite spins (parahelium), consistent with experimental observations.
 
-\section*{15 Quantization of the electromagnetic field}
+\section{Quantization of the electromagnetic field}
 For electromagnetic waves in vacuum ($\rho=0$ and $\vec{J}=0$), we have:
 
 \begin{align*}
@@ -7416,7 +7416,7 @@ Which means:
 \ddot{b}_{s\vec{k}}+\omega_k^2b_{s\vec{k}}=0 \tag{15.17}
 \end{equation*}
 
-\subsection*{15.1 Field quantization and Fock states}
+\subsection{Field quantization and Fock states}
 Now we apply the canonical quantization rules (CQR) and obtain:
 
 \begin{equation*}
