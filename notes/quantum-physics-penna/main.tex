@@ -3,6 +3,8 @@
 \documentclass[italian]{HKNdocument}
 \input{_preamble.tex}
 
+\usepackage{cancel}
+
 \title{Quantum physics}
 \author{Luca Oddenino}
 \docdate{Second semester 2024/2025}
@@ -3617,7 +3619,7 @@ The Schrödinger equation governs how our quantum state evolves in time, capturi
 \begin{align*}
 & -\hbar \dot{\alpha} \mathrm{e}^{i \alpha} \Psi_{z}(x)+i \hbar \mathrm{e}^{i \alpha} \frac{\partial}{\partial t} \sum_{n=0}^{\infty} \frac{z^{n}}{\sqrt{n!}} \Psi_{n}= \\
 & =-\hbar \dot{\alpha} \mathrm{e}^{i \alpha} \Psi_{z}(x)+i \hbar \mathrm{e}^{i \alpha} \sum_{n=0}^{\infty} n \frac{\dot{z}}{z} \frac{z^{n}}{\sqrt{n!}} \Psi_{n}= \\
-& =-\hbar \dot{\alpha} \mathrm{e}^{i \alpha} \Psi_{z}(x)+i \hbar \mathrm{e}^{i \alpha} \sum_{n=0}^{\infty} n \frac{1}{\not \not ~}(-i \omega \not z) \frac{z^{n}}{\sqrt{n!}} \Psi_{n}=  \tag{7.94}\\
+& =-\hbar \dot{\alpha} \mathrm{e}^{i \alpha} \Psi_{z}(x)+i \hbar \mathrm{e}^{i \alpha} \sum_{n=0}^{\infty} n \frac{-i \omega \cancel{z}}{\cancel{z}} \frac{z^{n}}{\sqrt{n!}} \Psi_{n}=  \tag{7.94}\\
 & =-\hbar \dot{\alpha} \mathrm{e}^{i \alpha} \Psi_{z}(x)+\mathrm{e}^{i \alpha} \sum_{n=0}^{\infty}(\hbar \omega n) \frac{z^{n}}{\sqrt{n!}} \Psi_{n}=
 \end{align*}
 
