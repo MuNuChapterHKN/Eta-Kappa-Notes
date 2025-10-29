@@ -1,4 +1,6 @@
 use File::Find;
+use File::Spec;
+use Cwd 'abs_path';
 
 # Paths
 my $chapters_src = abs_path('chapters');  # source chapters directory
@@ -7,12 +9,12 @@ my $chapters_build = "$build/chapters";  # build chapters directory
 
 # Ensure build directory exists
 mkdir $build unless -d $build;
-mkdir $chapters_build unless -d $chapters_build;
 
 # Recursively create subfolders in build/
-find(sub {
-    return unless -d;  # only directories
-    my $rel = File::Spec->abs2rel($File::Find::name, $chapters_src);
-    return if $rel eq '.';  # skip root
-    mkdir "$chapters_build/$rel" unless -d "$chapters_build/$rel";
-}, $chapters_src);
+if (-d $chapters_src) {
+    find(sub {  # iterate over subdirectories of chapters_src (including itself)
+        return unless -d;  # only directories
+        my $rel = File::Spec->abs2rel($File::Find::name, $chapters_src);
+        mkdir "$chapters_build/$rel" unless -d "$chapters_build/$rel";
+    }, $chapters_src);
+}

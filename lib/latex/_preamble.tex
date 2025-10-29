@@ -14,6 +14,8 @@
 % --------------------------
 \usepackage{amsmath,amssymb,amsthm} % Enhancements for mathematics (Theorems, symbols)
 \usepackage{mathtools}              % Extensions to amsmath
+\usepackage{mleftright}
+\mleftright  % remove extra space before and after \left and \right delimiters
 
 % --------------------------
 % NUMBERING OF FIGURES, TABLES, AND EQUATIONS
@@ -36,6 +38,34 @@
 }
 
 % --------------------------
-% SVG IMAGES
+% IMAGES
 % --------------------------
 \usepackage[inkscapeversion=1]{svg} % SVG images with Inkscape
+\usepackage{float}  % [H] option for figure and table placing
+\usepackage{caption}
+\captionsetup{margin=1cm}
+
+\newcommand{\addfigure}[3][]{
+    \begin{figure}[H]  % !h or H
+        \centering
+        \includegraphics[width=#3\textwidth]{res/#2}
+        \caption{#1}
+        \label{fig:#2}
+    \end{figure}
+}
+\newcommand{\addsvg}[3][]{
+    \begin{figure}[H]  % !h or H
+        \centering
+        \includesvg[width=#3\textwidth]{res/svg/#2.svg}
+        \caption{#1}
+        \label{fig:#2}
+    \end{figure}
+}
+\newcommand{\adddrawio}[3][]{
+    \begin{figure}[H]  % !h or H
+        \centering
+        \includesvg[width=#3\textwidth,inkscapelatex=true]{res/drawio/#2.drawio.svg}
+        \caption{#1}
+        \label{fig:#2}
+    \end{figure}
+}
