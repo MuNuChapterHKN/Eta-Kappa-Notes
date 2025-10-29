@@ -105,7 +105,7 @@ Credit for the notes must be attributed to the **authors and editors** of each r
 
 ## 📞 Contact
 
-- **Project manager:** responsabile.publishing@hknpolito.org (italian language is preferred in emails)
+- **Project manager:** responsabile.publishing@hknpolito.org (Italian language is preferred in emails)
 - **GitHub repository:** [MuNuChapterHKN/Eta-Kappa-Notes](https://github.com/MuNuChapterHKN/Eta-Kappa-Notes/)
 
 ## 🧭 About us
