@@ -1,9 +1,6 @@
-%! TEX root = analisi-2.tex
+%! TEX root = main.tex
 
-\documentclass[italian,12pt,toc=sections]{HKNdocument}
-\input{_preamble.tex}
-
-%adeguare formattazione
+\documentclass[italian,toc=sections]{HKNdocument}
 
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\inc}{\subseteq}
@@ -19,24 +16,14 @@
 \newenvironment{esercizio}{\begin{exercise}}{\end{exercise}}
 \newenvironment{corollario}{\begin{corollary}}{\end{corollary}}
 
-\begin{document}
-
 \title{Analisi 2}
 \shorttitle{Analisi 2}
-\date{\today}
 \author{Tommaso Pignatelli}
-
 \docdate{Primo semestre 2024/2025}
 \docversion{1.0}
 
-\frontmatter
-% Create the title page
-\maketitle
-\cclicense
-\tableofcontents
-\clearpage
+\begin{document}
 
-\mainmatter
 \include{chapters/introduzione}
 \include{chapters/calcolo_differenziale}
 \include{chapters/integrali_doppi}
@@ -51,7 +38,4 @@
 \include{chapters/serie_di_potenze}
 \include{chapters/serie_di_fourier}
 
-\backmatter
-
-\input{_postamble.tex}
 \end{document}

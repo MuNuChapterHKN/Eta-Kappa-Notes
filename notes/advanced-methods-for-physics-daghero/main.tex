@@ -1,4 +1,4 @@
-%! TEX root = guide.tex
+%! TEX root = main.tex
 
 % Possible arguments for the HKNdocument class:
 % Language:
@@ -18,22 +18,17 @@
 %
 % Draft mode:
 %   draft: Compiles the document in draft mode (useful for proofreading, dummy images and imported files).
-\documentclass[english,12pt,toc=sections]{HKNdocument}
-\input{_preamble.tex}
-\usepackage[english]{babel}
+\documentclass[english,toc=sections]{HKNdocument}
+
 \usepackage{epstopdf}
 \usepackage{xcolor}
 \usepackage{titlesec}
-\usepackage{mathtools}
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{subfig}
 \usepackage{tabularx}
-\usepackage{float}
-\usepackage{caption}
 \usepackage{cancel}
 \usepackage{lmodern}
-\usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{centernot}
 \usepackage[super]{nth}
@@ -104,24 +99,14 @@
 \scalebox{2}{\raisebox{-0.5ex}{\Stopsign}} This argument was not done during the lecture, but it may be helpful.
 \end{center}}
 
-
-\begin{document}
-% Document metadata
 \title{Advanced methods for physics}
 \shorttitle{Advanced methods}
-% You can include multiple \autor commands to list all autors in the frontpage.
 \author{Simone Odetto}
 \docdate{First semester 2024/2025}
 \docversion{1.0}
 
-\frontmatter
-\maketitle
-\cclicense
-\tableofcontents
-\clearpage
+\begin{document}
 
-\mainmatter
-\setlength{\parindent}{0pt}
 \include{chapters/Introduction_to_analytical_mechanics}
 \include{chapters/Constraints}
 \include{chapters/Lagrange_and_Euler-Lagrange_mechanics}
@@ -136,7 +121,5 @@
 \include{chapters/Representation_of_spacetime}
 \include{chapters/Classical_quantities_in_Special_Relativity}
 \include{chapters/Relativistic_formulation_of_electromagnetism}
-\backmatter
 
-% input{_postamble.tex}
 \end{document}
