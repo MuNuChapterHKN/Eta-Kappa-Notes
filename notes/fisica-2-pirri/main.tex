@@ -18,15 +18,10 @@
 %
 % Draft mode:
 %   draft: Compiles the document in draft mode (useful for proofreading, dummy images and imported files).
-\documentclass[italian,12pt,toc=sections]{HKNdocument}
-\input{_preamble.tex}
-
-\usepackage{parskip}
+\documentclass[italian,toc=sections]{HKNdocument}
 
 % Math
 \usepackage{cancel}  % \cancel
-\usepackage{mleftright}
-\mleftright  % remove extra space before and after \left and \right delimiters
 \usepackage[version=4]{mhchem}  % \ce
 \usepackage{siunitx}
 \sisetup{
@@ -44,35 +39,6 @@
 \crefname{pluralequation}{eqs.\!}{eqs.\!}
 \Crefname{pluralequation}{Le equazioni}{Le equazioni}
 \newcommand{\shorturl}[1]{\href{https://#1}{\texttt{#1}}}
-
-% Images
-\usepackage{float}  % [H] option for figure and table placing
-\newcommand{\addfigure}[3][]{
-    \begin{figure}[H]  % !h or H
-        \centering
-        \includegraphics[width=#3\textwidth]{res/#2}
-        \caption{#1}
-        \label{fig:#2}
-    \end{figure}
-}
-\newcommand{\addsvg}[3][]{
-    \begin{figure}[H]  % !h or H
-        \centering
-        \includesvg[width=#3\textwidth]{res/svg/#2.svg}
-        \caption{#1}
-        \label{fig:#2}
-    \end{figure}
-}
-\newcommand{\adddrawio}[3][]{
-    \begin{figure}[H]  % !h or H
-        \centering
-        \includesvg[width=#3\textwidth,inkscapelatex=true]{res/drawio/#2.drawio.svg}
-        \caption{#1}
-        \label{fig:#2}
-    \end{figure}
-}
-\usepackage{caption}
-\captionsetup{margin=1cm}
 
 %%% Command definitions
 \usepackage{xparse}  % \NewDocumentCommand
@@ -178,25 +144,14 @@
 \newcommand{\redtext}[1]{{\color{red} #1}}
 \newcommand{\important}[1]{\textbf{#1}}
 
-\begin{document}
-% Document metadata
 \title{Appunti di Fisica II per Ingegneria Fisica}
 \shorttitle{Appunti di Fisica II}
-% You can include multiple \autor commands to list all autors in the frontpage.
 \author{Giulio Cosentino}
-
-
 \docdate{Primo semestre 2024/2025}
 \docversion{1.1}
 
-\frontmatter
-% Create the title page
-\maketitle
-\cclicense
-\tableofcontents
-\clearpage
+\begin{document}
 
-\mainmatter
 \include{chapters/teoria/elettrostatica}
 \include{chapters/esercitazioni/ex-elettrostatica}
 \include{chapters/teoria/magnetostatica}
@@ -213,7 +168,4 @@
 \include{chapters/esercitazioni/ex-quantistica}
 \include{chapters/teoria/elettrone_solido}
 
-\backmatter
-
-\input{_postamble.tex}
 \end{document}
