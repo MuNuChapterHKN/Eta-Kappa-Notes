@@ -81,6 +81,7 @@
 \RequirePackage[a4paper,margin=3cm]{geometry}
 % Set margins and page size to A4 with 3cm margins.
 % Modifiable as desired.
+\RequirePackage{parskip}  % Remove paragraph indentation and add space between paragraphs
 
 % --------------------------
 % FANCYHDR FOR CUSTOM HEADERS AND FOOTERS
@@ -256,19 +257,6 @@
   \fi
   \chaptermark{#1}}  % Use the full title for starred chapters
 \makeatother
-
-% Reproduce parskip package behaviour
-\makeatletter
-\newcommand{\setupparskip}{
-    \@ifpackageloaded{parskip}{}{
-        \setlength{\parskip}{.5\baselineskip plus 2pt}  % space between paragraphs
-        \setlength{\parindent}{0pt}  % remove paragraph indentation
-        \BeforeBeginEnvironment{center}{\vspace{-\parskip}}
-        \AfterEndEnvironment{center}{\vspace{-\parskip}}
-    }
-}
-\makeatother
-\newcommand{\cclicense}{\input{cclicense.tex}}
 
 % Redefines \clearpage and \cleardoublepage to remove headers/footers on blank pages.
 \let\originalclearpage\clearpage
