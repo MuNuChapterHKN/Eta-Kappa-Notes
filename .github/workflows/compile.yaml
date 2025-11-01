@@ -2,6 +2,8 @@ name: Compilazione Documenti e Rilascio Automatico
 
 on:
   push:
+    tags:
+      - '*'
 
 jobs:
   compila_e_rilascia:
@@ -17,7 +19,7 @@ jobs:
     
     steps:
       # STEP: Configurazione Ambiente (Installazione di tutti i tool necessari)
-      - name: ⚙️ Configura Ambiente (tar, font cache, Node.js)
+      - name: Configura Ambiente (tar, font cache, Node.js)
         run: |
           # 1. Aggiorna e installa dipendenze: tar (per Typst), fonts-texgyre (font TeX), nodejs/npm (per Release Action)
           apt-get update -y
