@@ -1,0 +1,55 @@
+name: Compilazione Documenti e Rilascio Automatico
+
+on:
+  push:
+
+jobs:
+  compila_e_rilascia:
+    # Usiamo il container Docker basato su Debian/TeX Live
+    container:
+      image: ghcr.io/xu-cheng/texlive-debian:latest
+
+    runs-on: ubuntu-latest
+
+    env:
+      # Token fittizio per 'act', reale su GitHub
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    steps:
+      # STEP: Configurazione Ambiente (Installazione di tutti i tool necessari)
+      - name: ⚙️ Configura Ambiente (tar, font cache, Node.js)
+        run: |
+          # 1. Aggiorna e installa dipendenze: tar (per Typst), fonts-texgyre (font TeX), nodejs/npm (per Release Action)
+          apt-get update -y
+          apt-get install -y fonts-texgyre nodejs npm
+
+      # STEP: Scarica il repository
+      - name: Scarica il repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 
+          token: ${{ secrets.GITHUB_TOKEN }} 
+
+      # STEP: Compila tutti i file .tex (solo nella cartella notes)
+      - name: Compila Documenti LaTeX (.tex)
+        run: |
+          mkdir -p assets/pdf
+          
+          find notes -type f -name "*.tex" | while read file; do
+            echo "Compilazione di $file con LuaLaTeX..."
+            filename=$(basename "$file")
+            output_name="${filename%.tex}.pdf"
+            
+            lualatex -interaction=nonstopmode -output-directory=assets/pdf "$file" || { echo "Errore nella prima compilazione di $file."; continue; }
+            lualatex -interaction=nonstopmode -output-directory=assets/pdf "$file" || { echo "Errore nella seconda compilazione di $file."; continue; }
+
+            echo "PDF salvato in assets/pdf/$output_name"
+          done
+        
+      # STEP: Upload PDF nella Release GitHub
+      - name: Upload PDF come Asset di Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: assets/pdf/*.pdf
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
