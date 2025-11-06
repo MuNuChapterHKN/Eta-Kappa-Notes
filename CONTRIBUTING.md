@@ -6,6 +6,10 @@
 - [✍️ How to create new notes](#-how-to-create-new-notes)
   - [Workspace setup](#workspace-setup)
   - [Notes directory](#notes-directory)
+- [🖼️ Figures](#-figures)
+  - [Useful commands](#useful-commands)
+  - [Rendering LaTeX in Draw.io](#rendering-latex-in-drawio)
+  - [`H` option](#h-option)
 - [🔄 Repository workflow](#-repository-workflow)
   - [Branches](#branches)
   - [Merges](#merges)
@@ -57,18 +61,27 @@ You will organize your notes inside it using the following structure:
 
 - `main.tex` will be the main file that gathers the various chapters.
   See [below](#main-file) for the template.
+
 - `metadata.yaml` is a metadata file you’ll fill in as shown [below](#metadata-file).
+
 - `chapters/` contains the `.tex` files that make up your chapters.
   Give these files appropriate names.
   If necessary, you can further organize them into subfolders.
   See [below](#chapter-files) for the template.
+
 - `res/` and its subfolders are all optional and contain files associated with images you’ll include in your notes.
   In particular:
   - `drawio/` will contain Draw.io images in `.drawio.svg` format.
   - `ggb/` will contain GeoGebra projects (`.ggb` extension).
-  - `py/` will contain Python scripts (`.py` extension).
+  - `py/` will contain Python scripts (`.py` extension), for example for figures made with Matplotlib.
   - `svg/` will contain SVG images, e.g. exported from GeoGebra.
+
   You can freely create other subfolders for different image types (e.g. PNG); just try to maintain good organization.
+
+  If you use figures from external resources, make sure their licenses **allow redistribution under CC BY-NC-ND 4.0**.
+  Any required **attribution** must be included in the figure caption.
+
+  See [below](#-figures) for more help with inserting figures.
 
 When compiling the PDF, a `build/` folder will be automatically generated, and if you’ve used SVG files, also an `svg-inkscape/` folder.
 The output PDF will be located at `build/main.pdf`.
@@ -152,6 +165,74 @@ Chapter files begin with the following line:
 The option in `[ ]` is only needed for chapters with long titles and can be omitted if unnecessary.
 
 After that comes the actual content, divided into `\section`, etc.
+
+## 🖼️ Figures
+
+### Useful commands
+
+The preamble includes three useful commands to insert figures: `\addfigure`, `\addsvg`, and `\adddrawio`.
+
+Their syntax is similar.
+Here are two examples using `\addfigure`.
+
+- To add a certain figure with width `0.6\textwidth`:
+
+  ```latex
+  \addfigure{path/to/figure}{0.6}
+  ```
+
+- To also add a caption 'Caption' (default is empty):
+
+  ```latex
+  \addfigure[Caption]{path/to/figure}{0.6}
+  ```
+
+In particular, `path/to/figure` is as follows
+
+- `\addfigure`: for `res/dir/filename.png`, it is `dir/filename`.
+
+  Use it for figure formats like PNG and JPG, which must be somewhere inside `res/`.
+
+  The file extension (for example, `.png`) is usually unnecessary.
+
+- `\addsvg`: for `res/svg/filename.svg`, it is `filename`.
+
+  Use it for `.svg` files, which must be in `res/svg`.
+
+- `\adddrawio`: for `res/drawio/filename.drawio.svg`, it is `filename`.
+
+  Use it for `.drawio.svg` files, which must be in `res/drawio`.
+
+The command also defines the label `fig:path/to/figure` so that you can later reference to it as, e.g., `\ref{fig:path/to/figure}`.
+
+### Rendering LaTeX in Draw.io
+
+> [!WARNING]
+> The extension we use ([Draw.io Integration](https://marketplace.visualstudio.com/items/?itemName=hediet.vscode-drawio")) is unofficial, and differently from the Draw.io desktop app it doesn't allow to export as `.drawio.pdf`.
+
+- Enable the mathematical typesetting in the Draw.io editor:
+
+  > Draw.io menu (top-left) \> Extras \> Mathematical Typesetting
+
+- Add text
+
+  > Draw.io bar (top) \> Insert (the big +) \> Text
+
+  and **enclose the LaTeX text in `\( ... \)`**. In facts,
+
+  - using `$ ... $` doesn't trigger the mathematical typesetting;
+  - using `$$ ... $$` gives errors (they arise in the `.pdf_tex` files of the `svg-inkscape` folder).
+
+- Make sure that, when the source of the text is shown (e.g., when you are editing it), **it doesn't wrap**, otherwise other errors with the `.pdf_tex` files will occur.
+
+### `H` option
+
+The package `float`, loaded in the preamble, provides the `H` placement option.
+
+It is used with figures and tables and it means that the figure or table must be added *exactly* 'here'.
+The `!h` option may be disregarded is LaTeX chooses so, so using `H` can sometimes provide better spacing in the document.
+
+The three commands above use the `H` option by default.
 
 ## 🔄 Repository workflow
 
