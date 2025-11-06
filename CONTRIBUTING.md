@@ -115,7 +115,7 @@ This is the template for `main.tex`:
 \title{}
 \shorttitle{}
 \author{}
-\docdate{First semester 2025/2026}
+\docdate{Primo semestre 2025/2026}
 \docversion{1.0}
 
 \begin{document}
