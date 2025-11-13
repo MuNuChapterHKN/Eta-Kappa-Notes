@@ -1,4 +1,4 @@
-name: Compilazione Documenti e Rilascio Automatico
+name: Compiling and Releasing the PDFs
 
 on:
   push:
@@ -6,52 +6,43 @@ on:
       - '*'
 
 jobs:
-  compila_e_rilascia:
-    # Usiamo il container Docker basato su Debian/TeX Live
+  compile_and_release:
     container:
-      image: ghcr.io/xu-cheng/texlive-debian:latest
-
+        image: ghcr.io/munuchapterhkn/eta-kappa-notes/texlive:latest
     runs-on: ubuntu-latest
 
     env:
-      # Token fittizio per 'act', reale su GitHub
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    
-    steps:
-      # STEP: Configurazione Ambiente (Installazione di tutti i tool necessari)
-      - name: Configura Ambiente (tar, font cache, Node.js)
-        run: |
-          # 1. Aggiorna e installa dipendenze: tar (per Typst), fonts-texgyre (font TeX), nodejs/npm (per Release Action)
-          apt-get update -y
-          apt-get install -y fonts-texgyre nodejs npm
 
-      # STEP: Scarica il repository
+    steps:
       - name: Scarica il repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 
-          token: ${{ secrets.GITHUB_TOKEN }} 
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      # STEP: Compila tutti i file .tex (solo nella cartella notes)
       - name: Compila Documenti LaTeX (.tex)
+        env:
+            EKN_ROOT_DIR: ${{ github.workspace }}
         run: |
-          mkdir -p assets/pdf
-          
-          find notes -type f -name "*.tex" | while read file; do
-            echo "Compilazione di $file con LuaLaTeX..."
-            filename=$(basename "$file")
-            output_name="${filename%.tex}.pdf"
-            
-            lualatex -interaction=nonstopmode -output-directory=assets/pdf "$file" || { echo "Errore nella prima compilazione di $file."; continue; }
-            lualatex -interaction=nonstopmode -output-directory=assets/pdf "$file" || { echo "Errore nella seconda compilazione di $file."; continue; }
+            for notes in $(find . -type f -name metadata.yaml -exec grep -lZ -E "^status:[[:space:]]*'release'[[:space:]]*$" {} + \
+            | xargs -0 -n1 dirname \
+            | xargs -n1 basename \
+            | sort -u); do
+                make notes $notes;
+            done;
 
-            echo "PDF salvato in assets/pdf/$output_name"
-          done
-        
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: notes-pdf
+          path: |
+            build
+            
       # STEP: Upload PDF nella Release GitHub
       - name: Upload PDF come Asset di Release
         uses: softprops/action-gh-release@v1
         with:
-          files: assets/pdf/*.pdf
+          files: build/*.pdf
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
