@@ -1,0 +1,28 @@
+use File::Find;
+
+my $root = $ENV{EKN_ROOT_DIR};
+$root = '/workdir' unless defined $root && length $root;
+$root =~ s{/+$}{};
+
+$pdf_mode = 1;
+$out_dir = 'build';
+$shell_escape = 1;
+$synctex = 1;
+$pdflatex = 'pdflatex -shell-escape -synctex=1 -interaction=nonstopmode -file-line-error %O %S';
+
+ensure_path('TEXINPUTS', "$root/lib/latex/");
+ensure_path('TEXINPUTS', "$root/resources/imgs/");
+
+my $chapters_src = abs_path('chapters');
+my $build = abs_path('build');
+my $chapters_build = "$build/chapters";
+
+mkdir $build unless -d $build;
+mkdir $chapters_build unless -d $chapters_build;
+
+find(sub {
+    return unless -d;  # only directories
+    my $rel = File::Spec->abs2rel($File::Find::name, $chapters_src);
+    return if $rel eq '.';  # skip root
+    mkdir "$chapters_build/$rel" unless -d "$chapters_build/$rel";
+}, $chapters_src);
