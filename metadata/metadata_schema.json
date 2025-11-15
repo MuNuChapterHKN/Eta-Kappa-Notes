@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$defs": {
+    "name": {
+      "type": "string",
+      "pattern": "^[A-Za-zÀ-ÖØ-öø-ÿ' -]+, [A-Za-zÀ-ÖØ-öø-ÿ' -]+$"
+    }
+  },
+  "type": "object",
+  "required": [
+    "course_code",
+    "course_name",
+    "teacher",
+    "start_academic_year",
+    "program_level",
+    "program",
+    "language",
+    "formats",
+    "authors",
+    "editors",
+    "status"
+  ],
+  "properties": {
+    "course_code": {
+      "type": "string",
+      "pattern": "^[A-Z0-9]{7}$"
+    },
+    "course_name": { "type": "string" },
+    "teacher": { "$ref": "#/$defs/name" },
+    "start_academic_year": {
+      "type": "integer",
+      "minimum": 1950,
+      "maximum": 2100
+    },
+    "program_level": {
+      "type": "string",
+      "enum": ["bachelor", "master"]
+    },
+    "program": { "type": "string" },
+    "language": {
+      "type": "string",
+      "enum": ["ita", "eng"]
+    },
+    "formats": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["latex", "typst", "markdown"]
+      }
+    },
+    "authors": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/name" }
+    },
+    "editors": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/name" }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["released", "unreleased", "testing"]
+    }
+  },
+  "additionalProperties": false
+}
