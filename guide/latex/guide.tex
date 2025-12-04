@@ -18,29 +18,17 @@
 %
 % Draft mode:
 %   draft: Compiles the document in draft mode (useful for proofreading, dummy images and imported files).
-\documentclass[english,12pt,toc=sections]{HKNdocument}
-\input{_preamble.tex}
+\documentclass[english,toc=sections]{HKNdocument}
 
-
-\begin{document}
-% Document metadata
 \title{Guide to conventions and packages for the HKNotes project}
 \shorttitle{HKNotes Guide}
-% You can include multiple \autor commands to list all autors in the frontpage.
 \author{Erik Scolaro}
-
-% You can include multiple \editor commands to list all editors in the frontpage.
-
+\editor{Giulio Cosentino}
 \docdate{\today}
 \docversion{1.1}
 
-\frontmatter
-\maketitle
-\cclicense
-\tableofcontents
-\clearpage
+\begin{document}
 
-\mainmatter
 \include{chapters/introduction}
 \include{chapters/graphs}
 \include{chapters/math}
@@ -48,7 +36,4 @@
 \include{chapters/boxes}
 \include{chapters/tables}
 
-\backmatter
-
-% input{_postamble.tex}
 \end{document}
