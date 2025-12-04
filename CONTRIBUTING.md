@@ -78,9 +78,6 @@ You will organize your notes inside it using the following structure:
 
   You can freely create other subfolders for different image types (e.g. PNG); just try to maintain good organization.
 
-  If you use figures from external resources, make sure their licenses **allow redistribution under CC BY-NC-ND 4.0**.
-  Any required **attribution** must be included in the figure caption.
-
   See [below](#️-figures) for more help with inserting figures.
 
 When compiling the PDF, a `build/` folder will be automatically generated, and if you’ve used SVG files, also an `svg-inkscape/` folder.
@@ -167,6 +164,16 @@ The option in `[ ]` is only needed for chapters with long titles and can be omit
 After that comes the actual content, divided into `\section`, etc.
 
 ## 🖼️ Figures
+
+### Copyright
+
+Besides self-generated figures, you can also use figures from external resources in the following cases:
+
+- their licenses **allow redistribution under CC BY-NC-ND 4.0**, or
+
+- they are **low quality versions of figures in copyrighted material** (see [License](README.md#️-license)).
+
+In both cases, it is mandatory that any required **attribution** is included in the figure captions.
 
 ### Useful commands
 
