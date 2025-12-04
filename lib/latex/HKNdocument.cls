@@ -102,7 +102,7 @@
 \newcommand{\doclogofrontpage}{hkn_logo.pdf}      % Contains logo big path
 \newcommand{\doclogoupperpage}{hkn_ideogramma.pdf}    % Contains logo big path
 \newcommand{\doclicense}{ccbyncnd.png}  % Contains license logo path
-\newcommand{\DDorganization}{IEEE - MuNu Chapter}
+\newcommand{\DDorganization}{IEEE-HKN -- Mu Nu Chapter}
 
 % Preserve old commands for title and author
 \let\oldtitle\title
