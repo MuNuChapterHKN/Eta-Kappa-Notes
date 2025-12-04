@@ -3,10 +3,10 @@
 **Thank you for considering contributing to this repository!**
 
 - [🤝 Ways of contributing](#-ways-of-contributing)
-- [✍️ How to create new notes](#-how-to-create-new-notes)
+- [✍️ How to create new notes](#️-how-to-create-new-notes)
   - [Workspace setup](#workspace-setup)
   - [Notes directory](#notes-directory)
-- [🖼️ Figures](#-figures)
+- [🖼️ Figures](#️-figures)
   - [Useful commands](#useful-commands)
   - [Rendering LaTeX in Draw.io](#rendering-latex-in-drawio)
   - [`H` option](#h-option)
@@ -18,7 +18,7 @@
 
 ## 🤝 Ways of contributing
 
-✍️ **Create new notes**: see the [section below](#-how-to-create-new-notes).
+✍️ **Create new notes**: see the [section below](#️-how-to-create-new-notes).
 
 🔧 **Improve existing ones**: fork the repository and create a pull request.
 
@@ -81,7 +81,7 @@ You will organize your notes inside it using the following structure:
   If you use figures from external resources, make sure their licenses **allow redistribution under CC BY-NC-ND 4.0**.
   Any required **attribution** must be included in the figure caption.
 
-  See [below](#-figures) for more help with inserting figures.
+  See [below](#️-figures) for more help with inserting figures.
 
 When compiling the PDF, a `build/` folder will be automatically generated, and if you’ve used SVG files, also an `svg-inkscape/` folder.
 The output PDF will be located at `build/main.pdf`.

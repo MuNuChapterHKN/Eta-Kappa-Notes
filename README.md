@@ -9,7 +9,7 @@
 - [🤝 Contributing](#-contributing)
 - [📚 Project Structure](#-project-structure)
 - [🚀 Installation and compilation](#-installation-and-compilation)
-- [⚖️ License](#-license)
+- [⚖️ License](#️-license)
 - [📞 Contact](#-contact)
 - [🧭 About us](#-about-us)
 
