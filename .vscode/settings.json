@@ -17,6 +17,9 @@
   // LaTeX
   "latex-workshop.latex.outDir": "%DIR%/build/",
   "latex-workshop.latex.rootFile.useSubFile": true,
+  "latex-workshop.message.latexlog.exclude": [
+      "Infinite glue shrinkage found in box being split"
+  ],  // TeX Live 2025 triggers this 'ignored error' when a longtable is split across pages.
   "latex-workshop.latex.tools": [
     {
       "name": "latexmk",
