@@ -1,0 +1,12 @@
+course_code: "03RTSLX"
+course_name: "Elettronica di base"
+teacher: "Randazzo, Vincenzo"
+start_academic_year: 2025
+program_level: "bachelor"
+program: "Electrical Engineering"
+language: "ita"
+formats:
+  - "latex"
+authors:
+  - "Mattei, Tiziano"
+editors: []
