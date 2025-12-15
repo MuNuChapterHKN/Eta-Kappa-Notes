@@ -1,0 +1,242 @@
+\chapter[Interazione con la materia]{Interazione tra materia e radiazione}
+\section{Particelle pesanti cariche}
+Per particelle pesanti cariche si intende generalmente protoni, ioni e particelle alfa. Queste particelle interagiscono principalmente con gli elettroni del mezzo attraversato, perdendo energia principalmente per ionizzazione (scattering Coulomb) ed eccitazione degli atomi del mezzo stesso. La perdita di energia da parte di queste particelle presenta le seguenti caratteristiche principali:
+\begin{itemize}
+    \item Sono necessarie numerose interazioni per fermare completamente la particella, in quanto ogni interazione comporta una perdita di energia relativamente piccola rispetto all'energia totale della particella stessa
+    \item La traiettoria della particella è quasi rettilinea
+    \item La perdita di energia avviene in maniera graduale e continua, ovvero esiste un \textbf{range di propagazione}
+    \item Nel mezzo avvengono numerose ionizzazioni ed eccitazioni, che possono essere sfruttate per la rivelazione della particella stessa
+\end{itemize}
+La perdita di energia per unità di spessore del mezzo attraversato, detta \textbf{stopping power}, è descritta dalla formula di Bethe-Bloch:
+\begin{equation}
+    -\dv{E}{x} = \brackets{\dfrac{ze^2}{4\pi\varepsilon_0}}^2 \dfrac{4\pi Z \rho N_A}{A m_e v^2}\sqbr{\ln\brackets{\dfrac{2 m_e v^2}{I}} - \ln\brackets{1 - \beta^2} - \beta^2}
+\end{equation}
+Dove $z$ è la carica della particella incidente in unità di carica elementare, $Z$ è il numero atomico del mezzo attraversato, $A$ è il numero di massa del mezzo attraversato, $\rho$ è la densità del mezzo attraversato, $N_A$ è il numero di Avogadro, $m_e$ è la massa dell'elettrone, $v$ è la velocità della particella incidente, $\beta = v/c$ e $I$ è l'energia media di ionizzazione del mezzo attraversato.
+
+\addsvg[Formula di Bethe-Bloch in funzione di $\beta\gamma$]{Bethe_Bloch}{0.9}
+
+La formula di Bethe-Bloch è valida per particelle con energie comprese tra qualche MeV e qualche GeV. Per energie inferiori a qualche MeV, la perdita di energia non segue più la legge di Bethe-Bloch a causa di effetti quantistici e della discreta natura delle interazioni. Per energie superiori a qualche GeV, entrano in gioco altri processi di interazione come la produzione di particelle secondarie e l'interazione nucleare.\\
+Per un buon range di energie $\dd{E}/\dd{x}$ può essere approssimata come:
+\begin{equation}
+    -\dv{E}{x} \approx \dfrac{C}{E^{k}}
+\end{equation}
+Dove $C$ e $k$ sono costanti dipendenti dal mezzo attraversato e dalla particella incidente. Integrando questa espressione si ottiene il range di propagazione $R$ della particella:
+\begin{equation}
+    R = \int_0^{R} \diff{x} = \int_{E_0}^{0} \dfrac{\diff{E}}{-\dv{E}{x}} = \dfrac{E_0^{k+1}}{C(k+1)}
+\end{equation}
+Dove $E_0$ è l'energia iniziale della particella incidente. Otteniamo dunque che $R \propto E_0^{n}$ con $n = k+1$. Per particelle pesanti cariche, $n$ è tipicamente compreso tra 1.5 e 1.8.\\
+Un'altra caratteristica importante della perdita di energia delle particelle pesanti cariche è la presenza del \textbf{picco di Bragg}, che si verifica quando la particella si avvicina alla fine del suo range di propagazione. In questo punto, la perdita di energia per unità di spessore aumenta significativamente, portando a un picco nella distribuzione della dose rilasciata nel mezzo attraversato:
+
+\addtikz[Picco di Bragg]{
+    % Curva
+    \draw[thick,supportDarkBlue] (0,3) .. controls (4,3.3) and (5,3.5) .. (5.65,4.2) .. controls (6.3,5) and (6.4,0.3) .. (6.5,0) node[below right] {\textcolor{black}{R}};
+    % Axis
+    \draw[-stealth,thick] (0,0) -- (8,0) node[midway,below,yshift=-15] {Distance travelled (cm)};
+    \draw[-stealth,thick] (0,0) -- (0,6) node[midway,left] {Ionization density};
+    % Labels
+    \node at (5.8,5.2) {\textbf{Bragg Peak}};
+    \foreach \x / \text in {0/0.0,2.5/1.0,5/2.0,7.5/3.0}{
+        \draw[dashed,thick] (\x,0.1) -- (\x,0)node[below]{\text};
+    }
+}{1}{bragg_peak}
+
+Questo fenomeno è particolarmente rilevante in applicazioni mediche come la terapia con protoni, dove si sfrutta il picco di Bragg per concentrare la dose di radiazione sul tumore, minimizzando i danni ai tessuti sani circostanti.
+\subsection{Range}
+Il \textbf{range} di una particella è la distanza media che essa percorre in un mezzo prima di fermarsi completamente. Per particelle pesanti cariche, il range può essere calcolato integrando la perdita di energia lungo il percorso della particella:
+\begin{equation}
+    R = \int_{K_i}^{0} \dv{x}{K_p}\dd{K_p} = \int_{0}^{K_i} \dfrac{1}{S}\dd{K_p}
+\end{equation}
+Si trova che $S \sim Z_p^2/K_p$, da cui:
+\begin{equation}
+    R \sim \dfrac{K_i^2}{2 Z_p^2}
+\end{equation}
+Tipicamente l'energia degli ioni è espressa in MeV/nucleone (MeV/u), inoltre possiamo modellizzare qualsiasi tessuto come uno strato di acqua di spessore opportuno (solitamente tra 3 e 30 cm). In questo modo, il range di un ione in un tessuto può essere approssimato come il range dello stesso ione in acqua in unità cm H$_2$O.
+
+\addtikz[Range in H$_2$O per diversi ioni]{
+    % Curves
+    \draw[thick] plot[domain=0:5, samples=100] (\x, {0.16*(\x)^2});
+    \draw[thick,red] plot[domain=0:7, samples=100] (\x, {0.08*(\x)^2});
+    \draw[thick,blue] plot[domain=0:7, samples=100] (\x, {0.055*(\x)^2});
+    \draw[thick,green] plot[domain=0:7, samples=100] (\x, {0.04*(\x)^2});
+    \draw[-stealth,thick] (0,0) -- (7,0) node[midway,below] {E (MeV/u)};
+    \draw[-stealth,thick] (0,0) -- (0,4) node[midway,above,rotate=90] {R (cm H$_2$O)};
+    % Labels
+    \node at (3.5,2.5) {\textcolor{black}{$p,\alpha$}};
+    \node at (5,2.5) {\textcolor{red}{$\atom{C}{12}{}$}};
+    \node at (6,2.3) {\textcolor{blue}{$\atom{O}{16}{}$}};
+    \node at (6.5,1.2) {\textcolor{green}{$\atom{Ne}{20}{}$}};
+    \draw[dashed,thick] (0,2) -- (7,2) node[right] {Max profondità tumorale};
+}{1.2}{ions_range_h2o}
+
+L'adroterapia sfrutta questi ioni pesanti carichi per trattare tumori profondi, in quanto il loro range può essere controllato con precisione in base all'energia iniziale della particella. In particolare, i vantaggi dell'adroterapia rispetto alla radioterapia convenzionale con fotoni includono:
+\begin{itemize}
+    \item Maggiore precisione nel deposito della dose, grazie al picco di Bragg
+    \item Minore dose ai tessuti sani circostanti
+    \item Possibilità di trattare tumori resistenti alla radioterapia convenzionale (radioresistenti)
+    \item Ioni C e O, a parità di dose hanno maggiore efficacia su tumori poco ossigenati
+\end{itemize}
+Un centro di eccellenza per l'adroterapia in Italia è il CNAO (Centro Nazionale di Adroterapia Oncologica) di Pavia, che utilizza protoni e ioni di carbonio per il trattamento di tumori.
+
+\addfigure[Sincrotrone del CNAO. Fonte: \href{https://fondazionecnao.it/adroterapia/sincrotrone}{CNAO}]{jpg/CNAO}{0.8}
+
+\section{Elettroni}
+Anche gli elettroni possono essere utilizzati in radioterapia. A fissata energia iniziale, gli elettroni perdono meno energia durante l'attraversamento del mezzo rispetto alle particelle pesanti cariche, e presentano un range di propagazione più lungo. Tuttavia, gli elettroni subiscono una maggiore diffusione angolare (traiettoria non rettilinea) a causa della loro bassa massa, il che comporta una minore precisione nel deposito della dose rispetto alle particelle pesanti cariche. Per questo motivo, gli elettroni sono generalmente utilizzati per trattare tumori superficiali o situati vicino alla superficie del corpo, dove la precisione del deposito della dose non è critica. Inoltre, gli elettroni possono essere generati facilmente in acceleratori lineari (linac) utilizzati in radioterapia convenzionale.
+
+\addfigure[Potere di arresto di elettroni e protoni in acqua. Fonte: \href{https://www.researchgate.net/publication/257340500_Alloni_et_al_Early_Events_Leading_to_Radiation-Induced_Biological_Effects_In_Anders_Brahmeeditor-in-chief_Comprehensive_Biomedical_Physics_Vol_7_AmsterdamElsevier_2014_p_1-22_In_Press}{ResearchGate}]{png/Stopping_power_electron_proton}{0.7}
+
+\section{Raggi X e gamma}
+I raggi gamma e i raggi X sono radiazioni elettromagnetiche ad alta energia che interagiscono con la materia principalmente attraverso tre processi indipendenti: effetto fotoelettrico, effetto Compton e produzione di coppie. La probabilità di ciascun processo dipende dall'energia della radiazione incidente e dal numero atomico del mezzo attraversato.\\
+Questi processi seguono una legge di attenuazione esponenziale della radiazione incidente:
+\begin{equation}
+    -\dfrac{\dd{I}}{I} = \mu \dd{x}
+\end{equation}
+Dove $I$ è l'intensità della radiazione, $\mu$ è il coefficiente di attenuazione lineare e $x$ è lo spessore del mezzo attraversato. Integrando questa equazione si ottiene:
+\begin{equation}
+    I(x) = I_0 e^{-\mu x}
+\end{equation}
+Poichè i 3 fenomeni sono indipendenti troviamo 3 diversi $\mu$, che possono essere sommati linearmente:
+\begin{equation}
+    \dfrac{1}{\ell} = \mu = \mu_{\text{C}} + \mu_{\text{E}} + \mu_{\text{P}}
+\end{equation}
+Dove $\mu_{\text{C}}$ è il coefficiente di attenuazione per effetto Compton, $\mu_{\text{E}}$ è il coefficiente di attenuazione per effetto fotoelettrico e $\mu_{\text{P}}$ è il coefficiente di attenuazione per produzione di coppie. Otteniamo dunque il seguente grafico:
+
+\addsvg[Intensità dei raggi gamma in funzione dell'energia]{Intensity_gamma_rays}{0.8}
+
+In realtà $\mu$ non è costante, ma dipende dall'energia della radiazione incidente e dal mezzo attraversato. Per basse energie domina l'effetto fotoelettrico, per energie intermedie domina l'effetto Compton, mentre per alte energie domina la produzione di coppie:
+
+\addfigure[$\mu$ totale per raggi gamma]{png/Attenuation_coefficients}{0.8}
+
+Di particolare interesse è il meccanismo di generazione di coppie elettrone-positrone, infatti, secondo la teoria di Dirac, il vuoto quantistico è popolato da coppie virtuali di particelle-antiparticelle che possono essere rese reali se viene fornita loro energia sufficiente. Quando un fotone con energia superiore a $\qty{1.022}{\mega\electronvolt}$ interagisce con il campo elettromagnetico di un nucleo, può creare una coppia reale di elettrone e positrone, rispettando la conservazione dell'energia e della quantità di moto, ovvero:
+\begin{equation}
+    E_{\gamma} = h\nu = E_{e^-} + E_{e^+} + 2m_0c^2
+\end{equation}
+Dove $E_{\gamma}$ è l'energia del fotone incidente, $E_{e^-}$ e $E_{e^+}$ sono le energie cinetiche dell'elettrone e del positrone prodotti, e $m_0c^2$ è l'energia di riposo di ciascuna particella. La presenza del nucleo è fondamentale per conservare la quantità di moto durante il processo di creazione della coppia.
+\section{Neutroni}
+I neutroni sono particelle neutre che interagiscono con la materia principalmente attraverso interazioni nucleari. A differenza delle particelle cariche, i neutroni non subiscono interazioni elettromagnetiche, il che li rende particolarmente penetranti nei materiali. Come i raggi gamma, i neutroni seguono una legge di attenuazione esponenziale della radiazione incidente:
+\begin{equation}
+    I(x) = I_0 e^{-\Sigma x}
+\end{equation}
+Dove $I$ è l'intensità della radiazione neutronica, $\Sigma$ è il coefficiente di attenuazione macroscopia e $x$ è lo spessore del mezzo attraversato. Il coefficiente di attenuazione macroscopia $\Sigma$ è definito come:
+\begin{equation}
+    \Sigma = \dfrac{1}{\lambda} = \dfrac{1}{\lambda_{\text{s}}} + \dfrac{1}{\lambda_{\text{a}}}
+\end{equation}
+Dove $\lambda$ è il cammino libero medio totale, $\lambda_{\text{s}}$ è il cammino libero medio per scattering e $\lambda_{\text{a}}$ è il cammino libero medio per assorbimento. A differenza delle particelle cariche, i neutroni possono essere rallentati (moderati) attraverso collisioni elastiche con nuclei leggeri, come l'idrogeno presente nell'acqua o nel polietilene. Questo processo di moderazione è fondamentale in molte applicazioni, come nei reattori nucleari, dove i neutroni termici (a bassa energia) sono più efficaci nel sostenere la reazione a catena di fissione nucleare.
+\section{Rivelatori di particelle}
+I rivelatori di particelle sono dispositivi utilizzati per rilevare e misurare le proprietà delle particelle subatomiche. Questi dispositivi funzionano mediante un meccanismo similare alla vista umana. Normalmente possiamo osservare gli oggetti grazie alla luce che essi riflettono, la quale entra nei nostri occhi e viene convertita in segnali elettrici che il cervello interpreta come immagini. Allo stesso modo, i rivelatori di particelle sfruttano l'interazione delle particelle con un mezzo sensibile per produrre segnali elettrici che possono essere analizzati.\\
+Un esempio di rivelatore è il \textbf{rivelatore ATLAS} dell'LHC (Large Hadron Collider) al CERN. Questo rivelatore utilizza una combinazione di tecnologie, tra cui camere a deriva, calorimetri e rivelatori a pixel, per tracciare le traiettorie delle particelle prodotte nelle collisioni ad alta energia. La struttura di questo rivelatore è a strati, dove gli strati più interni hanno un'alta risoluzione spaziale, per tracciare le particelle vicine al punto di collisione, mentre gli strati esterni sono progettati per coprire un'ampia area.
+
+\addfigure[Rivelatore ATLAS (\textbf{A} \textbf{T}oroidal \textbf{L}HC \textbf{A}pparatu\textbf{S}). Fonte: \href{https://www.lhc-closer.es/taking_a_closer_look_at_lhc/0.atlas}{LHC}]{jpg/ATLAS}{0.6}
+
+Parte fondamentale del funzionamento dei rivelatori di particelle è dovuta all'enorme capacità di calcolo disponibile. Infatti, i filtri software permettono di selezionare gli eventi più interessanti da analizzare, riducendo la quantità di dati da elaborare e memorizzare da 1 Pb/s ad 1 Pb/y. Questo è reso possibile grazie al sistema GRID, ovvero una rete di computer distribuiti in tutto il mondo che lavorano insieme per elaborare e analizzare i dati raccolti dai rivelatori.
+
+\addfigure[Nodi principali del sistema GRID. Fonte: \href{https://www.lhc-closer.es/taking_a_closer_look_at_lhc/0.lhc_grid}{LHC}]{png/GRID_LHC}{0.6}
+
+\section{Rivelatori a gas}
+I rivelatori a gas sono dispositivi che utilizzano un gas ionizzabile come mezzo sensibile per rilevare particelle cariche. Quando una particella carica attraversa il gas, essa ionizza le molecole del gas, creando coppie di ioni ed elettroni liberi. Questi ioni ed elettroni vengono poi raccolti da elettrodi applicando un campo elettrico, generando un segnale elettrico che può essere misurato e analizzato.\\
+Analizziamo ora alcune categorie principali di rivelatori a gas:
+\begin{itemize}
+    \item \textbf{Camere a ionizzazione}
+    \item \textbf{Contatore proporzionale}
+    \item \textbf{Contatore Geiger-Müller}
+\end{itemize}
+\subsection{Camere a ionizzazione}
+Le camere a ionizzazione sono rivelatori a gas che operano in un regime di bassa tensione, in cui il campo elettrico applicato è sufficiente per raccogliere gli ioni ed elettroni prodotti dall'ionizzazione del gas, ma non abbastanza forte da causare ulteriori ionizzazioni. Possiamo schematizzare una camera a ionizzazione con il segunete diagramma:
+
+\addtikz[Camera a ionizzazione]{
+    \draw[thick] (-2,0) rectangle (3,5);
+    \fill[white] (-2,2.5) circle (0.5);
+    \draw[thick] (-2,2.5) circle (0.5);
+    \node[below] at (-2,3) {+};
+    \node[above] at (-2,2) {\normalsize \_};
+    \fill[white] (1.5,1.5) rectangle (4.5,3.5);
+    \draw[thick] (1.5,1.5) -- (4.5,1.5) (4.5,3.5) -- (1.5,3.5);
+    \draw[-stealth,thick] (2,2)-- (4.5,2);
+    \draw[-stealth,thick] (2,2.5)node[left] {Ionizing particles} -- (4.5,2.5);
+    \draw[-stealth,thick] (2,3) -- (4.5,3);
+    \fill[white] (3,4.25) circle (0.5);
+    \draw[thick] (3,4.25) circle (0.5);
+    \node at (4.25,4.25) {Meter};
+    \node at (3,4.25) {A};
+    \fill[white] (0,4.8) rectangle (1.2,5.2);
+    \draw[thick] (0,5) -- (0.1,5.2) -- (0.3,4.8) -- (0.5,5.2) -- (0.7,4.8) -- (0.9,5.2) -- (1.1,4.8) -- (1.2,5);
+    \node at (0.6,5.4) {R};
+}{1}{ion_chamber}
+
+L'energia media per ionizzare un gas dipende dal tipo di gas utilizzato, ma è tipicamente dell'ordine di qualche decina di eV ($\approx \qty{30}{\electronvolt}$ eccetto per He). Ad esempio, per l'aria, l'energia media per ionizzazione è di circa $\qty{34}{\electronvolt}$. Se una particella carica attraversa la camera a ionizzazione rilasciando $\qty{1}{\giga\electronvolt\per\second}$, la corrente media sarà:
+\begin{equation}
+    I = \dfrac{\qty{1e9}{\electronvolt\per\second} \cdot \qty{1.6e-19}{\coulomb}\,\text{per ion}}{\qty{34}{\electronvolt}\,\text{per ion}} \approx \qty{5e-12}{\ampere}
+\end{equation}
+Questa corrente è molto bassa, quindi le camere a ionizzazione sono generalmente utilizzate per misurare radiazioni ad alta intensità o per monitorare la dose di radiazione in applicazioni mediche.
+\subsection{Contatori proporzionali}
+I contatori proporzionali sono rivelatori a gas che operano in un regime di tensione più elevata rispetto alle camere a ionizzazione. In questo regime, il campo elettrico applicato è sufficientemente forte da accelerare gli elettroni prodotti dall'ionizzazione del gas a energie tali da causare ulteriori ionizzazioni attraverso un processo chiamato \textbf{avalanche di Townsend}. Questo processo porta a una moltiplicazione del numero di elettroni raccolti, aumentando così il segnale elettrico generato dal rivelatore. Inoltre, se il campo elettrico non è eccessivamente elevato viene mantenuta una proporzionalità diretta tra la corrente misurata e gli eventi di ionizzazione iniziale.\\
+Andando ad integrare la corrente generata nel contatore proporzionale otteniamo la carica totale raccolta, che ci fornisce informazioni sull'energia della particella incidente. Questo rende i contatori proporzionali particolarmente utili per la spettroscopia delle radiazioni, in quanto permettono di misurare l'energia delle particelle cariche con una buona risoluzione energetica.\\
+Un esempio di contatore proporzionale è il seguente:
+
+\addtikz[Contatore proporzionale]{
+    \draw[thick] (1,1) ellipse (0.5 and 1);
+    \draw[thick] (5,1) ellipse (0.5 and 1);
+    \fill[white] (4,0) rectangle (5,2);
+    \draw[thick] (1,2) -- (5,2);
+    \draw[thick] (1,0) -- (5,0);
+    \draw[thick] (1,1) ellipse (0.125 and 0.25);
+    \draw[thick] (6,1) ellipse (0.125 and 0.25);
+    \fill[white] (5.75,0) rectangle (6,2);
+    \draw[thick] (1,1.25) -- (1.5,1.25)
+    (1,0.75) -- (1.5,0.75)
+    (5.5,1.25) -- (6,1.25)
+    (5.5,0.75) -- (6,0.75);
+    \draw[thick,dashed] (1.5,1.25) -- (5.5,1.25)
+    (1.5,0.75) -- (5.5,0.75);
+    \draw[-stealth,thick] (2,3.5)node[above] {Cathode} -- (2,2.25);
+    \draw[-stealth,thick] (-0.25,-1)node[below] {Central wire anode} -- (1,0.5);
+    \draw[stealth-stealth,thick] (0,1) -- (0,2) node[midway,left] {$b$};
+    \draw[dashed,thick] (0,1) -- (1,1)
+    (0,2) -- (1,2);
+    \draw[-stealth,thick] (6.125,1) -- (7.5,1) node[right] {Output signal};
+    \draw[thick] (7,1) -- (7,3)node[above]{$+V$};
+    \fill[white] (6.75,1.25) rectangle (7.25,2.25);
+    \draw[thick] (6.75,1.25) rectangle (7.25,2.25);
+    \node at (7,1.75) {R};
+    \draw[thick] (5,0) -- (7,0) node[below]{ground};
+
+}{1}{proportional_counter}
+
+\subsection{Contatore Geiger}
+I contatori Geiger-Müller sono rivelatori a gas che operano in un regime di tensione ancora più elevata rispetto ai contatori proporzionali. In questo regime, il campo elettrico applicato è così forte che ogni ionizzazione iniziale causata dalla particella incidente porta a una scarica completa del gas all'interno del rivelatore. Questo significa che il segnale generato dal contatore Geiger-Müller è indipendente dall'energia della particella incidente, rendendo questo tipo di rivelatore inadatto per la spettroscopia delle radiazioni.\\
+Ciò che misura un contatore Geiger-Müller è semplicemente il numero di particelle incidenti, senza fornire informazioni sull'energia delle stesse. Tuttavia, i contatori Geiger-Müller sono molto sensibili e possono rilevare basse intensità di radiazione, rendendoli utili per applicazioni come il monitoraggio della radioattività ambientale e la rilevazione di radiazioni in ambito medico.\\
+Per riassumere possiamo individuare alcune regioni di funzionamento dei rivelatori a gas in funzione della tensione applicata:
+\begin{itemize}
+    \item \textbf{Regione di ionizzazione}: bassa tensione, raccolta diretta degli ioni ed elettroni prodotti dall'ionizzazione del gas
+    \item \textbf{Regione proporzionale}: tensione intermedia, moltiplicazione degli elettroni attraverso l'avalanche di Townsend, segnale proporzionale all'energia della particella incidente
+    \item \textbf{Proporzionalità limitata}: tensione più elevata, inizia la saturazione del segnale a causa della ionizzazione secondaria
+    \item \textbf{Regione Geiger-Müller}: alta tensione, scarica completa del gas, segnale indipendente dall'energia della particella incidente
+\end{itemize}
+
+\subsection{Camera a nebbia}
+Un'altro tipo di rivelatore di particelle è la camera a nebbia, che sfrutta la condensazione di vapore sovrassaturo per visualizzare le traiettorie delle particelle cariche. Quando una particella carica attraversa il vapore sovrassaturo, essa ionizza le molecole del vapore lungo il suo percorso, creando nuclei di condensazione attorno ai quali il vapore si condensa, formando piccole goccioline visibili. Queste goccioline formano una scia che traccia la traiettoria della particella, permettendo agli scienziati di studiare il comportamento delle particelle subatomiche.\\
+Un esempio famoso di scoperta effettuata con una camera a nebbia è la scoperta del positrone da parte di Carl Anderson nel 1932. Anderson osservò una traccia curva in una camera a nebbia posta in un campo magnetico, che indicava la presenza di una particella con carica positiva e massa simile a quella dell'elettrone, confermando così l'esistenza dell'antiparticella dell'elettrone prevista dalla teoria di Dirac.
+
+\addfigure[Traccia di un positrone in una camera a nebbia. Fonte: \href{https://en.wikipedia.org/wiki/Positron}{Wikipedia}]{png/PositronDiscovery}{0.5}
+
+\subsection{Camera a bolle}
+Nel tempo le camere a nebbia sono state soppiantate da una nuova tecnologia, ovvero le camere a bolle. Questi rivelatori utilizzano un liquido superriscaldato che, quando viene attraversato da una particella carica, forma piccole bolle di vapore lungo la traiettoria della particella. Le bolle sono visibili e possono essere fotografate, permettendo agli scienziati di analizzare le traiettorie delle particelle con maggiore precisione rispetto alle camere a nebbia.\\
+Lo schema di una camera a bolle è il seguente:
+
+\addfigure[Camera a bolle]{drawio-pdf/Camera_a_bolle.drawio}{0.6}
+
+Un'importante scoperta effettuata con le camere a bolle è stata la scoperta della particella $\Omega^-$ nel 1964. Questa particella, prevista teoricamente dal modello a quark, fu osservata in una camera a bolle durante esperimenti condotti al Brookhaven National Laboratory. La scoperta del $\Omega^-$ fornì una conferma significativa del modello a quark (modello standard) e contribuì alla comprensione della struttura interna dei barioni.
+
+\section{Rilevatori a scintillazione}
+I rilevatori a scintillazione sono dispositivi che utilizzano materiali scintillanti per rilevare particelle cariche e radiazioni ionizzanti. Quando una particella carica attraversa il materiale scintillante, essa eccita gli atomi del materiale, che successivamente rilasciano energia sotto forma di fotoni di luce visibile o ultravioletta. Questa luce viene poi raccolta da un \textbf{fotomoltiplicatore} o da un \textbf{fotodiodo}, che converte i fotoni in segnali elettrici misurabili.\\
+Alcuni materiali comunemente utilizzati nei rilevatori a scintillazione includono:
+\begin{itemize}
+    \item Cristalli inorganici, come il NaI(Tl) (ioduro di sodio drogato con tallio) e il CsI(Tl) (ioduro di cesio drogato con tallio). Altri esempi: BaF$_2$, BGO, LSO(Ce), PbWO$_4$, LaBr$_3$(Ce), YAP. Questi materiali offrono un'elevata efficienza di scintillazione e una buona risoluzione energetica, rendendoli adatti per la spettroscopia delle radiazioni gamma
+    \item Plastica scintillante, che è un materiale polimerico che emette luce quando viene attraversato da particelle cariche. Questi materiali sono leggeri, economici ed hanno un'alta velocità di risposta, rendendoli ideali per applicazioni in cui è richiesta una rapida rilevazione delle particelle
+    \item Liquidi scintillanti, che sono soluzioni liquide contenenti composti organici che emettono luce quando vengono eccitati da radiazioni ionizzanti
+\end{itemize}
+Come anticipato questi rilevatori sono tipicamente accoppiati a fotomoltiplicatori, i quali funzionano tramite una serie di dinodi che moltiplicano il segnale elettrico generato dai fotoni incidenti. Quando un fotone colpisce il fotocatodo del fotomoltiplicatore, esso emette un elettrone tramite l'effetto fotoelettrico. Questo elettrone viene poi accelerato verso il primo dinodo, dove produce ulteriori elettroni attraverso l'emissione secondaria. Questo processo si ripete attraverso una serie di dinodi, moltiplicando il numero di elettroni ad ogni stadio e generando infine un segnale elettrico amplificato fino ad un fattore $10^7$ che può essere misurato con precisione.
+%Da inserire immagine
+
+\section{Rivelatori a semiconduttore}
+I rivelatori a semiconduttore sono dispositivi che utilizzano materiali semiconduttori, come il silicio (Si) o il germanio (Ge), per rilevare particelle cariche e radiazioni ionizzanti. Quando una particella carica attraversa il materiale semiconduttore, essa crea coppie elettrone-lacuna attraverso il processo di ionizzazione. Queste coppie vengono poi raccolte da elettrodi applicando un campo elettrico, generando un segnale elettrico che può essere misurato e analizzato.\\
+%Da inserire immagine

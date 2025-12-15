@@ -1,0 +1,296 @@
+\chapter{Adroni e Yukawa}
+\section{Fisica degli adroni}
+Gli adroni sono particelle subatomiche composte da quark, tenuti insieme dalla forza nucleare forte mediata dai gluoni. Gli adroni si dividono in due categorie principali:
+\begin{itemize}
+    \item \textbf{Barioni}: composti da tre quark (es. protoni e neutroni)
+    \item \textbf{Mesoni}: composti da una coppia quark-antiquark (es. pioni e kaoni)
+\end{itemize}
+Gli adroni non sono particelle elementari, in quanto composti da altre particelle. Possiamo identificare però alcune proprietà fondamentali degli adroni:
+\begin{enumerate}
+    \item Scattering fortemente inelastico
+    \item Momento magnetico anomalo
+    \item Reazioni nucleari
+    \item Altro \dots
+\end{enumerate}
+Durante le reazioni nucleari osserviamo che viene conservato un numero quantico chiamato \textbf{numero barionico} $B$. Ogni barione ha $B=+1$, ogni antibarione ha $B=-1$ e i mesoni hanno $B=0$. In ogni reazione nucleare il numero barionico totale prima e dopo la reazione deve essere lo stesso. Ad esempio è possibile una reazione del tipo:
+\begin{equation}
+  \pi^+ +  p \to \Delta (1232)^{++} + \pi^0
+\end{equation}
+Dove $\Delta (1232)^{++}$ è il barione \textbf{delta} con massa di $\qty{1232}{\mega\electronvolt}$. In questa reazione il numero barionico totale prima e dopo la reazione è $B=1$. La particella $\Delta$ si può trovare in diverse configurazioni di carica:
+\begin{equation}
+    \Delta^{++}, \quad \Delta^{+}, \quad \Delta^{0}, \quad \Delta^{-}
+\end{equation}
+Inoltre il numero quantico chiamato \textbf{stranezza} $S$ della particella delta è $S=0$. Inoltre l'isospin varia tra le diverse configurazioni di carica:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{l|c|c}
+        Particella & Carica $Q$ & Isospin $I_3$ \\
+        \hline
+        $\Delta^{++}$ & $+2$ & $+3/2$ \\
+        $\Delta^{+}$ & $+1$ & $+1/2$ \\
+        $\Delta^{0}$ & $0$ & $-1/2$ \\
+        $\Delta^{-}$ & $-1$ & $-3/2$
+    \end{tabular}
+    \caption{Configurazioni di carica e isospin delle particelle delta.}
+\end{table}
+In generale possiamo riassumere le proprietà dei barioni con spin $3/2$ con questo schema:
+
+\addsvg[Combinazioni di quark $u,d,s$ per formare barioni con spin 3/2. Fonte: \href{https://en.wikipedia.org/wiki/Baryon}{Wikipedia}]{Baryon-decuplet-small}{0.4}
+
+Parliamo ora dello scattering inelastico degli adroni. Andando a visualizzare uno spettro di scattering osserviamo tipicamente una situazione di questo tipo:
+
+\addfigure[Cross section di scattering inelastico di adroni in funzione dell'energia]{png/Electron_proton_scattering}{0.6}
+
+Osserviamo dunque delle zone di risonanza, ovvero delle energie per cui la cross section di scattering aumenta notevolmente. Queste risonanze corrispondono alla formazione di stati eccitati degli adroni, che decadono rapidamente in particelle più leggere. La presenza di questi effetti di risonanza indica che gli adroni non sono particelle puntiformi, ma hanno una struttura interna complessa e dunque non possono essere particelle elementari.\\
+\section{Modello di interazione di Yukawa}
+Per spiegare la natura della forza nucleare forte che tiene insieme i nucleoni all'interno del nucleo, Hideki Yukawa propose un modello basato sullo scambio di particelle mediatrici. Nel caso dell'elettromagnetismo era noto che la particella mediatore era il fotone, un bosone di spin $1$ e massa nulla. Yukawa ipotizzò che la forza nucleare fosse mediata da una particella di spin $0$ e massa finita, che chiamò \textbf{pione} ($\pi$). Andando a scrivere l'equazione di Klein-Gordon per una particella di massa $m_{\pi}$ otteniamo:
+\begin{equation}
+    \brackets{\dalop + \dfrac{m_{\pi}^2 c^2}{\hbar^2}} \phi = 0
+\end{equation}
+Nel caso statico l'operatore d'Alembertiano si riduce al laplaciano, dunque l'equazione diventa:
+\begin{equation}
+    \brackets{-\lap + \dfrac{m_{\pi}^2 c^2}{\hbar^2}} \phi(\vec{r}) = 0
+\end{equation}
+Possiamo risolvere questa equazione considerando una sorgente puntiforme di forza in $\vec{r} = 0$, ovvero:
+\begin{equation}
+    \brackets{-\lap + \dfrac{m_{\pi}^2 c^2}{\hbar^2}} \phi(\vec{r}) = 4\pi g_{\pi}\delta(\vec{r})
+\end{equation}
+La soluzione di questa equazione è nota come potenziale di Yukawa:
+\begin{equation}
+    \phi(\vec{r}) = g_{\pi} \dfrac{\exp\brackets{-\dfrac{m_{\pi} c}{\hbar} r}}{r}
+\end{equation}
+Dove $g_{\pi}$ è una costante di accoppiamento che determina la forza dell'interazione. Il potenziale di Yukawa descrive una forza a corto raggio, che decresce esponenzialmente con la distanza $r$ come possiamo osservare:
+
+\addsvg[Andamento del potenziale di Yukawa in funzione della distanza]{Yukawa_potential}{0.6}
+
+La lunghezza caratteristica di questa forza è data da $r_{\pi} = \hbar/(m_{\pi} c) = 1/\lambda_{\pi}$, che rappresenta il raggio d'azione della forza nucleare.\\
+In particolare, poichè la massa del pione è circa $m_{\pi} \approx \qty{135}{\mega\electronvolt}$, la lunghezza caratteristica della forza nucleare risulta essere dell'ordine di $\qty{1.4}{\femto\meter}$, che è coerente con le dimensioni tipiche dei nuclei atomici. Questo modello di Yukawa ha avuto un grande successo nel descrivere le proprietà della forza nucleare e ha portato alla scoperta sperimentale dei pioni negli anni '40.\\
+Possiamo descrivere nel dettaglio l'interazione tra due nucleoni mediata dallo scambio di un pione. Consideriamo due nucleoni $A$ e $B$ che interagiscono tramite lo scambio di una particella $X$.La reazione è del tipo:
+\begin{equation}
+    A + B \to A + B
+\end{equation}
+In particolare, nel sistema di riferimento a riposo della particella $A$ scriviamo che:
+\begin{equation}
+    A(M_A, \vec{0}) \to A(E_A, \vec{p}_A c^2) + X(E_X, -\vec{p}_A c^2)
+\end{equation}
+In particolare:
+\begin{equation}
+  \begin{split}
+    &E_A^2 = p_A^2 c^2 + M_A^2 c^4 \\[8pt]
+    &E_X^2 = p_A^2 c^2 + m_X^2 c^4
+  \end{split}
+\end{equation}
+Il modulo del quadrivettore della particella $A$ risulta dunque essere:
+\begin{equation}
+    p_A^{\mu} p_{A \mu} = E_A^2 - p_A^2 c^2 = M_A^2 c^4
+\end{equation}
+Ma allora la differenza tra l'energia iniziale e finale risulta:
+\begin{equation}
+    \Delta E_A =  E_A + E_X - M_A c^2 = \sqrt{p_A^2 c^2 + M_A^2 c^4} + \sqrt{p_A^2 c^2 + M_X^2 c^4} - M_A c^2
+    \begin{cases}
+       \approx 2pc & \text{se } p_A \to 0 \\
+       \approx M_X c^2 & \text{se } p_A \to \infty
+    \end{cases}
+\end{equation}
+Dunque l'energia risulta non conservata per ogni valore di $p_A$. Possiamo dunque applicare il principio di indeterminazione di Heisenberg per giustificare la presenza della particella $X$ per un tempo limitato:
+\begin{equation}
+    \Delta E_A \Delta t \approx \hbar \implies \Delta t \approx \dfrac{\hbar}{\Delta E_A}
+\end{equation}
+Definiamo dunque questo tempo $\tau$ come il tempo caratteristico di scambio della particella $X$. Durante questo intervallo di tempo la particella $X$ può viaggiare una distanza massima:
+\begin{equation}
+    r \approx c \tau = \dfrac{\hbar c}{\Delta E_A}
+\end{equation}
+Poichè $r$ è inversamente proporzionale a $\Delta E_A$, possiamo trovare un valore limite nel caso di $p_A \to 0$:
+\begin{equation}
+    r_{\text{max}} \approx \dfrac{\hbar c}{M_X c^2} = \dfrac{\hbar}{M_X c} = \dfrac{1}{\lambda_X}
+\end{equation}
+In accordo con il modello di Yukawa, possiamo dunque identificare la massa della particella mediatore $X$ con la massa del pione $m_{\pi}$. Questo implica che la forza nucleare ha un raggio d'azione limitato, coerente con le dimensioni tipiche dei nuclei atomici.\\
+\section{Osservazioni sperimentali}
+Pioni e muoni sono oggi studiati in laboratorio, dove possono essere prodotti mediante acceleratori di particelle e rilevati tramite le cosiddette \textbf{camere a bolle}.
+
+\addfigure[Schema di funzionamento di una camera a bolle]{drawio-pdf/Camera_a_bolle.drawio}{0.6}
+
+Queste camere sono formate da un liquido super riscaldato che viene ionizzato dal passaggio di particelle cariche, formando delle bolle visibili. Analizzando le tracce lasciate dalle particelle nelle camere a bolle, è possibile ricostruire le loro proprietà, come la massa, la carica e il momento.
+
+\addfigure[Tracce all'interno di una camera a bolle]{jpg/bubble_chamber_trace}{0.6}
+
+Pioni e muoni sono mesoni, i pioni in particolare sono particelle instabili che decadono rapidamente in altre particelle. Il numero di mesoni non è conservato nelle reazioni nucleari. Alcuni decadimenti possibili sono:
+\begin{equation}
+    \begin{split}
+      &\pi^+ \to \mu^+ + \nu_{\mu} \\[8pt]
+      &\pi^- \to \mu^- + \anti{\nu}_{\mu} \\[8pt]
+      &\pi^0 \to \gamma + \gamma
+    \end{split}
+\end{equation}
+Mentre alcune reazioni a cui i pioni possono partecipare sono:
+\begin{equation}
+    \begin{split}
+      &p + p \to p + p + \pi^+ + \pi^- + \pi^0 + \pi^0\\[8pt]
+      &\pi^- + p \to \rho^0 + n \to \pi^+ + \pi^- + n \\[8pt]
+      &\rho^+ \to \pi^+ + \pi^0 \\[8pt]
+      &\varrho^0 \to \pi^+ + \pi^- \\[8pt]
+      &\omega \to \pi^+ + \pi^- + \pi^0
+    \end{split}
+\end{equation}
+Con $m_{\varrho} \approx \qty{770}{\mega\electronvolt}$ e $m_{\omega} \approx \qty{782}{\mega\electronvolt}$.\\
+\section{Numero quantico di stranezza e di colore}
+Possiamo ora introdurre due numeri quantici fondamentali per la descrizione degli adroni: il \textbf{numero di stranezza} $S$ e il \textbf{numero di colore} $C$.\\
+Il numero di stranezza $S$ è un numero quantico che descrive la presenza di quark strani all'interno di una particella. Nelle reazioni nucleari forti ($\Delta t \approx \qty{e-22}{\second}$), il numero di stranezza è conservato, mentre nelle reazioni deboli ($\Delta t \approx \qty{e-10}{\second}$) può variare. Prendiamo in esame due particelle:
+\begin{itemize}
+    \item Il kaone $K^0$, con $S=+1$, è composto da un quark down ($d$) e un quark anti-strano ($\anti{s}$).
+    \item Il lambda $\Lambda^0$, composto da un quark up ($u$), un quark down ($d$) e un quark strano ($s$), ha $S=-1$.
+\end{itemize}
+Possibili reazioni di produzione di particelle strane sono:
+\begin{equation}
+    \begin{split}
+      &\pi^- + p \to K^0 + \Lambda^0 \\[8pt]
+      &p + p \to \Lambda^0 + K^0 + p + \pi^+
+    \end{split}
+\end{equation}
+Ci sono diversi schemi che raggruppano le particelle adroniche in base alle loro proprietà, come il \textbf{modello a ottetto} e il \textbf{modello a decupletto}. Questi modelli organizzano le particelle in gruppi basati su simmetrie di isospin e stranezza. Ad esempio, il modello a decupletto mostrato in precedenza raggruppa i barioni con spin $3/2$ in un decupletto basato su queste proprietà.\\
+Per andare a parlare del numero di colore $C$, dobbiamo prima soffermarci sul concetto di quark. Inizialmente Feynman e Bjorken, dalle osservazioni sperimentali proposero l'esistenza di particelle subnucleari chimate partoni (oggi quark e gluoni). Questi partoni dovevano avere alcune proprietà peculiari:
+\begin{itemize}
+    \item Essere particelle puntiformi
+    \item Avere spin $1/2$
+    \item Avere carica frazionaria
+\end{itemize}
+In questo modo le interazioni di scattering possono essere interpretate come interazioni tra elettroni e singoli partoni all'interno del protone. Tuttavia, l'idea di quark con carica frazionaria portava a problemi di simmetria. Ad esempio, il delta $\Delta^{++}$ è composto da tre quark up ($uuu$), che sono fermioni identici. Secondo il principio di esclusione di Pauli, non possono occupare lo stesso stato quantico. Per risolvere questo problema, fu introdotto il concetto di \textbf{colore}, un nuovo numero quantico che può assumere tre valori distinti (rosso, verde e blu). In questo modo, i quark possono essere distinti non solo per le loro proprietà come spin e carica, ma anche per il loro colore.\\
+Nasce in questo modo il modello di Gell-Mann dei quark, che descrive gli adroni come combinazioni di quark e antiquark con diversi colori. I barioni sono composti da tre quark di colori diversi, mentre i mesoni sono composti da una coppia quark-antiquark con colori complementari. Questo perché gli adroni devono essere ``colori neutri'' (\textbf{colorless}), ovvero combinazioni di quark che risultano complessivamente senza colore.\\
+Inoltre individuiamo 6 ``sapori'' (\textbf{flavors}) di quark, distinti dalle seguenti proprietà:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{lcccc}
+        \hline \\[-8pt]
+        Nome & Simbolo & Carica $Q$ & Massa (GeV) & Stranezza $S$\\[4pt]
+        \hline \\[-8pt]
+        Down & $d$ & $-1/3$ & $m_d \approx 0.3$ & $0$\\[8pt]
+        Up & $u$ & $+2/3$ & $m_u \approx m_d$ & $0$\\[8pt]
+        Strange & $s$ & $-1/3$ & $m_s \approx 0.5$ & $-1$\\[8pt]
+        Charm & $c$ & $+2/3$ & $m_c \approx 1.5$ & $0$\\[8pt]
+        Bottom & $b$ & $-1/3$ & $m_b \approx 4.5$ & $0$\\[8pt]
+        Top & $t$ & $+2/3$ & $m_t \approx 180 \pm 12$ & $0$
+    \end{tabular}
+    \caption{Proprietà dei quark}
+\end{table}
+Alcuni esempi di combinazioni di quark per formare adroni sono:
+\begin{equation}
+  \begin{split}
+    &\ket{p} = \ket{uud} \\[8pt]
+    &\ket{n} = \ket{udd} \\[8pt]
+    &\ket{\pi^+} = \ket{u \anti{d}} \\[8pt]
+    &\ket{\pi^-} = \ket{d \anti{u}} \\[8pt]
+    &\ket{\pi^0} = \dfrac{1}{\sqrt{2}} \brackets{\ket{u \anti{u}} - \ket{d \anti{d}}}
+  \end{split}
+\end{equation}
+Come anticipato la necessità di introdurre il numero di colore deriva dal principio di esclusione di Pauli, che afferma che due fermioni identici non possono occupare lo stesso stato quantico. Nel caso del delta $\Delta^{++}$, composto da tre quark up ($uuu$), tutti e tre i quark avrebbero lo stesso spin e momento in modo da ottenere risonanza generando uno stato:
+\begin{equation}
+    \ket{\Delta^{++}} = \ket{u^\uparrow u^\uparrow u^\uparrow}
+\end{equation}
+Introducendo il colore come un nuovo grado di libertà, i quark possono essere distinti non solo per le loro proprietà come spin e carica, ma anche per il loro colore. In questo modo, i tre quark up nel delta $\Delta^{++}$ possono avere colori diversi (rosso, verde e blu), permettendo loro di occupare lo stesso stato quantico senza violare il principio di esclusione di Pauli.\\
+Rimane ora da capire come questi quark interagiscano tra loro. La teoria che descrive l'interazione tra quark e gluoni è la cromodinamica quantistica (\textbf{QCD}). In QCD, i quark interagiscono scambiando gluoni, che sono i mediatori della forza nucleare forte. I gluoni stessi portano carica di colore, il che porta a una serie di fenomeni unici, come il \textbf{confinamento} dei quark all'interno degli adroni e la \textbf{liberazione asintotica} a energie molto elevate.\\
+I gluoni hanno $J =1$ e massa nulla, e trasportano una combinazione di colore e anticolore. Ci sono nove tipi di gluoni ($3 \times 3$), ciascuno con una diversa combinazione di colori:
+\begin{equation}
+    \begin{split}
+      &\text{Ottetti di gluoni:} \\[8pt]
+      &r \anti{g}, \qquad r \anti{b}, \qquad g \anti{b}, \qquad g \anti{r}, \qquad b \anti{g}, \qquad b \anti{r}, \qquad \dfrac{1}{\sqrt{2}} (r \anti{r} - g \anti{g}), \qquad  \dfrac{1}{\sqrt{6}} (r \anti{r} + g \anti{g} - 2 b \anti{b}) \\[8pt]
+      &\text{Singoletto di gluone:} \\[8pt]
+      &\dfrac{1}{\sqrt{3}} (r \anti{r} + g \anti{g} + b \anti{b})
+    \end{split}
+\end{equation}
+Grazie alla QCD possiamo rappresentare la funzione d'onda dei barioni come:
+\begin{equation}
+    \Psi = \psi_{\text{spatial}}(\vec{r}) \psi_{\text{spin}}\psi_{\text{color}}
+\end{equation}
+Possiamo riassumere i possibili gluoni in questo schema:
+
+\addfigure[Combinazioni di colore dei gluoni]{drawio-pdf/Color_force.drawio}{1}
+
+Le interazioni fondamentali tra quark e gluoni sono 4:
+\begin{figure}[H]
+  \centering
+  \begin{minipage}
+    {1\textwidth}
+    \centering
+    \tikz{
+    \draw[-stealth,thick] (-1.5,0) -- (1.5,0) node[midway, above] {Time};
+  }
+  \end{minipage}
+  \begin{minipage}
+    {0.225\textwidth}
+    \centering
+    \addfeynmantikz{
+        \draw[gluon] (0,0) -- (1.5,-1.5);
+        \draw[fermion] (-1.5,0) -- (0,0) -- (1.5,1.5);
+    }{1}
+    \captionsetup{labelformat=empty}
+    \caption{\textbf{a}}
+  \end{minipage}
+  \begin{minipage}
+    {0.225\textwidth}
+    \centering
+    \addfeynmantikz{
+        \draw[gluon] (-1.5,0) -- (0,0);
+        \draw[fermion] (0,0) -- (1.5,1.5)
+        (1.5,-1.5) -- (0,0);
+    }{1}
+    \captionsetup{labelformat=empty}
+    \caption{\textbf{b}}
+  \end{minipage}
+  \begin{minipage}
+    {0.225\textwidth}
+    \centering
+    \addfeynmantikz{
+        \draw[gluon] (-1.5,0) -- (0,0) -- (1.5,1.5)
+        (0,0) -- (1.5,-1.5);
+    }{1}
+    \captionsetup{labelformat=empty}
+    \caption{\textbf{c}}
+  \end{minipage}
+  \begin{minipage}
+    {0.225\textwidth}
+    \centering
+    \addfeynmantikz{
+        \draw[gluon] (-1.5,-1.5) -- (0,0) -- (1.5,1.5)
+        (0,0) -- (1.5,-1.5)
+        (0,0) -- (-1.5,1.5);
+    }{1}
+    \captionsetup{labelformat=empty}
+    \caption{\textbf{d}}
+  \end{minipage}
+  \caption{Interazioni fondamentali tra quark e gluoni: (\textbf{a}) emissione di un gluone da un quark, (\textbf{b}) splitting di un gluone in una coppia quark-antiquark, (\textbf{c},\textbf{d}) self-coupling di gluoni.}
+\end{figure}
+
+\subsection{La costante di coupling della forza nucleare forte}
+In QCD, la forza nucleare forte è descritta da una costante di accoppiamento chiamata \textbf{costante di coupling forte} $\alpha_{\text{s}}$. Questa costante determina la forza dell'interazione tra quark e gluoni.
+
+\addtikz[Andamento di $\alpha_{\text{s}}$ in funzione di $Q^2$]{
+    %Axis
+    \draw[-stealth,thick] (0,0) -- (6,0) node[right]{$Q^2$};
+    \draw[-stealth,thick] (0,0) -- (0,5) node[above,rotate=90,midway]{Coupling constant};
+    %Annotations
+    \node at (3.5,2.5) {$\alpha_{\text{s}}$};
+    \node at (3.5,1) {$\alpha_{\text{em}}$};
+    \node at (1,5.5) {\centering Quark confined};
+    \draw[thick] (2,0) -- (2,5);
+    \fill[gray!50,opacity=0.5] (0,0) -- (2,0) -- (2,5) -- (0,5) -- cycle;
+    %Curves
+    \draw[color=supportDarkBlue,thick] (0.5,0.5) to[out=0,in=-165] (5,1)
+    (0.5,5) to[out=-60,in=165] (5,1.5);
+
+
+}{1}{coupling_constant}
+
+A differenza della costante di coupling elettromagnetica $\alpha$, che è relativamente piccola e costante a basse energie, la costante di coupling forte varia significativamente con l'energia dell'interazione. Abbiamo che:
+\begin{equation}
+    \alpha_{\text{s}}(Q^2) = \dfrac{12 \pi}{(33 - 2 n_f) \ln\brackets{\dfrac{Q^2}{\Lambda_{\text{QCD}}^2}}}
+\end{equation}
+Osserviamo che per $Q^2 \to \infty$ (piccole distanze) la costante di coupling forte tende a zero, indicando che i quark si comportano come particelle libere a energie molto elevate. Questo fenomeno è noto come \textbf{liberazione asintotica}. Al contrario, per $Q^2 \to \Lambda_{\text{QCD}}^2$ (grandi distanze) la costante di coupling forte aumenta, portando al \textbf{confinamento} dei quark all'interno degli adroni. Questo significa che i quark non possono essere isolati come particelle libere, ma sono sempre confinati in combinazioni di quark e antiquark (mesoni) o tre quark (barioni).
+\section{Conclusioni}
+Possiamo riassumere le particelle fondamentali della fisica nel \textbf{modello standard}, rappresentato nel seguente grafico:
+
+\addfigure[Particelle fondamentali del modello standard. Fonte: \href{https://en.wikipedia.org/wiki/Standard_Model}{Wikipedia}]{pdf/Standard_Model_of_Elementary_Particles}{0.6}
+
+In questo modello, le particelle sono suddivise in fermioni (quark e leptoni) e bosoni (mediatori delle forze fondamentali). I quark sono i costituenti fondamentali degli adroni, mentre i gluoni sono i mediatori della forza nucleare forte che tiene insieme i quark all'interno degli adroni. La cromodinamica quantistica (QCD) descrive le interazioni tra quark e gluoni, spiegando fenomeni come il confinamento e la liberazione asintotica. Il modello standard ha avuto un enorme successo nel descrivere le particelle e le interazioni fondamentali della natura, ed è stato confermato da numerosi esperimenti in fisica delle particelle.\\
+Queste particelle possono essere prodotte in laboratorio o osservate in natura, spesso in condizioni estreme come quelle presenti in alcune stelle (es. stelle di neutroni) o durante eventi cosmici ad alta energia.
+
+\addfigure[Diagramma di fase della cromodinamica quantistica (QCD)]{png/qcd_phase_diagram}{0.5}

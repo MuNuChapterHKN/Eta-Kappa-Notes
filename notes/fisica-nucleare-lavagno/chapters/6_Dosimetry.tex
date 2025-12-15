@@ -1,0 +1,104 @@
+\chapter{Dosimetria}
+\section{Misura delle radiazioni ionizzanti}
+La dosimetria è la scienza che si occupa della misurazione e della valutazione delle dosi di radiazione assorbite dai materiali, in particolare dai tessuti biologici. Essa è fondamentale in vari campi, tra cui la medicina nucleare, la radioterapia, la protezione dalle radiazioni e la radiobiologia.\\
+Definiamo le due seguenti grandezze:
+\begin{itemize}
+    \item \textbf{Dose assorbita} $D$: è l'energia per unità di massa di radiazione assorbita. Si misura in Gray (Gy), dove:
+    \begin{equation}
+        \qty{1}{\gray} = \qty{1}{\joule\per\kilogram} = \qty{100}{\rad}
+    \end{equation}
+    \item \textbf{Dose equivalente} $H$: tiene conto dei diversi effetti biologici della radiazione creati da differenti tipi di radiazione. Si calcola moltiplicando la dose assorbita per un fattore di ponderazione (o di qualità) della radiazione FQ. Valori tipici di FQ sono: FQ = 1 per raggi X, ed elettroni, FQ = 5 per neutroni lenti e FQ = 10 per particelle alfa. L'unità di misura della dose equivalente è lo Sievert (Sv):
+    \begin{equation}
+        \qty{1}{\sievert} = \qty{1}{\gray} = \qty{100}{\rem}
+    \end{equation}
+\end{itemize}
+Il Consiglio Nazionale per la protezione contro le radiazioni raccomanda una dose equivalente non superiore ad 1 mSv all'anno (escluso il contributo dovuto alle sorgenti naturali).
+\section{Effetti biologici della radiazione}
+Come anticipato, le radiazioni possono avere diversi impatti sui tessuti biologici, a seconda del tipo di radiazione e della dose assorbita. Possiamo identificare 3 principali categorie in base al livello di penetrazione:
+\begin{itemize}
+    \item \textbf{Radiazioni a bassa penetrazione}: come le particelle alfa, che possono essere fermate da un foglio di carta o dalla pelle umana. Queste radiazioni sono pericolose principalmente se ingerite o inalate.
+    \item \textbf{Radiazioni a media penetrazione}: come i raggi beta, che possono penetrare la pelle ma sono generalmente fermati da materiali come l'alluminio. Possono causare danni ai tessuti superficiali.
+    \item \textbf{Radiazioni ad alta penetrazione}: come i raggi X e i raggi gamma, che possono attraversare il corpo umano e causare danni ai tessuti interni. Queste radiazioni sono utilizzate in medicina per la diagnostica e la terapia, ma richiedono precauzioni per minimizzare l'esposizione.
+\end{itemize}
+Anche all'interno di queste categorie però possiamo osservare diversi pattern di assorbimento in base alle energie in gioco. Ad esempio:
+
+\addfigure[Pattern di assorbimento delle radiazioni ionizzanti nei tessuti biologici. Fonte: Slide]{drawio-pdf/Absorption_pattern_radiation.drawio}{0.8}
+
+Un caso particolare di radiazione ad alta penetrazione è rappresentato dai neutroni, che non essendo carichi elettricamente interagiscono debolmente con la materia. Essi possono però causare reazioni nucleari nei nuclei degli atomi, producendo particelle cariche secondarie che a loro volta ionizzano i tessuti biologici. In base alla loro energia, i neutroni possono essere fermati solo con spessi strati di cemento, acqua o paraffina.\\
+Partendo dal materiale che causa l'emissione di radiazioni possiamo distinguere 4 fasi di esposizione:
+
+\addtikz[Fasi di esposizione alle radiazioni]{
+    \node[draw, align=center,thick,rounded corners] (1) at (0,0) {Sorgente radioattiva \\\\ Attività $\to \si{\becquerel}, \si{\curie}$};
+    \node[draw, align=center,thick,rounded corners] (2) at (0,-2) {Materiale irraggiato \\\\ Esposizione $\to \si{\coulomb\per\kilo\gram}, \si{\rontgen}$};
+    \node[draw, align=center,thick,rounded corners] (3) at (0,-4) {Assorbimento \\\\ Dose assorbita $\to \si{\gray}, \si{\rad}$};
+    \node[draw, align=center,thick,rounded corners] (4) at (0,-6) {Danno biologico \\\\ Dose equivalente/efficace $\to \si{\sievert}, \si{\rem}$};
+    \draw[on each segment={draw,-stealth,thick}] (1) -- (2) -- (3) -- (4);
+}{1}{unit_exposure_radiation}
+
+L'esposizione a radiazioni non avviene esclusivamente da sorgenti ionizzanti e in ambito medico, ma l'esposizione avviene anche in natura. Le principali fonti di radiazioni naturali sono:
+
+\addfigure[Fonti di radiazioni naturali. Fonte: \href{https://radioactivity.eu.com/articles/in_daily_life/natural_exposures}{radioactivity.eu.com}]{jpg/Natural_radiation_absorption}{0.6}
+
+Come detto in precedenza esistono dei limiti di dose raccomandati per la popolazione generale e per i lavoratori esposti a radiazioni ionizzanti. Questi limiti sono stabiliti da organizzazioni internazionali come l'ICRP (International Commission on Radiological Protection) e sono adottati da molti paesi per garantire la sicurezza delle persone.\\
+La dose massima raccomandata per la popolazione generale è di $\qty{1}{\milli\sievert}$ all'anno, mentre per i lavoratori esposti a radiazioni ionizzanti il limite è di $\qty{20}{\milli\sievert}$ all'anno, con un limite massimo di $\qty{50}{\milli\sievert}$ in un singolo anno. Questi limiti sono progettati per minimizzare il rischio di effetti negativi sulla salute a lungo termine, come il cancro e le malattie genetiche.\\
+Oltre alla dose totale è importante capire che la stessa dose assunta in un lungo periodo può risultare invece fatale se assunta in un breve lasso di tempo. Nel caso di una dose assorbita su tutto il corpo per un'ora si hanno i seguenti effetti:
+\begin{table}
+    \centering
+    \begin{tabular}{|p{5cm}|p{8cm}|}
+        \hline
+        \textbf{Dose equivalente (Sv)} & \textbf{Effetti biologici} \\
+        \hline
+        $<\qty{0.25}{\sievert}$ & Nessun effetto osservabile \\
+        \hline
+        $\qtyrange{0.25}{1}{\sievert}$ & Lievi alterazioni sangue, raddoppio rischio leucemia e anomalie genetiche \\
+        \hline
+        $\qtyrange{1}{2}{\sievert}$ & Notevoli alterazioni sangue, nausea, emorragie intestinali, forte rischio leucemia e anomalie genetiche \\
+        \hline
+        $\qtyrange{2}{3}{\sievert}$ & Gravi emorragie, shock, stato di prostrazione \\
+        \hline
+        $\qtyrange{5}{7}{\sievert}$ & Grave sindrome acuta da radiazioni, danni agli organi interni, morte nel 30-60\% dei casi \\
+        \hline
+        $>\qty{8}{\sievert}$ & Morte nel 100\% dei casi entro due settimane \\
+        \hline
+    \end{tabular}
+    \caption{Effetti biologici della dose equivalente assorbita in un'ora.}
+    \label{tab:biological_effects_radiation}
+\end{table}
+Un'altro parametro significativo per valutare gli effetti biologici delle radiazioni è il \textbf{trasferimento lineare di energia} (LET, Linear Energy Transfer), che misura l'energia trasferita dalla radiazione al materiale per unità di lunghezza del percorso. Il LET è espresso in unità di $\si{\kilo\electronvolt\per\micro\meter}$. Radiazioni con un alto LET, come le particelle alfa, tendono a causare più danni biologici rispetto a radiazioni con un basso LET, come i raggi X e i raggi gamma, per la stessa dose assorbita.\\
+Distinguiamo:
+\begin{itemize}
+    \item \textbf{Radiazioni a basso LET}: come i raggi X, i raggi gamma e gli elettroni, che depositano energia in modo più diffuso lungo il loro percorso. La loro azione radiobiologica è influenzata dalla presenza di ossigeno
+    \item \textbf{Radiazioni ad alto LET}: come le particelle alfa, i protoni e i neutroni, che depositano energia in modo più concentrato. Queste radiazioni tendono a causare danni più gravi alle cellule, indipendentemente dalla presenza di ossigeno.
+\end{itemize}
+\section{Esempi di sorgenti radioattive}
+\subsection{Radon}
+Il radon è un gas nobile radioattivo che si forma naturalmente dalla decomposizione dell'uranio presente nelle rocce e nel suolo. È incolore, inodore e insapore, il che lo rende difficile da rilevare senza strumenti specifici. Il radon può accumularsi negli ambienti chiusi, come le abitazioni, soprattutto nei seminterrati e nelle cantine, dove può raggiungere concentrazioni elevate.\\
+Il radon (Rn) ha 26 isotopi, i più comuni sono:
+\begin{itemize}
+    \item \textbf{Radon-222} (Radon): è il più stabile e ha un'emivita di circa $3.8235$ giorni (emette particelle $\alpha$ da $\qty{5.48}{\mega\electronvolt}$). Si forma dalla decomposizione del radio-226 ed è il principale isotopo di radon presente nell'ambiente
+    \item \textbf{Radon-220} (Toron): ha un'emivita di circa 55 secondi ed è prodotto dalla decomposizione del torio-232
+    \item \textbf{Radon-219} (Attinon): ha un'emivita di circa 4 secondi ed è prodotto dalla decomposizione dell'attinio-227
+\end{itemize}
+In Italia non c'è ancora una normativa per quanto riguarda il limite massimo di concentrazione di radon all'interno delle abitazioni private. Si può fare riferimento ai valori raccomandati dalla Comunità Europea di $\qty{200}{\becquerel\per\meter\cubed}$ per le nuove abitazioni e $\qty{400}{\becquerel\per\meter\cubed}$ per quelle già esistenti. Una normativa invece esiste per gli ambienti di lavoro (Decreto legislativo n$^\circ$ 241, del 26/05/2000) che fissa un livello di riferimento di $\qty{500}{\becquerel\per\meter\cubed}$.
+Molti paesi hanno adottato valori di riferimento più bassi:
+\begin{itemize}
+    \item \textbf{Stati Uniti}: $\qty{150}{\becquerel\per\meter\cubed}$
+    \item \textbf{Regno Unito}: $\qty{200}{\becquerel\per\meter\cubed}$
+    \item \textbf{Germania}: $\qty{250}{\becquerel\per\meter\cubed}$
+\end{itemize}
+In ogni caso i valori medi misurati nelle regioni italiane variano da $\qty{20}{\becquerel\per\meter\cubed}$ a $\qty{120}{\becquerel\per\meter\cubed}$.
+\subsection{Polonio}
+Il polonio è un elemento chimico radioattivo con il simbolo Po e il numero atomico 84. Fu scoperto da Marie Curie nel 1898 ed è noto per la sua elevata radioattività. Il polonio si trova in natura in piccole quantità come prodotto di decadimento dell'uranio e del torio, o tramite il bombardamento del bismuto da parte di neutroni prodotti da reattori nucleari.\\
+Il polonio si scioglie facilmente in acido. Il polonio-210 è l'isotopo più comune e ha un'emivita di circa $138.39$ giorni, emettendo particelle alfa da $\qty{5.407}{\mega\electronvolt}$. A causa della sua elevata radioattività, il polonio-210 è estremamente tossico se ingerito o inalato, poiché le particelle alfa possono causare gravi danni ai tessuti biologici. Il limite massimo di $\qty{3}{\micro\curie}$ corrisponde a $\qty{3}{\nano\gram}$ di polonio-210.\\
+\section{Modalità di assunzione delle radiazioni}
+Oltre alle dosi assorbite naturalmente dall'ambiente, le radiazioni ionizzanti possono essere assunte dall'organismo umano tramite diverse modalità:
+\begin{itemize}
+    \item \textbf{Fumo}: il fumo di sigaretta contiene piccole quantità di polonio-210, che può essere inalato e depositarsi nei polmoni, aumentando il rischio di cancro polmonare
+    \item \textbf{Radioterapia}: i pazienti sottoposti a trattamenti di radioterapia per il cancro possono ricevere dosi significative di radiazioni ionizzanti, che possono causare effetti collaterali a breve e lungo termine
+    \item \textbf{Traccianti radioattivi}: in medicina nucleare, i traccianti radioattivi vengono utilizzati per diagnosticare e trattare varie condizioni mediche. Questi traccianti possono essere ingeriti, iniettati o inalati, esponendo il paziente a radiazioni ionizzanti
+    \item \textbf{Esposizione professionale}: i lavoratori in settori come la medicina nucleare, la radioterapia, l'industria nucleare e la ricerca scientifica possono essere esposti a radiazioni ionizzanti durante le loro attività lavorative
+\end{itemize}
+Per quanto riguarda il tabacco, sono state osservate quantità di diversi radionuclidi, tra cui: $\atom{Ra}{226}{}$, $\atom{Ra}{228}{}$, $\atom{Pb}{210}{}$, $\atom{K}{40}{}$ e $\atom{Cs}{137}{}$. In particolare, il polonio-210 è stato identificato come uno dei principali responsabili della tossicità del fumo di sigaretta a causa della sua elevata radioattività e della sua capacità di depositarsi nei polmoni.\\
+Nel caso della radioterapia, le dosi di radiazioni ionizzanti somministrate ai pazienti variano a seconda del tipo di cancro, della localizzazione del tumore e del protocollo di trattamento specifico. Le dosi possono variare da pochi Gray (Gy) per trattamenti palliativi a oltre $\qty{70}{\gray}$ per trattamenti curativi. Le dosi sono attentamente calcolate e monitorate per massimizzare l'efficacia del trattamento riducendo al minimo i danni ai tessuti sani circostanti.\\
+Per quanto riguarda i traccianti radioattivi nella ricerca biologica e medica si usano isotopi radioattivi come traccianti. Si sintetizza artificialmente un certo composto usando un isotopo radioattivo (carbonio-14 o idrogeno-3). In questo modo si può seguire le tracce di queste molecole ``marcate'' nei movimenti attraverso l'organismo. Ad es. i traccianti radioattivi hanno permesso di determinare come gli aminoacidi e gli altri composti fondamentali vengono sintetizzati dagli organismi.\\
+Un utilizzo particolare dei traccianti è l'\textbf{autoradiografia}: si può osservare la distribuzione dei carboidrati prodotti nelle foglie a partire dalla CO$_2$ assorbita, mantenendo la pianta in un'atmosfera in cui gli atomi di carbonio della CO$_2$ siano costituiti da carbonio-14.

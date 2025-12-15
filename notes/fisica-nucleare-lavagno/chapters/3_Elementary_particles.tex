@@ -1,0 +1,271 @@
+\chapter[Particelle elementari]{Deutone e Isospin}
+\section{Momenti magnetici nucleari}
+Protoni e neutroni possiedono un momento magnetico associato al loro spin e alla loro carica. Possiamo dunque scrivere il momento magnetico nucleare come:
+\begin{equation}
+ \vecsymb{\mu}_{\text{nucl}} = \dfrac{\mu_N}{\hbar} \bigsum_{i=1}^A (g_l \vec{l}_i + g_s \vec{s}_i)
+\end{equation}
+Dove:
+\begin{itemize}
+ \item $\mu_N = \dfrac{e \hbar}{2 M_p c} \approx \qty{3.15e-14}{\mega\electronvolt\per\tesla}$ è il magnetone nucleare (analogo del magnetone di Bohr per l'elettrone)
+ \item $g_l$ e $g_s$ sono i fattori di Landé per il momento angolare orbitale e di spin rispettivamente
+ \item $\vec{l}_i$ e $\vec{s}_i$ sono il momento angolare orbitale e di spin del singolo nucleone
+\end{itemize}
+I valori dei fattori di Landé per protoni e neutroni sono:
+\begin{equation}
+  \begin{cases}
+    \ket{p} & g_l = 1\\[8pt]
+    \ket{n} & g_l = 0
+  \end{cases} \qquad
+  \begin{cases}
+    \ket{p} & g_s = 5.586 \\[8pt]
+    \ket{n} & g_s = -3.826
+  \end{cases}
+\end{equation}
+Osserviamo, come prevedibile, che il momento magnetico del neutrone è dovuto esclusivamente al suo spin.\\
+In particolare osserviamo che il momento magnetico del protone dovuto allo spin è:
+\begin{equation}
+ \mu_{p}^{(s)} = \dfrac{g_s \mu_N}{2} = 2.793\, \mu_N = \mu_N - \underbrace{1.793\,\mu_N}_{\text{momento magnetico anomalo}}
+\end{equation}
+La presenza di un momento magnetico anomalo indica che il protone non è una particella puntiforme, ma possiede una struttura interna complessa. Lo stesso vale per il neutrone, il cui momento magnetico risulta:
+\begin{equation}
+ \mu_{n}^{(s)} = \dfrac{g_s \mu_N}{2} = (0-1.913) \,\mu_N
+\end{equation}
+Ci aspettiamo dunque che neutrone e protone non siano particelle elementari, ma composte da particelle più piccole, tali per cui la carica totale sia nulla nel caso del neutrone e pari a $+e$ nel caso del protone.\\
+Per questo motivo, ipotizzando di avere un campo magnetico uniforme lungo l'asse $z$, possiamo ottenere i due livelli energetici possibili:
+\begin{equation}
+ E = \pm \vecsymb{\mu}_{\text{nucl}} \cdot \vec{B} = \pm \mu_{z} B
+\end{equation}
+Ad esempio nella risonanza magnetica nucleare (NMR) possiamo osservare la transizione tra i due livelli energetici di protoni in un campo magnetico esterno. Dopo il salto di energia, il protone ritorna allo stato di energia più bassa emettendo un fotone di energia:
+\begin{equation}
+ \Delta E = h \nu = 2 \mu_{z} B
+\end{equation}
+\section{Il deutone}
+Il deutone è il nucleo dell'isotopo dell'idrogeno chiamato deuterio, ed è composto da un protone e un neutrone. Possiamo identificare un processo di produzione del deutone tramite la reazione:
+\begin{equation}
+ ^1\text{H} + n \rightarrow ^2\text{H} + \gamma
+\end{equation}
+Vale anche la reazione inversa di fotodissociazione:
+\begin{equation}
+ ^2\text{H} + \gamma \rightarrow ^1\text{H} + n
+\end{equation}
+Il deutone ha un'energia di legame di circa $\qty{2.22}{\mega\electronvolt}$. Inoltre possiede un momento angolare totale $J=1$ e momento magnetico $\mu_d = 0.857 \,\mu_N$.\\
+Per ottenere il momento angolare totale del deutone, dobbiamo considerare che il protone e il neutrone sono entrambi fermioni con spin $s=1/2$. Dunque possiamo combinare i due spin in due modi:
+\begin{equation}
+  \vec{J} = \vec{L} + \vec{S}_p + \vec{S}_n = 0 + \dfrac{1}{2} + \dfrac{1}{2} = 1
+\end{equation}
+Per quanto riguarda il momento magnetico, possiamo ipotizzare che sia dato dalla somma dei momenti magnetici del protone e del neutrone:
+\begin{equation}
+ \mu_d = \mu_p + \mu_n = 2.793\,\mu_N - 1.913\,\mu_N = 0.880\,\mu_N
+\end{equation}
+I nostri calcoli dunque non sono lontani dal valore sperimentale, ma non coincidono esattamente. Questo ci suggerisce che la struttura del deutone sia più complessa di una semplice somma dei due momenti magnetici. Questa ipotesi viene confermata dalla misurazione del quadrupolo elettrico del deutone, che risulta essere diverso da zero, indicando che la distribuzione di carica all'interno del deutone non è sfericamente simmetrica, ovvero:
+\begin{equation}
+  \vec{L} \neq 0 \iff Q_d \neq 0
+\end{equation}
+In particolare abbiamo che:
+\begin{equation}
+ Q_d = \int \rho(\vec{r}) (3z^2 - r^2) \diff{^3 r} \approx \qty{2.88}{\femto\meter^2}
+\end{equation}
+Se questa ipotesi è corretta dobbiamo rivedere i calcoli precedenti, considerando $\vec{L} \neq 0$ nel calcolo del momento angolare totale. Dato che il momento angolare totale del deutone è $J=1$. Abbiamo dunque una sovrapposizione di stati. Identifichiamo i possibili stati in base al valore di $L$:
+\begin{itemize}
+ \item $L=0$ (stato $S$)
+ \item $L=1$ (stato $P$)
+ \item $L=2$ (stato $D$)
+\end{itemize}
+Abbiamo dunque gli stati:
+\begin{equation}
+ ^{2S+1}L_J
+\end{equation}
+Le possibili combinazioni sono:
+\begin{itemize}
+ \item $^3S_1$ con $L=0$, $S=1$, $J=1$
+ \item $^1P_1$ con $L=1$, $S=0$, $J=1$
+ \item $^3P_0$ con $L=1$, $S=1$, $J=0$
+ \item $^3D_1$ con $L=2$, $S=1$, $J=1$
+\end{itemize}
+Le possibili combinazioni lineari di stati sono:
+\begin{equation}
+ \begin{cases}
+  \psi_{SD} = a_S^{(1)}\ket{^3S_1} + a_D^{(1)} \ket{^3D_1} \\[8pt]
+  \psi_{PP} = b_P^{(0)} \ket{^1P_1} + b_P^{(1)} \ket{^3P_1}
+ \end{cases}
+\end{equation}
+Osserviamo che lo stato $\psi_{PP}$ non contribuisce al momento magnetico, dunque possiamo concentrarci sullo stato $\psi_{SD}$.
+Lo stato $\psi_{PP}$ non contribuisce poiché non conserva la parità. In particolare possiamo esprimere la funzione d'onda come la fattorizzazione di una componente radiale e di una angolare:
+\begin{equation}
+  \psi_{n,\ell,m}(\vec{r}) = R_{n,\ell}(r) Y_{\ell}^{m}(\theta,\phi)
+\end{equation}
+La parità della funzione d'onda è data verificando l'invarianza per la trasformazione:
+\begin{itemize}
+  \item $r \rightarrow r$
+  \item $\theta \rightarrow \pi - \theta$
+  \item $\phi \rightarrow \phi + \pi$
+\end{itemize}
+Per la parte angolare abbiamo che:
+\begin{equation}
+ Y_{\ell}^{m}(\pi - \theta, \phi + \pi) = \propto \exp(i m (\phi + \pi)) P_{\ell}^{m}(\cos(\pi - \theta)) = (-1)^{\ell + 2m} Y_{\ell}^{m}(\theta, \phi) = (-1)^\ell Y_{\ell}^{m}(\theta, \phi)
+\end{equation}
+La parte radiale rimane invariata, dunque la parità totale della funzione d'onda risulta:
+\begin{equation}
+ \psi_{n,\ell,m} = (-1)^\ell \psi_{n,\ell,m}(\vec{r})
+\end{equation}
+Dunque gli stati con $\ell$ pari conservano la parità, come desiderato.\\
+Tornando dunque al calcolo del momento magnetico, possiamo scrivere:
+\begin{equation}
+  \mu_d = \bra{\psi_{SD}} \hat{\mu}_D \ket{\psi_{SD}}
+ \end{equation}
+Da questo calcolo possiamo valutare il peso dei coefficienti $a_S^{(1)}$ e $a_D^{(1)}$. In particolare otteniamo che:
+\begin{itemize}
+  \item $\abs{a_S^{(1)}}^2 \approx 0.96$
+  \item $\abs{a_D^{(1)}}^2 \approx 0.04$
+\end{itemize}
+Anche gli stati con $\ell$ conservano la parità, tuttavia non vengono misurati sperimentalmente. La presenza di una combinazione di stati ci porta a supporre che il potenziale della forza nucleare non sia perfettamente centrale.\\
+Questa forza deve anche spiegare altre due evidenze sperimentali:
+\begin{itemize}
+ \item La simmetria di carica (perfetta)
+ \item L'indipendenza dalla carica (approssimata)
+\end{itemize}
+La prima simmetria riguarda i nuclei di atomi con stesso numero di massa, ma con numero di protoni e neutroni scambiati. Ad esempio i nuclei di $\atom{F}{21}{9}$ e $\atom{Mg}{21}{12}$ hanno proprietà fisiche molto simili, nonostante il numero di protoni e neutroni sia scambiato.\\
+La seconda simmetria non è completamente verificata, tuttavia osserviamo che le interazioni tra protone-protone, neutrone-neutrone e protone-neutrone sono molto simili tra loro.
+
+\addfigure[Simmetria di carica nei livelli energetici nucleari. Fonte: Slide]{png/C-symmetry_energy_levels}{0.7}
+
+Per spiegare questo fenomeno dobbiamo introdurre il concetto di isospin o spin isotopico.\\
+\section{Isospin}
+L'operatore di isospin soddisfa le seguenti relazioni:
+\begin{equation}
+ \begin{split}
+  T_3 \ket{p}= \dfrac{1}{2}\ket{p}
+  T_3 \ket{n}= -\dfrac{1}{2}\ket{n}
+ \end{split}
+\end{equation}
+Possiamo anche definire l'operatore di isospin ridotto come:
+\begin{equation}
+ \tau_i = \dfrac{T_i}{2}
+\end{equation}
+In questo modo gli autovalori dell'operatore $\tau_3$ sono:
+\begin{equation}
+ \begin{split}
+  \tau_3 \ket{p}= \ket{p}
+  \tau_3 \ket{n}= -\ket{n}
+ \end{split}
+\end{equation}
+In particolare abbiamo che:
+\begin{equation}
+ \tau_3 = \begin{pmatrix}
+  1 & 0 \\[8pt]
+  0 & -1
+  \end{pmatrix}
+\end{equation}
+Dunque osserviamo che le proprietà sopra elencate sono rispettate:
+\begin{equation}
+  \tau_3 \ket{p} = \begin{pmatrix}
+  1 & 0 \\[8pt]
+  0 & -1
+  \end{pmatrix} \begin{pmatrix}
+  1 \\[8pt]
+  0
+  \end{pmatrix} = \begin{pmatrix}
+  1 \\[8pt]
+  0
+  \end{pmatrix} = \ket{p}
+\end{equation}
+\begin{equation}
+  \tau_3 \ket{n} = \begin{pmatrix}
+  1 & 0 \\[8pt]
+  0 & -1
+  \end{pmatrix} \begin{pmatrix}
+  0 \\[8pt]
+  1
+  \end{pmatrix} = \begin{pmatrix}
+  0 \\[8pt]
+  -1
+  \end{pmatrix} = -\ket{n}
+\end{equation}
+Possiamo quindi pensare al protone e al neutrone come a due stati di una stessa particella, chiamata nucleone, con isospin $T=1/2$.\\
+Sfruttando la teoria sulla somma dei momenti angolari otteniamo che l'interazione tra due nucleoni può essere descritta da uno stato di isospin totale $T$ e proiezione $T_3$. Individuiamo dunque i possibili stati:
+\begin{itemize}
+ \item Stato tripletto con $T=1$:
+ \begin{equation}
+  \begin{cases}
+   \ket{pp} & T_3 = +1 \\[8pt]
+   \dfrac{1}{\sqrt{2}}\brackets{\ket{pn} + \ket{np}} & T_3 = 0 \\[8pt]
+   \ket{nn} & T_3 = -1
+  \end{cases}
+ \end{equation}
+ \item Stato singoletto con $T=0$:
+ \begin{equation}
+  \dfrac{1}{\sqrt{2}}\brackets{\ket{pn} - \ket{np}} \quad T_3 = 0
+ \end{equation}
+\end{itemize}
+In questo modo possiamo fornire una spiegazione completa della funzione d'onda di un nucleone. Possiamo identificare 3 contributi:
+\begin{equation}
+  \psi(\vec{r}) = \varphi_{\alpha} \chi_{S_3} \eta_{t_3}
+\end{equation}
+Dove $\varphi_{\alpha}$ contiene i numeri quantici della parte spaziale, $\chi_{S_3}$ è la parte di spin e $\eta_{t_3}$ è la parte di isospin.\\
+Quando abbiamo due particelle identiche distinguiamo due casi. Uno stato antisimmetrico:
+\begin{equation}
+  \varphi_{\alpha,\beta}^A(\vec{r}_1, \vec{r}_2) = \dfrac{1}{\sqrt{2}}\brackets{\varphi_{\alpha}(\vec{r}_1) \varphi_{\beta}(\vec{r}_2) - \varphi_{\beta}(\vec{r}_1) \varphi_{\alpha}(\vec{r}_2)}
+\end{equation}
+ed uno stato simmetrico:
+\begin{equation}
+  \varphi_{\alpha,\beta}^S(\vec{r}_1, \vec{r}_2) = \dfrac{1}{\sqrt{2}}\brackets{\varphi_{\alpha}(\vec{r}_1) \varphi_{\beta}(\vec{r}_2) + \varphi_{\beta}(\vec{r}_1) \varphi_{\alpha}(\vec{r}_2)}
+\end{equation}
+La funzione d'onda totale sarà antisimmetrica quando dei tre contributi presenti 1 o 3 sono antisimmetrici, mentre sarà simmetrica negli altri casi. I casi antisimmetrici sono:
+\begin{itemize}
+ \item $\psi(\vec{r}_1,\vec{r}_2) = \varphi_{\alpha,\beta}^A \ket{S=1,S_3} \ket{T=1,T_3}$
+ \item $\psi(\vec{r}_1,\vec{r}_2) = \varphi_{\alpha,\beta}^A \ket{S=0} \ket{T=0}$
+ \item $\psi(\vec{r}_1,\vec{r}_2) = \varphi_{\alpha,\beta}^S \ket{S=1,S_3} \ket{T=0}$
+ \item $\psi(\vec{r}_1,\vec{r}_2) = \varphi_{\alpha,\beta}^S \ket{S=0} \ket{T=1,T_3}$
+\end{itemize}
+Quando il numero di neutroni e protoni aumenta possiamo generalizzare definendo un nuovo operatore. Utilizzando le proprietà di $\tau_1$ abbiamo che:
+\begin{equation}
+ \tau_1 \ket{p} = \ket{n} \qquad \tau_1 \ket{n} = \ket{p}
+\end{equation}
+Ovvero invertiamo un protone in un neutrone e viceversa. Dunque per $n$ nucleoni definiamo l'operatore:
+\begin{equation}
+ \pi_\tau = \tau_1^{(1)}\tau_1^{(2)}\dots\tau_1^{(A)}
+\end{equation}
+In questo modo una funzione d'onda con $Z$ protoni e $N$ neutroni viene trasformata in una funzione d'onda con $N$ protoni e $Z$ neutroni:
+\begin{equation}
+ \pi_\tau \psi(\underbrace{1,2,\dots,Z}_{\text{protoni}},\underbrace{1,2,\dots,N}_{\text{neutroni}}) = \psi(\underbrace{1,2,\dots,Z}_{\text{neutroni}},\underbrace{1,2,\dots,N}_{\text{protoni}})
+\end{equation}
+In questo modo la simmetria di carica viene rispettata se e solo se:
+\begin{equation}
+  [\pi_\tau, H] = 0
+\end{equation}
+Da cui segue che il potenziale di interazione tra nucleoni deve essere invariante sotto l'operatore di scambio di isospin:
+\begin{equation}
+  V_{ij} = V(\vec{r}_i - \vec{r}_j, \sigma_i, \sigma_j)\vecsymb{\tau}_i \cdot \vecsymb{\tau}_j
+\end{equation}
+Ricordando che:
+\begin{equation}
+  \vec{T} = \dfrac{1}{2} \brackets{\vecsymb{\tau}_i + \vecsymb{\tau}_j}
+\end{equation}
+Abbiamo che:
+\begin{equation}
+  \vec{T}^2 = \dfrac{1}{4} \brackets{\vecsymb{\tau}_i^2 + \vecsymb{\tau}_j^2 + 2 \vecsymb{\tau}_i \cdot \vecsymb{\tau}_j}
+\end{equation}
+Da cui ricaviamo $ \vecsymb{\tau}_i \cdot \vecsymb{\tau}_j$:
+\begin{equation}
+  \vecsymb{\tau}_i \cdot \vecsymb{\tau}_j = 2 \vec{T}^2 - \dfrac{1}{2}\brackets{\vecsymb{\tau}_i^2 + \vecsymb{\tau}_j^2} = 2 \vec{T}^2 - 3\mathbb{I}
+\end{equation}
+Dunque troviamo che:
+\begin{equation}
+  \bra{T,T_3} \vecsymb{\tau}_i \cdot \vecsymb{\tau}_j \ket{T,T_3} = 2 T(T+1) - 3 = \begin{cases}
+    -3 & T=0 \\[8pt]
+    +1 & T=1
+  \end{cases}
+\end{equation}
+Il risultato positivo corrisponde ad una forza repulsiva, mentre quello negativo ad una forza attrattiva. Dunque osserviamo che la forza tra un protone e un neutrone nello stato singoletto ($T=0$) è più attrattiva rispetto a quella nello stato tripletto ($T=1$). Questo spiega perchè il deutone esiste solo nello stato $T=0$.\\
+L'indipendenza di carica avviene per lo stato tripletto ovvero:
+\begin{equation}
+  \begin{cases}
+    \psi_{pp}(1,2) &= \psi^A\brackets{\vec{r}_1, \vec{r}_2,\vecsymb{\sigma}_1,\vecsymb{\sigma}_2}\ket{T=1,T_3=+1} \\[8pt]
+    \psi_{nn}(1,2) &= \psi^A\brackets{\vec{r}_1, \vec{r}_2,\vecsymb{\sigma}_1,\vecsymb{\sigma}_2}\ket{T=1,T_3=-1} \\[8pt]
+    \psi_{pn}(1,2) &= \psi^A\brackets{\vec{r}_1, \vec{r}_2,\vecsymb{\sigma}_1,\vecsymb{\sigma}_2}\ket{T=1,T_3=0}
+  \end{cases}
+\end{equation}
+Quando siamo nello stato singoletto, invece, l'interazione dipende dalla carica, infatti abbiamo che:
+\begin{equation}
+  \psi_{pn}(1,2) = \psi^S\brackets{\vec{r}_1, \vec{r}_2,\vecsymb{\sigma}_1,\vecsymb{\sigma}_2}\ket{T=0}
+\end{equation}

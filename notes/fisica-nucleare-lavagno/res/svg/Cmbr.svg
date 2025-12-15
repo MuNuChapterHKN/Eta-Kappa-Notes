@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="600" height="480" viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+<title>Produced by GNUPLOT 4.4 patchlevel 0 </title>
+<desc>Translations are included for Arabic, Catalan, English, German, French, Italian, Russian. Other languages can easily be added.</desc>
+
+<defs>
+
+	<circle id="gpDot" r="0.5" stroke-width="0.5"/>
+	<path id="gpPt0" stroke-width="0.444" stroke="currentColor" d="M-1,0 h2 M0,-1 v2"/>
+	<path id="gpPt1" stroke-width="0.222" stroke="currentColor" d="M-1,-1 L1,1 M1,-1 L-1,1"/>
+	<path id="gpPt2" stroke-width="0.222" stroke="currentColor" d="M-1,0 L1,0 M0,-1 L0,1 M-1,-1 L1,1 M-1,1 L1,-1"/>
+	<rect id="gpPt3" stroke-width="0.222" stroke="currentColor" x="-1" y="-1" width="2" height="2"/>
+	<rect id="gpPt4" stroke-width="0.222" stroke="currentColor" fill="currentColor" x="-1" y="-1" width="2" height="2"/>
+	<circle id="gpPt5" stroke-width="0.222" stroke="currentColor" cx="0" cy="0" r="1"/>
+	<use xlink:href="#gpPt5" id="gpPt6" fill="currentColor" stroke="none"/>
+	<path id="gpPt7" stroke-width="0.222" stroke="currentColor" d="M0,-1.33 L-1.33,0.67 L1.33,0.67 z"/>
+	<use xlink:href="#gpPt7" id="gpPt8" fill="currentColor" stroke="none"/>
+	<use xlink:href="#gpPt7" id="gpPt9" stroke="currentColor" transform="rotate(180)"/>
+	<use xlink:href="#gpPt9" id="gpPt10" fill="currentColor" stroke="none"/>
+	<use xlink:href="#gpPt3" id="gpPt11" stroke="currentColor" transform="rotate(45)"/>
+	<use xlink:href="#gpPt11" id="gpPt12" fill="currentColor" stroke="none"/>
+</defs>
+<g style="fill:none; color:white; stroke:currentColor; stroke-width:2.00; stroke-linecap:butt; stroke-linejoin:miter">
+</g>
+<g style="fill:none; color:black; stroke:currentColor; stroke-width:1.50; stroke-linecap:butt; stroke-linejoin:miter">
+	<path d="M80.2,422.4 L89.2,422.4 M579.1,422.4 L570.1,422.4 "/>
+	<g transform="translate(71.9,426.9)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:end">
+		<text> 0</text>
+	</g>
+	<path d="M80.2,376.4 L89.2,376.4 M579.1,376.4 L570.1,376.4 "/>
+	<g transform="translate(71.9,380.9)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:end">
+		<text> 50</text>
+	</g>
+	<path d="M80.2,330.3 L89.2,330.3 M579.1,330.3 L570.1,330.3 "/>
+	<g transform="translate(71.9,334.8)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:end">
+		<text> 100</text>
+	</g>
+	<path d="M80.2,284.3 L89.2,284.3 M579.1,284.3 L570.1,284.3 "/>
+	<g transform="translate(71.9,288.8)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:end">
+		<text> 150</text>
+	</g>
+	<path d="M80.2,238.2 L89.2,238.2 M579.1,238.2 L570.1,238.2 "/>
+	<g transform="translate(71.9,242.7)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:end">
+		<text> 200</text>
+	</g>
+	<path d="M80.2,192.2 L89.2,192.2 M579.1,192.2 L570.1,192.2 "/>
+	<g transform="translate(71.9,196.7)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:end">
+		<text> 250</text>
+	</g>
+	<path d="M80.2,146.2 L89.2,146.2 M579.1,146.2 L570.1,146.2 "/>
+	<g transform="translate(71.9,150.7)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:end">
+		<text> 300</text>
+	</g>
+	<path d="M80.2,100.1 L89.2,100.1 M579.1,100.1 L570.1,100.1 "/>
+	<g transform="translate(71.9,104.6)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:end">
+		<text> 350</text>
+	</g>
+	<path d="M80.2,54.1 L89.2,54.1 M579.1,54.1 L570.1,54.1 "/>
+	<g transform="translate(71.9,58.6)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:end">
+		<text> 400</text>
+	</g>
+	<path d="M80.2,422.4 L80.2,413.4 M80.2,54.1 L80.2,63.1 "/>
+	<g transform="translate(80.2,444.9)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:middle">
+		<text> 2</text>
+	</g>
+	<path d="M130.1,422.4 L130.1,413.4 M130.1,54.1 L130.1,63.1 "/>
+	<g transform="translate(130.1,444.9)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:middle">
+		<text> 4</text>
+	</g>
+	<path d="M180.0,422.4 L180.0,413.4 M180.0,54.1 L180.0,63.1 "/>
+	<g transform="translate(180.0,444.9)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:middle">
+		<text> 6</text>
+	</g>
+	<path d="M229.9,422.4 L229.9,413.4 M229.9,54.1 L229.9,63.1 "/>
+	<g transform="translate(229.9,444.9)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:middle">
+		<text> 8</text>
+	</g>
+	<path d="M279.8,422.4 L279.8,413.4 M279.8,54.1 L279.8,63.1 "/>
+	<g transform="translate(279.8,444.9)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:middle">
+		<text> 10</text>
+	</g>
+	<path d="M329.7,422.4 L329.7,413.4 M329.7,54.1 L329.7,63.1 "/>
+	<g transform="translate(329.7,444.9)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:middle">
+		<text> 12</text>
+	</g>
+	<path d="M379.5,422.4 L379.5,413.4 M379.5,54.1 L379.5,63.1 "/>
+	<g transform="translate(379.5,444.9)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:middle">
+		<text> 14</text>
+	</g>
+	<path d="M429.4,422.4 L429.4,413.4 M429.4,54.1 L429.4,63.1 "/>
+	<g transform="translate(429.4,444.9)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:middle">
+		<text> 16</text>
+	</g>
+	<path d="M479.3,422.4 L479.3,413.4 M479.3,54.1 L479.3,63.1 "/>
+	<g transform="translate(479.3,444.9)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:middle">
+		<text> 18</text>
+	</g>
+	<path d="M529.2,422.4 L529.2,413.4 M529.2,54.1 L529.2,63.1 "/>
+	<g transform="translate(529.2,444.9)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:middle">
+		<text> 20</text>
+	</g>
+	<path d="M579.1,422.4 L579.1,413.4 M579.1,54.1 L579.1,63.1 "/>
+	<g transform="translate(579.1,444.9)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:middle">
+		<text> 22</text>
+	</g>
+	<path d="M80.2,54.1 L80.2,422.4 L579.1,422.4 L579.1,54.1 L80.2,54.1 Z "/>
+	<g transform="translate(25.9,238.3) rotate(270)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:middle">
+		<switch>
+		  <text systemLanguage="ar">القوَّة [جانسكي\ستراديان]</text>
+		  <text systemLanguage="ca">Intensitat [MJy/sr]</text>
+		  <text systemLanguage="de">Intensität [MJy/sr]</text>
+		  <text systemLanguage="en">Intensity [MJy/sr]</text>
+		  <text systemLanguage="fr">Intensité [MJy/sr]</text>
+		  <text systemLanguage="it">Intensità [MJy/sr]</text>
+		  <text systemLanguage="pt">Intensidade [MJy/sr]</text>
+		  <text systemLanguage="ru">Плотность потока [МЯн/ср]</text>
+		  <text>Intensity [MJy/sr]</text>
+		</switch>
+	</g>
+	<g transform="translate(329.6,471.9)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:middle">
+		<switch>
+		  <text systemLanguage="ar">التردد [1\سنتم]</text>
+		  <text systemLanguage="ca">Freqüència [1/cm]</text>
+		  <text systemLanguage="de">Frequenz [1/cm]</text>
+		  <text systemLanguage="en">Frequency [1/cm]</text>
+		  <text systemLanguage="fr">Fréquence [1/cm]</text>
+		  <text systemLanguage="it">Frequenza [1/cm]</text>
+		  <text systemLanguage="pt">Frequência [1/cm]</text>
+		  <text systemLanguage="ru">Частота [1/см]</text>
+		  <text>Frequency [1/cm]</text>
+		</switch>
+	</g>
+	<g transform="translate(329.6,31.6)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:middle">
+		<switch>
+		  <text systemLanguage="ar">طيف إشعاع الخلفيَّة الكونية الميكروي من مُستكشف الخلفيَّة الكونيَّة</text>
+		  <text systemLanguage="ca">Espectre de la radiació còsmica de fons (del COBE)</text>
+		  <text systemLanguage="de">Spektrum der Kosmischen Hintergrundstrahlung (von COBE)</text>
+		  <text systemLanguage="en">Cosmic microwave background spectrum (from COBE)</text>
+		  <text systemLanguage="fr">Spectre du fond diffus cosmologique (selon COBE)</text>
+		  <text systemLanguage="it">Spettro della radiazione cosmica di fondo (da COBE)</text>
+		  <text systemLanguage="pt">Espectro da radiação cósmica de fundo (por COBE)</text>
+		  <text systemLanguage="ru">Спектр реликтового излучения (по данным COBE)</text>
+		  <text>Cosmic microwave background spectrum (from COBE)</text>
+		</switch>
+	</g>
+</g>
+
+<!-- "Plot #1" -->
+
+<g style="fill:none; color:red; stroke:currentColor; stroke-width:2.00; stroke-linecap:butt; stroke-linejoin:miter">
+	<g transform="translate(512.0,76.6)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:end">
+		<switch>
+		  <text systemLanguage="ar">بيانات مستكشف الخلفيَّة الكونيَّة</text>
+		  <text systemLanguage="ca">Dades del COBE</text>
+		  <text systemLanguage="de">Daten von COBE</text>
+		  <text systemLanguage="en">COBE data</text>
+		  <text systemLanguage="fr">Données de COBE</text>
+		  <text systemLanguage="it">Dati di COBE</text>
+		  <text systemLanguage="pt">Dados do COBE</text>
+		  <text systemLanguage="ru">Данные COBE</text>
+		  <text>COBE data</text>
+		</switch>
+	</g>
+	<path d="M520.3,72.1 L562.5,72.1 M520.3,67.6 L520.3,76.6 M562.5,67.6 L562.5,76.6 M86.9,237.6 M82.4,237.6    L91.4,237.6 M82.4,237.6 L91.4,237.6 M98.2,192.7 L98.2,192.6 M93.7,192.7 L102.7,192.7 M93.7,192.6    L102.7,192.6 M109.6,152.6 M105.1,152.6 L114.1,152.6 M105.1,152.6 L114.1,152.6 M120.9,120.6 M116.4,120.6    L125.4,120.6 M116.4,120.6 L125.4,120.6 M132.1,96.4 M127.6,96.4 L136.6,96.4 M127.6,96.4 L136.6,96.4    M143.6,79.8 M139.1,79.8 L148.1,79.8 M139.1,79.8 L148.1,79.8 M154.8,71.2 L154.8,71.1 M150.3,71.2    L159.3,71.2 M150.3,71.1 L159.3,71.1 M166.3,69.3 M161.8,69.3 L170.8,69.3 M161.8,69.3 L170.8,69.3    M177.5,73.5 M173.0,73.5 L182.0,73.5 M173.0,73.5 L182.0,73.5 M188.7,82.8 M184.2,82.8 L193.2,82.8    M184.2,82.8 L193.2,82.8 M200.2,96.4 M195.7,96.4 L204.7,96.4 M195.7,96.4 L204.7,96.4 M211.4,112.8    M206.9,112.8 L215.9,112.8 M206.9,112.8 L215.9,112.8 M222.6,131.4 M218.1,131.4 L227.1,131.4 M218.1,131.4    L227.1,131.4 M234.1,151.8 M229.6,151.8 L238.6,151.8 M229.6,151.8 L238.6,151.8 M245.3,172.5 M240.8,172.5    L249.8,172.5 M240.8,172.5 L249.8,172.5 M256.8,193.8 M252.3,193.8 L261.3,193.8 M252.3,193.8 L261.3,193.8    M268.0,214.4 M263.5,214.4 L272.5,214.4 M263.5,214.4 L272.5,214.4 M279.3,234.3 M274.8,234.3 L283.8,234.3    M274.8,234.3 L283.8,234.3 M290.7,253.7 L290.7,253.6 M286.2,253.7 L295.2,253.7 M286.2,253.6 L295.2,253.6    M302.0,271.6 L302.0,271.5 M297.5,271.6 L306.5,271.6 M297.5,271.5 L306.5,271.5 M313.2,288.2 M308.7,288.2    L317.7,288.2 M308.7,288.2 L317.7,288.2 M324.7,303.8 M320.2,303.8 L329.2,303.8 M320.2,303.8 L329.2,303.8    M335.9,317.9 L335.9,317.8 M331.4,317.9 L340.4,317.9 M331.4,317.8 L340.4,317.8 M347.4,330.9 L347.4,330.8    M342.9,330.9 L351.9,330.9 M342.9,330.8 L351.9,330.8 M358.6,342.3 L358.6,342.2 M354.1,342.3 L363.1,342.3    M354.1,342.2 L363.1,342.2 M369.8,352.6 L369.8,352.5 M365.3,352.6 L374.3,352.6 M365.3,352.5 L374.3,352.5    M381.3,361.9 L381.3,361.8 M376.8,361.9 L385.8,361.9 M376.8,361.8 L385.8,361.8 M392.5,369.9 M388.0,369.9    L397.0,369.9 M388.0,369.9 L397.0,369.9 M403.7,377.1 M399.2,377.1 L408.2,377.1 M399.2,377.1 L408.2,377.1    M415.2,383.5 M410.7,383.5 L419.7,383.5 M410.7,383.5 L419.7,383.5 M426.4,388.9 M421.9,388.9 L430.9,388.9    M421.9,388.9 L430.9,388.9 M437.9,393.8 M433.4,393.8 L442.4,393.8 M433.4,393.8 L442.4,393.8 M449.1,398.0    L449.1,397.9 M444.6,398.0 L453.6,398.0 M444.6,397.9 L453.6,397.9 M460.4,401.6 L460.4,401.5 M455.9,401.6    L464.9,401.6 M455.9,401.5 L464.9,401.5 M471.8,404.7 L471.8,404.6 M467.3,404.7 L476.3,404.7 M467.3,404.6    L476.3,404.6 M483.1,407.3 M478.6,407.3 L487.6,407.3 M478.6,407.3 L487.6,407.3 M494.5,409.7 M490.0,409.7    L499.0,409.7 M490.0,409.7 L499.0,409.7 M505.8,411.6 M501.3,411.6 L510.3,411.6 M501.3,411.6 L510.3,411.6    M517.0,413.3 L517.0,413.2 M512.5,413.3 L521.5,413.3 M512.5,413.2 L521.5,413.2 M528.5,414.7 L528.5,414.6    M524.0,414.7 L533.0,414.7 M524.0,414.6 L533.0,414.6 M539.7,416.0 L539.7,415.8 M535.2,416.0 L544.2,416.0    M535.2,415.8 L544.2,415.8 M550.9,417.2 L550.9,416.9 M546.4,417.2 L555.4,417.2 M546.4,416.9 L555.4,416.9    M562.4,418.5 L562.4,418.0 M557.9,418.5 L566.9,418.5 M557.9,418.0 L566.9,418.0 "/>
+	<use xlink:href="#gpPt0" transform="translate(86.9,237.6) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(98.2,192.7) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(109.6,152.6) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(120.9,120.6) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(132.1,96.4) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(143.6,79.8) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(154.8,71.1) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(166.3,69.3) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(177.5,73.5) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(188.7,82.8) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(200.2,96.4) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(211.4,112.8) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(222.6,131.4) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(234.1,151.8) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(245.3,172.5) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(256.8,193.8) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(268.0,214.4) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(279.3,234.3) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(290.7,253.7) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(302.0,271.6) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(313.2,288.2) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(324.7,303.8) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(335.9,317.8) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(347.4,330.8) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(358.6,342.3) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(369.8,352.5) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(381.3,361.8) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(392.5,369.9) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(403.7,377.1) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(415.2,383.5) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(426.4,388.9) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(437.9,393.8) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(449.1,397.9) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(460.4,401.6) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(471.8,404.7) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(483.1,407.3) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(494.5,409.7) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(505.8,411.6) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(517.0,413.3) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(528.5,414.7) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(539.7,415.9) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(550.9,417.1) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(562.4,418.2) scale(4.50)"/>
+	<use xlink:href="#gpPt0" transform="translate(541.4,72.1) scale(4.50)"/>
+</g>
+
+<!-- "Plot #2" -->
+
+<g style="fill:none; color:blue; stroke:currentColor; stroke-width:2.00; stroke-linecap:butt; stroke-linejoin:miter">
+	<g transform="translate(512.0,94.6)" style="stroke:none; fill:black; font-family:Arial; font-size:12.00pt; text-anchor:end">
+		<switch>
+		  <text systemLanguage="ar">طيف الجسم الأسود</text>
+		  <text systemLanguage="ca">Espectre del cos negre</text>
+		  <text systemLanguage="de">Schwarzkörper-Spektrum</text>
+		  <text systemLanguage="en">Black body spectrum</text>
+		  <text systemLanguage="fr">Spectre de corps noir</text>
+		  <text systemLanguage="it">Spettro del corpo nero</text>
+		  <text systemLanguage="pt">Espectro de corpo negro</text>
+		  <text systemLanguage="ru">Спектр абсолютно чёрного тела</text>
+		  <text>Black body spectrum</text>
+		</switch>
+	</g>
+	<path d="M520.3,90.1 L562.5,90.1 M86.9,237.6 L91.7,217.8 L96.5,198.9 L101.3,180.9 L106.1,164.1 L110.9,148.5    L115.8,134.2 L120.6,121.4 L125.4,110.0 L130.2,100.0 L135.0,91.5 L139.8,84.4 L144.6,78.7 L149.4,74.4    L154.2,71.4 L159.0,69.7 L163.8,69.1 L168.6,69.7 L173.4,71.4 L178.2,74.0 L183.0,77.5 L187.8,81.9    L192.6,87.0 L197.4,92.8 L202.2,99.1 L207.0,106.0 L211.8,113.4 L216.6,121.2 L221.4,129.2 L226.2,137.6    L231.0,146.2 L235.8,154.9 L240.6,163.7 L245.4,172.6 L250.2,181.6 L255.0,190.5 L259.8,199.4 L264.6,208.2    L269.4,216.9 L274.2,225.5 L279.0,233.9 L283.8,242.1 L288.6,250.2 L293.4,258.1 L298.2,265.8 L303.0,273.2    L307.9,280.4 L312.7,287.4 L317.5,294.2 L322.3,300.7 L327.1,306.9 L331.9,313.0 L336.7,318.8 L341.5,324.3    L346.3,329.6 L351.1,334.7 L355.9,339.6 L360.7,344.3 L365.5,348.7 L370.3,352.9 L375.1,357.0 L379.9,360.8    L384.7,364.4 L389.5,367.9 L394.3,371.1 L399.1,374.2 L403.9,377.2 L408.7,379.9 L413.5,382.6 L418.3,385.1    L423.1,387.4 L427.9,389.6 L432.7,391.7 L437.5,393.7 L442.3,395.5 L447.1,397.2 L451.9,398.9 L456.7,400.4    L461.5,401.9 L466.3,403.2 L471.1,404.5 L475.9,405.7 L480.7,406.8 L485.5,407.9 L490.3,408.9 L495.2,409.8    L500.0,410.6 L504.8,411.4 L509.6,412.2 L514.4,412.9 L519.2,413.6 L524.0,414.2 L528.8,414.8 L533.6,415.3    L538.4,415.8 L543.2,416.3 L548.0,416.7 L552.8,417.1 L557.6,417.5 L562.4,417.8 "/>
+</g>
+</svg>

@@ -1,0 +1,717 @@
+\chapter{Relatività speciale}
+La fisica nucleare studia le proprietà e le interazioni dei nuclei atomici, dove le energie in gioco possono essere estremamente elevate. In questi contesti, la relatività speciale diventa fondamentale per descrivere correttamente il comportamento delle particelle subatomiche. Ad esempio, la conservazione dell'energia e della quantità di moto deve essere formulata secondo i principi relativistici. Pertanto, lo studio della fisica nucleare è strettamente legato ai concetti fondamentali della relatività speciale.
+\section{Trasformazioni di Lorentz}
+Le trasformazioni di Lorentz sono un insieme di equazioni che descrivono come le coordinate spazio-temporali di un evento cambiano quando si passa da un sistema di riferimento inerziale a un altro che si muove a velocità costante rispetto al primo.\\
+Scrivendo le trasformazioni di Lorentz per un sistema che si muove lungo l'asse $z$ con velocità $v$, abbiamo:
+\begin{equation}
+    \begin{cases}
+        t' = \gamma \left( t - \dfrac{v z}{c^2} \right) \\
+        x' = x \\
+        y' = y \\
+        z' = \gamma (z - v t)
+    \end{cases}
+\end{equation}
+dove $\gamma = \dfrac{1}{\sqrt{1 - \dfrac{v^2}{c^2}}}$ è il fattore di Lorentz e $c$ è la velocità della luce nel vuoto.\\
+Formulando le trasformazioni di Lorentz lungo l'asse $z$, per le trasformazioni delle velocità otteniamo:
+\begin{equation}
+    \begin{cases}
+        u'_x = \dfrac{u_x}{\gamma \left( 1 - \dfrac{v u_z}{c^2} \right)} \\
+        u'_y = \dfrac{u_y}{\gamma \left( 1 - \dfrac{v u_z}{c^2} \right)} \\
+        u'_z = \dfrac{u_z - v}{1 - \dfrac{v u_z}{c^2}} \\
+    \end{cases}
+\end{equation}
+Infine, la matrice di Lorentz $\Lambda$ risulta essere:
+\begin{equation}
+    \Lambda =
+    \begin{pmatrix}
+        \gamma & 0 & 0 & -\beta \gamma  \\
+        0 & 1 & 0 & 0 \\
+        0 & 0 & 1& 0\\
+        -\beta \gamma & 0 & 0 & \gamma \\
+    \end{pmatrix}
+\end{equation}
+dove $\beta = \dfrac{v}{c}$.\\
+Dalle trasformazioni di Lorentz otteniamo risultati non previsti dalla fisica classica come la \textbf{contrazione delle lunghezze} e la \textbf{dilatazione dei tempi}:
+\begin{itemize}
+    \item $L(v) = \dfrac{L'}{\gamma(v)}$
+    \item $\Delta t (v) = \Delta t' \gamma (v)$
+\end{itemize}
+Le quantità $L'$ ed $\Delta t'$ sono dette rispettivamente lunghezza propria e intervallo di tempo proprio e sono misurate nel sistema di riferimento inerziale nel quale l'oggetto è stazionario.
+\section{Evidenze scientifiche}
+\subsection{I muoni}
+Grazie alla teoria della relatività speciale riusciamo a descrivere diversi fenomeni incompatibili con la meccanica classica.
+Prendiamo ad esempio la vita dei raggi cosmici, radiazioni formate all'$86\%$ da protoni, al $13\%$ da elio, al $2\%$ da elettroni, all'$1\%$ da altri nuclei e da qualche raggio $\gamma$.\\
+Questi raggi sono originati da diverse entità presenti nello spazio come stelle di varia tipologia, supernove o stelle di neutroni, anche dette stelle compatte a causa della loro elevata densità.\\
+Secondo la meccanica classica alcune particelle originate dall'impatto dei raggi cosmici con la nostra atmosfera, i \textbf{muoni} $\mu$, non dovrebbero essere in grado di arrivare sulla superficie terrestre a causa del loro breve tempo di vita.
+
+\addfigure[Raggi cosmici in atmosfera. Fonte: \href{https://www.vox.com/the-highlight/2019/7/16/17690740/cosmic-rays-universe-theory-science}{Vox, Nasa}]{png/cosmic_rays_diagram}{0.6}
+
+Tuttavia, grazie alla relatività speciale riusciamo a calcolare la dilatazione dei tempi che interessa queste particelle, in particolare il fattore $\gamma(v)$ è pari a circa 30.
+Se ci limitiamo alla meccanica classica, con un tempo di vita medio di $\tau = \qty{1.56}{\micro\second}$ il rapporto di sopravvivenza, che si ottiene confrontando le misurazioni effettuate a $\qty{10}{\kilo\metre}$ di altezza con quelle effettuate sulla superficie, dovrebbe essere:
+\begin{equation}
+    \dfrac{I}{I_0} \approx 0.26 \cdot 10^{-6}
+\end{equation}
+Al contrario, sperimentalmente, osserviamo che il rapporto di sopravvivenza è:
+\begin{equation}
+    \dfrac{I}{I_0} \approx 0.049
+\end{equation}
+Dato compatibile con le previsioni della relatività speciale.
+
+\subsection{Cutoff GZK}
+
+\addfigure[Energie e rilevamento dei raggi cosmici. Fonte: \href{https://www.researchgate.net/publication/360295707_A_Search_for_the_Origin_of_Ultra-High_Energy_Neutrinos_with_ANITA-4}{ResearchGate}]{jpg/GZK_cutoff}{0.7}
+
+Nell'osservazione dei raggi cosmici possiamo individuare un andamento delle possibili energie assunte in particolar modo dai protoni. Come prevedibile all'aumentare dell'energia diminuisce il numero di protoni rilevati, tuttavia osserviamo una discesa netta precedente ad una certa soglia energetica $\approx \qty{e20}{\electronvolt}$. Per spiegare questo fenomeno occorre avere in mente il modello cosmologico, che possiamo riassumere con i seguenti punti fondamentali:
+\begin{itemize}
+  \item Presenza di un Big Bang $\approx 13.8 \cdot 10^9$ anni fa
+  \item Espansione dell'universo e abbassamento della temperatura
+\end{itemize}
+Questa teoria è giustificata da un'importante osservazione sperimentale, ovvero quella della \textbf{radiazione cosmica di fondo} (CMB). Questa radiazione permea lo spazio ed assume uno spettro essenzialmente identico a quello di un corpo nero alla temperatura di $\qty{2.725 \pm 0.001}{\kelvin}$.
+
+\addsvg[Spettro della radiazione cosmica di fondo. Fonte: \href{https://en.wikipedia.org/wiki/Cosmic_microwave_background}{Wikipedia}]{Cmbr}{0.8}
+
+Tornando dunque al problema della rilevazione dei raggi cosmici, possiamo ipotizzare che dei protoni ad alta energia siano in grado di interagire con i fotoni della radiazione cosmica di fondo perdendo energia e generando un pione:
+\begin{equation}
+  p + \gamma_{CMB} \rightarrow p + \pi^0
+\end{equation}
+Per calcolare l'energia minima alla realizzazione di questo processo poniamo che il protone e il pione siano entrambi a riposo dopo l'interazione e che l'impatto avvenga lungo un'unica direzione ovvero:
+\begin{equation}
+  \begin{split}
+    &p_{p}^\mu = \brackets{E_p, 0, 0, E_p} \\[8pt]
+    &p_{\pi}^\mu = \brackets{E_{CMB}, 0, 0, -E_{CMB}} \\[8pt]
+    &p_{p'}^\mu = \brackets{m_{p}, 0, 0, 0} \\[8pt]
+    &p_{\pi}^\mu = \brackets{m_\pi, 0, 0, 0}
+  \end{split}
+\end{equation}
+Dove abbiamo utilizzato l'approssimazione ultra-relativistica $E \approx K \approx p$. Dalla conservazione del modulo del tensore otteniamo che:
+\begin{equation}
+  E_p = \dfrac{2m_p m_{\pi} + m^2_\pi}{4E_{CMB}}
+\end{equation}
+Dai dati sperimentali sappiamo che:
+\begin{itemize}
+  \item $E_{CMB} \approx \qty{3e-4}{\electronvolt}$
+  \item $m_p = \qty{938}{\mega\electronvolt}$
+  \item $m_\pi = \qty{135}{\mega\electronvolt}$
+\end{itemize}
+In questo modo troviamo:
+\begin{equation}
+  E_p \approx \qty{2e20}{\electronvolt} \approx \qty{30}{\joule}
+\end{equation}
+Questo spiega l'andamento qualitativo delle energie dei protoni, tuttavia, tenendo in considerazione la natura termica della CMB la soglia GKZ viene stimata a circa $\qty{5e19}{\electronvolt}$, dunque ci sono dei raggi cosmici che violano questo limite. La spiegazione completa di questo fenomeno è ancora oggi oggetto di studio.
+\section{Formalismo tensoriale}
+Il formalismo tensoriale è uno dei principali strumenti della relatività speciale, in quanto permette di descrivere le grandezze fisiche mediante oggetti matematici chiamati tensori. I tensori sono generalizzazioni dei vettori e delle matrici. Un tensore di ordine 1 ad esempio è indicato da un solo indice superiore, se contravarianti, o inferiore, se covarianti. Un tensore di ordine 2 invece è indicato da due indici, che possono essere entrambi superiori, entrambi inferiori o uno superiore e uno inferiore.\\
+Un esempio di tensore di ordine 1 è il quadrivettore posizione $x^\mu = (ct, x, y, z)$, mentre un esempio di tensore di ordine. Utilizzeremo la notazione di Einstein, che prevede la somma implicita sugli indici ripetuti, per esempio:
+\begin{equation}
+    A^\mu B_\mu = \sum_{\mu=0}^{3} A^\mu B_\mu
+\end{equation}
+Dunque le trasformazioni di Lorentz in notazione tensoriale si scrivono come:
+\begin{equation}
+    x'^\mu = \Lambda^\mu_{\ \nu} x^\nu
+\end{equation}
+Un altro concetto importante nel formalismo tensoriale è il tensore metrico $g_{\mu \nu}$, che permette di alzare e abbassare gli indici dei tensori. In relatività speciale, il tensore metrico è dato da:
+\begin{equation}
+    g_{\mu \nu} =
+    \begin{pmatrix}
+        1 & 0 & 0 & 0 \\
+        0 & -1 & 0 & 0 \\
+        0 & 0 & -1 & 0 \\
+        0 & 0 & 0 & -1 \\
+    \end{pmatrix}
+\end{equation}
+In questo caso abbiamo adottato la convenzione del segno $(+,-,-,-)$. Utilizzando il tensore metrico, possiamo scrivere la relazione tra un tensore covariante e uno contravariante come:
+\begin{equation}
+    A_\mu = g_{\mu \nu} A^\nu
+\end{equation}
+Poiché il formalismo tensoriale e la definizione dei quadrivettori discende dalle trasformate di Lorentz e dunque dall'invarianza della velocità della luce abbiamo che la quantità:
+\begin{equation}
+    x^\mu x_\mu = s^2 = c^2 t^2 - x^2 - y^2 - z^2
+\end{equation}
+È invariante sotto trasformazioni di Lorentz. Inoltre qualsiasi prodotto scalare tra due quadrivettori è invariante, ad esempio:
+\begin{equation}
+    p^\mu p_\mu = \dfrac{E^2}{c^2} - \vec{p}^2 = m^2 c^2 \implies E^2 = \vec{p}^2c^2 + m^2 c^4
+\end{equation}
+In questo modo otteniamo la formula fondamentale che lega energia, quantità di moto e massa a riposo di una particella. Utilizzeremo la notazione dove $m$ è la massa a riposo, mentre $m(v)$ è la massa relativistica, che dipende dalla velocità della particella:
+\begin{equation}
+    m(v) = \gamma(v) m
+\end{equation}
+\section{Dinamica relativistica}
+Per descrivere i processi dinamici relativistici occorre considerare la conservazione di:
+\begin{itemize}
+    \item Energia $E$
+    \item Quantità di moto $\vec{p}$
+\end{itemize}
+Dunque possiamo affermare che tutte le componenti del tensore $p^\mu$ sono conservate. Inoltre sappiamo che l'energia può essere espressa come:
+\begin{equation}
+    E = K + U
+\end{equation}
+Sapendo che $U = mc^2$ è l'energia a riposo abbiamo che:
+\begin{equation}
+    \begin{split}
+        &E^2 = \vec{p}^2c^2 + m^2c^4 \\[8pt]
+        &\brackets{K + mc^2}^2 = \vec{p}^2c^2 + m^2c^4 \\[8pt]
+        &K^2 + 2mKc^2 + \cancel{m^2c^4} = \vec{p}^2c^2 + \cancel{m^2c^4} \\[8pt]
+        &K^2 + 2mKc^2 - \vec{p}^2c^2 = 0
+    \end{split}
+\end{equation}
+Con questa espressione possiamo individuare tre diverse regioni in base all'energia cinetica della particella che stiamo considerando:
+\begin{itemize}
+    \item Regione non-relativistica:
+    \begin{equation}
+        \begin{split}
+            &K \ll mc^2 \implies K^2 + 2mKc^2 - \vec{p}^2c^2 \approx 2mKc^2 - \vec{p}^2c^2 \\[8pt]
+            &2mKc^2 - \vec{p}^2c^2 \approx 0 \\[8pt]
+            &K \approx \dfrac{\vec{p}^2}{2m}
+        \end{split}
+    \end{equation}
+    \item Regione relativistica:
+    \begin{equation}
+        K \sim mc^2
+    \end{equation}
+    \item Regione ultra-relativistica (U.R.):
+    \begin{equation}
+        \begin{split}
+            &K \gg mc^2 \implies K^2 + 2mKc^2 - \vec{p}^2c^2 \approx K^2 - \vec{p}^2c^2 \\[8pt]
+            &K^2 - \vec{p}^2c^2 \approx 0 \\[8pt]
+            &K^2 \approx \vec{p}^2c^2
+        \end{split}
+    \end{equation}
+\end{itemize}
+Per la regione ultra-relativistica possiamo notare che l'approssimazione diventa esatta nel caso di particelle con massa nulla, ovvero i fotoni. Infatti possiamo scrivere l'energia di un fotone come:
+\begin{equation}
+    E_\gamma = pc
+\end{equation}
+Possiamo ricavare questa formula dall'equazione generale dell'energia utilizzata in relatività speciale:
+\begin{equation}
+    E = \pm \sqrt{m^2c^4 + \vec{p}^2c^2}
+\end{equation}
+Ponendo $m = 0$ otteniamo la formula precedentemente citata. Inoltre osserviamo che i valori dell'energia ottenuti dalla formula possono essere sia positivi che negativi. Potremmo essere tentati di scartare a priori i valori negativi etichettandoli come ``non fisici'', tuttavia torneremo sul significato di energie negative successivamente.\\
+\textbf{Esempio}\\
+Ipotizziamo di avere una particella a riposo $\pi^0$ con massa $m_\pi c^2= \qty{135}{\mega\electronvolt}$. La particella decade in due raggi $\gamma$:
+\begin{equation}
+  \pi^0 \rightarrow \gamma + \gamma
+\end{equation}
+Ponendoci nel sistema di riferimento stazionario per $\pi^0$ abbiamo che:
+\begin{equation}
+  p_{\pi}^\mu = \brackets{m_\pi, 0, 0, 0}
+\end{equation}
+Poiché il tensore $p^\mu$ deve essere conservato abbiamo:
+\begin{equation}
+  \begin{split}
+    &p_{\gamma_1}^\mu = \brackets{E_{\gamma_1}, 0, 0, p_{z,\gamma_1}} \\[8pt]
+    &p_{\gamma_2}^\mu = \brackets{E_{\gamma_2}, 0, 0, p_{z,\gamma_2}}
+  \end{split}
+\end{equation}
+Dove abbiamo scelto l'asse $z$ parallelo alla direzione dei fotoni. Abbiamo dunque che:
+\begin{equation}
+  \begin{split}
+    E_{\gamma_1} + E_{\gamma_2} = m_\pi
+    p_{z,\gamma_1} = - p_{z,\gamma_2}
+  \end{split}
+\end{equation}
+Dunque abbiamo:
+\begin{equation}
+  \begin{split}
+    &p_{\gamma_1}^\mu = \brackets{E, 0, 0, p_z} \\[8pt]
+    &p_{\gamma_2}^\mu = \brackets{m_\pi - E, 0, 0, -p_z}
+  \end{split}
+\end{equation}
+Sapendo che $E_\gamma = p$ abbiamo che:
+\begin{equation}
+  2p = m_\pi \implies p = \dfrac{m_\pi}{2}
+\end{equation}
+Dunque:
+\begin{equation}
+  \begin{split}
+    &p_{\gamma_1}^\mu = \brackets{\dfrac{m_\pi}{2}, 0, 0, \dfrac{m_\pi}{2}} \\[8pt]
+    &p_{\gamma_2}^\mu = \brackets{m_\pi - \dfrac{m_\pi}{2}, 0, 0, -\dfrac{m_\pi}{2}}
+  \end{split}
+\end{equation}
+Dunque:
+\begin{equation}
+  \begin{split}
+    &p_{\gamma_1}^\mu = \brackets{\dfrac{m_\pi}{2}, 0, 0, \dfrac{m_\pi}{2}} \\[8pt]
+    &p_{\gamma_2}^\mu = \brackets{\dfrac{m_\pi}{2}, 0, 0, -\dfrac{m_\pi}{2}}
+  \end{split}
+\end{equation}
+\chapter{Meccanica quantistica relativistica}
+Ora analizzeremo come la meccanica quantistica può essere adattata per descrivere fenomeni in regime relativistico. La nota equazione di Schrödinger:
+\begin{equation}
+    i \hbar \pdv{\psi}{t}  = \hat{H} \psi
+\end{equation}
+Può descrivere il comportamento di numerosi sistemi subatomici, tuttavia non è valida quando si entra in regimi di velocità relativistiche. Dunque serve un'equazione che sia consistente con il formalismo della meccanica quantistica e rispetti le leggi della relatività speciale.
+\section{Equazione di Klein-Gordon}
+
+\addfigure[Oskar Klein. Fonte: \href{https://en.wikipedia.org/wiki/Oskar_Klein}{Wikipedia}]{jpg/Oskar_Klein}{0.3}
+
+Per raggiungere questo obiettivo possiamo ipotizzare di applicare la regola di quantizzazione canonica e trovare i seguenti operatori differenziali:
+\begin{equation}
+    \begin{split}
+        &\vec{p} \rightarrow -i\grad \\[8pt]
+        &E \rightarrow i\pdv{}{t}
+    \end{split}
+\end{equation}
+\textbf{N.B.} Da questo momento utilizzeremo le unità di misura naturali ovvero poniamo $c = \hbar = 1$, da qui deriva l'assenza di altri termini negli operatori.
+Una volta individuati i ``sostituti'' di energia e quantità di moto possiamo inserirli nell'equazione relativistica per l'energia:
+\begin{equation}
+    \begin{split}
+        &E^2 = p^2 + m^2 \\[8pt]
+        &-\pdv[2]{}{t} = -\lap + m^2 \\[8pt]
+        &\pdv[2]{}{t} -\lap + m^2 = 0
+    \end{split}
+\end{equation}
+Definendo l'operatore d'onda o D'Alembertiano come:
+\begin{equation}
+    \dalop = \pdv[2]{}{t} -\lap
+\end{equation}
+Otteniamo un operatore che possiamo applicare ad una funzione d'onda ottenendo l'equazione di \textbf{Klein-Gordon} (KG):
+\begin{equation}
+    \brackets{\dalop + m^2}\psi = 0
+\end{equation}
+O, alternativamente in notazione tensoriale:
+\begin{equation}
+    \boxed{\brackets{\partial^\mu\partial_\mu + m^2} \psi = 0}
+\end{equation}
+Poiché abbiamo costruito questa equazione mediante la formula per l'energia relativistica, che si può ottenere come prodotto scalare del tensore $p^\mu$, otteniamo che l'equazione di Klein-Gordon è invariante per trasformazioni di Lorentz come desiderato.\\
+Ipotizziamo ora una soluzione per l'equazione del tipo onda piana:
+\begin{equation}
+    \psi = N\efunction^{-i\brackets{\vec{p}\cdot\vec{r} - Et}}
+\end{equation}
+Sostituendo all'interno dell'equazione di KG otteniamo:
+\begin{equation}
+    \begin{split}
+        \lap \psi &= -\vec{p}^2\psi \\[8pt]
+        \pdv[2]{\psi}{t}  &= E^2\psi \\[8pt]
+        &\Downarrow \\[8pt]
+        E^2 &= p^2 + m^2
+    \end{split}
+\end{equation}
+\section{Equazione di Dirac}
+
+\addfigure[Paul Dirac. Fonte: \href{https://en.wikipedia.org/wiki/Paul_Dirac}{Wikipedia}]{jpg/Paul_Dirac}{0.3}
+
+L'equazione di KG è ancora oggi fondamentale, tuttavia è valida solo per particelle a spin nullo, infatti, già nel formalismo di Schrödinger lo spin viene inserito come contributo ``anomalo'' all'interno della spiegazione di molti fenomeni quantistici.
+Paul Dirac dunque vuole ottenere un'equazione che rispetti le leggi relativistiche, e dunque sia consistente con l'equazione di KG, ma che contenga anche informazioni valide per descrivere particelle fondamentali come gli elettroni.
+La brillante idea che viene utilizzata per ricavare la famosa equazione consiste nel ricercare una relazione lineare tra gli operatori differenziali presenti. In particolare abbiamo:
+\begin{equation}
+    \begin{split}
+        \hat{H}\psi &= \brackets{\vec{\alpha} \cdot \vec{p} + \beta m}\psi \\[8pt]
+        &= \brackets{-i\alpha_x\pdv{}{x} -i\alpha_y\pdv{}{y} -i\alpha_z\pdv{}{z} + \beta m}\psi = -i\pdv{\psi}{t}
+    \end{split}
+\end{equation}
+Ipotizziamo di applicare l'operatore a se stesso:
+\begin{equation}
+    \begin{split}
+        &\left[ -i\alpha_x\pdv{}{x} -i\alpha_y\pdv{}{y} -i\alpha_z\pdv{}{z} + \beta m \right]^2  = \\[8pt]
+        &= \left[ -i\alpha_x\pdv{}{x} -i\alpha_y\pdv{}{y} -i\alpha_z\pdv{}{z} + \beta m \right]
+            \left[ -i\alpha_x\pdv{}{x} -i\alpha_y\pdv{}{y} -i\alpha_z\pdv{}{z} + \beta m \right]  \\[8pt]
+        &=
+                \brackets{-i\alpha_x\pdv{}{x}}^2 + \brackets{-i\alpha_y\pdv{}{x}}^2 + \brackets{-i\alpha_z\pdv{}{x}}^2
+                + (\beta m)^2
+                + \text{cross terms}
+        \\[8pt]
+        &=
+                -\alpha_x^2 \pdv[2]{}{x}
+                -\alpha_y^2 \pdv[2]{}{y}
+                -\alpha_z^2 \pdv[2]{}{z}
+                + \beta^2 m^2
+                + \text{cross terms}
+        \\[8pt]
+    \end{split}
+\end{equation}
+I termini incrociati sono:
+\begin{equation}
+    \begin{split}
+        &\left[
+                \brackets{-i\alpha_x\pdv{}{x}} \brackets{-i\alpha_y\pdv{}{y}}
+                + \brackets{-i\alpha_x\pdv{}{x}} \brackets{-i\alpha_z\pdv{}{z}}
+                + \brackets{-i\alpha_y\pdv{}{y}} \brackets{-i\alpha_z\pdv{}{z}}
+                + \text{simmetrici}
+        \right] \\[8pt]
+        &= -\left[
+                \alpha_x\alpha_y \pdv{}{x}{y}
+                + \alpha_x\alpha_z \pdv{}{x}{z}
+                + \alpha_y\alpha_z \pdv{}{y}{z}
+                + \text{simmetrici}
+        \right] \\[8pt]
+    \end{split}
+\end{equation}
+Inoltre, i termini misti con $\beta m $ sono:
+\begin{equation}
+    -im \sqbr{\brackets{\beta \alpha_x + \alpha_x \beta}\pdv{}{x} + \brackets{\beta \alpha_y + \alpha_y \beta}\pdv{}{y} + \brackets{\beta \alpha_z + \alpha_z \beta}\pdv{}{z}}\\[8pt]
+\end{equation}
+Raccogliendo tutti i termini:
+\begin{equation}
+    \begin{split}
+        &= \bigg[
+                -\sum_{j} \alpha_j^2 \pdv[2]{}{x_j}
+                - \sum_{j<k} (\alpha_j\alpha_k + \alpha_k\alpha_j) \pdv{}{x_j}{x_k}\\[8pt]
+                &+ \beta^2 m^2
+                - i m \sum_j \brackets{\beta \alpha_j + \alpha_j\beta} \pdv{}{x_j}
+        \bigg]
+    \end{split}
+\end{equation}
+Per ottenere l'equazione di KG dobbiamo imporre le seguenti condizioni:
+\begin{equation}
+    \begin{cases}
+        \alpha_j^2 = 1 \\[8pt]
+        \beta^2 = 1 \\[8pt]
+        \alpha_j\alpha_k + \alpha_k\alpha_j = 0 \quad (j \neq k) \\[8pt]
+        \beta\alpha_j + \alpha_j\beta = 0
+    \end{cases}
+\end{equation}
+Dalle condizioni 3 e 4 osserviamo che $\alpha_j$ e $\beta$ non possono essere semplici numeri, infatti la relazione che devono rispettare è del tipo:
+\begin{equation}
+    AB = - BA
+\end{equation}
+Ovvero $\alpha_j$ e $\beta$ sono matrici anti-commutative. Le richieste 1 e 2 si traducono dunque in:
+\begin{equation}
+    \begin{cases}
+        \alpha_j^2 = \mathbb{I} \\[8pt]
+        \beta^2 = \mathbb{I} \\[8pt]
+    \end{cases}
+\end{equation}
+Rimane da determinare la dimensione di queste matrici. Per arrivare a questa conclusione abbiamo bisogno di ricavare altre proprietà interessanti di $\alpha_j$ e $\beta$. Sappiamo che il quadrato di queste matrici è l'identità dunque la traccia di una qualsiasi di esse risulta:
+\begin{equation}
+    \Tr (\alpha_j) = \Tr (\alpha_j \mathbb{I}) = \Tr (\alpha_j \beta^2) = \Tr (\beta \alpha_j \beta) = -\Tr (\alpha_j \beta^2) = - \Tr (\alpha_j)
+\end{equation}
+Abbiamo dunque sfruttato l'invarianza della traccia per permutazioni cicliche e la proprietà 4 che richiediamo, ottenendo che la traccia sia nulla $\Tr (\alpha_j) = 0$.
+Inoltre, sempre dall'equivalenza con l'identità sappiamo che se $\lambda$ è autovalore di $\alpha_j$ allora $\lambda^2$ è autovalore del quadrato di $\alpha_j$ ovvero dell'identità, dunque:
+\begin{equation}
+    \lambda^2 = 1 \implies \lambda = \pm 1
+\end{equation}
+Combinando questa informazione con il fatto che la traccia deve essere nulla escludiamo tutte le matrici di dimensioni dispari, consistente con l'impossibilità di soddisfare l'equazione con numeri (matrici $1 \by 1$).
+Le matrici di Pauli rispettano tutte le proprietà sopra citate, tuttavia necessitiamo di 4 matrici, dunque la prima dimensione disponibile è $4 \by 4$. Nonostante le matrici di Pauli non siano direttamente le matrici da noi richieste possiamo sfruttare le loro proprietà per costruire facilmente $\alpha_j$ e $\beta$.
+Osserviamo inoltre che, così facendo la funzione d'onda $\psi$ deve essere composta di almeno $4$ elementi:
+\begin{equation}
+    \psi = \begin{pmatrix}
+    \psi_1 \\
+    \psi_2 \\
+    \psi_3 \\
+    \psi_4
+    \end{pmatrix}
+\end{equation}
+Queste particolari funzioni d'onda sono dette \textbf{spinori}.\\
+Come precedentemente detto ci servono 4 matrici hermitiane e legate da una relazione anti-commutativa. Possiamo dunque costruire queste matrici mediante il prodotto tensoriale tra le matrici di Pauli. In particolare abbiamo che:
+\begin{equation}
+  \alpha_i = \begin{pmatrix}
+    0 & \sigma_i \\
+    \sigma_i & 0
+  \end{pmatrix}, \qquad
+  \beta = \begin{pmatrix}
+    \mathbb{I} & 0 \\
+    0 & -\mathbb{I}
+  \end{pmatrix}
+\end{equation}
+Osserviamo immediatamente che queste matrici rispettano le relazioni desiderate grazie alle proprietà delle matrici di Pauli, infatti:
+\begin{equation}
+  \alpha_i \alpha_j =
+  \begin{pmatrix}
+    0 & \sigma_i \\
+    \sigma_i & 0
+  \end{pmatrix}
+  \begin{pmatrix}
+    0 & \sigma_j \\
+    \sigma_j & 0
+  \end{pmatrix} =
+  \begin{pmatrix}
+    \sigma_i\sigma_j & 0 \\
+    0 & \sigma_i\sigma_j
+  \end{pmatrix} =
+  \begin{pmatrix}
+    -\sigma_j\sigma_i & 0 \\
+    0 & -\sigma_j\sigma_i
+  \end{pmatrix} = -\alpha_j \alpha_i
+\end{equation}
+Ora analizziamo cosa capita alla corrente di densità di probabilità. Abbiamo che:
+\begin{equation}
+  -i\alpha_x\pdv{\psi}{x} -i\alpha_y\pdv{\psi}{y} -i\alpha_z\pdv{\psi}{z} + m\beta\psi = i\pdv{\psi}{t}
+\end{equation}
+E la sua complessa coniugata, ricordando l'hermitianità delle matrici $\alpha$ e $\beta$ risulta:
+\begin{equation}
+  i\pdv{\psi^\dagger}{x}\alpha_x + i\pdv{\psi^\dagger}{y}\alpha_y + i\pdv{\psi^\dagger}{z}\alpha_z + m\psi^\dagger\beta = -i\pdv{\psi^\dagger }{t}
+\end{equation}
+Da cui:
+\begin{equation}
+  \begin{split}
+    &\psi^\dagger\brackets{-i\alpha_x\pdv{\psi}{x} -i\alpha_y\pdv{\psi}{y} -i\alpha_z\pdv{\psi}{z} + m\beta\psi} - \brackets{i\pdv{\psi^\dagger}{x}\alpha_x + i\pdv{\psi^\dagger}{y}\alpha_y + i\pdv{\psi^\dagger}{z}\alpha_z + m\psi^\dagger\beta}\psi = \\[8pt]&= i\psi^\dagger\pdv{\psi}{t}-i\pdv{\psi^\dagger }{t}\psi
+  \end{split}
+\end{equation}
+Ora, osservando che:
+\begin{equation}
+  \psi^\dagger\alpha_x\pdv{\psi}{x} + \pdv{\psi^\dagger}{x}\alpha_x\psi= \pdv{\brackets{\psi^\dagger\alpha_x\psi}}{x}
+\end{equation}
+e che:
+\begin{equation}
+  \psi^\dagger\pdv{\psi}{t} + \pdv{\psi^\dagger}{t}\psi = \pdv{\brackets{\psi^\dagger\psi}}{t}
+\end{equation}
+Possiamo scrivere in forma compatta:
+\begin{equation}
+  \divergence{\brackets{\psi^\dagger\vecsymb{\alpha}\psi}} = \pdv{\rho}{t}
+\end{equation}
+E identifichiamo dunque la corrente di densità di probabilità con:
+\begin{equation}
+  \vec{j} = \psi^\dagger\vecsymb{\alpha}\psi
+\end{equation}
+Inoltre la densità di probabilità è data da:
+\begin{equation}
+  \rho = \psi^\dagger \psi = \begin{pmatrix}
+    \psi_1^* & \psi_2^* & \psi_3^* & \psi_4^*
+  \end{pmatrix}
+  \begin{pmatrix}
+    \psi_1 \\ \psi_2 \\ \psi_3 \\ \psi_4
+  \end{pmatrix} = \abs{\psi_1}^2 + \abs{\psi_2}^2 + \abs{\psi_3}^2 + \abs{\psi_4}^2 > 0
+\end{equation}
+L'equazione di Dirac dunque riporta sempre una densità di probabilità positiva.
+Possiamo ora cercare di riscrivere l'equazione di Dirac in notazione tensoriale. Definiamo le matrici gamma come:
+\begin{equation}
+  \gamma^0 = \beta, \qquad \gamma^i = \beta \alpha_i
+\end{equation}
+In questo modo, moltiplicando ambo i membri dell'equazione di Dirca per $\beta$ otteniamo che:
+\begin{equation}
+  \boxed{\brackets{i\gamma^\mu \partial_\mu - m}\psi = 0}
+\end{equation}
+Possiamo osservare diverse proprietà delle matrici gamma. In particolare:
+\begin{equation}
+  \begin{split}
+    &\brackets{\gamma^0}^2 = \mathbb{I}\\[8pt]
+    &\brackets{\gamma^i}^2 = -\mathbb{I}
+  \end{split}
+\end{equation}
+Da cui otteniamo la seguente relazione di anticommutazione:
+\begin{equation}
+  \{\gamma^\mu, \gamma^\nu\} = \gamma^\mu \gamma^\nu + \gamma^\nu \gamma^\mu = 2 g^{\mu \nu}
+\end{equation}
+Questo serve a definire l'algebra che caratterizza le matrici gamma.\\
+Inoltre, per definizione le matrici $\alpha_i$ e $\beta$ sono anticommutative e hermitiane, dunque le matrici gamma avranno la seguente proprietà:
+\begin{equation}
+  \brackets{\gamma^0}^\dagger = \gamma^0, \qquad \brackets{\gamma^i}^\dagger = \brackets{\beta\alpha_i}^\dagger = \alpha_i^\dagger\beta^\dagger = \alpha_i\beta = -\beta \alpha_i = -\gamma^i
+\end{equation}
+Ovvero la matrice $\gamma^0$ è hermitiana, mentre le altre matrici gamma sono anti-hermitiane.\\
+Grazie ai risultati precedenti possiamo anche definire un quadrivettore di corrente come:
+\begin{equation}
+  j^\mu = \brackets{\rho, \vec{j}} = \psi^\dagger \gamma^0\gamma^\mu \psi
+\end{equation}
+In questo modo l'equazione di continuità può essere riscritta come:
+\begin{equation}
+  \partial_\mu j^\mu = 0
+\end{equation}
+Possiamo ulteriormente semplificare la notazione definendo lo spinore aggiunto come:
+\begin{equation}
+  \bar{\psi} = \psi^\dagger \gamma^0 = \begin{pmatrix}
+    \psi_1^* & \psi_2^* & \psi_3^* & \psi_4^*
+  \end{pmatrix} \begin{pmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0 \\
+    0 & 0 & -1 & 0 \\
+    0 & 0 & 0 & -1
+  \end{pmatrix} = \begin{pmatrix}
+    \psi_1^* & \psi_2^* & -\psi_3^* & -\psi_4^*
+  \end{pmatrix}
+\end{equation}
+Dunque la corrente di densità di probabilità può essere riscritta come:
+\begin{equation}
+  j^\mu = \bar{\psi} \gamma^\mu \psi
+\end{equation}
+Ora che abbiamo trovato una nuova equazione invariante per trasformazioni di Lorentz possiamo chiederci se il momento angolare rappresenti ancora un operatore conservato. Il momento angolare è dato da:
+\begin{equation}
+  \vec{L} = \vec{r} \cross \vec{p}
+\end{equation}
+Analizziamo per componenti:
+\begin{equation}
+  L_i = \epsilon_{ijk} x_j p_k
+\end{equation}
+Calcoliamo il commutatore tra l'hamiltoniana di Dirac e la componente $L_i$:
+\begin{equation}
+  \begin{split}
+    [H, L_i] &= \sqbr{\alpha_j p_j + \beta m, \epsilon_{ikl} x_k p_l } \\[8pt]
+    &= \alpha_j \epsilon_{ikl} \sqbr{p_j, x_k p_l} + \cancel{\sqbr{\beta m, \epsilon_{ikl} x_k p_l}} \\[8pt]
+    &= \alpha_j \epsilon_{ikl} \brackets{\sqbr{p_j, x_k} p_l +\cancel{ x_k \sqbr{p_j, p_l}}} \\[8pt]
+    &= -i \alpha_j \epsilon_{ikl} \delta_{jk} p_l \\[8pt]
+    &= -i \epsilon_{ijl} \alpha_j p_l \neq 0
+  \end{split}
+\end{equation}
+Abbiamo quindi ottenuto che:
+\begin{equation}
+  [H, \vec{L}] = -i\vecsymb{\alpha} \cross \vec{p} \neq 0
+\end{equation}
+Ovvero che l'hamiltoniana di Dirac non commuta con il momento angolare orbitale. Dunque il momento angolare orbitale non è una quantità conservata in questo formalismo.\\
+Identifichiamo ora un nuovo operatore di spin:
+\begin{equation}
+  \vec{S} = \dfrac{1}{2} \vecsymb{\Sigma} = \dfrac{1}{2} \begin{pmatrix}
+    \vecsymb{\sigma} & 0 \\
+    0 & \vecsymb{\sigma}
+  \end{pmatrix}
+\end{equation}
+Calcoliamo ora il commutatore tra l'hamiltoniana di Dirac e lo spin:
+\begin{equation}
+  \begin{split}
+    [H, S_i] &= \sqbr{\alpha_j p_j + \beta m, \dfrac{1}{2} \Sigma_i} \\[8pt]
+    &= \dfrac{1}{2} \sqbr{\alpha_j p_j, \Sigma_i} + \cancel{\dfrac{1}{2}\sqbr{\beta m, \Sigma_i}} \\[8pt]
+    &= \cancel{\dfrac{1}{2} \alpha_j \sqbr{p_j, \Sigma_i}} + \dfrac{1}{2} \sqbr{\alpha_j, \Sigma_i} p_j \\[8pt]
+    &= \dfrac{1}{2} \sqbr{\alpha_j, \Sigma_i} p_j
+  \end{split}
+\end{equation}
+Ricordando la definizione di $\alpha_j$ possiamo calcolare il commutatore:
+\begin{equation}
+  \begin{split}
+    \sqbr{\alpha_j, \Sigma_i} &=
+    \begin{pmatrix}
+      0 & \sigma_j \\
+      \sigma_j & 0
+    \end{pmatrix}
+    \begin{pmatrix}
+      \sigma_i & 0 \\
+      0 & \sigma_i
+    \end{pmatrix} -
+    \begin{pmatrix}
+      \sigma_i & 0 \\
+      0 & \sigma_i
+    \end{pmatrix}
+    \begin{pmatrix}
+      0 & \sigma_j \\
+      \sigma_j & 0
+    \end{pmatrix} \\[8pt]
+    &=
+    \begin{pmatrix}
+      0 & \sigma_j\sigma_i \\
+      \sigma_j\sigma_i & 0
+    \end{pmatrix} -
+    \begin{pmatrix}
+      0 & \sigma_i\sigma_j \\
+      \sigma_i\sigma_j & 0
+    \end{pmatrix} \\[8pt]
+    &=
+    \begin{pmatrix}
+      0 & [\sigma_j, \sigma_i] \\
+      [\sigma_j, \sigma_i] & 0
+    \end{pmatrix} \\[8pt]
+    &= 2i\epsilon_{jik}
+    \begin{pmatrix}
+      0 & \sigma_k \\
+      \sigma_k & 0
+    \end{pmatrix} = 2i\epsilon_{jik} \alpha_k
+  \end{split}
+\end{equation}
+Ovvero:
+\begin{equation}
+  [H, S_i] = i \epsilon_{jik} \alpha_k p_j
+\end{equation}
+Otteniamo dunque che i singoli contributi di momento angolare e spin non sono conservati, ma possiamo definire il momento angolare totale come:
+\begin{equation}
+  \vec{J} = \vec{L} + \vec{S}
+\end{equation}
+Calcoliamo ora il commutatore tra l'hamiltoniana di Dirac e il momento angolare totale:
+\begin{equation}
+  \begin{split}
+    [H, J_i] &= [H, L_i + S_i] = [H, L_i] + [H, S_i] \\[8pt]
+    &= -i \epsilon_{ijl} \alpha_j p_l + i \epsilon_{jik} \alpha_k p_j \\[8pt]
+    &= -i \epsilon_{ijl} \alpha_j p_l + i \epsilon_{ijl} \alpha_l p_j = 0
+  \end{split}
+\end{equation}
+Dunque il momento angolare totale è una quantità conservata nell'equazione di Dirac.\\
+Un'altra osservazione interessante riguarda le soluzioni dell'equazione di Dirac. Consideriamo il caso di una particella a riposo, ovvero con momento nullo $\vec{p} = 0$. Poichè il tensore quantità di moto è:
+\begin{equation}
+  p^\mu = \brackets{E, p_x, p_y, p_z} = \brackets{m, \pdv{}{x}, \pdv{}{y}, \pdv{}{z}} = i \brackets{\pdv{}{t}, \pdv{}{x}, \pdv{}{y}, \pdv{}{z}} = i \partial^\mu
+\end{equation}
+Otteniamo che l'equazione di Dirac diventa:
+\begin{equation}
+  \brackets{i\gamma^0 \partial_0 - m}\psi = 0 \implies \brackets{E \gamma^0 - m}\psi = 0
+\end{equation}
+Sostituendo la matrice $\gamma^0$ otteniamo:
+\begin{equation}
+  \begin{pmatrix}
+    E & 0 & 0 & 0 \\
+    0 & E & 0 & 0 \\
+    0 & 0 & -E & 0 \\
+    0 & 0 & 0 & -E
+  \end{pmatrix}
+  \begin{pmatrix}
+    \phi_1 \\ \phi_2 \\ \phi_3 \\ \phi_4
+  \end{pmatrix}
+  = m \begin{pmatrix}
+    \phi_1 \\ \phi_2 \\ \phi_3 \\ \phi_4
+  \end{pmatrix}
+\end{equation}
+Ovvero stiamo cercando gli autovalori della matrice $E \gamma^0$: Troviamo dunque due autovalori positivi $E = m$ con autovettori:
+\begin{equation}
+    u_1 = N_1 \begin{pmatrix}
+      1 \\ 0 \\ 0 \\ 0
+    \end{pmatrix}, \qquad
+    u_2 = N_2 \begin{pmatrix}
+      0 \\ 1 \\ 0 \\ 0
+    \end{pmatrix}
+\end{equation}
+E due autovalori negativi $E = -m$ con autovettori:
+\begin{equation}
+    u_3 = N_3 \begin{pmatrix}
+      0 \\ 0 \\ 1 \\ 0
+    \end{pmatrix}, \qquad
+    u_4 = N_4 \begin{pmatrix}
+      0 \\ 0 \\ 0 \\ 1
+    \end{pmatrix}
+\end{equation}
+Ricordando che la funzione d'onda è del tipo:
+\begin{equation}
+  \psi = u \efunction^{-iEt}
+\end{equation}
+Otteniamo dunque le seguenti soluzioni per l'equazione di Dirac a riposo:
+\begin{equation}
+    \psi_1 = N_1 \begin{pmatrix}
+      1 \\ 0 \\ 0 \\ 0
+    \end{pmatrix} \efunction^{-imt}, \qquad
+    \psi_2 = N_2 \begin{pmatrix}
+      0 \\ 1 \\ 0 \\ 0
+    \end{pmatrix} \efunction^{-imt}
+\end{equation}
+\begin{equation}
+    \psi_3 = N_3 \begin{pmatrix}
+      0 \\ 0 \\ 1 \\ 0
+    \end{pmatrix} \efunction^{+imt}, \qquad
+    \psi_4 = N_4 \begin{pmatrix}
+      0 \\ 0 \\ 0 \\ 1
+    \end{pmatrix} \efunction^{+imt}
+\end{equation}
+Le soluzioni con $E<0$ non possono essere semplicemente scartate in quanto non fisiche, in quanto l'equazione di Dirac è del primo ordine in tempo e dunque richiede 4 condizioni iniziali per essere risolta, una per ogni componente dello spinore.\\
+Possiamo studiare l'equazione di dirac per sistemi non a riposo $\vec{p} \neq 0$. In questo caso otteniamo 4 soluzioni del tipo:
+\begin{equation}
+    u_1 = N_1\begin{pmatrix}
+      1 \\[8pt] 0 \\[8pt] \dfrac{p_z}{E+m} \\[8pt] \dfrac{p_x + ip_y}{E+m}
+    \end{pmatrix},
+    u_2 = N_2\begin{pmatrix}
+      0 \\[8pt] 1 \\[8pt] \dfrac{p_x - ip_y}{E+m} \\[8pt] -\dfrac{p_z}{E+m}
+    \end{pmatrix},
+    u_3 = N_3\begin{pmatrix}
+      \dfrac{p_z}{E+m} \\[8pt] \dfrac{p_x + ip_y}{E+m} \\[8pt] 1 \\[8pt] 0
+    \end{pmatrix},
+    u_4 = N_4\begin{pmatrix}
+      \dfrac{p_x - ip_y}{E+m} \\[8pt] -\dfrac{p_z}{E+m} \\[8pt] 0 \\[8pt] 1
+    \end{pmatrix}
+\end{equation}
+Interpetazione di Dirac delle soluzioni negative: la particella può arrivare al più allo stato fondamentale, poiché gli stati ad energia negativa sono già occupati e per il principio di esclusione di Pauli la particella non può occupare quegli stati.\\
+Questa interpretazione è detta \textbf{interpretazione del mare di Dirac}. In questo modello il passaggio da energia negativa a positiva viene mediante l'assorbimento di un fotone. Simmetricamente lo riempimento di una lacuna nel mare di elettroni provoca l'emissione di un fotone.\\
+Dunque la produzione di una coppia elettrone-lacuna può essere vista come l'eccitazione di un elettrone dal mare di Dirac.\\
+\subsection{Interpretazione con antiparticelle}
+Nel 1933 C.D. Anderson scopre sperimentalmente l'esistenza del positrone, l'antiparticella dell'elettrone. Questa scoperta fornisce una conferma alle previsioni matematiche presentate da Dirac ed una valida alternativa all'interpretazione del mare di Dirac. Infatti possiamo interpretare le soluzioni negative come soluzioni per particelle con carica opposta, ovvero le antiparticelle.\\
+Questo inoltre risolve il problema dell'incompatibilità dell'interpretazione del mare di Dirac con particelle bosoniche, che non rispettano il principio di esclusione di Pauli.\\
+La scoperta sperimentale avvenne tramite l'osservazione di particelle cariche positivamente in una camera a nebbia immersa in un campo magnetico. Queste particelle presentavano la stessa massa dell'elettrone (le particelle più massive venivano bloccate da una lastra di piombo), ma percorso opposto a quello degli elettroni e, di conseguenza, carica opposta.\\
+L'interpretazione con antiparticelle è detta di Feynman-Stueckelberg. Le antiparticelle possono essere interpretate come particelle che viaggiano indietro nel tempo. In questo modo l'annichilazione di una particella può essere descritta con il seguente diagramma di Feynman:
+
+\addfeynman[Diagramma di Feynman per l'annichilazione di una particella e la sua antiparticella]{
+    \draw[fermion]
+        (0,0) -- (-1,1) node[above]{$e^+$}
+        (-1,-1) node[below]{$e^+$} -- (0,0)
+        (2,0) -- (3,1) node[above]{$e^-$}
+        (3,-1) node[below]{$e^-$} -- (2,0);
+    \draw[photon] (0,0) -- (2,0) node[midway, above] {$\gamma$};
+    \draw[-stealth,thick] (-2,-0.5) -- (-2,0.5) node[midway,left]{Time};
+}{1.2}
+
+Interpretando l'antiparticella come una particella che viaggia indietro nel tempo otteniamo:
+\begin{equation}
+  \psi = N \efunction^{-i\brackets{\vec{p}\cdot\vec{r} - Et}} \rightarrow N \efunction^{-i\vec{p}\cdot\vec{r}} \efunction^{i(-E)(-t)} = \psi
+\end{equation}
+Possiamo definire una quantità legata allo spin, valida per tutte le soluzioni e dunque non limitata a prendere $\hat{S}_z$ come riferimento:
+\begin{equation}
+  h \defineeq \dfrac{2\vec{S}\cdot\vec{p}}{\abs{\vec{p}}} = \dfrac{\boldsymbol{\Sigma}\cdot\vec{p}}{\abs{\vec{p}}}
+\end{equation}
+Questa quantità è detta \textbf{elicità} ed è una proprietà intrinseca delle particelle. Per particelle di massa nulla l'elicità è invariante per trasformazioni di Lorentz, mentre per particelle massive può essere cambiata da un sistema di riferimento ad un altro.\\

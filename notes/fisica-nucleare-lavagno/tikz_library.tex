@@ -1,0 +1,202 @@
+%% Tikz settings for Feynman diagrams
+
+\definecolor{betterYellow}{HTML}{FFBF00}
+\usetikzlibrary{decorations.pathreplacing,decorations.markings,decorations.pathmorphing,arrows.meta,math,shapes}
+\tikzset{
+  % style to apply some styles to each segment of a path
+  on each segment/.style={
+    decorate,
+    decoration={
+      show path construction,
+      moveto code={},
+      lineto code={
+        \path [#1]
+        (\tikzinputsegmentfirst) -- (\tikzinputsegmentlast);
+      },
+      curveto code={
+        \path [#1] (\tikzinputsegmentfirst)
+        .. controls
+        (\tikzinputsegmentsupporta) and (\tikzinputsegmentsupportb)
+        ..
+        (\tikzinputsegmentlast);
+      },
+      closepath code={
+        \path [#1]
+        (\tikzinputsegmentfirst) -- (\tikzinputsegmentlast);
+      },
+    },
+  },
+  % style to add an arrow in the middle of a path as fermion line
+  fermion/.style={
+    thick,
+    draw=#1, % assicura sempre la linea visibile
+    postaction={
+      on each segment={
+        decorate,
+        decoration={
+          markings,
+          mark=at position 0.5 with {\arrow{stealth}}
+        }
+      }
+    }
+  },
+  photon/.style={
+    on each segment = {
+        thick,
+        draw=#1,
+        decorate,
+        decoration={wave,amplitude=6pt}
+    }
+  },
+  gluon/.style={
+    on each segment = {
+        thick,
+        draw=#1,
+        decorate,
+        decoration={gluoncoil,aspect=1,segment length=6pt}
+    }
+  },
+  wzboson/.style={
+    on each segment = {
+        thick,
+        draw=#1,
+        decorate,
+        decoration={wave,amplitude=6pt}
+    }
+  },
+}
+
+\makeatletter
+\pgfdeclaredecoration{gluoncoil}{initial}
+{
+  \state{initial}[
+    width=+0pt,
+    next state=coil,
+    persistent precomputation={
+      \pgfmathsetmacro\matchinglength{
+        (ceil(\pgfdecoratedinputsegmentlength / \pgfdecorationsegmentlength) - \pgfdecoratedinputsegmentlength / \pgfdecorationsegmentlength) > 0.5
+        ? (\pgfdecoratedinputsegmentlength - 2 * \pgfdecorationsegmentaspect * \pgfdecorationsegmentamplitude) / (floor(\pgfdecoratedinputsegmentlength / \pgfdecorationsegmentlength) + 0.499)
+        : (\pgfdecoratedinputsegmentlength - 2 * \pgfdecorationsegmentaspect * \pgfdecorationsegmentamplitude) / (ceil(\pgfdecoratedinputsegmentlength / \pgfdecorationsegmentlength) + 0.499)
+      }
+      \setlength{\pgfdecorationsegmentlength}{\matchinglength pt}
+    },
+  ]{}
+  \state{coil}[
+    switch if less than=%
+      0.5\pgfdecorationsegmentlength%
+      +\pgfdecorationsegmentaspect\pgfdecorationsegmentamplitude%
+      +\pgfdecorationsegmentaspect\pgfdecorationsegmentamplitude to last,
+    width=+\pgfdecorationsegmentlength,
+  ]
+  {
+    \pgfpathcurveto
+    {\pgfpoint@oncoil{0    }{ 0.555}{ 1}}
+    {\pgfpoint@oncoil{0.445}{ 1    }{ 2}}
+    {\pgfpoint@oncoil{1    }{ 1    }{ 3}}
+    \pgfpathcurveto
+    {\pgfpoint@oncoil{1.555}{ 1    }{ 4}}
+    {\pgfpoint@oncoil{2    }{ 0.555}{ 5}}
+    {\pgfpoint@oncoil{2    }{ 0    }{ 6}}
+    \pgfpathcurveto
+    {\pgfpoint@oncoil{2    }{-0.555}{ 7}}
+    {\pgfpoint@oncoil{1.555}{-1    }{ 8}}
+    {\pgfpoint@oncoil{1    }{-1    }{ 9}}
+    \pgfpathcurveto
+    {\pgfpoint@oncoil{0.445}{-1    }{10}}
+    {\pgfpoint@oncoil{0    }{-0.555}{11}}
+    {\pgfpoint@oncoil{0    }{ 0    }{12}}
+  }
+  \state{last}[next state=final]
+  {
+    \pgfpathcurveto
+    {\pgfpoint@oncoil{0    }{ 0.555}{1}}
+    {\pgfpoint@oncoil{0.445}{ 1    }{2}}
+    {\pgfpoint@oncoil{1    }{ 1    }{3}}
+    \pgfpathcurveto
+    {\pgfpoint@oncoil{1.555}{ 1    }{4}}
+    {\pgfpoint@oncoil{2    }{ 0.555}{5}}
+    {\pgfpoint@oncoil{2    }{ 0    }{6}}
+  }
+  \state{final}{}
+}
+\newif\ifstartcompletesineup
+\newif\ifendcompletesineup
+\pgfkeys{
+    /pgf/decoration/.cd,
+    start up/.is if=startcompletesineup,
+    start up=true,
+    start up/.default=true,
+    start down/.style={/pgf/decoration/start up=false},
+    end up/.is if=endcompletesineup,
+    end up=true,
+    end up/.default=true,
+    end down/.style={/pgf/decoration/end up=false}
+}
+\pgfdeclaredecoration{wave}{initial}
+{
+    \state{initial}[
+        width=+0pt,
+        next state=upsine,
+        persistent precomputation={
+            \ifstartcompletesineup
+                \pgfkeys{/pgf/decoration automaton/next state=upsine}
+                \ifendcompletesineup
+                    \pgfmathsetmacro\matchinglength{
+                        0.5*\pgfdecoratedinputsegmentlength / (ceil(0.5* \pgfdecoratedinputsegmentlength / \pgfdecorationsegmentlength) )
+                    }
+                \else
+                    \pgfmathsetmacro\matchinglength{
+                        0.5 * \pgfdecoratedinputsegmentlength / (ceil(0.5 * \pgfdecoratedinputsegmentlength / \pgfdecorationsegmentlength ) - 0.499)
+                    }
+                \fi
+            \else
+                \pgfkeys{/pgf/decoration automaton/next state=downsine}
+                \ifendcompletesineup
+                    \pgfmathsetmacro\matchinglength{
+                        0.5* \pgfdecoratedinputsegmentlength / (ceil(0.5 * \pgfdecoratedinputsegmentlength / \pgfdecorationsegmentlength ) - 0.4999)
+                    }
+                \else
+                    \pgfmathsetmacro\matchinglength{
+                        0.5 * \pgfdecoratedinputsegmentlength / (ceil(0.5 * \pgfdecoratedinputsegmentlength / \pgfdecorationsegmentlength ) )
+                    }
+                \fi
+            \fi
+            \setlength{\pgfdecorationsegmentlength}{\matchinglength pt}
+        }] {}
+    \state{downsine}[width=\pgfdecorationsegmentlength,next state=upsine]{
+        \pgfpathsine{\pgfpoint{0.5\pgfdecorationsegmentlength}{0.5\pgfdecorationsegmentamplitude}}
+        \pgfpathcosine{\pgfpoint{0.5\pgfdecorationsegmentlength}{-0.5\pgfdecorationsegmentamplitude}}
+    }
+    \state{upsine}[width=\pgfdecorationsegmentlength,next state=downsine]{
+        \pgfpathsine{\pgfpoint{0.5\pgfdecorationsegmentlength}{-0.5\pgfdecorationsegmentamplitude}}
+        \pgfpathcosine{\pgfpoint{0.5\pgfdecorationsegmentlength}{0.5\pgfdecorationsegmentamplitude}}
+}
+    \state{final}{}
+}
+
+\makeatother
+\newcommand{\addfeynman}[3][]{
+    \begin{figure}[H]  % !h or H
+        \centering
+        \tikz[scale=#3,transform shape,every node/.style={font=\footnotesize}]{
+            #2
+        }
+        \caption{#1}
+        \label{feynm:#1}
+    \end{figure}
+}
+\newcommand{\addfeynmantikz}[2]{
+        \tikz[scale=#2,transform shape,every node/.style={font=\footnotesize}]{
+            #1
+        }
+}
+\newcommand{\addtikz}[4][]{
+    \begin{figure}[H]  % !h or H
+        \centering
+        \tikz[scale=#3,transform shape,every node/.style={font=\footnotesize}]{
+            #2
+        }
+        \caption{#1}
+        \label{tikz:#4}
+    \end{figure}
+}

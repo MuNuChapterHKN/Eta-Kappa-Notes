@@ -1,0 +1,14 @@
+\chapter{Applicazioni biomediche}
+Possiamo distinguere due principali tipi di imaging con radiazioni:
+\begin{itemize}
+    \item Immagini con radiazione \textbf{esterna}
+\end{itemize}
+Nel primo caso la legge dell'intensità registrata dallo schermo posto dietro all'oggetto è di tipo esponenziale:
+\begin{equation}
+    \dfrac{\dd{I}}{I} = -\mu \dd{\ell} \implies \ln\brackets{\dfrac{I_1}{I_2}} = \int_{1}^{2} \mu \dd{\ell}
+\end{equation}
+Alternativamente possiamo avere una sorgente interna di radiazione. In questo caso un isotopo radioattivo viene iniettato nel corpo e si propaga fino a raggiungere l'organo bersaglio. La radiazione emessa viene poi rilevata da un anello di rivelatori esterni. I migliori isotopi che possiamo usare per questo scopo sono quelli che emettono un solo raggio gamma (no decadimento $\beta$), che vengono rilevati dalle \textbf{gamma camere} e espongono il paziente a dosi minime. Le attività tipiche sono dell'ordine di qualche $\si{\mega\becquerel}$ e dunque hanno un tempo di acquisizione di immagine di circa 15-20 min.\\
+Questi isotopi devono essere prodotti mediante acceleratori di particelle. Ad esempio lo iodio-123 viene prodotto da ciclotroni ed ha un tempo di emivita di 13.21 ore, emettendo raggi gamma da $\qty{159}{\kilo\electronvolt}$. Viene usato per studiare la tiroide.
+\section{Tomografia computerizzata}
+La tomografia computerizzata (CT) è una tecnica di imaging medico che utilizza raggi X per creare immagini dettagliate delle strutture interne del corpo umano. Nasce dall'evoluzione della TAC (tomografia assiale computerizzata), che permetteva di ottenere immagini assiali (cioè sezioni trasversali) del corpo. La CT moderna consente di acquisire immagini in diverse proiezioni e di ricostruire immagini tridimensionali utilizzando sorgenti di radiazioni che orbitano attorno al paziente.\\
+%Video smartbeam imrt

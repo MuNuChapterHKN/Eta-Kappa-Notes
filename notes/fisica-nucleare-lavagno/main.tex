@@ -1,0 +1,122 @@
+% !TEX root = main.tex
+
+\documentclass[italian]{HKNdocument}
+
+\usepackage{epstopdf}
+\usepackage{titlesec}
+\usepackage{subfig}
+\usepackage{tabularx}
+\usepackage{cancel}
+\usepackage{lmodern}
+\usepackage{centernot}
+\usepackage[super]{nth}
+\usepackage{physics}
+\usepackage{siunitx}
+\usepackage{nicematrix}
+\usepackage{marvosym}
+\usepackage{tensor}
+\usepackage{esint}
+\usepackage{bigints}
+\usepackage{tikz}
+\usepackage{mlmodern}
+
+\AtBeginDocument{\RenewCommandCopy\qty\SI}
+\sisetup{
+    range-open-phrase =,
+    range-units = single,
+    range-phrase = \divisionsymbol,
+    output-product=\ensuremath{\cdot},
+    exponent-product=\ensuremath{\cdot},
+    inline-per-mode = symbol,
+    display-per-mode = fraction
+}
+\DeclareSIUnit\angstrom{\text{Å}}
+\DeclareSIUnit\rad{\text{rad}}
+\DeclareSIUnit\rem{\text{rem}}
+\DeclareSIUnit\curie{\text{Ci}}
+\DeclareSIUnit\becquerel{\text{Bq}}
+\DeclareSIUnit\rontgen{\text{R}}
+\DeclareMathAlphabet\mathbfcal{OMS}{cmsy}{b}{n}
+\setlength{\arraycolsep}{8pt}
+\renewcommand{\arraystretch}{1.5}
+\counterwithin{equation}{section}
+\counterwithin{figure}{section}
+\renewcommand{\vec}{\vb}
+\newcommand{\diff}[1]{\mathrm{d}#1}
+\newcommand{\dvec}[1]{\dot{\vec{#1}}}
+\newcommand{\muz}{\mu_0}
+\newcommand{\epsz}{\varepsilon_0}
+\newcommand{\crossout}[1]{\cancel{#1}\raisebox{14pt}{\scriptsize = 0}}
+\newcommand{\bigsum}{\displaystyle\sum}
+\newcommand{\brackets}[1]{\left(#1\right)}
+\newcommand{\bbrackets}[1]{\bigg(#1\bigg)}
+\newcommand{\sqbr}[1]{\left[#1\right]}
+\newcommand{\bigsqbr}[1]{\bigg[#1\bigg]}
+\newcommand{\grbr}[1]{\left{#1\right}}
+\newcommand{\biggrbr}[1]{\bigg{#1\bigg}}
+\newcommand{\defineeq}{\coloneqq}
+\newcommand{\lagr}{\mathcal{L}}
+\newcommand{\hamfun}{\mathcal{H}}
+\newcommand{\hamch}{\mathcal{W}}
+\newcommand{\action}{\mathcal{S}}
+\newcommand{\lap}{\laplacian}
+\newcommand{\efunction}{\mathrm{e}}
+\newcommand{\Velegant}{\mathcal{V}} %Aka V-sexy
+\newcommand{\Telegant}{\mathcal{T}} %Aka T-sexy
+\newcommand{\transpose}[1]{#1^{\;T}}
+\newcommand{\notimplies}{\centernot\implies}
+\newcommand{\potE}{\varphi}
+\newcommand{\dalop}{\square}
+\newcommand{\irf}[1]{\mathcal{#1}}
+\newcommand{\lm}{\Lambda}
+\newcommand{\invlm}{\Lambda^{-1}}
+\newcommand{\by}{\times}
+\newcommand{\mink}{\mathbb{M}^4}
+\newcommand{\anti}{\bar}
+\newcommand{\mass}{\mathcal{M}}
+\newcommand{\avg}[1]{\left\langle #1 \right\rangle}
+\newcommand{\atomsymbol}[1]{\mathrm{#1}} % Usage: \atomsymbol{Element}
+\newcommand{\atom}[3]{\prescript{#2}{#3}{\mathrm{#1}}} % Usage: \atom{Element}{Mass Number}{Atomic Number}
+\newcommand{\placeholder}{\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{res/png/placeholder.png}\end{figure}}
+\newcommand{\vecsymb}[1]{\boldsymbol{#1}}
+\renewcommand{\dv}{%%%
+ \def\flatfrac{\let\flatfrac\savedfrac\dfrac}\derivative*%%%
+}
+\renewcommand{\pdv}{%%%
+ \def\flatfrac{\let\flatfrac\savedfrac\dfrac}\partialderivative*%%%
+}
+\newcommand{\STOP}{
+    \begin{center}
+        \scalebox{2}{\raisebox{-0.5ex}{\Stopsign}}
+        This argument was not done during the lecture, but it may be helpful.
+    \end{center}
+}
+
+\input{tikz_library}
+
+
+
+
+\title{Fisica nucleare con applicazioni biomediche}
+\shorttitle{Fisica nucleare}
+\author{Simone Odetto}
+\docdate{Primo semestre 2025/2026}
+\docversion{1.0}
+
+\begin{document}
+
+\include{chapters/1_Special_relativity}
+\include{chapters/2_Atomic_structure}
+\include{chapters/3_Elementary_particles}
+\include{chapters/4_Hadrons}
+\include{chapters/5_Radioactive_decay}
+\include{chapters/6_Dosimetry}
+\include{chapters/7_Matter_interaction}
+\include{chapters/8_Biomedical_applications}
+\include{chapters/9_Fission_and_fusion}
+\include{chapters/10_Cosmology}
+%\include{chapters/Exercises}
+
+\end{document}

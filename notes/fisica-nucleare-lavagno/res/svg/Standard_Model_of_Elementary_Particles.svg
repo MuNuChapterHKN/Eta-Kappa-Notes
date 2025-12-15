@@ -1,0 +1,756 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1390" height="1330" viewBox="0 0 1390 1330" font-family="system-ui, sans-serif">
+
+  <title>Standard Model of Elementary Particles</title>
+  <desc>Chart of particle classification. Tiles are 240x240px spaced in 250px increments.</desc>
+
+  <metadata>
+    <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+      <cc:Work rdf:about="Standard Model of Elementary Particles">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <dc:creator rdf:resource="https://commons.wikimedia.org/wiki/User:Cush"/>
+        <dc:publisher>Wikimedia Commons</dc:publisher>
+        <cc:license rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/"/>
+        <cc:attributionURL rdf:resource="https://commons.wikimedia.org/w/index.php?title=File:Standard_Model_of_Elementary_Particles.svg"/>
+        <cc:attributionName rdf:resource="https://commons.wikimedia.org/wiki/User:Cush"/>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+
+  <style type="text/css">
+    .head1 { text-anchor: middle; font-size: 64px; font-weight: bold; }
+
+    .pmass, .pchar, .pspin { font-size: 24px; fill: #1a1a1a; }
+
+    .psymr { font-size: 64px; text-anchor: middle; font-family: Arial, serif; }
+    .psymg { font-size: 72px; text-anchor: middle; font-family: Times New Roman, serif; }
+    .sub   { font-size: 48px; baseline-shift: -8px; }
+
+    .pname { font-size: 42px; font-weight: bold; text-anchor: middle; fill: #001122; }
+    .pnam2 { font-size: 36px; font-weight: bold; text-anchor: middle; fill: #001122; }
+    .txcol { font-size: 30px; font-weight: bold; text-anchor: middle; fill: #001122; }
+
+    .pinteract { fill-opacity: 0.03; fill: #E6CC01; stroke: #772222; stroke-miterlimit: 10; stroke-opacity: 0.15; }
+    .pballglow { opacity: 0.25; fill: #FFFFFF; } /* ball background fill */
+    .columnbox { opacity: 0.5; fill: #CCDDFF; } /* columns box fill */
+
+    .txlept { fill: #55CC22; font-size: 54px; font-weight: bold; } /* color for leptons */
+    .txquar { fill: #CC99FF; font-size: 54px; font-weight: bold; } /* color for quarks */
+    .txgabo { fill: #FF6C6C; font-size: 54px; font-weight: bold; } /* color for gauge bosons */
+    .txvebo { fill: #FF6C6C; font-size: 36px; font-weight: bold; } /* color for vector bosons */
+    .txscbo { fill: #EEBB33; font-size: 54px; font-weight: bold; } /* color for scalar bosons */
+    .txtebo { fill: #77AADD; font-size: 54px; font-weight: bold; } /* color for tensor bosons */
+    .txhybo { fill: #77AADD; font-size: 36px; font-weight: bold; } /* color for hypothetical bosons */
+  </style>
+
+  <defs>
+
+    <linearGradient id="lgb_quark" gradientUnits="userSpaceOnUse" x1="45" y1="-15" x2="200" y2="250">
+      <stop offset="0" stop-color="#EEBBFF"/>
+      <stop offset="1" stop-color="#AA77DD"/>
+    </linearGradient>
+
+    <linearGradient id="lgb_lepton" gradientUnits="userSpaceOnUse" x1="45" y1="-15" x2="200" y2="250">
+      <stop offset="0" stop-color="#AAEE77"/>
+      <stop offset="1" stop-color="#66CC33"/>
+    </linearGradient>
+
+    <linearGradient id="lgb_gauge" gradientUnits="userSpaceOnUse" x1="45" y1="-15" x2="200" y2="250">
+      <stop offset="0" stop-color="#FF9977"/>
+      <stop offset="1" stop-color="#DD5544"/>
+    </linearGradient>
+
+    <linearGradient id="lgb_scalar" gradientUnits="userSpaceOnUse" x1="45" y1="-15" x2="200" y2="250">
+      <stop offset="0" stop-color="#EEE677"/>
+      <stop offset="1" stop-color="#EEBB33"/>
+    </linearGradient>
+
+    <linearGradient id="lgb_tensor" gradientUnits="userSpaceOnUse" x1="45" y1="-15" x2="200" y2="250">
+      <stop offset="0" stop-color="#99CCFF"/>
+      <stop offset="1" stop-color="#6699CC"/>
+    </linearGradient>
+
+    <linearGradient id="lgp_quark" gradientUnits="userSpaceOnUse" x1="120" y1="60" x2="165" y2="140">
+      <stop offset="0" stop-color="#EEBBFF"/>
+      <stop offset="1" stop-color="#AA77DD"/>
+    </linearGradient>
+
+    <linearGradient id="lgp_lepton" gradientUnits="userSpaceOnUse" x1="120" y1="60" x2="165" y2="140">
+      <stop offset="0" stop-color="#AAEE77"/>
+      <stop offset="1" stop-color="#66CC33"/>
+    </linearGradient>
+
+    <linearGradient id="lgp_gauge" gradientUnits="userSpaceOnUse" x1="120" y1="60" x2="165" y2="140">
+      <stop offset="0" stop-color="#FF9977"/>
+      <stop offset="1" stop-color="#DD5544"/>
+    </linearGradient>
+
+    <linearGradient id="lgp_scalar" gradientUnits="userSpaceOnUse" x1="120" y1="60" x2="165" y2="140">
+       <stop offset="0" stop-color="#EEE677"/>
+       <stop offset="1" stop-color="#EEBB33"/>
+    </linearGradient>
+
+    <linearGradient id="lgp_tensor" gradientUnits="userSpaceOnUse" x1="120" y1="60" x2="165" y2="140">
+       <stop offset="0" stop-color="#99CCFF"/>
+       <stop offset="1" stop-color="#6699CC"/>
+    </linearGradient>
+
+    <g id="box">
+      <rect x="5" y="5" width="230" height="230" fill="none" stroke-width="10" rx="25" ry="25"/>
+    </g>
+
+    <g id="ball">
+      <circle cx="120" cy="100" r="50.4" class="pballglow"/>
+      <circle cx="120" cy="100" r="47.7" class="pballglow"/>
+      <circle cx="120" cy="100" r="45"/>
+    </g>
+
+    <g id="tilequ">
+      <use xlink:href="#box" stroke="url(#lgb_quark)"/>
+      <use xlink:href="#ball" fill="url(#lgp_quark)"/>
+    </g>
+
+    <g id="tilele">
+      <use xlink:href="#box" stroke="url(#lgb_lepton)"/>
+      <use xlink:href="#ball" fill="url(#lgp_lepton)"/>
+    </g>
+
+    <g id="tilegb">
+      <use xlink:href="#box" stroke="url(#lgb_gauge)"/>
+      <use xlink:href="#ball" fill="url(#lgp_gauge)"/>
+    </g>
+
+    <g id="tilesb">
+      <use xlink:href="#box" stroke="url(#lgb_scalar)"/>
+      <use xlink:href="#ball" fill="url(#lgp_scalar)"/>
+    </g>
+
+    <g id="tiletb">
+      <use xlink:href="#box" stroke="url(#lgb_tensor)"/>
+      <use xlink:href="#ball" fill="url(#lgp_tensor)"/>
+    </g>
+
+  </defs>
+
+  <switch class="head1">
+    <text x="50%" y="95" systemLanguage="en">Standard Model of Elementary Particles</text>
+    <text x="50%" y="95" systemLanguage="ca">Model estàndard, partícules elementals</text>
+    <text x="50%" y="95" systemLanguage="de">Standardmodell der Elementarteilchen</text>
+    <text x="50%" y="95" systemLanguage="es">Modelo estándar de física de partículas</text>
+    <text x="50%" y="95" systemLanguage="eu">Oinarrizko partikulen eredu estandarra</text>
+    <text x="50%" y="95" systemLanguage="fr">Modèle standard, particules élémentaires</text>
+    <text x="50%" y="95" systemLanguage="id">Model Standar dari Partikel Dasar</text>
+    <text x="50%" y="95" systemLanguage="is">Öreindir staðallíkansins</text>
+    <text x="50%" y="95" systemLanguage="ja">素粒子の標準模型</text>
+    <text x="50%" y="95">Standard Model of Elementary Particles</text>
+  </switch>
+
+  <g transform="translate(-20 0)">
+    <desc>Forces</desc>
+    <path id="fstrong" class="pinteract" d="M240.8,322.6c-30.4,0-55,24.6-55,55v250c0,30.4,24.6,55,55,55h500c30.4,0,55-24.6,55-55  c0-107.7,87.3-195,195-195h10c30.4,0,55-24.6,55-55c0-30.4-24.6-55-55-55H240.8"/>
+    <path id="felecmag" class="pinteract" d="M240.8,312.6c-35.9,0-65,29.1-65,65v510c0,35.9,29.1,65,65,65h500c35.9,0,65-29.1,65-65  c0-107.7,82.8-195,185-195h10c35.9,0,65-29.1,65-65c0-35.9-29.1-65-65-65h-10c-102.2,0-185-82.8-185-185c0-35.9-29.1-65-65-65H240.8"/>
+    <path id="fweak" class="pinteract" d="M240.8,302.6c-41.4,0-75,33.6-75,75v760c0,41.4,33.6,75,75,75h760c41.4,0,75-33.6,75-75v-250  c0-41.4-33.6-75-75-75h-10c-96.6,0-175-78.4-175-175v-260c0-41.4-33.6-75-75-75H240.8"/>
+  </g>
+
+  <g>
+    <desc>Fermions</desc>
+    <rect class="columnbox" x="100" y="137.6" width="740" height="80" rx="30" ry="30"/>
+
+    <switch transform="translate(470 166)" class="txcol">
+      <text systemLanguage="en">three generations of matter<tspan x="0" dy="36">(fermions)</tspan></text>
+      <text systemLanguage="ca">les tres generacions de la matèria<tspan x="0" dy="36">(fermions)</tspan></text>
+      <text systemLanguage="de">Drei Generationen der Materie<tspan x="0" dy="36">(Fermionen)</tspan></text>
+      <text systemLanguage="es">las tres generaciones de la materia<tspan x="0" dy="36">(fermiones)</tspan></text>
+      <text systemLanguage="eu">materiaren hiru belaunaldiak<tspan x="0" dy="36">(fermioiak)</tspan></text>
+      <text systemLanguage="fr">trois générations de matière<tspan x="0" dy="36">(fermions)</tspan></text>
+      <text systemLanguage="id">tiga generasi benda<tspan x="0" dy="36">(fermion)</tspan></text>
+      <text systemLanguage="is">Þrjár kynslóðir oddskiptaeinda<tspan x="0" dy="36">(fermíeindir)</tspan></text>
+      <text systemLanguage="ja">物質の三世代<tspan x="0" dy="36">(フェルミ粒子)</tspan></text>
+      <text>three generations of matter<tspan x="0" dy="36">(fermions)</tspan></text>
+    </switch>
+
+    <g transform="translate(120 260)" fill="#112233" font-size="40" text-anchor="middle">
+      <text x="100">I</text>
+      <text x="350">II</text>
+      <text x="600">III</text>
+    </g>
+  </g>
+
+  <g>
+    <desc>Bosons</desc>
+    <rect class="columnbox" x="860" y="137.6" width="500" height="80" rx="30" ry="30"/>
+    <switch transform="translate(1110 166)" class="txcol">
+      <text systemLanguage="en">interactions / force carriers<tspan x="0" dy="36">(bosons)</tspan></text>
+      <text systemLanguage="ca">interaccions/transmissors de forces<tspan x="0" dy="36">(bosons)</tspan></text>
+      <text systemLanguage="de">Wechselwirkungen<tspan x="0" dy="36">(Bosonen)</tspan></text>
+      <text systemLanguage="es">interacciones / transmisores<tspan x="0" dy="36">de fuerzas (bosones)</tspan></text>
+      <text systemLanguage="eu">elkarrekintzak / indar-eramaileak<tspan x="0" dy="36">(bosoiak)</tspan></text>
+      <text systemLanguage="fr">interactions / forces<tspan x="0" dy="36">(bosons)</tspan></text>
+      <text systemLanguage="id">pembawa gaya/interaksi<tspan x="0" dy="36">(boson)</tspan></text>
+      <text systemLanguage="is">víxlverkun / kraftberar<tspan x="0" dy="36">(bóseindir)</tspan></text>
+      <text systemLanguage="ja">相互作用 / 力の伝搬<tspan x="0" dy="36">(ボース粒子)</tspan></text>
+      <text>interactions / force carriers<tspan x="0" dy="36">(bosons)</tspan></text>
+    </switch>
+  </g>
+
+  <g transform="translate(85 315)" opacity="0.65" font-size="24" text-anchor="end">
+    <desc>mass, charge, spin</desc>
+    <switch>
+      <text systemLanguage="en">mass</text>
+      <text systemLanguage="ca">massa</text>
+      <text systemLanguage="de">Masse</text>
+      <text systemLanguage="es">masa</text>
+      <text systemLanguage="eu">masa</text>
+      <text systemLanguage="fr">masse</text>
+      <text systemLanguage="id">massa</text>
+      <text systemLanguage="is">massi</text>
+      <text systemLanguage="ja">質量</text>
+      <text>mass</text>
+    </switch>
+    <switch>
+      <text y="40" systemLanguage="en">charge</text>
+      <text y="40" systemLanguage="ca">càrrega</text>
+      <text y="40" systemLanguage="de">Ladung</text>
+      <text y="40" systemLanguage="es">carga</text>
+      <text y="40" systemLanguage="eu">karga</text>
+      <text y="40" systemLanguage="fr">charge</text>
+      <text y="40" systemLanguage="id">muatan</text>
+      <text y="40" systemLanguage="is">hleðsla</text>
+      <text y="40" systemLanguage="ja">電荷</text>
+      <text y="40">charge</text>
+    </switch>
+    <switch>
+      <text y="80" systemLanguage="en">spin</text>
+      <text y="80" systemLanguage="ca">espin</text>
+      <text y="80" systemLanguage="de">Spin</text>
+      <text y="80" systemLanguage="es">espín</text>
+      <text y="80" systemLanguage="eu">spina</text>
+      <text y="80" systemLanguage="fr">spin</text>
+      <text y="80" systemLanguage="id">spin</text>
+      <text y="80" systemLanguage="is">spuni</text>
+      <text y="80" systemLanguage="ja">スピン</text>
+      <text y="80">spin</text>
+    </switch>
+  </g>
+
+  <g>
+    <desc>Quarks</desc>
+    <switch transform="translate(70 770) rotate(-90)" class="txquar">
+      <text systemLanguage="en">QUARKS</text>
+      <text systemLanguage="ca">QUARKS</text>
+      <text systemLanguage="de">QUARKS</text>
+      <text systemLanguage="es">CUARKS</text>
+      <text systemLanguage="eu">QUARKAK</text>
+      <text systemLanguage="fr">QUARKS</text>
+      <text systemLanguage="id">KUARK</text>
+      <text systemLanguage="is">KVARKAR</text>
+      <text systemLanguage="ja">クォーク</text>
+      <text>QUARKS</text>
+    </switch>
+
+    <g transform="translate(100 275)">
+      <desc>up</desc>
+
+      <use xlink:href="#tilequ"/>
+      <text class="psymr" x="120" y="120">u</text>
+
+      <text class="pmass" x="015" y="040">≈2.16 MeV/c²</text>
+      <text class="pchar" x="015" y="080">⅔</text>
+      <text class="pspin" x="015" y="120">½</text>
+      <switch transform="translate(120 200)">
+        <text class="pname" systemLanguage="en">up</text>
+        <text class="pname" systemLanguage="ca">quark u</text>
+        <text class="pname" systemLanguage="de">Up</text>
+        <text class="pnam2" systemLanguage="es"><tspan dy="-20">cuark</tspan><tspan x="0" dy="40">arriba</tspan></text>
+        <text class="pname" systemLanguage="eu">up</text>
+        <text class="pname" systemLanguage="fr">up</text>
+        <text class="pname" systemLanguage="id">naik</text>
+        <text class="pname" systemLanguage="is">upp</text>
+        <text class="pname" systemLanguage="ja">アップ</text>
+        <text class="pname">up</text>
+      </switch>
+    </g>
+
+    <g transform="translate(100 525)">
+      <desc>down</desc>
+
+      <use xlink:href="#tilequ"/>
+      <text class="psymr" x="120" y="120">d</text>
+
+      <text class="pmass" x="015" y="040">≈4.7 MeV/c²</text>
+      <text class="pchar" x="015" y="080">−⅓</text>
+      <text class="pspin" x="015" y="120">½</text>
+      <switch transform="translate(120 200)">
+        <text class="pname" systemLanguage="en">down</text>
+        <text class="pname" systemLanguage="ca">quark d</text>
+        <text class="pname" systemLanguage="de">Down</text>
+        <text class="pnam2" systemLanguage="es"><tspan dy="-20">cuark</tspan><tspan x="0" dy="40">abajo</tspan></text>
+        <text class="pname" systemLanguage="eu">down</text>
+        <text class="pname" systemLanguage="fr">down</text>
+        <text class="pname" systemLanguage="id">turun</text>
+        <text class="pname" systemLanguage="is">niður</text>
+        <text class="pname" systemLanguage="ja">ダウン</text>
+        <text class="pname">down</text>
+      </switch>
+    </g>
+
+    <g transform="translate(350 275)">
+      <desc>charm</desc>
+
+      <use xlink:href="#tilequ"/>
+      <text class="psymr" x="120" y="120">c</text>
+
+      <text class="pmass" x="015" y="040">≈1.273 GeV/c²</text>
+      <text class="pchar" x="015" y="080">⅔</text>
+      <text class="pspin" x="015" y="120">½</text>
+      <switch transform="translate(120 200)">
+        <text class="pname" systemLanguage="en">charm</text>
+        <text class="pname" systemLanguage="ca">quark c</text>
+        <text class="pname" systemLanguage="de">Charm</text>
+        <text class="pnam2" systemLanguage="es"><tspan dy="-20">cuark</tspan><tspan x="0" dy="40">encantado</tspan></text>
+        <text class="pname" systemLanguage="eu">charm</text>
+        <text class="pname" systemLanguage="fr">charm</text>
+        <text class="pname" systemLanguage="id">pesona</text>
+        <text class="pname" systemLanguage="is">þokki</text>
+        <text class="pname" systemLanguage="ja">チャーム</text>
+        <text class="pname">charm</text>
+      </switch>
+    </g>
+
+    <g transform="translate(350 525)">
+      <desc>strange</desc>
+
+      <use xlink:href="#tilequ"/>
+      <text class="psymr" x="120" y="120">s</text>
+
+      <text class="pmass" x="015" y="040">≈93.5 MeV/c²</text>
+      <text class="pchar" x="015" y="080">−⅓</text>
+      <text class="pspin" x="015" y="120">½</text>
+      <switch transform="translate(120 200)">
+        <text class="pname" systemLanguage="en">strange</text>
+        <text class="pname" systemLanguage="ca">quark s</text>
+        <text class="pname" systemLanguage="de">Strange</text>
+        <text class="pnam2" systemLanguage="es"><tspan dy="-20">cuark</tspan><tspan x="0" dy="40">extraño</tspan></text>
+        <text class="pname" systemLanguage="eu">strange</text>
+        <text class="pname" systemLanguage="fr">strange</text>
+        <text class="pname" systemLanguage="id">asing</text>
+        <text class="pname" systemLanguage="is">sérstæður</text>
+        <text class="pname" systemLanguage="ja">ストレンジ</text>
+        <text class="pname">strange</text>
+      </switch>
+    </g>
+
+    <g transform="translate(600 275)">
+      <desc>top</desc>
+
+      <use xlink:href="#tilequ"/>
+      <text class="psymr" x="120" y="120">t</text>
+
+      <text class="pmass" x="015" y="040">≈172.57 GeV/c²</text>
+      <text class="pchar" x="015" y="080">⅔</text>
+      <text class="pspin" x="015" y="120">½</text>
+      <switch transform="translate(120 200)">
+        <text class="pname" systemLanguage="en">top</text>
+        <text class="pname" systemLanguage="ca">quark t</text>
+        <text class="pname" systemLanguage="de">Top</text>
+        <text class="pnam2" systemLanguage="es"><tspan dy="-20">cuark</tspan><tspan x="0" dy="40">cima</tspan></text>
+        <text class="pname" systemLanguage="eu">top</text>
+        <text class="pname" systemLanguage="fr">top</text>
+        <text class="pname" systemLanguage="id">atas</text>
+        <text class="pname" systemLanguage="is">tryggð</text>
+        <text class="pname" systemLanguage="ja">トップ</text>
+        <text class="pname">top</text>
+      </switch>
+    </g>
+
+    <g transform="translate(600 525)">
+      <desc>bottom</desc>
+
+      <use xlink:href="#tilequ"/>
+      <text class="psymr" x="120" y="120">b</text>
+
+      <text class="pmass" x="015" y="040">≈4.183 GeV/c²</text>
+      <text class="pchar" x="015" y="080">−⅓</text>
+      <text class="pspin" x="015" y="120">½</text>
+      <switch transform="translate(120 200)">
+        <text class="pname" systemLanguage="en">bottom</text>
+        <text class="pname" systemLanguage="ca">quark b</text>
+        <text class="pname" systemLanguage="de">Bottom</text>
+        <text class="pnam2" systemLanguage="es"><tspan dy="-20">cuark</tspan><tspan x="0" dy="40">fondo</tspan></text>
+        <text class="pname" systemLanguage="eu">bottom</text>
+        <text class="pname" systemLanguage="fr">bottom</text>
+        <text class="pname" systemLanguage="id">bawah</text>
+        <text class="pname" systemLanguage="is">blíða</text>
+        <text class="pname" systemLanguage="ja">ボトム</text>
+        <text class="pname">bottom</text>
+      </switch>
+    </g>
+  </g>
+
+  <g>
+    <desc>Leptons</desc>
+    <switch transform="translate(70 1270) rotate(-90)" class="txlept">
+      <text systemLanguage="en">LEPTONS</text>
+      <text systemLanguage="ca">LEPTONS</text>
+      <text systemLanguage="de">LEPTONEN</text>
+      <text systemLanguage="es">LEPTONES</text>
+      <text systemLanguage="eu">LEPTOIAK</text>
+      <text systemLanguage="fr">LEPTONS</text>
+      <text systemLanguage="id">LEPTON</text>
+      <text systemLanguage="is">LÉTTEINDIR</text>
+      <text systemLanguage="ja">レプトン</text>
+      <text>LEPTONS</text>
+    </switch>
+
+    <g transform="translate(100 790)">
+      <desc>electron</desc>
+
+      <use xlink:href="#tilele"/>
+      <text class="psymr" x="120" y="120">e</text>
+
+      <text class="pmass" x="015" y="040">≈0.511 MeV/c²</text>
+      <text class="pchar" x="015" y="080">−1</text>
+      <text class="pspin" x="015" y="120">½</text>
+      <switch transform="translate(120 200)">
+        <text class="pname" systemLanguage="en">electron</text>
+        <text class="pname" systemLanguage="ca">electró</text>
+        <text class="pname" systemLanguage="de">Elektron</text>
+        <text class="pname" systemLanguage="es">electrón</text>
+        <text class="pname" systemLanguage="eu">elektroia</text>
+        <text class="pname" systemLanguage="fr">électron</text>
+        <text class="pname" systemLanguage="id">elektron</text>
+        <text class="pname" systemLanguage="is">rafeind</text>
+        <text class="pname" systemLanguage="ja">電子</text>
+        <text class="pname">electron</text>
+      </switch>
+    </g>
+
+    <g transform="translate(100 1040)">
+      <desc>electron neutrino</desc>
+
+      <use xlink:href="#tilele"/>
+      <text class="psymg" x="120" y="115">ν<tspan class="sub">e</tspan></text>
+
+      <text class="pmass" x="015" y="040">&lt;0.8 eV/c²</text>
+      <text class="pchar" x="015" y="080">0</text>
+      <text class="pspin" x="015" y="120">½</text>
+      <switch transform="translate(120 200)">
+        <text class="pnam2" systemLanguage="en"><tspan dy="-20">electron</tspan><tspan x="0" dy="40">neutrino</tspan></text>
+        <text class="pnam2" systemLanguage="ca"><tspan dy="-20">neutrí</tspan><tspan x="0" dy="40">electrònic</tspan></text>
+        <text class="pnam2" systemLanguage="de"><tspan dy="-20">Elektron-</tspan><tspan x="0" dy="40">Neutrino</tspan></text>
+        <text class="pnam2" systemLanguage="es"><tspan dy="-20">neutrino</tspan><tspan x="0" dy="40">electrónico</tspan></text>
+        <text class="pnam2" systemLanguage="eu"><tspan dy="-20">elektroi</tspan><tspan x="0" dy="40">neutrinoa</tspan></text>
+        <text class="pnam2" systemLanguage="fr"><tspan dy="-20">neutrino</tspan><tspan x="0" dy="40">électronique</tspan></text>
+        <text class="pnam2" systemLanguage="id"><tspan dy="-20">neutrino</tspan><tspan x="0" dy="40">elektron</tspan></text>
+        <text class="pnam2" systemLanguage="is"><tspan dy="-20">fiseind</tspan><tspan x="0" dy="40">rafeindar</tspan></text>
+        <text class="pnam2" systemLanguage="ja"><tspan dy="-20">電子</tspan><tspan x="0" dy="40">ニュートリノ</tspan></text>
+        <text class="pnam2"><tspan dy="-20">electron</tspan><tspan x="0" dy="40">neutrino</tspan></text>
+      </switch>
+    </g>
+
+    <g transform="translate(350 790)">
+      <desc>muon</desc>
+
+      <use xlink:href="#tilele"/>
+      <text class="psymg" x="120" y="120">μ</text>
+
+      <text class="pmass" x="015" y="040">≈105.66 MeV/c²</text>
+      <text class="pchar" x="015" y="080">−1</text>
+      <text class="pspin" x="015" y="120">½</text>
+      <switch transform="translate(120 200)">
+        <text class="pname" systemLanguage="en">muon</text>
+        <text class="pname" systemLanguage="ca">muó</text>
+        <text class="pname" systemLanguage="de">Myon</text>
+        <text class="pname" systemLanguage="es">muon</text>
+        <text class="pname" systemLanguage="eu">muoia</text>
+        <text class="pname" systemLanguage="fr">muon</text>
+        <text class="pname" systemLanguage="id">muon</text>
+        <text class="pname" systemLanguage="is">mýeind</text>
+        <text class="pname" systemLanguage="ja">ミュー粒子</text>
+        <text class="pname">muon</text>
+      </switch>
+    </g>
+
+    <g transform="translate(350 1040)">
+      <desc>muon neutrino</desc>
+
+      <use xlink:href="#tilele"/>
+      <text class="psymg" x="120" y="115">ν<tspan class="sub">μ</tspan></text>
+
+      <text class="pmass" x="015" y="040">&lt;0.17 MeV/c²</text>
+      <text class="pchar" x="015" y="080">0</text>
+      <text class="pspin" x="015" y="120">½</text>
+      <switch transform="translate(120 200)">
+        <text class="pnam2" systemLanguage="en"><tspan dy="-20">muon</tspan><tspan x="0" dy="40">neutrino</tspan></text>
+        <text class="pnam2" systemLanguage="ca"><tspan dy="-20">neutrí</tspan><tspan x="0" dy="40">moònic</tspan></text>
+        <text class="pnam2" systemLanguage="de"><tspan dy="-20">Myon-</tspan><tspan x="0" dy="40">Neutrino</tspan></text>
+        <text class="pnam2" systemLanguage="es"><tspan dy="-20">neutrino</tspan><tspan x="0" dy="40">muónico</tspan></text>
+        <text class="pnam2" systemLanguage="eu"><tspan dy="-20">muoi</tspan><tspan x="0" dy="40">neutrinoa</tspan></text>
+        <text class="pnam2" systemLanguage="fr"><tspan dy="-20">neutrino</tspan><tspan x="0" dy="40">muonique</tspan></text>
+        <text class="pnam2" systemLanguage="id"><tspan dy="-20">neutrino</tspan><tspan x="0" dy="40">muon</tspan></text>
+        <text class="pnam2" systemLanguage="is"><tspan dy="-20">fiseind</tspan><tspan x="0" dy="40">mýeindar</tspan></text>
+        <text class="pnam2" systemLanguage="ja"><tspan dy="-20">ミュー</tspan><tspan x="0" dy="40">ニュートリノ</tspan></text>
+        <text class="pnam2"><tspan dy="-20">muon</tspan><tspan x="0" dy="40">neutrino</tspan></text>
+      </switch>
+    </g>
+
+    <g transform="translate(600 790)">
+      <desc>tau</desc>
+
+      <use xlink:href="#tilele"/>
+      <text class="psymg" x="120" y="120">τ</text>
+
+      <text class="pmass" x="015" y="040">≈1.77693 GeV/c²</text>
+      <text class="pchar" x="015" y="080">−1</text>
+      <text class="pspin" x="015" y="120">½</text>
+      <switch transform="translate(120 200)">
+        <text class="pname" systemLanguage="en">tau</text>
+        <text class="pname" systemLanguage="ca">tauó</text>
+        <text class="pname" systemLanguage="de">Tauon</text>
+        <text class="pname" systemLanguage="es">tauón</text>
+        <text class="pname" systemLanguage="eu">tau</text>
+        <text class="pname" systemLanguage="fr">tau</text>
+        <text class="pname" systemLanguage="id">tau</text>
+        <text class="pname" systemLanguage="is">táeind</text>
+        <text class="pname" systemLanguage="ja">タウ粒子</text>
+        <text class="pname">tau</text>
+      </switch>
+    </g>
+
+    <g transform="translate(600 1040)">
+      <desc>tau neutrino</desc>
+
+      <use xlink:href="#tilele"/>
+      <text class="psymg" x="120" y="115">ν<tspan class="sub">τ</tspan></text>
+
+      <text class="pmass" x="015" y="040">&lt;18.2 MeV/c²</text>
+      <text class="pchar" x="015" y="080">0</text>
+      <text class="pspin" x="015" y="120">½</text>
+      <switch transform="translate(120 200)">
+        <text class="pnam2" systemLanguage="en"><tspan dy="-20">tau</tspan><tspan x="0" dy="40">neutrino</tspan></text>
+        <text class="pnam2" systemLanguage="ca"><tspan dy="-20">neutrí</tspan><tspan x="0" dy="40">tauònic</tspan></text>
+        <text class="pnam2" systemLanguage="de"><tspan dy="-20">Tauon-</tspan><tspan x="0" dy="40">Neutrino</tspan></text>
+        <text class="pnam2" systemLanguage="es"><tspan dy="-20">neutrino</tspan><tspan x="0" dy="40">tauónico</tspan></text>
+        <text class="pnam2" systemLanguage="eu"><tspan dy="-20">tau</tspan><tspan x="0" dy="40">neutrinoa</tspan></text>
+        <text class="pnam2" systemLanguage="fr"><tspan dy="-20">neutrino</tspan><tspan x="0" dy="40">tauique</tspan></text>
+        <text class="pnam2" systemLanguage="id"><tspan dy="-20">neutrino</tspan><tspan x="0" dy="40">tau</tspan></text>
+        <text class="pnam2" systemLanguage="is"><tspan dy="-20">fiseind</tspan><tspan x="0" dy="40">táeindar</tspan></text>
+        <text class="pnam2" systemLanguage="ja"><tspan dy="-20">タウ</tspan><tspan x="0" dy="40">ニュートリノ</tspan></text>
+        <text class="pnam2"><tspan dy="-20">tau</tspan><tspan x="0" dy="40">neutrino</tspan></text>
+      </switch>
+    </g>
+  </g>
+
+  <g>
+    <desc>Gauge Bosons</desc>
+    <switch transform="translate(1170 1270) rotate(-90)" class="txgabo">
+      <text systemLanguage="en">GAUGE BOSONS</text>
+      <text systemLanguage="ca">BOSONS DE GAUGE</text>
+      <text systemLanguage="de">EICHBOSONEN</text>
+      <text systemLanguage="es">BOSONES DE GAUGE</text>
+      <text systemLanguage="eu">GAUGE BOSOIAK</text>
+      <text systemLanguage="fr">BOSONS DE JAUGE</text>
+      <text systemLanguage="id">BOSON TOLOK</text>
+      <text systemLanguage="is">KVARÐAEINDIR</text>
+      <text systemLanguage="ja">ゲージ粒子</text>
+      <text>GAUGE BOSONS</text>
+    </switch>
+    <switch transform="translate(1210 1270) rotate(-90)" class="txvebo">
+      <text systemLanguage="en">VECTOR BOSONS</text>
+      <text systemLanguage="ca">BOSONS VECTORIALS</text>
+      <text systemLanguage="de">VEKTORBOSONEN</text>
+      <text systemLanguage="es">BOSONES VECTORIALES</text>
+      <text systemLanguage="eu">BOSOI BEKTORIALAK</text>
+      <text systemLanguage="fr">BOSONS VECTEURS</text>
+      <text systemLanguage="id">BOSON VEKTOR</text>
+      <text systemLanguage="is">VIGUREINDIR</text>
+      <text systemLanguage="ja">ベクトル粒子</text>
+      <text>VECTOR BOSONS</text>
+    </switch>
+
+    <g transform="translate(860 275)">
+      <desc>gluon</desc>
+
+      <use xlink:href="#tilegb"/>
+      <text class="psymr" x="120" y="120">g</text>
+
+      <text class="pmass" x="015" y="040">0</text>
+      <text class="pchar" x="015" y="080">0</text>
+      <text class="pspin" x="015" y="120">1</text>
+      <switch transform="translate(120 200)">
+        <text class="pname" systemLanguage="en">gluon</text>
+        <text class="pname" systemLanguage="ca">gluó</text>
+        <text class="pname" systemLanguage="de">Gluon</text>
+        <text class="pname" systemLanguage="es">gluon</text>
+        <text class="pname" systemLanguage="eu">gluoia</text>
+        <text class="pname" systemLanguage="fr">gluon</text>
+        <text class="pname" systemLanguage="id">gluon</text>
+        <text class="pname" systemLanguage="is">límeind</text>
+        <text class="pname" systemLanguage="ja">グルーオン</text>
+        <text class="pname">gluon</text>
+      </switch>
+    </g>
+
+    <g transform="translate(860 525)">
+      <desc>photon</desc>
+
+      <use xlink:href="#tilegb"/>
+      <text class="psymg" x="120" y="120">γ</text>
+
+      <text class="pmass" x="015" y="040">0</text>
+      <text class="pchar" x="015" y="080">0</text>
+      <text class="pspin" x="015" y="120">1</text>
+      <switch transform="translate(120 200)">
+        <text class="pname" systemLanguage="en">photon</text>
+        <text class="pname" systemLanguage="ca">fotó</text>
+        <text class="pname" systemLanguage="de">Photon</text>
+        <text class="pname" systemLanguage="es">fotón</text>
+        <text class="pname" systemLanguage="eu">fotoia</text>
+        <text class="pname" systemLanguage="fr">photon</text>
+        <text class="pname" systemLanguage="id">foton</text>
+        <text class="pname" systemLanguage="is">ljóseind</text>
+        <text class="pname" systemLanguage="ja">光子</text>
+        <text class="pname">photon</text>
+      </switch>
+    </g>
+
+    <g transform="translate(860 790)">
+      <desc>Z boson</desc>
+
+      <use xlink:href="#tilegb"/>
+      <text class="psymr" x="120" y="120">Z</text>
+
+      <text class="pmass" x="015" y="040">≈91.188 GeV/c²</text>
+      <text class="pchar" x="015" y="080">0</text>
+      <text class="pspin" x="015" y="120">1</text>
+      <switch transform="translate(120 200)">
+        <text class="pname" systemLanguage="en">Z boson</text>
+        <text class="pname" systemLanguage="ca">bosó Z</text>
+        <text class="pname" systemLanguage="de">Z-Boson</text>
+        <text class="pname" systemLanguage="es">bosón Z</text>
+        <text class="pname" systemLanguage="eu">Z bosoia</text>
+        <text class="pname" systemLanguage="fr">boson Z</text>
+        <text class="pname" systemLanguage="id">boson Z</text>
+        <text class="pname" systemLanguage="is">Z-eind</text>
+        <text class="pname" systemLanguage="ja">Zボソン</text>
+        <text class="pname">Z boson</text>
+      </switch>
+    </g>
+
+    <g transform="translate(860 1040)">
+      <desc>W boson</desc>
+
+      <use xlink:href="#tilegb"/>
+      <text class="psymr" x="120" y="120">W</text>
+
+      <text class="pmass" x="015" y="040">≈80.3692 GeV/c²</text>
+
+      <text class="pchar" x="015" y="080">±1</text>
+      <text class="pspin" x="015" y="120">1</text>
+      <switch transform="translate(120 200)">
+        <text class="pname" systemLanguage="en">W boson</text>
+        <text class="pname" systemLanguage="ca">bosó W</text>
+        <text class="pname" systemLanguage="de">W-Boson</text>
+        <text class="pname" systemLanguage="es">bosón W</text>
+        <text class="pname" systemLanguage="eu">W bosoia</text>
+        <text class="pname" systemLanguage="fr">boson W</text>
+        <text class="pname" systemLanguage="id">boson W</text>
+        <text class="pname" systemLanguage="is">W-eind</text>
+        <text class="pname" systemLanguage="ja">Wボソン</text>
+        <text class="pname">W boson</text>
+      </switch>
+    </g>
+  </g>
+
+  <g>
+    <desc>Scalar Bosons</desc>
+    <switch transform="translate(1350 530) rotate(-90)" class="txscbo">
+      <text text-anchor="end" systemLanguage="en">SCALAR BOSONS</text>
+      <text text-anchor="end" systemLanguage="ca">BOSONS ESCALARS</text>
+      <text text-anchor="end" systemLanguage="de">SKALARBOSONEN</text>
+      <text text-anchor="end" systemLanguage="es">BOSONES ESCALARES</text>
+      <text text-anchor="end" systemLanguage="eu">BOSOI ESKALARRAK</text>
+      <text text-anchor="end" systemLanguage="fr">BOSONS SCALAIRES</text>
+      <text text-anchor="end" systemLanguage="id">BOSON SKALAR</text>
+      <text text-anchor="end" systemLanguage="is">STIGSEINDIR</text>
+      <text text-anchor="end" systemLanguage="ja">スカラー粒子</text>
+      <text text-anchor="end">SCALAR BOSONS</text>
+    </switch>
+
+    <g transform="translate(1120 275)">
+      <desc>Higgs</desc>
+
+      <use xlink:href="#tilesb"/>
+      <text class="psymr" x="120" y="120">H</text>
+
+      <text class="pmass" x="015" y="040">≈125.2 GeV/c²</text>
+      <text class="pchar" x="015" y="080">0</text>
+      <text class="pspin" x="015" y="120">0</text>
+      <switch transform="translate(120 200)">
+        <text class="pname" systemLanguage="en">higgs</text>
+        <text class="pname" systemLanguage="ca">bosó de higgs</text>
+        <text class="pname" systemLanguage="de">Higgs</text>
+        <text class="pnam2" systemLanguage="es"><tspan dy="-20">bosón</tspan><tspan x="0" dy="40">de Higgs</tspan></text>
+        <text class="pnam2" systemLanguage="eu"><tspan dy="-20">Higgs</tspan><tspan x="0" dy="40">bosoia</tspan></text>
+        <text class="pnam2" systemLanguage="fr"><tspan dy="-20">boson</tspan><tspan x="0" dy="40">de Higgs</tspan></text>
+        <text class="pname" systemLanguage="id">Higgs</text>
+        <text class="pname" systemLanguage="is">higgs</text>
+        <text class="pname" systemLanguage="ja">ヒッグス粒子</text>
+        <text class="pname">higgs</text>
+      </switch>
+    </g>
+  </g>
+
+  <g style="display:none;">
+    <desc>Tensor Bosons</desc>
+    <switch transform="translate(1610 530) rotate(-90)" class="txtebo">
+      <text text-anchor="end" systemLanguage="en">TENSOR BOSONS</text>
+      <text text-anchor="end" systemLanguage="ca">BOSONS TENSORIALS</text>
+      <text text-anchor="end" systemLanguage="de">TENSORBOSONEN</text>
+      <text text-anchor="end" systemLanguage="es">BOSONES TENSORIALES</text>
+      <text text-anchor="end" systemLanguage="eu">BOSOI TENTSOREAK</text>
+      <text text-anchor="end" systemLanguage="fr">BOSONS TENSEURS</text>
+      <text text-anchor="end" systemLanguage="id">BOSON TENSOR</text>
+      <!-- <text text-anchor="end" systemLanguage="is">TENSOR BOSONS</text> -->
+      <!-- <text text-anchor="end" systemLanguage="ja">TENSOR BOSONS</text> -->
+      <text text-anchor="end">TENSOR BOSONS</text>
+    </switch>
+    <switch transform="translate(1555 530) rotate(-90)" class="txhybo">
+      <text text-anchor="end" systemLanguage="en">HYPOTHETICAL</text>
+      <text text-anchor="end" systemLanguage="ca">HIPOTÈTICS</text>
+      <text text-anchor="end" systemLanguage="de">HYPOTHETISCHE</text>
+      <text text-anchor="end" systemLanguage="es">HIPOTÉTICOS</text>
+      <text text-anchor="end" systemLanguage="eu">HIPOTETIKOAK</text>
+      <text text-anchor="end" systemLanguage="fr">HYPOTHÉTIQUES</text>
+      <text text-anchor="end" systemLanguage="id">HIPOTESIS</text>
+      <!-- <text text-anchor="end" systemLanguage="is">HYPOTHETICAL</text> -->
+      <!-- <text text-anchor="end" systemLanguage="ja">HYPOTHETICAL</text> -->
+      <text text-anchor="end">HYPOTHETICAL</text>
+    </switch>
+
+    <g transform="translate(1380 275)">
+      <desc>Graviton</desc>
+
+      <use xlink:href="#tiletb"/>
+      <text class="psymr" x="120" y="120">G</text>
+
+      <text class="pmass" x="015" y="040">0</text>
+      <text class="pchar" x="015" y="080">0</text>
+      <text class="pspin" x="015" y="120">2</text>
+      <switch transform="translate(120 200)">
+        <text class="pname" systemLanguage="en">graviton</text>
+        <text class="pname" systemLanguage="ca">gravitó</text>
+        <text class="pname" systemLanguage="de">Graviton</text>
+        <text class="pname" systemLanguage="es">gravitón</text>
+        <text class="pname" systemLanguage="eu">grabitoia</text>
+        <text class="pname" systemLanguage="fr">graviton</text>
+        <text class="pname" systemLanguage="id">graviton</text>
+        <text class="pname" systemLanguage="is">þyngdareind</text>
+        <text class="pname" systemLanguage="ja">重力子</text>
+        <text class="pname">graviton</text>
+      </switch>
+    </g>
+  </g>
+
+</svg>
