@@ -1,0 +1,146 @@
+\chapter{Referencing}
+
+In \LaTeX{}, you can reference any numbered element (equations, sections, subsections, figures, tables, pages, etc.) after you assigned a label to it.
+
+\textbf{Never} reference an element ``manually'' by writing its number directly in the text. Always use labels and the \verb|\ref{}| command to reference the element, so that the reference will be automatically updated if the numbering changes.
+
+\section{Assigning labels}
+\label{sec:assigning_labels}
+
+To label a numbered element use the \verb|\label{}| command within its environment.
+The argument of the \verb|\label{}| command is the name of the label, which must be unique in the document.
+
+It is good practice to always prefix the label name with a short identifier of the type of element being labeled (e.g., \texttt{eq:} for equations, \texttt{fig:} for figures, \texttt{sec:} for sections and subsections, etc.).
+
+Example -- labeling this section:
+\begin{quote}
+\begin{verbatim}
+\subsection{Assigning labels}
+\label{sec:assigning_labels}
+\end{verbatim}
+\end{quote}
+
+Example -- labeling an equation:
+\begin{quote}
+\begin{verbatim}
+\begin{equation}
+\label{eq:energy}
+    E = m c^2
+\end{equation}
+\end{verbatim}
+\end{quote}
+\begin{equation}
+\label{eq:energy}
+    E = m c^2
+\end{equation}
+
+In this case, the equation is labeled with \texttt{eq:energy}. Now, LaTeX will automatically assign a number to this equation, which can be cited later in the document.
+
+You can label any equation with a number, including those in subequations:
+
+\begin{quote}
+\begin{verbatim}
+\begin{subequations}
+\begin{align}
+    \cos(2 \alpha) & = \cos^2 \alpha - \sin^2 \alpha = \\
+    & = 2 \cos^2 \alpha - 1 = \\
+\label{eq:one_sin}
+    & = 1 - 2 \sin^2 \alpha
+\end{align}
+\end{subequations}
+\end{verbatim}
+\end{quote}
+\begin{subequations}
+\begin{align}
+    \cos(2 \alpha) & = \cos^2 \alpha - \sin^2 \alpha = \\
+    & = 2 \cos^2 \alpha - 1 = \\
+\label{eq:one_sin}
+    & = 1 - 2 \sin^2 \alpha
+\end{align}
+\end{subequations}
+
+Notice that the provided commands to include the figures already reference the figure with a label (see the \href{https://github.com/MuNuChapterHKN/Eta-Kappa-Notes/blob/structure/CONTRIBUTING.md#useful-commands}{Figures § Useful commands} section of the \texttt{CONTRIBUTING.md} file of the repository).
+
+\section{Referencing an element}
+
+To reference a labeled element, use the \verb|\ref{}| command. The argument of the \verb|\ref{}| command is the name of the label that was assigned to the element.
+
+Two caveats:
+\begin{itemize}
+    \item If the referenced number is preceded by a prefix (e.g., ``Fig.'', ``eq.'', ``Section''), it is good practice to insert a non-breaking space between the prefix and the number using \verb|~|, instead of a regular space.
+    \item To avoid excessive spacing when the prefix ends with a period (e.g., ``Fig.'', ``eq.'', etc.), it is good practice to insert a negative thin space using \verb|\!| before the non-breaking space.
+\end{itemize}
+
+Example -- referencing the previous section:
+\begin{quote}
+\begin{verbatim}
+As shown in Section~\ref{sec:assigning_labels},
+you can assign labels to sections and subsections.
+\end{verbatim}
+\end{quote}
+\begin{quote}
+    As shown in Section~\ref{sec:assigning_labels}, you can assign labels to sections and subsections.
+\end{quote}
+
+Example -- referencing a figure:
+\begin{quote}
+\begin{verbatim}
+See Fig.\!~\ref{fig:esempio_geogebra}.
+\end{verbatim}
+\end{quote}
+\begin{quote}
+    See Fig.\!~\ref{fig:esempio_geogebra}.
+\end{quote}
+
+\subsection{Referencing an equation}
+
+Use the \verb|\eqref{}| command to reference an equation, which will automatically include the parentheses around the equation number.
+
+Example:
+\begin{quote}
+\begin{verbatim}
+As shown in \eqref{eq:energy},
+Einstein's famous formula relates energy to mass.
+\end{verbatim}
+\end{quote}
+\begin{quote}
+    As shown in \eqref{eq:energy},
+    Einstein's famous formula relates energy to mass.
+\end{quote}
+
+Example:
+\begin{quote}
+\begin{verbatim}
+Let's use the variant of eq.\!~\eqref{eq:one_sin}, ...
+\end{verbatim}
+\end{quote}
+\begin{quote}
+    Let's use the variant of eq.\!~\eqref{eq:one_sin}, ...
+\end{quote}
+
+\subsection{Referencing a page}
+
+Use the \verb|\pageref{}| command to reference the page number where the labeled element appears. The argument of the \verb|\pageref{}| command is the name of the label that was assigned to the element.
+
+Example -- referencing this page:
+\begin{quote}
+\begin{verbatim}
+\label{page:ref_examples}
+As shown on page~\pageref{page:ref_examples}, ...
+\end{verbatim}
+\end{quote}
+\begin{quote}
+    \label{page:ref_examples}
+    As shown on page~\pageref{page:ref_examples}, ...
+\end{quote}
+
+Notice that here the label is assigned to the current section, not to the page itself.
+Compare the previous example with the following, which doesn't use \verb|\pageref{}|:
+\begin{quote}
+\begin{verbatim}
+As shown in Section~\ref{page:ref_examples}, ...
+\end{verbatim}
+\end{quote}
+\begin{quote}
+    As shown in Section~\ref{page:ref_examples}, ...
+\end{quote}
