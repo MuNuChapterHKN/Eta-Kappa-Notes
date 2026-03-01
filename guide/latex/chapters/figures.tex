@@ -1,0 +1,25 @@
+\chapter{Figures}
+
+Here are some examples of usage of the commands for inserting figures discussed in the \href{https://github.com/MuNuChapterHKN/Eta-Kappa-Notes/blob/structure/CONTRIBUTING.md#useful-commands}{Figures § Useful commands} section of the \texttt{CONTRIBUTING.md} file of the repository.
+
+\addsvg[Example graph created with Geogebra.]{esempio_geogebra}{0.8}
+
+\addsvg[2D graph created with Matplotlib, see the script.]{2d_example}{0.8}
+
+\addsvg[Continuous 3D graph created with Matplotlib, see the script.]{3d_continuous_example}{0.6}
+
+\addsvg[Continuous 3D graph created with Matplotlib, see the script.]{3d_wireframe_example}{0.6}
+
+\adddrawio[Dummy conceptual map created with Draw.io.]{esempioMappaConcettuale}{0.8}
+
+\adddrawio[Basic circuit created with with Draw.io.]{esempioCircuito}{0.8}
+
+If you open the \texttt{.tex} file, you will notice that I have inserted the \texttt{\textbackslash hfill} command between each graph. This is to prevent \LaTeX{} from optimizing the space by fragmenting the bulleted list below between the graphs. Don't believe me? Try it and see what chaos it creates.
+
+Use the labels when you need to refer to formulas, figures, tables, and pages in your text.
+Here are the main ways you can reference an object with an associated label:
+\begin{enumerate}
+    \item \texttt{\textbackslash ref\{fig:esempio\_geogebra\}}: To refer to the number associated with the label, such as a figure, table, section, etc. (example: Fig.\!~\ref{fig:esempio_geogebra}).
+    \item \texttt{\textbackslash pageref\{fig:esempio\_geogebra\}}: To refer to the page number where the labeled object appears (example: page~\pageref{fig:esempio_geogebra}).
+    \item \texttt{\textbackslash eqref\{fig:esempio\_geogebra\}}: To refer to an equation, if the label has been applied to an equation environment (example: eq.\!~\eqref{fig:esempio_geogebra}).
+\end{enumerate}
