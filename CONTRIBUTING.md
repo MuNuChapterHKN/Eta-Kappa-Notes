@@ -237,7 +237,7 @@ The command also defines the label `fig:path/to/figure` so that you can later re
 The package `float`, loaded in the preamble, provides the `H` placement option.
 
 It is used with figures and tables and it means that the figure or table must be added *exactly* 'here'.
-The `!h` option may be disregarded is LaTeX chooses so, so using `H` can sometimes provide better spacing in the document.
+The `!h` option may be disregarded if LaTeX chooses so, so using `H` can sometimes provide better spacing in the document.
 
 The three commands above use the `H` option by default.
 
