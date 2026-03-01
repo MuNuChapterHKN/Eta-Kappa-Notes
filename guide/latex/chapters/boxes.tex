@@ -1,25 +1,36 @@
 \chapter{Boxes}
+
 \section{Boxing examples}
 
-Additionally, the numbering between different types of boxes (such as Definitions, Theorems, Exercises, etc.) is independent. This means that the numbering for Definitions will not affect the numbering for Theorems, and so on.
-The numbering of the various boxes (such as Definitions, Theorems, Exercises, etc.) is automatically reset at the beginning of each chapter. This means that every time a new chapter starts, the box counter resets to 1.
+The numbering of the various boxes (such as Definitions, Theorems, Exercises, etc.)\ is automatically reset at the beginning of each chapter. This means that every time a new chapter starts, the box counter resets to 1.
 
-\begin{definition}{An example of a definition}
-  This is an example of a colored box with the title ``Definition'' in English.
+Additionally, the numbering between different types of boxes (such as Definitions, Theorems, Exercises, etc.)\ is independent. This means that the numbering for Definitions will not affect the numbering for Theorems, and so on.
+
+\begin{definition}{Definition term}
+    Example of a colored ``Definition'' box.
 \end{definition}
 
-\begin{theorem}{An example of a theorem}
-  This is an example of a colored box with the title ``Theorem'' in English.
+\begin{theorem}{Theorem name}
+    Example of a colored ``Theorem'' box.
 \end{theorem}
 
-\begin{corollary}{An example of a corollary}
-  This is an example of a colored box with the title ``Corollary'' in English.
+\begin{corollary}{Corollary name}
+    Example of a colored ``Corollary'' box.
 \end{corollary}
 
-\begin{exercise}{An example of an exercise}
-  This is an example of a colored box with the title ``Exercise'' in English.
+\begin{exercise}{Exercise title}
+    Example of a colored ``Exercise'' box.
 \end{exercise}
 
-\begin{observation}{An example of an observation}
-  This is an example of a colored box with the title ``Observation'' in English.
+\begin{observation}{Observation title}
+    Example of a colored ``Observation'' box.
 \end{observation}
+
+The source code is the same for both Italian and English documents:
+\begin{quote}
+\begin{verbatim}
+\begin{theorem}{Theorem name}
+    Example of a colored ``Theorem'' box.
+\end{theorem}
+\end{verbatim}
+\end{quote}
