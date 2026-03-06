@@ -26,15 +26,13 @@ You can insert a code block with the \texttt{lstlisting} environment, with the f
 \end{itemize}
 
 Example of a Python program with caption ``Demo'' and label \texttt{code:demo}:
-\begin{quote}
-\begin{verbatim}
+\begin{lstlisting}[language=TeX, escapechar=|]
 \begin{lstlisting}[language=Python, caption={Demo},
     label=code:demo]
 def main():
     print("Hello, World!")
+|\textbackslash|end{lstlisting}
 \end{lstlisting}
-\end{verbatim}
-\end{quote}
 \begin{lstlisting}[language=Python, caption={Demo}, label=code:demo]
 def main():
     print("Hello, World!")
@@ -48,11 +46,9 @@ For example, \verb|``Code~\ref{code:demo}''| gives ``Code~\ref{code:demo}''.
 With \verb|\lstinputlisting|, you can also include an external file containing the code.
 
 Here is an example using the \texttt{hkn-numbered} style:
-\begin{quote}
-\begin{verbatim}
+\begin{lstlisting}[language=TeX]
 \lstinputlisting[language=Python, style=hkn-numbered]{res/py/
 2d_example.py}
-\end{verbatim}
-\end{quote}
+\end{lstlisting}
 \vspace{0.5\baselineskip}
 \lstinputlisting[language=Python, style=hkn-numbered]{res/py/2d_example.py}

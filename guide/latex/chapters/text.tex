@@ -9,8 +9,7 @@ To create a new paragraph, simply leave an empty line in the source code.
 If you really need to force a line break without starting a new paragraph, you can use the \verb|\\| command at the end of the line.
 
 Example (demonstrative, bad practice):
-\begin{quote}
-\begin{verbatim}
+\begin{lstlisting}[language=TeX]
 This is     a sentence with extra  spaces.\\
 Here is a new line without starting a new paragraph. Very
 long sentence that continues on the next line in the source
@@ -18,8 +17,7 @@ code but will be formatted correctly in the output. Another
 sentence.
 
 New paragraph.
-\end{verbatim}
-\end{quote}
+\end{lstlisting}
 \begin{quote}
 This is     a sentence with extra  spaces.\\
 Here is a new line without starting a new paragraph. Very long sentence that continues on the next line in the source code but will be formatted correctly in the output. Another sentence.
@@ -28,8 +26,7 @@ New paragraph.
 \end{quote}
 
 Example (good practice):
-\begin{quote}
-\begin{verbatim}
+\begin{lstlisting}[language=TeX]
 This is a sentence with no extra spaces.
 
 Here is a new line without starting a new paragraph.
@@ -38,8 +35,7 @@ source code but will be formatted correctly in the output.
 Another sentence.
 
 New paragraph.
-\end{verbatim}
-\end{quote}
+\end{lstlisting}
 \begin{quote}
 This is a sentence with no extra spaces.
 
@@ -98,8 +94,7 @@ Keep in mind the following:
 Bullet lists can be created using the \texttt{itemize} environment, while numbered lists can be created using the \texttt{enumerate} environment.
 
 Example:
-\begin{quote}
-\begin{verbatim}
+\begin{lstlisting}[language=TeX]
 \begin{itemize}
     \item First item
     \begin{itemize}
@@ -112,8 +107,7 @@ Example:
     \end{itemize}
     \item Last item
 \end{itemize}
-\end{verbatim}
-\end{quote}
+\end{lstlisting}
 \begin{quote}
 \begin{itemize}
     \item First item

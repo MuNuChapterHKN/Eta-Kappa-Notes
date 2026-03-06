@@ -71,19 +71,19 @@ The syntax of the \LaTeX{} source code for the table \ref{tab:longtable_example}
 
 \begin{itemize}
     \item \textbf{Table Declaration}:
-    \begin{verbatim}
+    \begin{lstlisting}[language=TeX]
     \begin{longtable}{|l|c|c|p{6.2cm}|}
-    \end{verbatim}
+    \end{lstlisting}
     \vspace{-\baselineskip}
     Here, a table is declared with 4 columns. The first column is left-aligned (\verb|l|), the second and third columns are centered (\verb|c|), while the fourth column has a width of 6.2 cm and adjusts to the content (\verb|p{6.2cm}|).
 
     \item \textbf{Table Header}:
-    \begin{verbatim}
+    \begin{lstlisting}[language=TeX]
     \hline
     \textbf{Concept} & \textbf{Type} & \textbf{Volume}
     & \textbf{Reason} \\
     \hline
-    \end{verbatim}
+    \end{lstlisting}
     \vspace{-\baselineskip}
     These lines are used to define the header of the table and separate it from the subsequent rows with a horizontal line.
 
@@ -100,9 +100,9 @@ The syntax of the \LaTeX{} source code for the table \ref{tab:longtable_example}
     The data in each cell is separated by \verb|&|.
 
     Example:
-    \begin{verbatim}
+    \begin{lstlisting}[language=TeX]
     Utente & E & 30.000.000 & Ipotizziamo una piattaforma
     in cui sono iscritti 30 milioni di utenti \\
     \hline
-    \end{verbatim}
+    \end{lstlisting}
 \end{itemize}

@@ -21,13 +21,11 @@ To insert a single equation in display mode, you can use
 \end{itemize}
 
 For example, the code
-\begin{quote}
-\begin{verbatim}
+\begin{lstlisting}[language=TeX]
 \begin{equation}
     E = m c^2
 \end{equation}
-\end{verbatim}
-\end{quote}
+\end{lstlisting}
 results in
 \begin{equation}
     E = m c^2
@@ -39,16 +37,14 @@ A long equation can be split into multiple lines using the \verb|multline| envir
 The lines are separated by \verb|\\|; the first line is left-aligned, the last line is right-aligned, and the lines in between are centered.
 
 Example:
-\begin{quote}
-\begin{verbatim}
+\begin{lstlisting}[language=TeX]
 \begin{multline}
     (a + b)^{10} = a^{10} + 10 a^9 b + 45 a^8 b^2
     + 120 a^7 b^3 + 210 a^6 b^4 + {} \\
     {} + 252 a^5 b^5 + 210 a^4 b^6 + 120 a^3 b^7
     + 45 a^2 b^8 + 10 a b^9 + b^{10}
 \end{multline}
-\end{verbatim}
-\end{quote}
+\end{lstlisting}
 \begin{multline}
     (a + b)^{10} = a^{10} + 10 a^9 b + 45 a^8 b^2
     + 120 a^7 b^3 + 210 a^6 b^4 + {} \\
@@ -68,29 +64,25 @@ Each equation will retain its own number, and you can label each one separately.
 Lines are separated by \verb|\\|, and the alignment point in the \verb|align| environment is indicated by \verb|&|.
 
 Example with \verb|gather|:
-\begin{quote}
-\begin{verbatim}
+\begin{lstlisting}[language=TeX]
 \begin{gather}
     a x^2 + b x + c = 0 \\
     \Delta = b^2 - 4 a c
 \end{gather}
-\end{verbatim}
-\end{quote}
+\end{lstlisting}
 \begin{gather}
     a x^2 + b x + c = 0 \\
     \Delta = b^2 - 4 a c
 \end{gather}
 
 Example with \verb|align|:
-\begin{quote}
-\begin{verbatim}
+\begin{lstlisting}[language=TeX]
 \begin{align}
     \cos(2 \alpha) & = \cos^2(\alpha) - \sin^2(\alpha) = \\
     & = 2 \cos^2(\alpha) - 1 = \\
     & = 1 - 2 \sin^2(\alpha)
 \end{align}
-\end{verbatim}
-\end{quote}
+\end{lstlisting}
 \begin{align}
     \cos(2 \alpha) & = \cos^2 \alpha - \sin^2 \alpha = \\
     & = 2 \cos^2 \alpha - 1 = \\
@@ -103,8 +95,7 @@ Example with \verb|align|:
 To group the equation numbers as well, you can use \verb|gathered| and \verb|aligned| environments inside an \verb|equation|, \verb|gather|, or \verb|align| environment.
 
 Example with \verb|gathered| inside \verb|gather|:
-\begin{quote}
-\begin{verbatim}
+\begin{lstlisting}[language=TeX]
 \begin{gather}
     \cos^2 \alpha = \frac13 \\
 \begin{gathered}
@@ -112,8 +103,7 @@ Example with \verb|gathered| inside \verb|gather|:
     = 2 \cos^2 \alpha - 1 = -\frac13
 \end{gathered}
 \end{gather}
-\end{verbatim}
-\end{quote}
+\end{lstlisting}
 \begin{gather}
     \cos^2 \alpha = \frac13 \\
 \begin{gathered}
@@ -125,8 +115,7 @@ Example with \verb|gathered| inside \verb|gather|:
 \subsection{Equation subnumbering}
 
 You can also use the \verb|subequations| environment around \verb|gather| or \verb|align| to introduce a subnumbering:
-\begin{quote}
-\begin{verbatim}
+\begin{lstlisting}[language=TeX]
 \begin{subequations}
 \begin{align}
     \cos(2 \alpha) & = \cos^2 \alpha - \sin^2 \alpha = \\
@@ -134,8 +123,7 @@ You can also use the \verb|subequations| environment around \verb|gather| or \ve
     & = 1 - 2 \sin^2 \alpha
 \end{align}
 \end{subequations}
-\end{verbatim}
-\end{quote}
+\end{lstlisting}
 \begin{subequations}
 \begin{align}
     \cos(2 \alpha) & = \cos^2 \alpha - \sin^2 \alpha = \\
