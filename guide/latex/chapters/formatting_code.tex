@@ -4,11 +4,11 @@ In this chapter, we will show how to use the \texttt{listings} package to format
 
 \section{Inserting Code}
 
-After defining the style, you can use it to format code within the document. To do this, use the \texttt{\textbackslash lstset} command to set the style and the \texttt{\textbackslash lstinputlisting} or \texttt{\textbackslash begin{lstlisting}...\textbackslash end{lstlisting}} command to include the code. Here is an example:
+After defining the style, you can use it to format code within the document. To do this, use the \verb|\lstset| command to set the style and the \verb|lstinputlisting| or \verb|\begin{lstlisting}...\end{lstlisting}| command to include the code. Here is an example:
 
 \subsection{Example with External File} You can also include an external file containing the code:
 
-\lstinputlisting[language=Python, style=hkn]{res/py/2d_example.py}
+\lstinputlisting[language=Python, style=hkn-numbered]{res/py/2d_example.py}
 
 \section{Formatting the Code}
 
@@ -20,18 +20,22 @@ The \texttt{listings} package allows you to display source code within a LaTeX d
 
 For example, to include Python code in the document, you can use the following command:
 
-\begin{lstlisting}
-    \begin{lstlisting}[language=Python]
-        def hello_world():
-        print("Hello, World!")
-  \end {lstlisting}
-\end{lstlisting}
-
-Result:
+\begin{quote}
+\begin{verbatim}
 \begin{lstlisting}[language=Python]
-    def hello_world():
+def hello_world():
     print("Hello, World!")
 \end{lstlisting}
+\end{verbatim}
+\end{quote}
+
+Result:
+\begin{quote}
+\begin{lstlisting}[language=Python]
+def hello_world():
+    print("Hello, World!")
+\end{lstlisting}
+\end{quote}
 
 In this example, the \texttt{listings} package automatically recognizes Python syntax and highlights it correctly.
 
@@ -52,9 +56,18 @@ In this example, the \texttt{listings} package automatically recognizes Python s
 
 Example of SQL code:
 
+\begin{quote}
+\begin{verbatim}
 \begin{lstlisting}[language=SQL]
-    SELECT * FROM users WHERE age > 18;
+SELECT * FROM users WHERE age > 18;
 \end{lstlisting}
+\end{verbatim}
+\end{quote}
+\begin{quote}
+\begin{lstlisting}[language=SQL]
+SELECT * FROM users WHERE age > 18;
+\end{lstlisting}
+\end{quote}
 
 \subsection{Customizing Styles}
 
@@ -71,29 +84,30 @@ Although the package offers predefined styles, it is possible to customize the a
     \item \texttt{backgroundcolor}: Sets the background color of the code.
 \end{itemize}
 
-This is the before and after applying the SQL style defined in HKNtools.tex:
+This is the before and after applying the SQL style defined in \verb|HKNdocument.cls|:
 
 \begin{lstlisting}[language=SQL]
-    -- Query to select user data
-    SELECT name, age
-    FROM users
-    WHERE age > 18
-    ORDER BY age DESC;
+-- Query to select user data
+SELECT name, age
+FROM users
+WHERE age > 18
+ORDER BY age DESC;
 \end{lstlisting}
 
 \begin{lstlisting}[language=SQL, style=hkn]
-    -- Query to select user data
-    SELECT name, age
-    FROM users
-    WHERE age > 18
-    ORDER BY age DESC;
+-- Query to select user data
+SELECT name, age
+FROM users
+WHERE age > 18
+ORDER BY age DESC;
 \end{lstlisting}
 
 \subsection{Global Configuration}
 
-You can also configure \texttt{listings} globally to apply the same style settings throughout the document using the \texttt{\\lstset} command. For example:
+You can also configure \texttt{listings} globally to apply the same style settings throughout the document using the \verb|\lstset| command. For example:
 
-\begin{lstlisting}
+\begin{quote}
+\begin{verbatim}
 \lstset{
     language=Python,
     numbers=left,
@@ -101,13 +115,14 @@ You can also configure \texttt{listings} globally to apply the same style settin
     backgroundcolor=\color{lightgray},
     stepnumber=1
 }
-\end{lstlisting}
+\end{verbatim}
+\end{quote}
 
 This will set the options for all Python code blocks in the document.
 Here are the effects before and after using the instruction:
 
 \begin{lstlisting}[language=Python]
-    def hello_world():
+def hello_world():
     print("Hello, World!")
 \end{lstlisting}
 
@@ -120,17 +135,9 @@ Here are the effects before and after using the instruction:
 }
 
 \begin{lstlisting}[language=Python]
-    def hello_world():
+def hello_world():
     print("Hello, World!")
 \end{lstlisting}
-
-\section{Currently Defined Custom Styles}
-
-Additional styles will be implemented as needed by collaborators. For now, the following styles are currently defined:
-
-\begin{itemize}
-    \item SQL: sqlstyle
-\end{itemize}
 
 \section{Complete Example}
 
@@ -149,4 +156,4 @@ int main() {
 }
 \end{lstlisting}
 
-This example is labeled with \texttt{label=code:demo}, so we can refer to this code anywhere in the document using the command \texttt{\ref{code:demo}}. For example, we can reference the code \ref{code:demo} in the text.
+This example is labeled with \texttt{code:demo}, so we can refer to this code anywhere in the document using the command \verb|\ref{code:demo}|. For example, we can reference the ``Code \ref{code:demo}'' in the text.
