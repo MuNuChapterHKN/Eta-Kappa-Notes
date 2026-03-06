@@ -72,19 +72,16 @@ The syntax of the \LaTeX{} source code for the table \ref{tab:longtable_example}
 \begin{itemize}
     \item \textbf{Table Declaration}:
     \begin{lstlisting}[language=TeX]
-    \begin{longtable}{|l|c|c|p{6.2cm}|}
+\begin{longtable}{|l|c|c|p{6.2cm}|}
     \end{lstlisting}
-    \vspace{-\baselineskip}
     Here, a table is declared with 4 columns. The first column is left-aligned (\verb|l|), the second and third columns are centered (\verb|c|), while the fourth column has a width of 6.2 cm and adjusts to the content (\verb|p{6.2cm}|).
 
     \item \textbf{Table Header}:
     \begin{lstlisting}[language=TeX]
-    \hline
-    \textbf{Concept} & \textbf{Type} & \textbf{Volume}
-    & \textbf{Reason} \\
-    \hline
+\hline
+\textbf{Concept} & \textbf{Type} & \textbf{Volume} & \textbf{Reason} \\
+\hline
     \end{lstlisting}
-    \vspace{-\baselineskip}
     These lines are used to define the header of the table and separate it from the subsequent rows with a horizontal line.
 
     \item \textbf{Commands for Different Table Sections}:
@@ -101,7 +98,7 @@ The syntax of the \LaTeX{} source code for the table \ref{tab:longtable_example}
 
     Example:
     \begin{lstlisting}[language=TeX]
-    Utente & E & 30.000.000 & Ipotizziamo una piattaforma in cui sono iscritti 30 milioni di utenti \\
-    \hline
+Utente & E & 30.000.000 & Ipotizziamo una piattaforma in cui sono iscritti 30 milioni di utenti \\
+\hline
     \end{lstlisting}
 \end{itemize}

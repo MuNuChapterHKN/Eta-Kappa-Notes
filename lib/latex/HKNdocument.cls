@@ -302,6 +302,9 @@
 % https://ctan.mirror.garr.it/mirrors/ctan/macros/latex/contrib/listings/listings.pdf#subsection.4.3
 \RequirePackage{listings}  % code highlighting
 \lstdefinestyle{hkn}{
+    % Space and placement
+    aboveskip=0.7\baselineskip,
+    belowskip=-0.2\baselineskip,
     % Figure out the appearance
     basicstyle=\ttfamily\small\color{munuMediumBlue},
     identifierstyle=\color{munuDarkBlue},
@@ -318,7 +321,6 @@
     % Margins and line shape
     xleftmargin=4pt,
     xrightmargin=4pt,
-    resetmargins=true,  % indention from list environments like enumerate or itemize is reset
     breaklines=true,
     breakatwhitespace=true,
     breakautoindent=true,
