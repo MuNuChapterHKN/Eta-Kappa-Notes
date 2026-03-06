@@ -336,6 +336,7 @@
     % Margins and line shape
     xleftmargin=20pt,
 }
+\lstset{style=hkn}
 
 % Underline settings
 
