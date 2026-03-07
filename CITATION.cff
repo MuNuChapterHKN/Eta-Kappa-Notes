@@ -1,22 +1,40 @@
 cff-version: 1.2.0
 title: Eta Kappa Notes
 message: >-
-  If you use this notes in your research, please cite it
-  using the following metadata from this file.
+  If you use these notes or this software, please cite it
+  using the metadata from this file.
 type: software
 authors:
   - name: Mu Nu Chapter of IEEE-HKN
-    city: Torino
+    city: Turin
     country: IT
-    website: "https://hknpolito.org/"
+    post-code: '10129'
+    website: 'https://hknpolito.org/'
+    address: 'Corso Duca degli Abruzzi, 24'
+    email: responsabile.publishing@hknpolito.org
   - given-names: Eduard
     family-names: Occhipinti
     email: eduard.antonovic.occhipinti@hknpolito.org
-    orcid: "https://orcid.org/0009-0008-4050-2298"
+    orcid: 'https://orcid.org/0009-0008-4050-2298'
   - given-names: Erik
     family-names: Scolaro
     email: erik.scolaro@hknpolito.org
-repository-code: "https://github.com/MuNuChapterHKN/Eta-Kappa-Notes"
+  - given-names: Giulio
+    family-names: Cosentino
+    email: giulio.cosentino@hknpolito.org
+repository-code: 'https://github.com/MuNuChapterHKN/Eta-Kappa-Notes'
+abstract: >-
+  Eta Kappa Notes is an academic note-taking project
+  developed by the Mu Nu Chapter of IEEE-HKN at Politecnico
+  di Torino. The project collects study notes for various
+  university courses, providing high-quality resources for
+  engineering students and beyond.
 keywords:
-  - notes
-license: GPL-3.0
+  - open-educational-resources
+  - lecture-notes
+  - engineering
+  - digital-publishing
+  - latex
+  - ieee-hkn
+  - politecnico-di-torino
+license: GPL-3.0-or-later
