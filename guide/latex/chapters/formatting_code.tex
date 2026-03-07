@@ -29,12 +29,22 @@ Example of a Python program with caption ``Demo'' and label \texttt{code:demo}:
 \begin{lstlisting}[language=TeX, escapechar=|]
 \begin{lstlisting}[language=Python, caption={Demo}, label=code:demo]
 def main():
+	# Comment preceded by a tab
+    # This long line will be break in the visualization, but not in the actual code
     print("Hello, World!")
+    variable = 'start';
+    for i in range(10):
+        variable += str(i)
 |\textbackslash|end{lstlisting}
 \end{lstlisting}
 \begin{lstlisting}[language=Python, caption={Demo}, label=code:demo]
 def main():
+	# Comment preceded by a tab
+    # This long line will be break in the visualization, but not in the actual code
     print("Hello, World!")
+    variable = 'start';
+    for i in range(10):
+        variable += str(i)
 \end{lstlisting}
 
 Since it is labelled, you can reference this code anywhere in the document.
