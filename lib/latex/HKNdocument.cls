@@ -294,7 +294,7 @@
 \definecolor{munuDarkGray}{HTML}{929AA6}
 
 % Other colors
-\definecolor{darkerOrange}{HTML}{FFA42C}
+\definecolor{darkerOrange}{HTML}{EAAC01}
 \definecolor{backgroundLight}{HTML}{F6F8FA}
 
 % Listings style
@@ -306,15 +306,16 @@
     aboveskip=0.7\baselineskip,
     belowskip=-0.2\baselineskip,
     % Figure out the appearance
-    basicstyle=\ttfamily\small\color{munuMediumBlue},
+    basicstyle=\ttfamily\small\color{munuLightBlue},
     identifierstyle=\color{munuDarkBlue},
     commentstyle=\color{munuDarkGray},
-    stringstyle=\color{darkerOrange},
-    keywordstyle=\bfseries\color{hknRed},
+    stringstyle=\color{hknRed},
+    keywordstyle=[1]\bfseries\color{hknLightBlue},
+    keywordstyle=[2]\bfseries\color{darkerOrange},
     % Getting all characters right
     upquote=true,
     showtabs=true,
-    tab=$\mapsto$,
+    tab={\scriptsize \hfill\;$\mapsto$\hfill},
     showstringspaces=false,
     % Line numbers
     numbers=none,
@@ -323,7 +324,6 @@
     xrightmargin=4pt,
     breaklines=true,
     breakatwhitespace=true,
-    breakautoindent=true,
     % Frames
     frame=single,
     backgroundcolor=\color{backgroundLight},
