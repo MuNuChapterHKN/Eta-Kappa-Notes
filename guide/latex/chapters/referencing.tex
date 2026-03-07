@@ -2,15 +2,15 @@
 
 In \LaTeX{}, you can reference any numbered element (equations, sections, subsections, figures, tables, pages, etc.) after you assigned a label to it.
 
-\textbf{Never} reference an element ``manually'' by writing its number directly in the text. Always use labels and the \verb|\ref{}| command to reference the element, so that the reference will be automatically updated if the numbering changes.
+\textbf{Never} reference an element ``manually'' by writing its number directly in the text. Always use labels and the \lstinline[language=TeX]|\ref{}| command to reference the element, so that the reference will be automatically updated if the numbering changes.
 
 \section{Assigning labels}
 \label{sec:assigning_labels}
 
-To label a numbered element use the \verb|\label{}| command within its environment.
-The argument of the \verb|\label{}| command is the name of the label, which must be unique in the document.
+To label a numbered element use the \lstinline[language=TeX]|\label{}| command within its environment.
+The argument of the \lstinline[language=TeX]|\label{}| command is the name of the label, which must be unique in the document.
 
-It is good practice to always prefix the label name with a short identifier of the type of element being labeled (e.g., \texttt{eq:} for equations, \texttt{fig:} for figures, \texttt{sec:} for sections and subsections, etc.).
+It is good practice to always prefix the label name with a short identifier of the type of element being labeled (e.g., \lstinline[language=TeX]|eq:| for equations, \lstinline[language=TeX]|fig:| for figures, \lstinline[language=TeX]|sec:| for sections and subsections, etc.).
 
 Example -- labeling this section:
 \begin{lstlisting}[language=TeX]
@@ -30,7 +30,7 @@ Example -- labeling an equation:
     E = m c^2
 \end{equation}
 
-In this case, the equation is labeled with \texttt{eq:energy}. Now, \LaTeX{} will automatically assign a number to this equation, which can be cited later in the document.
+In this case, the equation is labeled with \lstinline[language=TeX]|eq:energy|. Now, \LaTeX{} will automatically assign a number to this equation, which can be cited later in the document.
 
 You can label any equation with a number, including those in subequations:
 
@@ -58,12 +58,12 @@ Notice that the provided commands to include the figures already reference the f
 \section{Referencing an element}
 \label{sec:referencing}
 
-To reference a labeled element, use the \verb|\ref{}| command. The argument of the \verb|\ref{}| command is the name of the label that was assigned to the element.
+To reference a labeled element, use the \lstinline[language=TeX]|\ref{}| command. The argument of the \lstinline[language=TeX]|\ref{}| command is the name of the label that was assigned to the element.
 
 Two caveats:
 \begin{itemize}
-    \item If the referenced number is preceded by a prefix (e.g., ``Fig.'', ``eq.'', ``Section''), it is good practice to insert a non-breaking space between the prefix and the number using \verb|~|, instead of a regular space.
-    \item To avoid excessive spacing when the prefix ends with a period (e.g., ``Fig.'', ``eq.'', etc.), it is good practice to insert a negative thin space using \verb|\!| before the non-breaking space.
+    \item If the referenced number is preceded by a prefix (e.g., ``Fig.'', ``eq.'', ``Section''), it is good practice to insert a non-breaking space between the prefix and the number using \lstinline[language=TeX]|~|, instead of a regular space.
+    \item To avoid excessive spacing when the prefix ends with a period (e.g., ``Fig.'', ``eq.'', etc.), it is good practice to insert a negative thin space using \lstinline[language=TeX]|\!| before the non-breaking space.
 \end{itemize}
 
 Example -- referencing the previous section:
@@ -84,7 +84,7 @@ See Fig.\!~\ref{fig:esempio_geogebra}.
 
 \subsection{Referencing an equation}
 
-Use the \verb|\eqref{}| command to reference an equation, which will automatically include the parentheses around the equation number.
+Use the \lstinline[language=TeX]|\eqref{}| command to reference an equation, which will automatically include the parentheses around the equation number.
 
 Example:
 \begin{lstlisting}[language=TeX]
@@ -104,7 +104,7 @@ Let's use the variant of eq.\!~\eqref{eq:one_sin}, ...
 
 \subsection{Referencing a page}
 
-Use the \verb|\pageref{}| command to reference the page number where the labeled element appears. The argument of the \verb|\pageref{}| command is the name of the label that was assigned to the element.
+Use the \lstinline[language=TeX]|\pageref{}| command to reference the page number where the labeled element appears. The argument of the \lstinline[language=TeX]|\pageref{}| command is the name of the label that was assigned to the element.
 
 Example -- referencing this page:
 \begin{lstlisting}[language=TeX]
@@ -117,7 +117,7 @@ As shown on page~\pageref{page:ref_examples}, ...
 \end{quote}
 
 Notice that here the label is assigned to the current section, not to the page itself.
-Compare the previous example with the following, which doesn't use \verb|\pageref{}|:
+Compare the previous example with the following, which doesn't use \lstinline[language=TeX]|\pageref{}|:
 \begin{lstlisting}[language=TeX]
 As shown in Section~\ref{page:ref_examples}, ...
 \end{lstlisting}

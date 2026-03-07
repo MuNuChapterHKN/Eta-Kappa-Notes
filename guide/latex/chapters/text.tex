@@ -6,7 +6,7 @@ When writing the text of your notes, there are a few guidelines to keep in mind:
 
 \LaTeX{} generally ignores additional spaces and multiple line breaks in the source code.
 To create a new paragraph, simply leave an empty line in the source code.
-If you really need to force a line break without starting a new paragraph, you can use the \verb|\\| command at the end of the line.
+If you really need to force a line break without starting a new paragraph, you can use the \lstinline[language=TeX]|\\| command at the end of the line.
 
 Example (demonstrative, bad practice):
 \begin{lstlisting}[language=TeX]
@@ -44,7 +44,7 @@ New paragraph.
 
 In short,
 \begin{itemize}
-    \item Prefer leaving blank lines to create new paragraphs over using \verb|\\|.
+    \item Prefer leaving blank lines to create new paragraphs over using \lstinline[language=TeX]|\\|.
     \item Make frequent line breaks in the source code to improve readability and the localization of changes and errors. \LaTeX{} will treat the line breaks in the source code as spaces, so they won't affect the formatting of the output.
     \item Use extra spaces or extra blank lines for readability when needed.
 \end{itemize}
@@ -53,14 +53,14 @@ In short,
 
 Keep in mind the following:
 \begin{itemize}
-    \item \textbf{Double quotes} should be written as \verb|``| (backticks) for opening and \verb|''| (apostrophes) for closing, to ensure proper typographical formatting.
-    Example: \verb|``quote''| will produce ``quote'' (correct), while \verb|''quote''| will produce ''quote'' (wrong) and \verb|"quote"| will produce "quote" (wrong).
-    \item The same is true for \textbf{single quotes}: \verb|`| (backtick) for opening and \verb|'| (apostrophe) for closing.
-    Example: \verb|`quote'| will produce `quote' (correct).
-    \item Add \verb|\| after the \textbf{period of an abbreviation} which is not at the end of a sentence, to prevent \LaTeX{} from adding extra space after it.
-    Example: \verb|e.g.\ example| will produce e.g.\ example (correct), while \verb|e.g. example| will produce e.g. example (wrong, notice the extra space).
-    \item The \textbf{non-breaking space} character \verb|~| can be used to prevent a line break between two words or elements.
-    Example: \verb|Dr.~Smith| will produce Dr.~Smith, ensuring that ``Dr.'' and ``Smith'' stay on the same line.
+    \item \textbf{Double quotes} should be written as \lstinline[language=TeX]|``| (backticks) for opening and \lstinline[language=TeX]|''| (apostrophes) for closing, to ensure proper typographical formatting.
+    Example: \lstinline[language=TeX]|``quote''| will produce ``quote'' (correct), while \lstinline[language=TeX]|''quote''| will produce ''quote'' (wrong) and \lstinline[language=TeX]|"quote"| will produce "quote" (wrong).
+    \item The same is true for \textbf{single quotes}: \lstinline[language=TeX]|`| (backtick) for opening and \lstinline[language=TeX]|'| (apostrophe) for closing.
+    Example: \lstinline[language=TeX]|`quote'| will produce `quote' (correct).
+    \item Add \lstinline[language=TeX]|\| after the \textbf{period of an abbreviation} which is not at the end of a sentence, to prevent \LaTeX{} from adding extra space after it.
+    Example: \lstinline[language=TeX]|e.g.\ example| will produce e.g.\ example (correct), while \lstinline[language=TeX]|e.g. example| will produce e.g. example (wrong, notice the extra space).
+    \item The \textbf{non-breaking space} character \lstinline[language=TeX]|~| can be used to prevent a line break between two words or elements.
+    Example: \lstinline[language=TeX]|Dr.~Smith| will produce Dr.~Smith, ensuring that ``Dr.'' and ``Smith'' stay on the same line.
 \end{itemize}
 
 \section{Basic text formatting}
@@ -71,22 +71,22 @@ Keep in mind the following:
     \begin{tabular}{l|l}
         \textbf{Command} & \textbf{Output} \\
         \hline
-        \verb|\textbf{bold}| & \textbf{bold} \\
-        \verb|\textit{italic}| & \textit{italic} \\
-        \verb|\texttt{monospaced}| & \texttt{monospaced} \\
-        \verb|\underline{underline}| & \underline{underline} \\
-        \verb|\textsc{Small Caps}| & \textsc{Small Caps} \\
-        \verb|\textsubscript{subscript}| & \textsubscript{subscript} \\
-        \verb|\textsuperscript{superscript}| & \textsuperscript{superscript} \\
-        \verb|\href{https://hknpolito.org}{link}| & \href{https://hknpolito.org}{link} \\
-        \verb|{\color{orange} colored}| & {\color{orange} colored} \\
+        \lstinline[language=TeX]|\textbf{bold}| & \textbf{bold} \\
+        \lstinline[language=TeX]|\textit{italic}| & \textit{italic} \\
+        \lstinline[language=TeX]|\texttt{monospaced}| & \texttt{monospaced} \\
+        \lstinline[language=TeX]|\underline{underline}| & \underline{underline} \\
+        \lstinline[language=TeX]|\textsc{Small Caps}| & \textsc{Small Caps} \\
+        \lstinline[language=TeX]|\textsubscript{subscript}| & \textsubscript{subscript} \\
+        \lstinline[language=TeX]|\textsuperscript{superscript}| & \textsuperscript{superscript} \\
+        \lstinline[language=TeX]|\href{https://hknpolito.org}{link}| & \href{https://hknpolito.org}{link} \\
+        \lstinline[language=TeX]|{\color{orange} colored}| & {\color{orange} colored} \\
     \end{tabular}
     \caption{Basic text formatting commands}
 \end{table}
 
 \section{Lists}
 
-Bullet lists can be created using the \texttt{itemize} environment, while numbered lists can be created using the \texttt{enumerate} environment.
+Bullet lists can be created using the \lstinline[language=TeX]|itemize| environment, while numbered lists can be created using the \lstinline[language=TeX]|enumerate| environment.
 
 Example:
 \begin{lstlisting}[language=TeX]

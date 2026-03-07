@@ -2,30 +2,30 @@
 
 \section{Inline code}
 
-You can insert inline formatted code with the \verb|\lstinline| environment.
-Instead of using curly braces like most \LaTeX{} commands, here the code must be delimited by the same delimiter character (e.g., \texttt{|} or \texttt{!}).
+You can insert inline formatted code with the \lstinline[language=TeX]|\lstinline| environment.
+Instead of using curly braces like most \LaTeX{} commands, here the code must be delimited by the same delimiter character (e.g., \lstinline[language=TeX]!|! or \lstinline[language=TeX]|!|).
 
-You can also use the \texttt{language} option.
+You can also use the \lstinline[language=TeX]|language| option.
 
-Example using \texttt{|} as delimiter character: \\
-\verb#\lstinline[language=Python]|print("Hello, World!")|# becomes \\
+Example using \lstinline[language=TeX]!|! as delimiter character:
+\lstinline[language=TeX]+\lstinline[language=Python]|print("Hello, World!")|+ becomes
 \lstinline[language=Python]|print("Hello, World!")|.
 
 \section{Code blocks}
 
-You can insert a code block with the \texttt{lstlisting} environment, with the following options:
+You can insert a code block with the \lstinline[language=TeX]|lstlisting| environment, with the following options:
 \begin{itemize}
-    \item \texttt{style}: only use with \texttt{hkn-numbered} if you want to number the lines.
+    \item \lstinline[language=TeX]|style|: only use with \lstinline[language=TeX]|hkn-numbered| if you want to number the lines.
 
-    \item \texttt{language}: optional but recommended, specifies the programming language for syntax highlighting.
+    \item \lstinline[language=TeX]|language|: optional but recommended, specifies the programming language for syntax highlighting.
     See \href{https://ctan.mirror.garr.it/mirrors/ctan/macros/latex/contrib/listings/listings.pdf#table.1}{the official documentation} for a complete list of supported languages.
 
-    \item \texttt{label}: optional, allows you to label the code block for referencing later in the document (see Section~\ref{sec:referencing}).
+    \item \lstinline[language=TeX]|label|: optional, allows you to label the code block for referencing later in the document (see Section~\ref{sec:referencing}).
 
-    \item \texttt{caption}: optional, allows you to add a caption to the code block, which will be displayed above the code.
+    \item \lstinline[language=TeX]|caption|: optional, allows you to add a caption to the code block, which will be displayed above the code.
 \end{itemize}
 
-Example of a Python program with caption ``Demo'' and label \texttt{code:demo}:
+Example of a Python program with caption ``Demo'' and label \lstinline[language=TeX]|code:demo|:
 \begin{lstlisting}[language=TeX, escapechar=|]
 \begin{lstlisting}[language=Python, caption={Demo}, label=code:demo]
 def main():
@@ -48,13 +48,13 @@ def main():
 \end{lstlisting}
 
 Since it is labelled, you can reference this code anywhere in the document.
-For example, \verb|``Code~\ref{code:demo}''| gives ``Code~\ref{code:demo}''.
+For example, \lstinline[language=TeX]|``Code~\ref{code:demo}''| gives ``Code~\ref{code:demo}''.
 
 \subsection{Including an external file}
 
-With \verb|\lstinputlisting|, you can also include an external file containing the code.
+With \lstinline[language=TeX]|\lstinputlisting|, you can also include an external file containing the code.
 
-Here is an example using the \texttt{hkn-numbered} style:
+Here is an example using the \lstinline[language=TeX]|hkn-numbered| style:
 \begin{lstlisting}[language=TeX]
 \lstinputlisting[language=Python, style=hkn-numbered]{res/py/2d_example.py}
 \end{lstlisting}

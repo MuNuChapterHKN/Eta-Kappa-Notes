@@ -6,18 +6,18 @@ Mathematical expressions can be inserted both inline and in display mode.
 
 The ways to insert mathematical expressions in inline mode are
 \begin{itemize}
-    \item \verb|$...$| (preferred)
-    \item \verb|\(...\)|
-    \item \verb|\begin{math}...\end{math}|
+    \item \lstinline[language=TeX]|$...$| (preferred)
+    \item \lstinline[language=TeX]|\(...\)|
+    \item \lstinline[language=TeX]|\begin{math}...\end{math}|
 \end{itemize}
-For example, \verb|$E = m c^2$| results in $E = m c^2$.
+For example, \lstinline[language=TeX]|$E = m c^2$| results in $E = m c^2$.
 
 \section{Display mode}
 
 To insert a single equation in display mode, you can use
 \begin{itemize}
-    \item \verb|\begin{equation}...\end{equation}| (preferred, numbers the equation)
-    \item \verb|\[...\]| (does not number the equation; use rarely or not at all)
+    \item \lstinline[language=TeX]|\begin{equation}...\end{equation}| (preferred, numbers the equation)
+    \item \lstinline[language=TeX]|\[...\]| (does not number the equation; use rarely or not at all)
 \end{itemize}
 
 For example, the code
@@ -33,8 +33,8 @@ results in
 
 \subsection{Splitting a long equation into multiple lines}
 
-A long equation can be split into multiple lines using the \verb|multline| environment.
-The lines are separated by \verb|\\|; the first line is left-aligned, the last line is right-aligned, and the lines in between are centered.
+A long equation can be split into multiple lines using the \lstinline[language=TeX]|multline| environment.
+The lines are separated by \lstinline[language=TeX]|\\|; the first line is left-aligned, the last line is right-aligned, and the lines in between are centered.
 
 Example:
 \begin{lstlisting}[language=TeX]
@@ -48,18 +48,18 @@ Example:
     {} + 252 a^5 b^5 + 210 a^4 b^6 + 120 a^3 b^7 + 45 a^2 b^8 + 10 a b^9 + b^{10}
 \end{multline}
 
-An alternative (which is often more appropriate) is to use \verb|aligned| and/or \verb|gathered| (see Section~\ref{sec:grouping_numbers}).
+An alternative (which is often more appropriate) is to use \lstinline[language=TeX]|aligned| and/or \lstinline[language=TeX]|gathered| (see Section~\ref{sec:grouping_numbers}).
 
-\section{Gruping multiple equations}
+\section{Grouping multiple equations}
 
 \subsection{Equations with own numbering}
 
-Use the \verb|gather| and \verb|align| environments to group multiple equations respectively without and with alignment.
+Use the \lstinline[language=TeX]|gather| and \lstinline[language=TeX]|align| environments to group multiple equations respectively without and with alignment.
 Each equation will retain its own number, and you can label each one separately.
 
-Lines are separated by \verb|\\|, and the alignment point in the \verb|align| environment is indicated by \verb|&|.
+Lines are separated by \lstinline[language=TeX]|\\|, and the alignment point in the \lstinline[language=TeX]|align| environment is indicated by \lstinline[language=TeX]|&|.
 
-Example with \verb|gather|:
+Example with \lstinline[language=TeX]|gather|:
 \begin{lstlisting}[language=TeX]
 \begin{gather}
     a x^2 + b x + c = 0 \\
@@ -71,7 +71,7 @@ Example with \verb|gather|:
     \Delta = b^2 - 4 a c
 \end{gather}
 
-Example with \verb|align|:
+Example with \lstinline[language=TeX]|align|:
 \begin{lstlisting}[language=TeX]
 \begin{align}
     \cos(2 \alpha) & = \cos^2(\alpha) - \sin^2(\alpha) = \\
@@ -88,9 +88,9 @@ Example with \verb|align|:
 \subsection{Grouping equation numbers}
 \label{sec:grouping_numbers}
 
-To group the equation numbers as well, you can use \verb|gathered| and \verb|aligned| environments inside an \verb|equation|, \verb|gather|, or \verb|align| environment.
+To group the equation numbers as well, you can use \lstinline[language=TeX]|gathered| and \lstinline[language=TeX]|aligned| environments inside an \lstinline[language=TeX]|equation|, \lstinline[language=TeX]|gather|, or \lstinline[language=TeX]|align| environment.
 
-Example with \verb|gathered| inside \verb|gather|:
+Example with \lstinline[language=TeX]|gathered| inside \lstinline[language=TeX]|gather|:
 \begin{lstlisting}[language=TeX]
 \begin{gather}
     \cos^2 \alpha = \frac13 \\
@@ -110,7 +110,7 @@ Example with \verb|gathered| inside \verb|gather|:
 
 \subsection{Equation subnumbering}
 
-You can also use the \verb|subequations| environment around \verb|gather| or \verb|align| to introduce a subnumbering:
+You can also use the \lstinline[language=TeX]|subequations| environment around \lstinline[language=TeX]|gather| or \lstinline[language=TeX]|align| to introduce a subnumbering:
 \begin{lstlisting}[language=TeX]
 \begin{subequations}
 \begin{align}

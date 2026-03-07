@@ -67,14 +67,14 @@
 
 \section{Explanation of the syntax}
 
-The syntax of the \LaTeX{} source code for the table \ref{tab:longtable_example} with the \texttt{longtable} package is as follows:
+The syntax of the \LaTeX{} source code for the table \ref{tab:longtable_example} with the \lstinline[language=TeX]|longtable| package is as follows:
 
 \begin{itemize}
     \item \textbf{Table Declaration}:
     \begin{lstlisting}[language=TeX]
 \begin{longtable}{|l|c|c|p{6.2cm}|}
     \end{lstlisting}
-    Here, a table is declared with 4 columns. The first column is left-aligned (\verb|l|), the second and third columns are centered (\verb|c|), while the fourth column has a width of 6.2 cm and adjusts to the content (\verb|p{6.2cm}|).
+    Here, a table is declared with 4 columns. The first column is left-aligned (\lstinline[language=TeX]|l|), the second and third columns are centered (\lstinline[language=TeX]|c|), while the fourth column has a width of 6.2 cm and adjusts to the content (\lstinline[language=TeX]|p{6.2cm}|).
 
     \item \textbf{Table Header}:
     \begin{lstlisting}[language=TeX]
@@ -86,15 +86,15 @@ The syntax of the \LaTeX{} source code for the table \ref{tab:longtable_example}
 
     \item \textbf{Commands for Different Table Sections}:
     \begin{itemize}
-        \item \verb|endfirsthead|: Defines the header to be used on the first page of the table.
-        \item \verb|endhead|: Defines the header to be used on the following pages of the table.
-        \item \verb|endfoot|: Defines the footer for each page of the table.
-        \item \verb|endlastfoot|: Defines the final footer of the table.
+        \item \lstinline[language=TeX]|endfirsthead|: Defines the header to be used on the first page of the table.
+        \item \lstinline[language=TeX]|endhead|: Defines the header to be used on the following pages of the table.
+        \item \lstinline[language=TeX]|endfoot|: Defines the footer for each page of the table.
+        \item \lstinline[language=TeX]|endlastfoot|: Defines the final footer of the table.
     \end{itemize}
 
     \item \textbf{Data Rows}:
-    Each data row is separated by \verb|\\| and \verb|\hline|, which adds a horizontal line.
-    The data in each cell is separated by \verb|&|.
+    Each data row is separated by \lstinline[language=TeX]|\\| and \lstinline[language=TeX]|\hline|, which adds a horizontal line.
+    The data in each cell is separated by \lstinline[language=TeX]|&|.
 
     Example:
     \begin{lstlisting}[language=TeX]
