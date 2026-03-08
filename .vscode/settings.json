@@ -39,5 +39,8 @@
         "TEXINPUTS": "%WORKSPACE_FOLDER%/lib/latex//;%WORKSPACE_FOLDER%/resources/imgs//;"
       }
     }
-  ]
+  ],
+
+  // Typst
+  "tinymist.outputPath": "$dir/build/$name"
 }

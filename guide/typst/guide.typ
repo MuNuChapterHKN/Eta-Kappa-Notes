@@ -72,18 +72,18 @@ Like in LaTeX, the `&` operator can be used for alignment of equations in Typst.
 
 ```typ
 $
-  angle.l a, b angle.r &= arrow(a) dot arrow(b) \
-                       &= a_1 b_1 + a_2 b_2 + ... a_n b_n \
-                       &= sum_(i=1)^n a_i b_i. #<sum>
+  chevron.l a, b chevron.r &= arrow(a) dot arrow(b) \
+  & = a_1 b_1 + a_2 b_2 + ... a_n b_n \
+  & = sum_(i=1)^n a_i b_i. #<sum>
 $ <dot-product>
 ```
 
 Will produce the following output:
 
 $
-  angle.l a, b angle.r &= arrow(a) dot arrow(b) \
-                       &= a_1 b_1 + a_2 b_2 + ... a_n b_n \
-                       &= sum_(i=1)^n a_i b_i. #<sum>
+  chevron.l a, b chevron.r &= arrow(a) dot arrow(b) \
+  & = a_1 b_1 + a_2 b_2 + ... a_n b_n \
+  & = sum_(i=1)^n a_i b_i. #<sum>
 $ <dot-product>
 
 As we can see we can also quote separate parts of the equation and cite it in the standard fashion, "like we see in @sum for @dot-product".
