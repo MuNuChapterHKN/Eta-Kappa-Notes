@@ -1,6 +1,4 @@
-\def\isitalian{italian}
-
-\ifx\DocumentLanguage\isitalian
+\iflanguage{italian}{
     {\Large\textbf{\#WeAreHKN}}
     \vspace{0.2cm}
 
@@ -81,7 +79,7 @@
     \end{itemize}
     Chi riutilizza o ridistribuisce questi appunti deve verificare la conformità alle leggi sul diritto d'autore applicabili nella propria giurisdizione.
 
-\else  % English version
+}{  % English version
 
     {\Large\textbf{\#WeAreHKN}}
     \vspace{0.2cm}
@@ -166,4 +164,4 @@
     \end{itemize}
 
     Users reusing or redistributing these notes must verify compliance with applicable copyright law in their jurisdiction.
-\fi
+}

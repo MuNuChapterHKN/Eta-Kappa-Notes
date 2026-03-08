@@ -40,7 +40,6 @@
 % Language options
 \DeclareOption{italian}{\def\DocumentLanguage{italian}}
 \DeclareOption{english}{\def\DocumentLanguage{english}}
-\def\isitalian{italian}  % use with \ifx\DocumentLanguage\isitalian
 
 % TOC options
 \DeclareOption{toc=chapters}{\AtEndOfClass{\def\HK@tocdepth{0}}}
@@ -144,18 +143,10 @@
 \def\programlevel#1{
     \gdef\DDprogramlevel{#1}  % bachelor or master
     \ifdefstring{\DDprogramlevel}{bachelor}{
-        \ifx\DocumentLanguage\isitalian
-            \gdef\DDprogramlevelword{Corso di laurea triennale}
-        \else
-            \gdef\DDprogramlevelword{Bachelor program}
-        \fi
+        \gdef\DDprogramlevelword{\iflanguage{italian}{Corso di laurea triennale}{Bachelor program}}
     }{
         \ifdefstring{\DDprogramlevel}{master}{
-            \ifx\DocumentLanguage\isitalian
-                \gdef\DDprogramlevelword{Corso di laurea magistrale}
-            \else
-                \gdef\DDprogramlevelword{Master program}
-            \fi
+            \gdef\DDprogramlevelword{\iflanguage{italian}{Corso di laurea magistrale}{Master program}}
         }{
             \ClassError{HKNdocument}
             {Invalid program level value: #1}
@@ -174,18 +165,10 @@
 \def\semester#1{
     \gdef\DDsemester{#1}  % number, 1 or 2
     \ifnum#1=1
-        \ifx\DocumentLanguage\isitalian
-            \gdef\DDsemesterword{Primo semestre}
-        \else
-            \gdef\DDsemesterword{First semester}
-        \fi
+        \gdef\DDsemesterword{\iflanguage{italian}{Primo semestre}{First semester}}
     \else
         \ifnum#1=2
-            \ifx\DocumentLanguage\isitalian
-                \gdef\DDsemesterword{Secondo semestre}
-            \else
-                \gdef\DDsemesterword{Second semester}
-            \fi
+            \gdef\DDsemesterword{\iflanguage{italian}{Secondo semestre}{Second semester}}
         \else
             \ClassError{HKNdocument}
             {Invalid semester value: #1}
@@ -240,24 +223,12 @@
 
         \ifx\DDtitle\empty
             % Course information
-            {\LARGE \textbf{% avoid space
-                \ifx\DocumentLanguage\isitalian
-                    Appunti di
-                \else
-                    Notes of
-                \fi
-                \DDcoursename
-            }}
+            {\LARGE \textbf{\iflanguage{italian}{Appunti di}{Notes of} \DDcoursename}}
 
             \vspace{0.2cm}
 
             {\large
-                \ifx\DocumentLanguage\isitalian
-                    Corso
-                \else
-                    Course
-                \fi
-                \DDcoursecode, \DDteacher
+                \iflanguage{italian}{Corso}{Course} \DDcoursecode, \DDteacher
 
                 \DDprogramlevelword\ in \DDprogram
 
@@ -284,14 +255,8 @@
 
         % Editors
         \if\DDeditors\empty\else
-            \linespread{1.5}\selectfont{
-                \ifx\DocumentLanguage\isitalian
-                    \Large \textit{Revisionati da:}
-                \else
-                    \Large \textit{Edited by:}
-                \fi
-                \DDeditors
-            }
+            \linespread{1.5}\selectfont
+            {\Large \textit{\iflanguage{italian}{Revisionati da}{Edited by}:} \DDeditors}
         \fi
 
         % Date and version
@@ -299,12 +264,7 @@
         {\large
             \today
 
-            \ifx\DocumentLanguage\isitalian
-                Versione
-            \else
-                Version
-            \fi
-            \DDversion
+            \iflanguage{italian}{Versione}{Version} \DDversion
         }
     \end{center}
     \end{titlepage}
