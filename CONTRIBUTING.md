@@ -48,7 +48,7 @@ You will organize your notes inside it using the following structure:
 
 <!-- https://asciitools.com/tree?trailingDirSlash=true&fullPath=false&rootDot=false -->
     notes/
-    └── notes-name/
+    └── <notes-name>/
         ├── chapters/
         ├── res/
         │   ├── drawio/
