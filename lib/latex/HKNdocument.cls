@@ -40,6 +40,7 @@
 % Language options
 \DeclareOption{italian}{\def\DocumentLanguage{italian}}
 \DeclareOption{english}{\def\DocumentLanguage{english}}
+\def\isitalian{italian}  % use with \ifx\DocumentLanguage\isitalian
 
 % TOC options
 \DeclareOption{toc=chapters}{\AtEndOfClass{\def\HK@tocdepth{0}}}
@@ -91,40 +92,6 @@
 % We will set headers and footers after defining commands for author and short title.
 
 % --------------------------
-% COMMANDS FOR TITLE, AUTHOR, SHORT TITLE, DATE, VERSION, LOGO
-% --------------------------
-% These commands will be redefined by the user in the main document preamble.
-% \title, \author: standard LaTeX definitions, here we capture them to save the data.
-% \shorttitle, \docdate, \docversion, \doclogo: additional commands for extra data.
-\newcommand{\shorttitle}{}  % Contains short title for header
-\newcommand{\docdate}{}     % Contains custom date
-\newcommand{\docversion}{}  % Contains document version
-\newcommand{\doclogofrontpage}{hkn_logo.pdf}      % Contains logo big path
-\newcommand{\doclogoupperpage}{hkn_ideogramma.pdf}    % Contains logo big path
-\newcommand{\doclicense}{ccbyncnd.png}  % Contains license logo path
-\newcommand{\DDorganization}{IEEE-HKN -- Mu Nu Chapter}
-
-% Preserve old commands for title and author
-\let\oldtitle\title
-\renewcommand{\title}[1]{\oldtitle{#1}\gdef\maintitle{#1}}
-\let\oldauthor\author
-\renewcommand{\author}[1]{\ifx\DDauthors\empty\gdef\DDauthors{#1}\else\g@addto@macro\DDauthors{, #1}\fi}
-
-% Define commands for short title, short author, editors, organization, date, version.
-\def\shorttitle#1{\gdef\STtitle{#1}}
-\def\editor#1{\ifx\DDeditors\empty\gdef\DDeditors{#1}\else\g@addto@macro\DDeditors{, #1}\fi}
-\def\docdate#1{\gdef\DDdate{#1}}
-\def\docversion#1{\gdef\DDversion{#1}}
-
-% Initialize variables to prevent undefined errors
-\gdef\maintitle{}
-\gdef\DDauthors{}
-\gdef\DDeditors{}
-\gdef\DDdate{}
-\gdef\DDversion{}
-\gdef\DDlicense{}
-
-% --------------------------
 % TABLE OF CONTENTS LEVEL
 % --------------------------
 % Once options are processed, set the tocdepth accordingly
@@ -133,59 +100,215 @@
 }
 
 % --------------------------
-% CUSTOM TITLE PAGE
+% COMMANDS FOR TITLE, AUTHOR, VERSION, LOGO
 % --------------------------
-% \maketitle here creates a title page with:
-% - Logo (if defined)
-% - Title, Author
-% - Version (if defined)
-% - Date (if defined, otherwise today)
+
+% Static variables
+\gdef\DDbiglogo{hkn_logo.pdf}
+\gdef\DDsmalllogo{hkn_ideogramma.pdf}
+\gdef\DDlicenselogo{ccbyncnd.png}
+\gdef\DDorganization{IEEE-HKN -- Mu Nu Chapter}
+
+% Course metadata
+% Optional variables are initialized as empty
+
+% Authors
+\gdef\DDauthors{}
+\let\oldauthor\author
+\renewcommand{\author}[1]{\ifx\DDauthors\empty\gdef\DDauthors{#1}\else\g@addto@macro\DDauthors{, #1}\fi}
+
+% Editors
+\gdef\DDeditors{}
+\def\editor#1{\ifx\DDeditors\empty\gdef\DDeditors{#1}\else\g@addto@macro\DDeditors{, #1}\fi}
+
+% Title
+\gdef\DDtitle{}
+\let\oldtitle\title
+\renewcommand{\title}[1]{\oldtitle{#1}\gdef\DDtitle{#1}}
+
+% Course code
+\def\coursecode#1{\gdef\DDcoursecode{#1}}
+
+% Course name
+\def\coursename#1{\gdef\DDcoursename{#1}}
+
+% Main teacher
+\def\teacher#1{\gdef\DDteacher{#1}}
+
+% Program
+\def\program#1{\gdef\DDprogram{#1}}
+\gdef\DDprogramen{\DDprogram}
+\def\programen#1{\gdef\DDprogramen{#1}}
+
+% Program level
+\def\programlevel#1{
+    \gdef\DDprogramlevel{#1}  % bachelor or master
+    \ifdefstring{\DDprogramlevel}{bachelor}{
+        \ifx\DocumentLanguage\isitalian
+            \gdef\DDprogramlevelword{Corso di laurea triennale}
+        \else
+            \gdef\DDprogramlevelword{Bachelor program}
+        \fi
+    }{
+        \ifdefstring{\DDprogramlevel}{master}{
+            \ifx\DocumentLanguage\isitalian
+                \gdef\DDprogramlevelword{Corso di laurea magistrale}
+            \else
+                \gdef\DDprogramlevelword{Master program}
+            \fi
+        }{
+            \ClassError{HKNdocument}
+            {Invalid program level value: #1}
+            {The \protect\programlevel\space command only accepts 'bachelor' or 'master'.}
+        }
+    }
+}
+
+% Academic year
+\def\startacademicyear#1{
+    \gdef\DDstartacademicyear{#1}  % starting year
+    \gdef\DDacademicyear{#1-\the\numexpr#1+1\relax}  % range of two years
+}
+
+% Semester
+\def\semester#1{
+    \gdef\DDsemester{#1}  % number, 1 or 2
+    \ifnum#1=1
+        \ifx\DocumentLanguage\isitalian
+            \gdef\DDsemesterword{Primo semestre}
+        \else
+            \gdef\DDsemesterword{First semester}
+        \fi
+    \else
+        \ifnum#1=2
+            \ifx\DocumentLanguage\isitalian
+                \gdef\DDsemesterword{Secondo semestre}
+            \else
+                \gdef\DDsemesterword{Second semester}
+            \fi
+        \else
+            \ClassError{HKNdocument}
+            {Invalid semester value: #1}
+            {The \protect\semester\space command only accepts 1 or 2.}
+        \fi
+    \fi
+}
+
+% Version
+\gdef\DDversion{}
+\def\version#1{\gdef\DDversion{#1}}
+
+% Interface through \courseinfo command
+\RequirePackage{pgfkeys}
+\pgfkeys{
+    /HKN/.is family, /HKN,
+    code/.code = {\coursecode{#1}},
+    name/.code = {\coursename{#1}},
+    teacher/.code = {\teacher{#1}},
+    program/.code = {\program{#1}},
+    program_en/.code = {\programen{#1}},
+    program_level/.code = {\programlevel{#1}},
+    start_academic_year/.code = {\startacademicyear{#1}},
+    semester/.code = {\semester{#1}},
+}
+\newcommand{\courseinfo}[1]{\pgfqkeys{/HKN}{#1}}
+
+% Title page
+
 \renewcommand{\maketitle}{
     \thispagestyle{empty} % No header/footer on title page
-    \def\tempa{italian}% Define comparison variable like in copyright section
     \begin{titlepage}
     \begin{center}
         % Logo e titoli
-        \vspace*{0.5cm}
-        \includegraphics[scale = 0.2]{\doclogofrontpage}\\[1.0 cm]  % HKN Logo
-        \textsc{\Large Mu Nu Chapter of IEEE-HKN}\\[-0.2 cm]  % Name
-        \rule{0.80\linewidth}{0.1 mm} \\
-        \textsc{\large Politecnico di Torino -- Honor Society}\\[2.0 cm]  % Branch
-        \rule{\linewidth}{0.2 mm} \\[0.4 cm]
-        {\LARGE \textbf{\maintitle}}\\
-        \rule{\linewidth}{0.2 mm} \\[1.5 cm]
+        \includegraphics[scale = 0.2]{\DDbiglogo}  % HKN Logo
 
+        \vspace{0.5cm}
+
+        \textsc{\Large Mu Nu Chapter of IEEE-HKN}  % Name
+        \vspace{-0.45cm}
+
+        \rule{0.80\linewidth}{0.1 mm}
+
+        \vspace{-0.1cm}
+        \textsc{\large Politecnico di Torino -- Honor Society}
+
+        \vspace{0.8cm}
+
+        \rule{\linewidth}{0.2 mm}
+
+        \vspace{0.1cm}
+
+        \ifx\DDtitle\empty
+            % Course information
+            {\LARGE \textbf{% avoid space
+                \ifx\DocumentLanguage\isitalian
+                    Appunti di
+                \else
+                    Notes of
+                \fi
+                \DDcoursename
+            }}
+
+            \vspace{0.2cm}
+
+            {\large
+                \ifx\DocumentLanguage\isitalian
+                    Corso
+                \else
+                    Course
+                \fi
+                \DDcoursecode, \DDteacher
+
+                \DDprogramlevelword\ in \DDprogram
+
+                \DDsemesterword\ \DDacademicyear
+            \par}
+        \else
+            % Title
+            {\LARGE \textbf{\DDtitle}}
+        \fi
+
+        \vspace{-0.3cm}
+
+        \rule{\linewidth}{0.2 mm}
+
+        \vspace{0.85cm}
+
+        % Authors
         \if\DDauthors\empty\else
-            \Large\DDauthors
+            \linespread{1.5}\selectfont
+            {\Large \DDauthors}
         \fi
 
         \vspace{0.3cm}
 
+        % Editors
         \if\DDeditors\empty\else
-            \ifx\DocumentLanguage\tempa
-                \Large \textit{Revisionato da:}
-            \else
-                \Large \textit{Edited by:}
-            \fi
-            \DDeditors
+            \linespread{1.5}\selectfont{
+                \ifx\DocumentLanguage\isitalian
+                    \Large \textit{Revisionati da:}
+                \else
+                    \Large \textit{Edited by:}
+                \fi
+                \DDeditors
+            }
         \fi
 
-        \vspace{1.5cm}
+        % Date and version
+        \vfill
+        {\large
+            \today
 
-        % Date, required
-        \Large \DDdate
-
-        % Optional version
-        \ifx\DDversion\empty\else
-            \ifx\DocumentLanguage\tempa
-                {\large Versione \DDversion}
+            \ifx\DocumentLanguage\isitalian
+                Versione
             \else
-                {\large Version \DDversion}
+                Version
             \fi
-        \fi
+            \DDversion
+        }
     \end{center}
     \end{titlepage}
-    \clearpage
+    \pagebreak
 }
 
 % --------------------------
@@ -210,7 +333,7 @@
 \fancyhead[R]{\DDorganization}
 \fancyhead[C]{%
   \raisebox{-0.6\height}{%
-    \href{https://hknpolito.org/}{\includegraphics[height=1cm]{\doclogoupperpage}}%
+    \href{https://hknpolito.org/}{\includegraphics[height=1cm]{\DDsmalllogo}}%
   }%
 }
 \fancyfoot[C]{\thepage}
