@@ -90,6 +90,9 @@
 \pagestyle{fancy}
 % We will set headers and footers after defining commands for author and short title.
 
+% PDF metadata and links
+\RequirePackage{hyperref}
+
 % --------------------------
 % TABLE OF CONTENTS LEVEL
 % --------------------------
@@ -491,6 +494,34 @@
 \AtBeginDocument{
     \renewcommand{\lstlistlistingname}{Codes}
     \renewcommand{\lstlistingname}{Code}
+
+    % PDF metadata
+    \ifx\DDtitle\empty
+        \iflanguage{italian}{
+            \hypersetup{pdfsubject = {Appunti di \DDcoursename\ per \DDprogram\ tenuto da \DDteacher\ (corso \DDcoursecode) -- \DDsemesterword\ \DDacademicyear, Politecnico di Torino, progetto Eta Kappa Notes (https://github.com/MuNuChapterHKN/Eta-Kappa-Notes)}}
+            \ifx\DDversion\empty
+                \hypersetup{pdftitle = {Appunti di \DDcoursename\ per \DDprogram\ -- versione non pubblicata}}
+            \else
+                \hypersetup{pdftitle = {Appunti di \DDcoursename\ per \DDprogram\ -- versione \DDversion}}
+            \fi
+        }{
+            \hypersetup{pdfsubject = {Notes of \DDcoursename\ for \DDprogram\ held by \DDteacher\ (course \DDcoursecode) -- \DDsemesterword\ \DDacademicyear, Politecnico di Torino, Eta Kappa Notes project (https://github.com/MuNuChapterHKN/Eta-Kappa-Notes)}}
+            \ifx\DDversion\empty
+                \hypersetup{pdftitle = {Notes of \DDcoursename\ for \DDprogram\ -- unpublished version}}
+            \else
+                \hypersetup{pdftitle = {Notes of \DDcoursename\ for \DDprogram\ -- version \DDversion}}
+            \fi
+        }
+    \else
+        \hypersetup{pdftitle = {\DDtitle}}
+    \fi
+
+    \ifx\DDeditors\empty
+        \gdef\DDallauthors{\DDauthors}
+    \else
+        \gdef\DDallauthors{\DDauthors, \DDeditors}
+    \fi
+    \hypersetup{pdfauthor = {Mu Nu Chapter of IEEE-HKN, \DDallauthors}}
 
     \frontmatter
     \maketitle
