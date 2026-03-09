@@ -99,10 +99,11 @@
 }
 
 % --------------------------
-% COMMANDS FOR TITLE, AUTHOR, VERSION, LOGO
+% COMMANDS FOR TITLE, AUTHOR, LOGO
 % --------------------------
 
 % Static variables
+\gdef\HK@versionFileName{version}
 \gdef\DDbiglogo{hkn_logo.pdf}
 \gdef\DDsmalllogo{hkn_ideogramma.pdf}
 \gdef\DDlicenselogo{ccbyncnd.png}
@@ -178,8 +179,12 @@
 }
 
 % Version
-\gdef\DDversion{}
-\def\version#1{\gdef\DDversion{#1}}
+\RequirePackage{catchfile}
+\IfFileExists{\HK@versionFileName}{
+    \CatchFileDef{\DDversion}{\HK@versionFileName}{\endlinechar=-1}
+}{
+    \gdef\DDversion{}
+}
 
 % Interface through \courseinfo command
 \RequirePackage{pgfkeys}
@@ -262,14 +267,36 @@
         % Date and version
         \vfill
         {\large
-            \today
-
-            \iflanguage{italian}{Versione}{Version} \DDversion
+            \iflanguage{italian}{Ultimo aggiornamento}{Last updated}: \today
+            \ifx\DDversion\empty
+                \par \vspace{0.5cm}
+                {\color{red} \Large
+                    \iflanguage{italian}
+                    {Attenzione: versione non pubblicata!}
+                    {Warning: unpublished version!}
+                    \unskip
+                }
+            \else
+                \ (\iflanguage{italian}{versione}{version} \DDversion)
+            \fi
         }
     \end{center}
     \end{titlepage}
     \pagebreak
 }
+
+% Watermark
+\ifx\DDversion\empty
+    \RequirePackage{background}
+    \backgroundsetup{
+        contents=\iflanguage{italian}{NON PUBBLICATO}{UNPUBLISHED},
+        color=hknRed!50,
+        angle=54.7,  % = arctan(sqrt(2)) in degrees, the A4 diagonal angle
+        scale=\iflanguage{italian}{7}{9},
+        opacity=0.2,
+        position=current page.center
+    }
+\fi
 
 % --------------------------
 % HEADER AND FOOTER

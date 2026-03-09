@@ -2,6 +2,11 @@
   // Text editor
   "files.trimFinalNewlines": true,
 
+  // File associations
+  "files.associations": {
+    "version": "plaintext"
+  },
+
   // Editor associations
   "workbench.editorAssociations": {
     "*.drawio.svg": "hediet.vscode-drawio-text",
@@ -36,7 +41,7 @@
         "%DOC%"
       ],
       "env": {
-        "TEXINPUTS": "%WORKSPACE_FOLDER%/lib/latex//;%WORKSPACE_FOLDER%/resources/imgs//;"
+        "TEXINPUTS": "%WORKSPACE_FOLDER%/lib/latex//;%WORKSPACE_FOLDER%/resources//;"
       }
     }
   ],

@@ -1,6 +1,7 @@
 # Build files
 build/
 svg-inkscape/
+/resources/**/version
 
 # VS Code
 .vscode/
