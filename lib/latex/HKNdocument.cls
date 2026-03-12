@@ -371,6 +371,7 @@
 
 \DeclareHKNBox{definition}{Definizione}{Definition}{hknRed}
 \DeclareHKNBox{theorem}{Teorema}{Theorem}{hknYellow}
+\DeclareHKNBox{lemma}{Lemma}{Lemma}{hknYellow}
 \DeclareHKNBox{corollary}{Corollario}{Corollary}{hknOrange}
 \DeclareHKNBox{exercise}{Esercizio}{Exercise}{munuDarkBlue}
 \DeclareHKNBox{observation}{Osservazione}{Observation}{hknLightBlue}
