@@ -181,6 +181,11 @@
     \fi
 }
 
+% Completed flag
+\def\completed#1{
+    \gdef\DDcompleted{#1}
+}
+
 % Version
 \RequirePackage{catchfile}
 \IfFileExists{\HK@versionFileName}{
@@ -201,6 +206,7 @@
     program_level/.code = {\programlevel{#1}},
     start_academic_year/.code = {\startacademicyear{#1}},
     semester/.code = {\semester{#1}},
+    completed/.code = {\completed{#1}},
 }
 \newcommand{\courseinfo}[1]{\pgfqkeys{/HKN}{#1}}
 
@@ -279,6 +285,17 @@
                 }
             \else
                 \ (\iflanguage{italian}{versione}{version} \DDversion)
+                \unskip
+                \ifdefstring{\DDcompleted}{false}{
+                    \par
+                    \vfill
+                    {\color{red} \Large
+                        \iflanguage{italian}
+                        {Attenzione: appunti incompleti!}
+                        {Warning: incomplete notes!}
+                        \unskip
+                    }
+                }
             \fi
         }
     \end{center}

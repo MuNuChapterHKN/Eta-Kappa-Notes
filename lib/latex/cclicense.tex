@@ -41,6 +41,16 @@
             Questa versione non riflette il contenuto finale del documento, e potrebbe essere incompleta e contenere errori.
             Si prega di non citare o condividere questo documento, e di riferirsi invece alla più recente versione pubblicata, disponibile presso il branch \texttt{main} della repository linkata sopra.
         }
+    \else
+        \ifdefstring{\DDcompleted}{false}{
+            {\color{red}
+                \vspace{0.3cm}
+                {\large\textbf{Appunti incompleti}}
+
+                Questi appunti non sono ancora completi.
+                Li pubblichiamo ugualmente sperando che possano essere utili anche nel loro stato attuale.
+            }
+        }
     \fi
 
     \newpage
@@ -133,6 +143,16 @@
 
             This version does not reflect the final content of the document, and may be incomplete and contain errors.
             Please do not cite or share this document, and refer instead to the most recent published version, available at the \texttt{main} branch of the linked GitHub repository.
+        }
+    \else
+        \ifdefstring{\DDcompleted}{false}{
+            {\color{red}
+                \vspace{0.3cm}
+                {\large\textbf{Incomplete notes}}
+
+                These notes are not yet complete.
+                We still publish them hoping that they can be useful even in their current state.
+            }
         }
     \fi
 
