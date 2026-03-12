@@ -1,0 +1,149 @@
+\chapter{La Combinatoria}
+\section{Introduzione}
+La combinatoria è l'area della matematica che confronta le "dimensioni" degli insiemi.
+Nel caso finito la combinatoria studia il numero di elementi di un insieme partendo da una sua definizione esplicita o
+ implicita. Nel caso infinito invece vengono usate funzioni per mettere in relazione
+ due insiemi e per confrontare le loro "grandezze".
+\section{Cardinalità}
+\subsection{Definizioni}
+Diamo un po' di definizioni
+\begin{definition}{Equipotenza}
+    Due insiemi $A$ e $B$ si dicono equipotenti ($A \sim B$) se
+    \begin{equation*}
+        \exists f:A \rightarrow B \quad \text{con $f$ biunivoca}
+    \end{equation*}
+\end{definition}
+Ricordiamo che una funzione biunivoca è una funzione surriettiva (Per ogni elemento del codominio esiste almeno un elemento del dominio) e iniettiva (Per ogni elemento del codominio corrisponde al piu' un elemento del dominio). Queste due propietà sono equivalenti all'esistenza di una funzione $\exists f^{-1}:B \rightarrow A$ detta inversa tale che \begin{align}
+    f^{-1}\circ f &= id_{A} \\
+    f\circ f^{-1} &= id_{B}
+\end{align}
+Viene anche ricordato che l'esistenza di pseudoinversi, ovvero funzioni inverse destre o sinitre è possibile anche se la funzione non è biunivoca.
+Mostriamo un esempio di due insiemi equipotenti.
+\begin{theorem}{}
+    L'insieme dei interi positivi pari è equipotente all'insieme degli interi positivi.
+\end{theorem}
+\begin{proof}
+    Consideriamo la funzione biunivoca $f:\N \rightarrow \N_{pari} \quad f(n) = 2n$.
+\end{proof}
+Dalla definizione di equipotenza seguono facilmente tre propietà che la rendono una relazione di equivalenza
+\begin{itemize}
+    \item \textbf{Riflessiva} $\forall A$ insieme $A\sim A$
+    \item \textbf{Simmetrica} $\forall A,B$ $A \sim B \iff B \sim A$
+    \item \textbf{Transitiva} $\forall A,B,C$ tali che $A\sim B$ e $B\sim C \implies A \sim C$
+\end{itemize}
+Le dimostrazioni di queste asserzioni sono molto accessibili: Per il punto 1 si può considerare la funzione identità, per il punto 2 la funzione inversa e per il punto 3 si può fare la composizioni delle funzioni biettive derivate dalle relazioni d'ipotesi.
+Definiamo ora piu' formalmente la cardinalità di un insieme e diamo qualche altra nozione.
+\begin{definition}{}
+
+\begin{itemize}
+    \item Un insieme è detto \textbf{finito} con \textbf{cardinalità} $n \coloneqq |A|$ se è equipotente con l'insieme $\{1,2\dots,n \}$
+
+    \item Un insieme si dice \textbf{infinito} se non è finito
+
+    \item Un insieme $A$ si dice \textbf{numerabile} se $A \sim \N$
+    \item Un insieme $A$ si dice al \textbf{piu' numerabil}e se è finito o numerabile
+    \item Un insieme si dice \textbf{non numerabile} se non è al piu' numerabile
+    \end{itemize}
+\end{definition}
+Possiamo dare una ulteriore caratterizazione di che cosa vuol dire formalmente essere un insieme infinto. Il seguente teorema non sarà dimostrato.
+\begin{theorem}{}
+    Le tre asserzioni sono equivalenti
+    \begin{itemize}
+        \item $A$ è un insieme infinito
+        \item $A$ contiene un sottoinsieme numerabile
+        \item $A$ è un insieme equipotente a un suo sottoinsieme proprio
+    \end{itemize}
+\end{theorem}
+\subsection{Risultati sugli insiemi infiniti}
+Georg Cantor e' stato il padre del confronto fra gli infiniti poichè è stato il primo a introdurre strumenti matematici chiari che ci permettono di confrontare insiemi infiniti fra di loro.
+Sorprendentemente si può mostrare che l'insieme dei razionali $\Q$, che a differenza di $\N$ contiene punti di accumulazione, è numerabile.
+\begin{theorem}{Numerabilità dei razionali}
+    $ \Q $ è numerabile
+\end{theorem}
+\begin{proof}
+    Iniziamo a dimostrare che $\Q^+$ è numerabile.  Definiamo la successione $\{a_{n\in\N}\}$ tale che
+    \begin{equation*}
+        a_n \coloneqq \begin{cases}
+        \frac{a+1}{b-1} \quad \text{se $b>1$} \\
+        \frac{1}{a+1} \quad \text{altrimenti}
+        \end{cases}
+    \end{equation*}
+    dove $a_{n-1} = \frac{a}{b}$ è una frazione ai minimi termini e $a_1 = \frac{1}{1}$. Definiamo poi la funzione $f:\N_{>0} \rightarrow \Q$ dove $f(n)$ è definita come $n$-esimo elemento distinto che appare, con ordine, nella successione.
+    Questa fuzione può essere visualizzata come una formichina che cammina diagonale per diagonale su una griglia infinita e numera i razionali saltando occasionalmente quelli che ha già incontrato. E' infatti chiaro che in questa successione siano presenti tutti i razionali, una ituizione visiva di questo fatto è presentata in fig1. Visto che questa funzione associa a ogni intero un razionale e viceversa è una biezione dimostrando quindi che $\Q^+$ è numerabile.
+    Per concludere la dimostrazione basta osservare che $\Q = \{0\}\cup\Q^+\cup\Q^-$ è una unione finita di insiemi numerabili ed è quindi numerabile.
+\end{proof}
+Per quanto riguarda $\R$ invece è possibile dimostrare che è un insieme non numerabile. L'idea della dimostrazione, divenuta celebre, è chiamata argomento diagonale di Cantor.
+\begin{theorem}{Non numerabilità dei reali}
+    $ \R $ non è numerabile
+\end{theorem}
+\begin{proof}
+    Supponiamo per assurdo che esista una funzione biunivoca da $\N$ a $\R$. In virtu' delle propietà degli interi possiamo scrivere in una tabella tutte le  mantisse (ovvero le cifre dopo la virgola) dei reali dove la riga $i$ è composta dalle cifre dopo la virgola del reale $f(i)$.
+    \begin{equation}
+    \begin{matrix}
+        a_{1,1} & a_{2,1} & a_{3,1} & \cdots \\
+        a_{1,2} & a_{2,2} & a_{3,2} & \cdots \\
+        a_{1,3} & a_{2,3} & a_{3,3} & \cdots \\
+        \vdots & \vdots & \vdots & \ddots
+    \end{matrix}
+\end{equation}
+    Definiamo il seguente numero reale.
+    \begin{equation}
+    x = 0,b_1b_2b_3b_4\dots
+    \end{equation}
+    Tale che $b_i \not \in \{0,9,a_{i,i} \}$. Per definizione è chiaro che $0<x<1$ e che abbia almeno una cifra differente da ogni reale presente nella tabella. Questo è chiaramente un assurdo poichè nella lista sono presenti tutti i reali tra 0 e 1.
+\end{proof}
+Vista questa rilevante differenza nel comportamento di questi due insiemi infiniti, definiamo piu' formalmente come si confrontano fra loro questi infiniti differenti.
+\begin{definition}{}
+    \begin{itemize}
+        \item $|\mathbb{R}| = c$
+        \item $|\mathbb{Q}| = \aleph_0$
+        \item Siano $A,B$ insimi infiniti allora diciamo $|A|\le|B|$ se $\exists f:A\rightarrow B$ tale che $f$ sia una funzione iniettiva.
+        \item Similmente possiamo definire il minore stretto. Dati $A,B$ diciamo $|A|<|B|$ se $|A|\le|B|$ e $|A|\not \sim |B|$
+    \end{itemize}
+\end{definition}
+Fra gli insiemi infiniti queste definizioni forniscono una relazione d'ordine proprio come il $<$ in $\mathbb{R}$.
+Introduciamo la seguente proprietà che una relazione (come quella definita sopra) può avere.
+\begin{itemize}
+    \item Propietà Riflessiva: Dato $A$ vale $|A|\le |A|$
+    \item Propeità Transitiva: Dato $A,B,C$ tale che $|A|\le |B|$ e $|B|\le |C|$ allora vale $|A| \le |C|$
+    \item Propietà Antisimmetrica: Dati $A,B$ tali che $|A|\le |B|$ e $|B|\le|A|$ allora $A\sim B$.
+\end{itemize}
+Una relazione che ha le prime due relazioni si dice "relazione di pre-ordine", mentre una che le ha tutte e tre si dice "relazione d'ordine". Dimostrare che la relazione definita in () è di pre-ordine si può fare in modo simile a come si è fatto in (). Mostrare invece che la relazione in () gode anche della terza propietà, ed è quindi una relazione d'ordine, è invece un risultato non banale che non dimostreremo, ma la cui veridicità è l'enunciato del seguente teorema.
+\begin{theorem}{Cantor-Bernstein 1}
+    Dati due insiemi $X$ e $Y$ tale che esistono $f:X\rightarrow Y$ e $g:Y\rightarrow X$ iniettive allora $\exists h:X\rightarrow Y$ biettiva.
+\end{theorem}
+Definiamo una relazione d'ordine totale una relazione d'ordine in cui ogni coppia di elementi è confrontabile. Ancora una volta Cantor ci ha già pensato e ha dimostrato che la relazione fra le cardinalità di insiemi infiniti è una relazione d'ordine totale.
+\begin{theorem}{Cantor-Bernstein 2}
+Dati due insiemi infiniti $A,B$ segue $|A|\le|B|$ o $|B|\le|A|$.
+\end{theorem}
+La prossima domanda spontanea è ora "Ci sono altri tipi di infinito oltre a $c$ e $\aleph_0$?".
+\begin{definition}{}
+    $\wp(A) \coloneqq \{U:U\subset A \}$
+\end{definition}
+Useremo questo strumento per costruire insiemi inifniti di tipo maggiore.
+\begin{theorem}{Cantor}
+    $A<|\wp (A)| $
+\end{theorem}
+La dimostrazione è in due parti. Iniziamo a dimostrare che $|A|\le |\wp(A)|$.
+\begin{proof}
+E' sufficiente definire la funzione $f:A\rightarrow \wp(A)$ tale che $f(x) = \{x\}$. Questa funzione è chiaramente iniettiva da cui la tesi.
+\end{proof}
+Dimostriamo ora che $A \not \sim \wp(A)$.
+\begin{proof}
+Supponiamo per assurdo che esista una funzione biunivoca $g:A\rightarrow \wp(A)$. Definiamo l'insieme $B = \{x\in A: x \not \in g(x) \}$ dove $g(x)$ è l'insieme immagine di $x$. Supponiamo $\exists b\in A$ tale che $g(b) \in B$. Ora si pongono due casi
+\begin{itemize}
+    \item Se $b\in B$
+\end{itemize}
+Concludiamo che l'insieme $B$ non ha controimmagine attraverso $g$ quindi $g$ non è una funzione suriettiva che è un assurdo.
+\end{proof}
+\section{Conteggi}
+Nel caso finito invece si può dimostrare questa altra relazione sull'insieme delle parti.
+\begin{theorem}{}
+    $|\wp(A)| = 2^{|A|} $
+\end{theorem}
+\begin{proof}
+    Lo dimostreremo per induzione. Il passo base è dato dall'insieme vuoto. Si vede facilmente che $\wp(\{ \}) = \{\{\}\}$ ovvero $|\wp(\{ \})| = 2^{0}$.
+
+    Usiamo l'ipotesi induttiva $|\wp(A)| = 2^{|A|}$ dove $A$ è un qualunque insieme di $n$ elementi. Prendiamo un qualsiasi insieme $B$ di $n+1$ elementi e consideriamo l'insieme delle parti $\wp(B)$. Preso un $b\in B$ dividiamo gli elementi di $\wp(B)$ in due sottoinsiemi $S_1$ e $S_2$. Nel primo sottoinsieme mettiamo tutti i sottoinsiemi finiti di $B$ che non contengono l'elemento $b$ e nel secondo i restanti. E' chiaro che $S_1 = \wp(B\ - \{b\}) $ quindi per induzione $|S_1| = 2^{n}$. Dimostriamo ora che $S_1 \sim S_2$. Definiamo la funzione biunivoca $f:S_2 \rightarrow S_1$ come
+    $f(x) = x-\{ b \}$. Concludiamo quindi che $|B| = |S_1|+|S_2| = 2^n+2^n = 2^{n+1}$.
+\end{proof}

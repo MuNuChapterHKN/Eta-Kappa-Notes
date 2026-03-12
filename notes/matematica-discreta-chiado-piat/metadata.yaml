@@ -1,0 +1,12 @@
+course_code: "02GQNYO"
+course_name: "Matematica Discreta"
+teacher: "Chiado' Piat, Valeria"
+start_academic_year: 2026
+program_level: "bachelor"
+program: "Matematica per l'ingegneria"
+language: "ita"
+formats:
+  - "latex"
+authors:
+  - "Morra, Valerio"
+editors: []

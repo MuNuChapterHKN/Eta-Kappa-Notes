@@ -1,0 +1,67 @@
+\chapter{Il Principio Di Induzione}
+\section{Introduzione}
+La matematica discreta è la controparte della analisi matematica 1 su oggetti numerabili. Questa disciplina copre un ampio range di argomenti spazianti dalla teoria spettrale dei grafi ai conteggi, alla teoria dei numeri fino allo studio delle cardinalità. I requisiti sono di natura elementare e comprendono solo concetti basici di algebra lineare, tra cui il teorema spettrale, e propietà dei numeri complessi. Ricordiamo inoltre che una proposizione è una affermazione che in un contesto è vera o falsa. Un predicato è una proposizione in funzione di variabili sconosciute e senza valutarlo non è possibile determinare se sia vero o falso.
+\section{Il Principio di Induzione}
+I modi di ragionare delle scienze funzionano in modo diverso. In matematica discreta la piu' grande arma a disposizione è il principio di induzione. I suoi enunciati sono molteplici e sono riportati qui sotto
+\begin{definition}{Primo Enunciato}
+    Sia $S\subset\mathbb{N}$ e $n\in \mathbb{N}$ tali che $\forall a > n$ e $a\in S$ allora $n+1 \in S$. Allora $\{ a\in \mathbb{N} : a \ge n\} \subset S$.
+\end{definition}
+Questo enunciato è stato storicamente usato come una caratterizazione assiomatica dell'insieme $\mathbb{N}$ dei naturali unito alle operazioni di somma e moltiplicazione.
+\begin{definition}{Secondo Enunciato}
+    Dato un predicato $P(n)$ con $n\in \mathbb{N}$ e $n_0 \in \mathbb{N}$ se \begin{itemize}
+        \item $P(n_0)$ è vera
+        \item $P(n) \rightarrow P(n+1) \quad \forall n\ge n_0 $
+    \end{itemize}
+    Allora $P(n)$ è vero $\forall n\ge n_0$.
+\end{definition}
+In una dimotrazione che fa uso del PI si indentificano quindi 2 passi. Il primo chiamato \textbf{passo base} che è la dimostrazione dell'esistenza di almeno un $n_0$ che rende verificato il predicato e un \textbf{passo induttivo} che parte dall'assunzione della verità di $P(n)$, chiamata \textbf{ipotesi induttiva}, e che dimostra che $P(n) \rightarrow P(n+1)$. \\
+Qui sotto è riportato un esempio di utilizzo per chiarire il concetto.
+\begin{theorem}{Somma di Gauss}
+    \[\sum^n_{i=1}i = \frac{n(n+1)}{2}\]
+\end{theorem}
+\begin{proof}
+    Usiamo il principio di induzione (PI). Iniziamo il con il passo base e procediamo con il passo induttivo.
+    \begin{itemize}
+        \item Per il passo induttivo è sufficiente mostrare che il predicato è vero per un intero. Questo è molto facile poichè $P(1)$ è vero poichè $1 = \frac{2*1}{2}$.
+        \item Assumiamo l'ipotesi induttiva ovvero affermiamo che \[\sum^n_{i=1}i = \frac{n(n+1)}{2}\] In questo caso il passo induttivo è semplicemente.
+        \[\sum^{n+1}_{i=1}i = \sum^{n}_{i=1}i + n+1 = \frac{n(n+1)}{2} + n+1 = \frac{(n+1)(n+2)}{2} \]
+    \end{itemize}
+    Questo conclude la dimostrazione poichè abbiamo soddisfatto i due requisiti del PI.
+\end{proof}
+Introduciamo ora il principio del buon ordinamento che è un altro assioma usato nella definizione dei numeri naturali e che è qualcosa di profondamente legato al ragionamento induttivo e in generale al mondo discreto.
+\begin{definition}{Buon ordinamento}
+    Preso un sottoinsieme non vuoto $S \subset \mathbb{N}$ $S$ ha sempre un minimo.
+\end{definition}
+E' chiaro che questo principio non valga per insiemi non discreti come $\mathbb{Q}$ o $\mathbb{R}$ o non limitati inferiormente tipo $\mathbb{Z}$ che rende $\mathbb{N}$ speciale. \\ \\ Introduciamo anche la forma forte del principio di induzione.
+\begin{definition}{Induzione forte}
+    Dato un predicato $P(n)$ e $n_0\in \mathbb{N}$.
+    \begin{itemize}
+        \item $P(n_0)$ vero
+        \item $\forall n\ge n_0$ e $P(j)$ è vero $\forall j$ tali che $n_0\le j \le n$ allora $P(n+1)$ è vero.
+    \end{itemize}
+\end{definition}
+Dimostriamo che il principio di boun ordinamento e il principio di induzione forte sono entrambi equivalenti al principio di induzione.
+\begin{theorem}{}
+    Il principio di induzione semplice (i),  forte (ii) e il principio di boun ordinamento (iii) sono equivalenti fra di loro.
+\end{theorem}
+Mostriamo (iii) $\iff$ (i).
+\begin{proof}
+    Iniziamo con la prima implicazione. Per assurdo assumiamo che se
+    \begin{itemize}
+        \item $P(n_0)$ è vero
+        \item $P(n) \implies P(n+1) \quad \forall n>n_0 $
+    \end{itemize}
+    Allora $S \coloneqq $ \{$n\in \mathbb{N}$ : $n> n_0$ e $P(n)$ falso\} è un insieme non vuoto. Per il principio del boun ordinamento esiste un $m > n_0$ con $m \in S$ tale che $m$ sia minore uguale di tutti gli elementi di $S$. Poichè $m-1\ge n_0$ e $m-1 \not \in S$  $P(m-1)$ è vero. Usando il fatto che $P(m-1) \implies P(m)$ otteniamo un assurdo. \\ \\
+    Facciamo la seconda implicazione. Sia $S \subset \N$ un insieme non vuoto. Iniziamo con un lemma.
+\begin{lemma}
+    Un insieme $S \subset \N$ di cadinalità finita ha un minimo.
+\end{lemma}
+\begin{proof}
+    Poichè $\N$ è completamente confrontabile (ovvero posso sempre dire chi è piu' grande di chi) esistono degli algoritmi per ordinare un insieme finito di interi in finite mosse. Di conseguenza esiste sempre un minimo.
+\end{proof}
+ Definiamo il seguente predicato
+\begin{equation}
+    P(n) = \text{$\exists$ $m\in S$ : $m\le n$}
+\end{equation}
+E' chiaro dalla definizione di $P(n)$ che $P(n) \implies P(n+1)$ ovvero abbiamo subito il passo induttivo. Per avere il passo base è sufficiente prendere $a\in S$ casuale per ottenere  $P(a)$ è vero. Per il principio di induzione allora $P(n)$ vero $\forall n \ge a$. Consideriamo allora l'insieme $\tilde{S} = S \; \cap \{n\in \N : n>a\}$ che è non vuoto e di cardinalità finita per cui ha un minimo.
+\end{proof}
