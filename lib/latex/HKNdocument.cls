@@ -213,22 +213,21 @@
         % Logo e titoli
         \includegraphics[scale = 0.2]{\DDbiglogo}  % HKN Logo
 
-        \vspace{0.5cm}
+        \vfill
 
         \textsc{\Large Mu Nu Chapter of IEEE-HKN}  % Name
+        \par
         \vspace{-0.45cm}
-
         \rule{0.80\linewidth}{0.1 mm}
-
+        \par
         \vspace{-0.1cm}
         \textsc{\large Politecnico di Torino -- Honor Society}
 
-        \vspace{0.8cm}
+        \vfill
 
         \rule{\linewidth}{0.2 mm}
-
+        \par
         \vspace{0.1cm}
-
         \ifx\DDtitle\empty
             % Course information
             {\LARGE \textbf{\iflanguage{italian}{Appunti di}{Notes of} \DDcoursename}}
@@ -246,12 +245,10 @@
             % Title
             {\LARGE \textbf{\DDtitle}}
         \fi
-
         \vspace{-0.3cm}
-
         \rule{\linewidth}{0.2 mm}
 
-        \vspace{0.85cm}
+        \vfill
 
         % Authors
         \if\DDauthors\empty\else
@@ -259,7 +256,7 @@
             {\Large \DDauthors}
         \fi
 
-        \vspace{0.3cm}
+        \vfill
 
         % Editors
         \if\DDeditors\empty\else
@@ -272,7 +269,8 @@
         {\large
             \iflanguage{italian}{Ultimo aggiornamento}{Last updated}: \today
             \ifx\DDversion\empty
-                \par \vspace{0.5cm}
+                \par
+                \vfill
                 {\color{red} \Large
                     \iflanguage{italian}
                     {Attenzione: versione non pubblicata!}
