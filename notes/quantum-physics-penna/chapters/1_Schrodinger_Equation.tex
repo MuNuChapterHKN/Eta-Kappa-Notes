@@ -1,0 +1,1066 @@
+\chapter{Schrödinger's Equation}
+
+\section{Introduction}
+Let's begin with a concise introduction to quantum mechanics and its fundamental principles.
+
+\subsection{Heuristic derivation of Schrödinger's equation}
+The cornerstone of quantum mechanics is Schrödinger's equation. As a fundamental postulate of quantum theory, it cannot be rigorously derived from more basic principles. However, we can develop intuition for its form through heuristic arguments that connect classical and quantum concepts.
+
+We start with de Broglie's revolutionary hypothesis, which associates a wavelength with any particle. While classical mechanics characterizes particles by mass $m$, position $\vec{r}$, and velocity $\dot{\vec{r}}$ (allowing for deterministic predictions), quantum mechanics describes particles with wave-like properties and probabilistic behavior. These principles can be expressed as:
+
+\[
+\begin{cases}\lambda=\frac{h}{p} & \text { de Broglie's principle }  \label{eq:1.1}\\ \Psi(\vec{x}, t)=A \mathrm{e}^{i(k \vec{x}-\omega t)} & \text { wave function }\end{cases}
+\]
+
+Here, Planck's constant $h \simeq 6.626 \cdot 10^{-34} \, \mathrm{J} \cdot \mathrm{s}$ appears as a fundamental quantum parameter. Since we're treating particles as waves, a natural starting point might be the classical d'Alembert wave equation:
+
+\begin{equation}
+\frac{\partial^{2} \Psi}{\partial t^{2}}=\sigma \nabla^{2} \Psi
+\end{equation}
+
+Substituting our wave function \eqref{eq:1.1} yields:
+
+\begin{align}
+-\omega^{2} \Psi & =-\sigma k^{2} \Psi \\
+\omega^{2} & =\sigma k^{2} \\
+\omega^{2} h^{2} & =\sigma\left(\frac{2 \pi}{\lambda}\right)^{2} h^{2}  \\
+\omega^{2} \hbar^{2} & =\sigma\left(\frac{h}{\lambda}\right)^{2} \\
+E^{2} & =\sigma p^{2}
+\end{align}
+
+
+The proportionality relation $E^2 = \sigma p^2$ derived from the d'Alembert equation is fundamentally incompatible with the nonrelativistic energy-momentum relation we seek. This discrepancy reveals a crucial insight: the quantum wave equation governing nonrelativistic particles must differ in structure from classical wave equations.
+
+The d'Alembert equation's second-order time derivative produces a relativistic-like dispersion relation where energy scales with momentum (rather than its square), appropriate for massless particles like photons ($E = pc$) but unsuitable for massive particles at nonrelativistic speeds. This mathematical inconsistency was one of the profound challenges faced by early quantum theorists, including Schrödinger himself in 1925-1926.
+
+Let's pursue an alternative approach by considering a first-order time derivative:
+
+\begin{equation}
+-i \frac{\partial \Psi}{\partial t}=\sigma \nabla^{2} \Psi \label{eq:1.4}
+\end{equation}
+
+The complex factor $-i$ is crucial and represents a fundamental departure from classical wave equations. Substituting our wave function:
+
+\begin{align}
+-i(-i\omega) \Psi & =-\sigma k^{2} \Psi \\
+\omega \Psi & =-\sigma k^{2} \Psi \\
+\omega & =\sigma k^{2} \\
+\omega h & =\sigma\left(\frac{2 \pi}{\lambda}\right)^{2} h  \\
+\omega \hbar & =\sigma\left(\frac{h}{\lambda}\right)^{2} \\
+E & =\sigma \frac{p^{2}}{\hbar}
+\end{align}
+
+This relation aligns with classical mechanics when we set:
+
+\begin{equation}
+\sigma=\frac{\hbar}{2 m} \Rightarrow E=\frac{p^{2}}{2 m}
+\end{equation}
+
+This nonrelativistic kinetic energy expression ($E=\frac{p^2}{2m}$) correctly describes particles like electrons under typical laboratory conditions where $v \ll c$. For reference, an electron accelerated through 100 eV reaches approximately 0.02c, where relativistic effects remain negligible (contributing corrections of only about 0.02).
+
+Rearranging equation \eqref{eq:1.4} with our value of $\sigma$, we obtain the time-dependent Schrödinger equation for a free particle:
+
+\begin{align}
+i \hbar \frac{\partial \Psi}{\partial t} & =-\frac{\hbar^{2}}{2 m} \nabla^{2} \Psi \quad \text{(3-D equation)} \\
+i \hbar \frac{\partial \Psi}{\partial t} & =-\frac{\hbar^{2}}{2 m} \frac{\partial^{2} \Psi}{\partial x^{2}} \quad \text{(1-D equation)}
+\end{align}
+
+This equation was formulated by Erwin Schrödinger in 1926 and represents one of the most significant achievements in theoretical physics. Unlike Newton's deterministic equations, Schrödinger's equation describes the evolution of probability amplitudes, fundamentally changing our understanding of physical reality.
+
+Two critical observations about these equations reveal their physical significance:
+
+\begin{enumerate}
+  \item The spatial differential operator corresponds directly to the kinetic energy operator. For a plane wave with wavevector components $k_1, k_2, k_3$:
+\end{enumerate}
+
+\begin{align}
+-\frac{\hbar^{2}}{2 m} \nabla^{2} \Psi & =-\frac{\hbar^{2}}{2 m}\left(k_{1}^{2}+k_{2}^{2}+k_{3}^{2}\right) \Psi  \\
+& =\frac{p^{2}}{2 m} \Psi=E \Psi
+\end{align}
+
+This shows how the Laplacian operator extracts the wave function’s kinetic-energy content, directly linking the mathematical formalism to physical observables. The eigenvalue
+$E$ corresponds to the energy measured in experiments, and for bound systems it naturally takes discrete values. This accounts for the quantized atomic spectra that puzzled classical physicists.
+
+\begin{enumerate}
+  \setcounter{enumi}{1}
+  \item The gradient operator, when properly scaled, yields the momentum operator—another fundamental connection between wave properties and particle attributes:
+\end{enumerate}
+
+\begin{equation}
+-i \hbar \vec{\nabla} \Psi=-\hbar \vec{k} \Psi=\vec{p} \Psi
+\end{equation}
+
+The Laplacian and gradient operators represent quantum mechanical operators that extract physical information from the wave function. Operators are transformations that act on wave functions to yield observable quantities, forming the mathematical backbone of quantum theory.
+
+The relationship between these operators mirrors classical physics in a profound way. In Newtonian mechanics, the kinetic energy and momentum of a particle are related by:
+
+\begin{equation}
+E=\frac{p^{2}}{2 m}
+\end{equation}
+
+When we substitute the quantum operators, we find out that this relationship is preserved:
+
+\begin{equation}
+\frac{1}{2 m}(-i \hbar \vec{\nabla}) \cdot(-i \hbar \vec{\nabla})=-\frac{\hbar^{2}}{2 m} \vec{\nabla} \cdot \vec{\nabla}=-\frac{\hbar^{2}}{2 m} \nabla^{2}
+\end{equation}
+
+This calculation reveals how the squared momentum operator transforms into the Laplacian, demonstrating the mathematical correspondence principle that connects classical and quantum formulations. The appearance of $\hbar$ ( $\hbar \coloneqq \frac{h}{2\pi}$, approximately $1.055 \times 10^{-34}$ J s) in these expressions marks the scale at which quantum effects become significant.
+
+In classical Hamiltonian mechanics, the total energy includes both kinetic and potential contributions:
+
+\begin{equation}
+H=\frac{p^{2}}{2 m}+U
+\end{equation}
+
+This structure carries over directly to quantum mechanics through the operator formalism. The correspondence allows us to define two fundamental quantum operators:
+
+\begin{itemize}
+  \item \textbf{Momentum operator:} The quantum analog of classical momentum
+\end{itemize}
+
+\begin{equation}
+\hat{p}=-i \hbar \vec{\nabla}
+\end{equation}
+
+This operator explains the wave-particle duality first proposed by de Broglie. When applied to a wave function, it extracts information about the particle's momentum. The operator's eigenvalues represent the possible momentum values that could be measured in an experiment.
+
+\begin{itemize}
+  \item \textbf{Hamiltonian (energy operator):} The quantum analog of total energy
+\end{itemize}
+
+\begin{equation}
+\hat{H}=-\frac{\hbar^{2}}{2 m} \nabla^{2}+U(\vec{x})
+\end{equation}
+
+The Hamiltonian operator encapsulates both kinetic energy (through the Laplacian term) and potential energy (through the function $U(\vec{x})$). This operator generates time evolution and determines energy eigenvalues, playing a central role in quantum dynamics comparable to that of the Hamiltonian function in classical mechanics.
+
+With these operators defined, we are now ready to express the complete form of the time-dependent Schrödinger equation.
+
+\section{Schrödinger's equation:}
+
+\begin{equation}
+i \hbar \frac{\partial \Psi(\vec{x}, t)}{\partial t}=-\frac{\hbar^{2}}{2 m} \nabla^{2} \Psi(\vec{x}, t)+U(\vec{x}) \Psi(\vec{x}, t)
+\end{equation}
+
+This equation, published by Erwin Schrödinger in 1926, represents one of the most significant achievements in theoretical physics of the 20th century. It earned Schrödinger the Nobel Prize in Physics in 1933 (shared with Paul Dirac) and has been experimentally validated across countless phenomena, from atomic spectra to quantum tunneling.
+
+For one-dimensional systems, the equation simplifies to:
+
+\begin{equation}
+i \hbar \frac{\partial \Psi(x, t)}{\partial t}=-\frac{\hbar^{2}}{2 m} \frac{\partial^{2} \Psi(x, t)}{\partial x^{2}}+U(x) \Psi(x, t)
+\end{equation}
+
+One-dimensional models provide valuable insights into quantum behavior while remaining mathematically tractable. Systems like the particle in a box, harmonic oscillator, and potential barriers are often first analyzed in one dimension before extending to more complex geometries.
+
+Using operator notation, the equation takes an elegant, compact form:
+
+\begin{equation}
+i \hbar \frac{\partial \Psi}{\partial t}=\hat{H} \Psi
+\end{equation}
+
+This formulation highlights that the Hamiltonian operator generates time evolution of the wave function, analogous to how the Hamiltonian function generates time evolution in classical mechanics through canonical equations. The equation is a partial differential equation of the first order in time and of the second order in space, requiring both initial conditions and boundary conditions in order to have a unique solutions.
+
+For multi-particle systems with masses $m_{1}, m_{2}, \ldots, m_{n}$ at positions $\vec{r}_{1}, \vec{r}_{2}, \ldots, \vec{r}_{n}$, the Hamiltonian becomes considerably more complex:
+
+\begin{equation}
+\hat{H}=\sum_{i=1}^{n} \frac{\hat{p}_i^{2}}{2 m_{i}}+\sum_{i=1}^{n} U_{i}\left(\vec{r}_{i}\right)+\sum_{i=1}^{n} \sum_{j \neq i}^{n} U_{i j}\left(\left|\vec{r}_{i}-\vec{r}_{j}\right|\right)
+\end{equation}
+
+This expression includes three distinct contributions:
+\begin{itemize}
+\item The kinetic energy terms for each particle
+\item External potential energy terms acting on individual particles
+\item Interaction potential terms between particle pairs
+\end{itemize}
+The resulting many-body Schrödinger equation poses formidable mathematical challenges. For a system of $n$ particles in three dimensions, the wave function depends on $3n$ spatial coordinates, making exact solutions computationally intractable for more than a few particles. This "exponential wall" necessitates approximation methods like the Hartree-Fock approach, density functional theory, and various numerical techniques that form the basis of computational quantum chemistry and condensed matter physics.
+
+\subsection{Superposition}
+The superposition principle represents another fundamental aspect of quantum mechanics, arising directly from the linearity of the Schrödinger equation. This principle has no classical analog and leads to many counterintuitive quantum phenomena.
+
+When we solve Schrödinger's equation for a particular system, we often obtain multiple wavefunctions $\Psi_{j}$ (where $j=1,2, \ldots, n$) that satisfy the equation. The superposition principle states that any linear combination of these solutions also represents a valid quantum state. This follows mathematically from the linearity of the differential operators in the Schrödinger equation.
+
+\textbf{Proof.} Start by defining a superposition of two solutions:
+
+\begin{equation}
+\Psi=c_{1} \Psi_{1}+c_{2} \Psi_{2}
+\end{equation}
+
+where $c_1$ and $c_2$ are complex coefficients. To verify that $\Psi$ is also a solution to Schrödinger's equation, we substitute it directly into Schrödinger's equation:
+
+\begin{align}
+i \hbar \frac{\partial \Psi}{\partial t} &= i \hbar \frac{\partial}{\partial t}\left(c_{1} \Psi_{1}+c_{2} \Psi_{2}\right) \\
+&= i \hbar\left(c_{1} \frac{\partial \Psi_{1}}{\partial t}+c_{2} \frac{\partial \Psi_{2}}{\partial t}\right)
+\end{align}
+
+Since $\Psi_1$ and $\Psi_2$ are solutions to Schrödinger's equation, we know that:
+$i \hbar \frac{\partial \Psi_1}{\partial t} = \hat{H}\Psi_1$ and $i \hbar \frac{\partial \Psi_2}{\partial t} = \hat{H}\Psi_2$
+
+Therefore:
+\begin{align}
+i \hbar \frac{\partial \Psi}{\partial t} &= i \hbar\left(c_{1} \frac{\partial \Psi_{1}}{\partial t}+c_{2} \frac{\partial \Psi_{2}}{\partial t}\right) \\
+&= c_{1} \hat{H} \Psi_{1}+c_{2} \hat{H} \Psi_{2} \\
+&= \hat{H}\left(c_{1} \Psi_{1}+c_{2} \Psi_{2}\right) \\
+&= \hat{H} \Psi
+\end{align}
+
+This proves that $\Psi$ satisfies Schrödinger's equation. The linearity of the Hamiltonian operator allows us to distribute it across the terms, confirming that any linear combination of solutions is also a solution.
+
+By induction, this extends to any number of solutions:
+
+\begin{equation}
+\Psi=\sum_{j=1}^{n} c_{j} \Psi_{j} \text{ is a solution } \Longleftrightarrow \text{ every } \Psi_{j} \text{ is a solution }
+\end{equation}
+
+The superposition principle has profound implications, explaining quantum interference and the behavior seen in the double-slit experiment.
+
+\subsection{Quantum representation of dynamics}
+What is the meaning of the wave function?
+
+In classical physics, dynamics follows a deterministic framework. When we solve Hamilton's equations:
+
+\[
+\left\{\begin{array}{l}
+\frac{\partial \mathcal{H}}{\partial q_{\alpha}}=-\dot{p}_{\alpha}  \\
+\frac{\partial \mathcal{H}}{\partial p_{\alpha}}=\dot{q}_{\alpha}
+\end{array}\right.
+\]
+
+We can precisely predict the system's evolution at any time. Given initial conditions, the future trajectory is entirely determined.
+
+Quantum mechanics represents a radical departure from determinism. The wave function introduces an inherently probabilistic description of physical systems, fundamentally changing our understanding of nature at the microscopic level.
+
+The probabilistic interpretation, known as the Copenhagen interpretation, was developed in Copenhagen during the formative years of quantum theory. While alternative interpretations exist, the Copenhagen approach remains standard due to its consistent agreement with experiments.
+
+In this framework, the wave function $\Psi(\vec{x}, t)$ represents the complete state of the system. From it, we define the probability density $\rho$:
+
+\begin{equation}
+\rho:=|\Psi(\vec{x}, t)|^{2} = \Psi^*(\vec{x}, t)\Psi(\vec{x}, t)
+\end{equation}
+
+For an infinitesimal volume $\mathrm{d}V$ within a region, the probability of finding the particle in that volume element is:
+
+\begin{equation}
+\mathrm{d}P=\rho\,\mathrm{d}V
+\end{equation}
+
+This probabilistic interpretation was initially controversial but has withstood extensive experimental verification, including tests of Bell's inequalities that support the quantum mechanical description over local hidden variable theories.
+
+For a finite volume $V_{0}$, the probability of finding the particle within that region is calculated by integrating the probability density over the entire volume:
+
+\begin{equation}
+P\left(V_{0}\right)=\int_{V_{0}} \rho \, \mathrm{d} V
+\end{equation}
+
+This integral represents a key connection between the mathematical formalism and experimental measurements. When we perform position measurements on identically prepared quantum systems, the statistical distribution of results approaches this probability distribution in the limit of many measurements.
+
+If the particle is confined within a volume $V$ (for example, in a potential well with infinite barriers), then the particle must be found somewhere within this volume. This leads to the normalization condition:
+
+\begin{equation}
+\int_{V} \rho \, \mathrm{d} V \stackrel{!}{=} 1
+\end{equation}
+
+The exclamation mark above the equal sign emphasizes that this is a constraint on physically acceptable wave functions rather than a derived result. Wave functions that don't satisfy this normalization condition don't represent physically realizable quantum states. This requirement guides the selection of appropriate solutions to Schrödinger's equation when boundary conditions allow for multiple mathematical solutions.
+
+A remarkable feature of quantum dynamics is that while the wave function evolves in time according to Schrödinger's equation, the total probability remains constant—a property known as probability conservation. This reflects the physical principle that particles are neither created nor destroyed during quantum evolution.
+
+To prove this conservation property, we start with the explicit definition of $\rho$:
+
+\begin{equation}
+\rho=|\Psi|^{2}=\Psi \Psi^{*}
+\end{equation}
+
+Taking the time derivative:
+
+\begin{equation}
+\frac{\partial \rho}{\partial t}=\frac{\partial}{\partial t}(\Psi \Psi^{*})=\Psi \frac{\partial \Psi^{*}}{\partial t}+\Psi^{*} \frac{\partial \Psi}{\partial t} \label{eq:1.28}
+\end{equation}
+
+This equation expresses how the probability density changes over time. To establish conservation, we need to show that the total integrated probability remains constant despite local changes in the distribution.
+
+
+Exploiting Schrödinger's equation and its complex conjugate:
+
+\begin{align}
+i \hbar \frac{\partial \Psi}{\partial t} &= -\frac{\hbar^{2}}{2 m} \nabla^{2} \Psi+U(\vec{x}) \Psi \\
+-i \hbar \frac{\partial \Psi^{*}}{\partial t} &= -\frac{\hbar^{2}}{2 m} \nabla^{2} \Psi^{*}+U(\vec{x}) \Psi^{*}
+\end{align}
+
+The second equation can be rewritten as:
+\begin{align}
+i \hbar \frac{\partial \Psi^{*}}{\partial t} &= \frac{\hbar^{2}}{2 m} \nabla^{2} \Psi^{*}-U(\vec{x}) \Psi^{*}
+\end{align}
+
+Substituting these expressions into equation \eqref{eq:1.28}:
+
+\begin{align}
+\frac{\partial \rho}{\partial t} &= \Psi \frac{\partial \Psi^{*}}{\partial t}+\Psi^{*} \frac{\partial \Psi}{\partial t} \\
+&= \Psi\left(\frac{-i\hbar^{2}}{2m i\hbar} \nabla^{2} \Psi^{*}+\frac{iU(\vec{x})}{i\hbar} \Psi^{*}\right)+\Psi^{*}\left(\frac{-i\hbar^{2}}{i\hbar 2 m} \nabla^{2} \Psi+\frac{iU(\vec{x})}{i\hbar} \Psi\right) \\
+&= \frac{\hbar^{2}}{2m i\hbar}\left(\Psi \nabla^{2} \Psi^{*}-\Psi^{*} \nabla^{2} \Psi\right)
+\end{align}
+
+The potential terms cancel out exactly, revealing that probability conservation holds even in the presence of external forces. This is a profound result showing that quantum evolution preserves probability regardless of the specific potential.
+
+Using a vector calculus identity for the Laplacian terms:
+
+\begin{equation}
+\Psi \nabla^{2} \Psi^{*}-\Psi^{*} \nabla^{2} \Psi=\vec{\nabla} \cdot\left(\Psi \vec{\nabla} \Psi^{*}-\Psi^{*} \vec{\nabla} \Psi\right)
+\end{equation}
+
+This identity transforms the difference of Laplacians into a divergence term, allowing us to express the time evolution in terms of a flow.
+
+Substituting this result:
+
+\begin{equation}
+\frac{\partial \rho}{\partial t}=\frac{1}{i\hbar}\frac{\hbar^{2}}{2 m} \vec{\nabla} \cdot\left(\Psi \vec{\nabla} \Psi^{*}-\Psi^{*} \vec{\nabla} \Psi\right) \label{eq:1.32}
+\end{equation}
+
+We can define a vector quantity representing the flow of probability:
+
+\begin{equation}
+\vec{j}:=\frac{\hbar}{2 m i}\left(\Psi^{*} \vec{\nabla} \Psi-\Psi \vec{\nabla} \Psi^{*}\right)
+\end{equation}
+
+This quantity $\vec{j}$ is the probability current density, analogous to fluid flow in classical mechanics. It represents how probability "flows" through space as the wave function evolves. The direction of $\vec{j}$ indicates the direction of probability flow, while its magnitude indicates the rate of flow.
+
+With this definition, equation \eqref{eq:1.32} takes the elegant form of a continuity equation:
+
+\begin{equation}
+\frac{\partial \rho}{\partial t}=-\vec{\nabla} \cdot \vec{j}
+\end{equation}
+
+This continuity equation expresses a fundamental conservation law: the rate at which probability density changes at any point equals the negative divergence of the probability current. In other words, probability can neither be created nor destroyed—it can only flow from one region to another.
+
+
+If we substitute the general expression for a complex wave function $\Psi=|\Psi| \mathrm{e}^{i \theta}$ into our expression for the probability current, we can gain further insight into its physical meaning:
+
+\begin{align}
+\vec{j} &= \frac{\hbar}{2 m i}\left(\Psi^{*} \vec{\nabla} \Psi-\Psi \vec{\nabla} \Psi^{*}\right) \\
+&= \frac{\hbar}{2 m i}\left(|\Psi| \mathrm{e}^{-i \theta} \vec{\nabla}\left(|\Psi| \mathrm{e}^{i \theta}\right)-|\Psi| \mathrm{e}^{i \theta} \vec{\nabla}\left(|\Psi| \mathrm{e}^{-i \theta}\right)\right) \\
+&= \frac{\hbar}{2 m i}(|\Psi| \mathrm{e}^{-i \theta}(\vec{\nabla}|\Psi|+i|\Psi| \vec{\nabla} \theta)-\underbrace{|\Psi| \mathrm{e}^{i \theta}(\vec{\nabla}|\Psi|-i|\Psi| \vec{\nabla} \theta)}_{\text {complex conjugate }})  \\
+\end{align}
+
+The gradient terms involving $|\Psi|$ cancel out when we complete the calculation:
+
+\begin{align}
+\vec{j} &= \frac{\hbar}{2 m i}\left(2 i|\Psi|^{2} \vec{\nabla} \theta\right) \\
+&= \frac{\hbar}{m}|\Psi|^{2} \vec{\nabla} \theta
+\end{align}
+
+This result reveals a profound connection between quantum mechanics and fluid dynamics. The term $\vec{v}=\frac{\hbar}{m} \vec{\nabla} \theta$ represents a velocity field associated with the flow of probability, while $|\Psi|^2 = \rho$ is the probability density. Thus:
+
+\begin{equation}
+\vec{j}=\rho \vec{v}
+\end{equation}
+
+This form mirrors the mass current density in fluid mechanics, suggesting that quantum probability flows like a fluid, with the phase gradient of the wave function determining the velocity field. This hydrodynamic analogy was explored by Madelung in 1926 and forms the basis of the quantum hydrodynamic interpretation.
+
+We can now prove that the total probability $P$ remains constant over time.
+
+Proof. The time derivative of the total probability in volume $V$ is:
+
+\begin{align}
+\frac{\partial}{\partial t} \int_{V} \rho \, \mathrm{d}^{3} \vec{x} &= \int_{V} \frac{\partial \rho}{\partial t} \, \mathrm{d}^{3} \vec{x}  \\
+&= -\int_{V} \vec{\nabla} \cdot \vec{j} \, \mathrm{d}^{3} \vec{x}
+\end{align}
+
+Applying the divergence theorem (Gauss's theorem), this becomes:
+
+\begin{align}
+\frac{\partial}{\partial t} \int_{V} \rho \, \mathrm{d}^{3} \vec{x} &= -\oint_{\partial V} \vec{j} \cdot \mathrm{d} \vec{\Sigma} = 0
+\end{align}
+
+The surface integral vanishes because for physically relevant wave functions, $|\Psi|^2$ approaches zero at the boundaries of the volume (for bound states) or falls off rapidly enough (for scattering states). Consequently, $\vec{j}$ also vanishes at the boundary, making the surface integral zero.
+
+This proves that the total probability within the volume remains constant during time evolution—a fundamental property ensuring that quantum mechanics preserves the probabilistic interpretation.
+
+For proper normalization, we require the total probability to be exactly 1. If a wave function yields:
+
+\begin{equation}
+\int_{V} \, \mathrm{d}^{3} x|\Psi|^{2}=c
+\end{equation}
+
+where $c$ is some positive constant, we normalize by scaling the wave function:
+$\Psi \rightarrow \frac{\Psi}{\sqrt{c}}$
+
+This ensures:
+
+\begin{equation}
+\int_{V} \, \mathrm{d}^{3} x\left|\frac{\Psi}{\sqrt{c}}\right|^{2}=1
+\end{equation}
+
+The normalization procedure is essential for maintaining the probabilistic interpretation, allowing us to interpret $|\Psi|^2$ as a proper probability density.
+
+For infinite volumes where $V=\mathbb{R}^{3}$, we still require the wave function to be normalizable, meaning it must decay sufficiently rapidly at infinity. This constraint excludes certain mathematical solutions to Schrödinger's equation that, while mathematically valid, don't represent physically realizable quantum states.
+
+
+For a wave function that asymptotically behaves as:
+
+\begin{equation}
+\Psi \simeq \frac{f(r)}{r^{k}} \quad \text { with } \quad|f(r)|<C
+\end{equation}
+
+where $C$ is some positive constant, we need to determine conditions on $k$ that ensure normalizability. Substituting this expression into the probability current:
+
+\begin{align}
+\vec{j} &= \frac{\hbar}{2 m i}\left(\frac{f^{*}(r)}{r^{k}} \vec{\nabla} \frac{f(r)}{r^{k}}-\frac{f(r)}{r^{k}} \vec{\nabla} \frac{f^{*}(r)}{r^{k}}\right)
+\end{align}
+
+Applying the product rule to evaluate the gradients:
+
+\begin{align}
+\vec{j} &= \frac{\hbar}{2 m i}\left(\frac{f^{*}(r)}{r^{k}}\left(\frac{\vec{\nabla} f(r)}{r^{k}}-\frac{k f(r)}{r^{k+1}}\hat{r}\right)-\frac{f(r)}{r^{k}}\left(\frac{\vec{\nabla} f^{*}(r)}{r^{k}}-\frac{k f(r)^{*}}{r^{k+1}}\hat{r}\right)\right) \\
+&= \frac{\hbar}{2 m i}\left(\frac{f^{*}(r) \vec{\nabla} f(r)}{r^{2 k}}-\frac{f^{*}(r) k f(r)}{r^{2 k+1}}\hat{r}-\frac{f(r) \vec{\nabla} f^{*}(r)}{r^{2 k}}+\frac{f(r) k f^{*}(r)}{r^{2 k+1}}\hat{r}\right)
+\end{align}
+
+The terms containing $\hat{r}$ cancel, leaving:
+
+\begin{align}
+\vec{j} &= \frac{\hbar}{2 m i}\left(\frac{f^{*}(r) \vec{\nabla} f(r)-f(r) \vec{\nabla} f^{*}(r)}{r^{2 k}}\right)
+\end{align}
+
+To analyze whether the total probability is conserved in an infinite volume, we examine the flux through a large sphere surrounding the origin:
+
+\begin{align}
+\frac{\partial}{\partial t} \int_{\mathbb{R}^{3}} \rho \, \mathrm{d}^{3} \vec{x} &= -\oint_{\partial V} \vec{j} \cdot \mathrm{d} \vec{\Sigma} \\
+&= -\oint_{S} \vec{j} \cdot \hat{r} \, r^{2} \sin\theta \, d\theta \, d\phi
+\end{align}
+
+Substituting our expression for $\vec{j}$:
+
+\begin{align}
+\frac{\partial}{\partial t} \int_{\mathbb{R}^{3}} \rho \, \mathrm{d}^{3} \vec{x} &= -\oint_{S}\left[\frac{\hbar}{2 m i}\left(\frac{f^{*}(r) \vec{\nabla} f(r)-f(r) \vec{\nabla} f^{*}(r)}{r^{2 k}}\right) \cdot \hat{r} \, r^{2}\right] \sin\theta \, d\theta \, d\phi  \\
+&= -\oint_{S} \frac{\hbar}{2 m i}\left(\frac{f^{*}(r) \frac{\partial f(r)}{\partial r}-f(r) \frac{\partial f^{*}(r)}{\partial r}}{r^{2 k-2}}\right) \sin\theta \, d\theta \, d\phi
+\end{align}
+
+For this integral to vanish as $r \to \infty$, the integrand must decay fast enough. Since $|f(r)|$ is bounded, the behavior is dominated by the $r^{2k-2}$ term in the denominator. The probability current density vanishes at infinity if $k > 1$, ensuring no probability escapes to infinity.
+
+However, for the wave function to be normalizable, we need:
+\begin{align}
+\int_{\mathbb{R}^{3}} |\Psi|^2 \, d^3x &= \int_0^\infty \int_0^\pi \int_0^{2\pi} \left|\frac{f(r)}{r^k}\right|^2 r^2 \sin\theta \, d\phi \, d\theta \, dr \\
+&= 4\pi \int_0^\infty \frac{|f(r)|^2}{r^{2k}} r^2 \, dr \\
+&= 4\pi \int_0^\infty \frac{|f(r)|^2}{r^{2k-2}} \, dr
+\end{align}
+
+This integral converges only if $2k-2 > 1$, which means $k > \frac{3}{2}$. Since this condition is stronger than $k > 1$, we need $k > \frac{3}{2}$ to satisfy both requirements.
+
+\subsection{Physical operators}
+In quantum mechanics, mathematical operators represent physical observables. These operators can be classified into three main categories based on how they act on wave functions:
+
+\begin{enumerate}
+  \item Multiplication operators: These act by simply multiplying the wave function by a function of coordinates. Key examples include:
+\end{enumerate}
+
+\begin{itemize}
+  \item The position operator, derived from the position vector $\vec{x}=x_{1} \hat{\vec{u}}_{1}+x_{2} \hat{\vec{u}}_{2}+x_{3} \hat{\vec{u}}_{3}$, becomes $\hat{x}=\hat{x_{1}} \hat{\vec{u}}_{1}+\hat{x_{2}} \hat{\vec{u}}_{2}+\hat{x_{3}} \hat{\vec{u}}_{3}$ where each component acts as $\hat{x}_i\Psi(\vec{x}) = x_i\Psi(\vec{x})$
+  \item Any function of position $f(\vec{x})$ becomes a multiplicative operator $\hat{f}$ acting as $\hat{f}\Psi(\vec{x}) = f(\vec{x})\Psi(\vec{x})$
+  \item The potential energy operator $\hat{U}(\vec{x})$ acts by multiplication: $\hat{U}(\vec{x})\Psi(\vec{x}) = U(\vec{x})\Psi(\vec{x})$
+\end{itemize}
+
+\begin{enumerate}
+  \setcounter{enumi}{1}
+  \item Differential operators: These involve derivatives of various orders. Important examples include:
+\end{enumerate}
+
+\begin{itemize}
+  \item The momentum operator $\hat{p}_{j}=-i \hbar \frac{\partial}{\partial x_{j}}$, which acts on wave functions through differentiation
+  \item The kinetic energy operator $\hat{T} = \frac{\hat{p}^2}{2m} = -\frac{\hbar^2}{2m}\nabla^2$
+\end{itemize}
+
+
+\begin{enumerate}
+  \setcounter{enumi}{2}
+  \item Mixed operators: These combine both multiplication and differentiation operations. Key examples include:
+\end{enumerate}
+
+\begin{itemize}
+  \item The Hamiltonian operator $\hat{H}=-\frac{\hbar^{2}}{2 m} \nabla^{2}+U(\vec{x})$, representing the total energy
+  \item The angular momentum operator $\hat{\vec{L}}=\hat{\vec{x}} \times \hat{\vec{p}}$, which describes rotational motion
+\end{itemize}
+
+To work with vector operators like angular momentum, we introduce the Levi-Civita symbol (also known as the permutation symbol or antisymmetric tensor):
+
+\[
+\epsilon_{i j k}:= \begin{cases}
+1 & \text{if $(i,j,k)$ is an even permutation of $(1,2,3)$} \\
+-1 & \text{if $(i,j,k)$ is an odd permutation of $(1,2,3)$} \\
+0 & \text{if any index is repeated}
+\end{cases}
+\]
+
+This means $\epsilon_{123} = \epsilon_{231} = \epsilon_{312} = 1$ and $\epsilon_{132} = \epsilon_{321} = \epsilon_{213} = -1$, while all other combinations with repeated indices are zero.
+
+We adopt Einstein's summation convention where repeated indices automatically imply summation over that index. For example:
+
+\begin{equation}
+\epsilon_{i j k} a_{i}=\sum_{i=1}^3 \epsilon_{i j k} a_{i}
+\end{equation}
+
+The Levi-Civita symbol possesses several remarkable properties. One particularly useful identity relates products of two Levi-Civita symbols to determinants of Kronecker delta functions:
+
+\[
+\epsilon_{i j k} \epsilon_{l m n}=\begin{vmatrix}
+\delta_{i l} & \delta_{i m} & \delta_{i n} \\
+\delta_{j l} & \delta_{j m} & \delta_{j n} \\
+\delta_{k l} & \delta_{k m} & \delta_{k n}
+\end{vmatrix}
+\]
+
+This identity proves extremely useful in tensor manipulations and simplifications of vector calculus expressions.
+
+Another important property connects the Levi-Civita symbol to the cross product of vectors:
+
+\[
+\epsilon_{i j k} \hat{\vec{u}}_{i} a_{j} b_{k}=\vec{a} \times \vec{b}=\begin{vmatrix}
+\hat{\vec{u}}_{1} & \hat{\vec{u}}_{2} & \hat{\vec{u}}_{3} \label{eq:1.46}\\
+a_{1} & a_{2} & a_{3} \\
+b_{1} & b_{2} & b_{3}
+\end{vmatrix}
+\]
+
+This provides a compact tensor notation for cross products, which is particularly valuable when working with angular momentum operators.
+
+To verify this identity, we can expand the summation explicitly:
+
+
+\begin{align}
+\epsilon_{i j k} \hat{\vec{u}}_{i} a_{j} b_{k} &= \sum_{i=1}^{3} \sum_{j=1}^{3} \sum_{k=1}^{3} \epsilon_{i j k} \hat{\vec{u}}_{i} a_{j} b_{k} \\
+&= \hat{\vec{u}}_{1} \sum_{j=1}^{3} \sum_{k=1}^{3} \epsilon_{1 j k} a_{j} b_{k} + \hat{\vec{u}}_{2} \sum_{j=1}^{3} \sum_{k=1}^{3} \epsilon_{2 j k} a_{j} b_{k} + \hat{\vec{u}}_{3} \sum_{j=1}^{3} \sum_{k=1}^{3} \epsilon_{3 j k} a_{j} b_{k}
+\end{align}
+
+Examining the first term in detail, we note that $\epsilon_{1jk}$ is non-zero only when $(j,k)$ is either $(2,3)$ or $(3,2)$:
+
+\begin{align}
+\hat{\vec{u}}_{1} \sum_{j=1}^{3} \sum_{k=1}^{3} \epsilon_{1 j k} a_{j} b_{k} &= \hat{\vec{u}}_{1}(\epsilon_{123} a_{2} b_{3} + \epsilon_{132} a_{3} b_{2})  \\
+&= \hat{\vec{u}}_{1}(1 \cdot a_{2} b_{3} + (-1) \cdot a_{3} b_{2}) \\
+&= \hat{\vec{u}}_{1}(a_{2} b_{3} - a_{3} b_{2})
+\end{align}
+
+This is precisely the first component of the cross product $\vec{a} \times \vec{b}$. Similarly, the second and third terms yield the second and third components:
+$\hat{\vec{u}}_{2}(a_{3} b_{1} - a_{1} b_{3})$ and $\hat{\vec{u}}_{3}(a_{1} b_{2} - a_{2} b_{1})$.
+
+Thus, equation \eqref{eq:1.46} is indeed the cross product of vectors $\vec{a}$ and $\vec{b}$, expressed using the Levi-Civita symbol.
+
+Using this notation, we can elegantly express the components of the angular momentum operator:
+
+\begin{equation}
+\hat{L}_{i} = (\hat{\vec{x}} \times \hat{\vec{p}})_{i} = \epsilon_{i j k} \hat{x}_{j} \hat{p}_{k}
+\end{equation}
+
+Expanding this definition:
+\begin{align}
+\hat{L}_1 &= \hat{x}_2\hat{p}_3 - \hat{x}_3\hat{p}_2 = \hat{y}\hat{p}_z - \hat{z}\hat{p}_y \\
+\hat{L}_2 &= \hat{x}_3\hat{p}_1 - \hat{x}_1\hat{p}_3 = \hat{z}\hat{p}_x - \hat{x}\hat{p}_z \\
+\hat{L}_3 &= \hat{x}_1\hat{p}_2 - \hat{x}_2\hat{p}_1 = \hat{x}\hat{p}_y - \hat{y}\hat{p}_x
+\end{align}
+
+This compact form highlights the geometric nature of angular momentum as a cross product of position and momentum operators.
+
+To formalize the mathematical framework of quantum mechanics, we define the Hilbert space $L^{2}(V)$, which contains all square-integrable functions:
+
+\begin{equation}
+L^{2}(V) := \left\{\Psi(\vec{x},t) : \int_{V} d^{3}x |\Psi(\vec{x},t)|^{2} < \infty \right\} \label{eq:1.50}
+\end{equation}
+
+This space provides the mathematical foundation for quantum states, ensuring that probability interpretations remain valid.
+
+For a generic linear operator $\hat{A}$ acting on functions in this space:
+
+\begin{equation}
+\Psi \in L^{2}(V) \Rightarrow \hat{A}\Psi = \phi \in L^{2}(V)
+\end{equation}
+
+This requirement ensures that operators transform physically meaningful states into other physically meaningful states.
+
+Quantum operators satisfy several important algebraic properties:
+
+\begin{itemize}
+  \item Additivity: $(\hat{A}+\hat{B})\Psi = \hat{A}\Psi + \hat{B}\Psi$
+  \item Linearity: $\hat{A}(c_{1}\Psi_{1} + c_{2}\Psi_{2}) = c_{1}\hat{A}\Psi_{1} + c_{2}\hat{A}\Psi_{2}$
+  \item Associativity: $(\hat{A}\hat{B})\Psi = \hat{A}(\hat{B}\Psi) = \hat{A}\phi$ where $\phi = \hat{B}\Psi$
+  \item Non-commutativity: $\hat{A}\hat{B} \neq \hat{B}\hat{A}$ in general, a property with profound physical implications
+  \item Identity operator: $\hat{\mathbb{I}}\Psi = \Psi$ for all $\Psi$
+  \item Zero operator: $\hat{O}\Psi = 0$ for all $\Psi$
+\end{itemize}
+
+The non-commutativity of operators is particularly significant in quantum mechanics, as it leads directly to uncertainty principles and complementarity between conjugate observables.
+
+
+\subsection{Commutators}
+
+In quantum mechanics, the commutator is a fundamental mathematical tool that captures the non-commutative nature of physical observables. For two operators $\hat{A}$ and $\hat{B}$, the commutator is defined as:
+
+\begin{equation}
+[\hat{A}, \hat{B}] := \hat{A}\hat{B} - \hat{B}\hat{A}
+\end{equation}
+
+When the commutator $[\hat{A}, \hat{B}] = 0$, we say the operators commute, meaning their order of application doesn't matter. However, when $[\hat{A}, \hat{B}] \neq 0$, the order becomes physically significant, leading to uncertainty relations between the corresponding observables.
+
+Commutators possess several important algebraic properties:
+
+\begin{enumerate}
+  \item Bilinearity: The commutator is linear in both arguments.
+\end{enumerate}
+
+\begin{align}
+[c_{1}\hat{A} + c_{2}\hat{B}, \hat{C}] &= c_{1}[\hat{A}, \hat{C}] + c_{2}[\hat{B}, \hat{C}] \\
+[\hat{A}, c_{1}\hat{B} + c_{2}\hat{C}] &= c_{1}[\hat{A}, \hat{B}] + c_{2}[\hat{A}, \hat{C}]
+\end{align}
+
+This property allows us to distribute commutators across linear combinations of operators.
+
+\begin{enumerate}
+  \setcounter{enumi}{1}
+  \item Leibniz rule: The commutator satisfies a product rule analogous to differentiation.
+\end{enumerate}
+
+\begin{equation}
+[\hat{A}, \hat{B}\hat{C}] = [\hat{A}, \hat{B}]\hat{C} + \hat{B}[\hat{A}, \hat{C}]
+\end{equation}
+
+This property is particularly useful when computing commutators of composite operators.
+
+\begin{enumerate}
+  \setcounter{enumi}{2}
+  \item Jacobi identity: The commutator satisfies a cyclic relation.
+\end{enumerate}
+
+\begin{equation}
+[\hat{A},[\hat{B}, \hat{C}]] + [\hat{B},[\hat{C}, \hat{A}]] + [\hat{C},[\hat{A}, \hat{B}]] = 0
+\end{equation}
+
+The Jacobi identity plays a crucial role in the theory of Lie algebras and is essential for establishing conservation laws in quantum mechanics.
+
+These properties reveal a profound connection between quantum mechanics and classical mechanics. In classical Hamiltonian mechanics, Poisson brackets $\{f,g\}$ serve a role analogous to commutators in quantum mechanics. The correspondence between these structures is captured in the following relations:
+
+\begin{align}
+[x_{j}, x_{k}] &= 0 \longleftrightarrow \{x_{j}, x_{k}\} = 0 \\
+[\hat{p}_{j}, \hat{p}_{k}] &= 0 \longleftrightarrow \{p_{j}, p_{k}\} = 0  \\
+[x_{j}, \hat{p}_{k}] &= ? \longleftrightarrow \{x_{j}, p_{k}\} = \delta_{j k}
+\end{align}
+
+This correspondence, formalized in Dirac's quantum condition, suggests that quantum mechanics can be viewed as a deformation of classical mechanics where Poisson brackets are replaced by commutators, with $i\hbar$ serving as the deformation parameter.
+
+The last relation raises a crucial question: what is the commutator between position and momentum operators? This fundamental commutation relation determines the uncertainty principle and lies at the heart of quantum behavior.
+
+
+Let's compute the commutator between position and momentum operators, a fundamental relation in quantum mechanics.
+
+For the position operator $x_j$ and momentum operator $\hat{p}_k$, the commutator is:
+
+\begin{equation}
+[x_j, \hat{p}_k] = x_j\hat{p}_k - \hat{p}_k x_j
+\end{equation}
+
+Using the position representation of the momentum operator $\hat{p}_k = -i\hbar\frac{\partial}{\partial x_k}$, we apply this commutator to a general wave function $\Psi$:
+
+\begin{align}
+[x_j, \hat{p}_k]\Psi &= x_j\left(-i\hbar\frac{\partial\Psi}{\partial x_k}\right) - \left(-i\hbar\frac{\partial}{\partial x_k}\right)(x_j\Psi) \\
+&= -i\hbar x_j\frac{\partial\Psi}{\partial x_k} + i\hbar\frac{\partial}{\partial x_k}(x_j\Psi)
+\end{align}
+
+Applying the product rule to the second term:
+
+\begin{align}
+[x_j, \hat{p}_k]\Psi &= -i\hbar x_j\frac{\partial\Psi}{\partial x_k} + i\hbar\left(\frac{\partial x_j}{\partial x_k}\Psi + x_j\frac{\partial\Psi}{\partial x_k}\right)  \\
+&= -i\hbar x_j\frac{\partial\Psi}{\partial x_k} + i\hbar\delta_{jk}\Psi + i\hbar x_j\frac{\partial\Psi}{\partial x_k}
+\end{align}
+
+Where we've used $\frac{\partial x_j}{\partial x_k} = \delta_{jk}$, the Kronecker delta. The first and third terms cancel, leaving:
+
+\begin{align}
+[x_j, \hat{p}_k]\Psi &= i\hbar\delta_{jk}\Psi
+\end{align}
+
+Since this holds for any wave function $\Psi$, we conclude:
+
+\begin{equation}
+[x_j, \hat{p}_k] = i\hbar\delta_{jk} \label{eq:1.59}
+\end{equation}
+
+This canonical commutation relation is one of the most fundamental in quantum mechanics. It directly leads to the Heisenberg uncertainty principle and distinguishes quantum from classical mechanics.
+
+Next, let's examine the commutator between the momentum operator $\hat{p}_j$ and a general function of position $f(x_1,x_2,x_3)$:
+
+\begin{equation}
+[\hat{p}_j, f] = \hat{p}_j f - f\hat{p}_j
+\end{equation}
+
+Applying this commutator to a wave function:
+
+\begin{align}
+[\hat{p}_j, f]\Psi &= \hat{p}_j(f\Psi) - f(\hat{p}_j\Psi) \\
+&= -i\hbar\frac{\partial}{\partial x_j}(f\Psi) - f\left(-i\hbar\frac{\partial\Psi}{\partial x_j}\right)
+\end{align}
+
+Using the product rule for differentiation:
+
+\begin{align}
+[\hat{p}_j, f]\Psi &= -i\hbar\left(\frac{\partial f}{\partial x_j}\Psi + f\frac{\partial\Psi}{\partial x_j}\right) + i\hbar f\frac{\partial\Psi}{\partial x_j} \label{eq:1.61} \\
+&= -i\hbar\frac{\partial f}{\partial x_j}\Psi
+\end{align}
+
+Therefore:
+
+\begin{equation}
+[\hat{p}_j, f] = -i\hbar\frac{\partial f}{\partial x_j}
+\end{equation}
+
+This result generalizes the position-momentum commutation relation and is essential for calculating the evolution of observables in quantum mechanics. It shows that momentum operators act as generators of infinitesimal translations in position space.
+
+The commutation relations \eqref{eq:1.59} and \eqref{eq:1.61} form the algebraic foundation of quantum mechanics and lead directly to the uncertainty principle. They encode the fundamental non-commutativity of conjugate observables, which has no classical analog and is responsible for many uniquely quantum phenomena.
+
+
+From our previous calculation, we have established:
+
+\begin{equation}
+[\hat{p}_j, f] = -i\hbar\frac{\partial f}{\partial x_j}
+\end{equation}
+
+This relation is essential for understanding how momentum operators interact with position-dependent functions in quantum mechanics.
+
+Next, we'll determine the commutation relation between angular momentum and linear momentum operators. Recall that the components of angular momentum are given by:
+
+\begin{equation}
+\hat{L}_i = (\hat{\vec{x}} \times \hat{\vec{p}})_i = \epsilon_{irs}x_r\hat{p}_s
+\end{equation}
+
+To find the commutator between $\hat{L}_i$ and $\hat{p}_n$, we write:
+
+\begin{equation}
+[\hat{L}_i, \hat{p}_n] = [\epsilon_{irs}x_r\hat{p}_s, \hat{p}_n]
+\end{equation}
+
+Expanding this using the Leibniz rule for commutators:
+
+\begin{align}
+[\hat{L}_i, \hat{p}_n] &= \epsilon_{irs}[x_r\hat{p}_s, \hat{p}_n] \\
+&= \epsilon_{irs}(x_r[\hat{p}_s, \hat{p}_n] + [x_r, \hat{p}_n]\hat{p}_s)
+\end{align}
+
+We know that momentum components commute with each other, so $[\hat{p}_s, \hat{p}_n] = 0$. Using our earlier result $[x_r, \hat{p}_n] = i\hbar\delta_{rn}$:
+
+\begin{align}
+[\hat{L}_i, \hat{p}_n] &= \epsilon_{irs}(0 + i\hbar\delta_{rn}\hat{p}_s) \\
+&= i\hbar\epsilon_{irs}\delta_{rn}\hat{p}_s \\
+&= i\hbar\epsilon_{ins}\hat{p}_s
+\end{align}
+
+This compact expression shows how angular momentum transforms linear momentum under rotations. It reveals that angular momentum serves as the generator of rotations in quantum mechanics.
+
+Now let's calculate the commutator between angular momentum and the squared momentum operator $\hat{p}^2 = \sum_{k=1}^3 \hat{p}_k^2$:
+
+\begin{equation}
+[\hat{L}_i, \hat{p}^2] = \left[\hat{L}_i, \sum_{k=1}^3 \hat{p}_k^2\right]
+\end{equation}
+
+Using the linearity property of commutators:
+
+\begin{equation}
+[\hat{L}_i, \hat{p}^2] = \sum_{k=1}^3 [\hat{L}_i, \hat{p}_k^2]
+\end{equation}
+
+For each term in the sum, we can apply the Leibniz rule:
+
+Continuing with our calculation of $[\hat{L}_i, \hat{p}^2]$, we analyze each term in the sum using the Leibniz rule:
+
+\begin{equation}
+[\hat{L}_i, \hat{p}_k^2] = [\hat{L}_i, \hat{p}_k\hat{p}_k] = [\hat{L}_i, \hat{p}_k]\hat{p}_k + \hat{p}_k[\hat{L}_i, \hat{p}_k] \label{eq:1.68}
+\end{equation}
+
+Using our previously derived result:
+
+\begin{equation}
+[\hat{L}_i, \hat{p}_k] = i\hbar\epsilon_{iks}\hat{p}_s
+\end{equation}
+
+We substitute this into equation \eqref{eq:1.68}:
+
+\begin{equation}
+[\hat{L}_i, \hat{p}_k^2] = (i\hbar\epsilon_{iks}\hat{p}_s)\hat{p}_k + \hat{p}_k(i\hbar\epsilon_{iks}\hat{p}_s)
+\end{equation}
+
+Now, returning to the full commutator with $\hat{p}^2$:
+
+\begin{equation}
+[\hat{L}_i, \hat{p}^2] = \sum_{k=1}^{3}(i\hbar\epsilon_{iks}\hat{p}_s)\hat{p}_k + \sum_{k=1}^{3}\hat{p}_k(i\hbar\epsilon_{iks}\hat{p}_s)
+\end{equation}
+
+Since $k$ and $s$ are summation indices, we can rename them in the second sum, swapping $k$ and $s$:
+
+\begin{equation}
+[\hat{L}_i, \hat{p}^2] = \sum_{k=1}^{3}(i\hbar\epsilon_{iks}\hat{p}_s)\hat{p}_k + \sum_{s=1}^{3}\hat{p}_s(i\hbar\epsilon_{isk}\hat{p}_k)
+\end{equation}
+
+Using the antisymmetry property of the Levi-Civita symbol: $\epsilon_{isk} = -\epsilon_{iks}$, the second term becomes:
+
+\begin{align}
+\sum_{s=1}^{3}\hat{p}_s(i\hbar\epsilon_{isk}\hat{p}_k) &= \sum_{s=1}^{3}\hat{p}_s(-i\hbar\epsilon_{iks}\hat{p}_k) \\
+&= -\sum_{s=1}^{3}(i\hbar\epsilon_{iks}\hat{p}_s\hat{p}_k)
+\end{align}
+
+Therefore:
+
+\begin{align}
+[\hat{L}_i, \hat{p}^2] &= \sum_{k=1}^{3}(i\hbar\epsilon_{iks}\hat{p}_s\hat{p}_k) - \sum_{s=1}^{3}(i\hbar\epsilon_{iks}\hat{p}_s\hat{p}_k) \\
+&= i\hbar\epsilon_{iks}\sum_{k=1}^{3}(\hat{p}_s\hat{p}_k - \hat{p}_s\hat{p}_k) \\
+&= 0
+\end{align}
+
+This remarkable result shows that $[\hat{L}_i, \hat{p}^2] = 0$, meaning angular momentum commutes with the squared momentum operator. This is a manifestation of rotational invariance - the magnitude of momentum is unchanged by rotations, though its direction changes.
+
+The vanishing commutator $[\hat{L}_i, \hat{p}^2] = 0$ has profound physical significance:
+
+1. It implies that angular momentum and the energy of a free particle (proportional to $\hat{p}^2$) can be simultaneously measured with arbitrary precision.
+
+2. It confirms that rotational symmetry preserves kinetic energy, as expected from physical intuition.
+
+3. It establishes $\hat{p}^2$ as a rotational invariant, consistent with its scalar nature.
+
+This commutation relation is part of a broader pattern in quantum mechanics where symmetry operations commute with the corresponding invariant quantities, reflecting fundamental conservation laws through Noether's theorem.
+
+
+The final calculation confirms that angular momentum commutes with squared momentum:
+
+\begin{equation}
+[\hat{L}_i, \hat{p}^2] = \sum_{k=1}^{3}(i\hbar\epsilon_{iks}\hat{p}_s\hat{p}_k) - \sum_{k=1}^{3}(i\hbar\epsilon_{iks}\hat{p}_s\hat{p}_k) = 0
+\end{equation}
+
+Through similar analysis, we can establish several other important commutation relations:
+
+\begin{align}
+[\hat{L}^2, \hat{p}_n] &= 0 \\
+[\hat{L}^2, \hat{L}_j] &= 0 \\
+[\hat{L}_j, x^2] &= 0  \\
+[\hat{L}_j, \hat{L}_k] &= i\hbar\epsilon_{jkm}\hat{L}_m
+\end{align}
+
+These relations have profound physical implications:
+- $[\hat{L}^2, \hat{p}_n] = 0$ indicates that the magnitude of angular momentum commutes with linear momentum components
+- $[\hat{L}^2, \hat{L}_j] = 0$ shows that the magnitude of angular momentum commutes with its components
+- $[\hat{L}_j, x^2] = 0$ demonstrates that angular momentum components commute with the square of position
+- $[\hat{L}_j, \hat{L}_k] = i\hbar\epsilon_{jkm}\hat{L}_m$ reveals that angular momentum components do not commute with each other, forming an $SU(2)$ algebra
+
+\subsection{Canonical quantization rule}
+
+The pattern emerging from our calculations leads to a fundamental principle in quantum mechanics:
+
+Definition 1.1. The canonical quantization rule (CQR) establishes a correspondence between classical and quantum mechanics:
+
+\begin{align}
+\text{Classical} &\longleftrightarrow \text{Quantum} \\
+x_j &\longleftrightarrow x_j \\
+p_j &\longleftrightarrow \hat{p}_j = -i\hbar\frac{\partial}{\partial x_j}  \\
+\{x_j, p_k\} = \delta_{jk} &\longleftrightarrow [x_j, \hat{p}_k] = i\hbar\delta_{jk}
+\end{align}
+
+Where $\{A,B\}$ denotes the classical Poisson bracket, and $[A,B]$ is the quantum commutator.
+
+This correspondence can be extended to general observables. For classical observables:
+
+\begin{align}
+A &= A(q_\alpha, p_\alpha) \\
+B &= B(q_\alpha, p_\alpha)  \\
+C &= \{A, B\}
+\end{align}
+
+The canonical quantization rule gives us:
+
+\begin{equation}
+[\hat{A}, \hat{B}] = i\hbar\hat{C}
+\end{equation}
+
+This principle, formulated by Dirac, provides a systematic way to convert classical theories into quantum ones. It reveals quantum mechanics as a deformation of classical mechanics with $\hbar$ as the deformation parameter. When $\hbar \to 0$, we recover classical physics.
+
+However, the canonical quantization rule faces ordering ambiguities when quantizing products of non-commuting observables (e.g., $xp$ could become $\hat{x}\hat{p}$ or $\hat{p}\hat{x}$ or some combination). Various prescriptions exist to resolve these ambiguities, including Weyl ordering and normal ordering.
+
+\subsection{Expectation value}
+
+To connect quantum operators with measurable quantities, we need to define how to extract physical predictions from wave functions. This begins with defining an appropriate scalar product on the Hilbert space $L^2(V)$ of square-integrable functions.
+
+
+For wave functions $\phi, \Psi \in L^2(V)$, the scalar product is defined as:
+
+\begin{equation}
+(\phi, \Psi) := \int_V d^3x \, \phi^*(x) \Psi(x)
+\end{equation}
+
+This inner product satisfies all requirements of a Hermitian scalar product, particularly sesquilinearity:
+
+\begin{equation}
+(a\phi, b_1\Psi_1 + b_2\Psi_2) = a^*b_1(\phi, \Psi_1) + a^*b_2(\phi, \Psi_2)
+\end{equation}
+
+For functions $\xi, \phi, \Psi \in L^2(V)$ where $\phi = \hat{A}\Psi$ for some operator $\hat{A}$, the scalar product becomes:
+
+\begin{equation}
+(\xi, \phi) = \int_V d^3x \, \xi^*(x)(\hat{A}\Psi)(x)
+\end{equation}
+
+When $\xi = \Psi$, this defines the expectation value of operator $\hat{A}$:
+
+\begin{equation}
+(\Psi, \phi) = (\Psi, \hat{A}\Psi) = \int_V d^3x \, \Psi^*(x)(\hat{A}\Psi)(x) := \langle\hat{A}\rangle
+\end{equation}
+
+The expectation value $\langle\hat{A}\rangle$ represents the statistical average of measurements of the physical observable corresponding to $\hat{A}$ when the system is in state $\Psi$.
+
+From the properties of the scalar product and the Hermiticity of physical operators, several important relations follow:
+
+\begin{itemize}
+  \item $(\phi, \hat{A}\Psi) = (\hat{A}^\dagger\phi, \Psi) = (\hat{A}\phi, \Psi)$ for Hermitian operators
+  \item $(\Psi, \hat{A}\Psi)^* = (\hat{A}\Psi, \Psi) = (\Psi, \hat{A}^\dagger\Psi) = (\Psi, \hat{A}\Psi)$
+\end{itemize}
+
+The second property confirms that expectation values of Hermitian operators are real numbers, as required for physical observables.
+
+For operator products, we have:
+\begin{itemize}
+  \item $(\phi, (\hat{A}\hat{B})^\dagger\Psi) = (\hat{A}\hat{B}\phi, \Psi) = (\hat{B}\phi, \hat{A}^\dagger\Psi) = (\phi, \hat{B}^\dagger\hat{A}^\dagger\Psi)$
+\end{itemize}
+
+This shows that $(\hat{A}\hat{B})^\dagger = \hat{B}^\dagger\hat{A}^\dagger$, a fundamental property of adjoint operators.
+
+\subsection{The Ehrenfest Theorem}
+
+To establish the Ehrenfest theorem, we first verify that the Hamiltonian operator is Hermitian. A Hermitian operator must satisfy:
+
+\begin{equation}
+(\phi, \hat{H}^\dagger\Psi) = (\Psi, \hat{H}\phi)^* \stackrel{!}{=} (\phi, \hat{H}\Psi)
+\end{equation}
+
+for all $\phi, \Psi \in L^2(V)$.
+
+Proof:
+
+
+To prove the Hermiticity of the Hamiltonian operator, we examine:
+
+\begin{align}
+(\Psi, \hat{H}\phi)^* &= \int_V d^3\vec{x}(\Psi^*\hat{H}\phi)^* \\
+&= \int_V d^3\vec{x}\left[\Psi^*\left(-\frac{\hbar^2}{2m}\nabla^2 + U\right)\phi\right]^* \\
+&= \int_V d^3\vec{x}\Psi\left(-\frac{\hbar^2}{2m}\nabla^2 + U\right)\phi^*  \\
+&= -\frac{\hbar^2}{2m}\int_V d^3\vec{x}\Psi\nabla^2\phi^* + \int_V d^3\vec{x}\Psi U\phi^*
+\end{align}
+
+Using integration by parts twice on the first term and applying boundary conditions where wave functions vanish at the boundary:
+
+\begin{align}
+-\frac{\hbar^2}{2m}\int_V d^3\vec{x}\Psi\nabla^2\phi^* &= -\frac{\hbar^2}{2m}\int_{\partial V}d\vec{\Sigma}\cdot\Psi\vec{\nabla}\phi^* + \frac{\hbar^2}{2m}\int_V d^3\vec{x}\vec{\nabla}\Psi\cdot\vec{\nabla}\phi^*  \\
+&= \frac{\hbar^2}{2m}\int_{\partial V}d\vec{\Sigma}\cdot(\vec{\nabla}\Psi)\phi^* - \frac{\hbar^2}{2m}\int_V d^3\vec{x}\phi^*\nabla^2\Psi
+\end{align}
+
+The surface integrals vanish because $\Psi$ and $\phi$ approach zero at infinity. Substituting back:
+
+\begin{align}
+(\Psi, \hat{H}\phi)^* &= -\frac{\hbar^2}{2m}\int_V d^3\vec{x}\phi^*\nabla^2\Psi + \int_V d^3\vec{x}\phi^*U\Psi \\
+&= \int_V d^3\vec{x}\phi^*\left(-\frac{\hbar^2}{2m}\nabla^2 + U\right)\Psi \\
+&= (\phi, \hat{H}\Psi)
+\end{align}
+
+This confirms that $\hat{H}$ is indeed Hermitian, as required for a physical observable. $\square$
+
+Now we derive the Ehrenfest theorem by examining the time evolution of expectation values:
+
+\begin{align}
+\frac{\partial\langle\hat{A}\rangle}{\partial t} &= \int_V d^3x\frac{\partial}{\partial t}(\Psi^*\hat{A}\Psi) \\
+&= \int_V d^3x(\partial_t\Psi^*)\hat{A}\Psi + \int_V d^3x\Psi^*(\partial_t\hat{A})\Psi + \int_V d^3x\Psi^*\hat{A}(\partial_t\Psi)
+\end{align}
+
+Using the Schrödinger equation:
+$i\hbar\frac{\partial\Psi}{\partial t} = \hat{H}\Psi$ and $-i\hbar\frac{\partial\Psi^*}{\partial t} = \hat{H}\Psi^*$
+
+\begin{align}
+\frac{\partial\langle\hat{A}\rangle}{\partial t} &= -\frac{1}{i\hbar}(\hat{H}\Psi, \hat{A}\Psi) + \frac{1}{i\hbar}(\Psi, \hat{A}\hat{H}\Psi) + (\Psi, \partial_t\hat{A}\Psi) \\
+&= -\frac{1}{i\hbar}(\Psi, \hat{H}\hat{A}\Psi) + \frac{1}{i\hbar}(\Psi, \hat{A}\hat{H}\Psi) + (\Psi, \partial_t\hat{A}\Psi) \\
+&= \frac{1}{i\hbar}(\Psi, (\hat{A}\hat{H} - \hat{H}\hat{A})\Psi) + (\Psi, \partial_t\hat{A}\Psi) \label{eq:1.87} \\
+&= \frac{1}{i\hbar}(\Psi, [\hat{A}, \hat{H}]\Psi) + (\Psi, \partial_t\hat{A}\Psi) \\
+&= \frac{1}{i\hbar}\langle[\hat{A}, \hat{H}]\rangle + \langle\partial_t\hat{A}\rangle
+\end{align}
+
+This is the Ehrenfest theorem, which shows striking similarity to classical mechanics. In classical Hamiltonian mechanics, the time evolution of a function $A$ is given by:
+
+
+The Ehrenfest theorem reveals a profound correspondence between quantum and classical mechanics. In classical mechanics, the time evolution of a function $A$ is given by:
+
+\begin{equation}
+\frac{dA}{dt} = \{H,A\} + \frac{\partial A}{\partial t}
+\end{equation}
+
+where $\{H,A\}$ is the Poisson bracket. Comparing with equation \eqref{eq:1.87}, we see that quantum commutators $\frac{1}{i\hbar}[\hat{A},\hat{H}]$ play the role analogous to classical Poisson brackets $\{H,A\}$.
+
+Let's examine specific applications of the Ehrenfest theorem:
+
+For the position operator $x_j$:
+
+\begin{equation}
+\frac{\partial\langle x_j\rangle}{\partial t} = \frac{1}{i\hbar}\langle[x_j,\hat{H}]\rangle = \frac{1}{i\hbar}\left\langle\left[x_j,-\frac{\hat{p}^2}{2m}+U\right]\right\rangle = \frac{1}{i\hbar}\frac{1}{2m}\langle[x_j,\hat{p}^2]\rangle
+\end{equation}
+
+Since $x_j$ commutes with all position operators and only fails to commute with $\hat{p}_j$, we have:
+
+\begin{equation}
+\frac{\partial\langle x_j\rangle}{\partial t} = \frac{1}{i\hbar 2m}\langle[x_j,\hat{p}_j^2]\rangle \stackrel{\text{Leibniz}}{=} \frac{1}{i\hbar 2m}\langle\hat{p}_j[x_j,\hat{p}_j]+[x_j,\hat{p}_j]\hat{p}_j\rangle = \frac{1}{m}\langle\hat{p}_j\rangle
+\end{equation}
+
+Using the commutation relation $[x_j,\hat{p}_j] = i\hbar$.
+
+For the momentum operator $\hat{p}_j$:
+
+\begin{equation}
+\frac{\partial\langle\hat{p}_j\rangle}{\partial t} = \frac{1}{i\hbar}\langle[\hat{p}_j,\hat{H}]\rangle = \frac{1}{i\hbar}\left\langle\left[\hat{p}_j,-\frac{\hat{p}^2}{2m}+U\right]\right\rangle
+\end{equation}
+
+The first term vanishes since momentum operators commute with each other: $[\hat{p}_j,\hat{p}^2] = 0$.
+
+For the potential energy term, we use our earlier result for the commutator of momentum with a function:
+
+\begin{equation}
+[\hat{p}_j,U] = [\hat{p}_j,U(x_1,x_2,x_3)] = -i\hbar\frac{\partial U}{\partial x_j}
+\end{equation}
+
+Therefore:
+
+\begin{equation}
+\frac{\partial\langle\hat{p}_j\rangle}{\partial t} = -\left\langle\frac{\partial U}{\partial x_j}\right\rangle
+\end{equation}
+
+These results are the quantum analogs of Newton's equations of motion. In classical mechanics:
+
+
+The Ehrenfest theorem leads directly to the quantum analogs of Newton's laws:
+
+\[
+\begin{array}{r}
+\frac{dx_j}{dt} = \{H, x_j\} = \frac{p_j}{m} \\
+\frac{dp_j}{dt} = \{H, p_j\} = -\frac{\partial U}{\partial x_j}
+\end{array}
+\]
+
+This correspondence is formalized in Ehrenfest's theorem:
+
+Theorem 1.1. The expectation values of physical operators follow the same equations of motion as their classical counterparts.
+
+This theorem applies exactly when the potential $U$ contains at most quadratic terms in position coordinates. For a general potential of the form:
+
+\begin{equation}
+U = \sum_i \sum_k U_{ik}x_i x_k + \sum_i c_i x_i
+\end{equation}
+
+Differentiating with respect to coordinate $x_n$:
+
+\begin{align}
+W := \frac{\partial U}{\partial x_n} &= \sum_i \sum_k U_{ik}\frac{\partial}{\partial x_n}(x_i x_k) + \sum_i c_i \frac{\partial x_i}{\partial x_n} \\
+&= \sum_i \sum_k U_{ik}x_k\frac{\partial x_i}{\partial x_n} + \sum_i \sum_k U_{ik}x_i\frac{\partial x_k}{\partial x_n} + \sum_i c_i\frac{\partial x_i}{\partial x_n} \\
+&= \sum_i \sum_k U_{ik}x_k\delta_{in} + \sum_i \sum_k U_{ik}x_i\delta_{kn} + \sum_i c_i\delta_{in} \\
+&= \sum_k(U_{nk} + U_{kn})x_k + c_n
+\end{align}
+
+Since $W$ is linear in the coordinates, we can show that:
+
+\begin{equation}
+\langle W(x_n)\rangle = W(\langle x_i\rangle)
+\end{equation}
+
+This equality wouldn't hold for potentials with higher-order terms. However, in the semiclassical limit (large quantum numbers), the factorization approximation $\langle\hat{A}\hat{B}\rangle \approx \langle\hat{A}\rangle\langle\hat{B}\rangle$ becomes valid, extending Ehrenfest's theorem to more general potentials.
+
+This aligns with Bohr's Correspondence Principle, which states that quantum mechanics must reduce to classical mechanics in the limit of large quantum numbers or macroscopic systems.

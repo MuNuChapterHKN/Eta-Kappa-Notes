@@ -1,0 +1,383 @@
+\chapter{Identical particles and Spin-Statistics Theorem}
+\section{Many-particle systems}
+In classical physics, we can theoretically track each particle's position and momentum at all times. In quantum mechanics, however, the uncertainty principle creates an effective "error box" around each particle. When particles are close enough that their error boxes overlap, we cannot distinguish them individually.
+
+Quantum mechanics reveals that only two types of particle statistics are possible:
+\begin{itemize}
+  \item Fermions with antisymmetric wavefunctions
+  \item Bosons with symmetric wavefunctions
+\end{itemize}
+
+The Hamiltonian for a multi-particle system has the form:
+
+\begin{equation}
+H=H(\vec{x}_1,\vec{x}_2,\ldots,\vec{x}_N)
+\end{equation}
+
+Which might be explicitly written as:
+
+\begin{equation}
+H=\sum_{j}^{N}(\frac{p_j^2}{2m_j}+U(x_j))+\frac{1}{2}\sum_{j}^{N}\sum_{l\neq j}^{N}U(|x_j-x_l|)
+\end{equation}
+
+This Hamiltonian is symmetric under particle exchange:
+
+\begin{equation}
+H(\vec{x}_1,\vec{x}_2,\ldots,\vec{x}_i,\ldots\vec{x}_j,\ldots,\vec{x}_N)=H(\vec{x}_1,\vec{x}_2,\ldots,\vec{x}_j,\ldots\vec{x}_i,\ldots,\vec{x}_N)
+\end{equation}
+
+
+A more general Hamiltonian could incorporate various interaction terms:
+
+\begin{equation}
+H=H_0+U+H_{SO}+H_B+H_{SS}+\ldots
+\end{equation}
+
+Where:
+\begin{itemize}
+  \item $H_{SO}$ is the spin-orbit coupling: $H_{SO}=\sum_{j=1}^{N}\chi L_j\cdot S_j$ where $\chi=\frac{1}{2m_e^2c^2r}\frac{dU}{dr}$
+  \item $H_B$ is the magnetic field coupling: $H_B=\sum_{j=1}^{N}\gamma B(L_j+gS_j)$
+  \item $H_{SS}$ is the spin-spin coupling: $H_{SS}=\frac{1}{2}\sum_{j=1}^{N}\sum_{i\neq j}^{N}\eta_{ji}S_j\cdot S_i$
+\end{itemize}
+
+\section{Construction of symmetrized states}
+We introduce the permutation operator $P$ that exchanges particle labels:
+
+\begin{equation}
+P_{ji}\Psi(\vec{x}_1,\vec{x}_2,\ldots,\vec{x}_i,\ldots\vec{x}_j,\ldots,\vec{x}_N)=\Psi(\vec{x}_1,\vec{x}_2,\ldots,\vec{x}_j,\ldots\vec{x}_i,\ldots,\vec{x}_N)
+\end{equation}
+
+For a system of $N$ particles, there are $N!$ possible permutations. Using these operators, we can construct fully symmetric states. For example, with $N=3$:
+
+\begin{align}
+\phi_s(1,2,3)&=\frac{1}{\sqrt{3!}}(1+P_{13}P_{12}+P_{23}P_{12}+P_{12}+P_{23}+P_{13})\Psi(1,2,3)\\
+&=\frac{1}{\sqrt{6}}(\Psi(1,2,3)+\Psi(2,3,1)+\Psi(3,1,2)+\Psi(2,1,3)+\Psi(1,3,2)+\Psi(3,2,1))
+\end{align}
+
+A key property of symmetric states is that they remain unchanged under particle exchange:
+
+\begin{equation}
+\phi_s(1,3,2)=\phi_s(1,2,3)
+\end{equation}
+
+Similarly, we can construct fully antisymmetric wavefunctions:
+
+\begin{align}
+\phi_a(1,2,3)&=\frac{1}{\sqrt{3!}}(1+P_{13}P_{12}+P_{23}P_{12}-P_{12}-P_{23}-P_{13})\Psi(1,2,3)\\
+&=\frac{1}{\sqrt{6}}(\Psi(1,2,3)+\Psi(2,3,1)+\Psi(3,1,2)-\Psi(2,1,3)-\Psi(1,3,2)-\Psi(3,2,1))
+\end{align}
+
+Antisymmetric wavefunctions change sign under odd permutations:
+
+\begin{equation}
+\phi_a(1,3,2)=-\phi_a(1,2,3)
+\end{equation}
+
+The general properties of these wavefunctions are:
+
+\begin{align}
+&\phi_s(1,3,2)=\phi_s(\text{any permutation})\\
+&\phi_a(1,3,2)=\phi_a(\text{even permutations}) \\
+&\phi_a(1,3,2)=-\phi_a(\text{odd permutations})
+\end{align}
+
+The general construction formulas are:
+
+\begin{gather}
+\phi_s=\sum_P P\Psi(1,2,\ldots,N) \\
+\phi_a=\sum_P(-1)^{\eta_P}P\Psi(1,2,\ldots,N)
+\end{gather}
+
+Where $\eta_P$ is defined as:
+\[
+\eta_P= \begin{cases}
+0 & \text{for even elementary permutations} \\
+1 & \text{for odd elementary permutations}
+\end{cases}
+\]
+
+An important consequence is that if $\vec{x}_i=\vec{x}_j$ for any two particles in an antisymmetric state, then $\phi_a=0$. This means there is zero probability of finding two fermions at the same position—a precursor to the Pauli exclusion principle.
+
+Conversely, $\phi_s$ reaches its maximum when all particles are in the same position: $\vec{x}_1=\vec{x}_2=\ldots=\vec{x}_N$.
+
+Since the Hamiltonian is symmetric under particle exchange, the permutation operator commutes with it:
+
+\begin{gather}
+PH\Psi=PE\Psi\\
+H(P\Psi)=E(P\Psi)
+\end{gather}
+
+Therefore, both symmetric and antisymmetric states are eigenstates of the Hamiltonian:
+
+\begin{align}
+H\phi_s&=H\sum_P P\Psi(1,2,\ldots,N)=\sum_P PH\Psi(1,2,\ldots,N)\\
+&=\sum_P PE\Psi(1,2,\ldots,N)=E\phi_s \\
+H\phi_a&=H\sum_P(-1)^{\eta_P}P\Psi(1,2,\ldots,N)=\sum_P(-1)^{\eta_P}PH\Psi(1,2,\ldots,N)\\
+&=\sum_P(-1)^{\eta_P}PE\Psi(1,2,\ldots,N)=E\phi_a
+\end{align}
+
+
+Both $\phi_s$ and $\phi_a$ are indeed eigenstates of the Hamiltonian, and their symmetry properties are preserved during time evolution:
+
+\begin{align}
+&P\exp(-i\frac{t}{\hbar}H)\Psi(1,2,\ldots,N)=\sum_{k}^{\infty}(\frac{-i}{\hbar})^k t^k PH^k\Psi(1,2,\ldots,N)\\
+&=\sum_{k}^{\infty}(\frac{-i}{\hbar})^k t^k H^kP\Psi(1,2,\ldots,N)=\exp(-i\frac{t}{\hbar}H)P\Psi(1,2,\ldots,N)
+\end{align}
+
+\section{Bosons, Fermions, Pauli's principle and Spin-Statistics Theorem}
+For many systems, the Hamiltonian can be separated into single-particle terms:
+
+\begin{equation}
+H=\sum_i H_i
+\end{equation}
+
+Where each single-particle Hamiltonian might include various interactions:
+
+\begin{equation}
+H_j=\frac{p_j^2}{2m_j}+\chi L_j\cdot S_j+\gamma B(L_j+gS_j)
+\end{equation}
+
+When these Hamiltonians commute ($[H_j,H_i]=0$ for $i\neq j$), the wavefunction can be factorized:
+
+\begin{equation}
+\Psi(\vec{x}_1,\vec{x}_2,\ldots,\vec{x}_N)=\prod_{j=1}^{N}\Psi_{\alpha_j}(\vec{x}_j)
+\end{equation}
+
+Where $\alpha_j$ represents the quantum numbers for the $j$-th particle.
+
+\section{Symmetric wavefunctions for a separable Hamiltonian}
+For symmetric states, we can distinguish three cases:
+
+Case 1: All quantum numbers are different ($\alpha_i\neq\alpha_j$ for all $i\neq j$). The symmetric state is:
+
+\begin{equation}
+\phi_s=\frac{1}{\sqrt{N!}}\sum_P P\Psi_{\alpha_1}(\vec{x}_1)\Psi_{\alpha_2}(\vec{x}_2)\ldots\Psi_{\alpha_N}(\vec{x}_N)
+\end{equation}
+
+Case 2: All quantum numbers are identical ($\alpha_1=\alpha_2=\ldots=\alpha_N=\alpha$). The state is already symmetric:
+
+\begin{equation}
+\phi_s=\Psi_{\alpha}(\vec{x}_1)\Psi_{\alpha}(\vec{x}_2)\ldots\Psi_{\alpha}(\vec{x}_N)
+\end{equation}
+
+Case 3: The general case with $r<N$ distinct quantum numbers. If there are $N_1$ particles with quantum number $\alpha_1$, $N_2$ with $\alpha_2$, etc., the symmetric state is:
+
+\begin{equation}
+\phi_s=\frac{1}{\sqrt{Q}}\sum_P^* P\left[\prod_{k_1=1}^{N_1}\Psi_{\alpha_1}(\vec{x}_{k_1})\prod_{k_2=N_1+1}^{N_1+N_2}\Psi_{\alpha_2}(\vec{x}_{k_2})\ldots\prod_{k_r=N_1+N_2+\ldots N_{r-1}+1}^{N_1+N_2+\ldots N_r}\Psi_{\alpha_r}(\vec{x}_{k_r})\right]
+\end{equation}
+
+The normalization factor $Q$ is a multinomial coefficient:
+
+\begin{equation}
+Q=\binom{N}{N_1,N_2,\ldots,N_r}=\frac{N!}{N_1!N_2!\ldots N_r!}
+\end{equation}
+
+\section{Antisymmetric wavefunctions}
+For the simplest case of $N=2$, the antisymmetric wavefunction is:
+
+\begin{equation}
+\phi_a(\vec{x}_1,\vec{x}_2)=\frac{1}{\sqrt{2!}}(\Psi_{\alpha_1}(\vec{x}_1)\Psi_{\alpha_2}(\vec{x}_2)-\Psi_{\alpha_1}(\vec{x}_2)\Psi_{\alpha_2}(\vec{x}_1))
+\end{equation}
+
+This can be expressed as a determinant:
+
+\[
+\phi_a=\frac{1}{\sqrt{2!}}\left|\begin{array}{ll}
+\Psi_{\alpha_1}(\vec{x}_1) & \Psi_{\alpha_1}(\vec{x}_2) \\
+\Psi_{\alpha_2}(\vec{x}_1) & \Psi_{\alpha_2}(\vec{x}_2)
+\end{array}\right|
+\]
+
+For the general case of $N$ particles, the antisymmetric wavefunction is the Slater determinant:
+
+\[
+\phi_a=\frac{1}{\sqrt{N!}}\left|\begin{array}{cccc}
+\Psi_{\alpha_1}(\vec{x}_1) & \Psi_{\alpha_1}(\vec{x}_2) & \ldots & \Psi_{\alpha_1}(\vec{x}_N) \\
+\Psi_{\alpha_2}(\vec{x}_1) & \Psi_{\alpha_2}(\vec{x}_2) & \ldots & \Psi_{\alpha_2}(\vec{x}_N)\\
+\vdots & \vdots & \ddots & \vdots\\
+\Psi_{\alpha_N}(\vec{x}_1) & \Psi_{\alpha_N}(\vec{x}_2) & \ldots & \Psi_{\alpha_N}(\vec{x}_N)
+\end{array}\right|
+\]
+
+
+From the Slater determinant representation of antisymmetric wavefunctions, we can immediately identify several key properties:
+
+\begin{itemize}
+  \item If any two quantum numbers are equal ($\alpha_i=\alpha_j$ for any $i\neq j$), the determinant contains two identical rows and therefore equals zero
+  \item If any two position coordinates are equal ($\vec{x}_i=\vec{x}_j$), the determinant contains two identical columns and equals zero
+  \item Exchanging any two positions ($\vec{x}_i \leftrightarrow \vec{x}_j$) is equivalent to swapping columns in the determinant, which multiplies the result by $-1$
+\end{itemize}
+
+\section{Spin-Statistics Theorem}
+The Spin-Statistics Theorem (also called the symmetrization principle) establishes a profound connection between a particle's intrinsic spin and its quantum statistical behavior:
+
+Theorem 14.1 (Spin-Statistics Theorem): A system of identical particles with integer spin is characterized by symmetric wavefunctions. These particles are called bosons and obey Bose-Einstein statistics.
+
+A system of identical particles with half-integer spin is characterized by antisymmetric wavefunctions. These particles are called fermions and obey Fermi-Dirac statistics.
+
+Examples include:
+\begin{itemize}
+  \item Spin 1: photon, Z boson, W boson, gluon (all bosons)
+  \item Spin $1/2$: quarks up, charm, top ($q=2/3$) (all fermions)
+  \item Spin $1/2$: quarks down, strange, bottom ($q=-1/3$) (all fermions)
+  \item Spin $1/2$: Leptons (electrons, muons, tau) (all fermions)
+\end{itemize}
+
+Even composite particles exhibit bosonic or fermionic behavior based on their total spin. For example, $^{87}$Rb has 37 protons and 50 neutrons. The total spin contribution is:
+
+\begin{equation}
+\text{Spin}=\frac{1}{2}(37+37+50)=\text{integer}
+\end{equation}
+
+Therefore, $^{87}$Rb is a boson.
+
+Similarly, for $^{41}$K with 19 protons:
+
+\begin{equation}
+\text{Spin}=\frac{1}{2}(19+19+22)=\text{integer}
+\end{equation}
+
+Making it a boson. However, $^{40}$K, also with 19 protons:
+
+\begin{equation}
+\text{Spin}=\frac{1}{2}(19+19+21)=\text{half-integer}
+\end{equation}
+
+Is therefore a fermion.
+
+\section{Helium atom}
+For the helium atom, the Hamiltonian can be written as:
+
+\begin{equation}
+H=\sum_j(\frac{p_j^2}{2m_e}+V(r_j))
+\end{equation}
+
+Where $V(r_j)$ is the Coulomb potential. We must also include the electron-electron interaction term:
+
+\begin{equation}
+U(r_1,r_2)=\frac{e^2}{|\vec{r}_1-\vec{r}_2|}
+\end{equation}
+
+This interaction can be treated as a perturbation. Although there is no explicit spin interaction term, we must account for the fermionic nature of electrons. We begin by finding the eigenstates of the unperturbed Hamiltonian:
+
+\begin{equation}
+H=\sum_j(\frac{p_j^2}{2m_e}+\frac{2e^2}{r_j})=2H_0
+\end{equation}
+
+This represents two hydrogen-like atoms with $Z=2$. A first approach might be to define:
+
+\begin{align}
+&u(r_j)=\Psi_{n\ell m} \\
+&v(r_j)=\Psi_{n'\ell'm'}
+\end{align}
+
+And construct symmetric and antisymmetric spatial wavefunctions:
+
+\begin{align}
+&\Psi_s=\frac{1}{\sqrt{2}}(u(\vec{r}_1)v(\vec{r}_2)+v(\vec{r}_1)u(\vec{r}_2)) \\
+&\Psi_a=\frac{1}{\sqrt{2}}(u(\vec{r}_1)v(\vec{r}_2)-v(\vec{r}_1)u(\vec{r}_2))
+\end{align}
+
+However, this approach is incomplete because we need to account for electron spin. The complete wavefunction must include spin terms:
+
+\begin{equation}
+\phi=\chi_{j,m_j}\Psi
+\end{equation}
+
+
+The complete wavefunction must include the spin part, which comes from combining the spins of the two electrons. For total spin $j=0$, only $m_j=0$ is possible:
+
+\begin{equation}
+\chi_{0,0}=\frac{1}{\sqrt{2}}(|s_1,+1/2\rangle|s_2,-1/2\rangle-|s_2,+1/2\rangle|s_1,-1/2\rangle)
+\end{equation}
+
+This spin state is antisymmetric under particle exchange. For total spin $j=1$, we have three possible states with $m_j=-1,0,1$:
+
+\begin{align}
+&\chi_{1,1}=|s_1,+1/2\rangle|s_2,+1/2\rangle\\
+&\chi_{1,0}=\frac{1}{\sqrt{2}}(|s_1,+1/2\rangle|s_2,-1/2\rangle+|s_2,+1/2\rangle|s_1,-1/2\rangle) \\
+&\chi_{1,-1}=|s_1,-1/2\rangle|s_2,-1/2\rangle
+\end{align}
+
+All these $j=1$ states are symmetric under particle exchange. We can now construct two sets of wavefunctions:
+
+\[
+\left\{\begin{array}{l}
+\phi_1=\chi_{1,\mu}\Psi_a \\
+\phi_2=\chi_{0,0}\Psi_s
+\end{array}\right.
+\quad
+\left\{\begin{array}{l}
+\phi_3=\chi_{1,\mu}\Psi_s\\
+\phi_4=\chi_{0,0}\Psi_a
+\end{array}\right.
+\]
+
+The first set consists of antisymmetric total wavefunctions (required for fermions), formed by combining antisymmetric spatial functions with symmetric spin functions, or symmetric spatial functions with antisymmetric spin functions.
+
+The action of the unperturbed Hamiltonian on these states gives:
+
+\begin{align}
+H\phi_2&=(H_1+H_2)\chi_{0,0}\Psi_s=\chi_{0,0}(H_1+H_2)\frac{1}{\sqrt{2}}(u(\vec{r}_1)v(\vec{r}_2)+v(\vec{r}_1)u(\vec{r}_2))\\
+&=\chi_{0,0}\frac{1}{\sqrt{2}}(H_1u(\vec{r}_1)v(\vec{r}_2)+v(\vec{r}_1)H_1u(\vec{r}_2)+u(\vec{r}_1)H_2v(\vec{r}_2)+H_2v(\vec{r}_1)u(\vec{r}_2))\\
+&=\chi_{0,0}\frac{1}{\sqrt{2}}(E_nu(\vec{r}_1)v(\vec{r}_2)+E_nv(\vec{r}_1)u(\vec{r}_2)+E_{n'}u(\vec{r}_1)v(\vec{r}_2)+E_{n'}v(\vec{r}_1)u(\vec{r}_2))\\
+&=\chi_{0,0}(E_n\Psi_s+E_{n'}\Psi_s)=(E_n+E_{n'})\phi_2
+\end{align}
+
+A similar result holds for $\phi_1$. Now we apply perturbation theory to find the energy corrections due to electron-electron interactions. We denote the perturbed states as:
+
+\[
+\begin{array}{lll}
+E_{OH} & \text{orthohelium} & |\uparrow\rangle|\uparrow\rangle \\
+E_{PH} & \text{parahelium} & |\uparrow\rangle|\downarrow\rangle
+\end{array}
+\]
+
+The first-order energy corrections are:
+
+\begin{align}
+&E_{OH}=E_n+E_{n'}+(\phi_1,U\phi_1)\\
+&E_{PH}=E_n+E_{n'}+(\phi_2,U\phi_2)
+\end{align}
+
+Calculating the perturbation term for $\phi_1$:
+
+\begin{align}
+(\phi_1,U\phi_1)&=\underbrace{(\chi_{1,\mu},\chi_{1,\mu})}_{=1}(\Psi_a,U\Psi_a)=\int d^3x_1\int d^3x_2\Psi_a^*U\Psi_a\\
+&=\int d^3x_1\int d^3x_2\frac{1}{\sqrt{2}}(u^*(\vec{r}_1)v^*(\vec{r}_2)-v^*(\vec{r}_1)u^*(\vec{r}_2))U(\vec{r}_1,\vec{r}_2)\frac{1}{\sqrt{2}}(u(\vec{r}_1)v(\vec{r}_2)-v(\vec{r}_1)u(\vec{r}_2))\\
+&=\frac{1}{2}\int d^3x_1\int d^3x_2(u^*(\vec{r}_1)v^*(\vec{r}_2)u(\vec{r}_1)v(\vec{r}_2)-u^*(\vec{r}_1)v^*(\vec{r}_2)v(\vec{r}_1)u(\vec{r}_2)\\
+&-v^*(\vec{r}_1)u^*(\vec{r}_2)u(\vec{r}_1)v(\vec{r}_2)+v^*(\vec{r}_1)u^*(\vec{r}_2)v(\vec{r}_1)u(\vec{r}_2))U(\vec{r}_1,\vec{r}_2)\\
+&=\frac{1}{2}\int d^3x_1\int d^3x_2(|u(\vec{r}_1)|^2|v(\vec{r}_2)|^2-u^*(\vec{r}_1)u(\vec{r}_2)v^*(\vec{r}_2)v(\vec{r}_1)\\
+&-u^*(\vec{r}_2)u(\vec{r}_1)v^*(\vec{r}_1)v(\vec{r}_2)+|v(\vec{r}_1)|^2|u(\vec{r}_2)|^2)U(\vec{r}_1,\vec{r}_2)
+\end{align}
+
+This can be written as:
+
+\begin{equation}
+(\phi_1,U\phi_1)=\int d^3x_1\int d^3x_2(|u(\vec{r}_1)|^2|v(\vec{r}_2)|^2)U(\vec{r}_1,\vec{r}_2)-\int d^3x_1\int d^3x_2(u^*(\vec{r}_1)u(\vec{r}_2)v^*(\vec{r}_2)v(\vec{r}_1))U(\vec{r}_1,\vec{r}_2)
+\end{equation}
+
+We define these integrals as:
+
+\begin{align}
+&I_C=\int d^3x_1\int d^3x_2(|u(\vec{r}_1)|^2|v(\vec{r}_2)|^2)U(\vec{r}_1,\vec{r}_2)\\
+&I_Q=\int d^3x_1\int d^3x_2(u^*(\vec{r}_1)u(\vec{r}_2)v^*(\vec{r}_2)v(\vec{r}_1))U(\vec{r}_1,\vec{r}_2)
+\end{align}
+
+The first integral $I_C$ represents the classical Coulomb interaction, while the second integral $I_Q$ is a purely quantum mechanical exchange term. The energy corrections are:
+
+\begin{align}
+&E_{OH}=E_n+E_{n'}+I_C-I_Q\\
+&E_{PH}=E_n+E_{n'}+I_C+I_Q
+\end{align}
+
+
+For the ground state of helium, we might initially expect the orthohelium state to have lower energy. However, when $n=n'$ (both electrons in the same orbital), the antisymmetric spatial wavefunction $\Psi_a=0$, meaning $I_C=I_Q=0$ for $\phi_1$.
+
+In contrast, for $\phi_2$, which has a symmetric spatial wavefunction $\Psi_s$ and antisymmetric spin function, we have $I_C=I_Q\neq 0$. Therefore, at the ground state:
+
+\begin{equation}
+E_0=E_{PH}=2E_n+2I_C
+\end{equation}
+
+This confirms that the helium atom ground state has both electrons in the same orbital with opposite spins (parahelium), consistent with experimental observations.

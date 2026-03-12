@@ -1,0 +1,554 @@
+\chapter{Harmonic Oscillator}
+
+The harmonic oscillator represents one of the most important models in quantum mechanics. Its classical Hamiltonian is given by:
+
+\begin{equation}
+\mathcal{H} = \frac{p^2}{2m} + \frac{1}{2}m\omega^2 x^2
+\end{equation}
+
+To transition to quantum mechanics, we substitute the appropriate operators:
+
+\begin{align}
+&p \longrightarrow \hat{p} = -i\hbar\frac{\partial}{\partial x}  \\
+&x \longrightarrow \hat{x}
+\end{align}
+
+The resulting Hamiltonian operator is:
+
+
+\begin{equation}
+\hat{H} = -\frac{\hbar^2}{2m}\frac{\partial^2}{\partial x^2} + \frac{1}{2}m\omega^2\hat{x}^2
+\end{equation}
+
+The quantum harmonic oscillator represents one of the most elegant problems in quantum mechanics. To find its energy spectrum, we need to solve the eigenvalue equation:
+
+\begin{equation}
+\hat{H}\Psi_E = E\Psi_E
+\end{equation}
+
+\section{Solution of the eigenvalue equation}
+
+Rather than directly solving the differential equation, we'll employ the powerful spectrum generating algebra method by introducing ladder operators. These operators allow us to navigate between energy states with remarkable simplicity:
+
+\begin{align}
+\hat{a} &= \sqrt{\frac{m\omega}{2\hbar}}\left(\hat{x} + i\frac{\hat{p}}{m\omega}\right)  \\
+\hat{a}^\dagger &= \sqrt{\frac{m\omega}{2\hbar}}\left(\hat{x} - i\frac{\hat{p}}{m\omega}\right)
+\end{align}
+
+A characteristic length scale emerges naturally in this problem:
+
+\begin{equation}
+\lambda = \sqrt{\frac{\hbar}{m\omega}}
+\end{equation}
+
+Using this length scale, we can express the ladder operators in a more compact form:
+
+\begin{align}
+\hat{a} &= \frac{1}{\sqrt{2}}\left(\frac{\hat{x}}{\lambda} + i\frac{\lambda\hat{p}}{\hbar}\right)  \\
+\hat{a}^\dagger &= \frac{1}{\sqrt{2}}\left(\frac{\hat{x}}{\lambda} - i\frac{\lambda\hat{p}}{\hbar}\right)
+\end{align}
+
+The commutation relation between these operators reveals their fundamental property. First calculating $\hat{a}\hat{a}^\dagger$:
+
+\begin{align}
+\hat{a}\hat{a}^\dagger &= \frac{1}{2}\left(\frac{\hat{x}}{\lambda} + i\frac{\lambda\hat{p}}{\hbar}\right)\left(\frac{\hat{x}}{\lambda} - i\frac{\lambda\hat{p}}{\hbar}\right) \\
+&= \frac{1}{2}\left[\left(\frac{\hat{x}}{\lambda}\right)^2 - i\frac{\hat{x}}{\lambda}\frac{\lambda\hat{p}}{\hbar} + i\frac{\lambda\hat{p}}{\hbar}\frac{\hat{x}}{\lambda} + \left(\frac{\lambda\hat{p}}{\hbar}\right)^2\right] \\
+&= \frac{1}{2}\left[\frac{\hat{x}^2}{\lambda^2} + \frac{\lambda^2\hat{p}^2}{\hbar^2} + \frac{i}{\hbar}[\hat{p},\hat{x}]\right]  \\
+&= \frac{1}{2}\left[\frac{\hat{x}^2}{\lambda^2} + \frac{\lambda^2\hat{p}^2}{\hbar^2} + 1\right]
+\end{align}
+
+And similarly for $\hat{a}^\dagger\hat{a}$:
+
+\begin{align}
+\hat{a}^\dagger\hat{a} &= \frac{1}{2}\left[\frac{\hat{x}^2}{\lambda^2} + \frac{\lambda^2\hat{p}^2}{\hbar^2} - 1\right]
+\end{align}
+
+From these calculations, we find the commutation relation:
+
+\begin{equation}
+[a,a^\dagger] = 1
+\end{equation}
+
+We can invert the ladder operator definitions to express position and momentum in terms of these operators:
+
+\begin{align}
+\hat{x} &= \sqrt{\frac{\hbar}{2m\omega}}(\hat{a} + \hat{a}^\dagger) \\
+\hat{p} &= -i\sqrt{\frac{m\omega\hbar}{2}}(\hat{a} - \hat{a}^\dagger)
+\end{align}
+
+Substituting these expressions into the Hamiltonian reveals a remarkably simple form:
+
+\begin{align}
+\hat{H} &= \frac{1}{2m}\hat{p}^2 + \frac{1}{2}m\omega^2\hat{x}^2 \\
+&= \frac{1}{2m}\left[-i\sqrt{\frac{m\omega\hbar}{2}}(\hat{a} - \hat{a}^\dagger)\right]^2 + \frac{1}{2}m\omega^2\left[\sqrt{\frac{\hbar}{2m\omega}}(\hat{a} + \hat{a}^\dagger)\right]^2 \\
+&= -\frac{\hbar\omega}{4}(\hat{a} - \hat{a}^\dagger)^2 + \frac{\hbar\omega}{4}(\hat{a} + \hat{a}^\dagger)^2 \\
+&= \frac{\hbar\omega}{4}[(\hat{a} + \hat{a}^\dagger)^2 - (\hat{a} - \hat{a}^\dagger)^2]  \\
+&= \frac{\hbar\omega}{4}[(\hat{a}^2 + \hat{a}\hat{a}^\dagger + \hat{a}^\dagger\hat{a} + \hat{a}^{\dagger2}) - (\hat{a}^2 - \hat{a}\hat{a}^\dagger - \hat{a}^\dagger\hat{a} + \hat{a}^{\dagger2})] \\
+&= \frac{\hbar\omega}{2}(\hat{a}\hat{a}^\dagger + \hat{a}^\dagger\hat{a}) \\
+&= \hbar\omega\left(\hat{a}^\dagger\hat{a} + \frac{1}{2}\right)
+\end{align}
+
+This leads us to define the number operator $\hat{n} = \hat{a}^\dagger\hat{a}$, yielding:
+
+\begin{equation}
+\hat{H} = \hbar\omega\left(\hat{n} + \frac{1}{2}\right)
+\end{equation}
+
+To determine the energy spectrum, we must understand how $\hat{n}$ acts on the eigenstates:
+
+
+Let's explore how the number operator $\hat{n}$ acts on energy eigenstates $\Psi_E$. First, observe that:
+
+\begin{equation}
+(\Psi_n, \hat{n}\Psi_n) = (\Psi_n, \hat{a}^\dagger\hat{a}\Psi_n) = (\hat{a}\Psi_n, \hat{a}\Psi_n) = |\hat{a}\Psi_n|^2 \geq 0
+\end{equation}
+
+This confirms that the expectation value of $\hat{n}$ must be positive. If we denote the eigenvalue of $\hat{n}$ as $n$, we have:
+
+\begin{equation}
+\hat{n}\Psi_n = n\Psi_n
+\end{equation}
+
+The operators we've introduced form an algebraic structure:
+
+\begin{equation}
+\{\hat{a}, \hat{a}^\dagger, \hat{n}, \mathbb{I}\}
+\end{equation}
+
+These operators satisfy the following commutation relations:
+
+\begin{align}
+&[\hat{a}, \hat{a}^\dagger] = 1 \\
+&[\hat{a}, \hat{n}] = \hat{a} \\
+&[\hat{a}^\dagger, \hat{n}] = -\hat{a}^\dagger  \\
+&[\hat{n}, \mathbb{I}] = 0 \\
+&[\hat{a}, \mathbb{I}] = 0 \\
+&[\hat{a}^\dagger, \mathbb{I}] = 0
+\end{align}
+
+This collection of operators forms an algebra:
+
+\begin{gather}
+\mathcal{A} = \{\hat{a}, \hat{a}^\dagger, \hat{n}, \mathbb{I}\}  \\
+b = \alpha_1\hat{n} + \alpha_2\mathbb{I} + \xi\hat{a} + \xi^*\hat{a}^\dagger \in \mathcal{A} \\
+c = \beta_1\hat{n} + \beta_2\mathbb{I} + \eta\hat{a} + \eta^*\hat{a}^\dagger \in \mathcal{A}
+\end{gather}
+
+With the Hermiticity requirements:
+
+\begin{align}
+&b = b^\dagger \\
+&c = c^\dagger
+\end{align}
+
+And closure under commutation:
+
+\begin{equation}
+[b,c] = f \in \mathcal{A}
+\end{equation}
+
+This mathematical structure constitutes the algebra of Hermitian operators, which provides powerful insights into the quantum harmonic oscillator's behavior.
+
+The ladder operators have remarkable properties that allow us to navigate between energy eigenstates. Let's examine two key lemmas:
+
+Lemma 5.1. $\hat{a}^\dagger\Psi_n$ is an eigenfunction of $\hat{n}$ associated with the eigenvalue $n+1$
+
+Proof:
+Starting with the eigenvalue equation:
+
+\begin{equation}
+\hat{n}\Psi_n = n\Psi_n
+\end{equation}
+
+We apply $\hat{n}$ to $\hat{a}^\dagger\Psi_n$:
+
+\begin{align}
+\hat{n}(\hat{a}^\dagger\Psi_n) &= \hat{n}\hat{a}^\dagger\Psi_n - \hat{a}^\dagger\hat{n}\Psi_n + \hat{a}^\dagger\hat{n}\Psi_n \\
+&= [\hat{n}, \hat{a}^\dagger]\Psi_n + \hat{a}^\dagger\hat{n}\Psi_n \\
+&= (-\hat{a}^\dagger)\Psi_n + \hat{a}^\dagger(n\Psi_n)  \\
+&= -\hat{a}^\dagger\Psi_n + n\hat{a}^\dagger\Psi_n \\
+&= (n+1)\hat{a}^\dagger\Psi_n
+\end{align}
+
+This confirms that $\hat{a}^\dagger\Psi_n$ is indeed an eigenfunction of $\hat{n}$ with eigenvalue $n+1$. We can therefore write:
+
+\begin{equation}
+\hat{a}^\dagger\Psi_n = d\Psi_{n+1} \Longrightarrow \Psi_{n+1} = \frac{\hat{a}^\dagger}{d}\Psi_n
+\end{equation}
+
+
+From the normalization condition for eigenstates:
+
+\begin{equation}
+(\Psi_{n+1}, \Psi_{n+1}) = 1
+\end{equation}
+
+We can determine the normalization constant $d$ in our relation $\hat{a}^\dagger\Psi_n = d\Psi_{n+1}$:
+
+\begin{align}
+(\Psi_{n+1}, \Psi_{n+1}) &= \left(\frac{\hat{a}^\dagger}{d}\Psi_n, \frac{\hat{a}^\dagger}{d}\Psi_n\right) \\
+&= \frac{1}{d^2}(\Psi_n, \hat{a}\hat{a}^\dagger\Psi_n) \\
+&= \frac{1}{d^2}(\Psi_n, (\hat{n}+1)\Psi_n)  \\
+&= \frac{1}{d^2}(\Psi_n, \hat{n}\Psi_n) + \frac{1}{d^2}(\Psi_n, \Psi_n) \\
+&= \frac{1}{d^2}(n+1)
+\end{align}
+
+Setting this equal to 1 gives us:
+
+\begin{equation}
+d = \sqrt{n+1}
+\end{equation}
+
+Therefore:
+
+\begin{equation}
+\hat{a}^\dagger\Psi_n = \sqrt{n+1}\Psi_{n+1}
+\end{equation}
+
+This confirms that $\hat{a}^\dagger$ acts as a raising operator, increasing the energy level by one quantum.
+
+Lemma 5.2. $\hat{a}\Psi_n$ is an eigenfunction of $\hat{n}$ associated with the eigenvalue $n-1$
+
+Proof:
+Starting with:
+
+\begin{equation}
+\hat{n}\Psi_n = n\Psi_n
+\end{equation}
+
+We apply $\hat{n}$ to $\hat{a}\Psi_n$:
+
+\begin{align}
+\hat{n}(\hat{a}\Psi_n) &= \hat{n}\hat{a}\Psi_n - \hat{a}\hat{n}\Psi_n + \hat{a}\hat{n}\Psi_n \\
+&= [\hat{n}, \hat{a}]\Psi_n + \hat{a}\hat{n}\Psi_n \\
+&= (\hat{a})\Psi_n + \hat{a}(n\Psi_n)  \\
+&= \hat{a}\Psi_n + n\hat{a}\Psi_n \\
+&= (n-1)\hat{a}\Psi_n
+\end{align}
+
+This confirms that $\hat{a}\Psi_n$ is an eigenfunction of $\hat{n}$ with eigenvalue $n-1$. We can write:
+
+\begin{equation}
+\hat{a}\Psi_n = c\Psi_{n-1} \Longrightarrow \Psi_{n-1} = \frac{\hat{a}}{c}\Psi_n
+\end{equation}
+
+From the normalization condition:
+
+\begin{equation}
+(\Psi_{n-1}, \Psi_{n-1}) = 1
+\end{equation}
+
+We determine the value of $c$:
+
+\begin{align}
+(\Psi_{n-1}, \Psi_{n-1}) &= \left(\frac{\hat{a}}{c}\Psi_n, \frac{\hat{a}}{c}\Psi_n\right) \\
+&= \frac{1}{c^2}(\Psi_n, a^\dagger a\Psi_n) \\
+&= \frac{1}{c^2}(\Psi_n, \hat{n}\Psi_n)  \\
+&= \frac{1}{c^2}(\Psi_n, n\Psi_n) \\
+&= \frac{n}{c^2}
+\end{align}
+
+Setting this equal to 1 gives us:
+
+\begin{equation}
+c = \sqrt{n}
+\end{equation}
+
+Therefore:
+
+\begin{equation}
+\hat{a}\Psi_n = \sqrt{n}\Psi_{n-1}
+\end{equation}
+
+This establishes $\hat{a}$ as a lowering operator, decreasing the energy level by one quantum.
+
+These ladder operators allow us to explore the entire spectrum by repeatedly applying them to known states.
+
+
+The recursive relationship established by the ladder operators allows us to express any energy eigenstate in terms of the ground state:
+
+\begin{equation}
+\hat{a}^\dagger\Psi_n = \sqrt{n+1}\Psi_{n+1} \Longrightarrow \Psi_{n+1} = \frac{\hat{a}^\dagger}{\sqrt{n+1}}\Psi_n
+\end{equation}
+
+Applying this relation repeatedly, we can express any state $\Psi_n$ in terms of the ground state $\Psi_0$:
+
+\begin{align}
+\Psi_n &= \frac{\hat{a}^\dagger}{\sqrt{n}}\Psi_{n-1} = \frac{(\hat{a}^\dagger)^2}{\sqrt{n}\sqrt{n-1}}\Psi_{n-2} = \ldots  \\
+\cdots &= \frac{(\hat{a}^\dagger)^n}{\sqrt{n!}}\Psi_0
+\end{align}
+
+The ground state $\Psi_0$ has the special property that applying the lowering operator to it yields zero:
+
+\begin{equation}
+\hat{a}\Psi_0 = \sqrt{0}\Psi_{-1} = 0
+\end{equation}
+
+This property allows us to determine the energy of the ground state:
+
+\begin{equation}
+\hat{H}\Psi_0 = \hbar\omega\left(\hat{n}+\frac{1}{2}\right)\Psi_0 = \hbar\omega\hat{a}^\dagger\hat{a}\Psi_0 + \frac{1}{2}\hbar\omega\Psi_0 = \frac{\hbar\omega}{2}\Psi_0
+\end{equation}
+
+Thus, the ground state energy is $\frac{\hbar\omega}{2}$, demonstrating the presence of zero-point energy in the quantum harmonic oscillator.
+
+To find the explicit form of the ground state wavefunction, we use the condition $\hat{a}\Psi_0 = 0$:
+
+\begin{align}
+&\sqrt{\frac{m\omega}{2\hbar}}\left(x + i\frac{\hat{p}}{m\omega}\right)\Psi_0 = 0  \\
+&x\Psi_0 + \frac{1}{m\omega}\frac{\partial\Psi_0}{\partial x} = 0
+\end{align}
+
+This first-order differential equation has the solution:
+
+\begin{equation}
+\Psi_0(x) = C\exp\left(-\frac{m\omega}{2\hbar}x^2\right) = C\exp\left(-\frac{x^2}{2\lambda^2}\right)
+\end{equation}
+
+The normalization constant $C$ is determined by requiring:
+
+\begin{equation}
+(\Psi_0, \Psi_0) = \int_{-\infty}^{\infty}dx\,C^2\exp\left(-\frac{x^2}{\lambda^2}\right) = \lambda C^2\sqrt{\pi} \stackrel{!}{=} 1
+\end{equation}
+
+Solving for $C$:
+
+\begin{equation}
+C = \sqrt{\frac{1}{\lambda\sqrt{\pi}}} = \left(\frac{m\omega}{\hbar\pi}\right)^{-\frac{1}{4}}
+\end{equation}
+
+\section{Hermite polynomials}
+
+To find the functional form of all energy eigenstates, we need to evaluate the expression:
+
+\begin{equation}
+(\hat{a}^\dagger)^n = \frac{1}{\sqrt{2^n}}\left(\frac{\hat{x}}{\lambda} - i\frac{\lambda\hat{p}}{\hbar}\right)^n
+\end{equation}
+
+This gives the general solution:
+
+\begin{equation}
+\Psi_n = \frac{1}{\sqrt{2^n n!\lambda\sqrt{\pi}}}\left(\frac{\hat{x}}{\lambda} - i\frac{\lambda\hat{p}}{\hbar}\right)^n\exp\left(-\frac{x^2}{2\lambda^2}\right)
+\end{equation}
+
+Making the substitution $y = \frac{x}{\lambda}$ (which implies $dx = \lambda dy$), the term in brackets becomes:
+
+\begin{equation}
+\frac{x}{\lambda} - i\frac{\lambda\hat{p}}{\hbar} = \frac{x}{\lambda} - i\frac{\lambda}{\hbar}\left(-i\hbar\frac{d}{dx}\right) = y - \frac{d}{dy}
+\end{equation}
+
+The exponential term can be rewritten as:
+
+\begin{equation}
+\exp\left(-\frac{x^2}{2\lambda^2}\right) = \exp\left(\frac{y^2}{2}\right)\exp(-y^2)
+\end{equation}
+
+Therefore, apart from normalization constants, the wavefunction involves repeated application of a differential operator:
+
+\begin{equation}
+\underbrace{\left(y - \frac{d}{dy}\right)\left(y - \frac{d}{dy}\right)\ldots\left(y - \frac{d}{dy}\right)}_{n}\left[\exp\left(\frac{y^2}{2}\right)\exp(-y^2)\right]
+\end{equation}
+
+For the first excited state ($n=1$), we calculate:
+
+\begin{align}
+\left(y-\frac{d}{dy}\right)\left[\exp\left(\frac{y^2}{2}\right)\exp(-y^2)\right] &= \left(y-\frac{d}{dy}\right)\left[\exp\left(-\frac{y^2}{2}\right)\right] \\
+&= y\exp\left(-\frac{y^2}{2}\right) - \frac{d}{dy}\left[\exp\left(\frac{y^2}{2}\right)\exp(-y^2)\right] \\
+&= y\exp\left(-\frac{y^2}{2}\right) - y\exp\left(\frac{y^2}{2}\right)\exp(-y^2) + 2y\exp\left(\frac{y^2}{2}\right)\exp(-y^2) \\
+&= y\exp\left(-\frac{y^2}{2}\right) - y\exp\left(-\frac{y^2}{2}\right) + 2y\exp\left(-\frac{y^2}{2}\right) \\
+&= 2y\exp\left(-\frac{y^2}{2}\right)
+\end{align}
+
+For the second excited state ($n=2$):
+
+\begin{align}
+&\left(y-\frac{d}{dy}\right)\left[\left(y-\frac{d}{dy}\right)\exp\left(-\frac{y^2}{2}\right)\right] \\
+&= \left(y-\frac{d}{dy}\right)\left[2y\exp\left(\frac{y^2}{2}\right)\exp(-y^2)\right] \\
+&= y\cdot 2y\exp\left(-\frac{y^2}{2}\right) - \frac{d}{dy}\left[2y\exp\left(\frac{y^2}{2}\right)\exp(-y^2)\right]  \\
+&= 2y^2\exp\left(-\frac{y^2}{2}\right) - 2\exp\left(-\frac{y^2}{2}\right) - 2y\frac{d}{dy}\left[\exp\left(\frac{y^2}{2}\right)\exp(-y^2)\right] \\
+&= 2y^2\exp\left(-\frac{y^2}{2}\right) - 2\exp\left(-\frac{y^2}{2}\right) - 2y\cdot y\exp\left(-\frac{y^2}{2}\right) + 4y^2\exp\left(-\frac{y^2}{2}\right) \\
+&= (4y^2-2)\exp\left(-\frac{y^2}{2}\right)
+\end{align}
+
+This pattern can be generalized by the formula:
+
+\begin{equation}
+F(y) = (-1)^n\exp\left(\frac{y^2}{2}\right)\frac{d^n}{dy^n}\exp(-y^2)
+\end{equation}
+
+Multiplying by $\exp\left(\frac{y^2}{2}\right)$, we obtain the Hermite polynomials:
+
+\begin{equation}
+H_n(y) = (-1)^n\exp(y^2)\frac{d^n}{dy^n}\exp(-y^2)
+\end{equation}
+
+Substituting back $y=\frac{x}{\lambda}$, we can express the wavefunction in terms of Hermite polynomials:
+
+\begin{equation}
+\Psi_n(x) = \frac{1}{\sqrt{2^n n!\lambda\sqrt{\pi}}}\exp\left(-\frac{x^2}{2\lambda^2}\right)H_n\left(\frac{x}{\lambda}\right)
+\end{equation}
+
+The probability density function is given by:
+
+\begin{equation}
+\rho(x) = |\Psi_n(x)|^2 = \frac{1}{2^n n!\lambda\sqrt{\pi}}\exp\left(-\frac{x^2}{\lambda^2}\right)H_n^2\left(\frac{x}{\lambda}\right)
+\end{equation}
+
+When plotted, the probability density shows maxima that follow a parabolic path, analogous to the classical harmonic oscillator confined between turning points. In quantum mechanics, the particle isn't strictly confined, but the probability of finding it beyond certain points becomes negligibly small.
+
+In classical mechanics, the Hamiltonian:
+
+\begin{equation}
+\mathcal{H} = \frac{p^2}{2m} + \frac{1}{2}m\omega^2 x^2
+\end{equation}
+
+yields the solution:
+
+\begin{equation}
+x = A\sin(\omega y + \varphi)
+\end{equation}
+
+where $A = \sqrt{\frac{2E}{m\omega^2}}$ defines the classical turning points $[-A,A]$. In quantum mechanics, these turning points correspond to where the probability density reaches its maximum, found at:
+
+\begin{equation}
+A_n = \sqrt{\frac{2\hbar\omega(n+\frac{1}{2})}{m\omega^2}} = \sqrt{\frac{2E_n}{m\omega^2}}
+\end{equation}
+
+This maintains the analogy with the classical case. For large quantum numbers, where $\frac{1}{2}$ becomes negligible:
+
+\begin{equation}
+A_n = \sqrt{\frac{2\hbar\omega(n+\frac{1}{2})}{m\omega^2}} \approx \sqrt{\frac{2\hbar n}{m\omega}}
+\end{equation}
+
+In the semiclassical limit (large $n$), the distance between probability peaks becomes smaller, and the overall distribution increasingly resembles the classical parabolic potential.
+
+\section{Uncertainty of the Harmonic oscillator}
+
+For any observable $\hat{A}$, the expected value $\langle\hat{A}\rangle$ is subject to uncertainty in measurement:
+
+\begin{gather}
+\langle\hat{A}\rangle \pm \Delta\hat{A}  \\
+\Delta\hat{A} = \sqrt{\langle\hat{A}^2\rangle - \langle\hat{A}\rangle^2}
+\end{gather}
+
+
+In the case of the harmonic oscillator, we can calculate the uncertainties explicitly. For the position operator $\hat{x}$:
+
+\begin{align}
+\langle\hat{x}\rangle &= (\Psi_n, \hat{x}\Psi_n) = \sqrt{\frac{\hbar}{2m\omega}}(\Psi_n, (\hat{a}+\hat{a}^\dagger)\Psi_n) \\
+&= \sqrt{\frac{\hbar}{2m\omega}}(\Psi_n, \hat{a}\Psi_n) + \sqrt{\frac{\hbar}{2m\omega}}(\Psi_n, \hat{a}^\dagger\Psi_n) \\
+&= \sqrt{\frac{\hbar}{2m\omega}}\sqrt{n}(\Psi_n, \Psi_{n-1}) + \sqrt{\frac{\hbar}{2m\omega}}\sqrt{n+1}(\Psi_n, \Psi_{n+1}) = 0
+\end{align}
+
+The expected value of position is zero due to the orthogonality of the eigenstates. For the expectation value of $\hat{x}^2$:
+
+\begin{align}
+\langle\hat{x}^2\rangle &= \frac{\hbar}{2m\omega}(\Psi_n, (\hat{a}+\hat{a}^\dagger)^2\Psi_n) \\
+&= \frac{\hbar}{2m\omega}[(\Psi_n, \hat{a}^2\Psi_n) + (\Psi_n, \hat{a}\hat{a}^\dagger\Psi_n) + (\Psi_n, \hat{a}^\dagger\hat{a}\Psi_n) + (\Psi_n, (\hat{a}^\dagger)^2\Psi_n)] \\
+&= \frac{\hbar}{2m\omega}[(n+1)(\Psi_n, \Psi_n) + n(\Psi_n, \Psi_n)] \\
+&= \frac{\hbar}{2m\omega}(2n+1)
+\end{align}
+
+Similarly for the momentum operator $\hat{p}$:
+
+\begin{align}
+\langle\hat{p}\rangle &= (\Psi_n, \hat{p}\Psi_n) = -i\sqrt{\frac{m\omega\hbar}{2}}(\Psi_n, (\hat{a}-\hat{a}^\dagger)\Psi_n) \\
+&= -i\sqrt{\frac{m\omega\hbar}{2}}((\Psi_n, \hat{a}\Psi_n) - (\Psi_n, \hat{a}^\dagger\Psi_n)) \\
+&= -i\sqrt{\frac{m\omega\hbar}{2}}(\sqrt{n}(\Psi_n, \Psi_{n-1}) - \sqrt{n+1}(\Psi_n, \Psi_{n+1})) = 0
+\end{align}
+
+And for $\hat{p}^2$:
+
+\begin{align}
+\langle\hat{p}^2\rangle &= -\frac{m\omega\hbar}{2}(\Psi_n, (\hat{a}-\hat{a}^\dagger)^2\Psi_n) \\
+&= -\frac{m\omega\hbar}{2}((\Psi_n, \hat{a}^2\Psi_n) - (\Psi_n, \hat{a}\hat{a}^\dagger\Psi_n) - (\Psi_n, \hat{a}^\dagger\hat{a}\Psi_n) + (\Psi_n, (\hat{a}^\dagger)^2\Psi_n)) \\
+&= -\frac{m\omega\hbar}{2}(-(n+1)(\Psi_n, \Psi_n) - n(\Psi_n, \Psi_n)) \\
+&= \frac{m\omega\hbar}{2}(2n+1)
+\end{align}
+
+These results show that the uncertainty in both position and momentum increases with the energy level $n$. Notably, the product of uncertainties $\Delta x \cdot \Delta p = \frac{\hbar}{2}(2n+1)$ exceeds the minimum value allowed by the uncertainty principle.
+
+\section{Orthogonality of Hermite polynomials}
+
+We now want to prove that the set of eigenfunctions $\Psi_n$ are orthonormal:
+
+\begin{equation}
+\Psi_n(x) = \frac{1}{\sqrt{2^n n!\lambda\sqrt{\pi}}}\exp\left(-\frac{x^2}{2\lambda^2}\right)H_n\left(\frac{x}{\lambda}\right)
+\end{equation}
+
+We need to establish:
+
+\begin{equation}
+(\Psi_m, \Psi_n) = \delta_{mn}
+\end{equation}
+
+Proof: Let's assume, without loss of generality, that $n \geq m$. We can express $\Psi_m$ as a finite power series:
+
+\begin{equation}
+\Psi_m = \sum_{s=0}^m C_s\exp\left(-\frac{x^2}{2\lambda^2}\right)x^s
+\end{equation}
+
+Multiplying and dividing by $\lambda^s$:
+
+\begin{equation}
+\Psi_m = \sum_{s=0}^m C_s\lambda^s\exp\left(-\frac{x^2}{2\lambda^2}\right)\frac{x^s}{\lambda^s}
+\end{equation}
+
+Using the substitution $y = \frac{x}{\lambda}$, the scalar product becomes:
+
+\begin{equation}
+(\Psi_m, \Psi_n) = \left(\sum_{s=0}^m C_s\lambda^s\exp\left(-\frac{y^2}{2}\right)y^s, \Psi_n\right) = \sum_{s=0}^m C_s\lambda^s\left(\exp\left(-\frac{y^2}{2}\right)y^s, \Psi_n\right)
+\end{equation}
+
+To analyze the inner product $\left(\exp\left(-y^2/2\right)y^s, \Psi_n\right)$, we use the expression for $\Psi_n$:
+
+\begin{equation}
+\Psi_n(y) = C_n\exp\left(-\frac{y^2}{2}\right)H_n(y) = C_n(-1)^n\exp\left(\frac{y^2}{2}\right)\frac{d^n}{dy^n}\exp(-y^2)
+\end{equation}
+
+Therefore:
+
+\begin{equation}
+\left(\exp\left(-y^2/2\right)y^s, \Psi_n\right) = C_n(-1)^n\left(\exp\left(\frac{-y^2}{2}\right)y^s, \exp\left(\frac{y^2}{2}\right)\frac{d^n}{dy^n}\exp(-y^2)\right)
+\end{equation}
+
+I understand now. Here's the revised LaTeX code with a different structure and explanations, keeping all mathematical expressions intact, without comments, and without adding content at the end:
+
+
+\section{Analysis of Inner Products in Harmonic Oscillator States}
+
+The key expression we need to evaluate is:
+
+\begin{equation}
+\left(\exp \left(\frac{-y^{2}}{2}\right) y^{s}, \exp \left(\frac{y^{2}}{2}\right) \frac{\mathrm{d}^{n}}{\, \mathrm{d} y^{n}} \exp \left(-y^{2}\right)\right)
+\end{equation}
+
+When written as an integral, this becomes:
+
+\begin{equation}
+\int_{-\infty}^{+\infty} \mathrm{d} y \exp \left(\frac{-y^{2}}{2}\right) y^{s} \exp \left(\frac{y^{2}}{2}\right) \frac{\mathrm{d}^{n}}{\, \mathrm{d} y^{n}} \exp \left(-y^{2}\right)=\int_{-\infty}^{+\infty} \mathrm{d} y y^{s} \frac{\mathrm{d}^{n}}{\, \mathrm{d} y^{n}} \exp \left(-y^{2}\right)
+\end{equation}
+
+Applying integration by parts gives:
+
+\begin{equation}
+\int_{-\infty}^{+\infty} \mathrm{d} y y^{s} \frac{\mathrm{d}^{n}}{\, \mathrm{d} y^{n}} \exp \left(-y^{2}\right)=\left.y^{s} \frac{\, \mathrm{d}^{n}}{\, \mathrm{d} y^{n}} \exp \left(-y^{2}\right)\right|_{-\infty} ^{+\infty}+s \int_{-\infty}^{+\infty} \mathrm{d} y y^{s-1} \frac{\, \mathrm{d}^{n-1}}{\, \mathrm{d} y^{n-1}} \exp \left(-y^{2}\right)
+\end{equation}
+
+With repeated integration by parts, we obtain:
+
+\begin{equation}
+s!\int_{-\infty}^{+\infty} \mathrm{d} y \frac{\mathrm{d}^{n-s}}{\, \mathrm{d} y^{n-s}} \exp \left(-y^{2}\right)
+\end{equation}
+
+For cases where $n \neq s$, this integral vanishes. With $s \leq m$ and $m \leq n$, we can only have $s = n$ when:
+
+\begin{equation}
+s \leq m \leq n \rightarrow n \leq m \leq n \Longrightarrow m=n
+\end{equation}
+
+This establishes the orthogonality relation:
+
+\begin{equation}
+\left(\Psi_{m}, \Psi_{n}\right)=\delta_{m n}
+\end{equation}

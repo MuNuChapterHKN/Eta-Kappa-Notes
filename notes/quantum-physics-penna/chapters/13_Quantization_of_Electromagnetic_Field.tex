@@ -1,0 +1,196 @@
+\chapter{Quantization of the electromagnetic field}
+For electromagnetic waves in vacuum ($\rho=0$ and $\vec{J}=0$), we have:
+
+\begin{align}
+\vec{E}&=\frac{\vec{D}}{\varepsilon_0} \\
+\vec{B}&=\mu_0\vec{H}
+\end{align}
+
+In the Coulomb gauge, we set $\vec{\nabla}\cdot\vec{A}=0$, which gives:
+
+\begin{align}
+\vec{E}&=-\partial_t\vec{A}\\
+\vec{B}&=\vec{\nabla}\times\vec{A}
+\end{align}
+
+From Maxwell's fourth equation, we derive:
+
+\begin{align}
+&\vec{\nabla}\times\vec{B}-\frac{1}{c^2}\partial_t\vec{E}=0\\
+&\vec{\nabla}\times\vec{\nabla}\times\vec{A}+\frac{1}{c^2}\partial_t^2\vec{A}=0\\
+&\vec{\nabla}(\vec{\nabla}\cdot\vec{A})-\nabla^2\vec{A}+\frac{1}{c^2}\partial_t^2\vec{A}=0 \\
+&\nabla^2\vec{A}-\frac{1}{c^2}\partial_t^2\vec{A}=0
+\end{align}
+
+This confirms that $\vec{A}$ satisfies the wave equation and can be expressed as a superposition of plane waves:
+
+\begin{equation}
+\vec{A}=\sum_{\vec{k}}F_{\vec{k}}(t)e^{i\vec{k}\cdot\vec{x}}\vec{u}_{\vec{k}}
+\end{equation}
+
+Each term must satisfy the wave equation:
+
+\[
+\begin{array}{r}
+\nabla^2\vec{A}=-\sum_{\vec{k}}F_{\vec{k}}(t)\vec{k}^2 e^{i\vec{k}\cdot\vec{x}}\vec{u}_{\vec{k}}\\
+\partial_t^2\vec{A}=\sum_{\vec{k}}\ddot{F}_{\vec{k}}(t)e^{i\vec{k}\cdot\vec{x}}\vec{u}_{\vec{k}}
+\end{array}
+\]
+
+Therefore, each component must satisfy:
+
+\begin{align}
+-F_k k^2-\frac{1}{c^2}\ddot{F}_k&=0 \\
+\ddot{F}_k+c^2k^2 F_k&=0
+\end{align}
+
+This is the equation of a harmonic oscillator with solution:
+
+\begin{equation}
+F_k=Be^{i\omega_k t}+Ce^{-i\omega_k t}
+\end{equation}
+
+Where $\omega_k=c|\vec{k}|$. Accounting for polarization, the complete vector potential is:
+
+\begin{equation}
+\vec{A}=\sum_{\vec{k}}\sum_s F_{s\vec{k}}(t)e^{i\vec{k}\cdot\vec{x}}\vec{u}_{s\vec{k}}
+\end{equation}
+
+
+This is a Fourier series representation. Since $\vec{A}$ must be real, we have $\vec{A}=\vec{A}^*$, which gives us:
+
+\begin{align}
+&\sum_{\vec{k}}\sum_s(B_{sk}e^{i\omega_k t}+C_{sk}e^{-i\omega_k t})e^{i\vec{k}\cdot\vec{x}}\vec{u}_{s\vec{k}}=\\
+&=\sum_{\vec{k}}\sum_s(B_{sk}^*e^{-i\omega_k t}+C_{sk}^*e^{i\omega_k t})e^{-i\vec{k}\cdot\vec{x}}\vec{u}_{s\vec{k}}
+\end{align}
+
+This leads to the following conditions:
+
+\begin{align}
+&B_{s,-\vec{k}}=C_{s,\vec{k}}^* \\
+&C_{s,-\vec{k}}=B_{s,\vec{k}}^*
+\end{align}
+
+The electromagnetic field Hamiltonian is given by:
+
+\begin{equation}
+\mathcal{H}=\int d^3r\frac{1}{2}\left(\varepsilon_0\vec{E}^2+\frac{1}{\mu_0}\vec{B}^2\right)
+\end{equation}
+
+Substituting $\vec{E}=-\partial_t\vec{A}$ and $\vec{B}=\vec{\nabla}\times\vec{A}$ and using our expression for $\vec{A}$, we can simplify this to:
+
+\begin{equation}
+\sum_s\sum_{\vec{k}}\hbar\omega_k|b_{s\vec{k}}|^2
+\end{equation}
+
+Where $b_{s\vec{k}}=d_kB_{sk}$ and $d_k=\sqrt{2\varepsilon_0\omega_kV/\hbar}$. The Poisson brackets are:
+
+\begin{equation}
+\{b_{s\vec{k}},b_{r\vec{q}}^*\}=\delta_{sr}\delta_{\vec{k}\vec{q}}\frac{1}{i\hbar}
+\end{equation}
+
+We can define a set of canonical Poisson brackets:
+
+\begin{equation}
+\{A,B\}=\sum_s\sum_{\vec{k}}\frac{\partial A}{\partial b_{s\vec{k}}}\frac{\partial B}{\partial b_{s\vec{k}}^*}-\frac{\partial B}{\partial b_{s\vec{k}}}\frac{\partial A}{\partial b_{s\vec{k}}^*}
+\end{equation}
+
+Verifying these brackets:
+
+\begin{align}
+\dot{b}_{s\vec{k}}&=\{b_{s\vec{k}},H\}=\sum_r\sum_{\vec{q}}\hbar\omega_q\{b_{s\vec{k}},b_{r\vec{q}}^*b_{r\vec{q}}\}\\
+&=\sum_r\sum_{\vec{q}}\hbar\omega_q(b_{r\vec{q}}^*\{b_{s\vec{k}},b_{r\vec{q}}\}+b_{r\vec{q}}\underbrace{\{b_{s\vec{k}},b_{r\vec{q}}^*\}}_{\delta_{sr}\delta_{\vec{k}\vec{q}}\frac{1}{i\hbar}}) \\
+&=-i\omega_kb_{s\vec{k}}
+\end{align}
+
+The second derivative is:
+
+\begin{equation}
+\ddot{b}_{s\vec{k}}=\frac{d\dot{b}_{s\vec{k}}}{dt}=\frac{d}{dt}(-i\omega_kb_{s\vec{k}})=-i\omega_k\dot{b}_{s\vec{k}}=-\omega_k^2b_{s\vec{k}}
+\end{equation}
+
+Which means:
+
+\begin{equation}
+\ddot{b}_{s\vec{k}}+\omega_k^2b_{s\vec{k}}=0
+\end{equation}
+
+\section{Field quantization and Fock states}
+Now we apply the canonical quantization rules (CQR) and obtain:
+
+\begin{equation}
+[b_{sk},b_{rq}^\dagger]=\delta_{rs}\delta_{qk}
+\end{equation}
+
+We recognize that the operators $b_{sk}, b_{sk}^\dagger$ form a set similar to the ladder operators $a, a^\dagger$ for the harmonic oscillator. We can write $\vec{A}$ as an operator:
+
+\begin{equation}
+\vec{A}=\sum_{\vec{k}}\sum_s(B_{sk}e^{i\omega_k t}+B_{sk}^\dagger e^{-i\omega_k t})e^{i\vec{k}\cdot\vec{x}}\vec{u}_{s\vec{k}}
+\end{equation}
+
+Where the operators $B_{sk}$ and $B_{sk}^\dagger$ are related to $b_{sk}, b_{sk}^\dagger$. The Hamiltonian becomes:
+
+\begin{equation}
+H=\sum_s\sum_{\vec{k}}\hbar\omega_k\frac{1}{2}(b_{sk}^\dagger b_{sk}+b_{sk}b_{sk}^\dagger)=\sum_s\sum_{\vec{k}}\hbar\omega_k(b_{sk}^\dagger b_{sk}+\frac{1}{2})
+\end{equation}
+
+
+This Hamiltonian is essentially a sum of independent harmonic oscillators. Since it is separable, we can factorize the wavefunction into what are called Fock states:
+
+\begin{equation}
+|n\rangle=\prod_s\prod_k|n_{sk}\rangle
+\end{equation}
+
+Where we define the number operator:
+
+\begin{equation}
+b_{sk}^\dagger b_{sk}=\hat{n}_{sk}
+\end{equation}
+
+Acting on the Fock states:
+
+\begin{equation}
+\hat{n}_{sk}|n_{sk}\rangle=n_{sk}|n_{sk}\rangle
+\end{equation}
+
+The creation and annihilation operators act as:
+
+\begin{align}
+&b_{sk}^\dagger|n_{sk}\rangle=\sqrt{n_{sk}+1}|n_{sk}+1\rangle \\
+&b_{sk}|n_{sk}\rangle=\sqrt{n_{sk}}|n_{sk}-1\rangle
+\end{align}
+
+The Hamiltonian applied to a Fock state gives:
+
+\begin{equation}
+H|n\rangle=\sum_s\sum_{\vec{k}}\hbar\omega_k(\hat{n}_{sk}+\frac{1}{2})\prod_r\prod_q|n_{rq}\rangle
+\end{equation}
+
+Since $\hat{n}_{sk}$ only acts on its corresponding state:
+
+\begin{align}
+H|n\rangle&=\sum_s\sum_{\vec{k}}(\prod_{r\neq s}\prod_{q\neq k}|n_{rq}\rangle)\hbar\omega_k(n_{sk}+\frac{1}{2})|n_{sk}\rangle\\
+&=(\prod_s\prod_k|n_{sk}\rangle)\underbrace{\sum_s\sum_{\vec{k}}\hbar\omega_k(n_{sk}+\frac{1}{2})}_E
+\end{align}
+
+The quantum number $n_{sk}$ represents the number of photons with wavevector $k$ and polarization $s$. Importantly, even with zero photons ($n_{sk}=0$ for all $s,k$), the energy $E\neq 0$ due to the vacuum energy contribution $\frac{1}{2}\hbar\omega_k$ for each mode.
+
+We can define the total photon number operator:
+
+\begin{equation}
+\hat{N}=\sum_s\sum_{\vec{k}}\hat{n}_{sk}
+\end{equation}
+
+Which gives:
+
+\begin{equation}
+\hat{N}|n\rangle=N|n\rangle
+\end{equation}
+
+Where $N$ is the total number of photons. We can verify that:
+
+\begin{equation}
+[\hat{N},H]=0
+\end{equation}
+
+This commutation relation confirms that the total number of photons is conserved in free electromagnetic field evolution.

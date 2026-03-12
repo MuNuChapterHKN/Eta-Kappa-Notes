@@ -1,0 +1,1350 @@
+\chapter{Quantum angular momentum theory}
+We now explore the quantum mechanical treatment of angular momentum, a fundamental concept with wide-ranging applications. The angular momentum operator is defined as:
+
+\begin{equation}
+\hat{L}=\hat{x} \wedge \hat{p}=-i \hbar x \wedge \vec{\nabla}
+\end{equation}
+
+The individual components can be expressed using the Levi-Civita symbol:
+
+\begin{equation}
+\hat{L}_{i}=-i \hbar \epsilon_{i j k} x_{j} \frac{\partial}{\partial x_{k}}
+\end{equation}
+
+These operators satisfy important commutation relations with position and momentum:
+
+\begin{align}
+{\left[\hat{L}_{i}, \hat{x}_{n}\right] } & =\left[\epsilon_{i j k} \hat{x}_{j} \hat{p}_{k}, \hat{x}_{n}\right]=\epsilon_{i j k} \hat{x}_{j}\left[\hat{p}_{k}, \hat{x}_{n}\right]+\epsilon_{i j k}\left[\hat{x}_{j}, \hat{x}_{n}\right] \hat{p}_{k}= \\
+& =-\epsilon_{i j k} x_{j} i \hbar \delta_{k n}=-i \hbar \epsilon_{i j n} \hat{x}_{j}=i \hbar \epsilon_{i n j} \hat{x}_{j}  \\
+{\left[\hat{L}_{i}, \hat{p}_{n}\right] } & =\left[\epsilon_{i j k} \hat{x}_{j} \hat{p}_{k}, \hat{p}_{n}\right]=\epsilon_{i j k} \hat{x}_{j}\left[\hat{p}_{k}, \hat{p}_{n}\right]+\epsilon_{i j k}\left[\hat{x}_{j}, \hat{p}_{n}\right] \hat{p}_{k}= \\
+& =\epsilon_{i j k} \hat{p}_{k} i \hbar \delta_{j n}=i \hbar \epsilon_{i n k} \hat{p}_{k}  \\
+{\left[\hat{L}_{i}, \hat{x}^{2}\right] } & =\left[\epsilon_{i j k} \hat{x}_{j} \hat{p}_{k}, \hat{x}^{2}\right]=\epsilon_{i j k} x_{j}\left[\hat{p}_{k}, \hat{x}^{2}\right]+\epsilon_{i j k}\left[x_{j}, \hat{x}^{2}\right] \hat{p}_{k}=0  \\
+{\left[\hat{L}_{i}, \hat{p}^{2}\right] } & =\left[\epsilon_{i j k} \hat{x}_{j} \hat{p}_{k}, \hat{p}^{2}\right]=\epsilon_{i j k} x_{j}\left[\hat{p}_{k}, \hat{p}^{2}\right]+\epsilon_{i j k}\left[x_{j}, \hat{p}^{2}\right] \hat{p}_{k}=0
+\end{align}
+
+For notational simplicity, we'll now refer to the operators without hats. Angular momentum is particularly important because many physical systems exhibit rotational symmetry, leading to conservation laws expressed through commutation relations:
+
+\begin{align}
+& {\left[L^{2}, H\right]=0} \\
+& {\left[L_{j}, H\right]=0}
+\end{align}
+
+While $L^2$ commutes with each component $L_j$, the components themselves do not commute with each other. This allows us to simultaneously specify eigenvalues of $L^2$ and only one component (conventionally $L_3$), creating a complete set of commuting observables with the Hamiltonian.
+
+\section{Angular momentum eigenvalue structure}
+To analyze the angular momentum spectrum, we introduce ladder operators analogous to those used in the harmonic oscillator:
+
+\begin{align}
+& L_{+}=L_{1}+i L_{2} \\
+& L_{-}=L_{1}-i L_{2}
+\end{align}
+\begin{equation}
+L_{ \pm}^{\dagger}=\left(L_{1} \pm i L_{2}\right)^{\dagger}=\left(L_{1} \mp i L_{2}\right)=L_{\mp}
+\end{equation}
+
+The hermiticity properties of these ladder operators reveal their complementary nature, similar to creation and annihilation operators.
+
+\begin{equation}
+\left[L_{3}, L_{ \pm}\right]=\left[L_{3}, L_{1} \pm i L_{2}\right]=\left[L_{3}, L_{1}\right] \pm i\left[L_{3}, L_{2}\right]=i \hbar L_{2} \pm i\left(-i \hbar L_{1}\right)= \pm \hbar\left(\hbar L_{1} \pm i L_{2}\right)= \pm \hbar L_{ \pm}
+\end{equation}
+
+This commutation relation demonstrates how the ladder operators shift eigenvalues of $L_3$ by precisely one quantum unit.
+
+\begin{align}
+{\left[L_{+}, L_{-}\right] } & =\left[L_{1}+i L_{2}, L_{1}-i L_{2}\right]=\left[L_{1}, L_{1}\right]-i\left[L_{1}, L_{2}\right]+i\left[L_{2}, L_{1}\right]+\left[L_{2}, L_{2}\right]= \\
+& =i\left[L_{2}, L_{1}\right]+i\left[L_{2}, L_{1}\right]=2 i\left(-i \hbar L_{3}\right)=2 \hbar L_{3}
+\end{align}
+
+The commutator between raising and lowering operators connects back to $L_3$, forming a closed algebraic structure.
+
+\begin{equation}
+L_{3} \phi_{m}=\hbar m \phi_{m}
+\end{equation}
+
+Eigenfunctions of $L_3$ are characterized by the magnetic quantum number $m$, which quantifies the component of angular momentum along a specified axis.
+
+\begin{equation}
+L^{2} \phi_{m}=\hbar \ell(\ell+1) \phi_{m}
+\end{equation}
+
+The total angular momentum operator $L^2$ has eigenvalues determined by the quantum number $\ell$, with the characteristic $\ell(\ell+1)$ form.
+
+\begin{align}
+L_{3}\left(L_{+} \phi_{m}\right) & =L_{3} L_{+} \phi_{m}=(\underbrace{L_{3} L_{+}-L_{+} L_{3}}_{\left[L_{3}, L_{+}\right]=\hbar L_{+}}+L_{+} L_{3})=  \\
+& =L_{+}\left(\hbar+L_{3}\right) \phi_{m}=\hbar(m+1) L_{+} \phi_{m}
+\end{align}
+
+The raising operator $L_+$ transforms an eigenstate of $L_3$ into another eigenstate with magnetic quantum number increased by one unit.
+
+\begin{align}
+L_{3}\left(L_{-} \phi_{m}\right) & =L_{3} L_{-} \phi_{m}=(\underbrace{L_{3} L_{-}-L_{-} L_{3}}_{\left[L_{3}, L_{-}\right]=-\hbar L_{-}}+L_{-} L_{3})=  \\
+& =L_{-}\left(-\hbar+L_{3}\right) \phi_{m}=\hbar(m-1) L_{+} \phi_{m}
+\end{align}
+
+Similarly, the lowering operator $L_-$ transforms an eigenstate into one with magnetic quantum number decreased by one unit.
+
+\begin{equation}
+L_{ \pm} \phi_{m}=\lambda_{ \pm} \phi_{m \pm 1}
+\end{equation}
+
+The ladder operators connect adjacent states in the angular momentum spectrum with proportionality constants $\lambda_\pm$.
+
+\begin{equation}
+\left(L_{ \pm} \phi_{m}, L_{ \pm} \phi_{m}\right) \stackrel{!}{=} 1
+\end{equation}
+
+The normalization condition helps determine the precise values of these proportionality constants.
+
+\begin{equation}
+\left(L_{ \pm} \phi_{m}, L_{ \pm} \phi_{m}\right)=\left(\phi_{m}, L_{\mp} L_{ \pm} \phi_{m}\right)
+\end{equation}
+
+Using the adjoint property, we can express the normalization in terms of operator products acting on the original state.
+
+\begin{align}
+L_{-} L_{+} & =\left(L_{1}+i L_{2}\right)\left(L_{1}-i L_{2}\right)=L_{1}^{2}+i L_{2} L_{1}-i L_{1} L_{2}+L_{2}^{2}= \\
+& =L^{3}-L_{3}^{2}+i\left[L_{2}, L_{1}\right]=L^{2}-L_{3}^{2}+i\left(i \hbar L_{3}\right)=L^{2}-L_{3}^{2}-\hbar L_{3}
+\end{align}
+
+The product of lowering and raising operators can be expressed in terms of the fundamental operators $L^2$ and $L_3$.
+
+\begin{align}
+\left(\phi_{m}, L_{-} L_{+} \phi_{m}\right) & =\left(\phi_{m},\left(L^{2}-L_{3}^{2}-\hbar L_{3}\right) \phi_{m}\right)= \\
+& =\left(\phi_{m}, L^{2} \phi_{m}\right)-\left(\phi_{m}, L_{3}^{2} \phi_{m}\right)-\hbar\left(\phi_{m}, L_{3} \phi_{m}\right)=  \\
+& =\hbar^{2} \ell(\ell+1)-\hbar^{2} m^{2}-\hbar^{2} m=\hbar^{2}[\ell(\ell+1)-m(m+1)]
+\end{align}
+
+This calculation reveals how the normalization depends on both quantum numbers $\ell$ and $m$.
+
+\begin{equation}
+\left(L_{+} \phi_{m}, L_{+} \phi_{m}\right)=\lambda_{+}^{2}\left(\phi_{m+1}, \phi_{m+1}\right)=\lambda_{+}^{2}
+\end{equation}
+
+And so $L_{+}$ and $L_{-}$ act on $\phi_{m}=Y_{\ell, m}$ as:
+
+\[
+\left\{\begin{array}{l}
+L_{+} Y_{\ell, m}=\hbar \sqrt{\ell(\ell+1)-m(m+1)} Y_{\ell, m+1}  \\
+L_{-} Y_{\ell, m}=\hbar \sqrt{\ell(\ell+1)-m(m-1)} Y_{\ell, m-1}
+\end{array}\right.
+\]
+
+These explicit formulas demonstrate precisely how the ladder operators transform angular momentum eigenstates, connecting states with different magnetic quantum numbers.
+
+\begin{equation}
+\ell(\ell+1)-m(m+1) \geq 0 \quad \text { and } \quad \ell(\ell+1)-m(m-1) \geq 0
+\end{equation}
+
+Physical constraints require that the expressions under the square roots remain non-negative, which limits the allowed values of quantum numbers.
+
+\begin{equation}
+-\ell \leq m \leq \ell
+\end{equation}
+
+This fundamental constraint establishes that for each value of $\ell$, there are exactly $2\ell+1$ possible values of the magnetic quantum number $m$.
+
+\begin{equation}
+L_{-} \phi_{\ell}=\hbar \sqrt{\ell(\ell+1)-\ell(\ell-1)} \phi_{\ell-1}=\hbar \sqrt{\ell^{\chi}+\ell-\ell^{\chi}+\ell} \phi_{\ell-1}=\hbar \sqrt{2 l} \phi_{\ell-1}
+\end{equation}
+
+Starting from the maximum value of $m=\ell$, we can systematically generate all lower states through repeated application of the lowering operator.
+
+\begin{align}
+\left(L_{-}\right)^{2} \phi_{\ell} & =\hbar \sqrt{2 l} L_{+} \phi_{\ell-1}=\hbar \sqrt{2 l}[\hbar \sqrt{\ell(\ell+1)-(\ell-1)(\ell-2)}] \phi_{\ell-2}= \\
+& =\hbar^{2} \sqrt{2 l} \sqrt{\ell^{2}+\ell-\ell^{2}+3 l-2} \phi_{\ell-2}=\hbar^{2} \sqrt{2 l} \sqrt{2(2 l-1)} \phi_{\ell-2}
+\end{align}
+
+Continuing this process reveals patterns in the coefficients that emerge when descending through the angular momentum ladder.
+
+\begin{equation}
+L_{-}^{s} \phi_{\ell}=\hbar^{s} \sqrt{s!} \sqrt{\frac{(2 l)!}{(2 l-s)!}} \phi_{\ell-s}
+\end{equation}
+
+This general formula describes how repeated application of the lowering operator connects states separated by $s$ units of angular momentum.
+
+\begin{align}
+L_{+}^{s} Y_{\ell, 0} & =\hbar^{s} \sqrt{\frac{(\ell+s)!}{(\ell-s)!}} Y_{\ell,-s} \\
+L_{-}^{s} Y_{\ell, 0} & =\hbar^{s} \sqrt{\frac{(\ell+s)!}{(\ell-s)!}} Y_{\ell, s}
+\end{align}
+
+Starting from the $m=0$ state, we can generate all other states symmetrically through appropriate applications of raising and lowering operators.
+
+\section{Spherical coordinate representation}
+For problems with rotational symmetry, spherical coordinates provide the most natural framework:
+
+\[
+\begin{cases}x_{1} & =r \sin \theta \cos \varphi  \\ x_{2} & =r \sin \theta \sin \varphi \\ x_{3} & =r \cos \theta\end{cases}
+\]
+
+This coordinate transformation allows us to express angular momentum operators in a form that highlights their geometric interpretation.
+
+\begin{align}
+\left\{\begin{array}{l}
+L_{1} = i \hbar\left(\sin \varphi \frac{\partial}{\partial \theta}+\cot \theta \cos \varphi \frac{\partial}{\partial \varphi}\right)  \\
+L_{2} = i \hbar\left(-\cos \varphi \frac{\partial}{\partial \theta}+\cot \theta \sin \varphi \frac{\partial}{\partial \varphi}\right) \\
+L_{3} = -i \hbar \frac{\partial}{\partial \varphi}
+\end{array}\right.
+\end{align}
+
+The simplicity of $L_3$ in this representation explains why it is conventionally chosen as the component to diagonalize alongside $L^2$.
+
+\[
+\left\{\begin{array}{l}
+L_{+}=\hbar e^{i \varphi}\left(\frac{\partial}{\partial \theta}+i \cot \theta \frac{\partial}{\partial \varphi}\right)  \\
+L_{-}=\hbar e^{-i \varphi}\left(-\frac{\partial}{\partial \theta}+i \cot \theta \frac{\partial}{\partial \varphi}\right) \\
+L^{2}=-\hbar^{2}\left[\frac{1}{\sin \theta} \frac{\partial}{\partial \theta}\left(\sin \theta \frac{\partial}{\partial \theta}\right)+\frac{1}{\sin ^{2} \theta} \frac{\partial^{2}}{\partial \varphi^{2}}\right]
+\end{array}\right.
+\]
+Now we assume that we can separate the contribution of $\varphi$ and $\theta$ :
+
+\begin{equation}
+Y_{\ell, m}(\theta, \varphi)=\Phi_{m}(\varphi) F_{\ell, m}(\theta)
+\end{equation}
+
+This separation of variables approach simplifies solving for the eigenfunctions by treating the azimuthal and polar dependencies independently.
+
+\begin{equation}
+-i \hbar \frac{\partial}{\partial \varphi}\left(\Phi_{m}(\varphi) F_{\ell, m}(\theta)\right)=-F_{\ell, m} i \hbar \frac{\partial \Phi_{m}}{\partial \varphi}
+\end{equation}
+
+Applying the $L_3$ operator to our separated function affects only the azimuthal component.
+
+\begin{equation}
+L_{3} Y_{\ell, m}=\hbar m Y_{\ell, m}
+\end{equation}
+
+The eigenvalue equation for $L_3$ establishes the quantum number $m$ as the defining characteristic of the azimuthal behavior.
+
+\begin{equation}
+-F_{\ell, m} i \hbar \frac{\partial \Phi_{m}}{\partial \varphi}=\hbar m \Phi_{m} F_{\ell, m} \Longrightarrow-i \hbar \frac{\partial \Phi_{m}}{\partial \varphi}=\hbar m \Phi_{m}
+\end{equation}
+
+Comparing these expressions yields a differential equation for the azimuthal function.
+
+\begin{equation}
+-i \frac{\partial \Phi_{m}}{\partial \varphi}=m \Phi_{m}
+\end{equation}
+
+This first-order differential equation has a straightforward solution with the physical constraint of $2\pi$ periodicity.
+
+\begin{equation}
+\Phi_{m}=\frac{\mathrm{e}^{i m \varphi}}{\sqrt{2 \pi}}
+\end{equation}
+
+The normalization factor ensures proper integration over the full azimuthal range.
+
+\begin{equation}
+L^{2}=-\hbar^{2}\left[\frac{1}{\sin \theta} \frac{\partial}{\partial \theta}\left(\sin \theta \frac{\partial}{\partial \theta}\right)+\frac{1}{\sin ^{2} \theta} \frac{\partial^{2}}{\partial \varphi^{2}}\right]
+\end{equation}
+
+The total angular momentum operator combines contributions from both angular coordinates.
+
+\begin{equation}
+\frac{\partial^{2} \Phi_{m}}{\partial \varphi^{2}}=-m^{2} \Phi_{m}
+\end{equation}
+
+The second derivative of the azimuthal function reveals how $m$ quantifies the rate of phase change around the azimuthal direction.
+
+\[
+\begin{array}{r}
+-\hbar^{2}\left[\frac{1}{\sin \theta} \frac{\partial}{\partial \theta}\left(\sin \theta \frac{\partial}{\partial \theta}\right)+\frac{1}{\sin ^{2} \theta} \frac{\partial^{2}}{\partial \varphi^{2}}\right] \Phi_{m} F_{\ell, m}=  \\
+-\hbar^{2}\left[\frac{1}{\sin \theta} \frac{\partial}{\partial \theta}\left(\sin \theta \frac{\partial}{\partial \theta}\right)-\frac{m^{2}}{\sin ^{2} \theta}\right] \Phi_{m} F_{\ell, m}
+\end{array}
+\]
+
+Substituting the azimuthal solution transforms the total angular momentum equation into one involving only the polar angle.
+
+\begin{equation}
+L^{2} Y_{\ell, m}=\hbar^{2} \ell(\ell+1) Y_{\ell, m}
+\end{equation}
+
+The eigenvalue of $L^2$ characterizes the total angular momentum of the state.
+
+\begin{equation}
+-\hbar^{\not 2}\left[\frac{1}{\sin \theta} \frac{\partial}{\partial \theta}\left(\sin \theta \frac{\partial}{\partial \theta}\right)-\frac{m^{2}}{\sin ^{2} \theta}\right] F_{\ell, m}=\hbar^{\not 2} \ell(\ell+1) F_{\ell, m}
+\end{equation}
+
+Comparing with the eigenvalue equation yields a differential equation for the polar component.
+
+\begin{equation}
+-\left[\frac{1}{\sin \theta} \frac{\partial}{\partial \theta}\left(\sin \theta \frac{\partial}{\partial \theta}\right)-\frac{m^{2}}{\sin ^{2} \theta}\right] F_{\ell, m}=\ell(\ell+1) F_{\ell, m}
+\end{equation}
+
+This is a form of the associated Legendre differential equation, whose solutions are well-established in mathematical physics.
+
+\begin{equation}
+F_{\ell, m}=P_{\ell, m}(\cos \theta)
+\end{equation}
+
+The polar component is expressed in terms of associated Legendre functions of the variable $\cos\theta$.
+
+\begin{align}
+& \text { Let } \xi=\cos \theta \\
+& P_{\ell, m}(\xi)=\left(1-\xi^{2}\right)^{m / 2} \frac{\partial^{m}}{\partial \xi^{m}} P_{l}(\xi)  \\
+& P_{\ell}(\xi)=\frac{1}{2^{\ell} \ell!} \frac{\partial^{\ell}}{\partial \xi^{\ell}}\left(\xi^{2}-1\right)^{\ell}
+\end{align}
+
+The terms $P_{l}(\xi)$ are the Legendre polynomials. They are defined for $-1 \leq \xi \leq 1$.\\
+From the definition of $\Phi(\varphi)$ we can understand that the choice of $\ell$ as an half integer must be excluded, because this would make $m$ be a half integer aswell, and so we have:
+
+\begin{align}
+& \text { Let } m=\frac{r}{2} \quad \text { with } r \in \mathbb{Z} \\
+& \Phi_{m}(\varphi+2 \pi)=\frac{\mathrm{e}^{i m(\varphi+2 \pi)}}{\sqrt{2 \pi}}=\frac{\mathrm{e}^{i m \varphi}}{\sqrt{2 \pi}} \mathrm{e}^{i r \varphi}=(-1)^{r} \Phi_{m}(\varphi)
+\end{align}
+
+This periodicity constraint demonstrates why $m$ must be an integer, as the wavefunction must return to its original value after a complete rotation of $2\pi$.
+
+\section{Property 1.}
+
+\begin{equation}
+P_{\ell, m}=(-1)^{m} \frac{(\ell+m)!}{(\ell-m)!} P_{\ell,|m|}
+\end{equation}
+
+This relation connects associated Legendre functions with negative and positive values of $m$, providing a complete characterization for all integer values of $m$.
+
+\section{Property 2.}
+
+\begin{equation}
+\int_{-1}^{1} \, \mathrm{d} \xi P_{\ell, m} P_{n, m}=\frac{2}{2 l+1} \frac{(\ell+m)!}{(\ell-m)!} \delta_{l n}
+\end{equation}
+
+This orthogonality relation is crucial for establishing the completeness of the spherical harmonic basis.
+
+Property 3. The functions:
+
+\begin{equation}
+Y_{\ell, m}(\theta, \varphi)=(-1)^{m} N_{\ell, m} \Phi_{m}(\varphi) P_{\ell, m}(\cos \theta)
+\end{equation}
+
+diagonalize two Hamiltonians, so they form a basis. This is a complete orthonormal system in $L^{2}\left(\mathbb{S}^{2}\right)$ defined on the sphere $\mathbb{S}^{2}$, thus:
+
+\begin{equation}
+\left(Y_{h, n}, Y_{\ell, m}\right)=\delta_{h \ell} \delta_{n m}
+\end{equation}
+
+The spherical harmonics form a complete orthonormal basis for functions on the sphere, making them ideal for representing angular wavefunctions.
+
+Proof. To prove this we explicit the integral:
+
+\begin{equation}
+\int_{0}^{\pi} \mathrm{d} \theta \sin \theta \int_{0}^{2 \pi} \, \mathrm{d} \varphi Y_{h, n}^{*}(\theta, \varphi) Y_{\ell, m}(\theta, \varphi)
+\end{equation}
+
+This integral represents the inner product of two spherical harmonics over the entire spherical surface.
+
+Separating the two contributions:
+
+\begin{equation}
+N_{\ell, m} N_{h, n}(-1)^{n}(-1)^{m} \int_{0}^{\pi} \mathrm{d} \theta \sin \theta P_{h, n}(\cos \theta) P_{\ell, m}(\cos \theta) \int_{0}^{2 \pi} \, \mathrm{d} \varphi \Phi_{n}^{*}(\varphi) \Phi_{m}(\varphi)
+\end{equation}
+
+The integral separates into independent azimuthal and polar components.
+
+\begin{equation}
+\int_{0}^{2 \pi} \, \mathrm{d} \varphi \Phi_{n}^{*}(\varphi) \Phi_{m}(\varphi)=\int_{0}^{2 \pi} \, \mathrm{d} \varphi \frac{\mathrm{e}^{-i n \varphi} \mathrm{e}^{i m \varphi}}{2 \pi}=\delta_{n m}
+\end{equation}
+
+The orthogonality of complex exponentials ensures that different azimuthal modes do not overlap.
+
+\begin{equation}
+(-1)^{n}(-1)^{m}=(-1)^{2 n}=1
+\end{equation}
+
+When $m=n$, the phase factors combine to yield unity.
+
+\begin{equation}
+\int_{0}^{\pi} \mathrm{d} \theta \sin \theta P_{h, m}(\cos \theta) P_{\ell, m}(\cos \theta)=\int_{-1}^{1} \, \mathrm{d} \xi P_{h, m}(\xi) P_{\ell, m}(\xi)
+\end{equation}
+
+A change of variable transforms the polar integral into the standard form for associated Legendre functions.
+
+\begin{equation}
+\frac{2}{2 l+1} \frac{(\ell+m)!}{(\ell-m)!} \delta_{\ell h}
+\end{equation}
+
+Also if $h=\ell$ :
+
+\begin{equation}
+N_{\ell, m}^{2} \frac{2}{2 \ell+1} \frac{(\ell+m)!}{(\ell-m)!}=1 \Longrightarrow N_{\ell, m}=\sqrt{\frac{2 l+1}{2} \frac{(\ell-m)!}{(\ell+m)!}}
+\end{equation}
+
+This determines the normalization constant needed to ensure that spherical harmonics form an orthonormal set.
+
+\begin{equation}
+\left(Y_{h, n}, Y_{\ell, m}\right)=\delta_{h \ell} \delta_{n m}
+\end{equation}
+
+The completed proof confirms that spherical harmonics satisfy the orthonormality condition, making them ideal basis functions for angular problems.
+
+\section{Probability density distributions}
+The probability density associated with spherical harmonics reveals the spatial distribution of quantum states:
+
+\begin{equation}
+\left|Y_{\ell, m}(\theta, \varphi)\right|^{2}=N_{\ell, m}^{2} P_{\ell, m}^{2}(\cos \theta) \Phi_{m}^{2}(\varphi)
+\end{equation}
+
+For the ground state ($\ell=0, m=0$), we have a perfectly spherical distribution:
+
+\begin{equation}
+\left|Y_{0,0}(\theta, \varphi)\right|^{2}=N_{0,0}^{2} P_{0,0}^{2}(\cos \theta) \Phi_{0}^{2}(\varphi)=\frac{1}{4 \pi}
+\end{equation}
+
+For $\ell=1$ states, we observe the characteristic p-orbital patterns:
+
+\[
+\begin{array}{r}
+\left|Y_{1,0}(\theta, \varphi)\right|^{2}=N_{1,0}^{2} P_{1,0}^{2}(\cos \theta) \Phi_{0}^{2}(\varphi)=\frac{3}{4 \pi} \cos ^{2} \theta \\
+\left|Y_{1, \pm 1}(\theta, \varphi)\right|^{2}=N_{1, \pm 1}^{2} P_{1, \pm 1}^{2}(\cos \theta) \Phi_{ \pm 1}^{2}(\varphi)=\frac{3}{8 \pi} \sin ^{2} \theta
+\end{array}
+\]
+
+The $Y_{1,0}$ state has zero probability in the equatorial plane where $\theta=\pi/2$, creating the characteristic dumbbell shape.
+
+For $\ell=2$ (d-orbital) states:
+
+\begin{align}
+\left|Y_{2,0}(\theta, \varphi)\right|^{2} & =N_{2,0}^{2} P_{2,0}^{2}(\cos \theta) \Phi_{0}^{2}(\varphi)=\frac{5}{16 \pi}\left(3 \cos ^{2} \theta-1\right)^{2} \\
+\left|Y_{2, \pm 1}(\theta, \varphi)\right|^{2} & =N_{2,1}^{2} P_{2,1}^{2}(\cos \theta) \Phi_{ \pm 1}^{2}(\varphi)=\frac{15}{8 \pi} \sin ^{2} \theta \cos ^{2} \theta  \\
+\left|Y_{2, \pm 2}(\theta, \varphi)\right|^{2} & =N_{2,2}^{2} P_{2,2}^{2}(\cos \theta) \Phi_{ \pm 2}^{2}(\varphi)=\frac{15}{32 \pi} \sin ^{4} \theta
+\end{align}
+
+These more complex angular distributions correspond to the characteristic shapes of d-orbitals in atomic physics, demonstrating how quantum numbers determine orbital geometry.
+
+\section{Application to diatomic molecules}
+We now apply our understanding of angular momentum to analyze diatomic molecules. In the classical approach, such a system consists of:
+
+\begin{itemize}
+  \item 2 atoms with the same mass $m_{1}=m_{2}=m$
+  \item The two atoms are rotating with respect to the centre of mass
+  \item The centre of mass is translating in space
+\end{itemize}
+
+The classical Hamiltonian takes the form:
+
+\begin{equation}
+\mathcal{H}=\frac{\vec{P}^{2}}{2 M}+\frac{\vec{L}^{2}}{2 I}
+\end{equation}
+
+This separates the translational motion of the center of mass from the rotational motion around it.
+
+\[
+\begin{array}{r}
+\hat{u}(\phi, \theta)=(\cos \phi \sin \theta, \sin \theta \sin \phi, \cos \theta)  \\
+\vec{r}_{i}=r_{i} \hat{u}(\phi, \theta)
+\end{array}
+\]
+
+The unit vector $\hat{u}$ specifies the orientation of the molecular axis in spherical coordinates.
+
+\begin{equation}
+\frac{\mathrm{d} \hat{u}}{\, \mathrm{d} t}=\dot{\phi} \sin \theta(-\sin \phi, \cos \phi, 0)+\dot{\theta}(\cos \phi \cos \theta, \sin \phi \cos \theta,-\sin \theta)
+\end{equation}
+
+The time derivative of this unit vector captures the rotational motion of the molecule.
+
+\begin{equation}
+E_{R}=\frac{1}{2} m \sum_{i} \vec{v}_{i}^{2}=\frac{1}{2} m \sum_{i}\left[\frac{\mathrm{d}}{\, \mathrm{d} t}\left(r_{i} \hat{u}\right)\right]^{2}
+\end{equation}
+
+The rotational kinetic energy depends on the velocities of both atoms relative to the center of mass.
+
+\begin{equation}
+E=\frac{1}{2} m \sum_{i}\left[\frac{\, \mathrm{d}}{\, \mathrm{d} t}\left(r_{i} \hat{u}\right)\right]^{2}=\frac{1}{2} m \sum_{i} r_{i}^{2}\left(\frac{\, \mathrm{d} \hat{u}}{\, \mathrm{d} t}\right)^{2}
+\end{equation}
+
+For a rigid molecule (no vibrations), the interatomic distances remain constant, simplifying the rotational energy expression.
+
+The derivative term is thus:
+
+\begin{align}
+\left(\frac{\mathrm{d} \hat{u}}{\, \mathrm{d} t}\right)^{2} & =\dot{\phi}^{2} \sin ^{2} \theta \underbrace{(-\sin \phi, \cos \phi, 0) \cdot(-\sin \phi, \cos \phi, 0)}_{=1}+ \\
+& +\dot{\theta}^{2} \underbrace{(\cos \phi \cos \theta, \sin \phi \cos \theta,-\sin \theta) \cdot(\cos \phi \cos \theta, \sin \phi \cos \theta,-\sin \theta)}_{=1}+ \\
+& +2 \dot{\theta} \dot{\phi} \underbrace{(-\sin \phi, \cos \phi, 0) \cdot(\cos \phi \cos \theta, \sin \phi \cos \theta,-\sin \theta)}_{=0}= \\
+& =\dot{\phi}^{2} \sin ^{2} \theta+\dot{\theta}^{2}
+\end{align}
+
+Expanding the squared derivative reveals the rotational kinetic energy's dependence on the angular velocities in spherical coordinates.
+
+\begin{equation}
+E_{R}=m r^{2}\left(\dot{\phi}^{2} \sin ^{2} \theta+\dot{\theta}^{2}\right)=\frac{I}{2}\left(\dot{\phi}^{2} \sin ^{2} \theta+\dot{\theta}^{2}\right)
+\end{equation}
+
+For identical atoms at equal distances, the moment of inertia $I=2mr^2$ simplifies the rotational energy expression.
+
+\begin{equation}
+\vec{L}=\sum_{i} \vec{r}_{i} \wedge m \vec{v}_{i}=m \sum_{i} r_{i}^{2} \hat{u} \wedge \frac{\mathrm{d} \hat{u}}{\, \mathrm{d} t}=2 m r^{2} \hat{u} \wedge \frac{\mathrm{d} \hat{u}}{\, \mathrm{d} t}=I \hat{u} \wedge \frac{\mathrm{d} \hat{u}}{\, \mathrm{d} t}
+\end{equation}
+
+The angular momentum vector emerges naturally from the cross product of position and velocity vectors.
+
+\begin{equation}
+\vec{L}^{2}=I^{2}\left(\hat{u} \wedge \frac{\, \mathrm{d} \hat{u}}{\, \mathrm{d} t}\right) \cdot\left(\hat{u} \wedge \frac{\, \mathrm{d} \hat{u}}{\, \mathrm{d} t}\right)
+\end{equation}
+
+The square of angular momentum determines the rotational energy of the molecule.
+
+\begin{equation}
+\vec{L}^{2}=I^{2}\left[\frac{\, \mathrm{d} \hat{u}}{\, \mathrm{d} t} \wedge\left(\hat{u} \wedge \frac{\, \mathrm{d} \hat{u}}{\, \mathrm{d} t}\right)\right] \cdot \hat{u}=I^{2}\left(\frac{\, \mathrm{d} \hat{u}}{\, \mathrm{d} t}\right)^{2}
+\end{equation}
+
+Through vector identities, we establish the relationship between angular momentum and the angular velocity terms.
+
+\begin{equation}
+E_{R}=\frac{\vec{L}^{2}}{2 I}
+\end{equation}
+
+This elegant expression connects the rotational energy directly to the angular momentum and moment of inertia.
+
+\begin{equation}
+\mathcal{H}=\frac{\vec{P}^{2}}{2 M}+\frac{\vec{L}^{2}}{2 I}
+\end{equation}
+
+The complete classical Hamiltonian combines translational and rotational contributions.
+
+\begin{equation}
+H=\frac{P^{2}}{2 M}+\frac{L^{2}}{2 I}
+\end{equation}
+
+Transitioning to quantum mechanics involves replacing classical variables with corresponding operators while maintaining the same structural form.
+
+\begin{equation}
+\Psi=\Phi_{\vec{K}}(X) Y_{\ell, m}(\varphi, \theta)
+\end{equation}
+
+The separability of the Hamiltonian allows us to factorize the wavefunction into translational and rotational components.
+
+\begin{equation}
+H \Psi=Y_{\ell, m}(\varphi, \theta) \frac{P^{2}}{2 M} \Phi_{\vec{K}}(X)+\Phi_{\vec{K}}(X) \frac{L^{2}}{2 I} Y_{\ell, m}(\varphi, \theta)=\left(\frac{\hbar^{2} K^{2}}{2 M}+\frac{\hbar^{2} \ell(\ell+1)}{2 I}\right) \Psi
+\end{equation}
+
+Applying the Hamiltonian to our factorized wavefunction reveals the energy eigenvalues for the combined system.
+
+\begin{equation}
+E=\frac{\hbar^{2} K^{2}}{2 M}+\frac{\hbar^{2} \ell(\ell+1)}{2 I}
+\end{equation}
+
+The total energy consists of translational kinetic energy and quantized rotational energy levels characterized by the angular momentum quantum number $\ell$.
+
+From this equation we can notice two things:
+
+\begin{itemize}
+  \item The energy does not depend on $m$ (degenerate states)
+  \item $\vec{K}$ has continuous values, while $\ell$ has discrete values
+\end{itemize}
+
+These observations highlight key quantum mechanical features: the $(2\ell+1)$-fold degeneracy of rotational states and the discrete nature of angular momentum.
+
+\begin{equation}
+\Psi=\sum_{m=-\ell}^{\ell} c_{m} \Psi_{\vec{K}, \ell, m}=\Psi_{\vec{K}, \ell}
+\end{equation}
+
+Since energy is independent of $m$, the general solution is a superposition of all possible $m$ states for a given $\ell$.
+
+\begin{equation}
+H=\ldots+\gamma L_{3}
+\end{equation}
+
+Adding a term proportional to $L_3$ would break the rotational symmetry of the system.
+
+\begin{equation}
+\gamma L_{3} \Psi=\gamma \hbar m \Psi
+\end{equation}
+
+Such a term would split the energy levels according to the magnetic quantum number.
+
+\begin{equation}
+E=\frac{\hbar^{2} K^{2}}{2 M}+\frac{\hbar^{2} \ell(\ell+1)}{2 I}+\gamma \hbar m
+\end{equation}
+
+This energy expression describes Zeeman splitting, where degenerate levels separate in the presence of a magnetic field.
+
+\section{Hydrogen atom}
+\section{Problem formulation}
+The hydrogen atom represents one of the most fundamental quantum mechanical systems. Classically, it consists of an electron orbiting a positively charged nucleus:
+
+\begin{equation}
+\mathcal{H}=\frac{p^{2}}{2 m}+V(r)=\frac{p^{2}}{2 m}-\frac{Z e^{2}}{r^{2}}
+\end{equation}
+
+The Coulomb potential creates a central force problem with spherical symmetry.
+
+\begin{align}
+& \left\{\vec{L}_{3}, \mathcal{H}\right\}=0 \\
+& \left\{\vec{L}^{2}, \mathcal{H}\right\}=0
+\end{align}
+
+These Poisson brackets (which become commutators in quantum mechanics) indicate that both the angular momentum magnitude and its z-component are conserved quantities.
+
+\begin{equation}
+\mathcal{H}=\frac{\vec{L}^{2}}{2 m r^{2}}+\frac{\vec{p}_{r}^{2}}{2 m}+V(r)
+\end{equation}
+
+This reformulation of the Hamiltonian separates the radial and angular contributions to the energy.
+
+\begin{equation}
+\mathcal{H}=\frac{1}{2} m \sum_{i} \vec{v}_{i}^{2}=\frac{1}{2} m \vec{v}^{2}=\frac{1}{2} m\left(\frac{\, \mathrm{d} \vec{r}}{\, \mathrm{d} t}\right)^{2}
+\end{equation}
+
+Starting from the kinetic energy expression, we need to transform to spherical coordinates.
+
+\begin{equation}
+\frac{\, \mathrm{d} \vec{r}_{i}}{\, \mathrm{d} t}=\frac{\, \mathrm{d}}{\, \mathrm{d} t}(r \hat{u})=\dot{r} \hat{u}+r \dot{\hat{u}}
+\end{equation}
+
+Unlike the rigid diatomic molecule, the radial coordinate can now vary, adding a radial velocity component.
+
+\begin{align}
+\left(\frac{\, \mathrm{d} \vec{r}}{\, \mathrm{d} t}\right)^{2} & =(\dot{r} \hat{u}+r \dot{\hat{u}}) \cdot(\dot{r} \hat{u}+r \dot{\hat{u}})= \\
+& =\dot{r}^{2} \hat{u} \cdot \hat{u}+2 \dot{r} r \hat{u} \cdot \hat{\hat{u}}+r^{2} \dot{\hat{u}} \cdot \dot{\hat{u}}=  \\
+& =\dot{r}^{2}+r^{2}(\dot{\hat{u}})^{2}=\dot{r}^{2}+r^{2}\left(\dot{\theta}^{2}+\dot{\varphi}^{2} \sin ^{2} \varphi\right)
+\end{align}
+
+The velocity squared decomposes into radial and angular components in spherical coordinates.
+
+\begin{equation}
+\vec{L}^{2}=m^{2} r^{4}\left(\frac{\, \mathrm{d} \hat{u}}{\, \mathrm{d} t}\right)^{2}=m^{2} r^{4}\left(\dot{\theta}^{2}+\dot{\varphi}^{2} \sin ^{2} \varphi\right)
+\end{equation}
+
+The angular momentum squared relates directly to the angular velocity components.
+
+And so the total kinetic energy can be rewritten as:
+
+\begin{equation}
+T=\frac{1}{2 m} m^{2} \dot{r}^{2}+\frac{1}{2} \frac{m r^{2}}{m^{2} r^{4}} \underbrace{m^{2} r^{4}\left(\dot{\theta}^{2}+\dot{\varphi}^{2} \sin ^{2} \varphi\right)}_{\vec{L}^{2}}=\frac{m^{2} \dot{r}^{2}}{2 m}+\frac{\vec{L}^{2}}{2 m r^{2}}
+\end{equation}
+
+The kinetic energy separates into radial and angular components, with the angular part expressed in terms of angular momentum.
+
+\begin{equation}
+p_{r}=\frac{\partial \mathcal{L}}{\partial \dot{r}}
+\end{equation}
+
+To verify the radial momentum expression, we need to apply the principles of Lagrangian mechanics.
+
+\begin{equation}
+\mathcal{L}=T-V(r)
+\end{equation}
+
+The Lagrangian connects to the Hamiltonian through a Legendre transformation.
+
+\begin{equation}
+p_{r}=\frac{\partial \mathcal{L}}{\partial \dot{r}}=\frac{\partial T}{\partial \dot{r}}-\frac{\partial V(\not \supset)}{\partial \dot{r}}
+\end{equation}
+
+Since the potential energy is independent of velocity, it doesn't contribute to momentum.
+
+\begin{equation}
+\frac{\partial T}{\partial \dot{r}}=\frac{\partial}{\partial \dot{r}}\left(\frac{m^{2} \dot{r}^{2}}{2 m}+\frac{\vec{L}^{2}}{2 m r^{2}}\right)=\frac{2 m^{2} \dot{r}}{2 m}=m \dot{r}
+\end{equation}
+
+This confirms that $p_r = m\dot{r}$, consistent with our expectations for radial momentum.
+
+\begin{equation}
+\mathcal{H}=\frac{p_{r}^{2}}{2 m}+\frac{\vec{L}^{2}}{2 m r^{2}}+V(r)
+\end{equation}
+
+The classical Hamiltonian now has a form that clearly separates radial and angular contributions.
+
+\begin{equation}
+\left\{r, p_{r}\right\}=1
+\end{equation}
+
+The classical Poisson bracket relation between position and momentum variables.
+
+\begin{equation}
+\left[r, \hat{p}_{r}\right]=i \hbar
+\end{equation}
+
+In quantum mechanics, this becomes a commutation relation between operators.
+
+\begin{equation}
+\hat{p}_{r}=-i \hbar \frac{\partial}{\partial r}-\frac{i \hbar}{r}
+\end{equation}
+
+The radial momentum operator takes this specific form to ensure hermiticity in spherical coordinates.
+
+\begin{equation}
+\left(\phi, \hat{p}_{r} \varphi\right)^{*}=\left(\varphi, \hat{p}_{r} \phi\right)
+\end{equation}
+
+To verify hermiticity, we must prove this inner product relation.
+
+\begin{align}
+\left(\phi, \hat{p}_{r} \varphi\right) & =-i \hbar \int_{\mathbb{R}^{3}} \, \mathrm{d}^{3} x \phi^{*}\left(\frac{\partial \varphi}{\partial r}+\varphi \frac{1}{r}\right)=  \\
+& =-i \hbar \int_{\mathbb{R}^{3}} \, \mathrm{d}^{3} x \phi^{*} \frac{\partial \varphi}{\partial r}-i \hbar \int_{\mathbb{R}^{3}} \, \mathrm{d}^{3} x \phi^{*} \varphi \frac{1}{r}
+\end{align}
+
+Expanding the inner product in Cartesian coordinates.
+
+\begin{equation}
+-i \hbar \iint_{\mathbb{R}^{2}} \, \mathrm{d} \Omega \int_{0}^{\infty} \mathrm{d} r \phi^{*} \frac{\partial \varphi}{\partial r} r^{2}-i \hbar \iint_{\mathbb{R}^{2}} \, \mathrm{d} \Omega \int_{0}^{\infty} \mathrm{d} r \phi^{*} \varphi r
+\end{equation}
+
+Converting to spherical coordinates introduces volume elements appropriate for this geometry.
+
+\begin{equation}
+\frac{\partial}{\partial r}\left(\phi^{*} \varphi r\right)=\frac{\partial \phi^{*}}{\partial r} \varphi r+\phi^{*} \frac{\partial(\varphi r)}{\partial r}=\frac{\partial \phi^{*}}{\partial r} \varphi r+\phi^{*} \frac{\partial \varphi}{\partial r} r+\phi^{*} \varphi
+\end{equation}
+
+Using the product rule to manipulate terms in preparation for integration by parts.
+
+So:
+
+\begin{equation}
+\phi^{*} \frac{\partial \varphi}{\partial r} r+\phi^{*} \varphi=\frac{\partial}{\partial r}\left(\phi^{*} \varphi r\right)-\frac{\partial \phi^{*}}{\partial r} \varphi r
+\end{equation}
+
+Rearranging terms to prepare for integration by parts.
+
+\begin{equation}
+-i \hbar \iint_{\mathbb{R}^{2}} \, \mathrm{d} \Omega \int_{0}^{\infty} \mathrm{d} r \frac{\partial}{\partial r}\left(\phi^{*} \varphi r\right) r+i \hbar \iint_{\mathbb{R}^{2}} \, \mathrm{d} \Omega \int_{0}^{\infty} \mathrm{d} r \frac{\partial \phi^{*}}{\partial r} \varphi r^{2}
+\end{equation}
+
+Substituting the rearranged terms into the original integral.
+
+\begin{align}
+& -i \hbar \iint_{\mathbb{R}^{2}} \, \mathrm{d} \Omega \int_{0}^{\infty} \mathrm{d} r \frac{\partial}{\partial r}\left(\phi^{*} \varphi r\right) r \\
+& =\left.i \hbar \iint_{\mathbb{R}^{2}} \, \mathrm{d} \Omega \phi^{*} \varphi r^{2}\right|_{0} ^{\infty}+i \hbar \iint_{\mathbb{R}^{2}} \, \mathrm{d} \Omega \int_{0}^{\infty} \mathrm{d} r \phi^{*} \varphi r
+\end{align}
+
+Integrating by parts, with boundary terms that vanish due to the behavior of well-behaved wavefunctions.
+
+\begin{align}
+\left(\phi, \hat{p}_{r} \varphi\right) & =i \hbar \iint_{\mathbb{R}^{2}} \, \mathrm{d} \Omega \int_{0}^{\infty} \mathrm{d} r \phi^{*} \varphi r+i \hbar \iint_{\mathbb{R}^{2}} \, \mathrm{d} \Omega \int_{0}^{\infty} \mathrm{d} r \frac{\partial \phi^{*}}{\partial r} \varphi r^{2}=  \\
+& =i \hbar \int_{\mathbb{R}^{3}} \, \mathrm{d}^{3} x\left(\frac{\partial \phi^{*}}{\partial r}+\phi^{*} \frac{1}{r}\right) \varphi
+\end{align}
+
+Recombining terms and converting back to a volume integral.
+
+\begin{equation}
+\left(\phi, \hat{p}_{r} \varphi\right)^{*}=-i \hbar \int_{\mathbb{R}^{3}} \, \mathrm{d}^{3} x\left(\frac{\partial \phi}{\partial r}+\phi \frac{1}{r}\right) \varphi^{*}
+\end{equation}
+
+Taking the complex conjugate of the inner product.
+
+\begin{equation}
+\left(\phi, \hat{p}_{r} \varphi\right)^{*}=\left(\varphi, \hat{p}_{r} \phi\right)
+\end{equation}
+
+This confirms that the radial momentum operator is indeed Hermitian, validating our choice of operator form.
+
+\section{Schrödinger equation solution}
+Now we can evaluate the square of the radial momentum operator:
+
+\begin{align}
+\hat{p}_{r}^{2} \Psi & =-\hbar^{2}\left(\frac{\partial}{\partial r}+\frac{1}{r}\right)\left(\frac{\partial \Psi}{\partial r}+\frac{\Psi}{r}\right)= \\
+& =-\hbar^{2}\left(\frac{\partial^{2} \Psi}{\partial r^{2}}+\frac{1}{r} \frac{\partial \Psi}{\partial r}-\frac{\Psi}{\not r^{2}}+\frac{1}{r} \frac{\partial \Psi}{\partial r}+\frac{\Psi}{\not r^{2}}\right)=  \\
+& =-\hbar^{2}\left(\frac{\partial^{2} \Psi}{\partial r^{2}}+\frac{2}{r} \frac{\partial \Psi}{\partial r}\right)
+\end{align}
+
+The cancellation of terms leads to a simpler form than might initially be expected.
+
+\begin{equation}
+\hat{p}_{r}^{2}=-\hbar^{2}\left(\frac{\partial^{2}}{\partial r^{2}}+\frac{2}{r} \frac{\partial}{\partial r}\right)
+\end{equation}
+
+This is the radial part of the Laplacian operator in spherical coordinates.
+
+\begin{equation}
+H=-\frac{\hbar^{2}}{2 m}\left(\frac{\partial^{2}}{\partial r^{2}}+\frac{2}{r} \frac{\partial}{\partial r}\right)+\frac{L^{2}}{2 m r^{2}}+V(r)
+\end{equation}
+
+The complete Hamiltonian combines the radial kinetic energy, angular momentum contribution, and potential energy.
+
+\begin{equation}
+\Psi=R(r) Y_{\ell, m}(\varphi, \theta)
+\end{equation}
+
+The separation of variables approach allows us to focus on solving for the radial function.
+
+\begin{align}
+& {\left[-\frac{\hbar^{2}}{2 m}\left(\frac{\partial^{2}}{\partial r^{2}}+\frac{2}{r} \frac{\partial}{\partial r}\right)+\frac{L^{2}}{2 m r^{2}}+V\right] R Y_{\ell, m}=} \\
+& =\left[-Y_{\ell, m} \frac{\hbar^{2}}{2 m}\left(\frac{\partial^{2}}{\partial r^{2}}+\frac{2}{r} \frac{\partial}{\partial r}\right) R+R \frac{L^{2}}{2 m r^{2}} Y_{\ell, m}+V R Y_{\ell, m}\right]=  \\
+& =\left[-Y_{\ell, m} \frac{\hbar^{2}}{2 m}\left(\frac{\partial^{2} R}{\partial r^{2}}+\frac{2}{r} \frac{\partial R}{\partial r}\right)+R Y_{\ell, m} \frac{\hbar^{2} \ell(\ell+1)}{2 m r^{2}}+V R Y_{\ell, m}\right]
+\end{align}
+
+This must be equal to:
+
+\begin{equation}
+Y_{\ell, m}\left[-\frac{\hbar^{2}}{2 m}\left(\frac{\partial^{2} R}{\partial r^{2}}+\frac{2}{r} \frac{\partial R}{\partial r}\right)+R \frac{\hbar^{2} \ell(\ell+1)}{2 m r^{2}}+V R\right]=E R Y_{\ell, m}
+\end{equation}
+
+Setting this equal to the energy eigenvalue equation.
+
+\begin{equation}
+-\frac{\hbar^{2}}{2 m}\left(\frac{\partial^{2} R}{\partial r^{2}}+\frac{2}{r} \frac{\partial R}{\partial r}\right)+R \frac{\hbar^{2} \ell(\ell+1)}{2 m r^{2}}+V R=E R
+\end{equation}
+
+The resulting radial differential equation contains the centrifugal potential term that depends on angular momentum.
+
+\begin{align}
+R(r) & =\frac{u(r)}{r} \\
+\frac{\partial R}{\partial r} & =\frac{\partial}{\partial r}\left(\frac{u}{r}\right)=\frac{1}{r} \frac{\partial u}{\partial r}-\frac{u}{r^{2}} \\
+\frac{\partial^{2} R}{\partial r^{2}} & =\frac{\partial}{\partial r}\left(\frac{1}{r} \frac{\partial u}{\partial r}-\frac{u}{r^{2}}\right)  \\
+& =\frac{1}{r} \frac{\partial^{2} u}{\partial r^{2}}-\frac{1}{r^{2}} \frac{\partial u}{\partial r}-\frac{1}{r^{2}} \frac{\partial u}{\partial r}+\frac{2 u}{r^{3}}= \\
+& =\frac{1}{r} \frac{\partial^{2} u}{\partial r^{2}}-\frac{2}{r^{2}} \frac{\partial u}{\partial r}+\frac{2 u}{r^{3}}
+\end{align}
+
+The substitution $R(r) = u(r)/r$ simplifies the differential equation by eliminating the first derivative term.
+
+\begin{align}
+\frac{\partial^{2} R}{\partial r^{2}}+\frac{2}{r} \frac{\partial R}{\partial r} & =\frac{1}{r} \frac{\partial^{2} u}{\partial r^{2}}-\frac{2}{r^{2}} \frac{\partial u}{\partial r}+\frac{2 u}{r^{3}}+\frac{2}{r}\left(\frac{1}{r} \frac{\partial u}{\partial r}-\frac{u}{r^{2}}\right)= \\
+& =\frac{1}{r} \frac{\partial^{2} u}{\partial r^{2}}-\frac{2}{y^{2}} \frac{\partial u}{\partial r}+\frac{2 u}{\not r^{3}}+\frac{2}{y^{2}} \frac{\partial u}{\partial r}-\frac{2 u}{\not r^{3}}=  \\
+& =\frac{1}{r} \frac{\partial^{2} u}{\partial r^{2}}
+\end{align}
+
+The terms cancel elegantly, resulting in a much simpler form of the radial equation.
+
+\begin{align}
+- & \frac{1}{r} \frac{\hbar^{2}}{2 m} \frac{\partial^{2} u}{\partial r^{2}}+\frac{\hbar^{2} \ell(\ell+1)}{2 m r^{2}} \frac{u}{r}+V \frac{u}{r}=E \frac{u}{r}  \\
+- & \frac{\hbar^{2}}{2 m} \frac{\partial^{2} u}{\partial r^{2}}+\frac{\hbar^{2} \ell(\ell+1)}{2 m r^{2}} u+V u=E u
+\end{align}
+
+The transformed equation resembles a one-dimensional Schrödinger equation with an effective potential that includes the centrifugal term.
+
+\begin{equation}
+\int \mathrm{d}^{3} x|\Psi|^{2}=1
+\end{equation}
+
+The normalization condition constrains the acceptable solutions.
+
+\begin{align}
+\underbrace{\iint_{4 \pi} \, \mathrm{d} \Omega\left|Y_{\ell, m}\right|^{2}}_{=1} \int_{0}^{+\infty} \mathrm{d} r |u|^{2} = \int_{0}^{+\infty} \mathrm{d} r|u|^{2}
+\end{align}
+
+The normalization condition for the radial function simplifies due to the orthonormality of spherical harmonics.
+
+\begin{equation}
+u(r) \sim \frac{1}{r^{\varepsilon+1 / 2}} \quad \text { for } \varepsilon>0
+\end{equation}
+
+The asymptotic behavior at large distances ensures normalizability.
+
+\begin{equation}
+-r^{2} \frac{\hbar^{2}}{2 m} \frac{\partial^{2} u}{\partial r^{2}}+\frac{\hbar^{2} \ell(\ell+1)}{2 m} u+r^{2}(V-E) u=0
+\end{equation}
+
+Examining the behavior near the origin by multiplying by $r^2$.
+
+\begin{equation}
+\frac{\hbar^{2}}{2 m} \frac{\partial^{2} u}{\partial r^{2}}=\frac{\hbar^{2} \ell(\ell+1)}{2 m r^{2}} u
+\end{equation}
+
+As $r \to 0$, the centrifugal term dominates the behavior of the solution.
+
+\begin{equation}
+\frac{\hbar^{2}}{2 m} \alpha(\alpha-1) r^{\alpha-2}=\frac{\hbar^{2} \ell(\ell+1)}{2 m} r^{\alpha-2}
+\end{equation}
+
+Assuming a power law solution near the origin reveals the characteristic exponent.
+
+\begin{equation}
+\alpha(\alpha-1)=\ell(\ell+1)
+\end{equation}
+
+This quadratic equation determines the behavior of the wavefunction near the origin.
+
+So either $\alpha=-\ell$ or $\alpha=\ell+1$, but we have:
+
+\begin{equation}
+u(r)=A r^{\ell+1}+\frac{B}{r^{\ell}} \rightarrow A r^{\ell+1}
+\end{equation}
+
+Near the origin, we select only the solution that remains finite ($\alpha=\ell+1$), rejecting the divergent solution ($\alpha=-\ell$).
+
+\begin{equation}
+-\frac{\hbar^{2}}{2 m} \frac{\partial^{2} u}{\partial r^{2}}=E u
+\end{equation}
+
+At large distances, the potential becomes negligible, and the equation approaches that of a free particle with negative energy.
+
+\begin{equation}
+u(r)=D \mathrm{e}^{k r}+C \mathrm{e}^{-k r} \rightarrow C \mathrm{e}^{-k r}
+\end{equation}
+
+For normalizability, we must select the decaying exponential solution, rejecting the growing one.
+
+\begin{equation}
+E=-\frac{\hbar^{2} k^{2}}{2 m} \Longrightarrow k=\sqrt{\frac{2 m|E|}{\hbar^{2}}}
+\end{equation}
+
+The negative energy indicates bound states, consistent with the physical expectation for the hydrogen atom.
+
+\begin{equation}
+-\frac{\hbar^{2}}{2 m} \frac{\partial^{2} u}{\partial r^{2}}+\frac{\hbar^{2} \ell(\ell+1)}{2 m r^{2}} u-\frac{Z e^{2}}{r} u=E u
+\end{equation}
+
+The complete radial equation with the Coulomb potential explicitly included.
+
+\begin{equation}
+\frac{\partial^{2} u}{\partial r^{2}}-\frac{\ell(\ell+1)}{r^{2}} u+\frac{2 m Z e^{2}}{\hbar^{2} r} u=-\frac{2 m E}{\hbar^{2}} u
+\end{equation}
+
+Rearranging to isolate the second derivative term.
+
+\begin{align}
+\frac{1}{r_{0}^{2}} \frac{\partial^{2} u}{\partial x^{2}}-\frac{\ell(\ell+1)}{r_{0}^{2} x^{2}} u+\frac{2 m Z e^{2}}{\hbar^{2} r_{0} x} u & =\frac{2 m|E|}{\hbar^{2}} u \\
+\frac{1}{r_{0}^{2}}\left[\frac{\partial^{2} u}{\partial x^{2}}-\frac{\ell(\ell+1)}{x^{2}} u+\frac{2 m Z e^{2} r_{0}}{\hbar^{2} x} u\right] & =\frac{2 m|E|}{\hbar^{2}} u
+\end{align}
+
+Introducing the dimensionless variable $x = r/r_0$ simplifies the equation.
+
+\begin{align}
+& r_{0}=\sqrt{\frac{\hbar^{2}}{2 m|E|}}=\frac{1}{k}  \\
+& x_{0}=\frac{2 m Z e^{2} r_{0}}{\hbar^{2}}
+\end{align}
+
+Defining characteristic length scales for the problem.
+
+\begin{equation}
+\left[\frac{\partial^{2}}{\partial x^{2}}-\frac{\ell(\ell+1)}{x^{2}}+\frac{x_{0}}{x}-1\right] u=0 \label{eq:9.52}
+\end{equation}
+
+The dimensionless form of the radial equation.
+
+\begin{equation}
+u\left(r_{0} x\right)=x^{\ell+1} \mathrm{e}^{-x} W(x)
+\end{equation}
+
+Proposing a solution form that satisfies both boundary conditions through the factor $W(x)$.
+
+\begin{align}
+\frac{\partial u}{\partial x} & =(\ell+1) x^{\ell} \mathrm{e}^{-x} W-x^{\ell+1} \mathrm{e}^{-x} W+x^{\ell+1} \mathrm{e}^{-x} \frac{\partial W}{\partial x} \\
+\frac{\partial^{2} u}{\partial x^{2}} & =\frac{\partial}{\partial x}\left((\ell+1) x^{\ell} \mathrm{e}^{-x} W-x^{\ell+1} \mathrm{e}^{-x} W+x^{\ell+1} \mathrm{e}^{-x} \frac{\partial W}{\partial x}\right)= \\
+& =\ell(\ell+1) x^{\ell-1} \mathrm{e}^{-x} W-(\ell+1) x^{\ell} \mathrm{e}^{-x} W+(\ell+1) x^{\ell} \mathrm{e}^{-x} \frac{\partial W}{\partial x}-(\ell+1) x^{\ell} \mathrm{e}^{-x} W+ \\
+& +x^{\ell+1} \mathrm{e}^{-x} W-x^{\ell+1} \mathrm{e}^{-x} \frac{\partial W}{\partial x}+(\ell+1) x^{\ell} \mathrm{e}^{-x} \frac{\partial W}{\partial x}-x^{\ell+1} \mathrm{e}^{-x} \frac{\partial W}{\partial x}+x^{\ell+1} \mathrm{e}^{-x} \frac{\partial^{2} W}{\partial x^{2}}= \\
+& =\left(\frac{\ell(\ell+1)}{x^{2}}-\frac{2(\ell+1)}{x}+1\right) x^{\ell+1} \mathrm{e}^{-x} W+2\left(\frac{\ell+1}{x}-1\right) x^{\ell+1} \mathrm{e}^{-x} \frac{\partial W}{\partial x}+x^{\ell+1} \mathrm{e}^{-x} \frac{\partial^{2} W}{\partial x^{2}}
+\end{align}
+
+Calculating the derivatives needed to substitute into the differential equation.
+
+And so \eqref{eq:9.52} becomes:
+
+\begin{align}
+& \left(\frac{\ell(\ell+1)}{x^{2}}-\frac{2(\ell+1)}{x}+1\right) x^{\ell+1} e^{-x} W+2\left(\frac{\ell+1}{x}-1\right) x^{\ell+1} e^{-x} \frac{\partial W}{\partial x}+x^{\ell+1} e^{-x} \frac{\partial^{2} W}{\partial x^{2}}- \\
+& -\frac{\ell(\ell+1)}{x^{2}} x^{\ell+1} e^{-x} W+\frac{x_{0}}{x} x^{\ell+1} e^{-x} W-x^{\ell+1} e^{-x} W=0 \\
+& \left.\left(\frac{\ell(\ell+1)}{x^{2}}-\frac{2(\ell+1)}{x}+\not\right)\right) W+2\left(\frac{\ell+1}{x}-1\right) \frac{\partial W}{\partial x}+\frac{\partial^{2} W}{\partial x^{2}}- \\
+& -\frac{\ell(\ell+1)}{x^{2}} W(x)+\frac{x_{0}}{x} W- W = 0 \\
+& -\frac{2(\ell+1)}{x} W+2\left(\frac{\ell+1}{x}-1\right) \frac{\partial W}{\partial x}+\frac{\partial^{2} W}{\partial x^{2}}+\frac{x_{0}}{x} W=0 \\
+& 2(\ell+1-x) \frac{\partial W}{\partial x}+x \frac{\partial^{2} W}{\partial x^{2}}+\left(x_{0}-2(\ell+1)\right) W=0
+\end{align}
+
+Substituting the trial solution and simplifying by canceling common factors.
+
+\begin{equation}
+x \frac{\partial^{2} W}{\partial x^{2}}+2(\ell+1-x) \frac{\partial W}{\partial x}+\left(x_{0}-2(\ell+1)\right) W=0
+\end{equation}
+
+This is the associated Laguerre differential equation, a well-known equation in mathematical physics.
+
+\begin{equation}
+W=\sum_{k=0}^{\infty} a_{k} x^{k}
+\end{equation}
+
+Attempting a power series solution to find the allowed energy values.
+
+\begin{align}
+\frac{\partial W}{\partial x} & =\sum_{k=0}^{\infty} k a_{k} x^{k-1} \\
+x \frac{\partial^{2} W}{\partial x^{2}} & =x \sum_{k=0}^{\infty} k(k-1) a_{k} x^{k-2}=\sum_{k=0}^{\infty} k(k-1) a_{k} x^{k-1}
+\end{align}
+
+Computing the derivatives of the power series.
+
+\begin{equation}
+\sum_{k=0}^{\infty} a_{k}\left[k(k-1) x^{k-1}+2(\ell+1) k x^{k-1}-2 k x^{k}+\left(x_{0}-2(\ell+1)\right) x^{k}\right]=0
+\end{equation}
+
+Substituting into the differential equation and collecting terms.
+
+\begin{align}
+& \sum_{k=0}^{\infty} a_{k}[k(k-1)+2(\ell+1) k] x^{k-1}+\sum_{k=0}^{\infty} a_{k}\left(x_{0}-2(\ell+1)-2 k\right) x^{k} \\
+& \sum_{k=0}^{\infty} a_{k+1}[k(k+1)+2(\ell+1)(k+1)] x^{k}+\sum_{k=0}^{\infty} a_{k}\left(x_{0}-2(\ell+1)-2 k\right) x^{k}
+\end{align}
+
+Shifting indices to match powers of x.
+
+\begin{align}
+& a_{k+1}[k(k+1)+2(\ell+1)(k+1)]+a_{k}\left(x_{0}-2(\ell+1)-2 k\right)=0 \\
+& a_{k+1}=-\frac{x_{0}-2(\ell+1)-2 k}{k(k+1)+2(\ell+1)(k+1)} a_{k}  \\
+& a_{k+1}=-\frac{x_{0}-2(\ell+1+k)}{(k+1)(k+2 l+2)} a_{k}
+\end{align}
+
+The recurrence relation between successive coefficients in the power series.
+
+\begin{align}
+& a_{N+2}=(\ldots) a_{N+1}=0 \\
+& a_{N+3}=(\ldots) a_{N+2}=0  \\
+& \ldots
+\end{align}
+
+For physical solutions, the series must terminate, creating a polynomial.
+
+\begin{equation}
+a_{N+1}=0 \Longrightarrow-\frac{x_{0}-2(\ell+1+N)}{(k+1)(k+2 l+2)} a_{N}=0 \Longrightarrow x_{0}=2(\ell+1+N)
+\end{equation}
+
+The condition for the series to terminate yields a quantization condition.
+
+\begin{equation}
+\frac{2 m Z e^{2} r_{0}}{\hbar^{2}}=2 n
+\end{equation}
+
+Substituting the definition of $x_0$ and introducing the principal quantum number $n = \ell+1+N$.
+
+\begin{align}
+& \frac{Z e^{2}}{\hbar} \sqrt{\frac{2 m}{|E|}}=2 n \\
+& \frac{Z^{2} e^{4}}{\hbar^{2}} \frac{2 m}{|E|}=4 n^{2}  \\
+& |E|=\frac{m Z^{2} e^{4}}{2 n^{2} \hbar^{2}}
+\end{align}
+
+This is the famous Bohr formula for the energy levels of the hydrogen atom, derived through quantum mechanics.
+
+The number $n$ is the principal quantum number and is an integer. Since the energy depends on $n$ we call it $E_{n}$. Also remember that we used the absolute value but $E_{n}$ is negative so:
+
+\begin{equation}
+E_{n}=-\frac{m Z^{2} e^{4}}{2 n^{2} \hbar^{2}}
+\end{equation}
+
+This negative energy formula matches the Bohr model results but is derived rigorously from quantum mechanics.
+
+\begin{equation}
+N=n-\ell-1 \geq 0 \Longrightarrow \ell \leq n-1
+\end{equation}
+
+This constraint establishes the allowed values of angular momentum for a given principal quantum number.
+
+\begin{equation}
+\Psi=R_{n}(r) Y_{\ell, m}=\Psi_{n \ell m}
+\end{equation}
+
+The complete wavefunction depends on all three quantum numbers, which determine its spatial properties.
+
+\begin{itemize}
+  \item 2 quantum numbers associated to the Legendre polynomials
+  \item 1 quantum number associated with the Laguerre polynomials
+\end{itemize}
+
+The three quantum numbers arise naturally from the separation of variables in spherical coordinates.
+
+\begin{align}
+& n=0,1,2, \ldots \\
+& \ell=0,1,2, \ldots, n-1  \\
+& m=-\ell, \ldots, 0, \ldots, \ell
+\end{align}
+
+These are the ranges for the quantum numbers that characterize the hydrogen atom states.
+
+\begin{equation}
+\sum_{\ell=0}^{n-1}(2 l+1)=2 \sum_{\ell=0}^{n-1} \ell+\sum_{\ell=0}^{n-1} 1=2 \frac{n(n-1)}{2}+n=n^{2}
+\end{equation}
+
+The degeneracy of the energy level $E_n$ is $n^2$, accounting for all possible angular momentum states.
+
+\begin{align}
+& 4 x \frac{\partial^{2} W}{\partial(2 x)^{2}}+4(\ell+1-x) \frac{\partial W}{\partial 2 x}+2 N W=0 \\
+& 2 y \frac{\partial^{2} W}{\partial y^{2}}+4\left(\ell+1-\frac{y}{2}\right) \frac{\partial W}{\partial y}+2 N W=0  \\
+& y \frac{\partial^{2} W}{\partial y^{2}}+2\left(\ell+1-\frac{y}{2}\right) \frac{\partial W}{\partial y}+N W=0 \\
+& y \frac{\partial^{2} W}{\partial y^{2}}+(s+1-y) \frac{\partial W}{\partial y}+N W=0
+\end{align}
+
+Transforming the differential equation into the standard form for associated Laguerre polynomials.
+
+\begin{equation}
+W(y)=L_{N}^{s}(y)
+\end{equation}
+
+The solution is expressed in terms of associated Laguerre polynomials.
+
+\begin{equation}
+L_{N}^{s}(y)=\sum_{k=0}^{N} \frac{(-1)^{k}(N+s)!}{k!(k+s)!(N-k)!} y^{k}
+\end{equation}
+
+The explicit form of the associated Laguerre polynomials as a finite series.
+
+\begin{equation}
+L_{N}^{s}(y)=(-1)^{s} \frac{\, \mathrm{d}^{s}}{\, \mathrm{d} y^{s}} L_{N+s} \quad \text { with } \quad L_{r}=\mathrm{e}^{y} \frac{\, \mathrm{d}^{r}}{\, \mathrm{d} y^{r}} \mathrm{e}^{-y} y^{r}
+\end{equation}
+
+An alternative definition relating associated Laguerre polynomials to derivatives of standard Laguerre polynomials.
+
+\section{Properties of the Laguerre polynomials}
+\section{Property 1.}
+
+\begin{equation}
+L_{N}^{s}(y)=(-1)^{s} \frac{\, \mathrm{d}^{s}}{\, \mathrm{d} y^{s}} L_{N+s} \quad \text { with } \quad L_{r}=\mathrm{e}^{y} \frac{\, \mathrm{d}^{r}}{\, \mathrm{d} y^{r}} \mathrm{e}^{-y} y^{r}
+\end{equation}
+
+This property connects associated Laguerre polynomials to derivatives of standard Laguerre polynomials.
+
+Property 2. Recursive formula:
+
+\begin{equation}
+(N+1) L_{N+1}^{s}(y)-(2 N+s+1-y) L_{N}^{s}(y)+(N+s) L_{N-1}^{s}(y)=0
+\end{equation}
+
+The recurrence relation allows efficient computation of higher-order polynomials from lower ones.
+
+\section{Property 3.}
+
+\begin{equation}
+\int_{0}^{+\infty} \mathrm{d} y \mathrm{e}^{-y} y^{s} L_{r}^{s} L_{q}^{s}=\delta_{r q} \frac{(r+s)!}{r!}
+\end{equation}
+
+The orthogonality relation for associated Laguerre polynomials with respect to the weight function $e^{-y}y^s$.
+
+\section{Property 4.}
+
+\begin{equation}
+\int_{0}^{+\infty} \mathrm{d} y \mathrm{e}^{-y} y^{s+1}\left(L_{N}^{s}\right)^{2}=(2 N+s+1) \frac{(N+s)!}{N!}
+\end{equation}
+
+A specific weighted integral of squared associated Laguerre polynomials.
+
+\begin{equation}
+\Psi_{n \ell m}=D_{n \ell} Y_{l m}\left(2 k_{n} r\right)^{\ell} \mathrm{e}^{-k_{n} r} L_{n-\ell-1}^{2 l+1}\left(2 k_{n} r\right)
+\end{equation}
+
+The complete hydrogen atom wavefunction with normalization constant $D_{n\ell}$.
+
+\begin{align}
+& \left(\Psi_{n \ell m}, \Psi_{n^{\prime} \ell^{\prime} m^{\prime}}\right)=\underbrace{\iint_{4 \pi} \, \mathrm{d} \Omega Y_{l m}^{*} Y_{\ell^{\prime} m^{\prime}}}_{\delta_{l l^{\prime}} \delta_{m m^{\prime}}} \\
+& \int_{0}^{+\infty} \mathrm{d} r r^{2} D_{n l}^{*} D_{n^{\prime} \ell^{\prime}}\left(2 k_{n} r\right)^{\ell}\left(2 k_{n^{\prime}} r\right)^{\ell^{\prime}} \mathrm{e}^{-k_{n} r} \mathrm{e}^{-k_{n^{\prime}} r} L_{n-\ell-1}^{2 l+1}\left(2 k_{n} r\right) L_{n^{\prime}-\ell^{\prime}-1}^{2 l^{\prime}+1}\left(2 k_{n^{\prime}} r\right)
+\end{align}
+
+Computing the inner product between two hydrogen atom wavefunctions.
+
+\begin{align}
+\left(\Psi_{n \ell m}, \Psi_{n^{\prime} \ell^{\prime} m^{\prime}}\right) & =\int_{0}^{+\infty} \mathrm{d} r r^{2} D_{n l}^{*} D_{n^{\prime} \ell}\left(2 k_{n} r\right)^{\ell}\left(2 k_{n^{\prime}} r\right)^{\ell} \mathrm{e}^{-k_{n} r} \mathrm{e}^{-k_{n^{\prime}} r}\left[L_{n-\ell-1}^{2 l+1}\left(2 k_{n} r\right)\right]\left[L_{n^{\prime}-\ell-1}^{2 l+1}\left(2 k_{n^{\prime}} r\right)\right]= \\
+& =\int_{0}^{+\infty} \mathrm{d} r D_{n l}^{*} D_{n^{\prime} \ell}\left(2 k_{n}\right)^{\ell}\left(2 k_{n}\right)^{\ell^{\prime}} r^{(2 l+1)+1} \mathrm{e}^{-r\left(k_{n}+k_{n^{\prime}}\right)}\left[L_{n-\ell-1}^{2 l+1}\left(2 k_{n} r\right)\right]\left[L_{n^{\prime}-\ell-1}^{2 l+1}\left(2 k_{n^{\prime}} r\right)\right]=
+\end{align}
+
+Due to orthogonality of spherical harmonics, the integral is non-zero only when $\ell=\ell'$ and $m=m'$.
+
+\begin{align}
+& \int_{0}^{+\infty} \mathrm{d}\left(2 k_{n} r\right)\left|D_{n \ell}\right|^{2}\left(2 k_{n}\right)^{2 l-1} r^{(2 l+1)+1} \mathrm{e}^{-2 r k_{n}}\left[L_{n-\ell-1}^{2 l+1}\left(2 k_{n} r\right)\right]^{2}= \\
+& =\int_{0}^{+\infty} \mathrm{d}\left(2 k_{n} r\right)\left|D_{n \ell}\right|^{2}\left(2 k_{n}\right)^{-3}\left(2 k_{n} r\right)^{(2 l+1)+1} \mathrm{e}^{-2 r k_{n}}\left[L_{n-\ell-1}^{2 l+1}\left(2 k_{n} r\right)\right]^{2}
+\end{align}
+
+For the case where $n=n'$, the integral simplifies and can be evaluated using Property 4.
+
+\begin{align}
+& \frac{\left|D_{n \ell}\right|^{2}}{\left(2 k_{n}\right)^{3}}(2(n-\ell-1)+2 l+1+1) \frac{(n-\ell-1+2 l+1)!}{(n-\ell-1)!}=  \\
+& =\frac{\left|D_{n \ell}\right|^{2} 2 n}{\left(2 k_{n}\right)^{3}} \frac{(n+\ell)!}{(n-\ell-1)!}
+\end{align}
+
+Applying Property 4 and simplifying the expression.
+
+\begin{equation}
+D_{n \ell}=\sqrt{\frac{\left(2 k_{n}\right)^{3}(n-\ell-1)!}{2 n(n+\ell)!}}
+\end{equation}
+
+The normalization constant determined to ensure that the wavefunction has unit norm.
+
+\section{Energy spectrum}
+The energy of a Hydrogen atom $E_{n}$ can be written in terms of a quantity called the Bohr radius $a$ :
+
+\begin{equation}
+a=\frac{\hbar^{2}}{m_{e} e^{2}} \approx 0.529 \times 10^{-10} \, \mathrm{m}
+\end{equation}
+
+The Bohr radius represents the most probable distance of the electron from the nucleus in the ground state.
+
+\begin{equation}
+E_{n}=-\frac{m_{e} Z^{2} e^{4}}{2 \hbar^{2} n^{2}}=-\frac{(Z e)^{2}}{2 a n^{2}}
+\end{equation}
+
+The energy levels expressed in terms of the Bohr radius.
+
+\begin{equation}
+\alpha=\frac{r^{2}}{\hbar c}=\frac{1}{137}
+\end{equation}
+
+The fine structure constant, a fundamental physical constant that characterizes the strength of the electromagnetic interaction.
+
+Which gives:
+
+\begin{equation}
+E_{n}=-\frac{m_{e} c^{2}}{2} \alpha^{2} \frac{Z^{2}}{n^{2}}
+\end{equation}
+
+The energy levels expressed in terms of the fine structure constant and the rest energy of the electron.
+
+\begin{equation}
+\left|E_{n}-E_{m}\right|=\hbar \omega=\frac{h c}{\lambda}
+\end{equation}
+
+When an electron transitions between energy levels, the energy difference corresponds to the energy of an absorbed or emitted photon.
+
+\begin{equation}
+E_{1}=-\frac{m_{e} Z^{2} e^{4}}{2 \hbar^{2}}
+\end{equation}
+
+The ground state energy of the hydrogen atom.
+
+\begin{equation}
+E_{n}=\frac{E_{1}}{n^{2}}
+\end{equation}
+
+All energy levels can be expressed in terms of the ground state energy.
+
+\begin{equation}
+\left|E_{n}-E_{m}\right|=\left|\frac{E_{1}}{n^{2}}-\frac{E_{1}}{m^{2}}\right|=\left|E_{1}\right|\left|\frac{1}{n^{2}}-\frac{1}{m^{2}}\right|
+\end{equation}
+
+The energy difference between levels expressed in terms of principal quantum numbers.
+
+\begin{equation}
+\left|E_{1}\right|\left|\frac{1}{n^{2}}-\frac{1}{m^{2}}\right|=\frac{h c}{\lambda} \Longrightarrow \frac{1}{\lambda}=\frac{\left|E_{1}\right|}{h c}\left|\frac{1}{n^{2}}-\frac{1}{m^{2}}\right|
+\end{equation}
+
+Relating the wavelength of emitted or absorbed light to energy level differences.
+
+\begin{equation}
+\frac{1}{\lambda}=\frac{\left|E_{1}\right|}{h c}\left(\frac{1}{n^{2}}-\frac{1}{m^{2}}\right)=R\left(\frac{1}{n^{2}}-\frac{1}{m^{2}}\right)
+\end{equation}
+
+This is the Rydberg formula, which predicts the wavelengths of spectral lines with remarkable accuracy.
+
+\section{Radial probability density}
+
+\begin{equation}
+\Psi_{n \ell m}=R_{n l}(r) Y_{\ell, m}(\varphi, \theta)
+\end{equation}
+
+The complete wavefunction separates into radial and angular components.
+
+\begin{equation}
+\left|\Psi_{n \ell m}\right|^{2}=\left|R_{n l} Y_{\ell, m}\right|^{2}=R_{n l}^{2}\left|Y_{\ell, m}\right|^{2}
+\end{equation}
+
+The probability density is the square of the wavefunction's magnitude.
+
+\begin{equation}
+\left(\Psi_{n \ell m}, \Psi_{n \ell m}\right)=1
+\end{equation}
+
+The normalization condition ensures that the total probability is 1.
+
+\begin{equation}
+\underbrace{\iint_{4 \pi} \, \mathrm{d} \Omega\left|Y_{\ell, m}\right|^{2}}_{=1} \int_{0}^{+\infty} \mathrm{d} r r^{2} R_{n l}^{2}=\int_{0}^{+\infty} \mathrm{d} r r^{2} R_{n l}^{2}
+\end{equation}
+
+The spherical symmetry allows separation of the radial and angular parts of the normalization integral.
+
+\begin{equation}
+\mathrm{d} P=P_{n l} \, \mathrm{d} r
+\end{equation}
+
+The radial probability density $P_{nl} = r^2 R_{nl}^2$ gives the probability of finding the electron in a spherical shell of radius $r$ and thickness $dr$. This resolves the apparent paradox for $\ell=0$ states, as the probability density properly approaches zero at the nucleus due to the $r^2$ factor, even though $R_{nl}$ remains finite there.
+
+This is the probability of finding an electron in a shell of $r$ radius and $\mathrm{d} r$ thickness.
+
+\section{Radial position expectation values}
+By using the recursion formula of the Laguerre polynomials we can show that:
+
+\begin{equation}
+\langle r\rangle_{n, \ell}=\frac{a}{2 Z}\left(3 n^{2}-\ell(\ell+1)\right)
+\end{equation}
+
+The expectation value of the radial position depends on both quantum numbers.
+
+\begin{equation}
+\langle r\rangle_{n, n-1}=\frac{a}{2 Z}\left(3 n^{2}-n(n-1)\right)=\frac{a}{2 Z}\left(3 n^{2}-n^{2}+n\right)=\frac{a}{Z} n\left(n+\frac{1}{2}\right)
+\end{equation}
+
+For the maximum angular momentum states, the expectation value simplifies.
+
+\begin{equation}
+\left\langle r^{2}\right\rangle_{n, n-1}=\frac{a^{2}}{Z^{2}} n^{2}(n+1)\left(n+\frac{1}{2}\right)
+\end{equation}
+
+The expectation value of $r^2$ for maximum angular momentum states.
+
+\begin{align}
+\Delta r & =\sqrt{\left\langle r^{2}\right\rangle_{n, n-1}-\langle r\rangle_{n, n-1}^{2}}=\sqrt{\frac{a^{2}}{Z^{2}} n^{2}(n+1)\left(n+\frac{1}{2}\right)-\frac{a^{2}}{Z^{2}} n^{2}\left(n+\frac{1}{2}\right)^{2}}= \\
+& =\sqrt{\frac{a^{2}}{Z^{2}} n^{2}\left(n+\frac{1}{2}\right)\left(n+1-n-\frac{1}{2}\right)}=\frac{a n}{Z \sqrt{2}} \sqrt{n+\frac{1}{2}}
+\end{align}
+
+The uncertainty in radial position calculated from the variance.
+
+\begin{equation}
+\frac{\Delta r}{\langle r\rangle_{n, n-1}}=\frac{a \pi}{\not Z \sqrt{2}} \sqrt{n+\frac{1}{2}} \frac{Z}{a n} \frac{1}{\left(n+\frac{1}{2}\right)}=\frac{1}{\sqrt{2 n+1}}
+\end{equation}
+
+The relative uncertainty decreases with increasing quantum number, approaching classical behavior for large $n$.
+
+\begin{equation}
+P_{n, n-1}=C r^{2 n} \mathrm{e}^{-2 k_{n} r} \Longrightarrow \frac{\, \mathrm{d} P_{n, n-1}}{\, \mathrm{d} r}=C r^{2 n} \mathrm{e}^{-2 k_{n} r}\left(\frac{2 n}{r}-2 k_{n}\right)
+\end{equation}
+
+The radial probability density and its derivative for maximum angular momentum states.
+
+\begin{equation}
+r=\frac{n}{k_{n}}=\frac{a n^{2}}{Z}
+\end{equation}
+
+The radius at which the probability density reaches its maximum.
+
+\begin{equation}
+\langle r\rangle_{n, n-1}=\frac{a}{Z} n\left(n+\frac{1}{2}\right) \sim \frac{a n^{2}}{Z}
+\end{equation}
+
+For large $n$, the most probable radius approaches the expectation value, consistent with classical orbits.
+
+\section{Two body problem}
+The system given by an electron orbiting a proton is essentially a two body problem. In the discussion of the Hydrogen atom we have only discussed the orbital problem at rest, but the proton is, in general, moving.
+
+The centre of mass is essentially the proton since $m_{p} \gg m_{e}$, instead the reduced mass will be approximately the one of the electron $\mu \approx m_{e}$.
+
+If we analyze the problem in classical mechanics we find that the kinetic energy can be divided into the contribution of the centre of mass and the contribution of a free particle of mass $\mu$ :
+
+\begin{equation}
+T=\frac{\vec{P}^{2}}{2 M}+\frac{\vec{p}^{2}}{2 \mu}
+\end{equation}
+
+The kinetic energy separates into center of mass motion and relative motion terms.
+
+\begin{equation}
+\mathcal{H}=\frac{\vec{P}^{2}}{2 M}+\frac{\vec{p}^{2}}{2 \mu}+V(r)
+\end{equation}
+
+The Hamiltonian includes both kinetic energy terms and the potential energy.
+
+\begin{align}
+& \left\{X_{i}, P_{j}\right\}=\delta_{i j} \\
+& \left\{x_{i}, p_{j}\right\}=\delta_{i j} \\
+& \left\{X_{i}, x_{j}\right\}=0 \\
+& \left\{X_{i}, p_{j}\right\}=0  \\
+& \left\{x_{i}, P_{j}\right\}=0 \\
+& \left\{P_{i}, p_{j}\right\}=0
+\end{align}
+
+The Poisson brackets demonstrate that the center of mass and relative coordinates form independent canonical pairs.
+
+\begin{align}
+& {\left[\hat{X}_{i}, \hat{P}_{j}\right]=i \hbar \delta_{i j}} \\
+& {\left[\hat{x}_{i}, \hat{p}_{j}\right]=i \hbar \delta_{i j}} \\
+& {\left[\hat{X}_{i}, \hat{x}_{j}\right]=0} \\
+& {\left[\hat{X}_{i}, \hat{p}_{j}\right]=0}  \\
+& {\left[\hat{x}_{i}, \hat{P}_{j}\right]=0} \\
+& {\left[\hat{P}_{i}, \hat{p}_{j}\right]=0}
+\end{align}
+
+The commutation relation $[\hat{P}, H]=0$ leads to a separable Hamiltonian form:
+
+\begin{equation}
+H=H_{CM}+H_{rel}=\frac{\hat{P}^{2}}{2 M}+\frac{\hat{p}^{2}}{2 m_{e}}+V(r)
+\end{equation}
+
+Where $H_{CM}$ describes center-of-mass motion and $H_{rel}$ represents the internal hydrogen dynamics. This separation allows us to factorize the wavefunction:
+
+\begin{equation}
+\Psi=\phi_{\vec{K}} \Psi_{n \ell m}=\Psi_{\vec{K} n \ell m}
+\end{equation}
+
+The total energy eigenvalue becomes:
+
+\begin{align}
+H \Psi_{\vec{K} n \ell m} & =\left(\frac{\hat{P}^{2}}{2 M}+H_{rel}\right) \phi_{\vec{K}} \Psi_{n \ell m}=\Psi_{n \ell m} \frac{\hat{P}^{2}}{2 M} \phi_{\vec{K}}+\phi_{\vec{K}} H_{rel} \Psi_{n \ell m}=  \\
+& =\Psi_{n \ell m} \phi_{\vec{K}} \frac{\hbar^{2} K^{2}}{2 M}+\phi_{\vec{K}} \Psi_{n \ell m} E_{n}=\left(\frac{\hbar^{2} K^{2}}{2 M}+E_{n}\right) \Psi_{n \ell m} \phi_{\vec{K}}
+\end{align}

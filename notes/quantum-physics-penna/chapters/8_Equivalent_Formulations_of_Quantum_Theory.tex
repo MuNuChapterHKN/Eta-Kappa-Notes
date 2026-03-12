@@ -1,0 +1,458 @@
+\chapter{Equivalent formulations of quantum theory}
+
+We will now show equivalent formulations of quantum theory.
+
+\section{Dirac's vector notation}
+
+Comparing Schrödinger's wave mechanics with Dirac's abstract vector formalism:
+
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+Schrödinger &  & Dirac \\
+\hline
+Wavefunctions $\Psi_{n}$ & $\Longleftrightarrow$ & Vectors $|n\rangle$ \\
+\hline
+Fourier series decomposition: & $\Longleftrightarrow$ & Vector components decomposition: \\
+\hline
+$\Psi_{v}=\sum_{i} v_{i} \phi_{i}$ &  & $|v\rangle=\sum_{i} v_{i} \vec{i}$ \\
+\hline
+Operators $\hat{A}$ & $\Longleftrightarrow$ & Matrices $\tilde{A}$ \\
+\hline
+Probability density $\rho=|\Psi|^{2}$ &  & ? \\
+\hline
+\end{tabular}
+\end{center}
+
+The probabilistic interpretation remains intact in Dirac's formalism through the inner product:
+
+\begin{equation}
+\left(\Psi_{u}, \Psi_{v}\right)=\langle u \mid v\rangle=\sum_{i} u_{i}^{*} v_{i}
+\end{equation}
+
+For the special case where $u=v$:
+
+\begin{equation}
+\left(\Psi_{v}, \Psi_{v}\right)=\langle v \mid v\rangle=\sum_{i}\left|v_{i}\right|^{2}
+\end{equation}
+
+Here $\left|v_{i}\right|^{2}$ represents the probability of finding the system in state $\phi_{i}$ or $|i\rangle$.
+
+Operators in Schrödinger's formulation transform into matrices in Dirac's approach. This transformation occurs through the basis representation:
+
+\begin{equation}
+\mathcal{B}=\left\{\phi_{i}: i \in[0,+\infty]\right\}
+\end{equation}
+
+The matrix elements are defined as:
+
+\begin{equation}
+A_{n m}=\left(\phi_{n}, A \phi_{m}\right)
+\end{equation}
+
+Leading to the complete operator representation:
+
+\begin{equation}
+\tilde{A}=\sum_{i} \sum_{j}|i\rangle A_{i j}\langle j|
+\end{equation}
+
+
+Recall that $|i\rangle\langle j|$ generates a $n \times n$ matrix with all zeros and 1 in position $i j$. For example let $i=1, j=2$ with $n=3$ :
+
+\[
+|1\rangle\langle 2|=\left[\begin{array}{l}
+1  \\
+0 \\
+0
+\end{array}\right]\left[\begin{array}{lll}
+0 & 1 & 0
+\end{array}\right]=\left[\begin{array}{lll}
+0 & 1 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & 0
+\end{array}\right]
+\]
+
+Using bra-ket notation, we can derive the matrix elements:
+
+\begin{equation}
+\langle n| \tilde{A}|m\rangle=\langle n|\left(\sum_{i} \sum_{j}|i\rangle A_{i j}\langle j|\right)|m\rangle=\sum_{i} \sum_{j} \underbrace{\langle n \mid i\rangle}_{\delta_{n i}} A_{i j} \underbrace{\langle j \mid m\rangle}_{\delta_{j m}}=\sum_{i} \sum_{j} \delta_{n i} A_{i j} \delta_{j m}=A_{n m}
+\end{equation}
+
+The adjoint matrix follows naturally from the Schrödinger picture definition:
+
+\begin{equation}
+A_{m n}^{\dagger}=\left(\phi_{m}, A^{\dagger} \phi_{n}\right)=\left(A \phi_{m}, \phi_{n}\right)=\left(\phi_{n}, A \phi_{m}\right)^{*}=A_{n m}^{*}
+\end{equation}
+
+Thus the adjoint matrix equals the transpose complex conjugate. For Hermitian operators where $A^{\dagger}=A$, we have $A_{n m}^{\dagger}=A_{n m}$.
+
+When the basis $\mathcal{B}$ diagonalizes operator $A$, the matrix representation simplifies to:
+
+\begin{equation}
+\tilde{A}=\sum_{n} \sum_{m}|n\rangle a_{n} \delta_{n m}\langle m|=\sum_{n} a_{n}|n\rangle\langle n|
+\end{equation}
+
+Where $a_n$ are the eigenvalues satisfying:
+
+\begin{equation}
+A \phi_{n}=a_{n} \phi_{n}
+\end{equation}
+
+\section{Basis transformations}
+When working with a different basis $\mathcal{B}^{\prime}=\left\{\phi_{k}^{\prime}: k \in[0,+\infty]\right\}$, we need transformation rules between bases.
+
+Lemma 10.1. Two complete orthonormal bases $\mathcal{B}$ and $\mathcal{B}^{\prime}$ are connected by a unitary transformation.
+
+Proof. Any element of $\mathcal{B}^{\prime}$ can be expanded in terms of $\mathcal{B}$:
+
+\begin{equation}
+\phi_{n}^{\prime}=\sum_{m} S_{m n} \phi_{m}
+\end{equation}
+
+Where the transformation coefficients are:
+
+\begin{equation}
+S_{m n}=\left(\phi_{m}, \phi_{n}^{\prime}\right)
+\end{equation}
+
+For $S$ to be unitary, it must satisfy:
+
+\begin{equation}
+S S^{\dagger}=S^{\dagger} S=\mathbb{I} \Longleftrightarrow \sum_{i} S_{m i} S_{i n}^{\dagger}=\sum_{i} S_{m i}^{\dagger} S_{i n}=\delta_{n m}
+\end{equation}
+
+Using $S_{i n}^{\dagger}=S_{n i}^{*}$ and the completeness of basis $\mathcal{B}^{\prime}$:
+
+\begin{align}
+\sum_{i} S_{m i} S_{i n}^{\dagger} & =\sum_{i} S_{m i} S_{n i}^{*}=\sum_{i}\left(\phi_{m}, \phi_{i}^{\prime}\right)\left(\phi_{n}, \phi_{i}^{\prime}\right)^{*}=\sum_{i}\left(\phi_{m}, \phi_{i}^{\prime}\right)\left(\phi_{i}^{\prime}, \phi_{n}\right)= \\
+& =\sum_{i}\left(\int \mathrm{d} x \phi_{m}^{*}(x) \phi_{i}^{\prime}(x)\right)\left(\int \mathrm{d} y \phi_{i}^{*}(y) \phi_{n}(y)\right)= \\
+& =\int \mathrm{d} x \int \mathrm{d} y \phi_{m}^{*}(x) \phi_{n}(y) \underbrace{\sum_{i}\left[\phi_{i}^{\prime}(x) \phi_{i}^{\prime}(y)\right]}_{\delta(x-y)}= \\
+& =\int \mathrm{d} x \int \mathrm{d} y \phi_{m}^{*}(x) \phi_{n}(y) \delta(x-y)= \\
+& =\int \mathrm{d} x \phi_{m}^{*}(x) \phi_{n}(x)=\left(\phi_{m}, \phi_{n}\right)=\delta_{m n}
+\end{align}
+
+This completes the proof.
+
+Corollary 10.2. Given a unitary transformation $S$ from basis $\mathcal{B}^{\prime}$ to $\mathcal{B}$, the inverse transformation is $S^{\dagger}$.
+
+Proof.
+
+\begin{equation}
+\sum_{n} S_{n i}^{\dagger} \phi_{n}^{\prime}=\sum_{n} S_{n i}^{\dagger} \sum_{m} S_{m n} \phi_{m}=\sum_{m} \underbrace{\left(\sum_{n} S_{m n} S_{n i}^{\dagger}\right)}_{\delta_{m i}} \phi_{m}=\sum_{m} \delta_{m i} \phi_{m}=\phi_{i}
+\end{equation}
+
+
+So:
+
+\begin{equation}
+\phi_{i}=\sum_{n} S_{n i}^{\dagger} \phi_{n}^{\prime}
+\end{equation}
+
+The transformation also relates vector components between bases:
+
+\begin{equation}
+v_{n}^{\prime}=\left(\phi_{n}^{\prime}, \Psi_{v}\right)=\left(\sum_{m} S_{m n} \phi_{m}, \sum_{i} v_{i} \phi_{i}\right)=\sum_{m} \sum_{i} S_{m n}^{*} v_{i} \underbrace{\left(\phi_{m}, \phi_{i}\right)}_{\delta_{m i}}=\sum_{m} \sum_{i} S_{m n}^{*} v_{i} \delta_{m i}=\sum_{m} S_{m n}^{*} v_{m}
+\end{equation}
+
+Using $S_{m n}^{*}=S_{n m}^{\dagger}$, we can derive the inverse relation:
+
+\begin{equation}
+\sum_{i} S_{i n} v_{n}^{\prime}=\sum_{i} S_{i n} \sum_{m} S_{m n}^{*} v_{m}=\sum_{m} \underbrace{\sum_{i} S_{i n} S_{n m}^{\dagger}}_{\delta_{i m}} v_{m}=\sum_{m} \delta_{i m} v_{m}=v_{i}
+\end{equation}
+
+Corollary 10.3. Unitary transformations preserve normalization.
+
+Proof. Starting with $\sum_{i}\left|v_{i}\right|^{2}=\left(\Psi_{v}, \Psi_{v}\right)=1$, we can show:
+
+\begin{align}
+\left(\Psi_{v}, \Psi_{v}\right) & =\langle v \mid v\rangle=\sum_{m} v_{m}^{*} v_{m}=\sum_{m}\left(\sum_{i} S_{m i} v_{i}^{\prime}\right)^{*}\left(\sum_{j} S_{m j} v_{j}^{\prime}\right)= \\
+& =\sum_{m} \sum_{i} \sum_{j} S_{i m}^{\dagger} S_{m j} v_{i}^{\prime*} v_{j}^{\prime}=\sum_{i} \sum_{j} \underbrace{\left(\sum_{m} S_{i m}^{\dagger} S_{m j}\right)}_{\delta_{i j}} v_{i}^{\prime*} v_{j}^{\prime}=  \\
+& =\sum_{i} \sum_{j} \delta_{i j} v_{i}^{\prime*} v_{j}^{\prime}=\sum_{i}\left|v_{i}^{\prime}\right|^{2}
+\end{align}
+
+\section{Practical implementations}
+The Dirac formulation provides elegant representations of quantum dynamics. For the Schrödinger equation:
+
+\begin{equation}
+i \hbar \partial_{t} \Psi(x, t)=\hat{H} \Psi(x, t)
+\end{equation}
+
+We can express the state vector as:
+
+\begin{equation}
+|\Psi\rangle=\sum_{m} c_{m}|m\rangle
+\end{equation}
+
+Where $c_{m}=c_{m}(t)$ are time-dependent coefficients. This gives:
+
+\[
+\begin{array}{r}
+i \hbar \partial_{t}|\Psi\rangle=\hat{H}|\Psi\rangle \\
+i \hbar \partial_{t} \sum_{m} c_{m}|m\rangle=\hat{H} \sum_{m} c_{m}|m\rangle
+\end{array}
+\]
+
+When the basis states are energy eigenstates with $\hat{H}|m\rangle=E_{m}|m\rangle$, the Hamiltonian becomes diagonal:
+
+\begin{equation}
+H_{n m}=\langle n| \hat{H}|m\rangle=E_{m}\langle n \mid m\rangle=E_{m} \delta_{n m}
+\end{equation}
+
+Resulting in the matrix representation:
+
+\[
+H=\left[\begin{array}{llll}
+E_{1} & & &  \\
+& E_{2} & & \\
+& & \ddots & \\
+& & & E_{n}
+\end{array}\right]
+\]
+
+This leads to decoupled differential equations for each coefficient:
+
+\begin{equation}
+i \hbar \partial_{t} c_{n}=E_{n} c_{n}
+\end{equation}
+
+With solutions:
+
+\begin{equation}
+c_{n}(t)=c_{n}(0) \exp \left(-i \frac{t}{\hbar} E_{n}\right)
+\end{equation}
+
+
+And so:
+
+\begin{equation}
+|\Psi\rangle=\sum_{m} c_{m}(0) \exp \left(-i \frac{t}{\hbar} E_{m}\right)|m\rangle
+\end{equation}
+
+\section{The Heisenberg representation}
+In Heisenberg's alternative formulation, we focus on the time evolution of observables rather than states. The expectation value of an operator is:
+
+\begin{equation}
+\langle\hat{A}\rangle_{t}=(\Psi(x, t), \hat{A} \Psi(x, t))=\langle\Psi| \tilde{A}|\Psi\rangle
+\end{equation}
+
+Introducing the time evolution operator:
+
+\begin{equation}
+\hat{U}_{t}=\exp \left(-i \frac{t}{\hbar} \hat{H}\right) \Longrightarrow \Psi(x, t)=\hat{U}_{t} \Psi(x, 0)
+\end{equation}
+
+We can express the expectation value in terms of the initial state:
+
+\begin{equation}
+(\Psi(x, t), \hat{A} \Psi(x, t))=\left(\hat{U}_{t} \Psi(x, 0), \hat{A} \hat{U}_{t} \Psi(x, 0)\right)=\left(\Psi(x, 0), \hat{U}_{t}^{\dagger} \hat{A} \hat{U}_{t} \Psi(x, 0)\right)
+\end{equation}
+
+For notational clarity:
+
+\begin{align}
+& \hat{A}=A \\
+& \hat{U}_{t}=U  \\
+& \Psi(x, 0)=\Psi_{0}
+\end{align}
+
+\section{Statistical description with density matrices}
+To calculate expectation values, we expand the wavefunction in the energy eigenbasis:
+
+\begin{equation}
+\Psi(x, t)=\sum_{r} c_{r} \phi_{r}(x)
+\end{equation}
+
+Where $H \phi_{r}(x)=E_{r} \phi_{r}(x)$. The expectation value becomes:
+
+\begin{equation}
+\langle A\rangle_{t}=\left(\sum_{r} c_{r} \phi_{r}, A \sum_{s} c_{s} \phi_{s}\right)=\sum_{r} \sum_{s} c_{r}^{*} c_{s}\left(\phi_{r}, A \phi_{s}\right)
+\end{equation}
+
+With matrix elements $A_{rs} = (\phi_r, A\phi_s)$ and time-dependent coefficients:
+
+\begin{equation}
+c_{r}(t)=c_{r}(0) \exp \left(-i \frac{t}{\hbar} E_{r}\right)
+\end{equation}
+
+This yields:
+
+\begin{align}
+\langle A\rangle_{t} & =\sum_{r} \sum_{s} c_{r}^{*}(0) \exp \left(i \frac{t}{\hbar} E_{r}\right) c_{s}(0) \exp \left(-i \frac{t}{\hbar} E_{s}\right) A_{r s}= \\
+& =\sum_{r} \sum_{s} c_{r}^{*}(0) c_{s}(0) \exp \left(i \frac{t}{\hbar}\left(E_{r}-E_{s}\right)\right) A_{r s}
+\end{align}
+
+For sufficiently large times, rapidly oscillating terms with $r \neq s$ average to zero:
+
+\begin{equation}
+\langle A\rangle_{t} \simeq \sum_{s}\left|c_{s}(0)\right|^{2} A_{s s}
+\end{equation}
+
+In statistical mechanics, the probability distribution follows Boltzmann statistics:
+
+\begin{equation}
+\langle A\rangle_{t} \simeq \sum_{s} \frac{\mathrm{e}^{-\beta E_{s}}}{Z} A_{s s}
+\end{equation}
+
+These expressions can be written compactly as $\operatorname{Tr}(\rho A)$, where $\rho$ is the density matrix.
+
+\section{Dynamics of observables}
+For time-dependent operators in the Heisenberg picture, $A_t = U^\dagger A U$, the equation of motion is:
+
+\begin{equation}
+\frac{\mathrm{d} A_{t}}{\, \mathrm{d} t}=\frac{1}{i \hbar}\left[A_{t}, H\right]+\left(\partial_{t} A\right)_{t}
+\end{equation}
+
+
+Proof. Starting from:
+
+\begin{equation}
+\frac{\mathrm{d} A_{t}}{\, \mathrm{d} t}=\frac{\mathrm{d}}{\, \mathrm{d} t}\left(U^{\dagger} A U\right)
+\end{equation}
+
+The time derivatives of the evolution operators are:
+
+\begin{align}
+\frac{\mathrm{d} U}{\, \mathrm{d} t} & =-\frac{i}{\hbar} H U \\
+\frac{\mathrm{d} U^{\dagger}}{\, \mathrm{d} t} & =\frac{i}{\hbar} U^{\dagger} H
+\end{align}
+
+Applying the product rule:
+
+\begin{align}
+\frac{\mathrm{d}}{\, \mathrm{d} t}\left(U^{\dagger} A U\right) & =\frac{\mathrm{d}}{\, \mathrm{d} t}\left(U^{\dagger}\right) A U+U^{\dagger} \frac{\mathrm{d}}{\, \mathrm{d} t}(A) U+U^{\dagger} A \frac{\, \mathrm{d}}{\, \mathrm{d} t}(U)=  \\
+& =\frac{i}{\hbar} U^{\dagger} H A U+U^{\dagger} \frac{\, \mathrm{d}}{\, \mathrm{d} t}(A) U-\frac{i}{\hbar} U^{\dagger} A H U
+\end{align}
+
+Since $H$ commutes with $U$ (which can be shown using Taylor expansion), we have:
+
+\begin{align}
+\frac{\mathrm{d}}{\, \mathrm{d} t}\left(U^{\dagger} A U\right) & =\frac{i}{\hbar} \underbrace{\left(U^{\dagger} H A U-U^{\dagger} A H U\right)}_{\left[U^{\dagger}HU, U^{\dagger}AU\right]}+U^{\dagger} \frac{\, \mathrm{d}}{\, \mathrm{d} t}(A) U= \\
+& =\frac{i}{\hbar} U^{\dagger}[H,A]U + U^{\dagger} \frac{\mathrm{d}}{\, \mathrm{d} t}(A) U= \\
+& =\frac{1}{i \hbar}\left[A_{t}, H\right]+\left(\partial_{t} A\right)_{t}
+\end{align}
+
+This equation closely resembles Ehrenfest's theorem and provides the dynamics of operators in the Heisenberg picture.
+
+\section{Harmonic oscillator example}
+For the harmonic oscillator, we define time-evolving operators:
+
+\begin{align}
+& x_{t}=U^{\dagger} x U \\
+& p_{t}=U^{\dagger} p U
+\end{align}
+
+With the Hamiltonian:
+
+\begin{equation}
+H\left(p_{t}, x_{t}\right)=\frac{p_{t}^{2}}{2 m}+\frac{1}{2} m \omega^{2} x_{t}^{2}
+\end{equation}
+
+Substituting the definitions:
+
+\begin{equation}
+H\left(p_{t}, x_{t}\right)=\frac{1}{2 m}\left(U^{\dagger} p U U^{\dagger} p U\right) + \frac{1}{2} m \omega^{2}\left(U^{\dagger} x U U^{\dagger} x U\right)
+\end{equation}
+
+Using the unitary property $U U^{\dagger}=\mathbb{I}$:
+
+\begin{equation}
+H\left(p_{t}, x_{t}\right)=U^{\dagger}\left(\frac{p^{2}}{2 m}+\frac{1}{2} m \omega^{2} x^{2}\right) U=U^{\dagger} H U=H
+\end{equation}
+
+Thus, the Hamiltonian remains time-independent in the Heisenberg picture.
+
+\section{Important unitary transformations}
+Several unitary transformations play key roles in quantum mechanics.
+
+Spatial translation operator:
+
+\begin{equation}
+T(\lambda)=\exp \left(i \frac{\lambda}{\hbar} p\right)=\exp \left(\lambda \frac{\partial}{\partial x}\right)
+\end{equation}
+
+Applying this to a wavefunction yields:
+
+\begin{equation}
+T(\lambda) \Psi(x)=\sum_{n} \frac{\lambda^{n}}{n!} \frac{\partial^{n} \Psi(x)}{\partial x^{n}}=\Psi(x+\lambda)
+\end{equation}
+\section{Rotational transformations}
+
+The angular momentum operator for rotation around the z-axis:
+
+\begin{equation}
+L_{3}=-i \hbar\left(x_{1} \frac{\partial}{\partial x_{2}}-x_{2} \frac{\partial}{\partial x_{1}}\right)=-i \hbar \frac{\partial}{\partial \phi}
+\end{equation}
+
+
+The expression in spherical coordinates represents rotation around the z-axis:
+
+\begin{equation}
+R(\alpha)=\exp \left(i \frac{\alpha}{\hbar} L_{3}\right)=\exp \left(\alpha \frac{\partial}{\partial \phi}\right)
+\end{equation}
+
+This operator rotates functions by angle $\alpha$. For a wavefunction expressed in spherical coordinates:
+
+\begin{equation}
+\Psi=\Psi(r \sin (\theta) \cos (\phi), r \sin \theta \sin (\phi), r \cos (\theta))
+\end{equation}
+
+The rotation transforms it to:
+
+\begin{equation}
+R(\alpha) \Psi=\Psi(r \sin (\theta) \cos (\phi+\alpha), r \sin \theta \sin (\phi+\alpha), r \cos (\theta))
+\end{equation}
+
+Using trigonometric addition formulas:
+
+\begin{align}
+& r \sin (\theta) \cos (\phi+\alpha)=r \sin (\theta)(\cos (\alpha) \cos (\phi)-\sin (\alpha) \sin (\phi))= \\
+& =\underbrace{r \sin (\theta) \cos (\phi)}_{x_{1}} \cos (\alpha)-\underbrace{r \sin (\theta) \sin (\phi)}_{x_{2}} \sin (\alpha)  \\
+& r \sin \theta \sin (\phi+\alpha)=r \sin (\theta)(\sin (\alpha) \cos (\phi)+\cos (\alpha) \sin (\phi))= \\
+& =\underbrace{r \sin (\theta) \cos (\phi)}_{x_{1}} \sin (\alpha)+\underbrace{r \sin (\theta) \sin (\phi)}_{x_{2}} \cos (\alpha)
+\end{align}
+
+This corresponds to the matrix representation:
+
+\[
+R(\alpha)=\left[\begin{array}{ccc}
+\cos \alpha & -\sin \alpha & 0  \\
+\sin \alpha & \cos \alpha & 0 \\
+0 & 0 & 1
+\end{array}\right]
+\]
+
+For time translation, the evolution operator is:
+
+\begin{equation}
+U(t+\Delta t)=\exp \left(\frac{-i}{\hbar}(t+\Delta t) H\right)
+\end{equation}
+
+Applying this to a wavefunction:
+
+\begin{equation}
+U(t+\Delta t) \Psi(x, 0)=\exp \left(\frac{-i}{\hbar} \Delta t H\right) \exp \left(\frac{-i}{\hbar} t H\right) \Psi(x, 0)=\exp \left(\frac{-i}{\hbar} \Delta t H\right) \Psi(x, t)=\Psi(x, t+\Delta t)
+\end{equation}
+
+For small time increments $\Delta t \ll t$, using first-order Taylor expansion:
+
+\begin{equation}
+U(t+\Delta t) \Psi(x, 0) \sim\left(\mathbb{I}-i \Delta t \frac{H}{\hbar}+\ldots\right) \Psi(x, t)=\Psi(x, t+\Delta t)
+\end{equation}
+
+This gives:
+
+\begin{align}
+\Psi(x, t+\Delta t) & \sim U(\Delta t) \Psi(x, t)=\mathbb{I} \Psi(x, t)-\Delta t \frac{i}{\hbar} H \Psi(x, t)  \\
+\Psi(x, t+\Delta t) & \sim \Psi(x, t)+\frac{\partial \Psi(x, t)}{\partial t} \Delta t
+\end{align}
+
+Comparing these expressions:
+
+\begin{align}
+\Psi(x, t)-\Delta t \frac{i}{\hbar} H \Psi(x, t) & =\Psi(x, t)+\frac{\partial \Psi(x, t)}{\partial t} \Delta t \\
+-\frac{i}{\hbar} H \Psi(x, t) & =\frac{\partial \Psi(x, t)}{\partial t}  \\
+H \Psi(x, t) & =i \hbar \frac{\partial \Psi(x, t)}{\partial t}
+\end{align}
+
+Thus recovering the Schrödinger equation.

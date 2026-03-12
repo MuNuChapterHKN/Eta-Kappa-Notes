@@ -1,0 +1,705 @@
+\chapter{Heisenberg Uncertainty Principle}
+We now present the mathematical foundation of uncertainty relations in quantum mechanics. \\
+Unlike classical mechanics, where a particle's position and momentum can be simultaneously determined with arbitrary precision, quantum mechanics imposes fundamental limitations on measurement precision. We can only specify:
+
+\begin{align}
+& \left\langle x_{j}\right\rangle \pm \Delta x_{j} \\
+& \left\langle\hat{p}_{j}\right\rangle \pm \Delta \hat{p}_{j}
+\end{align}
+
+This inherent uncertainty is not due to technological limitations or experimental errors but represents a fundamental property of nature. Our objective is to derive the general Heisenberg uncertainty principle:
+
+\begin{equation}
+\left(\Delta \hat{A}_{1}\right)^{2}\left(\Delta \hat{A}_{2}\right)^{2} \geq \frac{1}{4}\left|\left\langle\left[\hat{A}_{1}, \hat{A}_{2}\right]\right\rangle\right|^{2}
+\end{equation}
+
+
+\section{Derivation of the General Uncertainty Principle}
+
+Let's consider two physical observables represented by Hermitian operators $\hat{A}_1$ and $\hat{A}_2$:
+
+\begin{align}
+& \hat{A}_{1}^{\dagger}=\hat{A}_{1} \\
+& \hat{A}_{2}^{\dagger}=\hat{A}_{2}
+\end{align}
+
+We define the uncertainty (or standard deviation) of a physical quantity as:
+
+\begin{equation}
+(\Delta \hat{A})^{2}=\left(\Psi,(\hat{A}-\langle\hat{A}\rangle)^{2} \Psi\right)
+\end{equation}
+
+For convenience, we introduce deviation operators:
+
+\begin{align}
+& \hat{D}_{1}=\hat{A}_{1}-\left\langle\hat{A}_{1}\right\rangle \\
+& \hat{D}_{2}=\hat{A}_{2}-\left\langle\hat{A}_{2}\right\rangle
+\end{align}
+
+The uncertainties can then be expressed as:
+
+\begin{align}
+& \left(\Delta \hat{A}_{1}\right)^{2}=\left(\Psi, \hat{D}_{1}^{2} \Psi\right) \\
+& \left(\Delta \hat{A}_{2}\right)^{2}=\left(\Psi, \hat{D}_{2}^{2} \Psi\right)
+\end{align}
+
+Expanding $\hat{D}_j^2$:
+
+\begin{equation}
+\hat{D}_{j}^{2}=\left(\hat{A}_{j}-\left\langle\hat{A}_{j}\right\rangle\right)^{2}=\hat{A}_{j}^{2}-2\left\langle\hat{A}_{j}\right\rangle \hat{A}_{j}+\left\langle\hat{A}_{j}\right\rangle^{2}
+\end{equation}
+
+Taking the expectation value:
+
+\begin{equation}
+\left\langle\hat{D}_{j}^{2}\right\rangle=\left\langle\hat{A}_{j}^{2}\right\rangle-2\left\langle\hat{A}_{j}\right\rangle\left\langle\hat{A}_{j}\right\rangle+\left\langle\hat{A}_{j}\right\rangle^{2}=\left\langle\hat{A}_{j}^{2}\right\rangle-\left\langle\hat{A}_{j}\right\rangle^{2}=\sigma_{A_{j}}^{2}
+\end{equation}
+
+The commutator of the deviation operators equals the commutator of the original operators:
+
+\begin{align}
+{\left[\hat{D}_{1}, \hat{D}_{2}\right] } & =\left[\hat{A}_{1}-\left\langle\hat{A}_{1}\right\rangle, \hat{A}_{2}-\left\langle\hat{A}_{2}\right\rangle\right] \\
+& =\left[\hat{A}_{1}, \hat{A}_{2}-\left\langle\hat{A}_{2}\right\rangle\right]-\left[\left\langle\hat{A}_{1}\right\rangle, \hat{A}_{2}-\left\langle\hat{A}_{2}\right\rangle\right] \\
+& =\left[\hat{A}_{1}, \hat{A}_{2}\right]-\left[\hat{A}_{1},\left\langle\hat{A}_{2}\right\rangle\right]-\left[\left\langle\hat{A}_{1}\right\rangle, \hat{A}_{2}\right]+\left[\left\langle\hat{A}_{1}\right\rangle,\left\langle\hat{A}_{2}\right\rangle\right]  \\
+& =\left[\hat{A}_{1}, \hat{A}_{2}\right]
+\end{align}
+
+Since $\hat{D}_1$ and $\hat{D}_2$ are Hermitian, we can establish:
+
+\begin{align}
+\left\langle\hat{D}_{1} \hat{D}_{2}\right\rangle^{*} & =\left(\Psi, \hat{D}_{1} \hat{D}_{2} \Psi\right)^{*}= \\
+& =\left(\hat{D}_{1} \hat{D}_{2} \Psi, \Psi\right)=  \\
+& =\left(\hat{D}_{2} \Psi, \hat{D}_{1} \Psi\right)= \\
+& =\left(\Psi, \hat{D}_{2} \hat{D}_{1} \Psi\right)=\left\langle\hat{D}_{2} \hat{D}_{1}\right\rangle
+\end{align}
+
+This gives us:
+
+\begin{equation}
+\left\langle\hat{D}_{1} \hat{D}_{2}\right\rangle^{*}=\left\langle\hat{D}_{2} \hat{D}_{1}\right\rangle
+\end{equation}
+
+Using these relations, we can evaluate:
+
+\begin{align}
+\left|\left\langle\left[\hat{A}_{1}, \hat{A}_{2}\right]\right\rangle\right|^{2} & \stackrel{(1)}{=}\left|\left\langle\left[\hat{D}_{1}, \hat{D}_{2}\right]\right\rangle\right|^{2}=\left|\left\langle\hat{D}_{1} \hat{D}_{2}-\hat{D}_{2} \hat{D}_{1}\right\rangle\right|^{2}= \\
+& =\left|\left\langle\hat{D}_{1} \hat{D}_{2}\right\rangle-\left\langle\hat{D}_{1} \hat{D}_{2}\right\rangle^{*}\right|^{2}=\left|2 i \operatorname{Im}\left(\left\langle\hat{D}_{1} \hat{D}_{2}\right\rangle\right)\right|^{2}= \\
+& =4\left|\operatorname{Im}\left(\left\langle\hat{D}_{1} \hat{D}_{2}\right\rangle\right)\right|^{2} \leq 4\left|\operatorname{Re}\left(\left\langle\hat{D}_{1} \hat{D}_{2}\right\rangle\right)\right|^{2}+4\left|\operatorname{Im}\left(\left\langle\hat{D}_{1} \hat{D}_{2}\right\rangle\right)\right|^{2}= \\
+& =4\left|\left\langle\hat{D}_{1} \hat{D}_{2}\right\rangle\right|^{2}
+\end{align}
+
+This can be rewritten as:
+
+\begin{equation}
+4\left|\left\langle\hat{D}_{1} \hat{D}_{2}\right\rangle\right|^{2}=4\left(\Psi,\left(\hat{D}_{1} \hat{D}_{2}\right) \Psi\right)^{2}=4\left(\hat{D}_{1} \Psi, \hat{D}_{2} \Psi\right)^{2}
+\end{equation}
+
+Defining $\hat{D}_{1} \Psi=\phi_{1}$ and $\hat{D}_{2} \Psi=\phi_{2}$, we can apply the Cauchy-Schwarz inequality:
+
+\begin{equation}
+\left(\phi_{1}, \phi_{2}\right)^{2} \leq\left|\phi_{1}\right|^2\left|\phi_{2}\right|^2
+\end{equation}
+
+
+\section{Deriving the Uncertainty Relation}
+This analysis leads to:
+
+\begin{align}
+& 4\left(\Psi,\left(\hat{D}_{1} \hat{D}_{2}\right) \Psi\right)^{2} \stackrel{(2)}{\leq} 4\left|\hat{D}_{1} \Psi\right|\left|\hat{D}_{2} \Psi\right|= \\
+& =4\left(\hat{D}_{1} \Psi, \hat{D}_{1} \Psi\right)\left(\hat{D}_{2} \Psi \hat{D}_{2} \Psi\right)=4\left(\Psi, \hat{D}_{1}^{2} \Psi\right)\left(\Psi \hat{D}_{2}^{2} \Psi\right)  \\
+& =4\left\langle\hat{D}_{1}^{2}\right\rangle\left\langle\hat{D}_{2}^{2}\right\rangle=4\left(\Delta \hat{A}_{1}\right)^{2}\left(\Delta \hat{A}_{2}\right)^{2} \stackrel{(3)}{=} 4 \sigma_{A_{1}}^{2} \sigma_{A_{2}}^{2}
+\end{align}
+
+Combining the previous results yields:
+
+\begin{equation}
+\left|\left\langle\left[\hat{A}_{1}, \hat{A}_{2}\right]\right\rangle\right|^{2}=\left|\left\langle\left[\hat{D}_{1}, \hat{D}_{2}\right]\right\rangle\right|^{2} \leq 4\left|\hat{D}_{1} \Psi\right|\left|\hat{D}_{2} \Psi\right|=4 \sigma_{A_{1}}^{2} \sigma_{A_{2}}^{2}
+\end{equation}
+
+Thus we arrive at the fundamental uncertainty relation:
+
+\begin{equation}
+\sigma_{A_{1}}^{2} \sigma_{A_{2}}^{2} \geq \frac{1}{4}\left|\left\langle\left[\hat{A}_{1}, \hat{A}_{2}\right]\right\rangle\right|^{2}
+\end{equation}
+
+\section{Physical Implications}
+The Heisenberg uncertainty principle reveals a fundamental limitation: increasing measurement precision for one observable necessarily reduces precision for another non-commuting observable. The only exception occurs when operators commute, yielding $\sigma_{A_{1}}^{2} \sigma_{A_{2}}^{2} \geq 0$, allowing simultaneous precise measurements.
+
+The classical notion of simultaneously determining a particle's position and momentum with arbitrary precision fails in quantum mechanics. From the commutation relation:
+
+\begin{equation}
+\left[x_{i}, p_{j}\right]=i \hbar \delta_{i j}
+\end{equation}
+
+We derive:
+
+\begin{equation}
+\sigma_{x_{i}}^{2} \sigma_{p_{j}}^{2} \geq \frac{1}{4}\left|\left\langle\left[x_{i}, p_{j}\right]\right\rangle\right|^{2}=\frac{\hbar^{2}}{4} \delta_{i j}
+\end{equation}
+
+For the same coordinate direction ($i=j$), we obtain the iconic inequality:
+
+\begin{equation}
+\Delta x \Delta p \geq \frac{\hbar}{2}
+\end{equation}
+
+\section{Properties of Commuting Operators}
+For a wavefunction characterized by two quantum numbers $\alpha_1$ and $\alpha_2$, the following eigenvalue equations hold simultaneously if and only if the operators commute:
+
+\begin{align}
+& \hat{A}_{1} \Psi_{\alpha_{1}, \alpha_{2}}=\alpha_{1} \Psi_{\alpha_{1}, \alpha_{2}} \\
+& \hat{A}_{2} \Psi_{\alpha_{1}, \alpha_{2}}=\alpha_{2} \Psi_{\alpha_{1}, \alpha_{2}}
+\end{align}
+
+This follows from:
+
+\begin{equation}
+\left[\hat{A}_{1}, \hat{A}_{2}\right]=0 \Longleftrightarrow \hat{A}_{1} \hat{A}_{2} \Psi_{\alpha_{1}, \alpha_{2}}-\hat{A}_{2} \hat{A}_{1} \Psi_{\alpha_{1}, \alpha_{2}}
+\end{equation}
+
+For this relation to hold, $\hat{A}_1$ and $\hat{A}_2$ must have eigenvalues $\alpha_1$ and $\alpha_2$.
+
+Theorem 7.1. If two operators $\hat{A}$ and $\hat{B}$ satisfy $[\hat{A}, \hat{B}]=0$, they possess a common basis of eigenfunctions.
+
+\section{Non-degenerate case}
+Proof. For an eigenstate $\Psi$ of $\hat{A}$ with $\hat{A} \Psi=\alpha \Psi$, consider $\Psi_{B}=\hat{B} \Psi$. Then:
+
+\begin{equation}
+\hat{A} \Psi_{B}=\hat{A} \hat{B} \Psi=\hat{B} \hat{A} \Psi=\alpha \hat{B} \Psi=\alpha \Psi_{B}
+\end{equation}
+
+Thus $\Psi_{B}$ is also an eigenstate of $\hat{A}$. Since $\Psi_B$ is an eigenstate, we must have $\hat{A} \Psi_{B}=\gamma \Psi_{B}$. This requires:
+
+\begin{equation}
+\hat{B} \Psi=\beta \Psi \Longrightarrow \gamma=\alpha \beta
+\end{equation}
+
+Therefore, $\Psi$ must be a simultaneous eigenstate of both $\hat{A}$ and $\hat{B}$.
+
+\section{Degenerate case}
+Proof. For the degenerate case, we consider the basis:
+
+\begin{equation}
+\mathcal{B}=\left\{\Psi_{i}: i \in[1, M], \hat{A} \Psi_{i}=\alpha_{i} \Psi_{i}\right\}
+\end{equation}
+
+
+\section{Analyzing Commuting Operators}
+Continuing with the degenerate case:
+
+\begin{equation}
+\hat{A} \hat{B} \Psi_{i}=\hat{B} \hat{A} \Psi_{i}=\alpha_{i} \hat{B} \Psi
+\end{equation}
+
+While $\hat{B} \Psi_{i}$ represents a wavefunction, generally $\hat{B} \Psi_{i} \neq \beta \Psi_{i}$. Instead, $\hat{B} \Psi_{i}$ can be expressed as a linear combination:
+
+\begin{equation}
+\hat{B} \Psi_{i}=\sum_{n=1}^{M} C_{i n} \Psi_{n}
+\end{equation}
+
+Where $C_{i n}=\left(\Psi_{i}, \hat{B} \Psi_{n}\right)$. Examining the Hermiticity of $C_{in}$:
+
+\begin{equation}
+C_{i n}^{\dagger}=C_{n i}^{*}=\left(\Psi_{n}, \hat{B} \Psi_{i}\right)^{*}=\left(\hat{B} \Psi_{i}, \Psi_{n}\right)=\left(\Psi_{i}, \hat{B}^{\dagger} \Psi_{n}\right)=\left(\Psi_{i}, \hat{B} \Psi_{n}\right)=C_{i n}
+\end{equation}
+
+Thus $C_{i n}$ forms a Hermitian matrix. For any Hermitian matrix $C$, there exists a unitary matrix $U$ such that:
+
+\begin{align}
+& U^{\dagger} C U=D \quad \text { where } D \text { is a diagonal matrix } \\
+& U^{\dagger} U=\mathbb{I}
+\end{align}
+
+In component form:
+
+\begin{equation}
+U_{i j}^{\dagger} C_{j n} U_{n m}=U_{j i}^{*} C_{j n} U_{n m}=d_{i} \delta_{i j}
+\end{equation}
+
+With the unitarity condition:
+
+\begin{equation}
+U_{i k} U_{k j}^{\dagger}=\delta_{i j}
+\end{equation}
+
+Defining new states $\phi_{i}=U_{j i}^{*} \Psi_{j}$, we prove these are eigenstates of $\hat{B}$:
+
+\begin{equation}
+\hat{B} \phi_{i}=\hat{B} U_{j i}^{*} \Psi_{j}=U_{j i}^{*} \hat{B} \Psi_{j}=U_{j i}^{*} C_{j n} \Psi_{n}=U_{j i}^{*} C_{j n} \delta_{n m} \Psi_{m}
+\end{equation}
+
+Substituting the identity matrix with our $U$ matrix definition:
+
+\begin{equation}
+U_{j i}^{*} C_{j n} \delta_{n m} \Psi_{m}=\underbrace{U_{j i}^{*} C_{j n} U_{n k}}_{d_{i} \delta_{i k}} U_{k m}^{\dagger} \Psi_{m}
+\end{equation}
+
+This yields:
+
+\begin{equation}
+d_{i} \delta_{i k} U_{k m}^{\dagger} \Psi_{m}=d_{i} U_{m i}^{*} \Psi_{m}=d_{i} \phi_{i}
+\end{equation}
+
+Confirming $\phi_{i}$ is an eigenstate of $\hat{B}$ with eigenvalue $d_i$. Additionally:
+
+\begin{equation}
+\hat{A} \phi_{i}=\hat{A} U_{j i}^{*} \Psi_{j}=U_{j i}^{*} \hat{A} \Psi_{j}=U_{j i}^{*} \alpha \Psi_{j}=\alpha \phi_{i}
+\end{equation}
+
+Thus $\phi_{i}$ is a simultaneous eigenstate of both $\hat{A}$ and $\hat{B}$.
+
+\section{Key Implications}
+The commutation relation $[\hat{A}, \hat{B}]=0$ yields several significant consequences:
+
+\begin{enumerate}
+  \item If $[\hat{A}, \hat{H}]=0$, applying the Ehrenfest theorem we have:
+\end{enumerate}
+
+
+\section{Consequences of Operator Commutation}
+
+\begin{equation}
+i \hbar \frac{\, \mathrm{d}\langle\hat{A}\rangle}{\mathrm{d} t}=\langle[\hat{A}, \hat{H}]\rangle=0 \Longrightarrow \frac{\, \mathrm{d}\langle\hat{A}\rangle}{\mathrm{d} t}=0
+\end{equation}
+
+This demonstrates that when an operator commutes with the Hamiltonian, its expectation value remains constant over time.
+
+Additional consequences include:
+\begin{enumerate}
+  \item If $[\hat{A}, \hat{H}]=0$, a common eigenbasis exists
+  \item For commuting operators, the uncertainty relation reduces to:
+
+\begin{equation}
+(\Delta \hat{A})^{2}(\Delta \hat{H})^{2} \geq 0
+\end{equation}
+
+  Allowing for states where both $\Delta \hat{A}=0$ and $\Delta \hat{H}=0$
+  \item Complete sets of observables can be defined
+  \item Coherent states become possible
+\end{enumerate}
+
+We now examine the last two points in detail.
+
+\section{Complete Observable Sets}
+A collection of Hermitian operators $\hat{A}, \hat{B}, \ldots, \hat{P}$ forms a complete set when it contains the maximum possible number of mutually commuting operators.
+
+Example 1: For a free particle Hamiltonian:
+
+\begin{equation}
+\hat{H}=\frac{\hat{p}_{1}^{2}+\hat{p}_{2}^{2}+\hat{p}_{3}^{2}}{2 m}
+\end{equation}
+
+Several operator sets can be considered:
+\begin{enumerate}
+  \item $x_{1}, x_{2}, x_{3}$ - mutually commuting but not with $\hat{H}$
+  \item $\hat{p}_{1}, \hat{p}_{2}, \hat{p}_{3}$ - mutually commuting and commuting with $\hat{H}$
+  \item $x_{1}, x_{2}, p_{3}$ - mutually commuting but not with $\hat{H}$
+  \item $\hat{L}_{3}, \hat{L}^{2}, \hat{H}$ - mutually commuting
+  \item $\hat{p}_{i}, \hat{L}_{i}, \hat{H}$ - mutually commuting
+\end{enumerate}
+
+While options 4 and 5 are valid, $\hat{p}_{1}, \hat{p}_{2}, \hat{p}_{3}$ is most practical. For plane waves:
+
+\begin{equation}
+\hat{p}_{j} \phi_{\vec{k}}(\vec{x})=\hbar k_{j} \phi_{\vec{k}}(\vec{x})
+\end{equation}
+
+The Hamiltonian acts on these eigenfunctions as:
+
+\begin{equation}
+\hat{H} \phi_{\vec{k}}(\vec{x})=\frac{1}{2 m} \sum_{j} \hat{p}_{j}^{2} \phi_{\vec{k}}(\vec{x})=\frac{\hbar k^{2}}{2 m} \phi_{\vec{k}}(\vec{x})
+\end{equation}
+
+Example 2: For a Hamiltonian with potential:
+
+\begin{equation}
+\hat{H}=\frac{\hat{p}^{2}}{2 m}+U(\vec{x})
+\end{equation}
+
+Many commuting sets exist:
+\begin{enumerate}
+  \item $x_{1}, x_{2}, x_{3}$
+  \item $\hat{p}_{1}, \hat{p}_{2}, \hat{p}_{3}$\\
+$\cdots$\\
+n. $\hat{L}_{3}, \hat{L}^{2}, \hat{H}$
+\end{enumerate}
+
+Without knowledge of the potential form, any set might be appropriate.
+
+Example 3: For a spherically symmetric potential:
+
+\begin{equation}
+\hat{H}=\frac{\hat{p}^{2}}{2 m}+U(|\vec{x}|)
+\end{equation}
+
+The set $\hat{L}_{3}, \hat{L}^{2}, \hat{H}$ becomes particularly advantageous due to rotational symmetry. Note that since $\left[\hat{L}_{i}, \hat{L}_{j}\right]=i \hbar \epsilon_{i j k} \hat{L}_{k}$, we cannot simultaneously include both $\hat{L}_{2}$ and $\hat{L}_{3}$, but must use $\hat{L}^{2}$.
+
+\section{Quantum Coherent States}
+Coherent states minimize the uncertainty relation:
+
+\begin{equation}
+\Delta \hat{A} \Delta \hat{B}=\frac{1}{2}|[\hat{A}, \hat{B}]|
+\end{equation}
+
+These states exhibit quasi-classical behavior with minimal observable uncertainties. For position and momentum:
+
+\begin{equation}
+\Delta x \Delta \hat{p}=\frac{\hbar}{2}
+\end{equation}
+
+
+\section{Analysis of Quantum Coherent States}
+Coherent states satisfy the uncertainty relation with the minimal possible product:
+
+\begin{equation}
+\Delta \hat{A}=\sqrt{\left\langle\hat{A}^{2}\right\rangle-\langle\hat{A}\rangle^{2}}
+\end{equation}
+
+For position and momentum, coherent states are defined as eigenstates of the annihilation operator:
+
+\begin{equation}
+\hat{a} \Psi_{z}=z \Psi_{z}
+\end{equation}
+
+Using the definition of the annihilation operator:
+
+\begin{equation}
+\hat{a}=\frac{1}{\sqrt{2} \lambda}\left(x+i \frac{\lambda^{2} \hat{p}}{\hbar}\right)
+\end{equation}
+
+The eigenvalue equation becomes:
+
+\begin{equation}
+\frac{1}{\sqrt{2} \lambda}\left(x+\lambda^{2} \frac{\partial}{\partial x}\right) \Psi_{z}=z \Psi_{z}
+\end{equation}
+
+This first-order differential equation can be solved by proposing:
+
+\begin{equation}
+\Psi_{z}=c \mathrm{e}^{-\sigma x^{2}+i \eta x}
+\end{equation}
+
+Substituting into the eigenvalue equation:
+
+\begin{align}
+& \frac{1}{\sqrt{2} \lambda}\left[x+\lambda^{2} \frac{\partial}{\partial x}\right]\left(c e^{-\sigma x^{2}+i \eta x}\right)= \\
+& =\frac{1}{\sqrt{2} \lambda}\left[x c e^{-\sigma x^{2}+i \eta x}+\lambda^{2} \frac{\partial}{\partial x}\left(c e^{-\sigma x^{2}+i \eta x}\right)\right]= \\
+& =\frac{1}{\sqrt{2} \lambda}\left[x c e^{-\sigma x^{2}+i \eta x}+\lambda^{2} c(-2 \sigma x+i \eta) e^{-\sigma x^{2}+i \eta x}\right]  \\
+& =\frac{c e^{\sigma x^{2}+i \eta x}}{\sqrt{2} \lambda}\left[x+\lambda^{2}(-2 \sigma x+i \eta)\right]
+\end{align}
+
+Which gives:
+
+\begin{equation}
+z c e^{-\sigma x^{2}+i \eta x}=\frac{c e^{-\sigma x^{2}+i \eta x}}{\sqrt{2} \lambda}\left[x-\lambda^{2}(2 \sigma x+i \eta)\right]
+\end{equation}
+
+For this equation to be satisfied:
+
+\begin{align}
+& 1-\lambda^{2} 2 \sigma=0 \Longrightarrow \sigma=\frac{1}{2 \lambda^{2}} \\
+& z=\frac{i \lambda \eta}{\sqrt{2}} \Longrightarrow i \eta=\frac{\sqrt{2}}{\lambda} z
+\end{align}
+
+Therefore, the coherent state wavefunction is:
+
+\begin{equation}
+\Psi_{z}=c \exp \left(-\frac{x^{2}}{2 \lambda^{2}}+\frac{\sqrt{2}}{\lambda} z x\right) \label{eq:7.53}
+\end{equation}
+
+To normalize this wavefunction, we define $\nu=\operatorname{Re}(z)$ so that $z+z^{*}=2 \nu$ and calculate:
+
+\begin{equation}
+\Psi_{z} \Psi_{z}^{*}=c^{2} \exp \left(-\frac{x^{2}}{\lambda^{2}}+\frac{\sqrt{2}}{\lambda}\left(z+z^{*}\right) x\right)=c^{2} \exp \left(-\frac{x^{2}}{\lambda^{2}}+\frac{\sqrt{2}}{\lambda} \nu x\right)
+\end{equation}
+
+Completing the square in the exponent:
+
+\begin{equation}
+x^{2}-2 \sqrt{2} \lambda \nu x=(x-\sqrt{2} \lambda \nu)^{2}-2 \lambda^{2} \nu^{2}
+\end{equation}
+
+The probability density becomes:
+
+\begin{equation}
+\Psi_{z} \Psi_{z}^{*}=c^{2} \exp \left(-\frac{1}{\lambda^{2}}(x-\sqrt{2} \lambda \nu)^{2}+2 \nu^{2}\right)
+\end{equation}
+
+This represents a Gaussian function centered at $x_{0}=\frac{\lambda \nu}{\sqrt{2}}$.
+
+The normalization integral is:
+
+\begin{align}
+& c^{2} \int_{-\infty}^{+\infty} \mathrm{d} x \exp \left(-\frac{1}{\lambda^{2}}(x-\sqrt{2} \lambda \nu)^{2}+2 \nu^{2}\right)= \\
+& c^{2} \exp \left(2 \nu^{2}\right) \int_{-\infty}^{+\infty} \mathrm{d} x \exp \left(-\frac{1}{\lambda^{2}}(x-\sqrt{2} \lambda \nu)^{2}\right)
+\end{align}
+
+I understand now - you want me to revise the LaTeX code without adding comments, while maintaining mathematical expressions exactly as they are. Here's the revised code:
+
+
+This represents a gaussian integral with parameter $a=\frac{1}{\lambda^{2}}$ yielding $\sqrt{\frac{\pi}{a}}=\lambda \sqrt{\pi}$. The normalization condition requires:
+
+\begin{equation}
+c^{2} \mathrm{e}^{2 \nu^{2}} \lambda \sqrt{\pi}=1 \Longrightarrow c=\frac{\mathrm{e}^{-\nu^{2}}}{\sqrt{\lambda \sqrt{\pi}}}
+\end{equation}
+
+With the wavefunction normalized, we can determine the explicit form of $\Psi_{z}$. We know:
+
+\begin{equation}
+\left(\Psi_{z}, \hat{a} \Psi_{z}\right)=z\left(\Psi_{z}, \Psi_{z}\right)=z
+\end{equation}
+
+Additionally:
+
+\begin{align}
+\left(\Psi_{z}, \hat{a} \Psi_{z}\right) & =\frac{1}{\sqrt{2} \lambda}\left(\Psi_{z}, x \Psi_{z}\right)+\frac{i \lambda}{\sqrt{2} \hbar}\left(\Psi_{z}, \hat{p} \Psi_{z}\right)  \\
+& =\frac{1}{\sqrt{2} \lambda}\langle x\rangle+\frac{i \lambda}{\sqrt{2} \hbar}\langle\hat{p}\rangle
+\end{align}
+
+Substituting into equation \eqref{eq:7.53}:
+
+\begin{align}
+\Psi_{z} & =\frac{\mathrm{e}^{-\nu^{2}}}{\sqrt{\lambda \sqrt{\pi}}} \exp \left(-\frac{x^{2}}{2 \lambda^{2}}+\frac{\sqrt{2}}{\lambda} \frac{1}{\sqrt{2} \lambda}\langle x\rangle x+\frac{\sqrt{2}}{\lambda} \frac{i \lambda}{\sqrt{2} \hbar}\langle\hat{p}\rangle x\right)= \\
+& =\frac{\mathrm{e}^{-\nu^{2}}}{\sqrt{\lambda \sqrt{\pi}}} \exp \left(-\frac{x^{2}}{2 \lambda^{2}}+\frac{1}{\lambda^{2}}\langle x\rangle x+\frac{i}{\hbar}\langle\hat{p}\rangle x\right)= \\
+& =\frac{\mathrm{e}^{-\nu^{2}}}{\sqrt{\lambda \sqrt{\pi}}} \exp \left[-\frac{1}{2 \lambda^{2}}\left(x^{2}-2\langle x\rangle x\right)+\frac{i}{\hbar}\langle\hat{p}\rangle x\right]=  \label{eq:7.61}\\
+& =\frac{\mathrm{e}^{-\nu^{2}}}{\sqrt{\lambda \sqrt{\pi}}} \exp \left[-\frac{1}{2 \lambda^{2}}(x-\langle x\rangle)^{2}+\frac{\langle x\rangle^{2}}{2 \lambda^{2}}+\frac{i}{\hbar}\langle\hat{p}\rangle x\right]
+\end{align}
+
+For $\langle x\rangle$, the ladder operator properties give us:
+
+\begin{equation}
+x=\frac{\lambda}{\sqrt{2}}\left(\hat{a}+\hat{a}^{\dagger}\right)
+\end{equation}
+
+Since $z^{*}$ corresponds to $\hat{a}^{\dagger}$:
+
+\begin{equation}
+\left(\Psi_{z}, \hat{a}^{\dagger} \Psi_{z}\right)^{*}=\left(\hat{a}^{\dagger} \Psi_{z}, \Psi_{z}\right)=\left(\Psi_{z}, \hat{a} \Psi_{z}\right)=z
+\end{equation}
+
+Therefore:
+
+\begin{align}
+\langle x\rangle & =\left(\Psi_{z}, \frac{\lambda}{\sqrt{2}}\left(\hat{a}+\hat{a}^{\dagger}\right) \Psi_{z}\right)=\frac{\lambda}{\sqrt{2}}\left[\left(\Psi_{z}, \hat{a} \Psi_{z}\right)+\left(\Psi_{z}, \hat{a}^{\dagger} \Psi_{z}\right)\right]=  \\
+& =\frac{\lambda}{\sqrt{2}}\left(z+z^{*}\right)=\frac{2 \nu \lambda}{\sqrt{2}}
+\end{align}
+
+Squaring this result:
+
+\begin{equation}
+\langle x\rangle^{2}=2 \nu^{2} \lambda^{2}
+\end{equation}
+
+Substituting into equation \eqref{eq:7.61}:
+
+\begin{gather}
+\Psi_{z}=\frac{1}{\sqrt{\lambda \sqrt{\pi}}} \exp \left[-\frac{1}{2 \lambda^{2}}(x-\langle x\rangle)^{2}-\mathcal{\nu}^{2}+\mathcal{P}^{2}+\frac{i}{\hbar}\langle\hat{p}\rangle x\right]  \\
+\Psi_{z}=\frac{1}{\sqrt{\lambda \sqrt{\pi}}} \exp \left(-\frac{1}{2 \lambda^{2}}(x-\langle x\rangle)^{2}\right) \exp \left(i \frac{\langle\hat{p}\rangle}{\hbar} x\right)
+\end{gather}
+
+The second exponential represents a plane wave, while the first describes a gaussian distribution centered at $\langle x\rangle$ with variance $\sigma^{2}=\lambda^{2}$. This confines the highest probability region to a narrow band proportional to $\lambda$, explaining why coherent states approach deterministic behavior.
+
+For the uncertainty relation $\Delta x \Delta p=\hbar / 2$, recall from the harmonic oscillator:
+
+\begin{align}
+\Delta x & =\sqrt{\left\langle x^{2}\right\rangle-\langle x\rangle^{2}}=\sqrt{\left\langle x^{2}\right\rangle} \\
+\Delta p & =\sqrt{\left\langle\hat{p}^{2}\right\rangle-\langle\hat{p}\rangle^{2}}=\sqrt{\left\langle p^{2}\right\rangle}
+\end{align}
+
+\begin{equation}
+\Delta x \Delta p=\frac{\hbar}{2}(2 n+1) \geq \frac{\hbar}{2}
+\end{equation}
+
+This relation represents the fundamental uncertainty principle for quantum states, establishing the minimum bound for simultaneous measurement precision.
+
+\begin{align}
+\langle x\rangle & =\sqrt{\frac{\hbar}{2 m \omega}}\left(\Psi_{z},\left(\hat{a}+\hat{a}^{\dagger}\right) \Psi_{z}\right)= \\
+& =\sqrt{\frac{\hbar}{2 m \omega}}\left[\left(\Psi_{z}, \hat{a} \Psi_{z}\right)+\left(\Psi_{z}, \hat{a}^{\dagger} \Psi_{z}\right)\right]=  \\
+& =\sqrt{\frac{\hbar}{2 m \omega}}\left(z+z^{*}\right)
+\end{align}
+
+Here we derive the expectation value of position for a coherent state by expressing the position operator in terms of creation and annihilation operators.
+
+\begin{align}
+\langle\hat{p}\rangle & =-i \sqrt{\frac{\hbar m \omega}{2}}\left(\Psi_{z},\left(\hat{a}-\hat{a}^{\dagger}\right) \Psi_{z}\right)= \\
+& =-i \sqrt{\frac{\hbar m \omega}{2}}\left[\left(\Psi_{z}, \hat{a} \Psi_{z}\right)-\left(\Psi_{z}, \hat{a}^{\dagger} \Psi_{z}\right)\right]=  \\
+& =-i \sqrt{\frac{\hbar m \omega}{2}}\left(z-z^{*}\right) \\
+\left\langle x^{2}\right\rangle & =\frac{\hbar}{2 m \omega}\left(\Psi_{z},\left(\hat{a}+\hat{a}^{\dagger}\right)^{2} \Psi_{z}\right) \\
+& =\frac{\hbar}{2 m \omega}\left(\Psi_{z},\left(\hat{a}^{2}+\hat{a}^{\dagger 2}+\hat{a} \hat{a}^{\dagger}+\hat{a}^{\dagger} \hat{a}\right) \Psi_{z}\right) \\
+& =\frac{\hbar}{2 m \omega}\left(\Psi_{z},\left(\hat{a}^{2}+\hat{a}^{\dagger 2}+\hat{a}^{\dagger} \hat{a}+1+\hat{a}^{\dagger} \hat{a}\right) \Psi_{z}\right)  \\
+& =\frac{\hbar}{2 m \omega}\left(z^{2}+z^{* 2}+2 z^{*} z+1\right) \\
+& =\frac{\hbar}{2 m \omega}\left[\left(z+z^{*}\right)^{2}+1\right] \\
+\left\langle\hat{p}^{2}\right\rangle & =-\frac{\hbar m \omega}{2}\left(\Psi_{z},\left(\hat{a}-\hat{a}^{\dagger}\right)^{2} \Psi_{z}\right) \\
+& =-\frac{\hbar m \omega}{2}\left(\Psi_{z},\left(\hat{a}^{2}-\hat{a} \hat{a}^{\dagger}-\hat{a}^{\dagger} \hat{a}+\hat{a}^{\dagger 2}\right) \Psi_{z}\right) \\
+& =-\frac{\hbar m \omega}{2}\left(\Psi_{z},\left(\hat{a}^{2}-\hat{a}^{\dagger} \hat{a}-1-\hat{a}^{\dagger} \hat{a}+\hat{a}^{\dagger 2}\right) \Psi_{z}\right)  \\
+& =-\frac{\hbar m \omega}{2}\left(z^{2}+z^{* 2}-2 z^{*} z-1\right) \\
+& =-\frac{\hbar m \omega}{2}\left[\left(z-z^{*}\right)^{2}-1\right]
+\end{align}
+
+The calculations of squared expectation values reveal the variance properties of coherent states.
+
+\begin{align}
+\Delta x & =\sqrt{\frac{\hbar}{2 m \omega}\left[\left(z+z^{*}\right)^{2}+1\right]-\frac{\hbar}{2 m \omega}\left(z+z^{*}\right)^{2}}=\sqrt{\frac{\hbar}{2 m \omega}}  \\
+\Delta p & =\sqrt{-\frac{\hbar m \omega}{2}\left[\left(z-z^{*}\right)^{2}-1\right]+\frac{\hbar m \omega}{2}\left(z-z^{*}\right)^{2}}=\sqrt{\frac{\hbar m \omega}{2}}
+\end{align}
+
+Through algebraic simplification, we find that the uncertainties in position and momentum are independent of the specific coherent state parameter.
+
+\begin{equation}
+\Delta x \Delta p=\sqrt{\frac{\hbar}{2 m \omega} \frac{\hbar m \omega}{2}}=\frac{\hbar}{2}
+\end{equation}
+
+This remarkable result demonstrates that coherent states achieve the minimum possible uncertainty product allowed by quantum mechanics.
+
+\section{Construction of coherent states via eigenfunctions}
+We may alternatively build coherent states beginning with the harmonic oscillator eigenfunctions:
+
+\begin{equation}
+\frac{1}{\sqrt{2^{n} n!}} \frac{1}{\sqrt{\lambda \sqrt{\pi}}} \exp \left(-\frac{x^{2}}{2 \lambda^{2}}\right) H_{n}\left(\frac{x}{\lambda}\right)
+\end{equation}
+
+Our goal is to identify a quantum state $\Psi_{z}$ that satisfies the eigenvalue equation:
+
+\begin{equation}
+\hat{a} \Psi_{z}=z \Psi_{z}
+\end{equation}
+
+We can express this state through a Fourier expansion using the complete set of eigenfunctions $\Psi_{n}$:
+
+\begin{equation}
+\Psi_{z}=\sum_{n=0}^{\infty} c_{n} \Psi_{n} \quad \text { s.t. } \quad \hat{a} \Psi_{z}=z \Psi_{z}
+\end{equation}
+
+Applying the annihilation operator to this expansion yields:
+
+\begin{equation}
+\hat{a} \Psi_{z}=\hat{a} \sum_{n=0}^{\infty} c_{n} \Psi_{n}=\sum_{n=0}^{\infty} c_{n} \hat{a} \Psi_{n}=\sum_{n=0}^{\infty} c_{n} \sqrt{n} \Psi_{n-1}
+\end{equation}
+
+Through an index transformation $n \rightarrow n+1$, we can rewrite this as:
+
+\begin{equation}
+\hat{a} \Psi_{z}=\sum_{n=0}^{\infty} c_{n+1} \sqrt{n+1} \Psi_{n}
+\end{equation}
+
+From the eigenvalue condition, we also have:
+
+\begin{equation}
+\hat{a} \Psi_{z}=z \Psi_{z}=z \sum_{n=0}^{\infty} c_{n} \Psi_{n}
+\end{equation}
+
+\begin{equation}
+z \sum_{n=0}^{\infty} c_{n} \Psi_{n}=\sum_{n=0}^{\infty} c_{n+1} \sqrt{n+1} \Psi_{n}
+\end{equation}
+
+Comparing coefficients on both sides of this equation reveals a fundamental relationship between successive terms in our expansion.
+
+\begin{equation}
+z c_{n}=\sqrt{n+1} c_{n+1} \Longrightarrow c_{n}=\frac{z c_{n-1}}{\sqrt{n}}
+\end{equation}
+
+This recursive relation provides a systematic way to determine all coefficients from the initial value $c_0$.
+
+\begin{equation}
+c_{n}=\frac{z c_{n-1}}{\sqrt{n}}=\frac{z}{\sqrt{n}} \frac{z c_{n-2}}{\sqrt{n-1}}=\ldots=\frac{z^{n}}{\sqrt{n!}} c_{0}
+\end{equation}
+
+Through iterative application of the recurrence relation, we express each coefficient in terms of the parameter $z$ and the initial coefficient $c_0$.
+
+\begin{equation}
+\left(\Psi_{z}, \Psi_{z}\right) \stackrel{!}{=} 1
+\end{equation}
+
+The normalization requirement ensures our coherent state has unit probability across all space.
+
+\begin{align}
+\left(\Psi_{z}, \Psi_{z}\right) & =\left(\sum_{n} \frac{z^{n}}{\sqrt{n!}} c_{0} \Psi_{n}, \sum_{m} \frac{z^{m}}{\sqrt{m!}} c_{0} \Psi_{m}\right)=c_{0}^{2} \sum_{n} \sum_{m} \frac{z^{n} z^{* m}}{\sqrt{n!m!}}\left(\Psi_{n}, \Psi_{m}\right)= \\
+& =c_{0}^{2} \sum_{n} \sum_{m} \frac{z^{n} z^{* m}}{\sqrt{n!m!}} \delta_{n m}=c_{0}^{2} \sum_{n} \frac{\left(|z|^{2}\right)^{n}}{n!}= \\
+& =c_{0}^{2} \exp \left(|z|^{2}\right)
+\end{align}
+
+The orthonormality of the basis states simplifies the double sum to a recognizable exponential series.
+
+\begin{equation}
+c_{0}^{2} \exp \left(|z|^{2}\right)=1 \Longrightarrow c_{0}=\exp \left(-\frac{|z|^{2}}{2}\right)
+\end{equation}
+
+Solving for the normalization constant yields a characteristic exponential form that ensures proper probability interpretation.
+
+\begin{equation}
+\Psi_{z}=\mathrm{e}^{-|z|^{2} / 2} \sum_{n} \frac{z^{n}}{\sqrt{n!}} \Psi_{n}
+\end{equation}
+
+The complete coherent state representation elegantly combines the basis states with coefficients determined by the parameter $z$.
+
+\section{Temporal evolution of coherent states}
+We now examine how coherent states evolve under the influence of the harmonic oscillator Hamiltonian:
+
+\begin{align}
+\exp \left(-i \frac{t}{\hbar} H\right) \Psi_{z} & =\exp \left(-|z|^{2} / 2\right) \sum_{n} \frac{z^{n}}{\sqrt{n!}} \exp \left(-i \frac{t}{\hbar} H\right) \Psi_{n}= \\
+& =\exp \left(-|z|^{2} / 2\right) \sum_{n} \frac{z^{n}}{\sqrt{n!}} \exp \left(-i \frac{t}{\hbar} \hbar \omega\left(\hat{n}+\frac{1}{2}\right)\right) \Psi_{n}= \\
+& =\exp \left(-|z|^{2} / 2\right) \sum_{n} \frac{z^{n}}{\sqrt{n!}} \exp \left(-i t \omega\left(n+\frac{1}{2}\right)\right) \Psi_{n}= \\
+& =\exp \left(-\frac{|z|^{2}+i \omega t}{2}\right) \sum_{n} \frac{z^{n}}{\sqrt{n!}}[\exp (-i t \omega)]^{n} \Psi_{n}= \\
+& =\exp \left(-\frac{|z|^{2}+i \omega t}{2}\right) \sum_{n} \frac{z^{n}(t)}{\sqrt{n!}} \Psi_{n}=
+\end{align}
+
+The time evolution maintains the coherent state structure with a time-dependent parameter $z(t)=z \exp (-i t \omega)$.
+
+We observe that the expectation values follow classical-like trajectories:
+
+$\langle x\rangle=\sqrt{\frac{\hbar}{2 m \omega}}\left(\Psi_{z},\left(a^{\dagger}+a\right) \Psi_{z}\right)=\sqrt{\frac{\hbar}{2 m \omega}}\left(z^{*}(t)+z(t)\right)=\sqrt{\frac{2 \hbar}{m \omega}}\left|z_{0}\right| \cos \left(\omega t-\phi_{0}\right)$
+
+\begin{equation}
+\langle p\rangle=\sqrt{\frac{\hbar m \omega}{2}}\left(\Phi_{z},\left(a-a^{\dagger}\right) \Phi_{z}\right)=\sqrt{\frac{\hbar m \omega}{2}}\left(z^{*}(t)-z(t)\right)=\sqrt{\frac{\hbar m \omega}{2}}\left|z_{0}\right| \sin \left(\omega t-\phi_{0}\right)
+\end{equation}
+
+These expressions demonstrate that coherent states exhibit dynamics remarkably similar to classical harmonic oscillation with amplitude $A=\sqrt{\frac{2 \hbar}{m \omega}}\left|z_{0}\right|$.
+
+\section{Complementary approach to coherent state dynamics}
+An alternative derivation of coherent state evolution begins with the ansatz:
+
+\begin{equation}
+\Psi_{z}(x, t)=\mathrm{e}^{i \alpha} \Psi_{z}(x)
+\end{equation}
+
+Where the parameter $z$ evolves according to:
+
+\begin{equation}
+z(t)=z_{0} \mathrm{e}^{-i \omega t}
+\end{equation}
+
+\begin{align}
+i \hbar \frac{\partial}{\partial t}\left(\mathrm{e}^{i \alpha} \Psi_{z}(x)\right) & =\mathrm{e}^{i \alpha} H \Psi_{z}(x) \\
+i \hbar \mathrm{e}^{i \alpha} \frac{\partial \Psi_{z}(x)}{\partial t}-\hbar \dot{\alpha} \mathrm{e}^{i \alpha} \Psi_{z}(x) & =\mathrm{e}^{i \alpha} H \Psi_{z}(x)
+\end{align}
+
+The Schrödinger equation governs how our quantum state evolves in time, capturing both the phase evolution and the change in state structure.
+
+\begin{align}
+& -\hbar \dot{\alpha} \mathrm{e}^{i \alpha} \Psi_{z}(x)+i \hbar \mathrm{e}^{i \alpha} \frac{\partial}{\partial t} \sum_{n=0}^{\infty} \frac{z^{n}}{\sqrt{n!}} \Psi_{n}= \\
+& =-\hbar \dot{\alpha} \mathrm{e}^{i \alpha} \Psi_{z}(x)+i \hbar \mathrm{e}^{i \alpha} \sum_{n=0}^{\infty} n \frac{\dot{z}}{z} \frac{z^{n}}{\sqrt{n!}} \Psi_{n}= \\
+& =-\hbar \dot{\alpha} \mathrm{e}^{i \alpha} \Psi_{z}(x)+i \hbar \mathrm{e}^{i \alpha} \sum_{n=0}^{\infty} n \frac{-i \omega \cancel{z}}{\cancel{z}} \frac{z^{n}}{\sqrt{n!}} \Psi_{n}=  \\
+& =-\hbar \dot{\alpha} \mathrm{e}^{i \alpha} \Psi_{z}(x)+\mathrm{e}^{i \alpha} \sum_{n=0}^{\infty}(\hbar \omega n) \frac{z^{n}}{\sqrt{n!}} \Psi_{n}=
+\end{align}
+
+Substituting our time-dependent parameter into the coherent state expansion reveals how each energy component evolves.
+
+\begin{align}
+& \mathrm{e}^{i \alpha} H \Psi_{z}(x)=\mathrm{e}^{i \alpha} \hbar \omega\left(\hat{n}+\frac{1}{2}\right) \sum_{n=0}^{\infty} \frac{z^{n}}{\sqrt{n!}} \Psi_{n}=  \\
+& =\mathrm{e}^{i \alpha} \sum_{n=0}^{\infty} \hbar \omega n \frac{z^{n}}{\sqrt{n!}} \Psi_{n}+\frac{\hbar \omega}{2} \mathrm{e}^{i \alpha} \Psi_{z}
+\end{align}
+
+The Hamiltonian action on our coherent state separates into terms representing excited states and the zero-point energy contribution.
+
+\begin{align}
+-\hbar \dot{\alpha} e^{i \alpha} \Psi_{z}(x)+e^{i \alpha} \sum_{n=0}^{\infty}(\hbar \omega n) \frac{z^{n}}{\sqrt{n!}} \Psi_{n} & =e^{i \alpha} \sum_{n=0}^{\infty} \hbar \omega n \frac{z^{n}}{\sqrt{n!}} \Psi_{n}+\frac{\hbar \omega}{2} e^{i \alpha} \Psi_{z}  \\
+-\hbar \dot{\alpha} & =\frac{\hbar \omega}{2}
+\end{align}
+
+Comparing terms in the Schrödinger equation determines the phase evolution of our coherent state.
+
+\begin{equation}
+\alpha=-\frac{\omega}{2} t
+\end{equation}
+
+The phase accumulates linearly with time, reflecting the zero-point energy contribution to the coherent state dynamics.

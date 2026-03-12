@@ -1,0 +1,333 @@
+\chapter{Solutions to the Schrödinger's equation}
+
+This chapter explores general solutions to the Schrödinger equation and their physical interpretation.
+
+\section{Stationary solution}
+
+The separation of variables technique is a powerful method for solving partial differential equations like the Schrödinger equation. This approach assumes that solutions can be expressed as products of functions, each depending on a single variable.
+
+
+The separation of variables method assumes a solution of the form:
+
+\begin{equation}
+\Psi(\vec{x}, t) = f(t)\Psi(\vec{x})
+\end{equation}
+
+Substituting this into the Schrödinger equation:
+
+\begin{equation}
+i\hbar\Psi\frac{\partial f}{\partial t} = -\frac{\hbar^2}{2m}f\nabla^2\Psi + Uf\Psi
+\end{equation}
+
+Dividing by $f\Psi$ (assuming both are non-zero):
+
+\begin{align}
+\frac{1}{f(t)}i\hbar\frac{\partial f}{\partial t} &= \frac{1}{\Psi}\left(-\frac{\hbar^2}{2m}\nabla^2\Psi + U\Psi\right) \\
+\frac{1}{f(t)}i\hbar\frac{\partial f}{\partial t} &= \frac{1}{\Psi}\hat{H}\Psi
+\end{align}
+
+Since the left side depends only on time and the right side only on spatial coordinates, both must equal a constant, which we denote as $E$. This leads to two separate equations:
+
+\[
+\left\{\begin{array}{l}
+i\hbar\frac{\partial f}{\partial t} = Ef(t) \\
+\hat{H}\Psi = E\Psi
+\end{array}\right. \Rightarrow \left\{\begin{array}{l}
+f(t) = e^{-\frac{iE}{\hbar}t} \\
+\hat{H}\Psi_E = E\Psi_E
+\end{array}\right.
+\]
+
+The first equation has the solution $f(t) = e^{-\frac{iE}{\hbar}t}$, while the second is an eigenvalue equation for the Hamiltonian operator. The energy $E$ represents an eigenvalue, and $\Psi_E$ the corresponding eigenfunction.
+
+These solutions, called stationary states, have special significance in quantum mechanics as they represent states of definite energy. While the spatial probability distribution $|\Psi_E(\vec{x})|^2$ remains constant in time, the phase evolves uniformly.
+
+\section{Superposition principle}
+
+The stationary solution has the form:
+
+\begin{equation}
+\Psi(\vec{x}, t) = \exp\left(-\frac{iE}{\hbar}t\right)\Psi_E(\vec{x})
+\end{equation}
+
+Since the Schrödinger equation is linear, any linear combination of solutions is also a solution. This leads to the superposition principle, allowing us to write a general solution as:
+
+\begin{equation}
+\Psi(\vec{x}, t) = \sum_n \underbrace{c(E_n)}_{c_n}\exp\left(-\frac{iE_n}{\hbar}t\right)\Psi_{E_n}(\vec{x})
+\end{equation}
+
+Where $c_n$ are complex coefficients determining the contribution of each eigenstate to the total wavefunction.
+
+To verify this is indeed a solution, we can substitute it into the Schrödinger equation. For the time derivative:
+
+
+Verifying the superposition principle by substituting into the Schrödinger equation:
+
+For the time derivative:
+\begin{align}
+-i\hbar\frac{\partial\Psi(\vec{x},t)}{\partial t} &= -i\hbar\frac{\partial}{\partial t}\sum_n c_n\exp\left(-\frac{iE_n}{\hbar}t\right)\Psi_{E_n}(\vec{x}) \\
+&= \sum_n c_n\Psi_{E_n}(\vec{x})(-i\hbar)\frac{\partial}{\partial t}\left[\exp\left(-\frac{iE_n}{\hbar}t\right)\right] \label{eq:2.7} \\
+&= \sum_n c_nE_n\exp\left(-\frac{iE_n}{\hbar}t\right)\Psi_{E_n}(\vec{x})
+\end{align}
+
+For the Hamiltonian operating on the wavefunction:
+\begin{equation}
+\hat{H}\Psi(\vec{x},t) = \hat{H}\sum_n c_n\exp\left(-\frac{iE_n}{\hbar}t\right)\Psi_{E_n}(\vec{x})
+\end{equation}
+
+Since the Hamiltonian operates only on the spatial part:
+\begin{equation}
+\hat{H}\Psi(\vec{x},t) = \sum_n c_n\exp\left(-\frac{iE_n}{\hbar}t\right)\hat{H}\Psi_{E_n}(\vec{x})
+\end{equation}
+
+Using the eigenvalue equation $\hat{H}\Psi_{E_n} = E_n\Psi_{E_n}$:
+\begin{equation}
+\hat{H}\Psi(\vec{x},t) = \sum_n c_n\exp\left(-\frac{iE_n}{\hbar}t\right)E_n\Psi_{E_n}(\vec{x}) \label{eq:2.10}
+\end{equation}
+
+Comparing equations \eqref{eq:2.7} and \eqref{eq:2.10}, we see they are identical, confirming that the superposition indeed satisfies the Schrödinger equation.
+
+\section{Formal solution to the Schrödinger's equation}
+
+The time evolution of quantum states can be elegantly expressed using the quantum propagator, which connects the initial state to its future evolution:
+
+\begin{equation}
+\underbrace{\Psi(\vec{x},t)}_{\text{propagated state}} = \underbrace{\exp\left(-\frac{i}{\hbar}\hat{H}t\right)}_{\text{propagator}}\underbrace{\Psi(\vec{x},0)}_{\text{initial state}}
+\end{equation}
+
+The exponential operator can be expanded as a Taylor series:
+
+\begin{align}
+\Psi(\vec{x},t) = \exp\left(-\frac{i}{\hbar}\hat{H}t\right)\Psi(\vec{x},0) &\stackrel{\text{Taylor}}{=} \sum_{n=0}^{\infty}\frac{\left(-\frac{i}{\hbar}t\right)^n}{n!}\hat{H}^n\Psi(\vec{x},0) \\
+&= \sum_{n=0}^{\infty}\frac{\left(-\frac{i}{\hbar}t\right)^n}{n!}E^n\Psi(\vec{x},0)  \\
+&= \exp\left(-\frac{i}{\hbar}Et\right)\Psi(\vec{x},0)
+\end{align}
+
+This formal solution demonstrates how the time-evolution operator $\exp\left(-\frac{i}{\hbar}\hat{H}t\right)$ acts as a propagator that evolves the initial state forward in time. For stationary states (eigenstates of the Hamiltonian), this simply adds a time-dependent phase factor.
+
+For a general initial state that is a superposition of energy eigenstates, the propagator acts on each component independently, consistent with our earlier derivation using the superposition principle.
+
+The propagator formalism offers several advantages:
+
+1. It provides a compact mathematical expression for time evolution
+2. It preserves probability (unitarity) by construction
+3. It can be extended to more complex scenarios, including time-dependent Hamiltonians
+4. It connects quantum mechanics to path integral formulations
+
+This approach also highlights the fundamental role of the Hamiltonian as the generator of time translations in quantum mechanics, a direct consequence of energy conservation and time-translation symmetry.
+
+
+The formal solution to the Schrödinger equation can be verified by direct substitution. For a superposition of energy eigenstates evolved by the propagator:
+
+\begin{align}
+i\hbar\frac{\partial}{\partial t}\sum_n c_n\exp\left(-\frac{i}{\hbar}\hat{H}t\right)\Psi_{E_n} &= \sum_n c_n i\hbar\frac{\partial}{\partial t}\exp\left(-\frac{i}{\hbar}\hat{H}t\right)\Psi_{E_n} \\
+&= \sum_n c_n\exp\left(-\frac{i}{\hbar}\hat{H}t\right)\hat{H}\Psi_{E_n} \\
+&= \sum_n c_n\exp\left(-\frac{i}{\hbar}\hat{H}t\right)E_n\Psi_{E_n} \label{eq:2.13} \\
+&= \exp\left(-\frac{i}{\hbar}\hat{H}t\right)\sum_n c_nE_n\Psi_{E_n}
+\end{align}
+
+And for the Hamiltonian acting on the time-evolved state:
+\begin{align}
+\hat{H}\sum_n c_n\exp\left(-\frac{i}{\hbar}\hat{H}t\right)\Psi_{E_n} &= \sum_n c_n\hat{H}\exp\left(-\frac{i}{\hbar}\hat{H}t\right)\Psi_{E_n} \\
+&= \sum_n c_n\exp\left(-\frac{i}{\hbar}\hat{H}t\right)\hat{H}\Psi_{E_n} \\
+&= \sum_n c_n\exp\left(-\frac{i}{\hbar}\hat{H}t\right)E_n\Psi_{E_n} \label{eq:2.14} \\
+&= \exp\left(-\frac{i}{\hbar}\hat{H}t\right)\sum_n c_nE_n\Psi_{E_n}
+\end{align}
+
+Since the right-hand sides of equations \eqref{eq:2.13} and \eqref{eq:2.14} are identical, the propagator formulation satisfies the Schrödinger equation.
+
+Alternatively, we can verify this using the Taylor expansion of the propagator:
+\begin{align}
+i\hbar\frac{\partial}{\partial t}\sum_{n=0}^{\infty}\frac{\left(-\frac{i}{\hbar}t\right)^n}{n!}\hat{H}^n\Psi(\vec{x},0) &= i\hbar\sum_{n=0}^{\infty}\frac{\partial}{\partial t}\frac{\left(-\frac{i}{\hbar}t\right)^n}{n!}\hat{H}^n\Psi(\vec{x},0) \\
+&= i\hbar\sum_{n=0}^{\infty}\frac{n\left(-\frac{i}{\hbar}\right)^nt^{n-1}}{n!}\hat{H}^n\Psi(\vec{x},0) \\
+&= \sum_{n=1}^{\infty}\frac{\left(-\frac{i}{\hbar}\right)^nt^{n-1}}{(n-1)!}\hat{H}^n\Psi(\vec{x},0)  \\
+&= \sum_{s=0}^{\infty}\frac{\left(-\frac{i}{\hbar}\right)^{s+1}t^s}{s!}\hat{H}^{s+1}\Psi(\vec{x},0) \\
+&= \hat{H}\sum_{s=0}^{\infty}\frac{\left(-\frac{i}{\hbar}t\right)^s}{s!}\hat{H}^s\Psi(\vec{x},0) \\
+&= \hat{H}\exp\left(-\frac{i}{\hbar}\hat{H}t\right)\Psi(\vec{x},0)
+\end{align}
+
+This confirms that $\exp\left(-\frac{i}{\hbar}\hat{H}t\right)\Psi(\vec{x},0)$ satisfies the Schrödinger equation.
+
+For systems with continuous energy spectra (rather than discrete eigenvalues), the superposition becomes an integral:
+
+\begin{equation}
+\int_V c(E)\exp\left(-\frac{i}{\hbar}\hat{H}t\right)dE
+\end{equation}
+
+This continuous spectrum formulation is particularly relevant for unbound states, such as free particles, where energy can take any value in a continuous range.
+\section{Free particle}
+
+The free particle represents a foundational problem in quantum mechanics. While classically a free particle follows a simple trajectory:
+
+\begin{equation}
+\vec{r}(t) = \vec{r}_0 + \vec{v}t
+\end{equation}
+
+In quantum mechanics, we must solve the Schrödinger equation with the Hamiltonian:
+
+\begin{equation}
+\hat{H} = -\frac{\hbar^2}{2m}\nabla^2
+\end{equation}
+
+where the potential energy term is zero. The time-independent Schrödinger equation becomes:
+
+\begin{equation}
+\hat{H}\Psi = E\Psi
+\end{equation}
+
+For a free particle, the energy spectrum is continuous, and the energy depends on the wave vector $\vec{k}$, which is related to momentum by $\vec{p} = \hbar\vec{k}$. The stationary solutions have the form:
+
+\begin{equation}
+\Psi_{E(\vec{k})} = e^{-i\frac{E(\vec{k})}{\hbar}t}\Psi_k = e^{-i\frac{E(\vec{k})}{\hbar}t}\frac{e^{i\vec{k}\cdot\vec{x}}}{\sqrt{2\pi}}
+\end{equation}
+
+The normalization factor $\frac{1}{\sqrt{2\pi}}$ ensures proper normalization in the context of continuous spectra, where we work with wave packets rather than individual plane waves.
+
+The general solution is formed by superposing these plane wave solutions across all possible wave vectors:
+
+\begin{align}
+\Psi &= \int_V d^3k\,a(k)e^{-i\frac{E(\vec{k})}{\hbar}t}\Psi_k \\
+&= \int_V d^3k\,a(k)e^{-i\frac{E(\vec{k})}{\hbar}t}\frac{1}{\sqrt{2\pi}}e^{i\vec{k}\cdot\vec{x}}  \\
+&= \int_V d^3k\,a(k)\frac{1}{\sqrt{2\pi}}e^{i\left(\vec{k}\cdot\vec{x} - \frac{\hbar\vec{k}^2}{2m}t\right)}
+\end{align}
+
+Defining the angular frequency $\omega := \frac{\hbar\vec{k}^2}{2m}$, which represents the energy divided by $\hbar$:
+
+\begin{equation}
+\Psi = \int_V d^3k\,a(k)\frac{1}{\sqrt{2\pi}}e^{i(\vec{k}\cdot\vec{x} - \omega t)} \label{eq:3.6}
+\end{equation}
+
+This integral represents a superposition of plane waves with different wave vectors, each propagating with its own frequency determined by the dispersion relation $\omega = \frac{\hbar k^2}{2m}$. The coefficient function $a(k)$ determines the contribution of each plane wave to the overall wavefunction.
+
+Unlike classical particles, a quantum free particle is described by a wave packet that generally spreads over time. Even if initially localized, the wave packet will disperse as different momentum components travel at different speeds, a distinctly quantum phenomenon with no classical analog.
+
+The probability density $|\Psi|^2$ evolves in time, showing how the particle's position becomes increasingly uncertain—a manifestation of Heisenberg's uncertainty principle connecting position and momentum uncertainties.
+
+
+Verifying that our proposed solution satisfies the Schrödinger equation:
+
+For the time derivative:
+\begin{align}
+i\hbar\frac{\partial\Psi}{\partial t} &= i\hbar\frac{\partial}{\partial t}\int_V d^3k\,a(k)\frac{1}{\sqrt{2\pi}}e^{i(\vec{k}\cdot\vec{x}-\omega t)} \\
+&= \int_V d^3k\,a(k)\frac{1}{\sqrt{2\pi}}(-\hbar\omega i)e^{i(\vec{k}\cdot\vec{x}-\omega t)} \\
+&= \int_V d^3k\,a(k)\frac{1}{\sqrt{2\pi}}\hbar\omega e^{i(\vec{k}\cdot\vec{x}-\omega t)} \label{eq:3.7} \\
+&= \int_V d^3k\,a(k)\frac{1}{\sqrt{2\pi}}\left(\frac{\hbar^2\vec{k}^2}{2m}\right)e^{i(\vec{k}\cdot\vec{x}-\omega t)}
+\end{align}
+
+For the Hamiltonian acting on the wavefunction:
+\begin{align}
+\hat{H}\Psi &= \hat{H}\int_V d^3k\,a(k)\frac{1}{\sqrt{2\pi}}e^{i(\vec{k}\cdot\vec{x}-\omega t)} \\
+&= \int_V d^3k\,a(k)\frac{1}{\sqrt{2\pi}}\hat{H}e^{i(\vec{k}\cdot\vec{x}-\omega t)} \\
+&= \int_V d^3k\,a(k)\frac{1}{\sqrt{2\pi}}\left(-\frac{\hbar^2}{2m}\nabla^2\right)e^{i(\vec{k}\cdot\vec{x}-\omega t)} \label{eq:3.8} \\
+&= \int_V d^3k\,a(k)\frac{1}{\sqrt{2\pi}}\left(\frac{\hbar^2\vec{k}^2}{2m}\right)e^{i(\vec{k}\cdot\vec{x}-\omega t)}
+\end{align}
+
+Since the results from equations \eqref{eq:3.7} and \eqref{eq:3.8} are identical, our solution satisfies the Schrödinger equation.
+
+Now we consider the physical meaning of the coefficient function $a(k)$. For an electron beam from an emitter, $a(k)$ represents a distribution of wave vectors centered around a classical momentum $\vec{q}$. This can be modeled as a Gaussian distribution:
+
+\begin{equation}
+a(k) = Ae^{-d^2(\vec{k}-\vec{q})^2}
+\end{equation}
+
+When $\vec{k} \sim \vec{q}$, the particle behaves approximately like a classical particle. Substituting this expression for $a(k)$ into equation \eqref{eq:3.6}:
+
+\begin{equation}
+\Psi = \int_{\mathbb{R}^3}d^3k\,Ae^{-d^2(\vec{k}-\vec{q})^2}\frac{1}{\sqrt{2\pi}}e^{i(\vec{k}\cdot\vec{x}-\omega t)}
+\end{equation}
+
+Since the contributions along each dimension are independent, we can factorize this into three one-dimensional integrals:
+
+\begin{equation}
+\Psi = \int_{\mathbb{R}^3}\prod_{j=1}^3 dk_j\,A_je^{-d^2(k_j-q_j)^2}\frac{1}{\sqrt{2\pi}}e^{i(k_jx_j-\frac{\hbar k_j^2}{2m}t)}
+\end{equation}
+
+
+To solve this integral, we introduce a simplification by defining:
+
+\begin{equation}
+s := \frac{\hbar t}{2m}
+\end{equation}
+
+This allows us to rewrite our wavefunction as:
+
+\begin{align}
+\Psi &= \int_{\mathbb{R}^3}\prod_{j=1}^3dk_j\,A_je^{-d^2(k_j-q_j)^2}\frac{1}{\sqrt{2\pi}}e^{i(k_jx_j-sk_j^2)} \\
+&= \prod_{j=1}^3\frac{A_j}{\sqrt{2\pi}}\underbrace{\int_{\mathbb{R}}dk_j\,e^{-d^2(k_j-q_j)^2+i(k_jx_j-sk_j^2)}}_{I}
+\end{align}
+
+To evaluate the integral $I$, we drop the indices temporarily for clarity:
+
+\begin{align}
+\phi &= \int_{\mathbb{R}}dk\,e^{-d^2k^2+2d^2kq-d^2q^2+ikx-isk^2} \\
+&= e^{-d^2q^2}\int_{\mathbb{R}}dk\,e^{-d^2k^2+2d^2kq+ikx-isk^2}  \\
+&= e^{-d^2q^2}\int_{\mathbb{R}}dk\,e^{-k^2(d^2+is)+k(2d^2q+ix)}
+\end{align}
+
+This is a Gaussian integral that we can evaluate by defining:
+
+\begin{align}
+\nu &:= d^2+is \\
+\eta &:= 2d^2q+ix
+\end{align}
+
+To complete the square in the exponent, we add and subtract $\frac{\eta^2}{4\nu}$:
+
+\begin{align}
+\phi &= e^{-d^2q^2}\int_{\mathbb{R}}dk\,e^{-\nu k^2+\eta k} \\
+&= e^{-d^2q^2}\int_{\mathbb{R}}dk\,e^{-\nu k^2+\eta k-\frac{\eta^2}{4\nu}+\frac{\eta^2}{4\nu}}  \\
+&= e^{-d^2q^2+\frac{\eta^2}{4\nu}}\int_{\mathbb{R}}dk\,e^{-\nu\left(k-\frac{\eta}{2\nu}\right)^2}
+\end{align}
+
+This integral is a standard Gaussian form that can be evaluated using various methods, such as Feynman's trick or polar coordinates in two dimensions.
+
+
+The solution to the Gaussian integral gives us:
+
+\begin{equation}
+\phi = e^{-d^2q^2+\frac{\eta^2}{4\nu}}\sqrt{\frac{\pi}{\nu}}
+\end{equation}
+
+Since this expression generally contains complex values, we need to calculate the probability density $\rho$ by evaluating:
+
+\begin{equation}
+\rho = |\Psi|^2 = \left|\frac{A_1}{\sqrt{2\pi}}\phi_1\right|^2\left|\frac{A_2}{\sqrt{2\pi}}\phi_2\right|^2\left|\frac{A_3}{\sqrt{2\pi}}\phi_3\right|^2
+\end{equation}
+
+For this, we need to compute:
+
+\begin{gather}
+|\phi|^2 = \left|\sqrt{\frac{\pi}{\nu}}e^{\text{Re}(z)+i\text{Im}(z)}\right|^2 = \frac{\pi}{|\nu|}e^{2\text{Re}(z)}  \\
+-d^2q^2+\frac{\eta^2}{4\nu} = -d^2q^2+\frac{(d^2-is)(2d^2q+ix)^2}{4(d^4+s^2)} = \\
+= -d^2q^2+\frac{(d^2-is)(4d^4q^2+4id^2qx-x^2)}{4(d^4+s^2)} = \\
+= -d^2q^2+\frac{d^2(4d^4q^2+4id^2qx-x^2)-is(4d^4q^2+4id^2qx-x^2)}{4(d^4+s^2)} =  \\
+= -d^2q^2+\frac{d^2(4d^4q^2+4sqx-x^2)}{4(d^4+s^2)}-i\frac{(4sd^4q^2+4d^4qx-sx^2)}{4(d^4+s^2)}
+\end{gather}
+
+Therefore:
+
+\begin{align}
+\text{Re}(z) &= -d^2q^2+\frac{d^2(4d^4q^2+4sqx-x^2)}{4(d^4+s^2)} \\
+&= -d^2q^2+\frac{d^2(4d^4q^2+4s^2q^2-4s^2q^2+4sqx-x^2)}{4(d^4+s^2)} \\
+&= -d^2q^2+\frac{d^2(4d^4q^2+4s^2q^2-(x-2sq)^2)}{4(d^4+s^2)} \\
+&= -d^2q^2+\frac{4d^2q^2(d^4+s^2)-d^2(x-2sq)^2}{4(d^4+s^2)}  \\
+&= -d^2q^2+d^2q^2-\frac{d^2(x-2sq)^2}{4(d^4+s^2)} \\
+&= -\frac{d^2(x-2sq)^2}{4(d^4+s^2)}
+\end{align}
+
+Substituting the value of $s$ back:
+
+\begin{equation}
+2sq = 2\frac{\hbar t}{2m}q = \frac{\hbar q}{m}t = vt
+\end{equation}
+
+where $v = \frac{\hbar q}{m}$ is the velocity.
+
+Finally, we can evaluate one component of the probability density:
+
+\begin{align}
+\left|\frac{A_j}{\sqrt{2\pi}}\phi_j\right|^2 &= \frac{|A_j|^2}{2\pi}\frac{\pi}{|\nu|}e^{-\frac{d^2(x_j-v_jt)^2}{4(d^4+s^2)}} \\
+&= \frac{|A_j|^2}{2\sqrt{d^4+s^2}}e^{-\frac{d^2(x_j-v_jt)^2}{4(d^4+s^2)}}
+\end{align}
+
+This represents a Gaussian wave packet that moves with velocity $v_j$ along the $x_j$-axis while spreading out over time. At $t=0$, it is centered at $x=0$, and as time progresses, it both translates and spreads until it becomes essentially flat.

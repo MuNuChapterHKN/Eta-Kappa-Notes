@@ -1,0 +1,588 @@
+\chapter{Elementary Potential Problems}
+
+In quantum mechanics, we often approximate complex potentials with simpler forms. For instance, a smooth transition potential:
+
+\begin{equation}
+W(x)=\frac{V_{0}}{2}\left(1+\tanh \left(\frac{x}{d}\right)\right)
+\end{equation}
+
+Can be modeled as a step potential:
+
+\begin{equation}
+V(x)=V_{0} \theta(x)
+\end{equation}
+
+Where the Heaviside function is defined as:
+
+\[
+\theta(x)= \begin{cases}0 & \text { for } x<0  \\ 1 & \text { for } x \geq 0\end{cases}
+\]
+
+Two fundamental potential models are particularly useful:
+
+The finite potential well:
+
+\[
+V_{-}(x)= \begin{cases}0 & \text { for } x<-a  \\ -V_{0} & \text { for }-a \leq x \leq a \\ 0 & \text { for } x>a\end{cases}
+\]
+
+This approximates potentials like:
+
+\begin{equation}
+W(x)=\frac{-V_{0}}{\cosh \left(\frac{x}{d}\right)}
+\end{equation}
+
+And the finite potential barrier:
+
+\[
+V_{+}(x)= \begin{cases}0 & \text { for } x<-a  \\ V_{0} & \text { for }-a \leq x \leq a \\ 0 & \text { for } x>a\end{cases}
+\]
+
+Which models potentials of the form:
+
+\begin{equation}
+W(x)=\frac{V_{0}}{\cosh \left(\frac{x}{d}\right)}
+\end{equation}
+
+Here's the revised LaTeX code with a different structure while maintaining all mathematical expressions:
+
+
+\section{Step Potential: Solving the Eigenvalue Problem}
+
+The step potential divides space into two regions with different energy characteristics. Starting with the Hamiltonian eigenvalue equation:
+
+\begin{gather}
+\hat{H} \Psi=E \Psi  \\
+-\frac{\hbar^{2}}{2 m} \frac{d^{2} \Psi}{d x^{2}}+V_{0} \theta(x) \Psi=E \Psi
+\end{gather}
+
+We can rewrite this as a piecewise differential equation system:
+
+\[
+\begin{cases}-\frac{\hbar^{2}}{2 m} \frac{\partial^{2} \Psi}{\partial x^{2}}=E \Psi, & x<0 \text { (region I) }  \\ -\frac{\hbar^{2}}{2 m} \frac{\partial^{2} \Psi}{\partial x^{2}}+V_{0} \Psi=E \Psi, & x \geq 0 \text { (region II) }\end{cases}
+\]
+
+For the first region, we obtain a free-particle solution:
+
+\begin{align}
+& \text { Let } k=\sqrt{\frac{2 m E}{\hbar^{2}}}  \\
+& \Psi_{1}=A \mathrm{e}^{i k x}+R \mathrm{e}^{-i k x}
+\end{align}
+
+The coefficient A corresponds to the incident wave, while R represents the reflected component.
+
+For the second region, unlike classical mechanics where total reflection occurs when $E < V_0$, quantum mechanics allows for different behaviors. The general solution is:
+
+\begin{align}
+& \text { Let } q=\sqrt{\frac{2 m\left(E-V_{0}\right)}{\hbar^{2}}}  \\
+& \Psi_{2}=T \mathrm{e}^{i q x}
+\end{align}
+
+No wave from the right is included as this would be physically unrealistic.
+
+Verifying our solutions by substitution into the Schrödinger equations:
+
+\begin{align}
+k & =\sqrt{\frac{2 m E}{\hbar^{2}}}  \\
+q & =\sqrt{\frac{2 m\left(E-V_{0}\right)}{\hbar^{2}}}
+\end{align}
+
+The complete wavefunction can be expressed as:
+
+\begin{equation}
+\Psi=\Psi_{1} \theta(-x)+\Psi_{2} \theta(x)
+\end{equation}
+
+To determine the coefficients, we apply boundary conditions:
+
+\begin{enumerate}
+  \item Wavefunction continuity: $\Psi_{1}(0)=\Psi_{2}(0)$
+  \item Derivative continuity: $\Psi_{1}^{\prime}(0)=\Psi_{2}^{\prime}(0)$
+  \item Probability current continuity: $j_{1}(0)=j_{2}(0)$
+\end{enumerate}
+
+From the first condition:
+
+\begin{equation}
+A+R=T
+\end{equation}
+
+From the second condition:
+
+\begin{equation}
+i k A-i k R=i q T
+\end{equation}
+
+Solving these equations yields:
+
+\begin{align}
+\frac{R}{A} & =\frac{k-q}{k+q} \\
+\frac{T}{A} & =\frac{2 k}{k+q}
+\end{align}
+
+Substituting into our wavefunction gives:
+
+\begin{equation}
+\Psi(x)=A\left[\left(e^{i k x}+\frac{k-q}{k+q} e^{-i k x}\right) \theta(-x)+\frac{2 k}{k+q} e^{i q x} \theta(x)\right]
+\end{equation}
+
+
+\section{Probability Current Analysis for Step Potential}
+
+To verify the condition $j_{1}(0)=j_{2}(0)$, we need to calculate the probability currents in both regions. Beginning with region I:
+
+\begin{equation}
+j_{1}=\frac{\hbar}{2 m i}\left(\Psi_{1}^{*} \frac{\partial \Psi_{1}}{\partial x}-\Psi_{1} \frac{\partial \Psi_{1}^{*}}{\partial x}\right)
+\end{equation}
+
+We evaluate each component individually:
+
+\begin{align}
+\Psi_{1} & =A e^{i k x}+R e^{-i k x} \\
+\frac{\partial \Psi_{1}}{\partial x} & =i k A e^{i k x}-i k R e^{-i k x} \\
+\Psi_{1}^{*} & =A e^{-i k x}+R e^{i k x}  \\
+\frac{\partial \Psi_{1}^{*}}{\partial x} & =-i k A e^{-i k x}+i k R e^{i k x}
+\end{align}
+
+Substituting these expressions into the current formula:
+
+\begin{align}
+j_{1}= & \frac{\hbar}{2 m i}\left[\left(A e^{-i k x}+R e^{i k x}\right)\left(i k A e^{i k x}-i k R e^{-i k x}\right)\right. \\
+& \left.-\left(A e^{i k x}+R e^{-i k x}\right)\left(-i k A e^{-i k x}+i k R e^{i k x}\right)\right]= \\
+= & \frac{\hbar}{2 m i}\left[i k A^{2}-i k A R e^{-2 i k x}+i k R A e^{2 i k x}-i k R^{2}\right.  \\
+& \left.+i k A^{2}-i k A R e^{2 i k x}+i k R A e^{-2 i k x}-i k R^{2}\right]
+\end{align}
+
+The oscillatory terms cancel out, yielding:
+
+\begin{equation}
+j_{1}=\frac{\hbar k}{m}\left(A^{2}-R^{2}\right)
+\end{equation}
+
+For region II, we compute:
+
+\begin{equation}
+j_{2}=\frac{\hbar}{2 m i}\left(\Psi_{2}^{*} \frac{\partial \Psi_{2}}{\partial x}-\Psi_{2} \frac{\partial \Psi_{2}^{*}}{\partial x}\right)
+\end{equation}
+
+With the following components:
+
+\begin{align}
+\Psi_{2} & =T e^{i q x} \\
+\frac{\partial \Psi_{2}}{\partial x} & =i q T e^{i q x}  \\
+\Psi_{2}^{*} & =T e^{-i q x} \\
+\frac{\partial \Psi_{2}^{*}}{\partial x} & =-i q T e^{-i q x}
+\end{align}
+
+Inserting these into the current expression:
+
+\begin{align}
+j_{2} & =\frac{\hbar}{2 m i}\left[\left(T e^{-i q x}\right)\left(i q T e^{i q x}\right)-\left(T e^{i q x}\right)\left(-i q T e^{-i q x}\right)\right] \\
+& =\frac{\hbar}{2 m i}\left[i q T^{2}-\left(-i q T^{2}\right)\right]  \\
+& =\frac{\hbar}{2 m i}\left(2 i q T^{2}\right) \\
+& =\frac{\hbar q}{m} T^{2}
+\end{align}
+
+The probability current can be divided into three distinct contributions:
+
+\begin{align}
+j_{i n} & =\frac{\hbar k}{m} A^{2} \\
+j_{R} & =\frac{\hbar k}{m} R^{2}  \\
+j_{T} & =\frac{\hbar q}{m} T^{2}
+\end{align}
+
+This leads to a conservation principle analogous to Kirchhoff's law:
+
+\begin{equation}
+j_{1}=j_{2} \Longrightarrow j_{i n}=j_{R}+j_{T}
+\end{equation}
+
+We can express the reflection and transmission ratios as:
+
+\begin{align}
+\frac{j_{R}}{j_{\text {in }}} & =\frac{R^{2}}{A^{2}}=\left(\frac{k-q}{k+q}\right)^{2} \\
+\frac{j_{T}}{j_{\text {in }}} & =\frac{q}{k} \frac{T^{2}}{A^{2}}=\frac{q}{k}\left(\frac{2 k}{k+q}\right)^{2}=\frac{4 k q}{(k+q)^{2}}
+\end{align}
+
+For the high-energy limit where $E \gg V_{0}$:
+
+\begin{equation}
+q=\sqrt{\frac{2 m\left(E-V_{0}\right)}{\hbar^{2}}} \simeq \sqrt{\frac{2 m E}{\hbar^{2}}}=k
+\end{equation}
+
+
+\section{Analysis of Energy Regimes for Step Potential}
+
+For the high-energy case ($E \gg V_{0}$), the transmission and reflection ratios become:
+
+\begin{align}
+& \frac{j_{R}}{j_{i n}}=\frac{R^{2}}{A^{2}}=\left(\frac{k-q}{k+q}\right)^{2} \simeq 0  \\
+& \frac{j_{T}}{j_{i n}}=\frac{4 k q}{(k+q)^{2}} \simeq \frac{4 k^{2}}{4 k^{2}}=1
+\end{align}
+
+This physical result aligns with our intuition: particles with energy significantly exceeding the barrier height pass through virtually unimpeded. The wavefunction simplifies to:
+
+\begin{equation}
+\Psi \approx A \mathrm{e}^{i k x}
+\end{equation}
+
+When examining the threshold case where $E \simeq V_{0}$:
+
+\begin{equation}
+q=\sqrt{\frac{2 m\left(E-V_{0}\right)}{\hbar^{2}}} \simeq 0
+\end{equation}
+
+The transmission and reflection ratios become:
+
+\begin{align}
+\frac{j_{R}}{j_{\text {in }}} & =\frac{R^{2}}{A^{2}}=\left(\frac{k-q}{k+q}\right)^{2} \simeq \frac{k^{2}}{k^{2}}=1  \\
+\frac{j_{T}}{j_{\text {in }}} & =\frac{4 k q}{(k+q)^{2}} \simeq 0
+\end{align}
+
+In this scenario, the wave experiences complete reflection with no transmission. The amplitude coefficients satisfy:
+
+\begin{align}
+& \frac{R}{A}=\frac{k-q}{k+q} \simeq 1 \Longrightarrow R=A  \\
+& \frac{T}{A}=\frac{2 k}{k+q} \simeq 2 \Longrightarrow T=2 A
+\end{align}
+
+The regional wavefunctions become:
+
+\begin{equation}
+\Psi_{1}=A \mathrm{e}^{i k x}+A \mathrm{e}^{-i k x}=2 A \cos (k x)
+\end{equation}
+
+And:
+
+\begin{equation}
+\Psi_{2}=T \mathrm{e}^{i q x} \simeq T=2 A
+\end{equation}
+
+For the classically forbidden region where $E<V_{0}$, we redefine $q$ to maintain a real parameter:
+
+\begin{equation}
+q=\sqrt{\frac{2 m\left(V_{0}-E\right)}{\hbar}}
+\end{equation}
+
+The wavefunctions take the form:
+
+\begin{align}
+& \Psi_{1}=A \mathrm{e}^{i k x}+R \mathrm{e}^{-i k x} \\
+& \Psi_{2}=T \mathrm{e}^{-q x}
+\end{align}
+
+The boundary conditions yield:
+
+\[
+\left\{\begin{array}{l}
+A+R=T  \\
+i k A-i k R=-q T
+\end{array}\right.
+\]
+
+
+\section{Derivation of Coefficients for Sub-barrier Case}
+
+Solving the boundary condition equations for the case where $E<V_0$:
+
+\begin{align}
+& \left\{\begin{array}{l}
+A+R=T \\
+k R-k A=-i q A+-i q R
+\end{array}\right. \\
+& \left\{\begin{array}{l}
+A+R=T \\
+R(k+i q)=A(k-i q)
+\end{array}\right. \\
+& \left\{\begin{array}{l}
+A+R=T \\
+\frac{R}{A}=\frac{k-i q}{k+i q}
+\end{array}\right.  \\
+& \left\{\begin{array}{l}
+1+\frac{R}{A}=\frac{T}{A} \\
+\frac{R}{A}=\frac{k-i q}{k+i q}
+\end{array}\right. \\
+& \left\{\begin{array}{l}
+\frac{k-i q+k+i q}{k+i q}=\frac{T}{A} \\
+\frac{R}{A}=\frac{k-i q}{k+i q}
+\end{array}\right.
+\end{align}
+
+This yields the amplitude ratios:
+
+\begin{align}
+\frac{R}{A} & =\frac{k-i q}{k+i q} \\
+\frac{T}{A} & =\frac{2 k}{k+i q}
+\end{align}
+
+The complete wavefunction becomes:
+
+\begin{equation}
+\Psi(x)=A\left[\left(e^{i k x}+\frac{k-i q}{k+i q} e^{-i k x}\right) \theta(-x)+\frac{2 k}{k+i q} e^{-q x} \theta(x)\right]
+\end{equation}
+
+For region II, we analyze the probability current:
+
+\begin{equation}
+j_{2}=\frac{\hbar}{2 m i}\left(\Psi_{2}^{*} \frac{\partial \Psi_{2}}{\partial x}-\Psi_{2} \frac{\partial \Psi_{2}^{*}}{\partial x}\right)
+\end{equation}
+
+Evaluating each term:
+
+\begin{align}
+\Psi_{2} & =T e^{-q x} \\
+\frac{\partial \Psi_{2}}{\partial x} & =-q T e^{-q x} \\
+\Psi_{2}^{*} & =T^{*} e^{-q x}  \\
+\frac{\partial \Psi_{2}^{*}}{\partial x} & =-q T^{*} e^{-q x}
+\end{align}
+
+Substituting into the current expression:
+
+\begin{align}
+j_{2} & =\frac{\hbar}{2 m i}\left[\left(T e^{-q x}\right)\left(-q T^{*} e^{-q x}\right)-\left(T e^{-q x}\right)\left(-q T^{*} e^{-q x}\right)\right] \\
+& =\frac{\hbar}{2 m i}\left[-q|T|^{2} e^{-2 q x}+q|T|^{2} e^{-2 q x}\right]=0
+\end{align}
+
+Since $j_2 = 0$, the conservation law requires $j_1 = 0$ as well. For region I:
+
+\begin{equation}
+j_{1}=\frac{\hbar}{2 m i}\left(\Psi_{1}^{*} \frac{\partial \Psi_{1}}{\partial x}-\Psi_{1} \frac{\partial \Psi_{1}^{*}}{\partial x}\right)
+\end{equation}
+
+With components:
+
+\begin{align}
+\Psi_{1} & =A e^{i k x}+R e^{-i k x} \\
+\frac{\partial \Psi_{1}}{\partial x} & =i k A e^{i k x}-i k R e^{-i k x}  \\
+\Psi_{1}^{*} & =A^{*} e^{-i k x}+R^{*} e^{i k x} \\
+\frac{\partial \Psi_{1}^{*}}{\partial x} & =-i k A^{*} e^{-i k x}+i k R^{*} e^{i k x}
+\end{align}
+
+The current calculation yields:
+
+\begin{align}
+j_{1}= & \frac{\hbar}{2 m i}\left[\left(A^{*} e^{-i k x}+R^{*} e^{i k x}\right)\left(i k A e^{i k x}-i k R e^{-i k x}\right)\right. \\
+& \left.-\left(A e^{i k x}+R e^{-i k x}\right)\left(-i k A^{*} e^{-i k x}+i k R^{*} e^{i k x}\right)\right] \\
+= & \frac{\hbar}{2 m i}\left[i k|A|^{2}-i k A^{*} R e^{-2 i k x}+i k R^{*} A e^{2 i k x}-i k|R|^{2}\right. \\
+& \left.+i k|A|^{2}-i k A R^{*} e^{2 i k x}+i k R A^{*} e^{-2 i k x}-i k|R|^{2}\right] \\
+= & \frac{\hbar}{2 m i}\left[2 i k|A|^{2}-2 i k|R|^{2}+i k\left(R^{*} A-A R^{*}\right) e^{2 i k x}+i k\left(A^{*} R-R A^{*}\right) e^{-2 i k x}\right] \\
+= & \frac{\hbar}{2 m i}\left[2 i k\left(|A|^{2}-|R|^{2}\right)+i k\left(\left(R^{*} A-A R^{*}\right) e^{2 i k x}+\left(A^{*} R-R A^{*}\right) e^{-2 i k x}\right)\right]= \\
+= & \frac{\hbar k}{m}\left(|A|^{2}-|R|^{2}\right)
+\end{align}
+
+
+\section{Current Conservation and Physical Interpretation}
+
+Taking $A$ as real, the current conservation condition gives:
+
+\begin{equation}
+j_{1}=\frac{\hbar k}{m}\left(A^{2}-|R|^{2}\right)=0 \Longrightarrow|A|=|R|
+\end{equation}
+
+This equality between incident and reflected amplitudes indicates complete reflection for the sub-barrier case.
+
+\section{Finite Potential Barrier Analysis}
+
+For a rectangular potential barrier, we divide space into three distinct regions:
+
+\[
+V= \begin{cases}0 & \text { for } x<-a  \\ V_{0} & \text { for }-a \leq x \leq a \\ 0 & \text { for } x>a\end{cases}
+\]
+
+The Schrödinger equation takes different forms in each region:
+
+\[
+\begin{cases}-\frac{\hbar^{2}}{2 m} \frac{\partial^{2} \Psi_{1}}{\partial x^{2}}=E \Psi_{1}, & x<-a \quad \text { (region I) }  \\ -\frac{\hbar^{2}}{2 m} \frac{\partial^{2} \Psi_{2}}{\partial x^{2}}+V_{0} \Psi_{2}=E \Psi_{2}, & -a \leq x \leq a \quad \text { (region II) } \\ -\frac{\hbar^{2}}{2 m} \frac{\partial^{2} \Psi_{3}}{\partial x^{2}}=E \Psi_{3}, & x>a \quad \text { (region III) }\end{cases}
+\]
+
+The general solutions in each region are:
+
+\[
+\begin{array}{ll}
+\Psi_{1}(x)=A e^{i k x}+R e^{-i k x} & \text { for } x<-a \\
+\Psi_{2}(x)=C e^{i q x}+D e^{-i q x} & \text { for }-a \leq x \leq a  \\
+\Psi_{3}(x)=T e^{i k x} \quad \text { for } x>a &
+\end{array}
+\]
+
+The wavevectors are defined as:
+
+\begin{align}
+k & =\sqrt{\frac{2 m E}{\hbar^{2}}} \\
+q & =\sqrt{\frac{2 m\left(E-V_{0}\right)}{\hbar^{2}}}
+\end{align}
+
+At the boundaries between regions, we apply matching conditions:
+
+\begin{align}
+& \Psi_{1}(-a)=\Psi_{2}(-a) \\
+& \Psi_{1}^{\prime}(-a)=\Psi_{2}^{\prime}(-a) \\
+& \Psi_{2}(a)=\Psi_{3}(a)  \\
+& \Psi_{2}^{\prime}(a)=\Psi_{3}^{\prime}(a)
+\end{align}
+
+These conditions yield the following equations:
+
+\begin{equation}
+A e^{-i k a}+R e^{i k a}=C e^{-i q a}+D e^{i q a}
+\end{equation}
+
+\begin{equation}
+-i k\left(A e^{-i k a}-R e^{i k a}\right)=-i q\left(C e^{-i q a}-D e^{i q a}\right)
+\end{equation}
+
+\begin{equation}
+C e^{i q a}+D e^{-i q a}=T e^{i k a}
+\end{equation}
+
+\begin{equation}
+i q\left(C e^{i q a}-D e^{-i q a}\right)=i k T e^{i k a}
+\end{equation}
+
+Solving this system of equations, we obtain the reflection and transmission amplitudes:
+
+\begin{equation}
+\frac{R}{A}=\mathrm{e}^{-2 i k a} \frac{i\left(q^{2}-k^{2}\right) \sin (2 q a)}{2 k q \cos (2 q a)-i\left(k^{2}+q^{2}\right) \sin (2 q a)}
+\end{equation}
+
+\begin{equation}
+\frac{T}{A}=\frac{2 k q e^{-2 i k a}}{2 k q \cos (2 q a)-i\left(k^{2}+q^{2}\right) \sin (2 q a)}
+\end{equation}
+
+
+\section{Probability Current Analysis for Barrier Problem}
+
+For the finite barrier, we can express the probability currents in each region. For region I:
+
+\begin{equation}
+j_{1}=\frac{\hbar k}{m}\left(A^{2}-|R|^{2}\right)
+\end{equation}
+
+While in region III:
+
+\begin{equation}
+j_{3}=\frac{\hbar k}{m}|T|^{2}
+\end{equation}
+
+Current conservation requires $j_1 = j_2 = j_3$, leading to:
+
+\begin{equation}
+A^{2}=|R|^{2}+|T|^{2}
+\end{equation}
+
+The probability current components can be identified as:
+
+\begin{align}
+j_{i n} & =\frac{\hbar k}{m} A^{2} \\
+j_{R} & =\frac{\hbar k}{m}|R|^{2}  \\
+j_{T} & =\frac{\hbar k}{m}|T|^{2}
+\end{align}
+
+The reflection and transmission coefficients become:
+
+\begin{align}
+\frac{j_{R}}{j_{i n}} & =\frac{|R|^{2}}{A^{2}}=\frac{\left(q^{2}-k^{2}\right) \sin ^{2}(2 q a)}{4 k^{2} q^{2}+\left(k^{2}-q^{2}\right) \sin ^{2}(2 q a)} \\
+\frac{j_{T}}{j_{i n}} & =\frac{|T|^{2}}{A^{2}}=\frac{4 k^{2} q^{2}}{4 k^{2} q^{2}+\left(k^{2}-q^{2}\right) \sin ^{2}(2 q a)}
+\end{align}
+
+\section{Limiting Cases for Barrier Transmission}
+
+In the high-energy limit where $E \gg V_0$, we find $q \approx k$, resulting in:
+
+\begin{align}
+& \frac{R}{A} \rightarrow 0 \\
+& \frac{T}{A} \rightarrow 1
+\end{align}
+
+This corresponds to complete transmission through the barrier.
+
+As $E$ approaches $V_0$ from above ($E \rightarrow V_0^+$):
+
+\begin{align}
+& \frac{R}{A} \rightarrow \frac{-i k a}{1-i k a} \Longrightarrow \frac{j_{R}}{j_{i n}}=\frac{k^{2} a^{2}}{1+k^{2} a^{2}}  \\
+& \frac{T}{A} \rightarrow \frac{1}{1-i k a} \Longrightarrow \frac{j_{R}}{j_{i n}}=\frac{1}{1+k^{2} a^{2}}
+\end{align}
+
+The behavior depends critically on the dimensionless parameter $ka$, which relates to the ratio of barrier width to wavelength:
+
+\begin{equation}
+k a=\frac{2 \pi a}{\lambda}
+\end{equation}
+
+This gives rise to two distinct regimes:
+
+\[
+\begin{array}{ll}
+k a \gg 1 & \text { thick barrier } \\
+k a \ll 1 & \text { thin barrier }
+\end{array}
+\]
+
+For a thick barrier ($ka \gg 1$), the reflection dominates:
+
+\begin{align}
+\frac{R}{A} & =\frac{-i k a}{1-i k a} \rightarrow 1 \\
+\frac{T}{A} & =\frac{1}{1-i k a} \rightarrow 0
+\end{align}
+
+For a thin barrier ($ka \ll 1$), transmission prevails:
+
+\begin{align}
+\frac{R}{A} & =\frac{-i k a}{1-i k a} \rightarrow 0 \\
+\frac{T}{A} & =\frac{1}{1-i k a} \rightarrow 1
+\end{align}
+
+A particularly interesting case occurs when $q=\frac{\pi n}{a}$, where the reflection coefficient vanishes completely:
+
+\begin{align}
+\frac{R}{A} & =0 \\
+\frac{T}{A} & =1
+\end{align}
+
+
+\section{Quantum Tunneling Analysis}
+
+When the particle energy is below the potential barrier height ($E < V_0$), classical physics predicts total reflection. However, quantum mechanics allows for the tunneling effect. To analyze this phenomenon, we redefine the parameter $q$ as:
+
+\begin{equation}
+q \rightarrow i q
+\end{equation}
+
+This substitution transforms our previous formulas through the following identities:
+
+\begin{equation}
+\sin (i x)=i \sinh (x)
+\end{equation}
+
+\begin{equation}
+\cos (i x)=\cosh (x)
+\end{equation}
+
+The wavefunctions in the three regions become:
+
+\begin{align}
+& \Psi_{1}(x)=A e^{i k x}+R e^{-i k x} \quad \text { for } x<-a \\
+& \Psi_{2}(x)=C e^{q x}+D e^{-q x} \quad \text { for }-a \leq x \leq a  \\
+& \Psi_{3}(x)=T e^{i k x} \quad \text { for } x>a
+\end{align}
+
+Applying boundary conditions yields the modified reflection and transmission amplitudes:
+
+\begin{align}
+\frac{R}{A} & =\mathrm{e}^{-2 i k a} \frac{\left(q^{2}-k^{2}\right) \sinh (2 q a)}{2 i k q \cosh (2 q a)+\left(k^{2}-q^{2}\right) \sinh (2 q a)} \\
+\frac{T}{A} & =\frac{2 i k q e^{-2 i k a}}{2 i k q \cosh (2 q a)+\left(k^{2}-q^{2}\right) \sinh (2 q a)}
+\end{align}
+
+The corresponding probability current ratios are:
+
+\begin{align}
+\frac{j_{R}}{j_{i n}} & =\frac{\left(q^{2}+k^{2}\right)^{2} \sinh ^{2}(2 q a)}{4 k^{2} q^{2}+\left(q^{2}+k^{2}\right)^{2} \sinh ^{2}(2 q a)}  \\
+\frac{j_{T}}{j_{i n}} & =\frac{4 k^{2} q^{2}}{4 k^{2} q^{2}+\left(q^{2}+k^{2}\right)^{2} \sinh ^{2}(2 q a)}
+\end{align}
+
+In the limit where the barrier height greatly exceeds the particle energy ($V_0 \gg E$), we approach total reflection:
+
+\begin{align}
+& \frac{R}{A} \simeq 1  \\
+& \frac{T}{A} \simeq 0
+\end{align}

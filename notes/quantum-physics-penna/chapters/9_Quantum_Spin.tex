@@ -1,0 +1,766 @@
+\chapter{Quantum Spin}
+
+\section{The Stern-Gerlach experiment}
+The Stern-Gerlach experiment (1922) demonstrated that a beam of silver atoms, despite having zero orbital angular momentum, splits into two distinct beams when passing through a non-uniform magnetic field $\vec{B}$. Silver atoms have this property because, except for a single external electron, their electronic configuration has spherical symmetry with $\vec{L}_{\text{TOT}}=0$. The external electron is in the $5s$ state ($\ell=0$), also contributing zero orbital angular momentum.
+
+
+\begin{equation}
+H=\frac{\vec{p}^{2}}{2 m}-\vec{\mu} \cdot \vec{B}
+\end{equation}
+
+Where $\vec{\mu}=-\frac{e}{2 m_{e} c} \vec{L}$ represents the magnetic moment of a hydrogen-like atom with a single electron. Silver atoms closely match this model. The unexpected splitting observed in the experiment arises from the force due to the magnetic moment interacting with a non-uniform magnetic field:
+
+\begin{equation}
+\vec{F}=-\vec{\nabla}(-\vec{\mu} \cdot \vec{B})=\mu_{3} \frac{\partial B_{3}}{\partial x_{3}} \hat{u}_{3}
+\end{equation}
+
+According to conventional quantum theory, since the outer electron has $\ell=0$, its magnetic moment should be:
+
+\begin{equation}
+\mu_{3}=-\frac{e}{2 m_{e} c} L_{3} \propto \hbar m=0
+\end{equation}
+
+With $m=0$ being the only possible eigenvalue for $L_3$ in s-orbital states. The observed splitting revealed that electrons possess an intrinsic angular momentum called spin $\vec{S}$, which contributes to the total magnetic moment. This spin has two possible states corresponding to eigenvalues $\pm\hbar/2$ of $S_3$, explaining the two-beam splitting pattern.
+
+Numerous other experiments, including the anomalous Zeeman effect and helium spectroscopy, confirmed that spin is fundamental to atomic structure. This led to the spin-statistics theorem, which classifies elementary particles into fermions (half-integer spin particles like electrons, protons, and neutrons) and bosons (integer spin particles like photons or composite particles with even numbers of fermions).
+
+\section{Mathematical formulation of spin}
+While spin operators $S$ and angular momentum operators $L$ share similar algebraic properties, they differ fundamentally in their definitions:
+
+\begin{itemize}
+  \item $L$ is expressed through differential operators
+  \item $S$ is defined using matrices
+\end{itemize}
+
+The spin operators are constructed from the Pauli matrices:
+
+\[
+\sigma_{1}=\left[\begin{array}{ll}
+0 & 1  \\
+1 & 0
+\end{array}\right], \quad \sigma_{2}=\left[\begin{array}{cc}
+0 & -i \\
+i & 0
+\end{array}\right], \quad \sigma_{3}=\left[\begin{array}{cc}
+1 & 0 \\
+0 & -1
+\end{array}\right]
+\]
+
+The spin operators are defined as:
+
+\begin{align}
+S_{1} & =\frac{\hbar}{2} \sigma_{1} \\
+S_{2} & =\frac{\hbar}{2} \sigma_{2}  \\
+S_{3} & =\frac{\hbar}{2} \sigma_{3}
+\end{align}
+
+The Pauli matrices have the property:
+
+\begin{equation}
+\sigma_{1}^{2}=\mathbb{I}, \quad \sigma_{2}^{2}=\mathbb{I}, \quad \sigma_{3}^{2}=\mathbb{I}
+\end{equation}
+
+We can define raising and lowering operators for spin:
+
+\begin{align}
+& S_{+}=S_{1}+i S_{2}=\hbar\left[\begin{array}{ll}
+0 & 1 \\
+0 & 0
+\end{array}\right] \\
+& S_{-}=S_{1}-i S_{2}=\hbar\left[\begin{array}{ll}
+0 & 0 \\
+1 & 0
+\end{array}\right]
+\end{align}
+
+Examining their commutation relations:
+
+\begin{align}
+S_1 S_2 - S_2 S_1 &= \frac{\hbar}{2}\left[\begin{array}{ll}
+0 & 1 \\
+1 & 0
+\end{array}\right] \frac{\hbar}{2}\left[\begin{array}{cc}
+0 & -i \\
+i & 0
+\end{array}\right] - \frac{\hbar}{2}\left[\begin{array}{cc}
+0 & -i \\
+i & 0
+\end{array}\right] \frac{\hbar}{2}\left[\begin{array}{ll}
+0 & 1 \\
+1 & 0
+\end{array}\right] \\
+&= i\frac{\hbar^{2}}{4}\left[\begin{array}{cc}
+1 & 0 \\
+0 & -1
+\end{array}\right] = i\hbar S_3
+\end{align}
+
+
+Indeed, the commutation relations for spin operators mirror those of angular momentum:
+
+\begin{equation}
+\left[S_{1}, S_{2}\right]=i \hbar S_{3}
+\end{equation}
+
+And by cyclic permutation:
+
+\begin{align}
+& {\left[S_{2}, S_{3}\right]=i \hbar S_{1}} \\
+& {\left[S_{3}, S_{1}\right]=i \hbar S_{2}} \\
+& {\left[S_{+}, S_{-}\right]=2 \hbar S_{3}}  \\
+& {\left[S_{3}, S_{\pm}\right]=\pm \hbar S_{\pm}}
+\end{align}
+
+The total spin squared operator is:
+\begin{equation}
+S^{2}=S_{1}^{2}+S_{2}^{2}+S_{3}^{2}=\frac{3}{4} \hbar^{2} \mathbb{I}
+\end{equation}
+
+The standard basis consists of eigenstates of $S_3$, satisfying:
+
+\begin{equation}
+S_{3}\left|s, m_{s}\right\rangle=\hbar m_{s}\left|s, m_{s}\right\rangle \quad \text{with} \quad m_{s}=\pm\frac{1}{2}
+\end{equation}
+
+These eigenstates have the explicit matrix representation:
+
+\begin{align}
+& \left|s,+\frac{1}{2}\right\rangle=\left[\begin{array}{l}
+1 \\
+0
+\end{array}\right]  \\
+& \left|s,-\frac{1}{2}\right\rangle=\left[\begin{array}{l}
+0 \\
+1
+\end{array}\right]
+\end{align}
+
+The eigenvalue equation for $S^2$ is:
+
+\begin{equation}
+S^{2}\left|s, m_{s}\right\rangle=\hbar^{2} s(s+1)\left|s, m_{s}\right\rangle
+\end{equation}
+
+From our matrix representation, we know:
+
+\begin{equation}
+S^{2}\left|s, m_{s}\right\rangle=\frac{3}{4} \hbar^{2} \mathbb{I}\left|s, m_{s}\right\rangle=\frac{3}{4} \hbar^{2}\left|s, m_{s}\right\rangle
+\end{equation}
+
+This gives us the value of $s$:
+
+\begin{equation}
+s(s+1)=\frac{3}{4} \Longrightarrow s=\frac{1}{2}
+\end{equation}
+
+We select the positive solution by analogy with angular momentum. Since $s$ has only one value, we can simplify the notation:
+
+\begin{equation}
+|s, \pm 1/2\rangle=|\pm 1/2\rangle
+\end{equation}
+
+The action of the raising and lowering operators on these basis states is:
+
+\[
+S_{+}|-1/2\rangle=\hbar\left[\begin{array}{ll}
+0 & 1  \\
+0 & 0
+\end{array}\right]\left[\begin{array}{l}
+0 \\
+1
+\end{array}\right]=\hbar\left[\begin{array}{l}
+1 \\
+0
+\end{array}\right]=\hbar|+1/2\rangle
+\]
+
+And similarly:
+
+\[
+S_{-}|+1/2\rangle=\hbar\left[\begin{array}{ll}
+0 & 0  \\
+1 & 0
+\end{array}\right]\left[\begin{array}{l}
+1 \\
+0
+\end{array}\right]=\hbar\left[\begin{array}{l}
+0 \\
+1
+\end{array}\right]=\hbar|-1/2\rangle
+\]
+
+
+The remaining operations yield zero results:
+\begin{align}
+S_+|+1/2\rangle = 0\\
+S_-|-1/2\rangle = 0
+\end{align}
+
+When dealing with spin-dependent Hamiltonians, we work with spinor wavefunctions:
+
+\[
+|\Psi\rangle=\sum_{m_{s}= \pm 1/2} \psi_{m_{s}}\left|m_{s}\right\rangle=\psi_{+}|+1/2\rangle+\psi_{-}|-1/2\rangle=\left[\begin{array}{l}
+\psi_{+}  \\
+\psi_{-}
+\end{array}\right]
+\]
+
+For a Hamiltonian of the form:
+
+\begin{equation}
+\mathcal{H}=\mathcal{H}_{0}+\vec{\alpha} \cdot(\vec{L}+g \vec{S})
+\end{equation}
+
+The corresponding quantum mechanical operator is:
+
+\begin{equation}
+H=H_{0}+\vec{\alpha} \cdot(\vec{L}+g \vec{S})
+\end{equation}
+
+Where:
+
+\[
+\vec{L}=\left[\begin{array}{l}
+L_{1}  \\
+L_{2} \\
+L_{3}
+\end{array}\right], \quad \vec{S}=\left[\begin{array}{l}
+S_{1} \\
+S_{2} \\
+S_{3}
+\end{array}\right]
+\]
+
+Here $\vec{L}$ and $\vec{S}$ represent "vectors of operators" - a notation for operations like scalar products where each component operator acts on the corresponding component of another vector.
+
+Applying this Hamiltonian to a spinor state:
+
+\begin{align}
+& \left(H_{0}+\vec{\alpha} \cdot(\vec{L}+g \vec{S})\right)\left[\begin{array}{l}
+\psi_{+} \\
+\psi_{-}
+\end{array}\right]= \\
+& =\left[\begin{array}{l}
+H_{0} \psi_{+} \\
+H_{0} \psi_{-}
+\end{array}\right]+\left[\begin{array}{l}
+\vec{\alpha} \cdot \vec{L} \psi_{+} \\
+\vec{\alpha} \cdot \vec{L} \psi_{-}
+\end{array}\right]+\frac{g \hbar}{2}\left[\begin{array}{cc}
+\alpha_{3} & \alpha_{1}-i \alpha_{2} \\
+\alpha_{1}+i \alpha_{2} & -\alpha_{3}
+\end{array}\right]\left[\begin{array}{l}
+\psi_{+} \\
+\psi_{-}
+\end{array}\right]=  \\
+& =\left[\begin{array}{l}
+H_{0} \psi_{+} \\
+H_{0} \psi_{-}
+\end{array}\right]+\left[\begin{array}{l}
+\vec{\alpha} \cdot \vec{L} \psi_{+} \\
+\vec{\alpha} \cdot \vec{L} \psi_{-}
+\end{array}\right]+\frac{g \hbar}{2}\left[\begin{array}{l}
+\alpha_{3} \psi_{+}+\left(\alpha_{1}-i \alpha_{2}\right) \psi_{-} \\
+\left(\alpha_{1}+i \alpha_{2}\right) \psi_{+}-\alpha_{3} \psi_{-}
+\end{array}\right]
+\end{align}
+
+This leads to the coupled Schrödinger equations for the spinor components:
+
+\[
+-i \hbar \frac{\partial}{\partial t}\left[\begin{array}{l}
+\psi_{+}  \\
+\psi_{-}
+\end{array}\right]=\left[\begin{array}{l}
+\left(H_{0}+\vec{\alpha} \cdot \vec{L}+\frac{g\hbar}{2}\alpha_{3}\right) \psi_{+}+\frac{g\hbar}{2}\left(\alpha_{1}-i \alpha_{2}\right) \psi_{-} \\
+\left(H_{0}+\vec{\alpha} \cdot \vec{L}-\frac{g\hbar}{2}\alpha_{3}\right) \psi_{-}+\frac{g\hbar}{2}\left(\alpha_{1}+i \alpha_{2}\right) \psi_{+}
+\end{array}\right]
+\]
+
+
+These equations form a coupled system of differential equations.
+
+Setting $\vec{\alpha}=e \vec{B} / 2 m_{e} c$, we obtain the Pauli equation, which represents the non-relativistic limit of the Dirac equation:
+
+\[
+-i \hbar \frac{\partial}{\partial t}\left[\begin{array}{l}
+\psi_{+}  \\
+\psi_{-}
+\end{array}\right]=\left(-\frac{\hbar^{2}}{2 m_{e}} \nabla^{2}+V(\vec{x})+\frac{e}{2 m_{e} c} \vec{B} \cdot(\vec{L}+g \vec{S})\right)\left[\begin{array}{l}
+\psi_{+} \\
+\psi_{-}
+\end{array}\right]
+\]
+
+\section{Spin-1/2 free particle in a magnetic field}
+For a point-like particle with spin 1/2 and mass $m$ in a magnetic field, the Hamiltonian simplifies to:
+
+\begin{equation}
+H=H_{k}+H_{s}=\frac{p^{2}}{2 m}+k \vec{B} \cdot \vec{S}
+\end{equation}
+
+Using spherical coordinates for the magnetic field:
+
+\begin{equation}
+B_{1}=B \sin \theta \cos \phi, \quad B_{2}=B \sin \theta \sin \phi, \quad B_{3}=B \cos \theta
+\end{equation}
+
+The spin-dependent term becomes:
+
+\begin{align}
+k \vec{B} \cdot \vec{S} &= k \frac{\hbar}{2}\left[B_{1}\left(\begin{array}{ll}
+0 & 1 \\
+1 & 0
+\end{array}\right)+B_{2}\left(\begin{array}{cc}
+0 & -i \\
+i & 0
+\end{array}\right)+B_{3}\left(\begin{array}{cc}
+1 & 0 \\
+0 & -1
+\end{array}\right)\right] \\
+&= \frac{\hbar}{2} k B\left[\begin{array}{cc}
+\cos \theta & e^{-i \phi} \sin \theta \\
+e^{i \phi} \sin \theta & -\cos \theta
+\end{array}\right]
+\end{align}
+
+This model describes a neutral particle (like a neutron) in a time-dependent magnetic field $\vec{B}$ where $\theta=\theta(t)$ and $\phi=\phi(t)$. Such systems exhibit the Berry phase - an additional phase in the wavefunction arising from the time-dependence of $\vec{B}$.
+
+The energy eigenvalue problem is:
+
+\[
+\left[\frac{p^{2}}{2 m}+k \vec{B} \cdot \vec{S}\right]\left[\begin{array}{l}
+\psi_{+}  \\
+\psi_{-}
+\end{array}\right]=E\left[\begin{array}{l}
+\psi_{+} \\
+\psi_{-}
+\end{array}\right]
+\]
+
+The spinor wavefunction can be factorized into a plane wave and a spin vector:
+
+\[
+|\psi\rangle=\left[\begin{array}{l}
+\psi_{+}  \\
+\psi_{-}
+\end{array}\right]=e^{i \vec{k} \cdot \vec{x}}|v\rangle=e^{i \vec{k} \cdot \vec{x}}\left[\begin{array}{l}
+v_{+} \\
+v_{-}
+\end{array}\right], \quad \psi_{\pm}=v_{\pm} e^{i \vec{k} \cdot \vec{x}}
+\]
+
+Since the kinetic energy operator commutes with the spin operators, the eigenvectors of $k \vec{B} \cdot \vec{S}$ are:
+
+\[
+|v(+1)\rangle=\left[\begin{array}{c}
+\cos (\theta/2) e^{-i \phi/2}  \\
+\sin (\theta/2) e^{i \phi/2}
+\end{array}\right], \quad|v(-1)\rangle=\left[\begin{array}{c}
+-\sin (\theta/2) e^{-i \phi/2} \\
+\cos (\theta/2) e^{i \phi/2}
+\end{array}\right]
+\]
+
+These satisfy the eigenvalue equation:
+
+\[
+\frac{\hbar}{2} k B\left[\begin{array}{cc}
+\cos \theta & e^{-i \phi} \sin \theta  \\
+e^{i \phi} \sin \theta & -\cos \theta
+\end{array}\right]|v(\mu)\rangle=\mu \frac{\hbar}{2} k B|v(\mu)\rangle
+\]
+
+where $\mu = \pm 1$ corresponds to spin aligned or anti-aligned with the magnetic field.
+
+
+From these eigenvectors, we can determine the energy eigenvalues:
+
+\begin{equation}
+\left[\frac{p^{2}}{2 m}+k \vec{B} \cdot \vec{S}\right] e^{i \vec{k} \cdot \vec{x}}|v(\mu)\rangle=|v(\mu)\rangle \frac{p^{2}}{2 m} e^{i \vec{k} \cdot \vec{x}}+e^{i \vec{k} \cdot \vec{x}} k \vec{B} \cdot \vec{S}|v(\mu)\rangle=\left(\frac{\hbar^{2} k^{2}}{2 m}+\mu \frac{\hbar}{2} k B\right) e^{i \vec{k} \cdot \vec{x}}|v(\mu)\rangle
+\end{equation}
+
+Thus, the energy spectrum is:
+
+\begin{equation}
+E(\vec{k}, \mu)=\frac{\hbar^{2} k^{2}}{2 m}+\mu \frac{\hbar}{2} k B
+\end{equation}
+
+This shows how the energy splits into two levels due to the magnetic field, with the separation proportional to the field strength.
+
+\section{Addition of angular momenta}
+When two angular momenta interact in a quantum system, we need to understand how to combine them. Classically, we can add vectors $\vec{J}=\vec{L}+\vec{S}$ or $\vec{J}=\vec{S}_1+\vec{S}_2$. In quantum mechanics, this corresponds to the operator $\vec{J}=\vec{L}+\vec{S}$, which satisfies:
+
+\begin{align}
+\left[J_{n}, J_{m}\right] &= \left[L_{n}+S_{n}, L_{m}+S_{m}\right]\\
+&= \left[L_{n}, L_{m}\right]+\left[L_{n}, S_{m}\right]+\left[S_{n}, L_{m}\right]+\left[S_{n}, S_{m}\right]\\
+&= i \hbar \epsilon_{n m k} L_{k}+i \hbar \epsilon_{n m k} S_{k}=i \hbar \epsilon_{n m k} J_{k}
+\end{align}
+
+This shows that $\vec{J}$ satisfies the same commutation relations as $\vec{L}$ and $\vec{S}$, confirming that $\left[J^{2}, J_{3}\right]=0$. Therefore, the quantum numbers $j$ and $m_j$ provide a good basis.
+
+Classically, the magnitudes of these vectors are:
+
+\[
+\begin{array}{r}
+|\vec{L}|=\hbar \ell \\
+|\vec{S}|=\hbar s  \\
+\hbar(\ell-s) \leq|\vec{J}| \leq \hbar(\ell+s)
+\end{array}
+\]
+
+In quantum mechanics, the operators have eigenvalues $\hbar^{2}\ell(\ell+1)$ and $\hbar^{2}s(s+1)$, giving "quantum lengths":
+
+\begin{align}
+|L| &= \sqrt{\hbar^{2} \ell(\ell+1)} \sim \hbar \ell  \\
+|S| &= \sqrt{\hbar^{2} s(s+1)} \sim \hbar s
+\end{align}
+
+The quantum number $j$ must satisfy:
+
+\begin{equation}
+-j \leq m_{j} \leq j, \quad \ell-s \leq j \leq \ell+s
+\end{equation}
+
+Examining the commutators between $J^2$ and the individual components $L_3$ or $S_3$:
+
+\begin{align}
+\left[J^{2}, S_{3}\right] &= \left[(L+S)^{2}, S_{3}\right]\\
+&= \left[L^{2}+S^{2}+2 \vec{L} \cdot \vec{S}, S_{3}\right]\\
+&= \left[L^{2}, S_{3}\right]+\left[S^{2}, S_{3}\right]+2\left[\vec{L} \cdot \vec{S}, S_{3}\right]\\
+&= 2 \sum_{i}\left[L_{i} S_{i}, S_{3}\right]\\
+&= 2 \sum_{i}\left(L_{i}\left[S_{i}, S_{3}\right]+\left[L_{i}, S_{3}\right] S_{i}\right)\\
+&= 2 \sum_{i} L_{i}\left[S_{i}, S_{3}\right] \neq 0
+\end{align}
+
+Similarly:
+
+\begin{align}
+\left[J^{2}, L_{3}\right] &= \left[(L+S)^{2}, L_{3}\right]\\
+&= 2 \sum_{i}\left[L_{i}, L_{3}\right] S_{i} \neq 0
+\end{align}
+
+However, the sum of these commutators is zero:
+
+\begin{align}
+&2 \sum_{i}\left[L_{i}, L_{3}\right] S_{i}+2 \sum_{i} L_{i}\left[S_{i}, S_{3}\right]\\
+&= 2\left(\left[L_{1}, L_{3}\right] S_{1}+\left[L_{2}, L_{3}\right] S_{2}+L_{1}\left[S_{1}, S_{3}\right]+L_{2}\left[S_{2}, S_{3}\right]\right)\\
+&= 2\left(-i \hbar L_{2} S_{1}+i \hbar L_{1} S_{2}-i \hbar L_{1} S_{2}+i \hbar L_{2} S_{1}\right)=0
+\end{align}
+
+This confirms that $\left[J^{2}, J_{k}\right]=0$. Other useful commutators include:
+
+\begin{align}
+&\left[J^{2}, L^{2}\right]=0 \\
+&\left[L^{2}, J_{3}\right]=0  \\
+&\left[J^{2}, S^{2}\right]=0 \\
+&\left[S^{2}, J_{3}\right]=0
+\end{align}
+
+These commutation relations allow us to define a complete set of commuting observables:
+
+\begin{equation}
+S^{2}, L^{2}, J^{2}, J_{3} \quad \Longleftrightarrow \quad s, \ell, j, m_{j}
+\end{equation}
+
+The states with $m_j = m + m_s$ can be formed from different combinations of $m$ and $m_s$ that sum to the same value. This degeneracy means that states in the coupled basis $|j, m_j, \ell, s\rangle$ are superpositions of the uncoupled basis states:
+
+\begin{equation}
+\left|j, m_{j}, \ell, s\right\rangle=\sum_{m, m_{s}}^{*} C\left(m, m_{s}\right)|\ell, m\rangle\left|s, m_{s}\right\rangle
+\end{equation}
+
+
+The symbol * implies that we keep $m+m_{s}$ constant. This state satisfies:
+
+\begin{align}
+L^{2}\left|j, m_{j}, \ell, s\right\rangle &= \sum_{m, m_{s}}^{*} C\left(m, m_{s}\right) L^{2}|\ell, m\rangle\left|s, m_{s}\right\rangle \\
+&= \sum_{m, m_{s}}^{*} C\left(m, m_{s}\right)\left(\hbar^{2} \ell(\ell+1)\right)|\ell, m\rangle\left|s, m_{s}\right\rangle \\
+&= \hbar^{2} \ell(\ell+1) \sum_{m, m_{s}}^{*} C\left(m, m_{s}\right)|\ell, m\rangle\left|s, m_{s}\right\rangle=\hbar^{2} \ell(\ell+1)\left|j, m_{j}, \ell, s\right\rangle
+\end{align}
+
+Similarly for the spin operator:
+
+\begin{align}
+S^{2}\left|j, m_{j}, \ell, s\right\rangle &= \sum_{m, m_{s}}^{*} C\left(m, m_{s}\right)|\ell, m\rangle S^{2}\left|s, m_{s}\right\rangle \\
+&= \sum_{m, m_{s}}^{*} C\left(m, m_{s}\right)\left(\hbar^{2} s(s+1)\right)|\ell, m\rangle\left|s, m_{s}\right\rangle \\
+&= \hbar^{2} s(s+1) \sum_{m, m_{s}}^{*} C\left(m, m_{s}\right)|\ell, m\rangle\left|s, m_{s}\right\rangle=\hbar^{2} s(s+1)\left|j, m_{j}, \ell, s\right\rangle
+\end{align}
+
+For the z-component of total angular momentum:
+
+\begin{align}
+J_{3}\left|j, m_{j}, \ell, s\right\rangle &= \sum_{m, m_{s}}^{*} C\left(m, m_{s}\right)\left(L_{3}|\ell, m\rangle\left|s, m_{s}\right\rangle+|\ell, m\rangle S_{3}\left|s, m_{s}\right\rangle\right) \\
+&= \sum_{m, m_{s}}^{*} C\left(m, m_{s}\right) \hbar\left(m+m_{s}\right)|\ell, m\rangle\left|s, m_{s}\right\rangle \\
+&= \hbar m_{j} \sum_{m, m_{s}}^{*} C\left(m, m_{s}\right)|\ell, m\rangle\left|s, m_{s}\right\rangle=\hbar m_{j}\left|j, m_{j}, \ell, s\right\rangle
+\end{align}
+
+The coupled basis states for $j=\ell\pm\frac{1}{2}$ can be expressed as:
+
+\[
+\left\{\begin{array}{l}
+\left|\ell-\frac{1}{2}, m_{j}, \ell, s\right\rangle=\alpha_{-}\left|\ell, m_{j}-\frac{1}{2}\right\rangle\left|s,+\frac{1}{2}\right\rangle+\beta_{-}\left|\ell, m_{j}+\frac{1}{2}\right\rangle\left|s,-\frac{1}{2}\right\rangle  \\
+\left|\ell+\frac{1}{2}, m_{j}, \ell, s\right\rangle=\alpha_{+}\left|\ell, m_{j}-\frac{1}{2}\right\rangle\left|s,+\frac{1}{2}\right\rangle+\beta_{+}\left|\ell, m_{j}+\frac{1}{2}\right\rangle\left|s,-\frac{1}{2}\right\rangle
+\end{array}\right.
+\]
+
+The coefficients are given by:
+
+\begin{equation}
+\alpha_{\pm}= \pm \sqrt{\frac{\ell \pm m_{j}+\frac{1}{2}}{2\ell+1}}= \pm \beta_{\mp}
+\end{equation}
+
+These coefficients satisfy the normalization condition $\left|\alpha_{\pm}\right|^{2}+\left|\beta_{\pm}\right|^{2}=1$. For instance:
+
+\begin{align}
+\alpha_{+} &= \sqrt{\frac{\ell+m_{j}+\frac{1}{2}}{2\ell+1}}  \\
+\beta_{+} &= -\sqrt{\frac{\ell-m_{j}+\frac{1}{2}}{2\ell+1}}
+\end{align}
+
+Verifying normalization:
+
+\begin{equation}
+\left|\alpha_{+}\right|^{2}+\left|\beta_{+}\right|^{2}=\frac{\ell+m_{j}+\frac{1}{2}}{2\ell+1}+\frac{\ell-m_{j}+\frac{1}{2}}{2\ell+1}=\frac{2\ell+1}{2\ell+1}=1
+\end{equation}
+
+\section{Coupling arbitrary angular momenta}
+For two general angular momentum operators $J_{a}$ and $J_{b}$ with eigenstates:
+
+\begin{align}
+J_{a3}\left|j_{a}, m_{a}\right\rangle &= \hbar m_{a}\left|j_{a}, m_{a}\right\rangle \\
+J_{b3}\left|j_{b}, m_{b}\right\rangle &= \hbar m_{b}\left|j_{b}, m_{b}\right\rangle \\
+J_{a}^{2}\left|j_{a}, m_{a}\right\rangle &= \hbar^2 j_{a}\left(j_{a}+1\right)\left|j_{a}, m_{a}\right\rangle  \\
+J_{b}^{2}\left|j_{b}, m_{b}\right\rangle &= \hbar^{2} j_{b}\left(j_{b}+1\right)\left|j_{b}, m_{b}\right\rangle
+\end{align}
+
+The coupled states are formed as:
+
+\begin{equation}
+\left|j, m_{j}, j_{a}, j_{b}\right\rangle=\sum_{m_{a}, m_{b}}^{*} C\left(m_{a}, m_{b}\right)\left|j_{a}, m_{a}\right\rangle\left|j_{b}, m_{b}\right\rangle
+\end{equation}
+
+These states diagonalize the total angular momentum operators:
+
+\begin{align}
+J_{3}\left|j, m_{j}, j_{a}, j_{b}\right\rangle &= \hbar m_{j}\left|j, m_{j}, j_{a}, j_{b}\right\rangle \\
+J^{2}\left|j, m_{j}, j_{a}, j_{b}\right\rangle &= \hbar^2 j(j+1)\left|j, m_{j}, j_{a}, j_{b}\right\rangle
+\end{align}
+
+\section{Spin coupling illustration}
+As an illustrative example, consider coupling two spin-$\frac{1}{2}$ systems $S_{a}$ and $S_{b}$. Here $j_{a}=j_{b}=\frac{1}{2}$, so the possible values of total angular momentum $j$ are:
+
+\begin{equation}
+j=0,1
+\end{equation}
+
+And the corresponding $m_j$ values are:
+
+\begin{equation}
+m_{j}=-1,0,1
+\end{equation}
+
+
+\section{Analysis of coupled spin states}
+For the case $j=0$, we have $m_j=0$. This state can be formed from two combinations: $m_a=\frac{1}{2}, m_b=-\frac{1}{2}$ or $m_a=-\frac{1}{2}, m_b=\frac{1}{2}$. This configuration yields the singlet state:
+
+\begin{equation}
+|0,0,\frac{1}{2},\frac{1}{2}\rangle=\frac{1}{\sqrt{2}}(|\frac{1}{2},-\frac{1}{2}\rangle|\frac{1}{2},+\frac{1}{2}\rangle+\sigma|\frac{1}{2},+\frac{1}{2}\rangle|\frac{1}{2},-\frac{1}{2}\rangle)
+\end{equation}
+
+While both values $\sigma=\pm 1$ satisfy normalization, we must determine which gives the correct eigenvalue for $J^2$. We require $J^2|0,0,\frac{1}{2},\frac{1}{2}\rangle=0$. First, we express $J^2$ in terms of ladder operators:
+
+\begin{equation}
+J^{2}=J_{3}^{2}+J_{1}^{2}+J_{2}^{2}=J_{3}^{2}+\frac{1}{2}(J_{+}J_{-}+J_{-}J_{+})=J_{3}^{2}+\frac{1}{2}(2J_{+}J_{-}-2\hbar J_{3})
+\end{equation}
+
+Since $J_3|0,0,\frac{1}{2},\frac{1}{2}\rangle=0$, the terms involving $J_3$ vanish, leaving:
+
+\begin{equation}
+J^{2}=J_{+}J_{-}=(S_{a+}+S_{b+})(S_{a-}+S_{b-})
+\end{equation}
+
+Applying this to our state:
+
+\begin{align}
+J^{2}|0,0,\frac{1}{2},\frac{1}{2}\rangle &= (S_{a+}+S_{b+})(S_{a-}+S_{b-}) \frac{1}{\sqrt{2}}(|-\frac{1}{2}\rangle|+\frac{1}{2}\rangle+\sigma|+\frac{1}{2}\rangle|-\frac{1}{2}\rangle) \\
+&= (S_{a+}+S_{b+}) \frac{1}{\sqrt{2}}(S_{a-}|-\frac{1}{2}\rangle|+\frac{1}{2}\rangle+\sigma S_{a-}|+\frac{1}{2}\rangle|-\frac{1}{2}\rangle+|-\frac{1}{2}\rangle S_{b-}|+\frac{1}{2}\rangle+\sigma|+\frac{1}{2}\rangle S_{b-}|-\frac{1}{2}\rangle) \\
+&= (S_{a+}+S_{b+}) \frac{\sigma+1}{\sqrt{2}}|-\frac{1}{2}\rangle|-\frac{1}{2}\rangle \\
+&= \frac{\sigma+1}{\sqrt{2}}(S_{a+}|-\frac{1}{2}\rangle|-\frac{1}{2}\rangle+|-\frac{1}{2}\rangle S_{b+}|-\frac{1}{2}\rangle) \\
+&= \frac{\sigma+1}{\sqrt{2}}(|+\frac{1}{2}\rangle|-\frac{1}{2}\rangle+|-\frac{1}{2}\rangle|+\frac{1}{2}\rangle)
+\end{align}
+
+For this expression to equal zero, we must have $\sigma=-1$. Therefore, the singlet state is:
+
+\begin{equation}
+|0,0,\frac{1}{2},\frac{1}{2}\rangle=\frac{1}{\sqrt{2}}(|\frac{1}{2},-\frac{1}{2}\rangle|\frac{1}{2},+\frac{1}{2}\rangle-|\frac{1}{2},+\frac{1}{2}\rangle|\frac{1}{2},-\frac{1}{2}\rangle)
+\end{equation}
+
+This state is antisymmetric under particle exchange:
+
+\begin{equation}
+|0,0,j_a,j_b\rangle=-|0,0,j_b,j_a\rangle
+\end{equation}
+
+For the case $j=1$, we have three possible values: $m_j=-1,0,1$. For $m_j=\pm 1$, there is only one possible configuration:
+
+\[
+\left\{\begin{array}{l}
+|1,1,j_a,j_b\rangle=|j_a,\frac{1}{2}\rangle|j_b,\frac{1}{2}\rangle=|1,1\rangle  \\
+|1,-1,j_a,j_b\rangle=|j_a,-\frac{1}{2}\rangle|j_b,-\frac{1}{2}\rangle=|1,-1\rangle
+\end{array}\right.
+\]
+
+For $m_j=0$, we again have two possibilities: $m_a=\frac{1}{2}, m_b=-\frac{1}{2}$ or $m_a=-\frac{1}{2}, m_b=\frac{1}{2}$. The state has the form:
+
+\begin{equation}
+|1,0,\frac{1}{2},\frac{1}{2}\rangle=\frac{1}{\sqrt{2}}(|j_a,+\frac{1}{2}\rangle|j_b,-\frac{1}{2}\rangle+\nu|j_a,-\frac{1}{2}\rangle|j_b,+\frac{1}{2}\rangle)
+\end{equation}
+
+To determine $\nu$, we can generate this state by applying $J_+$ to the $m_j=-1$ state:
+
+\begin{align}
+\sqrt{2}|1,0,+\frac{1}{2},+\frac{1}{2}\rangle &= J_{+}|1,-1,+\frac{1}{2},+\frac{1}{2}\rangle=(S_{a+}+S_{b+})|j_a,-\frac{1}{2}\rangle|j_b,-\frac{1}{2}\rangle \\
+&= S_{a+}|j_a,-\frac{1}{2}\rangle|j_b,-\frac{1}{2}\rangle+|j_a,-\frac{1}{2}\rangle S_{b+}|j_b,-\frac{1}{2}\rangle \\
+&= |j_a,+\frac{1}{2}\rangle|j_b,-\frac{1}{2}\rangle+|j_a,-\frac{1}{2}\rangle|j_b,+\frac{1}{2}\rangle
+\end{align}
+
+This calculation shows that $\nu=1$. We can verify this by applying $J_+$ to the $m_j=0$ state:
+
+\begin{align}
+\sqrt{2}|1,1,+\frac{1}{2},+\frac{1}{2}\rangle &= J_{+}|1,0,+\frac{1}{2},+\frac{1}{2}\rangle=(S_{a+}+S_{b+})\frac{1}{\sqrt{2}}(|j_a,+\frac{1}{2}\rangle|j_b,-\frac{1}{2}\rangle+|j_a,-\frac{1}{2}\rangle|j_b,+\frac{1}{2}\rangle) \\
+&= \frac{1}{\sqrt{2}}(S_{a+}|j_a,+\frac{1}{2}\rangle|j_b,-\frac{1}{2}\rangle+S_{a+}|j_a,-\frac{1}{2}\rangle|j_b,+\frac{1}{2}\rangle \\
+&\quad +|j_a,+\frac{1}{2}\rangle S_{b+}|j_b,-\frac{1}{2}\rangle+|j_a,-\frac{1}{2}\rangle S_{b+}|j_b,+\frac{1}{2}\rangle) \\
+&= \frac{1}{\sqrt{2}}(|j_a,+\frac{1}{2}\rangle|j_b,+\frac{1}{2}\rangle+|j_a,+\frac{1}{2}\rangle|j_b,+\frac{1}{2}\rangle) \\
+&= \sqrt{2}|j_a,+\frac{1}{2}\rangle|j_b,+\frac{1}{2}\rangle
+\end{align}
+
+This confirms our choice of $\nu=1$ and reproduces the $m_j=1$ state correctly.
+
+The complete set of triplet states is:
+
+\[
+\left\{\begin{array}{l}
+|1,1,j_a,j_b\rangle=|j_a,\frac{1}{2}\rangle|j_b,\frac{1}{2}\rangle=|1,1\rangle  \\
+|1,0,j_a,j_b\rangle=\frac{1}{\sqrt{2}}(|j_a,+\frac{1}{2}\rangle|j_b,-\frac{1}{2}\rangle+|j_a,-\frac{1}{2}\rangle|j_b,+\frac{1}{2}\rangle) \\
+|1,-1,j_a,j_b\rangle=|j_a,-\frac{1}{2}\rangle|j_b,-\frac{1}{2}\rangle=|1,-1\rangle
+\end{array}\right.
+\]
+
+
+\section{Matrix formulation for angular momentum operators}
+The spectrum-generating algebra approach naturally leads to matrix representations of angular momentum operators. The dimension of these matrices depends on the representation index $j$, requiring $(2j+1)\times(2j+1)$ matrices. For spin-$\frac{1}{2}$ systems, this yields $2\times2$ matrices (the familiar Pauli matrices).
+
+For the case $j=1$, we need $3\times3$ matrices to represent the operators, corresponding to the three basis states with $m_j=-1,0,1$. These basis vectors can be written as:
+
+\[
+|1,+1\rangle=\left[\begin{array}{l}
+1  \\
+0 \\
+0
+\end{array}\right], \quad|1,0\rangle=\left[\begin{array}{l}
+0 \\
+1 \\
+0
+\end{array}\right], \quad|1,-1\rangle=\left[\begin{array}{l}
+0 \\
+0 \\
+1
+\end{array}\right]
+\]
+
+The matrix representation of $J_3$ in this basis is diagonal:
+
+\[
+J_{3}=\hbar\left[\begin{array}{ccc}
+1 & 0 & 0  \\
+0 & 0 & 0 \\
+0 & 0 & -1
+\end{array}\right]
+\]
+
+We can verify this acts correctly on the basis states, for example:
+
+\[
+J_{3}|1,-1\rangle=\hbar\left[\begin{array}{ccc}
+1 & 0 & 0  \\
+0 & 0 & 0 \\
+0 & 0 & -1
+\end{array}\right]\left[\begin{array}{l}
+0 \\
+0 \\
+1
+\end{array}\right]=-\hbar\left[\begin{array}{l}
+0 \\
+0 \\
+1
+\end{array}\right]
+\]
+
+To construct the ladder operators $J_+$ and $J_-$, we use the general formulas:
+
+\begin{align}
+J_{+}|j,m_j\rangle &= \hbar\sqrt{j(j+1)-m_j(m_j+1)}|j,m_j+1\rangle  \\
+J_{-}|j,m_j\rangle &= \hbar\sqrt{j(j+1)-m_j(m_j-1)}|j,m_j-1\rangle
+\end{align}
+
+Applying these to our $j=1$ basis states:
+
+\begin{align}
+J_{+}|1,+1\rangle &= \hbar\sqrt{1(1+1)-1(1+1)}|1,+2\rangle=0 \\
+J_{+}|1,0\rangle &= \hbar\sqrt{1(1+1)-0(0+1)}|1,+1\rangle=\hbar\sqrt{2}|1,+1\rangle \\
+J_{+}|1,-1\rangle &= \hbar\sqrt{1(1+1)-(-1)(0)}|1,0\rangle=\hbar\sqrt{2}|1,0\rangle \\
+J_{-}|1,+1\rangle &= \hbar\sqrt{1(1+1)-1(0)}|1,0\rangle=\hbar\sqrt{2}|1,0\rangle  \\
+J_{-}|1,0\rangle &= \hbar\sqrt{1(1+1)-0(-1)}|1,-1\rangle=\hbar\sqrt{2}|1,-1\rangle \\
+J_{-}|1,-1\rangle &= \hbar\sqrt{1(1+1)-(-1)(-2)}|1,-2\rangle=0
+\end{align}
+
+To determine the matrix elements, we start with a general form for $J_+$:
+
+\begin{gather}
+J_{+}=\hbar\left[\begin{array}{lll}
+a & b & c \\
+d & e & f \\
+g & h & i
+\end{array}\right]
+\end{gather}
+
+Then we apply this to each basis vector. For example:
+
+\begin{gather}
+J_{+}|1,+1\rangle=\hbar\left[\begin{array}{lll}
+a & b & c \\
+d & e & f \\
+g & h & i
+\end{array}\right]\left[\begin{array}{l}
+1 \\
+0 \\
+0
+\end{array}\right]=\hbar\left[\begin{array}{l}
+a \\
+d \\
+g
+\end{array}\right]
+\end{gather}
+
+
+From these conditions, we determine that $a=0, d=0, g=0$. Completing the calculations for $J_+$ and $J_-$:
+
+\[
+J_{+}=\hbar \sqrt{2}\left[\begin{array}{lll}
+0 & 1 & 0  \\
+0 & 0 & 1 \\
+0 & 0 & 0
+\end{array}\right], \quad J_{-}=\hbar \sqrt{2}\left[\begin{array}{lll}
+0 & 0 & 0 \\
+1 & 0 & 0 \\
+0 & 1 & 0
+\end{array}\right]
+\]
+
+This reveals the origin of the $\sqrt{2}$ factor encountered in our triplet state calculations. For the spin-$\frac{1}{2}$ case, the corresponding factor would be:
+
+\begin{equation}
+\hbar \sqrt{\frac{1}{2}(\frac{1}{2}+1)-\frac{1}{2}(\frac{1}{2}-1)}=\hbar
+\end{equation}
+
+This explains the structure of the spin raising and lowering operators.

@@ -1,0 +1,460 @@
+\chapter{Quantum dynamics in electromagnetic fields}
+\section{Particle motion in uniform magnetic fields}
+The classical motion of a charged particle in an electromagnetic field is governed by the Lorentz force:
+
+\begin{equation}
+m \ddot{\vec{x}}=q(\vec{E}+\frac{\vec{v}}{c} \times \vec{B})
+\end{equation}
+
+For a constant electric field $\vec{E}=-\vec{\nabla} \phi$ and uniform magnetic field $\vec{B}=(0,0,B)$, we can express the vector potential as:
+
+\begin{equation}
+\vec{A}=\frac{1}{2} \vec{B} \times \vec{x} \Rightarrow \vec{\nabla} \times(\frac{1}{2} \vec{B} \times \vec{x})=\vec{B}
+\end{equation}
+
+The Lagrangian formulation includes the minimal coupling term:
+
+\begin{equation}
+\mathcal{L}=\frac{1}{2} m \dot{\vec{x}}^{2}-q \phi+\frac{q}{c} \dot{\vec{x}} \cdot \vec{A}
+\end{equation}
+
+Expanding this expression:
+
+\begin{align}
+\mathcal{L} &= \frac{1}{2} m \dot{\vec{x}}^{2}-q \phi+\frac{q}{c} \frac{1}{2} (\vec{B} \times \vec{x}) \cdot \dot{\vec{x}}\\
+&= \frac{1}{2} m(\dot{x}_{1}^{2}+\dot{x}_{2}^{2}+\dot{x}_{3}^{2})-q \phi+\frac{q}{c} \frac{B}{2}(x_{1} \dot{x}_{2}-x_{2}\dot{x}_{1})
+\end{align}
+
+To verify this formulation reproduces the correct equations of motion, we apply the Euler-Lagrange equations:
+
+\begin{align}
+\frac{\mathrm{d}}{\mathrm{d} t}(\frac{\partial \mathcal{L}}{\partial \dot{x}_{1}})-\frac{\partial \mathcal{L}}{\partial x_{1}} &= 0 \\
+\frac{\mathrm{d}}{\mathrm{d} t}(m \dot{x}_{1}-\frac{q B}{2 c} x_{2})+q \frac{\partial \phi}{\partial x_{1}}-\frac{q B}{2 c} \dot{x}_{2} &= \\
+&= m \ddot{x}_{1}-\frac{q B}{2 c} \dot{x}_{2}+q \frac{\partial \phi}{\partial x_{1}}-\frac{q B}{2 c} \dot{x}_{2}\\
+&= m \ddot{x}_{1}-\frac{q B}{c} \dot{x}_{2}+q \frac{\partial \phi}{\partial x_{1}}=0
+\end{align}
+
+This corresponds to the $x_1$ component of the Lorentz force. Similarly for $x_2$:
+
+\begin{align}
+\frac{\mathrm{d}}{\mathrm{d} t}(\frac{\partial \mathcal{L}}{\partial \dot{x}_{2}})-\frac{\partial \mathcal{L}}{\partial x_{2}} &= \\
+\frac{\mathrm{d}}{\mathrm{d} t}(m \dot{x}_{2}+\frac{q B}{2 c} x_{1})+q \frac{\partial \phi}{\partial x_{2}}+\frac{q B}{2 c} \dot{x}_{1} &= \\
+&= m \ddot{x}_{2}+\frac{q B}{2 c} \dot{x}_{1}+q \frac{\partial \phi}{\partial x_{2}}+\frac{q B}{2 c} \dot{x}_{1}\\
+&= m \ddot{x}_{2}+\frac{q B}{c} \dot{x}_{1}+q \frac{\partial \phi}{\partial x_{2}}=0
+\end{align}
+
+The canonical momenta are therefore:
+
+\[
+\begin{array}{r}
+p_{1}=m \dot{x}_{1}-\frac{q B}{2 c} x_{2} \\
+p_{2}=m \dot{x}_{2}+\frac{q B}{2 c} x_{1}  \\
+p_{3}=m \dot{x}_{3}
+\end{array}
+\]
+
+The Hamiltonian is obtained through the Legendre transformation:
+
+\begin{align}
+\mathcal{H} &= \sum p_{j} \dot{x}_{j}-\mathcal{L}\\
+&= \dot{x}_{1}(m \dot{x}_{1}-\frac{q B}{2 c} x_{2})+\dot{x}_{2}(m \dot{x}_{2}+\frac{q B}{2 c} x_{1})+m \dot{x}_{3}^{2}\\
+&\quad -\frac{1}{2} m(\dot{x}_{1}^{2}+\dot{x}_{2}^{2}+\dot{x}_{3}^{2})+q \phi-\frac{q B}{2 c}(x_{1} \dot{x}_{2}-x_{2} \dot{x}_{1})\\
+&= \frac{1}{2} m(\dot{x}_{1}^{2}+\dot{x}_{2}^{2}+\dot{x}_{3}^{2})+q \phi
+\end{align}
+
+
+To express the Hamiltonian in terms of canonical variables, we substitute the inverse relations for velocities:
+
+\begin{align}
+\frac{(m\dot{x}_{1})^{2}}{m} &= \frac{1}{m}(p_{1}+\frac{q B}{2 c} x_{2})^{2}=\frac{p_{1}^{2}}{m}+\frac{q B}{m c} p_{1}x_{2}+\frac{q^{2}B^{2}}{4mc^{2}}x_{2}^{2} \\
+\frac{(m\dot{x}_{2})^{2}}{m} &= \frac{1}{m}(p_{2}-\frac{q B}{2 c} x_{1})^{2}=\frac{p_{2}^{2}}{m}-\frac{q B}{m c}p_{2}x_{1}+\frac{q^{2}B^{2}}{4mc^{2}}x_{1}^{2}  \\
+\frac{(m\dot{x}_{3})^{2}}{m} &= \frac{p_{3}^{2}}{m}
+\end{align}
+
+The Hamiltonian becomes:
+
+\begin{equation}
+\mathcal{H}=\frac{p_{1}^{2}+p_{2}^{2}+p_{3}^{2}}{2m}+q\phi+\frac{qB}{2mc}(p_{1}x_{2}-p_{2}x_{1})+\frac{q^{2}B^{2}}{8mc^{2}}(x_{1}^{2}+x_{2}^{2})
+\end{equation}
+
+An interesting observation emerges when examining the Poisson brackets of velocity components perpendicular to $\vec{B}$. Defining mechanical momenta:
+
+\begin{equation}
+P_{i}=m\dot{x}_{i}=p_{i}+\frac{q}{c}A_{i}
+\end{equation}
+
+We calculate:
+
+\begin{align}
+\{m\dot{x}_{1},m\dot{x}_{2}\} &= \{P_{1},P_{2}\}=\{p_{1}+\frac{q}{c}A_{1},p_{2}+\frac{q}{c}A_{2}\}\\
+&= \{p_{1},p_{2}\}+\frac{q}{c}\{p_{1},A_{2}\}+\frac{q}{c}\{A_{1},p_{2}\}+\frac{q^{2}}{c^{2}}\{A_{1},A_{2}\}\\
+&= \frac{q}{c}(\frac{\partial A_{2}}{\partial x_{1}}-\frac{\partial A_{1}}{\partial x_{2}})=\frac{q}{c}(\frac{B}{2}+\frac{B}{2})=\frac{qB}{c}\neq 0
+\end{align}
+
+Applying canonical quantization, we obtain:
+
+\begin{equation}
+[P_{1},P_{2}]=i\hbar\frac{qB}{c}
+\end{equation}
+
+For an electron ($q=-e$, $m=m_e$), the quantum Hamiltonian becomes:
+
+\begin{equation}
+H_{B}\approx\frac{p^{2}}{2m_e}+q\phi+\frac{eB}{2m_e c}(p_{1}x_{2}-p_{2}x_{1})
+\end{equation}
+
+Recognizing $p_{1}x_{2}-p_{2}x_{1}$ as the $z$-component of angular momentum $L_3$, we have:
+
+\begin{equation}
+H_{B}=\underbrace{\frac{p^{2}}{2m_e}+q\phi}_{H_0}+\frac{eB}{2m_e c}L_3
+\end{equation}
+
+This simplified form reveals that:
+
+\begin{equation}
+H_{B}=H_0+\frac{eB}{2m_e c}L_3
+\end{equation}
+
+The operators $L^2$ and $L_3$ still diagonalize this Hamiltonian, as they commute with both terms. The eigenvalues are:
+
+\begin{equation}
+H\Psi=H_0\Psi+\frac{eB}{2m_e c}L_3\Psi=\left(-\frac{Z^2e^4m_e}{\hbar^2n^2}+\frac{eB\hbar m}{2m_e c}\right)\Psi
+\end{equation}
+
+The presence of the magnetic quantum number $m$ lifts the degeneracy of the hydrogen atom energy levels.
+
+We can express the magnetic interaction term using the Bohr magneton:
+
+\begin{equation}
+\mu_B=\frac{e\hbar}{2m_e c}
+\end{equation}
+
+Giving:
+
+\begin{equation}
+H_\mu\Psi=\mu_B Bm\Psi
+\end{equation}
+
+The "weak field" approximation (neglecting $B^2$ terms) is valid when $B\leq 10^5$ G. For the hydrogen atom with Bohr radius $a=0.5$ Å:
+
+\begin{equation}
+\frac{q^2B^2}{8mc^2}(x_1^2+x_2^2\approx a^2)\approx 10^{-27} \text{ J}
+\end{equation}
+
+
+The Bohr magneton value is $\mu_{B} \approx 0.927 \times 10^{-20} \frac{\text{erg}}{\text{gauss}}$, where $1 \text{erg}=10^{-7} \text{J}$. For typical laboratory fields:
+
+\begin{equation}
+\mu_{B}B \approx 10^{-22} \text{J}
+\end{equation}
+
+Since the hydrogen atom ground state energy is approximately $E_n \approx 10^{-18} \text{J}$, this confirms that the $B^2$ term is indeed negligible compared to the magnetic moment interaction.
+
+The magnetic field term in the Hamiltonian can be written in the more familiar form:
+
+\begin{equation}
+H_{\mu}=\underbrace{\frac{e}{2m_e c}L_3}_{-\mu_3}B=-\vec{\mu}\cdot\vec{B}
+\end{equation}
+
+Where $\vec{\mu}$ represents the orbital magnetic dipole moment:
+
+\begin{equation}
+\vec{\mu}=-\frac{e}{2m_e c}\vec{L}
+\end{equation}
+
+This quantum mechanical result aligns with classical electrodynamics as described by Ampère's law:
+
+\begin{equation}
+\vec{\mu}=-\frac{e}{2m_e c}\vec{L}=-\frac{e}{2m_e c}m_e R^2\dot{\phi}\hat{u}_3
+\end{equation}
+
+For uniform circular motion, $\dot{\phi}=\frac{2\pi}{T}$, giving:
+
+\begin{equation}
+\vec{\mu}=\frac{1}{c}\underbrace{\left(-\frac{e}{T}\right)}_i \underbrace{\pi R^2}_S \hat{u}_3=\frac{1}{c}iS\hat{u}_3
+\end{equation}
+
+This matches the classical formula for a current loop's magnetic moment.
+
+\section{Zeeman effect energy spectrum}
+Considering the allowed quantum numbers:
+
+$$
+\begin{array}{llll}
+\text{For} & n=1 & \ell=0 & m=0 \\
+\text{For} & n=2 & \ell=0,1 & m=-1,0,1 \\
+\text{For} & n=3 & \ell=0,1,2 & m=-2,-1,0,1,2 \\
+\ldots & & &
+\end{array}
+$$
+
+The energy spectrum with magnetic field splitting becomes:
+
+\begin{gather}
+\text{For } n=1 \quad E_1 \\
+\text{For } n=2\left\{\begin{array}{l}
+E_2-\mu_B B \\
+E_2 \\
+E_2+\mu_B B
+\end{array}\right. \\
+\text{For } n=3\left\{\begin{array}{l}
+E_3-2\mu_B B \\
+E_3-\mu_B B \\
+E_3 \\
+E_3+\mu_B B \\
+E_3+2\mu_B B
+\end{array}\right. \\
+\cdots
+\end{gather}
+
+This splitting pattern, known as the normal Zeeman effect, does not fully match experimental observations. The discrepancy arises because we have not yet accounted for electron spin.
+
+\section{Transition selection rules}
+The allowed transitions between energy levels follow specific selection rules:
+
+\begin{align}
+\Delta m &= m'-m=0,\pm 1 \\
+\Delta\ell &= \ell'-\ell=\pm 1 \\
+\Delta m_s &= m_s'-m_s=0
+\end{align}
+
+These transitions correspond to changes in charge distribution. In classical electrodynamics, this is analogous to the radiation from an oscillating dipole (antenna effect):
+
+\begin{equation}
+I=\frac{2e^2}{3c^3}\left(\frac{d^2\vec{r}}{dt^2}\right)^2
+\end{equation}
+
+
+In quantum mechanics, the radiation intensity is given by:
+
+\begin{equation}
+I_{\nu\nu'}=\frac{2e^2}{3c^3}\left|\frac{d^2}{dt^2}\langle t,\nu'|\vec{r}|\nu,t\rangle\right|^2
+\end{equation}
+
+Where the time-dependent states are:
+
+\begin{equation}
+|\nu,t\rangle=\exp\left(-i\frac{t}{\hbar}E_n\right)|n,\ell,m\rangle
+\end{equation}
+
+Evaluating the time derivatives:
+
+\begin{align}
+I_{\nu\nu'} &=\frac{2e^2}{3c^3}\left|\frac{d^2}{dt^2}\exp\left(-i\frac{t}{\hbar}(E_n-E_{n'})\right)\langle n',\ell',m'|\vec{r}|n,\ell,m\rangle\right|^2\\
+&=\frac{2e^2}{3c^3}\omega_{n'n}^4\left|\exp\left(-i\frac{t}{\hbar}(E_n-E_{n'})\right)\langle n',\ell',m'|\vec{r}|n,\ell,m\rangle\right|^2 \\
+&=\frac{2e^2}{3c^3}\omega_{n'n}^4\left|\langle n',\ell',m'|\vec{r}|n,\ell,m\rangle\right|^2
+\end{align}
+
+The selection rules determine when the matrix element $\langle n',\ell',m'|\vec{r}|n,\ell,m\rangle$ is non-zero, thus identifying allowed transitions.
+
+\section{Spin-orbit coupling and anomalous Zeeman effect}
+To account for electron spin, we introduce an additional magnetic moment:
+
+\begin{equation}
+H_{\mu}=\frac{eB}{2m_e c}L_3
+\end{equation}
+
+By analogy with the orbital magnetic moment:
+
+\begin{equation}
+\vec{\mu}_L=-\frac{e}{2m_e c}\vec{L}
+\end{equation}
+
+We define the spin magnetic moment:
+
+\begin{equation}
+\vec{\mu}_s=-\frac{e}{2m_e c}g\vec{S}
+\end{equation}
+
+Where $g$ is the gyromagnetic ratio, which equals 2 for electrons. The complete magnetic interaction term becomes:
+
+\begin{equation}
+H_B=\frac{eB}{2m_e c}(L_3+gS_3)
+\end{equation}
+
+A more comprehensive Hamiltonian would include relativistic corrections:
+
+\begin{equation}
+H=H_0+H_B+H_{SL}+H_R+\ldots
+\end{equation}
+
+The spin-orbit coupling term $H_{SL}$ arises from the interaction between the electron's spin and its orbital motion:
+
+\begin{equation}
+H_{SL}=\frac{1}{2m_e^2c^2}\frac{1}{r}\frac{dU}{dr}\vec{S}\cdot\vec{L}=\frac{Ze^2}{2m_e^2c^2r^3}\vec{S}\cdot\vec{L}=\chi\vec{S}\cdot\vec{L}
+\end{equation}
+
+The relativistic kinetic energy correction $H_R$ is:
+
+\begin{equation}
+-\frac{(p^2)^2}{8m_e^3c^2}+\ldots
+\end{equation}
+
+This term originates from the relativistic energy-momentum relation:
+
+\begin{align}
+E &=\sqrt{p^2c^2+m_e^2c^4}=m_ec^2\sqrt{1+\frac{p^2}{m_e^2c^2}}\\
+&\approx m_ec^2\left(1+\frac{p^2}{2m_e^2c^2}-\frac{(p^2)^2}{8m_e^4c^4}\right)\\
+&=m_ec^2+\frac{p^2}{2m_e}-\frac{(p^2)^2}{8m_e^3c^2}
+\end{align}
+
+
+To estimate the magnitude of the spin-orbit coupling, we use:
+
+\begin{align}
+\vec{S}\cdot\vec{L} &\sim |S||L| \sim \hbar^2\sqrt{\ell(\ell+1)s(s+1)} \approx \hbar^2 \\
+r &\approx a=\frac{\hbar^2}{m_e e^2} \\
+\alpha &= \frac{e^2}{\hbar c} \approx \frac{1}{137} \\
+\alpha a &= \frac{\hbar}{m_e c} \\
+k &\approx \frac{1}{a}
+\end{align}
+
+The energy eigenvalue of the spin-orbit term is therefore:
+
+\begin{equation}
+E_{SL} \approx \frac{Ze^2\hbar^2}{2m_e^2c^2r^3} \approx \frac{Ze^2\hbar^2}{2m_e^2c^2a^3}=Z\alpha^2\frac{e^2}{2a}=Z\alpha^2|E_1|
+\end{equation}
+
+For the relativistic correction term:
+
+\begin{align}
+|E_R| &= \frac{p^4}{8m_e^3c^2} \approx \frac{(\hbar k)^4}{8m_e^3c^2}=\frac{\hbar^4}{8m_e^3c^2a^4}=\frac{\hbar^2}{8m_e}\frac{(\alpha a)^2}{a^4}\\
+&= \frac{1}{4}\underbrace{\frac{\hbar^2}{2m_e}\frac{2}{e^2}}_a\frac{\alpha^2}{a}\underbrace{\frac{e^2}{2a}}_{|E_1|}=\frac{\alpha^2}{4}|E_1|
+\end{align}
+
+\section{Anomalous Zeeman effect and Paschen-Back effect}
+As a first approximation, we consider only:
+
+\begin{equation}
+H=H_0+H_B
+\end{equation}
+
+The wavefunction now includes spin:
+
+\begin{equation}
+\Psi_{n\ell mm_s}=\psi_{n\ell m}|s,m_s\rangle
+\end{equation}
+
+Applying the Hamiltonian:
+
+\begin{align}
+H\Psi_{n\ell mm_s} &= (H_0+\frac{eB}{2m_e c}(L_3+gS_3))\psi_{n\ell m}|s,m_s\rangle\\
+&= H_0\psi_{n\ell m}|s,m_s\rangle+\frac{eB}{2m_e c}L_3\psi_{n\ell m}|s,m_s\rangle+\psi_{n\ell m}\frac{eB}{2m_e c}gS_3|s,m_s\rangle\\
+&= (E_n+\frac{eB}{2m_e c}\hbar m+\frac{eB}{2m_e c}g\hbar m_s)\psi_{n\ell m}|s,m_s\rangle\\
+&= (E_n+\frac{e\hbar B}{2m_e c}(m+gm_s))\Psi_{n\ell mm_s}\\
+&= (E_n+\mu_B B(m+gm_s))\Psi_{n\ell mm_s}
+\end{align}
+
+This gives the energy spectrum:
+
+\begin{align}
+\text{For } n=2&\left\{\begin{array}{l}
+E_2+\mu_B B(-1\pm 1)\\
+E_2\pm\mu_B B\\
+E_2+\mu_B B(1\pm 1)
+\end{array}\right.\\
+\text{For } n=3&\left\{\begin{array}{l}
+E_3+\mu_B B(-2\pm 1)\\
+E_3+\mu_B B(-1\pm 1)\\
+E_3\pm\mu_B B\\
+E_3+\mu_B B(1\pm 1)\\
+E_3+\mu_B B(2\pm 1)
+\end{array}\right.\\
+&\ldots
+\end{align}
+
+However, this approach does not fully explain the observed spectrum because we've neglected the spin-orbit coupling. When we include $H_{SL}$, we can no longer use $S_3$ and $L_3$ as good quantum numbers since:
+
+\begin{align}
+[\vec{S}\cdot\vec{L}, L_3] &\neq 0 \\
+[\vec{S}\cdot\vec{L}, S_3] &\neq 0
+\end{align}
+
+Instead, we must use the total angular momentum $\vec{J}=\vec{S}+\vec{L}$, which provides a set of commuting operators:
+
+\begin{align}
+[S^2, J^2] &= 0\\
+[L^2, J^2] &= 0\\
+[\vec{S}\cdot\vec{L}, J^2] &= 0 \\
+[\vec{S}\cdot\vec{L}, J_3] &= 0
+\end{align}
+
+The Hamiltonian is then diagonalized by the set $\{L^2, S^2, J^2, J_3\}$, giving:
+
+\begin{equation}
+H=H_0+\frac{eB}{2m_e c}(J_3+S_3)
+\end{equation}
+
+
+Although the relativistic terms are numerically small, they guide us to the correct quantum numbers for our problem:
+
+\begin{equation}
+n, j, m_j, \ell, s
+\end{equation}
+
+The corresponding spinor states are:
+
+\begin{equation}
+|n, j, m_j, \ell, s\rangle
+\end{equation}
+
+We separate the Hamiltonian into unperturbed and perturbation terms:
+
+\begin{equation}
+H=H_0+\frac{eB}{2m_e c}J_3+\frac{eB}{2m_e c}S_3=H_{un}+H_p
+\end{equation}
+
+The unperturbed Hamiltonian gives:
+
+\begin{equation}
+H_{un}|n, j, m_j, \ell, s\rangle=(E_n+\mu_B Bm_j)|n, j, m_j, \ell, s\rangle
+\end{equation}
+
+The first-order correction from the $S_3$ term is:
+
+\begin{equation}
+E \approx E_n+\mu_B Bm_j+\frac{eB}{2m_e c}\langle s,\ell,m_j,j|S_3|j,m_j,\ell,s\rangle
+\end{equation}
+
+For $j=\ell-\frac{1}{2}$, we calculate:
+
+\begin{align}
+&\langle s,\ell,m_j,\ell-\frac{1}{2}|S_3|\ell-\frac{1}{2},m_j,\ell,s\rangle\\
+&=(\langle-\frac{1}{2},s|\langle\ell,m_j+\frac{1}{2}|\beta_-^*+|+\frac{1}{2},s\rangle|\ell,m_j-\frac{1}{2}\rangle\alpha_-^*)\\
+&\times S_3(\alpha_-|\ell,m_j-\frac{1}{2}\rangle|s,+\frac{1}{2}\rangle+\beta_-|\ell,m_j+\frac{1}{2}\rangle|s,-\frac{1}{2}\rangle)\\
+&=|\alpha_-|^2\langle m_j-\frac{1}{2},\ell|\ell,m_j-\frac{1}{2}\rangle\langle+\frac{1}{2},s|S_3|s,+\frac{1}{2}\rangle\\
+&+|\beta_-|^2\langle m_j+\frac{1}{2},\ell|\ell,m_j+\frac{1}{2}\rangle\langle-\frac{1}{2},s|S_3|s,-\frac{1}{2}\rangle \\
+&=|\alpha_-|^2\langle+\frac{1}{2},s|S_3|s,+\frac{1}{2}\rangle+|\beta_-|^2\langle-\frac{1}{2},s|S_3|s,-\frac{1}{2}\rangle\\
+&=|\alpha_-|^2\frac{\hbar}{2}+|\beta_-|^2(-\frac{\hbar}{2})=\frac{\hbar}{2}\left(\frac{\ell-m_j+\frac{1}{2}}{2\ell+1}-\frac{\ell+m_j+\frac{1}{2}}{2\ell+1}\right)\\
+&=-\frac{\hbar m_j}{2\ell+1}
+\end{align}
+
+Similarly, for $j=\ell+\frac{1}{2}$:
+
+\begin{equation}
+\frac{\hbar m_j}{2\ell+1}
+\end{equation}
+
+Therefore, the energy spectrum becomes:
+
+\begin{equation}
+E=E_n+\frac{eB\hbar}{2m_e c}m_j\left(1\pm\frac{1}{2\ell+1}\right)=E_n+\frac{eB\hbar m_j}{2m_e c}\frac{2\ell+1\pm 1}{2\ell+1}
+\end{equation}
+
+This gives the experimentally observed spectrum:
+
+\begin{equation}
+E_n(\ell\pm 1/2,m_j)=E_n+\mu_B Bm_j\frac{2\ell+1\pm 1}{2\ell+1}
+\end{equation}
+
+Which, according to the selection rules, yields:
+
+\[
+\text{For } n=2\left\{\begin{array}{l}
+E_2(1-1/2,\pm 1/2)=E_2+\mu_B B(\pm 1/2)\frac{2}{3} \\
+E_2(1+1/2,\pm 1/2)=E_2+\mu_B B(\pm 1/2)\frac{4}{3}\\
+E_2(1+1/2,\pm 3/2)=E_2+\mu_B B(\pm 3/2)\frac{4}{3}
+\end{array}\right.
+\]
+
+$\cdots$
