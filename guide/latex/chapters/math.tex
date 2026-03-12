@@ -1,113 +1,129 @@
-\chapter[Advanced Mathematics]{Assigning Labels to Equations in LaTeX and Citing Them Later}
+\chapter{Inserting mathematical expressions}
 
-I don't want to talk to you about how to write mathematics, there are millions of guides on this topic. Instead, I want to talk about the ability to assign labels to equations in LaTeX so that they can be cited later.
+Mathematical expressions can be inserted both inline and in display mode.
 
-\section{Introduction}
+\section{Inline mode}
 
-One of LaTeX's most powerful features is the ability to assign labels to equations and then easily cite them within the document. This is particularly useful in scientific and technical documents, where it's often necessary to refer to specific equations. In this chapter, we will see how to label equations and how to cite them automatically, ensuring that the equation number is updated correctly during the document compilation.
+The ways to insert mathematical expressions in inline mode are
+\begin{itemize}
+    \item \lstinline[language=TeX]|$...$| (preferred)
+    \item \lstinline[language=TeX]|\(...\)|
+    \item \lstinline[language=TeX]|\begin{math}...\end{math}|
+\end{itemize}
+For example, \lstinline[language=TeX]|$E = m c^2$| results in $E = m c^2$.
 
-\section{Assigning a Label to an Equation}
+\section{Display mode}
 
-To label an equation, you need to use the \verb|\label{}| command within the environment where the equation is written (e.g., \verb|equation|, \verb|align|, etc.). The argument of the \verb|\label{}| command is the name of the label, which must be unique in the document.
+To insert a single equation in display mode, you can use
+\begin{itemize}
+    \item \lstinline[language=TeX]|\begin{equation}...\end{equation}| (preferred, numbers the equation)
+    \item \lstinline[language=TeX]|\[...\]| (does not number the equation; use rarely or not at all)
+\end{itemize}
 
-Here's an example of labeling an equation:
-\begin{quote}
-\begin{verbatim}
+For example, the code
+\begin{lstlisting}[language=TeX]
 \begin{equation}
-\label{eq:energy}
     E = m c^2
 \end{equation}
-\end{verbatim}
-\end{quote}
-
+\end{lstlisting}
+results in
 \begin{equation}
-\label{eq:energy}
     E = m c^2
 \end{equation}
 
-In this case, the equation is labeled with \texttt{eq:energy}. Now, LaTeX will automatically assign a number to this equation, which can be cited later in the document.
+\subsection{Splitting a long equation into multiple lines}
 
-\section{Citing an Equation}
+A long equation can be split into multiple lines using the \lstinline[language=TeX]|multline| environment.
+The lines are separated by \lstinline[language=TeX]|\\|; the first line is left-aligned, the last line is right-aligned, and the lines in between are centered.
 
-To reference the labeled equation, use the \verb|\ref{}| command. The argument of the \verb|\ref{}| command is the name of the label that was assigned to the equation.
+Example:
+\begin{lstlisting}[language=TeX]
+\begin{multline}
+    (a + b)^{10} = a^{10} + 10 a^9 b + 45 a^8 b^2 + 120 a^7 b^3 + 210 a^6 b^4 + {} \\
+    {} + 252 a^5 b^5 + 210 a^4 b^6 + 120 a^3 b^7 + 45 a^2 b^8 + 10 a b^9 + b^{10}
+\end{multline}
+\end{lstlisting}
+\begin{multline}
+    (a + b)^{10} = a^{10} + 10 a^9 b + 45 a^8 b^2 + 120 a^7 b^3 + 210 a^6 b^4 + {} \\
+    {} + 252 a^5 b^5 + 210 a^4 b^6 + 120 a^3 b^7 + 45 a^2 b^8 + 10 a b^9 + b^{10}
+\end{multline}
 
-Here's how to cite the previous equation:
+An alternative (which is often more appropriate) is to use \lstinline[language=TeX]|aligned| and/or \lstinline[language=TeX]|gathered| (see Section~\ref{sec:grouping_numbers}).
 
-\begin{quote}
-\begin{verbatim}
-As shown in equation \ref{eq:energy},
-Einstein's famous formula relates energy to mass.
-\end{verbatim}
-\end{quote}
+\section{Grouping multiple equations}
 
-The result will be:
+\subsection{Equations with own numbering}
 
-\begin{quote}
-    As shown in equation \ref{eq:energy},
-    Einstein's famous formula relates energy to mass.
-\end{quote}
+Use the \lstinline[language=TeX]|gather| and \lstinline[language=TeX]|align| environments to group multiple equations respectively without and with alignment.
+Each equation will retain its own number, and you can label each one separately.
 
-LaTeX will automatically replace \verb|\ref{eq:energy}| with the equation number (e.g., \((1)\)), which will update if other equations are added or removed from the document.
+Lines are separated by \lstinline[language=TeX]|\\|, and the alignment point in the \lstinline[language=TeX]|align| environment is indicated by \lstinline[language=TeX]|&|.
 
-\section{Citing an Equation with a Prefix}
+Example with \lstinline[language=TeX]|gather|:
+\begin{lstlisting}[language=TeX]
+\begin{gather}
+    a x^2 + b x + c = 0 \\
+    \Delta = b^2 - 4 a c
+\end{gather}
+\end{lstlisting}
+\begin{gather}
+    a x^2 + b x + c = 0 \\
+    \Delta = b^2 - 4 a c
+\end{gather}
 
-If you want to add a prefix to the equation number (like ``Eq.'' or ``Equation''), you can do so manually. For example:
-
-\begin{quote}
-\begin{verbatim}
-As shown in Eq.~\ref{eq:energy},
-Einstein's famous formula relates energy to mass.
-\end{verbatim}
-\end{quote}
-
-The result will be:
-
-\begin{quote}
-    As shown in Eq.~\ref{eq:energy},
-    Einstein's famous formula relates energy to mass.
-\end{quote}
-
-\section{Citations with the \texorpdfstring{\texttt{align}}{align} Environment}
-
-When using environments like \verb|align|, which allow you to write multiple equations on separate lines, you can label each individual equation. Here's an example:
+Example with \lstinline[language=TeX]|align|:
+\begin{lstlisting}[language=TeX]
 \begin{align}
-\label{eq:sum}
-    a + b & = c \\
-\label{eq:diff}
-    x - y & = z
+    \cos(2 \alpha) & = \cos^2(\alpha) - \sin^2(\alpha) = \\
+    & = 2 \cos^2(\alpha) - 1 = \\
+    & = 1 - 2 \sin^2(\alpha)
+\end{align}
+\end{lstlisting}
+\begin{align}
+    \cos(2 \alpha) & = \cos^2 \alpha - \sin^2 \alpha = \\
+    & = 2 \cos^2 \alpha - 1 = \\
+    & = 1 - 2 \sin^2 \alpha
 \end{align}
 
-To cite the individual equations:
+\subsection{Grouping equation numbers}
+\label{sec:grouping_numbers}
 
-\begin{quote}
-\begin{verbatim}
-As shown in \ref{eq:sum} and \ref{eq:diff}, the operations of
-addition and subtraction are defined respectively.
-\end{verbatim}
-\end{quote}
+To group the equation numbers as well, you can use \lstinline[language=TeX]|gathered| and \lstinline[language=TeX]|aligned| environments inside an \lstinline[language=TeX]|equation|, \lstinline[language=TeX]|gather|, or \lstinline[language=TeX]|align| environment.
 
-The result will be:
+Example with \lstinline[language=TeX]|gathered| inside \lstinline[language=TeX]|gather|:
+\begin{lstlisting}[language=TeX]
+\begin{gather}
+    \cos^2 \alpha = \frac13 \\
+\begin{gathered}
+    \cos(2 \alpha) = \cos^2 \alpha - \sin^2 \alpha = \\
+    = 2 \cos^2 \alpha - 1 = -\frac13
+\end{gathered}
+\end{gather}
+\end{lstlisting}
+\begin{gather}
+    \cos^2 \alpha = \frac13 \\
+\begin{gathered}
+    \cos(2 \alpha) = \cos^2 \alpha - \sin^2 \alpha = \\
+    = 2 \cos^2 \alpha - 1 = -\frac13
+\end{gathered}
+\end{gather}
 
-\begin{quote}
-    As shown in \ref{eq:sum} and \ref{eq:diff},
-    the operations of addition and subtraction
-    are defined respectively.
-\end{quote}
+\subsection{Equation subnumbering}
 
-\section{Citing an Equation with the \texorpdfstring{\texttt{\textbackslash eqref}}{eqref} Command}
-
-If you want to cite an equation including the parentheses around the equation number automatically, you can use the \verb|\eqref{}| command instead of \verb|\ref{}|. Here's how:
-
-\begin{quote}
-\begin{verbatim}
-As shown in \eqref{eq:energy},
-Einstein's formula expresses energy in terms of mass.
-\end{verbatim}
-\end{quote}
-
-The result will be:
-
-\begin{quote}
-    As shown in \eqref{eq:energy},
-    Einstein's formula expresses energy in terms of mass.
-\end{quote}
+You can also use the \lstinline[language=TeX]|subequations| environment around \lstinline[language=TeX]|gather| or \lstinline[language=TeX]|align| to introduce a subnumbering:
+\begin{lstlisting}[language=TeX]
+\begin{subequations}
+\begin{align}
+    \cos(2 \alpha) & = \cos^2 \alpha - \sin^2 \alpha = \\
+    & = 2 \cos^2 \alpha - 1 = \\
+    & = 1 - 2 \sin^2 \alpha
+\end{align}
+\end{subequations}
+\end{lstlisting}
+\begin{subequations}
+\begin{align}
+    \cos(2 \alpha) & = \cos^2 \alpha - \sin^2 \alpha = \\
+    & = 2 \cos^2 \alpha - 1 = \\
+    & = 1 - 2 \sin^2 \alpha
+\end{align}
+\end{subequations}

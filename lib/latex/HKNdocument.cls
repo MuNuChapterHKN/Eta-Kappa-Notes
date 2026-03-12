@@ -102,7 +102,7 @@
 \newcommand{\doclogofrontpage}{hkn_logo.pdf}      % Contains logo big path
 \newcommand{\doclogoupperpage}{hkn_ideogramma.pdf}    % Contains logo big path
 \newcommand{\doclicense}{ccbyncnd.png}  % Contains license logo path
-\newcommand{\DDorganization}{IEEE - MuNu Chapter}
+\newcommand{\DDorganization}{IEEE-HKN -- Mu Nu Chapter}
 
 % Preserve old commands for title and author
 \let\oldtitle\title
@@ -276,54 +276,69 @@
 \RequirePackage{xcolor}  % custom colors
 \RequirePackage{tcolorbox}  % custom boxes
 
-% Primary (Accent) Colors
-\definecolor{accentYellow}{RGB}{254, 196, 41}  % #FEC421
-\definecolor{accentRed}{RGB}{236, 45, 36}      % #EC2D24
+% HKN color palette
+\definecolor{hknLightBlue}{HTML}{00629B}
+\definecolor{hknOrange}{HTML}{FEC526}
+\definecolor{hknYellow}{HTML}{FDD10C}
+\definecolor{hknDarkBlue}{HTML}{0F2D52}
+\definecolor{hknDarkRed}{HTML}{C22033}
+\definecolor{hknRed}{HTML}{E2383F}
+\definecolor{hknLightGray}{HTML}{D6DBE4}
 
-% Secondary Colors
-\definecolor{supportOrange}{RGB}{242, 183, 5}  % #F2B705
-\definecolor{supportDarkBlue}{RGB}{55, 81, 113} % #375171
+% Mu Nu Chapter color palette
+\definecolor{munuDarkBlue}{HTML}{061E33}
+\definecolor{munuMediumBlue}{HTML}{1F3852}
+\definecolor{munuLightBlue}{HTML}{375171}
+\definecolor{munuLightGray}{HTML}{F2F2F2}
+\definecolor{munuMediumGray}{HTML}{C0C0C0}
+\definecolor{munuDarkGray}{HTML}{929AA6}
 
-% Background Colors
-\definecolor{backgroundLight}{RGB}{242, 242, 242} % #F2F2F2
-
-% Text & Border Colors
-\definecolor{textGrayBlue}{RGB}{100, 117, 140}   % #64758C
-\definecolor{textGrayMedium}{RGB}{146, 154, 166}  % #929AA6
-\definecolor{textGrayLight}{RGB}{184, 187, 191}   % #B8BBBF
+% Other colors
+\definecolor{darkerOrange}{HTML}{EAAC01}
+\definecolor{backgroundLight}{HTML}{F6F8FA}
 
 % Listings style
+% See Section 4.3 'Options' of the Listings package documentation for more details
+% https://ctan.mirror.garr.it/mirrors/ctan/macros/latex/contrib/listings/listings.pdf#subsection.4.3
 \RequirePackage{listings}  % code highlighting
 \lstdefinestyle{hkn}{
-    basicstyle=\ttfamily\small\color{textGrayBlue},                         % Base style (size and font)
-    keywordstyle=\bfseries\color{accentRed},           % Keywords in red (important, eye-catching)
-    identifierstyle=\color{supportDarkBlue},               % Identifiers in blue (clear distinction)
-    commentstyle=\color{textGrayMedium},                 % Comments in gray-blue (less prominent)
-    stringstyle=\color{supportOrange},                 % Strings in orange (warm and readable)
-    numberstyle=\ttfamily\scriptsize\color{textGrayMedium}, % Line numbers in gray (non-intrusive)
-    backgroundcolor=\color{backgroundLight},           % Light background for contrast
-    rulecolor=\color{textGrayLight},                   % Soft gray border for structure
-    frame=single,                          % Border around code (single, double, shadowbox, none)
-    framerule=0.8pt,                       % Border thickness
-    frameround=tttt,                       % Round all corners
-    framesep=5pt,                          % Distance between border and code
-    rulesep=2pt,                           % Distance between border and code line
-    numbers=left,                          % Line number position (left, right, none)
-    stepnumber=1,                          % Line number interval
-    numbersep=10pt,                        % Distance between line numbers and code
-    xleftmargin=30pt,                      % Left margin
-    xrightmargin=30pt,                     % Right margin
-    resetmargins=true,                     % Reset margins
-    numberblanklines=false,                % Number blank lines
-    firstnumber=auto,                      % Initial line number
-    columns=fixed,                         % Fixed column width
-    showstringspaces=false,                % Show spaces in strings
-    tabsize=2,                             % Tab size
-    breaklines=true,                       % Automatic line break for long lines
-    breakatwhitespace=true,                % Line break at whitespace
-    breakautoindent=true,                  % Automatic indentation after line break
-    escapeinside={(*@}{@*)}                % LaTeX commands in code
+    % Space and placement
+    aboveskip=0.7\baselineskip,
+    belowskip=-0.2\baselineskip,
+    % Figure out the appearance
+    basicstyle=\ttfamily\small\color{munuLightBlue},
+    identifierstyle=\color{munuDarkBlue},
+    commentstyle=\color{munuDarkGray},
+    stringstyle=\color{hknRed},
+    keywordstyle=[1]\bfseries\color{hknLightBlue},
+    keywordstyle=[2]\bfseries\color{darkerOrange},
+    % Getting all characters right
+    upquote=true,
+    showtabs=true,
+    tab={\scriptsize \hfill\;$\mapsto$\hfill},
+    showstringspaces=false,
+    % Line numbers
+    numbers=none,
+    % Margins and line shape
+    xleftmargin=4pt,
+    xrightmargin=4pt,
+    breaklines=true,
+    breakatwhitespace=true,
+    % Frames
+    frame=single,
+    backgroundcolor=\color{backgroundLight},
+    rulecolor=\color{backgroundLight},
 }
+\lstdefinestyle{hkn-numbered}{
+    style=hkn,
+    % Line numbers
+    numbers=left,
+    numberstyle=\ttfamily\scriptsize\color{munuDarkGray},
+    numbersep=10pt,  % distance between number and listing
+    % Margins and line shape
+    xleftmargin=20pt,
+}
+\lstset{style=hkn}
 
 % Underline settings
 
@@ -334,15 +349,10 @@
 \contourlength{0.8pt}
 
 % Custom underline command
-\newcommand{\myuline}[1]{%
-\uline{\phantom{#1}}%
-\llap{\contour{white}{#1}}%
+\newcommand{\myuline}[1]{
+    \uline{\phantom{#1}}
+    \llap{\contour{white}{#1}}
 }
-
-% tcolorbox color settings
-\definecolor{tcolorboxLeftColor}{RGB}{2, 65, 191}
-\definecolor{tcolorboxBackTitleColor}{RGB}{119, 152, 255}
-\definecolor{tcolorboxBackColor}{RGB}{210, 226, 255}
 
 % Factory macro for custom boxes
 \newcommand{\DeclareHKNBox}[4]{
@@ -350,24 +360,28 @@
         title={\iflanguage{italian}{#2}{#3}~\arabic{\tcbcounter}.~##1},
         boxrule=0mm,  % Bordo principale (disabilitato)
         leftrule=1mm,  % Bordo sinistro principale
-        arc=2mm,
+        arc=0.5mm,
         colframe=#4,  % Colore bordo
-        colbacktitle=textGrayMedium,
+        colbacktitle=munuLightBlue!90,
         colback=backgroundLight,  % Colore sfondo
         fonttitle=\bfseries,
         rounded corners=all  % Bordi arrotondati
     }
 }
 
-\DeclareHKNBox{definition}{Definizione}{Definition}{accentRed}
-\DeclareHKNBox{theorem}{Teorema}{Theorem}{accentYellow}
-\DeclareHKNBox{corollary}{Corollario}{Corollary}{supportOrange}
-\DeclareHKNBox{exercise}{Esercizio}{Exercise}{supportDarkBlue}
-\DeclareHKNBox{observation}{Osservazione}{Observation}{textGrayBlue}
+\DeclareHKNBox{definition}{Definizione}{Definition}{hknRed}
+\DeclareHKNBox{theorem}{Teorema}{Theorem}{hknYellow}
+\DeclareHKNBox{lemma}{Lemma}{Lemma}{hknYellow}
+\DeclareHKNBox{corollary}{Corollario}{Corollary}{hknOrange}
+\DeclareHKNBox{exercise}{Esercizio}{Exercise}{munuDarkBlue}
+\DeclareHKNBox{observation}{Osservazione}{Observation}{hknLightBlue}
 
 % Frontmatter and backmatter
 \input{_preamble.tex}
 \AtBeginDocument{
+    \renewcommand{\lstlistlistingname}{Codes}
+    \renewcommand{\lstlistingname}{Code}
+
     \frontmatter
     \maketitle
     \input{cclicense.tex}

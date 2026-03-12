@@ -1,6 +1,11 @@
-**/build/
-**/svg-inkscape/
-*.log
+# Build files
+build/
+svg-inkscape/
+
+# VS Code
+.vscode/
+!/.vscode/settings.json
+!/.vscode/extensions.json
 
 # Python
 *.pyc
@@ -8,34 +13,3 @@
 __pycache__/
 *.egg-info/
 .venv/
-
-# LaTeX
-*.aux
-*.glo
-*.idx
-*.toc
-*.ist
-*.acn
-*.acr
-*.alg
-*.bbl
-*.blg
-*.dvi
-*.glg
-*.gls
-*.ilg
-*.ind
-*.lof
-*.lot
-*.maf
-*.mtc
-*.mtc1
-*.out
-*.fls
-*.fdb_latexmk
-*.synctex.gz
-*.synctex(busy)
-
-# Build directories
-build/
-svg-inkscape/

@@ -1,0 +1,119 @@
+\chapter[Guidelines for writing text]{Introductory guidelines for writing text}
+
+When writing the text of your notes, there are a few guidelines to keep in mind:
+
+\section{Spacing}
+
+\LaTeX{} generally ignores additional spaces and multiple line breaks in the source code.
+To create a new paragraph, simply leave an empty line in the source code.
+If you really need to force a line break without starting a new paragraph, you can use the \lstinline[language=TeX]|\\| command at the end of the line.
+
+Example (demonstrative, bad practice):
+\begin{lstlisting}[language=TeX]
+This is     a sentence with extra  spaces.\\
+Here is a new line without starting a new paragraph. Very long sentence that continues on the next line in the source code but will be formatted correctly in the output. Another sentence.
+
+New paragraph.
+\end{lstlisting}
+\begin{quote}
+This is     a sentence with extra  spaces.\\
+Here is a new line without starting a new paragraph. Very long sentence that continues on the next line in the source code but will be formatted correctly in the output. Another sentence.
+
+New paragraph.
+\end{quote}
+
+Example (good practice):
+\begin{lstlisting}[language=TeX]
+This is a sentence with no extra spaces.
+
+Here is a new line without starting a new paragraph.
+Very long sentence that continues on the next line in the source code but will be formatted correctly in the output.
+Another sentence.
+
+New paragraph.
+\end{lstlisting}
+\begin{quote}
+This is a sentence with no extra spaces.
+
+Here is a new line without starting a new paragraph.
+Very long sentence that continues on the next line in the source code but will be formatted correctly in the output.
+Another sentence.
+
+New paragraph.
+\end{quote}
+
+In short,
+\begin{itemize}
+    \item Prefer leaving blank lines to create new paragraphs over using \lstinline[language=TeX]|\\|.
+    \item Make frequent line breaks in the source code to improve readability and the localization of changes and errors. \LaTeX{} will treat the line breaks in the source code as spaces, so they won't affect the formatting of the output.
+    \item Use extra spaces or extra blank lines for readability when needed.
+\end{itemize}
+
+\section{Special characters}
+
+Keep in mind the following:
+\begin{itemize}
+    \item \textbf{Double quotes} should be written as \lstinline[language=TeX]|``| (backticks) for opening and \lstinline[language=TeX]|''| (apostrophes) for closing, to ensure proper typographical formatting.
+    Example: \lstinline[language=TeX]|``quote''| will produce ``quote'' (correct), while \lstinline[language=TeX]|''quote''| will produce ''quote'' (wrong) and \lstinline[language=TeX]|"quote"| will produce "quote" (wrong).
+    \item The same is true for \textbf{single quotes}: \lstinline[language=TeX]|`| (backtick) for opening and \lstinline[language=TeX]|'| (apostrophe) for closing.
+    Example: \lstinline[language=TeX]|`quote'| will produce `quote' (correct).
+    \item Add \lstinline[language=TeX]|\| after the \textbf{period of an abbreviation} which is not at the end of a sentence, to prevent \LaTeX{} from adding extra space after it.
+    Example: \lstinline[language=TeX]|e.g.\ example| will produce e.g.\ example (correct), while \lstinline[language=TeX]|e.g. example| will produce e.g. example (wrong, notice the extra space).
+    \item The \textbf{non-breaking space} character \lstinline[language=TeX]|~| can be used to prevent a line break between two words or elements.
+    Example: \lstinline[language=TeX]|Dr.~Smith| will produce Dr.~Smith, ensuring that ``Dr.'' and ``Smith'' stay on the same line.
+\end{itemize}
+
+\section{Basic text formatting}
+
+\renewcommand{\arraystretch}{1.3}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{l|l}
+        \textbf{Command} & \textbf{Output} \\
+        \hline
+        \lstinline[language=TeX]|\textbf{bold}| & \textbf{bold} \\
+        \lstinline[language=TeX]|\textit{italic}| & \textit{italic} \\
+        \lstinline[language=TeX]|\texttt{monospaced}| & \texttt{monospaced} \\
+        \lstinline[language=TeX]|\underline{underline}| & \underline{underline} \\
+        \lstinline[language=TeX]|\textsc{Small Caps}| & \textsc{Small Caps} \\
+        \lstinline[language=TeX]|\textsubscript{subscript}| & \textsubscript{subscript} \\
+        \lstinline[language=TeX]|\textsuperscript{superscript}| & \textsuperscript{superscript} \\
+        \lstinline[language=TeX]|\href{https://hknpolito.org}{link}| & \href{https://hknpolito.org}{link} \\
+        \lstinline[language=TeX]|{\color{orange} colored}| & {\color{orange} colored} \\
+    \end{tabular}
+    \caption{Basic text formatting commands}
+\end{table}
+
+\section{Lists}
+
+Bullet lists can be created using the \lstinline[language=TeX]|itemize| environment, while numbered lists can be created using the \lstinline[language=TeX]|enumerate| environment.
+
+Example:
+\begin{lstlisting}[language=TeX]
+\begin{itemize}
+    \item First item
+    \begin{itemize}
+        \item Nested item
+        \begin{enumerate}
+            \item Nested numbered item
+            \item Another nested numbered item
+        \end{enumerate}
+        \item Nested item
+    \end{itemize}
+    \item Last item
+\end{itemize}
+\end{lstlisting}
+\begin{quote}
+\begin{itemize}
+    \item First item
+    \begin{itemize}
+        \item Nested item
+        \begin{enumerate}
+            \item Nested numbered item
+            \item Another nested numbered item
+        \end{enumerate}
+        \item Nested item
+    \end{itemize}
+    \item Last item
+\end{itemize}
+\end{quote}

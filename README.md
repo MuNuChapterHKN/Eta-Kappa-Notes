@@ -9,7 +9,7 @@
 - [🤝 Contributing](#-contributing)
 - [📚 Project Structure](#-project-structure)
 - [🚀 Installation and compilation](#-installation-and-compilation)
-- [⚖️ License](#-license)
+- [⚖️ License](#️-license)
 - [📞 Contact](#-contact)
 - [🧭 About us](#-about-us)
 
@@ -102,6 +102,15 @@ License notice:
 The notes (in the `notes/` directory) and the guide (in the `guide/` directory) are distributed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International](https://creativecommons.org/licenses/by-nc-nd/4.0/).
 
 Credit for the notes must be attributed to the **authors and editors** of each respective document.
+
+**Exception for copyrighted figures:** figures from third-party copyrighted sources (clearly marked in captions) are included in accordance with the requirements of Art. 70 of Italian Law No. 633/1941, since this project is intended for educational purposes only within the scope of a non-commercial activity.
+
+These figures:
+- are reproduced in low resolution;
+- include full attribution to the original source in the caption;
+- remain under the copyright of their respective owners.
+
+Users reusing or redistributing these notes must verify compliance with applicable copyright law in their jurisdiction.
 
 ## 📞 Contact
 
