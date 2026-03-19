@@ -1,8 +1,9 @@
 %% Tikz settings for Feynman diagrams
 
 \definecolor{betterYellow}{HTML}{FFBF00}
-\usetikzlibrary{decorations.pathreplacing,decorations.markings,decorations.pathmorphing,arrows.meta,math,shapes}
+\usetikzlibrary{decorations.pathreplacing,decorations.markings,decorations.pathmorphing,arrows.meta}
 \tikzset{
+  >=stealth, % set the default arrow tip
   % style to apply some styles to each segment of a path
   on each segment/.style={
     decorate,
@@ -27,6 +28,30 @@
     },
   },
   % style to add an arrow in the middle of a path as fermion line
+  midarrow/.style={
+    draw=#1, % assicura sempre la linea visibile
+    postaction={
+      on each segment={
+        decorate,
+        decoration={
+          markings,
+          mark=at position 0.5 with {\arrow[xshift=1mm]{stealth}}
+        }
+      }
+    }
+  },
+  multiarrows/.style={
+    draw=#1, % assicura sempre la linea visibile
+    postaction={
+      on each segment={
+        decorate,
+        decoration={
+          markings,
+          mark=at position 1 with {\arrow{stealth}}
+        }
+      }
+    }
+  },
   fermion/.style={
     thick,
     draw=#1, % assicura sempre la linea visibile
@@ -35,18 +60,16 @@
         decorate,
         decoration={
           markings,
-          mark=at position 0.5 with {\arrow{stealth}}
+          mark=at position 0.5 with {\arrow[xshift=1mm]{stealth}}
         }
       }
     }
   },
   photon/.style={
-    on each segment = {
-        thick,
-        draw=#1,
-        decorate,
-        decoration={wave,amplitude=6pt}
-    }
+    thick,
+    draw=#1,
+    decorate,
+    decoration={wave,amplitude=6pt}
   },
   gluon/.style={
     on each segment = {
@@ -57,13 +80,21 @@
     }
   },
   wzboson/.style={
-    on each segment = {
+    on each segment={
         thick,
         draw=#1,
         decorate,
         decoration={wave,amplitude=6pt}
     }
   },
+  boson/.style={
+    on each segment = {
+        thick,
+        draw=#1,
+        decorate,
+        decoration={wave,amplitude=6pt}
+    }
+  }
 }
 
 \makeatletter
@@ -175,25 +206,25 @@
 }
 
 \makeatother
-\newcommand{\addfeynman}[3][]{
+\newcommand{\addfeynman}[4][]{
     \begin{figure}[H]  % !h or H
         \centering
-        \tikz[scale=#3,transform shape,every node/.style={font=\footnotesize}]{
+        \tikz[scale=#3,transform shape,every node/.style={text=black,font=\footnotesize}]{
             #2
         }
         \caption{#1}
-        \label{feynm:#1}
+        \label{feynm:#4}
     \end{figure}
 }
 \newcommand{\addfeynmantikz}[2]{
-        \tikz[scale=#2,transform shape,every node/.style={font=\footnotesize}]{
+        \tikz[scale=#2,transform shape]{
             #1
         }
 }
 \newcommand{\addtikz}[4][]{
     \begin{figure}[H]  % !h or H
         \centering
-        \tikz[scale=#3,transform shape,every node/.style={font=\footnotesize}]{
+        \tikz[scale=#3,transform shape,every node/.style={text=black,font=\footnotesize}]{
             #2
         }
         \caption{#1}

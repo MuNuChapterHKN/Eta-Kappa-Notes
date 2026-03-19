@@ -1,1 +1,134 @@
-\chapter[Cosmologia]{Principi del modello cosmologico}
+\chapter[Cosmologia]{Introduzione alla cosmologia}
+\section{Principi del modello cosmologico}
+Il modello cosmologico standard si basa su un evento iniziale noto come Big Bang, che rappresenta l'inizio dell'espansione dell'Universo. Secondo questo modello, l'Universo ha avuto origine da uno stato di densità e temperatura estremamente elevate circa 13.8 miliardi di anni fa. La ``palla di fuoco'' iniziale si è espansa e raffreddata nel corso del tempo, portando alla formazione delle strutture cosmiche che osserviamo oggi, come galassie, stelle e pianeti.
+Il modello cosmologico standard si basa su due principi fondamentali:
+\begin{itemize}
+    \item \textbf{Principio di omogeneità}: Su larga scala, l'Universo è omogeneo, il che significa che la distribuzione della materia e dell'energia è uniforme in tutte le direzioni. Non ci sono regioni privilegiate nell'Universo.
+    \item \textbf{Principio di isotropia}: L'Universo appare lo stesso in tutte le direzioni. Non c'è una direzione preferenziale nell'Universo, il che implica che le proprietà fisiche dell'Universo sono le stesse ovunque.
+\end{itemize}
+Questo modello è supportato da diverse evidenze osservate:
+\begin{itemize}
+    \item \textbf{Radiazione cosmica di fondo}: La scoperta della radiazione cosmica di fondo a microonde (CMB) ha fornito una prova cruciale del Big Bang. Questa radiazione è un'eco dell'Universo primordiale, risalente a circa 380.000 anni dopo il Big Bang, quando l'Universo si è raffreddato abbastanza da permettere agli elettroni e ai nuclei di combinarsi per formare atomi neutri, rendendo l'Universo trasparente alla radiazione.
+    \item \textbf{Espansione dell'Universo}: Le osservazioni delle galassie mostrano che esse si stanno allontanando l'una dall'altra, un fenomeno descritto dalla legge di Hubble. Questa espansione implica che l'Universo era più denso e più caldo in passato, coerentemente con il modello del Big Bang.
+\end{itemize}
+Per quanto riguarda la CMB possiamo osservare che i dati registrati dimostrano una distribuzione quasi identica allo spettro di corpo nero a una temperatura di circa $\qty{2.725}{\kelvin}$, con piccole anisotropie ($1/100000$) che forniscono informazioni preziose sulla struttura dell'Universo primordiale e sulla formazione delle galassie.\\
+Per quanto riguarda l'espansione dell'Universo, la legge di Hubble stabilisce che la velocità di recessione delle galassie è proporzionale alla loro distanza da noi, espressa dalla formula:
+\begin{equation}
+    \vec{v} = H_0 \vec{r}
+\end{equation}
+Dove $\vec{v}$ è la velocità di recessione, $H_0$ è la costante di Hubble e $\vec{r}$ è la distanza dalla galassia. Le misurazioni attuali indicano un valore di $H_0$ di circa $\qty{70}{\kilo\meter\per\second\per\mega\parsec}$, anche se esistono alcune discrepanze tra i diversi metodi di misurazione.\\
+A supporto dell'espansione dell'Universo possiamo analizzare il fenomeno del redshift, che si riferisce allo spostamento verso il rosso delle linee spettrali della luce proveniente dalle galassie lontane. Questo spostamento è causato dall'espansione dello spazio stesso, che allunga le lunghezze d'onda della luce mentre viaggia attraverso l'Universo. Il redshift è una prova diretta dell'espansione cosmica e fornisce informazioni sulla velocità di recessione delle galassie in relazione alla loro distanza. Per una galassia con redshift $z$, la relazione tra la lunghezza d'onda osservata $\lambda_{\text{obs}}$ e la lunghezza d'onda emessa $\lambda_{\text{emit}}$ è data da:
+\begin{equation}
+    z = \dfrac{\lambda_{\text{obs}} - \lambda_{\text{emit}}}{\lambda_{\text{emit}}} \qquad \text{con } z = \dfrac{v}{c} \text{ per } v \ll c
+\end{equation}
+Dove $v$ è la velocità di recessione della galassia e $c$ è la velocità della luce. Un redshift positivo indica che la galassia si sta allontanando da noi, confermando l'espansione dell'Universo.\\
+Ritornando alla CMB sappiamo che la densità di energia della radiazione $\epsilon_{\text{rad}}$ dipende dalla temperatura $T$ secondo la legge di Stefan-Boltzmann:
+\begin{equation}
+    \epsilon_{\text{rad}} = \rho_{\text{rad}}c^2 = \alpha T^4
+\end{equation}
+Dove $\rho_{\text{rad}}$ è la densità di massa della radiazione, $\alpha = \pi^2 k_{\text{B}}^4 / 15 c^3 \hbar^3$ è la costante di radiazione. Possiamo calcolare la densità di energia della radiazione alla temperatura attuale di $T_0 = \qty{2.725}{\kelvin}$:
+\begin{equation}
+    \epsilon_{\text{rad}}(T_0) = \alpha T_0^4 \simeq \qty{4.17e-14}{\joule\per\meter\cubed}
+\end{equation}
+Dalle equazioni di Einstein-Friedmann sappiamo che la densità di radiazione scala con il \textbf{fattore di scala dell'Universo} $a(t)$ come:
+\begin{equation}
+    \rho_{\text{rad}} \propto \dfrac{1}{a^4}
+\end{equation}
+Da cui:
+\begin{equation}
+    \dfrac{1}{a^4} \propto T^4 \implies T \propto \dfrac{1}{a}
+\end{equation}
+Questo ci mostra che con l'espansione dell'Universo (aumento di $a$), la temperatura è inversamente proporzionale al fattore di scala. Questo comportamento è coerente con l'osservazione che la CMB si è raffreddata nel corso del tempo a causa dell'espansione dell'Universo.\\
+Se l'Universo si espande, ma il numero di fotoni e barioni rimane costante possiamo dire che la densità di numero di fotoni $n_{\gamma}$ e la densità di numero di barioni $n_{\text{B}}$ scalano come:
+\begin{equation}
+    n_{\gamma} \propto \dfrac{1}{a^3} \qquad n_{\text{B}} \propto \dfrac{1}{a^3}
+\end{equation}
+Da cui il rapporto tra la densità di numero di fotoni e barioni rimane costante durante l'espansione dell'Universo:
+\begin{equation}
+    \eta = \dfrac{n_{\gamma}}{n_{\text{B}}} = \text{costante}
+\end{equation}
+Questo rapporto è cruciale per comprendere la nucleosintesi primordiale e la formazione degli elementi leggeri nell'Universo primordiale.\\
+Possiamo trovare una buona stima della densità di fotoni attuali utilizzando la densità di energia della radiazione e l'energia media di ogni fotone:
+\begin{equation}
+    n_{\gamma} = \dfrac{\epsilon_{\text{rad}}}{\avg{E_{\gamma}}} = \dfrac{\epsilon_{\text{rad}}(T_0)}{3 k_{\text{B}} T_0} \simeq \qty{3.7e8}{\per\meter\cubed}
+\end{equation}
+Analogamente per i barioni avremo una densità di energia attuale di circa $\epsilon_{\text{B}} = \rho_{\text{B}} c^2 \simeq \qty{3.9e-11}{\joule\per\meter\cubed}$, da cui la densità di numero di barioni attuali risulta:
+\begin{equation}
+    n_{\text{B}} \simeq \qty{0.26}{\per\meter\cubed}
+\end{equation}
+Dunque il rapporto tra la densità di numero di barioni e fotoni risulta:
+\begin{equation}
+    \eta = \dfrac{n_{\gamma}}{n_{\text{B}}}\simeq 1.7\cdot 10^{9}
+\end{equation}
+Ovvero ci sono circa un miliardo e settecento milioni di fotoni per ogni barione nell'Universo attuale.\\
+\section{Origine della radiazione cosmica di fondo}
+Quando l'Universo era circa un milionesimo della sua dimensione attuale, la temperatura era all'incirca $T \simeq \qty{3000000}{\kelvin}$. A questa temperatura, l'energia media dei fotoni era sufficiente per ionizzare gli atomi di idrogeno, mantenendo l'Universo in uno stato di plasma ionizzato. In questo stato, i fotoni interagivano frequentemente con gli elettroni liberi attraverso il processo di scattering, impedendo loro di viaggiare liberamente (mean free path molto corto). Con l'espansione dell'Universo i fotoni hanno gradualmente perso energia, portando a un raffreddamento dell'Universo. Quando la temperatura è scesa a circa $T \simeq \qty{3000}{\kelvin}$, l'energia media dei fotoni non era più sufficiente per mantenere l'idrogeno ionizzato. Gli elettroni liberi si sono combinati con i nuclei di idrogeno per formare atomi neutri in un processo noto come ricombinazione. Questo ha causato una drastica riduzione della densità di elettroni liberi, aumentando significativamente il cammino libero medio dei fotoni. Di conseguenza, i fotoni hanno potuto viaggiare liberamente attraverso l'Universo, dando origine alla radiazione cosmica di fondo che osserviamo oggi. Questo processo è detto \textbf{decoupling} e si suppone si sia verificato quando l'Universo era circa un millesimo della sua dimensione attuale, dimensione per cui la temperatura era di circa $\qty{3000}{\kelvin}$.\\
+Durante la formazione i fotoni della CMB avevano frequenze decisamente più elevate, tuttavia, a causa del redshift cosmologico, le loro lunghezze d'onda si sono allungate nel corso del tempo.\\
+Possiamo riassumere l'evoluzione temporale della temperatura e dello stato dell'Universo come segue:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{p{4cm} p{4cm} p{5cm}}
+        \hline
+        \textbf{Tempo} & \textbf{Temperatura} & \textbf{Stato dell'Universo} \\
+        \hline
+        $t < \qty{e-10}{\second}$ & $T > \qty{e15}{\kelvin}$ & Ancora aperto ad ipotesi \\[8pt]
+        $\qty{e-10}{\second} < t < \qty{e-4}{\second}$ & $\qty{e12}{\kelvin} < T < \qty{e15}{\kelvin}$ & Elettroni, quark, fotoni e neutrini liberi che interagiscono \\[8pt]
+        $\qty{e-4}{\second} < t < \qty{1}{\second}$ & $\qty{e10}{\kelvin} < T < \qty{e12}{\kelvin}$ & Elettroni, quark, fotoni, neutroni e neutrini liberi che interagiscono \\[8pt]
+        $\qty{1}{\second} < t < \qty{e12}{\second}$ & $\qty{e4}{\kelvin} < T < \qty{e10}{\kelvin}$ &  Protoni e neutroni formano nuclei atomici che interagiscono con elettroni, fotoni e neutrini. I neutrini iniziano a perdere energia ed interagire poco. L'Universo è ancora dominato dalle radiazioni\\[8pt]
+        $\qty{e12}{\second} < t < \qty{e13}{\second}$ & $\qty{e4}{\kelvin} < T < \qty{3000}{\kelvin}$ & Come nel caso precedente, ma ora l'Universo è dominato da materia\\[8pt]
+        $\qty{e13}{\second} < t < t_0$ & $T_0 < T < \qty{3000}{\kelvin}$ & Universo attuale, formazione della CMB \\
+        \hline
+    \end{tabular}
+    \caption{Evoluzione temporale della temperatura e dello stato dell'Universo}
+\end{table}
+Il modello attuale inoltre prevede che dopo $\qty{e-35}{\second}$ dall'inizio dell'espansione, la temperatura sia scesa talmente velocemente da causare un cambiamento di fase, portando al disaccoppiamento della forza nucleare forte dalla forza elettrodebole detto \textbf{strong-electroweak symmetry breaking}. Successivamente, a circa $\qty{e-11}{\second}$ ($k_{\text{B}}T \simeq \qty{100}{\giga\electronvolt}$), si è verificato il \textbf{electroweak symmetry breaking}, in cui la forza elettrodebole si è separata nelle forze elettromagnetica e debole. Questi eventi hanno avuto un ruolo cruciale nella formazione delle particelle elementari e delle forze fondamentali che governano l'Universo, in quanto in questo momento i bosoni W e Z hanno acquisito la loro considerevole massa dal campo di Higgs.\\
+Dopo circa $\qty{e-6}{\second}$ ($k_{\text{B}}T \simeq \qty{100}{\mega\electronvolt}$), i quark si sono combinati per formare adroni, come protoni e neutroni, in un processo noto come \textbf{confinamento dei quark}. Questo evento ha segnato la transizione dall'Universo dominato da quark e gluoni a quello dominato da adroni. Il numero di neutroni e protoni è stimato dalla relazione:
+\begin{equation}
+    \dfrac{N_n}{N_p} = \brackets{\dfrac{M_n}{M_p}}^{3/2}\exp\left(-\dfrac{(M_n - M_p) c^2}{k_{\text{B}} T}\right)
+\end{equation}
+Dove $M_n$ e $M_p$ sono le masse del neutrone e del protone rispettivamente. Queste due masse sono circa uguali a causa della similarità nelle masse dei quark $u$ e $d$, dunque a temperature elevate, il rapporto $N_n/N_p$ era vicino a 1. Infatti per $k_{\text{B}} T \gg (M_n - M_p)c^2$, il rapporto tende a:
+\begin{equation}
+    \dfrac{N_n}{N_p} \simeq \brackets{\dfrac{M_n}{M_p}}^{3/2} \simeq 1
+\end{equation}
+Dopo circa $\qty{1}{\second}$ ($k_{\text{B}}T \simeq \qty{1}{\mega\electronvolt}$), i neutrini si sono disaccoppiati dalla materia, iniziando a viaggiare liberamente attraverso l'Universo. Questo evento ha segnato la fine dell'interazione significativa tra neutrini e altre particelle, portando alla formazione del fondo cosmico di neutrini, una radiazione relicta simile alla CMB ma composta da neutrini. Inoltre, poichè la temperatura era scesa al di sotto di $\qty{0.8}{\mega\electronvolt}$, il rapporto $N_n/N_p$ ha iniziato a diminuire esponenzialmente a causa della differenza di massa tra neutroni e protoni, portando a una predominanza di protoni rispetto ai neutroni nell'Universo primordiale, con un rapporto di 7 protoni per ogni neutrone.\\
+Dopo circa $\qty{3}{\minute}$ ($k_{\text{B}}T \simeq \qty{100}{\kilo\electronvolt}$), è iniziata la nucleosintesi primordiale, durante la quale i protoni e i neutroni si sono combinati per formare i primi nuclei leggeri, come deuterio, elio-3, elio-4 e tracce di litio-7. Questo processo ha avuto luogo in un intervallo di tempo relativamente breve, poiché l'Universo si stava ancora espandendo e raffreddando rapidamente. La nucleosintesi primordiale ha determinato l'abbondanza relativa degli elementi leggeri nell'Universo, con circa il 75\% della massa barionica sotto forma di idrogeno (protoni) e circa il 25\% sotto forma di elio-4, con tracce minori di altri elementi leggeri.\\
+
+\section{Materia oscura}
+Analizzando la dinamica delle galassie e degli ammassi di galassie, gli astronomi hanno osservato che la massa visibile (costituita da stelle, gas e polveri) non è sufficiente a spiegare le velocità orbitali delle stelle nelle galassie e la velocità di dispersione delle galassie negli ammassi. Le osservazioni indicano che c'è una quantità significativa di massa non visibile, chiamata \textbf{materia oscura}, che esercita un'influenza gravitazionale sulle strutture cosmiche.\\
+
+\addtikz[Composizione dell'energia dell'Universo]{
+    \pie[hide number, explode={0.5,0.5,0.1,0.1},color={supportOrange!75, teal!75, supportDarkBlue!75, black!75}]{ 1 / Massa barionica luminosa 1\%, 4 / Elio e idrogeno liberi 4\%, 25 / Materia oscura 25\%, 70 / Energia oscura 70\% }
+}{1}{universe_energy_composition}
+
+In particolare la massa barionica luminosa costituisce meno dell'1\% della densità dell'Universo, mentre la materia oscura costituisce circa il 25\% della densità totale dell'Universo. La natura della materia oscura rimane uno dei misteri più grandi della fisica moderna. Diverse teorie propongono che la materia oscura sia costituita da particelle subatomiche ancora non rilevate, come i WIMPs (Weakly Interacting Massive Particles). Altre ipotesi suggeriscono che a comporre la materia oscura siano neutrini massivi o leggeri o altri materiali esotici come i MACHOs (Massive Compact Halo Objects), le LSPs (Lightest Supersymmetric Particles) o i buchi neri primordiali.\\
+
+\section{Nucleosintesi primordiale}
+Torniamo a parlare dell'evoluzione temporale dell'Universo, concentrandoci sul processo che ha portato alla nucleosintesi primordiale. Dopo circa $\qty{200}{\second}$, come anticipato, il rapporto tra il numero di neutroni e protoni era diminuito a circa 1/7 a causa del decadimento beta dei neutroni liberi, dunque la materia barionica era composta circa per il 12.5\% da neutroni e per l'87.5\% da protoni. In questo contesto, i neutroni disponibili hanno iniziato a combinarsi con i protoni per formare nuclei di deuterio ($^2$H) attraverso la reazione:
+\begin{equation}
+    n + p \rightarrow \atom{H}{2}{} + \gamma
+\end{equation}
+Tuttavia, la formazione di deuterio era inizialmente in equilibrio con la sua distruzione da parte dei fotoni ad alta energia presenti nell'Universo primordiale (\textbf{fotodissociazione}):
+\begin{equation}
+    \atom{H}{2}{} + \gamma \rightarrow n + p
+\end{equation}
+Con il passare del tempo, come abbiamo visto, i fotoni hanno perso energia a causa dell'espansione dell'Universo, riducendo l'efficacia della fotodissociazione. Quando la temperatura è scesa al di sotto di circa $\qty{0.1}{\mega\electronvolt}$, la formazione di deuterio ha iniziato a prevalere sulla sua distruzione, permettendo la nucleosintesi di elementi più pesanti.\\
+Inizialmente si sono formati nuclei di elio-3 ($\atom{He}{3}{}$) e trizio ($\atom{H}{3}{}$) attraverso reazioni successive con deuterio:
+\begin{equation}
+    \begin{split}
+        &\atom{H}{2}{} + n \rightarrow \atom{H}{3}{} + \gamma \\[8pt]
+        &\atom{H}{2}{} + p \rightarrow \atom{He}{3}{} + \gamma \\[8pt]
+        &\atom{H}{2}{} + \atom{H}{2}{} \rightarrow \atom{He}{3}{} + n \qquad (\text{successivamente})\\[8pt]
+        &\atom{H}{2}{} + \atom{H}{2}{} \rightarrow \atom{H}{3}{} + p \qquad (\text{successivamente})
+    \end{split}
+\end{equation}
+Grazie all'abbondanza di deuterio, trizio ed elio-3, si sono formati nuclei di elio-4 ($\atom{He}{4}{}$) attraverso reazioni come:
+\begin{equation}
+    \begin{split}
+        &\atom{H}{3}{} + \atom{H}{2}{} \rightarrow \atom{He}{4}{} + n \\[8pt]
+        &\atom{H}{3}{} + p \rightarrow \atom{He}{4}{} + \gamma \\[8pt]
+        &\atom{He}{3}{} + n \rightarrow \atom{He}{4}{} + \gamma \\[8pt]
+        &\atom{He}{3}{} + \atom{H}{2}{} \rightarrow \atom{He}{4}{} + p \\[8pt]
+    \end{split}
+\end{equation}
+Infine, dopo circa $\qty{10}{\minute}$, la nucleosintesi primordiale si è conclusa con la formazione di tracce di litio-7 ($\atom{Li}{7}{}$), a causa della diminuzione della temperatura e della densità dell'Universo, che hanno permesso al potenziale Coulombiano di ostacolare ulteriori reazioni di fusione.\\
+Le abbondanze relative degli elementi leggeri prodotti durante la nucleosintesi primordiale sono state determinate dalle condizioni fisiche dell'Universo primordiale, come la densità di barioni, la temperatura e il tempo disponibile per le reazioni nucleari. Le previsioni teoriche basate sul modello della nucleosintesi primordiale sono in buon accordo con le osservazioni astronomiche delle abbondanze di idrogeno, elio e litio nell'Universo attuale, fornendo una forte conferma del modello del Big Bang e della nostra comprensione dell'evoluzione dell'Universo.\\

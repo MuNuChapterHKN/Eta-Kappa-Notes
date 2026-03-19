@@ -23,13 +23,15 @@ Dove $\Delta (1232)^{++}$ è il barione \textbf{delta} con massa di $\qty{1232}{
 Inoltre il numero quantico chiamato \textbf{stranezza} $S$ della particella delta è $S=0$. Inoltre l'isospin varia tra le diverse configurazioni di carica:
 \begin{table}[H]
     \centering
-    \begin{tabular}{l|c|c}
-        Particella & Carica $Q$ & Isospin $I_3$ \\
+    \begin{tabular}{lcc}
         \hline
-        $\Delta^{++}$ & $+2$ & $+3/2$ \\
-        $\Delta^{+}$ & $+1$ & $+1/2$ \\
-        $\Delta^{0}$ & $0$ & $-1/2$ \\
-        $\Delta^{-}$ & $-1$ & $-3/2$
+        \textbf{Particella} & \textbf{Carica} ($e$) & \textbf{Isospin} $\text{T}_3$ \\
+        \hline
+        $\Delta^{++}$ & $+2$ & $+3/2$ \\[8pt]
+        $\Delta^{+}$ & $+1$ & $+1/2$ \\[8pt]
+        $\Delta^{0}$ & $0$ & $-1/2$ \\[8pt]
+        $\Delta^{-}$ & $-1$ & $-3/2$\\
+        \hline
     \end{tabular}
     \caption{Configurazioni di carica e isospin delle particelle delta.}
 \end{table}
@@ -53,19 +55,31 @@ Nel caso statico l'operatore d'Alembertiano si riduce al laplaciano, dunque l'eq
 \end{equation}
 Possiamo risolvere questa equazione considerando una sorgente puntiforme di forza in $\vec{r} = 0$, ovvero:
 \begin{equation}
-    \brackets{-\lap + \dfrac{m_{\pi}^2 c^2}{\hbar^2}} \phi(\vec{r}) = 4\pi g_{\pi}\delta(\vec{r})
+    \brackets{-\lap + \dfrac{m_{\pi}^2 c^2}{\hbar^2}} \phi(\vec{r}) = 4\pi g_{\pi}\delta^3(\vec{r})
 \end{equation}
-La soluzione di questa equazione è nota come potenziale di Yukawa:
-\begin{equation}
-    \phi(\vec{r}) = g_{\pi} \dfrac{\exp\brackets{-\dfrac{m_{\pi} c}{\hbar} r}}{r}
-\end{equation}
-Dove $g_{\pi}$ è una costante di accoppiamento che determina la forza dell'interazione. Il potenziale di Yukawa descrive una forza a corto raggio, che decresce esponenzialmente con la distanza $r$ come possiamo osservare:
+La soluzione di questa equazione è nota come potenziale di Yukawa.
+\begin{definition}{Potenziale di Yukawa}
+    Il \textbf{potenziale di Yukawa} è la soluzione dell'equazione di Klein-Gordon con sorgente puntiforme, ed è dato da:
+    \begin{equation}
+        \phi(\vec{r}) = g_{\pi} \dfrac{\exp\brackets{-\dfrac{m_{\pi} c}{\hbar} r}}{r}
+    \end{equation}
+    Dove $g_{\pi}$ è una costante di accoppiamento che determina la forza dell'interazione.
+\end{definition}
+Il potenziale di Yukawa descrive una forza a corto raggio, che decresce esponenzialmente con la distanza $r$ come possiamo osservare:
 
 \addsvg[Andamento del potenziale di Yukawa in funzione della distanza]{Yukawa_potential}{0.6}
 
 La lunghezza caratteristica di questa forza è data da $r_{\pi} = \hbar/(m_{\pi} c) = 1/\lambda_{\pi}$, che rappresenta il raggio d'azione della forza nucleare.\\
-In particolare, poichè la massa del pione è circa $m_{\pi} \approx \qty{135}{\mega\electronvolt}$, la lunghezza caratteristica della forza nucleare risulta essere dell'ordine di $\qty{1.4}{\femto\meter}$, che è coerente con le dimensioni tipiche dei nuclei atomici. Questo modello di Yukawa ha avuto un grande successo nel descrivere le proprietà della forza nucleare e ha portato alla scoperta sperimentale dei pioni negli anni '40.\\
-Possiamo descrivere nel dettaglio l'interazione tra due nucleoni mediata dallo scambio di un pione. Consideriamo due nucleoni $A$ e $B$ che interagiscono tramite lo scambio di una particella $X$.La reazione è del tipo:
+In particolare, poichè la massa del pione è circa $m_{\pi} \simeq \qty{135}{\mega\electronvolt}$, la lunghezza caratteristica della forza nucleare risulta essere dell'ordine di $\qty{1.4}{\femto\meter}$, che è coerente con le dimensioni tipiche dei nuclei atomici. Questo modello di Yukawa ha avuto un grande successo nel descrivere le proprietà della forza nucleare e ha portato alla scoperta sperimentale dei pioni negli anni '40.\\
+Possiamo descrivere nel dettaglio l'interazione tra due nucleoni mediata dallo scambio di un pione;
+
+\addfeynman[Diagramma di Feynman dell'interazione tra adroni]{
+    \draw[fermion] (-2,0) node[left] {$A$} -- (0,1) -- (2,0) node[right] {$A$};
+    \draw[fermion] (-1,4) node[left] {$B$} -- (1,3) -- (3,4) node[right] {$B$};
+    \draw[boson] (0,1) -- (1,3) node[midway,above left] {$X$};
+}{1}{feynman_hadron_interaction}
+
+Consideriamo dunque due nucleoni $A$ e $B$ che interagiscono tramite lo scambio di una particella $X$. La reazione è del tipo:
 \begin{equation}
     A + B \to A + B
 \end{equation}
@@ -76,39 +90,82 @@ In particolare, nel sistema di riferimento a riposo della particella $A$ scrivia
 In particolare:
 \begin{equation}
   \begin{split}
-    &E_A^2 = p_A^2 c^2 + M_A^2 c^4 \\[8pt]
-    &E_X^2 = p_A^2 c^2 + m_X^2 c^4
+    &E_A^2 = \vec{p}_A^2 c^2 + M_A^2 c^4 \\[8pt]
+    &E_X^2 = \vec{p}_A^2 c^2 + m_X^2 c^4
   \end{split}
 \end{equation}
 Il modulo del quadrivettore della particella $A$ risulta dunque essere:
 \begin{equation}
-    p_A^{\mu} p_{A \mu} = E_A^2 - p_A^2 c^2 = M_A^2 c^4
+    (p_A)^{\mu} (p_A)_{\mu} = E_A^2 - \vec{p}_A^2 c^2 = M_A^2 c^4
 \end{equation}
 Ma allora la differenza tra l'energia iniziale e finale risulta:
 \begin{equation}
-    \Delta E_A =  E_A + E_X - M_A c^2 = \sqrt{p_A^2 c^2 + M_A^2 c^4} + \sqrt{p_A^2 c^2 + M_X^2 c^4} - M_A c^2
-    \begin{cases}
-       \approx 2pc & \text{se } p_A \to 0 \\
-       \approx M_X c^2 & \text{se } p_A \to \infty
-    \end{cases}
+    \begin{split}
+        \Delta E_A &=  E_A + E_X - M_A c^2 = \\[8pt]
+        &= \sqrt{\vec{p}_A^2 c^2 + M_A^2 c^4} + \sqrt{\vec{p}_A^2 c^2 + M_X^2 c^4} - M_A c^2 =
+        \begin{cases}
+            \simeq 2pc & \text{se } p \to \infty \\[8pt]
+            \simeq M_X c^2 & \text{se } p \to  0
+        \end{cases}
+    \end{split}
 \end{equation}
-Dunque l'energia risulta non conservata per ogni valore di $p_A$. Possiamo dunque applicare il principio di indeterminazione di Heisenberg per giustificare la presenza della particella $X$ per un tempo limitato:
+Dove $\abs{\vec{p}_A} = p$. Dunque l'energia risulta non conservata per ogni valore di $p$. Possiamo dunque applicare il principio di indeterminazione di Heisenberg per giustificare la presenza della particella $X$ per un tempo limitato:
 \begin{equation}
-    \Delta E_A \Delta t \approx \hbar \implies \Delta t \approx \dfrac{\hbar}{\Delta E_A}
+    \Delta E \Delta t \simeq \hbar \implies \Delta t \simeq \dfrac{\hbar}{\Delta E}
 \end{equation}
 Definiamo dunque questo tempo $\tau$ come il tempo caratteristico di scambio della particella $X$. Durante questo intervallo di tempo la particella $X$ può viaggiare una distanza massima:
 \begin{equation}
-    r \approx c \tau = \dfrac{\hbar c}{\Delta E_A}
+    r \simeq c \tau = \dfrac{\hbar c}{\Delta E}
 \end{equation}
-Poichè $r$ è inversamente proporzionale a $\Delta E_A$, possiamo trovare un valore limite nel caso di $p_A \to 0$:
+Poichè $r$ è inversamente proporzionale a $\Delta E$, possiamo trovare un valore limite nel caso di $p \to 0$:
 \begin{equation}
-    r_{\text{max}} \approx \dfrac{\hbar c}{M_X c^2} = \dfrac{\hbar}{M_X c} = \dfrac{1}{\lambda_X}
+    r_{\text{max}} \simeq \dfrac{\hbar c}{M_X c^2} = \dfrac{\hbar}{M_X c} = \dfrac{1}{\lambda_X}
 \end{equation}
 In accordo con il modello di Yukawa, possiamo dunque identificare la massa della particella mediatore $X$ con la massa del pione $m_{\pi}$. Questo implica che la forza nucleare ha un raggio d'azione limitato, coerente con le dimensioni tipiche dei nuclei atomici.\\
 \section{Osservazioni sperimentali}
 Pioni e muoni sono oggi studiati in laboratorio, dove possono essere prodotti mediante acceleratori di particelle e rilevati tramite le cosiddette \textbf{camere a bolle}.
 
-\addfigure[Schema di funzionamento di una camera a bolle]{drawio-pdf/Camera_a_bolle.drawio}{0.6}
+\addtikz[Schema di funzionamento di una camera a bolle]{
+    %Coils
+    \foreach \x in {0,1,2,...,5}{
+        \fill[betterYellow] (\x-0.2,2.5) arc(90:-90:0.1cm and 2.5cm) -- (\x+0.2,-2.5) arc(-90:90:0.1cm and 2.5cm) -- cycle;
+        \fill[betterYellow] (\x,2.5) circle(0.2);
+        \fill[betterYellow] (\x,-2.5) circle(0.2);
+        \draw[thick,orange] (\x,2.5) circle(0.2);
+        \draw[thick,orange] (\x,-2.5) circle(0.2);
+
+    }
+
+%Camera
+    \fill[white] (-2,2) -- (6,2) -- (6,-2) -- (-2,-2) -- cycle;
+    \fill[gray!50] (2,2) arc(90:270:0.5cm and 2cm) -- (2.5,-2) -- (2.5,2) -- cycle;
+    \fill[gray!50] (2.5,0) ellipse(0.5cm and 2cm);
+    \fill[supportDarkBlue!50] (2.5,2) arc(90:-90:0.5cm and 2cm) -- (6,-2) arc(-90:90:0.5cm and 2cm) -- cycle;
+
+    \draw[thick] (-1,2) -- (6,2) (-1,-2) -- (6,-2);
+    \draw[thick] (-1,0) ellipse(0.5cm and 2cm);
+    \draw[thick] (2,2) arc(90:270:0.5cm and 2cm);
+    \draw[thick] (2.5,0) ellipse(0.5cm and 2cm);
+    \draw[thick] (6,0) ellipse(0.5cm and 2cm);
+
+    %Arrows
+    \foreach \y in {-1.5,-0.5,0.5,1.5}{
+        \draw[->,thick,red] (-2,\y) -- (7,\y);
+    }
+    \node at (7.25,0) {$\vec{B}$};
+    \draw[->,thick] (1.5,0) -- (-0.25,0)node[midway,above] {Pistone};
+    \node[white,above] at (4,0.5) {Liquido};
+    %Labels
+    \draw[thick,->] (5,4)node[above] {Particelle} -- (5,1);
+    \node[below] at (2.5,-3) {Coil magnetici};
+    %Rilevatore
+    \fill[black!50] (8.5,-0.5) rectangle (9,0.5);
+    \fill[black!50] (9,-1) rectangle (10,1);
+    \draw[thick] (8.5,-0.5) rectangle (9,0.5);
+    \draw[thick] (9,-1) rectangle (10,1);
+    \node[right] at (10.25,0) {Rilevatore};
+
+}{1}{bubble_chamber_scheme_1}
 
 Queste camere sono formate da un liquido super riscaldato che viene ionizzato dal passaggio di particelle cariche, formando delle bolle visibili. Analizzando le tracce lasciate dalle particelle nelle camere a bolle, è possibile ricostruire le loro proprietà, come la massa, la carica e il momento.
 
@@ -132,10 +189,10 @@ Mentre alcune reazioni a cui i pioni possono partecipare sono:
       &\omega \to \pi^+ + \pi^- + \pi^0
     \end{split}
 \end{equation}
-Con $m_{\varrho} \approx \qty{770}{\mega\electronvolt}$ e $m_{\omega} \approx \qty{782}{\mega\electronvolt}$.\\
+Con $m_{\varrho} \simeq \qty{770}{\mega\electronvolt}$ e $m_{\omega} \simeq \qty{782}{\mega\electronvolt}$.\\
 \section{Numero quantico di stranezza e di colore}
 Possiamo ora introdurre due numeri quantici fondamentali per la descrizione degli adroni: il \textbf{numero di stranezza} $S$ e il \textbf{numero di colore} $C$.\\
-Il numero di stranezza $S$ è un numero quantico che descrive la presenza di quark strani all'interno di una particella. Nelle reazioni nucleari forti ($\Delta t \approx \qty{e-22}{\second}$), il numero di stranezza è conservato, mentre nelle reazioni deboli ($\Delta t \approx \qty{e-10}{\second}$) può variare. Prendiamo in esame due particelle:
+Il numero di stranezza $S$ è un numero quantico che descrive la presenza di quark strani all'interno di una particella. Nelle reazioni nucleari forti ($\Delta t \simeq \qty{e-22}{\second}$), il numero di stranezza è conservato, mentre nelle reazioni deboli ($\Delta t \simeq \qty{e-10}{\second}$) può variare. Prendiamo in esame due particelle:
 \begin{itemize}
     \item Il kaone $K^0$, con $S=+1$, è composto da un quark down ($d$) e un quark anti-strano ($\anti{s}$).
     \item Il lambda $\Lambda^0$, composto da un quark up ($u$), un quark down ($d$) e un quark strano ($s$), ha $S=-1$.
@@ -160,15 +217,16 @@ Inoltre individuiamo 6 ``sapori'' (\textbf{flavors}) di quark, distinti dalle se
 \begin{table}[H]
     \centering
     \begin{tabular}{lcccc}
-        \hline \\[-8pt]
-        Nome & Simbolo & Carica $Q$ & Massa (GeV) & Stranezza $S$\\[4pt]
-        \hline \\[-8pt]
-        Down & $d$ & $-1/3$ & $m_d \approx 0.3$ & $0$\\[8pt]
-        Up & $u$ & $+2/3$ & $m_u \approx m_d$ & $0$\\[8pt]
-        Strange & $s$ & $-1/3$ & $m_s \approx 0.5$ & $-1$\\[8pt]
-        Charm & $c$ & $+2/3$ & $m_c \approx 1.5$ & $0$\\[8pt]
-        Bottom & $b$ & $-1/3$ & $m_b \approx 4.5$ & $0$\\[8pt]
-        Top & $t$ & $+2/3$ & $m_t \approx 180 \pm 12$ & $0$
+        \hline
+        \textbf{Nome} & \textbf{Simbolo} & \textbf{Carica} ($e$) & \textbf{Massa} (GeV) & \textbf{Stranezza} $S$\\
+        \hline
+        Down & $d$ & $-1/3$ & $m_d \simeq 0.3$ & $0$\\[8pt]
+        Up & $u$ & $+2/3$ & $m_u \simeq m_d$ & $0$\\[8pt]
+        Strange & $s$ & $-1/3$ & $m_s \simeq 0.5$ & $-1$\\[8pt]
+        Charm & $c$ & $+2/3$ & $m_c \simeq 1.5$ & $0$\\[8pt]
+        Bottom & $b$ & $-1/3$ & $m_b \simeq 4.5$ & $0$\\[8pt]
+        Top & $t$ & $+2/3$ & $m_t \simeq 180 \pm 12$ & $0$\\
+        \hline
     \end{tabular}
     \caption{Proprietà dei quark}
 \end{table}
@@ -188,15 +246,17 @@ Come anticipato la necessità di introdurre il numero di colore deriva dal princ
 \end{equation}
 Introducendo il colore come un nuovo grado di libertà, i quark possono essere distinti non solo per le loro proprietà come spin e carica, ma anche per il loro colore. In questo modo, i tre quark up nel delta $\Delta^{++}$ possono avere colori diversi (rosso, verde e blu), permettendo loro di occupare lo stesso stato quantico senza violare il principio di esclusione di Pauli.\\
 Rimane ora da capire come questi quark interagiscano tra loro. La teoria che descrive l'interazione tra quark e gluoni è la cromodinamica quantistica (\textbf{QCD}). In QCD, i quark interagiscono scambiando gluoni, che sono i mediatori della forza nucleare forte. I gluoni stessi portano carica di colore, il che porta a una serie di fenomeni unici, come il \textbf{confinamento} dei quark all'interno degli adroni e la \textbf{liberazione asintotica} a energie molto elevate.\\
-I gluoni hanno $J =1$ e massa nulla, e trasportano una combinazione di colore e anticolore. Ci sono nove tipi di gluoni ($3 \times 3$), ciascuno con una diversa combinazione di colori:
-\begin{equation}
-    \begin{split}
-      &\text{Ottetti di gluoni:} \\[8pt]
-      &r \anti{g}, \qquad r \anti{b}, \qquad g \anti{b}, \qquad g \anti{r}, \qquad b \anti{g}, \qquad b \anti{r}, \qquad \dfrac{1}{\sqrt{2}} (r \anti{r} - g \anti{g}), \qquad  \dfrac{1}{\sqrt{6}} (r \anti{r} + g \anti{g} - 2 b \anti{b}) \\[8pt]
-      &\text{Singoletto di gluone:} \\[8pt]
-      &\dfrac{1}{\sqrt{3}} (r \anti{r} + g \anti{g} + b \anti{b})
-    \end{split}
-\end{equation}
+I gluoni hanno $\text{J} =1$ e massa nulla, e trasportano una combinazione di colore e anticolore. Ci sono nove tipi di gluoni ($3 \times 3$), ciascuno con una diversa combinazione di colori:
+\begin{itemize}
+    \item Ottetti di gluoni:
+    \begin{equation}
+        r \anti{g} \qquad r \anti{b} \qquad g \anti{b} \qquad g \anti{r} \qquad b \anti{g} \qquad b \anti{r} \qquad \dfrac{1}{\sqrt{2}} (r \anti{r} - g \anti{g}) \qquad  \dfrac{1}{\sqrt{6}} (r \anti{r} + g \anti{g} - 2 b \anti{b})
+    \end{equation}
+    \item Singoletto di gluone:
+    \begin{equation}
+        \dfrac{1}{\sqrt{3}} (r \anti{r} + g \anti{g} + b \anti{b})
+    \end{equation}
+\end{itemize}
 Grazie alla QCD possiamo rappresentare la funzione d'onda dei barioni come:
 \begin{equation}
     \Psi = \psi_{\text{spatial}}(\vec{r}) \psi_{\text{spin}}\psi_{\text{color}}

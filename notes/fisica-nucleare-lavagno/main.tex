@@ -18,19 +18,29 @@
 \usepackage{esint}
 \usepackage{bigints}
 \usepackage{tikz}
-\usepackage{mlmodern}
+\usepackage{pgf-pie}
+\usepackage[low-sup]{subdepth}
+\usepackage{mlmodern} %newtx o mlmodern
 
+\def\arraystretch{1.25}
 \AtBeginDocument{\RenewCommandCopy\qty\SI}
 \sisetup{
     range-open-phrase =,
     range-units = single,
-    range-phrase = \divisionsymbol,
-    output-product=\ensuremath{\cdot},
+    range-phrase = -,
+    product-symbol=\ensuremath{\cdot},
     exponent-product=\ensuremath{\cdot},
     inline-per-mode = symbol,
     display-per-mode = fraction
 }
+
+
+
 \DeclareSIUnit\angstrom{\text{Å}}
+\DeclareSIUnit\parsec{\text{pc}}
+\DeclareSIUnit\erg{\text{erg}}
+\DeclareSIUnit\gauss{\text{G}}
+\DeclareSIUnit\statC{\text{statC}}
 \DeclareSIUnit\rad{\text{rad}}
 \DeclareSIUnit\rem{\text{rem}}
 \DeclareSIUnit\curie{\text{Ci}}
@@ -38,14 +48,11 @@
 \DeclareSIUnit\rontgen{\text{R}}
 \DeclareMathAlphabet\mathbfcal{OMS}{cmsy}{b}{n}
 \setlength{\arraycolsep}{8pt}
-\renewcommand{\arraystretch}{1.5}
 \counterwithin{equation}{section}
 \counterwithin{figure}{section}
 \renewcommand{\vec}{\vb}
 \newcommand{\diff}[1]{\mathrm{d}#1}
 \newcommand{\dvec}[1]{\dot{\vec{#1}}}
-\newcommand{\muz}{\mu_0}
-\newcommand{\epsz}{\varepsilon_0}
 \newcommand{\crossout}[1]{\cancel{#1}\raisebox{14pt}{\scriptsize = 0}}
 \newcommand{\bigsum}{\displaystyle\sum}
 \newcommand{\brackets}[1]{\left(#1\right)}
@@ -61,8 +68,6 @@
 \newcommand{\action}{\mathcal{S}}
 \newcommand{\lap}{\laplacian}
 \newcommand{\efunction}{\mathrm{e}}
-\newcommand{\Velegant}{\mathcal{V}} %Aka V-sexy
-\newcommand{\Telegant}{\mathcal{T}} %Aka T-sexy
 \newcommand{\transpose}[1]{#1^{\;T}}
 \newcommand{\notimplies}{\centernot\implies}
 \newcommand{\potE}{\varphi}
@@ -77,6 +82,7 @@
 \newcommand{\avg}[1]{\left\langle #1 \right\rangle}
 \newcommand{\atomsymbol}[1]{\mathrm{#1}} % Usage: \atomsymbol{Element}
 \newcommand{\atom}[3]{\prescript{#2}{#3}{\mathrm{#1}}} % Usage: \atom{Element}{Mass Number}{Atomic Number}
+\renewcommand{\op}[1]{\hat{\text{#1}}}
 \newcommand{\placeholder}{\begin{figure}[H]
     \centering
     \includegraphics[width=0.4\textwidth]{res/png/placeholder.png}\end{figure}}
@@ -117,6 +123,7 @@
 \include{chapters/8_Biomedical_applications}
 \include{chapters/9_Fission_and_fusion}
 \include{chapters/10_Cosmology}
-%\include{chapters/Exercises}
+\include{chapters/A_Constants_and_units}
+%\include{chapters/B_Exercises}
 
 \end{document}

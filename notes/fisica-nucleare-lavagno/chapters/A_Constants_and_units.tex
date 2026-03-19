@@ -1,0 +1,71 @@
+\appendix
+\chapter[Costanti e unità]{Convenzioni, costanti e unità di misura}
+Elenchiamo alcune informazioni utili per la conversione tra le unità di misura più comuni in fisica nucleare e le costanti fisiche più utilizzate nel corso del testo.
+\section{Unità CGS}
+In fisica nucleare, è comune utilizzare il sistema di unità CGS (centimetro-grammo-secondo) per esprimere grandezze fisiche. Alcune proprietà di questo sistema sono:
+\begin{itemize}
+    \item La costante di Planck ridotta $\hbar$ è espressa in erg$\cdot$s, dove $\qty{1}{\joule} = \qty{e7}{\erg}$
+    \item La velocità della luce $c$ è espressa in cm/s, dunque $c = \qty{3e10}{\centi\meter\per\second}$
+    \item L'energia è espressa in erg, dove $\qty{1}{\electronvolt} = \qty{1.602e-12}{\erg}$
+    \item La carica elementare è espressa in statCoulomb (statC), dove $\qty{1}{\coulomb} = \qty{3e9}{\statC}$
+    \item $4\pi\varepsilon_0 = 1$, da cui la legge di Coulomb risulta:
+    \begin{equation}
+        F = \dfrac{q_1 q_2}{r^2}
+    \end{equation}
+    e l'equazione di Poisson risulta:
+    \begin{equation}
+        \nabla^2 \phi = -4 \pi \rho
+    \end{equation}
+\end{itemize}
+\section{Unità naturali}
+In fisica delle particelle e in fisica nucleare, è comune utilizzare il sistema di unità naturali, in cui si pone $1/4\pi\varepsilon_0 = \hbar = c = 1$. In questo sistema di unità, le grandezze fisiche vengono espresse in termini di energia (ad esempio, $\si{\mega\electronvolt}$). Alcune proprietà di questo sistema sono:
+\begin{itemize}
+    \item La lunghezza è espressa in $\si{\per\mega\electronvolt}$, dove $\qty{1}{\femto\meter} \simeq \qty{5.07}{\per\mega\electronvolt}$
+    \item Il tempo è espresso in $\si{\per\mega\electronvolt}$, dove $\qty{1}{\second} \simeq \qty{1.52e21}{\per\mega\electronvolt}$
+    \item La massa è espressa in $\si{\mega\electronvolt}/c^2$, ma poichè $c=1$, la massa viene espressa direttamente in $\si{\mega\electronvolt}$
+    \item La quantità di moto è espressa in $\si{\mega\electronvolt}/c$, ma poichè $c=1$, la quantità di moto viene espressa direttamente in $\si{\mega\electronvolt}$
+    \item La carica elementare è espressa in unità di carica elettrica, dove la costante di struttura fine $\alpha$ è data da:
+    \begin{equation}
+        \alpha = e^2 \simeq \dfrac{1}{137}
+    \end{equation}
+\end{itemize}
+\section{Costanti fisiche}
+Elenchiamo alcune costanti fisiche fondamentali utilizzate in fisica nucleare, prima in unità SI, poi in unità CGS e infine in unità naturali.
+\begin{itemize}
+    \item Costante di Planck ridotta $\hbar$:
+    \begin{equation}
+        \hbar = \qty{1.0545718e-34}{\joule\second} = \qty{1.0545718e-27}{\erg\second} = 1
+    \end{equation}
+    \item Velocità della luce $c$:
+    \begin{equation}
+        c = \qty{2.99792458e8}{\meter\per\second} = \qty{2.99792458e10}{\centi\meter\per\second} = 1
+    \end{equation}
+    \item Massa dell'elettrone $m_e$:
+    \begin{equation}
+        m_e = \qty{9.10938356e-31}{\kilo\gram} = \qty{9.10938356e-28}{\gram} = \qty{0.511}{\mega\electronvolt}
+    \end{equation}
+    \item Massa del protone $m_p$:
+    \begin{equation}
+        m_p = \qty{1.6726219e-27}{\kilo\gram} = \qty{1.6726219e-24}{\gram} = \qty{938.272}{\mega\electronvolt}
+    \end{equation}
+    \item Massa del neutrone $m_n$:
+    \begin{equation}
+        m_n = \qty{1.6749275e-27}{\kilo\gram} = \qty{1.6749275e-24}{\gram} = \qty{939.565}{\mega\electronvolt}
+    \end{equation}
+    \item Costante di struttura fine $\alpha$:
+    \begin{equation}
+        \alpha = \dfrac{e^2}{4\pi\varepsilon_0 \hbar c} = \dfrac{e^2}{\hbar c} = e^2 \simeq \dfrac{1}{137}
+    \end{equation}
+    \item Magnetone nucleare $\mu_N$:
+    \begin{equation}
+        \mu_N = \dfrac{e \hbar}{2 m_p} = \qty{5.0507837e-27}{\joule\per\tesla} = \qty{5.0507837e-20}{\erg\per\gauss} = \dfrac{e}{2 m_p}
+    \end{equation}
+    \item Magnetone di Bohr $\mu_B$:
+    \begin{equation}
+        \mu_B = \dfrac{e \hbar}{2 m_e} = \qty{9.274009994e-24}{\joule\per\tesla} = \qty{9.274009994e-17}{\erg\per\gauss} = \dfrac{e}{2 m_e}
+    \end{equation}
+    \item Raggio di Bohr $a_0$:
+    \begin{equation}
+        a_0 = \dfrac{4\pi\varepsilon_0 \hbar^2}{m_e e^2} = \dfrac{\hbar^2}{m_e e^2} = \qty{5.29177210903e-11}{\meter} = \qty{5.29177210903e-9}{\centi\meter} = \dfrac{1}{m_e e^2}
+    \end{equation}
+\end{itemize}

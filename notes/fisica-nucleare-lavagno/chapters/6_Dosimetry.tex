@@ -2,16 +2,18 @@
 \section{Misura delle radiazioni ionizzanti}
 La dosimetria è la scienza che si occupa della misurazione e della valutazione delle dosi di radiazione assorbite dai materiali, in particolare dai tessuti biologici. Essa è fondamentale in vari campi, tra cui la medicina nucleare, la radioterapia, la protezione dalle radiazioni e la radiobiologia.\\
 Definiamo le due seguenti grandezze:
-\begin{itemize}
-    \item \textbf{Dose assorbita} $D$: è l'energia per unità di massa di radiazione assorbita. Si misura in Gray (Gy), dove:
+\begin{definition}{Dose assorbita}
+    La \textbf{Dose assorbita} $D$ è l'energia per unità di massa di radiazione assorbita. Si misura in Gray (Gy), dove:
     \begin{equation}
         \qty{1}{\gray} = \qty{1}{\joule\per\kilogram} = \qty{100}{\rad}
     \end{equation}
-    \item \textbf{Dose equivalente} $H$: tiene conto dei diversi effetti biologici della radiazione creati da differenti tipi di radiazione. Si calcola moltiplicando la dose assorbita per un fattore di ponderazione (o di qualità) della radiazione FQ. Valori tipici di FQ sono: FQ = 1 per raggi X, ed elettroni, FQ = 5 per neutroni lenti e FQ = 10 per particelle alfa. L'unità di misura della dose equivalente è lo Sievert (Sv):
+\end{definition}
+\begin{definition}{Dose equivalente}
+    La \textbf{Dose equivalente} $H$ tiene conto dei diversi effetti biologici della radiazione creati da differenti tipi di radiazione. Si calcola moltiplicando la dose assorbita per un fattore di ponderazione della radiazione FQ. Valori tipici di FQ sono: FQ = 1 per raggi X, ed elettroni, FQ = 5 per neutroni lenti e FQ = 10 per particelle alfa. L'unità di misura della dose equivalente è lo Sievert (Sv):
     \begin{equation}
         \qty{1}{\sievert} = \qty{1}{\gray} = \qty{100}{\rem}
     \end{equation}
-\end{itemize}
+\end{definition}
 Il Consiglio Nazionale per la protezione contro le radiazioni raccomanda una dose equivalente non superiore ad 1 mSv all'anno (escluso il contributo dovuto alle sorgenti naturali).
 \section{Effetti biologici della radiazione}
 Come anticipato, le radiazioni possono avere diversi impatti sui tessuti biologici, a seconda del tipo di radiazione e della dose assorbita. Possiamo identificare 3 principali categorie in base al livello di penetrazione:
@@ -44,20 +46,15 @@ La dose massima raccomandata per la popolazione generale è di $\qty{1}{\milli\s
 Oltre alla dose totale è importante capire che la stessa dose assunta in un lungo periodo può risultare invece fatale se assunta in un breve lasso di tempo. Nel caso di una dose assorbita su tutto il corpo per un'ora si hanno i seguenti effetti:
 \begin{table}
     \centering
-    \begin{tabular}{|p{5cm}|p{8cm}|}
+    \begin{tabular}{p{5cm}p{8cm}}
         \hline
-        \textbf{Dose equivalente (Sv)} & \textbf{Effetti biologici} \\
+        \textbf{Dose equivalente} & \textbf{Effetti biologici} \\
         \hline
-        $<\qty{0.25}{\sievert}$ & Nessun effetto osservabile \\
-        \hline
-        $\qtyrange{0.25}{1}{\sievert}$ & Lievi alterazioni sangue, raddoppio rischio leucemia e anomalie genetiche \\
-        \hline
-        $\qtyrange{1}{2}{\sievert}$ & Notevoli alterazioni sangue, nausea, emorragie intestinali, forte rischio leucemia e anomalie genetiche \\
-        \hline
-        $\qtyrange{2}{3}{\sievert}$ & Gravi emorragie, shock, stato di prostrazione \\
-        \hline
-        $\qtyrange{5}{7}{\sievert}$ & Grave sindrome acuta da radiazioni, danni agli organi interni, morte nel 30-60\% dei casi \\
-        \hline
+        $<\qty{0.25}{\sievert}$ & Nessun effetto osservabile \\[8pt]
+        $\qtyrange{0.25}{1}{\sievert}$ & Lievi alterazioni sangue, raddoppio rischio leucemia e anomalie genetiche \\[8pt]
+        $\qtyrange{1}{2}{\sievert}$ & Notevoli alterazioni sangue, nausea, emorragie intestinali, forte rischio leucemia e anomalie genetiche \\[8pt]
+        $\qtyrange{2}{3}{\sievert}$ & Gravi emorragie, shock, stato di prostrazione \\[8pt]
+        $\qtyrange{5}{7}{\sievert}$ & Grave sindrome acuta da radiazioni, danni agli organi interni, morte nel 30-60\% dei casi \\[8pt]
         $>\qty{8}{\sievert}$ & Morte nel 100\% dei casi entro due settimane \\
         \hline
     \end{tabular}

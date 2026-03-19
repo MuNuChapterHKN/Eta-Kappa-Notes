@@ -1,1 +1,410 @@
 \chapter{Fissione e fusione nucleare}
+\section{Fissione nucleare}
+Quando abbiamo parlato di decadimento radioattivo, abbiamo visto che alcuni nuclei instabili tendono a trasformarsi spontaneamente in nuclei più stabili, emettendo particelle e radiazioni. Tuttavia, esistono anche processi in cui i nuclei possono essere indotti a trasformarsi attraverso l'interazione con altre particelle o nuclei. Due di questi processi sono la fissione nucleare e la fusione nucleare. In particolare, bombardando un elemento $X$ con particelle altamente energetiche (possono essere neutroni, protoni o nuclei leggeri), si può indurre la fissione di $X$ in due o più nuclei più leggeri, liberando una grande quantità di energia secondo la seguente reazione generale:
+\begin{equation}
+    a + X \rightarrow Y + b + \text{energia}
+\end{equation}
+L'energia di reazione è data da:
+\begin{equation}
+    Q = \brackets{M_a + M_X - M_Y - M_b} c^2
+\end{equation}
+Dove $M_a$, $M_X$, $M_Y$ e $M_b$ sono le masse a riposo delle particelle coinvolte nella reazione. Se $Q$ è positivo, la reazione è esotermica e libera energia; se $Q$ è negativo, la reazione è endotermica e richiede che $K_a > \abs{Q}$. Oltre all'energia, in queste reazioni sono conservate anche quantità come la carica, il numero barionico e il numero leptonico.\\
+Nel 1932 Chadwick scoprì il neutrone, particella priva di carica elettrica e con massa simile a quella del protone. Questa scoperta aprì la strada a numerosi esperimenti di bombardamento nucleare, poiché i neutroni, non essendo influenzati dalla repulsione elettrostatica dei nuclei, potevano penetrare facilmente all'interno degli atomi.\\
+Nel 1938 Otto Hahn e Fritz Strassmann, lavorando a Berlino, scoprirono che bombardando nuclei di uranio con neutroni termici si ottenevano prodotti di fissione come il bario e il kripton, nuclei molto più leggeri dell'uranio, entrambi approssimativamente con una massa pari a metà di quella dell'uranio. Questo fu il primo esperimento di \textbf{fusione indotta}. Possiamo rappresentare la reazione di fissione dell'uranio come:
+\begin{equation}
+    n + \atom{U}{235}{92} \rightarrow \atom{Ba}{141}{56} + \atom{Kr}{92}{36} + 3n
+\end{equation}
+In alcuni casi la fissione può avvenire spontaneamente, come visto precedentemente. Il modello che spiega questo tipo di fissione è il \textbf{modello della goccia liquida} (liquid drop model), che considera il nucleo come una goccia di liquido carica elettricamente. Quando un neutrone viene assorbito dal nucleo, questo può deformarsi e, se l'energia di deformazione supera una certa soglia, il nucleo si divide in due frammenti più piccoli, liberando energia.\\
+Inizialmente il nucleo è considerato come una sfera uniforme di raggio $R$:
+\begin{equation}
+    x^2 + y^2 + z^2 = R^2
+\end{equation}
+
+\addtikz[Nucleo perfettamente sferico]{
+    \draw[fill=supportDarkBlue!30] (0,0) circle (2cm);
+    \draw[fill=supportDarkBlue!50] (0,0) ellipse (2cm and 0.5cm);
+    \draw[thick] (0,0) circle (2cm);
+    \draw[thick] (0,0) ellipse (2cm and 0.5cm);
+    \draw[thick] (0,0) ellipse (1cm and 2cm);
+    \draw[thick,dashed] (0,0) -- (2,0)node[above left,xshift=-15pt,yshift=-2pt]{$R$};
+    \draw[thick,dashed] (-0.925,-0.4) -- (0,0)node[midway,above]{$R$};
+    \draw[thick,dashed] (0,0) -- (0,2)node[midway,left]{$R$};
+}{1}{spherical_nucleus}
+
+Dopo l'assorbimento del neutrone, il nucleo si deforma in una forma ellissoidale, che può essere descritta dall'equazione:
+\begin{equation}
+    \dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} + \dfrac{z^2}{c^2} = 1
+\end{equation}
+
+Se prendiamo la direzione di deformazione lungo l'asse $x$, possiamo semplificare l'equazione a:
+\begin{equation}
+    \dfrac{x^2}{a^2} + \dfrac{y^2 + z^2}{b^2} = 1
+\end{equation}
+
+\addtikz[Nucleo ellissoidale dopo assorbimento del neutrone]{
+    \draw[fill=supportDarkBlue!30] (0,0) ellipse (3cm and 2cm);
+    \draw[fill=supportDarkBlue!50] (0,0) ellipse (3cm and 0.5cm);
+    \draw[thick] (0,0) ellipse (3cm and 2cm);
+    \draw[thick] (0,0) ellipse (3cm and 0.5cm);
+    \draw[thick] (0,0) ellipse (1cm and 2cm);
+    \draw[thick,dashed] (0,0) -- (3,0)node[midway, above]{$a$};
+    \draw[thick,dashed] (-0.925,-0.4) -- (0,0)node[midway,above]{$b$};
+    \draw[thick,dashed] (0,0) -- (0,2)node[midway,left]{$b$};
+}{1}{ellipsoidal_nucleus}
+
+Una deformazione a volume costante richiede che:
+\begin{equation}
+    V_{\text{sfera}} = V_{\text{ellissoide}} \implies \frac{4}{3} \pi R^3 = \frac{4}{3} \pi a b^2 \implies R^3 = a b^2
+\end{equation}
+Per una trasformazione infinitesima a volume costante otteniamo che:
+\begin{equation}
+    \begin{split}
+        &a = R(1 + \epsilon) \\[8pt]
+        &b = \dfrac{R}{\sqrt{1 + \epsilon}}
+    \end{split} \qquad \text{con } \epsilon \ll 1
+\end{equation}
+Dove $\epsilon$ è un parametro di deformazione piccolo. La superficie dell'ellissoide può essere calcolata come:
+\begin{equation}
+    S_{\text{ellissoide}} = 2 \pi \brackets{ b^2 + ab\dfrac{\kappa}{\sin \kappa}}, \qquad \text{con } \kappa = \arccos\brackets{\dfrac{b}{a}}
+\end{equation}
+Dove $\kappa$ è l'angolo di eccentricità. Espandendo in serie di Taylor per piccoli valori di $\epsilon$, otteniamo:
+\begin{equation}
+    b \sim R\brackets{1 - \dfrac{\epsilon}{2} + \dfrac{\epsilon^2}{8} + \dots}
+\end{equation}
+Da cui otteniamo una modifica nel termine di energia superficiale e coulombiano nella formula semi-empirica della massa:
+\begin{equation}
+    \begin{split}
+        E_{\text{surf}} = b_{\text{surf}} A^{2/3} \brackets{1 + \dfrac{2}{5} \epsilon^2  + \dots} \\[8pt]
+        E_{\text{coul}} = b_{\text{coul}} \dfrac{Z^2}{A^{1/3}} \brackets{1 - \dfrac{1}{5} \epsilon^2  + \dots}
+    \end{split}
+\end{equation}
+Il termine di superficie aumenta con la deformazione, mentre il termine coulombiano diminuisce. La variazione totale di energia del nucleo deformato è quindi:
+\begin{equation}
+    \begin{split}
+        \Delta E &= \brackets{E_{\text{surf}} + E_{\text{coul}}}_{\text{ellissoide}} - \brackets{b_{\text{surf}} A^{2/3} + b_{\text{coul}} \dfrac{Z^2}{A^{1/3}}} = \\[8pt]
+        &= \brackets{\dfrac{2}{5} b_{\text{surf}} A^{2/3} - \dfrac{1}{5} b_{\text{coul}} \dfrac{Z^2}{A^{1/3}}} \epsilon^2
+    \end{split}
+\end{equation}
+La deformazione spontanea avviene per $\Delta E < 0$, ovvero quando:
+\begin{equation}
+    \dfrac{Z^2}{A} > \dfrac{2 b_{\text{surf}}}{b_{\text{coul}}} \simeq 48
+\end{equation}
+Se invece $Z^2/A < 48$ esiste una barriera di energia che impedisce la fissione spontanea. Tuttavia, se il nucleo assorbe un neutrone, l'energia cinetica del neutrone può superare questa barriera, inducendo la fissione.\\
+
+\addtikz[Barriera fissione nucleare]{
+    \draw[thick,->] (0,0) -- (6,0)node[right]{$r$};
+    \draw[thick,->] (0,0) -- (0,5)node[above]{$V(r)$};
+    \draw[dashed,thick] (0,4) to[out=0,in=135,looseness=0.7] (2,3);
+    \draw[thick] (0,2.5) .. controls (0.5,2.25) and (1.5,3.5) .. (2,3) to[out=-45,in=180] (5.5,0);
+    \draw[thick,dashed] (2,0)node[below]{$R$} -- (2,3.5);
+    \draw[thick,dashed] (3.5,4.5) -- (4,4.5)node[right]{$Z^2/A > 48$};
+    \draw[thick] (3.5,4) -- (4,4)node[right]{$Z^2/A < 48$};
+}{1}{fission_barrier}
+
+Tra questi elementi possiamo ancora distinguere due categorie principali:
+\begin{itemize}
+    \item \textbf{Fissili}: nuclei che possono subire fissione bombardati da neutroni termici (bassa energia), come l'uranio-235 e il plutonio-239.
+    \item \textbf{Fissili per neutroni veloci}: nuclei che richiedono neutroni ad alta energia per subire fissione, come l'uranio-238.
+\end{itemize}
+I neutroni ad alta energia, anche detti ``neutroni veloci'' hanno energie dell'ordine di qualche MeV e dunque sono di difficile produzione e gestione. Per questo motivo, i reattori nucleari sfruttano principalmente la fissione indotta da neutroni termici, che hanno energie dell'ordine di qualche meV.\\
+Più in generale distinguiamo tra:
+\begin{itemize}
+    \item \textbf{neutroni termici}: $K_n \simeq \qty{0.025}{\electronvolt}$
+    \item \textbf{neutroni epitermici}: $K_n \simeq \qty{1}{\electronvolt}$
+    \item \textbf{neutroni lenti}: $K_n \simeq \qty{1}{\kilo\electronvolt}$
+    \item \textbf{neutroni veloci}: $K_n \simeq \qtyrange{0.1}{10}{\mega\electronvolt}$
+\end{itemize}
+Alcuni metodi di produzione dei neutroni includono:
+\begin{itemize}
+    \item Reazioni $(\alpha, n)$: bombardamento di nuclei leggeri con particelle alfa:
+    \begin{equation}
+        \alpha + \atom{Be}{9}{4} \rightarrow \atom{C}{12}{6} + n
+    \end{equation}
+    \item Reazioni $(p, n)$: bombardamento di nuclei con protoni:
+    \begin{equation}
+        p + \atom{Li}{7}{3} \rightarrow \atom{Be}{7}{4} + n
+    \end{equation}
+    \item Reazioni di fissione: come la fissione dell'uranio-235.
+    \item Fotoproduzione: bombardamento di nuclei con fotoni ad alta energia:
+    \begin{equation}
+        \gamma + \atom{Be}{9}{4} \rightarrow \atom{Be}{8}{4} + n
+    \end{equation}
+\end{itemize}
+Durante una reazione di fissione dunque si liberano diversi neutroni, che possono a loro volta indurre la fissione di altri nuclei, creando una reazione a catena. Per mantenere questa reazione controllata, come avviene nei reattori nucleari, è necessario utilizzare materiali moderatori che rallentino i neutroni veloci a energie termiche, aumentando la probabilità di fissione nei nuclei fissili. Materiali comunemente usati come moderatori includono l'acqua leggera, l'acqua pesante e il grafite.\\
+Ricordiamo inoltre che durante la fissione è più probabile che si formino nuclei con numeri di massa approssimativamente pari a metà di quello del nucleo originario, seguendo una curva di distribuzione detta \textbf{distribuzione di fissione}. Questa distribuzione mostra due picchi principali, corrispondenti a nuclei con numeri di massa intorno a 95 e 140, rispettivamente.
+
+\addsvg[Distribuzione di fissione. Fonte: \href{https://it.wikipedia.org/wiki/File:Uranium-235_fission_product-en.svg}{Wikipedia}]{Uranium-235_fission_product-en}{0.7}
+
+Poichè l'energia di legame per l'uranio è di circa \qty{7.6}{\mega\electronvolt} per nucleone, mentre per i prodotti di fissione è di circa \qty{8.5}{\mega\electronvolt} per nucleone, la differenza di energia si traduce in una notevole quantità di energia liberata durante la fissione. In media, ogni fissione dell'uranio-235 libera circa \qty{200}{\mega\electronvolt} di energia, che si manifesta principalmente sotto forma di energia cinetica dei frammenti di fissione e dei neutroni emessi, nonché di radiazioni gamma.
+
+\subsection{Reattori nucleari}
+I reattori nucleari convenzionali sono dispositivi progettati per sfruttare l'energia liberata dalle reazioni di fissione nucleare in modo controllato. Questi reattori sono utilizzati principalmente per la produzione di energia elettrica, ma anche per scopi di ricerca e produzione di isotopi radioattivi.\\
+Il combustibile nucleare più comune nei reattori è l'uranio, tuttavia l'uranio naturale contiene solo circa lo 0.7\% di uranio-235, il quale è fissile. Per questo motivo, l'uranio viene spesso arricchito per aumentare la percentuale di uranio-235 fino a circa il 3-5\% per l'uso nei reattori.\\
+Per far funzionare un reattore occorre prestare attenzione a 3 problemi fonamentali:
+\begin{itemize}
+    \item La fuga dei neutroni
+    \item L'energia dei neutroni
+    \item La cattura dei neutroni
+\end{itemize}
+Il primo prototipo di reattore nucleare fu il Chicago Pile-1, costruito nel 1942 sotto la supervisione di Enrico Fermi. Per massimizzare la probabilità di cattura dei neutroni da parte dell'uranio-235, occorre che i neutroni siano lenti, ovvero con $K_n < \qty{1}{\electronvolt}$, ma i neutroni prodotti dalla reazione stessa sono veloci. Per questo motivo, il reattore utilizza un moderatore, che rallenta i neutroni veloci prodotti dalla fissione. Nel Chicago Pile-1, il moderatore era costituito da blocchi di grafite.\\
+Un altro materiale comunemente utilizzato nei moderatori è l'acqua pesante ($\mathrm{D_2O}$), che contiene deuterio invece di idrogeno. L'acqua pesante è efficace nel rallentare i neutroni senza assorbirli, aumentando così la probabilità di fissione nei nuclei fissili.\\
+Ora definiamo una quantità fondamentale:
+\begin{definition}{Massa critica}
+    La \textbf{massa critica} è la quantità minima di materiale fissile necessaria per sostenere una reazione a catena autosufficiente, tipicamente dell'ordine di qualche chilogrammo.
+\end{definition}
+Definiamo un'altra quantità importante:
+\begin{definition}{Fattore di moltiplicazione neutronica}
+    Il \textbf{fattore di moltiplicazione neutronica} $F$ è il rapporto tra il numero di neutroni prodotti in una generazione di fissione e il numero di neutroni che hanno causato la fissione nella generazione precedente. Questo fattore determina se la reazione a catena è autosufficiente, in crescita o in declino.
+    \begin{itemize}
+        \item Se $F = 1$, la reazione è \textbf{critica} e si mantiene costante nel tempo.
+        \item Se $F > 1$, la reazione è \textbf{supercritica} e cresce nel tempo.
+        \item Se $F < 1$, la reazione è \textbf{subcritica} e decresce nel tempo.
+    \end{itemize}
+\end{definition}
+In un reattore nucleare, il fattore di moltiplicazione neutronica dipende da vari parametri, tra cui la geometria del reattore, la composizione del combustibile, l'efficacia del moderatore e la presenza di materiali assorbitori di neutroni. Per mantenere una reazione a catena stabile, è essenziale controllare questi parametri attraverso il design del reattore e l'uso di barre di controllo, che possono essere inserite o rimosse dal nucleo del reattore per assorbire neutroni e regolare la reazione di fissione.\\
+Possiamo riassumere il funzionamento di un reattore di potenza nel seguente schema:
+
+\addfigure[Schema di funzionamento reattore di potenza. Fonte: \href{https://www.britannica.com/technology/nuclear-power}{Britannica}]{png/Nuclear_reactor_schematic}{0.7}
+
+Il \textbf{nocciolo} del reattore contiene il combustibile nucleare, solitamente sotto forma di barre di uranio arricchito fino al 2-4\%. Queste barre sono immerse in un \textbf{moderatore}, che rallenta i neutroni prodotti dalla fissione, aumentando la probabilità di ulteriori fissioni. Il moderatore può essere acqua leggera, acqua pesante o grafite.\\
+Successivamente, il calore generato dalla fissione viene trasferito a un \textbf{fluido di raffreddamento}, che può essere acqua, gas o metallo liquuido. Il fluido di raffreddamento assorbe il calore dal nocciolo e lo trasporta a uno scambiatore di calore, dove viene utilizzato per produrre vapore.\\
+Il vapore prodotto viene quindi utilizzato per azionare una turbina collegata a un generatore elettrico, producendo così energia elettrica. Dopo aver attraversato la turbina, il vapore viene condensato nuovamente in acqua e riciclato nel sistema di raffreddamento.\\
+Infine, le \textbf{barre di controllo} sono utilizzate per regolare la reazione di fissione. Queste barre sono fatte di materiali che assorbono neutroni, come il boro o il cadmio, e possono essere inserite o rimosse dal nocciolo del reattore per controllare la velocità della reazione. Inserendo le barre di controllo, si riduce il numero di neutroni disponibili per la fissione, rallentando la reazione; rimuovendole, si aumenta il numero di neutroni, accelerando la reazione.\\
+\textbf{Esempio}:\\
+Consideriamo un reattore da $\qty{1}{\giga\watt}$ di potenza elettrica con un'efficienza $\eta = 33\%$. La potenza termica generata nel nocciolo del reattore sarà quindi:
+\begin{equation}
+    P_{\text{termica}} = \dfrac{P_{\text{elettrica}}}{\eta} \simeq \qty{3}{\giga\watt}
+\end{equation}
+Se ogni fissione dell'uranio-235 libera circa \qty{200}{\mega\electronvolt} di energia, il numero di fissioni al secondo necessarie per mantenere questa potenza termica è:
+\begin{equation}
+    R = \dfrac{P_{\text{termica}}}{E_{\text{fissione}}} = \dfrac{\qty{3e9}{\joule\per\second}}{\qty{200}{\mega\electronvolt} \cdot \qty{1.6e-13}{\joule\per\mega\electronvolt}} \simeq 9.4 \cdot 10^{19} \text{ fissioni / s}
+\end{equation}
+In un anno (approssimativamente $3.15 \cdot 10^7$ secondi), il numero totale di fissioni sarà:
+\begin{equation}
+    N_{\text{fissioni}} = R \cdot t \simeq 2.96 \cdot 10^{27} \text{ fissioni}
+\end{equation}
+Dato che ogni mole di uranio-235 contiene un $N_A$ di nuclei, la quantità di uranio-235 consumata in un anno sarà:
+\begin{equation}
+    n = \dfrac{N_{\text{fissioni}}}{N_A} \simeq \qty{4920}{\mol}
+\end{equation}
+Convertendo in massa, otteniamo:
+\begin{equation}
+    m = n \cdot M_{\text{U-235}} \simeq \qty{4920}{\mol} \cdot \qty{235}{\gram\per\mole} \simeq \qty{1160}{\kilo\gram}
+\end{equation}
+Ovvero in un anno il reattore consuma qualche decina di tonnellate di uranio arricchito.\\
+\subsection{Criticità della fissione nucleare}
+Un problema importante nella gestione dei reattori nucleari è lo smaltimento delle scorie radioattive prodotte durante la fissione. I prodotti della fissione presentano un numero di neutroni circa il 50\% superiore a quello dei protoni. Ricordandoci che i prodotti vanno tipicamente da $Z = 40$ a $Z = 60$, possiamo aspettarci che i prodotti di fissione siano altamente instabili e radioattivi in quanto il rapporto $N/Z$ è molto più alto rispetto a quello dei nuclei stabili (circa $0.5$). Questi prodotti di fissione includono isotopi come il cesio-137, lo stronzio-90 e il plutonio-239, che hanno emivite che variano da pochi anni a migliaia di anni. La gestione sicura di queste scorie richiede l'isolamento a lungo termine in depositi geologici profondi, dove la radioattività può decadere in modo sicuro senza rischi per l'ambiente o la salute umana.\\
+La vita media di una centrale nucleare è di circa \textbf{30 anni}, in quanto nel tempo la radioattività delle strutture e la loro degradazione meccanica rendono necessario lo smantellamento e la costruzione di nuove centrali.\\
+Infine, un altro rischio associato alla fissione nucleare è la possibilità di incidenti nucleari, come quelli avvenuti a \textbf{Chernobyl} nel 1986 e a \textbf{Fukushima} nel 2011. Questi incidenti possono portare al rilascio di materiale radioattivo nell'ambiente, con conseguenze gravi per la salute umana e l'ecosistema. Per mitigare questi rischi, i reattori nucleari sono progettati con numerosi sistemi di sicurezza, tra cui sistemi di raffreddamento di emergenza, barriere fisiche per contenere il materiale radioattivo e procedure operative rigorose per prevenire errori umani.\\
+Oltre ai rischi associati ai reattori, la fissione nucleare è purtroppo anche utilizzata per scopi militari per la produzione di ordigni nucleari. Le bombe a fissione, come quelle utilizzate a \textbf{Hiroshima} e \textbf{Nagasaki} durante la Seconda Guerra Mondiale, sfruttano la rapida liberazione di energia derivante dalla fissione nucleare per causare distruzione su larga scala. Questi ordigni sono progettati con due masse di uranio \textbf{subcritiche}, che vengono unite al momento dell'esplosione per raggiungere una massa critica in modo estremamente rapido, innescando una reazione a catena incontrollata che rilascia un'enorme quantità di energia in un breve periodo di tempo.\\
+Altri danni collaterali delle bombe a fissione è l'enorme produzione di \textbf{fallout radioattivo} che, come nel caso dello stronzio-90 può depositarsi nelle ossa e causare gravi problemi di salute a lungo termine per le popolazioni esposte.\\
+\section{Fusione nucleare}
+La curva delle energie di legame ci suggerisce che un altro processo nucleare in grado di liberare energia è la \textbf{fusione nucleare}, ovvero la combinazione di due nuclei leggeri per formare un nucleo più pesante. Questo processo è alla base dell'energia prodotta dalle stelle, compreso il nostro Sole, dove le temperature e le pressioni estreme permettono ai nuclei di idrogeno di fondersi per formare elio, liberando enormi quantità di energia.\\
+Al centro del Sole abbiamo temperature elevate:
+\begin{equation}
+    T_{\odot} \simeq \qty{1.5e7}{\kelvin} \implies K_{\odot} \simeq \qty{1.3}{\kilo\electronvolt}
+\end{equation}
+Possiamo chiederci se questa energia è sufficiente a superare la barriera coulombiana. Classicamente, la barriera coulombiana è data da:
+\begin{equation}
+    V_{\text{coul}} = \dfrac{e^2}{4 \pi \varepsilon_0} \dfrac{Z_1Z_2}{R_1 + R_2}
+\end{equation}
+Per $A = A_1 = A_2 \simeq 2Z$ otteniamo:
+\begin{equation}
+    V_{\text{coul}} = \dfrac{e^2}{16 \pi \varepsilon_0} \dfrac{A^2}{R_1 + R_2}
+\end{equation}
+Ricordando che:
+\begin{equation}
+    R = r_0 A^{1/3} \quad \text{con } r_0 \simeq \qty{1.2}{\femto\meter}
+\end{equation}
+Otteniamo:
+\begin{equation}
+    V_{\text{coul}} = \dfrac{e^2}{32 \pi \varepsilon_0 r_0} A^{5/3} \simeq \qty{0.15}{\mega\electronvolt} \cdot A^{5/3}
+\end{equation}
+Dunque per un nucleo di deuterio ($A=2$) otteniamo:
+\begin{equation}
+    V_{\text{coul}} \simeq \qty{0.48}{\mega\electronvolt} \gg K_{\odot} \simeq \qty{1.3}{\kilo\electronvolt}
+\end{equation}
+Se volessimo raggiungere queste energie solo con il riscaldamento termico, dovremmo arrivare a temperature di circa:
+\begin{equation}
+    T_{\text{min}} = \dfrac{V_{\text{coul}}}{k_{\text{B}}} \simeq \qty{5.53e9}{\kelvin}
+\end{equation}
+Tuttavia, grazie al fenomeno del \textbf{tunneling quantistico}, i nuclei possono superare la barriera coulombiana anche a energie inferiori. Come trovato precedentemente la probabilità di tunneling attraverso una barriera di potenziale è data da:
+\begin{equation}
+    T \simeq \exp\brackets{-2 G}
+\end{equation}
+Dove:
+\begin{equation}
+    G = \dfrac{1}{\hbar} \int_{r_1}^{r_2} \sqrt{2m \brackets{V(r) - K}} \dd{r}
+\end{equation}
+Svolgendo l'integrale per la barriera coulombiana otteniamo:
+\begin{equation}
+    G = \dfrac{e^2}{4 \pi \varepsilon_0 \hbar v} Z_1 Z_2 \dfrac{\pi}{2} = \dfrac{Z_1 Z_2 \pi \alpha}{v/c}
+\end{equation}
+Dove $v$ è la velocità relativa delle particelle. In approssimazione classica:
+\begin{equation}
+    K = \dfrac{1}{2} m v^2 \implies v = \sqrt{\dfrac{2K}{m}}
+\end{equation}
+Con $m$ massa ridotta delle particelle:
+\begin{equation}
+    m = \dfrac{M_1 M_2}{M_1 + M_2}
+\end{equation}
+Definiamo anche:
+\begin{equation}
+    E_G = \brackets{2 \pi Z_1 Z_2 \alpha}^2 \dfrac{m c^2}{2}
+\end{equation}
+Chiamata \textbf{energia di Gamow}, che ci permette di riscrivere $G$ come:
+\begin{equation}
+    G = \sqrt{\dfrac{E_G}{K}}
+\end{equation}
+Dunque la probabilità di tunneling diventa:
+\begin{equation}
+    T \simeq \exp\brackets{-2 \sqrt{\dfrac{E_G}{K}}}
+\end{equation}
+Per il sole, il meccanismo $p-p$ (proton-proton) è il principale processo di fusione, in cui due protoni si combinano per formare un nucleo di deuterio, un positrone e un neutrino elettronico:
+\begin{equation}
+    p + p \rightarrow \atom{D}{2}{1} + e^+ + \nu_e
+\end{equation}
+In questo caso, $Z_1 = Z_2 = 1$ e la massa ridotta è circa la metà della massa del protone:
+\begin{equation}
+    m \simeq \dfrac{M_p}{2}
+\end{equation}
+Calcoliamo l'energia di Gamow per questa reazione:
+\begin{equation}
+    E_G = \brackets{2 \pi \alpha}^2 \dfrac{m c^2}{2} \simeq \qty{493}{\kilo\electronvolt}
+\end{equation}
+A temperatura solare, l'energia cinetica media dei protoni è:
+\begin{equation}
+    K_{\odot} \simeq \qty{1.3}{\kilo\electronvolt}
+\end{equation}
+Dunque la probabilità di tunneling per la reazione $p-p$ nel sole è:
+\begin{equation}
+    T \simeq \exp\brackets{-2 \sqrt{\dfrac{493 \cdot 10^3}{1.3 \cdot 10^3}}} \simeq \exp\brackets{-39} \simeq 1.1 \cdot 10^{-17}
+\end{equation}
+Nonostante questa probabilità sia estremamente bassa, la densità elevata di protoni e le enormi dimensioni del sole permettono comunque un tasso significativo di reazioni di fusione. Infatti possiamo definire una \textbf{cross-section di fusione}:
+\begin{equation}
+    \sigma(E) = \dfrac{S(E)}{E} \exp\brackets{-\sqrt{\dfrac{E_G}{E}}}
+\end{equation}
+Dove $S(E)$ è il \textbf{fattore S}, ed è un fattore astronomico. Il \textbf{tasso di reazione} è dato da:
+\begin{equation}
+    R = n_1 n_2 \avg{\sigma v} = n_1 n_2 \int_0^{\infty} f(E) \sigma(E) v \dd{v}
+\end{equation}
+In questo caso la distribuzione di velocità $f(E)$ è la distribuzione di Maxwell-Boltzmann:
+\begin{equation}
+    f(v) = \sqrt{\dfrac{2}{\pi}} \brackets{\dfrac{m}{k_{\text{B}} T}}^{3/2} v^2\exp\brackets{-\dfrac{1}{2} \dfrac{m v^2}{k_{\text{B}} T}}
+\end{equation}
+
+\addtikz[Distribuzione di Maxwell-Boltzmann]{
+    \draw[thick,->] (0,0) -- (6,0)node[right]{$E$};
+    \draw[thick,->] (0,0) -- (0,3)node[above]{$f(E)$};
+    \draw[thick] plot[smooth,domain=0:5,samples=200,supportDarkBlue] (\x,{18*(\x)*exp(-2.5*(\x))});
+}{1}{Maxwell_Boltzmann_distribution}
+
+Esprimendo tutto in funzione dell'energia cinetica $K = E$ otteniamo:
+\begin{equation}
+    f(E) = 2 \sqrt{\dfrac{2m}{\pi}} \brackets{\dfrac{1}{k_{\text{B}} T}}^{3/2} E \exp\brackets{-\dfrac{E}{k_{\text{B}} T}}
+\end{equation}
+Ricordando che:
+\begin{equation}
+    v = \sqrt{\dfrac{2E}{m}} \implies \dv{v}{E} = \dfrac{1}{\sqrt{2 m E}}
+\end{equation}
+Ovvero $\dd{v} = \dd{E} / \sqrt{2 m E}$ il tasso di reazione diventa:
+\begin{equation}
+    \begin{split}
+        R &= n_1 n_2 \int_0^{\infty}2 \sqrt{\dfrac{2m}{\pi}} \brackets{\dfrac{1}{k_{\text{B}} T}}^{3/2} E \exp\brackets{-\dfrac{E}{k_{\text{B}} T}} \dfrac{S(E)}{E} \exp\brackets{-\sqrt{\dfrac{E_G}{E}}} \dfrac{\sqrt{\dfrac{2E}{m}}}{\sqrt{2 m E}}\dd{E} =\\[8pt]
+        &= n_1 n_2 \sqrt{\dfrac{8}{\pi m}} \brackets{\dfrac{1}{k_{\text{B}} T}}^{3/2} \int_0^{\infty} S(E) \exp\brackets{-\dfrac{E}{k_{\text{B}} T} - \sqrt{\dfrac{E_G}{E}}} \dd{E}
+    \end{split}
+\end{equation}
+L'integrale può essere risolto con il metodo del punto stazionario, trovando il valore di $E$ che minimizza l'esponente:
+\begin{equation}
+    \dv{}{E} \brackets{\dfrac{E}{k_{\text{B}} T} + \sqrt{\dfrac{E_G}{E}}} = 0 \implies E_0 = \brackets{\dfrac{1}{2} k_{\text{B}} T \sqrt{E_G}}^{2/3}
+\end{equation}
+Espandendo al secondo ordine vicino al minimo dell'esponente otteniamo:
+\begin{equation}
+    \begin{split}
+        -\dfrac{E}{k_{\text{B}} T} - \sqrt{\dfrac{E_G}{E}} &\sim -\dfrac{E_0}{k_{\text{B}} T} - \sqrt{\dfrac{E_G}{E_0}} + \dfrac{1}{2}\brackets{-\dfrac{3}{4}\dfrac{\sqrt{E_G}}{(E_0)^{5/2}}}\brackets{E-E_0}^2 = \\[8pt]
+        &= -\dfrac{3E_0}{k_{\text{B}} T} - \dfrac{(E - E_0)^2}{2} \dfrac{3}{2} \dfrac{1}{E_0 k_{\text{B}} T}
+    \end{split}
+\end{equation}
+Dunque l'integrale diventa:
+\begin{equation}
+    \int_0^{\infty} S(E) \exp\brackets{-\dfrac{E}{k_{\text{B}} T} - \sqrt{\dfrac{E_G}{E}}} \dd{E} \simeq S(E_0) \exp\brackets{-\dfrac{3E_0}{k_{\text{B}} T}} \int_0^{\infty} \exp\brackets{-\dfrac{(E - E_0)^2}{2 \sigma^2}} \dd{E}
+\end{equation}
+Dove:
+\begin{equation}
+    \sigma = \brackets{\dfrac{2E_0 k_{\text{B}} T}{3}}^{1/2}
+\end{equation}
+Svolgendo l'integrale gaussiano otteniamo:
+\begin{equation}
+    \int_0^{\infty} S(E) \exp\brackets{-\dfrac{E}{k_{\text{B}} T} - \sqrt{\dfrac{E_G}{E}}} \dd{E} \simeq S(E_0) \exp\brackets{-\dfrac{3E_0}{k_{\text{B}} T}} \brackets{\dfrac{\pi E_0 k_{\text{B}} T}{2}}^{1/2}
+\end{equation}
+Dunque il tasso di reazione finale è:
+\begin{equation}
+    R = n_1 n_2 \brackets{\dfrac{2 \pi}{m k_{\text{B}} T}}^{1/2} S(E_0) \exp\brackets{-\dfrac{3E_0}{k_{\text{B}} T}}
+\end{equation}
+Il valore di $E_0$ rappresenta l'energia alla quale la maggior parte delle reazioni di fusione avviene, ed è noto come il \textbf{picco di Gamow}. Questo picco indica che, nonostante la maggior parte delle particelle abbia energie molto più basse, è proprio una piccola frazione di particelle con energie intorno a $E_0$ che contribuisce in modo significativo al tasso di reazione di fusione.
+
+\addtikz[Picco di Gamow]{
+    \draw[thick,->] (0,0) -- (7,0) node[right] {$E$};
+    \draw[thick,->] (0,0) -- (0,4) node[above] {$f(E) \sigma(E)$};
+    \draw[supportDarkBlue,thick] (0,0) .. controls (1,0) and (1.25,3.5) .. (1.75,3.5) .. controls (2.5,3.5) and (3,0) .. (7,0);
+    \draw[thick,dashed] (1.75,0)node[below]{$E_0$} -- (1.75,3.75);
+}{1}{Gamow_peak}
+
+Nel caso del sole, per la reazione $p-p$ con $E_G \simeq \qty{493}{\kilo\electronvolt}$ e $T \simeq \qty{1.5e7}{\kelvin}$, otteniamo:
+\begin{equation}
+    E_0 \simeq \qty{5.9}{\kilo\electronvolt}
+\end{equation}
+Questo valore è significativamente più alto dell'energia cinetica media dei protoni nel sole, ma è comunque molto più basso della barriera coulombiana, dimostrando l'importanza del tunneling quantistico nelle reazioni di fusione stellare.
+\subsection{Fusione nucleare controllata}
+La prima fusione nucleare avvenuta sulla Terra fu realizzata nel 1951 con l'esperimento \textbf{Mike}, che utilizzò una bomba all'idrogeno per innescare la fusione di isotopi dell'idrogeno, liberando un'energia di circa 10.4 megatoni di TNT. Tuttavia, l'obiettivo attuale della ricerca sulla fusione nucleare è quello di sviluppare metodi controllati e sostenibili per sfruttare questa fonte di energia pulita e praticamente inesauribile.\\
+Le reazioni più promettenti per la fusione controllata sulla Terra sono:
+\begin{equation}
+    \begin{split}
+        &\atom{H}{2}{} + \atom{H}{2}{} \rightarrow \atom{He}{3}{} + n \qquad Q = \qty{3.27}{\mega\electronvolt} \\[8pt]
+        &\atom{H}{2}{} + \atom{H}{2}{} \rightarrow \atom{H}{3}{} + n \qquad Q = \qty{4.03}{\mega\electronvolt} \\[8pt]
+        &\atom{H}{2}{} + \atom{H}{3}{} \rightarrow \atom{He}{4}{} + n \qquad Q = \qty{17.6}{\mega\electronvolt}
+    \end{split}
+\end{equation}
+Queste reazioni coinvolgono isotopi dell'idrogeno, come il deuterio ($\atom{H}{2}{}$) e il trizio ($\atom{H}{3}{}$), che sono più facili da fondere rispetto ai protoni singoli a causa delle loro proprietà nucleari. Per il funzionamento di un reattore a fusione sono necessarie tre condizioni fondamentali:
+\begin{itemize}
+    \item \textbf{Elevata densità numerica} $n$: per aumentare la probabilità di collisioni tra i nuclei
+    \item \textbf{Elevata temperatura} $T$ del plasma: per fornire ai nuclei l'energia cinetica necessaria a superare la barriera coulombiana
+    \item \textbf{Lungo tempo di confinamento} $\tau$: per mantenere il plasma in condizioni favorevoli alla fusione per un periodo di tempo sufficiente
+\end{itemize}
+Queste condizioni sono riassunte nel cosiddetto \textbf{criterio di Lawson}, che stabilisce che il prodotto $n \tau$ deve superare una certa soglia per ottenere un guadagno energetico netto dalla fusione:
+\begin{equation}
+    n \tau > \qty{e20}{\second\per\meter\cubed}, \qquad \text{con } T \simeq \qty{10}{\kilo\electronvolt} = \qty{1.1e8}{\kelvin}
+\end{equation}
+Possiamo ricavare il criterio di Lawson considerando una reazione con $n_1 = n_2 = n/2$. Il tasso di reazione per unità di volume è:
+\begin{equation}
+    R = \dfrac{n^2}{4} \avg{\sigma v}
+\end{equation}
+L'energia prodotta per unità di volume e di tempo è quindi:
+\begin{equation}
+    P_{\text{fus}} = R Q = \dfrac{n^2}{4} \avg{\sigma v} Q
+\end{equation}
+Questa energia è prodotta per un tempo $\tau$, dunque l'energia totale prodotta per unità di volume è:
+\begin{equation}
+    E_{\text{fus}} = P_{\text{fus}} \tau = \dfrac{n^2}{4} \avg{\sigma v} Q \tau
+\end{equation}
+D'altra parte, l'energia necessaria per riscaldare il plasma è:
+\begin{equation}
+    E_{\text{th}} = \dfrac{3}{2} n k_{\text{B}} T_{\text{ion}} + \dfrac{3}{2} n_e k_{\text{B}} T_{e}
+\end{equation}
+Poiché la temperatura degli ioni e degli elettroni è approssimativamente uguale ($T_{\text{ion}} \simeq T_e \simeq T$) e la densità degli elettroni è circa uguale a quella degli ioni ($n_e \simeq n$), possiamo semplificare l'energia termica a:
+\begin{equation}
+    E_{\text{th}} \simeq 3 n k_{\text{B}} T
+\end{equation}
+Per ottenere un guadagno energetico netto dalla fusione, l'energia prodotta deve essere maggiore dell'energia termica:
+\begin{equation}
+    E_{\text{fus}} > E_{\text{th}}
+\end{equation}
+Sostituendo le espressioni per $E_{\text{fus}}$ ed $E_{\text{th}}$, otteniamo:
+\begin{equation}
+    \dfrac{n^2}{4} \avg{\sigma v} Q \tau > 3 n k_{\text{B}} T
+\end{equation}
+Da cui ricaviamo il criterio di Lawson:
+\begin{equation}
+    n \tau > \dfrac{12 k_{\text{B}} T}{\avg{\sigma v} Q}
+\end{equation}
+%Manca da slide 39 (notizie varie sul nucleare + armi)

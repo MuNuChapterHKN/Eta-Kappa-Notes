@@ -31,13 +31,13 @@
         <mxCell id="wM5ESibL7Er5MMFptwoH-7" value="$$U(r)$$" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="270" y="200" width="70" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="wM5ESibL7Er5MMFptwoH-8" value="$$\approx 30 \text{ MeV}$$" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+        <mxCell id="wM5ESibL7Er5MMFptwoH-8" value="$$\simeq 30 \text{ MeV}$$" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="150" y="238" width="170" height="30" as="geometry" />
         </mxCell>
         <mxCell id="wM5ESibL7Er5MMFptwoH-9" value="$$5 \text{ MeV}$$" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="175" y="320" width="120" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="wM5ESibL7Er5MMFptwoH-10" value="$$\approx -40 \text{ MeV}$$" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+        <mxCell id="wM5ESibL7Er5MMFptwoH-10" value="$$\simeq -40 \text{ MeV}$$" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="150" y="495" width="170" height="30" as="geometry" />
         </mxCell>
         <mxCell id="wM5ESibL7Er5MMFptwoH-11" value="$$0$$" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">

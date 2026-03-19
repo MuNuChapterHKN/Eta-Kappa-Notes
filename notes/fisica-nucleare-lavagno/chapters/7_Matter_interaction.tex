@@ -7,18 +7,21 @@ Per particelle pesanti cariche si intende generalmente protoni, ioni e particell
     \item La perdita di energia avviene in maniera graduale e continua, ovvero esiste un \textbf{range di propagazione}
     \item Nel mezzo avvengono numerose ionizzazioni ed eccitazioni, che possono essere sfruttate per la rivelazione della particella stessa
 \end{itemize}
-La perdita di energia per unità di spessore del mezzo attraversato, detta \textbf{stopping power}, è descritta dalla formula di Bethe-Bloch:
-\begin{equation}
-    -\dv{E}{x} = \brackets{\dfrac{ze^2}{4\pi\varepsilon_0}}^2 \dfrac{4\pi Z \rho N_A}{A m_e v^2}\sqbr{\ln\brackets{\dfrac{2 m_e v^2}{I}} - \ln\brackets{1 - \beta^2} - \beta^2}
-\end{equation}
-Dove $z$ è la carica della particella incidente in unità di carica elementare, $Z$ è il numero atomico del mezzo attraversato, $A$ è il numero di massa del mezzo attraversato, $\rho$ è la densità del mezzo attraversato, $N_A$ è il numero di Avogadro, $m_e$ è la massa dell'elettrone, $v$ è la velocità della particella incidente, $\beta = v/c$ e $I$ è l'energia media di ionizzazione del mezzo attraversato.
+La perdita di energia per unità di spessore del mezzo attraversato, detta \textbf{stopping power}, è descritta dalla formula di Bethe-Bloch.
+\begin{theorem}{Formula di Bethe-Bloch}
+    La perdita di energia per unità di spessore del mezzo attraversato da una particella pesante carica è data da:
+    \begin{equation}
+        -\dv{E}{x} = \brackets{\dfrac{ze^2}{4\pi\varepsilon_0}}^2 \dfrac{4\pi Z \rho N_A}{A m_e v^2}\sqbr{\ln\brackets{\dfrac{2 m_e v^2}{I}} - \ln\brackets{1 - \beta^2} - \beta^2}
+    \end{equation}
+    Dove $z$ è la carica della particella incidente in unità di carica elementare, $Z$ è il numero atomico del mezzo attraversato, $A$ è il numero di massa del mezzo attraversato, $\rho$ è la densità del mezzo attraversato, $N_A$ è il numero di Avogadro, $m_e$ è la massa dell'elettrone, $v$ è la velocità della particella incidente, $\beta = v/c$ e $I$ è l'energia media di ionizzazione del mezzo attraversato.
+\end{theorem}
 
 \addsvg[Formula di Bethe-Bloch in funzione di $\beta\gamma$]{Bethe_Bloch}{0.9}
 
 La formula di Bethe-Bloch è valida per particelle con energie comprese tra qualche MeV e qualche GeV. Per energie inferiori a qualche MeV, la perdita di energia non segue più la legge di Bethe-Bloch a causa di effetti quantistici e della discreta natura delle interazioni. Per energie superiori a qualche GeV, entrano in gioco altri processi di interazione come la produzione di particelle secondarie e l'interazione nucleare.\\
 Per un buon range di energie $\dd{E}/\dd{x}$ può essere approssimata come:
 \begin{equation}
-    -\dv{E}{x} \approx \dfrac{C}{E^{k}}
+    -\dv{E}{x} \simeq \dfrac{C}{E^{k}}
 \end{equation}
 Dove $C$ e $k$ sono costanti dipendenti dal mezzo attraversato e dalla particella incidente. Integrando questa espressione si ottiene il range di propagazione $R$ della particella:
 \begin{equation}
@@ -46,9 +49,9 @@ Il \textbf{range} di una particella è la distanza media che essa percorre in un
 \begin{equation}
     R = \int_{K_i}^{0} \dv{x}{K_p}\dd{K_p} = \int_{0}^{K_i} \dfrac{1}{S}\dd{K_p}
 \end{equation}
-Si trova che $S \sim Z_p^2/K_p$, da cui:
+Si trova che $S \simeq Z_p^2/K_p$, da cui:
 \begin{equation}
-    R \sim \dfrac{K_i^2}{2 Z_p^2}
+    R \simeq \dfrac{K_i^2}{2 Z_p^2}
 \end{equation}
 Tipicamente l'energia degli ioni è espressa in MeV/nucleone (MeV/u), inoltre possiamo modellizzare qualsiasi tessuto come uno strato di acqua di spessore opportuno (solitamente tra 3 e 30 cm). In questo modo, il range di un ione in un tessuto può essere approssimato come il range dello stesso ione in acqua in unità cm H$_2$O.
 
@@ -104,7 +107,7 @@ Dove $\mu_{\text{C}}$ è il coefficiente di attenuazione per effetto Compton, $\
 
 In realtà $\mu$ non è costante, ma dipende dall'energia della radiazione incidente e dal mezzo attraversato. Per basse energie domina l'effetto fotoelettrico, per energie intermedie domina l'effetto Compton, mentre per alte energie domina la produzione di coppie:
 
-\addfigure[$\mu$ totale per raggi gamma]{png/Attenuation_coefficients}{0.8}
+\addfigure[$\mu$ totale per raggi gamma. Fonte: \href{https://doi.org/10.1016/j.nima.2016.07.042}{ScienceDirect}]{jpg/Attenuation_coefficients}{0.8}
 
 Di particolare interesse è il meccanismo di generazione di coppie elettrone-positrone, infatti, secondo la teoria di Dirac, il vuoto quantistico è popolato da coppie virtuali di particelle-antiparticelle che possono essere rese reali se viene fornita loro energia sufficiente. Quando un fotone con energia superiore a $\qty{1.022}{\mega\electronvolt}$ interagisce con il campo elettromagnetico di un nucleo, può creare una coppia reale di elettrone e positrone, rispettando la conservazione dell'energia e della quantità di moto, ovvero:
 \begin{equation}
@@ -162,9 +165,9 @@ Le camere a ionizzazione sono rivelatori a gas che operano in un regime di bassa
     \node at (0.6,5.4) {R};
 }{1}{ion_chamber}
 
-L'energia media per ionizzare un gas dipende dal tipo di gas utilizzato, ma è tipicamente dell'ordine di qualche decina di eV ($\approx \qty{30}{\electronvolt}$ eccetto per He). Ad esempio, per l'aria, l'energia media per ionizzazione è di circa $\qty{34}{\electronvolt}$. Se una particella carica attraversa la camera a ionizzazione rilasciando $\qty{1}{\giga\electronvolt\per\second}$, la corrente media sarà:
+L'energia media per ionizzare un gas dipende dal tipo di gas utilizzato, ma è tipicamente dell'ordine di qualche decina di eV ($\simeq \qty{30}{\electronvolt}$ eccetto per He). Ad esempio, per l'aria, l'energia media per ionizzazione è di circa $\qty{34}{\electronvolt}$. Se una particella carica attraversa la camera a ionizzazione rilasciando $\qty{1}{\giga\electronvolt\per\second}$, la corrente media sarà:
 \begin{equation}
-    I = \dfrac{\qty{1e9}{\electronvolt\per\second} \cdot \qty{1.6e-19}{\coulomb}\,\text{per ion}}{\qty{34}{\electronvolt}\,\text{per ion}} \approx \qty{5e-12}{\ampere}
+    I = \dfrac{\qty{1e9}{\electronvolt\per\second} \cdot \qty{1.6e-19}{\coulomb}\,\text{per ion}}{\qty{34}{\electronvolt}\,\text{per ion}} \simeq \qty{5e-12}{\ampere}
 \end{equation}
 Questa corrente è molto bassa, quindi le camere a ionizzazione sono generalmente utilizzate per misurare radiazioni ad alta intensità o per monitorare la dose di radiazione in applicazioni mediche.
 \subsection{Contatori proporzionali}
@@ -222,7 +225,47 @@ Un esempio famoso di scoperta effettuata con una camera a nebbia è la scoperta 
 Nel tempo le camere a nebbia sono state soppiantate da una nuova tecnologia, ovvero le camere a bolle. Questi rivelatori utilizzano un liquido superriscaldato che, quando viene attraversato da una particella carica, forma piccole bolle di vapore lungo la traiettoria della particella. Le bolle sono visibili e possono essere fotografate, permettendo agli scienziati di analizzare le traiettorie delle particelle con maggiore precisione rispetto alle camere a nebbia.\\
 Lo schema di una camera a bolle è il seguente:
 
-\addfigure[Camera a bolle]{drawio-pdf/Camera_a_bolle.drawio}{0.6}
+\addtikz[Schema di funzionamento di una camera a bolle]{
+    %Coils
+    \foreach \x in {0,1,2,...,5}{
+        \fill[betterYellow] (\x-0.2,2.5) arc(90:-90:0.1cm and 2.5cm) -- (\x+0.2,-2.5) arc(-90:90:0.1cm and 2.5cm) -- cycle;
+        \fill[betterYellow] (\x,2.5) circle(0.2);
+        \fill[betterYellow] (\x,-2.5) circle(0.2);
+        \draw[thick,orange] (\x,2.5) circle(0.2);
+        \draw[thick,orange] (\x,-2.5) circle(0.2);
+
+    }
+
+%Camera
+    \fill[white] (-2,2) -- (6,2) -- (6,-2) -- (-2,-2) -- cycle;
+    \fill[gray!50] (2,2) arc(90:270:0.5cm and 2cm) -- (2.5,-2) -- (2.5,2) -- cycle;
+    \fill[gray!50] (2.5,0) ellipse(0.5cm and 2cm);
+    \fill[supportDarkBlue!50] (2.5,2) arc(90:-90:0.5cm and 2cm) -- (6,-2) arc(-90:90:0.5cm and 2cm) -- cycle;
+
+    \draw[thick] (-1,2) -- (6,2) (-1,-2) -- (6,-2);
+    \draw[thick] (-1,0) ellipse(0.5cm and 2cm);
+    \draw[thick] (2,2) arc(90:270:0.5cm and 2cm);
+    \draw[thick] (2.5,0) ellipse(0.5cm and 2cm);
+    \draw[thick] (6,0) ellipse(0.5cm and 2cm);
+
+    %Arrows
+    \foreach \y in {-1.5,-0.5,0.5,1.5}{
+        \draw[->,thick,red] (-2,\y) -- (7,\y);
+    }
+    \node at (7.25,0) {$\vec{B}$};
+    \draw[->,thick] (1.5,0) -- (-0.25,0)node[midway,above] {Pistone};
+    \node[white,above] at (4,0.5) {Liquido};
+    %Labels
+    \draw[thick,->] (5,4)node[above] {Particelle} -- (5,1);
+    \node[below] at (2.5,-3) {Coil magnetici};
+    %Rilevatore
+    \fill[black!50] (8.5,-0.5) rectangle (9,0.5);
+    \fill[black!50] (9,-1) rectangle (10,1);
+    \draw[thick] (8.5,-0.5) rectangle (9,0.5);
+    \draw[thick] (9,-1) rectangle (10,1);
+    \node[right] at (10.25,0) {Rilevatore};
+
+}{1}{bubble_chamber_scheme_2}
 
 Un'importante scoperta effettuata con le camere a bolle è stata la scoperta della particella $\Omega^-$ nel 1964. Questa particella, prevista teoricamente dal modello a quark, fu osservata in una camera a bolle durante esperimenti condotti al Brookhaven National Laboratory. La scoperta del $\Omega^-$ fornì una conferma significativa del modello a quark (modello standard) e contribuì alla comprensione della struttura interna dei barioni.
 
@@ -235,8 +278,10 @@ Alcuni materiali comunemente utilizzati nei rilevatori a scintillazione includon
     \item Liquidi scintillanti, che sono soluzioni liquide contenenti composti organici che emettono luce quando vengono eccitati da radiazioni ionizzanti
 \end{itemize}
 Come anticipato questi rilevatori sono tipicamente accoppiati a fotomoltiplicatori, i quali funzionano tramite una serie di dinodi che moltiplicano il segnale elettrico generato dai fotoni incidenti. Quando un fotone colpisce il fotocatodo del fotomoltiplicatore, esso emette un elettrone tramite l'effetto fotoelettrico. Questo elettrone viene poi accelerato verso il primo dinodo, dove produce ulteriori elettroni attraverso l'emissione secondaria. Questo processo si ripete attraverso una serie di dinodi, moltiplicando il numero di elettroni ad ogni stadio e generando infine un segnale elettrico amplificato fino ad un fattore $10^7$ che può essere misurato con precisione.
-%Da inserire immagine
+
+\addsvg[Rivelatore a scintillazione. Fonte: \href{https://en.wikipedia.org/wiki/Scintillation_counter}{Wikipedia}]{Scintillator_detector}{0.7}
 
 \section{Rivelatori a semiconduttore}
 I rivelatori a semiconduttore sono dispositivi che utilizzano materiali semiconduttori, come il silicio (Si) o il germanio (Ge), per rilevare particelle cariche e radiazioni ionizzanti. Quando una particella carica attraversa il materiale semiconduttore, essa crea coppie elettrone-lacuna attraverso il processo di ionizzazione. Queste coppie vengono poi raccolte da elettrodi applicando un campo elettrico, generando un segnale elettrico che può essere misurato e analizzato.\\
-%Da inserire immagine
+
+\addfigure[Rivelatori a semiconduttore Fonte: \href{https://www.researchgate.net/publication/269704941_Development_of_a_PET_Cyclotron_Based_Irradiation_setup_for_Proton_Radiobiology}{ResearchGate}]{jpg/Semiconductor_detector}{0.5}

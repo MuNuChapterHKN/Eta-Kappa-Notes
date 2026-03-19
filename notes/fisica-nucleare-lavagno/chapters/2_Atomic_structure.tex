@@ -1,5 +1,5 @@
-\section{Struttura atomica e modelli nucleari}
-\subsection{Modello atomico e sezione d'urto}
+\chapter{Struttura atomica e modelli nucleari}
+\section{Modello atomico e sezione d'urto}
 Il primo modello atomico fu proposto da Dalton nel 1803, che immaginò gli atomi come sfere indivisibili e indistruttibili. Successivamente, nel 1897, Thomson scoprì l'elettrone e propose il modello a "panettone", in cui gli elettroni erano immersi in una massa positiva. Nel 1911, Rutherford condusse l'esperimento di scattering delle particelle alfa, che portò alla scoperta del nucleo atomico e alla proposta del modello planetario, dove gli elettroni orbitano attorno a un nucleo centrale carico positivamente.
 
 \addtikz[Modello di Rutherford]{
@@ -28,26 +28,41 @@ Otteniamo dunque un tasso di interazioni per unità di volume pari a:
 \begin{equation}
  \dv{N}{t} = \Phi_a N_b \sigma_b
 \end{equation}
-La sezione d'urto è la grandezza che caratterizza le singole interazioni. Ad esempio la fissione su $^{235}\text{U}$ ha una sezione d'urto variabile nell'ordine dei barn, dove $1$ barn = $10^{-28} m^2$.
+Possiamo dunque dare una definizione di sezione d'urto:
+\begin{definition}{Sezione d'urto}
+    La \textbf{sezione d'urto} $\sigma$ è definita come il rapporto tra il numero di interazioni per unità di tempo e il flusso di particelle incidente moltiplicato per il numero di centri di diffusione:
+    \begin{equation}
+     \sigma = \dfrac{1}{\Phi_a N_b} \dv{N}{t}
+    \end{equation}
+\end{definition}
+La sezione d'urto è la grandezza che caratterizza le singole interazioni. Ad esempio la fissione su $^{235}\text{U}$ ha una sezione d'urto variabile nell'ordine dei barn, dove $\qty{1}{\barn} = \qty{e-28}{\meter} = \qty{100}{\femto\meter\squared}$.
 
 \addfigure[Sezione d'urto per la fissione del $^{235}\text{U}$ in funzione dell'energia del neutrone incidente. Fonte: \href{https://whatisnuclear.com/barn-jams.html}{What is nuclear?}]{png/Cross_section_U235}{0.7}
 
 All'aumento della sezione d'urto corrisponde un aumento del numero di interazioni, dunque per reazioni di fissione dobbiamo lavorare a basse energie.\\
-Possiamo anche definire una \textbf{sezione d'urto differenziale} come:
-\begin{equation}
- \dv{\sigma}{\Omega}
-\end{equation}
+Possiamo anche definire una sezione d'urto differenziale.
+\begin{definition}{Sezione d'urto differenziale}
+    La \textbf{sezione d'urto differenziale} è definita come la variazione infinitesima della sezione d'urto in funzione dell'angolo solido:
+    \begin{equation}
+     \dv{\sigma}{\Omega} = \lim_{\Delta \Omega \to 0} \dfrac{\Delta \sigma}{\Delta \Omega}
+    \end{equation}
+\end{definition}
 Con $\sigma$ definito in coordinate polari:
 \begin{equation}
  \sigma = \int_{4 \pi} \dv{\sigma}{\Omega} \dd{\Omega} = \int_0^{2\pi} \dd{\varphi} \int_{-1}^{1} \dd{\brackets{\cos \theta}} \dv{\sigma}{\Omega}
 \end{equation}
-Poiché vogliamo attraversare una regione di spazio con un potenziale, dobbiamo considerare elettroni con un'energia dell'ordine di qualche MeV. Infatti, per una barriera di circa $\qty{1}{\femto\meter}$, utilizzando la relazione di De Broglie:
+Per piccole sezioni d'urto vale la proporzionalità:
 \begin{equation}
- \dfrac{\lambda}{2 \pi} = \dfrac{\hbar c}{p c} = \dfrac{\hbar}{K_{e^-}c} \approx \dfrac{\qty{200}{\mega\electronvolt\femto\meter}}{K_{e^-}} = \qty{1}{\femto\meter}
+ \sigma = \dv{\sigma}{\Omega} \Delta \Omega
+\end{equation}
+Dove $\Delta \Omega$ è l'angolo solido sotteso dalla sezione d'urto.\\
+Poiché vogliamo attraversare una regione di spazio con un potenziale, dobbiamo considerare elettroni con un'energia dell'ordine di qualche \si{\mega\electronvolt}. Infatti, per una barriera di circa $\qty{1}{\femto\meter}$, utilizzando la relazione di De Broglie:
+\begin{equation}
+ \dfrac{\lambda}{2 \pi} = \dfrac{\hbar c}{p c} = \dfrac{\hbar}{K_ec} \simeq \dfrac{\qty{200}{\mega\electronvolt\femto\meter}}{K_e} = \qty{1}{\femto\meter}
 \end{equation}
 Quindi:
 \begin{equation}
- K_{e^-} \approx \qty{200}{\mega\electronvolt}
+ K_e \simeq \qty{200}{\mega\electronvolt}
 \end{equation}
 Possiamo dunque spiegare l'esperimento di Rutherford con le seguenti assunzioni sull'interazione:
 \begin{itemize}
@@ -89,15 +104,15 @@ La sezione d'urto differenziale non decresce in maniera uniforme a causa della d
 
 Passiamo ora a ricavare la sezione d'urto di diffusione. Partiamo ricordando la regola d'oro di Fermi:
 \begin{equation} \label{eq:diff_urto_1}
-  W_F = \dfrac{2 \pi}{\hbar} \abs{M_{fi}}^2 \rho_f(E') = \dfrac{\dot{N}(E)}{N_a N_b} = \dfrac{\phi_a \cancel{N_b} \sigma}{N_a \cancel{N_b}} = \dfrac{\sigma v_a}{V}
+  W_{\text{F}} = \dfrac{2 \pi}{\hbar} \abs{M_{fi}}^2 \rho_{\text{F}}(E') = \dfrac{\dot{N}(E)}{N_a N_b} = \dfrac{\phi_a \cancel{N_b} \sigma}{N_a \cancel{N_b}} = \dfrac{\sigma v_a}{V}
 \end{equation}
 Dove $M_{fi}$ è l'elemento di matrice della transizione:
 \begin{equation}
-  M_{fi} = \bra{\psi_f}H_{\text{int}}\ket{\psi_i} = \int \dd{V} \psi_f^*(\vec{r}) H_{\text{int}}(\vec{r}) \psi_i(\vec{r})
+  M_{fi} = \bra{\psi_{\text{F}}}H_{\text{int}}\ket{\psi_i} = \int \dd{V} \psi_{\text{F}}^*(\vec{r}) H_{\text{int}}(\vec{r}) \psi_i(\vec{r})
 \end{equation}
 Con $H$ l'Hamiltoniana dell'interazione. La densità degli stati finali è data da:
 \begin{equation} \label{eq:diff_urto_2}
-  \rho_f(E') = \dv{n(E')}{E'}
+  \rho_{\text{F}}(E') = \dv{n(E')}{E'}
 \end{equation}
 Troviamo che:
 \begin{equation}
@@ -107,9 +122,9 @@ Unendo la \eqref{eq:diff_urto_1} e la \eqref{eq:diff_urto_2} otteniamo:
 \begin{equation}
   \dfrac{2 \pi}{\hbar} \abs{M_{fi}}^2 \dv{n(E')}{E'} = \dfrac{\sigma v_a}{V} \implies \sigma = \dfrac{2 \pi}{\hbar} \dfrac{V}{v_a} \abs{M_{fi}}^2 \dv{n(E')}{E'}
 \end{equation}
-In regime ultrarelativistico abbiamo $v_a \approx c$, $E' \approx p'c$, dunque:
+In regime ultrarelativistico abbiamo $v_a \simeq c$, $E' \simeq p'c$, dunque:
 \begin{equation}
-  \dv{p'}{E'} \approx \dfrac{1}{c} \implies \sigma \approx \dfrac{2 \pi}{\hbar c} V \abs{M_{fi}}^2 \dv{n(p')}{E'} = \dfrac{2 \pi}{\hbar c} V \abs{M_{fi}}^2 \dfrac{V}{(2 \pi \hbar)^3} \dfrac{p'^2 \dd{\Omega}}{c}
+  \dv{p'}{E'} \simeq \dfrac{1}{c} \implies \sigma \simeq \dfrac{2 \pi}{\hbar c} V \abs{M_{fi}}^2 \dv{n(p')}{E'} = \dfrac{2 \pi}{\hbar c} V \abs{M_{fi}}^2 \dfrac{V}{(2 \pi \hbar)^3} \dfrac{p'^2 \dd{\Omega}}{c}
 \end{equation}
 Ricordiamo che in questo caso l'Hamiltoniana di interazione è data dal potenziale di Coulomb:
 \begin{equation}
@@ -117,7 +132,7 @@ Ricordiamo che in questo caso l'Hamiltoniana di interazione è data dal potenzia
 \end{equation}
 Andando ad esprimere le funzioni d'onda iniziali e finali come onde piane otteniamo:
 \begin{equation}
-  \psi_i(\vec{r}) = \dfrac{1}{\sqrt{V}} \exp\brackets{i \dfrac{\vec{p}}{\hbar} \cdot \vec{r}} \quad \psi_f(\vec{r}) = \dfrac{1}{\sqrt{V}} \exp\brackets{i \dfrac{\vec{p}'}{\hbar} \cdot \vec{r}}
+  \psi_i(\vec{r}) = \dfrac{1}{\sqrt{V}} \exp\brackets{i \dfrac{\vec{p}}{\hbar} \cdot \vec{r}} \quad \psi_{\text{F}}(\vec{r}) = \dfrac{1}{\sqrt{V}} \exp\brackets{i \dfrac{\vec{p}'}{\hbar} \cdot \vec{r}}
 \end{equation}
 Dunque l'elemento di matrice diventa:
 \begin{equation}
@@ -138,23 +153,26 @@ Possiamo dunque riscrivere l'elemento di matrice come:
 \end{equation}
 Sostituendo nell'espressione della sezione d'urto otteniamo:
 \begin{equation}
-  W_F = \dv{\sigma}{\Omega_{\text{exp}}} = \dv{\sigma}{\Omega_{\text{Ruth}}} \abs{F(q)}^2
+  \pdv{\sigma}{\Omega} = \eval{\dv{\sigma}{\Omega}}_{\text{exp}} = \eval{\dv{\sigma}{\Omega}}_{\text{Ruth}} \abs{F(q)}^2
 \end{equation}
 Dove $\rho(\vec{q}) = Ze F(q)$ con $F$ fattore di forma del nucleo, che tiene conto della distribuzione di carica all'interno del nucleo stesso.\\
 La sezione d'urto di Rutherford che risulta:
 \begin{equation}
-  \dv{\sigma}{\Omega_{\text{Ruth}}} = \brackets{\dfrac{2Z \alpha\hbar c E'}{q^2 c^2}}^2 = \brackets{\dfrac{Z \alpha\hbar c}{2 E \sin^2(\theta/2)}}^2
+  \eval{\dv{\sigma}{\Omega}}_{\text{Ruth}} = \brackets{\dfrac{2Z \alpha\hbar c E'}{q^2 c^2}}^2 = \brackets{\dfrac{Z \alpha\hbar c}{2 E \sin^2(\theta/2)}}^2
 \end{equation}
 viene dunque modificata dal fattore di forma, che dipende dalla struttura interna del nucleo.\\
 Elenchiamo alcuni fattori di forma per distribuzioni di carica notevoli:
 \begin{table}[H]
   \centering
-  \begin{tabular}{c|c}
-    \textbf{Distribuzione di carica} & \textbf{Fattore di forma} $F(\vec{q}^2)$ \\ \hline\\[-4pt]
-    Puntiforme & $1$ \\[10pt]
-    Esponenziale & $(1 + q^2/a^2\hbar^2)^{-2}$ \\[10pt]
-    Gaussiana & $\exp\brackets{-q^2/2a^2 \hbar^2}$ \\[10pt]
-    Sfera uniforme & $3\alpha^{-3}(\sin(\alpha) - \alpha \cos(\alpha))$ con $\alpha = qR/\hbar$ \\[10pt]
+  \begin{tabular}{cc}
+    \hline
+    \textbf{Distribuzione di carica} & \textbf{Fattore di forma} $F(\vec{q})$ \\
+    \hline
+    Puntiforme & $1$ \\[8pt]
+    Esponenziale & $(1 + q^2/a^2\hbar^2)^{-2}$ \\[8pt]
+    Gaussiana & $\exp\brackets{-q^2/2a^2 \hbar^2}$ \\[8pt]
+    Sfera uniforme & $3\alpha^{-3}(\sin(\alpha) - \alpha \cos(\alpha))$ con $\alpha = qR/\hbar$ \\
+    \hline
   \end{tabular}
   \caption{Fattori di forma per diverse distribuzioni di carica}
 \end{table}
@@ -164,32 +182,32 @@ Sperimentalmente troviamo che la densità di carica all'interno dei nuclei è si
 \end{equation}
 I parametri della distribuzione sono:
 \begin{itemize}
- \item $c \approx \qty{1.07}{\femto\meter}A^{1/3}$ raggio a metà altezza
- \item $a \approx \qty{0.54}{\femto\meter}$ diffusività della superficie
+ \item $c \simeq \qty{1.07}{\femto\meter}\,A^{1/3}$ raggio a metà altezza
+ \item $a \simeq \qty{0.54}{\femto\meter}$ diffusività della superficie
 \end{itemize}
 Il parametro $c$ ci permette di stimare il raggio nucleare in funzione del numero di massa $A$, infatti, per una sfera uniforme, abbiamo:
 \begin{equation}
-  R^2 = \dfrac{5}{3}\avg{r^2}
+    \avg{r^2} = \dfrac{\int r^2 \rho(r) \dd{V}}{\int \rho(r) \dd{V}} = \dfrac{4 \pi \int_0^{R} r^4 \rho(r) \dd{r}}{4 \pi \int_0^{R} r^2 \rho(r) \dd{r}} = \dfrac{3}{5} R^2 \implies R = \sqrt{\dfrac{5}{3}\avg{r^2}}
 \end{equation}
-Dove:
+Per la distribuzione di Fermi otteniamo:
 \begin{equation}
- \sqrt{\avg{r^2}} = \sqrt{\int r^2 \rho(r) \dd{V}} \approx r_2 A^{1/3}
+ \sqrt{\avg{r^2}} = \sqrt{\int r^2 \rho(r) \dd{V}} \simeq r_2 A^{1/3}
 \end{equation}
-Con $r_2 \approx \qty{0.94}{\femto\meter}$. Dunque:
+Con $r_2 \simeq \qty{0.94}{\femto\meter}$. Dunque:
 \begin{equation}
- R \approx \sqrt{\dfrac{5}{3}r_2}A^{1/3} = \qty{1.21}{\femto\meter} A^{1/3}
+ R \simeq \sqrt{\dfrac{5}{3}}r_2A^{1/3} = \qty{1.21}{\femto\meter} A^{1/3}
 \end{equation}
 Andando a valutare numericamente l'integrale osserviamo che questa approssimazione è in accordo con i dati sperimentali.
 
-\addfigure[Raggio nucleare in funzione del numero di massa]{drawio-pdf/Nuclear_radius.drawio}{0.7}
+\addfigure[Raggio nucleare in funzione del numero di massa]{drawio-pdf/Nuclear_radius.drawio}{0.9}
 
-\subsection{Interazioni nucleari e fissione}
+\section{Interazioni nucleari e fissione}
 Per atomi con potenziale di Coulomb trascurabile, abbiamo $N=Z$, con l'aumento del numero di massa il numero di neutroni tende ad aumentare più rapidamente rispetto al numero di protoni.\\
 Considerando $A = Z+N$ il numero di massa possiamo osservare che anche la distribuzione di particelle nel nucleo assume l'aspetto di una distribuzione di Fermi:
 \begin{equation}
  \rho(0) = \dfrac{A}{V} = \dfrac{3A}{4 \pi R^3} = \dfrac{3\dfrac{R^3}{r_0^3}}{4 \pi R^3} = \dfrac{3}{4 \pi r_0^3}
 \end{equation}
-Dunque abbiamo che $\rho \approx \rho_0$ vicino al nucleo e decade rapidamente a zero oltre il raggio nucleare $R \sim \qty{1}{\angstrom} $.
+Dunque abbiamo che $\rho \simeq \rho_0$ vicino al nucleo e decade rapidamente a zero oltre il raggio nucleare $R \simeq \qty{1}{\angstrom} $.
 Possiamo anche calcolare l'energia di legame al variare del numero di massa:
 \begin{equation}
  \dfrac{\text{BE}}{c^2} = \mass(A,Z) + ZM_p + N M_n
@@ -217,9 +235,9 @@ Andando a esprimere le masse in termini di singoli nucleoni e energie di legame 
 \end{equation}
 Possiamo anche calcolare il rapporto $Z/A$ del nucleo di uranio e dei frammenti di fissione:
 \begin{itemize}
-  \item $\dfrac{Z}{A} (\text{U}) = \dfrac{92}{235} \approx 0.391 $
-  \item $\dfrac{Z}{A}(\text{Xe}) = \dfrac{54}{140} \approx 0.386 $
-  \item $\dfrac{Z}{A}(\text{Sr}) = \dfrac{38}{94} \approx 0.404$
+  \item $\dfrac{Z}{A} (\text{U}) = \dfrac{92}{235} \simeq 0.391 $
+  \item $\dfrac{Z}{A}(\text{Xe}) = \dfrac{54}{140} \simeq 0.386 $
+  \item $\dfrac{Z}{A}(\text{Sr}) = \dfrac{38}{94} \simeq 0.404$
 \end{itemize}
 I frammenti hanno dunque un rapporto $Z/A$ più vicino a quello dell'atomo iniziale, ma lontano dal valore di stabilità ottenuto da atomi con lo stesso numero di massa. Dunque i prodotti di fissione sono fortemente radioattivi e tendono a decadere per raggiungere uno stato più stabile.\\
 Vogliamo ora modellizzare l'andamento della energia di legame in funzione del numero di massa. In particolare cerchiamo una combinazione di termini che possano riprodurre il grafico sperimentale:
@@ -253,18 +271,21 @@ Infine abbiamo un termine di accoppiamento che dipende dalla parità del numero 
   +\delta & \text{se N e Z sono dispari}
  \end{cases}
 \end{equation}
-Sommando tutti i contributi otteniamo la formula semi-empirica della massa o di Bethe-Weizsäcker:
-\begin{equation}
- \text{BE}(A,Z) = -b_{\text{vol}} A + b_{\text{surf}} A^{2/3} + b_{\text{sym}} \dfrac{(N-Z)^2}{A} + b_{\text{coul}} \dfrac{Z^2}{A^{1/3}} + \Delta P
-\end{equation}
-Con i seguenti valori per i coefficienti:
-\begin{itemize}
- \item $b_{\text{vol}} \approx \qty{15.67}{\mega\electronvolt}$
- \item $b_{\text{surf}} \approx \qty{17.23}{\mega\electronvolt}$
- \item $b_{\text{sym}} \approx \qty{23.29}{\mega\electronvolt}$
- \item $b_{\text{coul}} \approx \qty{0.714}{\mega\electronvolt}$
- \item $\delta \approx 11.2 A^{-1/2}\,\text{MeV}$
-\end{itemize}
+Sommando tutti i contributi otteniamo la formula semi-empirica della massa o di Bethe-Weizsäcker.
+\begin{theorem}{Formula semi-empirica della massa (Bethe-Weizsäcker)}
+    L'energia di legame di un nucleo con numero di massa $A$ e numero atomico $Z$ è data da:
+    \begin{equation}
+        \text{BE}(A,Z) = -b_{\text{vol}} A + b_{\text{surf}} A^{2/3} + b_{\text{sym}} \dfrac{(N-Z)^2}{A} + b_{\text{coul}} \dfrac{Z^2}{A^{1/3}} + \Delta P
+    \end{equation}
+    Con i seguenti valori per i coefficienti:
+    \begin{itemize}
+        \item $b_{\text{vol}} \simeq \qty{15.67}{\mega\electronvolt}$
+        \item $b_{\text{surf}} \simeq \qty{17.23}{\mega\electronvolt}$
+        \item $b_{\text{sym}} \simeq \qty{23.29}{\mega\electronvolt}$
+        \item $b_{\text{coul}} \simeq \qty{0.714}{\mega\electronvolt}$
+        \item $\delta \simeq 11.2 A^{-1/2}\,\text{MeV}$
+    \end{itemize}
+\end{theorem}
 Andiamo ora a calcolare il coefficiente coulombiano. Consideriamo un nucleo come una sfera carica uniformemente distribuita con raggio $R$. La densità di carica risulta essere:
 \begin{equation}
  \rho = \dfrac{Ze}{4/3 \pi R^3}
@@ -291,7 +312,7 @@ Risostituendo $Q = Ze$ e $R = r_0 A^{1/3}$ otteniamo:
 \end{equation}
 Dunque il coefficiente coulombiano risulta essere:
 \begin{equation}
- b_{\text{coul}} = \dfrac{3 e^2}{5 r_0} \approx \qty{0.714}{\mega\electronvolt}
+ b_{\text{coul}} = \dfrac{3 e^2}{5 r_0} \simeq \qty{0.714}{\mega\electronvolt}
 \end{equation}
 Ora ricordiamo che la massa del nucleo è data da:
 \begin{equation}
@@ -305,31 +326,134 @@ Dunque:
 \begin{equation}
  \begin{split}
   &\pdv{}{Z} \brackets{-b_{\text{vol}} A + b_{\text{surf}} A^{2/3} + b_{\text{sym}} \dfrac{(A-2Z)^2}{A} + b_{\text{coul}} \dfrac{Z^2}{A^{1/3}} + \Delta P + ZM_p + (A-Z) M_n} = \\[8pt]
-  &-2b_{\text{sym}} \dfrac{A-2Z}{A} + 2b_{\text{coul}} \dfrac{Z}{A^{1/3}} + M_p - M_n = 0 \implies \\[8pt]
-  &Z = \dfrac{A}{2} \dfrac{1 + \dfrac{(M_n - M_p)c^2}{4 b_{\text{sym}}}}{1 + \dfrac{b_{\text{coul}} A^{2/3}}{4 b_{\text{sym}}}}
+  &-4b_{\text{sym}} \dfrac{A-2Z}{A} + 2b_{\text{coul}} \dfrac{Z}{A^{1/3}} + M_p - M_n = 0 \implies \\[8pt]
+  &Z = \dfrac{A}{2} \dfrac{1 + \dfrac{M_n - M_p}{4 b_{\text{sym}}}}{1 + \dfrac{b_{\text{coul}} A^{2/3}}{4 b_{\text{sym}}}}
  \end{split}
 \end{equation}
-Poiché $M_n - M_p \approx \qty{1.29}{\mega\electronvolt}$ e per valori di $A$ abbastanza grandi possiamo trascurare il termine al numeratore e approssimare $Z$ con $Z_m$, otteniamo:
+Poiché $M_n - M_p \simeq \qty{1.29}{\mega\electronvolt}$ e per valori di $A$ abbastanza grandi possiamo trascurare il termine al numeratore e approssimare $Z$ con $Z_{\text{min}}$, otteniamo:
 \begin{equation}
- Z_m = \dfrac{A}{2} \dfrac{1}{1 + \dfrac{b_{\text{coul}} A^{2/3}}{4 b_{\text{sym}}}}
+ Z_{\text{min}} = \dfrac{A}{2} \dfrac{1}{1 + \dfrac{b_{\text{coul}} A^{2/3}}{4 b_{\text{sym}}}}
 \end{equation}
 Dunque se la quantità:
 \begin{equation}
   \dfrac{b_{\text{coul}} A^{2/3}}{4 b_{\text{sym}}} \ll 1
 \end{equation}
-Abbiamo che $Z_m \approx A/2$, ovvero il numero di protoni è circa uguale al numero di neutroni. Questo avviene per nuclei leggeri. Al contrario, per nuclei pesanti, il termine di repulsione elettrostatica diventa dominante e $Z_m$ risulta essere:
+Abbiamo che $Z_{\text{min}} \simeq A/2$, ovvero il numero di protoni è circa uguale al numero di neutroni. Questo avviene per nuclei leggeri. Al contrario, per nuclei pesanti, il termine di repulsione elettrostatica diventa dominante e $Z_{\text{min}}$ risulta essere:
 \begin{equation}
-  Z_m \approx \dfrac{A}{2} \dfrac{1}{\dfrac{b_{\text{coul}} A^{2/3}}{4 b_{\text{sym}}}} = \dfrac{2 b_{\text{sym}}}{b_{\text{coul}}} A^{1/3} < \dfrac{A}{2}
+  Z_{\text{min}} \simeq \dfrac{A}{2} \dfrac{1}{\dfrac{b_{\text{coul}} A^{2/3}}{4 b_{\text{sym}}}} = \dfrac{2 b_{\text{sym}}}{b_{\text{coul}}} A^{1/3} < \dfrac{A}{2}
 \end{equation}
-Ovvero è significativamente minore di $A/2$. Questo spiega perché i nuclei più pesanti tendono ad avere un eccesso di neutroni rispetto ai protoni per mantenere la stabilità nucleare. Se teniamo il valore di $A$ fisso e andiamo a variare $Z$ possiamo tracciare la massa del nucleo in funzione di $Z$. Otteniamo una curva a forma di parabola con un minimo in corrispondenza di $Z_m$. Dunque, per un dato numero di massa $A$, il nucleo più stabile è quello con il numero di protoni che minimizza la massa totale. Ad esempio, per $A=140$ otteniamo:
+Ovvero è significativamente minore di $A/2$. Questo spiega perché i nuclei più pesanti tendono ad avere un eccesso di neutroni rispetto ai protoni per mantenere la stabilità nucleare. Se teniamo il valore di $A$ fisso e andiamo a variare $Z$ possiamo tracciare la massa del nucleo in funzione di $Z$. Otteniamo una curva a forma di parabola con un minimo in corrispondenza di $Z_{\text{min}}$. Dunque, per un dato numero di massa $A$, il nucleo più stabile è quello con il numero di protoni che minimizza la massa totale. Ad esempio, per $A=140$ otteniamo:
 \begin{equation}
-  Z_m = \dfrac{140}{2} \dfrac{1}{1 + \dfrac{0.714 \times 140^{2/3}}{4 \times 23.29}} \approx 57.8 \rightarrow \atom{Ce}{140}{58}
+  Z_{\text{min}} = \dfrac{140}{2} \dfrac{1}{1 + \dfrac{0.714 \cdot 140^{2/3}}{4 \cdot 23.29}} \simeq 57.8 \rightarrow \atom{Ce}{140}{58}
 \end{equation}
 Altri atomi con lo stesso numero di massa saranno instabili e tenderanno a decadere verso l'isotopo di cerio. Partendo dallo Xenon abbiamo:
 \begin{equation}
   \atom{Xe}{140}{54} \to \atom{Cs}{140}{55} \to \atom{Ba}{140}{56} \to \atom{La}{140}{57} \to \atom{Ce}{140}{58}
 \end{equation}
-%% Sarebbe da fare modello di Fermi, ma mi rifiuto
+Nel tracciare la massa in funzione di $Z$ per un dato $A$ distinguiamo due casi:
+\begin{itemize}
+    \item $A$ pari: in questo caso abbiamo due curve distinte a seconda della parità di $N$ e $Z$ ($\pm\delta$). La curva più bassa si ha per nuclei con $N$ e $Z$ pari, mentre la curva più alta per nuclei con $N$ e $Z$ dispari. In questo caso ogni decadimento $\beta$ farà saltare da una curva all'altra fino a raggiungere il minimo di massa in corrispondenza di $Z_{\text{min}}$ \textbf{solo se} il decadimento constituisce un \textbf{vantaggio energetico}.
+    \item $A$ dispari: in questo caso abbiamo una sola curva poichè uno tra $N$ e $Z$ è necessariamente dispari. Se $Z < Z_{\text{min}}$ il nucleo tenderà a decadere con decadimento $\beta^-$, mentre se $Z > Z_{\text{min}}$ il nucleo tenderà a decadere con decadimento $\beta^+$.
+\end{itemize}
+Ora possiamo spiegare il termine di simmetria utilizzando il modello di Fermi gas. Consideriamo un nucleo con $Z$ protoni e $N$ neutroni, entrambi trattati come gas di Fermi indipendenti. Abbiamo che:
+\begin{equation}
+    \begin{split}
+        N = V\gamma_{\text{s}} \int \dfrac{\dd{\vec{k}}}{(2\pi)^3} f_{\text{F}}^n(k) \\[8pt]
+        Z = V\gamma_{\text{s}} \int \dfrac{\dd{\vec{k}}}{(2\pi)^3} f_{\text{F}}^p(k)
+    \end{split}
+\end{equation}
+Dove $\gamma_{\text{s}} = 2$ è il fattore di degenerazione di spin e $f_{\text{F}}^{n/p}(k)$ sono le funzioni di distribuzione di Fermi per neutroni e protoni. A temperatura nulla abbiamo:
+\begin{equation}
+ f_{\text{F}}^{n/p}(k) =
+ \begin{cases}
+  1 & k \leq k_{\text{F}}^{n/p} \\[6pt]
+  0 & k > k_{\text{F}}^{n/p}
+ \end{cases} \implies f_{\text{F}}^{n/p} = \Theta(k_{\text{F}}^{n/p} - k)
+\end{equation}
+Da cui risolviamo gli integrali ottenendo:
+\begin{equation}
+    \begin{split}
+        N = V \dfrac{(k_{\text{F}}^n)^3}{3 \pi^2} \\[8pt]
+        Z = V \dfrac{(k_{\text{F}}^p)^3}{3 \pi^2}
+    \end{split}
+\end{equation}
+Ricordiamo che il volume del nucleo è dato da $V = 4/3 \pi R^3 = 4/3 \pi r_0^3 A$. Dunque:
+\begin{equation}
+    \begin{split}
+        p_{\text{F}}^n = \brackets{ \dfrac{9 \pi}{4} }^{1/3} \dfrac{\hbar}{r_0} \brackets{\dfrac{N}{A}}^{1/3} \\[8pt]
+        p_{\text{F}}^p = \brackets{ \dfrac{9 \pi}{4} }^{1/3} \dfrac{\hbar}{r_0} \brackets{\dfrac{Z}{A}}^{1/3}
+    \end{split}
+\end{equation}
+Poiché nei nuclei stabili abbiamo $N \simeq Z \simeq A/2$ possiamo approssimare:
+\begin{equation}
+    p_{\text{F}}^n \simeq p_{\text{F}}^p \simeq p_{\text{F}} = \brackets{ \dfrac{9 \pi }{8} }^{1/3} \dfrac{\hbar}{r_0} \simeq \qty{250}{\mega\electronvolt\per c}
+\end{equation}
+Analogamente l'energia di Fermi risulta essere:
+\begin{equation}
+    E_{\text{F}} = \dfrac{(p_{\text{F}})^2}{2M} \simeq \qty{33}{\mega\electronvolt}
+\end{equation}
+Passiamo ora a considerare l'energia totale del sistema:
+\begin{equation}
+    K_{\text{tot}} = \avg{K}_n + \avg{K}_p = N \dfrac{\avg{K}_n}{N} + Z \dfrac{\avg{K}_p}{Z}
+\end{equation}
+Dove l'energia cinetica media per neutroni e protoni è data da:
+\begin{equation}
+    \begin{split}
+        \dfrac{\avg{K}_{n}}{N} &= \dfrac{\displaystyle\int \dfrac{\dd{\vec{k}}}{(2\pi)^3} K_n \Theta (k_{\text{F}}^n - k)}{\displaystyle\int \dfrac{\dd{\vec{k}}}{(2\pi)^3} \Theta (k_{\text{F}}^n - k)} = \\[8pt]
+        &= \dfrac{\displaystyle\int_0^{p_{\text{F}}^n} \dd{p} p^2 K_n }{\displaystyle\int_0^{p_{\text{F}}^n} \dd{p} p^2} = \dfrac{1}{2M}\dfrac{\displaystyle\int_0^{p_{\text{F}}^n} \dd{p} p^4 }{\displaystyle\int_0^{p_{\text{F}}^n} \dd{p} p^2} = \dfrac{3}{5} E_{\text{F}}^n \\[8pt]
+    \end{split}
+\end{equation}
+Analogamente per i protoni otteniamo:
+\begin{equation}
+    \dfrac{\avg{K}_{p}}{Z} = \dfrac{3}{5} E_{\text{F}}^p
+\end{equation}
+Dunque l'energia totale del sistema risulta essere:
+\begin{equation}
+    K_{\text{tot}} = \dfrac{3}{5} \brackets{N E_{\text{F}}^n + Z E_{\text{F}}^p}
+\end{equation}
+Ricordando che $E_{\text{F}}^{n/p} \propto (N/Z)^{2/3}$ possiamo riscrivere l'energia di Fermi per neutroni e protoni come:
+\begin{equation}
+    \begin{split}
+        E_{\text{F}}^n = 2^{2/3}E_{\text{F}} \brackets{\dfrac{N}{A}}^{2/3} \\[8pt]
+        E_{\text{F}}^p = 2^{2/3} E_{\text{F}} \brackets{\dfrac{Z}{A}}^{2/3}
+    \end{split}
+\end{equation}
+Da cui otteniamo:
+\begin{equation}
+    K_{\text{tot}} = \dfrac{3}{5} E_{\text{F}} 2^{2/3} \sqbr{N \brackets{\dfrac{N}{A}}^{2/3} + Z \brackets{\dfrac{Z}{A}}^{2/3}}
+\end{equation}
+Ora definiamo $\Delta = N-Z$, dunque:
+\begin{equation}
+    \begin{split}
+        N &= \dfrac{A}{2}\brackets{1 + \dfrac{\Delta}{A}} \\[8pt]
+        Z &= \dfrac{A}{2}\brackets{1 - \dfrac{\Delta}{A}}
+    \end{split}
+\end{equation}
+Sviluppiamo i termini al secondo ordine in $\Delta/A$:
+\begin{equation}
+    \begin{split}
+        N \brackets{\dfrac{N}{A}}^{2/3} &= \dfrac{A}{2^{5/3}} \brackets{1 + \dfrac{\Delta}{A}}^{5/3} \sim \dfrac{A}{2^{5/3}} \brackets{1 + \dfrac{5}{3} \dfrac{\Delta}{A} + \dfrac{5}{9} \dfrac{\Delta^2}{A^2}} \\[8pt]
+        Z \brackets{\dfrac{Z}{A}}^{2/3} &= \dfrac{A}{2^{5/3}} \brackets{1 - \dfrac{\Delta}{A}}^{5/3} \sim \dfrac{A}{2^{5/3}} \brackets{1 - \dfrac{5}{3} \dfrac{\Delta}{A} + \dfrac{5}{9} \dfrac{\Delta^2}{A^2}}
+    \end{split}
+\end{equation}
+Sostituendo otteniamo:
+\begin{equation}
+    K_{\text{tot}} \simeq \dfrac{3}{5} E_{\text{F}} \dfrac{A}{2^{2/3}} 2^{2/3}\sqbr{1 + \dfrac{5}{9} \dfrac{(N-Z)^2}{A^2}}
+\end{equation}
+Poiché l'energia di volume è:
+\begin{equation}
+    E_{\text{vol}} = \dfrac{3}{5} E_{\text{F}} A
+\end{equation}
+Otteniamo un secondo termine che dipende dalla differenza tra numero di neutroni e protoni:
+\begin{equation}
+    E_{\text{sym}} = \dfrac{1}{3} E_{\text{F}} \dfrac{(N-Z)^2}{A}
+\end{equation}
+Possiamo dunque identificare il coefficiente di simmetria come:
+\begin{equation}
+    b_{\text{sym}} = \dfrac{1}{3} E_{\text{F}} = \brackets{ \dfrac{9 \pi }{8} }^{2/3} \dfrac{\hbar^2}{6r_0^2 M} \simeq \qty{12}{\mega\electronvolt}
+\end{equation}
+Osserviamo che questo valore è circa la metà di quello ottenuto sperimentalmente, il che indica che il modello di Fermi gas, sebbene utile per comprendere qualitativamente il termine di simmetria, non cattura completamente la complessità delle interazioni nucleari reali.\\
+
 Elenchiamo infine alcune proprietà generali delle forze nucleari:
 \begin{itemize}
   \item All'interno del nucleo la forza nucleare è assai più intensa delle interazioni elettromagnetiche.

@@ -21,21 +21,27 @@ Il decadimento radioattivo è un processo stocastico, ovvero non è possibile pr
     \dv{\mathcal{N}}{t} = -\lambda \mathcal{N} \implies \mathcal{N}(t) = \mathcal{N}_0 \efunction^{-\lambda t}
 \end{equation}
 Dove $\lambda$ è la costante di decadimento, caratteristica di ogni nuclide.
-Possiamo anche definire l'\textbf{attività} $\mathcal{A}$ come il numero di decadimenti per unità di tempo:
-\begin{equation}
-    \mathcal{A}(t) = \lambda \mathcal{N}(t) = \lambda \mathcal{N}(t) = \mathcal{A}_0 \efunction^{-\lambda t}
-\end{equation}
+Possiamo anche definire l'attività $\mathcal{A}$ come:
+\begin{definition}{Attività}
+    L'\textbf{attività} $\mathcal{A}(t)$ di un campione radioattivo è definita come il numero di decadimenti per unità di tempo:
+    \begin{equation}
+        \mathcal{A}(t) = \lambda \mathcal{N}(t) = \lambda \mathcal{N}(t) = \mathcal{A}_0 \efunction^{-\lambda t}
+    \end{equation}
+\end{definition}
 La vita media di un nuclide è data da:
 \begin{equation}
-    \tau = \avg{\mathcal{A}(t)} = \frac{1}{\lambda}
+    \tau = \avg{\mathcal{A}(t)} = \dfrac{\lambda \mathcal{N}_0 \int_0^{+\infty} t \efunction^{-\lambda t}}{\lambda \mathcal{N}_0 \int_0^{+\infty} \efunction^{-\lambda t}} \dd{t} = \lambda \int_0^{+\infty} t \efunction^{-\lambda t} = \frac{1}{\lambda}
 \end{equation}
 L'unità di misura dell'attività nel SI è il becquerel (Bq), che corrisponde ad un decadimento al secondo. Un'altra unità di misura comune è la curie (Ci), definita come $1 \text{ Ci} = \qty{3.7e10}{\becquerel}$.\\
-Infine definiamo il \textbf{tempo di dimezzamento} $T_{1/2}$ come l'intervallo di tempo necessario affinché la quantità di nuclei si riduca alla metà del valore iniziale:
-\begin{equation}
-    \mathcal{N}(t + T_{1/2}) = \dfrac{\mathcal{N}(t)}{2} \implies \dfrac{1}{2}\cancel{\mathcal{N}_0 \efunction^{-\lambda t}} = \cancel{\mathcal{N}_0 \efunction^{-\lambda t}}\efunction^{-\lambda T_{1/2}} \implies T_{1/2} = \frac{\ln 2}{\lambda}
-\end{equation}
+Infine definiamo il tempo di dimezzamento $T_{1/2}$ come:
+\begin{definition}{Tempo di dimezzamento}
+    Il \textbf{tempo di dimezzamento} $T_{1/2}$ è l'intervallo di tempo necessario affinché la quantità di nuclei si riduca alla metà del valore iniziale.
+    \begin{equation}
+        \mathcal{N}(t + T_{1/2}) = \dfrac{\mathcal{N}(t)}{2} \implies \dfrac{1}{2}\cancel{\mathcal{N}_0 \efunction^{-\lambda t}} = \cancel{\mathcal{N}_0 \efunction^{-\lambda t}}\efunction^{-\lambda T_{1/2}} \implies T_{1/2} = \frac{\ln 2}{\lambda}
+    \end{equation}
+\end{definition}
 
-\addsvg[Decadimento radioattivo e tempo di dimezzamento]{Radioactive_decay}{0.6}
+\addsvg[Decadimento radioattivo e tempo di dimezzamento]{Radioactive_decay}{0.9}
 
 \section{Decadimento alpha}
 Il decadimento $\alpha$ avviene quando un nucleo instabile emette una particella $\alpha$ (nucleo di elio) trasformandosi in un nucleo di un elemento con numero atomico diminuito di 2 e numero di massa diminuito di 4:
@@ -50,14 +56,38 @@ Se ci poniamo nel sistema di riferimento del nucleo padre, la particella $\alpha
 \begin{equation}
     Q = K_\alpha + K_Y
 \end{equation}
-Tipicamente $K_Y \ll K_\alpha$ poiché la massa del nucleo figlio è molto maggiore di quella della particella $\alpha$. Inoltre $K_\alpha \approx \qty{5}{\mega\electronvolt}$. Ad esempio, nel decadimento dell'uranio-238 in torio-234, l'energia di reazione è $Q = \qty{4.27}{\mega\electronvolt}$, di cui $\qty{4.25}{\mega\electronvolt}$ sono portati dalla particella $\alpha$. La reazione è la seguente:
+Tipicamente $K_Y \ll K_\alpha$ poiché la massa del nucleo figlio è molto maggiore di quella della particella $\alpha$. Inoltre $K_\alpha \simeq \qty{5}{\mega\electronvolt}$. Ad esempio, nel decadimento dell'uranio-238 in torio-234, l'energia di reazione è $Q = \qty{4.27}{\mega\electronvolt}$, di cui $\qty{4.25}{\mega\electronvolt}$ sono portati dalla particella $\alpha$. La reazione è la seguente:
 \begin{equation}
     \atom{U}{238}{92} \to \atom{Th}{234}{90} + \alpha
 \end{equation}
-Caratterizzata da un tempo di dimezzamento di $T_{1/2} = 4.47 \times 10^9 \text{ anni}$.\\
+Caratterizzata da un tempo di dimezzamento di $T_{1/2} = 4.47 \cdot 10^9 \text{ anni}$.\\
 Poiché l'uranio è particolarmente pesante, possiamo distinguere una lunga catena di decadimenti $\alpha$ e $\beta$ che porta alla formazione di un nuclei più stabili, come il piombo-206:
 
-\addfigure[Catena di decadimento dell'uranio-238]{drawio-pdf/U_238_decay.drawio.pdf}{0.7}
+\addtikz[Catena di decadimento dell'uranio-238]{
+    \foreach \x / \xlabel in {0 / 81,1 / 82, 2 / 83, 3 / 84,4 / 85,5 / 86,6 / 87,7 / 88,8 / 89,9 / 90,10 / 91, 11 / 92} {
+        \draw (\x,0)node[below] {\xlabel} -- (\x,16);
+    }
+    \foreach \x / \xlabel in {0 / Tl,1 / Pb, 2 / Bi, 3 / Po,4 / At,5 / Rn,6 / Fr,7 / Ra,8 / Ac,9 / Th,10 / Pa, 11 / U} {
+        \node[below] at (\x,-0.5) {\xlabel};
+    }
+    \foreach \y / \ylabel in {0 / 206,2 / 210, 4 / 214,6 / 218,8 / 222,10 / 226,12 / 230,14 / 234,16 / 238} {
+        \draw (0,\y)node[left,yshift=2] {\ylabel} -- (11,\y);
+    }
+    \node[above] at (0,16.5){$A$};
+    \node[right] at (11.5,0){$Z$};
+    %Alpha decays
+    \draw[multiarrows,thick,red] (11,16)node[above left,xshift=2]{$\atom{U}{238}{}$} -- ++(-2,-2)node[above left,xshift=2]{$\atom{Th}{234}{}$} (11,14) -- ++(-2,-2)node[above left,xshift=2]{$\atom{Th}{230}{}$} (9,12) -- ++(-2,-2)node[above left,xshift=2]{$\atom{Ra}{226}{}$} (7,10) -- ++(-2,-2)node[above left,xshift=2]{$\atom{Rn}{222}{}$} (5,8) -- ++(-2,-2)node[above left,xshift=2]{$\atom{Po}{218}{}$} (3,6) -- ++(-2,-2)node[above left,xshift=2]{$\atom{Pb}{214}{}$} (4,6) -- ++(-2,-2) (5,6) -- ++(-2,-2) (2,4) -- ++(-2,-2) (3,4) -- ++(-2,-2) (2,2) -- ++(-2,-2) (3,2) -- ++(-2,-2);
+    %Beta decays
+    \draw[multiarrows,thick,teal] (3,6) -- ++(1,0) (4,6) -- ++(1,0) (1,4) -- ++(1,0) (2,4) -- ++(1,0) (0,2) -- ++(1,0) (1,2) -- ++(1,0) (2,2) -- ++(1,0) (9,14) -- ++(1,0) (10,14) -- ++(1,0);
+    %Legenda
+    \draw[->,thick,red] (3,14) -- ++(-2,-2) node[below right]{Decadimento $\alpha$};
+    \draw[->,thick,teal] (3,14) -- ++(1,0) node[below right]{Decadimento $\beta^-$};
+    \fill[white] (1.5,14.25) rectangle (4.5,15.25);
+    \draw[thick] (1.5,14.25) rectangle (4.5,15.25);
+    \node at (3,14.75){Legenda};
+
+
+}{1}{uranium_decay_chain}
 
 Per capire il funzionamento del decadimento $\alpha$, consideriamo il nucleo come un pozzo di potenziale finito, dove la particella $\alpha$ è confinata all'interno del nucleo da una barriera di potenziale, che va da circa $-\qty{40}{\mega\electronvolt}$ a $\qty{30}{\mega\electronvolt}$, La particella $\alpha$ ha un'energia cinetica di circa $\qty{5}{\mega\electronvolt}$, quindi non ha abbastanza energia per superare la barriera di potenziale e uscire dal nucleo. Tuttavia, grazie al fenomeno del tunneling quantistico, c'è una probabilità finita che la particella $\alpha$ possa attraversare la barriera di potenziale ed essere emessa dal nucleo.\\
 Lo schema rappresentativo è il seguente:
@@ -68,8 +98,8 @@ Lo schema rappresentativo è il seguente:
     \draw[-stealth,thick] (0,-5) -- (0,4) node[above] {$U(r)$};
     %Annotations
     \draw[dashed,thick] (0,0.75) node[left]{$\qty{5}{\mega\electronvolt}$} -- (2.63,0.75) -- (2.63,0)node[below]{$R_1$};
-    \draw[dashed,thick] (0,3) node[left]{$\approx \qty{30}{\mega\electronvolt}$} -- (1.5,3);
-    \node[left] at (0,-4) {$\approx -\qty{40}{\mega\electronvolt}$};
+    \draw[dashed,thick] (0,3) node[left]{$\simeq \qty{30}{\mega\electronvolt}$} -- (1.5,3);
+    \node[left] at (0,-4) {$\simeq -\qty{40}{\mega\electronvolt}$};
     \node[below right] at (0.75,0) {$R$};
     \node[below left] at (0,0) {0};
     \node[above] at (4,3) {\centering Repulsive};
@@ -86,59 +116,68 @@ Lo schema rappresentativo è il seguente:
 
 Se approssimiamo la barriera di potenziale come una barriera rettangolare di altezza $V_0$ e larghezza $L$, la probabilità di trasmissione della particella $\alpha$ attraverso la barriera è data da:
 \begin{equation}
-    T \approx \efunction^{-2\gamma L} \quad \text{con} \quad \gamma = \frac{\sqrt{2m(V_0 - E)}}{\hbar}
+    T \simeq \efunction^{-2\gamma L} \quad \text{con} \quad \gamma = \frac{\sqrt{2m(V_0 - E)}}{\hbar}
 \end{equation}
 Dove $m$ è la massa della particella $\alpha$, $E$ è la sua energia cinetica, e $\hbar$ è la costante di Planck ridotta. La probabilità di trasmissione dipende esponenzialmente dalla larghezza e dall'altezza della barriera di potenziale, il che spiega perché il decadimento $\alpha$ è un processo raro e perché i nuclei con barriere di potenziale più alte e larghe hanno tempi di dimezzamento più lunghi.\\
 Ad esempio con una barriera di potenziale di altezza $V_0 = \qty{40}{\electronvolt}$ e larghezza $L = \qty{1}{\nano\meter}$, la probabilità di trasmissione per un elettrone $e^-$ con energia cinetica $E = \qty{30}{\electronvolt}$ è pari a:
 \begin{equation}
     \begin{split}
-        & 2\gamma L = 2\dfrac{\sqrt{2 \cdot \qty{9.11e-31}{\kilo\gram} \cdot (\qty{40}{\electronvolt} - \qty{30}{\electronvolt}) \cdot \qty{1.6e-19}{\joule\per\electronvolt}}}{\qty{1.05e-34}{\joule\second}} \cdot \qty{1e-9}{\meter} \approx 32.5 \\[8pt]
-        & T \approx \efunction^{-32.5} \approx 8.5 \times 10^{-15} \rightarrow \text{Probabilità} \approx 10^{-12} \%
+        & 2\gamma L = 2\dfrac{\sqrt{2 \cdot \qty{9.11e-31}{\kilo\gram} \cdot (\qty{40}{\electronvolt} - \qty{30}{\electronvolt}) \cdot \qty{1.6e-19}{\joule\per\electronvolt}}}{\qty{1.05e-34}{\joule\second}} \cdot \qty{1e-9}{\meter} \simeq 32.5 \\[8pt]
+        & T \simeq \efunction^{-32.5} \simeq 8.5 \cdot 10^{-15} \rightarrow \text{Probabilità} \simeq 10^{-12} \,\%
     \end{split}
 \end{equation}
 Se diminuiamo la larghezza della barriera a $L = \qty{0.1}{\nano\meter}$, la probabilità di trasmissione diventa:
 \begin{equation}
-    T \approx \efunction^{-3.25} \approx 3.9 \times 10^{-2} \rightarrow \text{Probabilità} \approx 4 \%
+    T \simeq \efunction^{-3.25} \simeq 3.9 \cdot 10^{-2} \rightarrow \text{Probabilità} \simeq 4 \%
 \end{equation}
-Il modello a barriera rettangolare ci serve per ottenere la legge di Geiger-Nuttall, che mette in relazione il tempo di dimezzamento $T_{1/2}$ di un nuclide con l'energia cinetica $K_\alpha$ della particella $\alpha$ emessa. Inizialmente questa legge fu ottenuta empiricamente, ma può essere giustificata tramite il modello di tunneling quantistico. Una particella $\alpha$ che attraversa la barriera di potenziale Coulombiano dal punto $A$ al punto $B$ può essere descritta come la somma di passaggi per barriere di potenziale rettangolari di larghezza infinitesima $\Delta r_i$. La probabilità di trasmissione attraverso la barriera complessiva è data dal prodotto delle probabilità di trasmissione attraverso ogni barriera infinitesimale:
+Il modello a barriera rettangolare ci serve per ottenere la legge di Geiger-Nuttall, che mette in relazione il tempo di dimezzamento $T_{1/2}$ di un nuclide con l'energia cinetica $K_\alpha$ della particella $\alpha$ emessa.
+
+\begin{theorem}{Legge di Geiger-Nuttall}
+    Il tempo di dimezzamento $T_{1/2}$ di un nuclide che decade emettendo una particella $\alpha$ è inversamente proporzionale alla probabilità di trasmissione della particella attraverso la barriera di potenziale Coulombiano del nucleo, che dipende dall'energia cinetica $K_\alpha$ della particella stessa e dal numero atomico $Z$ del nucleo padre:
+    \begin{equation}
+        \log_{10} T_{1/2} \propto \dfrac{Z-2}{\sqrt{K_\alpha}}
+    \end{equation}
+\end{theorem}
+
+Inizialmente questa legge fu ottenuta empiricamente, ma può essere giustificata tramite il modello di tunneling quantistico. Una particella $\alpha$ che attraversa la barriera di potenziale Coulombiano dal punto $A$ al punto $B$ può essere descritta come la somma di passaggi per barriere di potenziale rettangolari di larghezza infinitesima $\Delta r_i$. La probabilità di trasmissione attraverso la barriera complessiva è data dal prodotto delle probabilità di trasmissione attraverso ogni barriera infinitesimale:
 \begin{equation}
     T = \prod_i \efunction^{-2\gamma_i \Delta r_i} = \efunction^{-2\sum_i \gamma_i \Delta r_i} \xrightarrow[\Delta r_i \to 0]{} \efunction^{-2\int_A^B \gamma(r) \dd{r}}
 \end{equation}
 Possiamo definire il \textbf{fattore di Gamow} $G$ come:
 \begin{equation}
-    G = \int_R^{R_c} \gamma(r) \dd{r} = \frac{1}{\hbar} \int_R^{R_c} \sqrt{2M_{\alpha}(U_c(r) - K_\alpha)} \dd{r}
+    G = \int_R^{R_{\text{c}}} \gamma(r) \dd{r} = \frac{1}{\hbar} \int_R^{R_{\text{c}}} \sqrt{2M_{\alpha}(U_{\text{c}}(r) - K_\alpha)} \dd{r}
 \end{equation}
-Dove $R$ è il raggio del nucleo, $R_c$ è il punto in cui la barriera di potenziale Coulombiano incontra l'energia cinetica della particella $\alpha$, $M_\alpha$ è la massa della particella $\alpha$, e $U_c(r)$ è il potenziale Coulombiano. Poiché:
+Dove $R$ è il raggio del nucleo, $R_{\text{c}}$ è il punto in cui la barriera di potenziale Coulombiano incontra l'energia cinetica della particella $\alpha$, $M_\alpha$ è la massa della particella $\alpha$, e $U_{\text{c}}(r)$ è l'energia potenziale Coulombiana. Poiché:
 \begin{equation}
-    \dfrac{U_c(r)}{K_\alpha} = \dfrac{R_c}{r}
+    \dfrac{U_{\text{c}}(r)}{K_\alpha} = \dfrac{R_{\text{c}}}{r}
 \end{equation}
 Riscriviamo il fattore di Gamow come:
 \begin{equation}
-    G = \frac{\sqrt{2M_\alpha K_\alpha}}{\hbar} \int_R^{R_c} \sqrt{\dfrac{R_c}{r} - 1} \dd{r}
+    G = \frac{\sqrt{2M_\alpha K_\alpha}}{\hbar} \int_R^{R_{\text{c}}} \sqrt{\dfrac{R_{\text{c}}}{r} - 1} \dd{r}
 \end{equation}
-Effettuando il cambio di variabile $x = r/R_c$, otteniamo:
+Effettuando il cambio di variabile $x = r/R_{\text{c}}$, otteniamo:
 \begin{equation}
-    G = \frac{R_c}{\hbar}\sqrt{2M_\alpha K_\alpha}  \int_{R/R_c}^{1} \sqrt{\dfrac{1}{x} - 1} \dd{x}
+    G = \frac{R_{\text{c}}}{\hbar}\sqrt{2M_\alpha K_\alpha}  \int_{R/R_{\text{c}}}^{1} \sqrt{\dfrac{1}{x} - 1} \dd{x}
 \end{equation}
-Inoltre $R \ll R_c$ quindi possiamo approssimare l'integrale come:
+Inoltre $R \ll R_{\text{c}}$ quindi possiamo approssimare l'integrale come:
 \begin{equation}
     \int_{0}^{1} \sqrt{\dfrac{1}{x} - 1} \dd{x} = \frac{\pi}{2}
 \end{equation}
 Quindi il fattore di Gamow diventa:
 \begin{equation}
-    G \approx \frac{\pi R_c}{2\hbar} \sqrt{2M_\alpha K_\alpha}
+    G \simeq \frac{\pi R_{\text{c}}}{2\hbar} \sqrt{2M_\alpha K_\alpha}
 \end{equation}
 Ricordando che:
 \begin{equation}
-    R_c = \dfrac{1}{4\pi \varepsilon_0} \dfrac{2(Z-2) e^2}{K_\alpha}, \qquad \alpha_c = \dfrac{e^2}{4\pi \varepsilon_0 \hbar c} \approx \dfrac{1}{137}, \qquad K_\alpha = \dfrac{1}{2}M_\alpha v^2
+    R_{\text{c}} = \dfrac{1}{4\pi \varepsilon_0} \dfrac{2(Z-2) e^2}{K_\alpha}, \qquad \alpha_{\text{c}} = \dfrac{e^2}{4\pi \varepsilon_0 \hbar c} \simeq \dfrac{1}{137}, \qquad K_\alpha = \dfrac{1}{2}M_\alpha v^2
 \end{equation}
 Troviamo che:
 \begin{equation}
-    G \approx \dfrac{\pi (Z-2) e^2}{4\pi \varepsilon_0 \hbar} \sqrt{\dfrac{2M_\alpha}{K_\alpha}} = \dfrac{(Z-2) \alpha_c \pi}{v/c}
+    G \simeq \dfrac{\pi (Z-2) e^2}{4\pi \varepsilon_0 \hbar} \sqrt{\dfrac{2M_\alpha}{K_\alpha}} = \dfrac{(Z-2) \alpha_{\text{c}} \pi}{v/c}
 \end{equation}
 Infine, troviamo la legge di Geiger-Nuttall:
 \begin{equation}
-    T = \efunction^{-2G} \propto \lambda \propto \dfrac{1}{T_{1/2}} \implies \boxed{\log_{10} T_{1/2} \propto \dfrac{Z}{\sqrt{K_\alpha}}}
+    T = \efunction^{-2G} \propto \lambda \propto \dfrac{1}{T_{1/2}} \implies \boxed{\log_{10} T_{1/2} \propto \dfrac{Z-2}{\sqrt{K_\alpha}}}
 \end{equation}
 Un esempio applicativi della legge di Geiger-Nuttall e della teoria del tunneling quantistico nel decadimento $\alpha$ sono i generatori \textbf{RTG} (Radioisotope Thermoelectric Generators), utilizzati nelle sonde spaziali per generare energia elettrica. Questi motori sfruttano il calore generato dal decadimento radioattivo di isotopi come il plutonio-238, che decade emettendo particelle $\alpha$. Il calore prodotto viene convertito in energia elettrica tramite termocoppie, fornendo una fonte di energia affidabile e duratura per le missioni spaziali a lungo termine. Lo schema di un RTG è il seguente:
 
@@ -169,7 +208,7 @@ Per studiare i neutrini possiamo osservare i prodotti delle reazioni all'interno
 \begin{equation}
     n \to p + e^- + \anti{\nu}_{e}
 \end{equation}
-Oppure realizzare rilevatori, costituiti da una vasca di 200 litri di acqua mescolata a cloruro di sodio e cadmio, circondata da rivelatori di scintillazione. I neutrini interagiscono con i protoni nell'acqua, producendo positroni che generano segnali nei rivelatori:
+Oppure realizzare rilevatori, costituiti da una vasca di 200 litri di acqua mescolata a cloruro di sodio e cadmio, circondata da rivelatori di scintillazione. Gli antineutrini interagiscono con i protoni nell'acqua, producendo positroni che generano segnali nei rivelatori:
 \begin{equation}
     \anti{\nu}_{e} + p \to n + e^+
 \end{equation}
@@ -181,17 +220,21 @@ E sapendo che il neutrone prodotto viene catturato dal cadmio, emettendo un altr
 \begin{equation}
     n + \atom{Cd}{113}{} \to \atom{Cd}{114}{} + \gamma_n
 \end{equation}
-Possiamo rilevare i neutrini osservando le coincidenze tra i segnali prodotti dai positroni e dai neutroni. Questo metodo ha permesso di confermare l'esistenza dei neutrini e di studiarne le proprietà fondamentali. In particolare abbiamo che $\gamma_n \approx \qty{9}{\mega\electronvolt}$ e $\gamma_{e} \approx \qty{0.511}{\mega\electronvolt}$.\\
+Possiamo rilevare i neutrini osservando le coincidenze tra i segnali prodotti dai positroni e dai neutroni. Questo metodo ha permesso di confermare l'esistenza dei neutrini e di studiarne le proprietà fondamentali. In particolare abbiamo che $\gamma_n \simeq \qty{9}{\mega\electronvolt}$ e $\gamma_{e} \simeq \qty{0.511}{\mega\electronvolt}$.\\
 Inoltre possiamo confermare che i neutrini non sono uguali alle loro antiparticelle poichè, sperimentalmente non osserviamo mai il processo inverso:
 \begin{equation}
     {\nu}_{e} + n \not\to p + e^-
 \end{equation}
-Questo perché i neutrini interagiscono in modo estremamente debole con la materia, rendendo molto improbabile l'osservazione di tale processo. Per interagire un $\nu_{e}$ dovrebbe attraversare uno stato di materia di lunghezza circa pari a $10\,\text{ly} \approx \qty{e13}{\kilo\meter}$ di piombo.\\
+Questo perché i neutrini interagiscono in modo estremamente debole con la materia, rendendo molto improbabile l'osservazione di tale processo. Per interagire un $\nu_{e}$ dovrebbe attraversare uno stato di materia di lunghezza circa pari a $10\,\text{ly} \simeq \qty{e13}{\kilo\meter}$ di piombo.\\
 La generica reazione di decadimento $\beta$ può essere rappresentata come:
 \begin{equation}
     \atom{Y}{A}{Z} \to \atom{X}{A}{Z \pm 1} + e^{\mp} + (\anti{\nu}_{e} \text{ o } {\nu}_{e})
 \end{equation}
 Dove il segno $+$ si riferisce al decadimento $\beta^-$ e il segno $-$ al decadimento $\beta^+$.\\
+Possiamo inoltre osservare che è possibile la reazione inversa del decadimento $\beta^+$, chiamata \textbf{cattura elettronica}:
+\begin{equation}
+    e^- + \atom{Y}{A}{Z} \to \atom{X}{A}{Z-1} + \nu_{e}
+\end{equation}
 L'energia di reazione $Q$ in un decadimento $\beta$ è data da:
 \begin{equation}
     Q = (M_Y - M_X - m_e)c^2
@@ -200,14 +243,14 @@ Ovvero:
 \begin{equation}
     \begin{split}
         Q_{\beta^-} &= \sqbr{M_{\text{nuc}}(\atom{Y}{A}{Z}) - M_{\text{nuc}}(\atom{X}{A}{Z+1}) - m_e}c^2 =\\[8pt]
-        &\approx  \sqbr{M_{\text{at}}(\atom{Y}{A}{Z}) - Zm_e}c^2 - \sqbr{M_{\text{at}}(\atom{X}{A}{Z+1}) - (Z+1)m_e}c^2 - m_e c^2 =\\[8pt]
+        &\simeq  \sqbr{M_{\text{at}}(\atom{Y}{A}{Z}) - Zm_e}c^2 - \sqbr{M_{\text{at}}(\atom{X}{A}{Z+1}) - (Z+1)m_e}c^2 - m_e c^2 =\\[8pt]
         &= \sqbr{M_{\text{at}}(\atom{Y}{A}{Z}) - M_{\text{at}}(\atom{X}{A}{Z+1})}c^2
     \end{split}
 \end{equation}
 \begin{equation}
     \begin{split}
         Q_{\beta^+} &= \sqbr{M_{\text{nuc}}(\atom{Y}{A}{Z}) - M_{\text{nuc}}(\atom{X}{A}{Z-1}) - m_e}c^2 =\\[8pt]
-        &\approx  \sqbr{M_{\text{at}}(\atom{Y}{A}{Z}) - Zm_e}c^2 - \sqbr{M_{\text{at}}(\atom{X}{A}{Z-1}) - (Z-1)m_e}c^2 - m_e c^2 =\\[8pt]
+        &\simeq  \sqbr{M_{\text{at}}(\atom{Y}{A}{Z}) - Zm_e}c^2 - \sqbr{M_{\text{at}}(\atom{X}{A}{Z-1}) - (Z-1)m_e}c^2 - m_e c^2 =\\[8pt]
         &= \sqbr{M_{\text{at}}(\atom{Y}{A}{Z}) - M_{\text{at}}(\atom{X}{A}{Z-1}) - 2m_e}c^2
     \end{split}
 \end{equation}
@@ -219,7 +262,7 @@ L'energia di reazione è:
 \begin{equation}
     \begin{split}
         Q_{\epsilon} &= \sqbr{M_{\text{nuc}}(\atom{Y}{A}{Z}) + m_e - M_{\text{nuc}}(\atom{X}{A}{Z-1}) }c^2 =\\[8pt]
-        &\approx  \sqbr{M_{\text{at}}(\atom{Y}{A}{Z}) - Zm_e}c^2 - \sqbr{M_{\text{at}}(\atom{X}{A}{Z-1}) - (Z-1)m_e}c^2 + m_e c^2 =\\[8pt]
+        &\simeq  \sqbr{M_{\text{at}}(\atom{Y}{A}{Z}) - Zm_e}c^2 - \sqbr{M_{\text{at}}(\atom{X}{A}{Z-1}) - (Z-1)m_e}c^2 + m_e c^2 =\\[8pt]
         &= \sqbr{M_{\text{at}}(\atom{Y}{A}{Z}) - M_{\text{at}}(\atom{X}{A}{Z-1})}c^2
     \end{split}
 \end{equation}
@@ -229,7 +272,7 @@ Un aspetto interessante dei decadimenti $\beta$ è che la parità non è conserv
 \addfigure[Decadimento $\beta$ del cobalto-60 e violazione della parità]{drawio-pdf/Parity_transformations.drawio.pdf}{0.8}
 
 In particolare osserviamo che nelle interazioni deboli l'elicità delle particelle gioca un ruolo cruciale. Gli elettroni emessi nel decadimento $\beta^-$ sono prevalentemente di elicità sinistra, mentre i positroni emessi nel decadimento $\beta^+$ sono di elicità destra.\\
-Ma cosa implicava questa scoperta? Di fatto la scoperta di Wu dimostrava che le interazioni deboli hanno una preferenza verso una certa configurazione di spin e momento, violando la simmetria di parità. In particolare si osserva che gli elettroni hanno preferibilmente elicità negativa (sinistra) e i neutrini hanno preferibilmente elicità positiva (destra). Successivamente si scoprirà che i neutrini hanno sempre elicità positiva, mentre gli antineutrini hanno sempre elicità negativa.
+Ma cosa implicava questa scoperta? Di fatto la scoperta di Wu dimostrava che le interazioni deboli hanno una preferenza verso una certa configurazione di spin e momento, violando la simmetria di parità. In particolare si osserva che gli \textbf{elettroni} hanno preferibilmente \textbf{elicità negativa} (sinistra) e i \textbf{neutrini} hanno preferibilmente \textbf{elicità positiva} (destra). Successivamente si scoprirà che i neutrini hanno sempre elicità positiva, mentre gli antineutrini hanno sempre elicità negativa.
 \section{Decadimenti gamma}
 I decadimenti $\gamma$ avvengono quando un nucleo eccitato rilascia energia sotto forma di radiazione elettromagnetica ad alta energia (raggi $\gamma$) per tornare al suo stato fondamentale. Questo processo non comporta un cambiamento nel numero di massa o nel numero atomico del nucleo, ma solo una transizione tra stati energetici diversi. Un esempio di decadimento $\gamma$ è:
 \begin{equation}
@@ -264,17 +307,17 @@ Il numero leptonico totale prima del decadimento è $0$ (il neutrone non è un l
 \begin{table}[H]
     \centering
     \begin{tabular}{cccccccc}
-        \hline \\[-4pt]
-        Simbolo & M & Q & $L_e$ & $L_\mu$ & $L_\tau$ & Tempo di vita & Decadimenti principali \\[8pt]
-        \hline \\[-4pt]
-        $e^-$ & $\qty{0.511}{\mega\electronvolt/c^2}$ & $-1$ & $1$ & $0$ & $0$ & Stabile & - \\[8pt]
-        $\mu^-$ & $\qty{105.7}{\mega\electronvolt/c^2}$ & $-1$ & $0$ & $1$ & $0$ & $\qty{2.197e-6}{\second}$ & $e^-,\anti{\nu}_{e},\nu_{\mu}\,(100\%)$ \\[8pt]
-        $\tau^-$ & $\qty{1777.0}{\mega\electronvolt/c^2}$ & $-1$ & $0$ & $0$ & $1$ & $\qty{2.906e-13}{\second}$ & $\mu^-,\anti{\nu}_{\mu},\nu_{\tau}\,(17.4\%)$ \\[8pt]
+        \hline
+        & \textbf{M} ($\si{\mega\electronvolt/c^2}$) & \textbf{Q} & $\mathbf{L_{\boldsymbol{e}}}$ & $\mathbf{L_{\boldsymbol{\mu}}}$ & $\mathbf{L_{\boldsymbol{\tau}}}$ & $\boldsymbol{\tau}$ (s) & \textbf{Decadimenti principali} \\
+        \hline
+        $e^-$ & 0.511 & $-1$ & $1$ & $0$ & $0$ & Stabile & - \\[8pt]
+        $\mu^-$ & 105.7 & $-1$ & $0$ & $1$ & $0$ & $\qty{2.197e-6}{}$ & $e^-,\anti{\nu}_{e},\nu_{\mu}\,(100\%)$ \\[8pt]
+        $\tau^-$ & 1777.0 & $-1$ & $0$ & $0$ & $1$ & $\qty{2.906e-13}{}$ & $\mu^-,\anti{\nu}_{\mu},\nu_{\tau}\,(17.4\%)$ \\[8pt]
         &&&&&&& $e^-,\anti{\nu}_{e},\nu_{\tau}\,(17.8\%)$ \\[8pt]
-        &&&&&&& $\nu_\tau + \text{adroni}\,(\sim 64\%)$ \\[8pt]
-        $\nu_{e}$ & $< \qty{2.2}{\electronvolt/c^2}$ & $0$ & $1$ & $0$ & $0$ & Stabile & - \\[8pt]
-        $\nu_{\mu}$ & $< \qty{0.19}{\mega\electronvolt/c^2}$ & $0$ & $0$ & $1$ & $0$ & Stabile & - \\[8pt]
-        $\nu_{\tau}$ & $< \qty{18.2}{\mega\electronvolt/c^2}$ & $0$ & $0$ & $0$ & $1$ & Stabile & - \\[8pt]
+        &&&&&&& $\nu_\tau + \text{adroni}\,(\simeq 64\%)$ \\[8pt]
+        $\nu_{e}$ & $< 2.2 \cdot 10^{-6}$ & $0$ & $1$ & $0$ & $0$ & Stabile & - \\[8pt]
+        $\nu_{\mu}$ & $< 0.19$ & $0$ & $0$ & $1$ & $0$ & Stabile & - \\[8pt]
+        $\nu_{\tau}$ & $< 18.2$ & $0$ & $0$ & $0$ & $1$ & Stabile & - \\
         \hline
     \end{tabular}
     \caption{Proprietà fondamentali dei leptoni}
@@ -289,6 +332,6 @@ Un'importante applicazione del decadimento $\beta^-$ è la datazione al carbonio
 \end{equation}
 Una volta formato, il carbonio-14 viene assorbito dagli organismi viventi attraverso il ciclo del carbonio. La concentrazione di carbonio-14 in atmosfera rimane relativamente costante:
 \begin{equation}
-    \dfrac{N(\atom{C}{14}{})}{N(\atom{C}{12}{})} \approx 1.3 \times 10^{-12}
+    \dfrac{N(\atom{C}{14}{})}{N(\atom{C}{12}{})} \simeq 1.3 \cdot 10^{-12}
 \end{equation}
 Negli organismi biologici c'è un continuo riscambio di carbonio con l'ambiente, mantenendo un rapporto costante tra carbonio-14 e carbonio-12. Tuttavia, quando un organismo muore, smette di assorbire carbonio, e il carbonio-14 presente inizia a decadere con un tempo di dimezzamento di circa $T_{1/2} = 5730$ anni. Misurando la quantità di carbonio-14 rimanente in un campione organico e confrontandola con il rapporto iniziale, è possibile calcolare il tempo trascorso dalla morte dell'organismo, fornendo così una stima dell'età del reperto fino a circa 25.000 anni (per datazioni radiometriche più antiche si utilizzano altri isotopi come $\atom{K}{40}{}, \atom{U}{235}{}, \atom{Pb}{207}{}, \dots$). %da vedere slide 23 a 26

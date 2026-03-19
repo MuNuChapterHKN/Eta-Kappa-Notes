@@ -1,14 +1,57 @@
 \chapter{Applicazioni biomediche}
 Possiamo distinguere due principali tipi di imaging con radiazioni:
 \begin{itemize}
-    \item Immagini con radiazione \textbf{esterna}
+    \item Imaging con radiazione \textbf{esterna}
+    \item Imaging con radiazione \textbf{interna}
 \end{itemize}
 Nel primo caso la legge dell'intensità registrata dallo schermo posto dietro all'oggetto è di tipo esponenziale:
 \begin{equation}
     \dfrac{\dd{I}}{I} = -\mu \dd{\ell} \implies \ln\brackets{\dfrac{I_1}{I_2}} = \int_{1}^{2} \mu \dd{\ell}
 \end{equation}
 Alternativamente possiamo avere una sorgente interna di radiazione. In questo caso un isotopo radioattivo viene iniettato nel corpo e si propaga fino a raggiungere l'organo bersaglio. La radiazione emessa viene poi rilevata da un anello di rivelatori esterni. I migliori isotopi che possiamo usare per questo scopo sono quelli che emettono un solo raggio gamma (no decadimento $\beta$), che vengono rilevati dalle \textbf{gamma camere} e espongono il paziente a dosi minime. Le attività tipiche sono dell'ordine di qualche $\si{\mega\becquerel}$ e dunque hanno un tempo di acquisizione di immagine di circa 15-20 min.\\
-Questi isotopi devono essere prodotti mediante acceleratori di particelle. Ad esempio lo iodio-123 viene prodotto da ciclotroni ed ha un tempo di emivita di 13.21 ore, emettendo raggi gamma da $\qty{159}{\kilo\electronvolt}$. Viene usato per studiare la tiroide.
+Questi isotopi devono essere prodotti mediante acceleratori di particelle. Ad esempio lo iodio-123 viene prodotto da ciclotroni ed ha un tempo di emivita di 13.21 ore, emettendo raggi gamma da $\qty{159}{\kilo\electronvolt}$. Viene usato per studiare la tiroide. In particolare si sfrutta il meccanismo di cattura dello iodio da parte della tiroide per concentrare l'isotopo nell'organo bersaglio, in questo modo si ottiene un imaging della distribuzione anatomica del tessuto tiroideo.\\
 \section{Tomografia computerizzata}
-La tomografia computerizzata (CT) è una tecnica di imaging medico che utilizza raggi X per creare immagini dettagliate delle strutture interne del corpo umano. Nasce dall'evoluzione della TAC (tomografia assiale computerizzata), che permetteva di ottenere immagini assiali (cioè sezioni trasversali) del corpo. La CT moderna consente di acquisire immagini in diverse proiezioni e di ricostruire immagini tridimensionali utilizzando sorgenti di radiazioni che orbitano attorno al paziente.\\
-%Video smartbeam imrt
+La tomografia computerizzata (TC) è una tecnica di imaging medico che utilizza raggi X per creare immagini dettagliate delle strutture interne del corpo umano. Nasce dall'evoluzione della TAC (tomografia assiale computerizzata), che permetteva di ottenere immagini assiali (cioè sezioni trasversali) del corpo. La TC moderna consente di acquisire immagini in diverse proiezioni e di ricostruire immagini tridimensionali utilizzando sorgenti di radiazioni che orbitano attorno al paziente.\\
+
+\addtikz[Schema tomografia computerizzata]{
+    \draw[thick] (0,0) ellipse (2 and 1);
+    \node at (3,0) {Paziente};
+    \draw[fill=black] (0,0) circle (0.05);
+    \draw[thick,dashed] (0,0) circle (4);
+    \draw[thick] (0,0) circle (4.5);
+    \draw[thick] (0,0) circle (5);
+    \draw[fill=white] (-0.25,3.75) rectangle (0.25,4.25);
+    \draw[fill=white,rotate=-45] (-0.25,3.75) rectangle (0.25,4.25);
+    \draw[thick] (-0.25,3.75) rectangle (0.25,4.25);
+    \draw[thick,rotate=-45] (-0.25,3.75) rectangle (0.25,4.25);
+    \node at (0.5,3.7) {$S_2$};
+    \node[rotate=-45] at (3,2.25) {$S_1$};
+    %Arrows
+    \draw[->,thick] (0,3.75) -- (0,-4.25);
+    \draw[->,thick] (0,3.75) -- (-3.25,-2.75);
+    \draw[->,thick] (0,3.75) -- (3.25,-2.75);
+    \draw[->,thick] (0,3.75) -- (-2,-3.75);
+    \draw[->,thick] (0,3.75) -- (2,-3.75);
+    \draw[->,thick,rotate=-45] (0,3.75) -- (0,-4.25);
+    \draw[->,thick,rotate=-45] (0,3.75) -- (-3.25,-2.75);
+    \draw[->,thick,rotate=-45] (0,3.75) -- (3.25,-2.75);
+    \draw[->,thick,rotate=-45] (0,3.75) -- (-2,-3.75);
+    \draw[->,thick,rotate=-45] (0,3.75) -- (2,-3.75);
+    %Detectors
+    \draw[thick] (-0.25,-5) -- (-0.25,-4.5) (0.25,-5)node[below] {$D_2$} -- (0.25,-4.5);
+    \draw[thick,rotate=-45] (-0.25,-5) -- (-0.25,-4.5) (0.25,-5)node[below] {$D_1$} -- (0.25,-4.5);
+    %Labels
+    \draw[thick,->] (0,5.5)node[above] {Sorgente di raggi X} -- (0,4);
+    \draw[thick,->] (0,-6.5)node[below] {Rivelatori} -- (0,-4.75);
+}{1}{TC_scheme}
+
+Esistono inoltre macchinari \textbf{multislice} che permettono di acquisire più sezioni contemporaneamente, riducendo i tempi di scansione e migliorando la risoluzione spaziale. Questi sistemi utilizzano più file di rivelatori disposti in modo da coprire una maggiore area del corpo durante ogni rotazione della sorgente di raggi X.\\
+Un tipo particolare di TC è la \textbf{SPECT} (Single Photon Emission Computed Tomography), che utilizza isotopi radioattivi emettitori di raggi gamma per creare immagini tridimensionali delle funzioni fisiologiche del corpo. In questo caso, la sorgente di radiazione è interna al paziente, e i rivelatori esterni catturano i raggi gamma emessi dall'isotopo. La SPECT è particolarmente utile per studiare il flusso sanguigno, il metabolismo e altre funzioni organiche. Il radioisotopo più usato è il $\atom{Tc}{99\text{m}}{}$, che emette fotoni a $\qty{140}{\kilo\electronvolt}$.\\
+A causa della bassa frequenza di conteggio e dell'acquisizione di diverse sezioni gli esami SPECT possono richiedere tempi anche dell'ordine dell'ora.
+\section{Tomografia a emissione di positroni (PET)}
+La tomografia a emissione di positroni (PET) è una tecnica di imaging medico che utilizza isotopi radioattivi emettitori di positroni per creare immagini tridimensionali delle funzioni fisiologiche del corpo umano. Ricordiamo che l'interazione tra elettroni e positroni genera due fotoni gamma da $\qty{511}{\kilo\electronvolt}$ emessi in direzioni opposte:
+\begin{equation}
+    e^+ + e^- \to \gamma + \gamma
+\end{equation}
+Gli isotopi più comuni utilizzati nella PET includono il fluoro-18, il carbonio-11 e l'ossigeno-15. Questi isotopi vengono incorporati in molecole biologicamente attive, come il glucosio, che vengono poi iniettate nel paziente.\\
+Poiché i fotoni sono emessi in direzioni opposte, i rivelatori disposti attorno al paziente possono rilevare simultaneamente i due fotoni, permettendo di localizzare con precisione la sorgente di emissione all'interno del corpo. Questo processo è noto come \textbf{coincidenza}.\\ %Riparti da slide 18
