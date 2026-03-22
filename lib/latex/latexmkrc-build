@@ -12,6 +12,7 @@ $pdflatex = 'pdflatex -shell-escape -synctex=1 -interaction=nonstopmode -file-li
 
 ensure_path('TEXINPUTS', "$root/lib/latex/");
 ensure_path('TEXINPUTS', "$root/resources/imgs/");
+ensure_path('TEXINPUTS', "$root/resources/");
 
 my $chapters_src = abs_path('chapters');
 my $build = abs_path('build');
