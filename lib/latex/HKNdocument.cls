@@ -210,6 +210,22 @@
 }
 \newcommand{\courseinfo}[1]{\pgfqkeys{/HKN}{#1}}
 
+% Metadata file generation
+\newwrite\metafile
+\openout\metafile=metadata.yml
+
+\write\metafile{code: "\DDcoursecode"}
+\write\metafile{name: "\DDcoursename"}
+\write\metafile{teacher: "\DDteacher"}
+\write\metafile{program: "\DDprogram"}
+\write\metafile{program_en: "\DDprogramen"}
+\write\metafile{program_level: "\DDprogramlevel"}
+\write\metafile{start_academic_year: "\DDstartacademicyear"}
+\write\metafile{semester: "\DDsemester"}
+\write\metafile{completed: "\DDcompleted"}
+
+\closeout\metafile
+
 % Title page
 
 \renewcommand{\maketitle}{
