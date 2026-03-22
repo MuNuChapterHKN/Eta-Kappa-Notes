@@ -5,7 +5,7 @@ EKN_ROOT_DIR ?= /workdir
 all: notes-all release
 
 release:
-	cd scripts && pnpm run release
+	cd scripts && npm run release
 
 notes-all:
 	@for dir in $(wildcard notes/*/); do \
