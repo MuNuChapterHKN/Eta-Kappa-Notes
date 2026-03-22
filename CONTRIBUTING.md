@@ -104,8 +104,6 @@ This is the template for `main.tex`:
 
 \author{Name Surname}
 
-\version{1.0}
-
 \begin{document}
 
 \include{chapters/first-chapter}
