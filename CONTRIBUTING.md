@@ -80,6 +80,18 @@ You will organize your notes inside it using the following structure:
 When compiling the PDF, a `build/` folder will be automatically generated, and if you’ve used SVG files, also an `svg-inkscape/` folder.
 The output PDF will be located at `build/main.pdf`.
 
+> [!TIP]
+> By default, the output PDF is marked as "unpublished".
+> If you wish to **remove this watermark**:
+> - Create a file `version` (no extension) inside `resources/`;
+> - Write any text inside it (e.g., `v0`).
+>
+> The content of this file will appear as the document version on the title page, and the warnings and watermark will disappear.
+>
+> This is intended for development purposes only.
+> In fact, **what you write as version is unimportant** and will not affect the repository, since the `version` file is included in `.gitignore`.
+> The project manager is responsible for official versioning.
+
 #### Main file
 
 This is the template for `main.tex`:
