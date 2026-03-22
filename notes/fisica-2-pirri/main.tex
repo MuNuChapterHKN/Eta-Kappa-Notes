@@ -144,6 +144,15 @@
 \newcommand{\redtext}[1]{{\color{red} #1}}
 \newcommand{\important}[1]{\textbf{#1}}
 
+\newcommand{\book}{\textit{Copyright 1969 Addison-Wesley, da M.\ Alonso ed E.\ Finn, ``Elementi di Fisica per l'università, Volume 2''.}}
+\newcommand{\addfigurebook}[3][]{
+    \ifx\relax#1\relax
+        \addfigure[\book]{book/#2}{#3}
+    \else
+        \addfigure[#1 \\ \book]{book/#2}{#3}
+    \fi
+}
+
 \title{Appunti di Fisica II per Ingegneria Fisica}
 \shorttitle{Appunti di Fisica II}
 \author{Giulio Cosentino}
