@@ -90,39 +90,8 @@
 \pagestyle{fancy}
 % We will set headers and footers after defining commands for author and short title.
 
-% --------------------------
-% COMMANDS FOR TITLE, AUTHOR, SHORT TITLE, DATE, VERSION, LOGO
-% --------------------------
-% These commands will be redefined by the user in the main document preamble.
-% \title, \author: standard LaTeX definitions, here we capture them to save the data.
-% \shorttitle, \docdate, \docversion, \doclogo: additional commands for extra data.
-\newcommand{\shorttitle}{}  % Contains short title for header
-\newcommand{\docdate}{}     % Contains custom date
-\newcommand{\docversion}{}  % Contains document version
-\newcommand{\doclogofrontpage}{hkn_logo.pdf}      % Contains logo big path
-\newcommand{\doclogoupperpage}{hkn_ideogramma.pdf}    % Contains logo big path
-\newcommand{\doclicense}{ccbyncnd.png}  % Contains license logo path
-\newcommand{\DDorganization}{IEEE-HKN -- Mu Nu Chapter}
-
-% Preserve old commands for title and author
-\let\oldtitle\title
-\renewcommand{\title}[1]{\oldtitle{#1}\gdef\maintitle{#1}}
-\let\oldauthor\author
-\renewcommand{\author}[1]{\ifx\DDauthors\empty\gdef\DDauthors{#1}\else\g@addto@macro\DDauthors{, #1}\fi}
-
-% Define commands for short title, short author, editors, organization, date, version.
-\def\shorttitle#1{\gdef\STtitle{#1}}
-\def\editor#1{\ifx\DDeditors\empty\gdef\DDeditors{#1}\else\g@addto@macro\DDeditors{, #1}\fi}
-\def\docdate#1{\gdef\DDdate{#1}}
-\def\docversion#1{\gdef\DDversion{#1}}
-
-% Initialize variables to prevent undefined errors
-\gdef\maintitle{}
-\gdef\DDauthors{}
-\gdef\DDeditors{}
-\gdef\DDdate{}
-\gdef\DDversion{}
-\gdef\DDlicense{}
+% PDF metadata and links
+\RequirePackage{hyperref}
 
 % --------------------------
 % TABLE OF CONTENTS LEVEL
@@ -133,60 +102,219 @@
 }
 
 % --------------------------
-% CUSTOM TITLE PAGE
+% COMMANDS FOR TITLE, AUTHOR, LOGO
 % --------------------------
-% \maketitle here creates a title page with:
-% - Logo (if defined)
-% - Title, Author
-% - Version (if defined)
-% - Date (if defined, otherwise today)
+
+% Static variables
+\gdef\HK@versionFileName{version}
+\gdef\DDbiglogo{hkn_logo.pdf}
+\gdef\DDsmalllogo{hkn_ideogramma.pdf}
+\gdef\DDlicenselogo{ccbyncnd.png}
+\gdef\DDorganization{IEEE-HKN -- Mu Nu Chapter}
+
+% Course metadata
+% Optional variables are initialized as empty
+
+% Authors
+\gdef\DDauthors{}
+\let\oldauthor\author
+\renewcommand{\author}[1]{\ifx\DDauthors\empty\gdef\DDauthors{#1}\else\g@addto@macro\DDauthors{, #1}\fi}
+
+% Editors
+\gdef\DDeditors{}
+\def\editor#1{\ifx\DDeditors\empty\gdef\DDeditors{#1}\else\g@addto@macro\DDeditors{, #1}\fi}
+
+% Title
+\gdef\DDtitle{}
+\let\oldtitle\title
+\renewcommand{\title}[1]{\oldtitle{#1}\gdef\DDtitle{#1}}
+
+% Course code
+\def\coursecode#1{\gdef\DDcoursecode{#1}}
+
+% Course name
+\def\coursename#1{\gdef\DDcoursename{#1}}
+
+% Main teacher
+\def\teacher#1{\gdef\DDteacher{#1}}
+
+% Program
+\def\program#1{\gdef\DDprogram{#1}}
+\gdef\DDprogramen{\DDprogram}
+\def\programen#1{\gdef\DDprogramen{#1}}
+
+% Program level
+\def\programlevel#1{
+    \gdef\DDprogramlevel{#1}  % bachelor or master
+    \ifdefstring{\DDprogramlevel}{bachelor}{
+        \gdef\DDprogramlevelword{\iflanguage{italian}{Corso di laurea triennale}{Bachelor program}}
+    }{
+        \ifdefstring{\DDprogramlevel}{master}{
+            \gdef\DDprogramlevelword{\iflanguage{italian}{Corso di laurea magistrale}{Master program}}
+        }{
+            \ClassError{HKNdocument}
+            {Invalid program level value: #1}
+            {The \protect\programlevel\space command only accepts 'bachelor' or 'master'.}
+        }
+    }
+}
+
+% Academic year
+\def\startacademicyear#1{
+    \gdef\DDstartacademicyear{#1}  % starting year
+    \gdef\DDacademicyear{#1-\the\numexpr#1+1\relax}  % range of two years
+}
+
+% Semester
+\def\semester#1{
+    \gdef\DDsemester{#1}  % number, 1 or 2
+    \ifnum#1=1
+        \gdef\DDsemesterword{\iflanguage{italian}{Primo semestre}{First semester}}
+    \else
+        \ifnum#1=2
+            \gdef\DDsemesterword{\iflanguage{italian}{Secondo semestre}{Second semester}}
+        \else
+            \ClassError{HKNdocument}
+            {Invalid semester value: #1}
+            {The \protect\semester\space command only accepts 1 or 2.}
+        \fi
+    \fi
+}
+
+% Completed flag
+\def\completed#1{
+    \gdef\DDcompleted{#1}
+}
+
+% Version
+\RequirePackage{catchfile}
+\IfFileExists{\HK@versionFileName}{
+    \CatchFileDef{\DDversion}{\HK@versionFileName}{\endlinechar=-1}
+}{
+    \gdef\DDversion{}
+}
+
+% Interface through \courseinfo command
+\RequirePackage{pgfkeys}
+\pgfkeys{
+    /HKN/.is family, /HKN,
+    code/.code = {\coursecode{#1}},
+    name/.code = {\coursename{#1}},
+    teacher/.code = {\teacher{#1}},
+    program/.code = {\program{#1}},
+    program_en/.code = {\programen{#1}},
+    program_level/.code = {\programlevel{#1}},
+    start_academic_year/.code = {\startacademicyear{#1}},
+    semester/.code = {\semester{#1}},
+    completed/.code = {\completed{#1}},
+}
+\newcommand{\courseinfo}[1]{\pgfqkeys{/HKN}{#1}}
+
+% Title page
+
 \renewcommand{\maketitle}{
     \thispagestyle{empty} % No header/footer on title page
-    \def\tempa{italian}% Define comparison variable like in copyright section
     \begin{titlepage}
     \begin{center}
         % Logo e titoli
-        \vspace*{0.5cm}
-        \includegraphics[scale = 0.2]{\doclogofrontpage}\\[1.0 cm]  % HKN Logo
-        \textsc{\Large Mu Nu Chapter of IEEE-HKN}\\[-0.2 cm]  % Name
-        \rule{0.80\linewidth}{0.1 mm} \\
-        \textsc{\large Politecnico di Torino -- Honor Society}\\[2.0 cm]  % Branch
-        \rule{\linewidth}{0.2 mm} \\[0.4 cm]
-        {\LARGE \textbf{\maintitle}}\\
-        \rule{\linewidth}{0.2 mm} \\[1.5 cm]
+        \includegraphics[scale = 0.2]{\DDbiglogo}  % HKN Logo
 
+        \vfill
+
+        \textsc{\Large Mu Nu Chapter of IEEE-HKN}  % Name
+        \par
+        \vspace{-0.45cm}
+        \rule{0.80\linewidth}{0.1 mm}
+        \par
+        \vspace{-0.1cm}
+        \textsc{\large Politecnico di Torino -- Honor Society}
+
+        \vfill
+
+        \rule{\linewidth}{0.2 mm}
+        \par
+        \vspace{0.1cm}
+        \ifx\DDtitle\empty
+            % Course information
+            {\LARGE \textbf{\iflanguage{italian}{Appunti di}{Notes of} \DDcoursename}}
+
+            \vspace{0.2cm}
+
+            {\large
+                \iflanguage{italian}{Corso}{Course} \DDcoursecode, \DDteacher
+
+                \DDprogramlevelword\ in \DDprogram
+
+                \DDsemesterword\ \DDacademicyear
+            \par}
+        \else
+            % Title
+            {\LARGE \textbf{\DDtitle}}
+        \fi
+        \vspace{-0.3cm}
+        \rule{\linewidth}{0.2 mm}
+
+        \vfill
+
+        % Authors
         \if\DDauthors\empty\else
-            \Large\DDauthors
+            \linespread{1.5}\selectfont
+            {\Large \DDauthors}
         \fi
 
-        \vspace{0.3cm}
+        \vfill
 
+        % Editors
         \if\DDeditors\empty\else
-            \ifx\DocumentLanguage\tempa
-                \Large \textit{Revisionato da:}
-            \else
-                \Large \textit{Edited by:}
-            \fi
-            \DDeditors
+            \linespread{1.5}\selectfont
+            {\Large \textit{\iflanguage{italian}{Revisionati da}{Edited by}:} \DDeditors}
         \fi
 
-        \vspace{1.5cm}
-
-        % Date, required
-        \Large \DDdate
-
-        % Optional version
-        \ifx\DDversion\empty\else
-            \ifx\DocumentLanguage\tempa
-                {\large Versione \DDversion}
+        % Date and version
+        \vfill
+        {\large
+            \iflanguage{italian}{Ultimo aggiornamento}{Last updated}: \today
+            \ifx\DDversion\empty
+                \par
+                \vfill
+                {\color{red} \Large
+                    \iflanguage{italian}
+                    {Attenzione: versione non pubblicata!}
+                    {Warning: unpublished version!}
+                    \unskip
+                }
             \else
-                {\large Version \DDversion}
+                \ (\iflanguage{italian}{versione}{version} \DDversion)
+                \unskip
+                \ifdefstring{\DDcompleted}{false}{
+                    \par
+                    \vfill
+                    {\color{red} \Large
+                        \iflanguage{italian}
+                        {Attenzione: appunti incompleti!}
+                        {Warning: incomplete notes!}
+                        \unskip
+                    }
+                }
             \fi
-        \fi
+        }
     \end{center}
     \end{titlepage}
-    \clearpage
+    \pagebreak
 }
+
+% Watermark
+\ifx\DDversion\empty
+    \RequirePackage{background}
+    \backgroundsetup{
+        contents=\iflanguage{italian}{NON PUBBLICATO}{UNPUBLISHED},
+        color=hknRed!50,
+        angle=54.7,  % = arctan(sqrt(2)) in degrees, the A4 diagonal angle
+        scale=\iflanguage{italian}{7}{9},
+        opacity=0.2,
+        position=current page.center
+    }
+\fi
 
 % --------------------------
 % HEADER AND FOOTER
@@ -210,7 +338,7 @@
 \fancyhead[R]{\DDorganization}
 \fancyhead[C]{%
   \raisebox{-0.6\height}{%
-    \href{https://hknpolito.org/}{\includegraphics[height=1cm]{\doclogoupperpage}}%
+    \href{https://hknpolito.org/}{\includegraphics[height=1cm]{\DDsmalllogo}}%
   }%
 }
 \fancyfoot[C]{\thepage}
@@ -381,6 +509,34 @@
 \AtBeginDocument{
     \renewcommand{\lstlistlistingname}{Codes}
     \renewcommand{\lstlistingname}{Code}
+
+    % PDF metadata
+    \ifx\DDtitle\empty
+        \iflanguage{italian}{
+            \hypersetup{pdfsubject = {Appunti di \DDcoursename\ per \DDprogram\ tenuto da \DDteacher\ (corso \DDcoursecode) -- \DDsemesterword\ \DDacademicyear, Politecnico di Torino, progetto Eta Kappa Notes (https://github.com/MuNuChapterHKN/Eta-Kappa-Notes)}}
+            \ifx\DDversion\empty
+                \hypersetup{pdftitle = {Appunti di \DDcoursename\ per \DDprogram\ -- versione non pubblicata}}
+            \else
+                \hypersetup{pdftitle = {Appunti di \DDcoursename\ per \DDprogram\ -- versione \DDversion}}
+            \fi
+        }{
+            \hypersetup{pdfsubject = {Notes of \DDcoursename\ for \DDprogram\ held by \DDteacher\ (course \DDcoursecode) -- \DDsemesterword\ \DDacademicyear, Politecnico di Torino, Eta Kappa Notes project (https://github.com/MuNuChapterHKN/Eta-Kappa-Notes)}}
+            \ifx\DDversion\empty
+                \hypersetup{pdftitle = {Notes of \DDcoursename\ for \DDprogram\ -- unpublished version}}
+            \else
+                \hypersetup{pdftitle = {Notes of \DDcoursename\ for \DDprogram\ -- version \DDversion}}
+            \fi
+        }
+    \else
+        \hypersetup{pdftitle = {\DDtitle}}
+    \fi
+
+    \ifx\DDeditors\empty
+        \gdef\DDallauthors{\DDauthors}
+    \else
+        \gdef\DDallauthors{\DDauthors, \DDeditors}
+    \fi
+    \hypersetup{pdfauthor = {Mu Nu Chapter of IEEE-HKN, \DDallauthors}}
 
     \frontmatter
     \maketitle
