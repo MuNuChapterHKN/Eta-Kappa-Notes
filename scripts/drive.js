@@ -41,7 +41,7 @@ export async function uploadFile(filePath, fileName, folderId) {
 
     await drive.permissions.create({
         fileId,
-        requestBody: { role: "reader", type: "anyone" },
+        requestBody: { role: "commenter", type: "anyone" },
     });
 
     const { data } = await drive.files.get({ fileId, fields: "webViewLink" });
