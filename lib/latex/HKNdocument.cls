@@ -484,7 +484,7 @@
 
 % Factory macro for custom boxes
 \newcommand{\DeclareHKNBox}[4]{
-    \newtcolorbox[auto counter, number within=chapter]{#1}[1]{
+    \newtcolorbox[auto counter]{#1}[1]{
         title={\iflanguage{italian}{#2}{#3}~\arabic{\tcbcounter}.~##1},
         boxrule=0mm,  % Bordo principale (disabilitato)
         leftrule=1mm,  % Bordo sinistro principale
