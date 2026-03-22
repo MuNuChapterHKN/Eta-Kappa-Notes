@@ -1,0 +1,21 @@
+{
+  "name": "scripts",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "release": "node main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.29.2",
+  "dependencies": {
+    "@directus/sdk": "^21.2.0",
+    "dotenv": "^17.3.1",
+    "googleapis": "^171.4.0",
+    "js-yaml": "^4.1.1",
+    "zod": "^4.3.6"
+  }
+}
