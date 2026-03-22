@@ -1,24 +1,6 @@
-% !TEX root = fisica-2.tex
+% !TEX root = main.tex
 
-% Possible arguments for the HKNdocument class:
-% Language:
-%   italian (default): Sets the document language to Italian.
-%   english: Sets the document language to English.
-%
-% Table of Contents (ToC) depth:
-%   toc=chapters: Shows only chapters in the ToC (tocdepth=0).
-%   toc=sections: Shows chapters and sections in the ToC (tocdepth=1).
-%   toc=subsections: Shows up to subsections in the ToC (default, tocdepth=2).
-%   toc=subsubsections: Shows up to sub-subsections in the ToC (tocdepth=3).
-%
-% Font size:
-%   10pt: Sets the base font size to 10 points.
-%   11pt (default): Sets the base font size to 11 points.
-%   12pt: Sets the base font size to 12 points.
-%
-% Draft mode:
-%   draft: Compiles the document in draft mode (useful for proofreading, dummy images and imported files).
-\documentclass[italian,toc=sections]{HKNdocument}
+\documentclass[italian]{HKNdocument}
 
 % Math
 \usepackage{cancel}  % \cancel
@@ -153,11 +135,18 @@
     \fi
 }
 
-\title{Appunti di Fisica II per Ingegneria Fisica}
-\shorttitle{Appunti di Fisica II}
+\courseinfo{
+    code = 19AXPOD,
+    name = {Fisica II},
+    teacher = {Prof.\ Candido Fabrizio Pirri},
+    program_level = bachelor,
+    program = {Ingegneria Fisica},
+    program_en = {Physical Engineering},
+    start_academic_year = 2024,
+    semester = 1
+}
+
 \author{Giulio Cosentino}
-\docdate{Primo semestre 2024/2025}
-\docversion{1.1}
 
 \begin{document}
 

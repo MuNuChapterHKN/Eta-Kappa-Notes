@@ -1,24 +1,6 @@
 %! TEX root = main.tex
 
-% Possible arguments for the HKNdocument class:
-% Language:
-%   italian (default): Sets the document language to Italian.
-%   english: Sets the document language to English.
-%
-% Table of Contents (ToC) depth:
-%   toc=chapters: Shows only chapters in the ToC (tocdepth=0).
-%   toc=sections: Shows chapters and sections in the ToC (tocdepth=1).
-%   toc=subsections: Shows up to subsections in the ToC (default, tocdepth=2).
-%   toc=subsubsections: Shows up to sub-subsections in the ToC (tocdepth=3).
-%
-% Font size:
-%   10pt: Sets the base font size to 10 points.
-%   11pt (default): Sets the base font size to 11 points.
-%   12pt: Sets the base font size to 12 points.
-%
-% Draft mode:
-%   draft: Compiles the document in draft mode (useful for proofreading, dummy images and imported files).
-\documentclass[english,toc=sections]{HKNdocument}
+\documentclass[english]{HKNdocument}
 
 \usepackage{epstopdf}
 \usepackage{xcolor}
@@ -99,11 +81,17 @@
 \scalebox{2}{\raisebox{-0.5ex}{\Stopsign}} This argument was not done during the lecture, but it may be helpful.
 \end{center}}
 
-\title{Advanced methods for physics}
-\shorttitle{Advanced methods}
+\courseinfo{
+    code = 01TUSOD,
+    name = {Advanced methods for physics},
+    teacher = {Prof.\ Dario Daghero},
+    program_level = bachelor,
+    program = {Physical Engineering},
+    start_academic_year = 2024,
+    semester = 2
+}
+
 \author{Simone Odetto}
-\docdate{First semester 2024/2025}
-\docversion{1.0}
 
 \begin{document}
 
