@@ -15,32 +15,26 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-      - name: Scarica il repository
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Compila Documenti LaTeX (.tex)
+      - name: Compile the PDFs
         env:
-            EKN_ROOT_DIR: ${{ github.workspace }}
+          EKN_ROOT_DIR: ${{ github.workspace }}
         run: |
-            for notes in $(find . -type f -name metadata.yaml -exec grep -lZ -E "^status:[[:space:]]*'release'[[:space:]]*$" {} + \
-            | xargs -0 -n1 dirname \
-            | xargs -n1 basename \
-            | sort -u); do
-                make notes $notes;
-            done;
+          make notes-all
 
       - name: Archive production artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: notes-pdf
+          name: notes-${{ github.ref_name }}
           path: |
             build
-            
-      # STEP: Upload PDF nella Release GitHub
-      - name: Upload PDF come Asset di Release
+
+      - name: Release
         uses: softprops/action-gh-release@v1
         with:
           files: build/*.pdf

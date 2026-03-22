@@ -1,6 +1,11 @@
 EKN_ROOT_DIR ?= /workdir
 
-.PHONY: guide notes
+.PHONY: guide notes compile reduce clean d-image d-notes d-compile d-reduce
+
+notes-all:
+	@for dir in $(wildcard notes/*/); do \
+		$(MAKE) notes $$(basename $$dir); \
+	done
 
 guide:
 	cd guide/latex && latexmk -r "$(EKN_ROOT_DIR)/lib/latex/latexmkrc-build" -cd -f guide.tex
@@ -23,6 +28,9 @@ d-image:
 
 d-notes:
 	docker run --rm -it -v ${PWD}:$(EKN_ROOT_DIR) texlive-ekn make notes $(word 2,$(MAKECMDGOALS))
+
+d-notes-all:
+	docker run --rm -it -v ${PWD}:$(EKN_ROOT_DIR) texlive-ekn make notes-all
 
 d-compile:
 	docker run --rm -it -v ${PWD}:$(EKN_ROOT_DIR) texlive-ekn make compile $(word 2,$(MAKECMDGOALS))
