@@ -99,7 +99,8 @@ This is the template for `main.tex`:
     program = {Nome del corso di studi},
     program_en = {Name of Degree Program},
     start_academic_year = 2025,
-    semester = 2
+    semester = 2,
+    completed = false
 }
 
 \author{Name Surname}
@@ -125,6 +126,7 @@ This is the template for `main.tex`:
   - `program_level` is either `bachelor` or `master`.
   - `program_en` is the name of the degree program in English (it is optional, only include it if the program is in Italian).
   - `semester` is either 1 or 2.
+  - `completed = false` will be removed once the notes are completed.
 
 - Fill in `\author`.
   There can be as many authors and editors as needed (editors are added with the `\editor` command).
