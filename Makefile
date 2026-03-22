@@ -2,6 +2,11 @@ EKN_ROOT_DIR ?= /workdir
 
 .PHONY: guide notes compile reduce clean d-image d-notes d-compile d-reduce
 
+all: notes-all release
+
+release:
+	cd scripts && pnpm run release
+
 notes-all:
 	@for dir in $(wildcard notes/*/); do \
 		$(MAKE) notes $$(basename $$dir); \
@@ -19,6 +24,7 @@ compile:
 	-cd notes/$(word 2,$(MAKECMDGOALS)) && latexmk -cd -r "$(EKN_ROOT_DIR)/lib/latex/latexmkrc-build" -f main.tex
 	mkdir -p build
 	mv notes/$(word 2,$(MAKECMDGOALS))/build/main.pdf build/$(word 2,$(MAKECMDGOALS)).pdf
+	mv notes/$(word 2,$(MAKECMDGOALS))/build/metadata.yml build/$(word 2,$(MAKECMDGOALS)).yml
 
 reduce:
 	gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.5 -dNOPAUSE -dQUIET -dBATCH -dPrinted=false -sOutputFile=./build/$(word 2,$(MAKECMDGOALS))-compressed.pdf ./build/$(word 2,$(MAKECMDGOALS)).pdf
