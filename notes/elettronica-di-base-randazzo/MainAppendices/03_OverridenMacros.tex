@@ -1,0 +1,73 @@
+% ________________________________________________________________________________ OVERRIDEN MACROS (COMMANDS) ____________________________________________________________________________
+
+
+\begin{comment}     % --- RIEPILOGO MACRO (COMANDI) MODIFICATE O SOVRASCRITTE NELLA CLASSE "HKNdocument" ---
+
+    RIEPILOGO COMANDI SOVRASCRITTI (RENEWED) DALLA CLASSE HKNdocument
+    La custom class HKNdocument modifica alcun comandi standard di LaTeX, in precisione quelli elencati a seguire, per adattarli al design una volta per tutte.
+    Un comando si modifica con \renewcommand{cmd}{def}, che non fa altro che riscriverne la macro.
+
+    --- METADATI (Titolo e Autori) ---
+    \title{...}        % Invece di limitarsi a dichiarare il titolo, ora lo memorizza in una variabile interna per poterlo stampare con stili diversi nella copertina personalizzata.
+    \author{...}       % Modificato per supportare più autori in sequenza: se richiami \author{} più volte, li concatena automaticamente inserendo una virgola tra l'uno e l'altro.
+
+    --- COPERTINA E INTESTAZIONI ---
+    \maketitle         % Stravolge completamente l'estetica base di LaTeX: annulla la copertina standard per generare il frontespizio ufficiale con loghi, revisori, versione e data.
+    \headrule          % (Comando del pacchetto fancyhdr) Sovrascrive la riga superiore dell'intestazione, spezzandola in due segmenti separati per lasciare spazio al logo centrale.
+
+    --- GESTIONE DEI CAPITOLI E DELLE PAGINE BIANCHE ---
+    \clearpage         % Sovrascrive il salto pagina base: impone la regola \thispagestyle{empty} per assicurarsi che un'eventuale pagina bianca generata non abbia numeri o intestazioni residue.
+    \cleardoublepage   % Fa la stessa cosa di \clearpage, ma per l'impaginazione fronte-retro (evitando pagine sinistre vuote ma con l'intestazione stampata).
+    \chaptermark{...}  % Modifica il modo in cui il motore registra i nomi dei capitoli in memoria, permettendo all'intestazione di pagina di catturarli correttamente.
+
+    --- STILE TIPOGRAFICO ---
+    \ULdepth           % (Variabile del pacchetto ulem) Sostituisce la distanza standard della sottolineatura, abbassandola a 1.8pt per far funzionare bene il comando \myuline.
+
+    --- NUMERAZIONE AUTOMATICA (Modificata in _preamble.tex) ---
+    Numerazione Figure/Tabelle/Equazioni    % Anche se non usa renewcommand, sovrascrive la logica di base legandola ai capitoli (es. stamperà "Figura 1.1" invece di una numerazione globale come "Figura 15").
+
+    Più in dettaglio: la numerazione standard di particolari elementi in LaTeX (immagini, tabelle, equazioni, ed eventuali altri) sfrutta di base una logica globale,
+    nel senso che vengono contati da 1 ad X (es "fig. 62", presente nel capitolo 5, e non "fig 5.6", cioè la sesta figura del capitolo 5), senza che vi sia una
+    gerarchia, o in precisione sistema di subordinazione, che li suddivida. Ciò è ovviamente adatto solo per documenti brevi, la cui navigazione è nativamente facile.
+    Nel caso della document class "book", di cui HKNdocument è una modifica, cioè per documenti lunghi e suddivisi in capitoli, la prassi comune è quella di
+    gerarchizzare i contatori in modo che siano subordinati a opportuni elementi del documento, che possono essere: part, chapter, section, subsection, sub-subsection.
+
+    Per gli elementi standard di LaTeX questo si ottiene con il comando: \numberwithin{son}{father}, fornito dal package amsmath, che lega il contatore figlio al
+    contatore padre. In precisione, in _preamble.tex caricato dalla custoclass HKNdocument, sono esplicitamente riportati i seguenti comandi per farsi che
+    la numerazione di figure, tabelle, ed equazioni sia subordinata a quella dei capitoli:
+
+    \numberwithin{figure}{chapter}
+    \numberwithin{table}{chapter}
+    \numberwithin{equation}{chapter}
+
+    La particolarità di questo comando è che si tratta di una macro che al suo interno utilizza un \renewcommand, e per questo è stata riportata nella spiegazione
+    relativa alle "MACRO MODIFICATE DA HKNdocument". Più precisamente questo comando sovrascrive "di nascosto" le macro originali (\thefigure, \thetable, \theequation),
+    facendo stampare al posto della numerazione globale, quella subordinata al capitolo.
+
+    Quelle appena citate sono le macro che si possono usare per "leggere" i "numeri correnti" (gli ultimi oggetti prima del comando) dei contatori. Le più utili sono:
+    \thepart            % Numero della parte (solitamente numeri romani).
+    \thechapter         % Numero del capitolo (non presente in article).
+    \thesection         % Numero della sezione.
+    \thesubsection      % Numero della sottosezione.
+    \thesubsubsection   % Numero della sotto-sottosezione.
+    \theparagraph       % Numero del paragrafo (spesso non numerato di default: la numerazione va attivata con \setcounter{secnumdepth}{4}, e per farli apparire anche nell'indice con \setcounter{tocdepth}{4}).
+    \thesubparagraph    % Numero del sottoparagrafo (spesso non numerato di default: la numerazione va attivata con \setcounter{secnumdepth}{5}, e per farli apparire anche nell'indice con \setcounter{tocdepth}{5}).
+    \thepage            % Il numero della pagina corrente.
+    \theequation        % Il numero dell'equazione nell'ambiente equation.
+    \thefigure          % Il numero della figura nell'ambiente figure.
+    \thetable           % Il numero della tabella nell'ambiente table.
+    \thefootnote        % Il simbolo o numero della nota a piè di pagina.
+
+    Un'ultima spiegazione nota relativamente alla numerazione degli ELEMENTI CUSTOM della custom class HKNdocument, cioè dei BOX COLORATI  per Teoremi, Definizioni, Esercizi ecc.
+
+    Per gli ambienti generati con \DeclareHKNBox, la gerarchia NON è gestita da \numberwithin. Questi box sono creati con il pacchetto 'tcolorbox', che
+    possiede un suo motore indipendente. La classe gli passa semplicemente l'opzione 'number within=chapter' in fase di creazione. Il risultato estetico sul PDF è
+    identico, ma il meccanismo software è nativo del pacchetto.
+
+    RIASSUNTO FINALE COSA VIENE CAMBIATO (OVERRIDE) IN PRATICA DALLA CUSTOM CLASS HKNdocument RELATIVAMENTE ALLA NUMERAZIONE DEGLI OGGETTI:
+    1. Legame gerarchico: I contatori di Figure, Tabelle ed Equazioni eccetera vengono agganciati al contatore dei Capitoli.
+    2. Reset automatico: All'inizio di ogni nuovo capitolo, il conteggio degli elementi riparte da zero.
+    In conclusione: Invece di usare una numerazione globale e progressiva per tutto il libro (es. "Figura 45"), il motore stamperà il numero del capitolo seguito da
+    quello dell'elemento (es. "Figura 5.3", che indica a terza figura del quinto capitolo).
+
+\end{comment}

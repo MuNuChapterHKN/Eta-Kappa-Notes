@@ -6,243 +6,26 @@
 % ATTENZIONE: il progetto usa una classe custom per i documenti. Tutta la sua dichiarazione è presenta nella cartella "Eta-Kappa-Notes\lib".
 % Questa classe custom in particolare richiama numerosi package, che vengono elencati e spiegati a seguire.
 
-% ----------------------------------------------------------------------------- PREAMBLE: START -----------------------------------------------------------------------------
+% ------------------------------------------------------------------------- PREAMBLE: START -----------------------------------------------------------------------------
 
 % NOTA: lo spazio che intercorre tra \documentclass{} e \begin{document} è detto preambolo del documento, e qui vanno aggiunti i pacchetti e dichiarate
 % le custom macros (commands). Questo perchè vanno usati all'interno del documento, e devono essere tutti noti prima che inizi.
 % Inoltre per la custom class "HKNdocument" vanno dichiarati i metadati per poter generare la copertina, che è la prima cosa fatta appena iniziato il documento.
 
+% NOTA: è stata sfruttata una STRATEGIA DI SUDDIVISIONE MODULARE DEL CODICE DEL PREAMBOLO: in particolare è stato separato in più file salvati nella cartella
+% notes/elettronica-di-base-randazzo/MainAppendicess, che vengono richiamati nel codice tramite il comando \input{}. In questo modo il main risulta più pulito
+% ed asciutto, meglio organizzato e di più semplice navigazione. Infatti nelle varie sezioni del preambolo erano stati aggiunti numero commeni esplicativi
+% e note tecniche utili alla compresione del codice.
+
+\input{MainAppendices/00_ModularityExplained.tex}       % Spiegazione GESTIONE DELLA MODULARITÀ DEL DOCUMENTO: \input vs \include. Puro commento, non contiene codice, importato solo per consistenza.
+\input{MainAppendices/01_Packages.tex}                  % PACCHETTI (PACKAGES) Importati e loro spiegazione. NOTA: alcuni pacchetti sono caricati direttamente dalla custom class HKNdocument.
+\input{MainAppendices/02_CustomMacros.tex}              % CUSTOM MACROS (COMMANDS) DEFINITE, e loro spiegazione. NOTA: alcune custom macros sono definite direttamente dalla custom class HKNdocument.
+\input{MainAppendices/03_OverridenMacros.tex}           % CUSTOM MACROS (COMMANDS) OVERRIDE, cioè comandi preesistenti in LaTeX o nei pacchetti importati, che vengono ridefiniti per adattarli alle esigenze del documento.
+                                                        % NOTA: alcuni override avvengono direttamente dalla custom class HKNdocument.
+\input{MainAppendices/04_GlobalSettings.tex}            % GLOBAL SETTINGS, ovvero impostazioni globali che agiscono su tutto il documento.
 
 
-% ________________________________________________________________________________ PACKAGES ________________________________________________________________________________
-
-% Funzionalità aggiuntive o modifiche del comportamento standard di LaTeX
-
-% --- 00 PACCHETTI relativi a FUNZIONI BASE ---
-\usepackage{comment}                % [EXSTENTION] consente la creazione di commenti multilinea con l'enviroment "comment"
-
-% --- 01 PACCHETTI FORMATTAZIONE ---
-% Nota: quelli "commentati" sono già aggiunti dalla custom class HKNdocument. Li lascio perchè molto importanti.
-
-% \usepackage{lmodern}              % [PLUG & PLAY] [OVERRIDE] font vettoriali 100%, evita font accentati bitmap sgranati. Pacchetto plug & play non c'è altro da usare.
-% \usepackage[T1]{fontenc}          % [PLUG & PLAY] [OVERRIDE] aggiunge lettere accentate reali: LaTeX scriverà le lettere accentate come oggetti singoli, e non come caratteri modificati. Fondamentale per copia e incolla dal pdf compilato.
-% \usepackage[utf8]{inputenc}       % [PLUG & PLAY] [OVERRIDE] consente a LaTeX di leggere le lettere accentate, senza dover scrivere ad esempio "\'e" al posto di "è". Di solito è caricato nativamente nelle versioni recenti di LaTeX, ma meglio specificare.
-% \usepackage[italian]{babel}       % [PLUG & PLAY] [OVERRIDE] traduzione strutturale (termini associati al documento: capitolo, sezione, eccetera) in italiano, e sillabazione italiana.
-
-% --- 02 PACCHETTI PER FISICA ---
-\usepackage{siunitx}                % [EXTENSION] Per le unità di misura (es. \si{\ohm})
-
-% --- 03 PACCHETTI PER GRAFICA ---
-% \usepackage{circuitikz}             % [EXTENSION] Per disegnare i circuiti elettrici
-% \usepackage{pgfplots}               % [EXTENSION] Per i grafici matematici e di Bode
-
-\begin{comment}     % --- RIEPILOGO PACCHETTI INCLUSI NELLA CLASSE "HKNdocument" ---
-
-    RIEPILOGO COMPLETO: PACCHETTI CARICATI DALLA CLASSE HKNdocument E _preamble.tex
-    NON inserirli di nuovo in main.tex con \usepackage per evitare conflitti!
-
-    --- TIPOGRAFIA E LINGUA BASE (da HKNdocument.cls) ---
-    \usepackage[T1]{fontenc}                    % [PLUG & PLAY] [OVERRIDE]  Imposta la codifica europea dei font, fondamentale per stampare correttamente le lettere accentate italiane nel PDF e permettere il copia-incolla.
-    \usepackage[utf8]{inputenc}                 % [PLUG & PLAY] [OVERRIDE]  Permette di digitare direttamente da tastiera caratteri speciali e accenti (es. à, è, ì) riconoscendo la codifica UTF-8 del file sorgente.
-    \usepackage{lmodern}                        % [PLUG & PLAY] [OVERRIDE]  Carica i font vettoriali "Latin Modern", essenziali per mantenere il testo nitido e non sgranato anche ad alti livelli di zoom.
-    \usepackage[\DocumentLanguage]{babel}       % [PLUG & PLAY] [OVERRIDE]  Gestisce le regole tipografiche, le traduzioni automatiche (es. "Capitolo") e la corretta sillabazione per la lingua scelta (italiano o inglese).
-                                                %                           NOTA: il "\DocumentLanguage" è l'opzione passata alla document class custom HKNdocument, all'inizio del main.tex
-
-    --- LAYOUT E IMPAGINAZIONE (da HKNdocument.cls) ---
-    \usepackage{geometry}           % [PLUG & PLAY] [OVERRIDE]  Configura fisicamente la pagina, impostando il formato A4 e forzando margini uniformi di 3 cm su tutti i lati per una lettura ariosa.
-    \usepackage{parskip}            % [PLUG & PLAY] [OVERRIDE]  Rimuove l'indentazione o rientro della prima riga (considerata antiestetica), e aggiunge automaticamente spazio verticale tra i paragrafi.
-    \usepackage{fancyhdr}           % [EXTENSION]   [OVERRIDE]  Permette la creazione di intestazioni e piè di pagina personalizzati (usati dalla classe per inserire loghi, pagina e titolo del capitolo).
-
-    --- MATEMATICA E FISICA (da _preamble.tex) ---
-    \usepackage{amsmath}            % [EXTENSION] Il pacchetto fondamentale dell'American Mathematical Society per scrivere equazioni complesse, matrici e sistemi matematici.
-    \usepackage{amssymb}            % [EXTENSION] Aggiunge un'enorme libreria di simboli matematici avanzati (es. i simboli degli insiemi dei numeri reali o complessi).
-    \usepackage{amsthm}             % [EXTENSION] Fornisce gli ambienti standard per definire teoremi, dimostrazioni e lemmi matematici.
-    \usepackage{mathtools}          % [EXTENSION] [EXTENSION] Un'estensione di amsmath che risolve alcuni bug grafici e aggiunge strumenti avanzati per allineare le equazioni.
-    \usepackage{mleftright}         % [PLUG & PLAY] [OVERRIDE] [EXTENSION]  Ottimizza e corregge la spaziatura orizzontale automatica attorno alle parentesi che racchiudono frazioni o matrici alte.
-
-    --- TABELLE ED ELENCHI (da _preamble.tex) ---
-    \usepackage{longtable}          % [EXTENSION] Permette la creazione di tabelle lunghe che si spezzano automaticamente e in modo pulito su più pagine.
-    \usepackage{array}              % [EXTENSION] [OVERRIDE] Estende le funzionalità delle tabelle, permettendo di definire larghezze precise per le colonne e allineamenti complessi.
-    \usepackage{booktabs}           % [EXTENSION] Standard editoriale per tabelle professionali: rimuove le linee verticali e introduce linee orizzontali di diverso spessore (\toprule, \midrule, \bottomrule).
-    \usepackage{enumitem}           % [EXTENSION] [OVERRIDE] Offre il controllo totale sugli elenchi puntati e numerati, permettendo di regolarne i margini e la spaziatura verticale.
-
-    --- GRAFICA E COLORI (da HKNdocument.cls e _preamble.tex) ---
-    \usepackage{xcolor}             % [EXTENSION] Il motore principale per definire, miscelare e applicare colori personalizzati al testo e agli sfondi.
-    \usepackage{tcolorbox}          % [EXTENSION] Un potente pacchetto grafico usato dalla classe per creare i riquadri arrotondati e colorati di definizioni ed esercizi.
-    \usepackage{graphicx}           % [EXTENSION] Il pacchetto standard e indispensabile per importare e ridimensionare immagini esterne (JPG, PNG, PDF).
-    \usepackage{svg}                % [EXTENSION] Permette di importare direttamente file vettoriali .svg (utilizzando Inkscape in background per la conversione).
-    \usepackage{float}              % [OVERRIDE] [EXTENSION] Aggiunge l'opzione [H] (exactly here) e [h] (here if possible, otherwise as usual) per forzare tabelle e figure a rimanere nel punto del testo in cui sono state scriaggiunte, senza lasciarle "galleggiare" (float) alla deriva altrove.
-    \usepackage{caption}            % [PLUG & PLAY] [OVERRIDE] [EXTENSION]  Usato per personalizzare i margini, i font e l'allineamento delle didascalie sotto le immagini e le tabelle.
-                                    %                                       Come Fix auomatico "Plug & play" corregge uno storico problema di LaTeX relativo alla spaziatura delle didascalie se impostate sopra le tabelle. Inoltre la custom class hai impostato ad 1cm questo spazio.
-
-    --- STILE E UTILITY (da HKNdocument.cls e _preamble.tex) ---
-    \usepackage{hyperref}           % [PLUG & PLAY] [OVERRIDE] [EXTENSION] Rende il PDF interattivo: trasforma l'indice, i riferimenti incrociati e gli URL in link cliccabili (impostati in blu o nero).
-    \usepackage{listings}           % [EXTENSION] Permette di formattare ed evidenziare la sintassi di blocchi di codice informatico.
-                                    % NOTA: nella custom class è definito un TEMA CUSTOM, chiamato "hkn", per l'aspetto del codice. Non è stato impostato come predefinito, va usato con \begin{lstlisting}[style=hkn].
-                                    % Si dodvrebbe correggere la classe per imposarlo come predefinito in generale, basta aggiungere il comando \lstset{style=hkn}
-    \usepackage{ulem}               % [EXTENSION] Fornisce comandi avanzati per sottolineare e barrare il testo.
-    \usepackage{contour}            % [EXTENSION] Crea un contorno attorno ai caratteri, usato in combinazione con ulem per creare sottolineature che non tagliano le lettere discendenti.
-
-\end{comment}
-
-
-
-
-% ___________________________________________________________________________ NEW CUSTOM MACROS (COMMANDS) ____________________________________________________________________________
-
-% Di seguito vengono presentati i comandi custom/personalizzati dichiarati dall'utente.
-% Vengono inoltre riepilogati i comandi custom definite nella classe di documento custom "HKNdocument".
-% NOTA: Ricorda, ogni termine del tipo "\..." in LaTeX è una control sequence. Ogni control sequence è un Comando. I comandi possono essere primitivi o macro.
-%       Un primitivo (esempi \hline) è formulato direttamente nel sorgente del motore LaTeX. Una macro è invece una macroistruzione, cioè un insieme di altri comandi.
-%       L'utente in LaTeX dichiara solo macro, quindi ogni comando custom è precisamente una macro custom. Non può dichiarare "primitivi" (dovrebbe modificare il sorgente del motore grafico TeX).
-%       Ancora più precisamente oltre alle macro, l'utente può definire dei Registri (come i contatori \newcounter o le lunghezze \newlength), ma non sono comandi.
-%       Inoltre: su LaTeX non ci sono variabili, tuttavia si può usare una macro per contenere qualsiasi cosa, come fosse di fatto una variabile.
-
-
-\begin{comment}     % --- RIEPILOGO MACRO (COMANDI) CUSTOM DEFINITI NELLA CLASSE "HKNdocument" ---
-
-    RIEPILOGO MACRO (COMANDI) CUSTOM E AMBIENTI DEFINITI DALLA CLASSE HKNdocument E _preamble.tex
-    NOTA: non possono essere ridichiarati con \newcommand{cmd}{def}, ma possono essere aggiornati con \renewcommand{cmd}{def}
-
-    --- INSERIMENTO IMMAGINI FACILITATO (da _preamble.tex) ---
-    \addfigure[Didascalia]{nomefile}{0.8}       % Inserisce un'immagine posizionandola precisamente dov'è citata (passa l'opzione [H]: exactly here) e centrandola, pescando il file dalla cartella "res/". 0.8 sta per larga 80% della larghezzad del testo (si può cambiare).
-    \addsvg[Didascalia]{nomefile}{0.8}          % Inserisce un'immagine vettoriale SVG precisamente dov'è citata (passa l'opzione [H]: exactly here) e centrandola, pescando il file dalla cartella "res/svg/". 0.8 sta per larga 80% della larghezzad del testo (si può cambiare).
-    \adddrawio[Didascalia]{nomefile}{0.8}       % Inserisce uno schema grafico creato con Draw.io precisamente dov'è citata (passa l'opzione [H]: exactly here) e centrandola, esportato in SVG dalla cartella "res/drawio/". 0.8 sta per larga 80% della larghezzad del testo (si può cambiare).
-
-    --- BOX COLORATI PER LA TEORIA (da HKNdocument.cls) ---
-    NOTA: questi riquadri speciali non sono generati a partire dagli ambienti offerti dal package amsthm, bensì sono una soluzione completamente personalizzata
-    che si appoggia interamente al pacchetto grafico tcolorbox. Sono creati con la custom macro \DeclareHKNBox, citata a seguire.
-
-    \begin{definition} ... \end{definition}     % Genera un riquadro con bordo ROSSO numerato per le Definizioni.
-    \begin{theorem} ... \end{theorem}           % Genera un riquadro con bordo GIALLO numerato per i Teoremi.
-    \begin{corollary} ... \end{corollary}       % Genera un riquadro con bordo ARANCIONE numerato per i Corollari.
-    \begin{exercise} ... \end{exercise}         % Genera un riquadro con bordo BLU SCURO numerato per gli Esercizi.
-    \begin{observation} ... \end{observation}   % Genera un riquadro con bordo GRIGIO-BLU numerato per le Osservazioni generiche.
-
-    --- MACRO "FABBRICA" PER CREARE NUOVI BOX COLORATI (da HKNdocument.cls) ---
-    \DeclareHKNBox{nome}{TitITA}{TitENG}{colore}    % Macro avanzata. Usata per creare box colorati personalizzati (NOTA: nella nuova versione della classe sono stati aggiunti i lemmi).
-
-    --- COMANDI TIPOGRAFICI SPECIALI (da HKNdocument.cls) ---
-    \myuline{Testo}                             % Una sottolineatura intelligente che si interrompe elegantemente per non tagliare le parti basse delle lettere (p, g, q, j).
-
-    --- MACRO PER L'INSERIMENTO DEI METADATI (necessario usarle nel preambolo, per la custom class HKNdocument) ---
-    \shorttitle{Titolo Breve}                   % Definisce un titolo accorciato da usare nelle intestazioni superiori per non farle eventualmente sbordare.
-    \editor{Nome Cognome}                       % Aggiunge la voce "Revisionato da: / Edited by:" nella pagina del titolo.
-    \docdate{Data Libera}                       % Imposta una data fissa o personalizzata per la copertina. Impostato dal project manager scrivendo il semestre del corso.
-    \docversion{1.0}                            % Aggiunge l'indicazione della versione del documento in copertina. 1.0 è un esempio di versione
-
-    --- MACRO CUSTOM USATE COME VARIABILI PER OGGETTI DELLA PER COPERTINA E INTESTAZIONE DELLA CUSTOM CLASS HKNdocument (Modificabili con \renewcommand se necessario) (da HKNdocument.cls) ---
-    \doclogofrontpage                           % Macro che contiene il logo principale della copertina (Default: logo HKN).
-    \doclogoupperpage                           % Macro che contiene il piccolo logo dell'intestazione (Default: logo piccolo HKN).
-    \doclicense                                 % Macro che contiene l'immagine della licenza (Default: Creative Commons).
-    \DDorganization                             % Macro che contiene il nome dell'organizzazione (Default: IEEE-HKN Mu Nu Chapter).
-
-    --- MACRO INTERNE DI SALVATAGGIO (BACKEND) USATE COME VARIABILI - ATTENZIONE: NON TOCCARE
-    Queste macro rappresentano il "database interno" della custom class HKNdocument.
-
-    \maintitle       % Salva il titolo esteso inserito dall'utente tramite il comando \title{...}.
-    \DDauthors       % Raccoglie e concatena i nomi inseriti con le chiamate a \author{...}.
-    \DDeditors       % Salva i nomi dei revisori inseriti tramite il comando custom \editor{...}.
-    \DDdate          % Memorizza la data personalizzata definita tramite \docdate{...}.
-    \DDversion       % Registra il numero di versione impostato con \docversion{...}.
-    \STtitle         % Conserva il titolo breve definito con \shorttitle{...} per le intestazioni.
-
-    REGOLE IMPORANTI (Perché non vanno modificate e perchè non dovrebbero essere usate):
-    1. NON SOCRASCRIVERLE (NO \renewcommand): Si romperebbe il collegamento logico con i comandi standard (FrontEnd) previsti dalla classe. Usa sempre i
-    comandi ufficiali (\title, \author, ecc.) per inserire i dati.
-    2. NON USARLE/RICHIAMARLE NEL TESTO: Queste "scatole" vengono lette dalla classe per costruire la copertina e le intestazioni. Spesso contengono regole
-    di formattazione nascoste (es. font enormi e in grassetto). Stamparle in mezzo a un paragrafo distruggerebbe l'impaginazione. Inoltre, se una di
-    queste macro fosse vuota, genererebbe un errore fatale di compilazione.
-
-
-\end{comment}
-
-
-% ________________________________________________________________________________ OVERRIDEN MACROS (COMMANDS) ____________________________________________________________________________
-
-
-\begin{comment}     % --- RIEPILOGO MACRO (COMANDI) MODIFICATE O SOVRASCRITTE NELLA CLASSE "HKNdocument" ---
-
-    RIEPILOGO COMANDI SOVRASCRITTI (RENEWED) DALLA CLASSE HKNdocument
-    La custom class HKNdocument modifica alcun comandi standard di LaTeX, in precisione quelli elencati a seguire, per adattarli al design una volta per tutte.
-    Un comando si modifica con \renewcommand{cmd}{def}, che non fa altro che riscriverne la macro.
-
-    --- METADATI (Titolo e Autori) ---
-    \title{...}        % Invece di limitarsi a dichiarare il titolo, ora lo memorizza in una variabile interna per poterlo stampare con stili diversi nella copertina personalizzata.
-    \author{...}       % Modificato per supportare più autori in sequenza: se richiami \author{} più volte, li concatena automaticamente inserendo una virgola tra l'uno e l'altro.
-
-    --- COPERTINA E INTESTAZIONI ---
-    \maketitle         % Stravolge completamente l'estetica base di LaTeX: annulla la copertina standard per generare il frontespizio ufficiale con loghi, revisori, versione e data.
-    \headrule          % (Comando del pacchetto fancyhdr) Sovrascrive la riga superiore dell'intestazione, spezzandola in due segmenti separati per lasciare spazio al logo centrale.
-
-    --- GESTIONE DEI CAPITOLI E DELLE PAGINE BIANCHE ---
-    \clearpage         % Sovrascrive il salto pagina base: impone la regola \thispagestyle{empty} per assicurarsi che un'eventuale pagina bianca generata non abbia numeri o intestazioni residue.
-    \cleardoublepage   % Fa la stessa cosa di \clearpage, ma per l'impaginazione fronte-retro (evitando pagine sinistre vuote ma con l'intestazione stampata).
-    \chaptermark{...}  % Modifica il modo in cui il motore registra i nomi dei capitoli in memoria, permettendo all'intestazione di pagina di catturarli correttamente.
-
-    --- STILE TIPOGRAFICO ---
-    \ULdepth           % (Variabile del pacchetto ulem) Sostituisce la distanza standard della sottolineatura, abbassandola a 1.8pt per far funzionare bene il comando \myuline.
-
-    --- NUMERAZIONE AUTOMATICA (Modificata in _preamble.tex) ---
-    Numerazione Figure/Tabelle/Equazioni    % Anche se non usa renewcommand, sovrascrive la logica di base legandola ai capitoli (es. stamperà "Figura 1.1" invece di una numerazione globale come "Figura 15").
-
-    Più in dettaglio: la numerazione standard di particolari elementi in LaTeX (immagini, tabelle, equazioni, ed eventuali altri) sfrutta di base una logica globale,
-    nel senso che vengono contati da 1 ad X (es "fig. 62", presente nel capitolo 5, e non "fig 5.6", cioè la sesta figura del capitolo 5), senza che vi sia una
-    gerarchia, o in precisione sistema di subordinazione, che li suddivida. Ciò è ovviamente adatto solo per documenti brevi, la cui navigazione è nativamente facile.
-    Nel caso della document class "book", di cui HKNdocument è una modifica, cioè per documenti lunghi e suddivisi in capitoli, la prassi comune è quella di
-    gerarchizzare i contatori in modo che siano subordinati a opportuni elementi del documento, che possono essere: part, chapter, section, subsection, sub-subsection.
-
-    Per gli elementi standard di LaTeX questo si ottiene con il comando: \numberwithin{son}{father}, fornito dal package amsmath, che lega il contatore figlio al
-    contatore padre. In precisione, in _preamble.tex caricato dalla custoclass HKNdocument, sono esplicitamente riportati i seguenti comandi per farsi che
-    la numerazione di figure, tabelle, ed equazioni sia subordinata a quella dei capitoli:
-
-    \numberwithin{figure}{chapter}
-    \numberwithin{table}{chapter}
-    \numberwithin{equation}{chapter}
-
-    La particolarità di questo comando è che si tratta di una macro che al suo interno utilizza un \renewcommand, e per questo è stata riportata nella spiegazione
-    relativa alle "MACRO MODIFICATE DA HKNdocument". Più precisamente questo comando sovrascrive "di nascosto" le macro originali (\thefigure, \thetable, \theequation),
-    facendo stampare al posto della numerazione globale, quella subordinata al capitolo.
-
-    Quelle appena citate sono le macro che si possono usare per "leggere" i "numeri correnti" (gli ultimi oggetti prima del comando) dei contatori. Le più utili sono:
-    \thepart            % Numero della parte (solitamente numeri romani).
-    \thechapter         % Numero del capitolo (non presente in article).
-    \thesection         % Numero della sezione.
-    \thesubsection      % Numero della sottosezione.
-    \thesubsubsection   % Numero della sotto-sottosezione.
-    \theparagraph       % Numero del paragrafo (spesso non numerato di default: la numerazione va attivata con \setcounter{secnumdepth}{4}, e per farli apparire anche nell'indice con \setcounter{tocdepth}{4}).
-    \thesubparagraph    % Numero del sottoparagrafo (spesso non numerato di default: la numerazione va attivata con \setcounter{secnumdepth}{5}, e per farli apparire anche nell'indice con \setcounter{tocdepth}{5}).
-    \thepage            % Il numero della pagina corrente.
-    \theequation        % Il numero dell'equazione nell'ambiente equation.
-    \thefigure          % Il numero della figura nell'ambiente figure.
-    \thetable           % Il numero della tabella nell'ambiente table.
-    \thefootnote        % Il simbolo o numero della nota a piè di pagina.
-
-    Un'ultima spiegazione nota relativamente alla numerazione degli ELEMENTI CUSTOM della custom class HKNdocument, cioè dei BOX COLORATI  per Teoremi, Definizioni, Esercizi ecc.
-
-    Per gli ambienti generati con \DeclareHKNBox, la gerarchia NON è gestita da \numberwithin. Questi box sono creati con il pacchetto 'tcolorbox', che
-    possiede un suo motore indipendente. La classe gli passa semplicemente l'opzione 'number within=chapter' in fase di creazione. Il risultato estetico sul PDF è
-    identico, ma il meccanismo software è nativo del pacchetto.
-
-    RIASSUNTO FINALE COSA VIENE CAMBIATO (OVERRIDE) IN PRATICA DALLA CUSTOM CLASS HKNdocument RELATIVAMENTE ALLA NUMERAZIONE DEGLI OGGETTI:
-    1. Legame gerarchico: I contatori di Figure, Tabelle ed Equazioni eccetera vengono agganciati al contatore dei Capitoli.
-    2. Reset automatico: All'inizio di ogni nuovo capitolo, il conteggio degli elementi riparte da zero.
-    In conclusione: Invece di usare una numerazione globale e progressiva per tutto il libro (es. "Figura 45"), il motore stamperà il numero del capitolo seguito da
-    quello dell'elemento (es. "Figura 5.3", che indica a terza figura del quinto capitolo).
-
-\end{comment}
-
-
-% _______________________________________________________________________ IMPOSTAZIONI GLOBALI SPECIALI (FIXES) ___________________________________________________________
-
-\lstset{style=hkn}      % Imposta di default lo stile grafico per i listati di codice, sfruttando il custom style hkn.
-                        % Comodo per non dover sempre scrivere: \begin{lstlisting}[style=hkn]
-                        % NOTA: si potrebbe essere impostare in generale di default per il progetto aggiungendo questa istruzione nella custom class.
-
-
-
-
-% _____________________________________________________________________________ METADATI DEL DOCUMENTO ______________________________________________________________________
+% ______________________________________________________________________ METADATI DEL DOCUMENTO ______________________________________________________________________
 
 \title{Elettronica di Base}
 \shorttitle{Elettronica}
@@ -250,11 +33,8 @@
 \docdate{Primo semestre 2025/2026}
 \docversion{0.1}
 
-% --------------------------------------------------------------------------------- PREAMBLE: END -------------------------------------------------------------------------------
-
-
-
-% --------------------------------------------------------------------------------- DOCUMENT: START -----------------------------------------------------------------------------
+% ------------------------------------------------------------------------- PREAMBLE: END -------------------------------------------------------------------------------
+% ------------------------------------------------------------------------ DOCUMENT: START -----------------------------------------------------------------------------
 
 \begin{document}
 % ATTENZIONE: Non serve scrivere \maketitle o \tableofcontents!
@@ -265,3 +45,5 @@
 % \include{chapters/second-chapter}
 
 \end{document}
+
+% ------------------------------------------------------------------------ DOCUMENT: END -----------------------------------------------------------------------------
