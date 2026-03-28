@@ -1,1 +1,15 @@
 {"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\QIl comando esatto applicato nel codice è: .\\E$"}
+
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\QRIEPILOGO MACRO (COMANDI) CUSTOM E AMBIENTI DEFINITI DALLA CLASSE HKNdocument E _preamble.tex NOTA: non possono essere ridichiarati con , ma possono essere aggiornati con\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\QSono creati con la custom macro , citata a seguire.\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\QNON SOCRASCRIVERLE (NO ): Si romperebbe il collegamento logico con i comandi standard (FrontEnd) previsti dalla classe.\\E$"}
+{"rule":"DOUBLE_PUNCTUATION","sentence":"^\\QUsa sempre i comandi ufficiali (, , ecc.)\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qper inserire i dati.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qfont enormi e in grassetto).\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\QUn comando si modifica con , che non fa altro che riscriverne la macro.\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\QPer gli elementi standard di LaTeX questo si ottiene con il comando: , fornito dal package amsmath, che lega il contatore figlio al contatore padre.\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\QLa particolarità di questo comando è che si tratta di una macro che al suo interno utilizza un , e per questo è stata riportata nella spiegazione relativa alle \"MACRO MODIFICATE DA HKNdocument\".\\E$"}
+{"rule":"DOUBLE_PUNCTUATION","sentence":"^\\QPiù precisamente questo comando sovrascrive \"di nascosto\" le macro originali (, , ), facendo stampare al posto della numerazione globale, quella subordinata al capitolo.\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\QPiù precisamente questo comando sovrascrive \"di nascosto\" le macro originali (, , ), facendo stampare al posto della numerazione globale, quella subordinata al capitolo.\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\QPer gli ambienti generati con , la gerarchia NON è gestita da .\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qstyle=hkn\\E$"}

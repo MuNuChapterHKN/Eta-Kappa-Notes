@@ -1,5 +1,11 @@
+% --- MAGIC COMMENTS: CONFIGURAZIONE EDITOR ---
 % !TEX root = main.tex
-% La precedente riga è un "Magic comment" necessario per indicare il file principale, usato da VSCode per indicare la radice del progetto in progetti LaTeX multi-file
+
+% La precedente riga è un "Magic comment" che specifica all'IDE il file principale del progetto, da considerare come root per la compilazione, necessario
+% per lanciare la compilazione dai file secondari (es. quelli inclusi tramite \input o \include) senza errori. Nel main.tex è superfluo, ma è stato comunque
+% inserito per coerenza e consistenza, e per volontà del project manager che lo ha posto come utile indicazione.
+% Per ulteriori spiegazioni sui Magic Comments, ho scritto un'ampia guida su di essi con spiegazioni su utilizzo e ruolo, con particolare riferimento a
+% !TEX root, trasferita in un file dedicato (MainAppendices/00.1_MagicCommentsExpained.tex), tra l'altro imporato a seguire per consistenza (vedi preambolo).
 
 \documentclass[italian]{HKNdocument}
 
@@ -12,12 +18,13 @@
 % le custom macros (commands). Questo perché vanno usati all'interno del documento, e devono essere tutti noti prima che inizi.
 % Inoltre per la custom class "HKNdocument" vanno dichiarati i metadati per poter generare la copertina, che è la prima cosa fatta appena iniziato il documento.
 
-% NOTA: è stata sfruttata una STRATEGIA DI SUDDIVISIONE MODULARE DEL CODICE DEL PREAMBOLO: in particolare è stato separato in più file salvati nella cartella
+% NOTA: STRATEGIA DI SUDDIVISIONE MODULARE DEL CODICE DEL PREAMBOLO: in particolare è stato separato in più file salvati nella cartella
 % notes/elettronica-di-base-randazzo/MainAppendices, che vengono richiamati nel codice tramite il comando \input{}. In questo modo il main risulta più pulito
 % ed asciutto, meglio organizzato e di più semplice navigazione. Infatti nelle varie sezioni del preambolo erano stati aggiunti numerosi commenti esplicativi
-% e note tecniche utili alla comprensione del codice.
+% e note tecniche utili alla comprensione del codice. Per ulteriori spiegazione sulla modularità, si rimanda al file MainAppendices/00.2_ModularityExplained.tex.
 
-\input{MainAppendices/00_ModularityExplained.tex}       % Spiegazione GESTIONE DELLA MODULARITÀ DEL DOCUMENTO: \input vs \include. Puro commento, non contiene codice, importato solo per consistenza.
+\input{MainAppendices/00.1_MagicCommentsExpained.tex}   % Spiegazione MAGIC COMMENTS, con particolare riferimento a % !TEX root, e consigli di utilizzo. Puro commento, non contiene codice, importato solo per consistenza.
+\input{MainAppendices/00.2_ModularityExplained.tex}     % Spiegazione GESTIONE DELLA MODULARITÀ DEL DOCUMENTO: \input vs \include. Puro commento, non contiene codice, importato solo per consistenza.
 \input{MainAppendices/01_Packages.tex}                  % PACCHETTI (PACKAGES) Importati e loro spiegazione. NOTA: alcuni pacchetti sono caricati direttamente dalla custom class HKNdocument.
 \input{MainAppendices/02_CustomMacros.tex}              % CUSTOM MACROS (COMMANDS) DEFINITE, e loro spiegazione. NOTA: alcune custom macros sono definite direttamente dalla custom class HKNdocument.
 \input{MainAppendices/03_OverridenMacros.tex}           % CUSTOM MACROS (COMMANDS) OVERRIDE, cioè comandi preesistenti in LaTeX o nei pacchetti importati, che vengono ridefiniti per adattarli alle esigenze del documento.

@@ -1,0 +1,86 @@
+% ==============================================================
+% MAGIC COMMENTS (COMMENTI MAGICI) - SPIEGAZIONE E GUIDA ALL'USO
+% ==============================================================
+%
+% --- COSA SONO E A COSA SERVONO ---
+% I Magic Comments sono commenti speciali, direttive testuali particolari ignorate dal compilatore TeX, e lette esclusivamente dall'editor
+% (VS Code, TeXstudio, ecc.). Il loro scopo è quello di istruire localmente l'IDE su come trattare i file in cui sono inseriti, ad esempio per
+% configurare l'ambiente di lavoro (impostazioni di lingua, correzione grammaticale, eccetera) o su come gestire la compilazione di progetti multifile.
+% Agiscono nello specifico file in cui sono inseriti.
+%
+% NOTA: per chi ha studiato C, ricordano un po' le direttive al preprocessore (#define, #undef eccetera), in particoalre #pragma, ma sono concetti
+% sostanzialmente diversi, in quanto il preprocessore modifica il codice prima di compilarlo, mentre i Magic Comments impostano l'editor senza
+% toccare il codice in alcun caso.
+%
+% --- DOVE E COME VANNO SCRITTI, ED IN QUALE QUANTITÀ ---
+% VS Code è un IDE moderno, tecnicamente potrebbero essere scritti in qualsiasi puntod del file, in qualsiasi quantità, tuttavia è altamente sconsigliato
+% per questioni di compatibilità con altri editor, come ad esempio TeXShop (su Mac, il primo ad aver introdotto i magic comments), che hanno un limite
+% hardcoded (rigoroso) tipico di 20 righe all'inizio del file.
+% Quindi per questioni di Good Practice, si consiglia di relegare i magic comments alle primissime righe del file: si può eventualmente aggiungere una
+% riga di introduzione estetica, qualora si riesca a rientrare nelle prime 20 righe con i magic comments.
+% Questo tipicamente è più che sufficiente ad ogni utente, visto che il numero di magic comments necessari dovrebbe essre piuttosto basso (1-5 per file).
+%
+% --- IL LIMITE DEI MAGIC COMMENTS: QUANDO NON USARLI E PREFERIRE settings.json ---
+% Affidarsi ai Magic Comments per configurazioni "globali", quindi che si vogliono usare nella maggiore parte dei i file in progetti multi-file, come ad
+% esempio tipicamente la lingua da associare alla correzione ortografica e grammaticale, è ritenuto Bad Practice. Costringe infatti a duplicare lo stesso
+% codice in decine di file ("sporcandoli"), e rischia di creare conflitti invisibili, visto che si vanno a scavalcare le impostazioni globali che
+% perderebbero di fatto ogni utilità: se l'utente le modificasse, non vedrebbe alcun effetto nel file (e sarebbe facile dimenticarne il motivo).
+% In questi casi è sempre preferibile centralizzare tutto nel settings.json del Workspace, che è fatto per questo esatto scopo.
+%
+% --- UN CASO PARTICOLARE: % !TEX root - APPROFONDIMENTO TECNICO IMPORTANTE ---
+%
+% 1. SCOPO: Lo scopo di questo magic comment è indicare all'editor quale sia il file principale (o "root") del progetto LaTeX considerato, da passare al compilatore,
+%   quando l'utente avvia il processo di compilazione (o build), trovandosi all'interno di un file secondario (incluso tramite \input o \include).
+%
+% 2. IN QUALI FILE VA INSERITO?
+% - Nel main.tex: È totalmente inutile e ridondante. L'editor sa già che è il file principale grazie alla presenza di \begin{document}.
+%   In questo progetto viene comunque messo in apertura del main.tex per coerenza, consistenza, e volontà del project manager (che li lo ha posto come
+%   utile indicazione), sebbene sia superfluo.
+% - Nei file figli (es. \input o \include): È proprio per questi che nasce, ed essenziale aggiungerlo per non far fallire la compilazione, lanciandola
+%   all'interno di codesti.
+%
+% 3. COME SPECIFICARE IL PERCORSO (PATH) DEL FILE ROOT? ESEMPI DI SINTASSI
+%   Il percorso verso il file root deve seguire una sintassi rigida, e sono disponibili due modlità principali per specificarlo:
+%
+%   -   PERCORSI RELATIVI (Fortemente Raccomandati): nei quali il percorso è calcolato a partire dalla directory del file corrente.
+%       Garantiscono la portabilità del progetto (es. tramite Git/GitHub), consentendo la collaborazione, in quanto funzionanerebbero su qualsiasi macchina,
+%       a patto che la struttura delle cartelle rimanga intatta, indipendentemente dal sistema operativo o dall'IDE utilizzato, o dall'utente.
+%       Esempi di sintassi per percorsi relativi:
+%           * File root nella stessa cartella de file secondario:           % !TEX root = main.tex
+%           * File root in una cartella inferiore (caso da evitare):        % !TEX root = <foldername>/main.tex
+%           * File root in una cartella di un livello superiore:            % !TEX root = ../main.tex
+%           * File root in una cartella di n livelli superiore:             % !TEX root = ../../../main.tex (es: di 3 livelli superiore)
+%           * Navigazione a "V" (cartella superiore poi inferiore):         % !TEX root = ../<foldername>/main.tex
+%
+%       NOTA sui percorsi relativi: nel caso di stesso livello o livello inferiore, è formalmente corretto utilizzare anche la sintassi esplicita
+%       % !TEX root = ./main.tex e % !TEX root = ./<foldername>/main.tex ripsettivamente, dove "./" istruisce esplicitamente il sistema operativo a
+%       "partire dalla cartella corrente". Tuttavia, l'omissione del punto iniziale è considerata lo standard più pulito, compatto e universalmente supportato
+%       dai parser o analizzatore sintattico dell'IDE, ossia lo strumento con cui identifica e interpreta il codice).
+%
+%   -   PERCORSI ASSOLUTI (Da Evitare): Indicano il path dalla radice del disco, specificandone appunto la posizione esatta nella macchina che elabora il codice.
+%       Rompono irrevocabilmente la compilazione se il progetto viene clonato su una macchina diversa.
+%           *  Esempio di sintassi per percorso assoluto:                   % !TEX root = C:/Utenti/Username/Documenti/Progetto/main.tex
+%
+%   -   ATTENZIONE A COME SCRIVERE IL PERCORSO: STANDARD UNIX E SLASH (La regola del Backslash)
+%       LaTeX è un ecosistema di derivazione Unix. A prescindere dal sistema operativo in uso (incluso Windows, che nativamente utilizza il backslash "\" per
+%       specificare i percorsi), i path all'interno dell'ecosistema TeX devono TASSATIVAMENTE utilizzare il "forward slash" o "slash" ("/").
+%       L'uso del "backslash" ("\") è riservato all'invocazione delle macro o comandi (es. \textbf).
+%       In particoalre inserire un "\" in un magic comment causerà un errore di parsing, poiché il motore lo interpreterà come l'inizio di un comando inesistente.
+%
+% 4. VS CODE POSSIEDE L'AUTO-RILEVAMENTO DEL main.tex: PERCHÉ USARE % !TEX root COMUNQUE?
+%   L'estensione LaTeX Workshop per VS Code possiede un motore di Auto-Rilevamento (Root Directory Check) che, aprendo l'intera cartella (Workspace), scansiona
+%   l'albero delle dipendenze per dedurre autonomamente il file root.
+%   Tuttavia, l'uso esplicito di "% !TEX root" rimane la Best Practice per più motivi:
+%       A. Prestazioni: Evita all'IDE di dover parsare l'intero albero genealogico del progetto a ogni avvio, riducendo il carico di calcolo.
+%       B. Sicurezza: Previene la compilazione errata se un file figlio viene aperto singolarmente (fuori dal Workspace) o processato da altri editor.
+%       C. Documentazione: Rende esplicita l'architettura del progetto, facilitando la comprensione e la navigazione, soprattutto per nuovi collaboratori.
+%       D. Compatibilità: Garantisce che il progetto sia compilabile anche in IDE diversi privi di funzionalità di auto-rilevamento.
+%
+%   A rigurado la documentazione ufficiale di LaTeX Workshop riporta, a link: https://github.com/james-yu/latex-workshop/wiki/compile#:~:text=Root%20directory%20check
+%       Root directory check LaTeX Workshop iterates through all .tex files in the root folder of the workspace.
+%       The first one containing \documentclass[...]{...} (the [...] is optional) or \begin{document} depending on the value of
+%       latex-workshop.latex.rootFile.indicator, and which includes the file in the active editor is set as the root file.
+%       File inclusion is computed using a regex based static parsing of .tex files looking for include, input, import and variants of them.
+%       Note we cannot compute file inclusions if user defined macros are used to include files.
+%       To avoid parsing all .tex files in the workspace, you can narrow the search by
+%       specifying latex-workshop.latex.search.rootFiles.include and/or latex-workshop.latex.search.rootFiles.exclude.
