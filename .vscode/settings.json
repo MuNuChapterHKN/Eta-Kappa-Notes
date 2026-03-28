@@ -39,5 +39,20 @@
         "TEXINPUTS": "%WORKSPACE_FOLDER%/lib/latex//;%WORKSPACE_FOLDER%/resources/imgs//;"
       }
     }
+  ],
+
+  // LTeX+ (LanguageTool)
+  // Orthography and grammar checker: only supports one language at a time, but is more powerful than Code Spell Checker
+  // (see below), which only supports orthography. Here set to Italian, in order to set language automatically ofr whoever contributes to the project.
+
+  "ltex.language": "it",
+
+  // Code Spell Checker
+  // Additional extension, alternative to LTeX+, thats supports bilingual correction, but only for orthography, not grammar.
+  // Only one of them should be active at a time, otherwise they will conflict.
+  "cSpell.language": "en,it",
+  "cSpell.words": [
+    "Ndocument",
+    "randazzo"
   ]
 }

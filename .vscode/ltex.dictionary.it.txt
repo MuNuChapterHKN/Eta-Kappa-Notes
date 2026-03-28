@@ -1,3 +1,7 @@
 Mattei
 hkn
 HKNdocument
+tex
+_preamble
+cls
+main

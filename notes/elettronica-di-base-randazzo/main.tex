@@ -9,13 +9,13 @@
 % ------------------------------------------------------------------------- PREAMBLE: START -----------------------------------------------------------------------------
 
 % NOTA: lo spazio che intercorre tra \documentclass{} e \begin{document} è detto preambolo del documento, e qui vanno aggiunti i pacchetti e dichiarate
-% le custom macros (commands). Questo perchè vanno usati all'interno del documento, e devono essere tutti noti prima che inizi.
+% le custom macros (commands). Questo perché vanno usati all'interno del documento, e devono essere tutti noti prima che inizi.
 % Inoltre per la custom class "HKNdocument" vanno dichiarati i metadati per poter generare la copertina, che è la prima cosa fatta appena iniziato il documento.
 
 % NOTA: è stata sfruttata una STRATEGIA DI SUDDIVISIONE MODULARE DEL CODICE DEL PREAMBOLO: in particolare è stato separato in più file salvati nella cartella
-% notes/elettronica-di-base-randazzo/MainAppendicess, che vengono richiamati nel codice tramite il comando \input{}. In questo modo il main risulta più pulito
-% ed asciutto, meglio organizzato e di più semplice navigazione. Infatti nelle varie sezioni del preambolo erano stati aggiunti numero commeni esplicativi
-% e note tecniche utili alla compresione del codice.
+% notes/elettronica-di-base-randazzo/MainAppendices, che vengono richiamati nel codice tramite il comando \input{}. In questo modo il main risulta più pulito
+% ed asciutto, meglio organizzato e di più semplice navigazione. Infatti nelle varie sezioni del preambolo erano stati aggiunti numerosi commenti esplicativi
+% e note tecniche utili alla comprensione del codice.
 
 \input{MainAppendices/00_ModularityExplained.tex}       % Spiegazione GESTIONE DELLA MODULARITÀ DEL DOCUMENTO: \input vs \include. Puro commento, non contiene codice, importato solo per consistenza.
 \input{MainAppendices/01_Packages.tex}                  % PACCHETTI (PACKAGES) Importati e loro spiegazione. NOTA: alcuni pacchetti sono caricati direttamente dalla custom class HKNdocument.
