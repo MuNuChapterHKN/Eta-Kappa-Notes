@@ -6,3 +6,271 @@
 \lstset{style=hkn}      % Imposta di default lo stile grafico per i listati di codice, sfruttando il custom style hkn.
                         % Comodo per non dover sempre scrivere: \begin{lstlisting}[style=hkn]
                         % NOTA: si potrebbe essere impostare in generale di default per il progetto aggiungendo questa istruzione nella custom class.
+
+
+\begin{comment}
+    ==============================================================================
+    ARCHITETTURA DELLE OPZIONI PER LA CUSTOM CLASS HKNdocument E ALTRE SPIEGAZIONI
+    ==============================================================================
+
+    --- OPZIONI DELLA CUSTOM CLASS ---
+    La classe HKNdocument accetta parametri opzionali passati tra parentesi quadre nel comando iniziale: \documentclass[opzione1, opzione2, ...]{HKNdocument}.
+    L'ORDINE NON CONTA: Poiché la classe dichiara esplicitamente ogni singola opzione (tramite \DeclareOption), il motore LaTeX si limita a cercare le
+    chiavi riconosciute all'interno dell'elenco fornito: possono quindi essere inserite nell'ordine preferito.
+
+    Le Opzioni disponibili sono:
+    LINGUA DEL DOCUMENTO (Imposta il pacchetto babel e le diciture interne)
+    - italian  (Valore di Default)
+    - english
+    DIMENSIONE DEL FONT (Passata alla classe base 'book')
+    - 10pt
+    - 11pt
+    - 12pt     (Valore di Default)
+    PROFONDITÀ DELL'INDICE (ToC - Table of Contents)
+    - toc=chapters       (Livello 0: Mostra solo i capitoli)
+    - toc=sections       (Livello 1: Mostra capitoli e sezioni)
+    - toc=subsections    (Livello 2: Default, mostra fino alle sottosezioni)
+    - toc=subsubsections (Livello 3: Mostra fino alle sotto-sottosezioni)
+    ESEMPIO DI UTILIZZO
+    \documentclass[english, 10pt, toc=chapters]{HKNdocument}
+
+    --- OSSERVAZIONE IMPORTANTE SULLE OPZIONI DELLA CLASSE: OPZIONI DI BASE NON SOVRASCRIVIBILI ---
+    Attualmente, se l'utente inserisse opzioni standard di LaTeX nel comando \documentclass (es. openright), che non sono riportate tra le opzioni
+    esplicitamente dichiarate per la custom class, queste verrebbero ignorate dal compilatore generando un warning ("Unused global option(s)").
+    Questo succede perché:
+    1.  Il comando \ProcessOptions che è stato usato nella custom class, scarta di default tutto ciò che non è stato esplicitamente definito con
+        un \DeclareOption all'interno della classe.
+    2.  La classe base "book", sulla quale quella personalizzata HKNdocument viene generata, viene caricata con parametri fissi (hardcoded) tramite
+        \LoadClass[..., a4paper, openany]{book}. Questo garantisce un'impaginazione uniforme per tutti i documenti dell'associazione.
+
+    --- COME SBLOCCARE LA SOVRASCRIBILITÀ DELLE OPZIONI DI BASE ---
+    Se in futuro si volesse permettere all'utente di passare opzioni native della classe "book", si deve modificare il file .cls in 3 step:
+    1.  Aggiungere il comando a seguire, subito prima di \ProcessOptions\relax: consente di catturare tutte le opzioni, e nel caso in cui non rientrino
+        in quelle dichiarate esplicitamente, vengono inoltrate alla classe 'book':
+        \DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
+    2.  Impostare le opzioni da passare di default alla custom class, che l'utente può sovrascrivere:
+        \PassOptionsToClass{a4paper,openany}{book}
+    3.  Rimuovere i vincoli rigidi (come a4paper e openany) da \LoadClass (possono essere sovrascritti alla chiamata della classe).
+        Conviene invece lasciare il vincolo rigido sulla dimensione del font di base (che è definito una volta per tutte per ogni documento).
+
+    Quindi in conclusione l'aggiunta sarebbe, subito dopo \ProcessOptions\relax:
+    \DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}              % Dichiara l'accettazione di tutte le opzioni per l'utente
+    \PassOptionsToClass{a4paper,openany}{book}                              % Imposti i valori di default (che l'utente può sovrascrivere)
+    \ProcessOptions\relax                                                   % Processa tutto e carica
+    \LoadClass[\HK@classfontsize]{book}                                     % \HK@classfontsize contiene il valore di base del font, accettato come opzione
+                                                                            % esplicita dalla custom class. Ok lasciarlo qui, perché non può essere aggiornato.
+
+    --- NOTA SU HKN@classfontsize ---
+    OPZIONE ESPLICITA HARDCODED: la dimensione base del font viene iniettata tramite la macro interna \HK@classfontsize, garantendo sia flessibilità che
+    sicurezza strutturale. Infatti nonostante la macro sia passata rigidamente (hardcoded) a \loadclass, essa rappresenta ancora prima un'opzione esplicita
+    della custom class, quindi può essere aggiornata dall'utente alla chiamata della classe (es. \documentclass[10pt]{HKNdocument}).
+
+    LIMITE TECNICO GENERALE: In generale comunque, in qualsiasi documento LaTeX, la dimensione base del font non può essere ridichiarata o modificata
+    all'interno del documento LaTeX (main.tex): si tratta infatti di un'informazione geometrica vitale che deve essere fornita una volta per tutte alla classe
+    'book' nell'esatto istante in cui impagina il PDF (se potesse cambiare a posteriori, l'impaginazione verrebbe disastrosamente compromessa).
+    Per questo l'incorporazione hardcoded della dimensione del font in \loadclass rappresenta comunque Good Practice.
+
+    PROTEZIONE DELLA CUSTOM MACRO TRAMITE @: Per di più, chi ha scritto la custom class ha adottato un approccio ulteriormente protettivo: l'uso del
+    simbolo '@' nel nome della macro (variabile) \HK@classfontsize, costituisce un vincolo contro il tentativo di \renewcommand su di essa. Infatti in LaTeX,
+    la chiocciola è considerata un carattere valido per comporre i nomi dei comandi SOLO nei file strutturali (.cls o .sty).
+    Se l'utente provasse a manipolare la macro nei file .tex, il compilatore restituirebbe un errore fatale dicendo "Comando sconosciuto", perché la chiocciola
+    essendo un carattere speciale non può agire nella chiamata.
+
+    SBLOCCO PROTEZIONE TRAMITE @: Andando ancora più a fondo, questo sistema si può sbloccare temporaneamente tra i comandi \makeatletter e \makeatother,
+    che trasformano rispettivamente la chiocciola @ ("at") in un carattere normale (consentendo la chiamata), e poi di nuovo in un carattere speciale
+    (bloccando la chiamata, ripristinando la condizione originale).
+    Ad esempio il seguente codice funzionerebbe per stampare la dimensione del font di base:
+    \makeatletter
+        \HK@classfontsize
+    \makeatother
+
+\end{comment}
+
+
+\begin{comment}
+    ========================================================================================================================================
+    RIASSUNTO DELLE IMPOSTAZIONI GLOBALI DELLO STILE DEL DOCUMENTO IMPOSTATE DALLA CUSTOM CLASS: GEOMETRIA, TIPOGRAFIA E STRUTTURA DEL TESTO
+    ========================================================================================================================================
+
+    Questo lungo ma utile commento documenta tutte le personalizzazioni introdotte dalla custom class HKNdocument (file HKNdocument.cls + _preamble.tex) al
+    progetto, a livello estetico, strutturale e geometrico, che definiscono l'aspetto visivo di tutto il testo inserito dall'utente.
+    Vengono indicati in particolare:
+    - i comandi di interesse con cui sono stati impostati, o si possono impostare
+    - i valori esatti dei parametri che sono stati passati ai comandi
+
+
+    -----------------------------------------------------------------------------
+    SEZIONE 1: IMPOSTAZIONI PRINCIPALI RELATIVE AL CONTENUTO AGGIUNTO DALL'UTENTE
+    -----------------------------------------------------------------------------
+
+    --- 1. GEOMETRIA DELLA PAGINA E MARGINI ---
+    -   FORMATO CARTA E APERTURA CAPITOLI: Impostati passando le opzioni 'a4paper' (carta formato A4) e 'openany' (i capitoli non sono forzati a iniziare
+        sulla pagina destra dispari) al comando di base: \LoadClass[...,a4paper,openany]{book}, all'interno della custom class. Opzioni hardcoded, non
+        modificabili dall'utente, per garantire uniformità estetica in tutti i documenti dell'associazione.
+    -   MARGINI DELLA PAGINA: Fissati simmetricamente a 3 cm su tutti i lati. L'impostazione è definita caricando il pacchetto geometry all'interno della
+        custom class, con l'opzione dedicata: \RequirePackage[a4paper,margin=3cm]{geometry}
+
+    --- 2. TIPOGRAFIA DI BASE E COLLEGAMENTI ---
+    -   DIMENSIONE DEL FONT: Il default interno è 12pt (passato a \LoadClass). L'utente può sovrascriverlo richiamando la classe nel main con le opzioni
+        dedicate: \documentclass[10pt]{HKNdocument} (oppure 11pt, 12pt).
+    -   FAMIGLIA TIPOGRAFICA: Il font di default (Computer Modern) è interamente sostituito dal font "Latin Modern" richiamando \RequirePackage{lmodern}.
+    -   COLORI DEI COLLEGAMENTI TESTUALI: Gestiti dal pacchetto 'hyperref' tramite l'istruzione \hypersetup{...}.
+        Il comando esatto applicato nel codice è:
+        \hypersetup{colorlinks=true, linkcolor=black, citecolor=black, urlcolor=blue}.
+        In precisione:
+            * 'colorlinks=true' rimuove i riquadri colorati attorno ai link, piuttosto antiestetici, colorando direttamente il testo;
+            * 'linkcolor' e 'citecolor' rendono neri i riferimenti interni (figure, formule) e la bibliografia
+            * 'urlcolor' evidenzia in blu i collegamenti a siti web esterni.
+
+    --- 3. SPAZIATURA E GESTIONE DEI PARAGRAFI ---
+    -   RIENTRO DI RIGA (\parindent): È lo spazio orizzontale vuoto all'inizio della prima riga di un nuovo paragrafo. Caricando il pacchetto 'parskip', questo
+        valore viene forzatamente azzerato (\parindent=0pt).
+    -   SPAZIO PARAGRAFI (\parskip): È lo spazio verticale inserito per separare due paragrafi distinti. Il pacchetto 'parskip' lo imposta automaticamente
+        a un valore proporzionale alla dimensione del font, permettendo di separare visivamente i blocchi di testo ora che il rientro iniziale è stato rimosso.
+    -   PARENTESI (DELIMITATORI MATEMATICI): I comandi nativi \left( e \right) introducono tipograficamente una spaziatura bianca orizzontale "extra" attorno
+        alle parentesi scalabili, allontanandole fastidiosamente dal contenuto. Il comando globale \mleftright risolve questa anomalia, sopprimendo lo spazio
+        extra e rendendo le formule compatte e professionali.
+
+    --- 4. FORMATTAZIONE DIDASCALIE, SOTTOLINEATURE, E LISTATI DI CODICE ---
+    -   DIDASCALIE (CAPTIONS):
+        Hanno un margine orizzontale forzato di 1 cm per lato, impostato tramite il comando \captionsetup{margin=1cm} (pacchetto "caption").
+    -   BLOCCHI DI CODICE (LISTINGS): Configurati tramite \lstdefinestyle{hkn}{...}
+        Usano font monospazio (\ttfamily), dimensione \small, con margini rientrati di 30pt (xleftmargin=30pt, xrightmargin=30pt).
+    -   SOTTOLINEATURE (Pacchetti 'ulem' e 'contour'):
+        La profondità della sottolineatura è forzata a 1.8pt (\ULdepth). Il pacchetto 'contour' genera un "contorno di pulizia" (\contourlength{0.8pt}):
+        si tratta di una brevissima interruzione della sottolineatura (o minuscolo alone bianco invisibile) generata attorno alle lettere discendenti
+        (come la 'p', la 'g' o la 'q'). Ciò evita che la linea di sottolineatura tagli fisicamente il carattere, garantendo una leggibilità eccellente.
+
+    --- 5. STRUTTURA E NUMERAZIONE DEGLI AMBIENTI ---
+    -   PROFONDITÀ INDICE (ToC): Impostata dalla variabile \HK@tocdepth a 2 (mostra fino alle \subsection). È modificabile dall'utente richiamando la classe
+        con l'opportuno parametro, essendo un'opzione aggiunta esplicitamente: \documentclass[toc=chapters]{HKNdocument}.
+    -   SUBORDINAZIONE DELLA NUMERAZIONE:
+            * Figure, Tabelle ed Equazioni sono legate ai capitoli (es. Figura 1.1) tramite il comando \numberwithin{...}{chapter}.
+            * Custom Box Colorati dichiarati con \DeclareHKNBox (teorema, definizione, ecc.) sono subordinati nativamente al capitolo sfruttando l'opzione
+              \newtcolorbox[auto counter, number within=chapter] del pacchetto 'tcolorbox'.
+
+    ------------------------------------------
+    SEZIONE 2: ALTRE IMPOSTAZIONI E TECNICISMI
+    ------------------------------------------
+    Altre impostazioni più particolari, e questioni tecniche più complesse.
+
+    --- 1. INTESTAZIONI (HEADER): \headheight E \topmargin ---
+    Altezza del box o riga di intestazione fissata manualmente a 30pt (\headheight=30pt) per ospitare il logo piccolo di HKN senza generare errori
+    "Overfull", ossia per farlo stare dentro la riga dell'intestazione in modo legittimo.
+    Di conseguenza Il margine superiore (\topmargin) è compensato con \addtolength{\topmargin}{-20pt}, che diminuisce il margine superiore per riportarlo
+    simmetricamente a 3 cm, come gli altri margini, dopo aver lasciato lo spazio per l'intestazione.
+    In conclusione grazie a questa modifica, il testo vero e proprio inizia circa (esattamente se si fosse scritto -18pt, essendo di default
+    \headheight=12pt) dove sarebbe iniziato con il margine superiore di 3cm e con intestazione di dimensione standard.
+
+    --- 2. PIÈ DI PAGINA (FOOTER) - NUMERI DI PAGINA PER MAINMATTER (CONTENUTO STANDARD: vedi a seguire frontmatter) ---
+    Il Footer (o piè di pagina) è l'area fissa posizionata appena sopra il margine inferiore del foglio, strutturalmente separata dal corpo del testo,
+    dedicata a ospitare le informazioni di servizio, come numeri di pagina.
+    Nel gergo comune, nel footer vanno anche le "note a piè di pagina", ma LaTeX gestisce codeste in un'area dedicata, separata dal footer,
+    chiamata \footins (o "footnote area"), separata sia dal corpo del testo che dal footer.
+    La custom class applica \fancyfoot[C]{\thepage}: Il pacchetto 'fancyhdr' assegna alla casella centrale ([C]) del footer il compito di stampare la
+    macro \thepage, che contiene dinamicamente il valore del contatore della pagina corrente.
+
+    --- 3. TRANSIZIONE ROMANA/ARABA E FRONTMATTER (TESTO PRELIMINARE) ---
+    Il comando \frontmatter: È un interruttore strutturale dell'editoria che gestisce le pagine preliminari, ossia le pagine di servizio dedicate
+    all'inserimento di testo preliminare, come ad esempio l'indice, la licenza, eccetera (in questo caso).
+    Quando attivato, forza la numerazione in numeri romani minuscoli (i, ii, iii...) e sospende la numerazione formale dei capitoli per non intaccare
+    il conteggio del libro principale.
+    Tramite l'hook \AtBeginDocument, la custom class inietta \frontmatter di nascosto prima dell'indice. Terminate le pagine di servizio, viene
+    iniettato \mainmatter: questo comando ripristina i contatori, ripartendo da "1" in numeri arabi per il primo capitolo di testo.
+    I comandi \frontmatter e \mainmatter sono dunque comandi che vanno utilizzati sempre in coppia: quello che è presente tra di essi, è il contenuto
+    preliminare citato.
+
+    --- 4. PAGINE BIANCHE: RIMOZIONE DAL FRONTESPIZIO ---
+    -   FRONTESPIZIO: Nella ridefinizione di \maketitle, viene chiamato il comando \thispagestyle{empty}, che "spegne" completamente sia
+        l'intestazione che il piè di pagina per la singola pagina di copertina.
+    -   PAGINE VUOTE: I comandi \clearpage e \cleardoublepage sono stati sovrascritti con \renewcommand per iniettarvi al loro interno \thispagestyle{empty}.
+        Questo garantisce che le pagine di riempimento (generate ad esempio per far iniziare i capitoli a destra) siano totalmente immacolate,
+        prive del numero di pagina stampato.
+        I comandi originali di LaTeX per la gestione delle pagine vuote sono stati conservati con il comando \let:
+        \let\originalclearpage\clearpage    e   \let\originalcleardoublepage\cleardoublepage
+        In questo modo si possono richiamare anche i comandi originali, se necessario.
+
+    NOTA: GESTIONE DEI SALTI PAGINA: \clearpage, \cleardoublepage e \newpage
+    In LaTeX, i comandi per andare a capo pagina hanno impatti strutturali molto diversi sulla gestione delle figure e delle tabelle in sospeso (flottanti,
+    ossia non ancora stampati, e che possono essere stampati in punti diversi da quello in cui sono stati chiamati, a discrezione del compilatore, a meno
+    di aver specificato diversamente con opzioni, come [H] per "Here", del pacchetto 'float').
+        *   \newpage (salto semplice):
+            Interrompe la pagina corrente e sposta il testo successivo sul foglio nuovo. ATTENZIONE: NON forza la stampa delle immagini in sospeso.
+            Una figura inserita prima di \newpage potrebbe tranquillamente "scivolare" nelle pagine successive mescolandosi al nuovo testo.
+        *   \clearpage (reset duro):
+            Interrompe la pagina corrente MA, prima di far ripartire il testo, forza la stampa immediata di tutti gli elementi flottanti rimasti
+            nella memoria di compilazione. Crea un vero e proprio blocco che impedisce alle immagini di invadere la sezione o il capitolo successivo.
+        *   \cleardoublepage (Il rispetto per la rilegatura)
+            Esegue lo svuotamento totale di \clearpage, ma aggiunge un controllo geometrico per l'impaginazione fronte-retro: garantisce che il testo
+            successivo inizi rigorosamente su una pagina di destra (dispari). Se necessario, inserisce automaticamente una pagina di sinistra vuota per
+            ripristinare l'allineamento.
+
+    --- 5. GESTIONE DELL'INIZIO DEI CAPITOLI (STILE "plain") ---
+    Il comando \chapter è stato ridefinito (*) per iniettarvi \thispagestyle{plain}. A differenza di "empty" (passato ad esempio nella ridefinizone di
+    \maketitle), lo stile 'plain' nasconde l'intestazione grafica superiore (per non appesantire visivamente il titolo del capitolo), ma conserva
+    regolarmente il numero di pagina centrato in basso.
+
+    (*) NOTA: RIDEFINIZIONE PROFONDA DEI CAPITOLI - HACKING DI LATEX STANDARD:
+    Capire come il comando chapter è stato ridefinito è più complesso.
+    -   OSSERVAZIONE TECNICA SULL'USO DI \def AL POSTO DI \renewcommand:
+        Si utilizza la primitiva di basso livello \def perché \renewcommand ha due limiti strutturali in questo contesto:
+        1)  non è programmato per riconoscere o gestire le versioni con asterisco (*) dei comandi, causando errori fatali. Esistono infatti due versioni
+            del comando: \chapter la versione standard, e \chapter* la versione "starred" (con asterisco) per i capitoli non numerati.
+        2)  andrebbe in conflitto con la macro nativa \secdef, usata nella ridefinizione. Quest'ultima passa gli argomenti testuali crudi esigendo il
+            "pattern matching" letterale ([#1]#2), un input grezzo che solo \def può recepire senza rompere la classe 'book'.
+    -   ROUTING DEI CAPITOLI IN LATEX:
+        Il comando \chapter funge solo da router, grazie a \secdef: a seconda che l'utente usi o meno l'asterisco, smista il lavoro a \@chapter o \@schapter.
+    -   MODIFICHE APPORTATE RISPETTO AL LATEX STANDARD:
+        1)  \chapter (Il dispatcher o router):
+            Inietta forzatamente \thispagestyle{plain}. Rimuove l'intestazione grafica (header e logo) dalla primissima pagina di ogni capitolo per pulizia
+            visiva, mantenendo solo il numero di pagina a piè di pagina.
+        2)  \@chapter (Capitoli numerati normali):
+            Inietta il comando \chaptermark{#1}. Istruisce l'header (fancyhdr) a catturare e stampare in alto esclusivamente il "Titolo Corto" (#1, passato
+            tra parentesi quadre), mentre il titolo lungo (#2) va all'Indice, evitando che titoli troppo lunghi sbordino e si sovrappongano al logo.
+        3)  \@schapter (Capitoli non numerati / starred chapters): Inietta il comando \chaptermark{#1} come sopra.
+            Allo stesso tempo questo risolve un bug storico, il "bug dell'intestazione fantasma": nativamente, i capitoli con asterisco NON aggiornano
+            l'header, il quale continuerebbe a mostrare ostinatamente il nome del capitolo precedente. Questa aggiunta forza l'header ad aggiornarsi
+            immediatamente.
+
+    --- 6. GESTIONE GLOBALE DEI TITOLI: CORTI VS LUNGHI (OVERRIDE STANDARD LATEX) ---
+    Comportamento Standard LaTeX: Usando \chapter[Corto]{Lungo}, il "Titolo Corto" viene inviato di default sia all'intestazione in alto (header) che all'Indice (ToC).
+    Comportamento Custom di questa classe:
+    -   Nella ridefinizione di \@chapter, il comando \addcontentsline{toc} è stato forzato a ricevere SEMPRE il "Titolo Lungo" (#2), garantendo
+        un Indice dettagliato.
+    -   Il comando \chaptermark{#1}, invece, cattura e invia esclusivamente il "Titolo Corto" all'intestazione, mantenendola compatta ed evitando
+        che il testo sbordi sopra il logo.
+
+    --- 7. PALETTE COLORI PERSONALIZZATA (pacchetto "xcolor") ---
+    La classe utilizza costruttori \definecolor{nome}{RGB}{R, G, B} per definire variabili globali, garantendo la massima coerenza estetica in tutto il progetto:
+    COLORI D'ACCENTO:
+    - accentYellow              RGB(254, 196,  41)
+    - accentRed                 RGB(236,  45,  36)
+    COLORI DI SUPPORTO:
+    - supportOrange             RGB(242, 183,   5)
+    - supportDarkBlue           RGB( 55,  81, 113)
+    COLORI DI SFONDO:
+    - backgroundLight           RGB(242, 242, 242)
+    COLORI PER TESTI E BORDI (SCALA DI GRIGI/BLU):
+    - textGrayBlue              RGB(100, 117, 140)
+    - textGrayMedium            RGB(146, 154, 166)
+    - textGrayLight             RGB(184, 187, 191)
+    COLORI SPECIFICI PER I RIQUADRI TCOLORBOX:
+    - tcolorboxLeftColor        RGB(  2,  65, 191)
+    - tcolorboxBackTitleColor:  RGB(119, 152, 255)
+    - tcolorboxBackColor        RGB(210, 226, 255)
+
+    --- 8. IMPOSTAZIONI ESTETICHE E GRAFICHE DEI COLORED CUSTOM BOX (PACCHETTO tcolorbox) ---
+    PARAMETRI GEOMETRICI E GRAFICI ESATTI:
+    - boxrule=0mm           Disabilita il bordo standard su quattro lati per evitare l'effetto "gabbia" pesante.
+    - leftrule=1mm          Applica una barra verticale accentuata solo sul lato sinistro, creando un richiamo visivo forte al colore (parametro #4).
+    - arc=2mm               Imposta un raggio di curvatura discreto per gli angoli.
+    - rounded corners=all   Forza l'arrotondamento su tutti e quattro gli angoli del box, armonizzando la struttura.
+    GESTIONE CROMATICA (Identità HKN):
+    - colframe=#4           Il colore del bordo sinistro e degli accenti è passato dinamicamente col parametro 4 (es. accentYellow).
+    - colbacktitle          Fissato su 'textGrayMedium' per mantenere il titolo neutro e leggibile, indipendentemente dal colore del box.
+    - colback               Utilizza 'backgroundLight' per lo sfondo interno, garantendo contrasto massimo con il testo nero.
+    LOGICA FUNZIONALE:
+    - [auto counter, number within=chapter]: subordina la numerazione dei box ai capitoli (es. Teorema 1.1, 1.2, 2.1, ecc.) e automatizza il conteggio.
+    - \iflanguage{...}      Istruzione condizionale, rileva la lingua del documento e sceglie automaticamente tra il nome italiano (parametro #2) o
+                            inglese (parametro #3) del box.
+\end{comment}

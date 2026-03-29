@@ -13,3 +13,33 @@
 {"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\QPiù precisamente questo comando sovrascrive \"di nascosto\" le macro originali (, , ), facendo stampare al posto della numerazione globale, quella subordinata al capitolo.\\E$"}
 {"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\QPer gli ambienti generati con , la gerarchia NON è gestita da .\\E$"}
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qstyle=hkn\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\QTIPOGRAFIA DI BASE E COLLEGAMENTI — - Dimensione del font: Il default interno è 12pt (passato a ).\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\Q- Famiglia Tipografica: Il font di default (Computer Modern) è interamente sostituito dal font \"Latin Modern\" richiamando .\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\Q- Colori dei collegamenti testuali: Gestiti dal pacchetto 'hyperref' tramite l'istruzione .\\E$"}
+{"rule":"ER_01_002","sentence":"^\\QIn precisione 'colorlinks=true' rimuove gli inestetici riquadri attorno ai link colorando direttamente il testo; 'linkcolor' e 'citecolor' rendono neri i riferimenti interni (figure, formule) e la bibliografia, mentre 'urlcolor' evidenzia in blu i collegamenti a siti web esterni.\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\Q- Delimitatori Matematici: I comandi nativi ( e ) introducono tipograficamente una spaziatura bianca orizzontale \"extra\" attorno alle parentesi scalabili, allontanandole fastidiosamente dal contenuto.\\E$"}
+{"rule":"GR_09_002","sentence":"^\\Q- Blocchi di Codice (Listings): Configurati tramite hkn ....\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\QUsano font monospazio (), dimensione , con margini rientrati di 30pt (xleftmargin=30pt, xrightmargin=30pt).\\E$"}
+{"rule":"MORFOLOGIK_RULE_IT_IT","sentence":"^\\QUsano font monospazio (), dimensione , con margini rientrati di 30pt (xleftmargin=30pt, xrightmargin=30pt).\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\QSTRUTTURA E NUMERAZIONE — - Profondità Indice (ToC): Impostata dalla variabile a 2 (mostra fino alle .\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\QÈ modificabile dall'utente richiamando la classe con parametri: .\\E$"}
+{"rule":"UNPAIRED_BRACKETS","sentence":"^\\QSTRUTTURA E NUMERAZIONE — - Profondità Indice (ToC): Impostata dalla variabile a 2 (mostra fino alle .\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\QFigura 1.1) tramite il comando .\\E$"}
+{"rule":"DOUBLE_PUNCTUATION","sentence":"^\\QIl margine superiore () è compensato con ..\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\Q- Layout Pagine Vuote: I comandi e sono sovrascritti per applicare , rimuovendo l'intestazione grafica e il numero di pagina nelle pagine di intermezzo vuote.\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\QColori specifici per i riquadri tcolorbox: - tcolorboxLeftColor : RGB( 2, 65, 191) - tcolorboxBackTitleColor: RGB(119, 152, 255) - tcolorboxBackColor : RGB(210, 226, 255) ==============================================================================\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\QColori di supporto: - supportOrange : RGB(242, 183, 5) - supportDarkBlue : RGB( 55, 81, 113)\\E$"}
+{"rule":"COMMA_PARENTHESIS_WHITESPACE","sentence":"^\\QL'utente può sovrascrivere queste impostazioni richiamando la classe nel main con parametri diversi: .\\E$"}
+{"rule":"WHITESPACE_RULE","sentence":"^\\QAggiungere la seguente riga, subito prima di :  book (Questo comando \"acchiappatutto\" inoltra le opzioni sconosciute a 'book').\\E$"}
+{"rule":"ER_01_002","sentence":"^\\QIn precisione 'colorlinks=true' rimuove i riquadri colorati attorno ai link, piuttosto antiestetici, colorando direttamente il testo; 'linkcolor' e 'citecolor' rendono neri i riferimenti interni (figure, formule) e la bibliografia, mentre 'urlcolor' evidenzia in blu i collegamenti a siti web esterni.\\E$"}
+{"rule":"ER_01_002","sentence":"^\\QIn precisione: * 'colorlinks=true' rimuove i riquadri colorati attorno ai link, piuttosto antiestetici, colorando direttamente il testo; * 'linkcolor' e 'citecolor' rendono neri i riferimenti interni (figure, formule) e la bibliografia * 'urlcolor' evidenzia in blu i collegamenti a siti web esterni.\\E$"}
+{"rule":"UNPAIRED_BRACKETS","sentence":"^\\QSTRUTTURA E NUMERAZIONE — - PROFONDITÀ INDICE (ToC): Impostata dalla variabile a 2 (mostra fino alle .\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qsono subordinati nativamente al capitolo sfruttando l'opzione [auto counter, number within=chapter] del pacchetto 'tcolorbox'.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qla generazione del frontespizio o l'inserimento forzato della licenza).\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qe sospende la numerazione formale dei capitoli per non intaccare il conteggio del libro principale.\\E$"}
+{"rule":"ST_01_005","sentence":"^\\QQuest'ultima passa gli argomenti testuali crudi esigendo il \"pattern matching\" letterale ([#1]#2), un input grezzo che solo può recepire senza rompere la classe 'book'.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qcome sopra.\\E$"}
+{"rule":"DOUBLE_PUNCTUATION","sentence":"^\\Q2) (Capitoli numerati normali): Inietta il comando #1..\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qopenright), che non sono riportate tra le opzioni esplicitamente dichiarate per la custom class, queste verrebbero ignorate dal compilatore generando un warning (\"Unused global option(s)\").\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qè stato forzato a ricevere SEMPRE il \"Titolo Lungo\" (#2), garantendo un Indice dettagliato.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qe automatizza il conteggio.\\E$"}
