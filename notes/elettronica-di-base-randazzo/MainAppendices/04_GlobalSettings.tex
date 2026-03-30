@@ -3,9 +3,18 @@
 
 % __________________________________________________________________ IMPOSTAZIONI GLOBALI SPECIALI (FIXES) ___________________________________________________________
 
+% --- LISTATI CODICE (Pacchetto "listings") ---
 \lstset{style=hkn}      % Imposta di default lo stile grafico per i listati di codice, sfruttando il custom style hkn.
                         % Comodo per non dover sempre scrivere: \begin{lstlisting}[style=hkn]
                         % NOTA: si potrebbe essere impostare in generale di default per il progetto aggiungendo questa istruzione nella custom class.
+
+% --- SPAZIATURA ELENCHI PUNTATI E NUMERATI (Pacchetto "enumitem") ---
+% \setlist{nosep}       % Rimuove la spaziatura verticale extra introdotta di default tra gli elementi degli elenchi (itemize, enumerate, description)
+                        % Eccessivo, simile ad usare un valore negativo per itemsep. Usata soluzione a seguire.
+\setlist{itemsep=0pt}   % Riduce (ma non rimuove) lo spazio verticale tra gli item o elementi di tutti gli elenchi a 0pt, per un aspetto più compatto.
+                        % Dovrebbe essere adatto alla maggior parte delle liste (si possono modificare in locale quelle da allargare)
+                        % Si applica a TUTTE le liste (itemize, enumerate, description)
+                        % Es per applicare solo alle liste puntate (itemize): \setlist[itemize]{itemsep=...}
 
 
 \begin{comment}
@@ -104,9 +113,10 @@
     -----------------------------------------------------------------------------
 
     --- 1. GEOMETRIA DELLA PAGINA E MARGINI ---
-    -   FORMATO CARTA E APERTURA CAPITOLI: Impostati passando le opzioni 'a4paper' (carta formato A4) e 'openany' (i capitoli non sono forzati a iniziare
-        sulla pagina destra dispari) al comando di base: \LoadClass[...,a4paper,openany]{book}, all'interno della custom class. Opzioni hardcoded, non
-        modificabili dall'utente, per garantire uniformità estetica in tutti i documenti dell'associazione.
+    -   FORMATO CARTA E APERTURA CAPITOLI: Impostati passando le opzioni 'a4paper' (carta formato A4) e 'openany' (i capitoli NON sono forzati a iniziare
+        sulla pagina destra dispari, cioè possono in questo caso iniziare su qualsiasi pagina) al comando di base:
+            \LoadClass[...,a4paper,openany]{book}, all'interno della custom class.
+        Opzioni hardcoded, non modificabili dall'utente, per garantire uniformità estetica in tutti i documenti dell'associazione.
     -   MARGINI DELLA PAGINA: Fissati simmetricamente a 3 cm su tutti i lati. L'impostazione è definita caricando il pacchetto geometry all'interno della
         custom class, con l'opzione dedicata: \RequirePackage[a4paper,margin=3cm]{geometry}
 
