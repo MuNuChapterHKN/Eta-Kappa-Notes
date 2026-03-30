@@ -121,15 +121,33 @@
             * 'colorlinks=true' rimuove i riquadri colorati attorno ai link, piuttosto antiestetici, colorando direttamente il testo;
             * 'linkcolor' e 'citecolor' rendono neri i riferimenti interni (figure, formule) e la bibliografia
             * 'urlcolor' evidenzia in blu i collegamenti a siti web esterni.
-
-    --- 3. SPAZIATURA E GESTIONE DEI PARAGRAFI ---
-    -   RIENTRO DI RIGA (\parindent): È lo spazio orizzontale vuoto all'inizio della prima riga di un nuovo paragrafo. Caricando il pacchetto 'parskip', questo
-        valore viene forzatamente azzerato (\parindent=0pt).
-    -   SPAZIO PARAGRAFI (\parskip): È lo spazio verticale inserito per separare due paragrafi distinti. Il pacchetto 'parskip' lo imposta automaticamente
-        a un valore proporzionale alla dimensione del font, permettendo di separare visivamente i blocchi di testo ora che il rientro iniziale è stato rimosso.
     -   PARENTESI (DELIMITATORI MATEMATICI): I comandi nativi \left( e \right) introducono tipograficamente una spaziatura bianca orizzontale "extra" attorno
-        alle parentesi scalabili, allontanandole fastidiosamente dal contenuto. Il comando globale \mleftright risolve questa anomalia, sopprimendo lo spazio
-        extra e rendendo le formule compatte e professionali.
+        alle parentesi scalabili, allontanandole fastidiosamente dal contenuto. Il comando globale \mleftright, del pacchetto "mleftright", risolve questa anomalia,
+        sopprimendo lo spazio extra e rendendo le formule compatte e professionali. In precisione il pacchetto importa i comandi \mleft e \mright, che costituiscono
+        le versioni corrette (per il problema di spaziatura) di \left e \right, e il comando \mleftright che se usato, dal punto in cui è messo in poi, si comporta
+        come un wrapper che ridefinisce (usa \def, non \renewcommand essendo comandi di basso livello) i comandi \left e \right, sostituendoli di fatto con le versioni
+        corrette \mleft e \mright.
+        I vecchi comandi originali vengono salvati in altre macro, \mleftright@left e \mleftright@right, che essendo protette dalla chiocciola
+        possono essere chiamate solo tra i comandi \makeatletter e \makeatother.
+        Se si volesse ripristinare il comportamento originale, si può richiamare il comando \mleftright@restore, che ripristina i comandi \left e \right originali.
+
+    --- 3. PARAGRAFI: SPAZIATURA, INDENTAZIONE E INTERLINEA ---
+    Lo stile utilizzato dalla custom class HKNdocument si può descrivere in generale come "Black Style Paragraph": È uno stile di impaginazione (tipico del web
+    e dei manuali tecnici o scientifici) in cui i paragrafi sono formattati come "blocchi" separati da spazi: invece di segnalare l'inizio di un nuovo paragrafo
+    facendo rientrare la prima riga verso destra, si usa una riga vuota verticale per separarli nettamente, favorendo la leggibilità e la scansione visiva.
+    Per essere implementato, sfrutta i due elementi a seguire:
+    -   RIENTRO DI RIGA PER PARAGRAFI (\parindent): È lo spazio orizzontale vuoto all'inizio della prima riga di un nuovo paragrafo. Caricando il pacchetto
+        'parskip', questo valore viene forzatamente azzerato (\parindent=0pt).
+    -   SPAZIATURA PARAGRAFI (\parskip): È lo spazio verticale inserito per separare due paragrafi distinti. Il pacchetto 'parskip' lo imposta automaticamente
+        a un valore proporzionale alla dimensione del font, permettendo di separare visivamente i blocchi di testo ora che il rientro iniziale è stato rimosso.
+        Precisazione tecnica: Il pacchetto imposta \parskip a un valore base di circa mezza riga di testo (0.5\baselineskip, cioè è come se si avesse usato:
+        \setlength{\parskip}{0.5\baselineskip}, stessa sintassi con cui si può personalizzare. Nota che un numero adiacente a un registro di lunghezza è
+        interpretato da LaTeX come un prodotto). A questo valore aggiunge un margine elastico (chiamato "glue" in TeX): permette al motore di dilatare o
+        restringere impercettibilmente quello spazio per far arrivare l'ultima riga della pagina perfettamente a filo col margine inferiore.
+    -   NOTA ULTERIORE - INTERLINEA (LINE SPACING): la custom class non modifica in alcun modo l'interlinea, affidandosi all'algoritmo nativo di LaTeX (Single Spacing,
+        con fattore moltiplicativo esatto di 1.0) ottimizzato per il font 'lmodern'. Se si volesse modificare l'interlinea, si potrebbero usare:
+            * \linespread{<fattore moltiplicativo>} per modificare globalmente l'interlinea. Sconsigliato perché agisce di forza bruta su tutto, incluse didascalie, footnotes, ecc.
+            * pacchetto "setspace": lo standard migliore, permette di gestire l'interlinea del corpo del testo, senza toccare il resto degli elementi.
 
     --- 4. FORMATTAZIONE DIDASCALIE, SOTTOLINEATURE, E LISTATI DI CODICE ---
     -   DIDASCALIE (CAPTIONS):
@@ -175,10 +193,11 @@
     all'inserimento di testo preliminare, come ad esempio l'indice, la licenza, eccetera (in questo caso).
     Quando attivato, forza la numerazione in numeri romani minuscoli (i, ii, iii...) e sospende la numerazione formale dei capitoli per non intaccare
     il conteggio del libro principale.
-    Tramite l'hook \AtBeginDocument, la custom class inietta \frontmatter di nascosto prima dell'indice. Terminate le pagine di servizio, viene
+    Tramite l'hook (*) \AtBeginDocument, la custom class inietta \frontmatter di nascosto prima dell'indice. Terminate le pagine di servizio, viene
     iniettato \mainmatter: questo comando ripristina i contatori, ripartendo da "1" in numeri arabi per il primo capitolo di testo.
     I comandi \frontmatter e \mainmatter sono dunque comandi che vanno utilizzati sempre in coppia: quello che è presente tra di essi, è il contenuto
     preliminare citato.
+    (*) un hook è un comando che intercetta un passaggio della compilazione, e inietta in quel punto codice aggiuntivo per modificarne l'esito.
 
     --- 4. PAGINE BIANCHE: RIMOZIONE DAL FRONTESPIZIO ---
     -   FRONTESPIZIO: Nella ridefinizione di \maketitle, viene chiamato il comando \thispagestyle{empty}, che "spegne" completamente sia
@@ -210,27 +229,27 @@
     \maketitle), lo stile 'plain' nasconde l'intestazione grafica superiore (per non appesantire visivamente il titolo del capitolo), ma conserva
     regolarmente il numero di pagina centrato in basso.
 
-    (*) NOTA: RIDEFINIZIONE PROFONDA DEI CAPITOLI - HACKING DI LATEX STANDARD:
-    Capire come il comando chapter è stato ridefinito è più complesso.
-    -   OSSERVAZIONE TECNICA SULL'USO DI \def AL POSTO DI \renewcommand:
-        Si utilizza la primitiva di basso livello \def perché \renewcommand ha due limiti strutturali in questo contesto:
-        1)  non è programmato per riconoscere o gestire le versioni con asterisco (*) dei comandi, causando errori fatali. Esistono infatti due versioni
-            del comando: \chapter la versione standard, e \chapter* la versione "starred" (con asterisco) per i capitoli non numerati.
-        2)  andrebbe in conflitto con la macro nativa \secdef, usata nella ridefinizione. Quest'ultima passa gli argomenti testuali crudi esigendo il
-            "pattern matching" letterale ([#1]#2), un input grezzo che solo \def può recepire senza rompere la classe 'book'.
-    -   ROUTING DEI CAPITOLI IN LATEX:
-        Il comando \chapter funge solo da router, grazie a \secdef: a seconda che l'utente usi o meno l'asterisco, smista il lavoro a \@chapter o \@schapter.
-    -   MODIFICHE APPORTATE RISPETTO AL LATEX STANDARD:
-        1)  \chapter (Il dispatcher o router):
-            Inietta forzatamente \thispagestyle{plain}. Rimuove l'intestazione grafica (header e logo) dalla primissima pagina di ogni capitolo per pulizia
-            visiva, mantenendo solo il numero di pagina a piè di pagina.
-        2)  \@chapter (Capitoli numerati normali):
-            Inietta il comando \chaptermark{#1}. Istruisce l'header (fancyhdr) a catturare e stampare in alto esclusivamente il "Titolo Corto" (#1, passato
-            tra parentesi quadre), mentre il titolo lungo (#2) va all'Indice, evitando che titoli troppo lunghi sbordino e si sovrappongano al logo.
-        3)  \@schapter (Capitoli non numerati / starred chapters): Inietta il comando \chaptermark{#1} come sopra.
-            Allo stesso tempo questo risolve un bug storico, il "bug dell'intestazione fantasma": nativamente, i capitoli con asterisco NON aggiornano
-            l'header, il quale continuerebbe a mostrare ostinatamente il nome del capitolo precedente. Questa aggiunta forza l'header ad aggiornarsi
-            immediatamente.
+    | (*) NOTA TECNICA: RIDEFINIZIONE PROFONDA DEI CAPITOLI - HACKING DI LATEX STANDARD:
+    | Capire come il comando chapter è stato ridefinito è più complesso.
+    | - OSSERVAZIONE TECNICA SULL'USO DI \def AL POSTO DI \renewcommand:
+    |   Si utilizza la primitiva di basso livello \def perché \renewcommand ha due limiti strutturali in questo contesto:
+    |   1)  non è programmato per riconoscere o gestire le versioni con asterisco (*) dei comandi, causando errori fatali. Esistono infatti due versioni
+    |       del comando: \chapter la versione standard, e \chapter* la versione "starred" (con asterisco) per i capitoli non numerati.
+    |   2)  andrebbe in conflitto con la macro nativa \secdef, usata nella ridefinizione. Quest'ultima passa gli argomenti testuali crudi esigendo il
+    |       "pattern matching" letterale ([#1]#2), un input grezzo che solo \def può recepire senza rompere la classe 'book'.
+    | - ROUTING DEI CAPITOLI IN LATEX:
+    |   Il comando \chapter funge solo da router, grazie a \secdef: a seconda che l'utente usi o meno l'asterisco, smista il lavoro a \@chapter o \@schapter.
+    | - MODIFICHE APPORTATE RISPETTO AL LATEX STANDARD:
+    |   1)  \chapter (Il dispatcher o router):
+    |       Inietta forzatamente \thispagestyle{plain}. Rimuove l'intestazione grafica (header e logo) dalla primissima pagina di ogni capitolo per pulizia
+    |       visiva, mantenendo solo il numero di pagina a piè di pagina.
+    |   2)  \@chapter (Capitoli numerati normali):
+    |       Inietta il comando \chaptermark{#1}. Istruisce l'header (fancyhdr) a catturare e stampare in alto esclusivamente il "Titolo Corto" (#1, passato
+    |       tra parentesi quadre), mentre il titolo lungo (#2) va all'Indice, evitando che titoli troppo lunghi sbordino e si sovrappongano al logo.
+    |   3)  \@schapter (Capitoli non numerati / starred chapters): Inietta il comando \chaptermark{#1} come sopra.
+    |       Allo stesso tempo questo risolve un bug storico, il "bug dell'intestazione fantasma": nativamente, i capitoli con asterisco NON aggiornano
+    |       l'header, il quale continuerebbe a mostrare ostinatamente il nome del capitolo precedente. Questa aggiunta forza l'header ad aggiornarsi
+    |       immediatamente.
 
     --- 6. GESTIONE GLOBALE DEI TITOLI: CORTI VS LUNGHI (OVERRIDE STANDARD LATEX) ---
     Comportamento Standard LaTeX: Usando \chapter[Corto]{Lungo}, il "Titolo Corto" viene inviato di default sia all'intestazione in alto (header) che all'Indice (ToC).
@@ -240,7 +259,21 @@
     -   Il comando \chaptermark{#1}, invece, cattura e invia esclusivamente il "Titolo Corto" all'intestazione, mantenendola compatta ed evitando
         che il testo sbordi sopra il logo.
 
-    --- 7. PALETTE COLORI PERSONALIZZATA (pacchetto "xcolor") ---
+    --- 7. SPAZIATURA LISTE (Pacchetto 'enumitem' in _preamble.tex) ---
+    In LaTeX nativo, le liste hanno spaziature verticali grandi di default, perché in origine (anni 70-80) erano pensate principalmente per separare dimostrazioni
+    matematiche su carta stampata, che richiedevano molta "aria" visiva. Oggi, per liste di testo brevi, questo spazio può risultare sproporzionato.
+    La custom class non modifica questa spaziatura in generale, ma solo in un caso specifico, spiegato a seguire.
+    -   Il pacchetto 'enumitem' permette di stringere le liste usando tre opzioni da passare in \begin{<tipo_lista>}[<opzioni>]:
+            * topsep : Spazio elastico tra testo normale e inizio/fine lista.
+            * parsep : Spazio verticale tra due paragrafi nello stesso punto elenco.
+            * itemsep: Spazio verticale vuoto tra un punto elenco e il successivo. NOTA: tra due item agisce itemsep + parsep.
+        Esempio particolare: \begin{enumerate}[parsep=10pt, itemsep=-10pt] spazia solo i paragrafi di uno stesso item, ma annulla la spaziatura tra item diversi,
+        compensando con un valore negativo l'effetto di parsep.
+   -    Modifica Apportata: Il preambolo carica il pacchetto senza alterare i valori globali, ma la classe lo sfrutta localmente (es: nel file
+        cclicense.tex) applicando il parametro esatto [parsep=0pt] per compattare al massimo il testo nelle clausole legali.
+
+
+    --- 8. PALETTE COLORI PERSONALIZZATA (pacchetto "xcolor") ---
     La classe utilizza costruttori \definecolor{nome}{RGB}{R, G, B} per definire variabili globali, garantendo la massima coerenza estetica in tutto il progetto:
     COLORI D'ACCENTO:
     - accentYellow              RGB(254, 196,  41)
@@ -259,7 +292,7 @@
     - tcolorboxBackTitleColor:  RGB(119, 152, 255)
     - tcolorboxBackColor        RGB(210, 226, 255)
 
-    --- 8. IMPOSTAZIONI ESTETICHE E GRAFICHE DEI COLORED CUSTOM BOX (PACCHETTO tcolorbox) ---
+    --- 9. IMPOSTAZIONI ESTETICHE E GRAFICHE DEI COLORED CUSTOM BOX (PACCHETTO tcolorbox) ---
     PARAMETRI GEOMETRICI E GRAFICI ESATTI:
     - boxrule=0mm           Disabilita il bordo standard su quattro lati per evitare l'effetto "gabbia" pesante.
     - leftrule=1mm          Applica una barra verticale accentuata solo sul lato sinistro, creando un richiamo visivo forte al colore (parametro #4).

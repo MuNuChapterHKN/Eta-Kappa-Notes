@@ -416,3 +416,12 @@ colframe
 colbacktitle
 colback
 at
+glue
+Paragraph
+Spacing
+footnotes
+setspace
+topsep
+parsep
+itemsep
+cclicense
