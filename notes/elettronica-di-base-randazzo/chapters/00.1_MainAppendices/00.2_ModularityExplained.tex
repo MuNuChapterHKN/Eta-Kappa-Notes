@@ -65,3 +65,55 @@
 % 0. NOTA GENERALE SUI PERCORSI: È fondamentale utilizzare sempre lo slash (/) come separatore per le directory (es. cartella/file.tex), indipendentemente
 % dal sistema operativo in uso. In LaTeX, il backslash (\) è strettamente riservato all'invocazione dei comandi e causerebbe un errore di sintassi.
 % ======================================================================================================================
+
+
+% ==============================================================================
+% NOTA IMPORTANTE: NON USARE SPAZI NEI PERCORSI - \input vs \include
+% ==============================================================================
+% LINEE GUIDA GENERALI: Evitare SEMPRE gli spazi nei nomi dei file e nei
+% percorsi. Usare underscore (_), trattini (-) o CamelCase (MioFile.tex).
+%
+% --- 1. IL COMANDO \input (Inserimento Semplice) ---
+% TOLLERANZA SPAZI: Alta (nelle distribuzioni LaTeX moderne).
+% Se il file ha degli spazi nel nome, i motori recenti riescono a importarlo
+% a patto che l'intero percorso sia racchiuso tra doppie virgolette. Questa
+% possibilità è stata introdotta solo di recente nelle distribuzioni di TeX,
+% ed è consigliato evitarla per la massima compatibilità.
+%
+% SINTASSI IDEALE:       \input{il_mio_file.tex} (estensione .tex consigliata)
+% SINTASSI CON SPAZI:    \input{"il mio file.tex"} (Tollerata)
+%
+% --- 2. IL COMANDO \include (Gestione Strutturata Chapters) ---
+% TOLLERANZA SPAZI: Pessima (Altamente sconsigliato).
+% Anche se racchiusi tra virgolette, gli spazi mandano in crisi la creazione
+% e la lettura dei file .aux separati. Causa errori critici nei riferimenti
+% incrociati, manda in blocco la bibliografia (biber) o gli script (latexmk),
+% e fa smettere di funzionare la lista del comando \includeonly.
+% MOTIVO STORICO/TECNICO: TeX nasce nell'era dei primi sistemi UNIX e MS-DOS,
+% dove lo spazio era concepito esclusivamente come separatore di parametri
+% (token) e non come carattere valido per i file. Inoltre, strumenti come
+% latexmk dialogano direttamente con il terminale (cmd, PowerShell o Bash):
+% l'invio di percorsi con spazi richiede l'uso di stratagemmi di "escape"
+% (come avvolgere i nomi tra virgolette). Purtroppo, nei vari passaggi tra
+% LaTeX, file ausiliari e riga di comando, queste virgolette vengono spesso
+% interpretate male o eliminate al momento sbagliato, facendo fallire
+% l'escape sequence e facendo perdere al sistema le tracce del file.
+%
+% SINTASSI IDEALE:      \include{capitolo_1} (L'estensione .tex va OMESSA)
+% SINTASSI ERRATA:      \include{"capitolo 1"} (PERICOLOSO: EVITARE)
+%
+% --- 3. IL COMANDO \includeonly (La "Whitelist" di compilazione) ---
+% TOLLERANZA SPAZI: Nessuna.
+% È il comando meno tollerante in assoluto. Poiché legge una lista separata
+% da virgole, non riesce ad abbinare correttamente i file se contengono spazi
+% interni o virgolette. Inoltre, è buona prassi evitare anche gli spazi DOPO
+% la virgola di separazione: la possibilità di aggiungerli è anch'essa una
+% recente introduzione alle distribuzioni di TeX, dunque è consigliato
+% evitarli per la massima compatibilità.
+% Il motivo tecnico di queste problematicheè analogo a quello di \include.
+%
+% SINTASSI IDEALE:          \includeonly{capitolo_1,capitolo_2,capitolo_3}
+% SINTASSI SCONSIGLIATA:    \includeonly{capitolo 1, capitolo 2}
+% SINTASSI ERRATA:          \includeonly{"capitolo 1", "capitolo 2"}
+%
+% ==============================================================================
