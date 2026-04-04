@@ -9,9 +9,9 @@
                         % NOTA: si potrebbe essere impostare in generale di default per il progetto aggiungendo questa istruzione nella custom class.
 
 % --- SPAZIATURA ELENCHI PUNTATI E NUMERATI (Pacchetto "enumitem") ---
-% \setlist{nosep}       % Rimuove la spaziatura verticale extra introdotta di default tra gli elementi degli elenchi (itemize, enumerate, description)
+% \setlist{noitemsep}   % Rimuove la spaziatura verticale introdotta di default tra gli elementi degli elenchi (itemize, enumerate, description)
                         % Eccessivo, simile ad usare un valore negativo per itemsep. Usata soluzione a seguire.
-\setlist{itemsep=0pt}   % Riduce (ma non rimuove) lo spazio verticale tra gli item o elementi di tutti gli elenchi a 0pt, per un aspetto più compatto.
+\setlist{itemsep=0pt}   % Riduce (ma non rimuove del tutto) lo spazio verticale tra gli item o elementi di tutti gli elenchi a 0pt, per un aspetto più compatto.
                         % Dovrebbe essere adatto alla maggior parte delle liste (si possono modificare in locale quelle da allargare)
                         % Si applica a TUTTE le liste (itemize, enumerate, description)
                         % Es per applicare solo alle liste puntate (itemize): \setlist[itemize]{itemsep=...}
@@ -142,7 +142,7 @@
         Se si volesse ripristinare il comportamento originale, si può richiamare il comando \mleftright@restore, che ripristina i comandi \left e \right originali.
 
     --- 3. PARAGRAFI: SPAZIATURA, INDENTAZIONE E INTERLINEA ---
-    Lo stile utilizzato dalla custom class HKNdocument si può descrivere in generale come "Black Style Paragraph": È uno stile di impaginazione (tipico del web
+    Lo stile utilizzato dalla custom class HKNdocument si può descrivere in generale come "Block Style Paragraph": È uno stile di impaginazione (tipico del web
     e dei manuali tecnici o scientifici) in cui i paragrafi sono formattati come "blocchi" separati da spazi: invece di segnalare l'inizio di un nuovo paragrafo
     facendo rientrare la prima riga verso destra, si usa una riga vuota verticale per separarli nettamente, favorendo la leggibilità e la scansione visiva.
     Per essere implementato, sfrutta i due elementi a seguire:

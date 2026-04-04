@@ -1,9 +1,12 @@
 % --- MAGIC COMMENTS: CONFIGURAZIONE EDITOR --- (vedi main.tex per riferimenti e spiegazioni) ---
 % !TEX root = ../main.tex
 
-% ==========================================================================================================
+% NOTA: qui non viene utilizzato il commento multiriga del pacchetto "comment", in quanto i pacchetti sono importati
+% successivamente a questo file, secondo una logica di sviluppo informatico e logico del progetto.
+
+% ======================================================================================================================
 % NOTA: GESTIOME DELLA MODULARITÀ DEL DOCUMENTO E DEI FILE ESTERNI: UTILIZZO DEI COMANDI \input e \include
-% ==========================================================================================================
+% ======================================================================================================================
 % Nella gestione di progetti complessi, solitamente non è consigliabile generare enormi file di codice sorgente, poiché diventano rapidamente difficili da
 % navigare, comprendere e manutenere. Per questo motivo, è buona prassi suddividere il progetto in più file, ossia sfruttare un approccio modulare.
 % LaTeX offre due strumenti diversi principali per richiamare file esterni, che hanno scopi e comportamenti molto diversi, ma entrambi fondamentali per
@@ -22,15 +25,16 @@
 %
 % 2.1 GESTIONE MODULARE DI CAPITOLI: \include{percorso/nomefile}
 %
-% A differenza del primo, \include è progettato per gestire la struttura del corpo del documento. Ad esempio, il suo utilizzo forza un salto di pagina (\clearpage)
-% sia prima che dopo l'inserimento del testo (file passato alla sua chiamata) e genera file ausiliari (.aux) dedicati per ottimizzare la gestione dei riferimenti,
-% relativamente alla memoria e ai tempi di compilazione. A causa di queste caratteristiche, presenta delle regole di utilizzo molto rigide:
+% A differenza del primo, \include è progettato per gestire la struttura del corpo del documento, in particolare è stato progettato per i grandi
+% capitoli di libri o tesi. Il suo utilizzo forza un salto di pagina (\clearpage) sia prima che dopo l'inserimento del testo (file passato alla
+% sua chiamata) e genera file ausiliari (.aux) dedicati per ottimizzare la gestione dei riferimenti, relativamente alla memoria e ai tempi di
+% compilazione. A causa di queste caratteristiche, presenta delle regole di utilizzo molto rigide:
 % - Deve essere inserito esclusivamente nel corpo del documento (l'uso nel preambolo genera errori fatali di compilazione).
 % - Non supporta alcun tipo di nidificazione.
 % - Tipograficamente, è idoneo solo per gli elementi gerarchici di massimo livello, come i capitoli (\chapter) nelle class book (libro), o in quelle basate su
 %   di essa, come HKNdocument. L'uso di \include per le sezioni (\section) ad esempio, è altamente sconsigliato, poiché frammetnerebbe molto la lettura e l'estetica
 %   del documento, a causa dei grandi spazi vuoti generati dai i salti di pagina che il comando richiama. Proprio per lo stesso motivo, l'uso di \include in class
-%   che non supportano i capitoli (\chapter), come article, è altamente sconsigliata.
+%   che non supportano i capitoli (\chapter), come article, è altamente sconsigliata. Si usi \include{} in tal caso.
 %
 % NOTA: Estensione del file? TASSATIVAMENTE OMESSA. Ingannerebbe il compilatore, che potrebbe cercare di gestire file anomali, come "file.tex.tex", o peggio ancora
 % "file.tex.aux" (ricorda che \include genera file ausiliari concatenando l'estensione .aux al nome fornito) compromettendo il funzionamento di \includeonly
@@ -60,4 +64,4 @@
 %
 % 0. NOTA GENERALE SUI PERCORSI: È fondamentale utilizzare sempre lo slash (/) come separatore per le directory (es. cartella/file.tex), indipendentemente
 % dal sistema operativo in uso. In LaTeX, il backslash (\) è strettamente riservato all'invocazione dei comandi e causerebbe un errore di sintassi.
-% ==============================================================================
+% ======================================================================================================================

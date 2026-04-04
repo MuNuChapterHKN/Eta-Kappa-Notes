@@ -22,14 +22,15 @@
 % notes/elettronica-di-base-randazzo/MainAppendices, che vengono richiamati nel codice tramite il comando \input{}. In questo modo il main risulta più pulito
 % ed asciutto, meglio organizzato e di più semplice navigazione. Infatti nelle varie sezioni del preambolo erano stati aggiunti numerosi commenti esplicativi
 % e note tecniche utili alla comprensione del codice. Per ulteriori spiegazione sulla modularità, si rimanda al file MainAppendices/00.2_ModularityExplained.tex.
+% Qui si tenga solo a mente che è ALTAMENTE SCONSIGLIATO usare spazi nel percorso dei file, e usare \include in modo indiscriminato.
 
-\input{MainAppendices/00.1_MagicCommentsExpained.tex}   % Spiegazione MAGIC COMMENTS, con particolare riferimento a % !TEX root, e consigli di utilizzo. Puro commento, non contiene codice, importato solo per consistenza.
-\input{MainAppendices/00.2_ModularityExplained.tex}     % Spiegazione GESTIONE DELLA MODULARITÀ DEL DOCUMENTO: \input vs \include. Puro commento, non contiene codice, importato solo per consistenza.
-\input{MainAppendices/01_Packages.tex}                  % PACCHETTI (PACKAGES) Importati e loro spiegazione. NOTA: alcuni pacchetti sono caricati direttamente dalla custom class HKNdocument.
-\input{MainAppendices/02_CustomMacros.tex}              % CUSTOM MACROS (COMMANDS) DEFINITE, e loro spiegazione. NOTA: alcune custom macros sono definite direttamente dalla custom class HKNdocument.
-\input{MainAppendices/03_OverridenMacros.tex}           % CUSTOM MACROS (COMMANDS) OVERRIDE, cioè comandi preesistenti in LaTeX o nei pacchetti importati, che vengono ridefiniti per adattarli alle esigenze del documento.
-                                                        % NOTA: alcuni override avvengono direttamente dalla custom class HKNdocument.
-\input{MainAppendices/04_GlobalSettings.tex}            % GLOBAL SETTINGS, ovvero impostazioni globali che agiscono su tutto il documento.
+\input{chapters/00.1_MainAppendices/00.1_MagicCommentsExpained.tex}     % Spiegazione MAGIC COMMENTS, con particolare riferimento a % !TEX root, e consigli di utilizzo. Puro commento, non contiene codice, importato solo per consistenza.
+\input{chapters/00.1_MainAppendices/00.2_ModularityExplained.tex}       % Spiegazione GESTIONE DELLA MODULARITÀ DEL DOCUMENTO: \input vs \include. Puro commento, non contiene codice, importato solo per consistenza.
+\input{chapters/00.1_MainAppendices/01_Packages.tex}                    % PACCHETTI (PACKAGES) Importati e loro spiegazione. NOTA: alcuni pacchetti sono caricati direttamente dalla custom class HKNdocument.
+\input{chapters/00.1_MainAppendices/02_CustomMacros.tex}                % CUSTOM MACROS (COMMANDS) DEFINITE, e loro spiegazione. NOTA: alcune custom macros sono definite direttamente dalla custom class HKNdocument.
+\input{chapters/00.1_MainAppendices/03_OverridenMacros.tex}             % CUSTOM MACROS (COMMANDS) OVERRIDE, cioè comandi preesistenti in LaTeX o nei pacchetti importati, che vengono ridefiniti per adattarli alle esigenze del documento.
+                                                                        % NOTA: alcuni override avvengono direttamente dalla custom class HKNdocument.
+\input{chapters/00.1_MainAppendices/04_GlobalSettings.tex}              % GLOBAL SETTINGS, ovvero impostazioni globali che agiscono su tutto il documento.
 
 
 % ______________________________________________________________________ METADATI DEL DOCUMENTO ______________________________________________________________________
@@ -45,7 +46,7 @@
 
 \begin{document}
 % ATTENZIONE: Non serve scrivere \maketitle o \tableofcontents!
-% La custom class HKNdocument stampa copertina, licenza e indice in automatico qui.
+% La custom class HKNdocument stampa copertina, licenza e indice in automatico appena è richiamata.
 
 
 % \include{chapters/first-chapter}
