@@ -5,5 +5,95 @@
 % Per modificare il comportamente della custom class HKNdocument senza toccarne
 % il codice.
 
+% ==============================================================================
+% NOTA: COS'È IL PRE-PREAMBOLO (Direttive di Inizializzazione Anticipata)
+% ==============================================================================
+% POSIZIONE:
+% È la porzione di codice situata DOPO subito dopo gli eventuali Magic Comments
+% dell'editor, ma PRIMA della dichiarazione della classe (\documentclass).
+%
+% SCOPO E DEFINIZIONE:
+% Il Pre-Preambolo è un ambiente "sterile". In questa fase, il motore LaTeX
+% è appena stato avviato: non conosce ancora le dimensioni della pagina,
+% i font o la struttura del documento. Lo scopo di questa sezione è agire
+% sulla gestione delle dipendenze in memoria, depositando istruzioni che
+% il compilatore dovrà ricordare ed eseguire in un secondo momento.
+% Si utilizza principalmente per patching, o per controllo di alcune dipendenze,
+% per workarounds, o per modificare globalmente il comporamente di alcuni
+% elementi.
+%
+% CASI D'USO COMUNI:
+% Poiché in questa zona è vietato inserire testo visibile, formattazioni
+% o comandi come \usepackage, si utilizzano solo primitive a basso livello,
+% in precisione è possibile usare solo un ristretto insieme di comandi.
+% Comunque i casi d'uso più comuni sono i seguenti:
+%
+% 1. Iniezione di opzioni (\PassOptionsToPackage{...}{...}):
+%    Permette di forzare o aggiungere opzioni a pacchetti che verranno
+%    caricati più avanti e "alla cieca" dalla classe di documento (es.
+%    per evitare errori di "Option clash").
+% 2. Architettura del PDF (\DocumentMetadata{...}):
+%    Per configurare l'infrastruttura profonda del file (es. creazione
+%    di PDF/A per l'archiviazione a lungo termine o PDF accessibili).
+% 3. Controlli di sicurezza e debug (\NeedsTeXFormat, \listfiles):
+%    Per imporre una versione minima del compilatore o tracciare nel file
+%    di log tutti i percorsi esatti dei pacchetti letti dal sistema.
+%
+% ==============================================================================
+
 \PassOptionsToPackage{normalem}{ulem}   % Fix per Bug Overfull hbox in
                                         %bibliografia causato dal pacchetto ulem
+
+
+% ==============================================================================
+% BUGFIX: OVERFULL HBOX IN BIBLIOGRAFIA E CONFLITTO PACCHETTO ULEM
+% ==============================================================================
+% COMANDO: \PassOptionsToPackage{normalem}{ulem}
+% POSIZIONE CORRETTA: Pre-Preambolo (Rigorosamente PRIMA di \documentclass)
+%
+% 1. IL PROBLEMA (OVERFULL \HBOX IN BIBLIOGRAFIA)
+% Durante la compilazione, i titoli lunghi dei libri nella bibliografia
+% causavano gravi warning di "Overfull \hbox", sbordando oltre il margine
+% destro della pagina. Inoltre, i titoli apparivano sottolineati anziché
+% nel classico corsivo tipografico standard.
+%
+% 2. LA CAUSA (SOVRASCROTTIRA DI \EMPH)
+% La custom class del progetto (HKNdocument.cls) carica internamente il
+% pacchetto 'ulem' tramite il comando \RequirePackage{ulem}. Di default,
+% questo pacchetto sovrascrive i comandi standard \emph e \em, sostituendo
+% il corsivo con la sottolineatura continua, precisamente sostituendoli con
+% lo stesso comando \uline propsto dal pacchetto ulem stesso. Questo vincolo
+% rigido impedisce al motore di sillabazione di LaTeX di spezzare la
+% frase a fine riga quado viene usato \emph, in quanto è generato come un box
+% insecabile, generando l'errore di overfull.
+%
+% 3. LA SOLUZIONE E L'EFFETTO DI 'NORMALEM'
+% L'opzione 'normalem' (Normal Emphasis) istruisce il pacchetto 'ulem' a
+% non sovrascrivere il comportamento di \emph, ripristinando i corsivi
+% originali e, di conseguenza, la corretta sillabazione a fine riga.
+% Questo non causa alcuna perdita di features, visto che \uline è sempre
+% provvisto dal pacchetto.
+%
+% 4. NESSUN EFFETTO COLLATERALE NELLA RISOLUZIONE DEL BUG
+% Analizzando la classe HKNdocument.cls, si evince che il pacchetto ulem
+% è stato caricato dal project manager al solo scopo di definire la macro
+% \myuline. I corsivi della classe sono stati realizzati in modo sicuro tramite
+% \textit. Questa iniezione è quindi priva di effetti collaterali: corregge il
+% bug della bibliografia senza alterare in alcun modo l'estetica o le macro
+% progettate per l'associazione.
+%
+% 5. PERCHE' NEL PRE-PREAMBOLO? (LA GESTIONE DELLA MEMORIA)
+% Questo comando deve stare prima del \documentclass. Se posizionato nel
+% preambolo standard, LaTeX lo ignorerebbe o andrebbe in crash ("Option
+% clash"), perché la classe avrebbe già caricato il paccheto ulem in memoria.
+% Posizionandolo nel Pre-Preambolo, si lascia un "post-it" al compilatore:
+% quando la classe chiamerà ulem, LaTeX gli inietterà di nascosto l'opzione
+% 'normalem', aggirando i blocchi di sistema.
+%
+% 6. ALTRA SOLUZIONE NON PRATICA: MODIFICARE LA CUSTOM CLASS
+% Ovviamente per risovlere basterebbe modificare la custom class HKNdocument.cls
+% aggiunenddo l'opzione 'normalem' al comando \RequirePackage{ulem}. Tuttavia
+% questa soluzione invaliderebbe l'uncità dei file della classe pensata per il
+% progetto. Tuttavia si tratta di un bug meritevole di correzione in generale,
+% attraverso una pull-request.
+% ==============================================================================
