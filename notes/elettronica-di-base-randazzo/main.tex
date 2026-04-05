@@ -1,11 +1,13 @@
 % -------------------------------- MAGIC COMMENTS SECTION: CONFIGURAZIONE EDITOR ---------------------------------------
 % !TEX root = main.tex
 
-% La precedente riga è un "Magic comment" che specifica all'IDE il file principale del progetto, da considerare come root per la compilazione, necessario
-% per lanciare la compilazione dai file secondari (es. quelli inclusi tramite \input o \include) senza errori. Nel main.tex è superfluo, ma è stato comunque
-% inserito per coerenza e consistenza, e per volontà del project manager che lo ha posto come utile indicazione.
-% Per ulteriori spiegazioni sui Magic Comments, ho scritto un'ampia guida su di essi con spiegazioni su utilizzo e ruolo, con particolare riferimento
-% a "!TEX root", trasferita in un file dedicato (MainAppendices/00.1_MagicCommentsExpained.tex), tra l'altro imporato a seguire per consistenza (vedi preambolo).
+% La precedente riga è un "Magic comment" che specifica all'IDE il file principale del progetto, da considerare come
+% root per la compilazione, necessario per lanciare la compilazione dai file secondari (es. quelli inclusi tramite
+% \input o \include) senza errori. Nel main.tex è superfluo, ma è stato comunque inserito per coerenza e consistenza, e
+% per volontà del project manager che lo ha posto come utile indicazione.
+% Per ulteriori spiegazioni sui Magic Comments, ho scritto un'ampia guida su di essi con spiegazioni su utilizzo e
+% ruolo, con particolare riferimento a "!TEX root", trasferita in un file dedicato
+% (MainAppendices/00.1_MagicCommentsExpained.tex), tra l'altro imporato a seguire per consistenza (vedi preambolo).
 
 % ----------------------- PRE-PREAMBLE SECTION: DIRETTIVE DI INIZIALIZZAZIONE ANTICIPATA: START ------------------------
 % Per modificare il comportamente della custom class HKNdocument senza toccarne il codice. Ulteriori spiegazioni su
@@ -18,28 +20,46 @@
 
 \documentclass[italian]{HKNdocument}
 
-% ATTENZIONE: il progetto usa una classe custom per i documenti. Tutta la sua dichiarazione è presenta nella cartella "Eta-Kappa-Notes\lib".
-% Questa classe custom in particolare richiama numerosi package, che vengono elencati e spiegati a seguire.
+% ATTENZIONE: il progetto usa una classe custom per i documenti. Tutta la sua dichiarazione è presenta nella cartella
+% "Eta-Kappa-Notes\lib". Questa classe custom in particolare richiama numerosi package, che vengono elencati e spiegati
+% a seguire.
 
 % --------------------------------------------------- PREAMBLE: START --------------------------------------------------
 
-% NOTA: lo spazio che intercorre tra \documentclass{} e \begin{document} è detto preambolo del documento, e qui vanno aggiunti i pacchetti e dichiarate
-% le custom macros (commands). Questo perché vanno usati all'interno del documento, e devono essere tutti noti prima che inizi.
-% Inoltre per la custom class "HKNdocument" vanno dichiarati i metadati per poter generare la copertina, che è la prima cosa fatta appena iniziato il documento.
+% NOTA: lo spazio che intercorre tra \documentclass{} e \begin{document} è detto preambolo del documento, e qui vanno
+% aggiunti i pacchetti e dichiarate le custom macros (commands). Questo perché vanno usati all'interno del documento, e
+% devono essere tutti noti prima che inizi.
+% Inoltre per la custom class "HKNdocument" vanno dichiarati i metadati per poter generare la copertina, che è la prima
+% cosa fatta appena iniziato il documento.
 
-% NOTA: STRATEGIA DI SUDDIVISIONE MODULARE DEL CODICE DEL PREAMBOLO: in particolare è stato separato in più file salvati nella cartella
-% notes/elettronica-di-base-randazzo/MainAppendices, che vengono richiamati nel codice tramite il comando \input{}. In questo modo il main risulta più pulito
-% ed asciutto, meglio organizzato e di più semplice navigazione. Infatti nelle varie sezioni del preambolo erano stati aggiunti numerosi commenti esplicativi
-% e note tecniche utili alla comprensione del codice. Per ulteriori spiegazione sulla modularità, si rimanda al file MainAppendices/00.2_ModularityExplained.tex.
-% Qui si tenga solo a mente che è ALTAMENTE SCONSIGLIATO usare spazi nel percorso dei file, e usare \include in modo indiscriminato.
+% NOTA: STRATEGIA DI SUDDIVISIONE MODULARE DEL CODICE DEL PREAMBOLO: in particolare è stato separato in più file salvati
+% nella cartella notes/elettronica-di-base-randazzo/MainAppendices, che vengono richiamati nel codice tramite il comando
+% \input{}. In questo modo il main risulta più pulito ed asciutto, meglio organizzato e di più semplice navigazione.
+% Infatti nelle varie sezioni del preambolo erano stati aggiunti numerosi commenti esplicativi e note tecniche utili
+% alla comprensione del codice. Per ulteriori spiegazione sulla modularità, si rimanda al file
+% MainAppendices/00.2_ModularityExplained.tex. Qui si tenga solo a mente che è ALTAMENTE SCONSIGLIATO usare spazi nel
+% percorso dei file, e usare \include in modo indiscriminato.
 
-\input{chapters/00.1_MainAppendices/00.1_MagicCommentsExpained.tex}     % Spiegazione MAGIC COMMENTS, con particolare riferimento a % !TEX root, e consigli di utilizzo. Puro commento, non contiene codice, importato solo per consistenza.
-\input{chapters/00.1_MainAppendices/00.2_ModularityExplained.tex}       % Spiegazione GESTIONE DELLA MODULARITÀ DEL DOCUMENTO: \input vs \include. Puro commento, non contiene codice, importato solo per consistenza.
-\input{chapters/00.1_MainAppendices/01_Packages.tex}                    % PACCHETTI (PACKAGES) Importati e loro spiegazione. NOTA: alcuni pacchetti sono caricati direttamente dalla custom class HKNdocument.
-\input{chapters/00.1_MainAppendices/02_CustomMacros.tex}                % CUSTOM MACROS (COMMANDS) DEFINITE, e loro spiegazione. NOTA: alcune custom macros sono definite direttamente dalla custom class HKNdocument.
-\input{chapters/00.1_MainAppendices/03_OverridenMacros.tex}             % CUSTOM MACROS (COMMANDS) OVERRIDE, cioè comandi preesistenti in LaTeX o nei pacchetti importati, che vengono ridefiniti per adattarli alle esigenze del documento.
-                                                                        % NOTA: alcuni override avvengono direttamente dalla custom class HKNdocument.
-\input{chapters/00.1_MainAppendices/04_GlobalSettings.tex}              % GLOBAL SETTINGS, ovvero impostazioni globali che agiscono su tutto il documento.
+\input{chapters/00.1_MainAppendices/00.1_MagicCommentsExpained.tex}
+% Spiegazione MAGIC COMMENTS, con particolare riferimento a % !TEX root, e consigli di utilizzo.
+% Puro commento, non contiene codice, importato solo per consistenza.
+\input{chapters/00.1_MainAppendices/00.2_ModularityExplained.tex}
+% Spiegazione GESTIONE DELLA MODULARITÀ DEL DOCUMENTO: \input vs \include.
+% Puro commento, non contiene codice, importato solo per consistenza.
+\input{chapters/00.1_MainAppendices/01_Packages.tex}
+% PACCHETTI (PACKAGES) Importati e loro spiegazione.
+%NOTA: alcuni pacchetti sono caricati direttamente dalla custom class HKNdocument.
+\input{chapters/00.1_MainAppendices/02_CustomMacros.tex}
+% CUSTOM MACROS (COMMANDS) DEFINITE, e loro spiegazione.
+%NOTA: alcune custom macros sono definite direttamente dalla custom class HKNdocument.
+\input{chapters/00.1_MainAppendices/03_OverridenMacros.tex}
+% CUSTOM MACROS (COMMANDS) OVERRIDE, cioè comandi preesistenti in LaTeX o nei pacchetti importati, che vengono
+% ridefiniti per adattarli alle esigenze del documento.
+% NOTA: alcuni override avvengono direttamente dalla custom class HKNdocument.
+\input{chapters/00.1_MainAppendices/04_GlobalSettings.tex}
+% GLOBAL SETTINGS, ovvero impostazioni globali che agiscono su tutto il documento.
+
+
 
 
 % _______________________________________________ METADATI DEL DOCUMENTO _______________________________________________
@@ -71,6 +91,8 @@
                         % NOTA: è già chiamato dalla customclass HKNdocument, con un hook \AfterEndDocument{}, ma si
                         % tratta di un interruttore di stato idempotente in senso informatico: chiamarlo più volte
                         % consecutivamente non causa problemi, ed equivale a chiamarlo solo la prima volta.
+                        % Per ulteriori informazioni, vedi file chiamato a seguire con \input:
+                        % 00.2_Bibliography/Bibliography_Call_Settings_Explanation.tex
 
 \input{chapters/00.2_Bibliography/Bibliography_Call_Settings_Explanation.tex}   % Biblliografia: self-eplanatory
 

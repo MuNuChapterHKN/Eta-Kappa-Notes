@@ -1,3 +1,24 @@
+% --- MAGIC COMMENTS: CONFIGURAZIONE EDITOR --- (vedi main.tex per riferimenti e spiegazioni) ---
+% !TEX root = ../../main.tex
+
+% _____________________________________________________ BIBLIOGRAFIA ___________________________________________________
+
+\begin{comment}     NEL FILE PACKAGES SONO STATE RIPORTATE LE SEGUENTI ISTRUZIONI, RELATIVE ALLA BIBLIOGRFIA.
+% --- PACCHETTI PER BIBLIOGRAFIA E PER GESTIONE SMART DEGLI APICI ---
+\usepackage{biblatex}               % Pacchetto per la gestione avanzata della bibliografia, miglior standard attuale
+\usepackage{csquotes}               % Richiesto da biblatex per la gestione intelligente delle virgolette e degli apici
+                                    % nelle citazioni bibliografiche. Garantisce che le citazioni siano formattate
+                                    % correttamente in base alla lingua del documento (es. virgolette italiane « »).
+
+\addbibresource{chapters/00.2_Bibliography/HKN_ElnBiliography.bib}
+% File (Database bibliografico) contentnente tutte le fonti bibliografiche di interesse per il progetto.
+% ATTENZIONE: il file viene importato nel main.tex con il comando \input. Tieni a mente che TeX è un linguaggio
+% Espansore di macro: quindi il codice è come se fosse scritto nel main.tex, e per questo motivo è importante che i
+% percorsi siano riferti alla posizione del main.tex.
+\end{comment}
+
+% \backmatter inserito prima della chiamata di questo file. Inoltre vedi spiegazioni a riguardo nel commento che segue.
+
 \nocite{*}              % Opzione di biblatex per far stampare in bibliografia tutte le fonti presenti nel database
                         % bibliografico (file .bib)
 \printbibliography      % Stampa la bibliografia
