@@ -49,3 +49,4 @@
 {"rule":"ER_01_002","sentence":"^\\QAlcune di esse funzionano in particolare anche grazie ai file di configurazione del progetto (latexmkrc, settings.json).\\E$"}
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qnative), centrandola, pescando il file rispettivamente dalla cartella \"res/\"., \"res/svg/\" o \"res/drawio/\".\\E$"}
 {"rule":"UNPAIRED_BRACKETS","sentence":"^\\Q(0.8 sta per larga 80Ecco, per questi comandi NON SERVE SPECIFICARE I PERCORSI!\\E$"}
+{"rule":"DOUBLE_PUNCTUATION","sentence":"^\\QI comandi di stato (, , ) sono \"Interruttori Idempotenti\".\\E$"}

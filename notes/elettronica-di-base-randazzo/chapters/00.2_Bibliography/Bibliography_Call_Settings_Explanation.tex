@@ -4,6 +4,7 @@
 % _____________________________________________________ BIBLIOGRAFIA ___________________________________________________
 
 \begin{comment}     NEL FILE PACKAGES SONO STATE RIPORTATE LE SEGUENTI ISTRUZIONI, RELATIVE ALLA BIBLIOGRFIA.
+
 % --- PACCHETTI PER BIBLIOGRAFIA E PER GESTIONE SMART DEGLI APICI ---
 \usepackage{biblatex}               % Pacchetto per la gestione avanzata della bibliografia, miglior standard attuale
 \usepackage{csquotes}               % Richiesto da biblatex per la gestione intelligente delle virgolette e degli apici
@@ -15,6 +16,7 @@
 % ATTENZIONE: il file viene importato nel main.tex con il comando \input. Tieni a mente che TeX è un linguaggio
 % Espansore di macro: quindi il codice è come se fosse scritto nel main.tex, e per questo motivo è importante che i
 % percorsi siano riferti alla posizione del main.tex.
+
 \end{comment}
 
 % \backmatter inserito prima della chiamata di questo file. Inoltre vedi spiegazioni a riguardo nel commento che segue.
@@ -22,3 +24,68 @@
 \nocite{*}              % Opzione di biblatex per far stampare in bibliografia tutte le fonti presenti nel database
                         % bibliografico (file .bib)
 \printbibliography      % Stampa la bibliografia
+
+\begin{comment}     NOTA IMPORTANTE - BUG DI OVERFULL \HBOX IN BIBLIOGRAFIA CAUSATO DAL PACCHETTO ULEM
+
+    Per le informazioni complete su questo bug, la sua causa e la soluzione adottata, si rimanda al file
+    00.0_EarlyInitializationDirectives.tex, dove è stata inserita una spiegazione dettagliata e completa.
+    In Sintesi: ulem sovrascrive il comando \emph, usato da BibLaTeX per formattare i titoli in bibliografia, chiudendo
+    le parole enfatizzate in un box insecabile. Se il titolo è lungo, il box non può essere spezzato su più righe,
+    causando l'overfull, con i titoli che sbordano oltre il margine destro.
+    Si è risolto semplicemente impedendo a ulem di sovrascrivere \emph tramite l'opzione 'normalem, nel pre-preambolo.
+
+\end{comment}
+
+\begin{comment}     NOTA IMPORTANTE SULLA GESTIONE DELLA BIBLIOGRAFIA
+
+==============================================================================
+ARCHITETTURA DI IMPAGINAZIONE E GESTIONE DELLA BIBLIOGRAFIA
+==============================================================================
+1. GESTIONE DEGLI STATI NELLA CUSTOM CLASS (HKNdocument.cls)
+La classe HKNdocument gestisce automaticamente le transizioni di stato
+del libro (frontmatter, mainmatter, backmatter) sfruttando un'architettura
+a eventi (Event-Driven) tramite hook, ossia punti di iniezione di codice.
+
+- Frontmatter e Mainmatter:
+  * Hook usato: \AtBeginDocument
+  * Funzionamento: Nell'istante in cui si compila \begin{document}, la
+    classe inietta \frontmatter (numeri romani, no capitoli), genera il
+    frontespizio, la licenza e l'indice. Subito dopo, innesca \mainmatter
+    (numeri arabi e capitoli attivi) per iniziare gli appunti.
+
+- Backmatter:
+  * Hook usato: \AfterEndDocument
+  * Funzionamento: Quando si compila \end{document}, l'hook sospende lo
+    spegnimento di LaTeX, inietta \backmatter e carica il file condiviso
+    _postamble.tex.
+
+------------------------------------------------------------------------------
+2. LA SCELTA ARCHITETTURALE SULLA BIBLIOGRAFIA
+Tipograficamente, la bibliografia appartiene al Backmatter. Poiché la
+custom class attiva il \backmatter internamente richiamando il file
+_postamble.tex, la soluzione "teorica" perfetta sarebbe inserire
+\printbibliography direttamente all'interno di quel file.
+
+Tuttavia, si è preferito NON farlo per questioni di compatibilità e version
+control. Il file _postamble.tex è un file centralizzato del Project Manager.
+Modificarlo per gestire esigenze locali inquinerebbe la repository e
+causerebbe conflitti nei branch degli altri membri del team.
+
+------------------------------------------------------------------------------
+3. LA SOLUZIONE LOCALE: INTERRUTTORI IDEMPOTENTI
+Per stampare la bibliografia nel main.tex in modo corretto senza toccare i
+file di progetto, richiamiamo manualmente il comando \backmatter subito
+prima di \printbibliography.
+
+Perché il sistema non va in crash con due chiamate a \backmatter?
+I comandi di stato (\frontmatter, \mainmatter, \backmatter) sono
+"Interruttori Idempotenti". Eseguirli più volte consecutive produce
+esattamente lo stesso risultato della prima esecuzione.
+
+Quando si innescherà l'hook finale del PM (\AfterEndDocument), esso chiamerà
+nuovamente \backmatter. A quel punto, LaTeX si limiterà a "spegnere un
+interruttore già spento", ignorando la seconda operazione in modo silente
+e totalmente sicuro.
+==============================================================================
+
+\end{comment}
