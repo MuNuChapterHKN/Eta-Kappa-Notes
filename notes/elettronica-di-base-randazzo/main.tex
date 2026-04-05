@@ -1,4 +1,4 @@
-% --- MAGIC COMMENTS: CONFIGURAZIONE EDITOR ---
+% -------------------------------- MAGIC COMMENTS SECTION: CONFIGURAZIONE EDITOR ---------------------------------------
 % !TEX root = main.tex
 
 % La precedente riga è un "Magic comment" che specifica all'IDE il file principale del progetto, da considerare come root per la compilazione, necessario
@@ -7,12 +7,21 @@
 % Per ulteriori spiegazioni sui Magic Comments, ho scritto un'ampia guida su di essi con spiegazioni su utilizzo e ruolo, con particolare riferimento
 % a "!TEX root", trasferita in un file dedicato (MainAppendices/00.1_MagicCommentsExpained.tex), tra l'altro imporato a seguire per consistenza (vedi preambolo).
 
+% ----------------------- PRE-PREAMBLE SECTION: DIRETTIVE DI INIZIALIZZAZIONE ANTICIPATA: START ------------------------
+% Per modificare il comportamente della custom class HKNdocument senza toccarne il codice. Ulteriori spiegazioni su
+% questa sezione fornite nel file importato a seguire con \input.
+
+\input{chapters/00.1_MainAppendices/00.0_EarlyInitializationDirectives.tex}
+
+% -------------------------------------------------- PRE-PREAMBLE: END -------------------------------------------------
+% _________________________________________________ CLASS DECLARTATION _________________________________________________
+
 \documentclass[italian]{HKNdocument}
 
 % ATTENZIONE: il progetto usa una classe custom per i documenti. Tutta la sua dichiarazione è presenta nella cartella "Eta-Kappa-Notes\lib".
 % Questa classe custom in particolare richiama numerosi package, che vengono elencati e spiegati a seguire.
 
-% ------------------------------------------------------------------------- PREAMBLE: START -----------------------------------------------------------------------------
+% --------------------------------------------------- PREAMBLE: START --------------------------------------------------
 
 % NOTA: lo spazio che intercorre tra \documentclass{} e \begin{document} è detto preambolo del documento, e qui vanno aggiunti i pacchetti e dichiarate
 % le custom macros (commands). Questo perché vanno usati all'interno del documento, e devono essere tutti noti prima che inizi.
@@ -33,7 +42,7 @@
 \input{chapters/00.1_MainAppendices/04_GlobalSettings.tex}              % GLOBAL SETTINGS, ovvero impostazioni globali che agiscono su tutto il documento.
 
 
-% ______________________________________________________________________ METADATI DEL DOCUMENTO ______________________________________________________________________
+% _______________________________________________ METADATI DEL DOCUMENTO _______________________________________________
 
 \title{Elettronica di Base}
 \shorttitle{Elettronica}
@@ -41,8 +50,8 @@
 \docdate{Primo semestre 2025/2026}
 \docversion{0.1}
 
-% ------------------------------------------------------------------------- PREAMBLE: END -------------------------------------------------------------------------------
-% ------------------------------------------------------------------------ DOCUMENT: START -----------------------------------------------------------------------------
+% --------------------------------------------------- PREAMBLE: END ----------------------------------------------------
+% -------------------------------------------------- DOCUMENT: START ---------------------------------------------------
 
 \begin{document}
 % ATTENZIONE: Non serve scrivere \maketitle o \tableofcontents!
@@ -57,4 +66,7 @@
 
 \end{document}
 
-% ------------------------------------------------------------------------ DOCUMENT: END -----------------------------------------------------------------------------
+% --------------------------------------------------- DOCUMENT: END ----------------------------------------------------
+
+% -------------------------------------------------- POSTAMBLE: START --------------------------------------------------
+% --------------------------------------------------- POSTAMBLE: END ---------------------------------------------------

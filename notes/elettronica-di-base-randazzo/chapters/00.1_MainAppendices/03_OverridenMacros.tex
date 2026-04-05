@@ -11,20 +11,22 @@
     Un comando si modifica con \renewcommand{cmd}{def}, che non fa altro che riscriverne la macro.
 
     --- METADATI (Titolo e Autori) ---
-    \title{...}        % Invece di limitarsi a dichiarare il titolo, ora lo memorizza in una variabile interna per poterlo stampare con stili diversi nella copertina personalizzata.
-    \author{...}       % Modificato per supportare più autori in sequenza: se richiami \author{} più volte, li concatena automaticamente inserendo una virgola tra l'uno e l'altro.
+    \title{...}         % Invece di limitarsi a dichiarare il titolo, ora lo memorizza in una variabile interna per poterlo stampare con stili diversi nella copertina personalizzata.
+    \author{...}        % Modificato per supportare più autori in sequenza: se richiami \author{} più volte, li concatena automaticamente inserendo una virgola tra l'uno e l'altro.
 
     --- COPERTINA E INTESTAZIONI ---
-    \maketitle         % Stravolge completamente l'estetica base di LaTeX: annulla la copertina standard per generare il frontespizio ufficiale con loghi, revisori, versione e data.
-    \headrule          % (Comando del pacchetto fancyhdr) Sovrascrive la riga superiore dell'intestazione, spezzandola in due segmenti separati per lasciare spazio al logo centrale.
+    \maketitle          % Stravolge completamente l'estetica base di LaTeX: annulla la copertina standard per generare il frontespizio ufficiale con loghi, revisori, versione e data.
+    \headrule           % (Comando del pacchetto fancyhdr) Sovrascrive la riga superiore dell'intestazione, spezzandola in due segmenti separati per lasciare spazio al logo centrale.
 
     --- GESTIONE DEI CAPITOLI E DELLE PAGINE BIANCHE ---
-    \clearpage         % Sovrascrive il salto pagina base: impone la regola \thispagestyle{empty} per assicurarsi che un'eventuale pagina bianca generata non abbia numeri o intestazioni residue.
-    \cleardoublepage   % Fa la stessa cosa di \clearpage, ma per l'impaginazione fronte-retro (evitando pagine sinistre vuote ma con l'intestazione stampata).
-    \chaptermark{...}  % Modifica il modo in cui il motore registra i nomi dei capitoli in memoria, permettendo all'intestazione di pagina di catturarli correttamente.
+    \clearpage          % Sovrascrive il salto pagina base: impone la regola \thispagestyle{empty} per assicurarsi che un'eventuale pagina bianca generata non abbia numeri o intestazioni residue.
+    \cleardoublepage    % Fa la stessa cosa di \clearpage, ma per l'impaginazione fronte-retro (evitando pagine sinistre vuote ma con l'intestazione stampata).
+    \chaptermark{...}   % Modifica il modo in cui il motore registra i nomi dei capitoli in memoria, permettendo all'intestazione di pagina di catturarli correttamente.
 
     --- STILE TIPOGRAFICO ---
-    \ULdepth           % (Variabile del pacchetto ulem) Sostituisce la distanza standard della sottolineatura, abbassandola a 1.8pt per far funzionare bene il comando \myuline.
+    \ULdepth            % (Variabile del pacchetto ulem) Sostituisce la distanza standard della sottolineatura, abbassandola a 1.8pt per far funzionare bene il comando \myuline.
+    \emph               % Sovrascritto dal pacchetto ulem, che lo sostituisce con \uline, che sottolinea invece di mettere in corsivo.
+                        % FIXATO: ha cauato un bug di Overfull nella bibliografia. Vedi file 00.0_EarlyInitializationDirectives.tex per spiegazioni.
 
     --- NUMERAZIONE AUTOMATICA (Modificata in _preamble.tex) ---
     Numerazione Figure/Tabelle/Equazioni    % Anche se non usa renewcommand, sovrascrive la logica di base legandola ai capitoli (es. stamperà "Figura 1.1" invece di una numerazione globale come "Figura 15").
