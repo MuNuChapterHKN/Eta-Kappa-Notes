@@ -44,17 +44,15 @@
   // LTeX+ (LanguageTool)
   // Orthography and grammar checker: only supports one language at a time, but is more powerful than Code Spell Checker
   // (see below), which only supports orthography. Here set to Italian, in order to set language automatically ofr whoever contributes to the project.
-
   "ltex.language": "it",
 
   // GitLens Extension
-  // Ho rimosso "blocks" per evitare i suggerimenti fantasma vicino agli \include del file main.tex, fastidiosissimi.
-  // Questi suggerimenti sono quelli dedl tipo "2 authors (You and one other)". Lasciandoli accesi per document e
-  // containers, se ne ottiene uno solo all'inizio del documento, e poi uno per i grandi contenitori logici, come
-  // \begin{document}, eccetera.
+  // Ho rimosso "containers" e "blocks" per evitare i suggerimenti fantasma vicino agli \include del file main.tex,
+  // fastidiosissimi. Questi suggerimenti sono quelli dedl tipo "2 authors (You and one other)". Lasciandoli accesi per
+  // document se ne ottiene uno solo all'inizio del documento. La soluzione è stata togliere "containers" precisamente,
+  // essendo i containers blocchi logici principali.
   "gitlens.codeLens.scopes": [
-      "document",
-      "containers"
+      "document"
   ],
 
   // Code Spell Checker
