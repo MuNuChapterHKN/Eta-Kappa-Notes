@@ -17,10 +17,29 @@
     RIEPILOGO MACRO (COMANDI) CUSTOM E AMBIENTI DEFINITI DALLA CLASSE HKNdocument E _preamble.tex
     NOTA: non possono essere ridichiarati con \newcommand{cmd}{def}, ma possono essere aggiornati con \renewcommand{cmd}{def}
 
+    Il progetto HKN è stato programmato in modo da offrire alcune custom macro,
+    grazie alla custom class HKNdocument (HKNdocument.cls, _preamble.tex,
+    _postamble.tex). Alcune di esse funzionano in particolare anche grazie ai
+    file di configurazione del progetto (latexmkrc, settings.json).
+
     --- INSERIMENTO IMMAGINI FACILITATO (da _preamble.tex) ---
     \addfigure[Didascalia]{nomefile}{0.8}       % Inserisce un'immagine posizionandola precisamente dov'è citata (passa l'opzione [H]: exactly here) e centrandola, pescando il file dalla cartella "res/". 0.8 sta per larga 80% della larghezzad del testo (si può cambiare).
     \addsvg[Didascalia]{nomefile}{0.8}          % Inserisce un'immagine vettoriale SVG precisamente dov'è citata (passa l'opzione [H]: exactly here) e centrandola, pescando il file dalla cartella "res/svg/". 0.8 sta per larga 80% della larghezzad del testo (si può cambiare).
     \adddrawio[Didascalia]{nomefile}{0.8}       % Inserisce uno schema grafico creato con Draw.io precisamente dov'è citata (passa l'opzione [H]: exactly here) e centrandola, esportato in SVG dalla cartella "res/drawio/". 0.8 sta per larga 80% della larghezzad del testo (si può cambiare).
+
+    Nuova spiegazione:
+    Altro non sono che Wrapper dei comandi \includegraphics{} e \includesvg{}
+    dei pacchetti graphicx e svg, pensati per facilitare l'inserimento delle
+    immagini.
+    Questi comandi inseriscono un'immagine posizionandola precisamente dove
+    sono chiamati (passano l'opzione [H]: exactly here, del pacchetto float, più
+    forte e robusta delle opzioni "h" o "h!" native), centrandola, pescando il
+    file rispettivamente dalla cartella "res/"., "res/svg/" o "res/drawio/".
+    (0.8 sta per larga 80% della larghezzad del testo, si può cambiare).
+    Ecco, per questi comandi NON SERVE SPECIFICARE I PERCORSI! Li cercano in
+    automatico nelle cartelle dedicate: basta specificare il nome del file, in
+    particolare SENZA ESTENSIONE (le macro gestiscono automaticamente anche
+    quella: per graphics la omettono, per svg l'aggiungono).
 
     --- BOX COLORATI PER LA TEORIA (da HKNdocument.cls) ---
     NOTA: questi riquadri speciali non sono generati a partire dagli ambienti offerti dal package amsthm, bensì sono una soluzione completamente personalizzata

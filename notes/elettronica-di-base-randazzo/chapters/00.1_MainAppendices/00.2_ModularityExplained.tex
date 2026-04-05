@@ -117,3 +117,56 @@
 % SINTASSI ERRATA:          \includeonly{"capitolo 1", "capitolo 2"}
 %
 % ==============================================================================
+
+
+% ==============================================================================
+% NOTA IMPORTANTE: POSIZIONE DI RIFERIMENTO PER I PERCORSI NEI FILE SECONDARI
+% ==============================================================================
+% --- PRINCIPIO FONDAMENTALE---
+% LaTeX, e TeX, sono linugaggi di tipo "Espansore di macro", cioè quando
+% incontrano un comando come \input{percorso/file.tex}, o anche come
+% \include{percorso/file}, ciò che fanno è sostituire la riga di comando in
+% questione, con tutto il codice di interesse (quello contenuto nei file, solo
+% questo per \input, più altre eventuali aggiunte ausiliarie, come nel caso di
+% \include). Il codice è in sostanza "srotolato" nella posizione stessa dei
+% comandi che lo chiamano.
+%
+% --- CONSEGUENZA TECNICA SULLA CHIAMATA DI FILE DA FILE SECONDARI ---
+% i percorsi dei file chiamati da comandi scritti all'interno di file secondari
+% (quelli importati tramite \input o \include), ad esempio con comandi come:
+%   - \addbibresource{}, per aggiungere database bibliografici .bib
+%   - \includegraphics{}, del pacchetto graphicx, per inserire immagini
+%   - \input{} stesso, per importare altri file di codice in modo annidato
+%   - OSS: l'uso annidato di \include non è consentito
+% Come conseguenza devono essere sempre riferiti alla posizione del main.tex,
+% e non alla posizione del file secondario in cui sono scritti.
+%
+% --- ECCEZIONE DEI MAGIC COMMENTS ---
+% I Magic Comments, come % !TEX root = ...main.tex, sono un'eccezione a questa
+% regola, in quanto sono interpretati direttamente dall'IDE, e non hanno a che
+% fare con il motore TeX: si tratta in precisione di istruzioni su come trattare
+% il singolo file in cui sono scritti: non sono macro da espandere.
+% Per questo motivo, nel caso dei magic comments che includono percorsi di file,
+% come % !TEX root stesso, i percorsi vanno invece riferiti alla posizione del
+% file in cui sono scritti, e non a quella del main.tex.
+%
+% --- ECCEZIONE DELLE CUSTOM MACRO DEFINITE NELLA CUSTOM CLASS HKNdocument ---
+% Il progetto HKN è stato programmato in modo da offire alcune macro per
+% inserire comodamente file di imamgini, grazie alla custom class HKNdocument,
+% e a tutti i vari file di configurazione (HKNdocument.cls, _preamble.tex,
+% _postamble.tex, latexmkrc, settings.json).
+% In precisione le macro custom relative all'inserimento di immagini sono le
+% seguenti, che altro non sono che Wrapper dei comandi \includegraphics{} e
+% \includesvg{} dei pacchetti graphicx e svg:
+%   - \addfigure[Didascalia]{nomefile}{0.8}
+%   - \addsvg[Didascalia]{nomefile}{0.8}
+%   - \adddrawio[Didascalia]{nomefile}{0.8}
+% Questi comandi inseriscono un'immagine posizionandola precisamente dove
+% sono chiamati (passano l'opzione [H]: exactly here), centrandola, pescando
+% il file ripsettivamente dalla cartella "res/"., "res/svg/" o "res/drawio/".
+% (0.8 sta per larga 80% della larghezzad del testo, si può cambiare).
+% Ecco, per questi comandi NON SERVE SPECIFICARE I PERCORSI! Li cercano in
+% automatico nelle cartelle dedicate: basta specificare il nome del file, in
+% particolare SENZA ESTENSIONE (le macro gestiscono automaticamente anche
+% quella: per graphics la omettono, per svg l'aggiungono).
+% ==============================================================================

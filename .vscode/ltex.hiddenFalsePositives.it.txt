@@ -46,3 +46,6 @@
 {"rule":"ST_01_005","sentence":"^\\QQuest'ultima passa gli argomenti testuali crudi esigendo il | \"pattern matching\" letterale ([#1]#2), un input grezzo che solo può recepire senza rompere la classe 'book'.\\E$"}
 {"rule":"DOUBLE_PUNCTUATION","sentence":"^\\Q| 2) (Capitoli numerati normali): | Inietta il comando #1..\\E$"}
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qnel file cclicense.tex) applicando il parametro esatto [parsep=0pt] per compattare al massimo il testo nelle clausole legali.\\E$"}
+{"rule":"ER_01_002","sentence":"^\\QAlcune di esse funzionano in particolare anche grazie ai file di configurazione del progetto (latexmkrc, settings.json).\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qnative), centrandola, pescando il file rispettivamente dalla cartella \"res/\"., \"res/svg/\" o \"res/drawio/\".\\E$"}
+{"rule":"UNPAIRED_BRACKETS","sentence":"^\\Q(0.8 sta per larga 80Ecco, per questi comandi NON SERVE SPECIFICARE I PERCORSI!\\E$"}
