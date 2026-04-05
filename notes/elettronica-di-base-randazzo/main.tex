@@ -51,22 +51,31 @@
 \docversion{0.1}
 
 % --------------------------------------------------- PREAMBLE: END ----------------------------------------------------
-% -------------------------------------------------- DOCUMENT: START ---------------------------------------------------
+% ------------------------------------------------ DOCUMENT BODY: START ------------------------------------------------
 
 \begin{document}
+% ------------------------------------------------- FRONTMATTER: START -------------------------------------------------
 % ATTENZIONE: Non serve scrivere \maketitle o \tableofcontents!
 % La custom class HKNdocument stampa copertina, licenza e indice in automatico appena è richiamata.
-
-
+% Inoltre successivamente attiva \mainmatter, che segna l'inizio del corpo principale del testo, e imposta la
+% numerazione dei capitoli e delle pagine in formato arabo.
+% -------------------------------------------------- FRONTMATTER: END --------------------------------------------------
+% ------------------------------------------------- MAINMATTER: START --------------------------------------------------
 % \include{chapters/first-chapter}
 % \include{chapters/second-chapter}
+% -------------------------------------------------- MAINMATTER: END ---------------------------------------------------
+% ------------------------------------------------- BACKMATTER: START --------------------------------------------------
+\backmatter             % Segna la fine del corpo principale del testo, e l'inizio della parte finale, dedicata a
+                        % contenuti speciali, che non devono essere numerati come capitoli, come biblbiografia,
+                        % appendici, inidici analitici,...
+                        % NOTA: è già chiamato dalla customclass HKNdocument, con un hook \AfterEndDocument{}, ma si
+                        % tratta di un interruttore di stato idempotente in senso informatico: chiamarlo più volte
+                        % consecutivamente non causa problemi, ed equivale a chiamarlo solo la prima volta.
 
-\nocite{*}                                  % Opzione di biblatex per far stampare in bibliografia tutte le fonti presenti nel database bibliografico (file .bib)
-\printbibliography                          % Stampa la bibliografia
+\input{chapters/00.2_Bibliography/Bibliography_Call_Settings_Explanation.tex}   % Biblliografia: self-eplanatory
 
+% -------------------------------------------------- BACKMATTER: END ---------------------------------------------------
 \end{document}
-
-% --------------------------------------------------- DOCUMENT: END ----------------------------------------------------
-
+% ------------------------------------------------- DOCUMENT BODY: END -------------------------------------------------
 % -------------------------------------------------- POSTAMBLE: START --------------------------------------------------
 % --------------------------------------------------- POSTAMBLE: END ---------------------------------------------------

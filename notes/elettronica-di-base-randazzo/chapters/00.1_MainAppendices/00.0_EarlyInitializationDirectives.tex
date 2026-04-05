@@ -96,4 +96,19 @@
 % questa soluzione invaliderebbe l'uncità dei file della classe pensata per il
 % progetto. Tuttavia si tratta di un bug meritevole di correzione in generale,
 % attraverso una pull-request.
+%
+% 7. ALTRE SOLUZIONI INTERESSANTI:
+% - Si avrebbe potuto risolvere anche sfruttando il comando \normalem del
+%   pacchetto ulem, che ripstina il comando \emph al suo comportamento normale,
+%   in due modi diversi:
+%   1.  Mettendolo prima della bibliografia:
+%       \normalem  % Comando: Ripristina \emph al suo stato originale (corsivo)
+%       \printbibliography
+%       \ULforem   % Comando: Riattiva la sottolineatura per \emph (se serve)ù
+%   2.  Sfruttando un hook, ossia un'iniezione di codice:
+%       \AtBeginBibliography{\normalem}     % lancia \normalem prima di stampare
+%                                           % la bibliografia
+% - In modo simile, si sarebbe potuto sfruttare un backup del comando \emph
+%   originale, fatto con \let\originalemph\emph nel pre-preambolo, per poi
+%   risovrascriverlo prima della bibliografia, con \let\emph\OriginalEmph.
 % ==============================================================================
