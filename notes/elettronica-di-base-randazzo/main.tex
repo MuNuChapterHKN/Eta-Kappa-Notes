@@ -4,8 +4,8 @@
 % La precedente riga è un "Magic comment" che specifica all'IDE il file principale del progetto, da considerare come root per la compilazione, necessario
 % per lanciare la compilazione dai file secondari (es. quelli inclusi tramite \input o \include) senza errori. Nel main.tex è superfluo, ma è stato comunque
 % inserito per coerenza e consistenza, e per volontà del project manager che lo ha posto come utile indicazione.
-% Per ulteriori spiegazioni sui Magic Comments, ho scritto un'ampia guida su di essi con spiegazioni su utilizzo e ruolo, con particolare riferimento a
-% !TEX root, trasferita in un file dedicato (MainAppendices/00.1_MagicCommentsExpained.tex), tra l'altro imporato a seguire per consistenza (vedi preambolo).
+% Per ulteriori spiegazioni sui Magic Comments, ho scritto un'ampia guida su di essi con spiegazioni su utilizzo e ruolo, con particolare riferimento
+% a "!TEX root", trasferita in un file dedicato (MainAppendices/00.1_MagicCommentsExpained.tex), tra l'altro imporato a seguire per consistenza (vedi preambolo).
 
 \documentclass[italian]{HKNdocument}
 
@@ -51,6 +51,9 @@
 
 % \include{chapters/first-chapter}
 % \include{chapters/second-chapter}
+
+\nocite{*}                                  % Opzione di biblatex per far stampare in bibliografia tutte le fonti presenti nel database bibliografico (file .bib)
+\printbibliography                          % Stampa la bibliografia
 
 \end{document}
 

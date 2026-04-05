@@ -5,10 +5,10 @@
 
 % Funzionalità aggiuntive o modifiche del comportamento standard di LaTeX
 
-% --- 00 PACCHETTI relativi a FUNZIONI BASE ---
+% --- PACCHETTI relativi a FUNZIONI BASE ---
 \usepackage{comment}                % [EXSTENTION] consente la creazione di commenti multilinea con l'enviroment "comment"
 
-% --- 01 PACCHETTI FORMATTAZIONE ---
+% --- PACCHETTI FORMATTAZIONE ---
 % Nota: quelli "commentati" sono già aggiunti dalla custom class HKNdocument. Li lascio perchè molto importanti.
 
 % \usepackage{lmodern}              % [PLUG & PLAY] [OVERRIDE] font vettoriali 100%, evita font accentati bitmap sgranati. Pacchetto plug & play non c'è altro da usare.
@@ -16,10 +16,22 @@
 % \usepackage[utf8]{inputenc}       % [PLUG & PLAY] [OVERRIDE] consente a LaTeX di leggere le lettere accentate, senza dover scrivere ad esempio "\'e" al posto di "è". Di solito è caricato nativamente nelle versioni recenti di LaTeX, ma meglio specificare.
 % \usepackage[italian]{babel}       % [PLUG & PLAY] [OVERRIDE] traduzione strutturale (termini associati al documento: capitolo, sezione, eccetera) in italiano, e sillabazione italiana.
 
-% --- 02 PACCHETTI PER FISICA ---
+% --- PACCHETTI PER BIBLIOGRAFIA E PER GESTIONE SMART DEGLI APICI ---
+\usepackage{biblatex}               % Pacchetto per la gestione avanzata della bibliografia, miglior standard attuale
+\usepackage{csquotes}               % Richiesto da biblatex per la gestione intelligente delle virgolette e degli apici
+                                    % nelle citazioni bibliografiche. Garantisce che le citazioni siano formattate
+                                    % correttamente in base alla lingua del documento (es. virgolette italiane « »).
+
+\addbibresource{chapters/00.2_Bibliography/HKN_ElnBiliography.bib}
+% File (Database bibliografico) contentnente tutte le fonti bibliografiche di interesse per il progetto.
+% ATTENZIONE: il file viene importato nel main.tex con il comando \input. Tieni a mente che TeX è un linguaggio
+% Espansore di macro: quindi il codice è come se fosse scritto nel main.tex, e per questo motivo è importante che i
+% percorsi siano riferti alla posizione del main.tex.
+
+% --- PACCHETTI PER FISICA ---
 \usepackage{siunitx}                % [EXTENSION] Per le unità di misura (es. \si{\ohm})
 
-% --- 03 PACCHETTI PER GRAFICA ---
+% --- PACCHETTI PER GRAFICA ---
 % \usepackage{circuitikz}             % [EXTENSION] Per disegnare i circuiti elettrici
 % \usepackage{pgfplots}               % [EXTENSION] Per i grafici matematici e di Bode
 
