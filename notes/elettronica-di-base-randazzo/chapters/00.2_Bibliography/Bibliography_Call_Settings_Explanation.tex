@@ -29,9 +29,10 @@
 
     Per le informazioni complete su questo bug, la sua causa e la soluzione adottata, si rimanda al file
     00.0_EarlyInitializationDirectives.tex, dove è stata inserita una spiegazione dettagliata e completa.
-    In Sintesi: ulem sovrascrive il comando \emph, usato da BibLaTeX per formattare i titoli in bibliografia, chiudendo
-    le parole enfatizzate in un box insecabile. Se il titolo è lungo, il box non può essere spezzato su più righe,
-    causando l'overfull, con i titoli che sbordano oltre il margine destro.
+    In Sintesi: il pacchetto ulem, utilizzato dalla custom class per creare il comando \myuline (sottolineatura speciale
+    interrotta per le parti basse delle lettere (p, g, q, j)) sovrascrive il comando \emph, usato da BibLaTeX per
+    formattare i titoli in bibliografia, chiudendo le parole enfatizzate in un box insecabile. Se il titolo è lungo,
+    il box non può essere spezzato su più righe, causando l'overfull, con i titoli che sbordano oltre il margine destro.
     Si è risolto semplicemente impedendo a ulem di sovrascrivere \emph tramite l'opzione 'normalem, nel pre-preambolo.
 
 \end{comment}

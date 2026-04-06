@@ -37,5 +37,5 @@ __pycache__/
 *.synctex(busy)
 
 # VSCode Settings
-# il seguente impedisce di caricare mail privata, contenuta in .mailmap.
-.mailmap
+# il seguente impedisce di caricare mail privata, contenuta in .mailmap_privato
+.mailmap_privato
