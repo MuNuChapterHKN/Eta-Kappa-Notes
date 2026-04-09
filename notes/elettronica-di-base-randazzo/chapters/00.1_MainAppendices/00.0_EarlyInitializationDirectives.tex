@@ -112,3 +112,43 @@
 %   originale, fatto con \let\originalemph\emph nel pre-preambolo, per poi
 %   risovrascriverlo prima della bibliografia, con \let\emph\OriginalEmph.
 % ==============================================================================
+
+\PassOptionsToPackage{english}{babel}   % Fix per Bilinguismo, non supportato
+                                        % nativamente da HKNDocument
+                                        % Carica inglese come lingua secondaria
+                                        % Necessario per Bibliografia bilingue
+
+% ==============================================================================
+% INIEZIONE DELLA LINGUA SECONDARIA (INGLESE) SENZA MODIFICA DELLA CUSTOM CLASS
+% ==============================================================================
+% L'istruzione \PassOptionsToPackage modifica la chiamata del pacchetto Babel,
+% che avviene nella custom class HKNdocument, chiamata da \documentclass.
+%
+% SCOPO: BIBLIOGRAFIA CONTENENTE FONTI BILINGUE
+% Questa pre-configurazione è un prerequisito tecnico necessario per il
+% pacchetto 'biblatex' (se inizializzato con il parametro 'autolang=other').
+% Assicura la disponibilità in memoria dei dizionari di sillabazione
+% (hyphenation) e delle stringhe di localizzazione anglosassoni, vincolanti per
+% il corretto parsing e rendering delle voci bibliografiche recanti il metadato
+% 'langid={english}'.
+%
+% IDEA DI FONDO:
+% Il comando inietta la lingua 'english' nella lista delle opzioni destinate
+% al pacchetto 'babel', disaccoppiando il caricamento dalle restrizioni della
+% classe custom, che prevede una sola lingua.
+%
+% WORKAROUND SFRUTTATO:
+% 1. La classe 'HKNdocument' implementa logiche condizionali (es. \ifx)
+%    basate sulla variabile \DocumentLanguage. Passare una lista concatenata di
+%    lingue direttamente alla classe corromperebbe l'esecuzione di tali script
+%    (inclusa la generazione del blocco licenze).
+% 2. Demandando l'opzione tramite \PassOptionsToPackage, il compilatore LaTeX
+%    memorizza l'argomento. Al momento dell'effettiva invocazione di 'babel'
+%    da parte della classe (es. \RequirePackage[italian]{babel}), avviene un
+%    merge delle opzioni.
+% 3. L'elenco finale risolto dal compilatore risulta essere [english, italian].
+%    In accordo alle direttive di 'babel', l'ultimo parametro definisce
+%    la Main Language del documento, lasciando le lingue precedenti disponibili
+%    in memoria come Secondary Languages.
+%
+% ============================================================================

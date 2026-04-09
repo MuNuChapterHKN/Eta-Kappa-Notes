@@ -16,6 +16,7 @@
 \input{chapters/00.1_MainAppendices/00.0_EarlyInitializationDirectives.tex}
 % Contiene sostanzialmente FIX e workaround per la Custom Class HKNdocument, fatti senza toccarne il codice.
 % FIX 1: Bug Critico di Overfull \hbox in bibliografia causato dal pacchetto ulem.
+% FIX 2: Supporto bilingue per babel e biblatex, non supportato nativamente da HKNdocument.
 
 % -------------------------------------------------- PRE-PREAMBLE: END -------------------------------------------------
 % _________________________________________________ CLASS DECLARTATION _________________________________________________
@@ -195,5 +196,61 @@ righe non sono commentate!
 % \lstset{style=hkn}
 %
 ------------------------------------------------------------------------------
+% PR 5: SUPPORTO BILINGUE PER BABEL E BIBLATEX
+%
+% PROBLEMA ARCHITETTURALE:
+% L'attuale implementazione della classe accetta una singola lingua passata
+% alla macro \DocumentLanguage. Questo impedisce a 'babel' di caricare in
+% memoria i pattern di sillabazione e le stringhe di localizzazione secondarie,
+% rompendo il rendering tipografico bilingue della bibliografia (necessario
+% quando si usa biblatex con autolang=other e si leggono i langid da .bib).
+% D'altra parte, forzare una lista (es. "english, italian") in \DocumentLanguage
+% corromperebbe i controlli \ifx interni (es. in cclicense.tex).
+%
+% Si propongono due architetture candidate per la risoluzione definitiva,
+% da implementare alla riga dell'attuale \RequirePackage[...]{babel}.
+%
+% --- OPZIONE A: MACRO ESPLICITA CON FALLBACK DI SICUREZZA---
+%
+% Introduzione di una variabile dedicata per la lingua secondaria. Per prevenire
+% crash critici in fase di compilazione causati dal parsing rigido di Babel
+% (che non tollera parametri vuoti nelle opzioni, es. "[, italian]"), la lingua
+% secondaria viene inizializzata come clone esatto di quella principale.
+%
+% IMPLEMENTAZIONE:
+% \def\DocumentLanguage{italian}
+% \def\DocumentSecondLanguage{\DocumentLanguage} % Fallback di sicurezza
+%
+% % [ ... eventuale parsing delle opzioni utente per sovrascrivere ... ]
+%
+% \RequirePackage[\DocumentSecondLanguage, \DocumentLanguage]{babel}
+%
+% PRO: Massima flessibilità, permette l'introduzione di terze lingue future.
+% CONTRO: Richiede l'aggiunta di nuove definizioni di opzioni (\DeclareOption)
+%         nella classe.
+%
+%
+%
+% --- OPZIONE B: AUTO-INVERSIONE CONDIZIONALE (Raccomandata - "Zero Config") ---
+%
+% Mantenimento della singola variabile \DocumentLanguage per non alterare in
+% alcun modo l'interfaccia utente (Backward Compatibility totale). Il pacchetto
+% babel viene invocato con entrambe le lingue hardcoded, ma l'ordine di
+% caricamento viene invertito dinamicamente in base alla classe principale.
+%
+% IMPLEMENTAZIONE:
+% \def\tempa{italian}
+% \ifx\DocumentLanguage\tempa
+%     % Se il documento è in italiano, carichiamo prima l'inglese (secondario)
+%     \RequirePackage[english, italian]{babel}
+% \else
+%     % Se il documento è in inglese, carichiamo prima l'italiano (secondario)
+%     \RequirePackage[italian, english]{babel}
+% \fi
+%
+% PRO:
+% 1. Incolume la logica di cclicense.tex e degli altri file inclusi.
+% 2. Nessuna azione o parametro aggiuntivo richiesto all'utente finale.
+% 3. Risolve nativamente e in modo trasparente i requisiti di biblatex.
 
 % --------------------------------------------------- POSTAMBLE: END ---------------------------------------------------
