@@ -5,24 +5,69 @@
 
 \begin{comment}     NEL FILE PACKAGES SONO STATE RIPORTATE LE SEGUENTI ISTRUZIONI, RELATIVE ALLA BIBLIOGRFIA.
 
-% --- PACCHETTI PER BIBLIOGRAFIA E PER GESTIONE SMART DEGLI APICI ---
-\usepackage{biblatex}               % Pacchetto per la gestione avanzata della bibliografia, miglior standard attuale
-\usepackage{csquotes}               % Richiesto da biblatex per la gestione intelligente delle virgolette e degli apici
-                                    % nelle citazioni bibliografiche. Garantisce che le citazioni siano formattate
-                                    % correttamente in base alla lingua del documento (es. virgolette italiane « »).
+    % --- PACCHETTI PER BIBLIOGRAFIA E PER GESTIONE SMART DEGLI APICI ---
+    \usepackage{biblatex}[backend=biber, autolang=other, style=ieee]
 
-\addbibresource{chapters/00.2_Bibliography/HKN_ElnBiliography.bib}
-% File (Database bibliografico) contentnente tutte le fonti bibliografiche di interesse per il progetto.
-% ATTENZIONE: il file viene importato nel main.tex con il comando \input. Tieni a mente che TeX è un linguaggio
-% Espansore di macro: quindi il codice è come se fosse scritto nel main.tex, e per questo motivo è importante che i
-% percorsi siano riferti alla posizione del main.tex.
+    BibLaTeX - GESTIONE AVANZATA DELLA BIBLIOGRAFIA
 
+    % BibLaTeX è un pacchetto per la gestione avanzata della bibliografia,
+    % standard moderno per la bibliografia in LaTeX.
+    % - backend=biber: Specifica il motore bibliografico da utilizzare per
+    %   l'elaborazione dei dati contenuti nel database bibliografico (.bib),
+    %   in questo caso generato con Zotero.
+    %   Nelle distribuzioni moderne di TeX, in precisione TeX Live, è già
+    %   impostato di default, tuttavia esplicitarlo è la best practice, e
+    %   garantisce la compatibilità anche con distribuzioni più datate.
+    %   Offre pieno supporto nativo al formato UTF-8 e algoritmi di ordinamento e
+    %   parsing molto più avanzati del legacy BibTeX.
+    %
+    % - autolang=other: Risolve i problemi di sillabazione della lingua nella
+    %   bibliografia, nel caso le fonti citate abbiano più lingue diverse.
+    %   È fondamentale che il campo "langid" nel database .bib sia esplicitato
+    %   correttamente, in quanto è il campo usato per selezionare come viene
+    %   trattata ogni voce della bibliografia.
+    %   Zotero trasforma la lingua in langid automaticamente, se è scritta
+    %   correttamente (codici ISO, o per esteso in inglese).
+    %   In precisione "other" crea un ambiente linguistico isolato per la singola
+    %   riga della bibliografia: adatta sia le regole di sillabazione che di
+    %   formattazione e di terminologia funzione della localizzazione (esempio:
+    %   Edition vs Edizione, a cura di vs edited by, eccetera) garantendo le
+    %   migliori impostazioni tipografiche per ogni voce.
+    %   Come alternativa si può usare "autolang=hyphen", che si limita solo alla
+    %   sillabazione multilingua, senza adattare il resto.
+    %
+    % - style=ieee: applica lo standard bibliografico dell'Institute of Electrical
+    %   and Electronics Engineers (numerico con parentesi quadre, titoli
+    %   formattati e abbreviazioni specifiche). In precisione:
+    %     * Citazioni testuali: numeriche tra parentesi quadre (es. [1]),
+    %     con accorpamento automatico per fonti multiple (es. [1]-[3]).
+    %     * Nomenclatura: autori indicati con iniziali del nome e cognome per
+    %       esteso (es. J. C. Maxwell).
+    %     * Tipografia dei titoli: titoli di articoli o paper racchiusi tra
+    %       virgolette, mentre i nomi di riviste, manuali e libri sono formattati
+    %       in corsivo.
+    %     * Ordinamento bibliografico: rigorosamente sequenziale, basato
+    %       sull'esatto ordine di comparsa nel testo (sorting 'none').
+    %       Se si forza la stampa delle fonti non citate, vengono elencate dopo
+    %       quelle citate, nell'ordine di comparsa nel database .bib.
+    %     * Dettagli tecnici: standardizzazione automatica della punteggiatura
+    %     e delle abbreviazioni specifiche (Vol., No., pp.).
+    %   È la scelta coerente e per l'identità del Mu Nu Chapter HKN.
+    %   (Nota: richiede che nel sistema sia installato 'biblatex-ieee', incluso
+    %   con TexLive. Se si usa una distribuzione diversa, lo si può installare da
+    %   terminale col comando "tlmgr install biblatex-ieee").
+
+    \usepackage{csquotes}               % Richiesto da biblatex per la gestione intelligente delle virgolette e degli apici
+                                        % nelle citazioni bibliografiche. Garantisce che le citazioni siano formattate
+                                        % correttamente in base alla lingua del documento (es. virgolette italiane « »).
 \end{comment}
 
 % \backmatter inserito prima della chiamata di questo file. Inoltre vedi spiegazioni a riguardo nel commento che segue.
 
 \nocite{*}              % Opzione di biblatex per far stampare in bibliografia tutte le fonti presenti nel database
-                        % bibliografico (file .bib)
+                        % bibliografico (file .bib). Secondo lo standard IEEE, non si dovrebbe usare, ed ogni fonte
+                        % dovrebbe essere citata almeno una volta nel testo.
+
 \printbibliography      % Stampa la bibliografia
 
 \begin{comment}     NOTA IMPORTANTE - BUG DI OVERFULL \HBOX IN BIBLIOGRAFIA CAUSATO DAL PACCHETTO ULEM

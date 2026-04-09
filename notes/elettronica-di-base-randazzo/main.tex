@@ -14,6 +14,8 @@
 % questa sezione fornite nel file importato a seguire con \input.
 
 \input{chapters/00.1_MainAppendices/00.0_EarlyInitializationDirectives.tex}
+% Contiene sostanzialmente FIX e workaround per la Custom Class HKNdocument, fatti senza toccarne il codice.
+% FIX 1: Bug Critico di Overfull \hbox in bibliografia causato dal pacchetto ulem.
 
 % -------------------------------------------------- PRE-PREAMBLE: END -------------------------------------------------
 % _________________________________________________ CLASS DECLARTATION _________________________________________________
@@ -124,5 +126,74 @@
 Parte di Testo completamente ignorata dal compilatore! Come prova, queste prime
 righe non sono commentate!
 
+% Sistemare:
+% 1.
+% \myuline non sillaba, esempio a seguire da usare come test.
+% \chapter{prova}
+% \myuline{
+% lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur. Donec ut libero sed arcu vehicula ultricies a non tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut gravida lorem.
+% }
+
+
+
+
+
+% ==============================================================================
+% PROPOSTE DI PULL REQUEST (PR) PER IL TEMPLATE HKN - PROBLEMI RISCONTRATI
+% DURANTE ANALISI STATICA E DINAMICA DEL CODICE - SOLUZIONI PROPOSTE
+% Riepilogo delle ottimizzazioni architetturali e bugfix individuati
+% durante l'analisi statica del codice e il debugging.
+% ==============================================================================
+%
+% ------------------------------------------------------------------------------
+% PR 1: REFACTORING DEL MAGIC COMMENT E DEI PERCORSI ROOT
+% Problema: Il commento '% !TeX root = main.tex' inserito nel main.tex stesso
+% è un pleonasmo informatico (la radice di se stesso è... se stesso).
+% Soluzione Proposta: Trasformare la riga in un commento didattico. Spiegare
+% agli studenti che quel magic comment è utilissimo, ma va copiato in cima ai
+% file secondari (es. nella cartella /chapters). Bisogna inoltre specificare
+% l'importanza di usare il percorso relativo corretto per "risalire" la
+% cartella: es. '% !TeX root = ../main.tex'.
+%
+% ------------------------------------------------------------------------------
+% PR 2: BUGFIX CRITICO - IL SIDE-EFFECT ASSURDO DEL PACCHETTO ULEM
+% Problema: La classe HKNdocument.cls carica ciecamente \RequirePackage{ulem}.
+% Di default, ulem sovrscrive la macro semantica \emph trasformandola in \uline.
+% Questo rompe globalmente le bibliografie (generando Overfull \hbox) perché
+% il testo sottolineato ivi usato (\emph) non può essere sillabato a fine riga.
+% L'assurdità: ulem è stato importato dal PM al solo scopo di definire la macro
+% estetica \myuline. Questa macro non è MAI richiamata in tutta la custom
+% class, e l'utente finale non è nemmeno documentato della sua esistenza!
+% Un classico e grave "Effetto collaterale da dipendenza inutilizzata".
+% Soluzione Globale (Per la PR): Modificare HKNdocument.cls imponendo
+% l'opzione: \RequirePackage[normalem]{ulem}.
+% Soluzione Locale (Attualmente in uso in questo main): Iniezione a monte
+% tramite \PassOptionsToPackage{normalem}{ulem} nel Pre-Preambolo.
+%
+% ------------------------------------------------------------------------------
+% PR 3: STANDARDIZZAZIONE ARCHITETTURALE DELLA BIBLIOGRAFIA
+% Problema: Attualmente lo studente deve gestire la bibliografia a mano.
+% Soluzione Proposta: Applicare il pattern di disaccoppiamento Dati/Stile, già
+% in uso nel resto del progetto.
+% 1. In _preamble.tex: Inserire una configurazione standard di Ateneo,ad es:
+%    (\usepackage[style=ieee, backend=biber]{biblatex}).
+% 2. Nel main.tex dell'utente: Lasciare solo il db (\addbibresource{...}).
+% 3. In _postamble.tex: Automatizzare la stampa aggiungendo un controllo
+%    di sicurezza che sopprime i warning nel caso di bibliografia vuota:
+%    \ifnum\value{cite}>0
+%        \printbibliography[heading=bibintoc]
+%    \fi
+%
+% ------------------------------------------------------------------------------
+% PR 4: ATTIVAZIONE DELLO STILE DEI LISTATI (LISTINGS) DI DEFAULT
+% Problema: In HKNdocument.cls viene caricato il pacchetto listings e viene
+% definito lo stile "hkn" (\lstdefinestyle{hkn}{...}). Tuttavia, il project
+% manager ha dimenticato di renderlo attivo. Se un utente usa \begin{lstlisting}
+% senza specificare lo stile,otterrà il layout grezzo di base.
+% Soluzione Proposta: Aggiungere in HKNdocument.cls, subito sotto la
+% definizione dei colori, il comando di attivazione globale:
+% \lstset{style=hkn}
+%
+------------------------------------------------------------------------------
 
 % --------------------------------------------------- POSTAMBLE: END ---------------------------------------------------
