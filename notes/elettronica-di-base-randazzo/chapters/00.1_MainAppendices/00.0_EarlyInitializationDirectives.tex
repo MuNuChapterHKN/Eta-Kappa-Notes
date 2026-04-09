@@ -122,7 +122,9 @@
 % INIEZIONE DELLA LINGUA SECONDARIA (INGLESE) SENZA MODIFICA DELLA CUSTOM CLASS
 % ==============================================================================
 % L'istruzione \PassOptionsToPackage modifica la chiamata del pacchetto Babel,
-% che avviene nella custom class HKNdocument, chiamata da \documentclass.
+% che avviene nella custom class HKNdocument, chiamata da \documentclass,
+% iniettandovi l'opzione 'english', prima di quella passata dalla classe (o
+% dalle chiamate standard).
 %
 % SCOPO: BIBLIOGRAFIA CONTENENTE FONTI BILINGUE
 % Questa pre-configurazione è un prerequisito tecnico necessario per il
@@ -134,10 +136,10 @@
 %
 % IDEA DI FONDO:
 % Il comando inietta la lingua 'english' nella lista delle opzioni destinate
-% al pacchetto 'babel', disaccoppiando il caricamento dalle restrizioni della
-% classe custom, che prevede una sola lingua.
+% al pacchetto 'babel', disaccoppiando il caricamento di una lingua secondaria
+% dalle restrizioni intrinseche alla classe custom, che prevede una sola lingua.
 %
-% WORKAROUND SFRUTTATO:
+% WORKAROUND SFRUTTATO - MECCANISO DI RISOLUZIONE::
 % 1. La classe 'HKNdocument' implementa logiche condizionali (es. \ifx)
 %    basate sulla variabile \DocumentLanguage. Passare una lista concatenata di
 %    lingue direttamente alla classe corromperebbe l'esecuzione di tali script
@@ -151,4 +153,26 @@
 %    la Main Language del documento, lasciando le lingue precedenti disponibili
 %    in memoria come Secondary Languages.
 %
+% OSSERVAZIONE - SINERGIA TRA BABEL E MOTORE BIBLIOGRAFICO:
+%                       LOCALIZZAZIONE VS SILLABAZIONE
+% Questa pre-configurazione è un prerequisito tecnico necessario per il corretto
+% funzionamento generale del pacchetto 'biblatex', se inizializzato con
+% l'ozpione "autolang=other' o "autolang=hyphen".
+% In precisione hyphen chiama solo la sillabazione, mentre autolang chiama sia
+% la sillabazione che la localizzazione (spiegazione a seguire), nella lingua
+% specificata in "langid={...}" all'interno del database bibliografico (.bib).
+%
+% I due processi elaborativi separati da considerare sono:
+% - LOCALIZZAZIONE: La traduzione delle etichette bibliografiche (es. "6th Ed."
+%   invece di "6ª Ed.") è gestita autonomamente dai dizionari interni di
+%   'biblatex' tramite la lettura del metadato 'langid={english}'.
+% - SILLABAZIONE (Hyphenation): 'biblatex' non possiede algoritmi di andata
+%   a capo, ma demanda interamente questa operazione ai pattern caricati in
+%   memoria dal pacchetto 'babel'.
+%
+% Omettere l'istruzione \PassOptionsToPackage genera un'anomalia tipografica
+% silente: la bibliografia presenterà etichette correttamente localizzate in
+% inglese, ma il compilatore applicherà le regole di sillabazione italiane ai
+% testi anglosassoni, causando potenziali cesure errate (non grammaticali)
+% nell'andata a capo a fine riga.
 % ============================================================================
