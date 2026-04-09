@@ -68,7 +68,11 @@
                         % bibliografico (file .bib). Secondo lo standard IEEE, non si dovrebbe usare, ed ogni fonte
                         % dovrebbe essere citata almeno una volta nel testo.
 
-\printbibliography      % Stampa la bibliografia
+\printbibliography[heading=bibintoc]    % Stampa la bibliografia, generata come capitolo non numerato.
+                                        % L'opzione 'heading=bibintoc' include la bibliografia nell'indice generale,
+                                        % col suo numero di pagina ed il suo titolo, come se fosse un capitolo normale.
+                                        % Se si volesse cambiarne il nome, si può usare l'opzione:
+                                        % title={Nome Personalizzato}
 
 \begin{comment}     NOTA IMPORTANTE - BUG DI OVERFULL \HBOX IN BIBLIOGRAFIA CAUSATO DAL PACCHETTO ULEM
 
