@@ -61,7 +61,8 @@ numeri di macchina, ovvero che non sono numeri di macchina?
     viene approssimato con il simbolo \textit{Inf}, il processo di calcolo si arresta e l'utente
     riceve una segnalazione dell'avvenuto fenomeno. Pertanto è necessario evitare la regione di
     overflow, manipolando l'espressione che causa il fenomeno.
-    \item Quando un numero ha una mantissa con \textbf{più di $t$ cifre}, allora per la sua memorizzazione il calcolatore ricorre a una tecnica di arrotondamento.
+    \item Quando un numero ha una mantissa con \textbf{più di $t$ cifre}, allora per la sua memorizzazione il
+    calcolatore ricorre a una tecnica di arrotondamento.
 \end{itemize}
 
 La tecnica di arrotondamento generalmente utilizzata è la seguente:
@@ -126,6 +127,135 @@ Infatti, in questo caso, il valore di $|\overline{a\vphantom{\rule{0pt}{1.2ex}}}
 ``troppo piccolo'' rispetto ad $|\overline{a\vphantom{\rule{0pt}{1.2ex}}}_1|$ e non fornisce alcun
 contributo nella somma.
 
-\section{Cancellazione numerica}
+\section{Cifre significative e cancellazione numerica}
+
+Si supponga $N=10$ e che l'arrotondamento dei numeri reali venga effettuato con la tecnica di
+arrotondamento rounding to even. Allora vale la seguente definizione.
+\begin{definition}{Decimali corretti e cifre significative}
+    Sia $a=\left(-1\right)^s\,p\cdot10^q$ un numero reale e $\tilde{a}=\left(-1\right)^s\,\tilde{p}\cdot10^q$ una sua
+    approssimazione.
+    \begin{itemize}
+        \item Si dice che $\tilde{a}$ ha \textbf{$k$ decimali corretti} se
+        \[|a-\tilde{a}|\leq\frac1210^-k\]
+        \item Si dice che $\tilde{a}$ ha \textbf{$k$ cifre significative} se
+        \[|p-\tilde{p}|\leq\frac1210^-k\]
+        cioè se la mantissa $\tilde{p}$ di $\tilde{a}$ ha $k$ decimali corretti.
+    \end{itemize}
+\end{definition}
+
+\begin{observation}{Calcolo numero cifre significative}
+    Per calcolare il numero di cifre significative presenti in un'approssimazione è possibile
+    utilizzare l'errore relativo associato all'approssimazione $\tilde{a}$. Infatti, se
+    \[\frac{|a-\tilde{a}|}{|a|}=\frac{|p-\tilde{p}|}{|p|}\leq\frac1210^{-k}\]
+    allora $\tilde{a}$, in base alla definizione, ha $k$ oppure $k+1$ cifre significative.
+\end{observation}
+
+La cancellazione numerica è una delle conseguenze più gravi della rappresentazione con
+precisione finita dei reali. La cancellazione numerica può essere così definita.
+\begin{definition}{Cancellazione numerica}
+    Siano
+    \[a_1=\left(-1\right)^{s_1}\,p_1N^{q_1},\quad a_2=\left(-1\right)^{s_2}\,p_2N^{q_2}\]
+    due numeri reali e
+    \[\overline{a\vphantom{\rule{0pt}{1.2ex}}}_1=\left(-1\right)^{\overline{s}_1}\,
+    \overline{p\vphantom{\rule{0pt}{1.2ex}}}_1N^{\overline{q}_1},
+    \quad \overline{a\vphantom{\rule{0pt}{1.2ex}}}_2=\left(-1\right)^{\overline{s}_2}\,
+    \overline{p\vphantom{\rule{0pt}{1.2ex}}}_2N^{\overline{q}_2}\]
+    le rappresentazioni di macchina associate a essi, rispettivamente. La \textbf{cancellazione numerica}
+    consiste in una perdita di cifre della mantissa e si verifica quando si sottraggono due numeri di macchina
+    $\overline{a\vphantom{\rule{0pt}{1.2ex}}}_1$ e $\overline{a\vphantom{\rule{0pt}{1.2ex}}}_2$
+    \begin{itemize}
+        \item con lo stesso segno, ovvero $s_1=s_2$;
+        \item circa uguali, ovvero $q_1=q_2$ e $\overline{p\vphantom{\rule{0pt}{1.2ex}}}_1\approx
+        \overline{p\vphantom{\rule{0pt}{1.2ex}}}_2$;
+        \item almeno uno affetto da arrotondamento, ovvero $\overline{a\vphantom{\rule{0pt}{1.2ex}}}_1\ne p_1$
+        e/o $\overline{a\vphantom{\rule{0pt}{1.2ex}}}_2\ne p_2$.
+    \end{itemize}
+\end{definition}
+
+La cancellazione numerica può essere evitata in vari modi. Alcuni esempi sono attraverso la serie di
+Taylor o razionalizzando radici.
+
 \section{Condizionamento di un problema numerico}
+
+Nello studio della propagazione degli errori bisogna distinguere il ruolo del problema dal ruolo
+dell'algoritmo utilizzato per risolvere tale problema.
+
+A tale scopo si introducono le definizioni di problema numerico e algoritmo, e i corrispondenti
+concetti di condizionamento di un problema e stabilità di un algoritmo.
+\begin{definition}{Problema numerico}
+    Si definisce problema numerico una relazione funzionale $f$, del tipo $y=f(x)$ (\textbf{esplicita})
+    oppure $f(x,y)=0$ (\textbf{implicita}), tra i dati $x$ (\textbf{input}) e i risultati y (\textbf{output}).
+
+    I dati $x$ e i risultati $y$ devono essere rappresentabili da numeri, vettori o matrici di numeri
+    di dimensione finita.
+\end{definition}
+
+Sia $y=f(x)$ oppure $f(x,y)=0$ un generico problema numerico. Si denotino con
+\begin{itemize}
+    \item $\overline{x\vphantom{\rule{0pt}{1.2ex}}}$ una perturbazione dei dati $x$ in input;
+    \item $\overline{y\vphantom{\rule{0pt}{1.2ex}}}$ i risultati ottenuti a partire dai dati
+    $\overline{x\vphantom{\rule{0pt}{1.2ex}}}$ in \textbf{precisione infinita di calcolo}.
+\end{itemize}
+
+\begin{definition}{Problema ben condizionato}
+    Un problema numerico si dice \textbf{ben condizionato} se accade che l'errore relativo associato
+    a $\overline{y\vphantom{\rule{0pt}{1.2ex}}}$ è dello stesso ordine di grandezza dell'errore relativo
+    associato a $\overline{x\vphantom{\rule{0pt}{1.2ex}}}$ o minore:
+    \[\frac{||y-\overline{y\vphantom{\rule{0pt}{1.2ex}}}||}{||y||}\approx
+    \frac{||x-\overline{x\vphantom{\rule{0pt}{1.2ex}}}||}{||x||}\]
+    altrimenti, si dice \textbf{mal condizionato}.
+\end{definition}
+
+Pertanto, un problema è ben condizionato quando le perturbazioni nei dati non influenzano
+eccessivamente i risultati.
+
+Per studiare il condizionamento di un problema si possono determinare stime del tipo:
+\[\frac{||y-\overline{y\vphantom{\rule{0pt}{1.2ex}}}||}{||y||}\leq K(f,x)\,
+\frac{||x-\overline{x\vphantom{\rule{0pt}{1.2ex}}}||}{||x||}\]
+\begin{definition}{Numero di condizionamento}
+    Si definisce \textbf{numero di condizionamento} del problema il più piccolo valore di $K(f,x)$
+    per cui vale la suddetta disuguaglianza.
+\end{definition}
+Se $K$ non è eccessivamente grande, il problema è ben condizionato.
+\newpage
+
 \section{Stabilità di un algoritmo}
+
+\begin{definition}{Algoritmo}
+    Per \textbf{algoritmo} si intende una sequenza finita di operazioni (aritmetiche e non) che
+    consente di ottenere l'output di un problema a partire dai dati di input.
+\end{definition}
+
+Data un'aritmetica con precisione finita, si denotino con
+\begin{itemize}
+    \item $\overline{x\vphantom{\rule{0pt}{1.2ex}}}$ l'arrotondamento dei dati $x$ di input;
+    \item $\overline{y\vphantom{\rule{0pt}{1.2ex}}}$ i risultati dell'algoritmo ottenuti a partire
+    dai dati $\overline{x\vphantom{\rule{0pt}{1.2ex}}}$ in \textbf{precisione infinita di calcolo};
+    \item $\tilde{y}$ i risultati dell'algoritmo ottenuti a partire dai dati
+    $\overline{x\vphantom{\rule{0pt}{1.2ex}}}$ in \textbf{precisione finita di calcolo}.
+\end{itemize}
+
+Per giudicare la bontà di un algoritmo per la risoluzione di un problema, bisogna dunque confrontare
+la risposta $\tilde{y}$ con $\overline{y\vphantom{\rule{0pt}{1.2ex}}}$.
+\begin{definition}{Algoritmo numericamente stabile}
+    Un algoritmo si dice \textbf{numericamente stabile} se accade che l'errore relativo associato
+    al risultato $\tilde{y}$ ha lo stesso ordine di grandezza della precisione di macchina o minore
+    \[\frac{||\overline{y\vphantom{\rule{0pt}{1.2ex}}}-\tilde{y}||}
+    {\overline{y\vphantom{\rule{0pt}{1.2ex}}}}\approx\varepsilon_m\]
+    altrimenti, si dice \textbf{instabile}.
+\end{definition}
+
+Pertanto, un algoritmo è numericamente stabile quando la sequenza delle operazioni non amplifica
+eccessivamente gli errori di arrotondamento presenti nei dati.
+
+\begin{observation}{Differenza tra condizionamento e stabilità}
+    Il condizionamento è una \textbf{proprietà del problema matematico} e descrive quanto la soluzione varia al
+    variare dei dati di input. Esso dipende unicamente dal problema stesso ed è quindi \textbf{intrinseco
+    e non modificabile}: se piccole perturbazioni nei dati producono grandi variazioni nella soluzione,
+    il problema è mal condizionato indipendentemente dal metodo utilizzato.\\
+
+    La stabilità, invece, è una proprietà dell’algoritmo che si usa per risolvere il problema e
+    misura quanto gli errori introdotti durante i calcoli (ad esempio per arrotondamenti) vengono
+    propagati e amplificati. Essa dipende dalla struttura dell’algoritmo ed è quindi \textbf{controllabile e
+    migliorabile} scegliendo metodi numerici più adatti.
+\end{observation}
