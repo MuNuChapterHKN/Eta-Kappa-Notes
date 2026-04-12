@@ -37,12 +37,12 @@ Dato lo \textbf{spazio finito di memoria}, un calcolatore può memorizzare solo:
 \end{definition}
 
 L'\textbf{insieme dei numeri di macchina} è costituito da un numero finito di elementi ed è così definito:
-\[F=\{0\}\cup\{(-1)^{s}\,0\,.\,a_1\,a_2\,...\,a_t\cdot N^q,\quad 0\leq a_i<N,\quad a_1\ne0,\quad
+\[F=\{0\}\cup\{(-1)^{s}\,0\,.\,a_1\,a_2\,\dots\,a_t\cdot N^q,\quad 0\leq a_i<N,\quad a_1\ne0,\quad
 L\leq q\leq U\}\]
 Il più piccolo numero di macchina positivo (diverso dallo zero) appartenente a $F$ è
-\[m=0.\underbrace{10...0}_{t\text{ cifre}}\,\cdot\,N^L\]
+\[m=0.\underbrace{10\dots0}_{t\text{ cifre}}\,\cdot\,N^L\]
 Il più grande numero di macchina positivo appartenente a $F$ è
-\[M=0\,.\,\underbrace{N-1\,N-1\,...\,N-1}_{t\text{ cifre}}\,\cdot\,N^U\]
+\[M=0\,.\,\underbrace{N-1\,N-1\,\dots\,N-1}_{t\text{ cifre}}\,\cdot\,N^U\]
 \begin{definition}{Regioni di underflow e overflow}
     Si definisce \textbf{regione di underflow} l'insieme dei numeri reali diversi da zero e
     appartenenti a $(-m,m)$.
@@ -60,7 +60,7 @@ numeri di macchina, ovvero che non sono numeri di macchina?
     \item Quando, invece, il risultato di un'operazione appartiene alla \textbf{regione di overflow},
     viene approssimato con il simbolo \textit{Inf}, il processo di calcolo si arresta e l'utente
     riceve una segnalazione dell'avvenuto fenomeno. Pertanto è necessario evitare la regione di
-    overflow, manipolando l'espressione che causa il fenomeno.
+    overflow, riformulando l'espressione che causa il fenomeno.
     \item Quando un numero ha una mantissa con \textbf{più di $t$ cifre}, allora per la sua memorizzazione il
     calcolatore ricorre a una tecnica di arrotondamento.
 \end{itemize}
@@ -101,7 +101,7 @@ $\varepsilon=(\overline{a\vphantom{\rule{0pt}{1.2ex}}}-a)/a$, ove $\overline{a\v
 \[\overline{a\vphantom{\rule{0pt}{1.2ex}}}=a(1+\varepsilon),\quad |\varepsilon|\leq\varepsilon_m\]
 che esprime una relazione tra $\overline{a\vphantom{\rule{0pt}{1.2ex}}}$ e $a$.
 
-In un calcolatore non è possibile eseguire esattamente le operazione aritmetiche, ma solo le
+In un calcolatore non è possibile eseguire esattamente le operazioni aritmetiche, ma solo le
 cosiddette operazioni di macchina, che vengono rappresentate con i simboli $\oplus$, $\ominus$,
 $\otimes$ e $\oslash$.
 \begin{definition}{Operazione di macchina}
@@ -167,8 +167,8 @@ precisione finita dei reali. La cancellazione numerica può essere così definit
         \item con lo stesso segno, ovvero $s_1=s_2$;
         \item circa uguali, ovvero $q_1=q_2$ e $\overline{p\vphantom{\rule{0pt}{1.2ex}}}_1\approx
         \overline{p\vphantom{\rule{0pt}{1.2ex}}}_2$;
-        \item almeno uno affetto da arrotondamento, ovvero $\overline{a\vphantom{\rule{0pt}{1.2ex}}}_1\ne p_1$
-        e/o $\overline{a\vphantom{\rule{0pt}{1.2ex}}}_2\ne p_2$.
+        \item almeno uno affetto da arrotondamento, ovvero $\overline{a\vphantom{\rule{0pt}{1.2ex}}}_1\ne a_1$
+        e/o $\overline{a\vphantom{\rule{0pt}{1.2ex}}}_2\ne a_2$.
     \end{itemize}
 \end{definition}
 
@@ -201,8 +201,8 @@ Sia $y=f(x)$ oppure $f(x,y)=0$ un generico problema numerico. Si denotino con
     Un problema numerico si dice \textbf{ben condizionato} se accade che l'errore relativo associato
     a $\overline{y\vphantom{\rule{0pt}{1.2ex}}}$ è dello stesso ordine di grandezza dell'errore relativo
     associato a $\overline{x\vphantom{\rule{0pt}{1.2ex}}}$ o minore:
-    \[\frac{||y-\overline{y\vphantom{\rule{0pt}{1.2ex}}}||}{||y||}\approx
-    \frac{||x-\overline{x\vphantom{\rule{0pt}{1.2ex}}}||}{||x||}\]
+    \[\frac{\|y-\overline{y\vphantom{\rule{0pt}{1.2ex}}}\|}{\|y\|}\approx
+    \frac{\|x-\overline{x\vphantom{\rule{0pt}{1.2ex}}}\|}{\|x\|}\]
     altrimenti, si dice \textbf{mal condizionato}.
 \end{definition}
 
@@ -210,8 +210,8 @@ Pertanto, un problema è ben condizionato quando le perturbazioni nei dati non i
 eccessivamente i risultati.
 
 Per studiare il condizionamento di un problema si possono determinare stime del tipo:
-\[\frac{||y-\overline{y\vphantom{\rule{0pt}{1.2ex}}}||}{||y||}\leq K(f,x)\,
-\frac{||x-\overline{x\vphantom{\rule{0pt}{1.2ex}}}||}{||x||}\]
+\[\frac{\|y-\overline{y\vphantom{\rule{0pt}{1.2ex}}}\|}{\|y\|}\leq K(f,x)\,
+\frac{\|x-\overline{x\vphantom{\rule{0pt}{1.2ex}}}\|}{\|x\|}\]
 \begin{definition}{Numero di condizionamento}
     Si definisce \textbf{numero di condizionamento} del problema il più piccolo valore di $K(f,x)$
     per cui vale la suddetta disuguaglianza.
@@ -240,7 +240,7 @@ la risposta $\tilde{y}$ con $\overline{y\vphantom{\rule{0pt}{1.2ex}}}$.
 \begin{definition}{Algoritmo numericamente stabile}
     Un algoritmo si dice \textbf{numericamente stabile} se accade che l'errore relativo associato
     al risultato $\tilde{y}$ ha lo stesso ordine di grandezza della precisione di macchina o minore
-    \[\frac{||\overline{y\vphantom{\rule{0pt}{1.2ex}}}-\tilde{y}||}
+    \[\frac{\|\overline{y\vphantom{\rule{0pt}{1.2ex}}}-\tilde{y}\|}
     {\overline{y\vphantom{\rule{0pt}{1.2ex}}}}\approx\varepsilon_m\]
     altrimenti, si dice \textbf{instabile}.
 \end{definition}
