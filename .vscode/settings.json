@@ -47,5 +47,13 @@
   ],
 
   // Typst
-  "tinymist.outputPath": "$dir/build/$name"
+  "tinymist.outputPath": "$dir/build/$name",
+  "cSpell.enabledFileTypes": {
+    "latex": true
+  },
+  "cSpell.words": [
+    "floating",
+    "floating-point",
+    "point"
+  ]
 }

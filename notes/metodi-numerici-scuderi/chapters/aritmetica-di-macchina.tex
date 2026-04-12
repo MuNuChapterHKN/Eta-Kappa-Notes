@@ -1,0 +1,131 @@
+\chapter{Aritmetica di macchina}
+
+\section{Rappresentazione dei numeri}
+
+Di seguito verranno richiamati alcuni concetti fondamentali riguardanti
+l'aritmetica del calcolatore.
+\begin{definition}{Rappresentazione floating-point}
+    Si definisce \textbf{rappresentazione floating-point} di un numero reale $a$ la seguente
+    espressione
+    \[a=(-1)^{s} pN^{q},\quad s\in\{0,1\},\quad p\geq0\text{ reale},\quad q\text{ intero }\]
+    ove $N$ rappresenta la \textbf{base} del sistema di numerazione.
+\end{definition}
+
+\begin{definition}{Rappresentazione normalizzata}
+    La rappresentazione floating point $a=(-1)^{s} pN^{q}$ del numero reale $a$ si dice
+    \textbf{normalizzata} se $p$ soddisfa la condizione
+    \[N^{-1}\leq p<1\]
+    In tal caso, $p$ e $q$ sono univocamente determinati e
+    \begin{itemize}
+        \item il numero reale non negativo $p$ si definisce \textbf{mantissa} di $a$;
+        \item l'intero $q$ si definisce \textbf{esponente} oppure \textbf{caratteristica} di $a$.
+    \end{itemize}
+\end{definition}
+
+Per la memorizzazione di $a=(-1)^{s} pN^{q}$, con $N^{-1}\leq p<1$, su di un calcolatore è
+sufficiente memorizzare $s$, $p$ e $q$ della sua rappresentazione floating-point normalizzata.
+
+Dato lo \textbf{spazio finito di memoria}, un calcolatore può memorizzare solo:
+\begin{itemize}
+    \item mantisse con al più $t$ cifre;
+    \item esponenti in un intervallo $L\leq q\leq U$, con $L<0<U$ interi.
+\end{itemize}
+
+\begin{definition}{Numeri di macchina}
+    Si definiscono \textbf{numeri di macchina} i numeri con mantissa ed esponente esattamente
+    rappresentabili negli spazi a loro riservati dal calcolatore.
+\end{definition}
+
+L'\textbf{insieme dei numeri di macchina} è costituito da un numero finito di elementi ed è così definito:
+\[F=\{0\}\cup\{(-1)^{s}\,0\,.\,a_1\,a_2\,...\,a_t\cdot N^q,\quad 0\leq a_i<N,\quad a_1\ne0,\quad
+L\leq q\leq U\}\]
+Il più piccolo numero di macchina positivo (diverso dallo zero) appartenente a $F$ è
+\[m=0.\underbrace{10...0}_{t\text{ cifre}}\,\cdot\,N^L\]
+Il più grande numero di macchina positivo appartenente a $F$ è
+\[M=0\,.\,\underbrace{N-1\,N-1\,...\,N-1}_{t\text{ cifre}}\,\cdot\,N^U\]
+\begin{definition}{Regioni di underflow e overflow}
+    Si definisce \textbf{regione di underflow} l'insieme dei numeri reali diversi da zero e
+    appartenenti a $(-m,m)$.
+
+    Si definisce \textbf{regione di overflow} l'insieme dei numeri reali appartenenti a
+    $(-\infty,-M)\cup(M,+\infty)$.
+\end{definition}
+
+In un calcolatore come vengono ``trattati'' i numeri reali che non appartengono all'insieme $F$ dei
+numeri di macchina, ovvero che non sono numeri di macchina?
+\begin{itemize}
+    \item Quando un'operazione genera un numero appartenente alla \textbf{regione di underflow},
+    questo viene approssimato con lo zero, il processo di calcolo non si arresta e l'utente riceve
+    una segnalazione dell'avvenuto fenomeno.
+    \item Quando, invece, il risultato di un'operazione appartiene alla \textbf{regione di overflow},
+    viene approssimato con il simbolo \textit{Inf}, il processo di calcolo si arresta e l'utente
+    riceve una segnalazione dell'avvenuto fenomeno. Pertanto è necessario evitare la regione di
+    overflow, manipolando l'espressione che causa il fenomeno.
+    \item Quando un numero ha una mantissa con \textbf{più di $t$ cifre}, allora per la sua memorizzazione il calcolatore ricorre a una tecnica di arrotondamento.
+\end{itemize}
+
+La tecnica di arrotondamento generalmente utilizzata è la seguente:
+\begin{definition}{Tecnica di arrotondamento ``rounding to even''}
+    \textbf{Tecnica di arrotondamento ``rounding to even''}: la mantissa $p$ viene approssimata con
+    la mantissa di macchina $\overline{p\vphantom{\rule{0pt}{1.2ex}}}$ più vicina e se $p$ è
+    equidistante da due mantisse di macchina consecutive allora $p$ viene approssimata con quella
+    delle due che ha l'ultima cifra pari.
+\end{definition}
+
+In seguito con la notazione $\overline{a\vphantom{\rule{0pt}{1.2ex}}}$ verrà indicato il numero di
+macchina corrispondente ad $a$. Se $a$ è un numero di macchina, allora
+$a=\overline{a\vphantom{\rule{0pt}{1.2ex}}}$; altrimenti
+$a\approx\overline{a\vphantom{\rule{0pt}{1.2ex}}}$. In questo ultimo caso, vale la seguente
+definizione.
+\begin{definition}{Errore di arrotondamento}
+    Si definisce \textbf{errore di arrotondamento} l'errore che si commette quando si sostituisce
+    il numero reale $a\ne0$ con il corrispondente numero di macchina $\overline{a\vphantom{\rule{0pt}{1.2ex}}}$.
+    Per esso vale la seguente stima
+    \[\frac{|a-\overline{a\vphantom{\rule{0pt}{1.2ex}}}|}{|a|}\leq\frac{1}{2}N^{1-t}\]
+\end{definition}
+
+Si ricordano inoltre le seguenti definizioni.
+\begin{definition}{Epsilon e precisione di macchina}
+    Si definisce \textbf{epsilon di macchina} la quantità
+    \[eps=N^{1-t}\]
+    Si definisce \textbf{precisione di macchina} la quantità
+    \[\varepsilon_m=\frac12N^{1-t}\]
+\end{definition}
+
+La precisione di macchina è una costante caratteristica di ogni aritmetica floating-point; essa
+rappresenta il massimo errore relativo che si commette quando si approssima il numero reale $a$ con
+il corrispondente numero di macchina $\overline{a\vphantom{\rule{0pt}{1.2ex}}}$. Ponendo
+$\varepsilon=(\overline{a\vphantom{\rule{0pt}{1.2ex}}}-a)/a$, ove $\overline{a\vphantom{\rule{0pt}{1.2ex}}}$
+è il numero di macchina corrispondente al numero reale $a$, si deduce la seguente uguaglianza
+\[\overline{a\vphantom{\rule{0pt}{1.2ex}}}=a(1+\varepsilon),\quad |\varepsilon|\leq\varepsilon_m\]
+che esprime una relazione tra $\overline{a\vphantom{\rule{0pt}{1.2ex}}}$ e $a$.
+
+In un calcolatore non è possibile eseguire esattamente le operazione aritmetiche, ma solo le
+cosiddette operazioni di macchina, che vengono rappresentate con i simboli $\oplus$, $\ominus$,
+$\otimes$ e $\oslash$.
+\begin{definition}{Operazione di macchina}
+    L’\textbf{operazione di macchina} $\odot$ associa a due numeri di macchina
+    $\overline{a\vphantom{\rule{0pt}{1.2ex}}}_1$ e $\overline{a\vphantom{\rule{0pt}{1.2ex}}}_2$ un
+    terzo numero di macchina, ottenuto arrotondando l’esatto risultato dell’operazione in questione.
+    \[(\overline{a\vphantom{\rule{0pt}{1.2ex}}}_1\odot\overline{a\vphantom{\rule{0pt}{1.2ex}}}_2)=
+    \overline{\overline{a\vphantom{\rule{0pt}{1.2ex}}}_1\cdot\overline{a\vphantom{\rule{0pt}{1.2ex}}}_2}
+    =(\overline{a\vphantom{\rule{0pt}{1.2ex}}}_1\cdot\overline{a\vphantom{\rule{0pt}{1.2ex}}}_2)
+    (1+\varepsilon_\odot),\quad|\varepsilon_\odot|\leq\varepsilon_m\]
+\end{definition}
+
+Per le operazioni di macchina rimane valida la proprietà commutativa, ma in generale non valgono le
+proprietà associativa e distributiva. Per esempio, in generale vale
+\[(\overline{a\vphantom{\rule{0pt}{1.2ex}}}_1\oplus\overline{a\vphantom{\rule{0pt}{1.2ex}}}_2)\oplus
+\overline{a\vphantom{\rule{0pt}{1.2ex}}}_3\ne\overline{a\vphantom{\rule{0pt}{1.2ex}}}_1\oplus
+(\overline{a\vphantom{\rule{0pt}{1.2ex}}}_2\oplus\overline{a\vphantom{\rule{0pt}{1.2ex}}}_3)\]
+Inoltre, si ha
+\[\overline{a\vphantom{\rule{0pt}{1.2ex}}}_1\oplus\overline{a\vphantom{\rule{0pt}{1.2ex}}}_2=
+\overline{a\vphantom{\rule{0pt}{1.2ex}}}_1\quad\text{se}\quad|\overline{a\vphantom{\rule{0pt}{1.2ex}}}_2|
+<|\overline{a\vphantom{\rule{0pt}{1.2ex}}}_1|\,eps\]
+Infatti, in questo caso, il valore di $|\overline{a\vphantom{\rule{0pt}{1.2ex}}}_2|$ è
+``troppo piccolo'' rispetto ad $|\overline{a\vphantom{\rule{0pt}{1.2ex}}}_1|$ e non fornisce alcun
+contributo nella somma.
+
+\section{Cancellazione numerica}
+\section{Condizionamento di un problema numerico}
+\section{Stabilità di un algoritmo}
