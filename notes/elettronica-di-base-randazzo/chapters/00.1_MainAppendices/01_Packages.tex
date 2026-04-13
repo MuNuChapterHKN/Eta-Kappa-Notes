@@ -1,20 +1,29 @@
 % --- MAGIC COMMENTS: CONFIGURAZIONE EDITOR --- (vedi main.tex per riferimenti e spiegazioni) ---
 % !TEX root = ../../main.tex
 
-% ________________________________________________________________________________ PACKAGES ________________________________________________________________________________
+% ______________________________________________________ PACKAGES ______________________________________________________
 
 % Funzionalità aggiuntive o modifiche del comportamento standard di LaTeX
 
 % --- PACCHETTI relativi a FUNZIONI BASE ---
-\usepackage{comment}                % [EXSTENTION] consente la creazione di commenti multilinea con l'enviroment "comment"
+\usepackage{comment}                % [EXSTENTION] consente la creazione di commenti multilinea sfruttando l'enviroment
+                                    % "comment" con il comando \begin. Nota che il contenuto all'internod di questi
+                                    % blocchi di testo, non iniziando con "%", non è ignorato dal Parser di LTeX+, che
+                                    % quindi effettuerà la correzione grammaticale e ortografica anche su questi blocchi
 
 % --- PACCHETTI FORMATTAZIONE ---
 % Nota: quelli "commentati" sono già aggiunti dalla custom class HKNdocument. Li lascio perchè molto importanti.
 
-% \usepackage{lmodern}              % [PLUG & PLAY] [OVERRIDE] font vettoriali 100%, evita font accentati bitmap sgranati. Pacchetto plug & play non c'è altro da usare.
-% \usepackage[T1]{fontenc}          % [PLUG & PLAY] [OVERRIDE] aggiunge lettere accentate reali: LaTeX scriverà le lettere accentate come oggetti singoli, e non come caratteri modificati. Fondamentale per copia e incolla dal pdf compilato.
-% \usepackage[utf8]{inputenc}       % [PLUG & PLAY] [OVERRIDE] consente a LaTeX di leggere le lettere accentate, senza dover scrivere ad esempio "\'e" al posto di "è". Di solito è caricato nativamente nelle versioni recenti di LaTeX, ma meglio specificare.
-% \usepackage[italian]{babel}       % [PLUG & PLAY] [OVERRIDE] traduzione strutturale (termini associati al documento: capitolo, sezione, eccetera) in italiano, e sillabazione italiana.
+% \usepackage{lmodern}              % [PLUG & PLAY] [OVERRIDE] font vettoriali 100%, evita font accentati bitmap
+                                    % sgranati. Pacchetto plug & play non c'è altro da usare.
+% \usepackage[T1]{fontenc}          % [PLUG & PLAY] [OVERRIDE] aggiunge lettere accentate reali: LaTeX scriverà le
+                                    % lettere accentate come oggetti singoli, e non come caratteri modificati.
+                                    % Fondamentale per copia e incolla dal pdf compilato.
+% \usepackage[utf8]{inputenc}       % [PLUG & PLAY] [OVERRIDE] consente a LaTeX di leggere le lettere accentate,
+                                    % senza dover scrivere ad esempio "\'e" al posto di "è". Di solito è caricato
+                                    % nativamente nelle versioni recenti di LaTeX, ma meglio specificare.
+% \usepackage[italian]{babel}       % [PLUG & PLAY] [OVERRIDE] traduzione strutturale (termini associati al documento:
+                                    % capitolo, sezione, eccetera) in italiano, e sillabazione italiana.
 
 % --- PACCHETTI PER BIBLIOGRAFIA E PER GESTIONE SMART DEGLI APICI ---
 \usepackage[backend=biber, autolang=other, style=ieee]{biblatex}
@@ -72,6 +81,13 @@
 \usepackage{csquotes}               % Richiesto da biblatex per la gestione intelligente delle virgolette e degli apici
                                     % nelle citazioni bibliografiche. Garantisce che le citazioni siano formattate
                                     % correttamente in base alla lingua del documento (es. virgolette italiane « »).
+                                    % Fornisce inoltre utilissimi comandi per la gestione degli apici, come:
+                                    % - \enquote{text} per riportare il discorso diretto in funzione della lingua
+                                    %   selezionata con babel (es: sfrutta le caporali in italiano « »), ed in funzinone
+                                    %   del contesto semantico (es. se la citazione è all'interno di un'altra citazione,
+                                    %   la citazione di secondo livello, nidificata con le virgolette doppie normali "".
+                                    % - \enquote*{text} ignora il primo livello è usa sempre le virgolette doppie
+                                    %   normali "".
 
 \addbibresource{chapters/00.2_Bibliography/HKN_ElnBiliography.bib}
 % File (Database bibliografico) contentnente tutte le fonti bibliografiche di interesse per il progetto.
@@ -93,45 +109,87 @@
     NON inserirli di nuovo in main.tex con \usepackage per evitare conflitti!
 
     --- TIPOGRAFIA E LINGUA BASE (da HKNdocument.cls) ---
-    \usepackage[T1]{fontenc}                    % [PLUG & PLAY] [OVERRIDE]  Imposta la codifica europea dei font, fondamentale per stampare correttamente le lettere accentate italiane nel PDF e permettere il copia-incolla.
-    \usepackage[utf8]{inputenc}                 % [PLUG & PLAY] [OVERRIDE]  Permette di digitare direttamente da tastiera caratteri speciali e accenti (es. à, è, ì) riconoscendo la codifica UTF-8 del file sorgente.
-    \usepackage{lmodern}                        % [PLUG & PLAY] [OVERRIDE]  Carica i font vettoriali "Latin Modern", essenziali per mantenere il testo nitido e non sgranato anche ad alti livelli di zoom.
-    \usepackage[\DocumentLanguage]{babel}       % [PLUG & PLAY] [OVERRIDE]  Gestisce le regole tipografiche, le traduzioni automatiche (es. "Capitolo") e la corretta sillabazione per la lingua scelta (italiano o inglese).
-                                                %                           NOTA: il "\DocumentLanguage" è l'opzione passata alla document class custom HKNdocument, all'inizio del main.tex
+    \usepackage[T1]{fontenc}                    % [PLUG & PLAY] [OVERRIDE]  Imposta la codifica europea dei font,
+                                                % fondamentale per stampare correttamente le lettere accentate italiane
+                                                % nel PDF e permettere il copia-incolla.
+    \usepackage[utf8]{inputenc}                 % [PLUG & PLAY] [OVERRIDE]  Permette di digitare direttamente da
+                                                % tastiera caratteri speciali e accenti (es. à, è, ì) riconoscendo la
+                                                % codifica UTF-8 (unicode) direttamente dal file sorgente.
+                                                % Utile per non impazzire con i comandi per aggiungere apici.
+    \usepackage{lmodern}                        % [PLUG & PLAY] [OVERRIDE]  Carica i font vettoriali "Latin Modern",
+                                                % essenziali per mantenere il testo nitido e non sgranato anche ad alti
+                                                % livelli di zoom.
+    \usepackage[\DocumentLanguage]{babel}       % [PLUG & PLAY] [OVERRIDE]  Gestisce le regole tipografiche, le
+                                                % traduzioni automatiche (es. "Capitolo") e la corretta sillabazione per
+                                                % la lingua scelta (italiano o inglese).
+                                                % NOTA: il "\DocumentLanguage" è l'opzione passata alla document class
+                                                % custom HKNdocument, all'inizio del main.tex
 
     --- LAYOUT E IMPAGINAZIONE (da HKNdocument.cls) ---
-    \usepackage{geometry}           % [PLUG & PLAY] [OVERRIDE]  Configura fisicamente la pagina, impostando il formato A4 e forzando margini uniformi di 3 cm su tutti i lati per una lettura ariosa.
-    \usepackage{parskip}            % [PLUG & PLAY] [OVERRIDE]  Rimuove l'indentazione o rientro della prima riga (considerata antiestetica), e aggiunge automaticamente spazio verticale tra i paragrafi.
-    \usepackage{fancyhdr}           % [EXTENSION]   [OVERRIDE]  Permette la creazione di intestazioni e piè di pagina personalizzati (usati dalla classe per inserire loghi, pagina e titolo del capitolo).
+    \usepackage{geometry}           % [PLUG & PLAY] [OVERRIDE]  Configura fisicamente la pagina, impostando il formato
+                                    % A4 e forzando margini uniformi di 3 cm su tutti i lati per una lettura ariosa.
+    \usepackage{parskip}            % [PLUG & PLAY] [OVERRIDE]  Rimuove l'indentazione o rientro della prima riga
+                                    % (considerata antiestetica), e aggiunge automaticamente spazio verticale tra i
+                                    % paragrafi.
+    \usepackage{fancyhdr}           % [EXTENSION]   [OVERRIDE]  Permette la creazione di intestazioni e piè di pagina
+                                    % personalizzati (usati dalla classe per inserire loghi, pagina e titolo del
+                                    % capitolo).
 
     --- MATEMATICA E FISICA (da _preamble.tex) ---
-    \usepackage{amsmath}            % [EXTENSION] Il pacchetto fondamentale dell'American Mathematical Society per scrivere equazioni complesse, matrici e sistemi matematici.
-    \usepackage{amssymb}            % [EXTENSION] Aggiunge un'enorme libreria di simboli matematici avanzati (es. i simboli degli insiemi dei numeri reali o complessi).
-    \usepackage{amsthm}             % [EXTENSION] Fornisce gli ambienti standard per definire teoremi, dimostrazioni e lemmi matematici.
-    \usepackage{mathtools}          % [EXTENSION] [EXTENSION] Un'estensione di amsmath che risolve alcuni bug grafici e aggiunge strumenti avanzati per allineare le equazioni.
-    \usepackage{mleftright}         % [PLUG & PLAY] [OVERRIDE] [EXTENSION]  Ottimizza e corregge la spaziatura orizzontale automatica attorno alle parentesi che racchiudono frazioni o matrici alte.
+    \usepackage{amsmath}            % [EXTENSION] Il pacchetto fondamentale dell'American Mathematical Society per
+                                    % scrivere equazioni complesse, matrici e sistemi matematici.
+    \usepackage{amssymb}            % [EXTENSION] Aggiunge un'enorme libreria di simboli matematici avanzati (es. i
+                                    % simboli degli insiemi dei numeri reali o complessi).
+    \usepackage{amsthm}             % [EXTENSION] Fornisce gli ambienti standard per definire teoremi, dimostrazioni e
+                                    % lemmi matematici.
+    \usepackage{mathtools}          % [EXTENSION] [EXTENSION] Un'estensione di amsmath che risolve alcuni bug grafici e
+                                    % aggiunge strumenti avanzati per allineare le equazioni.
+    \usepackage{mleftright}         % [PLUG & PLAY] [OVERRIDE] [EXTENSION]  Ottimizza e corregge la spaziatura
+                                    % orizzontale automatica attorno alle parentesi che racchiudono frazioni o matrici
+                                    % alte.
 
     --- TABELLE ED ELENCHI (da _preamble.tex) ---
-    \usepackage{longtable}          % [EXTENSION] Permette la creazione di tabelle lunghe che si spezzano automaticamente e in modo pulito su più pagine.
-    \usepackage{array}              % [EXTENSION] [OVERRIDE] Estende le funzionalità delle tabelle, permettendo di definire larghezze precise per le colonne e allineamenti complessi.
-    \usepackage{booktabs}           % [EXTENSION] Standard editoriale per tabelle professionali: rimuove le linee verticali e introduce linee orizzontali di diverso spessore (\toprule, \midrule, \bottomrule).
-    \usepackage{enumitem}           % [EXTENSION] [OVERRIDE] Offre il controllo totale sugli elenchi puntati e numerati, permettendo di regolarne i margini e la spaziatura verticale.
+    \usepackage{longtable}          % [EXTENSION] Permette la creazione di tabelle lunghe che si spezzano
+                                    % automaticamente e in modo pulito su più pagine.
+    \usepackage{array}              % [EXTENSION] [OVERRIDE] Estende le funzionalità delle tabelle, permettendo di
+                                    % definire larghezze precise per le colonne e allineamenti complessi.
+    \usepackage{booktabs}           % [EXTENSION] Standard editoriale per tabelle professionali: rimuove le linee
+                                    % verticali e introduce linee orizzontali di diverso spessore (\toprule, \midrule,
+                                    % \bottomrule).
+    \usepackage{enumitem}           % [EXTENSION] [OVERRIDE] Offre il controllo totale sugli elenchi puntati e numerati,
+                                    % permettendo di regolarne i margini e la spaziatura verticale.
 
     --- GRAFICA E COLORI (da HKNdocument.cls e _preamble.tex) ---
-    \usepackage{xcolor}             % [EXTENSION] Il motore principale per definire, miscelare e applicare colori personalizzati al testo e agli sfondi.
-    \usepackage{tcolorbox}          % [EXTENSION] Un potente pacchetto grafico usato dalla classe per creare i riquadri arrotondati e colorati di definizioni ed esercizi.
-    \usepackage{graphicx}           % [EXTENSION] Il pacchetto standard e indispensabile per importare e ridimensionare immagini esterne (JPG, PNG, PDF).
-    \usepackage{svg}                % [EXTENSION] Permette di importare direttamente file vettoriali .svg (utilizzando Inkscape in background per la conversione).
-    \usepackage{float}              % [OVERRIDE] [EXTENSION] Aggiunge l'opzione [H] (exactly here) e [h] (here if possible, otherwise as usual) per forzare tabelle e figure a rimanere nel punto del testo in cui sono state scriaggiunte, senza lasciarle "galleggiare" (float) alla deriva altrove.
-    \usepackage{caption}            % [PLUG & PLAY] [OVERRIDE] [EXTENSION]  Usato per personalizzare i margini, i font e l'allineamento delle didascalie sotto le immagini e le tabelle.
-                                    %                                       Come Fix auomatico "Plug & play" corregge uno storico problema di LaTeX relativo alla spaziatura delle didascalie se impostate sopra le tabelle. Inoltre la custom class hai impostato ad 1cm questo spazio.
+    \usepackage{xcolor}             % [EXTENSION] Il motore principale per definire, miscelare e applicare colori
+                                    % personalizzati al testo e agli sfondi.
+    \usepackage{tcolorbox}          % [EXTENSION] Un potente pacchetto grafico usato dalla classe per creare i riquadri
+                                    % arrotondati e colorati di definizioni ed esercizi.
+    \usepackage{graphicx}           % [EXTENSION] Il pacchetto standard e indispensabile per importare e ridimensionare
+                                    % immagini esterne (JPG, PNG, PDF).
+    \usepackage{svg}                % [EXTENSION] Permette di importare direttamente file vettoriali .svg (utilizzando
+                                    % Inkscape in background per la conversione).
+    \usepackage{float}              % [OVERRIDE] [EXTENSION] Aggiunge l'opzione [H] (exactly here) e [h] (here if
+                                    % possible, otherwise as usual) per forzare tabelle e figure a rimanere nel punto
+                                    % del testo in cui sono state scriaggiunte, senza lasciarle "galleggiare" (float)
+                                    % alla deriva altrove.
+    \usepackage{caption}            % [PLUG & PLAY] [OVERRIDE] [EXTENSION]  Usato per personalizzare i margini, i font e
+                                    % l'allineamento delle didascalie sotto le immagini e le tabelle.
+                                    % Come Fix auomatico "Plug & play" corregge uno storico problema di LaTeX relativo
+                                    % alla spaziatura delle didascalie se impostate sopra le tabelle. Inoltre la custom
+                                    % class hai impostato ad 1cm questo spazio.
 
     --- STILE E UTILITY (da HKNdocument.cls e _preamble.tex) ---
-    \usepackage{hyperref}           % [PLUG & PLAY] [OVERRIDE] [EXTENSION] Rende il PDF interattivo: trasforma l'indice, i riferimenti incrociati e gli URL in link cliccabili (impostati in blu o nero).
-    \usepackage{listings}           % [EXTENSION] Permette di formattare ed evidenziare la sintassi di blocchi di codice informatico.
-                                    % NOTA: nella custom class è definito un TEMA CUSTOM, chiamato "hkn", per l'aspetto del codice. Non è stato impostato come predefinito, va usato con \begin{lstlisting}[style=hkn].
-                                    % Si dodvrebbe correggere la classe per imposarlo come predefinito in generale, basta aggiungere il comando \lstset{style=hkn}
+    \usepackage{hyperref}           % [PLUG & PLAY] [OVERRIDE] [EXTENSION] Rende il PDF interattivo: trasforma l'indice,
+                                    % i riferimenti incrociati e gli URL in link cliccabili (impostati in blu o nero).
+    \usepackage{listings}           % [EXTENSION] Permette di formattare ed evidenziare la sintassi di blocchi di codice
+                                    % informatico.
+                                    % NOTA: nella custom class è definito un TEMA CUSTOM, chiamato "hkn", per l'aspetto
+                                    % del codice. Non è stato impostato come predefinito, va usato con
+                                    % \begin{lstlisting}[style=hkn].
+                                    % Si dodvrebbe correggere la classe per imposarlo come predefinito in generale,
+                                    % basta aggiungere il comando \lstset{style=hkn}. Aggiunto nel file global settings.
     \usepackage{ulem}               % [EXTENSION] Fornisce comandi avanzati per sottolineare e barrare il testo.
-    \usepackage{contour}            % [EXTENSION] Crea un contorno attorno ai caratteri, usato in combinazione con ulem per creare sottolineature che non tagliano le lettere discendenti.
+    \usepackage{contour}            % [EXTENSION] Crea un contorno attorno ai caratteri, usato in combinazione con ulem
+                                    % per creare sottolineature che non tagliano le lettere discendenti.
 
 \end{comment}

@@ -119,7 +119,13 @@ righe non sono commentate!
 % \myuline non sillaba, esempio a seguire da usare come test.
 % \chapter{prova}
 % \myuline{
-% lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur. Donec ut libero sed arcu vehicula ultricies a non tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean ut gravida lorem.
+% lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus.
+% Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec
+% consectetur ante hendrerit. Donec et mollis dolor. Praesent et diam eget
+% libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut
+% porta lorem lacinia consectetur. Donec ut libero sed arcu vehicula ultricies
+% a non tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+% Aenean ut gravida lorem.
 % }
 
 
@@ -164,14 +170,21 @@ righe non sono commentate!
 % Soluzione Proposta: Applicare il pattern di disaccoppiamento Dati/Stile, già
 % in uso nel resto del progetto.
 % 1. In _preamble.tex: Inserire una configurazione standard di Ateneo,ad es:
-%    (\usepackage[style=ieee, backend=biber]{biblatex}).
+%    (\usepackage[style=ieee, backend=biber, heading=bibintoc]{biblatex}).
 % 2. Nel main.tex dell'utente: Lasciare solo il db (\addbibresource{...}).
 % 3. In _postamble.tex: Automatizzare la stampa aggiungendo un controllo
 %    di sicurezza che sopprime i warning nel caso di bibliografia vuota:
 %    \ifnum\value{cite}>0
 %        \printbibliography[heading=bibintoc]
 %    \fi
-%
+% 4. Si dovrebbe aggiungere sempre in automatico la voce delle dispense o
+%    materiale del corso. O il pm lo aggiunge a mano, o si generano più file
+%    .bib, uno che contiene questa voce fissa, l'altro gestito dallos studente
+%    con Zotero, ma con nome fisso. Basta aggiungerli tutti con
+%    \addbibresource{}. Non so se si può sfruttare il contenuto della macro del
+%    titolo del corso aggiunto nei metadati per automatizzare la citazione.
+%    Da vedere. Altrimenti l'aggiugne il PM a mano, prima di convidivere il
+%    branch.
 % ------------------------------------------------------------------------------
 % PR 4: ATTIVAZIONE DELLO STILE DEI LISTATI (LISTINGS) DI DEFAULT
 % Problema: In HKNdocument.cls viene caricato il pacchetto listings e viene
@@ -198,7 +211,6 @@ righe non sono commentate!
 % da implementare alla riga dell'attuale \RequirePackage[...]{babel}.
 %
 % --- OPZIONE A: MACRO ESPLICITA CON FALLBACK DI SICUREZZA---
-%
 % Introduzione di una variabile dedicata per la lingua secondaria. Per prevenire
 % crash critici in fase di compilazione causati dal parsing rigido di Babel
 % (che non tollera parametri vuoti nelle opzioni, es. "[, italian]"), la lingua
@@ -207,19 +219,14 @@ righe non sono commentate!
 % IMPLEMENTAZIONE:
 % \def\DocumentLanguage{italian}
 % \def\DocumentSecondLanguage{\DocumentLanguage} % Fallback di sicurezza
-%
 % % [ ... eventuale parsing delle opzioni utente per sovrascrivere ... ]
-%
 % \RequirePackage[\DocumentSecondLanguage, \DocumentLanguage]{babel}
 %
 % PRO: Massima flessibilità, permette l'introduzione di terze lingue future.
 % CONTRO: Richiede l'aggiunta di nuove definizioni di opzioni (\DeclareOption)
 %         nella classe.
 %
-%
-%
 % --- OPZIONE B: AUTO-INVERSIONE CONDIZIONALE (Raccomandata - "Zero Config") ---
-%
 % Mantenimento della singola variabile \DocumentLanguage per non alterare in
 % alcun modo l'interfaccia utente (Backward Compatibility totale). Il pacchetto
 % babel viene invocato con entrambe le lingue hardcoded, ma l'ordine di
