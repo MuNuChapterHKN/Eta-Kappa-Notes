@@ -50,3 +50,5 @@
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qnative), centrandola, pescando il file rispettivamente dalla cartella \"res/\"., \"res/svg/\" o \"res/drawio/\".\\E$"}
 {"rule":"UNPAIRED_BRACKETS","sentence":"^\\Q(0.8 sta per larga 80Ecco, per questi comandi NON SERVE SPECIFICARE I PERCORSI!\\E$"}
 {"rule":"DOUBLE_PUNCTUATION","sentence":"^\\QI comandi di stato (, , ) sono \"Interruttori Idempotenti\".\\E$"}
+{"rule":"ST_01_005","sentence":"^\\QQuest'ultima passa gli | argomenti testuali crudi esigendo il \"pattern matching\" letterale ([#1]#2), un input grezzo che solo può recepire senza rompere la classe 'book'.\\E$"}
+{"rule":"ST_01_005","sentence":"^\\QQuest'ultima passa gli | argomenti testuali crudi esigendo il \"pattern matching\" letterale ([#1]#2), un input grezzo che solo | può recepire senza rompere la classe 'book'.\\E$"}
