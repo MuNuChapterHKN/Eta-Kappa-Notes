@@ -7,63 +7,77 @@
 % ======================================================================================================================
 % NOTA: GESTIOME DELLA MODULARITÀ DEL DOCUMENTO E DEI FILE ESTERNI: UTILIZZO DEI COMANDI \input e \include
 % ======================================================================================================================
-% Nella gestione di progetti complessi, solitamente non è consigliabile generare enormi file di codice sorgente, poiché diventano rapidamente difficili da
-% navigare, comprendere e manutenere. Per questo motivo, è buona prassi suddividere il progetto in più file, ossia sfruttare un approccio modulare.
-% LaTeX offre due strumenti diversi principali per richiamare file esterni, che hanno scopi e comportamenti molto diversi, ma entrambi fondamentali per
-% la creazione di progetti ben strutturati:
+% Nella gestione di progetti complessi, solitamente non è consigliabile generare enormi file di codice sorgente, poiché
+% diventano rapidamente difficili da navigare, comprendere e manutenere. Per questo motivo, è buona prassi suddividere
+% il progetto in più file, ossia sfruttare un approccio modulare. LaTeX offre due strumenti diversi principali per
+% richiamare file esterni, che hanno scopi e comportamenti molto diversi, ma entrambi fondamentali per la creazione di
+% progetti ben strutturati:
 %
 % 1. COPIA-INCOLLA "TRASPARENTE": \input{percorso/nomefile.tex}
 %
-% Questo comando agisce come una pura e semplice trascrizione testuale: il contenuto del file esterno viene incollato nel punto esatto della chiamata,
-% senza alterare in alcun modo l'impaginazione o il flusso del testo. Grazie a questa proprietà di "trasparenza", \input può essere utilizzato in qualsiasi
-% punto del progetto, sia nel preambolo (per caricare pacchetti o impostazioni) sia nel corpo del documento. È inoltre possibile nidificarlo liberamente,
+% Questo comando agisce come una pura e semplice trascrizione testuale: il contenuto del file esterno viene incollato
+% nel punto esatto della chiamata, senza alterare in alcun modo l'impaginazione o il flusso del testo. Grazie a questa
+% proprietà di "trasparenza", \input può essere utilizzato in qualsiasi punto del progetto, sia nel preambolo (per
+% caricare pacchetti o impostazioni) sia nel corpo del documento. È inoltre possibile nidificarlo liberamente,
 % richiamando un comando \input all'interno di un file già importato.
 %
-% NOTA: Estensione del file? FACOLTATIVA ma FORTEMENTE CONSIGLIATA. Infatti \input esegue una trascrizione testuale pura, può importare qualsiasi formato
-% (es. sorgenti .c, dati .csv). Esplicitare il suffisso .tex rende il codice non ambiguo e professionalmente pulito. Tuttavia può funzionare senza estensione,
-% purché il file esista e sia accessibile, e non ci siano omonimie con altri file di diverso formato.
+% NOTA: Estensione del file? FACOLTATIVA ma FORTEMENTE CONSIGLIATA. Infatti \input esegue una trascrizione testuale
+% pura, può importare qualsiasi formato (es. sorgenti .c, dati .csv). Esplicitare il suffisso .tex rende il codice non
+% ambiguo e professionalmente pulito. Tuttavia può funzionare senza estensione, purché il file esista e sia accessibile,
+% e non ci siano omonimie con altri file di diverso formato.
 %
 % 2.1 GESTIONE MODULARE DI CAPITOLI: \include{percorso/nomefile}
 %
-% A differenza del primo, \include è progettato per gestire la struttura del corpo del documento, in particolare è stato progettato per i grandi
-% capitoli di libri o tesi. Il suo utilizzo forza un salto di pagina (\clearpage) sia prima che dopo l'inserimento del testo (file passato alla
-% sua chiamata) e genera file ausiliari (.aux) dedicati per ottimizzare la gestione dei riferimenti, relativamente alla memoria e ai tempi di
-% compilazione. A causa di queste caratteristiche, presenta delle regole di utilizzo molto rigide:
-% - Deve essere inserito esclusivamente nel corpo del documento (l'uso nel preambolo genera errori fatali di compilazione).
+% A differenza del primo, \include è progettato per gestire la struttura del corpo del documento, in particolare è stato
+% progettato per i grandi capitoli di libri o tesi. Il suo utilizzo forza un salto di pagina (\clearpage) sia prima che
+% dopo l'inserimento del testo (file passato alla sua chiamata) e genera file ausiliari (.aux) dedicati per ottimizzare
+% la gestione dei riferimenti, relativamente alla memoria e ai tempi di compilazione. A causa di queste caratteristiche,
+% presenta delle regole di utilizzo molto rigide:
+% - Deve essere inserito esclusivamente nel corpo del documento (l'uso nel preambolo genera errori fatali di
+%   compilazione).
 % - Non supporta alcun tipo di nidificazione.
-% - Tipograficamente, è idoneo solo per gli elementi gerarchici di massimo livello, come i capitoli (\chapter) nelle class book (libro), o in quelle basate su
-%   di essa, come HKNdocument. L'uso di \include per le sezioni (\section) ad esempio, è altamente sconsigliato, poiché frammetnerebbe molto la lettura e l'estetica
-%   del documento, a causa dei grandi spazi vuoti generati dai i salti di pagina che il comando richiama. Proprio per lo stesso motivo, l'uso di \include in class
-%   che non supportano i capitoli (\chapter), come article, è altamente sconsigliata. Si usi \include{} in tal caso.
+% - Tipograficamente, è idoneo solo per gli elementi gerarchici di massimo livello, come i capitoli (\chapter) nelle
+%   class book (libro), o in quelle basate su di essa, come HKNdocument. L'uso di \include per le sezioni (\section) ad
+%   esempio, è altamente sconsigliato, poiché frammetnerebbe molto la lettura e l'estetica del documento, a causa dei
+%   grandi spazi vuoti generati dai i salti di pagina che il comando richiama. Proprio per lo stesso motivo, l'uso di
+%   \include in class che non supportano i capitoli (\chapter), come article, è altamente sconsigliata. Si usi
+%   \include{} in tal caso.
 %
-% NOTA: Estensione del file? TASSATIVAMENTE OMESSA. Ingannerebbe il compilatore, che potrebbe cercare di gestire file anomali, come "file.tex.tex", o peggio ancora
-% "file.tex.aux" (ricorda che \include genera file ausiliari concatenando l'estensione .aux al nome fornito) compromettendo il funzionamento di \includeonly
-% (vedi a seguire). la risoluzione dei riferimenti incrociati.
+% NOTA: Estensione del file? TASSATIVAMENTE OMESSA. Ingannerebbe il compilatore, che potrebbe cercare di gestire file
+% anomali, come "file.tex.tex", o peggio ancora "file.tex.aux" (ricorda che \include genera file ausiliari concatenando
+% l'estensione .aux al nome fornito) compromettendo il funzionamento di \includeonly (vedi a seguire). la risoluzione
+% dei riferimenti incrociati.
 %
 % 2.2 BONUS - STRUMENTO DI COMPILAZIONE SELETTIVA: \includeonly{file1, file2, ...} - UTILE PER TEST E DEBUG
 %
-% Il principale vantaggio architetturale di \include risiede nella possibilità di utilizzare il comando \includeonly{file1, file2} all'interno del preambolo.
-% La stesura di documenti di grandi dimensioni (come tesi o dispense) comporta infatti spesso tempi di compilazione dilatati, specialmente in presenza di grafiche
-% vettoriali, circuiti o immagini ad alta risoluzione, tabelle eccetera. Proprio per ovviare a questo ostacolo operativo, LaTeX fornisce l'istruzione
-% \includeonly{...}: agisce da filtro sul resto dei comandi \include presenti nel documento, permettendo di compilare rapidamente solo capitoli specifici,
-% mantenendo tuttavia intatti e corretti l'indice generale, la numerazione delle pagine e i riferimenti incrociati globali.
+% Il principale vantaggio architetturale di \include risiede nella possibilità di utilizzare il comando
+% \includeonly{file1, file2} all'interno del preambolo. La stesura di documenti di grandi dimensioni (come tesi o
+% dispense) comporta infatti spesso tempi di compilazione dilatati, specialmente in presenza di grafiche vettoriali,
+% circuiti o immagini ad alta risoluzione, tabelle eccetera. Proprio per ovviare a questo ostacolo operativo, LaTeX
+% fornisce l'istruzione \includeonly{...}: agisce da filtro sul resto dei comandi \include presenti nel documento,
+% permettendo di compilare rapidamente solo capitoli specifici, mantenendo tuttavia intatti e corretti l'indice
+% generale, la numerazione delle pagine e i riferimenti incrociati globali.
 % - Posizionamento: Si dichiara esclusivamente all'interno del preambolo.
-% - Logica di funzionamento: Il comando \includeonly non inserisce autonomamente alcun file, ma funge esclusivamente da filtro globale di tipo "whitelist"
-%   (filtro di sblocco) per i comandi \include già presenti nel corpo del documento, infatti riceve in argomento una lista (separata da virgole) dei file che si desidera compilare
-%   (es. \includeonly{capitoli/cap_02, capitoli/cap_05}).
-% - Funzionamento tecnico: Il comando impone che il motore TeX, durante la compilazione, vada a comilare esclusivamente i file specificati nella lista, mentre per il resto
-%   dei file esclusi, che vada a leggerne  i file ausiliari (.aux) generati nelle compilazioni precedenti.
-% - Vantaggio strutturale: A differenza della semplice omissione (tramite %) dei comandi \include nel corpo del testo, \includeonly istruisce il
-%   motore TeX su come bypassare la generazione visiva dei capitoli esclusi (le pagine saranno assenti), mantenendo intatti e coerenti numeri di pagina,
-%   riferimenti incrociati, indice generale eccetera, come se l'intero documento fosse stato compilato.
-% - Prassi di utilizzo: È strettamente uno "strumento da cantiere". Si impiega durante le fasi di redazione per accelerare il rendering del singolo
-%   capitolo in lavorazione. A stesura ultimata, la direttiva \includeonly deve essere commentata o rimossa per procedere alla compilazione del
-%   volume completo (Release version).
+% - Logica di funzionamento: Il comando \includeonly non inserisce autonomamente alcun file, ma funge esclusivamente da
+%   filtro globale di tipo "whitelist" (filtro di sblocco) per i comandi \include già presenti nel corpo del documento,
+%   infatti riceve in argomento una lista (separata da virgole) dei file che si desidera compilare (es.
+%   \includeonly{capitoli/cap_02, capitoli/cap_05}).
+% - Funzionamento tecnico: Il comando impone che il motore TeX, durante la compilazione, vada a comilare esclusivamente
+%   i file specificati nella lista, mentre per il resto dei file esclusi, che vada a leggerne  i file ausiliari (.aux)
+%   generati nelle compilazioni precedenti.
+% - Vantaggio strutturale: A differenza della semplice omissione (tramite %) dei comandi \include nel corpo del testo,
+%   \includeonly istruisce il motore TeX su come bypassare la generazione visiva dei capitoli esclusi (le pagine saranno
+%   assenti), mantenendo intatti e coerenti numeri di pagina, riferimenti incrociati, indice generale eccetera, come se
+%   l'intero documento fosse stato compilato.
+% - Prassi di utilizzo: È strettamente uno "strumento da cantiere". Si impiega durante le fasi di redazione per
+%   accelerare il rendering del singolo capitolo in lavorazione. A stesura ultimata, la direttiva \includeonly deve
+%   essere commentata o rimossa per procedere alla compilazione del volume completo (Release version).
 %
 % NOTA: Estensione dei file? Come \include.
 %
-% 0. NOTA GENERALE SUI PERCORSI: È fondamentale utilizzare sempre lo slash (/) come separatore per le directory (es. cartella/file.tex), indipendentemente
-% dal sistema operativo in uso. In LaTeX, il backslash (\) è strettamente riservato all'invocazione dei comandi e causerebbe un errore di sintassi.
+% 0. NOTA GENERALE SUI PERCORSI: È fondamentale utilizzare sempre lo slash (/) come separatore per le directory (es.
+%    cartella/file.tex), indipendentemente dal sistema operativo in uso. In LaTeX, il backslash (\) è strettamente
+%    riservato all'invocazione dei comandi e causerebbe un errore di sintassi.
 % ======================================================================================================================
 
 

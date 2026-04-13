@@ -1,75 +1,96 @@
 % --- MAGIC COMMENTS: CONFIGURAZIONE EDITOR --- (vedi main.tex per riferimenti e spiegazioni) ---
 % !TEX root = ../../main.tex
 
-% ___________________________________________________________________________ NEW CUSTOM MACROS (COMMANDS) ____________________________________________________________________________
+% ____________________________________________ NEW CUSTOM MACROS (COMMANDS) ____________________________________________
 
 % Di seguito vengono presentati i comandi custom/personalizzati dichiarati dall'utente.
 % Vengono inoltre riepilogati i comandi custom definite nella classe di documento custom "HKNdocument".
-% NOTA: Ricorda, ogni termine del tipo "\..." in LaTeX è una control sequence. Ogni control sequence è un Comando. I comandi possono essere primitivi o macro.
-%       Un primitivo (esempi \hline) è formulato direttamente nel sorgente del motore LaTeX. Una macro è invece una macroistruzione, cioè un insieme di altri comandi.
-%       L'utente in LaTeX dichiara solo macro, quindi ogni comando custom è precisamente una macro custom. Non può dichiarare "primitivi" (dovrebbe modificare il sorgente del motore grafico TeX).
-%       Ancora più precisamente oltre alle macro, l'utente può definire dei Registri (come i contatori \newcounter o le lunghezze \newlength), ma non sono comandi.
-%       Inoltre: su LaTeX non ci sono variabili, tuttavia si può usare una macro per contenere qualsiasi cosa, come fosse di fatto una variabile.
+% NOTA: Ricorda, ogni termine del tipo "\..." in LaTeX è una control sequence. Ogni control sequence è un Comando. I
+% comandi possono essere primitivi o macro. Un primitivo (esempi \hline) è formulato direttamente nel sorgente del
+% motore LaTeX. Una macro è invece una macroistruzione, cioè un insieme di altri comandi. L'utente in LaTeX dichiara
+% solo macro, quindi ogni comando custom è precisamente una macro custom. Non può dichiarare "primitivi" (dovrebbe
+% modificare il sorgente del motore grafico TeX). Ancora più precisamente oltre alle macro, l'utente può definire dei
+% Registri (come i contatori \newcounter o le lunghezze \newlength), ma non sono comandi. Inoltre: su LaTeX non ci sono
+% variabili, tuttavia si può usare una macro per contenere qualsiasi cosa, come fosse di fatto una variabile.
 
 
 \begin{comment}     % --- RIEPILOGO MACRO (COMANDI) CUSTOM DEFINITI NELLA CLASSE "HKNdocument" ---
 
     RIEPILOGO MACRO (COMANDI) CUSTOM E AMBIENTI DEFINITI DALLA CLASSE HKNdocument E _preamble.tex
-    NOTA: non possono essere ridichiarati con \newcommand{cmd}{def}, ma possono essere aggiornati con \renewcommand{cmd}{def}
+    NOTA: non possono essere ridichiarati con \newcommand{cmd}{def}, ma possono essere aggiornati con
+    \renewcommand{cmd}{def}
 
-    Il progetto HKN è stato programmato in modo da offrire alcune custom macro,
-    grazie alla custom class HKNdocument (HKNdocument.cls, _preamble.tex,
-    _postamble.tex). Alcune di esse funzionano in particolare anche grazie ai
-    file di configurazione del progetto (latexmkrc, settings.json).
+    Il progetto HKN è stato programmato in modo da offrire alcune custom macro, grazie alla custom class HKNdocument
+    (HKNdocument.cls, _preamble.tex, _postamble.tex). Alcune di esse funzionano in particolare anche grazie ai file di
+    configurazione del progetto (latexmkrc, settings.json).
 
     --- INSERIMENTO IMMAGINI FACILITATO (da _preamble.tex) ---
-    \addfigure[Didascalia]{nomefile}{0.8}       % Inserisce un'immagine posizionandola precisamente dov'è citata (passa l'opzione [H]: exactly here) e centrandola, pescando il file dalla cartella "res/". 0.8 sta per larga 80% della larghezzad del testo (si può cambiare).
-    \addsvg[Didascalia]{nomefile}{0.8}          % Inserisce un'immagine vettoriale SVG precisamente dov'è citata (passa l'opzione [H]: exactly here) e centrandola, pescando il file dalla cartella "res/svg/". 0.8 sta per larga 80% della larghezzad del testo (si può cambiare).
-    \adddrawio[Didascalia]{nomefile}{0.8}       % Inserisce uno schema grafico creato con Draw.io precisamente dov'è citata (passa l'opzione [H]: exactly here) e centrandola, esportato in SVG dalla cartella "res/drawio/". 0.8 sta per larga 80% della larghezzad del testo (si può cambiare).
+    \addfigure[Didascalia]{nomefile}{0.8}       % Inserisce un'immagine posizionandola precisamente dov'è citata
+                                                % (passa l'opzione [H]: exactly here) e centrandola, pescando il file
+                                                % dalla cartella "res/". 0.8 sta per larga 80% della larghezzad del
+                                                % testo (si può cambiare).
+    \addsvg[Didascalia]{nomefile}{0.8}          % Inserisce un'immagine vettoriale SVG precisamente dov'è citata (passa
+                                                % l'opzione [H]: exactly here) e centrandola, pescando il file dalla
+                                                % cartella "res/svg/". 0.8 sta per larga 80% della larghezzad del testo
+                                                % (si può cambiare).
+    \adddrawio[Didascalia]{nomefile}{0.8}       % Inserisce uno schema grafico creato con Draw.io precisamente dov'è
+                                                % citata (passa l'opzione [H]: exactly here) e centrandola, esportato in
+                                                % SVG dalla cartella "res/drawio/". 0.8 sta per larga 80% della
+                                                % larghezzad del testo (si può cambiare).
 
-    Nuova spiegazione:
-    Altro non sono che Wrapper dei comandi \includegraphics{} e \includesvg{}
-    dei pacchetti graphicx e svg, pensati per facilitare l'inserimento delle
-    immagini.
-    Questi comandi inseriscono un'immagine posizionandola precisamente dove
-    sono chiamati (passano l'opzione [H]: exactly here, del pacchetto float, più
-    forte e robusta delle opzioni "h" o "h!" native), centrandola, pescando il
-    file rispettivamente dalla cartella "res/"., "res/svg/" o "res/drawio/".
-    (0.8 sta per larga 80% della larghezzad del testo, si può cambiare).
-    Ecco, per questi comandi NON SERVE SPECIFICARE I PERCORSI! Li cercano in
-    automatico nelle cartelle dedicate: basta specificare il nome del file, in
-    particolare SENZA ESTENSIONE (le macro gestiscono automaticamente anche
-    quella: per graphics la omettono, per svg l'aggiungono).
+    NUOVA SPIEGAZIONE: Altro non sono che Wrapper dei comandi \includegraphics{} e \includesvg{} dei pacchetti graphicx
+    e svg, pensati per facilitare l'inserimento delle immagini. Questi comandi inseriscono un'immagine posizionandola
+    precisamente dove sono chiamati (passano l'opzione [H]: exactly here, del pacchetto float, più forte e robusta delle
+    opzioni "h" o "h!" native), centrandola, pescando il file rispettivamente dalla cartella "res/"., "res/svg/" o
+    "res/drawio/". (0.8 sta per larga 80% della larghezzad del testo, si può cambiare).
+    Ecco, per questi comandi NON SERVE SPECIFICARE I PERCORSI! Li cercano in automatico nelle cartelle dedicate: basta
+    specificare il nome del file, in particolare SENZA ESTENSIONE (le macro gestiscono automaticamente anche quella: per
+    graphics la omettono, per svg l'aggiungono).
 
     --- BOX COLORATI PER LA TEORIA (da HKNdocument.cls) ---
-    NOTA: questi riquadri speciali non sono generati a partire dagli ambienti offerti dal package amsthm, bensì sono una soluzione completamente personalizzata
-    che si appoggia interamente al pacchetto grafico tcolorbox. Sono creati con la custom macro \DeclareHKNBox, citata a seguire.
+    NOTA: questi riquadri speciali non sono generati a partire dagli ambienti offerti dal package amsthm, bensì sono una
+    soluzione completamente personalizzata che si appoggia interamente al pacchetto grafico tcolorbox. Sono creati con
+    la custom macro \DeclareHKNBox, citata a seguire.
 
     \begin{definition} ... \end{definition}     % Genera un riquadro con bordo ROSSO numerato per le Definizioni.
     \begin{theorem} ... \end{theorem}           % Genera un riquadro con bordo GIALLO numerato per i Teoremi.
     \begin{corollary} ... \end{corollary}       % Genera un riquadro con bordo ARANCIONE numerato per i Corollari.
     \begin{exercise} ... \end{exercise}         % Genera un riquadro con bordo BLU SCURO numerato per gli Esercizi.
-    \begin{observation} ... \end{observation}   % Genera un riquadro con bordo GRIGIO-BLU numerato per le Osservazioni generiche.
+    \begin{observation} ... \end{observation}   % Genera un riquadro con bordo GRIGIO-BLU numerato per le Osservazioni
+                                                % generiche.
 
     --- MACRO "FABBRICA" PER CREARE NUOVI BOX COLORATI (da HKNdocument.cls) ---
-    \DeclareHKNBox{nome}{TitITA}{TitENG}{colore}    % Macro avanzata. Usata per creare box colorati personalizzati (NOTA: nella nuova versione della classe sono stati aggiunti i lemmi).
+    \DeclareHKNBox{nome}{TitITA}{TitENG}{colore}    % Macro avanzata. Usata per creare box colorati personalizzati
+                                                    % (NOTA: nella nuova versione della classe sono stati aggiunti i
+                                                    % lemmi).
 
     --- COMANDI TIPOGRAFICI SPECIALI (da HKNdocument.cls) ---
-    \myuline{Testo}                             % Una sottolineatura intelligente che si interrompe elegantemente per non tagliare le parti basse delle lettere (p, g, q, j).
-                                                % \myuline non è mai utilizzato all'interno della custom class! Il bello è che per inserire il pacchetto ulem che serve, si
-                                                % è creato il bug o conflitto per la bibliografia. Vedi il main.tex per i rimandi.
+    \myuline{Testo}                             % Una sottolineatura intelligente che si interrompe elegantemente per
+                                                % non tagliare le parti basse delle lettere (p, g, q, j). \myuline non è
+                                                % mai utilizzato all'interno della custom class! Il bello è che per
+                                                % inserire il pacchetto ulem che serve, si è creato il bug o conflitto
+                                                % per la bibliografia. Vedi il main.tex per i rimandi.
 
     --- MACRO PER L'INSERIMENTO DEI METADATI (necessario usarle nel preambolo, per la custom class HKNdocument) ---
-    \shorttitle{Titolo Breve}                   % Definisce un titolo accorciato da usare nelle intestazioni superiori per non farle eventualmente sbordare.
-    \editor{Nome Cognome}                       % Aggiunge la voce "Revisionato da: / Edited by:" nella pagina del titolo.
-    \docdate{Data Libera}                       % Imposta una data fissa o personalizzata per la copertina. Impostato dal project manager scrivendo il semestre del corso.
-    \docversion{1.0}                            % Aggiunge l'indicazione della versione del documento in copertina. 1.0 è un esempio di versione
+    \shorttitle{Titolo Breve}                   % Definisce un titolo accorciato da usare nelle intestazioni superiori
+                                                % per non farle eventualmente sbordare.
+    \editor{Nome Cognome}                       % Aggiunge la voce "Revisionato da: / Edited by:" nella pagina del
+                                                % titolo.
+    \docdate{Data Libera}                       % Imposta una data fissa o personalizzata per la copertina. Impostato
+                                                % dal project manager scrivendo il semestre del corso.
+    \docversion{1.0}                            % Aggiunge l'indicazione della versione del documento in copertina. 1.0
+                                                % è un esempio di versione
 
-    --- MACRO CUSTOM USATE COME VARIABILI PER OGGETTI DELLA PER COPERTINA E INTESTAZIONE DELLA CUSTOM CLASS HKNdocument (Modificabili con \renewcommand se necessario) (da HKNdocument.cls) ---
-    \doclogofrontpage                           % Macro che contiene il logo principale della copertina (Default: logo HKN).
-    \doclogoupperpage                           % Macro che contiene il piccolo logo dell'intestazione (Default: logo piccolo HKN).
-    \doclicense                                 % Macro che contiene l'immagine della licenza (Default: Creative Commons).
-    \DDorganization                             % Macro che contiene il nome dell'organizzazione (Default: IEEE-HKN Mu Nu Chapter).
+    --- MACRO CUSTOM USATE COME VARIABILI PER OGGETTI DELLA PER COPERTINA E INTESTAZIONE DELLA CUSTOM CLASS HKNdocument
+    (Modificabili con \renewcommand se necessario) (da HKNdocument.cls) ---
+    \doclogofrontpage                           % Macro che contiene il logo principale della copertina
+                                                % (Default: logo HKN).
+    \doclogoupperpage                           % Macro che contiene il piccolo logo dell'intestazione
+                                                % (Default: logo piccolo HKN).
+    \doclicense                                 % Macro che contiene l'immagine della licenza
+                                                % (Default: Creative Commons).
+    \DDorganization                             % Macro che contiene il nome dell'organizzazione
+                                                % (Default: IEEE-HKN Mu Nu Chapter).
 
     --- MACRO INTERNE DI SALVATAGGIO (BACKEND) USATE COME VARIABILI - ATTENZIONE: NON TOCCARE
     Queste macro rappresentano il "database interno" della custom class HKNdocument.
@@ -82,11 +103,12 @@
     \STtitle         % Conserva il titolo breve definito con \shorttitle{...} per le intestazioni.
 
     REGOLE IMPORANTI (Perché non vanno modificate e perché non dovrebbero essere usate):
-    1. NON SOCRASCRIVERLE (NO \renewcommand): Si romperebbe il collegamento logico con i comandi standard (FrontEnd) previsti dalla classe. Usa sempre i
-    comandi ufficiali (\title, \author, ecc.) per inserire i dati.
-    2. NON USARLE/RICHIAMARLE NEL TESTO: Queste "scatole" vengono lette dalla classe per costruire la copertina e le intestazioni. Spesso contengono regole
-    di formattazione nascoste (es. font enormi e in grassetto). Stamparle in mezzo a un paragrafo distruggerebbe l'impaginazione. Inoltre, se una di
-    queste macro fosse vuota, genererebbe un errore fatale di compilazione.
+    1. NON SOCRASCRIVERLE (NO \renewcommand): Si romperebbe il collegamento logico con i comandi standard (FrontEnd)
+    previsti dalla classe. Usa sempre i comandi ufficiali (\title, \author, ecc.) per inserire i dati.
+    2. NON USARLE/RICHIAMARLE NEL TESTO: Queste "scatole" vengono lette dalla classe per costruire la copertina e le
+    intestazioni. Spesso contengono regole di formattazione nascoste (es. font enormi e in grassetto). Stamparle in
+    mezzo a un paragrafo distruggerebbe l'impaginazione. Inoltre, se una di queste macro fosse vuota, genererebbe un
+    errore fatale di compilazione.
 
 
 \end{comment}
