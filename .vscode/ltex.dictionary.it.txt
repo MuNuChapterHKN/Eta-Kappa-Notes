@@ -483,3 +483,8 @@ Maxwell
 paper
 Vol
 pp
+bugfix
+magic
+pm
+metadati
+convidivere

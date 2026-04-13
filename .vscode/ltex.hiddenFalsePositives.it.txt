@@ -52,3 +52,6 @@
 {"rule":"DOUBLE_PUNCTUATION","sentence":"^\\QI comandi di stato (, , ) sono \"Interruttori Idempotenti\".\\E$"}
 {"rule":"ST_01_005","sentence":"^\\QQuest'ultima passa gli | argomenti testuali crudi esigendo il \"pattern matching\" letterale ([#1]#2), un input grezzo che solo può recepire senza rompere la classe 'book'.\\E$"}
 {"rule":"ST_01_005","sentence":"^\\QQuest'ultima passa gli | argomenti testuali crudi esigendo il \"pattern matching\" letterale ([#1]#2), un input grezzo che solo | può recepire senza rompere la classe 'book'.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qse stesso).\\E$"}
+{"rule":"ER_01_002","sentence":"^\\QSpiegare agli studenti che quel magic comment è utilissimo, ma va copiato in cima ai file secondari (es.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qnella cartella /chapters).\\E$"}
