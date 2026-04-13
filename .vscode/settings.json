@@ -41,9 +41,9 @@
     }
   ],
 
-  // LTeX+ (LanguageTool)
-  // Orthography and grammar checker: only supports one language at a time, but is more powerful than Code Spell Checker
-  // (see below), which only supports orthography. Here set to Italian, in order to set language automatically ofr whoever contributes to the project.
+  // LTeX+ (LanguageTool) Orthography and grammar checker: only supports one language at a time, but is more powerful
+  // than Code Spell Checker (see below), which only supports orthography. Here set to Italian, in order to set language
+  // automatically ofr whoever contributes to the project.
   "ltex.language": "it",
 
   // GitLens Extension
@@ -55,12 +55,24 @@
       "document"
   ],
 
+  // VSCode - Settings Locali (Scope = Workspace)
+  // Modifica locale delle impostazioni di VScode, affinchè mostri i delimitatori presi di riferimento per scrivere
+  // il codice di questo progetto. Sono valori standard, spesso usati, in particolare "80", valore tipico, risalente
+  // storicamente ai terminali UNIX, che avevano una larghezza di 80 caratteri. È tutt'ora comodo per quando si divide
+  // lo schermo a metà tra due app. "120" è un valore più ampio ragionevole che consente di usare meglio lo schermo
+  // intero. Un altro valore molto usato è "100".
+  "editor.rulers": [80, 120],
+
   // Code Spell Checker
-  // Additional extension, alternative to LTeX+, thats supports bilingual correction, but only for orthography, not grammar.
-  // Only one of them should be active at a time, otherwise they will conflict.
+  // Additional extension, alternative to LTeX+, thats supports bilingual correction, but only for orthography, not
+  // grammar. Only one of them should be active at a time, otherwise they will conflict.
   "cSpell.language": "en,it",
   "cSpell.words": [
     "Ndocument",
     "randazzo"
-  ],
+  ]
+
+  // NOTA BENE: tutte le entries del file .json devono essere separate da una virgola, tranne l'ultima, anche detta
+  // "trailing o dangling comma" ("virgola terminale o pendente"), che va omessa!
+  // Il file potrebbe funzionare lo stesso, ma essendo un errore di sintassi, la good practice è evitarlo.
 }
