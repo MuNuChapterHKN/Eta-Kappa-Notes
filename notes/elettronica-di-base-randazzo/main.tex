@@ -635,13 +635,38 @@ che ridefinisce \@chapter (esattamente come mostrato nel FIX A, inclusa
 la correzione del controllo condizionale), circondato da \makeatletter e
 \makeatother, e incollarlo così com'è direttamente nel preambolo.
 
+\makeatletter
+\def\@chapter[#1]#2{%
+  \ifnum \c@secnumdepth >\m@ne
+    \if@mainmatter % <--- IL CONTROLLO MANCANTE REINSERITO
+      \refstepcounter{chapter}% Incrementa solo se siamo nel mainmatter
+      \typeout{\@chapapp\space\thechapter.}%
+      \addcontentsline{toc}{chapter}% Inietta nel ToC con il numero
+                       {\protect\numberline{\thechapter}#2}%
+    \else
+      \addcontentsline{toc}{chapter}{#2}% Inietta nel ToC SENZA numero
+    \fi
+  \else
+    \addcontentsline{toc}{chapter}{#2}%
+  \fi
+  \chaptermark{#1}% Aggiorna l'header con il titolo breve
+  \addtocontents{lof}{\protect\addvspace{10\p@}}%
+  \addtocontents{lot}{\protect\addvspace{10\p@}}%
+  \if@twocolumn
+    \@topnewpage[\@makechapterhead{#2}]%
+  \else
+    \@makechapterhead{#2}%
+    \@afterheading
+  \fi}
+\makeatother
+
 ETIMOLOGIA: Il termine deriva da "Guerrilla Patching" (patch furtive), mutato
 poi in "Gorilla" per assonanza, e quindi trasformato infine in "Monkey",
 coadiuvato anche dalla terminologia "To Monkey Around" (nel senso di armeggiare
 in senso poco chiaro) o "Monkey Business" (affare losco o imbroglio), indicando
 un codice che "armeggia" (monkeys around) con le funzioni interne per correggere
-bug in modo estemporaneo (cosa che per forza di cosa è poco chiara o trasparente
-per l'utente che legge il codice).
+bug in modo estemporaneo (azione che per forza di cose è poco chiara o
+trasparente per l'utente che legge il codice).
 
 ------------------------------------------------------------------------------
 BEST PRACTICE DA ADOTTARE (LA SOLUZIONE OTTIMALE E IBRIDA)
