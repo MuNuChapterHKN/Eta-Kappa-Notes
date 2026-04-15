@@ -226,7 +226,8 @@ Riepilogo delle ottimizzazioni architetturali e bugfix individuati
 durante l'analisi statica del codice e il debugging.
 ================================================================================
 
-------------------------------------------------------------------------------
+________________________________________________________________________________
+
 PR 1: REFACTORING DEL MAGIC COMMENT E DEI PERCORSI ROOT
 Problema: Il commento '% !TeX root = main.tex' inserito nel main.tex stesso
 è un pleonasmo informatico (la radice di se stesso è... se stesso).
@@ -236,7 +237,8 @@ file secondari (es. nella cartella /chapters). Bisogna inoltre specificare
 l'importanza di usare il percorso relativo corretto per "risalire" la
 cartella: es. '% !TeX root = ../main.tex'.
 
-------------------------------------------------------------------------------
+________________________________________________________________________________
+
 PR 2: BUGFIX CRITICO - IL SIDE-EFFECT ASSURDO DEL PACCHETTO ULEM
 Problema: La classe HKNdocument.cls carica ciecamente \RequirePackage{ulem}.
 Di default, ulem sovrascrive la macro semantica \emph trasformandola in \uline.
@@ -251,7 +253,8 @@ l'opzione: \RequirePackage[normalem]{ulem}.
 Soluzione Locale (Attualmente in uso in questo main): Iniezione a monte
 tramite \PassOptionsToPackage{normalem}{ulem} nel Pre-Preambolo.
 
-------------------------------------------------------------------------------
+________________________________________________________________________________
+
 PR 3: STANDARDIZZAZIONE ARCHITETTURALE DELLA BIBLIOGRAFIA
 Problema: Attualmente lo studente deve gestire la bibliografia a mano.
 Soluzione Proposta: Applicare il pattern di disaccoppiamento Dati/Stile, già
@@ -272,7 +275,8 @@ in uso nel resto del progetto.
    titolo del corso aggiunto nei metadati per automatizzare la citazione.
    Da vedere. Altrimenti l'aggiunge il PM a mano, prima di convidivere il
    branch.
-------------------------------------------------------------------------------
+________________________________________________________________________________
+
 PR 4: ATTIVAZIONE DELLO STILE DEI LISTATI (LISTINGS) DI DEFAULT
 Problema: In HKNdocument.cls viene caricato il pacchetto listings e viene
 definito lo stile "hkn" (\lstdefinestyle{hkn}{...}). Tuttavia, il project
@@ -282,7 +286,8 @@ Soluzione Proposta: Aggiungere in HKNdocument.cls, subito sotto la
 definizione dei colori, il comando di attivazione globale:
 \lstset{style=hkn}
 
-------------------------------------------------------------------------------
+________________________________________________________________________________
+
 PR 5: SUPPORTO BILINGUE PER BABEL E BIBLATEX
 
 PROBLEMA ARCHITETTURALE:
@@ -334,8 +339,9 @@ PRO:
 2. Nessuna azione o parametro aggiuntivo richiesto all'utente finale.
 3. Risolve nativamente e in modo trasparente i requisiti di biblatex.
 
---------------------------------------------------------------------------------
-PR6: CAPITOLI NON NUMERATI - SOLUZIONI CON E SENZA MODIFICHE ALLA CUSTOM CLASS
+________________________________________________________________________________
+
+PR 6: CAPITOLI NON NUMERATI - SOLUZIONI CON E SENZA MODIFICHE ALLA CUSTOM CLASS
 
 IL PROBLEMA ARCHITETTURALE:
 La custom class HKNdocument chiama da sé \frontmatter, \mainmatter e
@@ -375,6 +381,7 @@ specifiche che mancano nella classe 'book' originale:
    (quindi non numerati e non riportati nell'indice) aggiornassero le testatine
    della pagina, affinchè comparisse il titolo corretto in essa.
 
+------------------------------------------------
 LE SOLUZIONI ANALIZZATE:
 
 ... SOLUZIONE 1: INTERRUTTORI DI STATO NATIVI (\frontmatter e \backmatter) ...
@@ -519,9 +526,7 @@ programmazione integrato dentro LaTeX2e.
 
 \makeatother
 
-
-
-
+-----------------------------------------------------------------
 ............... APPROFONDIMENTI TECNICI E CORREZIONI DELLA CLASSE ..............
 Come risolvere il problema dei capitoli non numerati nel modo migliore,
 correggendo la custom class, per recuperare il supporto a questi dall'origine,
@@ -668,9 +673,9 @@ un codice che "armeggia" (monkeys around) con le funzioni interne per correggere
 bug in modo estemporaneo (azione che per forza di cose è poco chiara o
 trasparente per l'utente che legge il codice).
 
-------------------------------------------------------------------------------
+----------------------------------------------------------
 BEST PRACTICE DA ADOTTARE (LA SOLUZIONE OTTIMALE E IBRIDA)
-------------------------------------------------------------------------------
+----------------------------------------------------------
 Per garantire la massima stabilità tipografica, si adotta un approccio
 combinato che richiede una pulizia della classe base, la pre-strutturazione
 del file logico principale, ed anche l'introduzione della custom macro
@@ -720,7 +725,306 @@ altera in alcun modo le funzionalità estetiche previste dalla classe HKN. Tutte
 le feature originarie (come l'aggiornamento automatico degli header) continuano
 a funzionare perfettamente, e in modo stabile grazie alle correzioni.
 
+________________________________________________________________________________
 
+PR 7: FIX ASPETTO TESTATINA (O HEADER O INTESTAZIONE): LEFTMARK E RIGHTMARK
+
+Nello scrivere la testatina (o intestazione o header), il comporamente standard
+di LaTeX è il seguente:
+- Pagina dei Capitoli: testatina vuota.
+- (Left/Even) Pagine Pari, sempre sulla sinistra: nome capitolo stampato nella
+  testatina di sinistra (leftmark).
+- (Right/Odd) Pagine Dispari, sempre sulla destra: nome sezione stampato nella
+  testatina di destra (rightmark). Se non ci sono sezioni, rimane vuota.
+
+Nella class HKNdocument.cls (versione 2024/12/08 v1.5 Base class for publishing)
+queste indicazioni di base sono state ignorate, e la testatina stampa sempre di
+default il nome del capitolo, il logo di HKN, e il nome dell'organizzazione,
+usando il pacchetto fancyhdr, su tutte le pagine, escluse quelle di inizio
+capitolo.
+
+Come si evince dai commenti nel codice della class, in realtà l'intento non era
+quello. Leggi a seguire.
+
+Vengono analizzate di seguito più soluzioni per migliorare l'aspetto delle
+testatine.
+
+--------------------------------------------------------------------------------
+... 7.1 LAYOUT TESTATINA ASIMMETRICO - NOME CAPITOLO SU PAGINA SX E DX ...
+
+EFFETTO FINALE:
+- Pagine Capitoli: testatina vuota
+- Pagine Pari (SX: Left/Even): nelle posizioni fanchyhdr della testatina:
+    * SX: titolo breve capitolo, con maiuscolo/minuscolo originale
+    * CENTRO: logo piccolo dell'associazione, con link ipertestuale
+    * DX: nome associazione, con maiuscolo/minuscolo originale
+- Pagine Dispari (DX: Right/Odd): nelle posizioni fanchyhdr della testatina:
+    * SX: nome associazione, con maiuscolo/minuscolo originale
+    * CENTRO: logo piccolo dell'associazione, con link ipertestuale
+    * DX: titolo breve capitolo, con maiuscolo/minuscolo originale
+
+Nel file HKNdocument.cls, i commenti alle righe 192-195 dichiarano l'intento
+di utilizzare un layout asimmetrico ("twoside") tipico dei libri, alternando
+la posizione di titolo e organizzazione tra pagine pari (Left/Even) e
+dispari (Right/Odd).
+Tuttavia, il codice implementato utilizzava direttive statiche (\fancyhead[L],
+\fancyhead[R]), risultando in un layout simmetrico piatto e ignorando le
+convenzioni tipografiche dichiarate.
+
+Si propone la seguente sostituzione del blocco testatine per implementare
+la corretta alternanza speculare (Outer/Inner margins). Questo codice, come
+quello originale, ignora per scelta il nome delle sezioni per le testatine.
+
+\fancyhead{} % Pulisce tutte le testatine correnti
+\renewcommand\headrule{...} % (Mantenere il codice custom della linea)
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+
+% Pagine PARI (Even - Foglio di Sinistra)
+\fancyhead[LE]{\leftmark}       % Titolo del capitolo sul margine ESTERNO
+\fancyhead[RE]{\DDorganization} % Organizzazione sul margine INTERNO
+
+% Pagine DISPARI (Odd - Foglio di Destra)
+\fancyhead[RO]{\leftmark}       % Titolo del capitolo sul margine ESTERNO
+\fancyhead[LO]{\DDorganization} % Organizzazione sul margine INTERNO
+
+% Logo sempre al centro
+\fancyhead[C]{%
+  \raisebox{-0.6\height}{%
+    \href{https://hknpolito.org/}{\includegraphics[height=1cm]{\doclogoupperpage}}%
+  }%
+}
+
+--------------------------------------------------------------------------------
+NOTA: in tutte le versioni a seguire, la stampa condizionale della sezione,
+se presente, nella testatina di destra (Right/Odd) al posto del capitolo, è
+stata ottenuta semplicemente riempiendo quella posizione col contenuto del
+capitolo dall'inizio (altrimenti sarebbe vuota): qualora ci fosse una sezione
+infatti, questa sovrascriverebbe in automatico il rightmark, eliminando così
+il titolo del capitolo.
+--------------------------------------------------------------------------------
+
+... 7.2 LAYOUT TESTATINA ASIMMETRICO - NOME CAPITOLO SU PAGINA SX E NOME SEZIONE
+SU PAGINA DX IN CASO DI SEZIONE, ALTRIMENTI NOME CAPITOLO, NON IN MAIUSCOLO -
+NUMERO DI CAPITOLO E NUMERO DI SEZIONE (+PUNTO E SPAZIO) OPZIONALI...
+
+EFFETTO FINALE:
+- Pagine Capitoli: testatina vuota
+- Pagine Pari (SX: Left/Even): nelle posizioni fanchyhdr della testatina:
+    * SX: (N° del capitolo.) + nome breve capitolo con maiuscolo/minuscolo originale
+    * CENTRO: logo piccolo dell'associazione, con link ipertestuale
+    * DX: nome associazione, con maiuscolo/minuscolo originale
+- Pagine Dispari (DX: Right/Odd): nelle posizioni fanchyhdr della testatina:
+    * SX: nome associazione, con maiuscolo/minuscolo originale
+    * CENTRO: logo piccolo dell'associazione, con link ipertestuale
+    * DX:   ** Se è presente una sezione, (N° della sezione.) + nome breve sezione con maiuscolo/minuscolo originale
+            ** Se non è presente una sezione, (N° del capitolo.) + nome breve capitolo con maiuscolo/minuscolo originale
+NOTA: per i numeri di sezioni e capitolo tra parentesi, vedi codice di seguito,
+si possono omettere o meno.
+
+\fancyhead{} % Pulisce tutte le testatine correnti di default
+
+% GESTIONE DEI REGISTRI (La Memoria)
+
+% Quando inizia un capitolo: riempie sia SX che DX col nome del capitolo.
+% Rimuoviamo il maiuscolo nativo di LaTeX per mantenere lo stile pulito HKN.
+% NOTA: Se non vuoi il numero del capitolo, rimuovi "\thechapter.\ " da entrambe le parentesi.
+% In precisione compare un punto dopo il numero del capitolo, poi uno spazio, come nel comporatmento standard di book.
+
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{\thechapter\ #1}}
+
+% Quando inizia una sezione: sovrascrive SOLO la memoria di DX.
+% Rimuoviamo il maiuscolo nativo di LaTeX per mantenere lo stile pulito HKN.
+% NOTA: Se non vuoi il numero della sezione, rimuovi "\thesection.\ ".
+% In precisione compare un punto dopo il numero della sezione, poi uno spazio, come nel comporatmento standard di book.
+
+\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
+
+% DISPOSIZIONE FISICA SULLA PAGINA (Il Layout)
+
+% Pagine PARI (Even - Foglio di Sinistra)
+\fancyhead[LE]{\leftmark}       % Nome Capitolo sul margine ESTERNO
+\fancyhead[RE]{\DDorganization} % Nome Associazione sul margine INTERNO
+
+% Pagine DISPARI (Odd - Foglio di Destra)
+\fancyhead[LO]{\DDorganization} % Nome Associazione sul margine INTERNO
+\fancyhead[RO]{\rightmark}      % Nome Sezione (o fallback Capitolo) sul margine ESTERNO
+
+% Logo sempre al CENTRO (su tutte le pagine)
+\fancyhead[C]{%
+  \raisebox{-0.6\height}{%
+    \href{https://hknpolito.org/}{\includegraphics[height=1cm]{\doclogoupperpage}}%
+  }%
+}
+
+% (Mantenere qui la definizione della \headrule preesistente se presente)
+% \renewcommand\headrule{...}
+
+--------------------------------------------------------------------------------
+... 7.3 LAYOUT TESTATINA ASIMMETRICO - NOME CAPITOLO SU PAGINA SX E NOME SEZIONE
+SU PAGINA DX IN CASO DI SEZIONE, ALTRIMENTI NOME CAPITOLO, IN MAIUSCOLO -
+NUMERO DI CAPITOLO E NUMERO DI SEZIONE AGGIUNTI ...
+
+Nativamente LaTeX stampa tutto in maiuscolo sulla testatina, aggiungendo ad
+esempio "CAPITOLO N. NOME BREVE CAPITOLO".
+Con questa soluzione si ripristina Solo il maiuscolo. Si avrà quindi:
+"N. NOME BREVE CAPITOLO".
+Si ottiene aggiungendo \MakeUppercase intorno al nome del capitolo. al codice
+del punto 7.2 per quanto riguarda il capitolo.
+Per la sezione si può semplicemente usare il \sectionmark nativo a questo punto,
+che di default ha esattamente lo stile "N.M. NOME SEZIONE", stampa cioè il
+numero e nome della sezione in maiuscolo, senza scrivere "SEZIONE".
+Tuttavia se si usa il comando \sectionmark nativo, verrà stampato il numero
+della sezione, quindi si perde la posssibilità di scegliere se si vuole
+mantenre coerenza tra stampa di capitolo e sezione.
+
+EFFETTO FINALE:
+- Pagine Capitoli: testatina vuota
+- Pagine Pari (SX: Left/Even): nelle posizioni fanchyhdr della testatina:
+    * SX: N° del capitolo. + nome breve capitolo in maiuscolo
+    * CENTRO: logo piccolo dell'associazione, con link ipertestuale
+    * DX: nome associazione, con maiuscolo/minuscolo originale
+- Pagine Dispari (DX: Right/Odd): nelle posizioni fanchyhdr della testatina:
+    * SX: nome associazione, con maiuscolo/minuscolo originale
+    * CENTRO: logo piccolo dell'associazione, con link ipertestuale
+    * DX:   ** Se è presente una sezione, N° della sezione. + nome breve sezione in maiuscolo
+            ** Se non è presente una sezione, N° del capitolo. + nome breve capitolo in maiuscolo
+
+
+
+\fancyhead{} % Pulisce tutte le testatine correnti di default
+
+% GESTIONE DEI REGISTRI (La Memoria)
+
+% Ridefiniamo SOLO il capitolo per implementare il fallback visivo a destra.
+% Usiamo \MakeUppercase e \chaptername per mantenere lo stile nativo di LaTeX.
+\renewcommand{\chaptermark}[1]{%
+  \markboth{\MakeUppercase{\thechapter.\ #1}}% SX: Comportamento nativo
+           {\MakeUppercase{\thechapter.\ #1}}% DX: Fallback visivo intelligente
+}
+
+% NOTA BENE: Non serve ridefinire \sectionmark!
+% Il comportamento nativo di LaTeX inserisce già la sezione in maiuscolo
+% nel registro \rightmark in automatico, senza scrivere "SEZIONE".
+
+% DISPOSIZIONE FISICA SULLA PAGINA (Il Layout)
+
+% Pagine PARI (Even - Foglio di Sinistra)
+\fancyhead[LE]{\leftmark}       % Nome Capitolo sul margine ESTERNO
+\fancyhead[RE]{\DDorganization} % Nome Associazione sul margine INTERNO
+
+% Pagine DISPARI (Odd - Foglio di Destra)
+\fancyhead[LO]{\DDorganization} % Nome Associazione sul margine INTERNO
+\fancyhead[RO]{\rightmark}      % Nome Sezione (o fallback Capitolo) sul margine ESTERNO
+
+% Logo sempre al CENTRO (su tutte le pagine)
+\fancyhead[C]{%
+  \raisebox{-0.6\height}{%
+    \href{https://hknpolito.org/}{\includegraphics[height=1cm]{\doclogoupperpage}}%
+  }%
+}
+
+% (Mantenere qui la definizione della \headrule preesistente se presente)
+% \renewcommand\headrule{...}
+
+--------------------------------------------------------------------------------
+... 7.3 BIS: ALTERNATIVA: SE SI VUOLE AVERE LA POSSIBILITÀ DI TOGLIERE I NUMERI
+DI SEZIONE E DI CAPITOLO ...
+
+EFFETTO FINALE:
+- Pagine Capitoli: testatina vuota
+- Pagine Pari (SX: Left/Even): nelle posizioni fanchyhdr della testatina:
+    * SX: (N° del capitolo.) + nome breve capitolo in maiuscolo
+    * CENTRO: logo piccolo dell'associazione, con link ipertestuale
+    * DX: nome associazione, con maiuscolo/minuscolo originale
+- Pagine Dispari (DX: Right/Odd): nelle posizioni fanchyhdr della testatina:
+    * SX: nome associazione, con maiuscolo/minuscolo originale
+    * CENTRO: logo piccolo dell'associazione, con link ipertestuale
+    * DX:   ** Se è presente una sezione, (N° della sezione.) + nome breve sezione in maiuscolo
+            ** Se non è presente una sezione, (N° del capitolo.) + nome breve capitolo in maiuscolo
+NOTA: per i numeri di sezioni e capitolo tra parentesi, vedi codice di seguito,
+si possono omettere o meno.
+
+Basta trasformare le prime righe del 7.3 nelle seguenti:
+
+% Quando inizia un capitolo: riempie sia SX che DX col nome del capitolo.
+% NOTA: Se non vuoi il numero del capitolo, rimuovi "\thechapter.\ " da entrambe le parentesi.
+% In precisione compare un punto dopo il numero del capitolo, poi uno spazio, come nel comporatmento standard di book.
+
+\renewcommand{\chaptermark}[1]{%
+  \markboth{\MakeUppercase{\thechapter.\ #1}}% SX: Comportamento nativo
+           {\MakeUppercase{\thechapter.\ #1}}% DX: Fallback visivo intelligente
+}
+
+% Quando inizia una sezione: sovrascrive SOLO la memoria di DX.
+% NOTA: Se non vuoi il numero della sezione, rimuovi "\thesection.\ ".
+% In precisione compare un punto dopo il numero della sezione, poi uno spazio, come nel comporatmento standard di book.
+
+\renewcommand{\sectionmark}[1]{\markright{\MakeUppercase{\thesection.\ #1}}}
+
+
+--------------------------------------------------------------------------------
+... 7.4 LAYOUT TESTATINA ASIMMETRICO - NOME CAPITOLO SU PAGINA SX E NOME SEZIONE
+SU PAGINA DX IN CASO DI SEZIONE, ALTRIMENTI NOME CAPITOLO, IN MAIUSCOLO -
+NUMERO DI CAPITOLO E NUMERO DI SEZIONE AGGIUNTI - COMPORTAMENTO ORIGINALE:
+STAMPA DI "CAPITOLO" PER INDICARE IL NUMERO DEL CAPITOLO ...
+
+Nativamente LaTeX stampa tutto in maiuscolo sulla testatina, aggiungendo ad
+esempio "CAPITOLO N. NOME BREVE CAPITOLO". Ripristiniamo questo comportamento
+orignale: basta usare un wrapper del comando originale!
+Per la sezione si può semplicemente usare il \sectionmark nativo a questo punto,
+che di default ha esattamente lo stile "N.M. NOME SEZIONE", stampa cioè il
+numero e nome della sezione in maiuscolo, senza scrivere "SEZIONE".
+
+EFFETTO FINALE:
+- Pagine Capitoli: testatina vuota
+- Pagine Pari (SX: Left/Even): nelle posizioni fanchyhdr della testatina:
+    * SX: CAPITOLO N° del capitolo. + nome breve capitolo in maiuscolo
+    * CENTRO: logo piccolo dell'associazione, con link ipertestuale
+    * DX: nome associazione, con maiuscolo/minuscolo originale
+- Pagine Dispari (DX: Right/Odd): nelle posizioni fanchyhdr della testatina:
+    * SX: nome associazione, con maiuscolo/minuscolo originale
+    * CENTRO: logo piccolo dell'associazione, con link ipertestuale
+    * DX:   ** Se è presente una sezione, N° della sezione. + nome breve sezione in maiuscolo
+            ** Se non è presente una sezione, CAPITOLO N° del capitolo. + nome breve capitolo in maiuscolo
+
+
+\fancyhead{} % Pulisce tutte le testatine correnti di default
+
+% GESTIONE DEI REGISTRI (La Memoria) tramite WRAPPER
+
+% Salviamo il comando nativo di LaTeX (che scrive a SX in maiuscolo e svuota a DX)
+\let\oldchaptermark\chaptermark
+
+% Creiamo il wrapper: esegue l'originale e poi "tappa il buco" a destra
+\renewcommand{\chaptermark}[1]{%
+  \oldchaptermark{#1}% Esegue il nativo: aggiorna \leftmark in maiuscolo e svuota \rightmark
+  \markright{\MakeUppercase{\chaptername\ \thechapter.\ #1}}% Riempie il \rightmark col fallback
+}
+
+% NOTA BENE: Non serve toccare \sectionmark!
+% Il comportamento nativo di LaTeX inserisce già la sezione in maiuscolo
+% nel registro \rightmark in automatico, sovrascrivendo il nostro fallback.
+
+
+% DISPOSIZIONE FISICA SULLA PAGINA (Il Layout HKN)
+
+% Pagine PARI (Even - Foglio di Sinistra)
+\fancyhead[LE]{\leftmark}       % Nome Capitolo sul margine ESTERNO
+\fancyhead[RE]{\DDorganization} % Nome Associazione sul margine INTERNO
+
+% Pagine DISPARI (Odd - Foglio di Destra)
+\fancyhead[LO]{\DDorganization} % Nome Associazione sul margine INTERNO
+\fancyhead[RO]{\rightmark}      % Nome Sezione (o fallback Capitolo) sul margine ESTERNO
+
+% Logo sempre al CENTRO (su tutte le pagine)
+\fancyhead[C]{%
+  \raisebox{-0.6\height}{%
+    \href{https://hknpolito.org/}{\includegraphics[height=1cm]{\doclogoupperpage}}%
+  }%
+}
+
+% (Mantenere qui la definizione della \headrule preesistente se presente)
+% \renewcommand\headrule{...}
 
 \end{comment}
 
