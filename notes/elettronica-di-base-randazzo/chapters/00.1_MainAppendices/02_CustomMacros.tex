@@ -13,6 +13,12 @@
 % Registri (come i contatori \newcounter o le lunghezze \newlength), ma non sono comandi. Inoltre: su LaTeX non ci sono
 % variabili, tuttavia si può usare una macro per contenere qualsiasi cosa, come fosse di fatto una variabile.
 
+\newcommand{\uchapter}[1]{%
+    \chapter*{#1}%
+    \phantomsection%
+    \addcontentsline{toc}{chapter}{#1}%
+    \markboth{#1}{#1}%
+}
 
 \begin{comment}     % --- RIEPILOGO MACRO (COMANDI) CUSTOM DEFINITI NELLA CLASSE "HKNdocument" ---
 

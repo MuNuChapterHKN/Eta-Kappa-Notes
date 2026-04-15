@@ -76,7 +76,7 @@
 \shorttitle{Elettronica}
 \author{Tiziano Mattei}
 \docdate{Primo semestre 2025/2026}
-\docversion{0.1}
+\docversion{0.2}
 
 % --------------------------------------------------- PREAMBLE: END ----------------------------------------------------
 % ------------------------------------------------ DOCUMENT BODY: START ------------------------------------------------
@@ -87,13 +87,71 @@
 % La custom class HKNdocument stampa copertina, licenza e indice in automatico appena è richiamata.
 % Inoltre successivamente attiva \mainmatter, che segna l'inizio del corpo principale del testo, e imposta la
 % numerazione dei capitoli e delle pagine in formato arabo.
+
+% Viene richiamata frontmatter per aggiungere capitoli iniziali non numerati, non previsti dalla custom class
+% HKNDocument
+\frontmatter
+
+\chapter{Introduzione}
+ciao, questa è un'introduzione di prova
+\newpage
+prova nuova pagina
+\newpage
+prova nuova pagina
+\newpage
+prova nuova pagina
+
+\chapter{Prefazione}
+ciao, questa è una prefazione di prova
+\newpage
+prova nuova pagina
+\newpage
+prova nuova pagina
+\newpage
+prova nuova pagina
+
+\uchapter{Prova 1 uchapter}
+ciao, queso è un uchapter di prova
+\newpage
+prova nuova pagina
+\newpage
+prova nuova pagina
+\newpage
+prova nuova pagina
+
 % -------------------------------------------------- FRONTMATTER: END --------------------------------------------------
 % ------------------------------------------------- MAINMATTER: START --------------------------------------------------
+\mainmatter             % Riattivazione del main matter (numerazione capitoli, e numerazione araba pagine)
+
 % \include{chapters/first-chapter}
 % \include{chapters/second-chapter}
 
+\chapter{Cap1}
+ciao, questa è un capitolo di prova
+\newpage
+prova nuova pagina
+\newpage
+prova nuova pagina
+\newpage
+prova nuova pagina
 
+\chapter{Cap2}
+ciao, questa è un capitolo di prova
+\newpage
+prova nuova pagina
+\newpage
+prova nuova pagina
+\newpage
+prova nuova pagina
 
+\uchapter{Prova 2 uchapter}
+ciao, queso è un uchpater di prova
+\newpage
+prova nuova pagina
+\newpage
+prova nuova pagina
+\newpage
+prova nuova pagina
 % -------------------------------------------------- MAINMATTER: END ---------------------------------------------------
 % ------------------------------------------------- BACKMATTER: START --------------------------------------------------
 \backmatter             % Segna la fine del corpo principale del testo, e l'inizio della parte finale, dedicata a
@@ -107,6 +165,32 @@
 
 \input{chapters/00.2_Bibliography/Bibliography_Call_Settings_Explanation.tex}   % Biblliografia: self-eplanatory
 
+\chapter{Cap3}
+ciao, questa è un capitolo di prova
+\newpage
+prova nuova pagina
+\newpage
+prova nuova pagina
+\newpage
+prova nuova pagina
+
+\chapter{Cap4}
+ciao, questa è un capitolo di prova
+\newpage
+prova nuova pagina
+\newpage
+prova nuova pagina
+\newpage
+prova nuova pagina
+
+\uchapter{Prova 3 uchapter}
+ciao, queso è un uchpater di prova
+\newpage
+prova nuova pagina
+\newpage
+prova nuova pagina
+\newpage
+prova nuova pagina
 % -------------------------------------------------- BACKMATTER: END ---------------------------------------------------
 \end{document}
 % ------------------------------------------------- DOCUMENT BODY: END -------------------------------------------------
@@ -131,7 +215,7 @@ righe non sono commentate!
 
 
 
-\begin{comment}
+\begin{comment} CANDIDATE PULL REQUESTS (PR) PER TEMPLATE HKN
 ================================================================================
 PROPOSTE DI PULL REQUEST (PR) PER IL TEMPLATE HKN - PROBLEMI RISCONTRATI
 DURANTE ANALISI STATICA E DINAMICA DEL CODICE - SOLUZIONI PROPOSTE
@@ -247,23 +331,46 @@ PRO:
 2. Nessuna azione o parametro aggiuntivo richiesto all'utente finale.
 3. Risolve nativamente e in modo trasparente i requisiti di biblatex.
 
-------------------------------------------------------------------------------
-PR6: REFACTORING STRUTTURALE E CAPITOLI NON NUMERATI
+--------------------------------------------------------------------------------
+PR6: CAPITOLI NON NUMERATI - SOLUZIONI CON E SENZA MODIFICHE ALLA CUSTOM CLASS
 
 IL PROBLEMA ARCHITETTURALE:
-La custom class HKNdocument chiamad a se \frontmatter, \mainmatter e
+La custom class HKNdocument chiama da sé \frontmatter, \mainmatter e
 \backmatter, suggerendo l'impossibilità di aggiungere capitoli non numerati
 da parte dell'utente, perlomeno non in modo funzionale, tuttavia spesso
 utilizzati, come prefazioni, introduzioni, ringraziamenti, postfazioni, ecc.
 
-La soluzione più immediata, alla quale qualsiasi utente potrebbe venire in
-contro, è l'uso del comando nativo \chapter*{...}, ma che tuttavia introduce
-tre criticità tecniche nel documento generato:
-1. Esclusione dal ToC: Il capitolo non compare nell'Indice Generale.
-2. Header desincronizzati: I registri di memoria non si aggiornano,
+Oltre a ciò, la classe HKNdocument adotta un approccio di basso livello,
+sovrascrivendo i comandi interni di LaTeX (\chapter, \@chapter e \@schapter).
+Questa sovrascrittura ha introdotto un bug grave: avendo rimosso il controllo
+nativo sullo stato del documento (\if@mainmatter), anche riattivando
+esplicitamente \frontmatter o \backmatter nel main.tex, i capitoli
+continuerebbero ad incrementare il contatore e apparirebbero numerati
+nell'Indice Generale.
+
+La soluzione più immediata, facilmente identificabile da ogni utente essendo
+piuttosto nota, è l'uso del comando nativo \chapter*{...}, ma che tuttavia
+introduce tre criticità tecniche nel documento generato:
+1. Esclusione dal ToC: \chapter genera capitoli non numerati, ma anche NON
+   INSERITI NELL'INDICE (NON INDICIZZATI).Quindi il capitolo non numerato non
+   comparirebbe nell'Indice Generale, e non è sempre il caso.
+2. Header (testatine) desincronizzati: I registri di memoria non si aggiornano,
    lasciando nelle intestazioni in alto il titolo del capitolo precedente.
 3. Bug ipertestuale: Forzando l'inserimento manuale nel ToC, 'hyperref'
    non trova un'ancora valida e fa puntare il link alla pagina sbagliata.
+
+I MOTIVI DELLA VECCHIA RIDEFINIZIONE (COSA VOLEVA OTTENERE IL PM):
+
+Il Project Manager aveva ridefinito \chapter per ottenere due feature
+specifiche che mancano nella classe 'book' originale:
+1. Disaccoppiamento ToC (indice)/Header (Testatina o Intestazione):
+   Nello standard, il titolo breve [Opzione] viene usato sia per l'Indice (ToC)
+   sia per la testatina in alto (Header). Il PM voleva forzare l'uso del titolo
+   lungo nel ToC e del titolo breve esclusivamente nell'Header.
+2. Header per capitoli stellati: Nello standard, \chapter*{...} non aggiorna
+   mai le testatine. Il PM voleva che anche i capitoli non numerati stellati
+   (quindi non numerati e non riportati nell'indice) aggiornassero le testatine
+   della pagina, affinchè comparisse il titolo corretto in essa.
 
 LE SOLUZIONI ANALIZZATE:
 
@@ -272,14 +379,25 @@ SOLUZIONE 1: INTERRUTTORI DI STATO NATIVI (\frontmatter e \backmatter)
 contatore dei capitoli ma mantengono attivi l'indicizzazione e l'aggiornamento
 degli header. Possono essere richiamati in main.tex di nuovo, nonostante siano
 già presenti in HKNdocument.cls, senza causare errori (sono inoltre
-idempotenti, cioè chiamarli più volte consecutimente non ne cambia il
+idempotenti, cioè chiamarli più volte consecutivamente non ne cambia il
 comportamento).
 - Pro: Gestisce correttamente la numerazione romana/araba delle pagine.
 - Contro: Modifica lo stato globale. Non può essere usato nel mezzo del
   documento senza sballare completamente la numerazione dei capitoli
-  successivi.
+  successivi. Inoltre come si è scoperto durante le prove, per funzionare
+  correttamente ha bisogno di alcune modifiche interne alla custom class, a
+  causa di com'è stata programmata. A seguire è fornita una lunga e completa
+  spiegazione per comprendere approfonditamente e risolvere.
 
 SOLUZIONE 2: CREAZIONE DELLA CUSTOM MACRO \uchapter
+
+NOTA: i simboli "%" prima degli a capo sono utili per evitare che vengano
+inseriti comandi di new line (spazi bianchi) indesiderati nel documento
+generato. Letteralmente vengono "commentati via". Sempre consigliati metterli
+quando si definiscono macro che generano blocchi di testo, per evitare
+problemi di formattazione. In realtà nella macro a seguire non sono necessari,
+se non dopo la parentesi graffa iniziale, ma è comunque good practice
+inserirli.
 
 \newcommand{\uchapter}[1]{%
     \chapter*{#1}%
@@ -290,20 +408,148 @@ SOLUZIONE 2: CREAZIONE DELLA CUSTOM MACRO \uchapter
 
 Si tratta di un wrapper che avvolge \chapter* con i comandi correttivi
 necessari:
-- \phantomsection: crea l'ancora invisibile per hyperref (per link nell'indice)
+- \phantomsection: crea l'ancora invisibile per hyperref (per link ToC).
 - \addcontentsline: inietta la voce nel ToC.
-- \markboth: forza l'aggiornamento degli header (testatina o intestazione) di
-  pagina.
+- \markboth: forza l'aggiornamento degli header (testatina) di pagina.
 
-BEST PRACTICE DA ADOTTARE (LA SOLUZIONE OTTIMALE E IBRIDA):
+Funziona perfettamente, ma se è fornita dal software di base una feature analoga
+così specifica e ben integrata, la soluzione migliore è sfruttare quella, per
+risolvere in automatico anche tutti i problemi ai quali non si è pensato, e che
+potrebbero emergere solo successivamente.
+
+............... APPROFONDIMENTI TECNICI E CORREZIONI DELLA CLASSE ..............
+
+--- FIX A: RIPRISTINO DEL CONTROLLO CONDIZIONALE NATIVO ---
+Il malfunzionamento di \frontmatter in HKNdocument è dovuto alla rimozione
+del controllo \if@mainmatter nella ridefinizione di \@chapter. Per ripristinare
+il comportamento standard della classe 'book', il codice va corretto così:
+
+\def\@chapter[#1]#2{%
+  \ifnum \c@secnumdepth >\m@ne
+    \if@mainmatter % <--- Ripristino della logica di stato nativa
+      \refstepcounter{chapter}%
+      \typeout{\@chapapp\space\thechapter.}%
+      \addcontentsline{toc}{chapter}{\protect\numberline{\thechapter}#2}%
+    \else
+      \addcontentsline{toc}{chapter}{#2}% Caso Front/Backmatter
+    \fi
+  \else
+    \addcontentsline{toc}{chapter}{#2}%
+  \fi
+  ... }
+
+--- FIX B: WRAPPER MODERNO E RETROCOMPATIBILE (SOLUZIONE MIGLIORE) ---
+È sempre sconsigliabile fare modifiche alle parti fondamentali di un software,
+essendo queste coinvolte in molte altre funzioni e pacchetti, pena
+l'imprevedibilità degli effetti delle modifiche fatte su tutto il resto,
+e bug fastidiosi da individuare e risolvere. Per questo motivo, invece di
+riscrivere il motore interno di LaTeX, o più precisamente le direttive di basso
+livello relative al comando \chapter, si suggerisce di utilizzare un wrapper,
+per incapsulare il comando originale, sfruttando le possibilità offerte dal
+pacchetto 'xparse'. Questo permette di mantenere la logica e le funzionalità
+originali della classe 'book' aggiungendo le funzionalità richieste (indicate
+in precedenza).
+
+NOTA SU XPARSE E LATEX3: È necessario aggiungere \RequirePackage{xparse}
+all'inizio della classe per garantire la retrocompatibilità con vecchie
+distribuzioni TeX antecedenti al 2020. Dal 2020 in poi, xparse e le
+funzioni di LaTeX3 sono state integrate nativamente nel kernel standard.
+Non bisogna modificare l'istruzione \NeedsTeXFormat{LaTeX2e} (es. in
+LaTeX3), poiché LaTeX3 non è mai stato rilasciato come formato a sé
+stante, ma è un ambiente di programmazione integrato dentro LaTeX2e.
+
+
+% --------------------------
+% CHAPTER COMMAND WRAPPER (xparse)
+% --------------------------
+% Conserva il comando nativo della classe book
+\let\oldchapter\chapter         % Backup del comando originale
+                                % Supporta la variante con *, come lo stesso comando chapter.
+
+% Ridefinisce \chapter per disaccoppiare TOC e Header, e gestire i capitoli stellati
+\RenewDocumentCommand{\chapter}{ s o m }{%
+    \IfBooleanTF{#1}{%
+        % CASO 1: Capitolo stellato \chapter*[]{Lungo}
+        \IfNoValueTF{#2}{%
+            % CASO 1-A: chapter* Senza titolo breve
+            \oldchapter*{#3}%
+            \chaptermark{#3}% Aggiorna l'header anche se non numerato
+        }{%
+            % CASO 1-B: chapter* con titolo breve \chapter*[Breve]{Lungo}
+            \oldchapter*{#3}% Invia il titolo LUNGO alla pagina
+            \chaptermark{#2}% Sovrascrive l'header con il titolo BREVE
+                            % Non invia nulla al ToC nulla, come di norma per \chapter*
+        }%
+    }{%
+        % CASO 2: Capitolo normale \chapter
+        \IfNoValueTF{#2}{%
+            % CASO 2-A: chapter Senza titolo breve
+            \oldchapter{#3}%
+        }{%
+            % CASO 2-B: chapter con titolo breve \chapter[Breve]{Lungo}
+            \oldchapter{#3}% Invia il titolo LUNGO al TOC e alla pagina
+            \chaptermark{#2}% Sovrascrive l'header con il titolo BREVE
+        }%
+    }%
+}
+
+SPIEGAZIONE DEL FUNZIONAMENTO E NUOVE FEATURE:
+1. Meccanismo di delega: Tramite \let, il wrapper crea uno "snapshot" del
+   comando nativo (\oldchapter). Quando l'utente invoca \chapter, il wrapper
+   intercetta la chiamata e decide come istruire \oldchapter.
+2. Il wrapper \chapter così ridefinito inoltre ha supporto nativo per la
+   variante stellata (non numerata e non indicizzata), che viene correttamente
+   passata a \oldchapter* per mantenere la coerenza con il comportamento
+   standard di LaTeX.
+3. Supporto titolo breveesteso a \chapter*: In LaTeX standard, \chapter* non
+   accetta un argomento opzionale tra quadre. Questo wrapper introduce questa
+   feature: usando \chapter*[Titolo Breve]{Titolo Lungo}, il sistema userà il
+   titolo lungo per la pagina e forzerà il titolo breve nell'header, qualora sia
+   stato dichiarato.
+4. Disaccoppiamento garantito: Nel caso di capitoli numerati, il titolo
+   lungo (#3) viene passato a \oldchapter per essere inserito nell'indice,
+   mentre l'header viene immediatamente sovrascritto con il titolo breve (#2).
+5. Integrità degli stati: Poiché il wrapper si appoggia a \oldchapter, eredita
+   automaticamente il controllo \if@mainmatter nativo. Questo risolve il bug
+   della numerazione errata nel frontmatter senza bisogno di logiche extra.
+
+
+--- FIX C: MONKEY PATCHING (OVERRIDE A RUNTIME) ---
+Il "Monkey Patching" consiste nel modificare il comportamento di un codice
+a runtime, cioè nel momento dell'esecuzione senza alterare fisicamente il file
+sorgente originale (la classe .cls).In questo caso, lo si ottiene con una
+sovrascrittura a posteriori, eseguirt attraverso altri file lanciati
+all'eseuzione, come il main.tex, senza toccare la classe
+
+Più precisamente sovrascrivendo la macro dei comandi nel preambolo:
+per applicare questo fix, è sufficiente copiare l'intero blocco di codice
+che ridefinisce \@chapter (esattamente come mostrato nel FIX A, inclusa
+la correzione del controllo condizionale), circondato da \makeatletter e
+\makeatother, e incollarlo così com'è direttamente nel preambolo.
+
+ETIMOLOGIA: Il termine deriva da "Guerrilla Patching" (patch furtive), mutato
+poi in "Gorilla" per assonanza, e quindi trasformato infine in "Monkey",
+coadiuvato anche dalla terminologia "To Monkey Around" (nel senso di armeggiare
+in senso poco chiaro) o "Monkey Business" (affare losco o imbroglio), indicando
+un codice che "armeggia" (monkeys around) con le funzioni interne per correggere
+bug in modo estemporaneo (cosa che per forza di cosa è poco chiara o trasparente
+per l'utente che legge il codice).
+
+------------------------------------------------------------------------------
+BEST PRACTICE DA ADOTTARE (LA SOLUZIONE OTTIMALE E IBRIDA)
+------------------------------------------------------------------------------
 Per garantire la massima stabilità tipografica, si adotta un approccio
-combinato che richiede una pulizia della classe base e la pre-strutturazione
-del file logico principale.
+combinato che richiede una pulizia della classe base, la pre-strutturazione
+del file logico principale, ed anche l'introduzione della custom macro
+\uchapter{}, per gestire i casi più particolari di capitoli non numerati
+nel mezzo del mainmatter, ma che al contrario di \chapter* si vuole che
+compaiono nell'indice, senza sballare la numerazione.
 
 1. Modifica alla classe custom (HKNdocument.cls):
-   Rimozione delle chiamate automatiche a \frontmatter (allocate in
-   \AtBeginDocument) e \backmatter (in \AfterEndDocument) nella custom class,
-   che divengono superflue per la ristrutturazione a seguire.
+   - Rimozione delle chiamate automatiche a \frontmatter e \backmatter.
+   - Implementazione del "Wrapper Moderno" (FIX B) per \chapter, eliminando
+     le vecchie ridefinizioni manuali di \@chapter e \@schapter.
+   - Inserimento di \RequirePackage{xparse} per la gestione dei comandi.
 
 2. Ristrutturazione del template 'main.tex':
    Si demanda il controllo logico al file 'main.tex', che verrà distribuito
@@ -315,8 +561,9 @@ del file logico principale.
    B) MAINMATTER: Il corpo del documento, dove si riattivano i contatori
       tramite \mainmatter.
       - Eccezioni interne: Per inserire sezioni non numerate al centro del
-        documento (es. Intermezzi Matematici), si utilizzerà esclusivamente
-        la macro \uchapter già citata.
+        documento (es. Intermezzi Matematici), si consiglia di mantenere
+        definita e utilizzare la macro \uchapter per evitare di alterare
+        la sequenza logica dei contatori con gli interruttori nativi.
       - Appendici: Devono essere collocate rigorosamente alla fine di questa
         sezione (attivando \appendix) per preservare la classificazione
         alfabetica (indicate nativamente con lettere anziché numeri).
@@ -324,6 +571,23 @@ del file logico principale.
    C) BACKMATTER: Avviato con \backmatter per spegnere la numerazione.
       Ospita ringraziamenti, postfazioni e la stampa della bibliografia
       (utilizzando l'istruzione \printbibliography[heading=bibintoc]).
+
+RIASSUMENDO si ottiene, in ogni caso con le giuste testatine (o header o
+intestazioni) e con la corretta numerazione di pagina:
+- \chapter: capitolo inserito nell'indice (indicizzato in generale), tale che
+  come di norma nella classe book:
+    * se chiamato in mainmatter: è anche numerato
+    * se chiamato in frontmatter o backmatter: è non numerato
+- \chapter*: capitolo non numerato e non indicizzato (escluso dall'indice),
+  come di norma nella classe book
+- \uchapter: capitolo non numerato, ma sempre inserito nell'indice (indicizzato)
+
+OSSERVAZIONE: Questa soluzione, incapsulando i comandi LaTeX originali, NON
+altera in alcun modo le funzionalità estetiche previste dalla classe HKN. Tutte
+le feature originarie (come l'aggiornamento automatico degli header) continuano
+a funzionare perfettamente, e in modo stabile grazie alle correzioni.
+
+
 
 \end{comment}
 
