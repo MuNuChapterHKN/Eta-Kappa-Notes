@@ -198,7 +198,8 @@ prova nuova pagina
 Parte di Testo completamente ignorata dal compilatore! Come prova, queste prime
 righe non sono commentate!
 
-% Sistemare:
+% DA SISTEMARE
+
 % 1.
 % \myuline non sillaba, esempio a seguire da usare come test.
 % \chapter{prova}
@@ -211,6 +212,8 @@ righe non sono commentate!
 % a non tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 % Aenean ut gravida lorem.
 % }
+
+% 2. Chiamata Chaptermark nella licenza
 
 
 
@@ -374,7 +377,7 @@ specifiche che mancano nella classe 'book' originale:
 
 LE SOLUZIONI ANALIZZATE:
 
-SOLUZIONE 1: INTERRUTTORI DI STATO NATIVI (\frontmatter e \backmatter)
+... SOLUZIONE 1: INTERRUTTORI DI STATO NATIVI (\frontmatter e \backmatter) ...
 È il meccanismo nativo della classe 'book'. Questi comandi spengono il
 contatore dei capitoli ma mantengono attivi l'indicizzazione e l'aggiornamento
 degli header. Possono essere richiamati in main.tex di nuovo, nonostante siano
@@ -386,38 +389,143 @@ comportamento).
   documento senza sballare completamente la numerazione dei capitoli
   successivi. Inoltre come si è scoperto durante le prove, per funzionare
   correttamente ha bisogno di alcune modifiche interne alla custom class, a
-  causa di com'è stata programmata. A seguire è fornita una lunga e completa
-  spiegazione per comprendere approfonditamente e risolvere.
+  causa di com'è stata programmata.
+A seguire è fornita una lunga e completa spiegazione per comprendere
+approfonditamente e risolvere i problemi introdotti dalla custom class. Se ne
+raccomanda un'attenta lettura.
 
-SOLUZIONE 2: CREAZIONE DELLA CUSTOM MACRO \uchapter
-
-NOTA: i simboli "%" prima degli a capo sono utili per evitare che vengano
-inseriti comandi di new line (spazi bianchi) indesiderati nel documento
-generato. Letteralmente vengono "commentati via". Sempre consigliati metterli
-quando si definiscono macro che generano blocchi di testo, per evitare
-problemi di formattazione. In realtà nella macro a seguire non sono necessari,
-se non dopo la parentesi graffa iniziale, ma è comunque good practice
-inserirli.
-
-\newcommand{\uchapter}[1]{%
-    \chapter*{#1}%
-    \phantomsection%
-    \addcontentsline{toc}{chapter}{#1}%
-    \markboth{#1}{#1}%
-}
-
-Si tratta di un wrapper che avvolge \chapter* con i comandi correttivi
-necessari:
-- \phantomsection: crea l'ancora invisibile per hyperref (per link ToC).
-- \addcontentsline: inietta la voce nel ToC.
-- \markboth: forza l'aggiornamento degli header (testatina) di pagina.
-
+... SOLUZIONE 2: CREAZIONE DELLA CUSTOM MACRO \uchapter ...
 Funziona perfettamente, ma se è fornita dal software di base una feature analoga
 così specifica e ben integrata, la soluzione migliore è sfruttare quella, per
 risolvere in automatico anche tutti i problemi ai quali non si è pensato, e che
 potrebbero emergere solo successivamente.
+Usare queste macro esclusivamente per i rari casi in cui si voglia inserire un
+capitolo non numerato nel mezzo del mainmatter, senza sballare la numerazione
+di pagine e capitoli. Per tutto il resto, è consigliato usare la soluzione 1,
+assieme alle correzioni alla custom class spiegate a seguire.
+
+NOTA: nella definizioe di macro, i simboli "%" prima degli a capo sono utili per
+evitare che vengano inseriti comandi di new line o di space (spazi bianchi in
+generale: un "a capo" diventa uno spazio, due o più "a capo" diventano un "a
+capo" nel pdf) indesiderati nel documento generato. Letteralmente vengono
+"commentati via". Come good pratice generale, è consigliato metterli sempre ogni
+qual volta si va a capo, in particolare quando si definiscono macro che generano
+blocchi di testo. Questo consenste di evitare in generale problemi di
+formattazione, particolarmente subdoli da identificare nel codice sorgente, e da
+risolvere). Altrimenti le Macro possono essere dichiarate tutte su una riga, ma
+è consigliabile solo per macro molto semplici e brevi. In realtà nella macro a
+seguire non sono necessari, se non dopo la parentesi graffa iniziale, ma è
+comunque good practice inserirli.
+
+NOTA: tutte le versioni presentati a seguire costituiscono dei wrapper, ossia
+del codice che avvolge \chapter* con i comandi correttivi necessari, per
+aggiungere le features mancanti (indicizzazione, aggiornamento header, link
+ipertestuale per l'indice in tutte le versioni, e il supporto agli short-title
+per le versioni 2 e 3, nativamente non supportato da chapter*)
+
+NOTA: in tutte le versioni, viene passato il titolo del chapter sia al leftmark
+(testatina pagine SX: di norma contiene il titolo del capitolo) che al rightmark
+(testatina pagine DX: di norma contiene il tittolo delle sezioni se ce ne sono,
+altrimenti rimane vuota), con markboth, per evitare le testatine di destra
+completamente vuote (un problema noto di LaTeX): infatti di norma non si usano
+le sezioni nei paragrafi non numerati (questa è la consuetudine), e il rightmark
+rimarrebbe vuoto (usando \markboth{#1}{} ad es.), lasciando così la testatina di
+destra vuota. Utilizzando \markboth invece il problema si risolve, e in modo
+flessibile: riempie la testatine di destra, ma qualora si aggiungessero sezioni,
+queste in automatico sovrascriverebbero il rightmark, lasciando così la
+testatina di destra con il giusto titolo di sezione, e non più con il titolo del
+capitolo. Tuttavia questo problema non si pone mai nella custom class
+HKNdocument (al momento della scrittura del commento: versione della class
+"2024/12/08 v1.5 Base class for publishing"), in quanto non stampa allo stato
+attuale il rightmark, ma solo il leftmark, in tutte le testatine. Sarebbe da
+correggere.
+
+% VERSIONE 1: senza supporto agli short-title (dovrebbe essere il parametro opzionale)
+% \newcommand{\uchapter}[1]{%
+%     \chapter*{#1}%                          % Chiama capitolo non numerato non indicizzato
+%     \phantomsection%                        % Aggiunge ancora per ipertesti (pacchetto hyperref), per indice
+%     \addcontentsline{toc}{chapter}{#1}%     % aggiunge il capitolo all'indice
+%     \markboth{#1}{#1}%                      % Aggiorna il contenuto della testatina
+% }
+
+
+% VERSIONE 2: supporto agli short-title in accordo al comando nativo \chapter[Short Title]{Long Title}, scritta
+% sfruttando xparse, che offre direttive di alto livello per definire macro avanzate.
+% Richiede per retrocompatibilità di aggiungere \RequirePackage{xparse} alla custom class, o \usepackage{xparse} nel
+% preambolo del main.tex.
+
+\NewDocumentCommand{\uchapter}{ o m }{%         % Dichiaratore di macro di xparse, più flessibile:
+%                                               % o - optional: argomento opzionale (short title). Argomento #1.
+%                                               % m - mandatory: argomento obbligatorio (long title). Argomento #2.
+    \chapter*{#2}%                              % Chiamata a capitolo non numerato e non indicizzato
+    \phantomsection%                            % Aggiunge ancora per ipertesti (pacchetto hyperref), per indice
+    \addcontentsline{toc}{chapter}{#2}%         % Inserisce titolo LUNGO nell'indice
+    \IfNoValueTF{#1}{%                          % Controllo Condizionale: controlla se è stato passato il titolo breve
+        \markboth{#2}{#2}%                      % Se manca il titolo breve, usa il titolo lungo nella testatina
+    }{%
+        \markboth{#1}{#1}%                      % Se il titolo breve è presente, usa il titolo breve nella testatina
+    }%
+}
+
+NOTA SU XPARSE E LATEX3: È necessario aggiungere \RequirePackage{xparse}
+all'inizio della classe, oppure \usepackage{xparse} nel preambolo del main.tex
+per garantire la retrocompatibilità con vecchie distribuzioni TeX antecedenti al
+2020. Dal 2020 in poi, xparse e le funzioni di LaTeX3 sono state integrate
+nativamente nel kernel standard. Non bisogna modificare l'istruzione
+\NeedsTeXFormat{LaTeX2e} (es. in LaTeX3) presente nella custom class, poiché
+LaTeX3 non è mai stato rilasciato come formato a sé stante, ma è un ambiente di
+programmazione integrato dentro LaTeX2e.
+
+% VERSIONE 3: SFRUTTANDO SOLO DIRETTIVE DI BASSO LIVELLO (SENZA xparse)
+
+% Vengono definiti in sostanza due comandi (motori) diversi, chiamati a seconda
+% di come l'utente scrive il comando di chiamata \uchapter, che a livello di
+% programmazione non è altro che un comando di facciata o dispatcher (similmente
+% a quello che fa il comando \chapter, che chiama a sua vota \@chapter o
+% \@schapter a seconda che sia usato con o senza asterisco ("star"))
+% In realtà il 3° comando, ossia il Dispatcher, potrebbe essere messo come primo
+% nella lista, essendo TeX un espansore di macro "pigro" (non controlla in
+% anticipo se le macro inserite nelle definizioni esistano o meno: vengono
+% compilate tutte insieme, poi se ci sono problemi, si verificano alla prima
+% chiamata).
+% Qui si è preferito rispettare l'ordine logico dei linguaggi più ferrei come il
+% C, dove non si possono scrivere comandi prima di averli dichiarati.
+
+\makeatletter
+
+% 1. Sottomotore CON argomento opzionale (\uchapter[Breve]{Lungo})
+\def\@uchapter@withopt[#1]#2{%
+    \chapter*{#2}%
+    \phantomsection%
+    \addcontentsline{toc}{chapter}{#2}%
+    \markboth{#1}{#1}% <-- Usa il Titolo Breve (#1) per la memoria
+}
+
+% 2. Sottomotore SENZA argomento opzionale (\uchapter{Lungo})
+\def\@uchapter@noopt#1{%
+    \chapter*{#1}%
+    \phantomsection%
+    \addcontentsline{toc}{chapter}{#1}%
+    \markboth{#1}{#1}% <-- Usa il Titolo Lungo (#1) per la memoria
+}
+
+% 3. Il Dispatcher o "Semaforo"
+% \@ifnextchar guarda il carattere successivo nel testo dell'utente.
+\newcommand{\uchapter}{%
+    \@ifnextchar[%
+        {\@uchapter@withopt}% Se vede una parentesi quadra '['
+        {\@uchapter@noopt}% Se NON vede la parentesi quadra
+}
+
+\makeatother
+
+
+
 
 ............... APPROFONDIMENTI TECNICI E CORREZIONI DELLA CLASSE ..............
+Come risolvere il problema dei capitoli non numerati nel modo migliore,
+correggendo la custom class, per recuperare il supporto a questi dall'origine,
+o (nel caso dei FIX B) per recuperare il supporto nativo a questi.
 
 --- FIX A: RIPRISTINO DEL CONTROLLO CONDIZIONALE NATIVO ---
 Il malfunzionamento di \frontmatter in HKNdocument è dovuto alla rimozione

@@ -55,3 +55,4 @@
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qse stesso).\\E$"}
 {"rule":"ER_01_002","sentence":"^\\QSpiegare agli studenti che quel magic comment è utilissimo, ma va copiato in cima ai file secondari (es.\\E$"}
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qnella cartella /chapters).\\E$"}
+{"rule":"UNPAIRED_BRACKETS","sentence":"^\\Q[\\E$"}

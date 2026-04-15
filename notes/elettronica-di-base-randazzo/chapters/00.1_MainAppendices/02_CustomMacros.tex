@@ -13,12 +13,118 @@
 % Registri (come i contatori \newcounter o le lunghezze \newlength), ma non sono comandi. Inoltre: su LaTeX non ci sono
 % variabili, tuttavia si può usare una macro per contenere qualsiasi cosa, come fosse di fatto una variabile.
 
-\newcommand{\uchapter}[1]{%
-    \chapter*{#1}%
-    \phantomsection%
-    \addcontentsline{toc}{chapter}{#1}%
-    \markboth{#1}{#1}%
+% NOTA BENE: COME SCRIVERE MACRO SU PIÙ RIGHE - ATTENZIONE AGLI A CAPO - TIPICI PROBLEMI DI FORMATTAZIONE
+% Nella definizioe di macro, i simboli "%" prima degli a capo sono utili per evitare che vengano inseriti comandi di new
+% line o di space (spazi bianchi in generale: un "a capo" diventa uno spazio, due o più "a capo" diventano un "a capo"
+% nel pdf) indesiderati nel documento generato. Letteralmente vengono "commentati via". Come good pratice generale, è
+% consigliato metterli sempre ogni qual volta si va a capo, in particolare quando si definiscono macro che generano
+% blocchi di testo. Questo consenste di evitare in generale problemi di formattazione, particolarmente subdoli da
+% identificare nel codice sorgente, e da risolvere). Altrimenti le Macro possono essere dichiarate tutte su una riga, ma
+% è consigliabile solo per macro molto semplici e brevi.
+
+% -------------------------------------- CAPITOLI INDICIZZATI MA NON NUMERATI ------------------------------------------
+
+% COMANDO per creazione di CAPITOLI NON NUMERATI MA INDICIZZATI (APPAIONO NELL'INDICE), con corretto aggiornamento delle
+% testatine (header, funzionante indipendentemente dalla programmazione della custom class HKNdocument, e senza problemi
+% di compatibilità con essa).
+
+% In generale NON USARE QUESTO COMANDO (consiglio valido per tutte le versioni presentate) ma preferisci \chapter
+% nall'interno dell'attivazione di \frontmatter e \backmatter, qualora si debbano aggiungere capitoli non numerati
+% ripsettivamente all'inizio e alla fine del documento. Per maggiori chiarimenti, leggi la PR 6 nel postambolo del
+% main.tex, c'è una lunga spiegazione. Questo comando va usato solo per intermezzi del mainmatter, nel raro caso in cui
+% non vadano numerati.
+
+% NOTA: tutte le versioni presentati a seguire costituiscono dei wrapper, ossia del codice che avvolge \chapter* con i
+% comandi correttivi necessari, per aggiungere le features mancanti (indicizzazione, aggiornamento header, link
+% ipertestuale per l'indice in tutte le versioni, e il supporto agli short-title per le versioni 2 e 3, nativamente non
+% supportato da chapter*)
+
+% NOTA: in tutte le versioni, viene passato il titolo del chapter sia al leftmark (testatina pagine SX: di norma
+% contiene il titolo del capitolo) che al rightmark (testatina pagine DX: di norma contiene il tittolo delle sezioni se
+% ce ne sono, altrimenti rimane vuota), con markboth, per evitare le testatine di destra completamente vuote (un
+% problema noto di LaTeX): infatti di norma non si usano le sezioni nei paragrafi non numerati (questa è la
+% consuetudine), e il rightmark rimarrebbe vuoto (usando \markboth{#1}{} ad es.), lasciando così la testatina di destra
+% vuota. Utilizzando \markboth invece il problema si risolve, e in modo flessibile: riempie la testatine di destra, ma
+% qualora si aggiungessero sezioni, queste in automatico sovrascriverebbero il rightmark, lasciando così la testatina di
+% destra con il giusto titolo di sezione, e non più con il titolo del capitolo. Tuttavia questo problema non si pone mai
+% nella custom class HKNdocument (al momento della scrittura del commento: versione della class "2024/12/08 v1.5 Base
+% class for publishing"), in quanto non stampa allo stato attuale il rightmark, ma solo il leftmark, in tutte le
+% testatine. Sarebbe da correggere.
+
+% VERSIONE 1: senza supporto agli short-title (dovrebbe essere il parametro opzionale)
+% \newcommand{\uchapter}[1]{%
+%     \chapter*{#1}%                          % Chiama capitolo non numerato non indicizzato
+%     \phantomsection%                        % Aggiunge ancora per ipertesti (pacchetto hyperref), per indice
+%     \addcontentsline{toc}{chapter}{#1}%     % aggiunge il capitolo all'indice
+%     \markboth{#1}{#1}%                      % Aggiorna il contenuto della testatina
+% }
+
+% VERSIONE 2: supporto agli short-title in accordo al comando nativo \chapter[Short Title]{Long Title}, scritta
+% sfruttando xparse, che offre direttive di alto livello per definire macro avanzate.
+% Richiede per retrocompatibilità di aggiungere \RequirePackage{xparse} alla custom class, o \usepackage{xparse} nel
+% preambolo del main.tex.
+
+\NewDocumentCommand{\uchapter}{ o m }{%         % Dichiaratore di macro di xparse, più flessibile:
+%                                               % o - optional: argomento opzionale (short title). Argomento #1.
+%                                               % m - mandatory: argomento obbligatorio (long title). Argomento #2.
+    \chapter*{#2}%                              % Chiamata a capitolo non numerato e non indicizzato
+    \phantomsection%                            % Aggiunge ancora per ipertesti (pacchetto hyperref), per indice
+    \addcontentsline{toc}{chapter}{#2}%         % Inserisce titolo LUNGO nell'indice
+    \IfNoValueTF{#1}{%                          % Controllo Condizionale: controlla se è stato passato il titolo breve
+        \markboth{#2}{#2}%                      % Se manca il titolo breve, usa il titolo lungo nella testatina
+    }{%
+        \markboth{#1}{#1}%                      % Se il titolo breve è presente, usa il titolo breve nella testatina
+    }%
 }
+
+% VERSIONE 3: sfruttando solo direttive di basso livello (senza xparse)
+% Vengono definiti in sostanza due comandi (motori) diversi, chiamati a seconda
+% di come l'utente scrive il comando di chiamata \uchapter, che a livello di programmazione non è altro che un comando
+% di facciata o dispatcher (similmente a quello che fa il comando \chapter, che chiama a sua vota \@chapter o \@schapter
+% a seconda che sia usato con o senza asterisco ("star")).
+% In realtà il 3° comando, ossia il Dispatcher, potrebbe essere messo come primo nella lista, essendo TeX un espansore
+% di macro "pigro" (non controlla in anticipo se le macro inserite nelle definizioni esistano o meno: vengono compilate
+% tutte insieme, poi se ci sono problemi, si verificano alla prima chiamata). Qui si è preferito rispettare l'ordine
+% logico dei linguaggi più ferrei come il C, dove non si possono scrivere comandi prima di averli dichiarati.
+
+% \makeatletter%                              % Rende la chiocchiala @, chiamata "at" in inglese, un carattere normale
+% %                                           % rendendo possibile usarlo niella definizione di macro.
+% %
+% % 1. Sottomotore CON argomento opzionale (\uchapter[Breve]{Lungo})
+% \def\@uchapter@withopt[#1]#2{%              % Definisce il comando da chiamare quando è presente l'arg. opzionale
+% %                                           % #1 è il titolo breve (tra quadre, sia nella dichiarazione che nell'uso)
+% %                                           % #2 è il titolo lungo (tra graffe nell'uso, senza graffe nella dichiaraz.)
+%     \chapter*{#2}%                          % Chiamata a capitolo non numerato e non indicizzato
+%     \phantomsection%                        % Aggiunge ancora per ipertesti (pacchetto hyperref), per indice
+%     \addcontentsline{toc}{chapter}{#2}%     % Inserisce titolo LUNGO nell'indice
+%     \markboth{#1}{#1}%                      % Usa il titolo BREVE nella testatina
+% }
+
+% % 2. Sottomotore SENZA argomento opzionale (\uchapter{Lungo})
+% \def\@uchapter@noopt#1{%                    % Definisce il comando da chiamare quando è assente l'arg. opzionale
+% %                                           % #1 è il titolo lungo (tra graffe nell'uso, senza graffe nella dichiaraz.)
+%     \chapter*{#1}%                          % Chiamata a capitolo non numerato e non indicizzato
+%     \phantomsection%                        % Aggiunge ancora per ipertesti (pacchetto hyperref), per indice
+%     \addcontentsline{toc}{chapter}{#1}%     % Inserisce titolo LUNGO nell'indice
+%     \markboth{#1}{#1}%                      % Usa il titolo LUNGO nella testatina
+% }
+
+% % 3. Il Dispatcher o "Semaforo"
+% % \@ifnextchar guarda il carattere successivo nel testo dell'utente.
+% \newcommand{\uchapter}{%                    % Definisce il comando da chiamare per generare capitoli indicizz. non num.
+%     \@ifnextchar[%                          % Controllo condizionale: se al comando segue una parentesi quadra '['
+%         {\@uchapter@withopt}%               % Chiama il comando con argomento opzionale: \@uchapter@withopt
+%         {\@uchapter@noopt}%                 % Altrimenti, chiama il comando senza argomento opzionale: \@uchapter@noopt
+% }
+
+% \makeatother                                % Rende la chiocchiala @, chiamata "at" in inglese, di nuovo un carattere
+% %                                           % speciale, rendendo impossibile usarlo nella definizione o chiamata di
+% %                                           % macro (ripristina la condizione di default: @ è usata per proteggere
+% %                                           % macro interne di basso livello, che non vanno ne chiamate ne modificate).
+
+
+
+% ---------------------------- CCUSTOM MACRO DEFINITI NELLA CUSTOM CLASS HKNdocument -----------------------------------
 
 \begin{comment}     % --- RIEPILOGO MACRO (COMANDI) CUSTOM DEFINITI NELLA CLASSE "HKNdocument" ---
 

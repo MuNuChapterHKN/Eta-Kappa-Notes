@@ -25,6 +25,19 @@
 % \usepackage[italian]{babel}       % [PLUG & PLAY] [OVERRIDE] traduzione strutturale (termini associati al documento:
                                     % capitolo, sezione, eccetera) in italiano, e sillabazione italiana.
 
+% --- PACCHETTI PER SCRITTURA DI MACRO AVANZATE ---
+\usepackage{xparse}                 % [EXTENSION] Pacchetto che fornisce comandi avanzati per la definizione di macro,
+                                    % come \NewDocumentCommand, grazie alla definizione di argomenti tramite signature
+                                    % flessibili. Utilizzato nella macro \uchapter definita in 02_CustomMacros.tex.
+                                    % NOTA SU XPARSE E LATEX3: È necessario aggiungere \RequirePackage{xparse}
+                                    % all'inizio della classe, oppure \usepackage{xparse} nel preambolo del main.tex per
+                                    % garantire la retrocompatibilità con vecchie distribuzioni TeX antecedenti al 2020.
+                                    % Dal 2020 in poi, xparse e le funzioni di LaTeX3 sono state integrate nativamente
+                                    % nel kernel standard. Non bisogna modificare l'istruzione \NeedsTeXFormat{LaTeX2e}
+                                    % (es. in LaTeX3) presente nella custom class, poiché LaTeX3 non è mai stato
+                                    % rilasciato come formato a sé stante, ma è un ambiente di programmazione integrato
+                                    % dentro LaTeX2e.
+
 % --- PACCHETTI PER BIBLIOGRAFIA E PER GESTIONE SMART DEGLI APICI ---
 \usepackage[backend=biber, autolang=other, style=ieee]{biblatex}
 \begin{comment} BibLaTeX - PACCHETTO DI GESTIONE AVANZATA DELLA BIBLIOGRAFIA
