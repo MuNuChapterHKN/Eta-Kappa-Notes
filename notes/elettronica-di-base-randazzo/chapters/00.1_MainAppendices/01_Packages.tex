@@ -29,14 +29,17 @@
 \usepackage{xparse}                 % [EXTENSION] Pacchetto che fornisce comandi avanzati per la definizione di macro,
                                     % come \NewDocumentCommand, grazie alla definizione di argomenti tramite signature
                                     % flessibili. Utilizzato nella macro \uchapter definita in 02_CustomMacros.tex.
-                                    % NOTA SU XPARSE E LATEX3: È necessario aggiungere \RequirePackage{xparse}
-                                    % all'inizio della classe, oppure \usepackage{xparse} nel preambolo del main.tex per
-                                    % garantire la retrocompatibilità con vecchie distribuzioni TeX antecedenti al 2020.
-                                    % Dal 2020 in poi, xparse e le funzioni di LaTeX3 sono state integrate nativamente
-                                    % nel kernel standard. Non bisogna modificare l'istruzione \NeedsTeXFormat{LaTeX2e}
-                                    % (es. in LaTeX3) presente nella custom class, poiché LaTeX3 non è mai stato
-                                    % rilasciato come formato a sé stante, ma è un ambiente di programmazione integrato
-                                    % dentro LaTeX2e.
+                                    % NOTA SU XPARSE E LATEX3: Tecnicamente NON è necessario aggiungere:
+                                    % - \RequirePackage{xparse} all'inizio della classe, oppure
+                                    % - \usepackage{xparse} nel preambolo del main.tex
+                                    % Questo perché dal 2020, xparse e le funzioni di LaTeX3 sono state integrate
+                                    % nativamente nel kernel standard di LaTeX2e. Proprio per questo ad esempio non
+                                    % bisogna modificare l'istruzione \NeedsTeXFormat{LaTeX2e} (es. in "LaTeX3")
+                                    % presente nella custom class, poiché LaTeX3 non è mai stato rilasciato come
+                                    % formato a sé stante, ma è un ambiente di programmazione integrato dentro
+                                    % LaTeX2e. Tuttavia, è good practice includerlo esplicitamente, per garantire la
+                                    % retrocompatibilità con vecchie distribuzioni TeX antecedenti al 2020. In ogni
+                                    % caso non causa problemi.
 
 % --- PACCHETTI PER BIBLIOGRAFIA E PER GESTIONE SMART DEGLI APICI ---
 \usepackage[backend=biber, autolang=other, style=ieee]{biblatex}
