@@ -56,3 +56,4 @@
 {"rule":"ER_01_002","sentence":"^\\QSpiegare agli studenti che quel magic comment è utilissimo, ma va copiato in cima ai file secondari (es.\\E$"}
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qnella cartella /chapters).\\E$"}
 {"rule":"UNPAIRED_BRACKETS","sentence":"^\\Q[\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qcode = 03RTSLX, name = Elettronica di Base, teacher = Prof. Vincenzo Randazzo, program_level = bachelor, program = Ingegneria Elettrica, program_en = Electrical Engineering, start_academic_year = 2025, semester = 1, completed = false\\E$"}

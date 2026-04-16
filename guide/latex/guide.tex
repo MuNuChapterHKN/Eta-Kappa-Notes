@@ -1,37 +1,20 @@
 %! TEX root = guide.tex
 
-% Possible arguments for the HKNdocument class:
-% Language:
-%   italian (default): Sets the document language to Italian.
-%   english: Sets the document language to English.
-%
-% Table of Contents (ToC) depth:
-%   toc=chapters: Shows only chapters in the ToC (tocdepth=0).
-%   toc=sections: Shows chapters and sections in the ToC (tocdepth=1).
-%   toc=subsections: Shows up to subsections in the ToC (default, tocdepth=2).
-%   toc=subsubsections: Shows up to sub-subsections in the ToC (tocdepth=3).
-%
-% Font size:
-%   10pt: Sets the base font size to 10 points.
-%   11pt (default): Sets the base font size to 11 points.
-%   12pt: Sets the base font size to 12 points.
-%
-% Draft mode:
-%   draft: Compiles the document in draft mode (useful for proofreading, dummy images and imported files).
-\documentclass[english,toc=sections]{HKNdocument}
+\documentclass[english]{HKNdocument}
 
-\title{Guide to conventions and packages for the HKNotes project}
-\shorttitle{HKNotes Guide}
+\lstset{defaultdialect=[LaTeX]TeX}
+
+\title{Guide on \LaTeX{} writing for the Eta-Kappa-Notes project}
+
+\author{Giulio Cosentino}
 \author{Erik Scolaro}
-\editor{Giulio Cosentino}
-\docdate{\today}
-\docversion{1.1}
 
 \begin{document}
 
-\include{chapters/introduction}
-\include{chapters/graphs}
+\include{chapters/text}
+\include{chapters/figures}
 \include{chapters/math}
+\include{chapters/referencing}
 \include{chapters/formatting_code}
 \include{chapters/boxes}
 \include{chapters/tables}

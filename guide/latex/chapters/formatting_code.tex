@@ -1,152 +1,62 @@
-\chapter{Formatting Code}
+\chapter{Formatting code}
 
-In this chapter, we will show how to use the \texttt{listings} package to format source code in LaTeX. This package allows you to highlight the syntax of various programming languages and customize the style to fit your document.
+\section{Inline code}
 
-\section{Inserting Code}
+You can insert inline formatted code with the \lstinline[language=TeX]|\lstinline| environment.
+Instead of using curly braces like most \LaTeX{} commands, here the code must be delimited by the same delimiter character (e.g., \lstinline[language=TeX]!|! or \lstinline[language=TeX]|!|).
 
-After defining the style, you can use it to format code within the document. To do this, use the \texttt{\textbackslash lstset} command to set the style and the \texttt{\textbackslash lstinputlisting} or \texttt{\textbackslash begin{lstlisting}...\textbackslash end{lstlisting}} command to include the code. Here is an example:
+You can also use the \lstinline[language=TeX]|language| option.
 
-\subsection{Example with External File} You can also include an external file containing the code:
+Example using \lstinline[language=TeX]!|! as delimiter character:
+\lstinline[language=TeX]+\lstinline[language=Python]|print("Hello, World!")|+ becomes
+\lstinline[language=Python]|print("Hello, World!")|.
 
-\lstinputlisting[language=Python, style=hkn]{res/py/2d_example.py}
+\section{Code blocks}
 
-\section{Formatting the Code}
-
-The \texttt{listings} package allows you to display source code within a LaTeX document while preserving formatting and syntax highlighting. In this section, we will explore how to use \texttt{listings} to include and format code in our document.
-
-\subsection{Predefined Styles}
-
-\texttt{listings} provides some predefined styles for syntax highlighting of various programming languages. These styles allow you to easily include code blocks with correct syntax highlighting.
-
-For example, to include Python code in the document, you can use the following command:
-
-\begin{lstlisting}
-    \begin{lstlisting}[language=Python]
-        def hello_world():
-        print("Hello, World!")
-  \end {lstlisting}
-\end{lstlisting}
-
-Result:
-\begin{lstlisting}[language=Python]
-    def hello_world():
-    print("Hello, World!")
-\end{lstlisting}
-
-In this example, the \texttt{listings} package automatically recognizes Python syntax and highlights it correctly.
-
-\subsection{Supported Programming Languages}
-
-\texttt{listings} supports many programming languages, so you can use automatic syntax highlighting for a wide range of languages. Just specify the language using the \texttt{language} option within the \texttt{lstlisting} environment. Some supported languages include:
-
+You can insert a code block with the \lstinline[language=TeX]|lstlisting| environment, with the following options:
 \begin{itemize}
-    \item Python: \texttt{language=Python}
-    \item C/C++: \texttt{language=C}
-    \item Java: \texttt{language=Java}
-    \item SQL: \texttt{language=SQL}
-    \item HTML: \texttt{language=HTML}
-    \item CSS: \texttt{language=CSS}
-    \item JavaScript: \texttt{language=JavaScript}
-    \item XML: \texttt{language=XML}
+    \item \lstinline[language=TeX]|style|: only use with \lstinline[language=TeX]|hkn-numbered| if you want to number the lines.
+
+    \item \lstinline[language=TeX]|language|: optional but recommended, specifies the programming language for syntax highlighting.
+    See \href{https://ctan.mirror.garr.it/mirrors/ctan/macros/latex/contrib/listings/listings.pdf#table.1}{the official documentation} for a complete list of supported languages.
+
+    \item \lstinline[language=TeX]|label|: optional, allows you to label the code block for referencing later in the document (see Section~\ref{sec:referencing}).
+
+    \item \lstinline[language=TeX]|caption|: optional, allows you to add a caption to the code block, which will be displayed above the code.
 \end{itemize}
 
-Example of SQL code:
-
-\begin{lstlisting}[language=SQL]
-    SELECT * FROM users WHERE age > 18;
-\end{lstlisting}
-
-\subsection{Customizing Styles}
-
-Although the package offers predefined styles, it is possible to customize the appearance of the code. If there is a need to create new styles, contact the responsible person. Some customizable parameters, listed here to highlight the potential of the styles, include:
-
-\begin{itemize}
-    \item \texttt{language}: Defines the language of the code.
-    \item \texttt{basicstyle}: Sets the base font for the code.
-    \item \texttt{keywordstyle}: Modifies the style of keywords.
-    \item \texttt{stringstyle}: Modifies the style of strings.
-    \item \texttt{commentstyle}: Defines the style for comments.
-    \item \texttt{numbers}: Displays line numbers.
-    \item \texttt{frame}: Adds a border around the code.
-    \item \texttt{backgroundcolor}: Sets the background color of the code.
-\end{itemize}
-
-This is the before and after applying the SQL style defined in HKNtools.tex:
-
-\begin{lstlisting}[language=SQL]
-    -- Query to select user data
-    SELECT name, age
-    FROM users
-    WHERE age > 18
-    ORDER BY age DESC;
-\end{lstlisting}
-
-\begin{lstlisting}[language=SQL, style=hkn]
-    -- Query to select user data
-    SELECT name, age
-    FROM users
-    WHERE age > 18
-    ORDER BY age DESC;
-\end{lstlisting}
-
-\subsection{Global Configuration}
-
-You can also configure \texttt{listings} globally to apply the same style settings throughout the document using the \texttt{\\lstset} command. For example:
-
-\begin{lstlisting}
-\lstset{
-    language=Python,
-    numbers=left,
-    frame=single,
-    backgroundcolor=\color{lightgray},
-    stepnumber=1
-}
-\end{lstlisting}
-
-This will set the options for all Python code blocks in the document.
-Here are the effects before and after using the instruction:
-
-\begin{lstlisting}[language=Python]
-    def hello_world():
+Example of a Python program with caption ``Demo'' and label \lstinline[language=TeX]|code:demo|:
+\begin{lstlisting}[language=TeX, escapechar=|]
+\begin{lstlisting}[language=Python, caption={Demo}, label=code:demo]
+def main():
+	# Comment preceded by a tab
+    # This long line will be break in the visualization, but not in the actual code
     print("Hello, World!")
+    variable = 'start';
+    for i in range(10):
+        variable += str(i)
+|\textbackslash|end{lstlisting}
 \end{lstlisting}
-
-\lstset{
-    language=Python,
-    numbers=left,
-    frame=single,
-    backgroundcolor=\color{lightgray},
-    stepnumber=1
-}
-
-\begin{lstlisting}[language=Python]
-    def hello_world():
+\begin{lstlisting}[language=Python, caption={Demo}, label=code:demo]
+def main():
+	# Comment preceded by a tab
+    # This long line will be break in the visualization, but not in the actual code
     print("Hello, World!")
+    variable = 'start';
+    for i in range(10):
+        variable += str(i)
 \end{lstlisting}
 
-\section{Currently Defined Custom Styles}
+Since it is labelled, you can reference this code anywhere in the document.
+For example, \lstinline[language=TeX]|``Code~\ref{code:demo}''| gives ``Code~\ref{code:demo}''.
 
-Additional styles will be implemented as needed by collaborators. For now, the following styles are currently defined:
+\subsection{Including an external file}
 
-\begin{itemize}
-    \item SQL: sqlstyle
-\end{itemize}
+With \lstinline[language=TeX]|\lstinputlisting|, you can also include an external file containing the code.
 
-\section{Complete Example}
-
-Below is an example of a C program highlighted with the \texttt{listings} package. This program prints a greeting on the screen. As you can see, I used a \texttt{label} to easily reference the code later.
-
-\begin{lstlisting}[language=C, style=hkn, caption={Demo}, label=code:demo]
-#include <stdio.h>
-
-int x = 10;
-uint32_t y = 10;
-
-// Example program
-int main() {
-  printf("Hello, World!\n");
-  return 0;
-}
+Here is an example using the \lstinline[language=TeX]|hkn-numbered| style:
+\begin{lstlisting}[language=TeX]
+\lstinputlisting[language=Python, style=hkn-numbered]{res/py/2d_example.py}
 \end{lstlisting}
-
-This example is labeled with \texttt{label=code:demo}, so we can refer to this code anywhere in the document using the command \texttt{\ref{code:demo}}. For example, we can reference the code \ref{code:demo} in the text.
+\vspace{0.5\baselineskip}
+\lstinputlisting[language=Python, style=hkn-numbered]{res/py/2d_example.py}

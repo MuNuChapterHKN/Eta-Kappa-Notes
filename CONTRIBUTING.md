@@ -48,7 +48,7 @@ You will organize your notes inside it using the following structure:
 
 <!-- https://asciitools.com/tree?trailingDirSlash=true&fullPath=false&rootDot=false -->
     notes/
-    └── notes-name/
+    └── <notes-name>/
         ├── chapters/
         ├── res/
         │   ├── drawio/
@@ -56,13 +56,10 @@ You will organize your notes inside it using the following structure:
         │   ├── py/
         │   ├── svg/
         │   └── ...
-        ├── main.tex
-        └── metadata.yaml
+        └── main.tex
 
 - `main.tex` will be the main file that gathers the various chapters.
   See [below](#main-file) for the template.
-
-- `metadata.yaml` is a metadata file you’ll fill in as shown [below](#metadata-file).
 
 - `chapters/` contains the `.tex` files that make up your chapters.
   Give these files appropriate names.
@@ -83,33 +80,17 @@ You will organize your notes inside it using the following structure:
 When compiling the PDF, a `build/` folder will be automatically generated, and if you’ve used SVG files, also an `svg-inkscape/` folder.
 The output PDF will be located at `build/main.pdf`.
 
-#### Metadata file
-
-Fill out `metadata.yaml` following this example:
-
-```yaml
-course_code: "AB1CDE2"
-course_name: "Course name"
-teacher: "Surname, Name"
-start_academic_year: 2025
-program_level: "bachelor"
-program: "Name of Degree Program"
-language: "ita"
-formats:
-  - "latex"
-authors:
-  - "Surname, Name"
-  - "Surname, Name"
-editors: []
-```
-
-- `teacher` is the course teacher.
-- `program_level` is either `bachelor` or `master`.
-- `program` is the name of the degree program, in English.
-- `language` can be `ita` or `eng`.
-- `formats` is a list with elements among `latex`, `typst`, and `markdown`.
-- The names in `teacher`, `authors`, and `editors` must follow the `Surname, Name` format.
-- The `editors` field should initially be an empty list (`[]`). Later, if needed, it will be filled in like `authors`.
+> [!TIP]
+> By default, the output PDF is marked as "unpublished".
+> If you wish to **remove this watermark**:
+> - Create a file `version` (no extension) inside `resources/`;
+> - Write any text inside it (e.g., `v0`).
+>
+> The content of this file will appear as the document version on the title page, and the warnings and watermark will disappear.
+>
+> This is intended for development purposes only.
+> In fact, **what you write as version is unimportant** and will not affect the repository, since the `version` file is included in `.gitignore`.
+> The project manager is responsible for official versioning.
 
 #### Main file
 
@@ -122,11 +103,19 @@ This is the template for `main.tex`:
 
 % Add here your custom packages and commands
 
-\title{}
-\shorttitle{}
-\author{}
-\docdate{Primo semestre 2025/2026}
-\docversion{1.0}
+\courseinfo{
+    code = AB1CDE2,
+    name = {Nome del corso},
+    teacher = {Prof.\ Name Surname},
+    program_level = bachelor,
+    program = {Nome del corso di studi},
+    program_en = {Name of Degree Program},
+    start_academic_year = 2025,
+    semester = 2,
+    completed = false
+}
+
+\author{Name Surname}
 
 \begin{document}
 
@@ -142,10 +131,18 @@ This is the template for `main.tex`:
 
 - Where indicated, you can import your own packages and define your commands.
 
-- Fill in `\title`, `\shorttitle`, `\author`, and `\docdate`.
-  - `\title` is the course name.
-  - `\shorttitle` helps avoid title overflow into the page margin graphics.
-  - `\docdate` indicates the semester and academic year.
+- Fill in the fields in `\courseinfo` as needed.
+  In particular:
+  - `name` and `program` are the course name and program name in their respective languages.
+  - `teacher` is the main course teacher (use the appropriate title).
+  - `program_level` is either `bachelor` or `master`.
+  - `program_en` is the name of the degree program in English (it is optional, only include it if the program is in Italian).
+  - `semester` is either 1 or 2.
+  - `completed = false` will be removed once the notes are completed.
+
+- Fill in `\author`.
+  There can be as many authors and editors as needed (editors are added with the `\editor` command).
+  Initially there will typically be one author and no editors.
 
 - The actual content will be included using lines like `\include{chapters/first-chapter}` (replace `first-chapter` with your chapter's `.tex` filename, extension optional).
 
@@ -237,7 +234,7 @@ The command also defines the label `fig:path/to/figure` so that you can later re
 The package `float`, loaded in the preamble, provides the `H` placement option.
 
 It is used with figures and tables and it means that the figure or table must be added *exactly* 'here'.
-The `!h` option may be disregarded is LaTeX chooses so, so using `H` can sometimes provide better spacing in the document.
+The `!h` option may be disregarded if LaTeX chooses so, so using `H` can sometimes provide better spacing in the document.
 
 The three commands above use the `H` option by default.
 

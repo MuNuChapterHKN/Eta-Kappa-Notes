@@ -488,3 +488,12 @@ magic
 pm
 metadati
 convidivere
+uchapter
+name
+teacher
+program_level
+bachelor
+program_en
+start_academic_year
+semester
+completed

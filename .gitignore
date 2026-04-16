@@ -1,6 +1,12 @@
-**/build/
-**/svg-inkscape/
-*.log
+# Build files
+build/
+svg-inkscape/
+/resources/**/version
+
+# VS Code
+.vscode/
+!/.vscode/settings.json
+!/.vscode/extensions.json
 
 # Python
 *.pyc

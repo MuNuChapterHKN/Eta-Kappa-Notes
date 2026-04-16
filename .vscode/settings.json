@@ -2,10 +2,15 @@
   // Text editor
   "files.trimFinalNewlines": true,
 
+  // File associations
+  "files.associations": {
+    "version": "plaintext"
+  },
+
   // Editor associations
   "workbench.editorAssociations": {
-      "*.drawio.svg": "hediet.vscode-drawio-text",
-      "*.svg": "imagePreview.previewEditor"
+    "*.drawio.svg": "hediet.vscode-drawio-text",
+    "*.svg": "imagePreview.previewEditor"
   },
 
   // Draw.io
@@ -18,7 +23,7 @@
   "latex-workshop.latex.outDir": "%DIR%/build/",
   "latex-workshop.latex.rootFile.useSubFile": true,
   "latex-workshop.message.latexlog.exclude": [
-      "Infinite glue shrinkage found in box being split"
+    "Infinite glue shrinkage found in box being split"
   ],  // TeX Live 2025 triggers this 'ignored error' when a longtable is split across pages.
   "latex-workshop.latex.tools": [
     {
@@ -36,10 +41,13 @@
         "%DOC%"
       ],
       "env": {
-        "TEXINPUTS": "%WORKSPACE_FOLDER%/lib/latex//;%WORKSPACE_FOLDER%/resources/imgs//;"
+        "TEXINPUTS": "%WORKSPACE_FOLDER%/lib/latex//;%WORKSPACE_FOLDER%/resources//;"
       }
     }
   ],
+
+  // Typst
+  "tinymist.outputPath": "$dir/build/$name",
 
   // LTeX+ (LanguageTool) Orthography and grammar checker: only supports one language at a time, but is more powerful
   // than Code Spell Checker (see below), which only supports orthography. Here set to Italian, in order to set language

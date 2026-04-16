@@ -1,0 +1,126 @@
+\chapter{Referencing}
+
+In \LaTeX{}, you can reference any numbered element (equations, sections, subsections, figures, tables, pages, etc.) after you assigned a label to it.
+
+\textbf{Never} reference an element ``manually'' by writing its number directly in the text. Always use labels and the \lstinline[language=TeX]|\ref{}| command to reference the element, so that the reference will be automatically updated if the numbering changes.
+
+\section{Assigning labels}
+\label{sec:assigning_labels}
+
+To label a numbered element use the \lstinline[language=TeX]|\label{}| command within its environment.
+The argument of the \lstinline[language=TeX]|\label{}| command is the name of the label, which must be unique in the document.
+
+It is good practice to always prefix the label name with a short identifier of the type of element being labeled (e.g., \lstinline[language=TeX]|eq:| for equations, \lstinline[language=TeX]|fig:| for figures, \lstinline[language=TeX]|sec:| for sections and subsections, etc.).
+
+Example -- labeling this section:
+\begin{lstlisting}[language=TeX]
+\subsection{Assigning labels}
+\label{sec:assigning_labels}
+\end{lstlisting}
+
+Example -- labeling an equation:
+\begin{lstlisting}[language=TeX]
+\begin{equation}
+\label{eq:energy}
+    E = m c^2
+\end{equation}
+\end{lstlisting}
+\begin{equation}
+\label{eq:energy}
+    E = m c^2
+\end{equation}
+
+In this case, the equation is labeled with \lstinline[language=TeX]|eq:energy|. Now, \LaTeX{} will automatically assign a number to this equation, which can be cited later in the document.
+
+You can label any equation with a number, including those in subequations:
+
+\begin{lstlisting}[language=TeX]
+\begin{subequations}
+\begin{align}
+    \cos(2 \alpha) & = \cos^2 \alpha - \sin^2 \alpha = \\
+    & = 2 \cos^2 \alpha - 1 = \\
+\label{eq:one_sin}
+    & = 1 - 2 \sin^2 \alpha
+\end{align}
+\end{subequations}
+\end{lstlisting}
+\begin{subequations}
+\begin{align}
+    \cos(2 \alpha) & = \cos^2 \alpha - \sin^2 \alpha = \\
+    & = 2 \cos^2 \alpha - 1 = \\
+\label{eq:one_sin}
+    & = 1 - 2 \sin^2 \alpha
+\end{align}
+\end{subequations}
+
+Notice that the provided commands to include the figures already reference the figure with a label (see the \href{https://github.com/MuNuChapterHKN/Eta-Kappa-Notes/blob/structure/CONTRIBUTING.md#useful-commands}{Figures § Useful commands} section of the \texttt{CONTRIBUTING.md} file of the repository).
+
+\section{Referencing an element}
+\label{sec:referencing}
+
+To reference a labeled element, use the \lstinline[language=TeX]|\ref{}| command. The argument of the \lstinline[language=TeX]|\ref{}| command is the name of the label that was assigned to the element.
+
+Two caveats:
+\begin{itemize}
+    \item If the referenced number is preceded by a prefix (e.g., ``Fig.'', ``eq.'', ``Section''), it is good practice to insert a non-breaking space between the prefix and the number using \lstinline[language=TeX]|~|, instead of a regular space.
+    \item To avoid excessive spacing when the prefix ends with a period (e.g., ``Fig.'', ``eq.'', etc.), it is good practice to insert a negative thin space using \lstinline[language=TeX]|\!| before the non-breaking space.
+\end{itemize}
+
+Example -- referencing the previous section:
+\begin{lstlisting}[language=TeX]
+As shown in Section~\ref{sec:assigning_labels}, you can assign labels to sections and subsections.
+\end{lstlisting}
+\begin{quote}
+    As shown in Section~\ref{sec:assigning_labels}, you can assign labels to sections and subsections.
+\end{quote}
+
+Example -- referencing a figure:
+\begin{lstlisting}[language=TeX]
+See Fig.\!~\ref{fig:esempio_geogebra}.
+\end{lstlisting}
+\begin{quote}
+    See Fig.\!~\ref{fig:esempio_geogebra}.
+\end{quote}
+
+\subsection{Referencing an equation}
+
+Use the \lstinline[language=TeX]|\eqref{}| command to reference an equation, which will automatically include the parentheses around the equation number.
+
+Example:
+\begin{lstlisting}[language=TeX]
+As shown in \eqref{eq:energy}, Einstein's famous formula relates energy to mass.
+\end{lstlisting}
+\begin{quote}
+    As shown in \eqref{eq:energy}, Einstein's famous formula relates energy to mass.
+\end{quote}
+
+Example:
+\begin{lstlisting}[language=TeX]
+Let's use the variant of eq.\!~\eqref{eq:one_sin}, ...
+\end{lstlisting}
+\begin{quote}
+    Let's use the variant of eq.\!~\eqref{eq:one_sin}, ...
+\end{quote}
+
+\subsection{Referencing a page}
+
+Use the \lstinline[language=TeX]|\pageref{}| command to reference the page number where the labeled element appears. The argument of the \lstinline[language=TeX]|\pageref{}| command is the name of the label that was assigned to the element.
+
+Example -- referencing this page:
+\begin{lstlisting}[language=TeX]
+\label{page:ref_examples}
+As shown on page~\pageref{page:ref_examples}, ...
+\end{lstlisting}
+\begin{quote}
+    \label{page:ref_examples}
+    As shown on page~\pageref{page:ref_examples}, ...
+\end{quote}
+
+Notice that here the label is assigned to the current section, not to the page itself.
+Compare the previous example with the following, which doesn't use \lstinline[language=TeX]|\pageref{}|:
+\begin{lstlisting}[language=TeX]
+As shown in Section~\ref{page:ref_examples}, ...
+\end{lstlisting}
+\begin{quote}
+    As shown in Section~\ref{page:ref_examples}, ...
+\end{quote}

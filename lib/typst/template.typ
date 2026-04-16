@@ -1,14 +1,14 @@
 #import "funcs.typ": *
-#import "@preview/equate:0.2.1": equate
-#import "@preview/codly:1.0.0": *
-#import "@preview/codly-languages:0.1.0": *
+#import "@preview/equate:0.3.2": equate
+#import "@preview/codly:1.3.0": *
+#import "@preview/codly-languages:0.1.10": *
 
 #let title-page(title, subtitle, authors, release) = {
   set align(center)
 
   v(1fr)
 
-  figure(image("../../resources/imgs/hkn_logo.svg", width: 40%))
+  figure(image("../../resources/imgs/hkn_logo.pdf", width: 40%))
 
   smallcaps(text(weight: "bold", size: 2em, title))
 
@@ -46,7 +46,7 @@
   show heading.where(level: 1): set heading(supplement: [Chapter])
   show: codly-init
   codly(languages: codly-languages, zebra-fill: none, number-format: it => text(fill: luma(200), str(it)))
-  set outline(depth: 3, indent: true)
+  set outline(depth: 3, indent: auto)
 
   show terms.item: it => [
     _*#it.term:*_ #it.description
