@@ -164,6 +164,36 @@
 % SumatraPDF) e non nel file generato da LaTeX.
 % ==============================================================================
 
+% \RequirePackage{cmap}   % Migiliora il pdf per ricerca e copia-incolla.
+
+% ==============================================================================
+% FEATURE: CHARACTER MAP (CMap) - "ToUnicode CMap"
+% ==============================================================================
+% Aggiunge una mappa caratteri interna al PDF, fondamentale per la corretta
+% interpretazione dei glifi da parte dei lettori PDF.
+% Fondamnetale per il copia-incolla esatto, e la ricerca testuale, in
+% particolare per i caratteri accentati europei, maiuscoli e minuscoli.
+% Ulteriori spiegazioni e dettagli tecnici su questo pacchetto sono forniti nel
+% file 01_Packages.tex, nella sezione dedicata al pacchetto "cmap", essendo
+% questo appunto un pacchetto.
+% È stato caricato in questa posizione per questioni di dipendenze e precedenze
+% con i pacchetti relativi alla codificad dei font del PDF (fontenc, lmodern).
+% È attualmente un surrogato di \DocumentMetadata{}, in attesa di una futura
+% stabilizzazione di quest'ultimo, sebbene non risolva la questione dei soft
+% hyphen, ma solo quella dell'interpretazione dei caratteri speciali sul pdf.
+
+% AGGIORNAMENTO - PERCHÈ L'HO COMPLETAMENTE ELIMINATO. Funziona, ma in realtà è
+% ormai un pacchetto obsoleto, e non più necessario. Crea sì la mappa unicode,
+% ma si limita ai 256 caratteri della codica T1 passata da fontenc, e non
+% risolve i problemi legati ai glifi più complessi come le legature
+% tipografiche. Attualmente, TeX ha una feature di base, che si attiva con i
+% comandi \input{glyphtounicode} e \pdfgentounicode=1: il primo introduce un
+% dizionario unicode completo, ed il secondo attiva la characer map nativa. Se
+% si usa cmap, questo interviene prima e blocca la funzionalità nativa (che è
+% programmata in modo tale che se una mappa caratteri è già presente, si
+% interrompe senza apportare modifiche).
+% ==============================================================================
+
 
 \PassOptionsToPackage{normalem}{ulem}   % Fix per Bug Overfull hbox in
                                         %bibliografia causato dal pacchetto ulem

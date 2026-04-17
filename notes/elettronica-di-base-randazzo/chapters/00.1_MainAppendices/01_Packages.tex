@@ -11,19 +11,142 @@
                                     % blocchi di testo, non iniziando con "%", non è ignorato dal Parser di LTeX+, che
                                     % quindi effettuerà la correzione grammaticale e ortografica anche su questi blocchi
 
-% --- PACCHETTI FORMATTAZIONE ---
-% Nota: quelli "commentati" sono già aggiunti dalla custom class HKNdocument. Li lascio perchè molto importanti.
+% --- PACCHETTI DI TIPOGRAGIA BASE: CARATTERI (ENCODING, SUPPORTO LEGATURE, STAMPA ...), SILLABAZIONE---
 
-% \usepackage{lmodern}              % [PLUG & PLAY] [OVERRIDE] font vettoriali 100%, evita font accentati bitmap
-                                    % sgranati. Pacchetto plug & play non c'è altro da usare.
-% \usepackage[T1]{fontenc}          % [PLUG & PLAY] [OVERRIDE] aggiunge lettere accentate reali: LaTeX scriverà le
-                                    % lettere accentate come oggetti singoli, e non come caratteri modificati.
-                                    % Fondamentale per copia e incolla dal pdf compilato.
-% \usepackage[utf8]{inputenc}       % [PLUG & PLAY] [OVERRIDE] consente a LaTeX di leggere le lettere accentate,
-                                    % senza dover scrivere ad esempio "\'e" al posto di "è". Di solito è caricato
-                                    % nativamente nelle versioni recenti di LaTeX, ma meglio specificare.
+% Pacchetti relativi all'infrastruttura tipografica dei progetti TeX, suddivisibile nelle seguente 4 FASI:
+% 1. INPUT: Tastiera -> Codice Sorgente
+% 2. MOTORE LOGICO e TIPOGRAFICO TeX: Formattazione e Grammatica in RAM
+% 3. OUTPUT GRAFICO: Motore Grafico (Backend, es: pdflatex) costruisce il PDF (glifi, simboli, ecc.)
+% 4. OUTPUT SEMANTICO sul PDF: Lettura software del PDF, ricerca, copia-incolla eccetera
+
+% ..................................
+
+% \usepackage{cmap}                 % [PLUG & PLAY] [EXTENSION-FIX] Pacchetto fondamentale per l'accessibilità del PDF,
+                                    % in particolare per la ricerca testuale ed il copia e incolla.
+                                    % Aadesso come surrogato ) di "\DocumentMetadata{}" (che attiva il backend di
+                                    % LaTeX3 per la generazione di PDF accessibili, ma è attualmente sperimentale e poco
+                                    % stabile): vedi 00.0_EarlyInitializationDirectives.tex per spiegazioni.
+                                    % Infatti sebbene non risolva il problema dei soft-hyphen, migliora la ricercabilità
+                                    % del pdf, grazie alla costruzione di una MAPPA di CARATTERI, chiamata "ToUnicode
+                                    % CMap", che fornisce al PDF stesso le istruzioni chiare con cui interpretare ogni
+                                    % simbolo e glifo dei caratteri, secondo la codifica Unicode (UTF-8).
+                                    % FONDAMENTALE CHE SIA CHIAMATO PRIMA DEI FONT (package: fontenc e lmodern) per
+                                    % funzionare, altrimenti NON FA NULLA e NON FUNZIONA.
+
+                                    % NOTA BENE: PERCHÈ È STATO COMMENTATO E DISATTIVATO: come appena detto dev'essere
+                                    % chiamato PRIMA dei font, altrimenti NON FUNZIONA: ma i font sono chiamati dalla
+                                    % custom class HKNdocument, e quindi per non modificarne il codice, questo pacchetto
+                                    % è stato richiamato nel pre-preambolo con \RequirePackage, che garantisce che venga
+                                    % caricato prima di fontenc e lmodern.
+                                    % Vedi il file 00.0_EarlyInitializationDirectives.tex
+
+                                    % NOTA: non ha a che fare invece con inputenc che è legato all'interpretazione del
+                                    % codice sorgente. Non c'è problmea con la posizione di inputenc, dunque.
+
+                                    % NOTA: è puramente PLUG & PLAY, non richiede configurazione e non fornisce comandi.
+
+                                    % AGGIORNAMENTO - PERCHÈ L'HO COMPLETAMENTE ELIMINATO.
+                                    % Funziona, ma in realtà è ormai un pacchetto obsoleto, e non più necessario.
+                                    % Crea sì la mappa unicode, ma si limita ai 256 caratteri della codica T1 passata
+                                    % da fontenc, e non risolve i problemi legati ai glifi più complessi come le
+                                    % legature tipografiche.
+                                    % Attualmente, TeX ha una feature di base, che si attiva con i comandi
+                                    % \input{glyphtounicode} e \pdfgentounicode=1: il primo introduce un dizionario
+                                    % unicode completo, ed il secondo attiva la characer map nativa.
+                                    % Se si usa cmap, questo interviene prima e blocca la funzionalità nativa (che è
+                                    % programmata in modo tale che se una mappa caratteri è già presente, si interrompe
+                                    % senza apportare modifiche).
+
+% SCHEMATICAMENTE:FASE 4: OUTPUT SEMANTICO: (Da inizializzare obbligatoriamente PRIMA dei font, fontenc e lmodern)
+% [FEATURE]: Aggiunge la "ToUnicode CMap" (Character Map): tabella di traduzione nascosta nel codice binario del PDF.
+% [SENZA CMAP]: Il lettore PDF vede solo geometrie, e erca di "indovinare" le lettere dal nome tecnico del glifo.
+% [CON CMAP]: L'aggiunta della CMap equivale all'iniziezione di un set di regole rigide.
+%             Es: "Il Glifo allo Slot 232 equivale alla lettera Unicode U+00E8 (è)".
+% [RISULTATO]: Abilita la ricerca esatta e il copia-incolla perfetto. Eliminati problmei con lettere accentate europee.
+
+% ..................................
+
+% NOTA: NON SONO PACCHETTI, ma sono riportati in questa posizione PER QUANTO SPIEGATO SOPRA.
+
+\input{glyphtounicode.tex}          % [EXTENSION] Carica il dizionario Unicode standard ufficiale.
+                                    % Risolve le ambiguità dovute all'interpretazione dei glifi complessi, come font con
+                                    % legature tipografiche (es. "ffi" fuso in un glifo unico), lettere accentate,
+                                    % simboli matematici, eccetera.
+                                    % Fondamentale per l'utilizzo più potente in assoluto del pacchetto cmap: fornisce
+                                    % in sostanza tutto il materiale possibile per creare la "ToUnicode CMap".
+                                    % NOTA: è un file dell'installazione standard di TeX, ed il motore di ricerca dei
+                                    % file di TeX (kpathsea, si può lanciare a mano anche) riesce a trovarlo senza
+                                    % specificare il percorso, perchè scansiona l'intera installazione.
+
+\pdfgentounicode=1                  % [OVERRIDE] Interruttore che attiva la CMAP NATIVA nel PDF.
+                                    % Sfrutta il dizionario Unicode caricato col comando precedente.
+
+% SCHEMATICAMENTE: FASE 4  OUTPUT SEMANTICO PER I GLIFI COMPLESSI
+% [FEATURE]: "Legatura". Abbellimento per cui due lettere (es. "f" e "i") si fondono nel glifo unico ed elegante "fi".
+% [SENZA]: Il PDF è privo di istruzioni per l'interpretazione dei glifi complessi, come le legature e le lettere
+% europee. Ad esempio: vede il glifo "ffi", va in crisi e copia "u cio" per "ufficio".
+% [CON]: Il primo comando carica un vocabolario massiccio per scindere i glifi fusi in codici Unicode multipli. Il
+% secondo è l'interruttore hardware che forza il backend a scrivere questo vocabolario nel codice binario del PDF,
+% cioè che attiva la character map nativa.
+% [RISULTATO]: Copia-incolla e ricerca testuale perfetti, anche in presenza di glifi complessi.
+
+% ..................................
+
+% NOTA: i pacchetti a seguire DISATTIVATI ("COMMENTATI") sono già aggiunti dalla custom class HKNdocument.
+% Li lascio in questa posizione perchè è importante conoscerli.
+
+% \usepackage[T1]{fontenc}          % [PLUG & PLAY] [OVERRIDE] Supporto alla codifica standard europea dei font (T1),
+                                    % con ben 256 caratteri (al contrario di quella standard americana OT1, con 128
+                                    % caratteri). Aggiunge il supporto del pdf alle lettere accentate italiane ad
+                                    % esempio: LaTeX scriverà le lettere accentate come glifi  singoli, e non come
+                                    % caratteri modificati. Fondamentale per copia e incolla, e ricerca nel pdf, e
+                                    % per la sillabazione corretta delle parole accentate (package Babel).
+
+% SCHEMATICAMENTE: FASE 3: OUTPUT GRAFICO E FONT (Come il motore "disegna" le lettere)
+% [SENZA FONTENC]: Usa la codifica OT1 (128 caratteri inglesi). Per fare la "è", disegna una "e", si sposta in alto
+% e stampa un accento. Visivamente ok, ma il motore non sa sillabare l'incrocio e il copia-incolla estrae 2 oggetti.
+% [CON FONTENC]: Attiva la codifica T1 (256 caratteri). Sblocca uno slot dedicato per un glifo pre-composto e unico.
+% [RISULTATO]: LaTeX ottiene la capacità di sillabare le parole accentate (es. "ve-lo-ci-tà") usando veri glifi.
+
+% ..................................
+
+% \usepackage{lmodern}              % [PLUG & PLAY] [OVERRIDE] font vettoriali 100%, evita font bitmap sgranati, in
+                                    % particolare per caratteri accentati. Pacchetto plug & play non c'è altro da usare.
+
+% SCHEMATICAMENTE: FASE 3: OUTPUT GRAFICO E FONT (Come il motore "disegna" le lettere)
+% [SENZA LMODERN]: Chiedendo a LaTeX il set esteso T1, il font base potrebbe usare varianti "bitmap" (a pixel).
+% [CON LMODERN]: Sostituisce il font con "Latin Modern", programmato in pura matematica vettoriale (curve di Bézier).
+% [RISULTATO]: Testo "razor-sharp" (nitidissimo) anche se fai uno zoom del 500% sulle formule del PDF compilato.
+
+% ..................................
+
+% \usepackage[utf8]{inputenc}       % [PLUG & PLAY] [OVERRIDE] Consente a LaTeX di decodificare UTF-8 direttamente nel
+                                    % codice sorgente. Fondamentale per poter scrivere direttamente le lettere
+                                    % accentate nel codice sorgente, garantendone una corretta interpretazione da TeX.
+                                    % Senza di questo, si dovrebbero usare i comandi per gli accenti, ad esempio si
+                                    % dovrebbe scrivere "\'e" al posto di "è".
+                                    % Di solito è caricato nativamente nelle versioni recenti di LaTeX, ma meglio
+                                    % specificare per retrocompatibilità con distribuzioni più datate.
+
+                                    % NOTA: non ha a che fare con fontenc, lmdoern o cmap, che sono legati ai font
+                                    % nel PDF finale, e non nel codice sorgente.
+
+% SCHEMATICAMENTE: FASE 1: INPUT SORGENTE (Come il compilatore interpreta ilt esto digitato con tastiera).
+% [SENZA INPUTENC]: Il motore pdflatex legge a 1 byte (ASCII). Se digiti "è" (multibyte UTF-8), va in crash fatale
+% o compila geroglifici come "Ã¨". Saresti costretto a sporcare il codice sorgente scrivendo "\'e" per ogni accento.
+% [CON INPUTENC]: Funge da interprete. Insegna al motore a decodificare i byte UTF-8 in tempo reale mentre legge.
+% [RISULTATO]: Puoi digitare liberamente in italiano, lasciando il sorgente (.tex) pulito e perfettamente leggibile.
+
+% ..................................
+
 % \usepackage[italian]{babel}       % [PLUG & PLAY] [OVERRIDE] traduzione strutturale (termini associati al documento:
                                     % capitolo, sezione, eccetera) in italiano, e sillabazione italiana.
+
+% SCHEMATICAMENTE: FASE 2: MOTORE LOGICO TIPOGRAFICO TeX (Regole grammaticali, spaziature e impaginazione)
+% [SENZA BABEL]: Il motore logico impagina in inglese. Taglia le parole a fine riga in modo errato per l'italiano
+% (es. "elett-ricità" invece di "elet-tri-ci-tà") e stampa le label di sistema in inglese (es. "Chapter").
+% [CON BABEL]: Applica l'algoritmo di sillabazione italiano e traduce strutturalmente l'intero documento in RAM.
+
 
 % --- PACCHETTI PER SCRITTURA DI MACRO AVANZATE ---
 \usepackage{xparse}                 % [EXTENSION] Pacchetto che fornisce comandi avanzati per la definizione di macro,
