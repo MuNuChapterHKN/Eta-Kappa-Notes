@@ -41,6 +41,130 @@
 %
 % ==============================================================================
 
+% \DocumentMetadata{}   % Inizializzazione del nuovo backend (compositore di
+                        % pdf) accessibile di LaTeX
+
+% AGGIORNAMENTO: allora funziona, ha solo dei piccoli conflitti con il pacchetto
+% enumitem, per le 2 opzioni parsep nella licenza.
+% Eliminandole e sostituendolo con delle versioni nuove previste (enumitem è
+% stato integrato in LaTeX3) il problema si risolve.
+% Tuttavia per essendo questo comando ancora sperimentale e non del tutto
+% stabile, per ora se ne sconsiglia l'uso. Aspettare prossimi aggionramenti, tra
+% un paio di anni (nel 2028).
+
+% ==============================================================================
+% \DocumentMetadata{} - IL NUOVO MOTORE PDF DI LATEX E L'ACCESSIBILITÀ
+% ==============================================================================
+% ATTENZIONE STRUTTURALE:
+% Questo comando DEVE essere la primissima riga attiva del file (nel
+% pre-preambolo), obbligatoriamente PRIMA di \documentclass. Serve a bloccare
+% il vecchio motore di generazione PDF degli anni '90 e a caricare la nuova
+% architettura prima che la classe venga letta.
+%
+% ------------------------------------------------------------------------------
+% 0. IL LATEX TAGGING PROJECT (Cos'è e perché nasce)
+% ------------------------------------------------------------------------------
+% Questo comando è la porta d'accesso al "LaTeX Tagging Project", un colossale
+% sforzo pluriennale del team LaTeX3 (introdotto in fase matura a partire
+% dalle distribuzioni TeX Live 2023). L'obiettivo è colmare il divario storico
+% tra la tipografia classica di TeX e i moderni standard digitali
+% internazionali, rendendo i PDF nativamente accessibili (PDF/A, PDF/UA),
+% leggibili dagli screen reader per non vedenti ed esportabili fluidamente in
+% altri formati (es. HTML/XML).
+%
+% ------------------------------------------------------------------------------
+% 1. COSA AGGIUNGE E COSA SOVRASCRIVE (SOTTO IL COFANO)
+% ------------------------------------------------------------------------------
+% - Gestione Sillabazione (Soft Hyphen vs Hard Hyphen):
+%   Di default, il vecchio LaTeX sillaba le parole inserendo un "Hard Hyphen"
+%   (Trattino rigido, U+002D in codifica Unicode/UTF-8), che spezza la parola
+%   in modo permanente. Questo nuovo comando lo sostituisce con il "Soft
+%   Hyphen" (Trattino opzionale, U+00AD). Questo carattere invisibile dice al
+%   lettore PDF: "Mostra graficamente un trattino qui, ma la parola resta
+%   logicamente intera". Ciò consente ad esempio di poter trovare, con lo
+%   strumento di ricerca interno ai lettori pdf, perlomeno a quelli col
+%   supporto al soft-hyphen (vedi sezione più avanti sulla compatibilità), le
+%   parole anche se stampate in versione sillabata.
+% - Metadati Centralizzati: Sostituisce il "Far West" in cui ogni pacchetto
+%   (come hyperref o pdfx) scriveva a modo suo le info nel PDF. Ora c'è un
+%   dizionario centrale standardizzato per titolo, autore, lingua e standard
+%   ISO.
+% - PDF Strutturato (Tagged PDF): Aggiunge un livello logico (Tag) nascosto
+%   dietro la grafica, indicando ai software dove sono i titoli, i paragrafi
+%   e le tabelle.
+% - Gestione Colore Avanzata: Inizializza un nuovo backend per la fedeltà
+%   cromatica.
+%
+% ------------------------------------------------------------------------------
+% 2. EFFETTI COLLATERALI E ATTENZIONI DA AVERE
+% ------------------------------------------------------------------------------
+% - [!] Il Problema dei Font: Alcuni font custom o scaricati da internet non
+%   sono programmati bene e mappano il carattere U+00AD come "invisibile" o a
+%   larghezza zero. Se usando questo comando si nota che i trattini a fine
+%   riga spariscono visivamente, la colpa è del font. Usando font di base
+%   robusti (come il Latin Modern standard di LaTeX) il problema non sussiste
+%   mai.
+% - Peso e Compilazione: L'aggiunta di strutture logiche e dizionari rende il
+%   PDF leggermente più pesante in termini di Kilobyte/Megabyte, e i tempi di
+%   compilazione aumentano di qualche frazione di secondo.
+% - Rischio Conflitti: Poiché sovrascrive il motore base, vecchi pacchetti
+%   non aggiornati (che usano primitive obsolete come \pdfobj) causeranno
+%   errori fatali.
+%
+% ------------------------------------------------------------------------------
+% 3. COMPATIBILITÀ DEI LETTORI PDF (Focus sui Soft Hyphen e Ricerca Testo)
+% ------------------------------------------------------------------------------
+% Il PDF generato è strutturalmente perfetto, ma la resa finale (stampa del
+% trattino, ricerca della parola intera, copia-incolla pulito e aspetto dei
+% segnalibri) dipende interamente dall'intelligenza del Reader utilizzato
+% dall'utente finale:
+%
+% * Adobe Acrobat / Foxit / PDF-XChange / Okular (I Gold Standard)
+%   - Ricerca: PERFETTA. Trovano la parola intera ignorando l'andata a capo.
+%   - Copia-Incolla: PERFETTO. Ricuciono la parola senza incollare trattini.
+%   - Segnalibri: PERFETTI. Il trattino invisibile non viene mostrato
+%     nell'indice.
+%   - (Nota: Okular, basato sul motore Poppler, è l'alternativa open-source
+%     più vicina alla perfezione, leggerissimo sia su Linux che su Windows).
+%
+% * Google Chrome / Edge / Firefox (Web Viewers)
+%   - Ricerca: OTTIMA. Trovano quasi sempre la parola per intero.
+%   - Copia-Incolla: BUONO. Comportamento simile a VS Code o perfetto a
+%     seconda del sistema operativo sottostante.
+%   - Segnalibri: OTTIMI. Nessun difetto visivo nell'indice laterale.
+%
+% * Sioyek (L'alternativa leggera per l'Accademia)
+%   - Ricerca: OTTIMA. Sfruttando un motore MuPDF moderno e ben integrato,
+%     trova correttamente le parole sillabate.
+%   - Copia-Incolla: BUONO. Comportamento generalmente corretto
+%     nell'estrazione.
+%   - Segnalibri: BUONI. Gestisce i titoli nell'indice senza i bug di Sumatra.
+%
+% * Lettore Interno di VS Code (Basato su PDF.js / Mozilla)
+%   - Ricerca: OTTIMA. Il motore normalizza il testo e trova le parole
+%     sillabate.
+%   - Segnalibri: OTTIMI. Il trattino rimane invisibile nell'indice laterale.
+%   - Copia-Incolla: IMPERFETTO. Copiando il testo, il carattere invisibile
+%     U+00AD finisce negli appunti. Se incollato altrove, la parola sembra
+%     unita ma contiene un carattere "fantasma" in mezzo.
+%
+% * SumatraPDF (L'anello debole: lettore leggero e veloce, man non supportato)
+%   - Ricerca: ROTTA. Non riesce a trovare la parola spezzata tra due righe.
+%   - Segnalibri: ROTTI. Se un titolo ha un soft hyphen, Sumatra stampa
+%     visivamente il trattino in mezzo alla parola nell'indice laterale.
+%   - Copia-Incolla: ROTTO. Spezza la parola e incolla il trattino fisico.
+%
+% ------------------------------------------------------------------------------
+% CONCLUSIONE STRATEGICA:
+% La scelta migliore risulta quella di attivare sempre questo comando (tant'è
+% che nelle future release di TeX sarà attivo di default), a patto che non si
+% verifichino conflitti con pacchetti obsoleti. Vengono così generati file
+% moderni, accessibili e a prova di futuro. Se l'utente finale riscontra
+% problemi di ricerca, la causa è da ricercarsi nel visualizzatore (es.
+% SumatraPDF) e non nel file generato da LaTeX.
+% ==============================================================================
+
+
 \PassOptionsToPackage{normalem}{ulem}   % Fix per Bug Overfull hbox in
                                         %bibliografia causato dal pacchetto ulem
 
