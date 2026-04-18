@@ -497,3 +497,4 @@ program_en
 start_academic_year
 semester
 completed
+everypage

@@ -330,3 +330,54 @@
 % testi anglosassoni, causando potenziali cesure errate (non grammaticali)
 % nell'andata a capo a fine riga.
 % ============================================================================
+
+\RequirePackage{silence}    % Pacchetto per silenziare avvisi
+                            % RequirePackage perchè siamo nel pre-preambolo.
+% \WarningsOff[everypage]       % Blocca tutti i warnings di everypage, drastico
+
+% Per bloccare solo i warning specifici di "pacchetto legacy".
+% Funzionano cercando una stringa esatta passata nel messaggio di warning
+% ATTENZIONE: alla formattazione della console di VScode, apri il file .log
+% per accedere ai messaggi esatti originali.
+% ATTENZIONE: i messaggi sono del tipo "Package everypage Warning: ...", ma non
+% va inclusa la prima parte, in quanto è già cercata dal comando visto che
+% si passa l'opzione "everypage" come primo argomento.
+\WarningFilter{everypage}{Functionality similar to this package has recently}
+\WarningFilter{everypage}{You appear to be running a version of LaTeX}
+
+% ==============================================================================
+% GESTIONE DEI WARNING DI EVERYPAGE E VARIE SOLUZIONI
+% ==============================================================================
+% ORIGINE DEL PROBLEMA:
+% La classe custom HKNdocument usa il pacchetto 'background' per generare la
+% filigrana di sfondo ("NON PUBBLICATO") per i documenti senza versione.
+% 'background' carica a sua volta il pacchetto 'everypage'. Quest'ultimo è
+% diventato obsoleto con le nuove distribuzioni LaTeX (che integrano comandi
+% nativi) e per questo stampa dei warning di legacy nel log.
+%
+% --- SOLUZIONE 1: DRASTICA (Pacchetto silence, blocco totale) ---
+% \RequirePackage{silence}
+% \WarningsOff[everypage]
+% Descrizione: Silenzia alla radice qualsiasi avviso di everypage.
+% Pro: Immediata. Contro: Rischia di nascondere bug critici futuri.
+% Tuttavia il pacchetto everypage ha ben pochi warnings e comandi (visto il
+% codice sorgente): andrebbe quasi bene.
+%
+% --- SOLUZIONE 2: CHIRURGICA / FILTRATA (Pacchetto silence, meno aggressiva) ---
+% \RequirePackage{silence}
+% \WarningFilter{everypage}{Functionality similar to this package}
+% \WarningFilter{everypage}{You appear to be running a version}
+% Descrizione: Nasconde solo le stringhe esatte specificate.
+% Pro: Mantiene il file .log pulito per tutto il team (portabile su Git).
+%
+% --- SOLUZIONE 3: MENO AGGRESSIVA (Filtro IDE in settings.json) ---
+% "latex-workshop.message.latexlog.exclude": [
+%   "Package everypage Warning: Functionality similar to this package",
+%   "Package everypage Warning: You appear to be running a version"
+% ]
+% Descrizione: Nasconde i warning dall'interfaccia di VS Code.
+% Pro: Non tocca il codice sorgente.
+% Contro: I warning restano nel .log e l'IDE degli altri sviluppatori
+% continuerà a mostrarli (non è portabile tramite repository se la cartella
+% .vscode è ignorata con .gitignore).
+% ==============================================================================
