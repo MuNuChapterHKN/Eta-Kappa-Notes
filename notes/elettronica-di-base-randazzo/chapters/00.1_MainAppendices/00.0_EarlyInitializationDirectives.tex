@@ -41,6 +41,157 @@
 %
 % ==============================================================================
 
+%_______________________________________________________________________________
+
+%      OPZIONI PER CLASSE VERSIONE: ORIGINALE, CREAZIONE BRANCH: 2025-11
+%_______________________________________________________________________________
+
+
+\PassOptionsToPackage{normalem}{ulem}   % Fix per Bug Overfull hbox in
+                                        %bibliografia causato dal pacchetto ulem
+
+
+% ==============================================================================
+% BUGFIX: OVERFULL HBOX IN BIBLIOGRAFIA E CONFLITTO PACCHETTO ULEM
+% ==============================================================================
+% COMANDO: \PassOptionsToPackage{normalem}{ulem}
+% POSIZIONE CORRETTA: Pre-Preambolo (Rigorosamente PRIMA di \documentclass)
+%
+% 1. IL PROBLEMA (OVERFULL \HBOX IN BIBLIOGRAFIA)
+% Durante la compilazione, i titoli lunghi dei libri nella bibliografia
+% causavano gravi warning di "Overfull \hbox", sbordando oltre il margine
+% destro della pagina. Inoltre, i titoli apparivano sottolineati anziché
+% nel classico corsivo tipografico standard.
+%
+% 2. LA CAUSA (SOVRASCROTTIRA DI \EMPH)
+% La custom class del progetto (HKNdocument.cls) carica internamente il
+% pacchetto 'ulem' tramite il comando \RequirePackage{ulem}. Di default,
+% questo pacchetto sovrascrive i comandi standard \emph e \em, sostituendo
+% il corsivo con la sottolineatura continua, precisamente sostituendoli con
+% lo stesso comando \uline propsto dal pacchetto ulem stesso. Questo vincolo
+% rigido impedisce al motore di sillabazione di LaTeX di spezzare la
+% frase a fine riga quado viene usato \emph, in quanto è generato come un box
+% insecabile, generando l'errore di overfull.
+%
+% 3. LA SOLUZIONE E L'EFFETTO DI 'NORMALEM'
+% L'opzione 'normalem' (Normal Emphasis) istruisce il pacchetto 'ulem' a
+% non sovrascrivere il comportamento di \emph, ripristinando i corsivi
+% originali e, di conseguenza, la corretta sillabazione a fine riga.
+% Questo non causa alcuna perdita di features, visto che \uline è sempre
+% provvisto dal pacchetto.
+%
+% 4. NESSUN EFFETTO COLLATERALE NELLA RISOLUZIONE DEL BUG
+% Analizzando la classe HKNdocument.cls, si evince che il pacchetto ulem
+% è stato caricato dal project manager al solo scopo di definire la macro
+% \myuline. I corsivi della classe sono stati realizzati in modo sicuro tramite
+% \textit. Questa iniezione è quindi priva di effetti collaterali: corregge il
+% bug della bibliografia senza alterare in alcun modo l'estetica o le macro
+% progettate per l'associazione.
+%
+% 5. PERCHE' NEL PRE-PREAMBOLO? (LA GESTIONE DELLA MEMORIA)
+% Questo comando deve stare prima del \documentclass. Se posizionato nel
+% preambolo standard, LaTeX lo ignorerebbe o andrebbe in crash ("Option
+% clash"), perché la classe avrebbe già caricato il paccheto ulem in memoria.
+% Posizionandolo nel Pre-Preambolo, si lascia un "post-it" al compilatore:
+% quando la classe chiamerà ulem, LaTeX gli inietterà di nascosto l'opzione
+% 'normalem', aggirando i blocchi di sistema.
+%
+% 6. ALTRA SOLUZIONE NON PRATICA: MODIFICARE LA CUSTOM CLASS
+% Ovviamente per risovlere basterebbe modificare la custom class HKNdocument.cls
+% aggiunenddo l'opzione 'normalem' al comando \RequirePackage{ulem}. Tuttavia
+% questa soluzione invaliderebbe l'uncità dei file della classe pensata per il
+% progetto. Tuttavia si tratta di un bug meritevole di correzione in generale,
+% attraverso una pull-request.
+%
+% 7. ALTRE SOLUZIONI INTERESSANTI:
+% - Si avrebbe potuto risolvere anche sfruttando il comando \normalem del
+%   pacchetto ulem, che ripstina il comando \emph al suo comportamento normale,
+%   in due modi diversi:
+%   1.  Mettendolo prima della bibliografia:
+%       \normalem  % Comando: Ripristina \emph al suo stato originale (corsivo)
+%       \printbibliography
+%       \ULforem   % Comando: Riattiva la sottolineatura per \emph (se serve)ù
+%   2.  Sfruttando un hook, ossia un'iniezione di codice:
+%       \AtBeginBibliography{\normalem}     % lancia \normalem prima di stampare
+%                                           % la bibliografia
+% - In modo simile, si sarebbe potuto sfruttare un backup del comando \emph
+%   originale, fatto con \let\originalemph\emph nel pre-preambolo, per poi
+%   risovrascriverlo prima della bibliografia, con \let\emph\OriginalEmph.
+% ==============================================================================
+
+\PassOptionsToPackage{english}{babel}   % Fix per Bilinguismo, non supportato
+                                        % nativamente da HKNDocument
+                                        % Carica inglese come lingua secondaria
+                                        % Necessario per Bibliografia bilingue
+
+% ==============================================================================
+% INIEZIONE DELLA LINGUA SECONDARIA (INGLESE) SENZA MODIFICA DELLA CUSTOM CLASS
+% ==============================================================================
+% L'istruzione \PassOptionsToPackage modifica la chiamata del pacchetto Babel,
+% che avviene nella custom class HKNdocument, chiamata da \documentclass,
+% iniettandovi l'opzione 'english', prima di quella passata dalla classe (o
+% dalle chiamate standard).
+%
+% SCOPO: BIBLIOGRAFIA CONTENENTE FONTI BILINGUE
+% Questa pre-configurazione è un prerequisito tecnico necessario per il
+% pacchetto 'biblatex' (se inizializzato con il parametro 'autolang=other').
+% Assicura la disponibilità in memoria dei dizionari di sillabazione
+% (hyphenation) e delle stringhe di localizzazione anglosassoni, vincolanti per
+% il corretto parsing e rendering delle voci bibliografiche recanti il metadato
+% 'langid={english}'.
+%
+% IDEA DI FONDO:
+% Il comando inietta la lingua 'english' nella lista delle opzioni destinate
+% al pacchetto 'babel', disaccoppiando il caricamento di una lingua secondaria
+% dalle restrizioni intrinseche alla classe custom, che prevede una sola lingua.
+%
+% WORKAROUND SFRUTTATO - MECCANISO DI RISOLUZIONE::
+% 1. La classe 'HKNdocument' implementa logiche condizionali (es. \ifx)
+%    basate sulla variabile \DocumentLanguage. Passare una lista concatenata di
+%    lingue direttamente alla classe corromperebbe l'esecuzione di tali script
+%    (inclusa la generazione del blocco licenze).
+% 2. Demandando l'opzione tramite \PassOptionsToPackage, il compilatore LaTeX
+%    memorizza l'argomento. Al momento dell'effettiva invocazione di 'babel'
+%    da parte della classe (es. \RequirePackage[italian]{babel}), avviene un
+%    merge delle opzioni.
+% 3. L'elenco finale risolto dal compilatore risulta essere [english, italian].
+%    In accordo alle direttive di 'babel', l'ultimo parametro definisce
+%    la Main Language del documento, lasciando le lingue precedenti disponibili
+%    in memoria come Secondary Languages.
+%
+% OSSERVAZIONE - SINERGIA TRA BABEL E MOTORE BIBLIOGRAFICO:
+%                       LOCALIZZAZIONE VS SILLABAZIONE
+% Questa pre-configurazione è un prerequisito tecnico necessario per il corretto
+% funzionamento generale del pacchetto 'biblatex', se inizializzato con
+% l'ozpione "autolang=other' o "autolang=hyphen".
+% In precisione hyphen chiama solo la sillabazione, mentre autolang chiama sia
+% la sillabazione che la localizzazione (spiegazione a seguire), nella lingua
+% specificata in "langid={...}" all'interno del database bibliografico (.bib).
+%
+% I due processi elaborativi separati da considerare sono:
+% - LOCALIZZAZIONE: La traduzione delle etichette bibliografiche (es. "6th Ed."
+%   invece di "6ª Ed.") è gestita autonomamente dai dizionari interni di
+%   'biblatex' tramite la lettura del metadato 'langid={english}'.
+% - SILLABAZIONE (Hyphenation): 'biblatex' non possiede algoritmi di andata
+%   a capo, ma demanda interamente questa operazione ai pattern caricati in
+%   memoria dal pacchetto 'babel'.
+%
+% Omettere l'istruzione \PassOptionsToPackage genera un'anomalia tipografica
+% silente: la bibliografia presenterà etichette correttamente localizzate in
+% inglese, ma il compilatore applicherà le regole di sillabazione italiane ai
+% testi anglosassoni, causando potenziali cesure errate (non grammaticali)
+% nell'andata a capo a fine riga.
+% ============================================================================
+
+
+
+%_______________________________________________________________________________
+
+%               OPZIONI PER CLASSE VERSIONE: MERGE DEL 2026-04-16
+%_______________________________________________________________________________
+
+
+
 % \DocumentMetadata{}   % Inizializzazione del nuovo backend (compositore di
                         % pdf) accessibile di LaTeX
 
@@ -194,144 +345,7 @@
 % interrompe senza apportare modifiche).
 % ==============================================================================
 
-
-\PassOptionsToPackage{normalem}{ulem}   % Fix per Bug Overfull hbox in
-                                        %bibliografia causato dal pacchetto ulem
-
-
-% ==============================================================================
-% BUGFIX: OVERFULL HBOX IN BIBLIOGRAFIA E CONFLITTO PACCHETTO ULEM
-% ==============================================================================
-% COMANDO: \PassOptionsToPackage{normalem}{ulem}
-% POSIZIONE CORRETTA: Pre-Preambolo (Rigorosamente PRIMA di \documentclass)
-%
-% 1. IL PROBLEMA (OVERFULL \HBOX IN BIBLIOGRAFIA)
-% Durante la compilazione, i titoli lunghi dei libri nella bibliografia
-% causavano gravi warning di "Overfull \hbox", sbordando oltre il margine
-% destro della pagina. Inoltre, i titoli apparivano sottolineati anziché
-% nel classico corsivo tipografico standard.
-%
-% 2. LA CAUSA (SOVRASCROTTIRA DI \EMPH)
-% La custom class del progetto (HKNdocument.cls) carica internamente il
-% pacchetto 'ulem' tramite il comando \RequirePackage{ulem}. Di default,
-% questo pacchetto sovrascrive i comandi standard \emph e \em, sostituendo
-% il corsivo con la sottolineatura continua, precisamente sostituendoli con
-% lo stesso comando \uline propsto dal pacchetto ulem stesso. Questo vincolo
-% rigido impedisce al motore di sillabazione di LaTeX di spezzare la
-% frase a fine riga quado viene usato \emph, in quanto è generato come un box
-% insecabile, generando l'errore di overfull.
-%
-% 3. LA SOLUZIONE E L'EFFETTO DI 'NORMALEM'
-% L'opzione 'normalem' (Normal Emphasis) istruisce il pacchetto 'ulem' a
-% non sovrascrivere il comportamento di \emph, ripristinando i corsivi
-% originali e, di conseguenza, la corretta sillabazione a fine riga.
-% Questo non causa alcuna perdita di features, visto che \uline è sempre
-% provvisto dal pacchetto.
-%
-% 4. NESSUN EFFETTO COLLATERALE NELLA RISOLUZIONE DEL BUG
-% Analizzando la classe HKNdocument.cls, si evince che il pacchetto ulem
-% è stato caricato dal project manager al solo scopo di definire la macro
-% \myuline. I corsivi della classe sono stati realizzati in modo sicuro tramite
-% \textit. Questa iniezione è quindi priva di effetti collaterali: corregge il
-% bug della bibliografia senza alterare in alcun modo l'estetica o le macro
-% progettate per l'associazione.
-%
-% 5. PERCHE' NEL PRE-PREAMBOLO? (LA GESTIONE DELLA MEMORIA)
-% Questo comando deve stare prima del \documentclass. Se posizionato nel
-% preambolo standard, LaTeX lo ignorerebbe o andrebbe in crash ("Option
-% clash"), perché la classe avrebbe già caricato il paccheto ulem in memoria.
-% Posizionandolo nel Pre-Preambolo, si lascia un "post-it" al compilatore:
-% quando la classe chiamerà ulem, LaTeX gli inietterà di nascosto l'opzione
-% 'normalem', aggirando i blocchi di sistema.
-%
-% 6. ALTRA SOLUZIONE NON PRATICA: MODIFICARE LA CUSTOM CLASS
-% Ovviamente per risovlere basterebbe modificare la custom class HKNdocument.cls
-% aggiunenddo l'opzione 'normalem' al comando \RequirePackage{ulem}. Tuttavia
-% questa soluzione invaliderebbe l'uncità dei file della classe pensata per il
-% progetto. Tuttavia si tratta di un bug meritevole di correzione in generale,
-% attraverso una pull-request.
-%
-% 7. ALTRE SOLUZIONI INTERESSANTI:
-% - Si avrebbe potuto risolvere anche sfruttando il comando \normalem del
-%   pacchetto ulem, che ripstina il comando \emph al suo comportamento normale,
-%   in due modi diversi:
-%   1.  Mettendolo prima della bibliografia:
-%       \normalem  % Comando: Ripristina \emph al suo stato originale (corsivo)
-%       \printbibliography
-%       \ULforem   % Comando: Riattiva la sottolineatura per \emph (se serve)ù
-%   2.  Sfruttando un hook, ossia un'iniezione di codice:
-%       \AtBeginBibliography{\normalem}     % lancia \normalem prima di stampare
-%                                           % la bibliografia
-% - In modo simile, si sarebbe potuto sfruttare un backup del comando \emph
-%   originale, fatto con \let\originalemph\emph nel pre-preambolo, per poi
-%   risovrascriverlo prima della bibliografia, con \let\emph\OriginalEmph.
-% ==============================================================================
-
-\PassOptionsToPackage{english}{babel}   % Fix per Bilinguismo, non supportato
-                                        % nativamente da HKNDocument
-                                        % Carica inglese come lingua secondaria
-                                        % Necessario per Bibliografia bilingue
-
-% ==============================================================================
-% INIEZIONE DELLA LINGUA SECONDARIA (INGLESE) SENZA MODIFICA DELLA CUSTOM CLASS
-% ==============================================================================
-% L'istruzione \PassOptionsToPackage modifica la chiamata del pacchetto Babel,
-% che avviene nella custom class HKNdocument, chiamata da \documentclass,
-% iniettandovi l'opzione 'english', prima di quella passata dalla classe (o
-% dalle chiamate standard).
-%
-% SCOPO: BIBLIOGRAFIA CONTENENTE FONTI BILINGUE
-% Questa pre-configurazione è un prerequisito tecnico necessario per il
-% pacchetto 'biblatex' (se inizializzato con il parametro 'autolang=other').
-% Assicura la disponibilità in memoria dei dizionari di sillabazione
-% (hyphenation) e delle stringhe di localizzazione anglosassoni, vincolanti per
-% il corretto parsing e rendering delle voci bibliografiche recanti il metadato
-% 'langid={english}'.
-%
-% IDEA DI FONDO:
-% Il comando inietta la lingua 'english' nella lista delle opzioni destinate
-% al pacchetto 'babel', disaccoppiando il caricamento di una lingua secondaria
-% dalle restrizioni intrinseche alla classe custom, che prevede una sola lingua.
-%
-% WORKAROUND SFRUTTATO - MECCANISO DI RISOLUZIONE::
-% 1. La classe 'HKNdocument' implementa logiche condizionali (es. \ifx)
-%    basate sulla variabile \DocumentLanguage. Passare una lista concatenata di
-%    lingue direttamente alla classe corromperebbe l'esecuzione di tali script
-%    (inclusa la generazione del blocco licenze).
-% 2. Demandando l'opzione tramite \PassOptionsToPackage, il compilatore LaTeX
-%    memorizza l'argomento. Al momento dell'effettiva invocazione di 'babel'
-%    da parte della classe (es. \RequirePackage[italian]{babel}), avviene un
-%    merge delle opzioni.
-% 3. L'elenco finale risolto dal compilatore risulta essere [english, italian].
-%    In accordo alle direttive di 'babel', l'ultimo parametro definisce
-%    la Main Language del documento, lasciando le lingue precedenti disponibili
-%    in memoria come Secondary Languages.
-%
-% OSSERVAZIONE - SINERGIA TRA BABEL E MOTORE BIBLIOGRAFICO:
-%                       LOCALIZZAZIONE VS SILLABAZIONE
-% Questa pre-configurazione è un prerequisito tecnico necessario per il corretto
-% funzionamento generale del pacchetto 'biblatex', se inizializzato con
-% l'ozpione "autolang=other' o "autolang=hyphen".
-% In precisione hyphen chiama solo la sillabazione, mentre autolang chiama sia
-% la sillabazione che la localizzazione (spiegazione a seguire), nella lingua
-% specificata in "langid={...}" all'interno del database bibliografico (.bib).
-%
-% I due processi elaborativi separati da considerare sono:
-% - LOCALIZZAZIONE: La traduzione delle etichette bibliografiche (es. "6th Ed."
-%   invece di "6ª Ed.") è gestita autonomamente dai dizionari interni di
-%   'biblatex' tramite la lettura del metadato 'langid={english}'.
-% - SILLABAZIONE (Hyphenation): 'biblatex' non possiede algoritmi di andata
-%   a capo, ma demanda interamente questa operazione ai pattern caricati in
-%   memoria dal pacchetto 'babel'.
-%
-% Omettere l'istruzione \PassOptionsToPackage genera un'anomalia tipografica
-% silente: la bibliografia presenterà etichette correttamente localizzate in
-% inglese, ma il compilatore applicherà le regole di sillabazione italiane ai
-% testi anglosassoni, causando potenziali cesure errate (non grammaticali)
-% nell'andata a capo a fine riga.
-% ============================================================================
-
-\RequirePackage{silence}    % Pacchetto per silenziare avvisi
+% \RequirePackage{silence}    % Pacchetto per silenziare avvisi
                             % RequirePackage perchè siamo nel pre-preambolo.
 % \WarningsOff[everypage]       % Blocca tutti i warnings di everypage, drastico
 
@@ -342,20 +356,26 @@
 % ATTENZIONE: i messaggi sono del tipo "Package everypage Warning: ...", ma non
 % va inclusa la prima parte, in quanto è già cercata dal comando visto che
 % si passa l'opzione "everypage" come primo argomento.
-\WarningFilter{everypage}{Functionality similar to this package has recently}
-\WarningFilter{everypage}{You appear to be running a version of LaTeX}
+% \WarningFilter{everypage}{Functionality similar to this package has recently}
+% \WarningFilter{everypage}{You appear to be running a version of LaTeX}
 
 % ==============================================================================
 % GESTIONE DEI WARNING DI EVERYPAGE E VARIE SOLUZIONI
 % ==============================================================================
 % ORIGINE DEL PROBLEMA:
-% La classe custom HKNdocument usa il pacchetto 'background' per generare la
-% filigrana di sfondo ("NON PUBBLICATO") per i documenti senza versione.
-% 'background' carica a sua volta il pacchetto 'everypage'. Quest'ultimo è
+% La classe custom HKNdocument usa il pacchetto "background" per generare la
+% filigrana di sfondo ("NON PUBBLICATO") per i documenti senza versione: a
+% proposito vedi il file CONTRIBUTING.md.
+% "Background" carica a sua volta il pacchetto 'everypage'. Quest'ultimo è
 % diventato obsoleto con le nuove distribuzioni LaTeX (che integrano comandi
-% nativi) e per questo stampa dei warning di legacy nel log.
+% nativi) e per questo stampa dei warning di stato legacy nel log.
+% Le funzionalità di everypage sono ormai intergrate nativamente in LaTeX, ed
+% il pacchetto è stato aggiornato in modo intelligente: dirotta i comandi di
+% everypage al sistema nativo. Quindi nonostante i warnings, la compatibilità
+% è piena.
 %
 % --- SOLUZIONE 1: DRASTICA (Pacchetto silence, blocco totale) ---
+% NEL PRE-PREAMBOLO, prima che la custom class carichi everypage (bakground)
 % \RequirePackage{silence}
 % \WarningsOff[everypage]
 % Descrizione: Silenzia alla radice qualsiasi avviso di everypage.
@@ -363,12 +383,16 @@
 % Tuttavia il pacchetto everypage ha ben pochi warnings e comandi (visto il
 % codice sorgente): andrebbe quasi bene.
 %
-% --- SOLUZIONE 2: CHIRURGICA / FILTRATA (Pacchetto silence, meno aggressiva) ---
+% --- SOLUZIONE 2: FILTRATA (Pacchetto silence, meno aggressiva) ---
+% NEL PRE-PREAMBOLO, prima che la custom class carichi everypage (bakground)
 % \RequirePackage{silence}
 % \WarningFilter{everypage}{Functionality similar to this package}
 % \WarningFilter{everypage}{You appear to be running a version}
 % Descrizione: Nasconde solo le stringhe esatte specificate.
 % Pro: Mantiene il file .log pulito per tutto il team (portabile su Git).
+% NOTA: ai comandi di filtratti, visto che viene passato il pacchetto, va poi
+% passata solo la parte del messaggio di warning successiva alla diciture
+% "Package everypage Warning: ", che è già cercata dal comando stesso.
 %
 % --- SOLUZIONE 3: MENO AGGRESSIVA (Filtro IDE in settings.json) ---
 % "latex-workshop.message.latexlog.exclude": [
@@ -378,6 +402,34 @@
 % Descrizione: Nasconde i warning dall'interfaccia di VS Code.
 % Pro: Non tocca il codice sorgente.
 % Contro: I warning restano nel .log e l'IDE degli altri sviluppatori
-% continuerà a mostrarli (non è portabile tramite repository se la cartella
-% .vscode è ignorata con .gitignore).
+% continuerà a mostrarli
+%
+% NOTA: qui si possono usare le stringhe complete dei messaggi di warning, al
+% contrario del caso precedente, in quanto il filtro è applicato al terminale,
+% a basso livello. Si possono usare anche regular expressions per filtrare.
+% NOTA: attenzione al file .gitignore.
+% La soluzione non è portabile (su Github) tramite repository se la cartella
+% .vscode è ignorata con .gitignore. Qui .vscode è ignorata solo in parte, il
+% file settings.json è escluso dall'essere ignorato, quindi è caricata.
+% NOTA: essendo un'impostazione dell'IDE, per funzionare ha bisogno di un aiuto:
+% Se non funziona: vai nella finestra laterale dell'estension TeX, e clicca:
+% - Commands -> Build LaTeX Project -> Kill LaTeX compiler process
+% - Commands -> Build LaTeX Project -> Clean auxiliary files
+% Se ancora non funziona fai anche:
+% - Command Palette (ctrl+shift+P) -> Reload Window
+% Questo può essere necessario in quanto l'IDE VScode non applica le nuove
+% impostazioni al volo ai file vecchi tipicamente, perchè ha una strategia di
+% efficenza: se i file non sono cambiati ( è ciò accade ad esempio se non si
+% aggiorna il codice sorgente, in quanto anche TeX è programmato per essere
+% efficiente, e non riscrive i file se non ci sono modifiche, incluso il .log.)
+% non fa nulla! Mentre lo si forza ad attivarsi, se i file vengon aggiornati
+%
+% SOLUZIONE ATTUALMENTE ADOTTATA:
+% Soluzione 3, per lasciare i warning nel .log, ma per nasconderli.
+% Si spera che il pacchetto background venga aggiornato, eliminando la
+% chiamata a everypage.
+%
+% NOTA: "latex-workshop.message.latexlog.exclude" era già presente nel file
+% settings.json: è bastato aggiungere le voci. Vedi il file per i dettagli.
+%
 % ==============================================================================

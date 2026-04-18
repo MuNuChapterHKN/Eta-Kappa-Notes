@@ -23,8 +23,16 @@
   "latex-workshop.latex.outDir": "%DIR%/build/",
   "latex-workshop.latex.rootFile.useSubFile": true,
   "latex-workshop.message.latexlog.exclude": [
-    "Infinite glue shrinkage found in box being split"
-  ],  // TeX Live 2025 triggers this 'ignored error' when a longtable is split across pages.
+      "Infinite glue shrinkage found in box being split",
+      "Package everypage Warning: Functionality similar to this package has recently",
+      "Package everypage Warning: You appear to be running a version of LaTeX"
+    ],
+    // LISTA WARNINGS IGNORATI (da VScode, vengono comunque stampati nel log)
+    // 1) TeX Live 2025 triggers this 'ignored error' when a longtable is split across pages.
+    // 2) Warning attivato dal pacchetto background, che richiama a sua volta il pacchetto everypage, usato dalla custom
+    //    class HKNdocument per generare la filigrana di sfondo (non pubblicato), per i documenti senza versione.
+    //    (Consulta contributing.md a riguardo)
+    // 3) Esattamente come il precedente.
   "latex-workshop.latex.tools": [
     {
       "name": "latexmk",
