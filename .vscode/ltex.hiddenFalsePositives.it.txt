@@ -57,3 +57,7 @@
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qnella cartella /chapters).\\E$"}
 {"rule":"UNPAIRED_BRACKETS","sentence":"^\\Q[\\E$"}
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qcode = 03RTSLX, name = Elettronica di Base, teacher = Prof. Vincenzo Randazzo, program_level = bachelor, program = Ingegneria Elettrica, program_en = Electrical Engineering, start_academic_year = 2025, semester = 1, completed = false\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qo m  #2.#1 #2 #2 #1 #1\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qnative), centrandola, pescando il file rispettivamente dalla cartella \"res/\", \"res/svg/\" o \"res/drawio/\".\\E$"}
+{"rule":"UNPAIRED_BRACKETS","sentence":"^\\Q(0.8 sta per 80Ecco, per questi comandi NON SERVE SPECIFICARE I PERCORSI!\\E$"}
+{"rule":"UNPAIRED_BRACKETS","sentence":"^\\Q(0.8 sta per larga l'80Ecco, per questi comandi NON SERVE SPECIFICARE I PERCORSI!\\E$"}

@@ -163,6 +163,12 @@
 
 \begin{comment}     % --- RIEPILOGO MACRO (COMANDI) CUSTOM DEFINITI NELLA CLASSE "HKNdocument" ---
 
+________________________________________________________________________________
+
+                   PER CLASS VERSIONE: MERGE DEL 2026-04-16
+________________________________________________________________________________
+
+
     RIEPILOGO MACRO (COMANDI) CUSTOM E AMBIENTI DEFINITI DALLA CLASSE HKNdocument E _preamble.tex
     NOTA: non possono essere ridichiarati con \newcommand{cmd}{def}, ma possono essere aggiornati con
     \renewcommand{cmd}{def}
@@ -174,22 +180,22 @@
     --- INSERIMENTO IMMAGINI FACILITATO (da _preamble.tex) ---
     \addfigure[Didascalia]{nomefile}{0.8}       % Inserisce un'immagine posizionandola precisamente dov'è citata
                                                 % (passa l'opzione [H]: exactly here) e centrandola, pescando il file
-                                                % dalla cartella "res/". 0.8 sta per larga 80% della larghezzad del
+                                                % dalla cartella "res/". 0.8 sta per larga l'80% della larghezza del
                                                 % testo (si può cambiare).
     \addsvg[Didascalia]{nomefile}{0.8}          % Inserisce un'immagine vettoriale SVG precisamente dov'è citata (passa
                                                 % l'opzione [H]: exactly here) e centrandola, pescando il file dalla
-                                                % cartella "res/svg/". 0.8 sta per larga 80% della larghezzad del testo
+                                                % cartella "res/svg/". 0.8 sta per larga l'80% della larghezza del testo
                                                 % (si può cambiare).
     \adddrawio[Didascalia]{nomefile}{0.8}       % Inserisce uno schema grafico creato con Draw.io precisamente dov'è
                                                 % citata (passa l'opzione [H]: exactly here) e centrandola, esportato in
-                                                % SVG dalla cartella "res/drawio/". 0.8 sta per larga 80% della
-                                                % larghezzad del testo (si può cambiare).
+                                                % SVG dalla cartella "res/drawio/". 0.8 sta per larga l'80% della
+                                                % larghezza del testo (si può cambiare).
 
     NUOVA SPIEGAZIONE: Altro non sono che Wrapper dei comandi \includegraphics{} e \includesvg{} dei pacchetti graphicx
     e svg, pensati per facilitare l'inserimento delle immagini. Questi comandi inseriscono un'immagine posizionandola
     precisamente dove sono chiamati (passano l'opzione [H]: exactly here, del pacchetto float, più forte e robusta delle
     opzioni "h" o "h!" native), centrandola, pescando il file rispettivamente dalla cartella "res/"., "res/svg/" o
-    "res/drawio/". (0.8 sta per larga 80% della larghezzad del testo, si può cambiare).
+    "res/drawio/". (0.8 sta per larga l'80% della larghezza del testo, si può cambiare).
     Ecco, per questi comandi NON SERVE SPECIFICARE I PERCORSI! Li cercano in automatico nelle cartelle dedicate: basta
     specificare il nome del file, in particolare SENZA ESTENSIONE (le macro gestiscono automaticamente anche quella: per
     graphics la omettono, per svg l'aggiungono).
@@ -201,15 +207,14 @@
 
     \begin{definition} ... \end{definition}     % Genera un riquadro con bordo ROSSO numerato per le Definizioni.
     \begin{theorem} ... \end{theorem}           % Genera un riquadro con bordo GIALLO numerato per i Teoremi.
+    \begin{lemma} ... \end{lemma}               % Genera un riquadro con bordo GIALLO numerato per i Lemmi.
     \begin{corollary} ... \end{corollary}       % Genera un riquadro con bordo ARANCIONE numerato per i Corollari.
     \begin{exercise} ... \end{exercise}         % Genera un riquadro con bordo BLU SCURO numerato per gli Esercizi.
-    \begin{observation} ... \end{observation}   % Genera un riquadro con bordo GRIGIO-BLU numerato per le Osservazioni
+    \begin{observation} ... \end{observation}   % Genera un riquadro con bordo AZZURRO numerato per le Osservazioni
                                                 % generiche.
 
     --- MACRO "FABBRICA" PER CREARE NUOVI BOX COLORATI (da HKNdocument.cls) ---
     \DeclareHKNBox{nome}{TitITA}{TitENG}{colore}    % Macro avanzata. Usata per creare box colorati personalizzati
-                                                    % (NOTA: nella nuova versione della classe sono stati aggiunti i
-                                                    % lemmi).
 
     --- COMANDI TIPOGRAFICI SPECIALI (da HKNdocument.cls) ---
     \myuline{Testo}                             % Una sottolineatura intelligente che si interrompe elegantemente per
@@ -219,16 +224,51 @@
                                                 % per la bibliografia. Vedi il main.tex per i rimandi.
 
     --- MACRO PER L'INSERIMENTO DEI METADATI (necessario usarle nel preambolo, per la custom class HKNdocument) ---
+
+    \courseinfo{                                % Hub centrale metadati (sostituisce i vecchi comandi singoli)
+    %                                           % Chiavi supportate (una per riga):
+        code = AB1CDE2,                         % Codice ufficiale dell'insegnamento (es. portale Polito).
+        name = {Nome del Corso},                % Nome completo della materia (usare graffe se contiene spazi).
+        teacher = {Nome Cognome},               % Docente principale del corso (es. {Prof. Mario Rossi}).
+        program = {Nome del CdL},               % Nome del Corso di Laurea (es. {Ingegneria Elettronica}).
+        program_en = {Degree Name},             % (Opzionale) Nome del CdL in inglese per documenti bilingue.
+        program_level = bachelor|master,        % Livello: usare 'bachelor' (Triennale) o 'master' (Magistrale).
+        start_academic_year = 2025,             % Anno solare di inizio (genera automaticamente il range es. 2025-26).
+        semester = 1|2,                         % Semestre di erogazione (1 o 2). Tradotto in automatico.
+        completed = true|false                  % Se 'false', aggiunge un avviso rosso di "Appunti incompleti".
+    }                                           % Questi dati autogenerano il frontespizio in modo intelligente e
+                                                % inietteranno automaticamente le proprietà nel file PDF finale.
+    \title{Titolo Personalizzato}               % (OPZIONALE) Se usato, sovrascrive l'autogenerazione del titolo basata
+                                                % su materia e corso di laurea dettata da \courseinfo.
+    \editor{Nome Cognome}                       % Aggiunge la voce "Revisionato da: / Edited by:" nella pagina del
+                                                % titolo. Può essere chiamato più volte.
+
+    % NOTA SULLA VERSIONE: Il comando \docversion NON esiste più. La document class ora legge automaticamente e
+    % silenziosamente il contenuto del file di testo "resources/version". Se il file non esiste, il documento viene
+    % automaticamente marcato come "NON PUBBLICATO" con tanto di filigrana di sicurezza rossa.
+
+                                            MACRO RIMOSSE CON MERGE DEL 2026-04-16
+
     \shorttitle{Titolo Breve}                   % Definisce un titolo accorciato da usare nelle intestazioni superiori
                                                 % per non farle eventualmente sbordare.
-    \editor{Nome Cognome}                       % Aggiunge la voce "Revisionato da: / Edited by:" nella pagina del
-                                                % titolo.
+                                                % Inizialmente pensata per le testatine, adesso rimossa
     \docdate{Data Libera}                       % Imposta una data fissa o personalizzata per la copertina. Impostato
                                                 % dal project manager scrivendo il semestre del corso.
+                                                % Adesso stampa in automatico la data di ultimo aggiornamento con \today
     \docversion{1.0}                            % Aggiunge l'indicazione della versione del documento in copertina. 1.0
                                                 % è un esempio di versione
+                                                % Adesso gestito da \courseinfo. Vedi CONTRIBUTING.md.
 
-    --- MACRO CUSTOM USATE COME VARIABILI PER OGGETTI DELLA PER COPERTINA E INTESTAZIONE DELLA CUSTOM CLASS HKNdocument
+    --- MACRO USATE COME COSTANTI DI SISTEMA PER LOGHI E INFO ORGANIZZAZIONE (da HKNdocument.cls) ---
+    % (Modificabili con \gdef o simili (altre versioni di def) se necessario)
+    \DDbiglogo                                  % Variabile che punta al logo principale in copertina (hkn_logo.pdf).
+    \DDsmalllogo                                % Variabile che punta al logo dell'intestazione (hkn_ideogramma.pdf).
+    \DDlicenselogo                              % Variabile che punta all'immagine della licenza (ccbyncnd.png).
+    \DDorganization                             % Variabile per il nome organizzazione (IEEE-HKN -- Mu Nu Chapter).
+
+
+                                    VECCHIE VERSIONI RIMOSSE CON MERGE DEL 2026-04-16
+
     (Modificabili con \renewcommand se necessario) (da HKNdocument.cls) ---
     \doclogofrontpage                           % Macro che contiene il logo principale della copertina
                                                 % (Default: logo HKN).
@@ -239,23 +279,37 @@
     \DDorganization                             % Macro che contiene il nome dell'organizzazione
                                                 % (Default: IEEE-HKN Mu Nu Chapter).
 
+
     --- MACRO INTERNE DI SALVATAGGIO (BACKEND) USATE COME VARIABILI - ATTENZIONE: NON TOCCARE
     Queste macro rappresentano il "database interno" della custom class HKNdocument.
 
-    \maintitle       % Salva il titolo esteso inserito dall'utente tramite il comando \title{...}.
+    \DDtitle         % Salva il titolo esteso inserito dall'utente se viene forzato il comando \title{...}.
     \DDauthors       % Raccoglie e concatena i nomi inseriti con le chiamate a \author{...}.
     \DDeditors       % Salva i nomi dei revisori inseriti tramite il comando custom \editor{...}.
-    \DDdate          % Memorizza la data personalizzata definita tramite \docdate{...}.
-    \DDversion       % Registra il numero di versione impostato con \docversion{...}.
-    \STtitle         % Conserva il titolo breve definito con \shorttitle{...} per le intestazioni.
+    \DDcoursecode    % Variabile interna generata da \courseinfo contenente il codice ufficiale del corso.
+    \DDcoursename    % Variabile interna generata da \courseinfo contenente il nome completo della materia.
+    \DDteacher       % Variabile interna generata da \courseinfo contenente il nome e cognome del docente.
+    \DDprogram       % Variabile interna generata da \courseinfo contenente il nome del corso di laurea.
+    \DDprogramlevel  % Variabile interna generata da \courseinfo per il livello (Triennale o Magistrale).
+    \DDsemester      % Variabile interna generata da \courseinfo contenente il numero del semestre (1 o 2).
+    \DDacademicyear  % Variabile interna contenente l'anno accademico esteso (calcolato da start_academic_year).
+    \DDcompleted     % Variabile interna booleana generata da \courseinfo per il flag di completezza.
+    \DDversion       % Registrata automaticamente leggendo il file esterno (tramite il pacchetto catchfile).
 
-    REGOLE IMPORANTI (Perché non vanno modificate e perché non dovrebbero essere usate):
-    1. NON SOCRASCRIVERLE (NO \renewcommand): Si romperebbe il collegamento logico con i comandi standard (FrontEnd)
-    previsti dalla classe. Usa sempre i comandi ufficiali (\title, \author, ecc.) per inserire i dati.
+    REGOLE IMPORTANTI (Perché non vanno modificate e perché non dovrebbero essere usate):
+    1. NON SOVRASCRIVERLE (NO \renewcommand): Si romperebbe il collegamento logico con i comandi standard (FrontEnd)
+    previsti dalla classe. Usa sempre i comandi ufficiali (\courseinfo, \author, ecc.) per inserire i dati.
     2. NON USARLE/RICHIAMARLE NEL TESTO: Queste "scatole" vengono lette dalla classe per costruire la copertina e le
     intestazioni. Spesso contengono regole di formattazione nascoste (es. font enormi e in grassetto). Stamparle in
     mezzo a un paragrafo distruggerebbe l'impaginazione. Inoltre, se una di queste macro fosse vuota, genererebbe un
     errore fatale di compilazione.
 
+
+                            VECCHIE VERSIONI RIMOSSE O CAMBIATE CON MERGE DEL 2026-04-16
+
+    \maintitle       % Salva il titolo esteso inserito dall'utente tramite il comando \title{...}.
+    \DDdate          % Memorizza la data personalizzata definita tramite \docdate{...}.
+    \DDversion       % Registra il numero di versione impostato con \docversion{...}.
+    \STtitle         % Conserva il titolo breve definito con \shorttitle{...} per le intestazioni.
 
 \end{comment}

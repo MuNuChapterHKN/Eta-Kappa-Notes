@@ -245,35 +245,47 @@
 
 \begin{comment}     % --- RIEPILOGO PACCHETTI INCLUSI NELLA CLASSE "HKNdocument" ---
 
+________________________________________________________________________________
+
+                   PER CLASS VERSIONE: MERGE DEL 2026-04-16
+________________________________________________________________________________
+
     RIEPILOGO COMPLETO: PACCHETTI CARICATI DALLA CLASSE HKNdocument E _preamble.tex
     NON inserirli di nuovo in main.tex con \usepackage per evitare conflitti!
 
     --- TIPOGRAFIA E LINGUA BASE (da HKNdocument.cls) ---
-    \usepackage[T1]{fontenc}                    % [PLUG & PLAY] [OVERRIDE]  Imposta la codifica europea dei font,
+    \usepackage[T1]{fontenc}                    % [PLUG & PLAY] [OVERRIDE] Imposta la codifica europea dei font,
                                                 % fondamentale per stampare correttamente le lettere accentate italiane
                                                 % nel PDF e permettere il copia-incolla.
-    \usepackage[utf8]{inputenc}                 % [PLUG & PLAY] [OVERRIDE]  Permette di digitare direttamente da
+    \usepackage[utf8]{inputenc}                 % [PLUG & PLAY] [OVERRIDE] Permette di digitare direttamente da
                                                 % tastiera caratteri speciali e accenti (es. à, è, ì) riconoscendo la
                                                 % codifica UTF-8 (unicode) direttamente dal file sorgente.
                                                 % Utile per non impazzire con i comandi per aggiungere apici.
-    \usepackage{lmodern}                        % [PLUG & PLAY] [OVERRIDE]  Carica i font vettoriali "Latin Modern",
+    \usepackage{lmodern}                        % [PLUG & PLAY] [OVERRIDE] Carica i font vettoriali "Latin Modern",
                                                 % essenziali per mantenere il testo nitido e non sgranato anche ad alti
                                                 % livelli di zoom.
-    \usepackage[\DocumentLanguage]{babel}       % [PLUG & PLAY] [OVERRIDE]  Gestisce le regole tipografiche, le
+    \usepackage[\DocumentLanguage]{babel}       % [PLUG & PLAY] [OVERRIDE] Gestisce le regole tipografiche, le
                                                 % traduzioni automatiche (es. "Capitolo") e la corretta sillabazione per
                                                 % la lingua scelta (italiano o inglese).
                                                 % NOTA: il "\DocumentLanguage" è l'opzione passata alla document class
-                                                % custom HKNdocument, all'inizio del main.tex
+                                                % custom HKNdocument, all'inizio del main.tex.
 
     --- LAYOUT E IMPAGINAZIONE (da HKNdocument.cls) ---
-    \usepackage{geometry}           % [PLUG & PLAY] [OVERRIDE]  Configura fisicamente la pagina, impostando il formato
+    \usepackage{geometry}           % [PLUG & PLAY] [OVERRIDE] Configura fisicamente la pagina, impostando il formato
                                     % A4 e forzando margini uniformi di 3 cm su tutti i lati per una lettura ariosa.
-    \usepackage{parskip}            % [PLUG & PLAY] [OVERRIDE]  Rimuove l'indentazione o rientro della prima riga
+    \usepackage{parskip}            % [PLUG & PLAY] [OVERRIDE] Rimuove l'indentazione o rientro della prima riga
                                     % (considerata antiestetica), e aggiunge automaticamente spazio verticale tra i
                                     % paragrafi.
-    \usepackage{fancyhdr}           % [EXTENSION]   [OVERRIDE]  Permette la creazione di intestazioni e piè di pagina
+    \usepackage{fancyhdr}           % [EXTENSION] [OVERRIDE] Permette la creazione di intestazioni e piè di pagina
                                     % personalizzati (usati dalla classe per inserire loghi, pagina e titolo del
                                     % capitolo).
+
+    --- LETTURA FILE ESTERNI E MACRO CUSTOM CON ARGOMENTI CHIAVE VALORE - PER METADATI (da HKNdocument.cls) ---
+    \usepackage{catchfile}          % [EXTENSION] Permette di catturare il contenuto di file di testo esterni e
+                                    % salvarlo in macro (usato per leggere dinamicamente il file "version").
+                                    % Vedi il file CONTRIBUTING.md per la spiegazione di codesta funzionalità.
+    \usepackage{pgfkeys}            % [EXTENSION] Motore avanzato per creare e gestire comandi con argomenti
+                                    % a "chiave-valore" (stile dizionario). Muove la logica del blocco \courseinfo.
 
     --- MATEMATICA E FISICA (da _preamble.tex) ---
     \usepackage{amsmath}            % [EXTENSION] Il pacchetto fondamentale dell'American Mathematical Society per
@@ -282,9 +294,9 @@
                                     % simboli degli insiemi dei numeri reali o complessi).
     \usepackage{amsthm}             % [EXTENSION] Fornisce gli ambienti standard per definire teoremi, dimostrazioni e
                                     % lemmi matematici.
-    \usepackage{mathtools}          % [EXTENSION] [EXTENSION] Un'estensione di amsmath che risolve alcuni bug grafici e
+    \usepackage{mathtools}          % [EXTENSION] Un'estensione di amsmath che risolve alcuni bug grafici e
                                     % aggiunge strumenti avanzati per allineare le equazioni.
-    \usepackage{mleftright}         % [PLUG & PLAY] [OVERRIDE] [EXTENSION]  Ottimizza e corregge la spaziatura
+    \usepackage{mleftright}         % [PLUG & PLAY] [OVERRIDE] [EXTENSION] Ottimizza e corregge la spaziatura
                                     % orizzontale automatica attorno alle parentesi che racchiudono frazioni o matrici
                                     % alte.
 
@@ -299,35 +311,39 @@
     \usepackage{enumitem}           % [EXTENSION] [OVERRIDE] Offre il controllo totale sugli elenchi puntati e numerati,
                                     % permettendo di regolarne i margini e la spaziatura verticale.
 
-    --- GRAFICA E COLORI (da HKNdocument.cls e _preamble.tex) ---
+    --- GRAFICA, COLORI, e IMMAGINI (da HKNdocument.cls e _preamble.tex) ---
     \usepackage{xcolor}             % [EXTENSION] Il motore principale per definire, miscelare e applicare colori
-                                    % personalizzati al testo e agli sfondi.
+                                    % personalizzati al testo e agli sfondi (es. palette Mu Nu Chapter).
     \usepackage{tcolorbox}          % [EXTENSION] Un potente pacchetto grafico usato dalla classe per creare i riquadri
-                                    % arrotondati e colorati di definizioni ed esercizi.
+                                    % arrotondati e colorati di definizioni, teoremi ed esercizi.
     \usepackage{graphicx}           % [EXTENSION] Il pacchetto standard e indispensabile per importare e ridimensionare
                                     % immagini esterne (JPG, PNG, PDF).
     \usepackage{svg}                % [EXTENSION] Permette di importare direttamente file vettoriali .svg (utilizzando
                                     % Inkscape in background per la conversione).
+    \usepackage{background}         % [EXTENSION] Permette di inserire grafiche e testo in filigrana (watermark) sullo
+                                    % sfondo delle pagine. Usato per stampare diagonalmente "NON PUBBLICATO".
+                                    % Per ulteriori spiegazioni consulta CONTRIBUTING.md, e info su pacchetti catchfile
+                                    % e pgfkeys, che costituiscono la logica di questa funzionalità.
     \usepackage{float}              % [OVERRIDE] [EXTENSION] Aggiunge l'opzione [H] (exactly here) e [h] (here if
                                     % possible, otherwise as usual) per forzare tabelle e figure a rimanere nel punto
-                                    % del testo in cui sono state scriaggiunte, senza lasciarle "galleggiare" (float)
-                                    % alla deriva altrove.
-    \usepackage{caption}            % [PLUG & PLAY] [OVERRIDE] [EXTENSION]  Usato per personalizzare i margini, i font e
+                                    % del testo in cui sono state scritte, senza lasciarle "galleggiare" (float) alla
+                                    % deriva altrove.
+    \usepackage{caption}            % [PLUG & PLAY] [OVERRIDE] [EXTENSION] Usato per personalizzare i margini, i font e
                                     % l'allineamento delle didascalie sotto le immagini e le tabelle.
                                     % Come Fix auomatico "Plug & play" corregge uno storico problema di LaTeX relativo
                                     % alla spaziatura delle didascalie se impostate sopra le tabelle. Inoltre la custom
-                                    % class hai impostato ad 1cm questo spazio.
+                                    % class ha impostato ad 1cm questo spazio (nel file preamble).
 
-    --- STILE E UTILITY (da HKNdocument.cls e _preamble.tex) ---
+    --- STILE E UTILITY (da HKNdocument.cls) ---
     \usepackage{hyperref}           % [PLUG & PLAY] [OVERRIDE] [EXTENSION] Rende il PDF interattivo: trasforma l'indice,
-                                    % i riferimenti incrociati e gli URL in link cliccabili (impostati in blu o nero).
+                                    % i riferimenti incrociati e gli URL in link cliccabili. Inietta inoltre i metadati
+                                    % (titolo, autore, url) nelle proprietà di sistema del PDF generato.
     \usepackage{listings}           % [EXTENSION] Permette di formattare ed evidenziare la sintassi di blocchi di codice
                                     % informatico.
-                                    % NOTA: nella custom class è definito un TEMA CUSTOM, chiamato "hkn", per l'aspetto
-                                    % del codice. Non è stato impostato come predefinito, va usato con
-                                    % \begin{lstlisting}[style=hkn].
-                                    % Si dodvrebbe correggere la classe per imposarlo come predefinito in generale,
-                                    % basta aggiungere il comando \lstset{style=hkn}. Aggiunto nel file global settings.
+                                    % NOTA: La custom class definisce e imposta automaticamente come globale lo stile
+                                    % "hkn" (con i colori della palette). Se serve la numerazione delle righe, basta
+                                    % chiamare l'ambiente con \begin{lstlisting}[style=hkn-numbered], cioè cambiare lo
+                                    % stile in "hkn-numbered", che è identico a "hkn" ma con la numerazione attivata.
     \usepackage{ulem}               % [EXTENSION] Fornisce comandi avanzati per sottolineare e barrare il testo.
     \usepackage{contour}            % [EXTENSION] Crea un contorno attorno ai caratteri, usato in combinazione con ulem
                                     % per creare sottolineature che non tagliano le lettere discendenti.

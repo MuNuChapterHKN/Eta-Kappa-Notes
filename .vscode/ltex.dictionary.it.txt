@@ -498,3 +498,4 @@ start_academic_year
 semester
 completed
 everypage
+Degree

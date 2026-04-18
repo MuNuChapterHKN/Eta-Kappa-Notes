@@ -5,38 +5,47 @@
 
 
 \begin{comment}     % --- RIEPILOGO MACRO (COMANDI) MODIFICATE O SOVRASCRITTE NELLA CLASSE "HKNdocument" ---
+________________________________________________________________________________
+
+                   PER CLASS VERSIONE: MERGE DEL 2026-04-16
+________________________________________________________________________________
 
     RIEPILOGO COMANDI SOVRASCRITTI (RENEWED) DALLA CLASSE HKNdocument
     La custom class HKNdocument modifica alcun comandi standard di LaTeX, in precisione quelli elencati a seguire, per
     adattarli al design una volta per tutte. Un comando si modifica con \renewcommand{cmd}{def}, che non fa altro che
-    riscriverne la macro.
+    riscriverne la macro. Oppure si può usare \gdef o \def\ per agire a basso livello, ma è meglio limitarsi a
+    \renewcommand per evitare conflitti con il motore di LaTeX.
 
-    --- METADATI (Titolo e Autori) ---
-    \title{...}         % Invece di limitarsi a dichiarare il titolo, ora lo memorizza in una variabile interna per
-                        % poterlo stampare con stili diversi nella copertina personalizzata.
+    --- METADATI E FRONTESPIZIO (COPERTINA) ---
+    \title{...}         % Sovrascrive il comando standard. Se omesso, la classe genera il titolo automaticamente
+                        % fondendo i dati di \courseinfo. Se usato, forza un titolo custom scavalcando l'automazione.
+                        % In tal caso lo memorizza in una variabile interna per poterlo stampare nella copertina.
     \author{...}        % Modificato per supportare più autori in sequenza: se richiami \author{} più volte, li
                         % concatena automaticamente inserendo una virgola tra l'uno e l'altro.
+    \maketitle          % Stravolge l'estetica base di LaTeX. Annulla la copertina standard per generare dinamicamente
+                        % il frontespizio ufficiale usando i dati di \courseinfo. Inietta i metadati di sistema nel
+                        % PDF finale e gestisce avvisi automatici (es. filigrana rossa se manca il file version).
 
-    --- COPERTINA E INTESTAZIONI ---
-    \maketitle          % Stravolge completamente l'estetica base di LaTeX: annulla la copertina standard per generare
-                        % il frontespizio ufficiale con loghi, revisori, versione e data.
+    --- TESTAINE (INTESTAZIONI) O HEADER ---
     \headrule           % (Comando del pacchetto fancyhdr) Sovrascrive la riga superiore dell'intestazione, spezzandola
                         % in due segmenti separati per lasciare spazio al logo centrale.
 
     --- GESTIONE DEI CAPITOLI E DELLE PAGINE BIANCHE ---
+    \chapter{...}       % Sovrascritto per forzare lo stile pagina 'plain' (senza intestazioni) all'inizio di ogni
+                        % nuovo capitolo e per passare correttamente l'eventuale titolo breve alle intestazioni.
     \clearpage          % Sovrascrive il salto pagina base: impone la regola \thispagestyle{empty} per assicurarsi che
                         % un'eventuale pagina bianca generata non abbia numeri o intestazioni residue.
     \cleardoublepage    % Fa la stessa cosa di \clearpage, ma per l'impaginazione fronte-retro (evitando pagine sinistre
                         % vuote ma con l'intestazione stampata).
     \chaptermark{...}   % Modifica il modo in cui il motore registra i nomi dei capitoli in memoria, permettendo
-                        % all'intestazione di pagina di catturarli correttamente.
+                        % all'intestazione di pagina di catturarli correttamente per stamparli in alto.
 
     --- STILE TIPOGRAFICO ---
     \ULdepth            % (Variabile del pacchetto ulem) Sostituisce la distanza standard della sottolineatura,
                         % abbassandola a 1.8pt per far funzionare bene il comando \myuline.
     \emph               % Sovrascritto dal pacchetto ulem, che lo sostituisce con \uline, che sottolinea invece di
                         % mettere in corsivo.
-                        % FIXATO: ha cauato un bug di Overfull nella bibliografia. Vedi file
+                        % FIXATO: ha causato un bug di Overfull nella bibliografia. Vedi file
                         % 00.0_EarlyInitializationDirectives.tex per spiegazioni.
 
     --- NUMERAZIONE AUTOMATICA (Modificata in _preamble.tex) ---
@@ -55,7 +64,7 @@
 
     Per gli elementi standard di LaTeX questo si ottiene con il comando: \numberwithin{son}{father}, fornito dal package
     amsmath, che lega il contatore figlio al contatore padre. In precisione, in _preamble.tex caricato dalla custom
-    class HKNdocument, sono esplicitamente riportati i seguenti comandi per farsi che la numerazione di figure, tabelle,
+    class HKNdocument, sono esplicitamente riportati i seguenti comandi per far sì che la numerazione di figure, tabelle,
     ed equazioni sia subordinata a quella dei capitoli:
 
     \numberwithin{figure}{chapter}
@@ -69,6 +78,7 @@
 
     Quelle appena citate sono le macro che si possono usare per "leggere" i "numeri correnti" (gli ultimi oggetti prima
     del comando) dei contatori. Le più utili sono:
+
     \thepart            % Numero della parte (solitamente numeri romani).
     \thechapter         % Numero del capitolo (non presente in article).
     \thesection         % Numero della sezione.
@@ -87,7 +97,7 @@
     \thefootnote        % Il simbolo o numero della nota a piè di pagina.
 
     Un'ultima spiegazione nota relativamente alla numerazione degli ELEMENTI CUSTOM della custom class HKNdocument, cioè
-    dei BOX COLORATI  per Teoremi, Definizioni, Esercizi ecc.
+    dei BOX COLORATI per Teoremi, Definizioni, Esercizi ecc.
 
     Per gli ambienti generati con \DeclareHKNBox, la gerarchia NON è gestita da \numberwithin. Questi box sono creati
     con il pacchetto 'tcolorbox', che possiede un suo motore indipendente. La classe gli passa semplicemente l'opzione
@@ -100,7 +110,7 @@
        Capitoli.
     2. Reset automatico: All'inizio di ogni nuovo capitolo, il conteggio degli elementi riparte da zero.
     In conclusione: Invece di usare una numerazione globale e progressiva per tutto il libro (es. "Figura 45"), il
-    motore stamperà il numero del capitolo seguito da quello dell'elemento (es. "Figura 5.3", che indica a terza figura
+    motore stamperà il numero del capitolo seguito da quello dell'elemento (es. "Figura 5.3", che indica la terza figura
     del quinto capitolo).
 
 \end{comment}
