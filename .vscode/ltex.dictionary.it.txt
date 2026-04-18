@@ -500,3 +500,15 @@ completed
 everypage
 Degree
 hkn-numbered
+Undefined
+sequence
+xleftmargin
+xrightmargin
+autogenera
+hknYellow
+hknBlue
+hknOrange
+hknRed
+munuDarkBlue
+munuMediumBlue
+munuLightBlue

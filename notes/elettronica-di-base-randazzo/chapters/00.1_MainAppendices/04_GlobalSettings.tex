@@ -1,7 +1,7 @@
 % --- MAGIC COMMENTS: CONFIGURAZIONE EDITOR --- (vedi main.tex per riferimenti e spiegazioni) ---
 % !TEX root = ../../main.tex
 
-% __________________________________________________________________ IMPOSTAZIONI GLOBALI SPECIALI (FIXES) ___________________________________________________________
+% ________________________________________ IMPOSTAZIONI GLOBALI SPECIALI (FIXES) _______________________________________
 
 % --- LISTATI CODICE (Pacchetto "listings") ---
 \lstset{style=hkn-numbered}     % Imposta di default lo stile grafico per i listati di codice, sfruttando il custom
@@ -29,93 +29,97 @@
 
 
 \begin{comment}
-    ==============================================================================
-    ARCHITETTURA DELLE OPZIONI PER LA CUSTOM CLASS HKNdocument E ALTRE SPIEGAZIONI
-    ==============================================================================
+==============================================================================
+ARCHITETTURA DELLE OPZIONI PER LA CUSTOM CLASS HKNdocument E ALTRE SPIEGAZIONI
+==============================================================================
 
-    --- OPZIONI DELLA CUSTOM CLASS ---
-    La classe HKNdocument accetta parametri opzionali passati tra parentesi quadre nel comando iniziale:
-    \documentclass[opzione1, opzione2, ...]{HKNdocument}. L'ORDINE NON CONTA: Poiché la classe dichiara esplicitamente
-    ogni singola opzione (tramite \DeclareOption), il motore LaTeX si limita a cercare le chiavi riconosciute
-    all'interno dell'elenco fornito: possono quindi essere inserite nell'ordine preferito.
+________________________________________________________________________________
 
-    Le Opzioni disponibili sono:
-    LINGUA DEL DOCUMENTO (Imposta il pacchetto babel e le diciture interne)
-    - italian  (Valore di Default)
-    - english
-    DIMENSIONE DEL FONT (Passata alla classe base 'book')
-    - 10pt
-    - 11pt
-    - 12pt     (Valore di Default)
-    PROFONDITÀ DELL'INDICE (ToC - Table of Contents)
-    - toc=chapters       (Livello 0: Mostra solo i capitoli)
-    - toc=sections       (Livello 1: Mostra capitoli e sezioni)
-    - toc=subsections    (Livello 2: Default, mostra fino alle sottosezioni)
-    - toc=subsubsections (Livello 3: Mostra fino alle sotto-sottosezioni)
-    ESEMPIO DI UTILIZZO
-    \documentclass[english, 10pt, toc=chapters]{HKNdocument}
+                   PER CLASS VERSIONE: MERGE DEL 2026-04-16
+________________________________________________________________________________
 
-    --- OSSERVAZIONE IMPORTANTE SULLE OPZIONI DELLA CLASSE: OPZIONI DI BASE NON SOVRASCRIVIBILI ---
-    Attualmente, se l'utente inserisse opzioni standard di LaTeX nel comando \documentclass (es. openright), che non
-    sono riportate tra le opzioni esplicitamente dichiarate per la custom class, queste verrebbero ignorate dal
-    compilatore generando un warning ("Unused global option(s)").
-    Questo succede perché:
-    1.  Il comando \ProcessOptions che è stato usato nella custom class, scarta di default tutto ciò che non è stato
-        esplicitamente definito con un \DeclareOption all'interno della classe.
-    2.  La classe base "book", sulla quale quella personalizzata HKNdocument viene generata, viene caricata con
-        parametri fissi (hardcoded) tramite \LoadClass[..., a4paper, openany]{book}. Questo garantisce un'impaginazione
-        uniforme per tutti i documenti dell'associazione.
+--- OPZIONI DELLA CUSTOM CLASS ---
+La classe HKNdocument accetta parametri opzionali passati tra parentesi quadre nel comando iniziale:
+\documentclass[opzione1, opzione2, ...]{HKNdocument}
 
-    --- COME SBLOCCARE LA SOVRASCRIBILITÀ DELLE OPZIONI DI BASE ---
-    Se in futuro si volesse permettere all'utente di passare opzioni native della classe "book", si deve modificare il
-    file .cls in 3 step:
-    1.  Aggiungere il comando a seguire, subito prima di \ProcessOptions\relax: consente di catturare tutte le opzioni,
-        e nel caso in cui non rientrino in quelle dichiarate esplicitamente, vengono inoltrate alla classe 'book':
-        \DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
-    2.  Impostare le opzioni da passare di default alla custom class, che l'utente può sovrascrivere:
-        \PassOptionsToClass{a4paper,openany}{book}
-    3.  Rimuovere i vincoli rigidi (come a4paper e openany) da \LoadClass (possono essere sovrascritti alla chiamata
-        della classe). Conviene invece lasciare il vincolo rigido sulla dimensione del font di base (che è definito una
-        volta per tutte per ogni documento).
+L'ORDINE NON CONTA: Poiché la classe dichiara esplicitamente ogni singola opzione (tramite \DeclareOption), il motore
+LaTeX si limita a cercare le chiavi riconosciute all'interno dell'elenco fornito: possono quindi essere inserite
+nell'ordine preferito.
 
-    Quindi in conclusione l'aggiunta sarebbe, subito dopo \ProcessOptions\relax:
-    \DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}      % Dichiara l'accettazione di tutte le opzioni per
-                                                                    % l'utente
-    \PassOptionsToClass{a4paper,openany}{book}                      % Imposti i valori di default (che l'utente può
-                                                                    % sovrascrivere)
-    \ProcessOptions\relax                                           % Processa tutto e carica
-    \LoadClass[\HK@classfontsize]{book}                             % \HK@classfontsize contiene il valore di base del
-                                                                    % font, accettato come opzione
-                                                                    % esplicita dalla custom class. Ok lasciarlo qui,
-                                                                    % perché non può essere aggiornato.
+Le Opzioni disponibili sono:
 
-    --- NOTA SU HKN@classfontsize ---
-    OPZIONE ESPLICITA HARDCODED: la dimensione base del font viene iniettata tramite la macro interna \HK@classfontsize,
-    garantendo sia flessibilità che sicurezza strutturale. Infatti nonostante la macro sia passata rigidamente
-    (hardcoded) a \loadclass, essa rappresenta ancora prima un'opzione esplicita della custom class, quindi può essere
-    aggiornata dall'utente alla chiamata della classe (es. \documentclass[10pt]{HKNdocument}).
+LINGUA DEL DOCUMENTO (Imposta il pacchetto babel e le diciture interne)
+- italian            % (Valore di Default)
+- english
 
-    LIMITE TECNICO GENERALE: In generale comunque, in qualsiasi documento LaTeX, la dimensione base del font non può
-    essere ridichiarata o modificata all'interno del documento LaTeX (main.tex): si tratta infatti di un'informazione
-    geometrica vitale che deve essere fornita una volta per tutte alla classe 'book' nell'esatto istante in cui impagina
-    il PDF (se potesse cambiare a posteriori, l'impaginazione verrebbe disastrosamente compromessa). Per questo
-    l'incorporazione hardcoded della dimensione del font in \loadclass rappresenta comunque Good Practice.
+DIMENSIONE DEL FONT (Passata alla classe base 'book')
+- 10pt
+- 11pt
+- 12pt               % (Valore di Default)
 
-    PROTEZIONE DELLA CUSTOM MACRO TRAMITE @: Per di più, chi ha scritto la custom class ha adottato un approccio
-    ulteriormente protettivo: l'uso del simbolo '@' nel nome della macro (variabile) \HK@classfontsize, costituisce un
-    vincolo contro il tentativo di \renewcommand su di essa. Infatti in LaTeX, la chiocciola è considerata un carattere
-    valido per comporre i nomi dei comandi SOLO nei file strutturali (.cls o .sty). Se l'utente provasse a manipolare la
-    macro nei file .tex, il compilatore restituirebbe un errore fatale dicendo "Comando sconosciuto", perché la
-    chiocciola essendo un carattere speciale non può agire nella chiamata.
+PROFONDITÀ DELL'INDICE (ToC - Table of Contents)
+- toc=chapters       % (Livello 0: Mostra solo i capitoli)
+- toc=sections       % (Livello 1: Mostra capitoli e sezioni)
+- toc=subsections    % (Livello 2: Default, mostra fino alle sottosezioni)
+- toc=subsubsections % (Livello 3: Mostra fino alle sotto-sottosezioni)
 
-    SBLOCCO PROTEZIONE TRAMITE @: Andando ancora più a fondo, questo sistema si può sbloccare temporaneamente tra i
-    comandi \makeatletter e \makeatother, che trasformano rispettivamente la chiocciola @ ("at") in un carattere normale
-    (consentendo la chiamata), e poi di nuovo in un carattere speciale (bloccando la chiamata, ripristinando la
-    condizione originale). Ad esempio il seguente codice funzionerebbe per stampare la dimensione del font di base:
-    \makeatletter
-        \HK@classfontsize
-    \makeatother
+ESEMPIO DI UTILIZZO:
+\documentclass[english, 10pt, toc=chapters]{HKNdocument}
 
+--- OSSERVAZIONE IMPORTANTE SULLE OPZIONI DELLA CLASSE: OPZIONI DI BASE NON SOVRASCRIVIBILI ---
+Attualmente, se l'utente inserisse opzioni standard di LaTeX nel comando \documentclass (es. openright), che non sono
+riportate tra le opzioni esplicitamente dichiarate per la custom class, queste verrebbero ignorate dal compilatore
+generando un warning ("Unused global option(s)").
+Questo succede perché:
+1. Il comando \ProcessOptions usato nella custom class scarta di default tutto ciò che non è stato esplicitamente
+   definito con un \DeclareOption all'interno della classe.
+2. La classe base "book", sulla quale quella personalizzata HKNdocument viene generata, viene caricata con parametri
+   fissi (hardcoded) tramite \LoadClass[..., a4paper, openany]{book}. Questo garantisce un'impaginazione uniforme per
+   tutti i documenti dell'associazione.
+
+--- COME SBLOCCARE LA SOVRASCRIBILITÀ DELLE OPZIONI DI BASE ---
+Se in futuro si volesse permettere all'utente di passare opzioni native della classe "book", si deve
+modificare il file .cls in 3 step:
+1. Aggiungere il comando a seguire, subito prima di \ProcessOptions\relax. Questo consente di catturare
+    tutte le opzioni non esplicitamente dichiarate e inoltrarle alla classe 'book':
+    \DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
+2. Impostare le opzioni da passare di default alla custom class, che l'utente può sovrascrivere:
+    \PassOptionsToClass{a4paper,openany}{book}
+3. Rimuovere i vincoli rigidi (come a4paper e openany) da \LoadClass (così possono essere sovrascritti
+    alla chiamata della classe). Conviene invece lasciare il vincolo rigido sulla dimensione del font base.
+
+Quindi in conclusione l'aggiunta sarebbe, sostituendo il blocco finale delle opzioni:
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}} % Accetta opzioni extra per l'utente
+\PassOptionsToClass{a4paper,openany}{book}                 % Default (che l'utente può sovrascrivere)
+\ProcessOptions\relax                                      % Processa tutte le opzioni lette
+\LoadClass[\HK@classfontsize]{book}                        % \HK@classfontsize contiene il font base.
+                                                            % Ok lasciarlo qui, per sicurezza.
+
+--- NOTA SU \HK@classfontsize ---
+OPZIONE ESPLICITA HARDCODED: la dimensione base del font viene iniettata tramite la macro interna \HK@classfontsize,
+garantendo sia flessibilità che sicurezza strutturale. Infatti, nonostante la macro sia passata rigidamente (hardcoded)
+a \LoadClass, essa rappresenta ancora prima un'opzione esplicita della custom class, quindi può essere aggiornata
+dall'utente alla chiamata della class (es. \documentclass[10pt]{HKNdocument}).
+
+LIMITE TECNICO GENERALE: In qualsiasi documento LaTeX, la dimensione base del font non può essere ridichiarata o
+modificata all'interno del documento (main.tex). Si tratta infatti di un'informazione geometrica vitale che deve essere
+fornita una volta per tutte alla classe 'book' nell'esatto istante in cui si inizializza. Se potesse cambiare a
+posteriori, l'impaginazione verrebbe disastrosamente compromessa. Per questo l'incorporazione hardcoded tramite macro in
+\LoadClass rappresenta una Good Practice.
+
+PROTEZIONE DELLA CUSTOM MACRO TRAMITE @: L'uso del simbolo '@' nel nome della macro \HK@classfontsize costituisce un
+vincolo contro il tentativo di \renewcommand su di essa. In LaTeX, la chiocciola è considerata un carattere valido per
+comporre i nomi dei comandi SOLO nei file strutturali (.cls o .sty). Se l'utente provasse a manipolare la macro nei file
+.tex, il compilatore restituirebbe un errore fatale ("Undefined control sequence"), perché la chiocciola non viene
+riconosciuta come parte del comando.
+
+SBLOCCO PROTEZIONE TRAMITE @: Questo sistema si può sbloccare temporaneamente tra i comandi \makeatletter e
+\makeatother, che trasformano rispettivamente la chiocciola @ ("at") in un carattere normale (consentendo la chiamata),
+e poi di nuovo in un carattere speciale (ripristinando la protezione).
+Ad esempio il seguente codice funzionerebbe per stampare la dimensione del font di base:
+\makeatletter
+    \HK@classfontsize
+\makeatother
 \end{comment}
 
 
@@ -154,8 +158,9 @@
         dedicate: \documentclass[10pt]{HKNdocument} (oppure 11pt, 12pt).
     -   FAMIGLIA TIPOGRAFICA: Il font di default (Computer Modern) è interamente sostituito dal font "Latin Modern"
         richiamando \RequirePackage{lmodern}.
-    -   COLORI DEI COLLEGAMENTI TESTUALI: Gestiti dal pacchetto 'hyperref' tramite l'istruzione \hypersetup{...}.
-        Il comando esatto applicato nel codice è:
+    -   COLORI DEI COLLEGAMENTI E METADATI PDF: Gestiti dal pacchetto 'hyperref' tramite l'istruzione \hypersetup{...}.
+        Nella nuova versione, la classe sfrutta questo comando anche per iniettare automaticamente nel file PDF le
+        proprietà di sistema (Titolo, Autore, Soggetto). Per i link, il comando esatto applicato nel codice è:
         \hypersetup{colorlinks=true, linkcolor=black, citecolor=black, urlcolor=blue}.
         In precisione:
             * 'colorlinks=true' rimuove i riquadri colorati attorno ai link, piuttosto antiestetici, colorando
@@ -204,7 +209,8 @@
         Hanno un margine orizzontale forzato di 1 cm per lato, impostato tramite il comando \captionsetup{margin=1cm}
         (pacchetto "caption").
     -   BLOCCHI DI CODICE (LISTINGS): Configurati tramite \lstdefinestyle{hkn}{...}
-        Usano font monospazio (\ttfamily), dimensione \small, con margini rientrati di 30pt (xleftmargin=30pt,
+        Ora impostato globalmente di default tramite \lstset{style=hkn}. Usano font monospazio (\ttfamily), dimensione
+        \small, e i nuovi colori della palette Mu Nu Chapter, con margini rientrati di 30pt (xleftmargin=30pt,
         xrightmargin=30pt).
     -   SOTTOLINEATURE (Pacchetti 'ulem' e 'contour'):
         La profondità della sottolineatura è forzata a 1.8pt (\ULdepth). Il pacchetto 'contour' genera un "contorno di
@@ -216,6 +222,8 @@
     -   PROFONDITÀ INDICE (ToC): Impostata dalla variabile \HK@tocdepth a 2 (mostra fino alle \subsection).
         È modificabile dall'utente richiamando la classe con l'opportuno parametro, essendo un'opzione aggiunta
         esplicitamente: \documentclass[toc=chapters]{HKNdocument}.
+    -   AUTOMAZIONE TITOLI E COPERTINA: Il frontespizio non è più basato su comandi singoli sparsi. Se non forzato con
+        \title{}, il titolo si autogenera fondendo i dati inseriti nel nuovo blocco \courseinfo{} (codice, materia).
     -   SUBORDINAZIONE DELLA NUMERAZIONE:
             * Figure, Tabelle ed Equazioni sono legate ai capitoli (es. Figura 1.1) tramite il comando
               \numberwithin{...}{chapter}.
@@ -259,14 +267,16 @@
     (*) un hook è un comando che intercetta un passaggio della compilazione, e inietta in quel punto codice aggiuntivo
     per modificarne l'esito.
 
-    --- 4. PAGINE BIANCHE: RIMOZIONE DAL FRONTESPIZIO ---
+    --- 4. PAGINE BIANCHE E FILIGRANA DI SICUREZZA ---
     -   FRONTESPIZIO: Nella ridefinizione di \maketitle, viene chiamato il comando \thispagestyle{empty}, che "spegne"
         completamente sia l'intestazione che il piè di pagina per la singola pagina di copertina.
+        Inoltre, se la classe non rileva il file "version", stampa in filigrana rossa "NON PUBBLICATO" tramite il
+        pacchetto 'background'. Vedi il file CONTRIBUTING.md e 01_Packages.tex per maggiori dettagli.
     -   PAGINE VUOTE: I comandi \clearpage e \cleardoublepage sono stati sovrascritti con \renewcommand per iniettarvi
         al loro interno \thispagestyle{empty}. Questo garantisce che le pagine di riempimento (generate ad esempio per
         far iniziare i capitoli a destra) siano totalmente immacolate, prive del numero di pagina stampato.
         I comandi originali di LaTeX per la gestione delle pagine vuote sono stati conservati con il comando \let:
-        \let\originalclearpage\clearpage    e   \let\originalcleardoublepage\cleardoublepage
+        \let\originalclearpage\clearpage    e    \let\originalcleardoublepage\cleardoublepage
         In questo modo si possono richiamare anche i comandi originali, se necessario.
 
     NOTA: GESTIONE DEI SALTI PAGINA: \clearpage, \cleardoublepage e \newpage
@@ -274,15 +284,15 @@
     delle tabelle in sospeso (flottanti, ossia non ancora stampati, e che possono essere stampati in punti diversi da
     quello in cui sono stati chiamati, a discrezione del compilatore, a meno di aver specificato diversamente con
     opzioni, come [H] per "Here", del pacchetto 'float').
-        *   \newpage (salto semplice):
+        * \newpage (salto semplice):
             Interrompe la pagina corrente e sposta il testo successivo sul foglio nuovo. ATTENZIONE: NON forza la stampa
             delle immagini in sospeso. Una figura inserita prima di \newpage potrebbe tranquillamente "scivolare" nelle
             pagine successive mescolandosi al nuovo testo.
-        *   \clearpage (reset duro):
+        * \clearpage (reset duro):
             Interrompe la pagina corrente MA, prima di far ripartire il testo, forza la stampa immediata di tutti gli
             elementi flottanti rimasti nella memoria di compilazione. Crea un vero e proprio blocco che impedisce alle
             immagini di invadere la sezione o il capitolo successivo.
-        *   \cleardoublepage (Il rispetto per la rilegatura)
+        * \cleardoublepage (Il rispetto per la rilegatura)
             Esegue lo svuotamento totale di \clearpage, ma aggiunge un controllo geometrico per l'impaginazione
             fronte-retro: garantisce che il testo successivo inizi rigorosamente su una pagina di destra (dispari).
             Se necessario, inserisce automaticamente una pagina di sinistra vuota per ripristinare l'allineamento.
@@ -340,7 +350,7 @@
               NOTA: tra due item agisce itemsep + parsep.
         Esempio particolare: \begin{enumerate}[parsep=10pt, itemsep=-10pt] spazia solo i paragrafi di uno stesso item,
         ma annulla la spaziatura tra item diversi, compensando con un valore negativo l'effetto di parsep.
-   -    Modifica Apportata: Il preambolo carica il pacchetto senza alterare i valori globali, ma la classe lo sfrutta
+    -   Modifica Apportata: Il preambolo carica il pacchetto senza alterare i valori globali, ma la classe lo sfrutta
         localmente (es: nel file cclicense.tex) applicando il parametro esatto [parsep=0pt] per compattare al massimo
         il testo nelle clausole legali.
 
@@ -349,6 +359,20 @@
     La classe utilizza costruttori \definecolor{nome}{RGB}{R, G, B} per definire variabili globali, garantendo la
     massima coerenza estetica in tutto il progetto:
 
+    COLORI UFFICIALI HKN:
+    - hknBlue                   RGB(  0, 102, 153)
+    - hknOrange                 RGB(243, 112,  33)
+    - hknYellow                 RGB(255, 196,  37)
+    - hknRed                    RGB(227,  27,  35)
+    COLORI MU NU CHAPTER:
+    - munuDarkBlue              RGB( 22,  65, 127)
+    - munuMediumBlue            RGB( 48, 121, 185)
+    - munuLightBlue             RGB(  0, 172, 233)
+    COLORI DI SFONDO E TESTO:
+    - backgroundLight           RGB(242, 242, 242)
+    - textGrayMedium            RGB(146, 154, 166)
+
+                                    COLORI VECCHI ELIMINATI CON MERGE DEL 2026-04-16
     COLORI D'ACCENTO:
     - accentYellow              RGB(254, 196,  41)
     - accentRed                 RGB(236,  45,  36)
@@ -371,11 +395,12 @@
     - boxrule=0mm           Disabilita il bordo standard su quattro lati per evitare l'effetto "gabbia" pesante.
     - leftrule=1mm          Applica una barra verticale accentuata solo sul lato sinistro, creando un richiamo visivo
                             forte al colore (parametro #4).
-    - arc=2mm               Imposta un raggio di curvatura discreto per gli angoli.
+    - arc=0.5mm             Imposta un raggio di curvatura discreto e più spigoloso per gli angoli.
+                            NOTA: prima del merge del 2026-04-16, il raggio era di 2mm, più arrotondato e morbido.
     - rounded corners=all   Forza l'arrotondamento su tutti e quattro gli angoli del box, armonizzando la struttura.
     GESTIONE CROMATICA (Identità HKN):
     - colframe=#4           Il colore del bordo sinistro e degli accenti è passato dinamicamente col parametro 4
-                            (es. accentYellow).
+                            (es. hknYellow) (NOTA: simile all'ex accentYellow, usato prima del merge del 2026-04-16).
     - colbacktitle          Fissato su 'textGrayMedium' per mantenere il titolo neutro e leggibile, indipendentemente
                             dal colore del box.
     - colback               Utilizza 'backgroundLight' per lo sfondo interno, garantendo contrasto massimo con il testo
