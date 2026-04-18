@@ -499,3 +499,4 @@ semester
 completed
 everypage
 Degree
+hkn-numbered

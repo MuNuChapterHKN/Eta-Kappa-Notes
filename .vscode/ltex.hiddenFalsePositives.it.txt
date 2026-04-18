@@ -61,3 +61,4 @@
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qnative), centrandola, pescando il file rispettivamente dalla cartella \"res/\", \"res/svg/\" o \"res/drawio/\".\\E$"}
 {"rule":"UNPAIRED_BRACKETS","sentence":"^\\Q(0.8 sta per 80Ecco, per questi comandi NON SERVE SPECIFICARE I PERCORSI!\\E$"}
 {"rule":"UNPAIRED_BRACKETS","sentence":"^\\Q(0.8 sta per larga l'80Ecco, per questi comandi NON SERVE SPECIFICARE I PERCORSI!\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qstyle=hkn-numbered\\E$"}

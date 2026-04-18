@@ -4,10 +4,13 @@
 % __________________________________________________________________ IMPOSTAZIONI GLOBALI SPECIALI (FIXES) ___________________________________________________________
 
 % --- LISTATI CODICE (Pacchetto "listings") ---
-\lstset{style=hkn}      % Imposta di default lo stile grafico per i listati di codice, sfruttando il custom style hkn.
-                        % Comodo per non dover sempre scrivere: \begin{lstlisting}[style=hkn]
-                        % NOTA: si potrebbe essere impostare in generale di default per il progetto aggiungendo questa
-                        % istruzione nella custom class.
+\lstset{style=hkn-numbered}     % Imposta di default lo stile grafico per i listati di codice, sfruttando il custom
+                                % style hkn-numbered (la versione con la numerazione delle righe attiva).
+                                % Comodo per non dover sempre scrivere: \begin{lstlisting}[style=hkn-numbered]
+                                % NOTA: si potrebbe impostare in generale di default per il progetto aggiungendo questa
+                                % istruzione nella custom class.
+                                % AGGIORNAMENTO: è stato aggiunta alla custom class l'impostazione \lstset{style=hkn},
+                                % con il merge del 2026-04-16: io ho impostato la versione numerata.
 
 % --- SPAZIATURA ELENCHI PUNTATI E NUMERATI (Pacchetto "enumitem") ---
 % \setlist{noitemsep}   % Rimuove la spaziatura verticale introdotta di default tra gli elementi degli elenchi (itemize,
