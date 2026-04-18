@@ -27,12 +27,12 @@
       "Package everypage Warning: Functionality similar to this package has recently",
       "Package everypage Warning: You appear to be running a version of LaTeX"
     ],
-    // LISTA WARNINGS IGNORATI (da VScode, vengono comunque stampati nel log)
+    // ABOVE: IGNORED LATEX WARNINGS LIST (Hidden by VS Code, but they are still printed in the raw LaTeX .log file)
     // 1) TeX Live 2025 triggers this 'ignored error' when a longtable is split across pages.
-    // 2) Warning attivato dal pacchetto background, che richiama a sua volta il pacchetto everypage, usato dalla custom
-    //    class HKNdocument per generare la filigrana di sfondo (non pubblicato), per i documenti senza versione.
-    //    (Consulta contributing.md a riguardo)
-    // 3) Esattamente come il precedente.
+    // 2) Warning triggered by the usage of the "background" package, which, in turn, calls the "everypage" package.
+    //    It is used by the custom class HKNdocument to print an "UNPUBLISHED" watermark on the background of documents
+    //    without a specified version. Further details are available in the CONTRIBUTING.md file.
+    // 3) Same as above.
   "latex-workshop.latex.tools": [
     {
       "name": "latexmk",
