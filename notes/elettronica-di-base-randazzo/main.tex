@@ -1101,6 +1101,74 @@ PER DISEGNARE LA FILIGRANA "NON PUBBLICATO" PER DOCUMENTI SENZA VERSIONE
 Vedi file 00.0_EarlyInitilizationDirectives.tex per spiegazione ed
 implementazione
 
+________________________________________________________________________________
+
+PR 10: AGGIORNAMENTO CODICE CUSTOM CLASS
+
+Sostituzione di
+
+% Redefines \clearpage and \cleardoublepage to remove headers/footers on blank pages.
+\let\originalclearpage\clearpage
+\renewcommand{\clearpage}{%
+    \originalclearpage%
+    \thispagestyle{empty}%
+}
+\let\originalcleardoublepage\cleardoublepage
+\renewcommand{\cleardoublepage}{%
+    \originalcleardoublepage%
+    \thispagestyle{empty}%
+}
+
+Con uso del pacchetto: \usepackage{emptypage}
+
+INFATTI: sebbene funzioni, agire su \clearpage è un po' aggressivo, perché
+viene usato anche alla fine del documento o per svuotare liste, non solo per i
+cambi capitolo.
+Semplicemente:
+- Il comando \clearpage significa "Svuota la memoria da ogni testo e immagine
+  rimasta in sospeso e vai a capo", e non crea pagine vuote di per sé. Fa andare
+  a pagina nuova solo se c'è del contenuto nella precedente (anche solo una
+  casella vuota, es hbox{}), altrimenti rimane sulla stessa pagina.
+- Il comando \cleardoublepage fa \clearpage, poi se si trova su una pagina pari
+  aggiugne una pagina vuota, altrimenti nulla.
+
+% ==============================================================================
+% GESTIONE DELLE PAGINE BIANCHE:
+% \clearpage VS \clearpage custom VS pacchetto emptypage
+% ==============================================================================
+% Nei documenti fronte/retro (twoside), i capitoli iniziano sempre su pagina
+% dispari (destra). Se necessario, LaTeX inserisce una pagina pari vuota.
+%
+% IN PRECISIONE:
+%
+% --- 1. COMPORTAMENTO NATIVO ---
+% \clearpage: Chiude la pagina corrente, stampa i float in coda e va a capo.
+% \cleardoublepage: Nei documenti twoside, assicura che il contenuto parta su
+% una pagina dispari (destra). Se necessario, inserisce una pagina pari vuota.
+% PROBLEMA: LaTeX stampa header e numero di pagina anche su queste pagine vuote.
+%
+% --- 2. L'APPROCCIO "OVERRIDE" (SCONSIGLIATO) ---
+% Riprogrammare \clearpage con \thispagestyle{empty} com mostrato sopra, sebbene
+% sia una tecnica nota e consolidata, è "pericoloso": ha side effect in quanto
+% clearpage è usato in generale anche per altri contesti.
+% EFFETTO: Rimuove l'intestazione da TUTTE le nuove pagine generate dal comando,
+% incluse quelle piene di testo a metà capitolo o quelle generate alla fine.
+% Introduce bug visivi silenti in tutto il documento.
+%
+% --- 3. LA SOLUZIONE OTTIMALE: Il pacchetto emptypage ---
+% SINTASSI: \RequirePackage{emptypage} (se in .cls) o \usepackage{emptypage}
+% PERCHÉ È LA SCELTA MIGLIORE:
+% - È sicuro, testato e non richiede comandi aggiuntivi nel testo dell'utente.
+% - Non altera in alcun modo il normale e vitale funzionamento di \clearpage.
+% - Intercetta SOLO le pagine puramente "cuscinetto" (generate per arrivare a
+%   una pagina destra) e rimuove header e footer esclusivamente da quelle.
+%
+% In sostanza:
+% Il pacchetto 'emptypage' rimuove automaticamente le intestazioni e i numeri
+% di pagina (header/footer) ESCLUSIVAMENTE da queste pagine vuote generate da
+% \cleardoublepage, rispettando le norme tipografiche standard.
+% Non richiede comandi aggiuntivi e non altera il comportamento di \clearpage.
+% ==============================================================================
 \end{comment}
 
 % --------------------------------------------------- POSTAMBLE: END ---------------------------------------------------
