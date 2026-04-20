@@ -1,0 +1,95 @@
+\chapter{Sistemi lineari}
+
+\section{Sistemi lineari}
+Sia $\mathbf{x}=(x_1,\dots,x_n)^T\in \mathbb{R}^n$ un vettore colonna. Nel seguito verranno considerate le
+seguenti norme di vettore:
+\begin{itemize}
+    \item $\|\mathbf{x}\|_1=\displaystyle\sum_{i=1}^n\left|x_i\right|$;
+    \item $\|\mathbf{x}\|_2=\sqrt{\displaystyle\sum_{i=1}^nx_i^2}=\sqrt{\mathbf{x}^T\mathbf{x}}$,
+    \quad \textbf{norma euclidea};
+    \item $\|\mathbf{x}\|_\infty=\displaystyle\max_{1\leq i\leq n}\left|x_i\right|$.
+\end{itemize}
+
+Sia $\mathbf{A}=(a_{ij})_{i=1,\dots,m,\,j=1,\dots,n}\in\mathbb{R}^{m,n}$ una matrice di dimensioni $m\times n$.
+Nella trattazione dei sistemi lineari verranno utilizzate le seguenti norme di matrice:
+\begin{itemize}
+    \item $\|\mathbf{A}\|_1=\displaystyle\max_{1\leq j\leq n}\sum_{i=1}^m\left|a_{ij}\right|$;
+    \item $\|\mathbf{A}\|_2=\sqrt{\rho(\mathbf{A}^T\mathbf{A})}$\textbf{ norma spettrale}, ove
+    $\rho(\mathbf{B})=\displaystyle\max_{1\leq j\leq n}\left|\lambda_i\right|$, con $\lambda_i$
+    autovalore di $\mathbf{B}$, è detto \textbf{raggio spettrale} di $\mathbf{B}$;
+    \item $\|\mathbf{A}\|_\infty=\displaystyle\max_{1\leq i\leq n}\sum_{j=1}^m\left|a_{ij}\right|$,\qquad
+    $\left(\|\mathbf{A}\|_\infty=\|\mathbf{A}^T\|_1\right)$.
+\end{itemize}
+
+\begin{definition}{Norme compatibili}
+    Data una norma di matrice e una di vettore, si dice che le due norme sono \textbf{compatibili} se
+    \[\|\mathbf{Ax}\|\leq\|\mathbf{A}\|\,\|\mathbf{x}\|\]
+    per ogni matrice $\mathbf{A}\in\mathbb{R}^{n,n}$ e un vettore $x\in\mathbb{R}^n$.
+\end{definition}
+
+\begin{observation}{Norme $1$, $2$ e $\infty$}
+    Le norme precedentemente definite $1$, $2$ e $\infty$ di matrice e di vettore sono compatibili.
+\end{observation}
+
+\begin{observation}{Relazione tra raggio spettrale e norma}
+    Per ogni norma di matrice compatibile con una norma di vettore, vale la seguente relazione
+    \[\rho(\mathbf{A})\leq\|\mathbf{A}\|\]
+\end{observation}
+
+\begin{definition}{Matrice diagonale dominante per righe}
+    Una matrice $\mathbf{A}\in\mathbb{R}^{n,n}$ si dice a \textbf{diagonale dominante per righe} se
+    \[\left|a_{ii}\right|>\sum_{\substack{j=1\\j\ne i}}^n\left|a_{ij}\right|,\quad i=1,\dots,n\]
+\end{definition}
+
+\begin{definition}{Matrice diagonale dominante per colonne}
+    Una matrice $\mathbf{A}\in\mathbb{R}^{n,n}$ si dice a \textbf{diagonale dominante per colonne} se
+    \[\left|a_{jj}\right|>\sum_{\substack{i=1\\i\ne j}}^n\left|a_{ij}\right|,\quad j=1,\dots,n\]
+\end{definition}
+
+\begin{definition}{Matrice definita positiva}
+    Una matrice \textbf{simmetrica $\mathbf{A}$} si dice \textbf{definita positiva} se
+    \[\mathbf{x}^T\mathbf{Ax}>0,\quad\forall \mathbf{x}\ne\mathbf{0};\]
+    oppure, equivalentemente, se
+    \[\lambda_1(\mathbf{A})>0,\quad\forall i=1,2,\dots,n\]
+    con $\lambda_i(\mathbf{A})$ autovalore di $\mathbf{A}$; oppure, equivalentemente, se
+    \[\det(\mathbf{A}_k)>0,\quad\forall k=1,2,\dots,n\]
+    ove $\mathbf{A}_k$ è la matrice di ordine $k$ formata dall'intersezione delle prime $k$ righe e
+    $k$ colonne di $\mathbf{A}$.
+\end{definition}
+
+\begin{definition}{Matrice ortogonale}
+    Una matrice $\mathbf{A}\in\mathbb{R}^{n,n}$ si dice \textbf{ortogonale} se le sue colonne (righe) formano
+    un sistema ortonormale; in questo caso, denotata con $\mathbf{I}$ la matrice identità, si ha $\mathbf{A}^T
+    \mathbf{A}=\mathbf{A}\mathbf{A}^T=\mathbf{I}$, quindi $\mathbf{A}^{-1}=\mathbf{A}^T$.
+\end{definition}
+
+\begin{definition}{Matrice di permutazione}
+    Si definisce \textbf{matrice di permutazione}, una matrice ottenuta permutando le righe della matrice identità.
+\end{definition}
+
+\begin{observation}{Matrice di permutazione}
+    Le matrici di permutazione in ogni riga e in ogni colonna hanno un solo elemento diverso da zero e uguale a $1$.\\
+    Le matrici di permutazione sono matrici ortogonali.\\
+    Come mostra il seguente esempio, se si moltiplica una matrice $\mathbf{A}$ o un vettore $\mathbf{b}$
+    a \textbf{sinistra} per un'opportuna matrice di permutazione $\mathbf{P}$, si possono realizzare scambi
+    di righe in $\mathbf{A}$ oppure id componenti in $\mathbf{b}$.
+    \[\mathbf{PA} = \left(
+        \begin{matrix}
+            0 & 0 & 1 \\
+            0 & 1 & 0 \\
+            1 & 0 & 0
+        \end{matrix}
+    \right)\left(
+        \begin{matrix}
+            a_{11} & a_{12} & a_{13} \\
+            a_{21} & a_{22} & a_{23} \\
+            a_{31} & a_{32} & a_{33}
+        \end{matrix}
+    \right)=\left(
+        \begin{matrix}
+            a_{31} & a_{32} & a_{33} \\
+            a_{21} & a_{22} & a_{23} \\
+            a_{11} & a_{12} & a_{13}
+        \end{matrix}
+    \right)\]
+\end{observation}
