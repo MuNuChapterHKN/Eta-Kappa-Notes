@@ -345,46 +345,100 @@
 \setlength{\headheight}{30pt} % Avoids warnings about head height
 \addtolength{\topmargin}{-20pt} % Corrects top margin for header
 
-% Chapter start pages will not have headers (only page number in "plain" style)
-% Redefine \chapter to force plain style on the first page of each chapter.
-% Also modify chapter marking to support short titles
-\makeatletter
-\def\chapter{\clearpage%
-  \thispagestyle{plain}% Plain page style (no fancy header, only page number)
-  \global\@topnum\z@%
-  \@afterindentfalse%
-  \secdef\@chapter\@schapter}
+% ______________________________________________________________________________ INIZIO MODIFICA TIZIANO - COMANDO CHAPTER
 
-% Redefine \@chapter to handle optional short titles for headers
-\def\@chapter[#1]#2{%
-  \ifnum \c@secnumdepth >\m@ne
-    \refstepcounter{chapter}%
-    \typeout{\@chapapp\space\thechapter.}%
-    \addcontentsline{toc}{chapter}%
-                     {\protect\numberline{\thechapter}#2}%  % Use full title (#2) for TOC
-  \else
-    \addcontentsline{toc}{chapter}{#2}%  % Use full title (#2) for TOC
-  \fi
-  \chaptermark{#1}%  % Use the optional argument (short title) for the header
-  \addtocontents{lof}{\protect\addvspace{10\p@}}%
-  \addtocontents{lot}{\protect\addvspace{10\p@}}%
-  \if@twocolumn
-    \@topnewpage[\@makechapterhead{#2}]%
-  \else
-    \@makechapterhead{#2}%
-    \@afterheading
-  \fi}
+% % Chapter start pages will not have headers (only page number in "plain" style)
+% % Redefine \chapter to force plain style on the first page of each chapter.
+% % Also modify chapter marking to support short titles
+% \makeatletter
+% \def\chapter{\clearpage%
+%   \thispagestyle{plain}% Plain page style (no fancy header, only page number)
+%   \global\@topnum\z@%
+%   \@afterindentfalse%
+%   \secdef\@chapter\@schapter}
 
-% Redefine \@schapter (for starred chapters) to also support header marking
-\def\@schapter#1{%
-  \if@twocolumn
-    \@topnewpage[\@makeschapterhead{#1}]%
-  \else
-    \@makeschapterhead{#1}%
-    \@afterheading
-  \fi
-  \chaptermark{#1}}  % Use the full title for starred chapters
-\makeatother
+% % Redefine \@chapter to handle optional short titles for headers
+% \def\@chapter[#1]#2{%
+%   \ifnum \c@secnumdepth >\m@ne
+%     \refstepcounter{chapter}%
+%     \typeout{\@chapapp\space\thechapter.}%
+%     \addcontentsline{toc}{chapter}%
+%                      {\protect\numberline{\thechapter}#2}%  % Use full title (#2) for TOC
+%   \else
+%     \addcontentsline{toc}{chapter}{#2}%  % Use full title (#2) for TOC
+%   \fi
+%   \chaptermark{#1}%  % Use the optional argument (short title) for the header
+%   \addtocontents{lof}{\protect\addvspace{10\p@}}%
+%   \addtocontents{lot}{\protect\addvspace{10\p@}}%
+%   \if@twocolumn
+%     \@topnewpage[\@makechapterhead{#2}]%
+%   \else
+%     \@makechapterhead{#2}%
+%     \@afterheading
+%   \fi}
+
+% % Redefine \@schapter (for starred chapters) to also support header marking
+% \def\@schapter#1{%
+%   \if@twocolumn
+%     \@topnewpage[\@makeschapterhead{#1}]%
+%   \else
+%     \@makeschapterhead{#1}%
+%     \@afterheading
+%   \fi
+%   \chaptermark{#1}}  % Use the full title for starred chapters
+% \makeatother
+
+
+
+\RequirePackage{xparse}
+
+% NOTA SU XPARSE E LATEX3: È necessario aggiungere \RequirePackage{xparse}
+% all'inizio della classe per garantire la retrocompatibilità con vecchie
+% distribuzioni TeX antecedenti al 2020. Dal 2020 in poi, xparse e le
+% funzioni di LaTeX3 sono state integrate nativamente nel kernel standard.
+% Non bisogna modificare l'istruzione \NeedsTeXFormat{LaTeX2e} (es. in
+% LaTeX3), poiché LaTeX3 non è mai stato rilasciato come formato a sé
+% stante, ma è un ambiente di programmazione integrato dentro LaTeX2e.
+
+% --------------------------
+% CHAPTER COMMAND WRAPPER (xparse)
+% --------------------------
+% Conserva il comando nativo della classe book
+\let\oldchapter\chapter         % Backup del comando originale
+                                % Supporta la variante con *, come lo stesso comando chapter.
+
+% Ridefinisce \chapter per disaccoppiare TOC e Header, e gestire i capitoli stellati
+% Testatina: usa sempre titolo breve
+% Indice: usa sempre titolo lungo
+% Aggiunto supporto per titoli brevi a capitoli stellati
+
+\RenewDocumentCommand{\chapter}{ s o m }{%
+    \IfBooleanTF{#1}{%
+        % CASO 1: Capitolo stellato \chapter*[]{Lungo}
+        \IfNoValueTF{#2}{%
+            % CASO 1-A: chapter* Senza titolo breve
+            \oldchapter*{#3}%
+            \chaptermark{#3}% Aggiorna l'header anche se non numerato
+        }{%
+            % CASO 1-B: chapter* con titolo breve \chapter*[Breve]{Lungo}
+            \oldchapter*{#3}% Invia il titolo LUNGO alla pagina
+            \chaptermark{#2}% Sovrascrive l'header con il titolo BREVE
+                            % Non invia nulla al ToC nulla, come di norma per \chapter*
+        }%
+    }{%
+        % CASO 2: Capitolo normale \chapter
+        \IfNoValueTF{#2}{%
+            % CASO 2-A: chapter Senza titolo breve
+            \oldchapter{#3}%
+        }{%
+            % CASO 2-B: chapter con titolo breve \chapter[Breve]{Lungo}
+            \oldchapter{#3}% Invia il titolo LUNGO al TOC e alla pagina
+            \chaptermark{#2}% Sovrascrive l'header con il titolo BREVE
+        }%
+    }%
+}
+
+% ______________________________________________________________________________ FINE MODIFICA TIZIANO - COMANDO CHAPTER
 
 % Redefines \clearpage and \cleardoublepage to remove headers/footers on blank pages.
 \let\originalclearpage\clearpage
