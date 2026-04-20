@@ -405,25 +405,25 @@
 \RequirePackage{tcolorbox}  % custom boxes
 
 % HKN color palette
-\definecolor{hknLightBlue}{HTML}{00629B}
-\definecolor{hknOrange}{HTML}{FEC526}
-\definecolor{hknYellow}{HTML}{FDD10C}
-\definecolor{hknDarkBlue}{HTML}{0F2D52}
-\definecolor{hknDarkRed}{HTML}{C22033}
-\definecolor{hknRed}{HTML}{E2383F}
-\definecolor{hknLightGray}{HTML}{D6DBE4}
+\definecolor{hknLightBlue}{HTML}{00629B}    % #00629B
+\definecolor{hknOrange}{HTML}{FEC526}       % #FEC526
+\definecolor{hknYellow}{HTML}{FDD10C}       % #FDD10C
+\definecolor{hknDarkBlue}{HTML}{0F2D52}     % #0F2D52
+\definecolor{hknDarkRed}{HTML}{C22033}      % #C22033
+\definecolor{hknRed}{HTML}{E2383F}          % #E2383F
+\definecolor{hknLightGray}{HTML}{D6DBE4}    % #D6DBE4
 
 % Mu Nu Chapter color palette
-\definecolor{munuDarkBlue}{HTML}{061E33}
-\definecolor{munuMediumBlue}{HTML}{1F3852}
-\definecolor{munuLightBlue}{HTML}{375171}
-\definecolor{munuLightGray}{HTML}{F2F2F2}
-\definecolor{munuMediumGray}{HTML}{C0C0C0}
-\definecolor{munuDarkGray}{HTML}{929AA6}
+\definecolor{munuDarkBlue}{HTML}{061E33}    % #061E33
+\definecolor{munuMediumBlue}{HTML}{1F3852}  % #1F3852
+\definecolor{munuLightBlue}{HTML}{375171}   % #375171
+\definecolor{munuLightGray}{HTML}{F2F2F2}   % #F2F2F2
+\definecolor{munuMediumGray}{HTML}{C0C0C0}  % #C0C0C0
+\definecolor{munuDarkGray}{HTML}{929AA6}    % #929AA6
 
 % Other colors
-\definecolor{darkerOrange}{HTML}{EAAC01}
-\definecolor{backgroundLight}{HTML}{F6F8FA}
+\definecolor{darkerOrange}{HTML}{EAAC01}    % #EAAC01
+\definecolor{backgroundLight}{HTML}{F6F8FA} % #F6F8FA
 
 % Listings style
 % See Section 4.3 'Options' of the Listings package documentation for more details
