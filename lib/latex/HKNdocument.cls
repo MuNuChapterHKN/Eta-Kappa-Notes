@@ -440,17 +440,27 @@
 
 % ______________________________________________________________________________ FINE MODIFICA TIZIANO - COMANDO CHAPTER
 
-% Redefines \clearpage and \cleardoublepage to remove headers/footers on blank pages.
-\let\originalclearpage\clearpage
-\renewcommand{\clearpage}{%
-    \originalclearpage%
-    \thispagestyle{empty}%
-}
-\let\originalcleardoublepage\cleardoublepage
-\renewcommand{\cleardoublepage}{%
-    \originalcleardoublepage%
-    \thispagestyle{empty}%
-}
+% ______________________________________________________________________________ INIZIO MODIFICA TIZIANO - COMANDI CLEAR
+
+% % Redefines \clearpage and \cleardoublepage to remove headers/footers on blank pages.
+% \let\originalclearpage\clearpage
+% \renewcommand{\clearpage}{%
+%     \originalclearpage%
+%     \thispagestyle{empty}%
+% }
+% \let\originalcleardoublepage\cleardoublepage
+% \renewcommand{\cleardoublepage}{%
+%     \originalcleardoublepage%
+%     \thispagestyle{empty}%
+% }
+
+\RequirePackage{emptypage}
+% Fa esattamente la stessa cosa sopra, ma meglio e senza bug.
+% Soprattutto è sbagliato rendere lo stile empty con \clearpage, perchè è usato
+% per chiudere in generale una pagina, anche con del testo.
+
+% ______________________________________________________________________________ FINE MODIFICA TIZIANO - COMANDI CLEAR
+
 
 % --------------------------
 % STYLE
