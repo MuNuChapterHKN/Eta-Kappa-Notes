@@ -405,7 +405,7 @@
 \RequirePackage{tcolorbox}  % custom boxes
 
 % HKN color palette
-\definecolor{hknLightBlue}{HTML}{00629B}    % #00629B
+\definecolor{hknLightBlue}{HTML}{00629B}    % #00629B                         % Caselle AGGIUNTE da Tiziano
 \definecolor{hknOrange}{HTML}{FEC526}       % #FEC526
 \definecolor{hknYellow}{HTML}{FDD10C}       % #FDD10C
 \definecolor{hknDarkBlue}{HTML}{0F2D52}     % #0F2D52
@@ -503,6 +503,8 @@
 \DeclareHKNBox{corollary}{Corollario}{Corollary}{hknOrange}
 \DeclareHKNBox{exercise}{Esercizio}{Exercise}{munuDarkBlue}
 \DeclareHKNBox{observation}{Osservazione}{Observation}{hknLightBlue}
+
+\DeclareHKNBox{proposition}{Proposizione}{Proposition}{munuLightBlue}           % AGGIUNTA da Tiziano
 
 % Frontmatter and backmatter
 \input{_preamble.tex}
