@@ -360,6 +360,9 @@
 % NOTA: si potrebbe aggiungere un opzione alla classe "HeaderCase=upper" o "HeaderCase=normal" per attivare o
 % disattivare il maiuscolo forzato in modo comodo, ovviamente aggiungendo un controllo condizionale nei comandi sopra.
 
+% NOTA: la testatina della licenza è impostata più avanti, prima della sua chiamata con input.
+% Se modifiche lo stile, modifica anche quello per coerenza.
+
 % --- TITOLI DEI CAPITOLI NELLE TESTATINE ---
 % Quando inizia un capitolo: riempie sia SX che DX col nome del capitolo, in modo che se non sono presenti sezioni,
 % comunque la testatina non rimane vuota (fallback al nome del capitolo).
@@ -697,6 +700,13 @@
 
     \frontmatter
     \maketitle
+% ______________________________________________________________________________ INIZIO MODIFICA TIZIANO - TESTATINA LICENZA
+    \iflanguage{italian}{%
+        \markboth{Presentazione e Licenza}{Presentazione e Licenza}%
+    }{%
+        \markboth{Overview and License}{Overview and License}%
+    }
+% ______________________________________________________________________________ FINE MODIFICA TIZIANO - TESTATINA LICENZA
     \input{cclicense.tex}
     \tableofcontents
     \clearpage
