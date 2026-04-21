@@ -64,3 +64,5 @@
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qstyle=hkn-numbered\\E$"}
 {"rule":"ARTICOLATA_SOSTANTIVO","sentence":"^\\QUsano font monospazio (), dimensione , e i nuovi colori della palette Mu Nu Chapter, con margini rientrati di 30pt (xleftmargin=30pt, xrightmargin=30pt).\\E$"}
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qo m  #2.\\E$"}
+{"rule":"ITALIAN_WORD_REPEAT_RULE","sentence":"^\\QProva Prova nuova pagina.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qo m  #2.#1 #2 #1\\E$"}

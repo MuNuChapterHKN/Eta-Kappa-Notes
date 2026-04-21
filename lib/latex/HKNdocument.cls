@@ -352,6 +352,14 @@
 
 \makeatletter           % Rende la @ un carattere normale, utilizzabile per comandi
 
+% NOTA: LaTeX utilizza di default \MakeUppercase per forzare i titoli in maiuscolo nelle testatine.
+% NOTA: se vuoi titoli nella testatina in maiuscolo, basta aggiungere \MakeUppercase{} attorno gli argomenti di
+% \markboth e \markright nei comandi sopra: se lo fai, ricorda anche di farlo per i comandi custom \uchapter,
+% \usection[]{}, e \usubsubsection[]{}, per mantenere coerenza di stile.
+
+% NOTA: si potrebbe aggiungere un opzione alla classe "HeaderCase=upper" o "HeaderCase=normal" per attivare o
+% disattivare il maiuscolo forzato in modo comodo, ovviamente aggiungendo un controllo condizionale nei comandi sopra.
+
 % --- TITOLI DEI CAPITOLI NELLE TESTATINE ---
 % Quando inizia un capitolo: riempie sia SX che DX col nome del capitolo, in modo che se non sono presenti sezioni,
 % comunque la testatina non rimane vuota (fallback al nome del capitolo).
@@ -387,7 +395,9 @@
 % inizio sezione, per evitare confusione. Per questo lascio il numero di sezione nella testatina anche nel frontmatter.
 % In ogni caso NON SI DOVREBBERO USARE SEZIONI NUMERATE NEL FRONTMATTER e nel BACKMATTER! Usa in caso il comando
 % \section*{} per evitare numerazione e presenza in testatina e nell'indice: ma attenzione in quanto i comandiù stellati
-% non aggiornano le testatine!
+% non aggiornano le testatine! Ho creato i comandi custom "unnumbered" appositamente per risolvere questi problemi: usa
+% \usection se vuoi reinserire nella testatina e nell'indice (non stampa numero) la sezione non numerata, ma che compare
+% nell'indice e nella testatina.
 
 \makeatother            % Rende di nuovo la @ un carattere non utilizzabile per comandi (protezione)
 
