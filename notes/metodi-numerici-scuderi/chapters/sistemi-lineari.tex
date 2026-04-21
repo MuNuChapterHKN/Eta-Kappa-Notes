@@ -7,9 +7,9 @@ Nella trattazione dei sistemi lineari verranno utilizzate le seguenti norme di m
 \begin{itemize}
     \item $\|\mathbf{A}\|_1=\displaystyle\max_{1\leq j\leq n}\sum_{i=1}^m\left|a_{ij}\right|$;
     \item $\|\mathbf{A}\|_2=\sqrt{\rho(\mathbf{A}^T\mathbf{A})}$\textbf{ norma spettrale}, ove
-    $\rho(\mathbf{B})=\displaystyle\max_{1\leq j\leq n}\left|\lambda_i\right|$, con $\lambda_i$
+    $\rho(\mathbf{B})=\displaystyle\max_{1\leq i\leq n}\left|\lambda_i\right|$, con $\lambda_i$
     autovalore di $\mathbf{B}$, è detto \textbf{raggio spettrale} di $\mathbf{B}$;
-    \item $\|\mathbf{A}\|_\infty=\displaystyle\max_{1\leq i\leq n}\sum_{j=1}^m\left|a_{ij}\right|$,\qquad
+    \item $\|\mathbf{A}\|_\infty=\displaystyle\max_{1\leq i\leq m}\sum_{j=1}^m\left|a_{ij}\right|$,\qquad
     $\left(\|\mathbf{A}\|_\infty=\|\mathbf{A}^T\|_1\right)$.
 \end{itemize}
 
@@ -77,4 +77,182 @@ Nella trattazione dei sistemi lineari verranno utilizzate le seguenti norme di m
             a_{11} & a_{12} & a_{13}
         \end{matrix}
     \right)\]
+\end{observation}\vfill
+
+\section{Condizionamento}
+
+Si denotino con $\mathbf{\bar{A}}$ e $\mathbf{\bar{b}}$ i dati perturbati e con $\mathbf{\bar{x}}$
+la soluzione in \textbf{aritmetica esatta} del sistema perturbato
+\[\mathbf{\bar{A}}\mathbf{\bar{x}}=\mathbf{\bar{b}}\]
+Nello studio del condizionamento si deve confrontare l'errore relativo associato alla soluzione
+perturbata $\bar{\mathbf{x}}$
+\[\frac{\|\mathbf{x}-\mathbf{\bar{x}}\|}{\|\mathbf{x}\|},\]
+con gli errori relativi associati ai dati perturbati
+\[\frac{\|\mathbf{A}-\mathbf{\bar{A}}\|}{\|\mathbf{A}\|}\quad\text{e}\quad
+\frac{\|\mathbf{b}-\mathbf{\bar{b}}\|}{\|\mathbf{b}\|}.\]
+\begin{theorem}{Numero di condizionamento}
+    Se $\displaystyle\|\mathbf{A}-\mathbf{\bar{A}}\|<\frac{1}{(2\|\mathbf{A}^{-1}\|)}$, il sistema
+    $\mathbf{\bar{A}}\mathbf{\bar{x}}=\mathbf{\bar{b}}$ ammette una sola soluzione e
+    \[\frac{\|\mathbf{x}-\mathbf{\bar{x}}\|}{\|\mathbf{x}\|}\leq 2K(\mathbf{A})
+    \left(\frac{\|\mathbf{A}-\mathbf{\bar{A}}\|}{\|\mathbf{A}\|}+\frac{\|\mathbf{b}-\mathbf{\bar{b}}
+    \|}{\|\mathbf{b}\|}\right),\]
+    ove
+    \[K(\mathbf{A})=\|\mathbf{A}\|\cdot\|\mathbf{A}^{-1}\|\geq1\]
+    viene definito \textbf{numero di condizionamento} del sistema lineare $\mathbf{Ax}=\mathbf{b}$.
+\end{theorem}
+
+Pertanto,
+\begin{itemize}
+    \item se $K(\mathbf{A})\approx1$, la matrice $\mathbf{A}$ è detta \textbf{ben condizionata} e le
+    perturbazioni sulla soluzione sono al più dello stesso ordine di grandezza di quelle sui dati;
+    \item se $K(\mathbf{A})\gg1$, la matrice $\mathbf{A}$ è detta \textbf{mal condizionata} e a
+    piccole perturbazioni sui dati \textbf{possono} corrispondere grandi perturbazioni sulla soluzione.
+\end{itemize}
+
+\begin{observation}{Numero di condizionamento della norma $2$}
+    Denotato con $\lambda_1(\mathbf{B})$ il generale autovalore della matrice $\mathbf{B}$, si dimostra che:
+    \[K_2(\mathbf{A})=\frac{\sqrt{\max_i{\left|\lambda_i(\mathbf{A}^T\mathbf{A})\right|}}}
+    {\sqrt{\min_i{\left|\lambda_i(\mathbf{A}^T\mathbf{A})\right|}}}\]
+    Se $\mathbf{A}$ è simmetrica, allora
+    \[K_2(\mathbf{A})=\frac{\left|\max_i{\lambda_i(\mathbf{A})}\right|}{\left|\min_i{\lambda_i(
+    \mathbf{A})}\right|}\]
+    Se $\mathbf{A}$ è simmetrica e definita positiva, allora
+    \[K_2(\mathbf{A})=\frac{\max_i{\lambda_i(\mathbf{A})}}{\min_i{\lambda_i(\mathbf{A})}}\]
 \end{observation}
+
+Esempi classici di sistemi lineari mal condizionati sono quello associato alla \textbf{matrice di
+Hilbert}, simmetrica e definita positiva,
+\[\textbf{H}_n=\left(
+    \renewcommand{\arraystretch}{1.5}
+    \begin{matrix}
+    1 & \frac{1}{2} & \dots & \frac{1}{n} \\
+    \frac{1}{2} & \frac{1}{3} & \dots & \frac{1}{n+1} \\
+    \vdots & \vdots & \vdots & \vdots \\
+    \frac{1}{n} & \frac{1}{n+1} & \dots & \frac{1}{2n-1}
+    \end{matrix}
+    \renewcommand{\arraystretch}{1}
+\right)\]
+e quello alla \textbf{matrice di Vandermonde}
+\[\textbf{V}_n=\left(
+    \begin{matrix}
+    x_1^n & \dots & x_1 & 1 \\
+    x_2^n & \dots & x_2 & 1 \\
+    \vdots & \vdots & \vdots & \vdots \\
+    x_{n+1}^n & \dots & x_{n+1} & 1
+    \end{matrix}
+\right)\]
+non singolare se $x_i\ne x_j$ per $i\ne j$.
+
+\section{Metodi diretti}
+
+Si descrivono ora alcuni metodi numerici e gli algoritmi, che implementano i suddetti metodi, per la
+risoluzione di sistemi lineari di ordine $n$.
+
+Per ciascun algoritmo verrà fornito il costo computazionale, ovvero il numero di operazioni
+aritmetiche che esso richiede per la sua esecuzione.
+
+Nel caso dei sistemi lineari il costo è legato alla dimensione $n$ del sistema e, in generale, viene
+quantificato il numero di operazioni per valori di $n$ grandi.
+
+I metodi numerici per la risoluzione di sistemi lineari vengono suddivisi in due classi:
+\textbf{metodi diretti} e \textbf{metodi iterativi}.
+
+\subsection{Matrici con struttura speciale}
+
+La scelta di un metodo diretto ed efficiente per la risoluzione del sistema lineare $\mathbf{Ax}=
+\mathbf{b}$ dipende dalla struttura e dalle proprietà della matrice $\mathbf{A}$. Se la matrice dei
+coefficienti $\mathbf{A}$ è \textbf{diagonale}, con $a_{kk}\ne0,\,k=1,\dots,n$, la soluzione del sistema lineare
+\[\left\{\begin{array}{c c c l l}
+a_{11}x_1 & & & & = b_1 \\
+& a_{22}x_2 & & & = b_2 \\
+& & a_{33}x_3 & & = b_3 \\
+& & & \ddots & \vdots \\
+& & & a_{nn}x_n & = b_n
+\end{array}\right.\]
+si ricava immediatamente mediante $n$ divisioni, quindi il costo computazionale in termini di operazioni
+aritmetiche è essenzialmente $O(n)$.\newpage
+
+Se la matrice dei coefficienti $\mathbf{A}$ è \textbf{triangolare}, con $a_{kk}\ne0,\,k=
+1,\dots,n$, la soluzione del sistema lineare si ricava con il \textbf{metodo di sostituzione}
+(\textbf{all'indietro} per quelle superiori e \textbf{in avanti} per quelle inferiori), il cui costo
+computazionale in termini di operazioni aritmetiche è essenzialmente $O(n^2/2)$.
+
+Se la matrice dei coefficienti $\mathbf{A}$ è \textbf{tridiagonale}, la soluzione del sistema lineare
+si ottiene tramite il \textbf{metodo di Thomas}, che sfrutta una eliminazione gaussiana specializzata
+per matrici tridiagonali, con costo computazionale essenzialmente $O(8n)$. Ha la limitazione che non
+si può applicare il pivoting sulla matrice. È particolarmente stabile per $\mathbf{A}$ simmetrica definita
+positiva o a diagonale dominante per colonne.
+
+\subsection{Matrici generiche}
+
+Se invece la matrice dei coefficienti $\mathbf{A}$ non ha una struttura particolare, il metodo diretto
+più noto e più utilizzato è senza dubbio il \textbf{metodo delle eliminazioni di Gauss}. Il costo
+computazionale in termini di operazioni aritmetiche è essenzialmente $O(n^3/3)$.
+
+Per garantire una \textbf{migliore stabilità numerica} dell'algoritmo di Gauss e, quindi, per ridurre
+l'amplificazione degli errori di arrotondamento che vengono generati nel corso delle trasformazioni,
+a ogni passo conviene operare un preliminare scambio di equazioni prima di procedere con le
+trasformazioni. Tale strategia è nota sotto il nome di \textbf{pivoting parziale}. Il pivoting è
+\textbf{superfluo} quando $\mathbf{A}$ è simmetrica e definita positiva o a diagonale dominante per colonne.
+
+Il metodo delle eliminazioni di Gauss con pivoting parziale realizza la seguente fattorizzazione della
+matrice $\mathbf{A}$:
+\[\mathbf{PA}=\mathbf{LU}\]
+ove $\mathbf{U}$ è una matrice triangolare superiore, $\mathbf{L}$ è triangolare inferiore con
+diagonale unitaria e $\mathbf{P}$ è una matrice di permutazione, definita dagli scambi richiesti
+dalla strategia del pivoting.
+
+Il costo computazionale della fattorizzazione $\mathbf{PA}=\mathbf{LU}$ della matrice $\mathbf{A}$
+è uguale a quello del metodo delle eliminazioni di Gauss e vale all'incirca $O(n^3/3)$.
+
+Si osservi che per la risoluzione di un sistema lineare $\mathbf{Ax}=\mathbf{b}$ si può procedere
+utilizzando la fattorizzazione $\mathbf{PA}=\mathbf{LU}$ nel seguente modo:
+\[\mathbf{Ax}=\mathbf{b}\quad\to\quad\mathbf{PAx}=\mathbf{Pb}\quad\to\quad\mathbf{L\underbrace
+{\mathbf{Ux}}_y}=\mathbf{Pb}\]
+da cui segue la risoluzione dei due seguenti sistemi triangolari
+\[\begin{cases}
+    \mathbf{Ly}=\mathbf{Pb} &\to \mathbf{y} \\
+    \mathbf{Ux}=\mathbf{y} &\to \mathbf{x}
+\end{cases}\]
+Se i fattori $\mathbf{L},\mathbf{U},\mathbf{P}$ non si devono calcolare perché già noti, il costo
+computazionale della risoluzione del sistema lineare $\mathbf{Ax}=\mathbf{b}$ è soltanto $O(n^2)$;
+altrimenti, il costo è pari a quello della fattorizzazione $\mathbf{PA}=\mathbf{LU}$, cioè $O(n^3/3)$.
+
+\subsection{Fattorizzazioni speciali}
+
+Per una matrice $\mathbf{A}$ \textbf{simmetrica e definita positiva} esiste ed è unica la fattorizzazione
+\[\mathbf{A}=\mathbf{R}^T\mathbf{R}\]
+ove $\mathbf{R}$ è una matrice triangolare superiore con elementi positivi sulla diagonale principale.
+Tale fattorizzazione è detta fattorizzazione di Choleski e viene dimostrata nel seguente teorema.
+\begin{theorem}{Fattorizzazione di Choleski}
+    Se $\mathbf{A}$ è una matrice simmetrica e definita positiva allora esiste un'unica matrice
+    triangolare inferiore $\mathbf{L}_1(=\mathbf{R}^T)$ con elementi diagonali positivi tale che
+    \[\mathbf{A}=\mathbf{L}_1\mathbf{L}_1^T\]
+\end{theorem}
+
+Il calcolo del fattore di Choleski $\mathbf{R}$ si ottiene mediante un algoritmo il cui costo
+computazionale è essenzialmente $O(n^3/6)$.
+
+Un'altra fattorizzazione per una generica matrice $\mathbf{A}$ di dimensioni $m\times n$ è la
+\textbf{fattorizzazione} $\mathbf{QR}$. In particolare, si può dimostrare che esiste una matrice
+ortogonale $\mathbf{Q}$ di dimensioni $m\times m$ tale che
+\[\mathbf{A}=\mathbf{QR}\]
+dove gli elementi $r_{ij}$ della matrice $\mathbf{R}$ sono nulli per $i>j$. Se $m=n$, $\mathbf{R}$
+è una matrice triangolare superiore.
+
+Il calcolo delle matrici $\mathbf{Q}$ e $\mathbf{R}$ richiede $O(2n^3/3)$ operazioni aritmetiche
+mentre il metodo di Gauss ne richiede solamente $O(n^3/3)$.
+
+Un'altra importante fattorizzazione di una generica matrice $\mathbf{A}$ di dimensioni $m\times n$
+è la \textbf{decomposizione ai valori singolari (SVD)}. In particolare, si può dimostrare
+che esistono due matrici ortogonali $\mathbf{U}$ di dimensioni $m\times m$ e $\mathbf{V}$ di
+dimensioni $n\times n$ tali che
+\[\mathbf{A}=\mathbf{USV}^T\]
+dove $\mathbf{S}$ è diagonale, ovvero
+\[s_{ij}=\begin{cases}
+    \sigma_i & \text{se }i=j \\
+    0 & \text{se }i\ne j
+\end{cases}\]
+con $\sigma_1\geq\sigma_2\geq\dots\geq\sigma_p\geq0,\,p=\min\{m,n\}$. Gli elementi diagonali della matrice
+$\mathbf{S}$ sono detti \textbf{valori singolari} della matrice $\mathbf{A}$. Essi coincidono con la
+radice quadrata degli autovalori (tutti non negativi) della matrice $\mathbf{A}^T\mathbf{A}$.\newpage
