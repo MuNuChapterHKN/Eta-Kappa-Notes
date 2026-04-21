@@ -316,34 +316,115 @@
     }
 \fi
 
-% --------------------------
-% HEADER AND FOOTER
-% --------------------------
-% Now define how headers and footers will appear on common pages.
-% The twoside structure means LE/RO are opposite positions on even and odd pages.
-% Here we put:
-% - On left pages (even pages): author on the left (RE), short title on the right (RO)
-% - On right pages (odd pages): short title on the left (LE), author on the right (LO)
-% Footer: page number centered (C)
-\fancyhead{}
-\fancyfoot{}
-\renewcommand\headrule{%
-  \vspace{-14.5pt}  % Aggiungi spazio negativo per posizionare la linea
-  \hrulefill     % Crea una linea orizzontale a sinistra
-  \hspace{50pt}  % Aggiungi uno spazio orizzontale (regola la dimensione a piacere)
-  \hrulefill     % Crea una linea orizzontale a destra
+% ______________________________________________________________________________ INIZIO MODIFICA TIZIANO - TESTATINE
+
+% % --------------------------
+% % HEADER AND FOOTER
+% % --------------------------
+% % Now define how headers and footers will appear on common pages.
+% % The twoside structure means LE/RO are opposite positions on even and odd pages.
+% % Here we put:
+% % - On left pages (even pages): author on the left (RE), short title on the right (RO)
+% % - On right pages (odd pages): short title on the left (LE), author on the right (LO)
+% % Footer: page number centered (C)
+% \fancyhead{}
+% \fancyfoot{}
+% \renewcommand\headrule{%
+%   \vspace{-14.5pt}  % Aggiungi spazio negativo per posizionare la linea
+%   \hrulefill     % Crea una linea orizzontale a sinistra
+%   \hspace{50pt}  % Aggiungi uno spazio orizzontale (regola la dimensione a piacere)
+%   \hrulefill     % Crea una linea orizzontale a destra
+% }
+% \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+% \fancyhead[L]{\leftmark}
+% \fancyhead[R]{\DDorganization}
+% \fancyhead[C]{%
+%   \raisebox{-0.6\height}{%
+%     \href{https://hknpolito.org/}{\includegraphics[height=1cm]{\DDsmalllogo}}%
+%   }%
+% }
+% \fancyfoot[C]{\thepage}
+% \setlength{\headheight}{30pt} % Avoids warnings about head height
+% \addtolength{\topmargin}{-20pt} % Corrects top margin for header
+
+\fancyhead{}            % Clear headers, just for precaution (good practice)
+\fancyfoot{}            % Clear footers, just for precaution (good practice)
+
+\makeatletter           % Rende la @ un carattere normale, utilizzabile per comandi
+
+% --- TITOLI DEI CAPITOLI NELLE TESTATINE ---
+% Quando inizia un capitolo: riempie sia SX che DX col nome del capitolo, in modo che se non sono presenti sezioni,
+% comunque la testatina non rimane vuota (fallback al nome del capitolo).
+% NOTA: Se non vuoi il numero del capitolo, rimuovi "\thechapter.\ " da entrambe le parentesi.
+% In precisione compare un punto dopo il numero del capitolo, poi uno spazio, come nel comporatmento standard di book.
+% NOTA: controllo condizionale: aggiunge il numero di capitolo solo nel mainmatter, come di default in book.
+
+\renewcommand{\chaptermark}[1]{%
+    \if@mainmatter%
+        \markboth{\thechapter.\ #1}{\thechapter.\ #1}%
+    \else%
+        \markboth{#1}{#1}%
+    \fi%
 }
-\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
-\fancyhead[L]{\leftmark}
-\fancyhead[R]{\DDorganization}
+
+% --- TITOLI DELLE SEZIONI NELLE TESTATINE ---
+% Quando inizia una sezione: sovrascrive SOLO la memoria di DX.
+% NOTA: Se non vuoi il numero della sezione, rimuovi "\thesection.\ ".
+% In precisione compare un punto dopo il numero della sezione, poi uno spazio, come nel comporatmento standard di book.
+
+% \renewcommand{\sectionmark}[1]{%
+%     \if@mainmatter%
+%         \markright{\thesection.\ #1}%
+%     \else%
+%         \markright{#1}%
+%     \fi%
+% }
+
+\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
+
+% Perchè ho disattivato la prima versione: Comunque compare il 0.1, 0.2... per le sezioni del frontmatter nella PAGINA
+% DI INIZIO SEZIONE. Andrebbe modificato dunque eventualmnete anche il comando che ne stampa il titolo della sezione ad
+% inizio sezione, per evitare confusione. Per questo lascio il numero di sezione nella testatina anche nel frontmatter.
+% In ogni caso NON SI DOVREBBERO USARE SEZIONI NUMERATE NEL FRONTMATTER e nel BACKMATTER! Usa in caso il comando
+% \section*{} per evitare numerazione e presenza in testatina e nell'indice: ma attenzione in quanto i comandiù stellati
+% non aggiornano le testatine!
+
+\makeatother            % Rende di nuovo la @ un carattere non utilizzabile per comandi (protezione)
+
+% DISPOSIZIONE FISICA SULLA PAGINA (Il Layout)
+
+% Pagine PARI (Even - Foglio di Sinistra)
+\fancyhead[LE]{\leftmark}           % Leftmark (Nome Capitolo) sul margine ESTERNO (SX)
+\fancyhead[RE]{\DDorganization}     % Nome Associazione sul margine INTERNO (DX)
+
+% Pagine DISPARI (Odd - Foglio di Destra)
+\fancyhead[LO]{\DDorganization}     % Nome Associazione sul margine INTERNO (SX)
+\fancyhead[RO]{\rightmark}          % Righmark (Nome Sezione, o fallback Capitolo) sul margine ESTERNO (DX)
+
+% Logo sempre al CENTRO (su tutte le pagine)
 \fancyhead[C]{%
   \raisebox{-0.6\height}{%
     \href{https://hknpolito.org/}{\includegraphics[height=1cm]{\DDsmalllogo}}%
   }%
 }
-\fancyfoot[C]{\thepage}
-\setlength{\headheight}{30pt} % Avoids warnings about head height
-\addtolength{\topmargin}{-20pt} % Corrects top margin for header
+
+\renewcommand{\headrule}{%
+    \vspace{-14.5pt}%               % Forza la posizione della linea più in alto, vicina al testo della testatina
+    \hrulefill%                     % Disegna la linea orizzontale, regolando elasticamente lo spazio
+    \hspace{50pt}%                  % Aggiunge uno spazio orizzontale vuoto (al centro, per far spazio al logo)
+    \hrulefill%                     % Disegna la linea orizzontale dopo lo spazio, regolando lo spazio
+    % EFFETTO COMPLESSIVO: le linee si esdpando a sx e a dx dell'hspace con la stessa "forza elastica": lo spazio bianco
+    % si troverà di conseguenza sempre al centro.
+}
+
+\setlength{\headheight}{30pt}       % Aumenta l'altezza della testatina per accogliere il logo evitando warnings
+\addtolength{\topmargin}{-20pt}     % Avendo aumentato l'altezza della testatina, viene corretto il margine superiore
+                                    % alzandone la posizione di 20pt (esatti sarebbe 18pt, essendo di default 12pt).
+
+\fancyfoot[C]{\thepage}             % Numero di pagina centrato nel piedino di pagina
+
+% ______________________________________________________________________________ FINE MODIFICA TIZIANO - TESTATINE
+
 
 % ______________________________________________________________________________ INIZIO MODIFICA TIZIANO - COMANDO CHAPTER
 

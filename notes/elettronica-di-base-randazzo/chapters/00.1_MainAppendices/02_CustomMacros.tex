@@ -69,7 +69,11 @@
 %                                               % m - mandatory: argomento obbligatorio (long title). Argomento #2.
     \chapter*{#2}%                              % Chiamata a capitolo non numerato e non indicizzato
     \phantomsection%                            % Aggiunge ancora per ipertesti (pacchetto hyperref), per indice
-    \addcontentsline{toc}{chapter}{#2}%         % Inserisce titolo LUNGO nell'indice
+    \addcontentsline{toc}{chapter}{#2}%         % Scrive il TITOLO LUNGO nel file .toc SEMPRE (come di default)
+    %                                           % Va nell'indice del pdf solo se tocdepth >= 0, altrimenti è ignorato.
+    %                                           % Le voci nel file .toc comunque appaiono nei segnalibri del pdf
+    %                                           % La profondità dei bookmarks si regola con bookmarksdepth de pacchetto
+    %                                           % hyperref (come opzione in importpackage, o come chiave in hypersetup)
     \IfNoValueTF{#1}{%                          % Controllo Condizionale: controlla se è stato passato il titolo breve
         \markboth{#2}{#2}%                      % Se manca il titolo breve, usa il titolo lungo nella testatina
     }{%
@@ -125,6 +129,8 @@
 
 % ---------------------------- MACRO PER MONKEY PATCHING DEL BUG SUI CAPITOLI NON NUMERATI -----------------------------
 
+% NON USARE: FIXATO NELLA CUSTOM CLASS
+
 % Per i dovuti chiarimenti, leggi il postambolo (nel main.tex) dopo ho parlato approfonditamente del bug dei capitoli
 % non numerati, introdotti dalla custom class HKNdocument (Versione: 2024/12/08 v1.5 Base class for publishing).
 % In particolare, il problema è affrontato nella sezione:
@@ -156,8 +162,6 @@
 %     \@afterheading
 %   \fi}
 % \makeatother
-
-
 
 % ---------------------------- CCUSTOM MACRO DEFINITI NELLA CUSTOM CLASS HKNdocument -----------------------------------
 
