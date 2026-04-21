@@ -661,8 +661,9 @@
 \DeclareHKNBox{corollary}{Corollario}{Corollary}{hknOrange}
 \DeclareHKNBox{exercise}{Esercizio}{Exercise}{munuDarkBlue}
 \DeclareHKNBox{observation}{Osservazione}{Observation}{hknLightBlue}
-
-\DeclareHKNBox{proposition}{Proposizione}{Proposition}{munuLightBlue}           % AGGIUNTA da Tiziano
+% ______________________________________________________________________________ INIZIO MODIFICA TIZIANO - HKNbox
+\DeclareHKNBox{proposition}{Proposizione}{Proposition}{munuLightBlue}
+% ______________________________________________________________________________ INIZIO MODIFICA TIZIANO - HKNbox
 
 % Frontmatter and backmatter
 \input{_preamble.tex}
