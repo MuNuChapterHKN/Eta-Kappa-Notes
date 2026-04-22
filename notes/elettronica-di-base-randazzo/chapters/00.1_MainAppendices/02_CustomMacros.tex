@@ -46,6 +46,11 @@
 % ipertestuale per l'indice in tutte le versioni, e il supporto agli short-title per le versioni 2 e 3, nativamente non
 % supportato da chapter*)
 
+% NOTA: il comando \chapter* di norma non supporta i titoli brevi. Tuttavia è stato ridefinito nella custom class per
+% poterli supportare. Inoltre originariamente non invia nulla al ToC, e questo non è stato toccato.
+% È usato per definire \uchapter, tuttavia questa funzione gestisce da se titoli brevi e lunghi, per testatine ed
+% indice, quindi comunque non ci sono conflitti.
+
 % NOTA: in tutte le versioni, viene passato il titolo del chapter sia al leftmark (testatina pagine SX: di norma
 % contiene il titolo del capitolo) che al rightmark (testatina pagine DX: di norma contiene il tittolo delle sezioni se
 % ce ne sono, altrimenti rimane vuota), con markboth, per evitare le testatine di destra completamente vuote (un
@@ -191,6 +196,12 @@
     %                                           % hyperref (come opzione in importpackage, o come chiave in hypersetup)
     % TITOLO BREVE NON USATO: le parti creano una pagina "copertina", senza testatina: quindi non è usato.
 }
+
+
+% NOTA: il comando \section* di norma non supporta i titoli brevi. Tuttavia è stato ridefinito nella custom class per
+% poterli supportare. Inoltre originariamente non invia nulla al ToC, e questo non è stato toccato.
+% È usato per definire \usection, tuttavia questa funzione gestisce da se titoli brevi e lunghi, per testatine ed
+% indice, quindi comunque non ci sono conflitti.
 
 \NewDocumentCommand{\usection}{ o m }{%         % Dichiaratore di macro di xparse, più flessibile:
 %                                               % o - optional: argomento opzionale (short title). Argomento #1.
