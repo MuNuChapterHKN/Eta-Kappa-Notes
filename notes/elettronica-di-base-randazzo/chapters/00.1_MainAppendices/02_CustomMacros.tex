@@ -204,10 +204,10 @@
     %                                           % hyperref (come opzione in importpackage, o come chiave in hypersetup)
     %
     \IfNoValueTF{#1}{%                          % Controllo Condizionale: controlla se è stato passato il titolo breve
-        % \markright{#2}%                       % Se manca il titolo breve, usa il titolo lungo nella testatina
+        \markright{#2}%                       % Se manca il titolo breve, usa il titolo lungo nella testatina
         % \usectionmark{#2}                     % Come sopra, ma applica le modifiche stilistiche fatte nella class! (ABBANDONATO)
     }{%
-        % \markright{#1}%                       % Se il titolo breve è presente, usa il titolo breve nella testatina
+        \markright{#1}%                       % Se il titolo breve è presente, usa il titolo breve nella testatina
         % \usectionmark{#1}                     % Come sopra, ma applica le modifiche stilistiche fatte nella class! (ABBANDONATO)
     }%
 }

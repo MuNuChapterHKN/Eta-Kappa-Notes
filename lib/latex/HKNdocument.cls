@@ -685,8 +685,8 @@
 % CHAPTER COMMAND WRAPPER (xparse)
 % --------------------------
 % Conserva il comando nativo della classe book
-\let\oldchapter\chapter         % Backup del comando originale
-                                % Supporta la variante con *, come lo stesso comando chapter.
+\let\oldchapter\chapter             % Backup del comando originale
+                                    % Supporta la variante con *, come lo stesso comando chapter.
 
 % Ridefinisce \chapter per disaccoppiare TOC e Header, e gestire i capitoli stellati
 % Testatina: usa sempre titolo breve
@@ -695,26 +695,27 @@
 
 \RenewDocumentCommand{\chapter}{ s o m }{%
     \IfBooleanTF{#1}{%
-        % CASO 1: Capitolo stellato \chapter*[]{Lungo}
+        % CASO 1:                   % Capitolo stellato \chapter*
         \IfNoValueTF{#2}{%
-            % CASO 1-A: chapter* Senza titolo breve
-            \oldchapter*{#3}%
-            \chaptermark{#3}% Aggiorna l'header anche se non numerato
+            % CASO 1-A:             % chapter* Senza titolo breve \chapter*[]{Lungo}
+            \oldchapter*{#3}%       % Invia il titolo LUNGO alla pagina
+            \chaptermark{#3}%       % Aggiorna l'header anche se non numerato
         }{%
-            % CASO 1-B: chapter* con titolo breve \chapter*[Breve]{Lungo}
-            \oldchapter*{#3}% Invia il titolo LUNGO alla pagina
-            \chaptermark{#2}% Sovrascrive l'header con il titolo BREVE
-                            % Non invia nulla al ToC nulla, come di norma per \chapter*
+            % CASO 1-B:             % chapter* con titolo breve \chapter*[Breve]{Lungo}
+            \oldchapter*{#3}%       % Invia il titolo LUNGO alla pagina
+            \chaptermark{#2}%       % Sovrascrive l'header con il titolo BREVE
+            %                       % Non invia nulla al ToC, come di norma per \chapter*.
+            %                       % Se vuoi che compaia nell'indice, usa la custom macro \uchapter.
         }%
     }{%
-        % CASO 2: Capitolo normale \chapter
+        % CASO 2:                   % Capitolo normale \chapter
         \IfNoValueTF{#2}{%
-            % CASO 2-A: chapter Senza titolo breve
-            \oldchapter{#3}%
+            % CASO 2-A:             % chapter Senza titolo breve \chapter[]{Lungo}
+            \oldchapter{#3}%        % Comportamento standard: invia il titolo LUNGO al TOC e alla pagina
         }{%
-            % CASO 2-B: chapter con titolo breve \chapter[Breve]{Lungo}
-            \oldchapter{#3}% Invia il titolo LUNGO al TOC e alla pagina
-            \chaptermark{#2}% Sovrascrive l'header con il titolo BREVE
+            % CASO 2-B:             % chapter con titolo breve \chapter[Breve]{Lungo}
+            \oldchapter{#3}%        % Invia il titolo LUNGO al TOC e alla pagina
+            \chaptermark{#2}%       % Sovrascrive l'header con il titolo BREVE
         }%
     }%
 }
