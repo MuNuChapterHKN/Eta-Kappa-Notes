@@ -681,9 +681,9 @@
 % LaTeX3), poiché LaTeX3 non è mai stato rilasciato come formato a sé
 % stante, ma è un ambiente di programmazione integrato dentro LaTeX2e.
 
-% --------------------------
+% --------------------------------
 % CHAPTER COMMAND WRAPPER (xparse)
-% --------------------------
+% --------------------------------
 % Conserva il comando nativo della classe book
 \let\oldchapter\chapter             % Backup del comando originale
                                     % Supporta la variante con *, come lo stesso comando chapter.
@@ -716,6 +716,53 @@
             % CASO 2-B:             % chapter con titolo breve \chapter[Breve]{Lungo}
             \oldchapter{#3}%        % Invia il titolo LUNGO al TOC e alla pagina
             \chaptermark{#2}%       % Sovrascrive l'header con il titolo BREVE
+        }%
+    }%
+}
+
+% --------------------------------
+% SECTION COMMAND WRAPPER (xparse)
+% --------------------------------
+% Nato per risolvere gli stessi problemi di disaccoppiamento : i titoli corti devono andare solo negli header, mentre
+% quelli lunghi devono andare in pagina e in indice. Inoltre aggiunto supporto ai titolli corti per le sezioni stellate.
+
+% NOTA BENE: ALTRI WRAPPER PER LE ALTRE DIVISIONI?
+% Per gli altri comandi legati alle divisioni o struttura del documento, come, \part, \subsection, \subsubsection,
+% \paragraph, e \subparagraph, visto che non vengono mai stampati nella testatina, si consiglia semplicemente di non
+% usare i titoli brevi (che ammettono tutti), se si vuole che nell'indice \compaiano i titoli lunghi.
+
+% Conserva il comando nativo della classe book
+\let\oldsection\section             % Backup del comando originale
+                                    % Supporta la variante con *, come lo stesso comando section.
+
+% Ridefinisce \section per disaccoppiare TOC e Header, e gestire le sezioni stellate
+% Testatina: usa sempre titolo breve
+% Indice: usa sempre titolo lungo (di norma LaTeX invierebbe il breve)
+% Aggiunto supporto per titoli brevi a sezioni stellate
+
+\RenewDocumentCommand{\section}{ s o m }{%
+    \IfBooleanTF{#1}{%
+        % CASO 1:                   % Sezione stellata \section*
+        \IfNoValueTF{#2}{%
+            % CASO 1-A:             % section* Senza titolo breve \section*[]{Lungo}
+            \oldsection*{#3}%       % Invia il titolo LUNGO alla pagina
+            \sectionmark{#3}%       % Aggiorna l'header anche se non numerato
+        }{%
+            % CASO 1-B:             % section* con titolo breve \section*[Breve]{Lungo}
+            \oldsection*{#3}%       % Invia il titolo LUNGO alla pagina
+            \sectionmark{#2}%       % Sovrascrive l'header con il titolo BREVE
+            %                       % Non invia nulla al ToC, come di norma per \section*.
+            %                       % Se vuoi che compaia nell'indice, usa la custom macro \usection.
+        }%
+    }{%
+        % CASO 2:                   % Sezione normale \section
+        \IfNoValueTF{#2}{%
+            % CASO 2-A:             % section Senza titolo breve \section[]{Lungo}
+            \oldsection{#3}%        % Comportamento standard: invia il titolo LUNGO al TOC e alla pagina
+        }{%
+            % CASO 2-B:             % section con titolo breve \section[Breve]{Lungo}
+            \oldsection{#3}%        % Invia il titolo LUNGO al TOC e alla pagina
+            \sectionmark{#2}%       % Sovrascrive l'header con il titolo BREVE
         }%
     }%
 }
