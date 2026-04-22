@@ -378,6 +378,14 @@
                                     % "Capitolo" o "Chapter" in funzione della lingua attiva.
 \newif\ifHKN@hdrBriefLabel          % Flag: se true, l'eticehtta sopra è stampata in forma abbreviata (disponibile solo
                                     % per italiano, "Cap.", e inglese, "Ch.").
+\newif\ifHKN@hdrNumberLabel         % Flag: se true, viene aggiunta nella testatina l'etichetta numerica ai capitoli e
+                                    % alle sezioni numerati, dichiarate con \chapter e \section
+                                    % NOTA: andrebbero usate numerate solo nel mainmatter! Nel frontmatter e backmatter
+                                    % la numerazione capitoli è disattivata, ma non quella delle sezioni (numerazioni
+                                    % sezioni sballa). Allora o usi le versioni stellate delle sottodivisoni, ad esempio
+                                    % \section* (ma in quel caso non vanno nell'indice o nella testatina), o usi
+                                    % le macro custom unnumbered but indexed, come \usection, che risolvono questi
+                                    % problemi: numerazione annullata, ma compaiono in indice e testatina.
 
 
 % 2. INTERFACCIA DI CONTROLLO (pgfkeys) CON GESTIONE DELLE ECCEZIONI O ERRORI
@@ -417,26 +425,38 @@
             Invalid value for key ChapterLabel.\MessageBreak                        % Messaggio stampato nell'errore
             Allowed values are: absent, normal, brief%
         }{%
-            Check your \string\setupHeaders\space options for typos.%               % Messaggio di help (scrivi h nel terminale
-            %                                                                       % dopo blocco compilazione per visualizzarlo)
+            Check your \string\setupHeaders\space options for typos.%               % Messaggio di help (scrivi h nel terminale dopo blocco compilazione per visualizzarlo)
         }%
     },
     ChapterLabel = absent,                                                          % Imposta il valore di default della key: se l'utente non specifica nulla, usa questo
+    % GESTIONE ETICHETTA NUMERICA
+    NumberLabel/.is choice,                                                         % Dichiara la chiave NumberLabel come scelta multipla (choice)
+    NumberLabel/absent/.code = {\HKN@hdrNumberLabelfalse},                          % Se usata, setta false il flag per stampare l'etichetta numerica
+    NumberLabel/normal/.code = {\HKN@hdrNumberLabeltrue},                           % Se usata, setta false il flag per stampare l'etichetta numerica
+    NumberLabel/.unknown/.code = {%                                                 % Gestione Eccezioni: avvisa l'utente se usa valori non ammessi
+        \ClassError{HKNdocument}{%                                                  % Tipo di errore: errore di classe, custom class HKNdocument
+            Invalid value for key NumberLabel.\MessageBreak                         % Messaggio stampato nell'errore
+            Allowed values are: absent, normal%
+        }{%
+            Check your \string\setupHeaders\space options for typos.%               % Messaggio di help (scrivi h nel terminale dopo blocco compilazione per visualizzarlo)
+        }%
+    },
+    NumberLabel = absent,                                                           % Imposta il valore di default della key: se l'utente non specifica nulla, usa questo
     % GESTIONE ERRORI PER CHIAVI INESISTENTI
     % Se l'utente sbaglia a digitare il NOME della chiave (es. CapterLabel=brief),scatta l'unknown generale della
     % famiglia. \pgfkeyscurrentname contiene il nome della chiave sbagliata.
     .unknown/.code = {%                                                             % Gestione Eccezioni: avvisa l'utente se usa key non ammesse
         \ClassError{HKNdocument}{%                                                  % Tipo di errore: errore di classe, custom class HKNdocument
             Unknown key '\pgfkeyscurrentname' used in header setup.\MessageBreak    % Messaggio stampato dall'errore
-            Allowed keys are: HeaderCase, ChapterLabel%
+            Allowed keys are: HeaderCase, ChapterLabel, NumberLabel%
         }{%
-            Please read the class documentation or check for typos.%                % Messaggio di help
+            Please read the class documentation or check for typos.%                % Messaggio di help (scrivi h nel terminale dopo blocco compilazione per visualizzarlo)
         }%
     },
 }
 
 % Valori di default iniziali: COMMENTATI PERCHÈ INSERITI DIRETTAMENTE DOPO LE DICHIARAZIONI
-% \pgfkeys{/HKNhdr, HeaderCase=normal, ChapterLabel=absent}
+% \pgfkeys{/HKNhdr, HeaderCase=normal, ChapterLabel=absent, NumberLabel=absent}
 
 % Comando per l'utente finale: interfaccia di alto livello, che accetta direttamente la lista separate da virgole e
 % spazi (o "a capo").
@@ -451,7 +471,6 @@
 % \newcommand{\setupHeaders}[1]{\pgfkeys{/HKNhdr/.cd, #1}}
 % Qui non è necessario, in quanto (dalla documentazione del pacchetto pgfkeys), se si dichiara una stringa come famiglia
 % di chiavi, come "/HKNhdr", allora ad ogni chiamata di questa è aggiunto in automatico un .cd.
-
 \newcommand{\setupHeaders}[1]{\pgfqkeys{/HKNhdr}{#1}}
 
 % 3. MODIFICATORI E FILTRI (Logica di formattazione)
@@ -465,12 +484,13 @@
     \fi
 }
 
-% Generatore Etichetta Breve: in italiano scrive Cap., altrimenti Ch. (inglese default per ogni altra lingua,
+% Generatore Etichetta Chapter Breve: in italiano scrive Cap., altrimenti Ch. (inglese default per ogni altra lingua,
 % in caso va modificato a mano per altre lingue, ma inglese ed italino sono le uniche supportate dal progetto).
 % Invece il nome completo è scritto col comando "\chaptername", che gestisce tutte le lingue.
 \newcommand{\HKNbrieflabel}{\iflanguage{italian}{Cap.}{Ch.}}
 
-% Fabbricatore Etichetta: costruisce l'etichetta prima del numero del capitolo.
+% Generatore Etichetta Chapter: costruisce l'etichetta prima del numero del capitolo.
+% Controlla se farla, e poi se farla completa o abbreviata.
 \newcommand{\HKNchaplabel}{%
     \ifHKN@hdrChapLabel%
         \ifHKN@hdrBriefLabel%
@@ -479,7 +499,27 @@
             \chaptername\space%
         \fi%
     % \else%
-    %     \relax%
+    %     \relax%                           % Comando filler: è meglio omettere del tutto l'else per le prestazioni.
+    \fi%
+}
+
+% Generatore Etichetta Numerica Chapter: costruisce l'etichetta con numero del capitolo.
+% Controlla se stamparla
+\newcommand{\HKNnumchaplabel}{%
+    \ifHKN@hdrNumberLabel%
+        \thechapter.\ %                     % la stringa "\ " forza la stampa di uno spazio dopo il numero del capitolo
+    % \else%
+    %     \relax%                           % Comando filler: è meglio omettere del tutto l'else per le prestazioni.
+    \fi%
+}
+
+% Generatore Etichetta Numerica Section: costruisce l'etichetta con numero della sezione.
+% Controlla se stamparla
+\newcommand{\HKNnumseclabel}{%
+    \ifHKN@hdrNumberLabel%
+        \thesection.\ %                     % la stringa "\ " forza la stampa di uno spazio dopo il numero della sezione
+    % \else%
+    %     \relax%                           % Comando filler: è meglio omettere del tutto l'else per le prestazioni.
     \fi%
 }
 
@@ -500,7 +540,8 @@
 % RIDEFINIZIONE CHAPTERMARK
 \renewcommand{\chaptermark}[1]{%
     \if@mainmatter%
-        \markboth{\HKNchaplabel\thechapter.\ #1}{\HKNchaplabel\thechapter.\ #1}%
+        \markboth{\HKNchaplabel\HKNnumchaplabel{}#1}{\HKNchaplabel\HKNnumchaplabel{}#1}%
+        % Graffe dopo numlabel per evitare pronlemi di spazi e formattazione: spazi inseriti già dalle etichette!
     \else%
         \markboth{#1}{#1}%
     \fi%
@@ -530,7 +571,9 @@
 %     \fi%
 % }
 
-\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
+\renewcommand{\sectionmark}[1]{\markright{\HKNnumseclabel{}#1}}
+    % Graffe dopo numlabel per evitare pronlemi di spazi e formattazione: spazi inseriti già dalle etichette!
+
 
 % Perchè ho disattivato la prima versione: Comunque compare il 0.1, 0.2... per le sezioni del frontmatter nella PAGINA
 % DI INIZIO SEZIONE. Andrebbe modificato dunque eventualmnete anche il comando che ne stampa il titolo della sezione ad
@@ -647,7 +690,7 @@
 
 % Ridefinisce \chapter per disaccoppiare TOC e Header, e gestire i capitoli stellati
 % Testatina: usa sempre titolo breve
-% Indice: usa sempre titolo lungo
+% Indice: usa sempre titolo lungo (di norma LaTeX invierebbe il breve)
 % Aggiunto supporto per titoli brevi a capitoli stellati
 
 \RenewDocumentCommand{\chapter}{ s o m }{%
