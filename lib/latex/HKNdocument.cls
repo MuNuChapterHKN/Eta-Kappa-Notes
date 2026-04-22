@@ -355,30 +355,169 @@
 % NOTA: LaTeX utilizza di default \MakeUppercase per forzare i titoli in maiuscolo nelle testatine.
 % NOTA: se vuoi titoli nella testatina in maiuscolo, basta aggiungere \MakeUppercase{} attorno gli argomenti di
 % \markboth e \markright nei comandi sopra: se lo fai, ricorda anche di farlo per i comandi custom \uchapter,
-% \usection[]{}, e \usubsubsection[]{}, per mantenere coerenza di stile.
+% \usection[]{}, e \usubsubsection[]{}, per mantenere coerenza di stile. FATTO IN AUTOMATICO, con modifica di markboth e
+% markright, e con la creazione di uchaptermark e usectionmark.
+% NOTA: la testatina della licenza è impostata più avanti, prima della sua chiamata con input.
+% Se modifiche lo stile, modifica anche quello per coerenza. FATTO IN AUTOMATICO, con modifica di markboth e markright.
+% NOTA: in pratica si potrebbero modificare, invece che \sectionmark e \chaptermark, direttamente \rightmark e
+% \markboth. Tuttavia si tratta di primitive di basso livello, che è utile che si comportino in modo standard, per
+% eventuale uso manuale. ATTENZIONE NON SI PUÒ FARE PER TUTTE LE FUNZIONI: infatti servono comportamenti diversi per
+% markboth e markright, in funzione che si tratti di capitoli o sezioni. Si può quindi fare solo per il case del
+% carattere. FATTO!
 
 % NOTA: si potrebbe aggiungere un opzione alla classe "HeaderCase=upper" o "HeaderCase=normal" per attivare o
 % disattivare il maiuscolo forzato in modo comodo, ovviamente aggiungendo un controllo condizionale nei comandi sopra.
+% FATTO A SEGUIRE!
 
-% NOTA: la testatina della licenza è impostata più avanti, prima della sua chiamata con input.
-% Se modifiche lo stile, modifica anche quello per coerenza.
+% AGGIORNAMENTO: CREAZIONE DI INTERFACCIA DI SELEZIONE LAYOUT TESTATINA CON PGFKEYS (si potrebbero usare anche solo
+% direttive interne di basso livello)
 
-% --- TITOLI DEI CAPITOLI NELLE TESTATINE ---
+% 1. VARIABILI DI STATO (Boolean flags)
+\newif\ifHKN@hdrUpperCase           % Flag: se true, i titoli nelle testatine saranno tutti in maiuscolo
+\newif\ifHKN@hdrChapLabel           % Flag: se true, viene stampata l'etichetta \chaptername nella testatina, ossia
+                                    % "Capitolo" o "Chapter" in funzione della lingua attiva.
+\newif\ifHKN@hdrBriefLabel          % Flag: se true, l'eticehtta sopra è stampata in forma abbreviata (disponibile solo
+                                    % per italiano, "Cap.", e inglese, "Ch.").
+
+
+% 2. INTERFACCIA DI CONTROLLO (pgfkeys) CON GESTIONE DELLE ECCEZIONI O ERRORI
+% ATTENZIONE alla FORMATTAZIONE all'interno di pgfkeys: è molto rigido, non usare righe vuote, e ci devono essere solo
+% virgole per separare le coppie chiave-valore. Per aggiungere spazi, commentali per annullarne l'effetto.
+% NOTA: è stato usato pgfkeys come esercizio di programmazione, essendo molto versatile e potente. Tuttavia lo stesso
+% identico risultato (cioè usare booleani per modificare il comporament delle funzioni modificatrici dichiarate a
+% seguire), si può ottenere anche con le primitive di basso livello di TeX (incluso il controllo dell'esistenza dei
+% booleani). Si dovrebbe poi creare un'interfaccia di gestione apposita, se non si vuole che l'utente finale stia a
+% scrivere i booleani.
+
+\pgfkeys{
+    /HKNhdr/.is family,             % Dichiara una nuova famiglia di chiavi, nella folder /HKNhdr (hdr: sta per header)
+    /HKNhdr,                        % Attiva il percorso suddetto come default (solo per le prossime dichiarazioni)
+    %
+    % GESTIONE DEL MAIUSCOLO (is choice crea un menu chiuso)
+    HeaderCase/.is choice,                                             % Dichiara la chiave HeaderCase come scelta multipla (choice)
+    HeaderCase/upper/.code  = {\HKN@hdrUpperCasetrue},                 % Se usata setta true il flag per il maiuscolo forzato
+    HeaderCase/normal/.code = {\HKN@hdrUpperCasefalse},                % Se usata setta false il flag per il maiuscolo forzato
+    HeaderCase/.unknown/.code = {%                                     % Gestione Eccezioni: avvisa l'utente se usa valori non ammessi
+        \ClassError{HKNdocument}{%                                      % Tipo di errore: errore di classe, custom class HKNdocument
+            Invalid value for key HeaderCase.\MessageBreak             % Messaggio stampato nell'errore
+            Allowed values are: upper, normal%
+        }{%
+            Check your \string\setupHeaders\space options for typos.%   % Messaggio di help (scrivi h nel terminale
+            %                                                           % dopo blocco compilazione per visualizzarlo)
+        }%
+    },
+    HeaderCase = normal,                                                           % Imposta il valore di default della key: se l'utente non specifica nulla, usa questo
+    % GESTIONE ETICHETTA CHAPTER
+    ChapterLabel/.is choice,                                                        % Dichiara la chiave ChapterLabel come scelta multipla (choice)
+    ChapterLabel/absent/.code = {\HKN@hdrChapLabelfalse},                           % Se usata, setta false il flag per stampare l'etichetta "capitolo"
+    ChapterLabel/normal/.code = {\HKN@hdrChapLabeltrue \HKN@hdrBriefLabelfalse},    % Se usata, setta true il flag per stampare l'etichetta "capitolo", ma falso per la versione breve
+    ChapterLabel/brief/.code  = {\HKN@hdrChapLabeltrue \HKN@hdrBriefLabeltrue},     % Se usata, setta ture i 2 flag per stampare l'etichetta "capitolo" in forma breve
+    ChapterLabel/.unknown/.code = {%                                                % Gestione Eccezioni: avvisa l'utente se usa valori non ammessi
+        \ClassError{HKNdocument}{%                                                  % Tipo di errore: errore di classe, custom class HKNdocument
+            Invalid value for key ChapterLabel.\MessageBreak                        % Messaggio stampato nell'errore
+            Allowed values are: absent, normal, brief%
+        }{%
+            Check your \string\setupHeaders\space options for typos.%               % Messaggio di help (scrivi h nel terminale
+            %                                                                       % dopo blocco compilazione per visualizzarlo)
+        }%
+    },
+    ChapterLabel = absent,                                                          % Imposta il valore di default della key: se l'utente non specifica nulla, usa questo
+    % GESTIONE ERRORI PER CHIAVI INESISTENTI
+    % Se l'utente sbaglia a digitare il NOME della chiave (es. CapterLabel=brief),scatta l'unknown generale della
+    % famiglia. \pgfkeyscurrentname contiene il nome della chiave sbagliata.
+    .unknown/.code = {%                                                             % Gestione Eccezioni: avvisa l'utente se usa key non ammesse
+        \ClassError{HKNdocument}{%                                                  % Tipo di errore: errore di classe, custom class HKNdocument
+            Unknown key '\pgfkeyscurrentname' used in header setup.\MessageBreak    % Messaggio stampato dall'errore
+            Allowed keys are: HeaderCase, ChapterLabel%
+        }{%
+            Please read the class documentation or check for typos.%                % Messaggio di help
+        }%
+    },
+}
+
+% Valori di default iniziali: COMMENTATI PERCHÈ INSERITI DIRETTAMENTE DOPO LE DICHIARAZIONI
+% \pgfkeys{/HKNhdr, HeaderCase=normal, ChapterLabel=absent}
+
+% Comando per l'utente finale: interfaccia di alto livello, che accetta direttamente la lista separate da virgole e
+% spazi (o "a capo").
+% NOTA: il comando a seguire è \pgfqkeys e non \pgfkeys: quella "q" in più sta per "quick": è una versione del comando
+% più veloce, che accetta due argomenti: la cartella dove cercare le chiavi, e la lista di valori.
+% La velocità superiore consiste proprio in questa separazione degli argomenti: sostanzialmente il parser si risparmia
+% una parte del lavoro! È la best practice per dichiare i comandi di impostazione!
+% Si sarebbe potuto usare anche:
+% \newcommand{\setupHeaders}[1]{\pgfkeys{/HKNhdr, #1}}
+% Oppure: metodo generale, quando la cartella dove si ricerca non è dichiarata come una famiglia: va aggiunto un .cd
+% per change directory (le folder delle keys).
+% \newcommand{\setupHeaders}[1]{\pgfkeys{/HKNhdr/.cd, #1}}
+% Qui non è necessario, in quanto (dalla documentazione del pacchetto pgfkeys), se si dichiara una stringa come famiglia
+% di chiavi, come "/HKNhdr", allora ad ogni chiamata di questa è aggiunto in automatico un .cd.
+
+\newcommand{\setupHeaders}[1]{\pgfqkeys{/HKNhdr}{#1}}
+
+% 3. MODIFICATORI E FILTRI (Logica di formattazione)
+
+% Filtro Case: applica il maiuscolo se richiesto
+\newcommand{\HKNcase}[1]{%
+    \ifHKN@hdrUpperCase
+        \MakeUppercase{#1}%
+    \else
+        #1%
+    \fi
+}
+
+% Generatore Etichetta Breve: in italiano scrive Cap., altrimenti Ch. (inglese default per ogni altra lingua,
+% in caso va modificato a mano per altre lingue, ma inglese ed italino sono le uniche supportate dal progetto).
+% Invece il nome completo è scritto col comando "\chaptername", che gestisce tutte le lingue.
+\newcommand{\HKNbrieflabel}{\iflanguage{italian}{Cap.}{Ch.}}
+
+% Fabbricatore Etichetta: costruisce l'etichetta prima del numero del capitolo.
+\newcommand{\HKNchaplabel}{%
+    \ifHKN@hdrChapLabel%
+        \ifHKN@hdrBriefLabel%
+            \HKNbrieflabel\space%
+        \else%
+            \chaptername\space%
+        \fi%
+    % \else%
+    %     \relax%
+    \fi%
+}
+
+% 4. APPLICAZIONE
+% --- TITOLI DEI CAPITOLI (chiamati con \chapter) NELLE TESTATINE ---
 % Quando inizia un capitolo: riempie sia SX che DX col nome del capitolo, in modo che se non sono presenti sezioni,
 % comunque la testatina non rimane vuota (fallback al nome del capitolo).
 % NOTA: Se non vuoi il numero del capitolo, rimuovi "\thechapter.\ " da entrambe le parentesi.
 % In precisione compare un punto dopo il numero del capitolo, poi uno spazio, come nel comporatmento standard di book.
 % NOTA: controllo condizionale: aggiunge il numero di capitolo solo nel mainmatter, come di default in book.
 
+% WRAPPER PER APPLICARE HKNcase in generale
+\let\OLDmarkboth=\markboth
+\let\OLDmarkright=\markright
+\renewcommand{\markboth}[2]{\OLDmarkboth{\HKNcase{#1}}{\HKNcase{#2}}}
+\renewcommand{\markright}[1]{\OLDmarkright{\HKNcase{#1}}}
+
+% RIDEFINIZIONE CHAPTERMARK
 \renewcommand{\chaptermark}[1]{%
     \if@mainmatter%
-        \markboth{\thechapter.\ #1}{\thechapter.\ #1}%
+        \markboth{\HKNchaplabel\thechapter.\ #1}{\HKNchaplabel\thechapter.\ #1}%
     \else%
         \markboth{#1}{#1}%
     \fi%
 }
 
-% --- TITOLI DELLE SEZIONI NELLE TESTATINE ---
+% NON NECESSARIO: meglio usare direttamente \markboth modificato, come in origine: tanto sarebbe aggiunta solo la label
+% CAPITOLO, che nei capitoli non numerati non ha molto senso (Avranno sicuramente un nome speciale, infatti).
+% % RIDEFINIZIONE CHAPTERMARK per CAPITOLI NON NUMERATI generati con uchapter
+% \newcommand{\uchaptermark}[1]{%
+%     \if@mainmatter%
+%         \markboth{\HKNchaplabel{}#1}{\HKNchaplabel{}#1}%
+%     \else%
+%         \markboth{#1}{#1}%
+%     \fi%
+% }
+
+% --- TITOLI DELLE SEZIONI (chiamate con \section) NELLE TESTATINE ---
 % Quando inizia una sezione: sovrascrive SOLO la memoria di DX.
 % NOTA: Se non vuoi il numero della sezione, rimuovi "\thesection.\ ".
 % In precisione compare un punto dopo il numero della sezione, poi uno spazio, come nel comporatmento standard di book.
@@ -397,13 +536,18 @@
 % DI INIZIO SEZIONE. Andrebbe modificato dunque eventualmnete anche il comando che ne stampa il titolo della sezione ad
 % inizio sezione, per evitare confusione. Per questo lascio il numero di sezione nella testatina anche nel frontmatter.
 % In ogni caso NON SI DOVREBBERO USARE SEZIONI NUMERATE NEL FRONTMATTER e nel BACKMATTER! Usa in caso il comando
-% \section*{} per evitare numerazione e presenza in testatina e nell'indice: ma attenzione in quanto i comandiù stellati
+% \section*{} per evitare numerazione e presenza in testatina e nell'indice: ma attenzione in quanto i comandi stellati
 % non aggiornano le testatine! Ho creato i comandi custom "unnumbered" appositamente per risolvere questi problemi: usa
 % \usection se vuoi reinserire nella testatina e nell'indice (non stampa numero) la sezione non numerata, ma che compare
 % nell'indice e nella testatina.
 
+% NON NECESSARIO: meglio usare direttamente \markritgh modificato, come in origine. Tanto consiste solo in quello.
+% RIDEFINIZIONE SECTIONMARK per SEZIONI NON NUMERATE, generate con \usection
+% \newcommand{\usectionmark}[1]{\markright{#1}}
+
 \makeatother            % Rende di nuovo la @ un carattere non utilizzabile per comandi (protezione)
 
+%---------------------------------------------
 % DISPOSIZIONE FISICA SULLA PAGINA (Il Layout)
 
 % Pagine PARI (Even - Foglio di Sinistra)

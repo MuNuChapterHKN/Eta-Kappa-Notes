@@ -95,6 +95,11 @@
 \author{Tiziano Mattei}     % Nomi di chi scrive gli appunti.
 %\editor{}                  % Nomi di chi revisiona gli appunti.
 
+% COMANDI PER LAYOUT TESTATINE: Vedi Custom Class per documentazione.
+\setupHeaders{
+    HeaderCase = normal,
+    ChapterLabel = brief,
+}
 
 % --------------------------------------------------- PREAMBLE: END ----------------------------------------------------
 % ------------------------------------------------ DOCUMENT BODY: START ------------------------------------------------
@@ -109,8 +114,36 @@
 % Viene richiamata frontmatter per aggiungere capitoli iniziali non numerati, non previsti dalla custom class
 % HKNDocument
 \frontmatter
-%
+
 \chapter{Introduzione}
+Ciao, questa è un'introduzione di prova.
+\newpage
+Prova nuova pagina.
+\usection{Prova}
+\newpage
+Prova nuova pagina.
+\newpage
+Prova nuova pagina.
+
+\chapter{Prefazione}
+Ciao, questa è una prefazione di prova.
+\newpage
+Prova nuova pagina.
+\usection{Prova}
+\newpage
+Prova nuova pagina.
+\newpage
+Prova nuova pagina.
+
+\uchapter{Prova 1 uchapter}
+Ciao, questo è un uchapter di prova.
+\newpage
+\usection{Prova}
+Prova nuova pagina.
+\newpage
+Prova nuova pagina.
+\newpage
+Prova nuova pagina.
 
 % -------------------------------------------------- FRONTMATTER: END --------------------------------------------------
 % ------------------------------------------------- MAINMATTER: START --------------------------------------------------
@@ -118,7 +151,36 @@
 
 % \include{chapters/first-chapter}
 % \include{chapters/second-chapter}
-
+\part{Prima Parte}
+\chapter{Cap1}
+Ciao, questo è un capitolo di prova.
+\newpage
+Prova nuova pagina.
+\newpage
+\section{Prova}
+Prova nuova pagina.
+\newpage
+Prova nuova pagina.
+\part{Seconda Parte}
+\chapter{Cap2}
+Ciao, questo è un capitolo di prova.
+\newpage
+Prova nuova pagina.
+\newpage
+Prova nuova pagina.
+\section{Prova}
+\newpage
+Prova nuova pagina.
+\upart{Parte non numerata}
+\uchapter{Prova 2 uchapter}
+Ciao, questo è un uchapter di prova.
+\newpage
+\section{Prova}
+Prova nuova pagina.
+\newpage
+Prova nuova pagina.
+\newpage
+Prova nuova pagina.
 % -------------------------------------------------- MAINMATTER: END ---------------------------------------------------
 % ------------------------------------------------- BACKMATTER: START --------------------------------------------------
 \backmatter             % Segna la fine del corpo principale del testo, e l'inizio della parte finale, dedicata a
@@ -129,10 +191,38 @@
                         % consecutivamente non causa problemi, ed equivale a chiamarlo solo la prima volta.
                         % Per ulteriori informazioni, vedi file chiamato a seguire con \input:
                         % 00.2_Bibliography/Bibliography_Call_Settings_Explanation.tex
-%
+
 \input{chapters/00.2_Bibliography/Bibliography_Call_Settings_Explanation.tex}   % Biblliografia: self-eplanatory
 
+\chapter{Cap3}
+Ciao, questa è un capitolo di prova.
+\newpage
+Prova nuova pagina.
+\section{Prova}
+\newpage
+Prova nuova pagina.
+\newpage
+Prova nuova pagina.
 
+\chapter{Cap4}
+Ciao, questa è un capitolo di prova.
+\newpage
+Prova nuova pagina.
+\newpage
+Prova nuova pagina.
+\section{Prova}
+\newpage
+Prova nuova pagina.
+
+\uchapter{Prova 3 uchapter}
+Ciao, questo è un uchapter di prova.
+\newpage
+\section{Prova}
+Prova nuova pagina.
+\newpage
+Prova nuova pagina.
+\newpage
+Prova nuova pagina.
 % -------------------------------------------------- BACKMATTER: END ---------------------------------------------------
 \end{document}
 % ------------------------------------------------- DOCUMENT BODY: END -------------------------------------------------

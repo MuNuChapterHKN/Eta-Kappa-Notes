@@ -512,3 +512,5 @@ hknRed
 munuDarkBlue
 munuMediumBlue
 munuLightBlue
+normal
+brief

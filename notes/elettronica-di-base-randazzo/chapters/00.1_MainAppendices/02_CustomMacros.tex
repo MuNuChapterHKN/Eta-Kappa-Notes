@@ -34,6 +34,13 @@
 % main.tex, c'è una lunga spiegazione. Questo comando va usato solo per intermezzi del mainmatter, nel raro caso in cui
 % non vadano numerati.
 
+% NOTA: se usi uchapter (o upart, vedi a seguire), assicurati di creare al suo interno sottodivisioni solo con le
+% versioni "u" (unnumbered) dei comandi. Le ho definite tutte a seguire: upart, uchapter, usection, usubsection,
+% usubsubsection, uparagraph, usubparagraph. È fondamentale per non sballare le numerazioni (o meglio per non aggangiare
+% divisioni numerate a non numerate (si aggancerebbero al precedente oggetto numerato): comparirebbe qeusto fatto
+% nell'indice (in funzione del tocdepth), nei segnalibri (in funzione del bookmarksdepth), e nelle testatine (solo per
+% chapters e sections).
+
 % NOTA: tutte le versioni presentati a seguire costituiscono dei wrapper, ossia del codice che avvolge \chapter* con i
 % comandi correttivi necessari, per aggiungere le features mancanti (indicizzazione, aggiornamento header, link
 % ipertestuale per l'indice in tutte le versioni, e il supporto agli short-title per le versioni 2 e 3, nativamente non
@@ -76,8 +83,10 @@
     %                                           % hyperref (come opzione in importpackage, o come chiave in hypersetup)
     \IfNoValueTF{#1}{%                          % Controllo Condizionale: controlla se è stato passato il titolo breve
         \markboth{#2}{#2}%                      % Se manca il titolo breve, usa il titolo lungo nella testatina
+        % \uchaptermark{#2}                     % Come sopra, ma applica le modifiche stilistiche fatte nella class! (ABBANDONATO)
     }{%
         \markboth{#1}{#1}%                      % Se il titolo breve è presente, usa il titolo breve nella testatina
+        % \uchaptermark{#1}                     % Come sopra, ma applica le modifiche stilistiche fatte nella class! (ABBANDONATO)
     }%
 }
 
@@ -195,9 +204,11 @@
     %                                           % hyperref (come opzione in importpackage, o come chiave in hypersetup)
     %
     \IfNoValueTF{#1}{%                          % Controllo Condizionale: controlla se è stato passato il titolo breve
-        \markright{#2}%                         % Se manca il titolo breve, usa il titolo lungo nella testatina
+        % \markright{#2}%                       % Se manca il titolo breve, usa il titolo lungo nella testatina
+        % \usectionmark{#2}                     % Come sopra, ma applica le modifiche stilistiche fatte nella class! (ABBANDONATO)
     }{%
-        \markright{#1}%                         % Se il titolo breve è presente, usa il titolo breve nella testatina
+        % \markright{#1}%                       % Se il titolo breve è presente, usa il titolo breve nella testatina
+        % \usectionmark{#1}                     % Come sopra, ma applica le modifiche stilistiche fatte nella class! (ABBANDONATO)
     }%
 }
 
