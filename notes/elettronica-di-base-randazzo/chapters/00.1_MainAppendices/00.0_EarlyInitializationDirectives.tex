@@ -433,3 +433,85 @@
 % settings.json: è bastato aggiungere le voci. Vedi il file per i dettagli.
 %
 % ==============================================================================
+
+\PassOptionsToPackage{dvipsnames}{xcolor}
+
+% ==============================================================================
+% Carica Vocabolario di 68 colori predefiniti (sono disponibili vocabolri anche
+% più ampi, ma questi sono sufficienti per la maggior parte dei casi).
+% È scongliato usare i colori predefiniti di LaTeXche sono solo 8: white, black,
+% red, green, blue, cyan, magenta, yellow, essendo stati pensati per monitor
+% monocromatici e non per la stampa.
+%
+% ------------------------------------------------------------------------------
+% NomeColore		CodiceOriginale (CMYK)		#CodiceEsadecimale
+% ------------------------------------------------------------------------------
+% Apricot		    {0, 0.32, 0.52, 0}		    #FBB982
+% Aquamarine		{0.82, 0, 0.30, 0}		    #00B5BE
+% Bittersweet		{0, 0.75, 1, 0.24}		    #C04F17
+% Black			    {0, 0, 0, 1}			    #221E1F
+% Blue			    {1, 1, 0, 0}			    #2D2F92
+% BlueGreen		    {0.85, 0, 0.33, 0}		    #00B3B8
+% BlueViolet		{0.86, 0.91, 0, 0.04}		#473992
+% BrickRed		    {0, 0.89, 0.94, 0.28}		#B6321C
+% Brown			    {0, 0.81, 1, 0.60}		    #792500
+% BurntOrange		{0, 0.51, 1, 0}			    #F7921D
+% CadetBlue		    {0.62, 0.57, 0.23, 0}		#74729A
+% CarnationPink		{0, 0.63, 0, 0}			    #F282B4
+% Cerulean		    {0.94, 0.11, 0, 0}		    #00A2E3
+% CornflowerBlue	{0.65, 0.13, 0, 0}		    #41B0E4
+% Cyan			    {1, 0, 0, 0}			    #00AEEF
+% Dandelion		    {0, 0.29, 0.84, 0}		    #FDBC42
+% DarkOrchid		{0.40, 0.80, 0.20, 0}		#A4538A
+% Emerald		    {1, 0, 0.50, 0}			    #00A99D
+% ForestGreen		{0.91, 0, 0.88, 0.12}		#009B55
+% Fuchsia		    {0.47, 0.91, 0, 0.08}		#8C368C
+% Goldenrod		    {0, 0.10, 0.84, 0}		    #FFDF42
+% Gray			    {0, 0, 0, 0.50}			    #949698
+% Green			    {1, 0, 1, 0}			    #00A64F
+% GreenYellow		{0.15, 0, 0.69, 0}		    #DFE674
+% JungleGreen		{0.99, 0, 0.52, 0}		    #00A99A
+% Lavender		    {0, 0.48, 0, 0}			    #F49EC4
+% LimeGreen		    {0.50, 0, 1, 0}			    #8DC73E
+% Magenta		    {0, 1, 0, 0}			    #EC008C
+% Mahogany		    {0, 0.85, 0.87, 0.35}		#A9341F
+% Maroon		    {0, 0.87, 0.68, 0.32}		#AF3235
+% Melon			    {0, 0.46, 0.50, 0}		    #F89E7B
+% MidnightBlue		{0.98, 0.13, 0, 0.43}		#006795
+% Mulberry		    {0.34, 0.90, 0, 0.02}		#A93C93
+% NavyBlue		    {0.94, 0.54, 0, 0}		    #006EB8
+% OliveGreen		{0.64, 0, 0.95, 0.40}		#3C8031
+% Orange		    {0, 0.61, 0.87, 0}		    #F58137
+% OrangeRed		    {0, 1, 0.50, 0}			    #ED135A
+% Orchid		    {0.32, 0.64, 0, 0}		    #AF72B0
+% Peach			    {0, 0.50, 0.70, 0}		    #F7965A
+% Periwinkle		{0.57, 0.55, 0, 0}		    #7977B8
+% PineGreen		    {0.92, 0, 0.59, 0.25}		#008B72
+% Plum			    {0.50, 1, 0, 0}			    #92268F
+% ProcessBlue		{0.96, 0, 0, 0}			    #00B0F0
+% Purple		    {0.45, 0.86, 0, 0}		    #99479B
+% RawSienna		    {0, 0.72, 1, 0.45}		    #974006
+% Red			    {0, 1, 1, 0}			    #ED1B23
+% RedOrange		    {0, 0.77, 0.87, 0}		    #F26035
+% RedViolet		    {0.23, 0.89, 0, 0.11}		#A1246B
+% Rhodamine		    {0, 0.82, 0, 0}			    #EF559F
+% RoyalBlue		    {1, 0.50, 0, 0}			    #0071BC
+% RoyalPurple		{0.75, 0.90, 0, 0}		    #613F99
+% RubineRed		    {0, 1, 0.13, 0}			    #ED017D
+% Salmon		    {0, 0.53, 0.38, 0}		    #F69289
+% SeaGreen		    {0.69, 0, 0.50, 0}		    #3FBC9D
+% Sepia			    {0, 0.83, 1, 0.70}		    #671800
+% SkyBlue		    {0.62, 0, 0.12, 0}		    #46C5DD
+% SpringGreen		{0.26, 0, 0.59, 0}		    #C6DC67
+% Tan			    {0.14, 0.42, 0.56, 0}		#DA9D76
+% TealBlue		    {0.86, 0, 0.34, 0.02}		#00AEB3
+% Thistle		    {0.12, 0.59, 0, 0}		    #D883B7
+% Turquoise		    {0.85, 0, 0.20, 0}		    #00B4CE
+% Violet		    {0.79, 0.88, 0, 0}		    #58429B
+% VioletRed		    {0, 0.81, 0, 0}			    #EF58A0
+% White			    {0, 0, 0, 0}			    #FFFFFF
+% WildStrawberry	{0, 0.96, 0.39, 0}		    #EE2967
+% Yellow		    {0, 0, 1, 0}			    #FFF200
+% YellowGreen		{0.44, 0, 0.74, 0}		    #98CC70
+% YellowOrange		{0, 0.42, 1, 0}			    #FAA21A
+% ==============================================================================
