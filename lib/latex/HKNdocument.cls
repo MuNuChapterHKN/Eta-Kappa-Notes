@@ -950,8 +950,11 @@
     \input{cclicense.tex}
     \tableofcontents
     \clearpage
-
-    \mainmatter
+% ______________________________________________________________________________ INIZIO MODIFICA TIZIANO - MAINMATTER
+    %\mainmatter
+    % IMPORTANTE DISATTIVARLA: altrimenti se si richiama di nuovo successivamente il frontmatter, la numerazione romana
+    % delle pagine rinizia da capo, sballando dunque tutta la numerazione.
+% ______________________________________________________________________________ FINE MODIFICA TIZIANO - MAINMATTER
 }
 \AfterEndDocument{
     \backmatter

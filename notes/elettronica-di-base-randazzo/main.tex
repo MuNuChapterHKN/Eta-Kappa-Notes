@@ -111,11 +111,13 @@
 % La custom class HKNdocument stampa copertina, licenza e indice in automatico appena è richiamata.
 % Inoltre successivamente attiva \mainmatter, che segna l'inizio del corpo principale del testo, e imposta la
 % numerazione dei capitoli e delle pagine in formato arabo.
-
+%
 % Viene richiamata frontmatter per aggiungere capitoli iniziali non numerati, non previsti dalla custom class
-% HKNDocument
-\frontmatter
-
+% HKNDocument. ATTENZIONE! NON VA BENE COSÌ: ogni volta che si chiama il frontmatter viene riavviata la numerazione
+% roamana delle pagine! VA DISATTIVATA LA CHIAMATA AL MAINMATTER NELLA CUSTOM CLASS, e quella di seguito.
+%\frontmatter               % HO DISATTIVATO IL MAINMATTER NELLA CUSTOM CLASS: non richiamare per non riavviare la
+                            % numerazione romana!
+%
 \chapter{Introduzione}
 Ciao, questa è un'introduzione di prova.
 \newpage
