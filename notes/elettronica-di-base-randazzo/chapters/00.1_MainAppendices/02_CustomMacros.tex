@@ -34,9 +34,13 @@
 \newcommand{\ddq}[1]{\lq\lq#1\rq\rq}    % Doppie doppie virgolette inglesi. Preferire le versioni a seguire,
                                         % che hanno la semantica speficata (così che in caso di necessità, l'effetto sia
                                         % modificabile globalmente con un unico intervento))
-\newcommand{\fig}[1]{\enquote*{#1}}     % Per citare termini in senso figurato. In italiano stampa doppie doppie.
-                                        % Maniene effetti contestuali di csquote, gestisce microspazi e altre virgolett
-                                        % interne da solo.
+\newcommand{\fig}[1]{\enquote*{#1}}     % Per citare termini in senso figurato. In italiano stampa doppie doppie
+                                        % virgolette inglesi. Maniene effetti contestuali di csquote, gestisce
+                                        % microspazi e altre virgolett interne da solo.
+\newcommand{\quo}[1]{\enquote{#1}}      % Per citazioni letterali e discorso diretto. In italiano stampa doppie doppie
+                                        % caporali. Maniene effetti contestuali di csquote, gestisce microspazi e altre
+                                        % virgolett interne da solo.
+\newcommand{\lit}[1]{\lq#1\rq}          % Per signficato letterale. Stampa virgolette singole inglesi.
 
 % ---------------------------------------- CAPITOLI INDICIZZATI MA NON NUMERATI ----------------------------------------
 

@@ -1,4 +1,4 @@
-% --- MAGIC COMMENTS: CONFIGURAZIONE EDITOR --- (vedi main.tex per riferimenti e spiegazioni) ---
+% --- MAGIC COMMENTS: CONFIGURAZIONE EDITOR --- (vedi main.tex) ---
 % !TEX root = ../main.tex
 \chapter{Introduzione, ma da leggere!}
 Questo libro (se così può essere chiamato) è rivolto principalmente agli studenti
@@ -10,10 +10,10 @@ Nasce in precisione come una sorta di blocco appunti avanzato, da integrare
 ovviamente al materiale didattico del corso, del quale necessariamente non può
 essere un sostituto completo! Si invitano dunque tutti gli studenti che
 intendono sfruttarlo, a \textcolor{Red}{\textbf{consultare sempre e comunque il
-materiale ufficiale fornito dai docenti}}, in modo da potersi comunque preparare al
+materiale ufficiale fornito dai docenti}}, in modo da potersi comunque preparare
 al meglio e secondo le linee guida.
 
-Fatta questa doverosa premessa iniziale è chiaro che, a causa della sua natura,
+Fatta la doverosa premessa iniziale è chiaro che, a causa della sua natura,
 quest'opera non possa porsi come obiettivo quello di essere un riferimento
 completo e definitivo per lo studio dell'elettronica (di base). Si ribadisce
 nuovamente che il suo scopo è quello di essere un supporto allo studio, mirato
@@ -23,20 +23,72 @@ Tuttavia, sebbene questi aspetti puramente utilitaristici siano alla base della
 sua esistenza, parlare solo di essi non renderebbe giustizia alla filosofia e
 alla visione didattica con cui è stata pensata e realizzata. Infatti, se da un
 lato l'elettronica è una materia ormai consolidata, per la quale è possibile
-reperire (anche troppo) facilmente materiale di ottima qualità per lo studio,
-dall'altro gli studenti faticano a orientarsi efficacemente in questa vastità, e
-a creare un approccio che sia produttivo e teoricamente sano allo stesso tempo.
+reperire (anche troppo) facilmente buon materiale per lo studio; dall'altro gli
+studenti faticano a orientarsi efficacemente in questa vastità, e a sostenere un
+approccio che sia produttivo e accademicamente sano allo stesso tempo.
 
 Dall'esperienza dell'autore, è evidente che le difficoltà principali vengano
 alla luce quando si devono far convivere assieme:
 \begin{itemize}
 \item il rigore matematico necessario a una comprensione chiara, ed
 eventualmente profonda, dei modelli studiati;
-\item un approccio \enquote{fisico} e intuitivo, per non perdersi nei dettagli e
-costruire un motore mentale di \enquote{alto livello} in senso informatico, con
+\item un approccio \fig{fisico} e intuitivo, per non perdersi nei dettagli e
+costruire un motore mentale di \fig{alto livello} (in senso informatico), con
 cui navigare gli argomenti e i concetti;
-\item le capacità pratiche e tecniche richieste nei laboratori, nei quali
-tipicamente è molto raro che le cose funzioni al primo tentativo, nonstante
-la preparazione teorica;
+\item le capacità pratiche e le conoscenze tecniche richieste nei laboratori,
+nei quali tipicamente è molto raro che le cose funzioni al primo tentativo,
+nonostante la preparazione teorica.
 \end{itemize}
-a una comprensione chiara, la necessità di un approccio
+
+È ovvio che non possa esistere un singolo corso universitario, né un singolo
+libro, che da solo possa insegnare efficacemente tutto questo, cioè
+\emph{come studiare} e gli \emph{strumenti per studiare}, oltre a \emph{cosa
+studiare} e \emph{come applicare quanto studiato}. Si noti tra l'altro che sono
+tutte cose ben diverse, e a volte lontane, dal \emph{superare un esame}.
+
+In ogni caso, è proprio in questa posizione ibrida che la presente guida vuole
+porsi: l'obiettivo secondario, per quanto ambizioso possa essere, è quello di
+tentare di accorciare le distanze che esistono tra gli obiettivi materiali, e
+una buona preparazione personale. Sarà sicuramente complesso, ma la speranza che
+possa essere un aiuto diverso, più vicino alle esigenze reali degli studenti,
+rimane.
+
+Infine, una nota di incoraggiamento per tutti coloro che possano averne bisogno:
+è stato citato il \quo{rigore matematico}, un concetto spesso frainteso e
+ritenuto più antipatico che utile. Si vuole ora rincuorare lo studente: qui se
+ne intende una versione sana, che con il giusto sforzo iniziale (inevitabile),
+permette poi di comprendere serenamente e facilmente, ma soprattutto una volta
+per tutte, ognuno dei concetti affrontati. Non ci si lasci dunque spaventare
+dalle equazioni, dalle dimostrazioni e dai teoremi, perché non c'è molto da
+temere.
+
+Nello studio delle materie scientifiche, la matematica è una forma di
+investimento che diventa conveniente molto rapidamente con il tempo: saper
+scrivere i simboli giusti, vale più di quanto tante parole e reinterpretazioni
+pratiche possano dire al loro posto.
+
+Per fare un paragone, che potrebbe essere utile ad apprezzare lo sforzo di chi
+ha scritto il presente documento, è un po' lo stesso fenomeno che si vive
+quando, scrivendo un documento complesso, si passa dall'utilizzare \emph{Word},
+o qualsiasi altro editor \emph{WYSIWYG}%
+\footnote{Sta per \emph{What You See Is What You Get}, ed indica un editor di
+documenti nel quale il risultato finale coincide esattamente con la
+rappresentazione grafica di ciò che l'utente inserisce, dunque che costringe
+l'utente a occuparsi degli aspetti grafici assieme al contenuto.}%
+, a utilizzare
+\LaTeX, che è un motore tipografico di tipo \emph{WYSIWYM}%
+\footnote{Sta per\emph{What You See Is What You Mean}, e indica un editor di
+documenti nel quale il risultato finale è determinato dal significato del
+contenuto, piuttosto che dalla sua rappresentazione grafica, sfruttando
+ovviamente del codice in un linguaggio apposito.}%
+: la curva di apprendimento iniziale è piuttosto ripida,
+ma una volta superata, il risparmio di energie e risorse è molto grande.
+A riguardo si veda l'immagine \ref{img:wordvslatex}.
+\addfigure[Word vs \LaTeX]{wordVSlatex.png}{0.4}%
+\label{img:wordvslatex}
+
+% Da aggiungere: segnalazione a parte di argomenti fuori programma
+% Testo scritto con LaTeX. Esempio word.
+% Cambiare immagine
+% Correggere macro immagini per label
+% Aggiungere pacchetto per citazioni intelligenti
