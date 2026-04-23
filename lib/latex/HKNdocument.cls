@@ -368,6 +368,9 @@
 % generano la loro testatina da se! Qualora li si aggiunga al documento, VANNO SISTEMATI CASO PER CASO. Qui per ora
 % è stato sistemato solo il caso della bibliografia, con la creazione di un heading style custom, che chiama \uchapter
 % per generarla (in alternativa, copiaci dentro lo stesso codice), che chiama il markboth modificato!.
+% AGGIORNAMENTO: testatine corrette anche per LOF e LOT, con la sovrascrittura dei comandi \listoffigures e
+% \listoftables. manca solo l'indice analitico, caso diverso (essendo un enviroment), ma è probabile che non serva in
+% questo progetto.
 
 % NOTA: si potrebbe aggiungere un opzione alla classe "HeaderCase=upper" o "HeaderCase=normal" per attivare o
 % disattivare il maiuscolo forzato in modo comodo, ovviamente aggiungendo un controllo condizionale nei comandi sopra.
