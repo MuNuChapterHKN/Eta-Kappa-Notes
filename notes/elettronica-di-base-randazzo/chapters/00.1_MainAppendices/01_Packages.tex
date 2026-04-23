@@ -148,11 +148,10 @@
 % [CON BABEL]: Applica l'algoritmo di sillabazione italiano e traduce strutturalmente l'intero documento in RAM.
 
 
-% --- PACCHETTI PER SCRITTURA DI MACRO AVANZATE ---
+% --- PACCHETTI PER PROGRAMMAZIONE E SCRITTURA DI MACRO AVANZATE ---
 \usepackage{xparse}                 % [EXTENSION] Pacchetto che fornisce comandi avanzati per la definizione di macro,
                                     % come \NewDocumentCommand, grazie alla possibilità di definire argomenti delle
                                     % macro tramite "signature" flessibili.
-                                    % Utilizzato nella macro \uchapter definita in 02_CustomMacros.tex.
                                     % NOTA SU XPARSE E LATEX3: Tecnicamente NON è necessario aggiungere:
                                     % - \RequirePackage{xparse} all'inizio della classe, oppure
                                     % - \usepackage{xparse} nel preambolo del main.tex
@@ -164,6 +163,12 @@
                                     % bisogna modificare l'istruzione \NeedsTeXFormat{LaTeX2e} (es. in "LaTeX3")
                                     % presente nella custom class, poiché LaTeX3 non è mai stato rilasciato come
                                     % formato a sé stante, ma è un ambiente di programmazione integrato dentro LaTeX2e.
+                                    % NOTA: usato per definire \uchpater, \usection, ecc e altre custom macro.
+
+\usepackage{etoolbox}               % [EXTENSION] Pacchetto che fornisce comandi avanzati per la programmazione
+                                    % condizionale, usato in combinazione con xparse per definire macro più
+                                    % intelligenti. Fornisce comandi come \ifstrequal, \ifbool... che permettono di
+                                    % eseguire controlli logici complessi all'interno delle macro.
 
 % --- PACCHETTI PER BIBLIOGRAFIA E PER GESTIONE SMART DEGLI APICI ---
 \usepackage[backend=biber, autolang=other, style=ieee]{biblatex}

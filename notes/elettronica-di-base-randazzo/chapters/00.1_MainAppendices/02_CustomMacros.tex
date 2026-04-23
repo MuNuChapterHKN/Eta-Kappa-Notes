@@ -293,9 +293,49 @@
 \let\OLDlistoffigures\listoffigures % Salva il comando originale di LaTeX per stampare la LOF, se dovesse servire.
 \let\OLDlistoftables\listoftables % Salva il comando originale di LaTeX per stampare la LOT, se dovesse servire.
 
+% VECCHIE VERSIONI: compaiono sempre nell'indice!
+% \makeatletter
+% % ------- LIST OF FIGURES -------
+% \renewcommand\listoffigures{%
+%     % CONTROLLO DI SICUREZZA COLONNE:   % Gestione colonne: se il documento è a 2 colonne, passa a 1, solo localmente
+%     \if@twocolumn%                      % Se il documento è a due colonne
+%       \@restonecoltrue%                 % Imposta true un flag per ricordare di tornare a due colonne dopo la LOF
+%       \onecolumn%                       % Passa a una colonna per stampare la LOF
+%     \else%
+%       \@restonecolfalse%                % Altrimenti, se il documento è già a una colonna, imposta false il flag citato
+%     \fi%
+%     % SCRITTURA CAPITOLO:               % Genera la LOF come capitolo non numerato ma indicizzato
+%     \uchapter{\listfigurename}%         % Sfruttiamo la comoda macro \uchapter, che gestisce già tutto il necessario
+%     % STAMPA LOF:
+%     \@starttoc{lof}%                    % Legge il file .lof e stampa tutta la lista delle figure
+%     % RIPRISTINO COLONNE EVENTUALE
+%     \if@restonecol\twocolumn\fi         % Se il flag citato è true, torna a due colonne. Altrimenti, resta a una colonna
+% }
+% % ------- LIST OF TABLES -------
+% \renewcommand\listoftables{%
+%     % CONTROLLO DI SICUREZZA COLONNE:   % Gestione colonne: se il documento è a 2 colonne, passa a 1, solo localmente
+%     \if@twocolumn%                      % Se il documento è a due colonne
+%       \@restonecoltrue%                 % Imposta true un flag per ricordare di tornare a due colonne dopo la LOT
+%       \onecolumn%                       % Passa a una colonna per stampare la LOT
+%     \else%
+%       \@restonecolfalse%                % Altrimenti, se il documento è già a una colonna, imposta false il flag citato
+%     \fi%
+%     % SCRITTURA CAPITOLO:               % Genera la LOT come capitolo non numerato ma indicizzato
+%     \uchapter{\listtablename}%          % Sfruttiamo la comoda macro \uchapter, che gestisce già tutto il necessario
+%     % STAMPA LOT:
+%     \@starttoc{lot}%                    % Legge il file .lot e stampa tutta la lista delle tabelle
+%     % RIPRISTINO COLONNE EVENTUALE
+%     \if@restonecol\twocolumn\fi         % Se il flag citato è true, torna a due colonne. Altrimenti, resta a una colonna
+% }
+% % ------------------------------
+% \makeatother
+
+
+% NUOVE VERSIONI: con opzioni per comparire nell'indice o meno!
+% Richiedono i pacchetti xparse (per gestire argomenti opzionali) e etoolbox (per i controlli condizionali).
 \makeatletter
 % ------- LIST OF FIGURES -------
-\renewcommand\listoffigures{%
+\RenewDocumentCommand{\listoffigures}{ o }{%
     % CONTROLLO DI SICUREZZA COLONNE:   % Gestione colonne: se il documento è a 2 colonne, passa a 1, solo localmente
     \if@twocolumn%                      % Se il documento è a due colonne
       \@restonecoltrue%                 % Imposta true un flag per ricordare di tornare a due colonne dopo la LOF
@@ -303,15 +343,43 @@
     \else%
       \@restonecolfalse%                % Altrimenti, se il documento è già a una colonna, imposta false il flag citato
     \fi%
-    % SCRITTURA CAPITOLO:               % Genera la LOF come capitolo non numerato ma indicizzato
-    \uchapter{\listfigurename}%         % Sfruttiamo la comoda macro \uchapter, che gestisce già tutto il necessario
+    % CONTROLLI SUL PARAMETRO OPZIONALE: INSERISCE O MENO LA LISTA NELL'INDICE, CON GESTIONE ERRORI
+    \IfNoValueTF{#1}{%                  % Controlla se è stato passato un argomento opzionale
+            % CASO DEFAULT:             % Nessun argomento: non stampa la LOF nell'indice, come da default di LaTeX
+            \chapter*{\listfigurename}%                     % Genera la LOF come capitolo non numerato e non indicizzato
+            \markboth{\listfigurename}{\listfigurename}%    % Aggiorna le testatine con il nome della LOF
+        }{%
+            % CASO CON ARGOMENTO:                           % L'utente ha inserito le parentesi quadre
+            \ifstrequal{#1}{lofintoc}{%                     % Se l'argomento è la stringa "lofintoc", stampa nell'indice
+                % OPZIONE CORRETTA: [lofintoc]
+                \uchapter{\listfigurename}%                 % Genera la LOF come capitolo non numerato ma indicizzato
+            }{%
+                % ERRORE: OPZIONE SCONOSCIUTA               % Se l'argomento è diverso da "lofintoc", genera un errore
+                \ClassError{HKNdocument}{%
+                    % MESSAGGIO DI ERRORE:
+                    Opzione '#1' non valida per \string\listoffigures.\messageBreak
+                    L'unico argomento opzionale supportato è 'lofintoc'.%
+                }{%
+                    % MESSAGGIO DI HELP: stampato inviando "h" dopo l'errore sul terminale.
+                    Per risolvere:\MessageBreak
+                    - Scrivi \string\listoffigures[lofintoc] per avere la lista nell'indice.\MessageBreak
+                    - Scrivi \string\listoffigures senza parentesi per la lista non indicizzata (default LaTeX).%
+                }%
+                % FALLBACK DI SICUREZZA:                    % Usa opzioni di default (VS prova a far prosguire la
+                %                                           % compilazione anche in caso di errori: mode nonstop)
+                \chapter*{\listfigurename}%
+                \markboth{\listfigurename}{\listfigurename}%
+            }%
+        }%
     % STAMPA LOF:
     \@starttoc{lof}%                    % Legge il file .lof e stampa tutta la lista delle figure
     % RIPRISTINO COLONNE EVENTUALE
     \if@restonecol\twocolumn\fi         % Se il flag citato è true, torna a due colonne. Altrimenti, resta a una colonna
 }
+
+
 % ------- LIST OF TABLES -------
-\renewcommand\listoftables{%
+\RenewDocumentCommand{\listoftables}{ o }{%
     % CONTROLLO DI SICUREZZA COLONNE:   % Gestione colonne: se il documento è a 2 colonne, passa a 1, solo localmente
     \if@twocolumn%                      % Se il documento è a due colonne
       \@restonecoltrue%                 % Imposta true un flag per ricordare di tornare a due colonne dopo la LOT
@@ -319,8 +387,34 @@
     \else%
       \@restonecolfalse%                % Altrimenti, se il documento è già a una colonna, imposta false il flag citato
     \fi%
-    % SCRITTURA CAPITOLO:               % Genera la LOT come capitolo non numerato ma indicizzato
-    \uchapter{\listtablename}%          % Sfruttiamo la comoda macro \uchapter, che gestisce già tutto il necessario
+    % CONTROLLI SUL PARAMETRO OPZIONALE: INSERISCE O MENO LA LISTA NELL'INDICE, CON GESTIONE ERRORI
+    \IfNoValueTF{#1}{%                  % Controlla se è stato passato un argomento opzionale
+            % CASO DEFAULT:             % Nessun argomento: non stampa la LOT nell'indice, come da default di LaTeX
+            \chapter*{\listtablename}%                      % Genera la LOT come capitolo non numerato e non indicizzato
+            \markboth{\listtablename}{\listtablename}%      % Aggiorna le testatine con il nome della LOT
+        }{%
+            % CASO CON ARGOMENTO:                           % L'utente ha inserito le parentesi quadre
+            \ifstrequal{#1}{lotintoc}{%                     % Se l'argomento è la stringa "lotintoc", stampa nell'indice
+                % OPZIONE CORRETTA: [lotintoc]
+                \uchapter{\listtablename}%                  % Genera la LOT come capitolo non numerato ma indicizzato
+            }{%
+                % ERRORE: OPZIONE SCONOSCIUTA               % Se l'argomento è diverso da "lotintoc", genera un errore
+                \ClassError{HKNdocument}{%
+                    % MESSAGGIO DI ERRORE:
+                    Opzione '#1' non valida per \string\listoftables.\messageBreak
+                    L'unico argomento opzionale supportato è 'lotintoc'.%
+                }{%
+                    % MESSAGGIO DI HELP: stampato inviando "h" dopo l'errore sul terminale.
+                    Per risolvere:\MessageBreak
+                    - Scrivi \string\listoftables[lotintoc] per avere la lista nell'indice.\MessageBreak
+                    - Scrivi \string\listoftables senza parentesi per la lista non indicizzata (default LaTeX).%
+                }%
+                % FALLBACK DI SICUREZZA:                    % Usa opzioni di default (VS prova a far prosguire la
+                %                                           % compilazione anche in caso di errori: mode nonstop)
+                \chapter*{\listtablename}%
+                \markboth{\listtablename}{\listtablename}%
+            }%
+        }%
     % STAMPA LOT:
     \@starttoc{lot}%                    % Legge il file .lot e stampa tutta la lista delle tabelle
     % RIPRISTINO COLONNE EVENTUALE
