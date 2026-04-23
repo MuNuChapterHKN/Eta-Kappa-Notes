@@ -290,9 +290,12 @@
 % si basa), e vi sono state apportato le semplici modifiche necessarie! Così alla chiamata di \listoffigures e
 % \listoftables, l'effetto sarà esattamente quello voluto.
 
+\let\OLDlistoffigures\listoffigures % Salva il comando originale di LaTeX per stampare la LOF, se dovesse servire.
+\let\OLDlistoftables\listoftables % Salva il comando originale di LaTeX per stampare la LOT, se dovesse servire.
+
 \makeatletter
 % ------- LIST OF FIGURES -------
-\newcommand\HKNlistoffigures{%
+\renewcommand\listoffigures{%
     % CONTROLLO DI SICUREZZA COLONNE:   % Gestione colonne: se il documento è a 2 colonne, passa a 1, solo localmente
     \if@twocolumn%                      % Se il documento è a due colonne
       \@restonecoltrue%                 % Imposta true un flag per ricordare di tornare a due colonne dopo la LOF
@@ -308,7 +311,7 @@
     \if@restonecol\twocolumn\fi         % Se il flag citato è true, torna a due colonne. Altrimenti, resta a una colonna
 }
 % ------- LIST OF TABLES -------
-\newcommand\HKNlistoftables{%
+\renewcommand\listoftables{%
     % CONTROLLO DI SICUREZZA COLONNE:   % Gestione colonne: se il documento è a 2 colonne, passa a 1, solo localmente
     \if@twocolumn%                      % Se il documento è a due colonne
       \@restonecoltrue%                 % Imposta true un flag per ricordare di tornare a due colonne dopo la LOT
