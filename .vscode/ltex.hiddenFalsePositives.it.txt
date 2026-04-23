@@ -68,3 +68,4 @@
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qo m  #2.#1 #2 #1\\E$"}
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qo m  #2.#1 #2  #1\\E$"}
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qo m  #2.#1\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qlof lot\\E$"}

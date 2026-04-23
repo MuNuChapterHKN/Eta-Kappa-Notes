@@ -275,6 +275,90 @@
     % TITOLO BREVE NON USATO: non va nelle testatine
 }
 
+
+
+% -------------- CCUSTOM MACRO PER STAMPARE LIST OF FIGURES E LIST OF TABLES CON LE TESTATINE STILE HKN ----------------
+
+% NOTA: non si possono semplicemente sovrascrivere le testatine generate dalle lof e lot, perchè sono scritte durante
+% la chiamata alla scritture di queste, dunque la sovcrascrittura con \markboth arriverebbe troppo tardi. Per la stessa
+% ragione, non può essere usato un wrapper (che lancerebbe comunque il codice originale).
+% Le possibilità che rimangono sono dunque due:
+% - sovrascrivere il codice sorgente di LaTeX per stampare la lof e la lot
+% - definire delle macro alternative, per stampare la lof e la lot
+% Il codice in entrambi i casi dev'essere lo stesso. A seguire è stata adattata la seconda opzione.
+% Viene semplicemente ripreso il codice originale di LaTeX della classe book.cls (sulla quale la cusom class HKNdocument
+% si basa), e vi sono state apportato le semplici modifiche necessarie! Così alla chiamata di \listoffigures e
+% \listoftables, l'effetto sarà esattamente quello voluto.
+
+\makeatletter
+% ------- LIST OF FIGURES -------
+\newcommand\HKNlistoffigures{%
+    % CONTROLLO DI SICUREZZA COLONNE:   % Gestione colonne: se il documento è a 2 colonne, passa a 1, solo localmente
+    \if@twocolumn%                      % Se il documento è a due colonne
+      \@restonecoltrue%                 % Imposta true un flag per ricordare di tornare a due colonne dopo la LOF
+      \onecolumn%                       % Passa a una colonna per stampare la LOF
+    \else%
+      \@restonecolfalse%                % Altrimenti, se il documento è già a una colonna, imposta false il flag citato
+    \fi%
+    % SCRITTURA CAPITOLO:               % Genera la LOF come capitolo non numerato ma indicizzato
+    \uchapter{\listfigurename}%         % Sfruttiamo la comoda macro \uchapter, che gestisce già tutto il necessario
+    % STAMPA LOF:
+    \@starttoc{lof}%                    % Legge il file .lof e stampa tutta la lista delle figure
+    % RIPRISTINO COLONNE EVENTUALE
+    \if@restonecol\twocolumn\fi         % Se il flag citato è true, torna a due colonne. Altrimenti, resta a una colonna
+}
+% ------- LIST OF TABLES -------
+\newcommand\HKNlistoftables{%
+    % CONTROLLO DI SICUREZZA COLONNE:   % Gestione colonne: se il documento è a 2 colonne, passa a 1, solo localmente
+    \if@twocolumn%                      % Se il documento è a due colonne
+      \@restonecoltrue%                 % Imposta true un flag per ricordare di tornare a due colonne dopo la LOT
+      \onecolumn%                       % Passa a una colonna per stampare la LOT
+    \else%
+      \@restonecolfalse%                % Altrimenti, se il documento è già a una colonna, imposta false il flag citato
+    \fi%
+    % SCRITTURA CAPITOLO:               % Genera la LOT come capitolo non numerato ma indicizzato
+    \uchapter{\listtablename}%          % Sfruttiamo la comoda macro \uchapter, che gestisce già tutto il necessario
+    % STAMPA LOT:
+    \@starttoc{lot}%                    % Legge il file .lot e stampa tutta la lista delle tabelle
+    % RIPRISTINO COLONNE EVENTUALE
+    \if@restonecol\twocolumn\fi         % Se il flag citato è true, torna a due colonne. Altrimenti, resta a una colonna
+}
+% ------------------------------
+\makeatother
+
+% ---- CODICE ORIGINALE DELLA CLASSE book.cls PER LOF E LOT (da cui è stato adattato quello sopra), PER RIFERIMENTO ----
+% NOTA: LaTeX ha un utility molto utile per trovare i file nel suo sistema, si chiama kpathsea, che offre il comando
+% kpsewhich per cercare il percorso di un file. Ad esempio ho trovato la posizione di book.cls digitando sul terminale
+% "kpsewhich book.cls". Dopodichè con la funzione cerca è stato facile trovare il codice sorgente dei comandi.<
+
+% \newcommand\listoffigures{%
+%     \if@twocolumn
+%       \@restonecoltrue\onecolumn
+%     \else
+%       \@restonecolfalse
+%     \fi
+%     \chapter*{\listfigurename}%
+%       \@mkboth{\MakeUppercase\listfigurename}%
+%               {\MakeUppercase\listfigurename}%
+%     \@starttoc{lof}%
+%     \if@restonecol\twocolumn\fi
+%     }
+% \newcommand\listoftables{%
+%     \if@twocolumn
+%       \@restonecoltrue\onecolumn
+%     \else
+%       \@restonecolfalse
+%     \fi
+%     \chapter*{\listtablename}%
+%       \@mkboth{%
+%           \MakeUppercase\listtablename}%
+%          {\MakeUppercase\listtablename}%
+%     \@starttoc{lot}%
+%     \if@restonecol\twocolumn\fi
+%     }
+
+
+
 % ---------------------------- CCUSTOM MACRO DEFINITI NELLA CUSTOM CLASS HKNdocument -----------------------------------
 
 \begin{comment}     % --- RIEPILOGO MACRO (COMANDI) CUSTOM DEFINITI NELLA CLASSE "HKNdocument" ---
