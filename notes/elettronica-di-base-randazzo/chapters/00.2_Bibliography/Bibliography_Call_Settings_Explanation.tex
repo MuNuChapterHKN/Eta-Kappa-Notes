@@ -89,8 +89,11 @@
                                                 % Chapter HKN, e include automaticamente la bibliografia nell'indice
                                                 % generale. In precisione corregge la testatina, che lo stile originale
                                                 % stampa sempre in maiuscolo comunque (hardcoded internamente).
+%
 % NOTA: si potrebbe risolvere anche wrappando delle macro interne di biblatex, tuttavia la soluzione appena usata è
-% più semplice.
+% più semplice. Inoltre ho aperto il codice di biblatex.sty e biblate.def, e letteralmente il codice che definisce lo
+% stile bibintoc è molto simile (anzi ha il difetto che manca \phantosection, corretto dal pacchetto hyperref) al mio
+% codice (quello dentro uchapter). Quindi nessun problema di compatibilità!
 %
 \begin{comment}     NOTA IMPORTANTE - BUG DI OVERFULL \HBOX IN BIBLIOGRAFIA CAUSATO DAL PACCHETTO ULEM
 

@@ -363,7 +363,11 @@
 % \markboth. Tuttavia si tratta di primitive di basso livello, che è utile che si comportino in modo standard, per
 % eventuale uso manuale. ATTENZIONE NON SI PUÒ FARE PER TUTTE LE FUNZIONI: infatti servono comportamenti diversi per
 % markboth e markright, in funzione che si tratti di capitoli o sezioni. Si può quindi fare solo per il case del
-% carattere. FATTO!
+% carattere. FATTO COSÌ!
+% NOTA: la bibliografia, così come l'indice analitico, la lista delle tabelle, la lista delle figure, se presenti,
+% generano la loro testatina da se! Qualora li si aggiunga al documento, VANNO SISTEMATI CASO PER CASO. Qui per ora
+% è stato sistemato solo il caso della bibliografia, con la creazione di un heading style custom, che chiama \uchapter
+% per generarla (in alternativa, copiaci dentro lo stesso codice), che chiama il markboth modificato!.
 
 % NOTA: si potrebbe aggiungere un opzione alla classe "HeaderCase=upper" o "HeaderCase=normal" per attivare o
 % disattivare il maiuscolo forzato in modo comodo, ovviamente aggiungendo un controllo condizionale nei comandi sopra.
