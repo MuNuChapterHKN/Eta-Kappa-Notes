@@ -22,7 +22,23 @@
 % identificare nel codice sorgente, e da risolvere). Altrimenti le Macro possono essere dichiarate tutte su una riga, ma
 % è consigliabile solo per macro molto semplici e brevi.
 
-% -------------------------------------- CAPITOLI INDICIZZATI MA NON NUMERATI ------------------------------------------
+% ----------------------------------------------- DATI E METADATI UTILI ------------------------------------------------
+% NOTA: alcuni sono già definiti nella custom class, ma hanno una formattazione specifica da rivedere.
+% In futuro saranno raggruppati probabilmente.
+
+\newcommand{\uni}{\iflanguage{italian}{Politecnico di Torino}{Polytechnic University of Turin}}     % Università
+\newcommand{\course}{\iflanguage{italian}{Corso di Laurea Triennale}{Bachelor's Degree}}               % Livello
+\newcommand{\prog}{\iflanguage{italian}{Ingegneria Elettrica}{Electrical Engineering}}            % Corso di laurea
+
+% --------------------------------------------- MACRO TIPOGRAFICHE UTILI -----------------------------------------------
+\newcommand{\ddq}[1]{\lq\lq#1\rq\rq}    % Doppie doppie virgolette inglesi. Preferire le versioni a seguire,
+                                        % che hanno la semantica speficata (così che in caso di necessità, l'effetto sia
+                                        % modificabile globalmente con un unico intervento))
+\newcommand{\fig}[1]{\enquote*{#1}}     % Per citare termini in senso figurato. In italiano stampa doppie doppie.
+                                        % Maniene effetti contestuali di csquote, gestisce microspazi e altre virgolett
+                                        % interne da solo.
+
+% ---------------------------------------- CAPITOLI INDICIZZATI MA NON NUMERATI ----------------------------------------
 
 % COMANDO per creazione di CAPITOLI NON NUMERATI MA INDICIZZATI (APPAIONO NELL'INDICE), con corretto aggiornamento delle
 % testatine (header, funzionante indipendentemente dalla programmazione della custom class HKNdocument, e senza problemi
