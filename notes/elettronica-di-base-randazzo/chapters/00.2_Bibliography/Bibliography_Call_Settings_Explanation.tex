@@ -1,8 +1,8 @@
 % --- MAGIC COMMENTS: CONFIGURAZIONE EDITOR --- (vedi main.tex per riferimenti e spiegazioni) ---
 % !TEX root = ../../main.tex
-
+%
 % _____________________________________________________ BIBLIOGRAFIA ___________________________________________________
-
+%
 \begin{comment}     NEL FILE PACKAGES SONO STATE RIPORTATE LE SEGUENTI ISTRUZIONI, RELATIVE ALLA BIBLIOGRFIA.
 
     % --- PACCHETTI PER BIBLIOGRAFIA E PER GESTIONE SMART DEGLI APICI ---
@@ -61,19 +61,37 @@
                                         % nelle citazioni bibliografiche. Garantisce che le citazioni siano formattate
                                         % correttamente in base alla lingua del documento (es. virgolette italiane « »).
 \end{comment}
-
+%
 % \backmatter inserito prima della chiamata di questo file. Inoltre vedi spiegazioni a riguardo nel commento che segue.
-
+%
 \nocite{*}              % Opzione di biblatex per far stampare in bibliografia tutte le fonti presenti nel database
                         % bibliografico (file .bib). Secondo lo standard IEEE, non si dovrebbe usare, ed ogni fonte
                         % dovrebbe essere citata almeno una volta nel testo.
-
-\printbibliography[heading=bibintoc]    % Stampa la bibliografia, generata come capitolo non numerato.
-                                        % L'opzione 'heading=bibintoc' include la bibliografia nell'indice generale,
-                                        % col suo numero di pagina ed il suo titolo, come se fosse un capitolo normale.
-                                        % Se si volesse cambiarne il nome, si può usare l'opzione:
-                                        % title={Nome Personalizzato}
-
+%
+%
+% PROBLEMA: lo stile classico stampa sempre in maiuscolo la testatina della bibliografia (si rivela solo se ci sono
+% (più paginde di bibliografia, altrimenti non si nota).
+% \printbibliography[heading=bibintoc]    % Stampa la bibliografia, generata come capitolo non numerato indicizzato.
+%                                         % L'opzione 'heading=bibintoc' include la bibliografia nell'indice generale,
+%                                         % col suo numero di pagina ed il suo titolo, come se fosse un capitolo normale.
+%                                         % Se si volesse cambiarne il nome, si può usare l'opzione:
+%                                         % title={Nome Personalizzato}
+%
+\defbibheading{HKNbibheadingstyle}[\bibname]{%  % Stile custom: Bibliografia generata come cap. non numerato indicizzato
+    \uchapter{#1}%
+    }
+%
+\printbibliography[heading=HKNbibheadingstyle]  % Stampa la bibliografia, con lo stile per l'heading specificato
+                                                % In questo caso è generata come capitolo non numerato indicizzato.
+                                                % L'opzione 'heading=HKNbibheadingstyle' applica lo stile di
+                                                % intestazione personalizzato definito in precedenza, che usa \uchapter
+                                                % per formattare il titolo della bibliografia secondo lo stile del Mu Nu
+                                                % Chapter HKN, e include automaticamente la bibliografia nell'indice
+                                                % generale. In precisione corregge la testatina, che lo stile originale
+                                                % stampa sempre in maiuscolo comunque (hardcoded internamente).
+% NOTA: si potrebbe risolvere anche wrappando delle macro interne di biblatex, tuttavia la soluzione appena usata è
+% più semplice.
+%
 \begin{comment}     NOTA IMPORTANTE - BUG DI OVERFULL \HBOX IN BIBLIOGRAFIA CAUSATO DAL PACCHETTO ULEM
 
     Per le informazioni complete su questo bug, la sua causa e la soluzione adottata, si rimanda al file
@@ -85,7 +103,7 @@
     Si è risolto semplicemente impedendo a ulem di sovrascrivere \emph tramite l'opzione 'normalem, nel pre-preambolo.
 
 \end{comment}
-
+%
 \begin{comment}     NOTA IMPORTANTE SULLA GESTIONE DELLA BIBLIOGRAFIA
 
 ==============================================================================
