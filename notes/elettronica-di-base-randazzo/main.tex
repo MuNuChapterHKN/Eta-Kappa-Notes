@@ -116,12 +116,13 @@
 % HKNDocument. ATTENZIONE! NON VA BENE COSÌ: ogni volta che si chiama il frontmatter viene riavviata la numerazione
 % roamana delle pagine! VA DISATTIVATA LA CHIAMATA AL MAINMATTER NELLA CUSTOM CLASS, e quella di seguito.
 %
-%\frontmatter               % HO DISATTIVATO IL MAINMATTER NELLA CUSTOM CLASS: non richiamare per non riavviare la
-                            % numerazione romana!
+%\frontmatter                       % HO DISATTIVATO IL MAINMATTER NELLA CUSTOM CLASS: non richiamare per non riavviare
+                                    % la numerazione romana!
 %
-\listoffigures[lofintoc]   % Stampa l'elenco delle figure, con voce nell'indice (lofintoc)
-\listoftables[lotintoc]    % Stampa l'elenco delle tabelle, con voce nell'indice (lotintoc)
-\include{chapters/00_Introduzione}
+\listoffigures[lofintoc]            % Stampa l'elenco delle figure, con voce nell'indice (lofintoc)
+\listoftables[lotintoc]             % Stampa l'elenco delle tabelle, con voce nell'indice (lotintoc)
+\include{chapters/00_Prefazione}    % Prefazione: obiettivi e contesto del libro
+%
 % -------------------------------------------------- FRONTMATTER: END --------------------------------------------------
 % ------------------------------------------------- MAINMATTER: START --------------------------------------------------
 \mainmatter             % Riattivazione del main matter (numerazione capitoli, e numerazione araba pagine)
@@ -207,7 +208,7 @@ righe non sono commentate!
 % 14. Aggiungere indici analitici, con correzione contestuale delle loro
 %     testatine, come fatto ad esempio per \listoffigures e \listoftables
 
-% 15. Riformula termini copertina, per generare introduzione standardizzata
+% 15. Riformula termini copertina, per generare prefazione standardizzata
 %     eventuale!
 
 \begin{comment} CANDIDATE PULL REQUESTS (PR) PER TEMPLATE HKN
