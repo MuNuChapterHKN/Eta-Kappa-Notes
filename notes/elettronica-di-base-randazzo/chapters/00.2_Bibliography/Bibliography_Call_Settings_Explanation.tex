@@ -77,9 +77,12 @@
 %                                         % Se si volesse cambiarne il nome, si può usare l'opzione:
 %                                         % title={Nome Personalizzato}
 %
-\defbibheading{HKNbibheadingstyle}[\bibname]{%  % Stile custom: Bibliografia generata come cap. non numerato indicizzato
-    \uchapter{#1}%
-    }
+\defbibheading{HKNbibheadingstyle}[\bibname]{%      % Stile custom per modificare la stampa della Bibliografia
+    \cleardoublepage%                               % Forza l'inizio della bibliografia su una pagina dispari (opzione
+    %                                               % tipica dei libri!). NOTA: se c'è openright non serve.
+    \uchapter{#1}%                                  % Bibliografia generata come cap. non numerato indicizzato
+    \label{chap:bibliography}%                      % Per citare liberamente la bibliografia
+}
 %
 \printbibliography[heading=HKNbibheadingstyle]  % Stampa la bibliografia, con lo stile per l'heading specificato
                                                 % In questo caso è generata come capitolo non numerato indicizzato.
