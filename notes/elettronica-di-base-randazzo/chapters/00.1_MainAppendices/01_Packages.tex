@@ -5,13 +5,14 @@
 
 % Funzionalità aggiuntive o modifiche del comportamento standard di LaTeX
 
-% --- PACCHETTI relativi a FUNZIONI BASE ---
+% ----------------------------------------- PACCHETTI relativi a FUNZIONI BASE -----------------------------------------
+
 \usepackage{comment}                % [EXSTENTION] consente la creazione di commenti multilinea sfruttando l'enviroment
                                     % "comment" con il comando \begin. Nota che il contenuto all'internod di questi
                                     % blocchi di testo, non iniziando con "%", non è ignorato dal Parser di LTeX+, che
                                     % quindi effettuerà la correzione grammaticale e ortografica anche su questi blocchi
 
-% --- PACCHETTI DI TIPOGRAGIA BASE: CARATTERI (ENCODING, SUPPORTO LEGATURE, STAMPA ...), SILLABAZIONE---
+% ----------- PACCHETTI DI TIPOGRAGIA BASE: CARATTERI (ENCODING, SUPPORTO LEGATURE, STAMPA ...), SILLABAZIONE ----------
 
 % Pacchetti relativi all'infrastruttura tipografica dei progetti TeX, suddivisibile nelle seguente 4 FASI:
 % 1. INPUT: Tastiera -> Codice Sorgente
@@ -148,7 +149,8 @@
 % [CON BABEL]: Applica l'algoritmo di sillabazione italiano e traduce strutturalmente l'intero documento in RAM.
 
 
-% --- PACCHETTI PER PROGRAMMAZIONE E SCRITTURA DI MACRO AVANZATE ---
+% ----------------------------- PACCHETTI PER PROGRAMMAZIONE E SCRITTURA DI MACRO AVANZATE -----------------------------
+
 \usepackage{xparse}                 % [EXTENSION] Pacchetto che fornisce comandi avanzati per la definizione di macro,
                                     % come \NewDocumentCommand, grazie alla possibilità di definire argomenti delle
                                     % macro tramite "signature" flessibili.
@@ -170,7 +172,9 @@
                                     % intelligenti. Fornisce comandi come \ifstrequal, \ifbool... che permettono di
                                     % eseguire controlli logici complessi all'interno delle macro.
 
-% --- PACCHETTI PER BIBLIOGRAFIA E PER GESTIONE SMART DEGLI APICI ---
+
+% ----------------------------- PACCHETTI PER BIBLIOGRAFIA E PER GESTIONE SMART DEGLI APICI ----------------------------
+
 \usepackage[backend=biber, autolang=other, style=ieee]{biblatex}
 \begin{comment} BibLaTeX - PACCHETTO DI GESTIONE AVANZATA DELLA BIBLIOGRAFIA
 
@@ -240,20 +244,37 @@
 % Espansore di macro: quindi il codice è come se fosse scritto nel main.tex, e per questo motivo è importante che i
 % percorsi siano riferti alla posizione del main.tex.
 
+% ---------------------------------------------- PACCHETTI PER CITAZIONI -----------------------------------------------
+\usepackage[italian]{cleveref}      % [EXTENSION] [OVERRIDE] [PLUG & PLAY] Evoluzione di hyperref, lo stato dell'arte
+                                    % per i riferimenti incrociati intelligenti: in precisione aggiunge logica semantica
+                                    % e grammaticale (scrive da solo figura, tabella, ecc), riprogramma \label, e carica
+                                    % dizionari già pronti per le funzioni intelligenti (qui italian).
+                                    % ATTENZIONE ALL'ORDINE: deve essere caricato rigorosamente DOPO hyperref.
+                                    % Introduce i comandi \cref (minuscolo) e \Cref (maiuscolo per inizio frase), che
+                                    % deducono in automatico il nome dell'oggetto puntato (es. "figura"). Aggiunge
+                                    % \cpageref per citare dinamicamente pagine multiple. Gestisce da solo le citazioni
+                                    % multiple, il plurale e le sequenze (es. \cref{a,b,c} diventa "figure 1, 2 e 5" o
+                                    % "da 1 a 3" se consecutive).
 
-% --- PACCHETTI PER FISICA ---
+% ------------------------------------------------ PACCHETTI PER FISICA ------------------------------------------------
+
 \usepackage{siunitx}                % [EXTENSION] Per le unità di misura (es. \si{\ohm})
 
-% --- PACCHETTI PER GRAFICA ---
+% ----------------------------------------------- PACCHETTI PER GRAFICA ------------------------------------------------
+
 % \usepackage{circuitikz}             % [EXTENSION] Per disegnare i circuiti elettrici
 % \usepackage{pgfplots}               % [EXTENSION] Per i grafici matematici e di Bode
 
+
+% ----------------------------------------------------------------------------------------------------------------------
+
+
 \begin{comment}     % --- RIEPILOGO PACCHETTI INCLUSI NELLA CLASSE "HKNdocument" ---
 
-________________________________________________________________________________
+________________________________________________________________________________________________________________________
 
-                   PER CLASS VERSIONE: MERGE DEL 2026-04-16
-________________________________________________________________________________
+                                        PER CLASS VERSIONE: MERGE DEL 2026-04-16
+________________________________________________________________________________________________________________________
 
     RIEPILOGO COMPLETO: PACCHETTI CARICATI DALLA CLASSE HKNdocument E _preamble.tex
     NON inserirli di nuovo in main.tex con \usepackage per evitare conflitti!
