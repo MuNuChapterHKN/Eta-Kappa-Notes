@@ -505,7 +505,7 @@
     }%
 }
 
-\begin{comment} IDEA: INTERFACCIA PGFkeys - POI DA AGGIUNGERE ALLA CUSTOM CLASS
+\begin{comment} IDEA - DEFINITIVA: INTERFACCIA PGFkeys - POI DA AGGIUNGERE ALLA CUSTOM CLASS
 La mia nuova idea, per centralizzare la gestione colori è la seguente.
 Creo una versione Custom di hypersetup, chiamata HKNhypersetup, usando pgfkeys.
 Accetta all'ingresso una lista di chiavi: tutte quelle originali di hypersetup, più le custom.
@@ -525,17 +525,32 @@ xpatch, perché hanno svariati problemi di compatibilità con macro complesse.
 Si potrebbero tuttavia usare sui comandi \@starttoc{}, usato sia da ToC, che da LoF e LoT, ma non avrebbero effetto del
 tutto generale (link in altre parti delle pagine, come i titoli dei capitoli (falso problema) sarebbero colorati).
 
+------------------
 L'unica cosa che devo ancora chiarire è: voglio mandare i colori per i link una volta sola. Ci sarà la key linkcolor
 per impostare il colore dei link in hyperref, ma poi quel colore va salvato anche per ripristinarlo dopo.
 Ci sarà poi una chiave custom che sceglie il colore da sovrascrivere per i link in ToC, LoF, e LoT.
 Ci sono modi di analizzare le stringhe, o di separarle (il sistema pgf offre il pacchetto pgffor ad esempio per cicli
 for con cui analizzare le stringhe che costituiscono le keys in modo comodo).
+------------------
+AGGIORNAMENTO: ho chiarito, in realtà era facile, e non servono pacchetti esterni. Basta dichiarare una chiave che ha lo
+stesso nome di quella originale "linkcolor", ma riconosciuta da pgfkeys. Allora semplicemente il codice di quella chiave
+definirà il colore da riutilizzare, e inoltre lo passerà a hypersetup. In tutto ciò l'utente penserà di star parlando
+semplicemente con hypersetup, ma in realtà la versione custom HKNhypersetup introduce un hook!.
+
+ATTENZIONE: c'è un problema di priorità e ordine di esecuzione del codice! Ho ridefinito le macro per stampare LoF e LoT
+con una sovrascrittura totale, senza wrapper! Se si lancia la sovrascrittura totale dopo le modifiche per i colori,
+queste andranno perse! E visto che le ridefinizioni di LoF e LoT usano le altre definizioni di uchapter eccetera,
+in sostanza TUTTE LE DEFINIZIONI DELLE MIE MACRO CUSTOM VANNO RIPORTATE NELLA CLASS!
+Come nelle classi professionali pubblicati su CTAN, allora METTILE TUTTE IN UN FILE HKNdocument.def, che la classe
+importerà con il comando \input.
 
 Sistemerò questa parte di codice quando metterò mano alla custom class per modifiche ufficiali.
 Per ora la soluzione usata, dove si cambiano i colori a mano, è troppo più comoda.
 Il punto è che per fare questa interfaccia, va inserito tutto nella custom class, incluse le macro ausiliarie eccetera,
-quindi voglio aspettare di avere tutto chiaro. NOTA: in realtà è già tutto chiarito. Aggiungi key per stampa di LoF
-e LoT, riporta il codice del frontmatter iniziale dentro la custom class, e sarà tutto risolto!
+quindi voglio aspettare di avere tutto chiaro.
+
+NOTA: in realtà è già tutto chiarito. Aggiungi key per stampa di LoF e LoT, riporta il codice del frontmatter iniziale
+dentro la custom class, e sarà tutto risolto! Questo va bene anche per la guida LaTeX.
 
 
 Qui sotto avevo iniziato a scriverla, ma non avevo ancora focalizzato l'obiettivo, codice da rivedere.
