@@ -685,10 +685,12 @@ LE VARIE POSSIBILITÀ ANALIZZATE SONO STATE LE SEGUENTI
                                                 % di codice chiuso di per sé.
 
    PROBLEMA: questo sistema nativo di hook, non funziona con tutti i comandi, in particolare non funziona con macro
-   complesse, che hanno particolarità interne di precedenza e attese per chiamate o letture. Uno di questi casi è
-   proprio il comando \tableofcontents, che è un wrapper complesso che chiama internamente altri comandi e file.
-   NOTA: in generale funzionano molto bene con macro semplici, e la cosa utile è che non modifica o sovrascrive le macro
-   originali. Il sistema di hook è proprio interno e funzionante su binari a parte.
+   complesse, che hanno particolarità interne di precedenza e attese per chiamate o letture. Il problema in questione è
+   L'ASINCRONIA DELL'IMPAGINAZIONE: i comandi vengono eseguiti, ma l'effetto e l'impaginazione può avvenire con un certo
+   ritardo: se così accade, l'hook riscatta prima dell'impaginazione, annullando quindi l'effetto di modifica locale
+   desiderato. Uno di questi casi è proprio il comando \tableofcontents, che è un wrapper complesso che chiama
+   internamente altri comandi e file. NOTA: in generale funzionano molto bene con macro semplici, e la cosa utile è che
+   non modifica o sovrascrive le macro originali. Il sistema di hook è proprio interno e funzionante su binari a parte.
 
 2. PATCHING CON PACKAGE ETOOOLBOX - UTILIZZANDO I COMANDI \pretocmd e \apptocmd
 
