@@ -525,7 +525,20 @@ xpatch, perché hanno svariati problemi di compatibilità con macro complesse.
 Si potrebbero tuttavia usare sui comandi \@starttoc{}, usato sia da ToC, che da LoF e LoT, ma non avrebbero effetto del
 tutto generale (link in altre parti delle pagine, come i titoli dei capitoli (falso problema) sarebbero colorati).
 
+L'unica cosa che devo ancora chiarire è: voglio mandare i colori per i link una volta sola. Ci sarà la key linkcolor
+per impostare il colore dei link in hyperref, ma poi quel colore va salvato anche per ripristinarlo dopo.
+Ci sarà poi una chiave custom che sceglie il colore da sovrascrivere per i link in ToC, LoF, e LoT.
+Ci sono modi di analizzare le stringhe, o di separarle (il sistema pgf offre il pacchetto pgffor ad esempio per cicli
+for con cui analizzare le stringhe che costituiscono le keys in modo comodo).
 
+Sistemerò questa parte di codice quando metterò mano alla custom class per modifiche ufficiali.
+Per ora la soluzione usata, dove si cambiano i colori a mano, è troppo più comoda.
+Il punto è che per fare questa interfaccia, va inserito tutto nella custom class, incluse le macro ausiliarie eccetera,
+quindi voglio aspettare di avere tutto chiaro. NOTA: in realtà è già tutto chiarito. Aggiungi key per stampa di LoF
+e LoT, riporta il codice del frontmatter iniziale dentro la custom class, e sarà tutto risolto!
+
+
+Qui sotto avevo iniziato a scriverla, ma non avevo ancora focalizzato l'obiettivo, codice da rivedere.
 % ______________________________________________________________________________ INIZIO MODIFICA TIZIANO - hyperref
 % ORIGINARIAMENTE IN _preamble.tex
 % SPOSTATO SU CUSTOM CLASS PER CENTRALIZZARE GESTIONE HYPERREF E COLORI
@@ -641,8 +654,9 @@ tutto generale (link in altre parti delle pagine, come i titoli dei capitoli (fa
 % ______________________________________________________________________________ FINE MODIFICA TIZIANO - hyperref
 \end{comment}
 
-\begin{comment} SOLUZIONE ALTERNATIVA DISMESSA - APPLICAZIONE COMANDI CON PATCHING CMD - LE VARIE POSSIBILITÀ ANALIZZATE
-% PATCH: SPEGNIMENTO COLORI LINK NEGLI INDICI:
+\begin{comment} SOLUZIONE ALTERNATIVA DISMESSA - PATCHING DEI COMANDI CON HOOK O ETOOLBOX O XPATCH
+PATCH: SPEGNIMENTO COLORI LINK NEGLI INDICI
+LE VARIE POSSIBILITÀ ANALIZZATE SONO STATE LE SEGUENTI
 
 1. SISTEMA DI HOOK NATIVO DI LaTeX3: utilizzando i comandi \AddToHook.
    ESEMPIO PER HOOK COMANDI:
@@ -650,6 +664,8 @@ tutto generale (link in altre parti delle pagine, come i titoli dei capitoli (fa
    \AddToHook{cmd/tableofcontents/after}{\bluelinks}
 
    ESEMPIO PER HOOK AMBIENTI (EVNIROMENTS):
+   NOTA: per indice analitico non usare theindex, essendo obsoleto, ma \printindex di imakeidx, che è più moderno. Qui
+   si tratta solo di un esempio.
    \AddToHook{env/theindex/begin}{\blacklinks}  % NON servono before e after per ambienti, perchè costituiscono gruppi
                                                 % di codice chiuso di per sé.
 
@@ -661,7 +677,38 @@ tutto generale (link in altre parti delle pagine, come i titoli dei capitoli (fa
 
 2. PATCHING CON PACKAGE ETOOOLBOX - UTILIZZANDO I COMANDI \pretocmd e \apptocmd
 
-   Questi comandi sono molto più robusti dei precedenti, perché funzionano
+   Questi comandi sono molto più robusti dei precedenti, perché funzionano aggiungendo codice prima e dopo la macro
+   originale, come una sorta  di wrapper o decorator, ma a basso livello (tra token dei comandi, non equivalente a un
+   wrapper classico scritto a mano).
+   Hanno un problema però: non funzionano bene con le macro complesse definite con \NewDocumentCommand (ossia xparse),
+   in quanto intercettando il parsing, e il risultato è che tagliano fuori le gli argomenti opzionali, che non vengono
+   più riconosciuti.
+   Allora è stato sviluppato il pacchetto xpatch per sopperire a questo problema, che ne offre versioni patchate,
+   che dovrebbero risovlere questo problema.
+
+3. PATCHING CON PACKAGE XPATCH - UTILIZZANDO I COMANDI \xpretocmd e \xapptocmd
+   Come sopra, avrebbero dovuto risolvere il problema citato del taglio degli argomenti opzionali.
+   Il problema è che hanno funzionato bene fino al 2020, ossia fino a quando xparse è stato introdotto nel kernel
+   ufficiale di LaTeX, diventando parte integrante di esso. Da allora hanno smesso di funzionare bene, e soffrono
+   esattamente dello stesso problema citato sopra, per gli argomenti opzionali dei comandi definiti con
+   \NewDocumentCommand.
+
+Ho provato tutte e tre le soluzioni, e anche soluzioni miste, come l'ultima versione a seguire, ma c'era sempre qualcosa
+che non funzionava correttamente. In particolare: AddToHook, in particolare il before, ha dimostrato di non funzionare
+bene. Invece \xpretocmd e \xapptocmd alterano il parser in modo definitivo: anche se si usa solo pre, avviene il taglio
+delle opzioni. Questo ad esempio impedisce alla bibliografia di caricare lo stile personalizzato (in realtà non mi
+interessava applicare questo cambio colore alla bibliografia).
+
+Comunque alla fine ho optato per una soluzione molto più facile: ho semplicemente scritto a mano i comandi per
+modificare i colori prima e dopo di ToC, LoF, e LoT. Tuttavia ho dovuto di nuovo mettere mano alla custom class.
+
+A dire la verità ci sarebbe stata una soluzione funzionante:
+Si sarebbero potuti usare i patcher sui comandi \@starttoc, che è il motore tipografico usato sia da ToC, che da LoF e
+LoT, ma non avrebbero effetto del tutto generale (link in altre parti delle pagine, come i titoli dei capitoli (falso
+problema) sarebbero colorati). Ma non mi piaceva più di tanto. Alla fine la soluzione sopra era troppo più semplice.
+
+---------------------------------
+TENTATIVO DI SOLUZIONE CON PATCHING - DISMESSO
 
 \newcommand{\ColorPatchError}[2]{%                              % Comando per stampare messaggio di errore utile.
     \ClassError{HKNdocument}{%

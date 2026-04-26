@@ -172,10 +172,38 @@
                                     % intelligenti. Fornisce comandi come \ifstrequal, \ifbool... che permettono di
                                     % eseguire controlli logici complessi all'interno delle macro.
 
-\usepackage{xpatch}                 % [EXTENSION] Pacchetto che fornisce comandi avanzati per patchare macro
-                                    % preesistenti. Nasce in precisione come fix per i bug degli stessi comandi che
-                                    % offre etoolbox.
+\usepackage{xpatch}                 % [EXTENSION] [FIX] Pacchetto che fornisce comandi avanzati per patchare macro
+                                    % preesistenti, come \xpatchcmd, \xapptocmd, \xpretocmd, che supportano in modo
+                                    % più robusto le macro complesse.
+                                    % NOTA: questo pacchetto è nato principalmente come fix per i comandi rispettivi
+                                    % provvisti da etoolbox, ossia \patchcmd, \apptocmd, \pretocmd:  che non funzionano
+                                    % per le macro definite con xparse, cioè usando \NewDocumentCommand. Il problema
+                                    % è che questi comandi alterano troppo il parsing, e fanno si che le opzioni passate
+                                    % ai comandi (gli argomenti opzionali in particolare) vegano completamente tagliate
+                                    % (sono riportati nel documento come testo). xpatch ha funzionato bene fino al 2020,
+                                    % quando xparse è divenuto parte ufficiale del kernel di LaTeX3, e da allora ha
+                                    % smesso di funzionare bene, e soffre esattamente dellos stesso problema!
+                                    % Le atlernative migliori sono:
+                                    % - scrivere wrapper o decorator a mano (alla fine, le istruzioni in questione fanno
+                                    %   una cosa molto simile, ma a livello più basso, tra i token dei comandi, quindi
+                                    %   più efficiente)
+                                    % - usare il sistema di hook nativo di LaTeX3:
+                                    %   es \AddToHook{cmd/<nome comando>/before}
+                                    %   Il problema è che anche questi hook non sono perfetti, non funzinonano con macro
+                                    %   complesse (es \tableofcontents). Sfruttano un sistema interno di hook
+                                    %   precostruito, non supportato da tutte le macro.
+                                    % Alla fine per ora (2026-04-26) ho abbandonato tutti i tentativi di patching con
+                                    % xpatch, ma alla fine per macro semplici è ottimo.
+                                    % NOTA: quando si patchano macro, avviene una sovrascrittura globale, a meno che non
+                                    % si usino all'interno di \begingroup e \endgroup, che limitano la portata di
+                                    % tutto il codice al loro interno.
 
+% GIÀ IMPORTATO DA CUSTOM CLASS
+% \usepackage{pgfkeys}              % [EXTENSION] Pacchetto che fornisce un sistema avanzato per costruire interfacce
+                                    % di tipo CHIAVE-VALORE, utilissime ad esempio per variare il comportamento del
+                                    % codice per macro complese. Fornisce anche gestione eccezioni o errori.
+                                    % Utilizzato nella custom class per la gestione condizionale dei contenuti fissi,
+                                    % delle impostazioni di layout personalizzabili.
 
 % ----------------------------- PACCHETTI PER BIBLIOGRAFIA E PER GESTIONE SMART DEGLI APICI ----------------------------
 
