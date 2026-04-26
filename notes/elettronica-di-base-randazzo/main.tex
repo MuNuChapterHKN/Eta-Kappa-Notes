@@ -67,40 +67,7 @@
 \input{chapters/00.1_MainAppendices/04_GlobalSettings.tex}
 % GLOBAL SETTINGS, ovvero impostazioni globali che agiscono su tutto il documento.
 
-
-
-
-% _______________________________________________ METADATI DEL DOCUMENTO _______________________________________________
-
-% COMANDI USATI CON LA CUSTOM CLASS HKNdocument, Versione: ?, originale, risalente al momento della creazione del branch
-% \title{Elettronica di Base}
-% \shorttitle{Elettronica}
-% \author{Tiziano Mattei}
-% \docdate{Primo semestre 2025/2026}
-% \docversion{0.2}
-
-% COMANDI ATTUALI PER CUSTOM CLASS HKNdocument, Versione: Merge del 2026-04-16
-\courseinfo{
-    code = 03RTSLX,
-    name = {Elettronica di Base},
-    teacher = {Prof.\ Vincenzo Randazzo},
-    program_level = bachelor,
-    program = {Ingegneria Elettrica},
-    program_en = {Electrical Engineering},
-    start_academic_year = 2025,
-    semester = 1,
-    completed = false
-}
-
-\author{Tiziano Mattei}     % Nomi di chi scrive gli appunti.
-%\editor{}                  % Nomi di chi revisiona gli appunti.
-
-% COMANDI PER LAYOUT TESTATINE: Vedi Custom Class per documentazione.
-\setupHeaders{
-    HeaderCase = normal,
-    ChapterLabel = brief,
-    NumberLabel = normal,
-}
+% NOTA: COMANDI METADATI SPOSTATI IN GLOBAL SETTINGS, PER CENTRALIZZARE GESTIONE DATI E IMPOSTAZIONI GLOBALI.
 
 % --------------------------------------------------- PREAMBLE: END ----------------------------------------------------
 % ------------------------------------------------ DOCUMENT BODY: START ------------------------------------------------
@@ -216,7 +183,12 @@ righe non sono commentate!
 % 15. Riformula termini copertina, per generare prefazione standardizzata
 %     eventuale!
 
-% 16. Aggiornare hypersetup per colori link. Vedi GlobalSettings
+% 16. Aggiornare hypersetup per colori link. Vedi GlobalSettings.
+%     Creazione interfaccia per colori link.
+
+% 17. ATTENZIONE: andrebbe corretta anche la GUIDA, le modifiche sulla custom
+%     class hanno effetto anche su di essa! Quando si centralizzeranno tutte le
+%     modifiche alla custom class, sarà tutto più facile.
 
 \begin{comment} CANDIDATE PULL REQUESTS (PR) PER TEMPLATE HKN
 ================================================================================

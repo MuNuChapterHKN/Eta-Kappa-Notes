@@ -1,7 +1,56 @@
 % --- MAGIC COMMENTS: CONFIGURAZIONE EDITOR --- (vedi main.tex per riferimenti e spiegazioni) ---
 % !TEX root = ../../main.tex
 
-% ________________________________________ IMPOSTAZIONI GLOBALI SPECIALI (FIXES) _______________________________________
+% _______________________________________________ METADATI DEL DOCUMENTO _______________________________________________
+
+% COMANDI USATI CON LA CUSTOM CLASS HKNdocument, Versione: ?, originale, risalente al momento della creazione del branch
+% \title{Elettronica di Base}
+% \shorttitle{Elettronica}
+% \author{Tiziano Mattei}
+% \docdate{Primo semestre 2025/2026}
+% \docversion{0.2}
+
+% COMANDI ATTUALI PER CUSTOM CLASS HKNdocument, Versione: Merge del 2026-04-16
+\courseinfo{
+    code = 03RTSLX,
+    name = {Elettronica di Base},
+    teacher = {Prof.\ Vincenzo Randazzo},
+    program_level = bachelor,
+    program = {Ingegneria Elettrica},
+    program_en = {Electrical Engineering},
+    start_academic_year = 2025,
+    semester = 1,
+    completed = false
+}
+
+\author{Tiziano Mattei}     % Nomi di chi scrive gli appunti.
+%\editor{}                  % Nomi di chi revisiona gli appunti.
+
+% ________________________________________________ IMPOSTAZIONI GLOBALI ________________________________________________
+
+% -------------------------------------------------- LAYOUT TESTATINE --------------------------------------------------
+% Vedi Custom Class per documentazione.
+\setupHeaders{
+    HeaderCase = normal,
+    ChapterLabel = brief,
+    NumberLabel = normal,
+}
+
+% ---------------------------------------- COLORI LINK SETUP PACCHETTO hyperref ----------------------------------------
+% NOTA: setup già definito in _preamble.tex. Qui lo SOVRASCRIVO per personalizzarlo.
+% NOTA: ricorda che i colori originali di LaTeX, come "blue" sono "molto sparati". Quelli importati con xcolor,
+% che iniziano con la maiuscola, sono invece più tenui e adatti alla lettura.
+
+% SOVRASCRITTURA IMPOSTAZIONI GLOBALI
+\RefMattDefaultLinksColor   % NOTA: ho usato questo approccio per scrivere i colori che cambiano una volta sola.
+                            % Vedi 02_CustomMacros.tex per la documentazione a riguardo.
+\hypersetup{%
+    colorlinks=true,        % Attiva il colore del testo per i link; rimuove i riquadri colorati (antiestetici nel PDF).
+    urlcolor=blue,          % Colore per i link web esterni.
+    %                       % NOTA: usare lo stesso blu dei link interni riduce il feedback visivo.
+    linktoc=all             % Rende cliccabili sia il titolo che la pagina negli indici.
+    %                       % ATTENZIONE:Colora tutta la riga se linkcolor è attivo.
+}%
 
 % --------------------------------------- LISTATI CODICE (Pacchetto "listings") ----------------------------------------
 \lstset{style=hkn-numbered}     % Imposta di default lo stile grafico per i listati di codice, sfruttando il custom
@@ -27,219 +76,6 @@
 % Sarebbero dovuto essere attive in questa posizione, ma sono li per questioni didattiche sul codice.
 % \input{glyphtounicode.tex}          % [EXTENSION] Carica il dizionario Unicode standard ufficiale.
 % \pdfgentounicode=1                  % [OVERRIDE] Interruttore che attiva la CMAP NATIVA nel PDF.
-
-% ---------------------------------------- COLORI LINK SETUP PACCHETTO hyperref ----------------------------------------
-% NOTA: setup già definito in _preamble.tex. Qui lo SOVRASCRIVO per personalizzarlo.
-
-% IMPOSTAZIONI GLOBALI E MACRO AUSILIARIE
-% NOTA: ricorda che i colori originali di LaTeX, come "blue" sono "molto sparati". Quelli importati con xcolor,
-% che iniziano con la maiuscola, sono invece più tenui e adatti alla lettura.
-% NOTA: RefMatt sta per Reference Matter: ossia i capitoli di reference tecnica: ToC, LoT, LoF, Index, Bib...
-% Tuttavia non necessariamente a tutti questi applichiamo la correzione colori. Sono di interesse principiale ToC, LoF,
-% LoT. Per ora Index non è stato inserito. Mentre in Bib ci sono solo i backref links, che è giusto siano colorati.
-
-\newcommand{\RefMattDefaultLinksColor}{%
-    \hypersetup{%
-        linkcolor=blue,     % Colore per riferimenti interni (es: capitoli, figure, tabelle, ecc.).
-        %                   % ATTENZIONE: colora anche l'intero TOC/LOF, essendo le righe di questi dei link.
-        citecolor=blue,     % Colore per le citazioni bibliografiche.
-    }%
-}
-
-\newcommand{\RefMattBlackLinksColor}{%
-    \hypersetup{%
-        linkcolor=black,    % Colore per riferimenti interni (es: capitoli, figure, tabelle, ecc.).
-        %                   % ATTENZIONE: colora anche l'intero TOC/LOF, essendo le righe di questi dei link.
-        citecolor=black,    % Colore per le citazioni bibliografiche.
-    }%
-}
-
-% AVVIO SOVRASCRITTURA IMPOSTAZIONI GLOBALI
-\RefMattDefaultLinksColor   % NOTA: ho usato questo approccio per scrivere i colori una volta sola. Avevo creato macro
-                            % ausiliarie solo con le opzioni di interesse, ma dovevo comunque riscrivere i colori più
-                            % volte.
-\hypersetup{%
-    colorlinks=true,        % Attiva il colore del testo per i link; rimuove i riquadri colorati (antiestetici nel PDF).
-    urlcolor=blue,          % Colore per i link web esterni.
-    %                       % NOTA: usare lo stesso blu dei link interni riduce il feedback visivo.
-    linktoc=all             % Rende cliccabili sia il titolo che la pagina negli indici.
-    %                       % ATTENZIONE:Colora tutta la riga se linkcolor è attivo.
-}%
-
-% PATCH: SPEGNIMENTO COLORI LINK NEGLI INDICI:
-
-\begin{comment} SOLUZIONE ALTERNATIVA DISMESSA - APPLICAZIONE COMANDI CON PATCHING CMD - LE VARIE POSSIBILITÀ ANALIZZATE
-
-1. SISTEMA DI HOOK NATIVO DI LaTeX3: utilizzando i comandi \AddToHook.
-   ESEMPIO PER HOOK COMANDI:
-   \AddToHook{cmd/tableofcontents/before}{\blacklinks}
-   \AddToHook{cmd/tableofcontents/after}{\bluelinks}
-
-   ESEMPIO PER HOOK AMBIENTI (EVNIROMENTS):
-   \AddToHook{env/theindex/begin}{\blacklinks}  % NON servono before e after per ambienti, perchè costituiscono gruppi
-                                                % di codice chiuso di per sé.
-
-   PROBLEMA: questo sistema nativo di hook, non funziona con tutti i comandi, in particolare non funziona con macro
-   complesse, che hanno particolarità interne di precedenza e attese per chiamate o letture. Uno di questi casi è
-   proprio il comando \tableofcontents, che è un wrapper complesso che chiama internamente altri comandi e file.
-   NOTA: in generale funzionano molto bene con macro semplici, e la cosa utile è che non modifica o sovrascrive le macro
-   originali. Il sistema di hook è proprio interno e funzionante su binari a parte.
-
-2. PATCHING CON PACKAGE ETOOOLBOX - UTILIZZANDO I COMANDI \pretocmd e \apptocmd
-
-   Questi comandi sono molto più robusti dei precedenti, perché funzionano
-
-\newcommand{\ColorPatchError}[2]{%                              % Comando per stampare messaggio di errore utile.
-    \ClassError{HKNdocument}{%
-        Color patching #2 #1 did not work.\MessageBreak
-        Check the code to understand!
-    }{%
-        See the GlobalSettings file, "hyperref setup" section.
-    }%
-}
-
-
-% % 1. Indice Generale (TOC)
-% \xpretocmd{\tableofcontents}{\RefsBlackLinks}{}{\ColorPatchError{ToC}{before}}
-% \AddToHook{cmd/tableofcontents/after}{\RefsDefaultLinks}
-
-% % 2. Elenco delle Figure (LOF)
-% \xpretocmd{\listoffigures}{\RefsBlackLinks}{}{\ColorPatchError{LoF}{before}}
-% \AddToHook{cmd/listoffigures/after}{\RefsDefaultLinks}
-
-% % 3. Elenco delle Tabelle (LOT)
-% \xpretocmd{\listoftables}{\RefsBlackLinks}{}{\ColorPatchError{LoT}{before}}
-% \AddToHook{cmd/listoftables/after}{\RefsDefaultLinks}
-
-% % 4. Indice Analitico (Index)
-% % Se usi imakeidx, il comando standard è \printindex.
-% % Come alternativa c'è l'ambiente theindex, che è quello nativo di LaTeX.
-% % \xpretocmd{\printindex}{\RefsBlackLinks}{}{\ColorPatchError{Index}{before}}
-% % \xapptocmd{\printindex}{\RefsDefaultLinks}{}{\ColorPatchError{Index}{after}}
-% % \AtBeginEnvironment{theindex}{\RefsBlackLinks}     % NON servono before e after per ambienti, perchè costituiscono gruppi
-% %                                                 % di codice chiuso di per sé.
-
-% % 5. Bibliografia
-% \xpretocmd{\printbibliography}{\RefsBlackLinks}{}{\ColorPatchError{Bib}{before}}
-% \AddToHook{cmd/printbibliography/after}{\RefsDefaultLinks}
-
-\end{comment}
-
-\begin{comment} INTERFACCIA DA AGGIUNGERE ALLA CUSTOM CLASS
-% ______________________________________________________________________________ INIZIO MODIFICA TIZIANO - hyperref
-% ORIGINARIAMENTE IN _preamble.tex
-% SPOSTATO SU CUSTOM CLASS PER CENTRALIZZARE GESTIONE HYPERREF E COLORI
-% --------------------------
-% HYPERREF FOR INTERNAL AND EXTERNAL LINKS
-% --------------------------
-% Create clickable links in PDF and set link colors
-% \hypersetup{
-%     colorlinks=true,
-%     linkcolor=black,
-%     citecolor=black,
-%     urlcolor=blue
-% }
-
-% MACRO AUSILIARIE
-% NOTA: ricorda che i colori originali di LaTeX, come "blue" sono "molto sparati". Quelli importati con xcolor,
-% che iniziano con la maiuscola, sono invece più tenui e adatti alla lettura.
-
-% RefMatt sta per Reference Matter: ossia i capitoli di reference tecnica: ToC, LoT, LoF, Index, Bib...
-
-\newcommand{\RefMattDefaultLinksColor}{%
-    \hypersetup{%
-        linkcolor=blue,     % Colore per riferimenti interni (es: capitoli, figure, tabelle, ecc.).
-        %                   % ATTENZIONE: colora anche l'intero TOC/LOF, essendo le righe di questi dei link.
-    }%
-}
-
-\newcommand{\RefMattBlackLinksColor}{%
-    \hypersetup{%
-        linkcolor=black,    % Colore per riferimenti interni (es: capitoli, figure, tabelle, ecc.).
-        %                   % ATTENZIONE: colora anche l'intero TOC/LOF, essendo le righe di questi dei link.
-    }%
-}
-
-% IMPOSTAZIONI GLOBALI
-\RefMattDefaultLinksColor   % NOTA: ho usato questo approccio per scrivere i colori una volta sola. Avevo creato macro
-                            % ausiliarie solo con le opzioni di interesse, ma dovevo comunque riscrivere i colori più
-                            % volte.
-\hypersetup{%
-    colorlinks=true,        % Attiva il colore del testo per i link; rimuove i riquadri colorati (antiestetici nel PDF).
-    urlcolor=blue,          % Colore per i link web esterni.
-    %                       % NOTA: usare lo stesso blu dei link interni riduce il feedback visivo.
-    linktoc=all             % Rende cliccabili sia il titolo che la pagina negli indici.
-    %                       % ATTENZIONE:Colora tutta la riga se linkcolor è attivo.
-}%
-
-% INTERFACCIA DI PERSONALIZZAZIONE PER GLI UTENTI FINALI
-% --- 1. VARIABILI DI STATO (Boolean flags)
-% In accordo con le precedenti versioni della custom class, il ToC è sempre stampato.
-\newif\ifHKN@printLoF       % Flag: se true, stampa LoF
-\newif\ifHKN@printLoT       % Flag: se true, stampa LoT
-\newif\ifHKN@blackColors    % Flag: se true, usa colore nero per link in ToC, LoF, LoT.
-% --- 2. DICHIARAZIONE INTERFACCIA (pgfkeys) - CON GESTIONE ERRORI
-
-\pgfkeys{
-    /HKNrefs/.is family,             % Dichiara una nuova famiglia di chiavi, nella folder /HKNrefs (refs: sta per references)
-    /HKNrefs,                        % Attiva il percorso suddetto come default (solo per le prossime dichiarazioni)
-    %
-    % STAMPA LOF (.is choice crea un menu chiuso)
-    PrintLoF/.is choice,                                    % Dichiara la chiave PrintLoF come scelta multipla (choice)
-    PrintLoF/true/.code  = {\HKN@printLoFtrue},             % Se usata setta true il flag per stmapre LoF
-    PrintLoF/false/.code = {\HKN@printLoFfalse},            % Se usata setta false il flag per stmapre LoF
-    PrintLoF/.unknown/.code = {%                            % Gestione Eccezioni: avvisa l'utente se usa valori non ammessi
-        \ClassError{HKNdocument}{%                          % Tipo di errore: errore di classe, custom class HKNdocument
-            Invalid value for key PrintLoF.\MessageBreak    % Messaggio stampato nell'errore
-            Allowed values are: true, false%
-        }{%
-            Check your \string\setupRefs\space options for typos.%   % Messaggio di help (scrivi h nel terminale
-            %                                                        % dopo blocco compilazione per visualizzarlo)
-        }%
-    },
-    PrintLoF = true,                                        % Imposta il valore di default della key: se l'utente non specifica nulla, usa questo
-    % STAMPA LOT (.is choice crea un menu chiuso)
-    PrintLoT/.is choice,                                    % Dichiara la chiave PrintLoT come scelta multipla (choice)
-    PrintLoT/true/.code  = {\HKN@printLoTtrue},             % Se usata setta true il flag per stmapre LoT
-    PrintLoT/false/.code = {\HKN@printLoTfalse},            % Se usata setta false il flag per stmapre LoT
-    PrintLoT/.unknown/.code = {%                            % Gestione Eccezioni: avvisa l'utente se usa valori non ammessi
-        \ClassError{HKNdocument}{%                          % Tipo di errore: errore di classe, custom class HKNdocument
-            Invalid value for key PrintLoT.\MessageBreak    % Messaggio stampato nell'errore
-            Allowed values are: true, false%
-        }{%
-            Check your \string\setupRefs\space options for typos.%   % Messaggio di help (scrivi h nel terminale
-            %                                                        % dopo blocco compilazione per visualizzarlo)
-        }%
-    },
-    PrintLoT = true,                                        % Imposta il valore di default della key: se l'utente non specifica nulla, usa questo
-    % GESTIONE COLORI (.is choice crea un menu chiuso)
-    BlackRefsColors/.is choice,                             % Dichiara la chiave BlackRefsColors come scelta multipla (choice)
-    BlackRefsColors/true/.code  = {\HKN@blackColorstrue},   % Se usata setta true il flag per attivare il nero
-    BlackRefsColors/false/.code = {\HKN@blackColorsfalse},  % Se usata setta false il flag per disattivare il nero
-    BlackRefsColors/.unknown/.code = {%                     % Gestione Eccezioni: avvisa l'utente se usa valori non ammessi
-        \ClassError{HKNdocument}{%                          % Tipo di errore: errore di classe, custom class HKNdocument
-            Invalid value for key BlackRefsColors.\MessageBreak         % Messaggio stampato nell'errore
-            Allowed values are: true, false%
-        }{%
-            Check your \string\setupRefs\space options for typos.%      % Messaggio di help (scrivi h nel terminale
-            %                                                           % dopo blocco compilazione per visualizzarlo)
-        }%
-    },
-    BlackRefsColors = true,                                % Imposta il valore di default della key: se l'utente non specifica nulla, usa questo
-    % GESTIONE ERRORI PER CHIAVI INESISTENTI
-    % Se l'utente sbaglia a digitare il NOME della chiave,scatta l'unknown generale della famiglia.
-    % \pgfkeyscurrentname contiene il nome della chiave sbagliata.
-    .unknown/.code = {%                                                             % Gestione Eccezioni: avvisa l'utente se usa key non ammesse
-        \ClassError{HKNdocument}{%                                                  % Tipo di errore: errore di classe, custom class HKNdocument
-            Unknown key '\pgfkeyscurrentname' used in Refs setup.\MessageBreak      % Messaggio stampato dall'errore
-            Allowed keys are: HeaderCase, ChapterLabel, NumberLabel%
-        }{%
-            Please read the class documentation or check for typos.%                % Messaggio di help (scrivi h nel terminale dopo blocco compilazione per visualizzarlo)
-        }%
-    },
-}
-% ______________________________________________________________________________ FINE MODIFICA TIZIANO - hyperref
-\end{comment}
 
 % ----------------------------------------------------------------------------------------------------------------------
 
