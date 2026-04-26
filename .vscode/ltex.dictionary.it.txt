@@ -585,3 +585,4 @@ Blalock
 chap
 bibliography
 def
+Viète

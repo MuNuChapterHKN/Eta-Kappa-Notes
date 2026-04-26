@@ -62,12 +62,6 @@
                                         % correttamente in base alla lingua del documento (es. virgolette italiane « »).
 \end{comment}
 %
-% \backmatter inserito prima della chiamata di questo file. Inoltre vedi spiegazioni a riguardo nel commento che segue.
-%
-\nocite{*}              % Opzione di biblatex per far stampare in bibliografia tutte le fonti presenti nel database
-                        % bibliografico (file .bib). Secondo lo standard IEEE, non si dovrebbe usare, ed ogni fonte
-                        % dovrebbe essere citata almeno una volta nel testo.
-%
 %
 % PROBLEMA: lo stile classico stampa sempre in maiuscolo la testatina della bibliografia (si rivela solo se ci sono
 % (più paginde di bibliografia, altrimenti non si nota).
@@ -83,6 +77,14 @@
     \uchapter{#1}%                                  % Bibliografia generata come cap. non numerato indicizzato
     \label{chap:bibliography}%                      % Per citare liberamente la bibliografia
 }
+%
+% NOTA BENE:
+% \backmatter inserito prima della chiamata di questo file. Inoltre vedi spiegazioni a riguardo nel commento che segue.
+%
+\nocite{*}              % Opzione di biblatex per far stampare in bibliografia tutte le fonti presenti nel database
+                        % bibliografico (file .bib). Secondo lo standard IEEE, non si dovrebbe usare, ed ogni fonte
+                        % dovrebbe essere citata almeno una volta nel testo.
+%
 %
 \printbibliography[heading=HKNbibheadingstyle]  % Stampa la bibliografia, con lo stile per l'heading specificato
                                                 % In questo caso è generata come capitolo non numerato indicizzato.

@@ -284,12 +284,16 @@
                                     % - \enquote*{text} ignora il primo livello è usa sempre le virgolette doppie
                                     %   normali "".
 
-\addbibresource{chapters/00.2_Bibliography/HKN_ElnBiliography.bib}
-% File (Database bibliografico) contentnente tutte le fonti bibliografiche di interesse per il progetto.
+ \addbibresource{chapters/00.2_Bibliography/HKN_ElnBiliography.bib}
+% File (Database bibliografico) contentnente tutte le fonti bibliografiche di principale interesse per il progetto.
+% Sviluppato con Zotero, esportato in formato BibLaTeX.
 % ATTENZIONE: il file viene importato nel main.tex con il comando \input. Tieni a mente che TeX è un linguaggio
 % Espansore di macro: quindi il codice è come se fosse scritto nel main.tex, e per questo motivo è importante che i
 % percorsi siano riferti alla posizione del main.tex.
 
+\addbibresource{chapters/00.2_Bibliography/HKN_OtherSources.bib}
+% File (Database bibliografico) contentnente le fonti di interesse secondario. Cosruito a mano per ora.
+%
 % ---------------------------------------------- PACCHETTI PER CITAZIONI -----------------------------------------------
 \usepackage[italian]{cleveref}      % [EXTENSION] [OVERRIDE] [PLUG & PLAY] Evoluzione di hyperref, lo stato dell'arte
                                     % per i riferimenti incrociati intelligenti: in precisione aggiunge logica semantica
