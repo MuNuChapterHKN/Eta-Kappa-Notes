@@ -94,6 +94,11 @@
 \RefMattDefaultLinksColor           % Ripristina i link colorati (colore di default) per il resto del documento
 %                                   % NOTA: vedi global settings per note sui link e i loro colori.
 \include{chapters/00_Prefazione}    % Prefazione: obiettivi e contesto del libro
+\HKNblankpage                       % Pagina bianca, per separare la prefazione dal resto del testo.
+%                                   % NOTA: la uso perchè la prefazione termina su una pagina dispari, dunque
+%                                   % \frontmatter fa un \cleardoublepage, che lascia la pagina completamente bianca a
+%                                   % causa dell'uso del pacchetto emptypage (Che lo modifica: rimuove testatina e numero
+%                                   % di pagina)
 %
 % -------------------------------------------------- FRONTMATTER: END --------------------------------------------------
 % ------------------------------------------------- MAINMATTER: START --------------------------------------------------
@@ -207,6 +212,10 @@ righe non sono commentate!
 %     Aggiungere eventuale riferimento a fonti bibliografiche presenti in
 %     database.
 %     NOTA: la scritta "fonte" deve dipendere dalla lingua. "source" in inglese.
+
+% 21. Inserimento comando HKNblankpage, per inserimento volonatario di pagine
+%     bianche. Ad esempio per sostituire quelle completamente bianche, generate
+%     dai \cleardoublepage nascosti nel codice (es: inizio di frontmatter).
 
 
 \begin{comment} CANDIDATE PULL REQUESTS (PR) PER TEMPLATE HKN

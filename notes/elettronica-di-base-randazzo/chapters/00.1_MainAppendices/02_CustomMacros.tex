@@ -48,6 +48,62 @@
 \newcommand{\fr}[1]{\foreignlanguage{french}{#1}}      % Per termini in lingua francese, in modo che il motore
                                                         % tipografico gestisca correttamente la sillabazione.
 
+% --------------------------------------- MACRO STAMPA VOLONTARIA DI PAGINE VUOTE --------------------------------------
+% NOTA: non funzionano bene se è applicato twocoloumn credo.
+
+\newcommand{\HKNblankpage}{             % Macro per generare pagine intenzionalmente vuote
+    \clearpage                          % Chiude pagina precedente, e ne inzia una col corpo del testo vuoto, ma con
+    %                                   % testatina e numero di pagina. Solo se la pagina precedente ha il corpo del
+    %                                   % testo non vuoto, altrimenti non fa nulla.
+    %                                   % NOTA: non influenzato da pacchetto emptypage che modifica solo cleardoublepage
+    \thispagestyle{empty}               % Svuota Pagina, rimuovendo testatina e numero di pagina.
+    %                                   % NOTA: non influenzato da pacchetto emptypage che modifica solo cleardoublepage
+    \vspace*{\fill}                     % Spazio elastico superiore. L'asterisco lo forza (altrimenti come primo
+    %                                   % elemento sarebbe saltato).
+    %                                   % NOTA: due vfill hanno la stessa forza elastica -> il contenuto è centrato
+    %                                   % (vedi a seguire l'altro). Questo comando equivale a \vfill forzato.
+    \begin{center}                      % Centra il testo orizzontalmente
+        \footnotesize                   % Comando Dichiarativo (Interruttore): font size ridotta (footnotesize)
+        \itshape                        % Comando Dichiarativo (Interruttore): corsivo (italic)
+        \color{gray!60}                 % Comando Dichiarativo (Interruttore): colore grigio chiaro
+        %                               % (60% grigio, 40% bianco)
+        %                               % NOTA: non serve spegnere interruttori
+        Pagina lasciata intenzionalmente vuota
+    \end{center}
+    \vfill%                             % Spazio elastico inferiore. Equivale a \vspace{\fill}.
+    %                                   % NOTA: non serve l'asterisco per forzare, perchè ci sono elementi nella pagina.
+    %                                   % NOTA: due vfill hanno la stessa forza elastica -> il contenuto è centrato.
+    \clearpage%                         % Chiude la pagina, e ne inizia una nuova.
+}
+
+% NOTA: ALTRA VERSIONE EQUIVALENTE, PER ESERCIZIO:
+% \newcommand{\HKNblankpage}{             % Macro per generare pagine intenzionalmente vuote
+%     \clearpage                          % Chiude pagina precedente, e ne inzia una col corpo del testo vuoto, ma con
+%     %                                   % testatina e numero di pagina. Solo se la pagina precedente ha il corpo del
+%     %                                   % testo non vuoto, altrimenti non fa nulla.
+%     %                                   % NOTA: non influenzato da pacchetto emptypage che modifica solo cleardoublepage
+%     \thispagestyle{empty}               % Svuota Pagina, rimuovendo testatina e numero di pagina.
+%     %                                   % NOTA: non influenzato da pacchetto emptypage che modifica solo cleardoublepage
+%     \hbox{}                             % Crea una scatola orizzontale vuota, per evitare che la pagina non abbia
+%     %                                   % elementi, in modo da far funzionare vfill.
+%     \vfill                              % Spazio elastico superiore. L'asterisco lo forza (altrimenti come primo
+%     %                                   % elemento sarebbe saltato).
+%     %                                   % NOTA: due vfill hanno la stessa forza elastica -> il contenuto è centrato
+%     %                                   % (vedi a seguire l'altro).
+%     \begin{center}                      % Centra il testo orizzontalmente
+%         \footnotesize                   % Comando Dichiarativo (Interruttore): font size ridotta (footnotesize)
+%         \itshape                        % Comando Dichiarativo (Interruttore): corsivo (italic)
+%         \color{gray!60}                 % Comando Dichiarativo (Interruttore): colore grigio chiaro
+%         %                               % (60% grigio, 40% bianco)
+%         %                               % NOTA: non serve spegnere interruttori
+%         Pagina lasciata intenzionalmente vuota
+%     \end{center}
+%     \vfill%                             % Spazio elastico inferiore. Equivale a \vspace{\fill}.
+%     %                                   % NOTA: non serve l'asterisco per forzare, perchè ci sono elementi nella pagina.
+%     %                                   % NOTA: due vfill hanno la stessa forza elastica -> il contenuto è centrato.
+%     \clearpage%                         % Chiude la pagina, e ne inizia una nuova.
+% }
+
 % ---------------------------------------- CAPITOLI INDICIZZATI MA NON NUMERATI ----------------------------------------
 
 % COMANDO per creazione di CAPITOLI NON NUMERATI MA INDICIZZATI (APPAIONO NELL'INDICE), con corretto aggiornamento delle
