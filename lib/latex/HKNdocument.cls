@@ -804,6 +804,7 @@
 \RequirePackage{xcolor}  % custom colors
 \RequirePackage{tcolorbox}  % custom boxes
 
+% ______________________________________________________________________________ INIZIO MODIFICA TIZIANO - COMMENTI COLORI
 % HKN color palette
 \definecolor{hknLightBlue}{HTML}{00629B}    % #00629B                         % Caselle AGGIUNTE da Tiziano
 \definecolor{hknOrange}{HTML}{FEC526}       % #FEC526
@@ -824,6 +825,7 @@
 % Other colors
 \definecolor{darkerOrange}{HTML}{EAAC01}    % #EAAC01
 \definecolor{backgroundLight}{HTML}{F6F8FA} % #F6F8FA
+% ______________________________________________________________________________ FINE MODIFICA TIZIANO - COMMENTI COLORI
 
 % Listings style
 % See Section 4.3 'Options' of the Listings package documentation for more details

@@ -34,8 +34,11 @@
 % IMPOSTAZIONI GLOBALI E MACRO AUSILIARIE
 % NOTA: ricorda che i colori originali di LaTeX, come "blue" sono "molto sparati". Quelli importati con xcolor,
 % che iniziano con la maiuscola, sono invece più tenui e adatti alla lettura.
+% NOTA: RefMatt sta per Reference Matter: ossia i capitoli di reference tecnica: ToC, LoT, LoF, Index, Bib...
+% Tuttavia non necessariamente a tutti questi applichiamo la correzione colori. Sono di interesse principiale ToC, LoF,
+% LoT. Per ora Index non è stato inserito. Mentre in Bib ci sono solo i backref links, che è giusto siano colorati.
 
-\newcommand{\RefsDefaultLinks}{%
+\newcommand{\RefMattDefaultLinksColor}{%
     \hypersetup{%
         linkcolor=blue,     % Colore per riferimenti interni (es: capitoli, figure, tabelle, ecc.).
         %                   % ATTENZIONE: colora anche l'intero TOC/LOF, essendo le righe di questi dei link.
@@ -43,7 +46,7 @@
     }%
 }
 
-\newcommand{\RefsBlackLinks}{%
+\newcommand{\RefMattBlackLinksColor}{%
     \hypersetup{%
         linkcolor=black,    % Colore per riferimenti interni (es: capitoli, figure, tabelle, ecc.).
         %                   % ATTENZIONE: colora anche l'intero TOC/LOF, essendo le righe di questi dei link.
@@ -52,7 +55,7 @@
 }
 
 % AVVIO SOVRASCRITTURA IMPOSTAZIONI GLOBALI
-\RefsDefaultLinks           % NOTA: ho usato questo approccio per scrivere i colori una volta sola. Avevo creato macro
+\RefMattDefaultLinksColor   % NOTA: ho usato questo approccio per scrivere i colori una volta sola. Avevo creato macro
                             % ausiliarie solo con le opzioni di interesse, ma dovevo comunque riscrivere i colori più
                             % volte.
 \hypersetup{%
@@ -65,8 +68,7 @@
 
 % PATCH: SPEGNIMENTO COLORI LINK NEGLI INDICI:
 
-\begin{comment}
-COME PATCHARE NEL MODO GIUSTO? LE VARIE POSSIBILITÀ ANALIZZATE.
+\begin{comment} COME PATCHARE NEL MODO GIUSTO? LE VARIE POSSIBILITÀ ANALIZZATE.
 
 1. SISTEMA DI HOOK NATIVO DI LaTeX3: utilizzando i comandi \AddToHook.
    ESEMPIO PER HOOK COMANDI:
@@ -86,9 +88,6 @@ COME PATCHARE NEL MODO GIUSTO? LE VARIE POSSIBILITÀ ANALIZZATE.
 2. PATCHING CON PACKAGE ETOOOLBOX - UTILIZZANDO I COMANDI \pretocmd e \apptocmd
 
    Questi comandi sono molto più robusti dei precedenti, perché funzionano
-
-
-\end{comment}
 
 \newcommand{\ColorPatchError}[2]{%                              % Comando per stampare messaggio di errore utile.
     \ClassError{HKNdocument}{%
@@ -123,6 +122,124 @@ COME PATCHARE NEL MODO GIUSTO? LE VARIE POSSIBILITÀ ANALIZZATE.
 % % 5. Bibliografia
 % \xpretocmd{\printbibliography}{\RefsBlackLinks}{}{\ColorPatchError{Bib}{before}}
 % \AddToHook{cmd/printbibliography/after}{\RefsDefaultLinks}
+
+\end{comment}
+
+\begin{comment} INTERFACCIA DA AGGIUNGERE ALLA CUSTOM CLASS
+% ______________________________________________________________________________ INIZIO MODIFICA TIZIANO - hyperref
+% ORIGINARIAMENTE IN _preamble.tex
+% SPOSTATO SU CUSTOM CLASS PER CENTRALIZZARE GESTIONE HYPERREF E COLORI
+% --------------------------
+% HYPERREF FOR INTERNAL AND EXTERNAL LINKS
+% --------------------------
+% Create clickable links in PDF and set link colors
+% \hypersetup{
+%     colorlinks=true,
+%     linkcolor=black,
+%     citecolor=black,
+%     urlcolor=blue
+% }
+
+% MACRO AUSILIARIE
+% NOTA: ricorda che i colori originali di LaTeX, come "blue" sono "molto sparati". Quelli importati con xcolor,
+% che iniziano con la maiuscola, sono invece più tenui e adatti alla lettura.
+
+% RefMatt sta per Reference Matter: ossia i capitoli di reference tecnica: ToC, LoT, LoF, Index, Bib...
+
+\newcommand{\RefMattDefaultLinksColor}{%
+    \hypersetup{%
+        linkcolor=blue,     % Colore per riferimenti interni (es: capitoli, figure, tabelle, ecc.).
+        %                   % ATTENZIONE: colora anche l'intero TOC/LOF, essendo le righe di questi dei link.
+    }%
+}
+
+\newcommand{\RefMattBlackLinksColor}{%
+    \hypersetup{%
+        linkcolor=black,    % Colore per riferimenti interni (es: capitoli, figure, tabelle, ecc.).
+        %                   % ATTENZIONE: colora anche l'intero TOC/LOF, essendo le righe di questi dei link.
+    }%
+}
+
+% IMPOSTAZIONI GLOBALI
+\RefMattDefaultLinksColor   % NOTA: ho usato questo approccio per scrivere i colori una volta sola. Avevo creato macro
+                            % ausiliarie solo con le opzioni di interesse, ma dovevo comunque riscrivere i colori più
+                            % volte.
+\hypersetup{%
+    colorlinks=true,        % Attiva il colore del testo per i link; rimuove i riquadri colorati (antiestetici nel PDF).
+    urlcolor=blue,          % Colore per i link web esterni.
+    %                       % NOTA: usare lo stesso blu dei link interni riduce il feedback visivo.
+    linktoc=all             % Rende cliccabili sia il titolo che la pagina negli indici.
+    %                       % ATTENZIONE:Colora tutta la riga se linkcolor è attivo.
+}%
+
+% INTERFACCIA DI PERSONALIZZAZIONE PER GLI UTENTI FINALI
+% --- 1. VARIABILI DI STATO (Boolean flags)
+% In accordo con le precedenti versioni della custom class, il ToC è sempre stampato.
+\newif\ifHKN@printLoF       % Flag: se true, stampa LoF
+\newif\ifHKN@printLoT       % Flag: se true, stampa LoT
+\newif\ifHKN@blackColors    % Flag: se true, usa colore nero per link in ToC, LoF, LoT.
+% --- 2. DICHIARAZIONE INTERFACCIA (pgfkeys) - CON GESTIONE ERRORI
+
+\pgfkeys{
+    /HKNrefs/.is family,             % Dichiara una nuova famiglia di chiavi, nella folder /HKNrefs (refs: sta per references)
+    /HKNrefs,                        % Attiva il percorso suddetto come default (solo per le prossime dichiarazioni)
+    %
+    % STAMPA LOF (.is choice crea un menu chiuso)
+    PrintLoF/.is choice,                                    % Dichiara la chiave PrintLoF come scelta multipla (choice)
+    PrintLoF/true/.code  = {\HKN@printLoFtrue},             % Se usata setta true il flag per stmapre LoF
+    PrintLoF/false/.code = {\HKN@printLoFfalse},            % Se usata setta false il flag per stmapre LoF
+    PrintLoF/.unknown/.code = {%                            % Gestione Eccezioni: avvisa l'utente se usa valori non ammessi
+        \ClassError{HKNdocument}{%                          % Tipo di errore: errore di classe, custom class HKNdocument
+            Invalid value for key PrintLoF.\MessageBreak    % Messaggio stampato nell'errore
+            Allowed values are: true, false%
+        }{%
+            Check your \string\setupRefs\space options for typos.%   % Messaggio di help (scrivi h nel terminale
+            %                                                        % dopo blocco compilazione per visualizzarlo)
+        }%
+    },
+    PrintLoF = true,                                        % Imposta il valore di default della key: se l'utente non specifica nulla, usa questo
+    % STAMPA LOT (.is choice crea un menu chiuso)
+    PrintLoT/.is choice,                                    % Dichiara la chiave PrintLoT come scelta multipla (choice)
+    PrintLoT/true/.code  = {\HKN@printLoTtrue},             % Se usata setta true il flag per stmapre LoT
+    PrintLoT/false/.code = {\HKN@printLoTfalse},            % Se usata setta false il flag per stmapre LoT
+    PrintLoT/.unknown/.code = {%                            % Gestione Eccezioni: avvisa l'utente se usa valori non ammessi
+        \ClassError{HKNdocument}{%                          % Tipo di errore: errore di classe, custom class HKNdocument
+            Invalid value for key PrintLoT.\MessageBreak    % Messaggio stampato nell'errore
+            Allowed values are: true, false%
+        }{%
+            Check your \string\setupRefs\space options for typos.%   % Messaggio di help (scrivi h nel terminale
+            %                                                        % dopo blocco compilazione per visualizzarlo)
+        }%
+    },
+    PrintLoT = true,                                        % Imposta il valore di default della key: se l'utente non specifica nulla, usa questo
+    % GESTIONE COLORI (.is choice crea un menu chiuso)
+    BlackRefsColors/.is choice,                             % Dichiara la chiave BlackRefsColors come scelta multipla (choice)
+    BlackRefsColors/true/.code  = {\HKN@blackColorstrue},   % Se usata setta true il flag per attivare il nero
+    BlackRefsColors/false/.code = {\HKN@blackColorsfalse},  % Se usata setta false il flag per disattivare il nero
+    BlackRefsColors/.unknown/.code = {%                     % Gestione Eccezioni: avvisa l'utente se usa valori non ammessi
+        \ClassError{HKNdocument}{%                          % Tipo di errore: errore di classe, custom class HKNdocument
+            Invalid value for key BlackRefsColors.\MessageBreak         % Messaggio stampato nell'errore
+            Allowed values are: true, false%
+        }{%
+            Check your \string\setupRefs\space options for typos.%      % Messaggio di help (scrivi h nel terminale
+            %                                                           % dopo blocco compilazione per visualizzarlo)
+        }%
+    },
+    BlackRefsColors = true,                                % Imposta il valore di default della key: se l'utente non specifica nulla, usa questo
+    % GESTIONE ERRORI PER CHIAVI INESISTENTI
+    % Se l'utente sbaglia a digitare il NOME della chiave,scatta l'unknown generale della famiglia.
+    % \pgfkeyscurrentname contiene il nome della chiave sbagliata.
+    .unknown/.code = {%                                                             % Gestione Eccezioni: avvisa l'utente se usa key non ammesse
+        \ClassError{HKNdocument}{%                                                  % Tipo di errore: errore di classe, custom class HKNdocument
+            Unknown key '\pgfkeyscurrentname' used in Refs setup.\MessageBreak      % Messaggio stampato dall'errore
+            Allowed keys are: HeaderCase, ChapterLabel, NumberLabel%
+        }{%
+            Please read the class documentation or check for typos.%                % Messaggio di help (scrivi h nel terminale dopo blocco compilazione per visualizzarlo)
+        }%
+    },
+}
+% ______________________________________________________________________________ FINE MODIFICA TIZIANO - hyperref
+\end{comment}
 
 % ----------------------------------------------------------------------------------------------------------------------
 
