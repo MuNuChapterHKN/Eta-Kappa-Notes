@@ -536,3 +536,11 @@ meta-testo
 pag
 numbering
 backref
+pgfkeys
+hypersetup
+HKNhypersetup
+unknown
+for
+xpatch
+pre
+etoolbox
