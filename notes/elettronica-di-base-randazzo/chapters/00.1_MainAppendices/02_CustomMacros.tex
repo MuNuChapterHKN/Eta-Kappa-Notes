@@ -312,7 +312,10 @@
 % Il codice in entrambi i casi dev'essere lo stesso. A seguire è stata adattata la seconda opzione.
 % Viene semplicemente ripreso il codice originale di LaTeX della classe book.cls (sulla quale la cusom class HKNdocument
 % si basa), e vi sono state apportato le semplici modifiche necessarie! Così alla chiamata di \listoffigures e
-% \listoftables, l'effetto sarà esattamente quello voluto.
+% \listoftables, l'effetto sarà esattamente quello voluto. Il codice originale della classe .book è riportato in fondo.
+% NOTA: se vuoi leggere il contenuto della classe book.cls, puoi trovarlo nell'installazion di TeXLive, usando da
+% terminale il comando "kpsewhich book.cls", che ti restituirà il percorso completo del file. Apri book.cle e book.def
+% per controllare le definizioni.
 
 \let\OLDlistoffigures\listoffigures % Salva il comando originale di LaTeX per stampare la LOF, se dovesse servire.
 \let\OLDlistoftables\listoftables % Salva il comando originale di LaTeX per stampare la LOT, se dovesse servire.
@@ -478,7 +481,10 @@
 %     \if@restonecol\twocolumn\fi
 %     }
 
-
+% ---------------------------------------- COLORI LINK SETUP PACCHETTO hyperref ----------------------------------------
+% NOTA: setup già definito in _preamble.tex. Qui lo SOVRASCRIVO per personalizzarlo.
+% NOTA: macro riportate direttamente in 04_GlobalSettings.tex, in quanto si tratta sostanzialmente di impostazioni
+% del documento.
 
 % ---------------------------- CCUSTOM MACRO DEFINITI NELLA CUSTOM CLASS HKNdocument -----------------------------------
 

@@ -521,3 +521,14 @@ lotintoc
 lofintoc
 
 approf
+cmd
+tableofcontents
+before
+after
+listoffigures
+listoftables
+printindex
+printbibliography
+env
+theindex
+begin
