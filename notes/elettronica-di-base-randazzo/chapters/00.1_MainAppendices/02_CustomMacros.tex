@@ -538,11 +538,11 @@ definirà il colore da riutilizzare, e inoltre lo passerà a hypersetup. In tutt
 semplicemente con hypersetup, ma in realtà la versione custom HKNhypersetup introduce un hook!.
 
 ATTENZIONE: c'è un problema di priorità e ordine di esecuzione del codice! Ho ridefinito le macro per stampare LoF e LoT
-con una sovrascrittura totale, senza wrapper! Se si lancia la sovrascrittura totale dopo le modifiche per i colori,
-queste andranno perse! E visto che le ridefinizioni di LoF e LoT usano le altre definizioni di uchapter eccetera,
-in sostanza TUTTE LE DEFINIZIONI DELLE MIE MACRO CUSTOM VANNO RIPORTATE NELLA CLASS!
-Come nelle classi professionali pubblicati su CTAN, allora METTILE TUTTE IN UN FILE HKNdocument.def, che la classe
-importerà con il comando \input.
+con una sovrascrittura totale, senza wrapper! Sono in CustomMacro esattamente qui sopra, prima di questa sezione sul
+custom hypersetup. Se si lancia la sovrascrittura totale dopo le modifiche per i colori, queste andranno perse! E visto
+che le ridefinizioni di LoF e LoT usano le altre definizioni di uchapter eccetera, in sostanza TUTTE LE DEFINIZIONI
+DELLE MIE MACRO CUSTOM VANNO RIPORTATE NELLA CLASS! Come nelle classi professionali pubblicati su CTAN, allora METTILE
+TUTTE IN UN FILE HKNdocument.def, che la classe importerà con il comando \input.
 
 Sistemerò questa parte di codice quando metterò mano alla custom class per modifiche ufficiali.
 Per ora la soluzione usata, dove si cambiano i colori a mano, è troppo più comoda.
