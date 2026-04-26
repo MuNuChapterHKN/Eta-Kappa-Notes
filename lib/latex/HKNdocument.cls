@@ -945,14 +945,19 @@
     \maketitle
 % ______________________________________________________________________________ INIZIO MODIFICA TIZIANO - TESTATINA LICENZA
     \iflanguage{italian}{%
-        \markboth{Presentazione e Licenza}{Presentazione e Licenza}%
+        \markboth{Presentazione e Licenza}{Presentazione e Licenza}%            % Scrittura Testatina sx e dx in ita
     }{%
-        \markboth{Overview and License}{Overview and License}%
+        \markboth{Overview and License}{Overview and License}%                  % Scrittura Testatina sx e dx in eng
     }
 % ______________________________________________________________________________ FINE MODIFICA TIZIANO - TESTATINA LICENZA
-    \input{cclicense.tex}
-    \tableofcontents
-    \clearpage
+% ______________________________________________________________________________ INIZIO MODIFICA TIZIANO - COLORI ToC e License
+    % Spostati nel mainmatter per gestire la colorazione tutti in un posto, e sfruttare le definizioni di macro già
+    % introdotte fuori dalla custom class. In Futuro: semplicemente va centralizzata la gestione colori nella class.
+    %
+    % \input{cclicense.tex}
+    % \tableofcontents
+    % \clearpage                % Non necessario, \tableofcontents lancia di perse \clearpage.
+% ______________________________________________________________________________ FINE MODIFICA TIZIANO - COLORI ToC e License
 % ______________________________________________________________________________ INIZIO MODIFICA TIZIANO - MAINMATTER
     %\mainmatter
     % IMPORTANTE DISATTIVARLA: altrimenti se si richiama di nuovo successivamente il frontmatter, la numerazione romana

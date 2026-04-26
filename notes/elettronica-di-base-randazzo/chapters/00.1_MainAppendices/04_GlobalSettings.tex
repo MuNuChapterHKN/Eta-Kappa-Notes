@@ -51,16 +51,17 @@
     }%
 }
 
-% \RefsDefaultLinks       % AVVIO SOVRASCRITTURA IMPOSTAZIONI GLOBALI
-%                         % NOTA: ho usato questo approccio per scrivere i colori una volta sola. Avevo creato macro
-%                         % ausiliarie solo con le opzioni di interesse, ma dovevo comunque riscrivere i colori più volte.
-% \hypersetup{%
-%     colorlinks=true,    % Attiva il colore del testo per i link; rimuove i riquadri colorati (antiestetici nel PDF).
-%     urlcolor=blue,      % Colore per i link web esterni.
-%     %                   % NOTA: usare lo stesso blu dei link interni riduce il feedback visivo.
-%     linktoc=all         % Rende cliccabili sia il titolo che la pagina negli indici.
-%     %                   % ATTENZIONE:Colora tutta la riga se linkcolor è attivo.
-% }%
+% AVVIO SOVRASCRITTURA IMPOSTAZIONI GLOBALI
+\RefsDefaultLinks           % NOTA: ho usato questo approccio per scrivere i colori una volta sola. Avevo creato macro
+                            % ausiliarie solo con le opzioni di interesse, ma dovevo comunque riscrivere i colori più
+                            % volte.
+\hypersetup{%
+    colorlinks=true,        % Attiva il colore del testo per i link; rimuove i riquadri colorati (antiestetici nel PDF).
+    urlcolor=blue,          % Colore per i link web esterni.
+    %                       % NOTA: usare lo stesso blu dei link interni riduce il feedback visivo.
+    linktoc=all             % Rende cliccabili sia il titolo che la pagina negli indici.
+    %                       % ATTENZIONE:Colora tutta la riga se linkcolor è attivo.
+}%
 
 % PATCH: SPEGNIMENTO COLORI LINK NEGLI INDICI:
 

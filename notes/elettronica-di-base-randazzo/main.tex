@@ -119,8 +119,13 @@
 %\frontmatter                       % HO DISATTIVATO IL MAINMATTER NELLA CUSTOM CLASS: non richiamare per non riavviare
                                     % la numerazione romana!
 %
+\input{cclicense.tex}               % Stampa la sezione Preentazione e Licenza
+\RefsBlackLinks                     % Imposta i link in nero, per evitare di riempire di colore ToC, LoF, LoT.
+\tableofcontents                    % Stampa l'indice generale
 \listoffigures[lofintoc]            % Stampa l'elenco delle figure, con voce nell'indice (lofintoc)
 \listoftables[lotintoc]             % Stampa l'elenco delle tabelle, con voce nell'indice (lotintoc)
+\RefsDefaultLinks                   % Ripristina i link colorati (colore di default) per il resto del documento
+%                                   % NOTA: vedi global settings per note sui link e i loro colori.
 \include{chapters/00_Prefazione}    % Prefazione: obiettivi e contesto del libro
 %
 % -------------------------------------------------- FRONTMATTER: END --------------------------------------------------
