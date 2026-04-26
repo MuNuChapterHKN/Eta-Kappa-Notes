@@ -155,6 +155,8 @@ Perché il sistema non va in crash con due chiamate a \backmatter?
 I comandi di stato (\frontmatter, \mainmatter, \backmatter) sono
 "Interruttori Idempotenti". Eseguirli più volte consecutive produce
 esattamente lo stesso risultato della prima esecuzione.
+ATTENZIONE: se si chiama più volte \frontmatter in punti diversi, ogni volta
+fa riavviare il page numbering in numeri romani, sballando la numerazione.
 
 Quando si innescherà l'hook finale del PM (\AfterEndDocument), esso chiamerà
 nuovamente \backmatter. A quel punto, LaTeX si limiterà a "spegnere un

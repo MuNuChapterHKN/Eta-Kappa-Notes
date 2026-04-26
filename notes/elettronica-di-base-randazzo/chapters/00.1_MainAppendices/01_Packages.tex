@@ -179,7 +179,7 @@
 
 % ----------------------------- PACCHETTI PER BIBLIOGRAFIA E PER GESTIONE SMART DEGLI APICI ----------------------------
 
-\usepackage[backend=biber, autolang=other, style=ieee]{biblatex}
+\usepackage[backend=biber, style=ieee, autolang=hyphen, backref=true]{biblatex}
 \begin{comment} BibLaTeX - PACCHETTO DI GESTIONE AVANZATA DELLA BIBLIOGRAFIA
 
     BibLaTeX è un pacchetto per la gestione avanzata della bibliografia,
@@ -192,22 +192,6 @@
       garantisce la compatibilità anche con distribuzioni più datate.
       Offre pieno supporto nativo al formato UTF-8 e algoritmi di ordinamento e
       parsing molto più avanzati del legacy BibTeX.
-
-    - autolang=other: Risolve i problemi di sillabazione della lingua nella
-      bibliografia, nel caso le fonti citate abbiano più lingue diverse.
-      È fondamentale che il campo "langid" nel database .bib sia esplicitato
-      correttamente, in quanto è il campo usato per selezionare come viene
-      trattata ogni voce della bibliografia.
-      Zotero trasforma la lingua in langid automaticamente, se è scritta
-      correttamente (codici ISO, o per esteso in inglese).
-      In precisione "other" crea un ambiente linguistico isolato per la singola
-      riga della bibliografia: adatta sia le regole di sillabazione che di
-      formattazione e di terminologia funzione della localizzazione (esempio:
-      Edition vs Edizione, a cura di vs edited by, eccetera) garantendo le
-      migliori impostazioni tipografiche per ogni voce.
-      Come alternativa si può usare "autolang=hyphen", che si limita solo alla
-      sillabazione multilingua, senza adattare il resto (ossia il "meta-testo"
-      bibliografico, come "edizione", "citato a pag.", eccetera).
 
     - style=ieee: applica lo standard bibliografico dell'Institute of Electrical
       and Electronics Engineers (numerico con parentesi quadre, titoli
@@ -229,6 +213,34 @@
       (Nota: richiede che nel sistema sia installato 'biblatex-ieee', incluso
       con TexLive. Se si usa una distribuzione diversa, lo si può installare da
       terminale col comando "tlmgr install biblatex-ieee").
+
+    - autolang=other: Risolve i problemi di sillabazione della lingua nella
+      bibliografia, nel caso le fonti citate abbiano più lingue diverse.
+      È fondamentale che il campo "langid" nel database .bib sia esplicitato
+      correttamente, in quanto è il campo usato per selezionare come viene
+      trattata ogni voce della bibliografia.
+      Zotero trasforma la lingua in langid automaticamente, se è scritta
+      correttamente (codici ISO, o per esteso in inglese).
+      In precisione "other" crea un ambiente linguistico isolato per la singola
+      riga della bibliografia: adatta sia le regole di sillabazione che di
+      formattazione e di terminologia funzione della localizzazione (esempio:
+      Edition vs Edizione, a cura di vs edited by, eccetera) garantendo le
+      migliori impostazioni tipografiche per ogni voce.
+      Come alternativa si può usare "autolang=hyphen", che si limita solo alla
+      sillabazione multilingua, senza adattare il resto (ossia il "meta-testo"
+      bibliografico, come "edizione", "citato a pag.", eccetera).
+
+      AGGIORNAMENTO (26-02-2026):
+      autolang=hyphen : ho corretto autolang in hyphen, invece che usare other,
+      in quanto le moderne convenzioni tipografiche per i libri vogliono più
+      correttamente che i nomi originali siano conservati nella lingua
+      originale, ma che il resto del meta-testo bibliografico sia invece sempre
+      nella lingua di riferimento per il lettore, e questo si ottiene con questa
+      opzione
+
+    - backref=true: Aggiunge automaticamente al fondo di ogni voce bibliografica
+      l'elenco delle pagine in cui è stata citata, con link dinamici che portano
+      direttamente alla citazione nel testo. Molto utile per la navigazione.
 
 \end{comment}
 

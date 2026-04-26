@@ -534,3 +534,5 @@ theindex
 begin
 meta-testo
 pag
+numbering
+backref
