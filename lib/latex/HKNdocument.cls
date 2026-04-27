@@ -629,7 +629,8 @@
 % funzionano le testatine in LaTeX, in particolare la loro memoria, che non è affatto una cosa banale purtroppo. Ho
 % formulato personalmente un mio modello, che spiega esattamente cosa accade di DEFAULT in LaTeX. Successivamente, si
 % potrà quindi capire l'effetto delle modifiche ai comandi.
-%
+
+
 % ======================================================================================================================
 % MODELLO TEORICO DELLA MEMORIA DELLE TESTATINE IN (La)TeX - COMPORTAMENTO DI DEFAULT - I MARKS (leftmark, rightmark)
 % ======================================================================================================================
@@ -733,6 +734,97 @@
 % - COMANDI CLEARPAGE E CLEARDOUBLEPAGE: non hanno nulla a che vedere, e non interferiscono, con le testatine.
 % ======================================================================================================================
 
+
+
+
+% ======================================================================================================================
+% LISTA DEI BUG RISCONTRATI NELLE VERSIONI PRECEDENTI DEL CODICE SOVRASCRITTO:
+% ======================================================================================================================
+
+% BUG N°1: UTILIZZO DI CHAPTERMARK PER LA TESTATINA DEI CAPITOLI STELLATI:
+% Il chaptermark che ho riprogrammato, fa questo:
+% - stampa il nome passato del capitolo sempre su entrambi leftmark e rightmark, così se non iniziano sezioni la
+%   testatina non rimane vuota, ma mostra comunque il capitolo.
+% - se è nel mainmatter:
+%   stampa etichetta capitolo ("CAPITOLO" o "Cap." a seconda dell'impostazione, anche in inglese) +
+%   + etichetta numerica (es: "1.") (se impostato) + titolo del capitolo.
+% - se è nel frontmatter o backmatter: stampa solo il titolo del capitolo, senza etichette (non andrebbero bene)
+%
+% Dunque, chiaramente se si vuole un capitolo STELLATO, dunque NON NUMERATO (ma che aggionra ToC con titolo lungo e
+% entrambi i marks della testatina con titolo breve se c'è, altrimenti titolo lungo) CHIARAMENTE IL CHAPTERMARK
+% MODIFICATO NON PUÒ ESSERE USATO, altrimenti NEL MAINMATTER \chapter* stamperebbe comunque le etichette. Visto che
+% questa variante di chaptermark serve anche per \uchapter (vedi bug a seguire), la chiamiamo \uchaptermark (chaptermark
+% per capitolo non numerato).
+
+\newcommand{\uchaptermark}[1]{%
+    \markboth{#1}{#1}%              % Aggiorna entrambi i mark, cosicchè in assenza si sezioni, la testatina non sia
+    %                               % vuota, ma mostri comunque il capitolo.
+}
+
+% ----------------------------------------------------------------------------------------------------------------------
+
+% BUG N°2: UTILIZZO DI SECTIONMARK PER LA TESTATINA DELLE SEZIONI STELLATE:
+% Il sectionmark che ho riprogrammato, fa questo:
+% - stampa il nome passato della sezione in rightmark
+% - stampa: etichetta numerica (es: "1.") (se impostato) + titolo della sezione SEMPRE.
+% - Nessuna differenza tra mainmatter e front/backmatter, in quanto questi NON influenzano il comando section, come
+%   accade invece nel caso chapter: se lo modificassi per essere sensibile per usarlo con \section nel front/backmatter,
+%   allora avrei comunque il numero SBAGLIATO nel titolo, ma non nella testatina. Meglio che l'errore sia più evidente.
+%   Usa \usection per le sezioni non numerate nel front/backmatter: Lamport e Knuth non avevano previsto infatti che
+%   venissere usate sezioni nel front/backmatter (di norma non si fa, ma può essere utile).
+%
+% Dunque, chiaramente se si vuole una SEZIONE STELLATA, dunque NON NUMERATA (ma che aggionra ToC con titolo lungo e
+% il rigthmark della testatina con titolo breve se c'è, altrimenti titolo lungo) CHIARAMENTE IL SECTIONMARK MODIFICATO
+% NON PUÒ ESSERE USATO, altrimenti stamperebbe comunque le etichette numeriche sempre. Visto che questa variante
+% di sectionmark serve anche per \usection (vedi bug a seguire), la chiamiamo \usectionmark (sectionmark per sezione
+% non numerata).
+
+\newcommand{\usectionmark}[1]{%
+    \markright{#1}                  % Aggiorna il rightmark della pagina corrente, con l'ultima sezione.
+}
+
+% ----------------------------------------------------------------------------------------------------------------------
+
+% BUG N°3: SOVRASCRITTURA DEI MARK USATA SIA PER CAPITOLI CHE PER SEZIONI NELLA RIDEFINZIONE DEI COMANDI CHAPTER E
+% SECTION CON WRAPPER - FUNZIONA SOLO PER CAPITOLI - CASO NUMERATO
+% Come spiegato chiaramente nel modello teorica, se si tenta di sovrascrivere i mark di una pagina in particolare,
+% esclusivamente la sovrascrittura del \leftmark, riservato ai capitoli, funziona: infatti per i motivi tipografici
+% spiegati, in tutte le pagine viene usato il \leftmark più recente o il primo \rightmark (il meno recente), in
+% funzione della pagina, che sia Sx o Dx.
+% Quindi, nel caso dei:
+% - CAPITOLI: dopo la chiamata di \OLDchapter, si può modificare la testatina richiamando \chaptermark o \uchaptermark
+% - SEZIONI: dopo la chiamata di \OLDsection, se si richiama \sectionmark, non si avrà ALCUN EFFETTO SULLA TESTATINA:
+%   l'unico modo per modificare la testatina è intercettare \sectionmark PRIMA della chiamata di \OLDsection.
+%   È sconsigliato semplicemente chiamare \sectionmark o \usectionmark dopo \OLDsection o \OLDsection* rispettivamente,
+%   in quanto la sezione potrebbe iniziare in una pagina diversa da quella in cui è chiamato il mark, se la disposizione
+%   degli elementi è al limite pagina (funzionerebbe comunque nelle pagine successive, se non sono chiamate sezioni, ma
+%   è decisamente meglio evitare: può rendere difficile il debug, e soprattutto è un comportamento non deterministico.
+%   Per questo, è molto meglio MODIFICARE LOCALMENTE IL COMANDO \sectionmark o \usectionmark per far si che quanto viene
+%   chiamato internamente da \OLDsection o \OLDsection*, sappia già cosa stampare.
+%   La logica da seguire è la seguente:
+%
+%   \let\TempSectionMark\sectionmark o \let\TempSectionMark\usectionmark (a seconda del caso)
+%   \renewcommand{\sectionmark}{\<SECTIONMARKCORRETTO>}
+%   .... comandi che usano \section ....
+%   \let\sectionmark\TempSectionMark o \let\usectionmark\TempSectionMark (a seconda del caso)
+%
+% SEBBENE una modifica del genere si possa fare anche per i capitoli come spiegato non è affatto necessario, perchè per
+% codesti, la sovrascrittura della testatina funziona!
+
+% ----------------------------------------------------------------------------------------------------------------------
+
+% BUG N°4: CONFLITTO RIDEFINIZIONE DI CHAPTER E SECTION, CON LE DEFINZIONI DI UNCHAPTER E USECTION RISPETTIVAMENTE
+% Avevo scritto uchapter e usection prima di modificare, come allo stato attuale, i comandi chapter e section, e dunque
+% al loro interno avevo usato i comandi \chapter* e \section* originali.
+% Visto che erano definiti nel contesto dei chapter originali, basta che al loro posto al loro interno si usino
+% \OLDchapter* e \OLDsection* per risolvere il problema.
+% Oppure li si può riscrivere utilizzando direttamente \chapter e \section modificati appunto! Basta in realtà passare i
+% titoli nel modo giusto in sostanza, e lasciare che siano i comandi modificati a gestire tutto.
+% Altrimenti ancora, per evitare che siano riferiti ai comandi dello stato modificato, si potrebbe fare in modo che
+% usino le macro protette dei capitoli \@schapter e \@ssection, che per prassi non si toccano!
+% Vedi codice in custom macros!
+
+% ======================================================================================================================
 
 
 
