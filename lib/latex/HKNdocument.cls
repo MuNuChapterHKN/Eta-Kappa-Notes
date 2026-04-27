@@ -833,6 +833,23 @@
 %---------------------------------------------
 % DISPOSIZIONE FISICA SULLA PAGINA (Il Layout)
 
+% NOTA: per ogni pagina, come già spiegato, c'è un \leftmark e un \rightmark, ma le pagine pari (Sx) usano solo il
+% \leftmark, mentre le pagine dispari (Dx) usano solo il \rightmark.
+% Il pacchetto fancyhdr inoltre mette in gioco PER OGNI TESTATINA, 3 CONTENITORI GRAFICI, indicati da L, C, R, che
+% stanno ovviamente per Left, Center, Right. Questi sono INDIPENDENTI DAI MARKS, e sono semplicemente dei box grafici,
+% che il seguente codice configura nel contenuto.
+% Si è scelto di stampare:
+% - Sulle pagine pari (Sx): il \lefmark (sempre e solo il capitolo, eventualmente il nome della sezione) nel box L, il
+%   logo nel box C, e il nome dell'associazione nel box R
+% - Sulle pagine dispari (Dx): il nome dell'associazione nel box L, il logo nel box C, e il \rightmark (se ci sono
+%   sezioni attive c'è il titolo della sezione, altrimenti quello del capitolo, grazie alle modifiche fatte) nel box R
+% Così facendo:
+% - il logo è sempre al centro della testatina
+% - il nome dell'associazione è sempre vicino al margine interno del libro (vicino alla rilegatura, zona meno visibile)
+% - i titoli di capitolo e sezione sono sempre vicino al margine esterno del libro (bordo esterno delle pagine), più
+%   visibili, essendo importanti per navigare il cotenuto.
+
+
 % Pagine PARI (Even - Foglio di Sinistra)
 \fancyhead[LE]{\leftmark}           % Leftmark (Nome Capitolo) sul margine ESTERNO (SX)
 \fancyhead[RE]{\DDorganization}     % Nome Associazione sul margine INTERNO (DX)
