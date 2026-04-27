@@ -810,10 +810,10 @@
 %   La logica da seguire è la seguente:
 %
 %   .....{%     % POSIZIONE: all'interno dei casi del wrapper (\section) a cui è passato #1=TitoloLungo e #2=TitoloBreve
-%   \let\TempSectionMark\sectionmark%    OPPURE   \let\TempSectionMark\usectionmark (a seconda del caso)
-%   \renewcommand{\sectionmark}[1]{\TempSectionMark{#2}}%   OPPURE \renewcommand{\usectionmark}[1]{\TempSectionMark{#2}}
+%   \let\TempSectionMark\sectionmark%     OPPURE     \let\TempSectionMark\usectionmark (a seconda del caso)
+%   \renewcommand{\sectionmark}[1]{\TempSectionMark{#2}}%  OPPURE  \renewcommand{\usectionmark}[1]{\TempSectionMark{#2}}
 %   \OLDsection{#1}%
-%   \let\sectionmark\TempSectionMark%    OPPURE      \let\usectionmark\TempSectionMark (a seconda del caso)
+%   \let\sectionmark\TempSectionMark%     OPPURE     \let\usectionmark\TempSectionMark (a seconda del caso)
 %   }
 %
 %   Perchè in questo modo?
@@ -821,6 +821,12 @@
 %   contenuto di \sectionmark o \usectionmark originale, MA IMPONENDO CHE USINO #2 INDIPENDENTEMENTE DA COSA È PASSATO
 %   A \OLDsection O \OLDsection*, ossia #1. Ed il bello è che è comunque chiamato da \OLDsection o \OLDsection*!
 %   In pratica preimpostaiamo localmente il contenuto di \sectionmark o \usectionmark, che perde l'interattività con #1.
+%
+%   NOTA BENE: dentro section, al \sectionmark è passato comunque il titolo breve, quindi il comando si aspetta un
+%   argomento! Per questo, per evitare errori, va comunque inserito l'argomento nella ridefinzione locale, con [1],
+%   sebbene poi non venga usato! Infatti il #2 è srotolato dalla macro prima. Per passare parametri in modo annidato,
+%   in definizioni annidate di macro, si deve usare ##numero per annidamento doppio, ###numero per annidamento triplo,
+%   e così via.
 %
 %   NOTA: modifica locale, quindi gruppo? NO, sebbene sia logico, è sconsigliato mettere \section originale, quindi
 %   \OLDsection dentro un gruppo, perchè altrimenti perde impostazioni o contatti con il resto del codice.
@@ -869,6 +875,10 @@
 % Se la modifica è da fare, tanto vale farla corretta a priori.
 % Ricorda comqune che con la stampa della testatina disattiva sulla pagina del capitolo, come di norma anche con i
 % comandi custom, IL PROBLEMA NON SI VEDE.
+%
+% NOTA FINALE: tra tutti e 4 i casi di uso del chapter sovrascritto (con o senza stella, con o senza titolo breve),
+% ovviamente è un problema solo del caso normale senza stella, perchè \OLDchapter* non aggiorna i mark, e col titolo
+% breve, perchè altrimenti non c'è distinzione tra i titoli nelle testatine.
 
 % ----------------------------------------------------------------------------------------------------------------------
 
@@ -1019,26 +1029,41 @@
 \RenewDocumentCommand{\chapter}{ s o m }{%
     \IfBooleanTF{#1}{%
         % CASO 1:                   % Capitolo stellato \chapter*
+        %                           % Aggionra Header. Non invia nulla al ToC, come di norma per \chapter*.
+        %                           % Se vuoi che compaia nell'indice, usa la custom macro \uchapter.
         \IfNoValueTF{#2}{%
             % CASO 1-A:             % chapter* Senza titolo breve \chapter*[]{Lungo}
             \OLDchapter*{#3}%       % Invia il titolo LUNGO alla pagina
-            \NLchaptermark{#3}%     % Aggiorna l'header anche se non numerato, usando la variante senza etichette
+            \NLchaptermark{#3}%     % Aggiorna l'header con titolo (lungo), usando la variante senza etichette.
+            %                       % NOTA: \OLDchapter* non chiama \chaptermark, dunque non c'è nessuna sovrascrittura
+            %                       % dei marks, ergo nessuno dei problemi discussi nei bug.
         }{%
             % CASO 1-B:             % chapter* con titolo breve \chapter*[Breve]{Lungo}
             \OLDchapter*{#3}%       % Invia il titolo LUNGO alla pagina
-            \chaptermark{#2}%       % Sovrascrive l'header con il titolo BREVE
-            %                       % Non invia nulla al ToC, come di norma per \chapter*.
-            %                       % Se vuoi che compaia nell'indice, usa la custom macro \uchapter.
+            \NLchaptermark{#2}%     % Aggiorna l'header con titolo corto, usando la variante senza etichette.
+            %                       % NOTA: \OLDchapter* non chiama \chaptermark, dunque non c'è nessuna sovrascrittura
+            %                       % dei marks, ergo nessuno dei problemi discussi nei bug.
         }%
     }{%
         % CASO 2:                   % Capitolo normale \chapter
         \IfNoValueTF{#2}{%
             % CASO 2-A:             % chapter Senza titolo breve \chapter[]{Lungo}
             \OLDchapter{#3}%        % Comportamento standard: invia il titolo LUNGO al TOC e alla pagina
+            %                       % NOTA: nessuna sovrascrittura dei mark, ergo nessuno dei problemi discussi nei bug.
         }{%
             % CASO 2-B:             % chapter con titolo breve \chapter[Breve]{Lungo}
-            \OLDchapter{#3}%        % Invia il titolo LUNGO al TOC e alla pagina
-            \chaptermark{#2}%       % Sovrascrive l'header con il titolo BREVE
+            % CORRETTO BUG CON INTERCETTAZIONE - VEDI BUG 4 (tra quelli citati in precedenza).
+            \let\TempChapterMark\chaptermark%                       % Salva il comando originale \chaptermark
+            \renewcommand{\chaptermark}[1]{\TempChapterMark{#2}}%   % Ridefinizione locale che intercetta #2 (parmaetro
+            %                                                       % della macro \chapter).
+            % NOTA: va aggiunto un parametro [1] alla ridefinizione locale di \chaptermark, anche se non è usato
+            % (si userebbe con ##1), perchè comunque \OLDchapter chiama \chaptermark{#3}, quindi passa un argomento,
+            % che va gestito per evitare errori. È ignorato, e viene usato #2 hardcoded (è questa l'intercettazione).
+            \OLDchapter{#3}%        % Invia il titolo LUNGO al TOC e alla pagina, e chiama \chaptermark modificato.
+            \let\chaptermark\TempChapterMark%                       % Ripristina il comando originale \chaptermark
+            %\chaptermark{#2}%      % Sovrascrive l'header con il titolo BREVE. AGGIORNATO: VEDI BUG 4, NON USARE
+            %                       % SOVRASCRITTURA, MA INTERCETTAZIONE, come per le sezioni, per evitare problemi di
+            %                       % testatine sbagliate all'inizio del capitolo su pag dx, qualore fosseto attivate.
         }%
     }%
 }
