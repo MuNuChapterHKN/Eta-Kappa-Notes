@@ -788,13 +788,17 @@
 % ----------------------------------------------------------------------------------------------------------------------
 
 % BUG N°3: SOVRASCRITTURA DEI MARK USATA SIA PER CAPITOLI CHE PER SEZIONI NELLA RIDEFINZIONE DEI COMANDI CHAPTER E
-% SECTION CON WRAPPER - FUNZIONA SOLO PER CAPITOLI - CASO NUMERATO
+% SECTION CON WRAPPER - FUNZIONA SOLO PER CAPITOLI (AGGIORNAMENTO: IN PARTE) - TESTATINE SBAGLIATE (NUMERATE QUANDO NON
+% DOVREBBERO ESSERLO)!
 % Come spiegato chiaramente nel modello teorica, se si tenta di sovrascrivere i mark di una pagina in particolare,
 % esclusivamente la sovrascrittura del \leftmark, riservato ai capitoli, funziona: infatti per i motivi tipografici
 % spiegati, in tutte le pagine viene usato il \leftmark più recente o il primo \rightmark (il meno recente), in
 % funzione della pagina, che sia Sx o Dx.
 % Quindi, nel caso dei:
+%
 % - CAPITOLI: dopo la chiamata di \OLDchapter, si può modificare la testatina richiamando \chaptermark o \uchaptermark
+%   ATTENZIONE: AGGIORNAMENTO (*) FORSE È MEGLIO APPLICARE UNA MODIFICA COME QUELLA PER SECTION.
+%
 % - SEZIONI: dopo la chiamata di \OLDsection, se si richiama \sectionmark, non si avrà ALCUN EFFETTO SULLA TESTATINA:
 %   l'unico modo per modificare la testatina è intercettare \sectionmark PRIMA della chiamata di \OLDsection.
 %   È sconsigliato semplicemente chiamare \sectionmark o \usectionmark dopo \OLDsection o \OLDsection* rispettivamente,
@@ -805,17 +809,70 @@
 %   chiamato internamente da \OLDsection o \OLDsection*, sappia già cosa stampare.
 %   La logica da seguire è la seguente:
 %
-%   \let\TempSectionMark\sectionmark o \let\TempSectionMark\usectionmark (a seconda del caso)
-%   \renewcommand{\sectionmark}{\<SECTIONMARKCORRETTO>}
-%   .... comandi che usano \section ....
-%   \let\sectionmark\TempSectionMark o \let\usectionmark\TempSectionMark (a seconda del caso)
+%   .....{%     % POSIZIONE: all'interno dei casi del wrapper (\section) a cui è passato #1=TitoloLungo e #2=TitoloBreve
+%   \let\TempSectionMark\sectionmark%    OPPURE   \let\TempSectionMark\usectionmark (a seconda del caso)
+%   \renewcommand{\sectionmark}[1]{\TempSectionMark{#2}}%   OPPURE \renewcommand{\usectionmark}[1]{\TempSectionMark{#2}}
+%   \OLDsection{#1}%
+%   \let\sectionmark\TempSectionMark%    OPPURE      \let\usectionmark\TempSectionMark (a seconda del caso)
+%   }
 %
-% SEBBENE una modifica del genere si possa fare anche per i capitoli come spiegato non è affatto necessario, perchè per
-% codesti, la sovrascrittura della testatina funziona!
+%   Perchè in questo modo?
+%   Come si può osservare, così facendo si RIDEFINISCE LOCALMENTE \sectionmark o \usectionmark, sempre usando lo stesso
+%   contenuto di \sectionmark o \usectionmark originale, MA IMPONENDO CHE USINO #2 INDIPENDENTEMENTE DA COSA È PASSATO
+%   A \OLDsection O \OLDsection*, ossia #1. Ed il bello è che è comunque chiamato da \OLDsection o \OLDsection*!
+%   In pratica preimpostaiamo localmente il contenuto di \sectionmark o \usectionmark, che perde l'interattività con #1.
+%
+%   NOTA: modifica locale, quindi gruppo? NO, sebbene sia logico, è sconsigliato mettere \section originale, quindi
+%   \OLDsection dentro un gruppo, perchè altrimenti perde impostazioni o contatti con il resto del codice.
+%   Queste macro così complesse ed articolate è sconsigliato inserirle in gruppi, per evitare effetti indesiderati la
+%   cui causa è complessa da individuare.
+
+% BUG N°4: CASO PARTICOLARE DI MINORE INTERESSE - TESTATINE NELLE PAGINE DEI CAPITOLI SBALLATE
+% ATTENZIONE: AGGIORNAMENTO (*): UN ALTRO DOVUTO COMMENTO RELATIVO AI CAPITOLI - TESTATINA AD INZIO CAPITOLO.
+% SEBBENE una modifica analoga a quella discussa per le sezioni si possa fare anche per i capitoli, come spiegato almeno
+% in generale non sembra necessaria. Tuttavia potrebbe non essere scontato. A seguire analizzaremo il caso particolare
+% in cui si attivino le testatine sulla prima pagina del capitolo stesso.
+% Quello che accade nel codice.
+% IN OGNI CASO:
+% - il comportamento della memoria della testatina non cambia in funzione del fatto che il capitolo inizi su
+%   su una pagina destra (openright) o una sinistara (openany)
+% - il comportamento della stampa della testatina, a posteriori della memoria, invece cambia come sappiamo in base alla
+%   pagina: sulla sinsitra stampa ultimo leftmark, sulla destra stampa primo rightmark.
+% LATEX DEFAULT:
+% - usa \markboth{nomecapitolo}{}: il capitolo di default è memorizzato solo sul \leftmark, la cui stampa si aggiorna,
+%   mentre il \rightmark rimane vuoto, e la stampa non si può aggiornare.
+% - sulla pagina del capitolo non c'è mai la testatina
+% CUSTOM CLASS CON TESTATINA MODIFICATA
+% - usa \markboth{nomecapitolo}{nomecapitolo}: il capitolo è memorizzato sia sul \leftmark, la cui stampa si aggiorna,
+%   che sul \rightmark, la cui stampa non si può aggiornare.
+% - sulla pagina del capitolo non c'è mai la testatina
+%  LATEX DEFAULT: SE SI ATTIVASSE DUNQUE LA TESTATINA SULLA PAGINA DEL CAPITOLO?
+% - se la pagina è a sx, che stampa il leftmark, mostra il nome del capitolo. In particolare l'ultimo socrascritto. OK.
+% - se la pagina è a dx, che stampa il rightmark, è VUOTA. Ok? Sì in sostanza, non è una sezione, e anche se ci fossero
+%   sezioni non sarebbero stampate (rightmark non si aggiorna). Non del tutto giusto, discutibile, ma non sbagliato.
+% - pagine successive: nessun problema ovviamente. O usano i loro valori, o se non ci sono dichiarazioni, il sistema
+%   eredita quelli delle precedenti pagine, sempre gli ulitmi valori aggiornati.
+%   Senza nuovi dati, continuano ad esserci testatine vuote a DX, com'è giusto senza sezioni.
+% Forse è discutibile che la testatina sia vuota nel caso cominci a dx, ma almeno sta seguendo una regola semplice.
+% Quindi in realtà è giusto. Ricorda comqune che con la stampa della testatina disattiva sulla pagina del capitolo, come
+% di norma, IL PROBLEMA NON SI VEDE.
+% CUSTOM CLASS CON TESTATINA MODIFICATA: SE SI ATTIVASSE DUNQUE LA TESTATINA SULLA PAGINA DEL CAPITOLO?
+% - se la pagina è a sx, che stampa il leftmark, mostra il nome del capitolo. In particolare l'ultimo sovrascritto. OK.
+% - se la pagina è a dx, che stampa il rightmark, STAMPA IL PRIMO LEFTMARK, cioè IL TITOLO LUNGO secondo il codice
+%   che fa solo la sovrascrittura del \chaptermark -> ERRORE! Stiamo inserendo un'anomalia nel comporamento del codice:
+%   anche se è nascosto, solo li farebbe questa cosa diversa da tutte le altre pagine: non segue una regola.
+% Qui la cosa è formalmente sbagliata, perchè non sta seguendo comunque una regola semplice.
+% Faremo quindi in modo DI NON USARE LA SOVRASCRITTURA anche nel caso dei capitoli, bensì L'INTERCETTAZIONE, in modo da
+% avere IN MEMORIA IL PRIMO LEFTMARK sempre e comunque corretto.
+% Questa è una strategia di PROGRAMMAZIONE DIFENSIVA, che serve ad evitare errori e compotamenti anomali, le cui cause
+% sono difficili da individuare, e che rendono il debugging tipicamente infernale.
+% Se la modifica è da fare, tanto vale farla corretta a priori.
+% Ricorda comqune che con la stampa della testatina disattiva sulla pagina del capitolo, come di norma anche con i
+% comandi custom, IL PROBLEMA NON SI VEDE.
 
 % ----------------------------------------------------------------------------------------------------------------------
 
-% BUG N°4: CONFLITTO RIDEFINIZIONE DI CHAPTER E SECTION, CON LE DEFINZIONI DI UNCHAPTER E USECTION RISPETTIVAMENTE
+% BUG N°5: CONFLITTO RIDEFINIZIONE DI CHAPTER E SECTION, CON LE DEFINZIONI DI UNCHAPTER E USECTION RISPETTIVAMENTE
 % Avevo scritto uchapter e usection prima di modificare, come allo stato attuale, i comandi chapter e section, e dunque
 % al loro interno avevo usato i comandi \chapter* e \section* originali.
 % Visto che erano definiti nel contesto dei chapter originali, basta che al loro posto al loro interno si usino
@@ -850,6 +907,14 @@
 % - il nome dell'associazione è sempre vicino al margine interno del libro (vicino alla rilegatura, zona meno visibile)
 % - i titoli di capitolo e sezione sono sempre vicino al margine esterno del libro (bordo esterno delle pagine), più
 %   visibili, essendo importanti per navigare il cotenuto.
+%
+% NOTA DI COMPRENSIONE FINALE: ricorda che indipendentemente da come si stampa la testatina con fancyhdr, il
+% comportamento della memoria è sempre lo stesso, e si sconsiglia fortemente di sovvertire l'ordine con cui i leftmark
+% e i rightmark sono usati. Il primo serve per il capitolo, il secondo per le sezioni. Non sovvertire mai l'ordine
+% perchè sarebbe un problema gestirne la logica! Se l'intento è solo scambiare le posizoni sulla testatina, bastano le
+% opzioni associate di fancyhdr, senza toccare la logica dei mark.
+% Tutti i bug commentati, e la riporgrammazione fatta, sono un esempio sufficintemente ampio di come la logica dei mark
+% rende complesse le modifiche.
 
 
 % Pagine PARI (Even - Foglio di Sinistra)
@@ -949,13 +1014,15 @@
 % Indice: usa sempre titolo lungo (di norma LaTeX invierebbe il breve)
 % Aggiunto supporto per titoli brevi a capitoli stellati
 
+% NOTA BENE: ricorda, per i capitoli la sovrascrittura de
+
 \RenewDocumentCommand{\chapter}{ s o m }{%
     \IfBooleanTF{#1}{%
         % CASO 1:                   % Capitolo stellato \chapter*
         \IfNoValueTF{#2}{%
             % CASO 1-A:             % chapter* Senza titolo breve \chapter*[]{Lungo}
             \OLDchapter*{#3}%       % Invia il titolo LUNGO alla pagina
-            \chaptermark{#3}%      % Aggiorna l'header anche se non numerato, usando la variante senza etichette
+            \NLchaptermark{#3}%     % Aggiorna l'header anche se non numerato, usando la variante senza etichette
         }{%
             % CASO 1-B:             % chapter* con titolo breve \chapter*[Breve]{Lungo}
             \OLDchapter*{#3}%       % Invia il titolo LUNGO alla pagina
