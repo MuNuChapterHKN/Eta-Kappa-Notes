@@ -548,7 +548,7 @@
 \renewcommand{\chaptermark}[1]{%
     \if@mainmatter%
         \markboth{\HKNchaplabel\HKNnumchaplabel{}#1}{\HKNchaplabel\HKNnumchaplabel{}#1}%
-        % Graffe dopo numlabel per evitare pronlemi di spazi e formattazione: spazi inseriti già dalle etichette!
+        % Graffe dopo numlabel per evitare problemi di spazi e formattazione: spazi inseriti già dalle etichette!
     \else%
         \markboth{#1}{#1}%
     \fi%
@@ -579,7 +579,7 @@
 % }
 
 \renewcommand{\sectionmark}[1]{\markright{\HKNnumseclabel{}#1}}
-    % Graffe dopo numlabel per evitare pronlemi di spazi e formattazione: spazi inseriti già dalle etichette!
+    % Graffe dopo numlabel per evitare problemi di spazi e formattazione: spazi inseriti già dalle etichette!
 
 
 % Perchè ho disattivato la prima versione: Comunque compare il 0.1, 0.2... per le sezioni del frontmatter nella PAGINA
@@ -591,11 +591,152 @@
 % \usection se vuoi reinserire nella testatina e nell'indice (non stampa numero) la sezione non numerata, ma che compare
 % nell'indice e nella testatina.
 
-% NON NECESSARIO: meglio usare direttamente \markritgh modificato, come in origine. Tanto consiste solo in quello.
+% NON NECESSARIO: meglio usare direttamente \markright modificato, come in origine. Tanto consiste solo in quello.
 % RIDEFINIZIONE SECTIONMARK per SEZIONI NON NUMERATE, generate con \usection
 % \newcommand{\usectionmark}[1]{\markright{#1}}
 
 \makeatother            % Rende di nuovo la @ un carattere non utilizzabile per comandi (protezione)
+
+
+% --- AGGIORNAMENTO 2026-27-04 - FIX BUGS TESTATINE \chapter* e \uchapter, e \section* e \usection ---
+%
+% Nelle versioni precedenti del codice era presente un BUG: nel codice della custom class, a seguire, vengono modificati
+% i comandi nativi per \chapter e \section, con l'obiettivo di:
+% - aggiungere il supporto ai titoli brevi opzionali anche per le versioni stellate (\chapter* e \section*)
+% - le versioni non stellate (\chapter e \section) devono inviare al ToC il titolo lungo obbligatorio, invece di quello
+%   breve opzionale
+% - le versioni stellate (\chapter* e \section*) devono inviare comunque il titolo lungo obbligatorio al ToC (di norma
+%   non lo inviano)
+% - le versioni non stellate (\chapter e \section) devono inviare alla testatina il titolo breve opzionale se c'è,
+%   altrimenti il titolo lungo obbligatorio, come in LaTeX standard.
+% - le versioni stellate (\chapter* e \section*) devono inviare alla testatina il titolo breve opzionale se c'è,
+%   altrimenti il titolo lungo obbligatorio (in LaTeX standard non inviano nulla alla testatina, e rimane quella della
+%   sezione precedente, o del capitolo precedente se non c'è una sezione prima, con risultati sballati).
+% - sia nel caso stellato che non stellato, il comando \chapter riempie sia il leftmark che il rightmark, così se alle
+%   pagine dopo non viene chiamata una sezione, la testatina non sarà vuota è conterrà il capitolo, l'ultimo avviato.
+%
+% [NOTA: ricorda che di norma SOLO chapter è programmato in modo da essere sensibile al frontmatter e al backmatter:
+% quando è chiamato in essi, si comporta esattamente come il mio \uchapter, cioè stampa il titolo senza etichetta
+% "CAPITOLO X" (senza numero dunque), ma AGGIORNA l'INDICE e LA TESTATINA (tuttavia di standard usa il titolo breve,
+% ma io ho corretto il comportamento). Quindi in sostanza, \chapter in backmatter e frontmatter è indistinguibile da
+% \uchapter]
+%
+% Comunque le correzioni citate consistono in una sovrascrittura di funzioni di base, che a mia idea è un po' assurdo
+% che non siano fornite di base come opzioni, dalla classe book. Se ho capito bene, la superclass memoir (modifica di
+% book) le offre, insieme a tanto altro.
+%
+% Il punto fondamentale è che per poter correggere questi comportamentin in modo esatto, è fondamentale conoscere come
+% funzionano le testatine in LaTeX, in particolare la loro memoria, che non è affatto una cosa banale purtroppo. Ho
+% formulato personalmente un mio modello, che spiega esattamente cosa accade di DEFAULT in LaTeX. Successivamente, si
+% potrà quindi capire l'effetto delle modifiche ai comandi.
+%
+% ======================================================================================================================
+% MODELLO TEORICO DELLA MEMORIA DELLE TESTATINE IN (La)TeX - COMPORTAMENTO DI DEFAULT - I MARKS (leftmark, rightmark)
+% ======================================================================================================================
+% Questo modello descrive il meccanismo asincrono e asimmetrico con cui TeX gestisce i "post-it" (marks) per le
+% testatine, modellizzandolo come un array tridimensionale. È lo strumento definitivo per prevedere e fare debug del
+% comportamento di \leftmark e \rightmark.
+% NOTA: in realtà LaTeX non fa storage di tutti i mark, ma sovrascrive la stessa parte di ram ad ogni pagina
+% (fondamentale per non saturare la ram dei pc anni '80).
+%
+% ----------------------------------------------------------------------------------------------------------------------
+% 1. IL CONTENITORE (MemoriaTestatina)
+% La memoria delle testatine può essere modellizzata come un array: M(n, k, m)
+%    Dove:
+% - n = Numero identificativo della pagina corrente
+% - k = Scompartimento: 1 = SINISTRA (Pagine PARI, Testatina: Capitoli), 2 = DESTRA (Pagine DISPARI, Testatina: Sezioni)
+% - m = Indice cronologico della scrittura all'interno della singola pagina 'n' (m=1 per il primo comando lanciato, m=2
+%       per il secondo, ecc.: si intendono i comandi di scrittura: markboth e markright).
+%
+% NOTA TECNICA SULLA STRUTTURA: TeX non salva scompartimenti isolati. Ogni volta che si esegue una scrittura, TeX crea
+% un "post-it" contenente la COPPIA [ Sx | Dx ], incrementando 'm'. Lo stato globale, che contiene i valori sia per
+% pagina Sx che Dx, esiste a prescindere dal fatto che la pagina in elaborazione diventerà pari (Sx) o dispari (Dx).
+%
+% ----------------------------------------------------------------------------------------------------------------------
+% 2. I COMANDI DI SCRITTURA (Come si popola l'array)
+% - \markboth{A}{B} : Aggiorna ENTRAMBI gli scompartimenti. Genera un nuovo record m: M(n, 1, m) = A  |  M(n, 2, m) = B
+% - \markright{B}   : Aggiorna SOLO lo scompartimento destro. Trascinando il vecchio sinistro, genera: M(n, 1, m) = M(n,
+%                     1, m-1) [vecchio sx]  |  M(n, 2, m) = B
+% - \markleft       : Comando INESISTENTE in LaTeX standard (richiede pacchetti extra) poiché tipograficamente non ha
+%                     senso aggiornare il macro-livello (Capitolo) senza pulire il micro-livello (Sezione).
+%
+% COMANDI STRUTTURALI BASE:
+% - \chapter : Esegue internamente \markboth{Capitolo}{}, svuotando la destra. Inoltre applica \thispagestyle{plain} per
+%              spegnere la testatina su quella prima pagina (mantenendo solo il numero in basso).
+% - \section : Esegue internamente \markright{Sezione}, aggiornando solo la destra.
+%
+% ----------------------------------------------------------------------------------------------------------------------
+% 3. EREDITARIETÀ (Gestione delle pagine senza nuovi comandi, m=0) Se nella pagina 'n' non viene eseguito alcun nuovo
+%    comando di mark (l'array degenerebbe a m=0), il motore compensa a posteriori durante lo shipout. Clona l'ultimo
+%    stato noto della pagina precedente, iniettandolo virtualmente come primo e unico stato della nuova pagina: M(n,
+%    1,1) = M(n-1, 1, m_max(n-1))  --> Il sinistro eredita l'ultimo sinistro M(n, 2, 1) = M(n-1, 2, m_max(n-1))  --> Il
+%    destro eredita l'ultimo destro
+%
+% NOTA: In TeX questa primitiva si chiama \topmark, che cattura esattamente l'intero \botmark, ossia gli utlimi valori
+% di \leftmark e \rightmark della pagina precedente).
+%
+% ----------------------------------------------------------------------------------------------------------------------
+% 4. I COMANDI DI LETTURA (Estrazione alla chiusura della pagina) Quando TeX chiude e stampa la pagina 'n', estrae i
+%    valori per le testatine secondo regole asimmetriche e inflessibili:
+%
+% - Pagine PARI (Sx) -> Stampano in testatina l'ULTIMO \leftmark
+%                       (hanno in memoria anche il rightmark proprio, ma non lo usano)
+%
+%   REGOLA MODELLO: Alla pagina attuale n, Estrae sempre M(n, 1, m_max(n)).
+%   REGOLA TIPOGRAFICA: Estrae l'ULTIMO valore sinistro scritto sulla pagina. (La primitiva TeX sottostante è \botmark).
+%   MOTIVO TIPOGRAFICO: La testatina di sinistra deve riflettere l'ultimo capitolo iniziato, perchè si fa in modo che
+%   più capitoli non inizino sulla stessa pagina (\chpater lancia un \clearpage). Se ciò accadesse lo stesso (caso
+%   limite), con la modifica di macro interne, comunque la convenzione tipografica ci si aspetta che l'ultimo capitolo
+%   arrivato sia quello che occupa il maggiore spazio nella pagina (tempo di lettura), altrimenti va iniziato inu una
+%   nuova pagina. Per questo è imporante che il \leftmark sfrutti sempre l'ultimo valore salvato nella pagina.
+%
+% - Pagine DISPARI (Dx) -> Stampano in testatina il PRIMO \rightmark
+%                          (hanno in memoria anche il leftmark proprio, ma non lo usano)
+%
+%   REGOLA MODELLO: Alla pagina attuale n, Estrae sempre M(n, 2, 1).
+%   REGOLA TIPOGRAFICA: Estrae rigorosamente il PRIMO valore destro scritto sulla pagina, anche se fosse una stringa
+%   vuota {}. (La primitiva TeX sottostante è \firstmark).
+%   MOTIVO TIPOGRAFICO: Qualora inizino sezioni in una pagina destra, la testatina di destra deve riflettere la sezione
+%   più recente iniziata sulla pagina stessa, perchè visto che in una pagina possono iniziare più sezioni, si presuppone
+%   che tra tutte quelle che inizino, la sezione più recente sia quella che occupa il maggiore spazio nella pagina
+%   (tempo di lettura). Ovviamente potrebbe capitare il caso che una vecchia sezione iniziata pagine prime occupi
+%   comunque il maggiore spazio, ma è una situazione in cui comunque va ammessa l'ultima sezione iniziata (l'inziio di
+%   una nuova sezione è un evento tipografico importante, che va evidenziato, e LaTeX non offre un controllo
+%   condizionale basato sul riempimento delle pagine: in ogni caso meglio avere una regola semplice da rispettare
+%   sempre).
+% ----------------------------------------------------------------------------------------------------------------------
+%
+% 5. COROLLARI DI DEBUG (IL PROBLEMAD DELLE SEZIONI E IL PRIMO RIGHTMARK)
+% - FALLIMENTO SOVRASCRITTURA SEZIONI: Se si cerca di sovrascrivere l'output di \section richiamando un \markright
+%   subito dopo, l'azione fallirà sulla pagina corrente. Il motore di impaginazione per la pagina Dx pescherà SEMPRE
+%   M(n, 2, 1), mentre la correzione manuale giacerà ignorata in M(n, 2, 2).
+%   SOLUZIONE: Intercettare \sectionmark prima che scriva il record m=1. O si chiama sectionmark in anticipo, ma non è
+%   la mossa migliore, in quanto si rischia che la sezioni inizi in una pagina diversa (in funzione di come lo spazio è
+%   gestito im automatico), usando il valore corretto, oppure si modifica localmente sectionmark, in modo che la sezioni
+%   chiami il \markright corretto.
+%   NOTA: non usare un gruppo per la ridefinizone delle macro, perchè \section interagisce con altre macro per
+%   funzionare correttamente. Usa: \let\vecchioComando\comando, dunque \renecommand{\comando} poi
+%   \let\comando\vecchioComando.
+%
+% - SUCCESSO SOVRASCRITTURA CAPITOLI: Sovrascrivere l'output di \chapter usando \chaptermark funziona perfettamente.
+%   Questo perché \leftmark (sulle pagine Sx) legge M(n, 1, m_max), catturando con successo l'ultimo comando impartito.
+%
+% - INIDPENDENZA DA OPENANY E OPNERIGTH: Il meccanismo delle testatine È COMPLETAMENTE INDIPENDENTE da openany e
+%   openright, non c'è bisogno di fare distinzioni.
+%
+% - ESISTENZA DI ENTRAMBI I MARK PER TUTTE LE PAGINE: sebbene già citato più volte, per debuggare è fondamentale capire
+%   che tutte le pagine possiedono \leftmark e \rightmark proprio indipendenti in assoluto, ma le Sx usano solo il
+%   \leftmark e le Dx usano solo il \rightmark. Quindi ad esempio, se un capitolo chiama \marboth{nomecapitolo}{}, il
+%   rightmark vuoto non influenzerà il \rightmark della pagina successiva, qualora in essa vengano dichiarate sezioni
+%   (se non vengono dichiarate \topmark clona e quindi l'influenza c'è, ma questo solo a posteriori!).
+%
+% - COMANDI CLEARPAGE E CLEARDOUBLEPAGE: non hanno nulla a che vedere, e non interferiscono, con le testatine.
+% ======================================================================================================================
+
+
+
+
+
 
 %---------------------------------------------
 % DISPOSIZIONE FISICA SULLA PAGINA (Il Layout)
@@ -606,7 +747,7 @@
 
 % Pagine DISPARI (Odd - Foglio di Destra)
 \fancyhead[LO]{\DDorganization}     % Nome Associazione sul margine INTERNO (SX)
-\fancyhead[RO]{\rightmark}          % Righmark (Nome Sezione, o fallback Capitolo) sul margine ESTERNO (DX)
+\fancyhead[RO]{\rightmark}          % Rightmark (Nome Sezione, o fallback Capitolo) sul margine ESTERNO (DX)
 
 % Logo sempre al CENTRO (su tutte le pagine)
 \fancyhead[C]{%
@@ -692,7 +833,7 @@
 % CHAPTER COMMAND WRAPPER (xparse)
 % --------------------------------
 % Conserva il comando nativo della classe book
-\let\oldchapter\chapter             % Backup del comando originale
+\let\OLDchapter\chapter             % Backup del comando originale
                                     % Supporta la variante con *, come lo stesso comando chapter.
 
 % Ridefinisce \chapter per disaccoppiare TOC e Header, e gestire i capitoli stellati
@@ -705,11 +846,11 @@
         % CASO 1:                   % Capitolo stellato \chapter*
         \IfNoValueTF{#2}{%
             % CASO 1-A:             % chapter* Senza titolo breve \chapter*[]{Lungo}
-            \oldchapter*{#3}%       % Invia il titolo LUNGO alla pagina
+            \OLDchapter*{#3}%       % Invia il titolo LUNGO alla pagina
             \chaptermark{#3}%       % Aggiorna l'header anche se non numerato
         }{%
             % CASO 1-B:             % chapter* con titolo breve \chapter*[Breve]{Lungo}
-            \oldchapter*{#3}%       % Invia il titolo LUNGO alla pagina
+            \OLDchapter*{#3}%       % Invia il titolo LUNGO alla pagina
             \chaptermark{#2}%       % Sovrascrive l'header con il titolo BREVE
             %                       % Non invia nulla al ToC, come di norma per \chapter*.
             %                       % Se vuoi che compaia nell'indice, usa la custom macro \uchapter.
@@ -718,10 +859,10 @@
         % CASO 2:                   % Capitolo normale \chapter
         \IfNoValueTF{#2}{%
             % CASO 2-A:             % chapter Senza titolo breve \chapter[]{Lungo}
-            \oldchapter{#3}%        % Comportamento standard: invia il titolo LUNGO al TOC e alla pagina
+            \OLDchapter{#3}%        % Comportamento standard: invia il titolo LUNGO al TOC e alla pagina
         }{%
             % CASO 2-B:             % chapter con titolo breve \chapter[Breve]{Lungo}
-            \oldchapter{#3}%        % Invia il titolo LUNGO al TOC e alla pagina
+            \OLDchapter{#3}%        % Invia il titolo LUNGO al TOC e alla pagina
             \chaptermark{#2}%       % Sovrascrive l'header con il titolo BREVE
         }%
     }%
@@ -739,7 +880,7 @@
 % usare i titoli brevi (che ammettono tutti), se si vuole che nell'indice \compaiano i titoli lunghi.
 
 % Conserva il comando nativo della classe book
-\let\oldsection\section             % Backup del comando originale
+\let\OLDsection\section             % Backup del comando originale
                                     % Supporta la variante con *, come lo stesso comando section.
 
 % Ridefinisce \section per disaccoppiare TOC e Header, e gestire le sezioni stellate
@@ -752,11 +893,11 @@
         % CASO 1:                   % Sezione stellata \section*
         \IfNoValueTF{#2}{%
             % CASO 1-A:             % section* Senza titolo breve \section*[]{Lungo}
-            \oldsection*{#3}%       % Invia il titolo LUNGO alla pagina
+            \OLDsection*{#3}%       % Invia il titolo LUNGO alla pagina
             \sectionmark{#3}%       % Aggiorna l'header anche se non numerato
         }{%
             % CASO 1-B:             % section* con titolo breve \section*[Breve]{Lungo}
-            \oldsection*{#3}%       % Invia il titolo LUNGO alla pagina
+            \OLDsection*{#3}%       % Invia il titolo LUNGO alla pagina
             \sectionmark{#2}%       % Sovrascrive l'header con il titolo BREVE
             %                       % Non invia nulla al ToC, come di norma per \section*.
             %                       % Se vuoi che compaia nell'indice, usa la custom macro \usection.
@@ -765,10 +906,10 @@
         % CASO 2:                   % Sezione normale \section
         \IfNoValueTF{#2}{%
             % CASO 2-A:             % section Senza titolo breve \section[]{Lungo}
-            \oldsection{#3}%        % Comportamento standard: invia il titolo LUNGO al TOC e alla pagina
+            \OLDsection{#3}%        % Comportamento standard: invia il titolo LUNGO al TOC e alla pagina
         }{%
             % CASO 2-B:             % section con titolo breve \section[Breve]{Lungo}
-            \oldsection{#3}%        % Invia il titolo LUNGO al TOC e alla pagina
+            \OLDsection{#3}%        % Invia il titolo LUNGO al TOC e alla pagina
             \sectionmark{#2}%       % Sovrascrive l'header con il titolo BREVE
         }%
     }%

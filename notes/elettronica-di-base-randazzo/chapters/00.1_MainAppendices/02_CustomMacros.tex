@@ -48,7 +48,7 @@
 \newcommand{\fr}[1]{\foreignlanguage{french}{#1}}      % Per termini in lingua francese, in modo che il motore
                                                         % tipografico gestisca correttamente la sillabazione.
 
-% --------------------------------------- MACRO STAMPA VOLONTARIA DI PAGINE VUOTE --------------------------------------
+% ------------------------------------- MACRO PER STAMPA VOLONTARIA DI PAGINE VUOTE ------------------------------------
 % NOTA: non funzionano bene se è applicato twocoloumn credo.
 
 \newcommand{\HKNblankpage}{             % Macro per generare pagine intenzionalmente vuote
@@ -85,7 +85,7 @@
 %     \thispagestyle{empty}               % Svuota Pagina, rimuovendo testatina e numero di pagina.
 %     %                                   % NOTA: non influenzato da pacchetto emptypage che modifica solo cleardoublepage
 %     \hbox{}                             % Crea una scatola orizzontale vuota, per evitare che la pagina non abbia
-%     %                                   % elementi, in modo da far funzionare vfill.
+%     %                                   % elementi, in modo da far funzionare vfill. Concide al comando \null.
 %     \vfill                              % Spazio elastico superiore. L'asterisco lo forza (altrimenti come primo
 %     %                                   % elemento sarebbe saltato).
 %     %                                   % NOTA: due vfill hanno la stessa forza elastica -> il contenuto è centrato
@@ -161,7 +161,7 @@
 \NewDocumentCommand{\uchapter}{ o m }{%         % Dichiaratore di macro di xparse, più flessibile:
 %                                               % o - optional: argomento opzionale (short title). Argomento #1.
 %                                               % m - mandatory: argomento obbligatorio (long title). Argomento #2.
-    \chapter*{#2}%                              % Chiamata a capitolo non numerato e non indicizzato
+    \OLDchapter*{#2}%                              % Chiamata a capitolo non numerato e non indicizzato
     \phantomsection%                            % Aggiunge ancora per ipertesti (pacchetto hyperref), per indice
     \addcontentsline{toc}{chapter}{#2}%         % Scrive il TITOLO LUNGO nel file .toc SEMPRE (come di default)
     %                                           % Va nell'indice del pdf solo se tocdepth >= 0, altrimenti è ignorato.
@@ -288,7 +288,7 @@
 \NewDocumentCommand{\usection}{ o m }{%         % Dichiaratore di macro di xparse, più flessibile:
 %                                               % o - optional: argomento opzionale (short title). Argomento #1.
 %                                               % m - mandatory: argomento obbligatorio (long title). Argomento #2.
-    \section*{#2}%                              % Chiamata a sezione non numerata e non indicizzata
+    \OLDsection*{#2}%                              % Chiamata a sezione non numerata e non indicizzata
     \phantomsection%                            % Aggiunge ancora per ipertesti (pacchetto hyperref), per indice
     \addcontentsline{toc}{section}{#2}%         % Scrive il TITOLO LUNGO nel file .toc SEMPRE (come di default)
     %                                           % Va nell'indice del pdf solo se tocdepth >= 1, altrimenti è ignorato.
