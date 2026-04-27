@@ -754,9 +754,10 @@
 % entrambi i marks della testatina con titolo breve se c'è, altrimenti titolo lungo) CHIARAMENTE IL CHAPTERMARK
 % MODIFICATO NON PUÒ ESSERE USATO, altrimenti NEL MAINMATTER \chapter* stamperebbe comunque le etichette. Visto che
 % questa variante di chaptermark serve anche per \uchapter (vedi bug a seguire), la chiamiamo \uchaptermark (chaptermark
-% per capitolo non numerato).
+% per capitolo non numerato). AGGIORNAMENTO: cambio il nome in \NLchpatermark, "NL" sta per NO LABELS, perchè i comandi
+% "u" (unnummbered but indexed + header) non fanno parte della custom class.
 
-\newcommand{\uchaptermark}[1]{%
+\newcommand{\NLchaptermark}[1]{%
     \markboth{#1}{#1}%              % Aggiorna entrambi i mark, cosicchè in assenza si sezioni, la testatina non sia
     %                               % vuota, ma mostri comunque il capitolo.
 }
@@ -777,9 +778,10 @@
 % il rigthmark della testatina con titolo breve se c'è, altrimenti titolo lungo) CHIARAMENTE IL SECTIONMARK MODIFICATO
 % NON PUÒ ESSERE USATO, altrimenti stamperebbe comunque le etichette numeriche sempre. Visto che questa variante
 % di sectionmark serve anche per \usection (vedi bug a seguire), la chiamiamo \usectionmark (sectionmark per sezione
-% non numerata).
+% non numerata). AGGIORNAMENTO: cambio il nome in \NLsectionmark, "NL" sta per NO LABELS, perchè i comandi "u"
+% (unnummbered but indexed + header) non fanno parte della custom class.
 
-\newcommand{\usectionmark}[1]{%
+\newcommand{\NLsectionmark}[1]{%
     \markright{#1}                  % Aggiorna il rightmark della pagina corrente, con l'ultima sezione.
 }
 
@@ -929,14 +931,11 @@
 
 
 \RequirePackage{xparse}
-
-% NOTA SU XPARSE E LATEX3: È necessario aggiungere \RequirePackage{xparse}
-% all'inizio della classe per garantire la retrocompatibilità con vecchie
-% distribuzioni TeX antecedenti al 2020. Dal 2020 in poi, xparse e le
-% funzioni di LaTeX3 sono state integrate nativamente nel kernel standard.
-% Non bisogna modificare l'istruzione \NeedsTeXFormat{LaTeX2e} (es. in
-% LaTeX3), poiché LaTeX3 non è mai stato rilasciato come formato a sé
-% stante, ma è un ambiente di programmazione integrato dentro LaTeX2e.
+% NOTA SU XPARSE E LATEX3: È necessario aggiungere \RequirePackage{xparse} all'inizio della classe per garantire la
+% retrocompatibilità con vecchie distribuzioni TeX antecedenti al 2020. Dal 2020 in poi, xparse e le funzioni di LaTeX3
+% sono state integrate nativamente nel kernel standard. Non bisogna modificare l'istruzione \NeedsTeXFormat{LaTeX2e}
+% (es. in LaTeX3), poiché LaTeX3 non è mai stato rilasciato come formato a sé stante, ma è un ambiente di programmazione
+% integrato dentro LaTeX2e.
 
 % --------------------------------
 % CHAPTER COMMAND WRAPPER (xparse)
@@ -956,7 +955,7 @@
         \IfNoValueTF{#2}{%
             % CASO 1-A:             % chapter* Senza titolo breve \chapter*[]{Lungo}
             \OLDchapter*{#3}%       % Invia il titolo LUNGO alla pagina
-            \chaptermark{#3}%       % Aggiorna l'header anche se non numerato
+            \chaptermark{#3}%      % Aggiorna l'header anche se non numerato, usando la variante senza etichette
         }{%
             % CASO 1-B:             % chapter* con titolo breve \chapter*[Breve]{Lungo}
             \OLDchapter*{#3}%       % Invia il titolo LUNGO alla pagina
