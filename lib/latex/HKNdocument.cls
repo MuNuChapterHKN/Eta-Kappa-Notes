@@ -899,6 +899,129 @@
 % usino le macro protette dei capitoli \@schapter e \@ssection, che per prassi non si toccano!
 % Vedi codice in custom macros!
 
+% ----------------------------------------------------------------------------------------------------------------------
+
+% BUG N°6: RIDEFINIZIONE DI \listoffigures e \listoftables PER CORREGGERE TESTATINE - Definizioni chapter, criteri marks
+% MEGLIO USARE INTERCETTAZIONE, anche in quel caso! Applicare anche a toc!
+
+
+% AGGIORNAMENTO: ho capito di aver usato una filosofia sbagliata! Non si dovrebbe sfruttare la modifica dei marks,
+% che sono sezioni di memoria pensate per funzionare solo in un certo modo, per ottenere un risutlato grafico.
+% È molto meglio lasciarli come sono, e gestire gli aspetti grafici a posteriori, mediante fancyhdr.
+% Mi riferisco al fatto dell'uso di \markboth{capitolo}{capitolo} per aggiornare le testatine, che tra l'altro va
+% propagato su tutto il codice, modificando ogni comando che genera un capitolo (LoF, LoT, ToC, Index, Appendix, Bib...)
+% È Molto più semplice agire una volta per tutte ad alto livello secondo l'interfaccio di fancyhdr:
+% \fancyhead[RO]{\ifblank{\rigthmark}{\leftmark}{\rightmark}}, così agisce indipendetemente OVUNQUE! Era una riga!
+% NOTA: \ifblank è una macro di etoolbox, che controlla se il suo argomento è vuoto o contiene solo spaziature.
+% Ho scritto il seguente commento per spiegare meglio la questione.
+
+% ======================================================================================================================
+% MANIFESTO DI DESIGN DELLE TESTATINE: IL PATTERN MVC IN (La)TeX E IL PROBLEMA DEI MARKS
+% ======================================================================================================================
+% Questo blocco documenta un cambio di paradigma fondamentale nella gestione delle testatine. Invece di hackerare le
+% primitive del kernel TeX, la classe adotterà un approccio MVC (Model-View-Controller):
+% - MODEL (Modello): Il livello dei "Dati", ovvero come TeX immagazzina le informazioni (i marks).
+% - VIEW (Vista): Il livello della "Presentazione", ovvero il pacchetto fancyhdr che disegna fisicamente la pagina.
+% - CONTROLLER (Controllo): La logica condizionale che decide cosa estrarre dai dati per passarlo alla vista. Separare
+%   rigorosamente questi tre livelli garantisce un codice pulito, robusto e prevedibile.
+%
+% ----------------------------------------------------------------------------------------------------------------------
+% 1. MODEL - IL MISUNDERSTANDING STORICO DEI NOMI E LA FILOSOFIA DEL KERNEL (Il Livello Dati)
+%
+% I nomi scelti negli anni '80 da Knuth/Lamport per i marks sono semanticamente fuorvianti per il layout moderno. Sotto
+% il cofano, \leftmark e \rightmark sono intimamente legati a contenitori di memoria pensati per funzionare sempre e
+% rigorosamente in un solo, specifico modo:
+%
+% - \leftmark NON significa "stampato a sinistra nelle testatine" o "stampato solo nelle pagine di sinistra". È il
+%    MACRO-CONTENITORE, progettato per ospitare SOLO IL CAPITOLO. Si potrebbere rinominarlo in "\markforchapter", ma
+%    anche questo sarebbe fuorviante, visto che esite \chpatermark, che però fa altro (vedi a seguire).
+%
+% - \rightmark NON significa "stampa a destra nelle testatine" o "stampa solo nelle pagine di destra". È il
+%    MICRO-CONTENITORE, progettato per ospitare SOLO LE SEZIONI. Si potrebbere rinominarlo in "\markforsection", ma
+%    anche questo sarebbe fuorviante, visto che esite \sectionmark, che però fa altro (vedi a seguire).
+%
+% Entrambi questi valori risiedono nello stato globale del motore TeX ed esistono simultaneamente su OGNI pagina,
+% indipendentemente che sia pari o dispari. Il pensiero di fondo del Kernel prevede questo uso esclusivo:
+% \chapter{capitolo} riempie il macro-contenitore svuotando il micro, e lo fa chiamando il comando
+% \chaptermark{capitolo}, che a sua volta chiama \markboth{capitolo}{} (il vuoto, svota il \righrmark), mentre
+% \section{sezione} aggiorna solo il micro-contenitore, chiamando \sectionmark{sezione}, che a sua volta chiama
+% \markright{sezione} comportamento significa andare contro la natura stessa del motore.
+%
+% ----------------------------------------------------------------------------------------------------------------------
+% 2. MODEL - LA TRAPPOLA DELL'HACKING STRUTTURALE DEI MARKS
+%
+% L'errore più comune (e frustrante) in LaTeX è tentare di ottenere layout custom per le testatine, come quello
+% asimmetrico inizialmente proposto (es. "stampa il Capitolo a destra se non ci sono sezioni"), alterando la logica dei
+% comandi marks, mettendo mano alle definizioni dei comandi \chaptermark e \sectionmark. In questo caso li si era usati
+% per forzarli a scrivere dati ridondanti nelle celle di memoria sbagliate dell'array globale dei marks di TeX,
+% costringendo i chapter a riempire il \rightmark).
+% Questo approccio distrugge la semantica del kernel e costringe a "patchare" singolarmente ogni ambiente speciale
+% (Indice, Bibliografia, Appendici, List of Figures) che non usa i comandi standard.
+%
+% ----------------------------------------------------------------------------------------------------------------------
+% 3. VIEW E CONTROL - LA SOLUZIONE "ARCHITETTURALE" (Il Livello Presentazione)
+%
+% La Regola d'Oro è: LASCIA CHE TEX FACCIA IL SUO LAVORO SEMANTICO. Tutte le decisioni grafiche e spaziali devono essere
+% delegate esclusivamente all'interfaccia di visualizzazione (fancyhdr, la Vista), utilizzando logiche condizionali
+% direttamente in fase di stampa (il Controllo).
+%
+% ESEMPIO PRATICO (Il Dominio del Capitolo sulla pagina destra): Invece di costringere \chaptermark a riempire il
+% \rightmark, si istruisce fancyhdr a valutare la situazione in tempo reale sulla pagina corrente. Si possono usare due
+% approcci equivalenti:
+%
+%   APPROCCIO 1 (Classico, richiede il pacchetto ifthen):
+%   \fancyhead[RO]{\ifthenelse{\equal{\rightmark}{}}{\leftmark}{\rightmark}}
+%
+%   APPROCCIO 2 (Moderno e ottimizzato, richiede il pacchetto etoolbox):
+%   \fancyhead[RO]{\ifblank{\rightmark}{\leftmark}{\rightmark}}
+%
+% SPIEGAZIONE: "Se il micro-contenitore (\rightmark) è vuoto (es. inizio capitolo, o capitoli speciali), allora stampa
+% in questa posizione il macro-contenitore (\leftmark). Altrimenti, stampa la Sezione".
+%
+% ----------------------------------------------------------------------------------------------------------------------
+% 4. CONTRO - LA MODIFICA LEGITTIMA DEL CONTENUTO (Le API del Modello)
+%
+% Tutto questo non significa che i marks siano intoccabili. Al contrario, \chaptermark e \sectionmark sono le API
+% ufficiali di LaTeX, i comandi di interfaccia pensati appositamente per essere ridefiniti e personalizzati.
+% L'importante è rispettare il confine tra "Dove/Come salvare" e "Cosa salvare":
+%
+% - SBAGLIATO (Hacking architetturale): Usare \chaptermark per scrivere nel contenitore di destra, o in generale
+%   alterare l'uso della memoria delle testatine, agendo su come i marks funzionano.
+% - CORRETTO (Formattazione del Dato): Usare \chaptermark per cambiare il TESTO che finisce nel contenitore di sinistra
+%   (es. omettere la parola "Capitolo", usare il maiuscoletto, o inviare il "Titolo Breve" catturato dinamicamente).
+%
+% Agire su \chaptermark e \sectionmark per raffinare la stringa di testo PRIMA che venga inghiottita dal motore è una
+% pratica architetturalmente perfetta e pienamente incoraggiata. Sono comandi d'iterfaccia pensati anche per essere
+% modificati.
+%
+% ----------------------------------------------------------------------------------------------------------------------
+% 5. LE ECCEZIONI HARDCODED E LE TECNICHE DI INTERVENTO
+%
+% Sebbene \chaptermark e \sectionmark siano le interfacce previste, in LaTeX esistono generatori di capitoli automatici
+% (come Bibliografia, Indice Generale (ToC), Indice Analitico, List of Figures (LoF) e List of Tables (LoT)) che
+% bypassano queste API. Le classi standard inviano ai marks uno stile preformattato (es. tutto maiuscolo tramite
+% \MakeUppercase o comandi come \@mkboth), senza offrire un'interfaccia semplice per modificarlo.
+%
+% In questi casi, per correggere la formattazione del Dato senza infrangere il pattern MVC, è necessario intervenire
+% direttamente sul codice del generatore. Le tecniche per farlo includono:
+% - Hooks (Ganci): Usare i moderni comandi \AddToHook per iniettare codice prima o dopo l'esecuzione dell'ambiente.
+% - Modificatori di codice: Sfruttare pacchetti come etoolbox (\patchcmd) per cercare e sostituire stringhe interne.
+% - Wrapper o Decorator: Salvare il comando originale e avvolgerlo in una nuova macro che ne altera il comportamento.
+% - Intercettazione (L'approccio di più alto livello): Sfruttare le primitive (\let) per catturare in volo parametri o
+%   comandi annidati, preimpostandone il contenuto (come fatto in questa classe per l'opzione del titolo breve).
+%
+% ----------------------------------------------------------------------------------------------------------------------
+% VANTAGGI DI QUESTO APPROCCIO COMBINATO (MVC):
+% - Il kernel TeX rimane incontaminato e la sua filosofia semantica (Macro vs Micro contenitore) è preservata.
+% - Le decisioni sul "Cosa Testo" (maiuscole, numeri, titoli brevi) sono gestite ordinatamente dalle API (\..mark).
+% - Le decisioni sul "Dove/Quando" sono centralizzate nella Vista (fancyhdr), rendendo il layout globale facilissimo da
+%   aggiornare in un unico punto del codice.
+% - I comandi strutturali (\chapter, \section) richiedono ridefinizioni minime e pulite (solo per l'intercettazione
+%   degli argomenti brevi).
+% - I capitoli speciali (ToC, LoF, LoT) ereditano magicamente il layout corretto senza toccare una riga del loro codice:
+%   lasciando per loro natura il \rightmark vuoto, attivano automaticamente la logica condizionale della Vista.
+% ======================================================================================================================
+
 % ======================================================================================================================
 
 

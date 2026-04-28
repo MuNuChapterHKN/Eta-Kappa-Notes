@@ -1,8 +1,6 @@
 % --- MAGIC COMMENTS: CONFIGURAZIONE EDITOR --- (vedi main.tex per riferimenti e spiegazioni) ---
 % !TEX root = ../../main.tex
 
-% ____________________________________________ NEW CUSTOM MACROS (COMMANDS) ____________________________________________
-
 % Di seguito vengono presentati i comandi custom/personalizzati dichiarati dall'utente.
 % Vengono inoltre riepilogati i comandi custom definite nella classe di documento custom "HKNdocument".
 % NOTA: Ricorda, ogni termine del tipo "\..." in LaTeX è una control sequence. Ogni control sequence è un Comando. I
@@ -21,6 +19,8 @@
 % blocchi di testo. Questo consenste di evitare in generale problemi di formattazione, particolarmente subdoli da
 % identificare nel codice sorgente, e da risolvere). Altrimenti le Macro possono essere dichiarate tutte su una riga, ma
 % è consigliabile solo per macro molto semplici e brevi.
+
+% ____________________________________________ NEW CUSTOM MACROS (COMMANDS) ____________________________________________
 
 % ----------------------------------------------- DATI E METADATI UTILI ------------------------------------------------
 % NOTA: alcuni sono già definiti nella custom class, ma hanno una formattazione specifica da rivedere.
@@ -438,7 +438,7 @@
 % La versione non stellta supporta i titoli brevi, ma se non li si vuole mandare al ToC, visto che comunque non servono
 % ad altri scopi, basta non usarli.
 
-% -------------- CCUSTOM MACRO PER STAMPARE LIST OF FIGURES E LIST OF TABLES CON LE TESTATINE STILE HKN ----------------
+% --------------- CUSTOM MACRO PER STAMPARE LIST OF FIGURES E LIST OF TABLES CON LE TESTATINE STILE HKN ----------------
 
 % NOTA: non si possono semplicemente sovrascrivere le testatine generate dalle lof e lot, perchè sono scritte durante
 % la chiamata alla scritture di queste, dunque la sovcrascrittura con \markboth arriverebbe troppo tardi. Per la stessa
@@ -446,6 +446,9 @@
 % Le possibilità che rimangono sono dunque due:
 % - sovrascrivere il codice sorgente di LaTeX per stampare la lof e la lot
 % - definire delle macro alternative, per stampare la lof e la lot
+% - AGGIORNAMENTO: MOLTO PIÙ COMODAMENTO, SI POTEVA FARE INTERCETTAZIONE LOCALE! VEDI CODICE A SEGUIRE. ANCHE PERCHÈ
+%   HO STUDIATO CON LA CUSTOM CLASS, LE SOVRASCRITTURE DEI MARKS IN GENERALE NON FUNZIONANO BENE. Basta intercettare
+%   localmente i chapter, e trasformali in \uchapter o altro, ed il gioco è fatto. Il resto della logica non si tocca.
 % Il codice in entrambi i casi dev'essere lo stesso. A seguire è stata adattata la seconda opzione.
 % Viene semplicemente ripreso il codice originale di LaTeX della classe book.cls (sulla quale la cusom class HKNdocument
 % si basa), e vi sono state apportato le semplici modifiche necessarie! Così alla chiamata di \listoffigures e
@@ -617,6 +620,36 @@
 %     \@starttoc{lot}%
 %     \if@restonecol\twocolumn\fi
 %     }
+
+
+
+
+
+% NUOVE VERSIONI CON INTERCETTAZIONE! APPLICABILE IN GENEREALE A TUTTI QUESTI COMANDI PARTICOLARI, SENZA STARE A
+% PERDERE TEMPO A COPIARE E MODIFICARE IL CODICE ORIGINALE.
+
+%
+%
+% ___________________________DA FARE!
+%
+%
+%
+%
+
+% AGGIORNAMENTO: ho capito di aver usato una filosofia sbagliata! Non si dovrebbe sfruttare la modifica dei marks,
+% che sono sezioni di memoria pensate per funzionare solo in un certo modo, per ottenere un risutlato grafico.
+% È molto meglio lasciarli come sono, e gestire gli aspetti grafici a posteriori, mediante fancyhdr.
+% Mi riferisco al fatto dell'uso di \markboth{capitolo}{capitolo} per aggiornare le testatine, che tra l'altro va
+% propagato su tutto il codice, modificando ogni comando che genera un capitolo (LoF, LoT, ToC, Index, Appendix, Bib...)
+% È Molto più semplice agire una volta per tutte ad alto livello secondo l'interfaccio di fancyhdr:
+% \fancyhead[RO]{\ifblank{\rigthmark}{\leftmark}{\rightmark}}, così agisce indipendetemente OVUNQUE! Era una riga!
+% NOTA: \ifblank è una macro di etoolbox, che controlla se il suo argomento è vuoto o contiene solo spaziature.
+% Ho scritto il seguente commento per spiegare meglio la questione.
+
+% Nel codice della custom class, ho scritto un lungo commento relativamente a questo problema e a come le modifiche sul
+% desgin della testatina andrebbero fatte! L'ho chiamato;
+% MANIFESTO DI DESIGN DELLE TESTATINE: IL PATTERN MVC IN (La)TeX E IL PROBLEMA DEI MARKS
+
 
 % --------------------------------------- COLORI LINK - SETUP PACCHETTO hyperref ---------------------------------------
 % NOTA: setup già definito in _preamble.tex. Qui lo SOVRASCRIVO per personalizzarlo.
