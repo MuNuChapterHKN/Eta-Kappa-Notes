@@ -788,8 +788,8 @@
 % ----------------------------------------------------------------------------------------------------------------------
 
 % BUG N°3: SOVRASCRITTURA DEI MARK USATA SIA PER CAPITOLI CHE PER SEZIONI NELLA RIDEFINZIONE DEI COMANDI CHAPTER E
-% SECTION CON WRAPPER - FUNZIONA SOLO PER CAPITOLI (AGGIORNAMENTO: IN PARTE) - TESTATINE SBAGLIATE (NUMERATE QUANDO NON
-% DOVREBBERO ESSERLO)!
+% SECTION CON WRAPPER - TESTATINE SBAGLIATE (NUMERATE QUANDO NON DOVREBBERO ESSERLO)! - PER I CAPITOLI E DIVERSO CHE
+% PER LE SEZIONI (AGGIORNAMENTO: VEDI BUG 4 A RIGUARDO).
 % Come spiegato chiaramente nel modello teorica, se si tenta di sovrascrivere i mark di una pagina in particolare,
 % esclusivamente la sovrascrittura del \leftmark, riservato ai capitoli, funziona: infatti per i motivi tipografici
 % spiegati, in tutte le pagine viene usato il \leftmark più recente o il primo \rightmark (il meno recente), in
@@ -832,8 +832,14 @@
 %   \OLDsection dentro un gruppo, perchè altrimenti perde impostazioni o contatti con il resto del codice.
 %   Queste macro così complesse ed articolate è sconsigliato inserirle in gruppi, per evitare effetti indesiderati la
 %   cui causa è complessa da individuare.
+%
+% NOTA FINALE: tra tutti e 4 i casi di uso della section sovrascritta (con o senza stella, con o senza titolo breve),
+% ovviamente è un problema solo del caso normale senza stella, perchè \OLDsection* non aggiorna i mark, e col titolo
+% breve, perchè altrimenti non c'è distinzione tra i titoli nelle testatine.
 
-% BUG N°4: CASO PARTICOLARE DI MINORE INTERESSE - TESTATINE NELLE PAGINE DEI CAPITOLI SBALLATE
+% ----------------------------------------------------------------------------------------------------------------------
+
+% BUG N°4: CASO PARTICOLARE COME IL 3 MA DI MINORE INTERESSE - TESTATINE NELLE PAGINE DEI CAPITOLI SBALLATE
 % ATTENZIONE: AGGIORNAMENTO (*): UN ALTRO DOVUTO COMMENTO RELATIVO AI CAPITOLI - TESTATINA AD INZIO CAPITOLO.
 % SEBBENE una modifica analoga a quella discussa per le sezioni si possa fare anche per i capitoli, come spiegato almeno
 % in generale non sembra necessaria. Tuttavia potrebbe non essere scontato. A seguire analizzaremo il caso particolare
@@ -852,7 +858,7 @@
 % - usa \markboth{nomecapitolo}{nomecapitolo}: il capitolo è memorizzato sia sul \leftmark, la cui stampa si aggiorna,
 %   che sul \rightmark, la cui stampa non si può aggiornare.
 % - sulla pagina del capitolo non c'è mai la testatina
-%  LATEX DEFAULT: SE SI ATTIVASSE DUNQUE LA TESTATINA SULLA PAGINA DEL CAPITOLO?
+% LATEX DEFAULT: SE SI ATTIVASSE DUNQUE LA TESTATINA SULLA PAGINA DEL CAPITOLO?
 % - se la pagina è a sx, che stampa il leftmark, mostra il nome del capitolo. In particolare l'ultimo socrascritto. OK.
 % - se la pagina è a dx, che stampa il rightmark, è VUOTA. Ok? Sì in sostanza, non è una sezione, e anche se ci fossero
 %   sezioni non sarebbero stampate (rightmark non si aggiorna). Non del tutto giusto, discutibile, ma non sbagliato.
@@ -1029,41 +1035,54 @@
 \RenewDocumentCommand{\chapter}{ s o m }{%
     \IfBooleanTF{#1}{%
         % CASO 1:                   % Capitolo stellato \chapter*
-        %                           % Aggionra Header. Non invia nulla al ToC, come di norma per \chapter*.
-        %                           % Se vuoi che compaia nell'indice, usa la custom macro \uchapter.
+        %                           % Aggionra Header. Non invia nulla all'indice (ToC), come di norma per \chapter*.
+        %                           % Se vuoi che compaia nell'indice (ToC), usa la custom macro \uchapter.
         \IfNoValueTF{#2}{%
-            % CASO 1-A:             % chapter* Senza titolo breve \chapter*[]{Lungo}
+            % CASO 1-A:             % chapter* senza titolo breve \chapter*[]{Lungo}
             \OLDchapter*{#3}%       % Invia il titolo LUNGO alla pagina
+            % CORRETTO BUG DEL CHAPTERMARK SU CAPITOLI STELLATI - VEDI BUG 1 (tra quelli citati in precedenza).
             \NLchaptermark{#3}%     % Aggiorna l'header con titolo (lungo), usando la variante senza etichette.
             %                       % NOTA: \OLDchapter* non chiama \chaptermark, dunque non c'è nessuna sovrascrittura
             %                       % dei marks, ergo nessuno dei problemi discussi nei bug.
+            %\chaptermark{#3}%      % NON USARE - VEDI BUG 1. Nel mainmatter caricava label numerica su capitoli
+            %                       % stellati.
         }{%
             % CASO 1-B:             % chapter* con titolo breve \chapter*[Breve]{Lungo}
             \OLDchapter*{#3}%       % Invia il titolo LUNGO alla pagina
+            % CORRETTO BUG DEL CHAPTERMARK SU CAPITOLI STELLATI - VEDI BUG 1 (tra quelli citati in precedenza).
             \NLchaptermark{#2}%     % Aggiorna l'header con titolo corto, usando la variante senza etichette.
             %                       % NOTA: \OLDchapter* non chiama \chaptermark, dunque non c'è nessuna sovrascrittura
             %                       % dei marks, ergo nessuno dei problemi discussi nei bug.
+            %\chaptermark{#3}%      % NON USARE - VEDI BUG 1. Nel mainmatter caricava label numerica su capitoli
+            %                       % stellati.
         }%
     }{%
         % CASO 2:                   % Capitolo normale \chapter
         \IfNoValueTF{#2}{%
-            % CASO 2-A:             % chapter Senza titolo breve \chapter[]{Lungo}
+            % CASO 2-A:             % chapter senza titolo breve \chapter[]{Lungo}
             \OLDchapter{#3}%        % Comportamento standard: invia il titolo LUNGO al TOC e alla pagina
             %                       % NOTA: nessuna sovrascrittura dei mark, ergo nessuno dei problemi discussi nei bug.
         }{%
             % CASO 2-B:             % chapter con titolo breve \chapter[Breve]{Lungo}
+            %
             % CORRETTO BUG CON INTERCETTAZIONE - VEDI BUG 4 (tra quelli citati in precedenza).
+            %
             \let\TempChapterMark\chaptermark%                       % Salva il comando originale \chaptermark
             \renewcommand{\chaptermark}[1]{\TempChapterMark{#2}}%   % Ridefinizione locale che intercetta #2 (parmaetro
             %                                                       % della macro \chapter).
             % NOTA: va aggiunto un parametro [1] alla ridefinizione locale di \chaptermark, anche se non è usato
             % (si userebbe con ##1), perchè comunque \OLDchapter chiama \chaptermark{#3}, quindi passa un argomento,
             % che va gestito per evitare errori. È ignorato, e viene usato #2 hardcoded (è questa l'intercettazione).
+            %
+            % NOTA: per le definizioni locali di macro qui non puoi usare un group al posto di questi comandi, perchè
+            % \chapter dialoga con altre macro e impostazioni globali che altrimenti sarebbero ignorate.
+            %
             \OLDchapter{#3}%        % Invia il titolo LUNGO al TOC e alla pagina, e chiama \chaptermark modificato.
             \let\chaptermark\TempChapterMark%                       % Ripristina il comando originale \chaptermark
-            %\chaptermark{#2}%      % Sovrascrive l'header con il titolo BREVE. AGGIORNATO: VEDI BUG 4, NON USARE
-            %                       % SOVRASCRITTURA, MA INTERCETTAZIONE, come per le sezioni, per evitare problemi di
-            %                       % testatine sbagliate all'inizio del capitolo su pag dx, qualore fosseto attivate.
+            %
+            %\chaptermark{#2}%      % NON USARE - VEDI BUG 4. NON USARE SOVRASCRITTURA, MA INTERCETTAZIONE, come per le
+            %                       % sezioni, per evitare problemi di testatine sbagliate all'inizio del capitolo su
+            %                       % pag dx, qualore fosseto attivate.
         }%
     }%
 }
@@ -1091,26 +1110,50 @@
 \RenewDocumentCommand{\section}{ s o m }{%
     \IfBooleanTF{#1}{%
         % CASO 1:                   % Sezione stellata \section*
+        %                           % Aggionra Header. Non invia nulla all'indice (ToC), come di norma per \section*.
+        %                           % Se vuoi che compaia nell'indice (ToC), usa la custom macro \usection.
         \IfNoValueTF{#2}{%
-            % CASO 1-A:             % section* Senza titolo breve \section*[]{Lungo}
+            % CASO 1-A:             % section* senza titolo breve \section*[]{Lungo}
             \OLDsection*{#3}%       % Invia il titolo LUNGO alla pagina
-            \sectionmark{#3}%       % Aggiorna l'header anche se non numerato
+            \NLsectionmark{#3}%     % Aggiorna l'header con titolo (lungo), usando la variante senza etichette.
+            %                       % NOTA: \OLDsection* non chiama \sectionmark, dunque non c'è nessuna sovrascrittura
+            %                       % dei marks, ergo nessuno dei problemi discussi nei bug.
+            %\sectionmark{#3}%      % NON USARE - VEDI BUG 2. Caricava label numerica su sezioni stellate.
         }{%
             % CASO 1-B:             % section* con titolo breve \section*[Breve]{Lungo}
             \OLDsection*{#3}%       % Invia il titolo LUNGO alla pagina
-            \sectionmark{#2}%       % Sovrascrive l'header con il titolo BREVE
-            %                       % Non invia nulla al ToC, come di norma per \section*.
-            %                       % Se vuoi che compaia nell'indice, usa la custom macro \usection.
+            \NLsectionmark{#2}%     % Aggiorna l'header con titolo corto, usando la variante senza etichette.
+            %                       % NOTA: \OLDsection* non chiama \sectionmark, dunque non c'è nessuna sovrascrittura
+            %                       % dei marks, ergo nessuno dei problemi discussi nei bug.
+            %\sectionmark{#3}%      % NON USARE - VEDI BUG 2. Caricava label numerica su sezioni stellate.
         }%
     }{%
         % CASO 2:                   % Sezione normale \section
         \IfNoValueTF{#2}{%
-            % CASO 2-A:             % section Senza titolo breve \section[]{Lungo}
+            % CASO 2-A:             % section senza titolo breve \section[]{Lungo}
             \OLDsection{#3}%        % Comportamento standard: invia il titolo LUNGO al TOC e alla pagina
+            %                       % NOTA: nessuna sovrascrittura dei mark, ergo nessuno dei problemi discussi nei bug.
         }{%
             % CASO 2-B:             % section con titolo breve \section[Breve]{Lungo}
-            \OLDsection{#3}%        % Invia il titolo LUNGO al TOC e alla pagina
-            \sectionmark{#2}%       % Sovrascrive l'header con il titolo BREVE
+            %
+            % CORRETTO BUG CON INTERCETTAZIONE - VEDI BUG 3 (tra quelli citati in precedenza).
+            %
+            \let\TempSectionMark\sectionmark%                       % Salva il comando originale \sectionmark
+            \renewcommand{\sectionmark}[1]{\TempSectionMark{#2}}%   % Ridefinizione locale che intercetta #2 (parmaetro
+            %                                                       % della macro \section).
+            % NOTA: va aggiunto un parametro [1] alla ridefinizione locale di \sectionmark, anche se non è usato
+            % (si userebbe con ##1), perchè comunque \OLDsection chiama \sectionmark{#3}, quindi passa un argomento,
+            % che va gestito per evitare errori. È ignorato, e viene usato #2 hardcoded (è questa l'intercettazione).
+            %
+            % NOTA: per le definizioni locali di macro qui non puoi usare un group al posto di questi comandi, perchè
+            % \section dialoga con altre macro e impostazioni globali che altrimenti sarebbero ignorate.
+            %
+            \OLDsection{#3}%        % Invia il titolo LUNGO al TOC e alla pagina, e chiama \sectionmark modificato.
+            \let\sectionmark\TempSectionMark%                       % Ripristina il comando originale \sectionmark
+            %
+            %\sectionmark{#2}%      % Sovrascrive l'header con il titolo BREVE. AGGIORNATO: VEDI BUG 3, NON USARE
+            %                       % SOVRASCRITTURA, MA INTERCETTAZIONE, come per le sezioni, per evitare problemi di
+            %                       % testatine sbagliate all'inizio del capitolo su pag dx, qualore fosseto attivate.
         }%
     }%
 }
