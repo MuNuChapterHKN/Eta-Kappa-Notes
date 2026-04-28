@@ -153,30 +153,41 @@
 %     \markboth{#1}{#1}%                      % Aggiorna il contenuto della testatina
 % }
 
+% QUELLA DA USARE:
 % VERSIONE 2: supporto agli short-title in accordo al comando nativo \chapter[Short Title]{Long Title}, scritta
 % sfruttando xparse, che offre direttive di alto livello per definire macro avanzate.
 % Richiede per retrocompatibilità di aggiungere \RequirePackage{xparse} alla custom class, o \usepackage{xparse} nel
 % preambolo del main.tex.
 
-\NewDocumentCommand{\uchapter}{ o m }{%         % Dichiaratore di macro di xparse, più flessibile:
-%                                               % o - optional: argomento opzionale (short title). Argomento #1.
-%                                               % m - mandatory: argomento obbligatorio (long title). Argomento #2.
-    \OLDchapter*{#2}%                              % Chiamata a capitolo non numerato e non indicizzato
-    \phantomsection%                            % Aggiunge ancora per ipertesti (pacchetto hyperref), per indice
-    \addcontentsline{toc}{chapter}{#2}%         % Scrive il TITOLO LUNGO nel file .toc SEMPRE (come di default)
-    %                                           % Va nell'indice del pdf solo se tocdepth >= 0, altrimenti è ignorato.
-    %                                           % Le voci nel file .toc comunque appaiono nei segnalibri del pdf
-    %                                           % La profondità dei bookmarks si regola con bookmarksdepth de pacchetto
-    %                                           % hyperref (come opzione in importpackage, o come chiave in hypersetup)
-    \IfNoValueTF{#1}{%                          % Controllo Condizionale: controlla se è stato passato il titolo breve
-        \markboth{#2}{#2}%                      % Se manca il titolo breve, usa il titolo lungo nella testatina
-        % \uchaptermark{#2}                     % Come sopra, ma applica le modifiche stilistiche fatte nella class! (ABBANDONATO)
-    }{%
-        \markboth{#1}{#1}%                      % Se il titolo breve è presente, usa il titolo breve nella testatina
-        % \uchaptermark{#1}                     % Come sopra, ma applica le modifiche stilistiche fatte nella class! (ABBANDONATO)
-    }%
-}
+% \NewDocumentCommand{\uchapter}{ o m }{%         % Dichiaratore di macro di xparse, più flessibile:
+% %                                               % o - optional: argomento opzionale (short title). Argomento #1.
+% %                                               % m - mandatory: argomento obbligatorio (long title). Argomento #2.
+%     \chapter*{#2}%                              % Chiamata a capitolo non numerato e non indicizzato
+%     \phantomsection%                            % Aggiunge ancora per ipertesti (pacchetto hyperref), per indice
+%     \addcontentsline{toc}{chapter}{#2}%         % Scrive il TITOLO LUNGO nel file .toc SEMPRE (come di default)
+%     %                                           % Va nell'indice del pdf solo se tocdepth >= 0, altrimenti è ignorato.
+%     %                                           % Le voci nel file .toc comunque appaiono nei segnalibri del pdf
+%     %                                           % La profondità dei bookmarks si regola con bookmarksdepth de pacchetto
+%     %                                           % hyperref (come opzione in importpackage, o come chiave in hypersetup)
+%     \IfNoValueTF{#1}{%                          % Controllo Condizionale: controlla se è stato passato il titolo breve
+%         \markboth{#2}{#2}%                      % Se manca il titolo breve, usa il titolo lungo nella testatina
+%         % \uchaptermark{#2}                     % Come sopra, ma applica le modifiche stilistiche fatte nella class! (ABBANDONATO)
+%     }{%
+%         \markboth{#1}{#1}%                      % Se il titolo breve è presente, usa il titolo breve nella testatina
+%         % \uchaptermark{#1}                     % Come sopra, ma applica le modifiche stilistiche fatte nella class! (ABBANDONATO)
+%     }%
+% }
 
+% _______________________AGGIORNAMENTO________________________
+% La versione 2 è quella corretta per LaTeX default, ma per le modifiche alla custom class, dove ho modificato il
+% comando chapter non va bene! Vedi bug testatine 1,2,3,4,5 discussi nella custom class.
+% Riscrivo la versione nuova a seguire! Basterbbe semplcimente sostituire \chapter* con \OLDchapter*, ma sposto tutto
+% sotto per raggruppare al meglio le custom macro "u". IN REALTÀ NO: così generebbe due volte la voce nel file .toc.
+% Funziona, ma meglio di no! Si avrebbero due voci uguali nei segnalibri del pdf.
+% ____________________________________________________________
+
+
+% IN PIÙ A SCOPO DIDATTICO.
 % VERSIONE 3: sfruttando solo direttive di basso livello (senza xparse)
 % Vengono definiti in sostanza due comandi (motori) diversi, chiamati a seconda
 % di come l'utente scrive il comando di chiamata \uchapter, che a livello di programmazione non è altro che un comando
@@ -261,10 +272,13 @@
 
 
 % ----- PARTI, SEZIONI, SOTTO-SEZIONI, SOTTO-SOTTOSEZIONI, PARAGRAFI, SOTTO-PARAGRAFI, INDICIZZATI MA NON NUMERATE -----
+% AGGIORNAMENTO: + VERSIONE NUOVA uchapter: CAPITOLI NON NUMERATI MA INDICIZZATI.
 
 % Stesso effetto di sopra, ma per sezioni, sottosezioni e sotto-sottosezioni. Per i dovuti chiarimenti, leggi
 % le spiegazioni sopra.
 % NOTA: mancherebbero paragrafi e sottoparagrafi, ma di norma non sono numerati.
+
+% ..............................................................................
 
 \NewDocumentCommand{\upart}{ o m }{%            % Dichiaratore di macro di xparse, più flessibile:
 %                                               % o - optional: argomento opzionale (short title). Argomento #1.
@@ -279,31 +293,72 @@
     % TITOLO BREVE NON USATO: le parti creano una pagina "copertina", senza testatina: quindi non è usato.
 }
 
+% NOTA: \part non è ridefinito nella custom class, perché non ha nulla a che fare con la testatina. Quindi questa
+% versione va bene anche per la custom class.
+% La versione non stellta supporta i titoli brevi, ma se non li si vuole mandare al ToC, visto che comunque non servono
+% ad altri scopi, basta non usarli.
 
-% NOTA: il comando \section* di norma non supporta i titoli brevi. Tuttavia è stato ridefinito nella custom class per
-% poterli supportare. Inoltre originariamente non invia nulla al ToC, e questo non è stato toccato.
-% È usato per definire \usection, tuttavia questa funzione gestisce da se titoli brevi e lunghi, per testatine ed
-% indice, quindi comunque non ci sono conflitti.
+% ..............................................................................
 
+% Viste le ridefinzioni della custom class del comando chapter. Gestisce titoli, etichette e loro stile da solo
+% Semplicemente, aggiungo la voce al ToC.
+\NewDocumentCommand{\uchapter}{ o m }{%         % Dichiaratore di macro di xparse, più flessibile:
+%                                               % o - optional: argomento opzionale (short title). Argomento #1.
+%                                               % m - mandatory: argomento obbligatorio (long title). Argomento #2.
+    \chapter*[#1]{#2}%                          % Chiamata a capitolo non numerato e non indicizzato
+    \phantomsection%                            % Aggiunge ancora per ipertesti (pacchetto hyperref), per indice
+    \addcontentsline{toc}{chapter}{#2}%         % Scrive il TITOLO LUNGO nel file .toc SEMPRE (come di default)
+    %                                           % Va nell'indice del pdf solo se tocdepth >= 0, altrimenti è ignorato.
+    %                                           % Le voci nel file .toc comunque appaiono nei segnalibri del pdf
+    %                                           % La profondità dei bookmarks si regola con bookmarksdepth de pacchetto
+    %                                           % hyperref (come opzione in importpackage, o come chiave in hypersetup)
+}
+
+% ..............................................................................
+
+% \NewDocumentCommand{\usection}{ o m }{%         % Dichiaratore di macro di xparse, più flessibile:
+% %                                               % o - optional: argomento opzionale (short title). Argomento #1.
+% %                                               % m - mandatory: argomento obbligatorio (long title). Argomento #2.
+%     \section*{#2}%                              % Chiamata a sezione non numerata e non indicizzata
+%     \phantomsection%                            % Aggiunge ancora per ipertesti (pacchetto hyperref), per indice
+%     \addcontentsline{toc}{section}{#2}%         % Scrive il TITOLO LUNGO nel file .toc SEMPRE (come di default)
+%     %                                           % Va nell'indice del pdf solo se tocdepth >= 1, altrimenti è ignorato.
+%     %                                           % Le voci nel file .toc comunque appaiono nei segnalibri del pdf
+%     %                                           % La profondità dei bookmarks si regola con bookmarksdepth de pacchetto
+%     %                                           % hyperref (come opzione in importpackage, o come chiave in hypersetup)
+%     %
+%     \IfNoValueTF{#1}{%                          % Controllo Condizionale: controlla se è stato passato il titolo breve
+%         \markright{#2}%                         % Se manca il titolo breve, usa il titolo lungo nella testatina
+%         % \usectionmark{#2}                     % Come sopra, ma applica le modifiche stilistiche fatte nella class! (ABBANDONATO)
+%     }{%
+%         \markright{#1}%                         % Se il titolo breve è presente, usa il titolo breve nella testatina
+%         % \usectionmark{#1}                     % Come sopra, ma applica le modifiche stilistiche fatte nella class! (ABBANDONATO)
+%     }%
+% }
+
+% _______________________AGGIORNAMENTO________________________
+% La versione 2 è quella corretta per LaTeX default, ma per le modifiche alla custom class, dove ho modificato il
+% comando section non va bene! Vedi bug testatine 1,2,3,4,5 discussi nella custom class.
+% Riscrivo la versione nuova a seguire! Basterbbe semplcimente sostituire \section* con \OLDsection*, ma sposto tutto
+% sotto per raggruppare al meglio le custom macro "u". IN REALTÀ NO: così generebbe due volte la voce nel file .toc.
+% Funziona, ma meglio di no! Si avrebbero due voci uguali nei segnalibri del pdf.
+% ____________________________________________________________
+
+% Viste le ridefinzioni della custom class del comando section. Gestisce titoli, etichette e loro stile da solo
+% Semplicemente, aggiungo la voce al ToC.
 \NewDocumentCommand{\usection}{ o m }{%         % Dichiaratore di macro di xparse, più flessibile:
 %                                               % o - optional: argomento opzionale (short title). Argomento #1.
 %                                               % m - mandatory: argomento obbligatorio (long title). Argomento #2.
-    \OLDsection*{#2}%                              % Chiamata a sezione non numerata e non indicizzata
+    \section*[#1]{#2}%                          % Chiamata alla sezione non numerata e non indicizzata
     \phantomsection%                            % Aggiunge ancora per ipertesti (pacchetto hyperref), per indice
     \addcontentsline{toc}{section}{#2}%         % Scrive il TITOLO LUNGO nel file .toc SEMPRE (come di default)
     %                                           % Va nell'indice del pdf solo se tocdepth >= 1, altrimenti è ignorato.
     %                                           % Le voci nel file .toc comunque appaiono nei segnalibri del pdf
     %                                           % La profondità dei bookmarks si regola con bookmarksdepth de pacchetto
     %                                           % hyperref (come opzione in importpackage, o come chiave in hypersetup)
-    %
-    \IfNoValueTF{#1}{%                          % Controllo Condizionale: controlla se è stato passato il titolo breve
-        \markright{#2}%                         % Se manca il titolo breve, usa il titolo lungo nella testatina
-        % \usectionmark{#2}                     % Come sopra, ma applica le modifiche stilistiche fatte nella class! (ABBANDONATO)
-    }{%
-        \markright{#1}%                         % Se il titolo breve è presente, usa il titolo breve nella testatina
-        % \usectionmark{#1}                     % Come sopra, ma applica le modifiche stilistiche fatte nella class! (ABBANDONATO)
-    }%
 }
+
+% ..............................................................................
 
 \NewDocumentCommand{\usubsection}{ o m }{%      % Dichiaratore di macro di xparse, più flessibile:
 %                                               % o - optional: argomento opzionale (short title). Argomento #1.
@@ -318,6 +373,13 @@
     % TITOLO BREVE NON USATO: nelle testatine di norma non vanno le sottosezioni
 }
 
+% NOTA: \subsection non è ridefinito nella custom class, perché non ha nulla a che fare con la testatina. Quindi questa
+% versione va bene anche per la custom class.
+% La versione non stellta supporta i titoli brevi, ma se non li si vuole mandare al ToC, visto che comunque non servono
+% ad altri scopi, basta non usarli.
+
+% ..............................................................................
+
 \NewDocumentCommand{\usubsubsection}{ o m }{%   % Dichiaratore di macro di xparse, più flessibile:
 %                                               % o - optional: argomento opzionale (short title). Argomento #1.
 %                                               % m - mandatory: argomento obbligatorio (long title). Argomento #2.
@@ -330,6 +392,13 @@
     %                                           % hyperref (come opzione in importpackage, o come chiave in hypersetup)
     % TITOLO BREVE NON USATO: nelle testatine di norma non vanno le sotto-sottosezioni
 }
+
+% NOTA: \subsubsection non è ridefinito nella custom class, perché non ha nulla a che fare con la testatina. Quindi
+% questa versione va bene anche per la custom class.
+% La versione non stellta supporta i titoli brevi, ma se non li si vuole mandare al ToC, visto che comunque non servono
+% ad altri scopi, basta non usarli.
+
+% ..............................................................................
 
 \NewDocumentCommand{\uparagraph}{ o m }{%       % Dichiaratore di macro di xparse, più flessibile:
 %                                               % o - optional: argomento opzionale (short title). Argomento #1.
@@ -344,6 +413,13 @@
     % TITOLO BREVE NON USATO: non va nelle testatine
 }
 
+% NOTA: \paragraph non è ridefinito nella custom class, perché non ha nulla a che fare con la testatina. Quindi questa
+% versione va bene anche per la custom class.
+% La versione non stellta supporta i titoli brevi, ma se non li si vuole mandare al ToC, visto che comunque non servono
+% ad altri scopi, basta non usarli.
+
+% ..............................................................................
+
 \NewDocumentCommand{\usubparagraph}{ o m }{%    % Dichiaratore di macro di xparse, più flessibile:
 %                                               % o - optional: argomento opzionale (short title). Argomento #1.
 %                                               % m - mandatory: argomento obbligatorio (long title). Argomento #2.
@@ -357,7 +433,10 @@
     % TITOLO BREVE NON USATO: non va nelle testatine
 }
 
-
+% NOTA: \subparagraph non è ridefinito nella custom class, perché non ha nulla a che fare con la testatina. Quindi
+% questa versione va bene anche per la custom class.
+% La versione non stellta supporta i titoli brevi, ma se non li si vuole mandare al ToC, visto che comunque non servono
+% ad altri scopi, basta non usarli.
 
 % -------------- CCUSTOM MACRO PER STAMPARE LIST OF FIGURES E LIST OF TABLES CON LE TESTATINE STILE HKN ----------------
 
