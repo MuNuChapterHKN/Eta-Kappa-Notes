@@ -320,6 +320,7 @@
 
 % ______________________________________________________________________________ INIZIO MODIFICA TIZIANO - TESTATINE
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% CODICE ORIGINALE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % % --------------------------
 % % HEADER AND FOOTER
 % % --------------------------
@@ -348,14 +349,27 @@
 % \fancyfoot[C]{\thepage}
 % \setlength{\headheight}{30pt} % Avoids warnings about head height
 % \addtolength{\topmargin}{-20pt} % Corrects top margin for header
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\fancyhead{}            % Clear headers, just for precaution (good practice)
+
+%------- SPIEGAZIONE INIZIALE FUNZIONAMENTO TESTATINE - FONDAMENTALE PER CAPIRE COME APPLICARE MODIFICHE
+
+\fancyhead{}            % Pulizia Precauzionale delle testatine
 \fancyfoot{}            % Clear footers, just for precaution (good practice)
 
 \makeatletter           % Rende la @ un carattere normale, utilizzabile per comandi
 
-% NOTA: LaTeX utilizza di default \MakeUppercase per forzare i titoli in maiuscolo nelle testatine.
-% NOTA: se vuoi titoli nella testatina in maiuscolo, basta aggiungere \MakeUppercase{} attorno gli argomenti di
+% NOTA: Di default, LaTeX utilizza \MakeUppercase per forzare i titoli in maiuscolo nelle testatine.
+% NOTA: se vuoi titoli nella testatina in maiuscolo, o in generale per altre modifiche puramente dello stile di quanto
+% già presente, è sufficiente modificare il contenuto dei comandi \fancyhead, che si occupano solo della stampa di
+% testatina (header) e piè di pagina (footer). In generale, per pure modifiche di stile, non è necessario toccare i
+% comandi di marks.
+% NOTA: i comandi di marks sono \chaptermark, \sectionmak, \markboth, \markright (\leftmark non esiste in LaTeX default,
+% perchè non ha senso aggiornare il capitolo senza toccare le sezioni (rightmark).
+
+
+
+% basta usare \MakeUppercase{} attorno gli argomenti di
 % \markboth e \markright nei comandi sopra: se lo fai, ricorda anche di farlo per i comandi custom \uchapter,
 % \usection[]{}, e \usubsubsection[]{}, per mantenere coerenza di stile. FATTO IN AUTOMATICO, con modifica di markboth e
 % markright, e con la creazione di uchaptermark e usectionmark.
@@ -935,19 +949,19 @@
 % rigorosamente in un solo, specifico modo:
 %
 % - \leftmark NON significa "stampato a sinistra nelle testatine" o "stampato solo nelle pagine di sinistra". È il
-%    MACRO-CONTENITORE, progettato per ospitare SOLO IL CAPITOLO. Si potrebbere rinominarlo in "\markforchapter", ma
-%    anche questo sarebbe fuorviante, visto che esite \chpatermark, che però fa altro (vedi a seguire).
+%    MACRO-CONTENITORE, progettato per ospitare SOLO IL CAPITOLO. Si potrebbe rinominarlo in "\markforchapter", ma
+%    anche questo sarebbe fuorviante, visto che esiste \chaptermark, che però fa altro (vedi a seguire).
 %
 % - \rightmark NON significa "stampa a destra nelle testatine" o "stampa solo nelle pagine di destra". È il
-%    MICRO-CONTENITORE, progettato per ospitare SOLO LE SEZIONI. Si potrebbere rinominarlo in "\markforsection", ma
-%    anche questo sarebbe fuorviante, visto che esite \sectionmark, che però fa altro (vedi a seguire).
+%    MICRO-CONTENITORE, progettato per ospitare SOLO LE SEZIONI. Si potrebbe rinominarlo in "\markforsection", ma
+%    anche questo sarebbe fuorviante, visto che esiste \sectionmark, che però fa altro (vedi a seguire).
 %
 % Entrambi questi valori risiedono nello stato globale del motore TeX ed esistono simultaneamente su OGNI pagina,
 % indipendentemente che sia pari o dispari. Il pensiero di fondo del Kernel prevede questo uso esclusivo:
 % \chapter{capitolo} riempie il macro-contenitore svuotando il micro, e lo fa chiamando il comando
-% \chaptermark{capitolo}, che a sua volta chiama \markboth{capitolo}{} (il vuoto, svota il \righrmark), mentre
+% \chaptermark{capitolo}, che a sua volta chiama \markboth{capitolo}{} (il vuoto, svuota il \rightmark), mentre
 % \section{sezione} aggiorna solo il micro-contenitore, chiamando \sectionmark{sezione}, che a sua volta chiama
-% \markright{sezione} comportamento significa andare contro la natura stessa del motore.
+% \markright{sezione}. Modificare questo comportamento significa andare contro la natura stessa del motore.
 %
 % ----------------------------------------------------------------------------------------------------------------------
 % 2. MODEL - LA TRAPPOLA DELL'HACKING STRUTTURALE DEI MARKS
@@ -981,7 +995,7 @@
 % in questa posizione il macro-contenitore (\leftmark). Altrimenti, stampa la Sezione".
 %
 % ----------------------------------------------------------------------------------------------------------------------
-% 4. CONTRO - LA MODIFICA LEGITTIMA DEL CONTENUTO (Le API del Modello)
+% 4. CONTROL - LA MODIFICA LEGITTIMA DEL CONTENUTO (Le API del Modello)
 %
 % Tutto questo non significa che i marks siano intoccabili. Al contrario, \chaptermark e \sectionmark sono le API
 % ufficiali di LaTeX, i comandi di interfaccia pensati appositamente per essere ridefiniti e personalizzati.
@@ -993,7 +1007,7 @@
 %   (es. omettere la parola "Capitolo", usare il maiuscoletto, o inviare il "Titolo Breve" catturato dinamicamente).
 %
 % Agire su \chaptermark e \sectionmark per raffinare la stringa di testo PRIMA che venga inghiottita dal motore è una
-% pratica architetturalmente perfetta e pienamente incoraggiata. Sono comandi d'iterfaccia pensati anche per essere
+% pratica architetturalmente perfetta e pienamente incoraggiata. Sono comandi d'interfaccia pensati anche per essere
 % modificati.
 %
 % ----------------------------------------------------------------------------------------------------------------------
@@ -1023,6 +1037,10 @@
 % - I capitoli speciali (ToC, LoF, LoT) ereditano magicamente il layout corretto senza toccare una riga del loro codice:
 %   lasciando per loro natura il \rightmark vuoto, attivano automaticamente la logica condizionale della Vista.
 % ======================================================================================================================
+
+
+
+
 
 % ======================================================================================================================
 
