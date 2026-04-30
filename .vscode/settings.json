@@ -1,13 +1,13 @@
 {
-  // Text editor
+  // TEXT EDITOR
   "files.trimFinalNewlines": true,
 
-  // File associations
+  // FILE ASSOCIATIONS
   "files.associations": {
     "version": "plaintext"
   },
 
-  // Editor associations
+  // EDITOR ASSOCIATIONS
   "workbench.editorAssociations": {
     "*.drawio.svg": "hediet.vscode-drawio-text",
     "*.svg": "imagePreview.previewEditor"
@@ -54,39 +54,72 @@
     }
   ],
 
-  // Typst
+  // TYPST
   "tinymist.outputPath": "$dir/build/$name",
 
-  // LTeX+ (LanguageTool) Orthography and grammar checker: only supports one language at a time, but is more powerful
-  // than Code Spell Checker (see below), which only supports orthography. Here set to Italian, in order to set language
-  // automatically ofr whoever contributes to the project.
+  // LTeX+ ORTHOGRAPHY AND GRAMMAR CHECKER:
+  // only supports one language at a time, but is more powerful than Code Spell Checker (see below), which only supports
+  // orthography. Here set to Italian, in order to set language automatically ofr whoever contributes to the project.
   "ltex.language": "it",
 
-  // GitLens Extension
+  // GITLENS EXTENSION
   // Ho rimosso "containers" e "blocks" per evitare i suggerimenti fantasma vicino agli \include del file main.tex,
-  // fastidiosissimi. Questi suggerimenti sono quelli dedl tipo "2 authors (You and one other)". Lasciandoli accesi per
+  // fastidiosissimi. Questi suggerimenti sono quelli del tipo "2 authors (You and one other)". Lasciandoli accesi per
   // document se ne ottiene uno solo all'inizio del documento. La soluzione è stata togliere "containers" precisamente,
   // essendo i containers blocchi logici principali.
   "gitlens.codeLens.scopes": [
       "document"
   ],
 
-  // VSCode - Settings Locali (Scope = Workspace)
-  // Modifica locale delle impostazioni di VScode, affinchè mostri i delimitatori presi di riferimento per scrivere
+  // VSCODE - SETTINGS LOCALI (SCOPE = WORKSPACE)
+  // Modifica locale delle impostazioni di VScode, affinché mostri i delimitatori presi di riferimento per scrivere
   // il codice di questo progetto. Sono valori standard, spesso usati, in particolare "80", valore tipico, risalente
   // storicamente ai terminali UNIX, che avevano una larghezza di 80 caratteri. È tutt'ora comodo per quando si divide
   // lo schermo a metà tra due app. "120" è un valore più ampio ragionevole che consente di usare meglio lo schermo
   // intero. Un altro valore molto usato è "100".
   "editor.rulers": [80, 120],
 
-  // Code Spell Checker
+  // CODE SPELL CHECKER
   // Additional extension, alternative to LTeX+, thats supports bilingual correction, but only for orthography, not
-  // grammar. Only one of them should be active at a time, otherwise they will conflict.
+  // grammar. Only one of them should be active at a time if no relative limitation exists, otherwise they will
+  // conflict.
+  // Activates bilingual spell checking, in English and Italian.
   "cSpell.language": "en,it",
+  // Deactivates Code Spell Checker for LaTeX files, in order to keep cSpell active for other file types.
+  // Note that LTeX+ is still active for LaTeX files, and it is more powerful than cSpell, as it also supports grammar
+  // checking.
+  // Note also that the following Language-specific instructions could not work properly in detecting all LaTeX
+  // Ecosystem File Types, as some of them could be detected as "plaintext" or "miscellaneous" by VS Code, leading to
+  // cSpell being active and showing false positives. For instance, .cls and .sty files, respectively used for classes
+  // and packages in LaTeX, usually are not detected properly. Alternative solution for these is shown below.
+  "[latex]": {
+      "cSpell.enabled": false
+  },
+  "[tex]": {
+      "cSpell.enabled": false
+  },
+  "[bibtex]": {
+      "cSpell.enabled": false
+  },
+  // Deactivates Code Spell Checker for specific files. ADD HERE EXCEPTIONS FOR NOT DETECTED LATEX FILE TYPES.
+  // NOTE: "**" stands for "any directory or subdirectory", while "*." stands for "any file name".
+  "cSpell.ignorePaths": [
+      "**/*.cls",
+      "**/*.sty"
+  ],
+
+  // Custom dictionary terms, to avoid false positives.
+  // NOTA: Dictionary moved in a separate file, in .cspell folder
   "cSpell.words": [
-    "Ndocument",
-    "randazzo"
-  ]
+  ],
+  "cSpell.customDictionaries": {
+    "custom-dictionary-workspace": {
+      "name": "custom-dictionary-workspace",
+      "path": "${workspaceFolder:Eta-Kappa-Notes}/.cspell/custom-dictionary-workspace.txt",
+      "addWords": true,
+      "scope": "workspace"
+    }
+  }
 
   // NOTA BENE: tutte le entries del file .json devono essere separate da una virgola, tranne l'ultima, anche detta
   // "trailing o dangling comma" ("virgola terminale o pendente"), che va omessa!

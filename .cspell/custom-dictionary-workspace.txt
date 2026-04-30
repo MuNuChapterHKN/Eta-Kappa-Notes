@@ -1,0 +1,5 @@
+# Custom Dictionary Words.
+# ONE WORD FOR LINE.
+# Changes works once saved (ctrl+s).
+Ndocument
+Randazzo
