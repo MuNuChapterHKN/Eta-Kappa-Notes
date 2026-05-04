@@ -80,18 +80,16 @@
   "editor.rulers": [80, 120],
 
   // CODE SPELL CHECKER
-  // Additional extension, alternative to LTeX+, thats supports bilingual correction, but only for orthography, not
-  // grammar. Only one of them should be active at a time if no relative limitation exists, otherwise they will
-  // conflict.
+  // Additional extension, alternative to LTeX+, that supports bilingual correction, but only for spelling, not grammar.
+  // Only one of them should be active at a time unless scope limitations are set; otherwise, they will conflict.
   // Activates bilingual spell checking, in English and Italian.
   "cSpell.language": "en,it",
-  // Deactivates Code Spell Checker for LaTeX files, in order to keep cSpell active for other file types.
-  // Note that LTeX+ is still active for LaTeX files, and it is more powerful than cSpell, as it also supports grammar
-  // checking.
-  // Note also that the following Language-specific instructions could not work properly in detecting all LaTeX
-  // Ecosystem File Types, as some of them could be detected as "plaintext" or "miscellaneous" by VS Code, leading to
+  // Deactivates Code Spell Checker for LaTeX files, in order to keep cSpell active for other file types. Note that
+  // LTeX+ is still active for LaTeX files, and it is more powerful than cSpell, as it also supports grammar checking.
+  // Note also that the following language-specific instructions might not work properly in detecting all LaTeX
+  // ecosystem file types, as some of them might be detected as "plaintext" or "miscellaneous" by VS Code, leading to
   // cSpell being active and showing false positives. For instance, .cls and .sty files, respectively used for classes
-  // and packages in LaTeX, usually are not detected properly. Alternative solution for these is shown below.
+  // and packages in LaTeX, usually are not detected properly. An alternative solution for these is shown below.
   "[latex]": {
       "cSpell.enabled": false
   },
@@ -101,21 +99,31 @@
   "[bibtex]": {
       "cSpell.enabled": false
   },
-  // Deactivates Code Spell Checker for specific files. ADD HERE EXCEPTIONS FOR NOT DETECTED LATEX FILE TYPES.
+  // Deactivates Code Spell Checker for specific files. ADD EXCEPTIONS HERE FOR UNDETECTED LATEX FILE TYPES.
   // NOTE: "**" stands for "any directory or subdirectory", while "*." stands for "any file name".
   "cSpell.ignorePaths": [
       "**/*.cls",
       "**/*.sty"
   ],
-
-  // Custom dictionary terms, to avoid false positives.
-  // NOTA: Dictionary moved in a separate file, in .cspell folder
+  // Custom dictionary terms, to avoid false positives. Not used anymore: see the next entry for details.
   "cSpell.words": [
   ],
+  // NOTE: Dictionary moved to a separate file in the .cspell folder. See the "cSpell.customDictionaries" entry below.
+  // The dictionary path is shown in the "path" entry of "custom-dictionary-workspace". "addWords:true" activates the
+  // option to add new words to the dictionary directly from the VS Code interface (ctrl+. on the highlighted word).
+  // You can use the "HOVER" feature (VS Code), letting mouse hover above a term, to see suggestions for each entry.
+  // NOTE: "${workspaceFolder:Eta-Kappa-Notes}" is a VS Code substitution variable that points to the root directory of
+  // the project, specifying its name. If the root folder changes its name, or if you want to use the root folder
+  // regardless of its name, you can simply use "${workspaceFolder}" instead. The only disadvantage is that there will
+  // be no specific support for multiple root folders (e.g., if you use "Add Folder to Workspace").
+  // NOW SWITCHED TO GENERIC! Modified "${workspaceFolder:Eta-Kappa-Notes}" to "${workspaceFolder}". Useful if someone
+  // renames the folder on its pc.
+  // NOTE: This was autocreated using the command palette (Ctrl+Shift+P) and searching for "cSpell: Create Custom
+  // Dictionary".
   "cSpell.customDictionaries": {
     "custom-dictionary-workspace": {
       "name": "custom-dictionary-workspace",
-      "path": "${workspaceFolder:Eta-Kappa-Notes}/.cspell/custom-dictionary-workspace.txt",
+      "path": "${workspaceFolder}/.cspell/custom-dictionary-workspace.txt",
       "addWords": true,
       "scope": "workspace"
     }

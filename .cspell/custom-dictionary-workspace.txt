@@ -1,5 +1,9 @@
 # Custom Dictionary Words.
 # ONE WORD FOR LINE.
 # Changes works once saved (ctrl+s).
+autolang
+biblatex
 Ndocument
+normalem
 Randazzo
+risovrascriverlo

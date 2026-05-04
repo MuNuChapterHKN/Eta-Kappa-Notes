@@ -2,7 +2,7 @@
 % !TEX root = ../../main.tex
 
 % ------- PRE-PREAMBLE SECTION: DIRETTIVE DI INIZIALIZZAZIONE ANTICIPATA -------
-% Per modificare il comportamente della custom class HKNdocument senza toccarne
+% Per modificare il comportamento della custom class HKNdocument senza toccarne
 % il codice.
 
 % ==============================================================================
@@ -19,7 +19,7 @@
 % sulla gestione delle dipendenze in memoria, depositando istruzioni che
 % il compilatore dovrà ricordare ed eseguire in un secondo momento.
 % Si utilizza principalmente per patching, o per controllo di alcune dipendenze,
-% per workarounds, o per modificare globalmente il comporamente di alcuni
+% per workarounds, o per modificare globalmente il comportamento di alcuni
 % elementi.
 %
 % CASI D'USO COMUNI:
@@ -91,22 +91,22 @@
 % 5. PERCHE' NEL PRE-PREAMBOLO? (LA GESTIONE DELLA MEMORIA)
 % Questo comando deve stare prima del \documentclass. Se posizionato nel
 % preambolo standard, LaTeX lo ignorerebbe o andrebbe in crash ("Option
-% clash"), perché la classe avrebbe già caricato il paccheto ulem in memoria.
+% clash"), perché la classe avrebbe già caricato il pacchetto ulem in memoria.
 % Posizionandolo nel Pre-Preambolo, si lascia un "post-it" al compilatore:
 % quando la classe chiamerà ulem, LaTeX gli inietterà di nascosto l'opzione
 % 'normalem', aggirando i blocchi di sistema.
 %
 % 6. ALTRA SOLUZIONE NON PRATICA: MODIFICARE LA CUSTOM CLASS
-% Ovviamente per risovlere basterebbe modificare la custom class HKNdocument.cls
-% aggiunenddo l'opzione 'normalem' al comando \RequirePackage{ulem}. Tuttavia
-% questa soluzione invaliderebbe l'uncità dei file della classe pensata per il
+% Ovviamente per risolvere basterebbe modificare la custom class HKNdocument.cls
+% aggiungendo l'opzione 'normalem' al comando \RequirePackage{ulem}. Tuttavia
+% questa soluzione invaliderebbe l'unicità dei file della classe pensata per il
 % progetto. Tuttavia si tratta di un bug meritevole di correzione in generale,
 % attraverso una pull-request.
 %
 % 7. ALTRE SOLUZIONI INTERESSANTI:
 % - Si avrebbe potuto risolvere anche sfruttando il comando \normalem del
-%   pacchetto ulem, che ripstina il comando \emph al suo comportamento normale,
-%   in due modi diversi:
+%   pacchetto ulem, che ripristina il comando \emph al suo comportamento
+%   normale, in due modi diversi:
 %   1.  Mettendolo prima della bibliografia:
 %       \normalem  % Comando: Ripristina \emph al suo stato originale (corsivo)
 %       \printbibliography
