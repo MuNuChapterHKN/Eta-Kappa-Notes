@@ -79,47 +79,69 @@
   // intero. Un altro valore molto usato è "100".
   "editor.rulers": [80, 120],
 
-  // CODE SPELL CHECKER
+  // CODE SPELL CHECKER (cSpell) EXTENSION
   // Additional extension, alternative to LTeX+, that supports bilingual correction, but only for spelling, not grammar.
-  // Only one of them should be active at a time unless scope limitations are set; otherwise, they will conflict.
+  // Only one of them should be active at a time unless scope limitations are set; otherwise, they could conflict.
+  // Note thath they use different custom dictionaries (files), and that LTeX+ is more powerful than cSpell, as it
+  // supports grammar and spell (orthography) checking, while cSpell only supports spell checking. For this reasons,
+  // LTeX+ is set as the main e default checker for LaTeX files, while for the same files cSpell is deactivated, or
+  // limited to specific roles. Anyway cSpell is still active for other file types, as Commit Messages!
+  //
   // Activates bilingual spell checking, in English and Italian.
   "cSpell.language": "en,it",
-  // Deactivates Code Spell Checker for LaTeX files, in order to keep cSpell active for other file types. Note that
-  // LTeX+ is still active for LaTeX files, and it is more powerful than cSpell, as it also supports grammar checking.
-  // Note also that the following language-specific instructions might not work properly in detecting all LaTeX
-  // ecosystem file types, as some of them might be detected as "plaintext" or "miscellaneous" by VS Code, leading to
-  // cSpell being active and showing false positives. For instance, .cls and .sty files, respectively used for classes
-  // and packages in LaTeX, usually are not detected properly. An alternative solution for these is shown below.
-  "[latex]": {
-      "cSpell.enabled": false
+  // Deactivates Code Spell Checker for LaTeX Ecosystem files. Manual change of cSpell whitelist.
+  // NOTE: the following istructions uses language ID objects, that can be obtained by opening command palette
+  // (Ctrl+Shift+P), and searching and clicking on "Change Language Mode": search for "tex", and look at all the related
+  // IDs shown there. Other ways to open change language mode: click on the language string in the bottom right corner
+  // of the VS Code window, or use the keyboard shortcut (key chords, or sequential shortcut: Ctrl+K, M).
+  // Some of the IDs shown below are not native to VS Code, but are added by the LaTeX Workshop extension.
+  // NOTE: the VS Code native syntax, like "[latex]": {"cSpell.enabled": false} (on more rows) it is not supported.
+  // NOTE: cSpell recently changed syntax for this istruction. It was array-based, like (on more rows)
+  // "cSpell.enableFiletypes": ["!latex", "!tex", "!bibtex"], which now does not work anymore. Today is object-based.
+  "cSpell.enabledFileTypes": {
+      "latex": false,
+      "tex": false,
+      "latex-class": false,
+      "latex-package": false,
+      "latex-expl3": false,
+      "doctex": false,
+      "context": false,
+      "bibtex": false,
+      "biblatex": false,
+      "bibtex-style": false,
+      "doctex-installer": false,
+      "markdown_latex_combined": false,
+      "cpp_embedded_latex": false,
+      "latex_workshop_log": false,
+      "jsonc": false
   },
-  "[tex]": {
-      "cSpell.enabled": false
-  },
-  "[bibtex]": {
-      "cSpell.enabled": false
-  },
-  // Deactivates Code Spell Checker for specific files. ADD EXCEPTIONS HERE FOR UNDETECTED LATEX FILE TYPES.
-  // NOTE: "**" stands for "any directory or subdirectory", while "*." stands for "any file name".
+  // Deactivates Code Spell Checker for specific files. ADD EXCEPTIONS HERE FOR SPECIFIC FILES, FOLDER, OR FILE
+  // EXTENSIONS, IF NEEDED. Example: the string "**/*.cls" means all files with the .cls extension, in any directory or
+  // subdirectory. "**" stands for "any directory or subdirectory", while the "*" in "*." stands for "any file name".
   "cSpell.ignorePaths": [
-      "**/*.cls",
-      "**/*.sty"
   ],
   // Custom dictionary terms, to avoid false positives. Not used anymore: see the next entry for details.
   "cSpell.words": [
   ],
-  // NOTE: Dictionary moved to a separate file in the .cspell folder. See the "cSpell.customDictionaries" entry below.
-  // The dictionary path is shown in the "path" entry of "custom-dictionary-workspace". "addWords:true" activates the
-  // option to add new words to the dictionary directly from the VS Code interface (ctrl+. on the highlighted word).
-  // You can use the "HOVER" feature (VS Code), letting mouse hover above a term, to see suggestions for each entry.
-  // NOTE: "${workspaceFolder:Eta-Kappa-Notes}" is a VS Code substitution variable that points to the root directory of
-  // the project, specifying its name. If the root folder changes its name, or if you want to use the root folder
-  // regardless of its name, you can simply use "${workspaceFolder}" instead. The only disadvantage is that there will
-  // be no specific support for multiple root folders (e.g., if you use "Add Folder to Workspace").
-  // NOW SWITCHED TO GENERIC! Modified "${workspaceFolder:Eta-Kappa-Notes}" to "${workspaceFolder}". Useful if someone
-  // renames the folder on its pc.
+  // Sets up istructions to use a custom dictionary for the workspace, with the possibility to add words directly from
+  // VS code interface.
+  // NOTE: Dictionary is created in a dedicated file in the .cspell folder. See the "cSpell.customDictionaries" entry
+  // below, to see every detail about the setup. You can use the "HOVER" feature (VS Code), letting mouse hover above
+  // a term, to see suggestions for each entry.
+  // - "custom-dictionary-workspace" is the name of the custom dictionary JSON object, that can be chosen freely.
+  // - "name": specifies the custom dictionary name used internally by cSpell. Best Practice: use the same as above.
+  // - "path": specifies the path to the custom dictionary file.
+  //   NOTE: "${workspaceFolder:Eta-Kappa-Notes}" is a VS Code substitution variable that points to the root directory
+  //   of the project, specifying its name. If the root folder changes its name, or if you want to use the root folder
+  //   regardless of its name, you can simply use "${workspaceFolder}" instead. The only disadvantage is that there will
+  //   be no specific support for multi-root workspaces (e.g., if you use "Add Folder to Workspace"). NOW SWITCHED TO
+  //   GENERIC! Modified "${workspaceFolder:Eta-Kappa-Notes}" to "${workspaceFolder}". Useful if someone renames the
+  //   folder on its pc.
+  // - ("addWords": true): activates the option to add new words to the dictionary directly from the VS Code interface:
+  //   ctrl+. on the highlighted word, or click on the lightbulb icon that appears when hovering the mouse over it.
+  // - ("scope": "workspace"): specifies that the custom dictionary is limited to the workspace, and not global.
   // NOTE: This was autocreated using the command palette (Ctrl+Shift+P) and searching for "cSpell: Create Custom
-  // Dictionary".
+  // Dictionary". Then manually modified to adjust it to the project structure and needs.
   "cSpell.customDictionaries": {
     "custom-dictionary-workspace": {
       "name": "custom-dictionary-workspace",
