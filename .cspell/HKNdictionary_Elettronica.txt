@@ -5,10 +5,15 @@ autolang
 biblatex
 bibtex
 doctex
+everypage
 expl
+hediet
 iffalse
+ifundefined
+longtable
 ltex
 Ndocument
 normalem
 Randazzo
 risovrascriverlo
+TYPST
