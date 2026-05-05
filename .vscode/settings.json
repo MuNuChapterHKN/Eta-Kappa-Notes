@@ -82,30 +82,56 @@
   // CODE SPELL CHECKER (cSpell) EXTENSION
   // Additional extension, alternative to LTeX+, that supports bilingual correction, but only for spelling, not grammar.
   // Only one of them should be active at a time unless scope limitations are set; otherwise, they could conflict.
-  // Note thath they use different custom dictionaries (files), and that LTeX+ is more powerful than cSpell, as it
+  // Note that they use different custom dictionaries (files), and that LTeX+ is more powerful than cSpell, as it
   // supports grammar and spell (orthography) checking, while cSpell only supports spell checking. For this reasons,
-  // LTeX+ is set as the main e default checker for LaTeX files, while for the same files cSpell is deactivated, or
+  // LTeX+ is set as the main and default checker for LaTeX files, while for the same files cSpell is deactivated, or
   // limited to specific roles. Anyway cSpell is still active for other file types, as Commit Messages!
   //
   // Activates bilingual spell checking, in English and Italian.
   "cSpell.language": "en,it",
   // Deactivates Code Spell Checker for LaTeX Ecosystem files. Manual change of cSpell whitelist.
-  // NOTE: the following istructions uses language ID objects, that can be obtained by opening command palette
+  // NOTE: the following instructions uses language ID objects, that can be obtained by opening command palette
   // (Ctrl+Shift+P), and searching and clicking on "Change Language Mode": search for "tex", and look at all the related
   // IDs shown there. Other ways to open change language mode: click on the language string in the bottom right corner
   // of the VS Code window, or use the keyboard shortcut (key chords, or sequential shortcut: Ctrl+K, M).
   // Some of the IDs shown below are not native to VS Code, but are added by the LaTeX Workshop extension.
-  // NOTE: the VS Code native syntax, like "[latex]": {"cSpell.enabled": false} (on more rows) it is not supported.
-  // NOTE: cSpell recently changed syntax for this istruction. It was array-based, like (on more rows)
+  // NOTE: the VS Code native syntax, like "[latex]": {"cSpell.enabled": false} (on multiple lines) it is not supported.
+  // NOTE: cSpell recently changed syntax for this instruction. It was array-based, like (on more rows)
   // "cSpell.enableFiletypes": ["!latex", "!tex", "!bibtex"], which now does not work anymore. Today is object-based.
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  /*
+  UPDATE: RE-ENABLE CSPELL ONLY FOR FILE TYPES WHERE WE WANT TO READ COMMENTS: CSPELL SURGICAL APPROACH.
+  Explanations for the selected IDs / Native cSpell / Native LTeX+ / Surgical cSpell for comments:
+  - latex, tex: Standard files (.tex). Nat. cSpell: Active. Nat. LTeX+: Active. Surgical: YES.
+  - latex-class, latex-package: Classes (.cls) and packages (.sty). Nat. cSpell: Active?. Nat. LTeX+: Active.
+    Surgical: YES.
+  - latex-expl3: Modern LaTeX3 programming scripts. Nat. cSpell: Inactive. Nat. LTeX+: Struggles. Surgical: YES.
+  - doctex: Documented LaTeX source files (.dtx). Nat. cSpell: Inactive. Nat. LTeX+: Active. Surgical: YES.
+  - context: ConTeXt typesetting system files. Nat. cSpell: Inactive. Nat. LTeX+: Active. Surgical: YES.
+  - bibtex, biblatex: Bibliography databases (.bib). Nat. cSpell: Inactive. Nat. LTeX+: Active. Surgical: NO
+    (disabled to avoid false positives on foreign names and titles).
+  - bibtex-style: BibTeX styles (.bst). Nat. cSpell: Inactive. Nat. LTeX+: Inactive. Surgical: NO.
+  - doctex-installer, markdown_latex_combined, cpp_embedded_latex, latex_workshop_log: Installers, logs, hybrid
+    files. Nat. cSpell: Inactive. Nat. LTeX+: Active (Markdown)/Inactive. Surgical: NO (prevents conflicts/errors).
+  - json, jsonc: JSON and JSON with Comments files. Nat. cSpell: Active. Nat. LTeX+: Inactive. Surgical: YES.
+  NOTE: Explicitly setting "true" ensures custom IDs provided by the extensions are always checked, overriding
+  cSpell's default internal whitelist.
+  NOTE: WHY cSpell? HAS LTeX+ GOT AN OPTION TO CHECK COMMENTS TOO? No, LTeX+ does not have a built-in option to check
+  for LaTeX comments: its LaTeX comment ignoring logic its hardcoded and cannot be modified by options. Anyway, even if
+  it were possible to enabled it, grammar checking for comments would be a nightmare: not recommended. LTeX+ docs
+  report that the extension can also check only comments in other programming languages (using ltex.enabled, putting
+  Language IDs of non-LaTeX files), but does the exact opposite on LaTeX files, where it checks only code and ignores
+  comments.
+  */
   "cSpell.enabledFileTypes": {
-      "latex": false,
-      "tex": false,
-      "latex-class": false,
-      "latex-package": false,
-      "latex-expl3": false,
-      "doctex": false,
-      "context": false,
+      "latex": true,
+      "tex": true,
+      "latex-class": true,
+      "latex-package": true,
+      "latex-expl3": true,
+      "doctex": true,
+      "context": true,
       "bibtex": false,
       "biblatex": false,
       "bibtex-style": false,
@@ -113,8 +139,101 @@
       "markdown_latex_combined": false,
       "cpp_embedded_latex": false,
       "latex_workshop_log": false,
-      "jsonc": false
+      "json": true,
+      "jsonc": true
   },
+  // SURGICAL MODE: For the activated languages above, tell cSpell to read ONLY the comments. Implemented using regular
+  // expressions (RegEx): special string patterns that cSpell will use to identify the text to be checked.
+  // [NOTE: this comment cannot be transformed into a multi-line json comment because it contains the "/*...*/" string]
+  //
+  // --- DETAILED REGEX STRATEGIES FOR CSPELL ---
+  //
+  // ESCAPE CHARACTER IN JSON - JSON vs REGEX:
+  // In JSON files, the backslash ("\") is an escape character. To send a single backslash to the RegEx engine, we must
+  // write two of them in the JSON ("\\"). To send two (which the RegEx engine interprets as "find a literal
+  // backslash", because it's an escape sequence in RegEx too), we must write four of them ("\\\\").
+  //
+  // BRACKETS IN REGEX:
+  // - ROUND BRACKETS OR PARENTHESES "(...)" - GROUPS: Create a "group", which is a sequence treated by the Regex
+  //   engine as a single unified block. It behaves like a sequence or concatenation: it matches exactly the characters
+  //   sequence inside, in the exact order they appear. They can be used for multiple purposes:
+  //   * Defining a simple string of characters to find as a single unit.
+  //   * Calling special command with complex syntax: the parentheses enclose the all the command itself with its
+  //     arguments, making them clearly identifiable. These commands are meant to be initiated by a parenthesis, like
+  //     the negative lookbehind "(?<!string_to_exclude)" discussed below: when a group starts with "(?", it tells the
+  //     engine: "This is a special command, not literal text".
+  //   Furthermore, each pair of parentheses creates a "capture group", which is a memory-based feature: they can be
+  //   used to "remember the matched string". More precisely, each pair creates a background variable that stores the
+  //   matched text in RAM. This can be recalled later (e.g., in the replace field of "Find and Replace") using
+  //   specific syntax ($1, $2, etc., for the first, second, etc., group respectively).
+  //   The general effect of parentheses is to ADD UP everything inside them into a single unit. One could say they
+  //   behave like a "LOGICAL AND", but it is not a perfect analogy: the order of the characters inside strictly
+  //   matters, whereas a pure LOGICAL AND would not care about it.
+  // - SQUARE BRACKETS OR BRACKETS "[...]" - OPTIONS (CHARACTER CLASSES): Create a list of acceptable options for a
+  //   single position, called a "character class". The engine will match ONLY ONE of the characters inside the
+  //   brackets. It behaves exactly like a LOGICAL "OR": e.g., "[abc]" matches "a" OR "b" OR "c". Here, the logic
+  //   description its exact and not just an analogy: its the way the engine works with square brackets.
+  // - CURLY BRACKETS O BRACES "{...}" - QUANTIFIERS: They specify EXACTLY how many times the preceding character,
+  //   group, or class must be repeated. For example, "a{3}" matches exactly "aaa". "[0-9]{2,4}" matches between 2 and 4
+  //   digits (e.g., "12", "1234").
+  // NOTE ON NESTING:
+  // Brackets can absolutely be nested to create complex logic! For example, "([A-Z][a-z]{1,5})" is a Group (identified
+  // by parentheses) that contains two Character Classes (square) and a Quantifier (curly). It translates to: "Find a
+  // sequence starting with one uppercase letter, followed by 1 to 5 lowercase letters, and treat it as a single unit."
+  //
+  // NEGATIVE LOOKBEHIND REGEX:
+  // When a group starts with "(?", it tells the engine: "This is a special command, not literal text". Specifically,
+  // the sequence "?<!" in inside "(?<!string_to_exclude)target", means "Negative Lookbehind": the "string_to_exclude"
+  // which follows ?<! inside the group is used as a condition to ensure that what precedes the "target" (what follows
+  // the group) does NOT match it. Literally, the RegEx engine looks behind the "target" to exclude cases where the
+  // specified string_to_exclude is found. This is crucial for our surgical approach, as it allows us to precisely
+  // target comments while avoiding false positives in code. See following text for specific examples.
+  //
+  // 1. LATEX COMMENTS: "(?<!\\\\)%.*" to capture single-line LaTeX comments ("%...").
+  // RESULT: Captures everything from "%" to the end of the line, ONLY IF it is a real comment and not an escaped
+  // percentage like "\%".
+  // - "(?<!\\\\)": The negative lookbehind. It checks that immediately before our target there is NO backslash.
+  //   (Note: remember that "\\\\" in JSON becomes "\\" in RegEx, which translates to "find a literal backslash" "\".).
+  // - "%": The target. It looks for the literal percent symbol.
+  // - ".*": The payload. "." means "any character (except newline)", and "*" means "zero or infinite times".
+  // NOTE: LTeX+ is already active for LaTeX block comments written with the "comment" environment, or with the
+  // other code-based trick (iffalse, void macro with one argument, etc.) because in both cases is considered as code.
+  //
+  // 2. JSON/JSONC SINGLE-LINE COMMENTS: "(?<!:)//.*" to capture single-line comments ("//...").
+  // RESULT: Captures standard "// comments" but safely ignores URLs like "https://..." inside JSON string values.
+  // - "(?<!:)": The negative lookbehind. It ensures there is NO colon (":") immediately before the target.
+  // - "//": The target. Looks for two literal forward slashes.
+  // - ".*": The payload. Captures everything after the slashes until the end of the line.
+  //
+  // 3. JSON/JSONC MULTI-LINE COMMENTS: "/\\*[\\s\\S]*?\\*/" to capture block comments ("/*...*/").
+  // RESULT: Captures block comments /*...*/ spanning multiple lines, without accidentally eating code between blocks.
+  // - "/\\*": The start target. Matches a literal forward slash "/" followed by an asterisk "*". (The asterisk
+  //   is a RegEx command meaning "multiply", so it must be escaped to be passed as a literal character: it's done with
+  //   a "\" RegEx backslash, which translates in "\\" in JSON (the first backslash escapes the second)).
+  // - "[\\s\\S]": The "match absolutely anything" trick. "\s" means "spaces/newlines", "\S" means "non-spaces".
+  //   Inside brackets "[...]" they form a character class that means "match a character that is EITHER a space OR a
+  //   non-space" (i.e., anything).
+  // - "*?": The "Lazy" modifier. "*" says "repeat the previous rule zero or infinite times". The "?" says "but
+  //   stop exactly at the VERY FIRST closing tag you find, don't eat the whole file".
+  // - "\\*/": The end target. Matches an escaped asterisk "\*" followed by a forward slash "/". Escaped like the first.
+
+  "cSpell.languageSettings": [
+      {
+          "languageId": "latex,tex,latex-class,latex-package,latex-expl3,doctex,context",
+          "includeRegExpList": [
+              "(?<!\\\\)%.*"
+          ]
+      },
+      {
+          "languageId": "json,jsonc",
+          "includeRegExpList": [
+              "(?<!:)//.*",
+              "/\\*[\\s\\S]*?\\*/"
+          ]
+      }
+  ],
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   // Deactivates Code Spell Checker for specific files. ADD EXCEPTIONS HERE FOR SPECIFIC FILES, FOLDER, OR FILE
   // EXTENSIONS, IF NEEDED. Example: the string "**/*.cls" means all files with the .cls extension, in any directory or
   // subdirectory. "**" stands for "any directory or subdirectory", while the "*" in "*." stands for "any file name".
@@ -123,7 +242,7 @@
   // Custom dictionary terms, to avoid false positives. Not used anymore: see the next entry for details.
   "cSpell.words": [
   ],
-  // Sets up istructions to use a custom dictionary for the workspace, with the possibility to add words directly from
+  // Sets up instructions to use a custom dictionary for the workspace, with the possibility to add words directly from
   // VS code interface.
   // NOTE: Dictionary is created in a dedicated file in the .cspell folder. See the "cSpell.customDictionaries" entry
   // below, to see every detail about the setup. You can use the "HOVER" feature (VS Code), letting mouse hover above
@@ -143,9 +262,9 @@
   // NOTE: This was autocreated using the command palette (Ctrl+Shift+P) and searching for "cSpell: Create Custom
   // Dictionary". Then manually modified to adjust it to the project structure and needs.
   "cSpell.customDictionaries": {
-    "custom-dictionary-workspace": {
-      "name": "custom-dictionary-workspace",
-      "path": "${workspaceFolder}/.cspell/custom-dictionary-workspace.txt",
+    "HKNdictionary_Elettronica": {  // Project Specific Custom Dictionary for Elettronica di Base Randazzo notes.
+      "name": "HKNdictionary_Elettronica",
+      "path": "${workspaceFolder}/.cspell/HKNdictionary_Elettronica.txt",
       "addWords": true,
       "scope": "workspace"
     }

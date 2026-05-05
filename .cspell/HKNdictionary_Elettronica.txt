@@ -3,6 +3,11 @@
 # Changes works once saved (ctrl+s).
 autolang
 biblatex
+bibtex
+doctex
+expl
+iffalse
+ltex
 Ndocument
 normalem
 Randazzo
