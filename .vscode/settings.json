@@ -24,8 +24,8 @@
   "latex-workshop.latex.rootFile.useSubFile": true,
   "latex-workshop.message.latexlog.exclude": [
       "Infinite glue shrinkage found in box being split",
-      "Package everypage Warning: Functionality similar to this package has recently",
-      "Package everypage Warning: You appear to be running a version of LaTeX"
+      "Package everypage Warning: Functionality similar to this package has recently",  // CUSTOM ADDED
+      "Package everypage Warning: You appear to be running a version of LaTeX"          // CUSTOM ADDED
     ],
     // ABOVE: IGNORED LATEX WARNINGS LIST (Hidden by VS Code, but they are still printed in the raw LaTeX .log file)
     // 1) TeX Live 2025 triggers this 'ignored error' when a longtable is split across pages.
@@ -57,10 +57,8 @@
   // TYPST
   "tinymist.outputPath": "$dir/build/$name",
 
-  // LTeX+ ORTHOGRAPHY AND GRAMMAR CHECKER:
-  // only supports one language at a time, but is more powerful than Code Spell Checker (see below), which only supports
-  // orthography. Here set to Italian, in order to set language automatically ofr whoever contributes to the project.
-  "ltex.language": "it",
+  ///////////////////////////////////////////// CUSTOMIZATION STARTS HERE //////////////////////////////////////////////
+  // Other modifications prior to this are flagged above.
 
   // GITLENS EXTENSION
   // Ho rimosso "containers" e "blocks" per evitare i suggerimenti fantasma vicino agli \include del file main.tex,
@@ -219,6 +217,9 @@
   // ALTERNATIVE: RegEx has a built-in command for "word characters" (letters, numbers, and underscores for snake_case):
   // "\w", which is exactly equivalent to "[a-zA-Z0-9_]". So we could have used "\\\\[\\w@*]+", but the explicit version
   // above is more didactic.
+  // NOTE: This prevents false positives from LaTeX commands, but could cause some false negatives if command is
+  // misspelled. However, this is an acceptable trade-off (otherwise every command should be added to the dictionary, to
+  // avoid false positives).
   //
   // 3. JSON/JSONC SINGLE-LINE COMMENTS: "(?<!:)//.*" to capture single-line comments ("//...").
   // RESULT: Captures standard "// comments" but safely ignores URLs like "https://..." inside JSON string values.
@@ -268,9 +269,9 @@
   ],
   // Sets up instructions to use a custom dictionary for the workspace, with the possibility to add words directly from
   // the VS code interface.
-  // NOTE: Dictionary is created in a dedicated file in the .cspell folder. See the "cSpell.customDictionaries" entry
-  // below, to see every detail about the setup. You can use the "HOVER" feature (VS Code), letting the mouse hover above
-  // a term, to see suggestions for each entry.
+  // NOTE: Dictionary is created in a dedicated file in the specified folder. See the "cSpell.customDictionaries" entry
+  // below, to see every detail about the setup. You can use the "HOVER" feature (VS Code), letting the mouse hover
+  // above a term, to see suggestions for each entry.
   // - "custom-dictionary-workspace" is the name of the custom dictionary JSON object, which can be chosen freely.
   // - "name": specifies the custom dictionary name used internally by cSpell. Best Practice: use the same as above.
   // - "path": specifies the path to the custom dictionary file.
@@ -285,14 +286,106 @@
   // - ("scope": "workspace"): specifies that the custom dictionary is limited to the workspace, and not global.
   // NOTE: This was autocreated using the command palette (Ctrl+Shift+P) and searching for "cSpell: Create Custom
   // Dictionary". Then manually modified to adjust it to the project structure and needs.
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // UPDATE: DOUBLE DICTIONARY STRATEGY: BRANCH-SPECIFIC DICTIONARY AND CENTRAL DICTIONARY FOR BOTH cSpell and LTeX+.
+  // NOTE: both the extensions use "one word per line" file format for custom dictionary, but cSpell allows for
+  // comments with "#", whereas LTeX+ does not. So do not add comments in the dictionary file.
+  // NOTE: even though LTeX+ is a much more powerful checker than cSpell (supports grammar too alongside orthography=
+  // = spelling), its much more dumber than cSpell in managing custom dictionaries, e.g.:
+  // - cSpell support read and write operations for any number of custom dictionaries, supporting "add to ....
+  //   dictionary" buttons in VS Code UI (little lightbulb menu, equivalent to Ctrl+.), and every adding operation
+  //   reorders the dictionary file alphabetically. Furthermore applies the custom dictionaries to all language, and the
+  //   user can voluntarily disable or enable adding-from-UI feature and modify the scope for each dictionary file.
+  //   In the end, supports comments too with "#".
+  // - LTeX+ supports multiple custom dictionaries too, but only supports a single custom dictionary for writing
+  //   operations from VS Code UI (lamp icon), with a simple "append to the end of the file" logic, and no reordering.
+  //   Furthermore has a rigid language-based dictionary file management: every language must have its own declaration.
+  //   This problem is solved by aiming to the same files for both it and en languages.
+  //   The from-UI-writing supported dictionary is the first one in the declaration list, for each language.
+  //   On top of that, no comment support.
+  // The following commands keep all these differences in mind.
+  // REMEMBER: cSpell has RegEx exclude for LaTeX commands, using "\...", inside comments. cSpell is active for
+  // comments in LaTeX files, and for other file types (there does the entire standard checking).
+  //
+  // NOTE: the alphabetical reordering feature of cSpell is a very neat trick. Even if LTeX+ doesn't reorder, the
+  // next cSpell call will take care of that, reordering the entire file! Global dictionary from-UI-writing setting
+  // could be temporarily set to "true" just to use this feature to reorder the file.
+  //
+  // BRANCH-SPECIFIC CUSTOM DICTIONARY = HKNdictionaryLocal.txt
+  // This is where the user can add its terms.
+  //
+  // CENTRAL GENERIC CUSTOM DICTIONARY = HKNdictionaryGlobal.txt
+  // Should contain LaTeX, Typst, Typography, IT, math, physics, science non standard generic terms.
+  // This is a centralized dictionary for the entire project. The user can't add words from the VS Code interface
+  // ("addWords": false), because it's meant to be manually edited by the project maintainers.
+  // Words are added manually, for instance by refactoring the branch-specific dictionaries (use AI to extract and order
+  // terms), with a prompt sequence like:
+  // 1. "Extract only non standard italian or english generic terms related to LaTeX, Typst, Typography, IT, (math,
+  //     physics, science ?) from these files. Exclude context specific terms, like proper names..."
+  // 2. "Join this 2 files, old dictionary and dictionary upgrade, removing duplicates and sorting alphabetically,
+  //     keeping the "one word per line" format."
+  // NOTE: the branch specific dictionary can be cleaned up from transferred terms, or kept as it is (with duplicates).
+  //
+  // WHY THIS DOUBLE DICTIONARY STRATEGY? Because it allows to keep the global dictionary clean and generic, avoiding
+  // a huge mixed dictionary for the entire project. It would be works as well, but it would be more subject to
+  // introduction of misspellings (by mistake) from multiple users. Furthermore, there is no need to have ultra-specific
+  // terms in the global dictionary. The merging maintenance is similar to both cases. Anyway the global dictionary
+  // should not be updated very often.
+
   "cSpell.customDictionaries": {
-    "HKNdictionary_Elettronica": {  // Project Specific Custom Dictionary for Elettronica di Base Randazzo notes.
-      "name": "HKNdictionary_Elettronica",
-      "path": "${workspaceFolder}/.cspell/HKNdictionary_Elettronica.txt",
-      "addWords": true,
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // UPDATE: DISABLED TO USE CENTRALIZED DICTIONARIES FOR BOTH LTeX+ AND cSpell.
+    // Project Specific Custom Dictionary for Elettronica di Base Randazzo notes.
+    // "HKNdictionary_Elettronica": {
+    //   "name": "HKNdictionary_Elettronica",
+    //   "path": "${workspaceFolder}/.cspell/HKNdictionary_Elettronica.txt",
+    //   "addWords": true,
+    //   "scope": "workspace"
+    // },
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    "HKNdictionaryGlobal": {
+      "name": "HKNdictionaryGlobal",
+      "path": "${workspaceFolder}/dictionaries/HKNdictionaryGlobal.txt",
+      "addWords": false,    // user can't add words from the VS Code UI. Turn it true temporarily to reorder with cSpell
       "scope": "workspace"
-    }
-  }
+    },
+    "HKNdictionaryLocal": {
+      "name": "HKNdictionaryLocal",
+      "path": "${workspaceFolder}/dictionaries/HKNdictionaryLocal.txt",
+      "addWords": true,     // user can add words from the VS Code UI
+      "scope": "workspace"
+    },
+  },
+
+  // LTeX+ ORTHOGRAPHY AND GRAMMAR CHECKER:
+
+  // USER MUST SET LANGUAGE HERE IN ORDER TO OBTAIN BEST RESULTS FROM LTeX+. This instruction set the Global Fallback
+  // language, which is used when no other higher priority switches are active.
+  // NOTE: "auto" option is available, but discouraged even from the author of the extension in the official LTeX+
+  // documentation, because it is not very reliable.
+  // See: https://ltex-plus.github.io/ltex-plus/settings.html#ltexlanguage:~:text=%22auto%22%3A%20Automatic%20language%20detection%20(not%20recommended)
+  // NOTE: LTeX+ only supports one language at a time, but is more powerful than Code Spell Checker (see below), which
+  // only supports orthography.
+  // NOTE: LTeX+ has a feature to automatically switch language along with LaTeX language-switching commands, precisely
+  // \begin{otherlanguage}{language} environment, \foreignlanguage{language}{text}, \selectlanguage{language}. It uses
+  // its own parser, and ignores LaTeX logics (e.g.: it doesn't care about what languages are imported for babel)).
+  // These auto switches have higher priority than the global fallback language!
+  "ltex.language": "it",
+
+  // CUSTOM DICTIONARIES FOR LTeX+. SEE COMMENTS ABOVE FOR THE DOUBLE DICTIONARY STRATEGY.
+  // NOTE: LTeX+ uses a different relative path syntax. ":" stands for ".vscode" folder. "../" goes back as usual.
+  // NOTE: if more languages are needed, just add them with the same structure to use the custom dictionaries.
+  "ltex.dictionary": {
+      "it": [
+          ":../dictionaries/HKNdictionaryLocal.txt",
+          ":../dictionaries/HKNdictionaryGlobal.txt"
+      ],
+      "en": [
+          ":../dictionaries/HKNdictionaryLocal.txt",
+          ":../dictionaries/HKNdictionaryGlobal.txt"
+      ]
+  },
 
   // NOTA BENE: tutte le entries del file .json devono essere separate da una virgola, tranne l'ultima, anche detta
   // "trailing o dangling comma" ("virgola terminale o pendente"), che va omessa!

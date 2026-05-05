@@ -7,7 +7,7 @@
 % per volontà del project manager che lo ha posto come utile indicazione.
 % Per ulteriori spiegazioni sui Magic Comments, ho scritto un'ampia guida su di essi con spiegazioni su utilizzo e
 % ruolo, con particolare riferimento a "!TEX root", trasferita in un file dedicato
-% (MainAppendices/00.1_MagicCommentsExpained.tex), tra l'altro imporato a seguire per consistenza (vedi preambolo).
+% (MainAppendices/00.1_MagicCommentsExplained.tex), tra l'altro imporato a seguire per consistenza (vedi preambolo).
 
 % ----------------------- PRE-PREAMBLE SECTION: DIRETTIVE DI INIZIALIZZAZIONE ANTICIPATA: START ------------------------
 % Per modificare il comportamente della custom class HKNdocument senza toccarne il codice. Ulteriori spiegazioni su
@@ -86,7 +86,7 @@
 %\frontmatter                       % HO DISATTIVATO IL MAINMATTER NELLA CUSTOM CLASS: non richiamare per non riavviare
                                     % la numerazione romana!
 %
-\input{cclicense.tex}               % Stampa la sezione Preentazione e Licenza
+\input{cclicense.tex}               % Stampa la sezione Presentazione e Licenza
 \RefMattBlackLinksColor             % Imposta i link in nero, per evitare di riempire di colore ToC, LoF, LoT.
 \tableofcontents                    % Stampa l'indice generale
 \newpage
@@ -101,7 +101,7 @@ prova
 %                                   % NOTA: vedi global settings per note sui link e i loro colori.
 \include{chapters/00_Prefazione}    % Prefazione: obiettivi e contesto del libro
 \HKNblankpage                       % Pagina bianca, per separare la prefazione dal resto del testo.
-%                                   % NOTA: la uso perchè la prefazione termina su una pagina dispari, dunque
+%                                   % NOTA: la uso perché la prefazione termina su una pagina dispari, dunque
 %                                   % \frontmatter fa un \cleardoublepage, che lascia la pagina completamente bianca a
 %                                   % causa dell'uso del pacchetto emptypage (Che lo modifica: rimuove testatina e numero
 %                                   % di pagina)
@@ -150,7 +150,7 @@ righe non sono commentate!
 % ATTENZIONE: COMANDO MODIFICATO CON NUOVA VERSIONE DELLA CUSTOM CLASS 2026-04
 
 % 2. Chiamata Chaptermark nella presentazione e nella licenza: basta riempire il
-%    lefmark
+%    leftmark
 %    Fanne uno solo (perchè se attivo le testatine asimmetriche poi ne viene
 %    stampato uno solo): ad esempio "Presentazione e Licenza"
 %    Si potrebbero trasformare in capitoli non numerati.
@@ -230,7 +230,11 @@ righe non sono commentate!
 
 % 23. Corsivo opzionale nelle testatine.
 
-% 24. Rendere Robusti eventuali comandi.
+% 24. Rendere Robusti eventuali comandi. Non credo serva in realtà, vedi
+%     commenti a riguardo.
+
+% 25. Gestione dizionari branch-specific + central. Già implementato qui
+%     Vedi settings.json.
 
 \begin{comment} CANDIDATE PULL REQUESTS (PR) PER TEMPLATE HKN
 ================================================================================
