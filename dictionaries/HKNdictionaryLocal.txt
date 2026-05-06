@@ -1,6 +1,7 @@
 approf
 autogenerano
 autogenerazione
+bibintoc
 Blalock
 casellina
 ccbyncnd
@@ -27,6 +28,7 @@ modellizzandolo
 modellizzata
 multilinea
 multiriga
+Nbibheadingstyle
 nomecapitolo
 parsare
 patchano
@@ -40,6 +42,16 @@ rinizia
 risovrascriverlo
 Sottomotore
 sovrascritta
+SOVRASCRITTE
 Storey
 tokenizzazione
+wrappando
 Xstudio
+
+unreasonable
+effectiveness
+mathematics
+sciences
+Communications
+Applied
+Mathematics
