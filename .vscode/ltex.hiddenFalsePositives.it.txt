@@ -72,3 +72,5 @@
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qlot\\E$"}
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qlof\\E$"}
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qo  #1 .\\E$"}
+
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qenv/theindex/begin\\E$"}

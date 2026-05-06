@@ -12,11 +12,11 @@
 % variabili, tuttavia si può usare una macro per contenere qualsiasi cosa, come fosse di fatto una variabile.
 
 % NOTA BENE: COME SCRIVERE MACRO SU PIÙ RIGHE - ATTENZIONE AGLI A CAPO - TIPICI PROBLEMI DI FORMATTAZIONE
-% Nella definizioe di macro, i simboli "%" prima degli a capo sono utili per evitare che vengano inseriti comandi di new
+% Nella definizione di macro, i simboli "%" prima degli a capo sono utili per evitare che vengano inseriti comandi di new
 % line o di space (spazi bianchi in generale: un "a capo" diventa uno spazio, due o più "a capo" diventano un "a capo"
-% nel pdf) indesiderati nel documento generato. Letteralmente vengono "commentati via". Come good pratice generale, è
+% nel pdf) indesiderati nel documento generato. Letteralmente vengono "commentati via". Come good practice generale, è
 % consigliato metterli sempre ogni qual volta si va a capo, in particolare quando si definiscono macro che generano
-% blocchi di testo. Questo consenste di evitare in generale problemi di formattazione, particolarmente subdoli da
+% blocchi di testo. Questo consente di evitare in generale problemi di formattazione, particolarmente subdoli da
 % identificare nel codice sorgente, e da risolvere). Altrimenti le Macro possono essere dichiarate tutte su una riga, ma
 % è consigliabile solo per macro molto semplici e brevi.
 
@@ -32,15 +32,15 @@
 
 % --------------------------------------------- MACRO TIPOGRAFICHE UTILI -----------------------------------------------
 \newcommand{\ddq}[1]{\lq\lq#1\rq\rq}    % Doppie doppie virgolette inglesi. Preferire le versioni a seguire,
-                                        % che hanno la semantica speficata (così che in caso di necessità, l'effetto sia
-                                        % modificabile globalmente con un unico intervento))
+                                        % che hanno la semantica specificata (così che in caso di necessità, l'effetto
+                                        % sia modificabile globalmente con un unico intervento))
 \newcommand{\fig}[1]{\enquote*{#1}}     % Per citare termini in senso figurato. In italiano stampa doppie doppie
-                                        % virgolette inglesi. Maniene effetti contestuali di csquote, gestisce
-                                        % microspazi e altre virgolett interne da solo.
+                                        % virgolette inglesi. Mantiene effetti contestuali di csquotes, gestisce
+                                        % microspazi e altre virgolette interne da solo.
 \newcommand{\quo}[1]{\enquote{#1}}      % Per citazioni letterali e discorso diretto. In italiano stampa doppie doppie
-                                        % caporali. Maniene effetti contestuali di csquote, gestisce microspazi e altre
-                                        % virgolett interne da solo.
-\newcommand{\lit}[1]{\lq#1\rq}          % Per signficato letterale. Stampa virgolette singole inglesi.
+                                        % caporali. Mantiene effetti contestuali di csquotes, gestisce microspazi e altre
+                                        % virgolette interne da solo.
+\newcommand{\lit}[1]{\lq#1\rq}          % Per significato letterale. Stampa virgolette singole inglesi.
 
 % --------------------------------------------- MACRO LINGUISTICHE UTILI -----------------------------------------------
 \newcommand{\en}[1]{\foreignlanguage{english}{#1}}      % Per termini in lingua inglese, in modo che il motore
@@ -49,7 +49,7 @@
                                                         % tipografico gestisca correttamente la sillabazione.
 
 % ------------------------------------- MACRO PER STAMPA VOLONTARIA DI PAGINE VUOTE ------------------------------------
-% NOTA: non funzionano bene se è applicato twocoloumn credo.
+% NOTA: non funzionano bene se è applicato twocolumn credo.
 
 \newcommand{\HKNblankpage}{             % Macro per generare pagine intenzionalmente vuote
     \clearpage                          % Chiude pagina precedente, e ne inzia una col corpo del testo vuoto, ma con
@@ -71,7 +71,7 @@
         Pagina lasciata intenzionalmente vuota
     \end{center}
     \vfill%                             % Spazio elastico inferiore. Equivale a \vspace{\fill}.
-    %                                   % NOTA: non serve l'asterisco per forzare, perchè ci sono elementi nella pagina.
+    %                                   % NOTA: non serve l'asterisco per forzare, perché ci sono elementi nella pagina.
     %                                   % NOTA: due vfill hanno la stessa forza elastica -> il contenuto è centrato.
     \clearpage%                         % Chiude la pagina, e ne inizia una nuova.
 }
@@ -85,7 +85,7 @@
 %     \thispagestyle{empty}               % Svuota Pagina, rimuovendo testatina e numero di pagina.
 %     %                                   % NOTA: non influenzato da pacchetto emptypage che modifica solo cleardoublepage
 %     \hbox{}                             % Crea una scatola orizzontale vuota, per evitare che la pagina non abbia
-%     %                                   % elementi, in modo da far funzionare vfill. Concide al comando \null.
+%     %                                   % elementi, in modo da far funzionare vfill. Coincide al comando \null.
 %     \vfill                              % Spazio elastico superiore. L'asterisco lo forza (altrimenti come primo
 %     %                                   % elemento sarebbe saltato).
 %     %                                   % NOTA: due vfill hanno la stessa forza elastica -> il contenuto è centrato
@@ -99,7 +99,7 @@
 %         Pagina lasciata intenzionalmente vuota
 %     \end{center}
 %     \vfill%                             % Spazio elastico inferiore. Equivale a \vspace{\fill}.
-%     %                                   % NOTA: non serve l'asterisco per forzare, perchè ci sono elementi nella pagina.
+%     %                                   % NOTA: non serve l'asterisco per forzare, perché ci sono elementi nella pagina.
 %     %                                   % NOTA: due vfill hanno la stessa forza elastica -> il contenuto è centrato.
 %     \clearpage%                         % Chiude la pagina, e ne inizia una nuova.
 % }
@@ -111,15 +111,15 @@
 % di compatibilità con essa).
 
 % In generale NON USARE QUESTO COMANDO (consiglio valido per tutte le versioni presentate) ma preferisci \chapter
-% nall'interno dell'attivazione di \frontmatter e \backmatter, qualora si debbano aggiungere capitoli non numerati
-% ripsettivamente all'inizio e alla fine del documento. Per maggiori chiarimenti, leggi la PR 6 nel postambolo del
+% nell'interno dell'attivazione di \frontmatter e \backmatter, qualora si debbano aggiungere capitoli non numerati
+% rispettivamente all'inizio e alla fine del documento. Per maggiori chiarimenti, leggi la PR 6 nel postambolo del
 % main.tex, c'è una lunga spiegazione. Questo comando va usato solo per intermezzi del mainmatter, nel raro caso in cui
 % non vadano numerati.
 
 % NOTA: se usi uchapter (o upart, vedi a seguire), assicurati di creare al suo interno sottodivisioni solo con le
 % versioni "u" (unnumbered) dei comandi. Le ho definite tutte a seguire: upart, uchapter, usection, usubsection,
-% usubsubsection, uparagraph, usubparagraph. È fondamentale per non sballare le numerazioni (o meglio per non aggangiare
-% divisioni numerate a non numerate (si aggancerebbero al precedente oggetto numerato): comparirebbe qeusto fatto
+% usubsubsection, uparagraph, usubparagraph. È fondamentale per non sballare le numerazioni (o meglio per non agganciare
+% divisioni numerate a non numerate (si aggancerebbero al precedente oggetto numerato): comparirebbe questo fatto
 % nell'indice (in funzione del tocdepth), nei segnalibri (in funzione del bookmarksdepth), e nelle testatine (solo per
 % chapters e sections).
 
@@ -134,7 +134,7 @@
 % indice, quindi comunque non ci sono conflitti.
 
 % NOTA: in tutte le versioni, viene passato il titolo del chapter sia al leftmark (testatina pagine SX: di norma
-% contiene il titolo del capitolo) che al rightmark (testatina pagine DX: di norma contiene il tittolo delle sezioni se
+% contiene il titolo del capitolo) che al rightmark (testatina pagine DX: di norma contiene il titolo delle sezioni se
 % ce ne sono, altrimenti rimane vuota), con markboth, per evitare le testatine di destra completamente vuote (un
 % problema noto di LaTeX): infatti di norma non si usano le sezioni nei paragrafi non numerati (questa è la
 % consuetudine), e il rightmark rimarrebbe vuoto (usando \markboth{#1}{} ad es.), lasciando così la testatina di destra
@@ -181,8 +181,8 @@
 % _______________________AGGIORNAMENTO________________________
 % La versione 2 è quella corretta per LaTeX default, ma per le modifiche alla custom class, dove ho modificato il
 % comando chapter non va bene! Vedi bug testatine 1,2,3,4,5 discussi nella custom class.
-% Riscrivo la versione nuova a seguire! Basterbbe semplcimente sostituire \chapter* con \OLDchapter*, ma sposto tutto
-% sotto per raggruppare al meglio le custom macro "u". IN REALTÀ NO: così generebbe due volte la voce nel file .toc.
+% Riscrivo la versione nuova a seguire! Basterebbe semplicemente sostituire \chapter* con \OLDchapter*, ma sposto tutto
+% sotto per raggruppare al meglio le custom macro "u". IN REALTÀ NO: così genererebbe due volte la voce nel file .toc.
 % Funziona, ma meglio di no! Si avrebbero due voci uguali nei segnalibri del pdf.
 % ____________________________________________________________
 
@@ -198,7 +198,7 @@
 % tutte insieme, poi se ci sono problemi, si verificano alla prima chiamata). Qui si è preferito rispettare l'ordine
 % logico dei linguaggi più ferrei come il C, dove non si possono scrivere comandi prima di averli dichiarati.
 
-% \makeatletter%                              % Rende la chiocchiala @, chiamata "at" in inglese, un carattere normale
+% \makeatletter%                              % Rende la chiocciala @, chiamata "at" in inglese, un carattere normale
 % %                                           % rendendo possibile usarlo niella definizione di macro.
 % %
 % % 1. Sottomotore CON argomento opzionale (\uchapter[Breve]{Lungo})
@@ -228,7 +228,7 @@
 %         {\@uchapter@noopt}%                 % Altrimenti, chiama il comando senza argomento opzionale: \@uchapter@noopt
 % }
 
-% \makeatother                                % Rende la chiocchiala @, chiamata "at" in inglese, di nuovo un carattere
+% \makeatother                                % Rende la chiocciala @, chiamata "at" in inglese, di nuovo un carattere
 % %                                           % speciale, rendendo impossibile usarlo nella definizione o chiamata di
 % %                                           % macro (ripristina la condizione di default: @ è usata per proteggere
 % %                                           % macro interne di basso livello, che non vanno ne chiamate ne modificate).
@@ -295,12 +295,12 @@
 
 % NOTA: \part non è ridefinito nella custom class, perché non ha nulla a che fare con la testatina. Quindi questa
 % versione va bene anche per la custom class.
-% La versione non stellta supporta i titoli brevi, ma se non li si vuole mandare al ToC, visto che comunque non servono
+% La versione non stellata supporta i titoli brevi, ma se non li si vuole mandare al ToC, visto che comunque non servono
 % ad altri scopi, basta non usarli.
 
 % ..............................................................................
 
-% Viste le ridefinzioni della custom class del comando chapter. Gestisce titoli, etichette e loro stile da solo
+% Viste le ridefinizioni della custom class del comando chapter. Gestisce titoli, etichette e loro stile da solo
 % Semplicemente, aggiungo la voce al ToC.
 \NewDocumentCommand{\uchapter}{ o m }{%         % Dichiaratore di macro di xparse, più flessibile:
 %                                               % o - optional: argomento opzionale (short title). Argomento #1.
@@ -339,12 +339,12 @@
 % _______________________AGGIORNAMENTO________________________
 % La versione 2 è quella corretta per LaTeX default, ma per le modifiche alla custom class, dove ho modificato il
 % comando section non va bene! Vedi bug testatine 1,2,3,4,5 discussi nella custom class.
-% Riscrivo la versione nuova a seguire! Basterbbe semplcimente sostituire \section* con \OLDsection*, ma sposto tutto
-% sotto per raggruppare al meglio le custom macro "u". IN REALTÀ NO: così generebbe due volte la voce nel file .toc.
+% Riscrivo la versione nuova a seguire! Basterebbe semplicemente sostituire \section* con \OLDsection*, ma sposto tutto
+% sotto per raggruppare al meglio le custom macro "u". IN REALTÀ NO: così genererebbe due volte la voce nel file .toc.
 % Funziona, ma meglio di no! Si avrebbero due voci uguali nei segnalibri del pdf.
 % ____________________________________________________________
 
-% Viste le ridefinzioni della custom class del comando section. Gestisce titoli, etichette e loro stile da solo
+% Viste le ridefinizioni della custom class del comando section. Gestisce titoli, etichette e loro stile da solo
 % Semplicemente, aggiungo la voce al ToC.
 \NewDocumentCommand{\usection}{ o m }{%         % Dichiaratore di macro di xparse, più flessibile:
 %                                               % o - optional: argomento opzionale (short title). Argomento #1.
@@ -375,7 +375,7 @@
 
 % NOTA: \subsection non è ridefinito nella custom class, perché non ha nulla a che fare con la testatina. Quindi questa
 % versione va bene anche per la custom class.
-% La versione non stellta supporta i titoli brevi, ma se non li si vuole mandare al ToC, visto che comunque non servono
+% La versione non stellata supporta i titoli brevi, ma se non li si vuole mandare al ToC, visto che comunque non servono
 % ad altri scopi, basta non usarli.
 
 % ..............................................................................
@@ -395,7 +395,7 @@
 
 % NOTA: \subsubsection non è ridefinito nella custom class, perché non ha nulla a che fare con la testatina. Quindi
 % questa versione va bene anche per la custom class.
-% La versione non stellta supporta i titoli brevi, ma se non li si vuole mandare al ToC, visto che comunque non servono
+% La versione non stellata supporta i titoli brevi, ma se non li si vuole mandare al ToC, visto che comunque non servono
 % ad altri scopi, basta non usarli.
 
 % ..............................................................................
@@ -415,7 +415,7 @@
 
 % NOTA: \paragraph non è ridefinito nella custom class, perché non ha nulla a che fare con la testatina. Quindi questa
 % versione va bene anche per la custom class.
-% La versione non stellta supporta i titoli brevi, ma se non li si vuole mandare al ToC, visto che comunque non servono
+% La versione non stellata supporta i titoli brevi, ma se non li si vuole mandare al ToC, visto che comunque non servono
 % ad altri scopi, basta non usarli.
 
 % ..............................................................................
@@ -435,25 +435,25 @@
 
 % NOTA: \subparagraph non è ridefinito nella custom class, perché non ha nulla a che fare con la testatina. Quindi
 % questa versione va bene anche per la custom class.
-% La versione non stellta supporta i titoli brevi, ma se non li si vuole mandare al ToC, visto che comunque non servono
+% La versione non stellata supporta i titoli brevi, ma se non li si vuole mandare al ToC, visto che comunque non servono
 % ad altri scopi, basta non usarli.
 
 % --------------- CUSTOM MACRO PER STAMPARE LIST OF FIGURES E LIST OF TABLES CON LE TESTATINE STILE HKN ----------------
 
-% NOTA: non si possono semplicemente sovrascrivere le testatine generate dalle lof e lot, perchè sono scritte durante
-% la chiamata alla scritture di queste, dunque la sovcrascrittura con \markboth arriverebbe troppo tardi. Per la stessa
+% NOTA: non si possono semplicemente sovrascrivere le testatine generate dalle lof e lot, perché sono scritte durante
+% la chiamata alla scritture di queste, dunque la sovrascrittura con \markboth arriverebbe troppo tardi. Per la stessa
 % ragione, non può essere usato un wrapper (che lancerebbe comunque il codice originale).
 % Le possibilità che rimangono sono dunque due:
 % - sovrascrivere il codice sorgente di LaTeX per stampare la lof e la lot
 % - definire delle macro alternative, per stampare la lof e la lot
-% - AGGIORNAMENTO: MOLTO PIÙ COMODAMENTO, SI POTEVA FARE INTERCETTAZIONE LOCALE! VEDI CODICE A SEGUIRE. ANCHE PERCHÈ
+% - AGGIORNAMENTO: MOLTO PIÙ COMODAMENTE, SI POTEVA FARE INTERCETTAZIONE LOCALE! VEDI CODICE A SEGUIRE. ANCHE PERCHÉ
 %   HO STUDIATO CON LA CUSTOM CLASS, LE SOVRASCRITTURE DEI MARKS IN GENERALE NON FUNZIONANO BENE. Basta intercettare
 %   localmente i chapter, e trasformali in \uchapter o altro, ed il gioco è fatto. Il resto della logica non si tocca.
 % Il codice in entrambi i casi dev'essere lo stesso. A seguire è stata adattata la seconda opzione.
-% Viene semplicemente ripreso il codice originale di LaTeX della classe book.cls (sulla quale la cusom class HKNdocument
+% Viene semplicemente ripreso il codice originale di LaTeX della classe book.cls (sulla quale la custom class HKNdocument
 % si basa), e vi sono state apportato le semplici modifiche necessarie! Così alla chiamata di \listoffigures e
 % \listoftables, l'effetto sarà esattamente quello voluto. Il codice originale della classe .book è riportato in fondo.
-% NOTA: se vuoi leggere il contenuto della classe book.cls, puoi trovarlo nell'installazion di TeXLive, usando da
+% NOTA: se vuoi leggere il contenuto della classe book.cls, puoi trovarlo nell'installazione di TeXLive, usando da
 % terminale il comando "kpsewhich book.cls", che ti restituirà il percorso completo del file. Apri book.cle e book.def
 % per controllare le definizioni.
 
@@ -532,7 +532,7 @@
                     - Scrivi \string\listoffigures[lofintoc] per avere la lista nell'indice.\MessageBreak
                     - Scrivi \string\listoffigures senza parentesi per la lista non indicizzata (default LaTeX).%
                 }%
-                % FALLBACK DI SICUREZZA:                    % Usa opzioni di default (VS prova a far prosguire la
+                % FALLBACK DI SICUREZZA:                    % Usa opzioni di default (VS prova a far proseguire la
                 %                                           % compilazione anche in caso di errori: mode nonstop)
                 \chapter*{\listfigurename}%
                 \markboth{\listfigurename}{\listfigurename}%
@@ -576,7 +576,7 @@
                     - Scrivi \string\listoftables[lotintoc] per avere la lista nell'indice.\MessageBreak
                     - Scrivi \string\listoftables senza parentesi per la lista non indicizzata (default LaTeX).%
                 }%
-                % FALLBACK DI SICUREZZA:                    % Usa opzioni di default (VS prova a far prosguire la
+                % FALLBACK DI SICUREZZA:                    % Usa opzioni di default (VS prova a far proseguire la
                 %                                           % compilazione anche in caso di errori: mode nonstop)
                 \chapter*{\listtablename}%
                 \markboth{\listtablename}{\listtablename}%
@@ -593,7 +593,7 @@
 % ---- CODICE ORIGINALE DELLA CLASSE book.cls PER LOF E LOT (da cui è stato adattato quello sopra), PER RIFERIMENTO ----
 % NOTA: LaTeX ha un utility molto utile per trovare i file nel suo sistema, si chiama kpathsea, che offre il comando
 % kpsewhich per cercare il percorso di un file. Ad esempio ho trovato la posizione di book.cls digitando sul terminale
-% "kpsewhich book.cls". Dopodichè con la funzione cerca è stato facile trovare il codice sorgente dei comandi.<
+% "kpsewhich book.cls". Dopodiché con la funzione cerca è stato facile trovare il codice sorgente dei comandi.<
 
 % \newcommand\listoffigures{%
 %     \if@twocolumn
@@ -625,7 +625,7 @@
 
 
 
-% NUOVE VERSIONI CON INTERCETTAZIONE! APPLICABILE IN GENEREALE A TUTTI QUESTI COMANDI PARTICOLARI, SENZA STARE A
+% NUOVE VERSIONI CON INTERCETTAZIONE! APPLICABILE IN GENERALE A TUTTI QUESTI COMANDI PARTICOLARI, SENZA STARE A
 % PERDERE TEMPO A COPIARE E MODIFICARE IL CODICE ORIGINALE.
 
 %
@@ -637,17 +637,17 @@
 %
 
 % AGGIORNAMENTO: ho capito di aver usato una filosofia sbagliata! Non si dovrebbe sfruttare la modifica dei marks,
-% che sono sezioni di memoria pensate per funzionare solo in un certo modo, per ottenere un risutlato grafico.
+% che sono sezioni di memoria pensate per funzionare solo in un certo modo, per ottenere un risultato grafico.
 % È molto meglio lasciarli come sono, e gestire gli aspetti grafici a posteriori, mediante fancyhdr.
 % Mi riferisco al fatto dell'uso di \markboth{capitolo}{capitolo} per aggiornare le testatine, che tra l'altro va
 % propagato su tutto il codice, modificando ogni comando che genera un capitolo (LoF, LoT, ToC, Index, Appendix, Bib...)
 % È Molto più semplice agire una volta per tutte ad alto livello secondo l'interfaccio di fancyhdr:
-% \fancyhead[RO]{\ifblank{\rigthmark}{\leftmark}{\rightmark}}, così agisce indipendetemente OVUNQUE! Era una riga!
+% \fancyhead[RO]{\ifblank{\rigthmark}{\leftmark}{\rightmark}}, così agisce indipendentemente OVUNQUE! Era una riga!
 % NOTA: \ifblank è una macro di etoolbox, che controlla se il suo argomento è vuoto o contiene solo spaziature.
 % Ho scritto il seguente commento per spiegare meglio la questione.
 
 % Nel codice della custom class, ho scritto un lungo commento relativamente a questo problema e a come le modifiche sul
-% desgin della testatina andrebbero fatte! L'ho chiamato;
+% design della testatina andrebbero fatte! L'ho chiamato;
 % MANIFESTO DI DESIGN DELLE TESTATINE: IL PATTERN MVC IN (La)TeX E IL PROBLEMA DEI MARKS
 
 
@@ -784,8 +784,8 @@ Qui sotto avevo iniziato a scriverla, ma non avevo ancora focalizzato l'obiettiv
     %
     % STAMPA LOF (.is choice crea un menu chiuso)
     PrintLoF/.is choice,                                    % Dichiara la chiave PrintLoF come scelta multipla (choice)
-    PrintLoF/true/.code  = {\HKN@printLoFtrue},             % Se usata setta true il flag per stmapre LoF
-    PrintLoF/false/.code = {\HKN@printLoFfalse},            % Se usata setta false il flag per stmapre LoF
+    PrintLoF/true/.code  = {\HKN@printLoFtrue},             % Se usata setta true il flag per stampare LoF
+    PrintLoF/false/.code = {\HKN@printLoFfalse},            % Se usata setta false il flag per stampare LoF
     PrintLoF/.unknown/.code = {%                            % Gestione Eccezioni: avvisa l'utente se usa valori non ammessi
         \ClassError{HKNdocument}{%                          % Tipo di errore: errore di classe, custom class HKNdocument
             Invalid value for key PrintLoF.\MessageBreak    % Messaggio stampato nell'errore
@@ -798,8 +798,8 @@ Qui sotto avevo iniziato a scriverla, ma non avevo ancora focalizzato l'obiettiv
     PrintLoF = true,                                        % Imposta il valore di default della key: se l'utente non specifica nulla, usa questo
     % STAMPA LOT (.is choice crea un menu chiuso)
     PrintLoT/.is choice,                                    % Dichiara la chiave PrintLoT come scelta multipla (choice)
-    PrintLoT/true/.code  = {\HKN@printLoTtrue},             % Se usata setta true il flag per stmapre LoT
-    PrintLoT/false/.code = {\HKN@printLoTfalse},            % Se usata setta false il flag per stmapre LoT
+    PrintLoT/true/.code  = {\HKN@printLoTtrue},             % Se usata setta true il flag per stampare LoT
+    PrintLoT/false/.code = {\HKN@printLoTfalse},            % Se usata setta false il flag per stampare LoT
     PrintLoT/.unknown/.code = {%                            % Gestione Eccezioni: avvisa l'utente se usa valori non ammessi
         \ClassError{HKNdocument}{%                          % Tipo di errore: errore di classe, custom class HKNdocument
             Invalid value for key PrintLoT.\MessageBreak    % Messaggio stampato nell'errore
@@ -851,7 +851,7 @@ LE VARIE POSSIBILITÀ ANALIZZATE SONO STATE LE SEGUENTI
    ESEMPIO PER HOOK AMBIENTI (EVNIROMENTS):
    NOTA: per indice analitico non usare theindex, essendo obsoleto, ma \printindex di imakeidx, che è più moderno. Qui
    si tratta solo di un esempio.
-   \AddToHook{env/theindex/begin}{\blacklinks}  % NON servono before e after per ambienti, perchè costituiscono gruppi
+   \AddToHook{env/theindex/begin}{\blacklinks}  % NON servono before e after per ambienti, perché costituiscono gruppi
                                                 % di codice chiuso di per sé.
 
    PROBLEMA: questo sistema nativo di hook, non funziona con tutti i comandi, in particolare non funziona con macro
@@ -924,8 +924,8 @@ TENTATIVO DI SOLUZIONE CON PATCHING - DISMESSO
 % % Come alternativa c'è l'ambiente theindex, che è quello nativo di LaTeX.
 % % \xpretocmd{\printindex}{\RefsBlackLinks}{}{\ColorPatchError{Index}{before}}
 % % \xapptocmd{\printindex}{\RefsDefaultLinks}{}{\ColorPatchError{Index}{after}}
-% % \AtBeginEnvironment{theindex}{\RefsBlackLinks}     % NON servono before e after per ambienti, perchè costituiscono gruppi
-% %                                                 % di codice chiuso di per sé.
+% % \AtBeginEnvironment{theindex}{\RefsBlackLinks}     % NON servono before e after per ambienti, perché costituiscono gruppi
+% %                                                    % di codice chiuso di per sé.
 
 % % 5. Bibliografia
 % \xpretocmd{\printbibliography}{\RefsBlackLinks}{}{\ColorPatchError{Bib}{before}}
@@ -933,7 +933,7 @@ TENTATIVO DI SOLUZIONE CON PATCHING - DISMESSO
 \end{comment}
 
 
-% ---------------------------- CCUSTOM MACRO DEFINITI NELLA CUSTOM CLASS HKNdocument -----------------------------------
+% ---------------------------- CUSTOM MACRO DEFINITI NELLA CUSTOM CLASS HKNdocument -----------------------------------
 
 \begin{comment}     % --- RIEPILOGO MACRO (COMANDI) CUSTOM DEFINITI NELLA CLASSE "HKNdocument" ---
 
