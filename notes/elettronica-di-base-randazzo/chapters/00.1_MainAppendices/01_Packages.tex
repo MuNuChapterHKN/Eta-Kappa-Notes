@@ -7,12 +7,12 @@
 
 % ----------------------------------------- PACCHETTI relativi a FUNZIONI BASE -----------------------------------------
 
-\usepackage{comment}                % [EXSTENTION] consente la creazione di commenti multilinea sfruttando l'enviroment
-                                    % "comment" con il comando \begin. Nota che il contenuto all'internod di questi
+\usepackage{comment}                % [EXTENSION] consente la creazione di commenti multilinea sfruttando l'environment
+                                    % "comment" con il comando \begin. Nota che il contenuto all'interno di questi
                                     % blocchi di testo, non iniziando con "%", non è ignorato dal Parser di LTeX+, che
                                     % quindi effettuerà la correzione grammaticale e ortografica anche su questi blocchi
 
-% ----------- PACCHETTI DI TIPOGRAGIA BASE: CARATTERI (ENCODING, SUPPORTO LEGATURE, STAMPA ...), SILLABAZIONE ----------
+% ----------- PACCHETTI DI TIPOGRAFIA BASE: CARATTERI (ENCODING, SUPPORTO LEGATURE, STAMPA ...), SILLABAZIONE ----------
 
 % Pacchetti relativi all'infrastruttura tipografica dei progetti TeX, suddivisibile nelle seguente 4 FASI:
 % 1. INPUT: Tastiera -> Codice Sorgente
@@ -24,7 +24,7 @@
 
 % \usepackage{cmap}                 % [PLUG & PLAY] [EXTENSION-FIX] Pacchetto fondamentale per l'accessibilità del PDF,
                                     % in particolare per la ricerca testuale ed il copia e incolla.
-                                    % Aadesso come surrogato ) di "\DocumentMetadata{}" (che attiva il backend di
+                                    % Adesso come surrogato ) di "\DocumentMetadata{}" (che attiva il backend di
                                     % LaTeX3 per la generazione di PDF accessibili, ma è attualmente sperimentale e poco
                                     % stabile): vedi 00.0_EarlyInitializationDirectives.tex per spiegazioni.
                                     % Infatti sebbene non risolva il problema dei soft-hyphen, migliora la ricercabilità
@@ -34,7 +34,7 @@
                                     % FONDAMENTALE CHE SIA CHIAMATO PRIMA DEI FONT (package: fontenc e lmodern) per
                                     % funzionare, altrimenti NON FA NULLA e NON FUNZIONA.
 
-                                    % NOTA BENE: PERCHÈ È STATO COMMENTATO E DISATTIVATO: come appena detto dev'essere
+                                    % NOTA BENE: PERCHÉ È STATO COMMENTATO E DISATTIVATO: come appena detto dev'essere
                                     % chiamato PRIMA dei font, altrimenti NON FUNZIONA: ma i font sono chiamati dalla
                                     % custom class HKNdocument, e quindi per non modificarne il codice, questo pacchetto
                                     % è stato richiamato nel pre-preambolo con \RequirePackage, che garantisce che venga
@@ -42,28 +42,28 @@
                                     % Vedi il file 00.0_EarlyInitializationDirectives.tex
 
                                     % NOTA: non ha a che fare invece con inputenc che è legato all'interpretazione del
-                                    % codice sorgente. Non c'è problmea con la posizione di inputenc, dunque.
+                                    % codice sorgente. Non c'è problema con la posizione di inputenc, dunque.
 
                                     % NOTA: è puramente PLUG & PLAY, non richiede configurazione e non fornisce comandi.
 
-                                    % AGGIORNAMENTO - PERCHÈ L'HO COMPLETAMENTE ELIMINATO.
+                                    % AGGIORNAMENTO - PERCHÉ L'HO COMPLETAMENTE ELIMINATO.
                                     % Funziona, ma in realtà è ormai un pacchetto obsoleto, e non più necessario.
-                                    % Crea sì la mappa unicode, ma si limita ai 256 caratteri della codica T1 passata
+                                    % Crea sì la mappa unicode, ma si limita ai 256 caratteri della codifica T1 passata
                                     % da fontenc, e non risolve i problemi legati ai glifi più complessi come le
                                     % legature tipografiche.
                                     % Attualmente, TeX ha una feature di base, che si attiva con i comandi
                                     % \input{glyphtounicode} e \pdfgentounicode=1: il primo introduce un dizionario
-                                    % unicode completo, ed il secondo attiva la characer map nativa.
+                                    % unicode completo, ed il secondo attiva la character map nativa.
                                     % Se si usa cmap, questo interviene prima e blocca la funzionalità nativa (che è
                                     % programmata in modo tale che se una mappa caratteri è già presente, si interrompe
                                     % senza apportare modifiche).
 
 % SCHEMATICAMENTE:FASE 4: OUTPUT SEMANTICO: (Da inizializzare obbligatoriamente PRIMA dei font, fontenc e lmodern)
 % [FEATURE]: Aggiunge la "ToUnicode CMap" (Character Map): tabella di traduzione nascosta nel codice binario del PDF.
-% [SENZA CMAP]: Il lettore PDF vede solo geometrie, e erca di "indovinare" le lettere dal nome tecnico del glifo.
-% [CON CMAP]: L'aggiunta della CMap equivale all'iniziezione di un set di regole rigide.
+% [SENZA CMAP]: Il lettore PDF vede solo geometrie, e cerca di "indovinare" le lettere dal nome tecnico del glifo.
+% [CON CMAP]: L'aggiunta della CMap equivale all'iniezione di un set di regole rigide.
 %             Es: "Il Glifo allo Slot 232 equivale alla lettera Unicode U+00E8 (è)".
-% [RISULTATO]: Abilita la ricerca esatta e il copia-incolla perfetto. Eliminati problmei con lettere accentate europee.
+% [RISULTATO]: Abilita la ricerca esatta e il copia-incolla perfetto. Eliminati problemi con lettere accentate europee.
 
 % ..................................
 
@@ -77,7 +77,7 @@
                                     % in sostanza tutto il materiale possibile per creare la "ToUnicode CMap".
                                     % NOTA: è un file dell'installazione standard di TeX, ed il motore di ricerca dei
                                     % file di TeX (kpathsea, si può lanciare a mano anche) riesce a trovarlo senza
-                                    % specificare il percorso, perchè scansiona l'intera installazione.
+                                    % specificare il percorso, perché scansiona l'intera installazione.
 
 \pdfgentounicode=1                  % [OVERRIDE] Interruttore che attiva la CMAP NATIVA nel PDF.
                                     % Sfrutta il dizionario Unicode caricato col comando precedente.
@@ -94,7 +94,7 @@
 % ..................................
 
 % NOTA: i pacchetti a seguire DISATTIVATI ("COMMENTATI") sono già aggiunti dalla custom class HKNdocument.
-% Li lascio in questa posizione perchè è importante conoscerli.
+% Li lascio in questa posizione perché è importante conoscerli.
 
 % \usepackage[T1]{fontenc}          % [PLUG & PLAY] [OVERRIDE] Supporto alla codifica standard europea dei font (T1),
                                     % con ben 256 caratteri (al contrario di quella standard americana OT1, con 128
@@ -129,10 +129,10 @@
                                     % Di solito è caricato nativamente nelle versioni recenti di LaTeX, ma meglio
                                     % specificare per retrocompatibilità con distribuzioni più datate.
 
-                                    % NOTA: non ha a che fare con fontenc, lmdoern o cmap, che sono legati ai font
+                                    % NOTA: non ha a che fare con fontenc, lmodern o cmap, che sono legati ai font
                                     % nel PDF finale, e non nel codice sorgente.
 
-% SCHEMATICAMENTE: FASE 1: INPUT SORGENTE (Come il compilatore interpreta ilt esto digitato con tastiera).
+% SCHEMATICAMENTE: FASE 1: INPUT SORGENTE (Come il compilatore interpreta il testo digitato con tastiera).
 % [SENZA INPUTENC]: Il motore pdflatex legge a 1 byte (ASCII). Se digiti "è" (multibyte UTF-8), va in crash fatale
 % o compila geroglifici come "Ã¨". Saresti costretto a sporcare il codice sorgente scrivendo "\'e" per ogni accento.
 % [CON INPUTENC]: Funge da interprete. Insegna al motore a decodificare i byte UTF-8 in tempo reale mentre legge.
@@ -182,14 +182,14 @@
                                     % ai comandi (gli argomenti opzionali in particolare) vegano completamente tagliate
                                     % (sono riportati nel documento come testo). xpatch ha funzionato bene fino al 2020,
                                     % quando xparse è divenuto parte ufficiale del kernel di LaTeX3, e da allora ha
-                                    % smesso di funzionare bene, e soffre esattamente dellos stesso problema!
-                                    % Le atlernative migliori sono:
+                                    % smesso di funzionare bene, e soffre esattamente dello stesso problema!
+                                    % Le alternative migliori sono:
                                     % - scrivere wrapper o decorator a mano (alla fine, le istruzioni in questione fanno
                                     %   una cosa molto simile, ma a livello più basso, tra i token dei comandi, quindi
                                     %   più efficiente)
                                     % - usare il sistema di hook nativo di LaTeX3:
                                     %   es \AddToHook{cmd/<nome comando>/before}
-                                    %   Il problema è che anche questi hook non sono perfetti, non funzinonano con macro
+                                    %   Il problema è che anche questi hook non sono perfetti, non funzionano con macro
                                     %   complesse (es \tableofcontents). Sfruttano un sistema interno di hook
                                     %   precostruito, non supportato da tutte le macro.
                                     % Alla fine per ora (2026-04-26) ho abbandonato tutti i tentativi di patching con
@@ -201,7 +201,7 @@
 % GIÀ IMPORTATO DA CUSTOM CLASS
 % \usepackage{pgfkeys}              % [EXTENSION] Pacchetto che fornisce un sistema avanzato per costruire interfacce
                                     % di tipo CHIAVE-VALORE, utilissime ad esempio per variare il comportamento del
-                                    % codice per macro complese. Fornisce anche gestione eccezioni o errori.
+                                    % codice per macro complesse. Fornisce anche gestione eccezioni o errori.
                                     % Utilizzato nella custom class per la gestione condizionale dei contenuti fissi,
                                     % delle impostazioni di layout personalizzabili.
 
@@ -278,21 +278,21 @@
                                     % correttamente in base alla lingua del documento (es. virgolette italiane « »).
                                     % Fornisce inoltre utilissimi comandi per la gestione degli apici, come:
                                     % - \enquote{text} per riportare il discorso diretto in funzione della lingua
-                                    %   selezionata con babel (es: sfrutta le caporali in italiano « »), ed in funzinone
+                                    %   selezionata con babel (es: sfrutta le caporali in italiano « »), ed in funzione
                                     %   del contesto semantico (es. se la citazione è all'interno di un'altra citazione,
                                     %   la citazione di secondo livello, nidificata con le virgolette doppie normali "".
                                     % - \enquote*{text} ignora il primo livello è usa sempre le virgolette doppie
                                     %   normali "".
 
  \addbibresource{chapters/00.2_Bibliography/HKN_ElnBiliography.bib}
-% File (Database bibliografico) contentnente tutte le fonti bibliografiche di principale interesse per il progetto.
+% File (Database bibliografico) contenente tutte le fonti bibliografiche di principale interesse per il progetto.
 % Sviluppato con Zotero, esportato in formato BibLaTeX.
 % ATTENZIONE: il file viene importato nel main.tex con il comando \input. Tieni a mente che TeX è un linguaggio
 % Espansore di macro: quindi il codice è come se fosse scritto nel main.tex, e per questo motivo è importante che i
-% percorsi siano riferti alla posizione del main.tex.
+% percorsi siano riferiti alla posizione del main.tex.
 
 \addbibresource{chapters/00.2_Bibliography/HKN_OtherSources.bib}
-% File (Database bibliografico) contentnente le fonti di interesse secondario. Cosruito a mano per ora.
+% File (Database bibliografico) contenente le fonti di interesse secondario. Costruito a mano per ora.
 %
 % ---------------------------------------------- PACCHETTI PER CITAZIONI -----------------------------------------------
 \usepackage[italian]{cleveref}      % [EXTENSION] [OVERRIDE] [PLUG & PLAY] Evoluzione di hyperref, lo stato dell'arte
@@ -406,7 +406,7 @@ ________________________________________________________________________________
                                     % deriva altrove.
     \usepackage{caption}            % [PLUG & PLAY] [OVERRIDE] [EXTENSION] Usato per personalizzare i margini, i font e
                                     % l'allineamento delle didascalie sotto le immagini e le tabelle.
-                                    % Come Fix auomatico "Plug & play" corregge uno storico problema di LaTeX relativo
+                                    % Come Fix aromatico "Plug & play" corregge uno storico problema di LaTeX relativo
                                     % alla spaziatura delle didascalie se impostate sopra le tabelle. Inoltre la custom
                                     % class ha impostato ad 1cm questo spazio (nel file preamble).
 

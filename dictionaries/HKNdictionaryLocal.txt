@@ -4,6 +4,8 @@ casellina
 dall'IDE
 debuggare
 disinnescatore
+elet
+elett
 espansore
 Floyd
 Harlow
@@ -14,12 +16,17 @@ Lamport
 Mattei
 modellizzandolo
 modellizzata
+multilinea
 multiriga
 nomecapitolo
 parsare
+patchano
+precostruito
 preformattato
 processamento
 Randazzo
+ricercabilità
+ricità
 rinizia
 risovrascriverlo
 Sottomotore
