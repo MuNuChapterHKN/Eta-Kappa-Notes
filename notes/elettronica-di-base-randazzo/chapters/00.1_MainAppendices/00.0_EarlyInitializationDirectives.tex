@@ -63,14 +63,14 @@
 % destro della pagina. Inoltre, i titoli apparivano sottolineati anziché
 % nel classico corsivo tipografico standard.
 %
-% 2. LA CAUSA (SOVRASCROTTIRA DI \EMPH)
+% 2. LA CAUSA (SOVRASCRITTURA DI \EMPH)
 % La custom class del progetto (HKNdocument.cls) carica internamente il
 % pacchetto 'ulem' tramite il comando \RequirePackage{ulem}. Di default,
 % questo pacchetto sovrascrive i comandi standard \emph e \em, sostituendo
 % il corsivo con la sottolineatura continua, precisamente sostituendoli con
-% lo stesso comando \uline propsto dal pacchetto ulem stesso. Questo vincolo
+% lo stesso comando \uline proposto dal pacchetto ulem stesso. Questo vincolo
 % rigido impedisce al motore di sillabazione di LaTeX di spezzare la
-% frase a fine riga quado viene usato \emph, in quanto è generato come un box
+% frase a fine riga quando viene usato \emph, in quanto è generato come un box
 % insecabile, generando l'errore di overfull.
 %
 % 3. LA SOLUZIONE E L'EFFETTO DI 'NORMALEM'
@@ -151,7 +151,7 @@
 % al pacchetto 'babel', disaccoppiando il caricamento di una lingua secondaria
 % dalle restrizioni intrinseche alla classe custom, che prevede una sola lingua.
 %
-% WORKAROUND SFRUTTATO - MECCANISO DI RISOLUZIONE::
+% WORKAROUND SFRUTTATO - MECCANISMO DI RISOLUZIONE::
 % 1. La classe 'HKNdocument' implementa logiche condizionali (es. \ifx)
 %    basate sulla variabile \DocumentLanguage. Passare una lista concatenata di
 %    lingue direttamente alla classe corromperebbe l'esecuzione di tali script
@@ -169,7 +169,7 @@
 %                       LOCALIZZAZIONE VS SILLABAZIONE
 % Questa pre-configurazione è un prerequisito tecnico necessario per il corretto
 % funzionamento generale del pacchetto 'biblatex', se inizializzato con
-% l'ozpione "autolang=other' o "autolang=hyphen".
+% l'opzione "autolang=other' o "autolang=hyphen".
 % In precisione hyphen chiama solo la sillabazione, mentre autolang chiama sia
 % la sillabazione che la localizzazione (spiegazione a seguire), nella lingua
 % specificata in "langid={...}" all'interno del database bibliografico (.bib).
@@ -206,7 +206,7 @@
 % Eliminandole e sostituendolo con delle versioni nuove previste (enumitem è
 % stato integrato in LaTeX3) il problema si risolve.
 % Tuttavia per essendo questo comando ancora sperimentale e non del tutto
-% stabile, per ora se ne sconsiglia l'uso. Aspettare prossimi aggionramenti, tra
+% stabile, per ora se ne sconsiglia l'uso. Aspettare prossimi aggiornamenti, tra
 % un paio di anni (nel 2028).
 
 % ==============================================================================
@@ -321,39 +321,39 @@
 % SumatraPDF) e non nel file generato da LaTeX.
 % ==============================================================================
 
-% \RequirePackage{cmap}   % Migiliora il pdf per ricerca e copia-incolla.
+% \RequirePackage{cmap}   % Migliora il pdf per ricerca e copia-incolla.
 
 % ==============================================================================
 % FEATURE: CHARACTER MAP (CMap) - "ToUnicode CMap"
 % ==============================================================================
 % Aggiunge una mappa caratteri interna al PDF, fondamentale per la corretta
 % interpretazione dei glifi da parte dei lettori PDF.
-% Fondamnetale per il copia-incolla esatto, e la ricerca testuale, in
+% Fondamentale per il copia-incolla esatto, e la ricerca testuale, in
 % particolare per i caratteri accentati europei, maiuscoli e minuscoli.
 % Ulteriori spiegazioni e dettagli tecnici su questo pacchetto sono forniti nel
 % file 01_Packages.tex, nella sezione dedicata al pacchetto "cmap", essendo
 % questo appunto un pacchetto.
 % È stato caricato in questa posizione per questioni di dipendenze e precedenze
-% con i pacchetti relativi alla codificad dei font del PDF (fontenc, lmodern).
+% con i pacchetti relativi alla codifica dei font del PDF (fontenc, lmodern).
 % È attualmente un surrogato di \DocumentMetadata{}, in attesa di una futura
 % stabilizzazione di quest'ultimo, sebbene non risolva la questione dei soft
 % hyphen, ma solo quella dell'interpretazione dei caratteri speciali sul pdf.
 
-% AGGIORNAMENTO - PERCHÈ L'HO COMPLETAMENTE ELIMINATO. Funziona, ma in realtà è
+% AGGIORNAMENTO - PERCHÉ L'HO COMPLETAMENTE ELIMINATO. Funziona, ma in realtà è
 % ormai un pacchetto obsoleto, e non più necessario. Crea sì la mappa unicode,
-% ma si limita ai 256 caratteri della codica T1 passata da fontenc, e non
+% ma si limita ai 256 caratteri della codifica T1 passata da fontenc, e non
 % risolve i problemi legati ai glifi più complessi come le legature
 % tipografiche. Attualmente, TeX ha una feature di base, che si attiva con i
 % comandi \input{glyphtounicode} e \pdfgentounicode=1: il primo introduce un
-% dizionario unicode completo, ed il secondo attiva la characer map nativa. Se
+% dizionario unicode completo, ed il secondo attiva la character map nativa. Se
 % si usa cmap, questo interviene prima e blocca la funzionalità nativa (che è
 % programmata in modo tale che se una mappa caratteri è già presente, si
 % interrompe senza apportare modifiche).
 % ==============================================================================
 
 % \RequirePackage{silence}    % Pacchetto per silenziare avvisi
-                            % RequirePackage perchè siamo nel pre-preambolo.
-% \WarningsOff[everypage]       % Blocca tutti i warnings di everypage, drastico
+                              % RequirePackage perché siamo nel pre-preambolo.
+% \WarningsOff[everypage]     % Blocca tutti i warnings di everypage, drastico
 
 % Per bloccare solo i warning specifici di "pacchetto legacy".
 % Funzionano cercando una stringa esatta passata nel messaggio di warning
@@ -375,13 +375,13 @@
 % "Background" carica a sua volta il pacchetto 'everypage'. Quest'ultimo è
 % diventato obsoleto con le nuove distribuzioni LaTeX (che integrano comandi
 % nativi) e per questo stampa dei warning di stato legacy nel log.
-% Le funzionalità di everypage sono ormai intergrate nativamente in LaTeX, ed
+% Le funzionalità di everypage sono ormai integrate nativamente in LaTeX, ed
 % il pacchetto è stato aggiornato in modo intelligente: dirotta i comandi di
 % everypage al sistema nativo. Quindi nonostante i warnings, la compatibilità
 % è piena.
 %
 % --- SOLUZIONE 1: DRASTICA (Pacchetto silence, blocco totale) ---
-% NEL PRE-PREAMBOLO, prima che la custom class carichi everypage (bakground)
+% NEL PRE-PREAMBOLO, prima che la custom class carichi everypage (background)
 % \RequirePackage{silence}
 % \WarningsOff[everypage]
 % Descrizione: Silenzia alla radice qualsiasi avviso di everypage.
@@ -390,13 +390,13 @@
 % codice sorgente): andrebbe quasi bene.
 %
 % --- SOLUZIONE 2: FILTRATA (Pacchetto silence, meno aggressiva) ---
-% NEL PRE-PREAMBOLO, prima che la custom class carichi everypage (bakground)
+% NEL PRE-PREAMBOLO, prima che la custom class carichi everypage (background)
 % \RequirePackage{silence}
 % \WarningFilter{everypage}{Functionality similar to this package}
 % \WarningFilter{everypage}{You appear to be running a version}
 % Descrizione: Nasconde solo le stringhe esatte specificate.
 % Pro: Mantiene il file .log pulito per tutto il team (portabile su Git).
-% NOTA: ai comandi di filtratti, visto che viene passato il pacchetto, va poi
+% NOTA: ai comandi di filtrati, visto che viene passato il pacchetto, va poi
 % passata solo la parte del messaggio di warning successiva alla diciture
 % "Package everypage Warning: ", che è già cercata dal comando stesso.
 %
@@ -418,17 +418,17 @@
 % .vscode è ignorata con .gitignore. Qui .vscode è ignorata solo in parte, il
 % file settings.json è escluso dall'essere ignorato, quindi è caricata.
 % NOTA: essendo un'impostazione dell'IDE, per funzionare ha bisogno di un aiuto:
-% Se non funziona: vai nella finestra laterale dell'estension TeX, e clicca:
+% Se non funziona: vai nella finestra laterale dell'estensione TeX, e clicca:
 % - Commands -> Build LaTeX Project -> Kill LaTeX compiler process
 % - Commands -> Build LaTeX Project -> Clean auxiliary files
 % Se ancora non funziona fai anche:
 % - Command Palette (ctrl+shift+P) -> Reload Window
 % Questo può essere necessario in quanto l'IDE VScode non applica le nuove
-% impostazioni al volo ai file vecchi tipicamente, perchè ha una strategia di
-% efficenza: se i file non sono cambiati ( è ciò accade ad esempio se non si
+% impostazioni al volo ai file vecchi tipicamente, perché ha una strategia di
+% efficienza: se i file non sono cambiati ( è ciò accade ad esempio se non si
 % aggiorna il codice sorgente, in quanto anche TeX è programmato per essere
 % efficiente, e non riscrive i file se non ci sono modifiche, incluso il .log.)
-% non fa nulla! Mentre lo si forza ad attivarsi, se i file vengon aggiornati
+% non fa nulla! Mentre lo si forza ad attivarsi, se i file vengono aggiornati
 %
 % SOLUZIONE ATTUALMENTE ADOTTATA:
 % Soluzione 3, per lasciare i warning nel .log, ma per nasconderli.
@@ -443,11 +443,11 @@
 \PassOptionsToPackage{dvipsnames}{xcolor}
 
 % ==============================================================================
-% Carica Vocabolario di 68 colori predefiniti (sono disponibili vocabolri anche
+% Carica Vocabolario di 68 colori predefiniti (sono disponibili vocabolari anche
 % più ampi, ma questi sono sufficienti per la maggior parte dei casi).
-% È scongliato usare i colori predefiniti di LaTeXche sono solo 8: white, black,
-% red, green, blue, cyan, magenta, yellow, essendo stati pensati per monitor
-% monocromatici e non per la stampa.
+% È sconsigliato usare i colori predefiniti di LaTeX che sono solo 8: white,
+% black, red, green, blue, cyan, magenta, yellow, essendo stati pensati per
+% monitor monocromatici e non per la stampa.
 %
 % ------------------------------------------------------------------------------
 % NomeColore		CodiceOriginale (CMYK)		#CodiceEsadecimale

@@ -12,12 +12,12 @@
 % configurare l'ambiente di lavoro (impostazioni di lingua, correzione grammaticale, eccetera) o su come gestire la
 % compilazione di progetti multifile. Agiscono nello specifico file in cui sono inseriti.
 %
-% NOTA: per chi ha studiato C, ricordano un po' le direttive al preprocessore (#define, #undef eccetera), in particoalre
+% NOTA: per chi ha studiato C, ricordano un po' le direttive al preprocessore (#define, #undef eccetera), in particolare
 % #pragma, ma sono concetti sostanzialmente diversi, in quanto il preprocessore modifica il codice prima di compilarlo,
 % mentre i Magic Comments impostano l'editor senza toccare il codice in alcun caso.
 %
 % --- DOVE E COME VANNO SCRITTI, ED IN QUALE QUANTITÀ ---
-% VS Code è un IDE moderno, tecnicamente potrebbero essere scritti in qualsiasi puntod del file, in qualsiasi quantità,
+% VS Code è un IDE moderno, tecnicamente potrebbero essere scritti in qualsiasi punto del file, in qualsiasi quantità,
 % tuttavia è altamente sconsigliato per questioni di compatibilità con altri editor, come ad esempio TeXShop (su Mac,
 % il primo ad aver introdotto i magic comments), che hanno un limite hardcoded (rigoroso) tipico di 20 righe all'inizio
 % del file. Quindi per questioni di Good Practice, si consiglia di relegare i magic comments alle primissime righe del
@@ -49,12 +49,12 @@
 %   fallire la compilazione, lanciandola all'interno di codesti.
 %
 % 3. COME SPECIFICARE IL PERCORSO (PATH) DEL FILE ROOT? ESEMPI DI SINTASSI
-% Il percorso verso il file root deve seguire una sintassi rigida, e sono disponibili due modlità principali per
+% Il percorso verso il file root deve seguire una sintassi rigida, e sono disponibili due modalità principali per
 % specificarlo:
 %
 % - PERCORSI RELATIVI (Fortemente Raccomandati): nei quali il percorso è calcolato a partire dalla directory del file
 %   corrente. Garantiscono la portabilità del progetto (es. tramite Git/GitHub), consentendo la collaborazione, in
-%   quanto funzionanerebbero su qualsiasi macchina, a patto che la struttura delle cartelle rimanga intatta,
+%   quanto funzionerebbero su qualsiasi macchina, a patto che la struttura delle cartelle rimanga intatta,
 %   indipendentemente dal sistema operativo o dall'IDE utilizzato, o dall'utente. Esempi di sintassi per percorsi
 %   relativi:
 %   * File root nella stessa cartella de file secondario:           % !TEX root = main.tex
@@ -65,7 +65,7 @@
 %   * Navigazione a "V" (cartella superiore poi inferiore):         % !TEX root = ../<foldername>/main.tex
 %
 %   NOTA sui percorsi relativi: nel caso di stesso livello o livello inferiore, è formalmente corretto utilizzare anche
-%   la sintassi esplicita % !TEX root = ./main.tex e % !TEX root = ./<foldername>/main.tex ripsettivamente, dove
+%   la sintassi esplicita % !TEX root = ./main.tex e % !TEX root = ./<foldername>/main.tex rispettivamente, dove
 %   "./" istruisce esplicitamente il sistema operativo a "partire dalla cartella corrente". Tuttavia, l'omissione
 %   del punto iniziale è considerata lo standard più pulito, compatto e universalmente supportato dai parser o
 %   analizzatore sintattico dell'IDE, ossia lo strumento con cui identifica e interpreta il codice).
@@ -79,7 +79,7 @@
 %   derivazione Unix. A prescindere dal sistema operativo in uso (incluso Windows, che nativamente utilizza il backslash
 %   "\" per specificare i percorsi), i path all'interno dell'ecosistema TeX devono TASSATIVAMENTE utilizzare il "forward
 %   slash" o "slash" ("/"). L'uso del "backslash" ("\") è riservato all'invocazione delle macro o comandi (es. \textbf).
-%   In particoalre inserire un "\" in un magic comment causerà un errore di parsing, poiché il motore lo interpreterà
+%   In particolare inserire un "\" in un magic comment causerà un errore di parsing, poiché il motore lo interpreterà
 %   come l'inizio di un comando inesistente.
 %
 % 4. VS CODE POSSIEDE L'AUTO-RILEVAMENTO DEL main.tex: PERCHÉ USARE % !TEX root COMUNQUE?
@@ -95,7 +95,7 @@
 % D. Compatibilità: Garantisce che il progetto sia compilabile anche in IDE diversi privi di funzionalità di
 %    auto-rilevamento.
 %
-% A rigurado la documentazione ufficiale di LaTeX Workshop riporta, a link:
+% A riguardo la documentazione ufficiale di LaTeX Workshop riporta, a link:
 % https://github.com/james-yu/latex-workshop/wiki/compile#:~:text=Root%20directory%20check
 % Root directory check LaTeX Workshop iterates through all .tex files in the root folder of the workspace. The first one
 % containing \documentclass[...]{...} (the [...] is optional) or \begin{document} depending on the value of

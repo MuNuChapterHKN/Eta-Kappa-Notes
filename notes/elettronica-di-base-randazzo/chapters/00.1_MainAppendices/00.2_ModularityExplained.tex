@@ -5,7 +5,7 @@
 % successivamente a questo file, secondo una logica di sviluppo informatico e logico del progetto.
 
 % ======================================================================================================================
-% NOTA: GESTIOME DELLA MODULARITÀ DEL DOCUMENTO E DEI FILE ESTERNI: UTILIZZO DEI COMANDI \input e \include
+% NOTA: GESTIONE DELLA MODULARITÀ DEL DOCUMENTO E DEI FILE ESTERNI: UTILIZZO DEI COMANDI \input e \include
 % ======================================================================================================================
 % Nella gestione di progetti complessi, solitamente non è consigliabile generare enormi file di codice sorgente, poiché
 % diventano rapidamente difficili da navigare, comprendere e manutenere. Per questo motivo, è buona prassi suddividere
@@ -38,7 +38,7 @@
 % - Non supporta alcun tipo di nidificazione.
 % - Tipograficamente, è idoneo solo per gli elementi gerarchici di massimo livello, come i capitoli (\chapter) nelle
 %   class book (libro), o in quelle basate su di essa, come HKNdocument. L'uso di \include per le sezioni (\section) ad
-%   esempio, è altamente sconsigliato, poiché frammetnerebbe molto la lettura e l'estetica del documento, a causa dei
+%   esempio, è altamente sconsigliato, poiché frammenterebbe molto la lettura e l'estetica del documento, a causa dei
 %   grandi spazi vuoti generati dai i salti di pagina che il comando richiama. Proprio per lo stesso motivo, l'uso di
 %   \include in class che non supportano i capitoli (\chapter), come article, è altamente sconsigliata. Si usi
 %   \include{} in tal caso.
@@ -62,7 +62,7 @@
 %   filtro globale di tipo "whitelist" (filtro di sblocco) per i comandi \include già presenti nel corpo del documento,
 %   infatti riceve in argomento una lista (separata da virgole) dei file che si desidera compilare (es.
 %   \includeonly{capitoli/cap_02, capitoli/cap_05}).
-% - Funzionamento tecnico: Il comando impone che il motore TeX, durante la compilazione, vada a comilare esclusivamente
+% - Funzionamento tecnico: Il comando impone che il motore TeX, durante la compilazione, vada a compilare esclusivamente
 %   i file specificati nella lista, mentre per il resto dei file esclusi, che vada a leggerne  i file ausiliari (.aux)
 %   generati nelle compilazioni precedenti.
 % - Vantaggio strutturale: A differenza della semplice omissione (tramite %) dei comandi \include nel corpo del testo,
@@ -124,7 +124,7 @@
 % la virgola di separazione: la possibilità di aggiungerli è anch'essa una
 % recente introduzione alle distribuzioni di TeX, dunque è consigliato
 % evitarli per la massima compatibilità.
-% Il motivo tecnico di queste problematicheè analogo a quello di \include.
+% Il motivo tecnico di queste problematiche è analogo a quello di \include.
 %
 % SINTASSI IDEALE:          \includeonly{capitolo_1,capitolo_2,capitolo_3}
 % SINTASSI SCONSIGLIATA:    \includeonly{capitolo 1, capitolo 2}
@@ -137,7 +137,7 @@
 % NOTA IMPORTANTE: POSIZIONE DI RIFERIMENTO PER I PERCORSI NEI FILE SECONDARI
 % ==============================================================================
 % --- PRINCIPIO FONDAMENTALE---
-% LaTeX, e TeX, sono linugaggi di tipo "Espansore di macro", cioè quando
+% LaTeX, e TeX, sono linguaggi di tipo "Espansore di macro", cioè quando
 % incontrano un comando come \input{percorso/file.tex}, o anche come
 % \include{percorso/file}, ciò che fanno è sostituire la riga di comando in
 % questione, con tutto il codice di interesse (quello contenuto nei file, solo
@@ -165,8 +165,8 @@
 % file in cui sono scritti, e non a quella del main.tex.
 %
 % --- ECCEZIONE DELLE CUSTOM MACRO DEFINITE NELLA CUSTOM CLASS HKNdocument ---
-% Il progetto HKN è stato programmato in modo da offire alcune macro per
-% inserire comodamente file di imamgini, grazie alla custom class HKNdocument,
+% Il progetto HKN è stato programmato in modo da offrire alcune macro per
+% inserire comodamente file di immagini, grazie alla custom class HKNdocument,
 % e a tutti i vari file di configurazione (HKNdocument.cls, _preamble.tex,
 % _postamble.tex, latexmkrc, settings.json).
 % In precisione le macro custom relative all'inserimento di immagini sono le
@@ -177,8 +177,8 @@
 %   - \adddrawio[Didascalia]{nomefile}{0.8}
 % Questi comandi inseriscono un'immagine posizionandola precisamente dove
 % sono chiamati (passano l'opzione [H]: exactly here), centrandola, pescando
-% il file ripsettivamente dalla cartella "res/"., "res/svg/" o "res/drawio/".
-% (0.8 sta per larga 80% della larghezzad del testo, si può cambiare).
+% il file rispettivamente dalla cartella "res/"., "res/svg/" o "res/drawio/".
+% (0.8 sta per larga 80% della larghezza del testo, si può cambiare).
 % Ecco, per questi comandi NON SERVE SPECIFICARE I PERCORSI! Li cercano in
 % automatico nelle cartelle dedicate: basta specificare il nome del file, in
 % particolare SENZA ESTENSIONE (le macro gestiscono automaticamente anche

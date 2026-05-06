@@ -1,6 +1,7 @@
 approf
 Blalock
 casellina
+dall'IDE
 debuggare
 disinnescatore
 espansore
@@ -13,7 +14,9 @@ Lamport
 Mattei
 modellizzandolo
 modellizzata
+multiriga
 nomecapitolo
+parsare
 preformattato
 processamento
 Randazzo
@@ -23,3 +26,4 @@ Sottomotore
 sovrascritta
 Storey
 tokenizzazione
+Xstudio
