@@ -311,9 +311,10 @@
   // NOTE: the alphabetical reordering feature of cSpell is a very neat trick. Even if LTeX+ doesn't reorder, the
   // next cSpell call will take care of that, reordering the entire file! Global dictionary from-UI-add setting
   // ("addWords": false) could be temporarily set to "true" just to use this feature to reorder the file: e.g. turn it
-  // "true", save to make it work, add a fake word to reorder it (like "aaaaaaaaz" which goes first, or "zzzzzzzza"
-  // which goes last: you can click on these ones here, kept unmemorized on purpose), then delete it and set back to
-  // "false", and save to deactivate. Neat Trick to keep alphabetical order without external tools.
+  // "true", save to make it work, add a fake word to reorder it (like "aaaaaaaaz" which goes between the first lines,
+  // or "zzzzzzzza" which goes between the last lines: you can click on these ones here, kept unmemorized on purpose),
+  // then open the HKNdictionaryGlobal.txt file and delete it, set back addWords to "false", and save to deactivate.
+  // Neat trick to keep alphabetical order without external tools.
   //
   // BRANCH-SPECIFIC CUSTOM DICTIONARY = HKNdictionaryLocal.txt
   // This is where the user can add its terms.

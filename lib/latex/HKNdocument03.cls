@@ -882,8 +882,8 @@
 %   eredita quelli delle precedenti pagine, sempre gli ultimi valori aggiornati.
 %   Senza nuovi dati, continuano ad esserci testatine vuote a DX, com'è giusto senza sezioni.
 % Forse è discutibile che la testatina sia vuota nel caso cominci a dx, ma almeno sta seguendo una regola semplice.
-%   Quindi in realtà è giusto. Ricorda comunque che con la stampa della testatina disattiva sulla pagina del capitolo,
-%   come di norma, IL PROBLEMA NON SI VEDE.
+% Quindi in realtà è giusto. Ricorda comunque che con la stampa della testatina disattiva sulla pagina del capitolo,
+% come di norma, IL PROBLEMA NON SI VEDE.
 % CUSTOM CLASS CON TESTATINA MODIFICATA: SE SI ATTIVASSE DUNQUE LA TESTATINA SULLA PAGINA DEL CAPITOLO?
 % - se la pagina è a sx, che stampa il leftmark, mostra il nome del capitolo. In particolare l'ultimo sovrascritto. OK.
 % - se la pagina è a dx, che stampa il rightmark, STAMPA IL PRIMO LEFTMARK, cioè IL TITOLO LUNGO secondo il codice
@@ -936,10 +936,12 @@
 % ======================================================================================================================
 % Questo blocco documenta un cambio di paradigma fondamentale nella gestione delle testatine. Invece di hackerare le
 % primitive del kernel TeX, la classe adotterà un approccio MVC (Model-View-Controller):
-% - MODEL (Modello): Il livello dei "Dati", ovvero come TeX immagazzina le informazioni (i marks).
-% - VIEW (Vista): Il livello della "Presentazione", ovvero il pacchetto fancyhdr che disegna fisicamente la pagina.
-% - CONTROLLER (Controllo): La logica condizionale che decide cosa estrarre dai dati per passarlo alla vista. Separare
-%   rigorosamente questi tre livelli garantisce un codice pulito, robusto e prevedibile.
+% - MODEL (Modello): Il livello dei "Dati", ossia come TeX immagazzina le informazioni (i marks). Fornisce accesso ai
+%   dati stessi con opportuni strumenti.
+% - VIEW (Vista): Il livello della "Presentazione" (dei dati), ossia il pacchetto fancyhdr, che disegna fisicamente la
+%   pagina, in precisione le testatine.
+% - CONTROLLER (Controllo): La logica condizionale che decide cosa estrarre dai dati per passarlo alla vista.
+% Separare rigorosamente questi tre livelli garantisce un codice pulito, robusto e prevedibile.
 %
 % ----------------------------------------------------------------------------------------------------------------------
 % 1. MODEL - IL MISUNDERSTANDING STORICO DEI NOMI E LA FILOSOFIA DEL KERNEL (Il Livello Dati)
@@ -1018,8 +1020,28 @@
 % bypassano queste API. Le classi standard inviano ai marks uno stile preformattato (es. tutto maiuscolo tramite
 % \MakeUppercase o comandi come \@mkboth), senza offrire un'interfaccia semplice per modificarlo.
 %
-% In questi casi, per correggere la formattazione del Dato senza infrangere il pattern MVC, è necessario intervenire
-% direttamente sul codice del generatore. Le tecniche per farlo includono:
+% ------ LA SOLUZIONE EASY: DIRETTAMENTE NEL VIEW LEVEL (fornita da fancyhdr): \nouppercase{}
+% La prima e più elegante linea di difesa contro il maiuscolo hardcoded è offerta da fancyhdr tramite \nouppercase.
+% Semplicemente disattiva i comandi di maiuscolo (\uppercase e \MakeUppercase) intercettandoli localmente, ridefinendoli
+% rendendoli "trasparenti" (intercettatore asincrono, leggi a seguire). In questo modo, essi restituiscono l'argomento
+% intatto con il Character Case originale (non ci sono rielaborazioni), ossia il testo restituito è quello nativo, come
+% se il maiuscolo non fosse mai stato applicato. Si usa semplicemente passandogli come scope l'intero blocco di codice
+% (di controllo eventualmente) che andrebbe in fancyhead (stampa testatine), ad esempio:
+%
+% \fancyhead[LE]{\nouppercase{\leftmark}}                                       % Stampa testatina Sx di pagine Sx
+%                                                                               % (capitolo) senza maiuscolo
+% \fancyhead[RO]{\nouppercase{\ifblank{\rightmark}{\leftmark}{\rightmark}}}     % Stampa testatina Dx di pagine Dx:
+%                                                                               % Capitolo se non ci sono sezioni,
+%                                                                               % altrimenti sezione, senza maiuscolo.
+%
+% NOTA: fancyhdr è stato pensato per la gestione integrale delle testatine, inclusa la risoluzione di queste
+% problematiche storiche e note (a proposito: si consiglia la lettura della sua documentazione, un breve e illuminante
+% documento di 20 pagine).
+% NOTA: VEDI A SEGUIRE APPENDICE, PER CAPIRE COME E PERCHÉ \nouppercase FUNZIONA.
+%
+% ------LA SOLUZIONE HARD: NEL MODELLO (Interventi diretti sul codice o sui dati):
+% Quando disinnescare la formattazione non basta (ad es. se si desidera alterare le parole generate dall'ambiente e
+% non solo il maiuscolo), è necessario intervenire direttamente sul codice del generatore. Le tecniche includono:
 % - Hooks (Ganci): Usare i moderni comandi \AddToHook per iniettare codice prima o dopo l'esecuzione dell'ambiente.
 % - Modificatori di codice: Sfruttare pacchetti come etoolbox (\patchcmd) per cercare e sostituire stringhe interne.
 % - Wrapper o Decorator: Salvare il comando originale e avvolgerlo in una nuova macro che ne altera il comportamento.
@@ -1029,19 +1051,67 @@
 % ----------------------------------------------------------------------------------------------------------------------
 % VANTAGGI DI QUESTO APPROCCIO COMBINATO (MVC):
 % - Il kernel TeX rimane incontaminato e la sua filosofia semantica (Macro vs Micro contenitore) è preservata.
-% - Le decisioni sul "Cosa Testo" (maiuscole, numeri, titoli brevi) sono gestite ordinatamente dalle API (\..mark).
+% - Le decisioni sul "Cosa Testo" (maiuscole, numeri, titoli brevi), cioè i dati, sono gestite ordinatamente dalle API
+%   (\chaptermark e \sectionmark) appositamente pensate (anche per essere modificate).
 % - Le decisioni sul "Dove/Quando" sono centralizzate nella Vista (fancyhdr), rendendo il layout globale facilissimo da
 %   aggiornare in un unico punto del codice.
 % - I comandi strutturali (\chapter, \section) richiedono ridefinizioni minime e pulite (solo per l'intercettazione
 %   degli argomenti brevi).
-% - I capitoli speciali (ToC, LoF, LoT) ereditano magicamente il layout corretto senza toccare una riga del loro codice:
-%   lasciando per loro natura il \rightmark vuoto, attivano automaticamente la logica condizionale della Vista.
-% ======================================================================================================================
-
-
-
-
-
+% - I capitoli speciali (ToC, LoF, LoT) ereditano in automatico il layout corretto senza toccare una riga del loro
+%   codice: lasciando per loro natura il \rightmark vuoto, attivano automaticamente la logica condizionale della Vista.
+%
+% ----------------------------------------------------------------------------------------------------------------------
+% APPENDICE: COME FA \nouppercase{} A FUNZIONARE A POSTERIORI SE I COMANDI DI MAIUSCOLO SONO GIÀ APPLICATI AI MARKS?
+%
+% I capitoli speciali citati iniettano il maiuscolo hardcoded direttamente nei marks, ben prima che fancyhdr intervenga
+% per stampare le testatine. Allora, se TeX è un motore basato puramente su espansione di macro (parsing con
+% tokenizzazione, poi esecuzione, alternate tra loro token per token), come è possibile che \nouppercase riesca a
+% disattivare a posteriori il maiuscolo? Per quando è chiamato, dovrebbe essere già troppo tardi: ad esempio al posto di
+% "\MakeUppercase{Capitolo}" o "\uppercase{Capitolo}" dovrebbe esserci già "CAPITOLO" in memoria all'interno dei marks.
+% ...
+% [NOTA: modernamente si usa solo \MakeUppercase, introdotto con LaTeX, e tutti i capitolo in questione essendo stati
+% introdotti con LaTeX, usano solo \MakeUppercase. \uppercase è una vecchia primitiva di TeX, usata solo da vecchi
+% pacchetti, che ha molte limitazioni: per compatibilità la si considera comunque!)].
+% ...
+% La risposta è sorprendente ma semplice, e diversa per i due comandi citati, sebbene ai fatti molto simile: viene
+% sfruttata rispettivamente la loro ESPANSIONE ED ESECUZIONE RITARDATE RISPETTO ALLA MEMORIZZAZIONE NEI MARKS.
+% - \uppercase{} non è una macro, bensì una primitiva di TeX: non c'è codice TeX da espandere al suo interno (i suoi
+%   argomenti vengono invece espansi di norma). Richiama solo del codice binario lanciato al momento dell'esecuzione.
+%   Visto che l'esecuzione del codice coincide al momento della stampa (shipout), e che chiaramente memorizzare nei
+%   marks è ben diverso dallo stampare, si deduce facilmente che al momento della memorizzazione nei marks, \uppercase
+%   non viene eseguito.
+% - \MakeUppercase{} invece è una macro "robusta", cioè è integrata in essa un comando di protezione (\protect, che fa
+%   parte di LaTeX, tradotto in questo contesto in \noexpand, parte di TeX) che ne impedisce l'espansione durante il
+%   primo momento in cui il flusso d'espansione la incontra: in tale istante, il motore (TeX) si limita solo ad
+%   eliminare suddetta protezione. L'espansione è così semplicemente ritardata (rispetto alla memorizzazione), rimandata
+%   ad un punto di espansione successivo.
+% In questo modo, in entrambi i casi (per questo "ai fatti l'effetto era simile") i comandi di maiuscolo vengono
+% MEMORIZZATI SINTATTICAMENTE INTATTI NEI MARKS (es: \leftmark conterrebbe in tal caso proprio "\uppercase{Capitolo}",
+% con tutta la sintassi inclusa!).
+%
+% La domanda che segue naturalmente è: qual è il successivo punto del processo di compilazione (espansione ed
+% esecuzione) in cui le stringhe memorizzate nei marks vengono richiamate per l'espansione o esecuzione? Banalmente, lo
+% SHIPOUT delle testatine stesse, ossia il momento in cui VENGONO STAMPATE NELLA PAGINA, che coincide con il
+% processamento del comando \fancyhead: guarda caso, il punto di iniezione dell'intercettatore \nouppercase.
+% ...
+% [NOTA: ora è anche chiaro perché fosse stato chiamato "Intercettatore Asincrono": perché l'intercettazione +
+% processamento del codice di \nouppercase avviene in un momento successivo a quando i comandi di maiuscolo vengono
+% memorizzati nei marks].
+% ...
+% Per questi motivi, le INTERCETTAZIONI FATTE ALL'INTERNO DI \fancyhead con \nouppercase FUNZIONANO IN ENTRAMBI I CASI!
+%
+% ----------------------------------------------------------------------------------------------------------------------
+% APPENDICE: INTERCETTATORE ASINCRONO O SINCRONO? COSA SIGNIFICA?
+% Sia infine chiaro che ovviamente \nouppercase funziona in generale nel codice anche come intercettatore sincrono:
+% ad esempio scrivendo \nouppercase{\MakeUppercase{Testo di Prova}}, viene restituito "Testo di Prova", appunto senza
+% maiuscolo o altre alterazioni! Qui non c'è nulla di "asincrono" in senso vero e proprio: la stringa
+% "\MakeUppercase{Testo di Prova}" è passata immediatamente a \nouppercase, che la elabora immediatamente.
+% L'asincronia citata in precedenza, infatti non è una caratteristica di \nouppercase in sé ma è, come ampiamente
+% argomentato, dovuta alla logica con cui i marks sono stati progettati per funzionare nel kernel (memorizzazione
+% prima, e solo dopo esecuzione per stampa, in punti diversi del processo di compilazione). Quindi, per concludere,
+% diciamo solo che è un intercettatore (o se si preferisce "disinnescatore"), sincrono o asincrono in base al contesto
+% in cui viene usato.
+%
 % ======================================================================================================================
 
 
