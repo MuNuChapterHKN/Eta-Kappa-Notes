@@ -321,8 +321,9 @@
   // ("addWords": false), because it's meant to be manually edited by the project maintainers.
   // Words are added manually, for instance by refactoring the branch-specific dictionaries (use AI to extract and order
   // terms), with a prompt sequence like:
-  // 1. "Extract only non standard italian or english generic terms related to LaTeX, Typst, Typography, IT, (math,
-  //     physics, science ?) from these files. Exclude context specific terms, like proper names..."
+  // 1. "Extract only italian or english generic terms related to LaTeX, Typst, Typography, IT, math, physics, science
+  //     from these files. Exclude context or branch specific terms, like proper names... Keep also standard words (used
+  //     by LTeX+ that can't use bilingual checking)".
   // 2. "Join this 2 files, old dictionary and dictionary upgrade, removing duplicates and sorting alphabetically,
   //     keeping the "one word per line" format."
   // NOTE: the branch specific dictionary can be cleaned up from transferred terms, or kept as it is (with duplicates).
@@ -332,6 +333,14 @@
   // introduction of misspellings (by mistake) from multiple users. Furthermore, there is no need to have ultra-specific
   // terms in the global dictionary. The merging maintenance is similar to both cases. Anyway the global dictionary
   // should not be updated very often.
+  //
+  // NOTE: another possible idea, nice to have, could be a third dictionary for informal and slang terms used only in
+  // comments, which would not be desirable in the main document body (LaTeX text). This is easy to implement, as it
+  // would be only accessible to cSpell, but has a not-negligible drawback: every time the user add a term from
+  // comments, they would have to decide in which dictionary they should add it (hypothesis: user can add terms with
+  // cSpell to HKNdictionaryLocal.txt and HKNdictionaryLocalInformal.txt). This mental workload could be annoying, and
+  // the only advantage of this third dictionary would be having informal/slang terms flagged, if they are voluntarily
+  // written in the main text body by the user. Not so much.
 
   "cSpell.customDictionaries": {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
