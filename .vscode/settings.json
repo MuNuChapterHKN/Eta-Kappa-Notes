@@ -309,8 +309,11 @@
   // comments in LaTeX files, and for other file types (there does the entire standard checking).
   //
   // NOTE: the alphabetical reordering feature of cSpell is a very neat trick. Even if LTeX+ doesn't reorder, the
-  // next cSpell call will take care of that, reordering the entire file! Global dictionary from-UI-writing setting
-  // could be temporarily set to "true" just to use this feature to reorder the file.
+  // next cSpell call will take care of that, reordering the entire file! Global dictionary from-UI-add setting
+  // ("addWords": false) could be temporarily set to "true" just to use this feature to reorder the file: e.g. turn it
+  // "true", save to make it work, add a fake word to reorder it (like "aaaaaaaaz" which goes first, or "zzzzzzzza"
+  // which goes last: you can click on these ones here, kept unmemorized on purpose), then delete it and set back to
+  // "false", and save to deactivate. Neat Trick to keep alphabetical order without external tools.
   //
   // BRANCH-SPECIFIC CUSTOM DICTIONARY = HKNdictionaryLocal.txt
   // This is where the user can add its terms.
