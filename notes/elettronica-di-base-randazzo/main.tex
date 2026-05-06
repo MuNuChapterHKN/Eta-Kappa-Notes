@@ -7,10 +7,10 @@
 % per volontà del project manager che lo ha posto come utile indicazione.
 % Per ulteriori spiegazioni sui Magic Comments, ho scritto un'ampia guida su di essi con spiegazioni su utilizzo e
 % ruolo, con particolare riferimento a "!TEX root", trasferita in un file dedicato
-% (MainAppendices/00.1_MagicCommentsExplained.tex), tra l'altro imporato a seguire per consistenza (vedi preambolo).
+% (MainAppendices/00.1_MagicCommentsExplained.tex), tra l'altro importato a seguire per consistenza (vedi preambolo).
 
 % ----------------------- PRE-PREAMBLE SECTION: DIRETTIVE DI INIZIALIZZAZIONE ANTICIPATA: START ------------------------
-% Per modificare il comportamente della custom class HKNdocument senza toccarne il codice. Ulteriori spiegazioni su
+% Per modificare il comportamento della custom class HKNdocument senza toccarne il codice. Ulteriori spiegazioni su
 % questa sezione fornite nel file importato a seguire con \input.
 
 \input{chapters/00.1_MainAppendices/00.0_EarlyInitializationDirectives.tex}
@@ -19,7 +19,7 @@
 % FIX 2: Supporto bilingue per babel e biblatex, non supportato nativamente da HKNdocument.
 
 % -------------------------------------------------- PRE-PREAMBLE: END -------------------------------------------------
-% _________________________________________________ CLASS DECLARTATION _________________________________________________
+% _________________________________________________ CLASS DECLARATION __________________________________________________
 
 \documentclass[italian]{HKNdocument03}
 
@@ -81,7 +81,7 @@
 %
 % Viene richiamata frontmatter per aggiungere capitoli iniziali non numerati, non previsti dalla custom class
 % HKNDocument. ATTENZIONE! NON VA BENE COSÌ: ogni volta che si chiama il frontmatter viene riavviata la numerazione
-% roamana delle pagine! VA DISATTIVATA LA CHIAMATA AL MAINMATTER NELLA CUSTOM CLASS, e quella di seguito.
+% romana delle pagine! VA DISATTIVATA LA CHIAMATA AL MAINMATTER NELLA CUSTOM CLASS, e quella di seguito.
 %
 %\frontmatter                       % HO DISATTIVATO IL MAINMATTER NELLA CUSTOM CLASS: non richiamare per non riavviare
                                     % la numerazione romana!
@@ -90,11 +90,12 @@
 \RefMattBlackLinksColor             % Imposta i link in nero, per evitare di riempire di colore ToC, LoF, LoT.
 \tableofcontents                    % Stampa l'indice generale
 \newpage
-prova
+Prova
 \newpage
-prova
+Prova
 \newpage
-prova
+Prova
+
 \listoffigures[lofintoc]            % Stampa l'elenco delle figure, con voce nell'indice (lofintoc)
 \listoftables[lotintoc]             % Stampa l'elenco delle tabelle, con voce nell'indice (lotintoc)
 \RefMattDefaultLinksColor           % Ripristina i link colorati (colore di default) per il resto del documento
@@ -114,15 +115,15 @@ prova
 % -------------------------------------------------- MAINMATTER: END ---------------------------------------------------
 % ------------------------------------------------- BACKMATTER: START --------------------------------------------------
 \backmatter             % Segna la fine del corpo principale del testo, e l'inizio della parte finale, dedicata a
-                        % contenuti speciali, che non devono essere numerati come capitoli, come biblbiografia,
-                        % appendici, inidici analitici,...
+                        % contenuti speciali, che non devono essere numerati come capitoli, come bibliografia,
+                        % appendici, indici analitici,...
                         % NOTA: è già chiamato dalla customclass HKNdocument, con un hook \AfterEndDocument{}, ma si
                         % tratta di un interruttore di stato idempotente in senso informatico: chiamarlo più volte
                         % consecutivamente non causa problemi, ed equivale a chiamarlo solo la prima volta.
                         % Per ulteriori informazioni, vedi file chiamato a seguire con \input:
                         % 00.2_Bibliography/Bibliography_Call_Settings_Explanation.tex
 %
-\input{chapters/00.2_Bibliography/Bibliography_Call_Settings_Explanation.tex}   % Biblliografia: self-eplanatory
+\input{chapters/00.2_Bibliography/Bibliography_Call_Settings_Explanation.tex}   % Bibliografia: self-explanatory
 % -------------------------------------------------- BACKMATTER: END ---------------------------------------------------
 \end{document}
 % ------------------------------------------------- DOCUMENT BODY: END -------------------------------------------------
@@ -151,11 +152,11 @@ righe non sono commentate!
 
 % 2. Chiamata Chaptermark nella presentazione e nella licenza: basta riempire il
 %    leftmark
-%    Fanne uno solo (perchè se attivo le testatine asimmetriche poi ne viene
+%    Fanne uno solo (perché se attivo le testatine asimmetriche poi ne viene
 %    stampato uno solo): ad esempio "Presentazione e Licenza"
 %    Si potrebbero trasformare in capitoli non numerati.
 
-% 3. Sulla pagina inziale cambia:
+% 3. Sulla pagina iniziale cambia:
 %    "Corso di laurea triennale in Ingegneria Elettrica" in
 %    "Corso di Laurea Triennale in Ingegneria Elettrica"
 
@@ -181,7 +182,7 @@ righe non sono commentate!
 
 % 11. Aggiungere commento con casellina colori, per colori.
 
-% 12. Headrule testatina: troppo vicino a lettere minuscoel estese in basso,
+% 12. Headrule testatina: troppo vicino a lettere minuscolo estese in basso,
 %     come g, p, q. Spostarlo più in alto, mantenendo la stessa posizione
 %     rispetto al logo centrale.
 
@@ -205,9 +206,9 @@ righe non sono commentate!
 % 18. SPOSTA tutte le definizioni di macro custom, che vanno messe nella custom
 %     class, in un file HKNdocument.def, che la class importerà con \input, come
 %     per le class professionali pubblicate su CTAN. Mantiene pulita la class,
-%     seprando la logica dal materiale tipografico.
+%     separando la logica dal materiale tipografico.
 
-% 19. Istruire Team sulle funzioni di GitHub (Issue ecc) per discutre problemi,
+% 19. Istruire Team sulle funzioni di GitHub (Issue ecc) per discutere problemi,
 %     proposte di modifica, e per tenere traccia di tutto questo. Il progetto
 %     sembrerà anche più attivo e professionale.
 
@@ -219,7 +220,7 @@ righe non sono commentate!
 %     database.
 %     NOTA: la scritta "fonte" deve dipendere dalla lingua. "source" in inglese.
 
-% 21. Inserimento comando HKNblankpage, per inserimento volonatario di pagine
+% 21. Inserimento comando HKNblankpage, per inserimento volontario di pagine
 %     bianche. Ad esempio per sostituire quelle completamente bianche, generate
 %     dai \cleardoublepage nascosti nel codice (es: inizio di frontmatter).
 
@@ -852,14 +853,14 @@ si possono omettere o meno.
 % Quando inizia un capitolo: riempie sia SX che DX col nome del capitolo.
 % Rimuoviamo il maiuscolo nativo di LaTeX per mantenere lo stile pulito HKN.
 % NOTA: Se non vuoi il numero del capitolo, rimuovi "\thechapter.\ " da entrambe le parentesi.
-% In precisione compare un punto dopo il numero del capitolo, poi uno spazio, come nel comporatmento standard di book.
+% In precisione compare un punto dopo il numero del capitolo, poi uno spazio, come nel comportamento standard di book.
 
 \renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{\thechapter\ #1}}
 
 % Quando inizia una sezione: sovrascrive SOLO la memoria di DX.
 % Rimuoviamo il maiuscolo nativo di LaTeX per mantenere lo stile pulito HKN.
 % NOTA: Se non vuoi il numero della sezione, rimuovi "\thesection.\ ".
-% In precisione compare un punto dopo il numero della sezione, poi uno spazio, come nel comporatmento standard di book.
+% In precisione compare un punto dopo il numero della sezione, poi uno spazio, come nel comportamento standard di book.
 
 \renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
 
@@ -972,7 +973,7 @@ Basta trasformare le prime righe del 7.3 nelle seguenti:
 
 % Quando inizia un capitolo: riempie sia SX che DX col nome del capitolo.
 % NOTA: Se non vuoi il numero del capitolo, rimuovi "\thechapter.\ " da entrambe le parentesi.
-% In precisione compare un punto dopo il numero del capitolo, poi uno spazio, come nel comporatmento standard di book.
+% In precisione compare un punto dopo il numero del capitolo, poi uno spazio, come nel comportamento standard di book.
 
 \renewcommand{\chaptermark}[1]{%
   \markboth{\MakeUppercase{\thechapter.\ #1}}% SX: Comportamento nativo
@@ -981,7 +982,7 @@ Basta trasformare le prime righe del 7.3 nelle seguenti:
 
 % Quando inizia una sezione: sovrascrive SOLO la memoria di DX.
 % NOTA: Se non vuoi il numero della sezione, rimuovi "\thesection.\ ".
-% In precisione compare un punto dopo il numero della sezione, poi uno spazio, come nel comporatmento standard di book.
+% In precisione compare un punto dopo il numero della sezione, poi uno spazio, come nel comportamento standard di book.
 
 \renewcommand{\sectionmark}[1]{\markright{\MakeUppercase{\thesection.\ #1}}}
 
@@ -1073,7 +1074,7 @@ CODICE REALMENTE USATO: aggiunge controllo condizionale per mainmatter
 % Quando inizia un capitolo: riempie sia SX che DX col nome del capitolo, in modo che se non sono presenti sezioni,
 % comunque la testatina non rimane vuota (fallback al nome del capitolo).
 % NOTA: Se non vuoi il numero del capitolo, rimuovi "\thechapter.\ " da entrambe le parentesi.
-% In precisione compare un punto dopo il numero del capitolo, poi uno spazio, come nel comporatmento standard di book.
+% In precisione compare un punto dopo il numero del capitolo, poi uno spazio, come nel comportamento standard di book.
 % NOTA: controllo condizionale: aggiunge il numero di capitolo solo nel mainmatter, come di default in book.
 
 \renewcommand{\chaptermark}[1]{%
@@ -1087,7 +1088,7 @@ CODICE REALMENTE USATO: aggiunge controllo condizionale per mainmatter
 % --- TITOLI DELLE SEZIONI NELLE TESTATINE ---
 % Quando inizia una sezione: sovrascrive SOLO la memoria di DX.
 % NOTA: Se non vuoi il numero della sezione, rimuovi "\thesection.\ ".
-% In precisione compare un punto dopo il numero della sezione, poi uno spazio, come nel comporatmento standard di book.
+% In precisione compare un punto dopo il numero della sezione, poi uno spazio, come nel comportamento standard di book.
 
 % \renewcommand{\sectionmark}[1]{%
 %     \if@mainmatter%
@@ -1099,11 +1100,11 @@ CODICE REALMENTE USATO: aggiunge controllo condizionale per mainmatter
 
 \renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
 
-% Perchè ho disattivato la prima versione: Comunque compare il 0.1, 0.2... per le sezioni del frontmatter nella PAGINA
-% DI INIZIO SEZIONE. Andrebbe modificato dunque eventualmnete anche il comando che ne stampa il titolo della sezione ad
+% Perché ho disattivato la prima versione: Comunque compare il 0.1, 0.2... per le sezioni del frontmatter nella PAGINA
+% DI INIZIO SEZIONE. Andrebbe modificato dunque eventualmente anche il comando che ne stampa il titolo della sezione ad
 % inizio sezione, per evitare confusione. Per questo lascio il numero di sezione nella testatina anche nel frontmatter.
 % In ogni caso NON SI DOVREBBERO USARE SEZIONI NUMERATE NEL FRONTMATTER e nel BACKMATTER! Usa in caso il comando
-% \section*{} per evitare numerazione e presenza in testatina e nell'indice: ma attenzione in quanto i comandiù stellati
+% \section*{} per evitare numerazione e presenza in testatina e nell'indice: ma attenzione in quanto i comandi stellati
 % non aggiornano le testatine! Ho creato i comandi custom "unnumbered" appositamente per risolvere questi problemi: usa
 % \usection se vuoi reinserire nella testatina e nell'indice (non stampa numero) la sezione non numerata, ma che compare
 % nell'indice e nella testatina.
@@ -1118,7 +1119,7 @@ CODICE REALMENTE USATO: aggiunge controllo condizionale per mainmatter
 
 % Pagine DISPARI (Odd - Foglio di Destra)
 \fancyhead[LO]{\DDorganization}     % Nome Associazione sul margine INTERNO (SX)
-\fancyhead[RO]{\rightmark}          % Righmark (Nome Sezione, o fallback Capitolo) sul margine ESTERNO (DX)
+\fancyhead[RO]{\rightmark}          % Rightmark (Nome Sezione, o fallback Capitolo) sul margine ESTERNO (DX)
 
 % Logo sempre al CENTRO (su tutte le pagine)
 \fancyhead[C]{%
@@ -1132,8 +1133,8 @@ CODICE REALMENTE USATO: aggiunge controllo condizionale per mainmatter
     \hrulefill%                     % Disegna la linea orizzontale, regolando elasticamente lo spazio
     \hspace{50pt}%                  % Aggiunge uno spazio orizzontale vuoto (al centro, per far spazio al logo)
     \hrulefill%                     % Disegna la linea orizzontale dopo lo spazio, regolando lo spazio
-    % EFFETTO COMPLESSIVO: le linee si esdpando a sx e a dx dell'hspace con la stessa "forza elastica": lo spazio bianco
-    % si troverà di conseguenza sempre al centro.
+    % EFFETTO COMPLESSIVO: le linee si espandono a sx e a dx dell'hspace con la stessa "forza elastica": lo spazio
+    % bianco si troverà di conseguenza sempre al centro.
 }
 
 \setlength{\headheight}{30pt}       % Aumenta l'altezza della testatina per accogliere il logo evitando warnings
