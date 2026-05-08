@@ -354,46 +354,42 @@
 
 %------- SPIEGAZIONE INIZIALE FUNZIONAMENTO TESTATINE - FONDAMENTALE PER CAPIRE COME APPLICARE MODIFICHE
 
-\fancyhead{}            % Pulizia Precauzionale delle testatine
-\fancyfoot{}            % Clear footers, just for precaution (good practice)
-
-\makeatletter           % Rende la @ un carattere normale, utilizzabile per comandi
-
 % NOTA: Di default, LaTeX utilizza \MakeUppercase per forzare i titoli in maiuscolo nelle testatine.
+
 % NOTA: se vuoi titoli nella testatina in maiuscolo, o in generale per altre modifiche puramente dello stile di quanto
 % già presente, è sufficiente modificare il contenuto dei comandi \fancyhead, che si occupano solo della stampa di
 % testatina (header) e piè di pagina (footer). In generale, per pure modifiche di stile, non è necessario toccare i
-% comandi di marks.
-% NOTA: i comandi di marks sono \chaptermark, \sectionmak, \markboth, \markright (\leftmark non esiste in LaTeX default,
-% perché non ha senso aggiornare il capitolo senza toccare le sezioni (rightmark).
+% comandi di marks. Fare in questo modo, consente di GUADAGNARE IN AUTOMATICO LA COERENZA DI STILE PER TUTTI I CASI
+% DI STAMPA DELLE TESTATINE: comandi di sectioning normali (part, chapter, section,...), comandi si sectioning stellati
+% (part*, chapter*, section*,...) il cui comportamento è stato ridefinito a seguire (aggiornano la testatina), comandi
+% di sectioning custom (upart, uchapter, usection, ...), comandi di "sectioning speciali" (o meglio generatori di
+% capitoli speciali): listoffigures, listoftables, bibliography, tableofcontents (indice generale), makeindex (indice
+% analitico), eccetera.
 
+% NOTA: quanto appena spiegato, vale in particolare solo se si deve intervenire sullo stile delle testatine! Invece,
+% qualora si voglia intervenire sul contenuto, allora è necessario mettere mano ai comandi, con sovrascritture, hooks,
+% o wrapper. Ulteriori informazioni vengono fornite più avanti. In generale si può intervenire sia sui comandi che
+% chiamano i marks (come nel caso dei generatori di capitoli speciali), sia sui comandi di mark.
+% NOTA: i comandi di mark sono \chaptermark, \sectionmark, \markboth, \markright (\leftmark non esiste in LaTeX default,
+% perché il \rightmark è dedicato ai capitoli, mentre il \leftmark alle sezioni: non ha senso aggiornare il capitolo
+% senza toccare le sezioni. Si consiglia al più di intervenire solo su \chaptermark e \sectionmrk, senza mai toccare
+% \markboth e \markright: sono comandi (macro) di basso livello, che devono funzionare sempre nel modo preconfigurato,
+% con la logica prevista originariamente da Lamport.
 
+% NOTA: si è optato alla fine per consentire all'utente la scelta del layout delle testatine, tra un set di opzioni
+% fisse, derivanti da solide tradizioni tipografiche o dal LaTeX standard, tramite interfaccia chiave valore (PGFkeys).
+% NOTA: CREAZIONE DI INTERFACCIA DI SELEZIONE LAYOUT TESTATINA CON PGFKEYS (si potrebbero usare anche solo
+% direttive interne di basso livello, ma sarebbe più astruso e meno programmer-friendly).
 
-% basta usare \MakeUppercase{} attorno gli argomenti di
-% \markboth e \markright nei comandi sopra: se lo fai, ricorda anche di farlo per i comandi custom \uchapter,
-% \usection[]{}, e \usubsubsection[]{}, per mantenere coerenza di stile. FATTO IN AUTOMATICO, con modifica di markboth e
-% markright, e con la creazione di uchaptermark e usectionmark.
-% NOTA: la testatina della licenza è impostata più avanti, prima della sua chiamata con input.
-% Se modifiche lo stile, modifica anche quello per coerenza. FATTO IN AUTOMATICO, con modifica di markboth e markright.
-% NOTA: in pratica si potrebbero modificare, invece che \sectionmark e \chaptermark, direttamente \rightmark e
-% \markboth. Tuttavia si tratta di primitive di basso livello, che è utile che si comportino in modo standard, per
-% eventuale uso manuale. ATTENZIONE NON SI PUÒ FARE PER TUTTE LE FUNZIONI: infatti servono comportamenti diversi per
-% markboth e markright, in funzione che si tratti di capitoli o sezioni. Si può quindi fare solo per il case del
-% carattere. FATTO COSÌ!
-% NOTA: la bibliografia, così come l'indice analitico, la lista delle tabelle, la lista delle figure, se presenti,
-% generano la loro testatina da se! Qualora li si aggiunga al documento, VANNO SISTEMATI CASO PER CASO. Qui per ora
-% è stato sistemato solo il caso della bibliografia, con la creazione di un heading style custom, che chiama \uchapter
-% per generarla (in alternativa, copiaci dentro lo stesso codice), che chiama il markboth modificato!.
-% AGGIORNAMENTO: testatine corrette anche per LOF e LOT, con la sovrascrittura dei comandi \listoffigures e
-% \listoftables. manca solo l'indice analitico, caso diverso (essendo un environment), ma è probabile che non serva in
-% questo progetto.
+% 0. SETUP INIZIALE
+\fancyhead{}            % Pulizia precauzionale testatina o header - Good practice
+\fancyfoot{}            % Pulizia precauzionale piedino (sì, si chiama così in italiano LOL) o footer - Good practice
 
-% NOTA: si potrebbe aggiungere un opzione alla classe "HeaderCase=upper" o "HeaderCase=normal" per attivare o
-% disattivare il maiuscolo forzato in modo comodo, ovviamente aggiungendo un controllo condizionale nei comandi sopra.
-% FATTO A SEGUIRE!
-
-% AGGIORNAMENTO: CREAZIONE DI INTERFACCIA DI SELEZIONE LAYOUT TESTATINA CON PGFKEYS (si potrebbero usare anche solo
-% direttive interne di basso livello)
+%\makeatletter          % Rende la @ un carattere normale, utilizzabile per comandi
+                        % NOTA: in realtà nei file .cls (classi), .sty (pacchetti e stili), .def, .clo, .fd, .cfg, .ldf
+                        % questa opzione è attiva di default!
+                        % AGGIORNAMENTO: NON USARE: questo di fatto è innocuo, ma poi si è portati a usare
+                        % \makeatother che FORZA LA DISATTIVAZIONE rompendo il file di classe!
 
 % 1. VARIABILI DI STATO (Boolean flags)
 \newif\ifHKN@hdrUpperCase           % Flag: se true, i titoli nelle testatine saranno tutti in maiuscolo
@@ -611,7 +607,10 @@
 % RIDEFINIZIONE SECTIONMARK per SEZIONI NON NUMERATE, generate con \usection
 % \newcommand{\usectionmark}[1]{\markright{#1}}
 
-\makeatother            % Rende di nuovo la @ un carattere non utilizzabile per comandi (protezione)
+% \makeatother          % Rende di nuovo la @ un carattere non utilizzabile per comandi (protezione)
+                        % NOTA BENE: NON USARE MAI NEI FILE .cls (classi), .sty (pacchetti e stili), .def, .clo, .fd,
+                        % .cfg, .ldf: \makeatletter è attiva di default per codesti, e chiamare \makeatother forza
+                        % la disattivazione, che potrebbe rompere il funzionamento di questi file!
 
 
 % --- AGGIORNAMENTO 2026-27-04 - FIX BUGS TESTATINE \chapter* e \uchapter, e \section* e \usection ---
@@ -1180,6 +1179,8 @@
 
 
 % ______________________________________________________________________________ INIZIO MODIFICA TIZIANO - COMANDO CHAPTER
+
+% NOTA BENE: RICORDA COME SPIEGATO DI NON USARE MAI \makeatletter e \makeatother all'interno di una classe
 
 % % Chapter start pages will not have headers (only page number in "plain" style)
 % % Redefine \chapter to force plain style on the first page of each chapter.

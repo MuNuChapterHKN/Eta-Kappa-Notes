@@ -237,6 +237,12 @@ righe non sono commentate!
 % 25. Gestione dizionari branch-specific + central. Già implementato qui
 %     Vedi settings.json.
 
+% 26. Eliminare \makeatletter e \makeatother dalla custom class, spiegando
+%     che nei file .cls, .sty, .def, .clo, .fd, .cfg, .ldf \makeatletter è
+%     attivo di default, e che chiamare \makeatother forza la disattivazione,
+%     che potrebbe rompere il funzionamento di questi file. LaTeX lo disattiva
+%     automaticamente alla fine di questi file.
+
 \begin{comment} CANDIDATE PULL REQUESTS (PR) PER TEMPLATE HKN
 ================================================================================
 PROPOSTE DI PULL REQUEST (PR) PER IL TEMPLATE HKN - PROBLEMI RISCONTRATI
