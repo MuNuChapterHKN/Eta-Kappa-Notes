@@ -922,7 +922,7 @@
 % MANIFESTO DI DESIGN DELLE TESTATINE: IL PATTERN MVC IN (La)TeX E IL PROBLEMA DEI MARKS
 % ======================================================================================================================
 % Questo blocco documenta un cambio di paradigma fondamentale nella gestione delle testatine. Invece di hackerare le
-% primitive del kernel TeX, la classe adotterà un approccio MVC (Model-View-Controller):
+% macro di basso livello del kernel LaTeX, la classe adotterà un approccio MVC (Model-View-Controller):
 % - MODEL (Modello): Il livello dei "Dati", ossia come TeX immagazzina le informazioni (i marks). Fornisce accesso ai
 %   dati stessi con opportuni strumenti.
 % - VIEW (Vista): Il livello della "Presentazione" (dei dati), ossia il pacchetto fancyhdr, che disegna fisicamente la

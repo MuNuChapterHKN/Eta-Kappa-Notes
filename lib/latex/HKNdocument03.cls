@@ -352,7 +352,41 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%------- SPIEGAZIONE INIZIALE FUNZIONAMENTO TESTATINE - FONDAMENTALE PER CAPIRE COME APPLICARE MODIFICHE
+%----------- SPIEGAZIONE INIZIALE FUNZIONAMENTO TESTATINE - FONDAMENTALE PER CAPIRE COME APPLICARE MODIFICHE -----------
+
+% Si è optato alla fine per consentire all'utente la scelta del layout delle testatine, tra un set di opzioni fisse,
+% derivanti da solide tradizioni tipografiche o dal LaTeX standard, tramite interfaccia chiave valore (PGFkeys).
+% [NOTA: Relativamente alla creazione dell'interfaccia di selezione del layout della testatina con pgfkeys: si sarebbe
+% potuto costruire usando solo macro e primitive interne di basso livello (d'altronde consiste in una serie di booleani
+% che pilotano il controllo con dei condizionali), ma sarebbe stato più astruso e meno programmer-friendly].
+%
+% ---------------
+% UNA CONSIDERAZIONE PERSONALE:
+% Non è stato immediato o facile ottenere complessivamente questo risultato per i seguenti motivi:
+% - è stato necessario imparare ad usare il pacchetto pgfkeys: potente strumento per creare interfacce chiave-valore
+%   NOTA: PGF sta per portable graphics format, perché è un sistema nato per far funzionare tikz (per la grafica):
+%   l'autore ha poi deciso di renderlo disponibile come feature in se, essendo stato molto apprezzato.
+% - è stato necessario imparare ad usare il pacchetto fancyhdr
+% - è stato necessario comprendere il modello informatico di gestione delle testatine in LaTeX, tutt'altro che scontato:
+%   ho formulato un MODELLO INFORMATICO TEORICO personalmente, per spiegarlo chiaramente una volta per tutte, riportato
+%   più avanti.
+% - è stato necessario imparare come i comandi di sectioning (chapter, section, eccetera) e come i comandi dei capitoli
+%   speciali (listoffigures, listoftables, bibliography, tableofcontents, makeindex) interagiscono con le testatine,
+%   le loro differenze di comportamento, e peculiarità hardcoded. In particolarità come chiamano i comandi \chaptermark
+%   e \sectionmark.
+% - è stato necessario comprendere le migliori pratiche di intervento sul contenuto delle testatine: si è provato ad
+%   intervenire direttamente sui comandi di sectioning e capitoli speciali, sui comandi chaptermark e sectionmark, su
+%   markboth e markright, con sovrascritture, wrapper, hooks, eccetera, per capire cosa fosse meglio. Si è giunti infine
+%   all'estremamente soddisfacente soluzione presentata a seguire.
+% Guardando a posteriori la soluzioni individuata, si può osservare comunque come sia "semplice e facilmente intuibile",
+% almeno per i più esperti nella scrittura di classi LaTeX. In ogni caso il percorso per trovarla e comprenderla è
+% stato di grande ispirazione ed ottimo effetto didattico.
+% Ho raccolto quanto appreso nel "MANIFESTO DI DESIGN DELLE TESTATINE", riportato a seguire.
+% Sono riportati inoltre altri commenti utili, non del tutto organizzati, ma interessanti e verosimilmente utili.
+%
+% Tiziano Mattei.
+% ---------------
+
 
 % NOTA: Di default, LaTeX utilizza \MakeUppercase per forzare i titoli in maiuscolo nelle testatine.
 
@@ -375,242 +409,6 @@
 % senza toccare le sezioni. Si consiglia al più di intervenire solo su \chaptermark e \sectionmrk, senza mai toccare
 % \markboth e \markright: sono comandi (macro) di basso livello, che devono funzionare sempre nel modo preconfigurato,
 % con la logica prevista originariamente da Lamport.
-
-% NOTA: si è optato alla fine per consentire all'utente la scelta del layout delle testatine, tra un set di opzioni
-% fisse, derivanti da solide tradizioni tipografiche o dal LaTeX standard, tramite interfaccia chiave valore (PGFkeys).
-% NOTA: CREAZIONE DI INTERFACCIA DI SELEZIONE LAYOUT TESTATINA CON PGFKEYS (si potrebbero usare anche solo
-% direttive interne di basso livello, ma sarebbe più astruso e meno programmer-friendly).
-
-% 0. SETUP INIZIALE
-\fancyhead{}            % Pulizia precauzionale testatina o header - Good practice
-\fancyfoot{}            % Pulizia precauzionale piedino (sì, si chiama così in italiano LOL) o footer - Good practice
-
-%\makeatletter          % Rende la @ un carattere normale, utilizzabile per comandi
-                        % NOTA: in realtà nei file .cls (classi), .sty (pacchetti e stili), .def, .clo, .fd, .cfg, .ldf
-                        % questa opzione è attiva di default!
-                        % AGGIORNAMENTO: NON USARE: questo di fatto è innocuo, ma poi si è portati a usare
-                        % \makeatother che FORZA LA DISATTIVAZIONE rompendo il file di classe!
-
-% 1. VARIABILI DI STATO (Boolean flags)
-\newif\ifHKN@hdrUpperCase           % Flag: se true, i titoli nelle testatine saranno tutti in maiuscolo
-\newif\ifHKN@hdrChapLabel           % Flag: se true, viene stampata l'etichetta \chaptername nella testatina, ossia
-                                    % "Capitolo" o "Chapter" in funzione della lingua attiva.
-\newif\ifHKN@hdrBriefLabel          % Flag: se true, l'etichetta sopra è stampata in forma abbreviata (disponibile solo
-                                    % per italiano, "Cap.", e inglese, "Ch.").
-\newif\ifHKN@hdrNumberLabel         % Flag: se true, viene aggiunta nella testatina l'etichetta numerica ai capitoli e
-                                    % alle sezioni numerati, dichiarate con \chapter e \section
-                                    % NOTA: andrebbero usate numerate solo nel mainmatter! Nel frontmatter e backmatter
-                                    % la numerazione capitoli è disattivata, ma non quella delle sezioni (numerazioni
-                                    % sezioni sballa). Allora o usi le versioni stellate delle sottodivisioni, ad
-                                    % esempio \section* (ma in quel caso non vanno nell'indice o nella testatina), o usi
-                                    % le macro custom unnumbered but indexed, come \usection, che risolvono questi
-                                    % problemi: numerazione annullata, ma compaiono in indice e testatina.
-
-
-% 2. INTERFACCIA DI CONTROLLO (pgfkeys) CON GESTIONE DELLE ECCEZIONI O ERRORI
-% ATTENZIONE alla FORMATTAZIONE all'interno di pgfkeys: è molto rigido, non usare righe vuote, e ci devono essere solo
-% virgole per separare le coppie chiave-valore. Per aggiungere spazi, commentali per annullarne l'effetto.
-% NOTA: è stato usato pgfkeys come esercizio di programmazione, essendo molto versatile e potente. Tuttavia lo stesso
-% identico risultato (cioè usare booleani per modificare il comportamento delle funzioni modificatrici dichiarate a
-% seguire), si può ottenere anche con le primitive di basso livello di TeX (incluso il controllo dell'esistenza dei
-% booleani). Si dovrebbe poi creare un'interfaccia di gestione apposita, se non si vuole che l'utente finale stia a
-% scrivere i booleani.
-
-\pgfkeys{
-    /HKNhdr/.is family,             % Dichiara una nuova famiglia di chiavi, nella folder /HKNhdr (hdr: sta per header)
-    /HKNhdr,                        % Attiva il percorso suddetto come default (solo per le prossime dichiarazioni)
-    %
-    % GESTIONE DEL MAIUSCOLO (is choice crea un menu chiuso)
-    HeaderCase/.is choice,                                             % Dichiara la chiave HeaderCase come scelta multipla (choice)
-    HeaderCase/upper/.code  = {\HKN@hdrUpperCasetrue},                 % Se usata setta true il flag per il maiuscolo forzato
-    HeaderCase/normal/.code = {\HKN@hdrUpperCasefalse},                % Se usata setta false il flag per il maiuscolo forzato
-    HeaderCase/.unknown/.code = {%                                     % Gestione Eccezioni: avvisa l'utente se usa valori non ammessi
-        \ClassError{HKNdocument}{%                                      % Tipo di errore: errore di classe, custom class HKNdocument
-            Invalid value for key HeaderCase.\MessageBreak             % Messaggio stampato nell'errore
-            Allowed values are: upper, normal%
-        }{%
-            Check your \string\setupHeaders\space options for typos.%   % Messaggio di help (scrivi h nel terminale
-            %                                                           % dopo blocco compilazione per visualizzarlo)
-        }%
-    },
-    HeaderCase = normal,                                                           % Imposta il valore di default della key: se l'utente non specifica nulla, usa questo
-    % GESTIONE ETICHETTA CHAPTER
-    ChapterLabel/.is choice,                                                        % Dichiara la chiave ChapterLabel come scelta multipla (choice)
-    ChapterLabel/absent/.code = {\HKN@hdrChapLabelfalse},                           % Se usata, setta false il flag per stampare l'etichetta "capitolo"
-    ChapterLabel/normal/.code = {\HKN@hdrChapLabeltrue \HKN@hdrBriefLabelfalse},    % Se usata, setta true il flag per stampare l'etichetta "capitolo", ma falso per la versione breve
-    ChapterLabel/brief/.code  = {\HKN@hdrChapLabeltrue \HKN@hdrBriefLabeltrue},     % Se usata, setta ture i 2 flag per stampare l'etichetta "capitolo" in forma breve
-    ChapterLabel/.unknown/.code = {%                                                % Gestione Eccezioni: avvisa l'utente se usa valori non ammessi
-        \ClassError{HKNdocument}{%                                                  % Tipo di errore: errore di classe, custom class HKNdocument
-            Invalid value for key ChapterLabel.\MessageBreak                        % Messaggio stampato nell'errore
-            Allowed values are: absent, normal, brief%
-        }{%
-            Check your \string\setupHeaders\space options for typos.%               % Messaggio di help (scrivi h nel terminale dopo blocco compilazione per visualizzarlo)
-        }%
-    },
-    ChapterLabel = absent,                                                          % Imposta il valore di default della key: se l'utente non specifica nulla, usa questo
-    % GESTIONE ETICHETTA NUMERICA
-    NumberLabel/.is choice,                                                         % Dichiara la chiave NumberLabel come scelta multipla (choice)
-    NumberLabel/absent/.code = {\HKN@hdrNumberLabelfalse},                          % Se usata, setta false il flag per stampare l'etichetta numerica
-    NumberLabel/normal/.code = {\HKN@hdrNumberLabeltrue},                           % Se usata, setta false il flag per stampare l'etichetta numerica
-    NumberLabel/.unknown/.code = {%                                                 % Gestione Eccezioni: avvisa l'utente se usa valori non ammessi
-        \ClassError{HKNdocument}{%                                                  % Tipo di errore: errore di classe, custom class HKNdocument
-            Invalid value for key NumberLabel.\MessageBreak                         % Messaggio stampato nell'errore
-            Allowed values are: absent, normal%
-        }{%
-            Check your \string\setupHeaders\space options for typos.%               % Messaggio di help (scrivi h nel terminale dopo blocco compilazione per visualizzarlo)
-        }%
-    },
-    NumberLabel = absent,                                                           % Imposta il valore di default della key: se l'utente non specifica nulla, usa questo
-    % GESTIONE ERRORI PER CHIAVI INESISTENTI
-    % Se l'utente sbaglia a digitare il NOME della chiave (es. ChapterLabel=brief),scatta l'unknown generale della
-    % famiglia. \pgfkeyscurrentname contiene il nome della chiave sbagliata.
-    .unknown/.code = {%                                                             % Gestione Eccezioni: avvisa l'utente se usa key non ammesse
-        \ClassError{HKNdocument}{%                                                  % Tipo di errore: errore di classe, custom class HKNdocument
-            Unknown key '\pgfkeyscurrentname' used in header setup.\MessageBreak    % Messaggio stampato dall'errore
-            Allowed keys are: HeaderCase, ChapterLabel, NumberLabel%
-        }{%
-            Please read the class documentation or check for typos.%                % Messaggio di help (scrivi h nel terminale dopo blocco compilazione per visualizzarlo)
-        }%
-    },
-}
-
-% Valori di default iniziali: COMMENTATI PERCHÉ INSERITI DIRETTAMENTE DOPO LE DICHIARAZIONI
-% \pgfkeys{/HKNhdr, HeaderCase=normal, ChapterLabel=absent, NumberLabel=absent}
-
-% Comando per l'utente finale: interfaccia di alto livello, che accetta direttamente la lista separate da virgole e
-% spazi (o "a capo").
-% NOTA: il comando a seguire è \pgfqkeys e non \pgfkeys: quella "q" in più sta per "quick": è una versione del comando
-% più veloce, che accetta due argomenti: la cartella dove cercare le chiavi, e la lista di valori.
-% La velocità superiore consiste proprio in questa separazione degli argomenti: sostanzialmente il parser si risparmia
-% una parte del lavoro! È la best practice per dichiarare i comandi di impostazione!
-% Si sarebbe potuto usare anche:
-% \newcommand{\setupHeaders}[1]{\pgfkeys{/HKNhdr, #1}}
-% Oppure: metodo generale, quando la cartella dove si ricerca non è dichiarata come una famiglia: va aggiunto un .cd
-% per change directory (le folder delle keys).
-% \newcommand{\setupHeaders}[1]{\pgfkeys{/HKNhdr/.cd, #1}}
-% Qui non è necessario, in quanto (dalla documentazione del pacchetto pgfkeys), se si dichiara una stringa come famiglia
-% di chiavi, come "/HKNhdr", allora ad ogni chiamata di questa è aggiunto in automatico un .cd.
-\newcommand{\setupHeaders}[1]{\pgfqkeys{/HKNhdr}{#1}}
-
-% 3. MODIFICATORI E FILTRI (Logica di formattazione)
-
-% Filtro Case: applica il maiuscolo se richiesto
-\newcommand{\HKNcase}[1]{%
-    \ifHKN@hdrUpperCase
-        \MakeUppercase{#1}%
-    \else
-        #1%
-    \fi
-}
-
-% Generatore Etichetta Chapter Breve: in italiano scrive Cap., altrimenti Ch. (inglese default per ogni altra lingua,
-% in caso va modificato a mano per altre lingue, ma inglese ed italiano sono le uniche supportate dal progetto).
-% Invece il nome completo è scritto col comando "\chaptername", che gestisce tutte le lingue.
-\newcommand{\HKNbrieflabel}{\iflanguage{italian}{Cap.}{Ch.}}
-
-% Generatore Etichetta Chapter: costruisce l'etichetta prima del numero del capitolo.
-% Controlla se farla, e poi se farla completa o abbreviata.
-\newcommand{\HKNchaplabel}{%
-    \ifHKN@hdrChapLabel%
-        \ifHKN@hdrBriefLabel%
-            \HKNbrieflabel\space%
-        \else%
-            \chaptername\space%
-        \fi%
-    % \else%
-    %     \relax%                           % Comando filler: è meglio omettere del tutto l'else per le prestazioni.
-    \fi%
-}
-
-% Generatore Etichetta Numerica Chapter: costruisce l'etichetta con numero del capitolo.
-% Controlla se stamparla
-\newcommand{\HKNnumchaplabel}{%
-    \ifHKN@hdrNumberLabel%
-        \thechapter.\ %                     % la stringa "\ " forza la stampa di uno spazio dopo il numero del capitolo
-    % \else%
-    %     \relax%                           % Comando filler: è meglio omettere del tutto l'else per le prestazioni.
-    \fi%
-}
-
-% Generatore Etichetta Numerica Section: costruisce l'etichetta con numero della sezione.
-% Controlla se stamparla
-\newcommand{\HKNnumseclabel}{%
-    \ifHKN@hdrNumberLabel%
-        \thesection.\ %                     % la stringa "\ " forza la stampa di uno spazio dopo il numero della sezione
-    % \else%
-    %     \relax%                           % Comando filler: è meglio omettere del tutto l'else per le prestazioni.
-    \fi%
-}
-
-% 4. APPLICAZIONE
-% --- TITOLI DEI CAPITOLI (chiamati con \chapter) NELLE TESTATINE ---
-% Quando inizia un capitolo: riempie sia SX che DX col nome del capitolo, in modo che se non sono presenti sezioni,
-% comunque la testatina non rimane vuota (fallback al nome del capitolo).
-% NOTA: Se non vuoi il numero del capitolo, rimuovi "\thechapter.\ " da entrambe le parentesi.
-% In precisione compare un punto dopo il numero del capitolo, poi uno spazio, come nel comportamento standard di book.
-% NOTA: controllo condizionale: aggiunge il numero di capitolo solo nel mainmatter, come di default in book.
-
-% WRAPPER PER APPLICARE HKNcase in generale
-\let\OLDmarkboth=\markboth
-\let\OLDmarkright=\markright
-\renewcommand{\markboth}[2]{\OLDmarkboth{\HKNcase{#1}}{\HKNcase{#2}}}
-\renewcommand{\markright}[1]{\OLDmarkright{\HKNcase{#1}}}
-
-% RIDEFINIZIONE CHAPTERMARK
-\renewcommand{\chaptermark}[1]{%
-    \if@mainmatter%
-        \markboth{\HKNchaplabel\HKNnumchaplabel{}#1}{\HKNchaplabel\HKNnumchaplabel{}#1}%
-        % Graffe dopo numlabel per evitare problemi di spazi e formattazione: spazi inseriti già dalle etichette!
-    \else%
-        \markboth{#1}{#1}%
-    \fi%
-}
-
-% NON NECESSARIO: meglio usare direttamente \markboth modificato, come in origine: tanto sarebbe aggiunta solo la label
-% CAPITOLO, che nei capitoli non numerati non ha molto senso (Avranno sicuramente un nome speciale, infatti).
-% % RIDEFINIZIONE CHAPTERMARK per CAPITOLI NON NUMERATI generati con uchapter
-% \newcommand{\uchaptermark}[1]{%
-%     \if@mainmatter%
-%         \markboth{\HKNchaplabel{}#1}{\HKNchaplabel{}#1}%
-%     \else%
-%         \markboth{#1}{#1}%
-%     \fi%
-% }
-
-% --- TITOLI DELLE SEZIONI (chiamate con \section) NELLE TESTATINE ---
-% Quando inizia una sezione: sovrascrive SOLO la memoria di DX.
-% NOTA: Se non vuoi il numero della sezione, rimuovi "\thesection.\ ".
-% In precisione compare un punto dopo il numero della sezione, poi uno spazio, come nel comportamento standard di book.
-
-% \renewcommand{\sectionmark}[1]{%
-%     \if@mainmatter%
-%         \markright{\thesection.\ #1}%
-%     \else%
-%         \markright{#1}%
-%     \fi%
-% }
-
-\renewcommand{\sectionmark}[1]{\markright{\HKNnumseclabel{}#1}}
-    % Graffe dopo numlabel per evitare problemi di spazi e formattazione: spazi inseriti già dalle etichette!
-
-
-% Perché ho disattivato la prima versione: Comunque compare il 0.1, 0.2... per le sezioni del frontmatter nella PAGINA
-% DI INIZIO SEZIONE. Andrebbe modificato dunque eventualmente anche il comando che ne stampa il titolo della sezione ad
-% inizio sezione, per evitare confusione. Per questo lascio il numero di sezione nella testatina anche nel frontmatter.
-% In ogni caso NON SI DOVREBBERO USARE SEZIONI NUMERATE NEL FRONTMATTER e nel BACKMATTER! Usa in caso il comando
-% \section*{} per evitare numerazione e presenza in testatina e nell'indice: ma attenzione in quanto i comandi stellati
-% non aggiornano le testatine! Ho creato i comandi custom "unnumbered" appositamente per risolvere questi problemi: usa
-% \usection se vuoi reinserire nella testatina e nell'indice (non stampa numero) la sezione non numerata, ma che compare
-% nell'indice e nella testatina.
-
-% NON NECESSARIO: meglio usare direttamente \markright modificato, come in origine. Tanto consiste solo in quello.
-% RIDEFINIZIONE SECTIONMARK per SEZIONI NON NUMERATE, generate con \usection
-% \newcommand{\usectionmark}[1]{\markright{#1}}
-
-% \makeatother          % Rende di nuovo la @ un carattere non utilizzabile per comandi (protezione)
-                        % NOTA BENE: NON USARE MAI NEI FILE .cls (classi), .sty (pacchetti e stili), .def, .clo, .fd,
-                        % .cfg, .ldf: \makeatletter è attiva di default per codesti, e chiamare \makeatother forza
-                        % la disattivazione, che potrebbe rompere il funzionamento di questi file!
 
 
 % --- AGGIORNAMENTO 2026-27-04 - FIX BUGS TESTATINE \chapter* e \uchapter, e \section* e \usection ---
@@ -649,80 +447,144 @@
 % ======================================================================================================================
 % MODELLO TEORICO DELLA MEMORIA DELLE TESTATINE IN (La)TeX - COMPORTAMENTO DI DEFAULT - I MARKS (leftmark, rightmark)
 % ======================================================================================================================
-% Questo modello descrive il meccanismo asincrono e asimmetrico con cui TeX gestisce i "post-it" (marks) per le
-% testatine, modellizzandolo come un array tridimensionale. È lo strumento definitivo per prevedere e fare debug del
-% comportamento di \leftmark e \rightmark.
-% NOTA: in realtà LaTeX non fa storage di tutti i mark, ma sovrascrive la stessa parte di ram ad ogni pagina
-% (fondamentale per non saturare la ram dei pc anni '80).
+% Questo modello descrive il meccanismo asincrono e asimmetrico con cui TeX gestisce i marks, o "marche" in italiano,
+% per i contenuti delle testatine, modellizzandolo come un ARRAY TRIDIMENSIONALE. È lo strumento logico definitivo per
+% prevedere e fare debug del comportamento di \leftmark e \rightmark.
+% Le marche possono essere pensate come blocchi di memoria pensati appositamente per il contenuto delle testatine, che
+% si comportano come "post-it" appiccicati alle singole pagine, analizzati solo al momento della stampa o (shipout)
+% delle testatine.
+%
+% REALTÀ TECNICA: in realtà a livello fisico TeX non alloca un array per memorizzare tutti i mark del documento
+% contemporaneamente: fondamentale per non saturare la RAM dei calcolatori anni '70--'80, periodo in cui il software è
+% nato. Adotta invece una soluzione molto smart: utilizza solo tre registri di memoria (\topmark, \firstmark, \botmark)
+% che vengono costantemente sovrascritti e riassegnati ad ogni cambio di pagina (direttiva Page Builder o Cutter,
+% chiamata durante la Composizione), o all'interno di una stessa pagina. Si tratta di una piccola parte di RAM
+% ripetutamente sovrascritta per eseguire l'intero compito. Pertanto, il modello ad array globale esposto nel seguito
+% non rappresenta la gestione reale a basso livello della memoria; tuttavia costituisce comunque un modello informatico
+% esatto per la descrizione del flusso e della gestione delle informazioni.
+%
+% PER CHI VOLESSE APPROFONDIRE ULTERIORMENTE IL KERNEL TEX E LATEX: \topmark, \firstmark, \botmark sono 3 primitive TeX
+% programmate da Knuth (TeX puro), che come spiegato puntano a 3 registri di memoria: sono state originariamente pensate
+% per contenere ognuna una solo stringa di testo, andando dunque a costituire un array string 3x1.
+% Memorizzano rispettivamente l'ultimo mark della pagina precedente (\topmark), il primo mark della pagina corrente
+% (\firstmark), e l'ultimo mark della pagina corrente (\botmark).
+% Ciò non era sufficiente per la gestione di testatine in coppia per i libri di testo, dove solitamente le testatine
+% destra e sinistra contengono informazioni diverse organizzate gerarchicamente:    Capitolo (Sx)   ->  Sezione 1 (Dx)
+%                                                                                                   ->  Sezione 2 (Dx)
+%                                                                                                   ->  ...
+% Per questo Lamport, che ha programmato LaTeX come un semplice macro package sopra TeX, ha deciso di aggirare questo
+% limite tecnico sfruttando un trucco (è letteralmente hacking): usando il parser TeX basato sul pattern matching (macro
+% definite col comando \def) e un raggruppamento per graffe annidato {{}{}}, ha fatto in modo di trasformare ognuno di
+% quei 3 registri in una coppia di registri, portando così la struttura ad un array string 3x2: ognuno di essi ha un
+% valore per la testatina di sinistra (Sx) e uno per la testatina di destra (Dx).
+% Ha inoltre fornito dei comandi che interagiscono con questa struttura e fanno il parsing automatico del raggruppamento
+% citato, o la composizione di questo:
+% - \leftmark e \rightmark per la lettura (fanno il parsing citato);
+% - \markboth e \markright per la scrittura (fanno la composizione citata);
+% - \chaptermark e \sectionmark come "chiamate custom e context-options aware" (es: frontmatter attiva, tocdepth ecc,
+%   maiuscolo, nome del capitolo) rispettivamente di \markboth e \markright, usate da \chapter e \section per stampare
+%   le testatine.
+% Ulteriori informazioni sono fornite a seguire.
+% Inoltre LaTeX sovrascrive anche l'output routine di TeX, cioè la parte di software che si occupa del Page Make Up
+% (appena prima dello shipout) per interpretare questa modifica in automatico: il comando che esegue questo override è
+% \pagestyle, ad esempio chiamato dalla stessa classe book in automatico.
+%
+% In ogni caso, per comprendere il modello che segue, comunque va ignorata la distinzione nei 3 registri di memoria: si
+% suppone un unico array che registra tutte le occorrenze di scrittura dei marks, in coppia sx e dx, per ogni pagina.
 %
 % ----------------------------------------------------------------------------------------------------------------------
 % 1. IL CONTENITORE (MemoriaTestatina)
 % La memoria delle testatine può essere modellizzata come un array: M(n, k, m)
-%    Dove:
+% Dove:
 % - n = Numero identificativo della pagina corrente
 % - k = Scompartimento: 1 = SINISTRA (Pagine PARI, Testatina: Capitoli), 2 = DESTRA (Pagine DISPARI, Testatina: Sezioni)
 % - m = Indice cronologico della scrittura all'interno della singola pagina 'n' (m=1 per il primo comando lanciato, m=2
-%       per il secondo, ecc.: si intendono i comandi di scrittura: markboth e markright).
+%       per il secondo, ecc.: si intendono i comandi di scrittura: markboth e markright). Ogni scrittura, scrive sempre
+%       una coppia di valori per sx e dx, con la logica spiegata a seguire.
 %
 % NOTA TECNICA SULLA STRUTTURA: TeX non salva scompartimenti isolati. Ogni volta che si esegue una scrittura, TeX crea
 % un "post-it" contenente la COPPIA [ Sx | Dx ], incrementando 'm'. Lo stato globale, che contiene i valori sia per
 % pagina Sx che Dx, esiste a prescindere dal fatto che la pagina in elaborazione diventerà pari (Sx) o dispari (Dx).
 %
+% NOTA TECNICA SULLA STRUTTURA: formalmente, si tratta di un array dinamico, il cui valore di m è determinato dal numero
+% di sovrascritture dei marks della pagina che ha avuto più sovrascritture di marks. Nelle altre pagine ci saranno meno
+% sovrascritture: la cosa si risolve o pensando di clonare l'ultima sovrascrittura reale fino ad arrivare ad m, o
+% immaginando le celle restanti vuote. In ogni caso funziona, è solo una questione di definizioni formali (solite cose
+% necessarie, ma non così interessanti): a seguire bypassiamo la question usando "m_max(n)" per riferirci al numero
+% dell'ultima cella scritta per la pagina 'n', indipendentemente da come è stata modellizzata.
+%
 % ----------------------------------------------------------------------------------------------------------------------
 % 2. I COMANDI DI SCRITTURA (Come si popola l'array)
-% - \markboth{A}{B} : Aggiorna ENTRAMBI gli scompartimenti. Genera un nuovo record m: M(n, 1, m) = A  |  M(n, 2, m) = B
-% - \markright{B}   : Aggiorna SOLO lo scompartimento destro. Trascinando il vecchio sinistro, genera: M(n, 1, m) = M(n,
-%                     1, m-1) [vecchio sx]  |  M(n, 2, m) = B
-% - \markleft       : Comando INESISTENTE in LaTeX standard (richiede pacchetti extra) poiché tipograficamente non ha
-%                     senso aggiornare il macro-livello (Capitolo) senza pulire il micro-livello (Sezione).
+% - \markboth{A}{B} : Aggiorna ENTRAMBI gli scompartimenti. Genera un nuovo record m:
+%                     M(n, 1, m) = A                            |   M(n, 2, m) = B
+% - \markright{B}   : Aggiorna SOLO lo scompartimento destro. Clonando il vecchio sinistro, genera:
+%                     M(n, 1, m) = M(n, 1, m-1) [vecchio sx]    |   M(n, 2, m) = B
+% - \markleft       : Comando INESISTENTE in LaTeX standard poiché tipograficamente non ha senso aggiornare il
+%                     macro-livello (Capitolo) senza pulire il micro-livello (Sezione). Se lo si desiderasse per
+%                     particolari esigenze tecniche, esistono pacchetti che lo forniscono, come "extramarks".
 %
-% COMANDI STRUTTURALI BASE:
-% - \chapter : Esegue internamente \markboth{Capitolo}{}, svuotando la destra. Inoltre applica \thispagestyle{plain} per
-%              spegnere la testatina su quella prima pagina (mantenendo solo il numero in basso).
-% - \section : Esegue internamente \markright{Sezione}, aggiornando solo la destra.
+% COMANDI DI SECTIONING BASE E CHIAMATA AI COSTRUTTORI DEI MARKS PER CAPITOLI E SEZIONI:
+% - \chapter -> \chpatermark:
+%   \chapter chiama internamente \chpatermark, che chiama \markboth{<TestatinaCapitolo>}{} (ci sono comandi context
+%   aware e di formazione della stringa: vedi codice sorgente class book), svuotando la destra.
+%   Inoltre \chpater stesso applica \thispagestyle{plain} per spegnere la testatina solo su quella prima pagina
+%   (mantenendo solo il numero in basso).
+% - \section -> \sectionmark:
+%   \section chiama internamente \sectionmark, che altro non è che \markright{<TestatinaSezione>} (ci sono comandi
+%   context aware e di formazione della stringa: vedi codice sorgente class book), aggiornando solo la destra.
+%
+% NOTA: i comandi che generano capitoli speciali (bibliography, makeindex, listoffigures, listoftables, tableofcontents)
+% chiamano direttamente \markboth (oppure macro sottostante \@mkboth) e non \chaptermark, perché sono tipicamente basati
+% su \chapter*, che non aggiorna le testatine nativamente. NOTA BENE s: in questa classe \chapter* è stato modificato per
+% aggiornare comunque le testatine, attenzione! Comunque i vari casi saranno trattati singolarmente in modo opportuno
+% qualora ce ne sarà bisogno, in associazione ad una strategia globale! Vedi avanti.
 %
 % ----------------------------------------------------------------------------------------------------------------------
-% 3. EREDITARIETÀ (Gestione delle pagine senza nuovi comandi, m=0) Se nella pagina 'n' non viene eseguito alcun nuovo
-%    comando di mark (l'array degenererebbe a m=0), il motore compensa a posteriori durante lo shipout. Clona l'ultimo
-%    stato noto della pagina precedente, iniettandolo virtualmente come primo e unico stato della nuova pagina: M(n,
-%    1,1) = M(n-1, 1, m_max(n-1))  --> Il sinistro eredita l'ultimo sinistro M(n, 2, 1) = M(n-1, 2, m_max(n-1))  --> Il
-%    destro eredita l'ultimo destro
+% 3. EREDITARIETÀ (Gestione delle pagine senza nuovi comandi, m=0)
+% Se nella pagina 'n' non viene eseguito alcun nuovo comando di mark (l'array degenererebbe a m=0), il motore
+% compensa a posteriori durante lo shipout. Clona l'ultimo stato noto della pagina precedente, iniettandolo
+% virtualmente come primo e unico stato della nuova pagina:
+% M(n, 1, 1) = M(n-1, 1, m_max(n-1)) --> Il sinistro eredita l'ultimo sinistro
+% M(n, 2, 1) = M(n-1, 2, m_max(n-1)) --> Il destro eredita l'ultimo destro
 %
 % NOTA: In TeX questa primitiva si chiama \topmark, che cattura esattamente l'intero \botmark, ossia gli ultimi valori
 % di \leftmark e \rightmark della pagina precedente).
 %
 % ----------------------------------------------------------------------------------------------------------------------
-% 4. I COMANDI DI LETTURA (Estrazione alla chiusura della pagina) Quando TeX chiude e stampa la pagina 'n', estrae i
-%    valori per le testatine secondo regole asimmetriche e inflessibili:
+% 4. I COMANDI DI LETTURA (Estrazione dei marks alla chiusura della pagina)
+% Quando LaTeX chiude e stampa la pagina 'n', chiama un output routine (quella LaTeX, che ha sovrascritto quella TeX
+% alla chiamata del comando \pagestyle) che estrae i valori per le testatine secondo regole asimmetriche e inflessibili:
 %
-% - Pagine PARI (Sx) -> Stampano in testatina l'ULTIMO \leftmark
-%                       (hanno in memoria anche il rightmark proprio, ma non lo usano)
+% - Pagine PARI (Sx)    -> Stampano in testatina l'ULTIMO \leftmark
+%                          (hanno in memoria anche il rightmark ad esse associato, ma non lo usano)
 %
 %   REGOLA MODELLO: Alla pagina attuale n, Estrae sempre M(n, 1, m_max(n)).
 %   REGOLA TIPOGRAFICA: Estrae l'ULTIMO valore sinistro scritto sulla pagina. (La primitiva TeX sottostante è \botmark).
 %   MOTIVO TIPOGRAFICO: La testatina di sinistra deve riflettere l'ultimo capitolo iniziato, perché si fa in modo che
 %   più capitoli non inizino sulla stessa pagina (\chpater lancia un \clearpage). Se ciò accadesse lo stesso (caso
-%   limite), con la modifica di macro interne, comunque la convenzione tipografica ci si aspetta che l'ultimo capitolo
-%   arrivato sia quello che occupa il maggiore spazio nella pagina (tempo di lettura), altrimenti va iniziato inu una
-%   nuova pagina. Per questo è importante che il \leftmark sfrutti sempre l'ultimo valore salvato nella pagina.
+%   limite o custom), ad esempio con la modifica di macro interne, comunque la convenzione tipografica vorrebbe che
+%   l'ultimo capitolo arrivato sia quello che occupi il maggiore spazio (tempo di lettura) nella pagina, altrimenti
+%   sarebbe da considerarsi un'impaginazione errata, ed andrebbe spostato l'inizio del nuovo capitolo in una nuova
+%   pagina. Per questo è importante che il \leftmark sfrutti sempre l'ultimo valore salvato nella pagina.
 %
 % - Pagine DISPARI (Dx) -> Stampano in testatina il PRIMO \rightmark
-%                          (hanno in memoria anche il leftmark proprio, ma non lo usano)
+%                          (hanno in memoria anche il leftmark ad esse associato, ma non lo usano)
 %
 %   REGOLA MODELLO: Alla pagina attuale n, Estrae sempre M(n, 2, 1).
 %   REGOLA TIPOGRAFICA: Estrae rigorosamente il PRIMO valore destro scritto sulla pagina, anche se fosse una stringa
 %   vuota {}. (La primitiva TeX sottostante è \firstmark).
 %   MOTIVO TIPOGRAFICO: Qualora inizino sezioni in una pagina destra, la testatina di destra deve riflettere la sezione
 %   più recente iniziata sulla pagina stessa, perché visto che in una pagina possono iniziare più sezioni, si presuppone
-%   che tra tutte quelle che inizino, la sezione più recente sia quella che occupa il maggiore spazio nella pagina
-%   (tempo di lettura). Ovviamente potrebbe capitare il caso che una vecchia sezione iniziata pagine prime occupi
-%   comunque il maggiore spazio, ma è una situazione in cui comunque va ammessa l'ultima sezione iniziata (l'inizio di
-%   una nuova sezione è un evento tipografico importante, che va evidenziato, e LaTeX non offre un controllo
-%   condizionale basato sul riempimento delle pagine: in ogni caso meglio avere una regola semplice da rispettare
-%   sempre).
-% ----------------------------------------------------------------------------------------------------------------------
+%   che tra tutte quelle che inizino, la sezione più recente sia quella che ha occupato il maggiore spazio (tempo di
+%   lettura) nella pagina o comunque la prima in evidenza.
+%   Ovviamente potrebbe capitare il caso che una vecchia sezione iniziata pagine prime occupi comunque il maggiore
+%   spazio, ma è una situazione in cui comunque va ammessa l'ultima sezione iniziata: l'inizio di una nuova sezione è un
+%   evento tipografico importante, che va evidenziato, e LaTeX non offre un controllo condizionale basato sul
+%   riempimento delle pagine: in ogni caso meglio avere una regola semplice da rispettare sempre.
 %
+% ----------------------------------------------------------------------------------------------------------------------
 % 5. COROLLARI DI DEBUG (IL PROBLEMA DELLE SEZIONI E IL PRIMO RIGHTMARK)
+%
 % - FALLIMENTO SOVRASCRITTURA SEZIONI: Se si cerca di sovrascrivere l'output di \section richiamando un \markright
 %   subito dopo, l'azione fallirà sulla pagina corrente. Il motore di impaginazione per la pagina Dx pescherà SEMPRE
 %   M(n, 2, 1), mentre la correzione manuale giacerà ignorata in M(n, 2, 2).
@@ -731,8 +593,8 @@
 %   gestito im automatico), usando il valore corretto, oppure si modifica localmente sectionmark, in modo che la sezioni
 %   chiami il \markright corretto.
 %   NOTA: non usare un gruppo per la ridefinizione delle macro, perché \section interagisce con altre macro per
-%   funzionare correttamente. Usa: \let\vecchioComando\comando, dunque \renecommand{\comando} poi
-%   \let\comando\vecchioComando.
+%   funzionare correttamente. Usa: \let\vecchioComando\comando, dunque \renewcommand{\comando} poi
+%   \let\comando\vecchioComando, per un'intercettazione locale e pulita, senza effetti collaterali.
 %
 % - SUCCESSO SOVRASCRITTURA CAPITOLI: Sovrascrivere l'output di \chapter usando \chaptermark funziona perfettamente.
 %   Questo perché \leftmark (sulle pagine Sx) legge M(n, 1, m_max), catturando con successo l'ultimo comando impartito.
@@ -747,177 +609,24 @@
 %   (se non vengono dichiarate \topmark clona e quindi l'influenza c'è, ma questo solo a posteriori!).
 %
 % - COMANDI CLEARPAGE E CLEARDOUBLEPAGE: non hanno nulla a che vedere, e non interferiscono, con le testatine.
+%
+% ----------------------------------------------------------------------------------------------------------------------
+% APPENDICE: come il modello spiegato è compatibile con le primitive TeX.
+% Una volta visualizzato è molto semplice (l'override di LaTeX sfrutta comunque la logica originale di TeX).
+% [NOTA: a seguire per brevità uso la sintassi MatLab compatta per l'estrazione di blocchi (colonne) da array tramite
+% intervalli di indici, ma è solo per comodità di esposizione (non ha nulla a che fare con TeX). E.g A(1,:)=riga 1 di A]
+% - \botmark:   "bot" sta per "bottom", ossia "fondo": salva l'ultima scrittura dei marks della pagina corrente, ossia
+%               letteralmente \botmark = M(n,:,m_max(n)). Dunque è sovrascritto ad ogni scrittura dei marks internamente
+%               alla pagina stessa.
+% - \topmark:   salva il \botmark della pagina precedente, ossia M(n-1,:,m_max(n-1)), dunque non è mai sovrascritto
+%               internamente alla pagina stessa.
+% - \firstmark: salva la prima scrittura dei marks della pagina corrente, ossia M(n,:,1), dunque non è mai sovrascritto
+%               internamente alla pagina stessa. Se nella pagina corrente non viene eseguita alcuna scrittura, clona il
+%               \topmark attuale, ossia il \botmark della pagina precedente. (È il meccanismo di Ereditarietà spiegato,
+%               che propaga fisicamente la memoria dei marks).
+% - \leftmark:  chiama \botmark, ed estrae il valore sx, ossia M(n, 1, m_max(n))
+% - \rightmark: chiama \firstmark, ed estrae il valore dx, ossia M(n, 2, 1)
 % ======================================================================================================================
-
-
-
-
-% ======================================================================================================================
-% LISTA DEI BUG RISCONTRATI NELLE VERSIONI PRECEDENTI DEL CODICE SOVRASCRITTO:
-% ======================================================================================================================
-
-% BUG N°1: UTILIZZO DI CHAPTERMARK PER LA TESTATINA DEI CAPITOLI STELLATI:
-% Il chaptermark che ho riprogrammato, fa questo:
-% - stampa il nome passato del capitolo sempre su entrambi leftmark e rightmark, così se non iniziano sezioni la
-%   testatina non rimane vuota, ma mostra comunque il capitolo.
-% - se è nel mainmatter:
-%   stampa etichetta capitolo ("CAPITOLO" o "Cap." a seconda dell'impostazione, anche in inglese) +
-%   + etichetta numerica (es: "1.") (se impostato) + titolo del capitolo.
-% - se è nel frontmatter o backmatter: stampa solo il titolo del capitolo, senza etichette (non andrebbero bene)
-%
-% Dunque, chiaramente se si vuole un capitolo STELLATO, dunque NON NUMERATO (ma che aggiorna ToC con titolo lungo e
-% entrambi i marks della testatina con titolo breve se c'è, altrimenti titolo lungo) CHIARAMENTE IL CHAPTERMARK
-% MODIFICATO NON PUÒ ESSERE USATO, altrimenti NEL MAINMATTER \chapter* stamperebbe comunque le etichette. Visto che
-% questa variante di chaptermark serve anche per \uchapter (vedi bug a seguire), la chiamiamo \uchaptermark (chaptermark
-% per capitolo non numerato). AGGIORNAMENTO: cambio il nome in \NLchpatermark, "NL" sta per NO LABELS, perché i comandi
-% "u" (unnumbered but indexed + header) non fanno parte della custom class.
-
-\newcommand{\NLchaptermark}[1]{%
-    \markboth{#1}{#1}%              % Aggiorna entrambi i mark, cosicché in assenza si sezioni, la testatina non sia
-    %                               % vuota, ma mostri comunque il capitolo.
-}
-
-% ----------------------------------------------------------------------------------------------------------------------
-
-% BUG N°2: UTILIZZO DI SECTIONMARK PER LA TESTATINA DELLE SEZIONI STELLATE:
-% Il sectionmark che ho riprogrammato, fa questo:
-% - stampa il nome passato della sezione in rightmark
-% - stampa: etichetta numerica (es: "1.") (se impostato) + titolo della sezione SEMPRE.
-% - Nessuna differenza tra mainmatter e front/backmatter, in quanto questi NON influenzano il comando section, come
-%   accade invece nel caso chapter: se lo modificassi per essere sensibile per usarlo con \section nel front/backmatter,
-%   allora avrei comunque il numero SBAGLIATO nel titolo, ma non nella testatina. Meglio che l'errore sia più evidente.
-%   Usa \usection per le sezioni non numerate nel front/backmatter: Lamport e Knuth non avevano previsto infatti che
-%   venissero usate sezioni nel front/backmatter (di norma non si fa, ma può essere utile).
-%
-% Dunque, chiaramente se si vuole una SEZIONE STELLATA, dunque NON NUMERATA (ma che aggiorna ToC con titolo lungo e
-% il rightmark della testatina con titolo breve se c'è, altrimenti titolo lungo) CHIARAMENTE IL SECTIONMARK MODIFICATO
-% NON PUÒ ESSERE USATO, altrimenti stamperebbe comunque le etichette numeriche sempre. Visto che questa variante
-% di sectionmark serve anche per \usection (vedi bug a seguire), la chiamiamo \usectionmark (sectionmark per sezione
-% non numerata). AGGIORNAMENTO: cambio il nome in \NLsectionmark, "NL" sta per NO LABELS, perché i comandi "u"
-% (unnumbered but indexed + header) non fanno parte della custom class.
-
-\newcommand{\NLsectionmark}[1]{%
-    \markright{#1}                  % Aggiorna il rightmark della pagina corrente, con l'ultima sezione.
-}
-
-% ----------------------------------------------------------------------------------------------------------------------
-
-% BUG N°3: SOVRASCRITTURA DEI MARK USATA SIA PER CAPITOLI CHE PER SEZIONI NELLA RIDEFINIZIONE DEI COMANDI CHAPTER E
-% SECTION CON WRAPPER - TESTATINE SBAGLIATE (NUMERATE QUANDO NON DOVREBBERO ESSERLO)! - PER I CAPITOLI E DIVERSO CHE
-% PER LE SEZIONI (AGGIORNAMENTO: VEDI BUG 4 A RIGUARDO).
-% Come spiegato chiaramente nel modello teorica, se si tenta di sovrascrivere i mark di una pagina in particolare,
-% esclusivamente la sovrascrittura del \leftmark, riservato ai capitoli, funziona: infatti per i motivi tipografici
-% spiegati, in tutte le pagine viene usato il \leftmark più recente o il primo \rightmark (il meno recente), in
-% funzione della pagina, che sia Sx o Dx.
-% Quindi, nel caso dei:
-%
-% - CAPITOLI: dopo la chiamata di \OLDchapter, si può modificare la testatina richiamando \chaptermark o \uchaptermark
-%   ATTENZIONE: AGGIORNAMENTO (*) FORSE È MEGLIO APPLICARE UNA MODIFICA COME QUELLA PER SECTION.
-%
-% - SEZIONI: dopo la chiamata di \OLDsection, se si richiama \sectionmark, non si avrà ALCUN EFFETTO SULLA TESTATINA:
-%   l'unico modo per modificare la testatina è intercettare \sectionmark PRIMA della chiamata di \OLDsection.
-%   È sconsigliato semplicemente chiamare \sectionmark o \usectionmark dopo \OLDsection o \OLDsection* rispettivamente,
-%   in quanto la sezione potrebbe iniziare in una pagina diversa da quella in cui è chiamato il mark, se la disposizione
-%   degli elementi è al limite pagina (funzionerebbe comunque nelle pagine successive, se non sono chiamate sezioni, ma
-%   è decisamente meglio evitare: può rendere difficile il debug, e soprattutto è un comportamento non deterministico.
-%   Per questo, è molto meglio MODIFICARE LOCALMENTE IL COMANDO \sectionmark o \usectionmark per far si che quanto viene
-%   chiamato internamente da \OLDsection o \OLDsection*, sappia già cosa stampare.
-%   La logica da seguire è la seguente:
-%
-%   .....{%     % POSIZIONE: all'interno dei casi del wrapper (\section) a cui è passato #1=TitoloLungo e #2=TitoloBreve
-%   \let\TempSectionMark\sectionmark%     OPPURE     \let\TempSectionMark\usectionmark (a seconda del caso)
-%   \renewcommand{\sectionmark}[1]{\TempSectionMark{#2}}%  OPPURE  \renewcommand{\usectionmark}[1]{\TempSectionMark{#2}}
-%   \OLDsection{#1}%
-%   \let\sectionmark\TempSectionMark%     OPPURE     \let\usectionmark\TempSectionMark (a seconda del caso)
-%   }
-%
-%   Perché in questo modo?
-%   Come si può osservare, così facendo si RIDEFINISCE LOCALMENTE \sectionmark o \usectionmark, sempre usando lo stesso
-%   contenuto di \sectionmark o \usectionmark originale, MA IMPONENDO CHE USINO #2 INDIPENDENTEMENTE DA COSA È PASSATO
-%   A \OLDsection O \OLDsection*, ossia #1. Ed il bello è che è comunque chiamato da \OLDsection o \OLDsection*!
-%   In pratica preimpostiamo localmente il contenuto di \sectionmark o \usectionmark, che perde l'interattività con #1.
-%
-%   NOTA BENE: dentro section, al \sectionmark è passato comunque il titolo breve, quindi il comando si aspetta un
-%   argomento! Per questo, per evitare errori, va comunque inserito l'argomento nella ridefinizione locale, con [1],
-%   sebbene poi non venga usato! Infatti il #2 è srotolato dalla macro prima. Per passare parametri in modo annidato,
-%   in definizioni annidate di macro, si deve usare ##numero per annidamento doppio, ###numero per annidamento triplo,
-%   e così via.
-%
-%   NOTA: modifica locale, quindi gruppo? NO, sebbene sia logico, è sconsigliato mettere \section originale, quindi
-%   \OLDsection dentro un gruppo, perché altrimenti perde impostazioni o contatti con il resto del codice.
-%   Queste macro così complesse ed articolate è sconsigliato inserirle in gruppi, per evitare effetti indesiderati la
-%   cui causa è complessa da individuare.
-%
-% NOTA FINALE: tra tutti e 4 i casi di uso della section sovrascritta (con o senza stella, con o senza titolo breve),
-% ovviamente è un problema solo del caso normale senza stella, perché \OLDsection* non aggiorna i mark, e col titolo
-% breve, perché altrimenti non c'è distinzione tra i titoli nelle testatine.
-
-% ----------------------------------------------------------------------------------------------------------------------
-
-% BUG N°4: CASO PARTICOLARE COME IL 3 MA DI MINORE INTERESSE - TESTATINE NELLE PAGINE DEI CAPITOLI SBALLATE
-% ATTENZIONE: AGGIORNAMENTO (*): UN ALTRO DOVUTO COMMENTO RELATIVO AI CAPITOLI - TESTATINA AD INIZIO CAPITOLO.
-% SEBBENE una modifica analoga a quella discussa per le sezioni si possa fare anche per i capitoli, come spiegato almeno
-% in generale non sembra necessaria. Tuttavia potrebbe non essere scontato. A seguire analizzeremo il caso particolare
-% in cui si attivino le testatine sulla prima pagina del capitolo stesso.
-% Quello che accade nel codice.
-% IN OGNI CASO:
-% - il comportamento della memoria della testatina non cambia in funzione del fatto che il capitolo inizi su
-%   su una pagina destra (openright) o una sinistra (openany)
-% - il comportamento della stampa della testatina, a posteriori della memoria, invece cambia come sappiamo in base alla
-%   pagina: sulla sinistra stampa ultimo leftmark, sulla destra stampa primo rightmark.
-% LATEX DEFAULT:
-% - usa \markboth{nomecapitolo}{}: il capitolo di default è memorizzato solo sul \leftmark, la cui stampa si aggiorna,
-%   mentre il \rightmark rimane vuoto, e la stampa non si può aggiornare.
-% - sulla pagina del capitolo non c'è mai la testatina
-% CUSTOM CLASS CON TESTATINA MODIFICATA
-% - usa \markboth{nomecapitolo}{nomecapitolo}: il capitolo è memorizzato sia sul \leftmark, la cui stampa si aggiorna,
-%   che sul \rightmark, la cui stampa non si può aggiornare.
-% - sulla pagina del capitolo non c'è mai la testatina
-% LATEX DEFAULT: SE SI ATTIVASSE DUNQUE LA TESTATINA SULLA PAGINA DEL CAPITOLO?
-% - se la pagina è a sx, che stampa il leftmark, mostra il nome del capitolo. In particolare l'ultimo sovrascritto. OK.
-% - se la pagina è a dx, che stampa il rightmark, è VUOTA. Ok? Sì in sostanza, non è una sezione, e anche se ci fossero
-%   sezioni non sarebbero stampate (rightmark non si aggiorna). Non del tutto giusto, discutibile, ma non sbagliato.
-% - pagine successive: nessun problema ovviamente. O usano i loro valori, o se non ci sono dichiarazioni, il sistema
-%   eredita quelli delle precedenti pagine, sempre gli ultimi valori aggiornati.
-%   Senza nuovi dati, continuano ad esserci testatine vuote a DX, com'è giusto senza sezioni.
-% Forse è discutibile che la testatina sia vuota nel caso cominci a dx, ma almeno sta seguendo una regola semplice.
-% Quindi in realtà è giusto. Ricorda comunque che con la stampa della testatina disattiva sulla pagina del capitolo,
-% come di norma, IL PROBLEMA NON SI VEDE.
-% CUSTOM CLASS CON TESTATINA MODIFICATA: SE SI ATTIVASSE DUNQUE LA TESTATINA SULLA PAGINA DEL CAPITOLO?
-% - se la pagina è a sx, che stampa il leftmark, mostra il nome del capitolo. In particolare l'ultimo sovrascritto. OK.
-% - se la pagina è a dx, che stampa il rightmark, STAMPA IL PRIMO LEFTMARK, cioè IL TITOLO LUNGO secondo il codice
-%   che fa solo la sovrascrittura del \chaptermark -> ERRORE! Stiamo inserendo un'anomalia nel comportamento del codice:
-%   anche se è nascosto, solo li farebbe questa cosa diversa da tutte le altre pagine: non segue una regola.
-% Qui la cosa è formalmente sbagliata, perché non sta seguendo comunque una regola semplice.
-% Faremo quindi in modo DI NON USARE LA SOVRASCRITTURA anche nel caso dei capitoli, bensì L'INTERCETTAZIONE, in modo da
-% avere IN MEMORIA IL PRIMO LEFTMARK sempre e comunque corretto.
-% Questa è una strategia di PROGRAMMAZIONE DIFENSIVA, che serve ad evitare errori e comportamenti anomali, le cui cause
-% sono difficili da individuare, e che rendono il debugging tipicamente infernale.
-% Se la modifica è da fare, tanto vale farla corretta a priori.
-% Ricorda comunque che con la stampa della testatina disattiva sulla pagina del capitolo, come di norma anche con i
-% comandi custom, IL PROBLEMA NON SI VEDE.
-%
-% NOTA FINALE: tra tutti e 4 i casi di uso del chapter sovrascritto (con o senza stella, con o senza titolo breve),
-% ovviamente è un problema solo del caso normale senza stella, perché \OLDchapter* non aggiorna i mark, e col titolo
-% breve, perché altrimenti non c'è distinzione tra i titoli nelle testatine.
-
-% ----------------------------------------------------------------------------------------------------------------------
-
-% BUG N°5: CONFLITTO RIDEFINIZIONE DI CHAPTER E SECTION, CON LE DEFINIZIONI DI UCHAPTER E USECTION RISPETTIVAMENTE
-% Avevo scritto uchapter e usection prima di modificare, come allo stato attuale, i comandi chapter e section, e dunque
-% al loro interno avevo usato i comandi \chapter* e \section* originali.
-% Visto che erano definiti nel contesto dei chapter originali, basta che al loro posto al loro interno si usino
-% \OLDchapter* e \OLDsection* per risolvere il problema.
-% Oppure li si può riscrivere utilizzando direttamente \chapter e \section modificati appunto! Basta in realtà passare i
-% titoli nel modo giusto in sostanza, e lasciare che siano i comandi modificati a gestire tutto.
-% Altrimenti ancora, per evitare che siano riferiti ai comandi dello stato modificato, si potrebbe fare in modo che
-% usino le macro protette dei capitoli \@schapter e \@ssection, che per prassi non si toccano!
-% Vedi codice in custom macros!
-
-% ----------------------------------------------------------------------------------------------------------------------
-
-% BUG N°6: RIDEFINIZIONE DI \listoffigures e \listoftables PER CORREGGERE TESTATINE - Definizioni chapter, criteri marks
-% MEGLIO USARE INTERCETTAZIONE, anche in quel caso! Applicare anche a toc!
 
 
 % AGGIORNAMENTO: ho capito di aver usato una filosofia sbagliata! Non si dovrebbe sfruttare la modifica dei marks,
@@ -930,11 +639,12 @@
 % NOTA: \ifblank è una macro di etoolbox, che controlla se il suo argomento è vuoto o contiene solo spaziature.
 % Ho scritto il seguente commento per spiegare meglio la questione.
 
+
 % ======================================================================================================================
 % MANIFESTO DI DESIGN DELLE TESTATINE: IL PATTERN MVC IN (La)TeX E IL PROBLEMA DEI MARKS
 % ======================================================================================================================
 % Questo blocco documenta un cambio di paradigma fondamentale nella gestione delle testatine. Invece di hackerare le
-% primitive del kernel TeX, la classe adotterà un approccio MVC (Model-View-Controller):
+% macro di basso livello del kernel LaTeX, la classe adotterà un approccio MVC (Model-View-Controller):
 % - MODEL (Modello): Il livello dei "Dati", ossia come TeX immagazzina le informazioni (i marks). Fornisce accesso ai
 %   dati stessi con opportuni strumenti.
 % - VIEW (Vista): Il livello della "Presentazione" (dei dati), ossia il pacchetto fancyhdr, che disegna fisicamente la
@@ -1112,6 +822,415 @@
 % in cui viene usato.
 %
 % ======================================================================================================================
+
+% 0. SETUP INIZIALE
+\fancyhead{}            % Pulizia precauzionale testatina o header - Good practice
+\fancyfoot{}            % Pulizia precauzionale piedino (sì, si chiama così in italiano LOL) o footer - Good practice
+
+%\makeatletter          % Rende la @ un carattere normale, utilizzabile per comandi
+                        % NOTA: in realtà nei file .cls (classi), .sty (pacchetti e stili), .def, .clo, .fd, .cfg, .ldf
+                        % questa opzione è attiva di default!
+                        % AGGIORNAMENTO: NON USARE: questo di fatto è innocuo, ma poi si è portati a usare
+                        % \makeatother che FORZA LA DISATTIVAZIONE rompendo il file di classe!
+
+% 1. VARIABILI DI STATO (Boolean flags)
+\newif\ifHKN@hdrUpperCase           % Flag: se true, i titoli nelle testatine saranno tutti in maiuscolo
+\newif\ifHKN@hdrChapLabel           % Flag: se true, viene stampata l'etichetta \chaptername nella testatina, ossia
+                                    % "Capitolo" o "Chapter" in funzione della lingua attiva.
+\newif\ifHKN@hdrBriefLabel          % Flag: se true, l'etichetta sopra è stampata in forma abbreviata (disponibile solo
+                                    % per italiano, "Cap.", e inglese, "Ch.").
+\newif\ifHKN@hdrNumberLabel         % Flag: se true, viene aggiunta nella testatina l'etichetta numerica ai capitoli e
+                                    % alle sezioni numerati, dichiarate con \chapter e \section
+                                    % NOTA: andrebbero usate numerate solo nel mainmatter! Nel frontmatter e backmatter
+                                    % la numerazione capitoli è disattivata, ma non quella delle sezioni (numerazioni
+                                    % sezioni sballa). Allora o usi le versioni stellate delle sottodivisioni, ad
+                                    % esempio \section* (ma in quel caso non vanno nell'indice o nella testatina), o usi
+                                    % le macro custom unnumbered but indexed, come \usection, che risolvono questi
+                                    % problemi: numerazione annullata, ma compaiono in indice e testatina.
+
+
+% 2. INTERFACCIA DI CONTROLLO (pgfkeys) CON GESTIONE DELLE ECCEZIONI O ERRORI
+% ATTENZIONE alla FORMATTAZIONE all'interno di pgfkeys: è molto rigido, non usare righe vuote, e ci devono essere solo
+% virgole per separare le coppie chiave-valore. Per aggiungere spazi, commentali per annullarne l'effetto.
+% NOTA: è stato usato pgfkeys come esercizio di programmazione, essendo molto versatile e potente. Tuttavia lo stesso
+% identico risultato (cioè usare booleani per modificare il comportamento delle funzioni modificatrici dichiarate a
+% seguire), si può ottenere anche con le primitive di basso livello di TeX (incluso il controllo dell'esistenza dei
+% booleani). Si dovrebbe poi creare un'interfaccia di gestione apposita, se non si vuole che l'utente finale stia a
+% scrivere i booleani.
+
+\pgfkeys{
+    /HKNhdr/.is family,             % Dichiara una nuova famiglia di chiavi, nella folder /HKNhdr (hdr: sta per header)
+    /HKNhdr,                        % Attiva il percorso suddetto come default (solo per le prossime dichiarazioni)
+    %
+    % GESTIONE DEL MAIUSCOLO (is choice crea un menu chiuso)
+    HeaderCase/.is choice,                                             % Dichiara la chiave HeaderCase come scelta multipla (choice)
+    HeaderCase/upper/.code  = {\HKN@hdrUpperCasetrue},                 % Se usata setta true il flag per il maiuscolo forzato
+    HeaderCase/normal/.code = {\HKN@hdrUpperCasefalse},                % Se usata setta false il flag per il maiuscolo forzato
+    HeaderCase/.unknown/.code = {%                                     % Gestione Eccezioni: avvisa l'utente se usa valori non ammessi
+        \ClassError{HKNdocument}{%                                      % Tipo di errore: errore di classe, custom class HKNdocument
+            Invalid value for key HeaderCase.\MessageBreak             % Messaggio stampato nell'errore
+            Allowed values are: upper, normal%
+        }{%
+            Check your \string\setupHeaders\space options for typos.%   % Messaggio di help (scrivi h nel terminale
+            %                                                           % dopo blocco compilazione per visualizzarlo)
+        }%
+    },
+    HeaderCase = normal,                                                           % Imposta il valore di default della key: se l'utente non specifica nulla, usa questo
+    % GESTIONE ETICHETTA CHAPTER
+    ChapterLabel/.is choice,                                                        % Dichiara la chiave ChapterLabel come scelta multipla (choice)
+    ChapterLabel/absent/.code = {\HKN@hdrChapLabelfalse},                           % Se usata, setta false il flag per stampare l'etichetta "capitolo"
+    ChapterLabel/normal/.code = {\HKN@hdrChapLabeltrue \HKN@hdrBriefLabelfalse},    % Se usata, setta true il flag per stampare l'etichetta "capitolo", ma falso per la versione breve
+    ChapterLabel/brief/.code  = {\HKN@hdrChapLabeltrue \HKN@hdrBriefLabeltrue},     % Se usata, setta ture i 2 flag per stampare l'etichetta "capitolo" in forma breve
+    ChapterLabel/.unknown/.code = {%                                                % Gestione Eccezioni: avvisa l'utente se usa valori non ammessi
+        \ClassError{HKNdocument}{%                                                  % Tipo di errore: errore di classe, custom class HKNdocument
+            Invalid value for key ChapterLabel.\MessageBreak                        % Messaggio stampato nell'errore
+            Allowed values are: absent, normal, brief%
+        }{%
+            Check your \string\setupHeaders\space options for typos.%               % Messaggio di help (scrivi h nel terminale dopo blocco compilazione per visualizzarlo)
+        }%
+    },
+    ChapterLabel = absent,                                                          % Imposta il valore di default della key: se l'utente non specifica nulla, usa questo
+    % GESTIONE ETICHETTA NUMERICA
+    NumberLabel/.is choice,                                                         % Dichiara la chiave NumberLabel come scelta multipla (choice)
+    NumberLabel/absent/.code = {\HKN@hdrNumberLabelfalse},                          % Se usata, setta false il flag per stampare l'etichetta numerica
+    NumberLabel/normal/.code = {\HKN@hdrNumberLabeltrue},                           % Se usata, setta false il flag per stampare l'etichetta numerica
+    NumberLabel/.unknown/.code = {%                                                 % Gestione Eccezioni: avvisa l'utente se usa valori non ammessi
+        \ClassError{HKNdocument}{%                                                  % Tipo di errore: errore di classe, custom class HKNdocument
+            Invalid value for key NumberLabel.\MessageBreak                         % Messaggio stampato nell'errore
+            Allowed values are: absent, normal%
+        }{%
+            Check your \string\setupHeaders\space options for typos.%               % Messaggio di help (scrivi h nel terminale dopo blocco compilazione per visualizzarlo)
+        }%
+    },
+    NumberLabel = absent,                                                           % Imposta il valore di default della key: se l'utente non specifica nulla, usa questo
+    % GESTIONE ERRORI PER CHIAVI INESISTENTI
+    % Se l'utente sbaglia a digitare il NOME della chiave (es. ChapterLabel=brief),scatta l'unknown generale della
+    % famiglia. \pgfkeyscurrentname contiene il nome della chiave sbagliata.
+    .unknown/.code = {%                                                             % Gestione Eccezioni: avvisa l'utente se usa key non ammesse
+        \ClassError{HKNdocument}{%                                                  % Tipo di errore: errore di classe, custom class HKNdocument
+            Unknown key '\pgfkeyscurrentname' used in header setup.\MessageBreak    % Messaggio stampato dall'errore
+            Allowed keys are: HeaderCase, ChapterLabel, NumberLabel%
+        }{%
+            Please read the class documentation or check for typos.%                % Messaggio di help (scrivi h nel terminale dopo blocco compilazione per visualizzarlo)
+        }%
+    },
+}
+
+% Valori di default iniziali: COMMENTATI PERCHÉ INSERITI DIRETTAMENTE DOPO LE DICHIARAZIONI
+% \pgfkeys{/HKNhdr, HeaderCase=normal, ChapterLabel=absent, NumberLabel=absent}
+
+% 2.BIS - COMANDO DI INTERFACCIA PER L'UTENTE FINALE: WRAPPER PER PGFKEYS
+% Comando per l'utente finale: interfaccia di alto livello, che accetta direttamente la lista separate da virgole e
+% spazi (o "a capo").
+% NOTA: il comando a seguire è \pgfqkeys e non \pgfkeys: quella "q" in più sta per "quick": è una versione del comando
+% più veloce, che accetta due argomenti: la cartella dove cercare le chiavi, e la lista di valori.
+% La velocità superiore consiste proprio in questa separazione degli argomenti: sostanzialmente il parser si risparmia
+% una parte del lavoro: il parsing dei percorsi! È la best practice per dichiarare i comandi di impostazione!
+% Si sarebbe potuto usare anche:
+% \newcommand{\setupHeaders}[1]{\pgfkeys{/HKNhdr, #1}}
+% Oppure: metodo generale, quando la cartella dove si ricerca non è dichiarata come una famiglia: va aggiunto un .cd
+% per change directory (le folder delle keys).
+% \newcommand{\setupHeaders}[1]{\pgfkeys{/HKNhdr/.cd, #1}}
+% Qui non è necessario, in quanto (dalla documentazione del pacchetto pgfkeys), se si dichiara una stringa come famiglia
+% di chiavi, come "/HKNhdr", allora ad ogni chiamata di questa è aggiunto in automatico un .cd.
+% Però appunto TeX deve comunque fare il parsing del percorso: nella versione quick, è inviato direttamente.
+\newcommand{\setupHeaders}[1]{\pgfqkeys{/HKNhdr}{#1}}
+
+% 3. MODIFICATORI E FILTRI (Logica di formattazione)
+
+% Filtro Case: applica il maiuscolo se richiesto
+\newcommand{\HKNcase}[1]{%
+    \ifHKN@hdrUpperCase
+        \MakeUppercase{#1}%
+    \else
+        #1%
+    \fi
+}
+
+% Generatore Etichetta Chapter Breve: in italiano scrive Cap., altrimenti Ch. (inglese default per ogni altra lingua,
+% in caso va modificato a mano per altre lingue, ma inglese ed italiano sono le uniche supportate dal progetto).
+% Invece il nome completo è scritto col comando "\chaptername", che gestisce tutte le lingue.
+\newcommand{\HKNbrieflabel}{\iflanguage{italian}{Cap.}{Ch.}}
+
+% Generatore Etichetta Chapter: costruisce l'etichetta prima del numero del capitolo.
+% Controlla se farla, e poi se farla completa o abbreviata.
+\newcommand{\HKNchaplabel}{%
+    \ifHKN@hdrChapLabel%
+        \ifHKN@hdrBriefLabel%
+            \HKNbrieflabel\space%
+        \else%
+            \chaptername\space%
+        \fi%
+    % \else%
+    %     \relax%                           % Comando filler: è meglio omettere del tutto l'else per le prestazioni.
+    \fi%
+}
+
+% Generatore Etichetta Numerica Chapter: costruisce l'etichetta con numero del capitolo.
+% Controlla se stamparla
+\newcommand{\HKNnumchaplabel}{%
+    \ifHKN@hdrNumberLabel%
+        \thechapter.\ %                     % la stringa "\ " forza la stampa di uno spazio dopo il numero del capitolo
+    % \else%
+    %     \relax%                           % Comando filler: è meglio omettere del tutto l'else per le prestazioni.
+    \fi%
+}
+
+% Generatore Etichetta Numerica Section: costruisce l'etichetta con numero della sezione.
+% Controlla se stamparla
+\newcommand{\HKNnumseclabel}{%
+    \ifHKN@hdrNumberLabel%
+        \thesection.\ %                     % la stringa "\ " forza la stampa di uno spazio dopo il numero della sezione
+    % \else%
+    %     \relax%                           % Comando filler: è meglio omettere del tutto l'else per le prestazioni.
+    \fi%
+}
+
+% 4. APPLICAZIONE
+% --- TITOLI DEI CAPITOLI (chiamati con \chapter) NELLE TESTATINE ---
+% Quando inizia un capitolo: riempie sia SX che DX col nome del capitolo, in modo che se non sono presenti sezioni,
+% comunque la testatina non rimane vuota (fallback al nome del capitolo).
+% NOTA: Se non vuoi il numero del capitolo, rimuovi "\thechapter.\ " da entrambe le parentesi.
+% In precisione compare un punto dopo il numero del capitolo, poi uno spazio, come nel comportamento standard di book.
+% NOTA: controllo condizionale: aggiunge il numero di capitolo solo nel mainmatter, come di default in book.
+
+% WRAPPER PER APPLICARE HKNcase in generale
+\let\OLDmarkboth=\markboth
+\let\OLDmarkright=\markright
+\renewcommand{\markboth}[2]{\OLDmarkboth{\HKNcase{#1}}{\HKNcase{#2}}}
+\renewcommand{\markright}[1]{\OLDmarkright{\HKNcase{#1}}}
+
+% RIDEFINIZIONE CHAPTERMARK
+\renewcommand{\chaptermark}[1]{%
+    \if@mainmatter%
+        \markboth{\HKNchaplabel\HKNnumchaplabel{}#1}{\HKNchaplabel\HKNnumchaplabel{}#1}%
+        % Graffe dopo numlabel per evitare problemi di spazi e formattazione: spazi inseriti già dalle etichette!
+    \else%
+        \markboth{#1}{#1}%
+    \fi%
+}
+
+% NON NECESSARIO: meglio usare direttamente \markboth modificato, come in origine: tanto sarebbe aggiunta solo la label
+% CAPITOLO, che nei capitoli non numerati non ha molto senso (Avranno sicuramente un nome speciale, infatti).
+% % RIDEFINIZIONE CHAPTERMARK per CAPITOLI NON NUMERATI generati con uchapter
+% \newcommand{\uchaptermark}[1]{%
+%     \if@mainmatter%
+%         \markboth{\HKNchaplabel{}#1}{\HKNchaplabel{}#1}%
+%     \else%
+%         \markboth{#1}{#1}%
+%     \fi%
+% }
+
+% --- TITOLI DELLE SEZIONI (chiamate con \section) NELLE TESTATINE ---
+% Quando inizia una sezione: sovrascrive SOLO la memoria di DX.
+% NOTA: Se non vuoi il numero della sezione, rimuovi "\thesection.\ ".
+% In precisione compare un punto dopo il numero della sezione, poi uno spazio, come nel comportamento standard di book.
+
+% \renewcommand{\sectionmark}[1]{%
+%     \if@mainmatter%
+%         \markright{\thesection.\ #1}%
+%     \else%
+%         \markright{#1}%
+%     \fi%
+% }
+
+\renewcommand{\sectionmark}[1]{\markright{\HKNnumseclabel{}#1}}
+    % Graffe dopo numlabel per evitare problemi di spazi e formattazione: spazi inseriti già dalle etichette!
+
+
+% Perché ho disattivato la prima versione: Comunque compare il 0.1, 0.2... per le sezioni del frontmatter nella PAGINA
+% DI INIZIO SEZIONE. Andrebbe modificato dunque eventualmente anche il comando che ne stampa il titolo della sezione ad
+% inizio sezione, per evitare confusione. Per questo lascio il numero di sezione nella testatina anche nel frontmatter.
+% In ogni caso NON SI DOVREBBERO USARE SEZIONI NUMERATE NEL FRONTMATTER e nel BACKMATTER! Usa in caso il comando
+% \section*{} per evitare numerazione e presenza in testatina e nell'indice: ma attenzione in quanto i comandi stellati
+% non aggiornano le testatine! Ho creato i comandi custom "unnumbered" appositamente per risolvere questi problemi: usa
+% \usection se vuoi reinserire nella testatina e nell'indice (non stampa numero) la sezione non numerata, ma che compare
+% nell'indice e nella testatina.
+
+% NON NECESSARIO: meglio usare direttamente \markright modificato, come in origine. Tanto consiste solo in quello.
+% RIDEFINIZIONE SECTIONMARK per SEZIONI NON NUMERATE, generate con \usection
+% \newcommand{\usectionmark}[1]{\markright{#1}}
+
+% \makeatother          % Rende di nuovo la @ un carattere non utilizzabile per comandi (protezione)
+                        % NOTA BENE: NON USARE MAI NEI FILE .cls (classi), .sty (pacchetti e stili), .def, .clo, .fd,
+                        % .cfg, .ldf: \makeatletter è attiva di default per codesti, e chiamare \makeatother forza
+                        % la disattivazione, che potrebbe rompere il funzionamento di questi file!
+
+
+
+
+
+
+
+% ======================================================================================================================
+% LISTA DEI BUG RISCONTRATI NELLE VERSIONI PRECEDENTI DEL CODICE SOVRASCRITTO:
+% ======================================================================================================================
+
+% BUG N°1: UTILIZZO DI CHAPTERMARK PER LA TESTATINA DEI CAPITOLI STELLATI:
+% Il chaptermark che ho riprogrammato, fa questo:
+% - stampa il nome passato del capitolo sempre su entrambi leftmark e rightmark, così se non iniziano sezioni la
+%   testatina non rimane vuota, ma mostra comunque il capitolo.
+% - se è nel mainmatter:
+%   stampa etichetta capitolo ("CAPITOLO" o "Cap." a seconda dell'impostazione, anche in inglese) +
+%   + etichetta numerica (es: "1.") (se impostato) + titolo del capitolo.
+% - se è nel frontmatter o backmatter: stampa solo il titolo del capitolo, senza etichette (non andrebbero bene)
+%
+% Dunque, chiaramente se si vuole un capitolo STELLATO, dunque NON NUMERATO (ma che aggiorna ToC con titolo lungo e
+% entrambi i marks della testatina con titolo breve se c'è, altrimenti titolo lungo) CHIARAMENTE IL CHAPTERMARK
+% MODIFICATO NON PUÒ ESSERE USATO, altrimenti NEL MAINMATTER \chapter* stamperebbe comunque le etichette. Visto che
+% questa variante di chaptermark serve anche per \uchapter (vedi bug a seguire), la chiamiamo \uchaptermark (chaptermark
+% per capitolo non numerato). AGGIORNAMENTO: cambio il nome in \NLchpatermark, "NL" sta per NO LABELS, perché i comandi
+% "u" (unnumbered but indexed + header) non fanno parte della custom class.
+
+\newcommand{\NLchaptermark}[1]{%
+    \markboth{#1}{#1}%              % Aggiorna entrambi i mark, cosicché in assenza si sezioni, la testatina non sia
+    %                               % vuota, ma mostri comunque il capitolo.
+}
+
+% ----------------------------------------------------------------------------------------------------------------------
+
+% BUG N°2: UTILIZZO DI SECTIONMARK PER LA TESTATINA DELLE SEZIONI STELLATE:
+% Il sectionmark che ho riprogrammato, fa questo:
+% - stampa il nome passato della sezione in rightmark
+% - stampa: etichetta numerica (es: "1.") (se impostato) + titolo della sezione SEMPRE.
+% - Nessuna differenza tra mainmatter e front/backmatter, in quanto questi NON influenzano il comando section, come
+%   accade invece nel caso chapter: se lo modificassi per essere sensibile per usarlo con \section nel front/backmatter,
+%   allora avrei comunque il numero SBAGLIATO nel titolo, ma non nella testatina. Meglio che l'errore sia più evidente.
+%   Usa \usection per le sezioni non numerate nel front/backmatter: Lamport e Knuth non avevano previsto infatti che
+%   venissero usate sezioni nel front/backmatter (di norma non si fa, ma può essere utile).
+%
+% Dunque, chiaramente se si vuole una SEZIONE STELLATA, dunque NON NUMERATA (ma che aggiorna ToC con titolo lungo e
+% il rightmark della testatina con titolo breve se c'è, altrimenti titolo lungo) CHIARAMENTE IL SECTIONMARK MODIFICATO
+% NON PUÒ ESSERE USATO, altrimenti stamperebbe comunque le etichette numeriche sempre. Visto che questa variante
+% di sectionmark serve anche per \usection (vedi bug a seguire), la chiamiamo \usectionmark (sectionmark per sezione
+% non numerata). AGGIORNAMENTO: cambio il nome in \NLsectionmark, "NL" sta per NO LABELS, perché i comandi "u"
+% (unnumbered but indexed + header) non fanno parte della custom class.
+
+\newcommand{\NLsectionmark}[1]{%
+    \markright{#1}                  % Aggiorna il rightmark della pagina corrente, con l'ultima sezione.
+}
+
+% ----------------------------------------------------------------------------------------------------------------------
+
+% BUG N°3: SOVRASCRITTURA DEI MARK USATA SIA PER CAPITOLI CHE PER SEZIONI NELLA RIDEFINIZIONE DEI COMANDI CHAPTER E
+% SECTION CON WRAPPER - TESTATINE SBAGLIATE (NUMERATE QUANDO NON DOVREBBERO ESSERLO)! - PER I CAPITOLI E DIVERSO CHE
+% PER LE SEZIONI (AGGIORNAMENTO: VEDI BUG 4 A RIGUARDO).
+% Come spiegato chiaramente nel modello teorica, se si tenta di sovrascrivere i mark di una pagina in particolare,
+% esclusivamente la sovrascrittura del \leftmark, riservato ai capitoli, funziona: infatti per i motivi tipografici
+% spiegati, in tutte le pagine viene usato il \leftmark più recente o il primo \rightmark (il meno recente), in
+% funzione della pagina, che sia Sx o Dx.
+% Quindi, nel caso dei:
+%
+% - CAPITOLI: dopo la chiamata di \OLDchapter, si può modificare la testatina richiamando \chaptermark o \uchaptermark
+%   ATTENZIONE: AGGIORNAMENTO (*) FORSE È MEGLIO APPLICARE UNA MODIFICA COME QUELLA PER SECTION.
+%
+% - SEZIONI: dopo la chiamata di \OLDsection, se si richiama \sectionmark, non si avrà ALCUN EFFETTO SULLA TESTATINA:
+%   l'unico modo per modificare la testatina è intercettare \sectionmark PRIMA della chiamata di \OLDsection.
+%   È sconsigliato semplicemente chiamare \sectionmark o \usectionmark dopo \OLDsection o \OLDsection* rispettivamente,
+%   in quanto la sezione potrebbe iniziare in una pagina diversa da quella in cui è chiamato il mark, se la disposizione
+%   degli elementi è al limite pagina (funzionerebbe comunque nelle pagine successive, se non sono chiamate sezioni, ma
+%   è decisamente meglio evitare: può rendere difficile il debug, e soprattutto è un comportamento non deterministico.
+%   Per questo, è molto meglio MODIFICARE LOCALMENTE IL COMANDO \sectionmark o \usectionmark per far si che quanto viene
+%   chiamato internamente da \OLDsection o \OLDsection*, sappia già cosa stampare.
+%   La logica da seguire è la seguente:
+%
+%   .....{%     % POSIZIONE: all'interno dei casi del wrapper (\section) a cui è passato #1=TitoloLungo e #2=TitoloBreve
+%   \let\TempSectionMark\sectionmark%     OPPURE     \let\TempSectionMark\usectionmark (a seconda del caso)
+%   \renewcommand{\sectionmark}[1]{\TempSectionMark{#2}}%  OPPURE  \renewcommand{\usectionmark}[1]{\TempSectionMark{#2}}
+%   \OLDsection{#1}%
+%   \let\sectionmark\TempSectionMark%     OPPURE     \let\usectionmark\TempSectionMark (a seconda del caso)
+%   }
+%
+%   Perché in questo modo?
+%   Come si può osservare, così facendo si RIDEFINISCE LOCALMENTE \sectionmark o \usectionmark, sempre usando lo stesso
+%   contenuto di \sectionmark o \usectionmark originale, MA IMPONENDO CHE USINO #2 INDIPENDENTEMENTE DA COSA È PASSATO
+%   A \OLDsection O \OLDsection*, ossia #1. Ed il bello è che è comunque chiamato da \OLDsection o \OLDsection*!
+%   In pratica preimpostiamo localmente il contenuto di \sectionmark o \usectionmark, che perde l'interattività con #1.
+%
+%   NOTA BENE: dentro section, al \sectionmark è passato comunque il titolo breve, quindi il comando si aspetta un
+%   argomento! Per questo, per evitare errori, va comunque inserito l'argomento nella ridefinizione locale, con [1],
+%   sebbene poi non venga usato! Infatti il #2 è srotolato dalla macro prima. Per passare parametri in modo annidato,
+%   in definizioni annidate di macro, si deve usare ##numero per annidamento doppio, ###numero per annidamento triplo,
+%   e così via.
+%
+%   NOTA: modifica locale, quindi gruppo? NO, sebbene sia logico, è sconsigliato mettere \section originale, quindi
+%   \OLDsection dentro un gruppo, perché altrimenti perde impostazioni o contatti con il resto del codice.
+%   Queste macro così complesse ed articolate è sconsigliato inserirle in gruppi, per evitare effetti indesiderati la
+%   cui causa è complessa da individuare.
+%
+% NOTA FINALE: tra tutti e 4 i casi di uso della section sovrascritta (con o senza stella, con o senza titolo breve),
+% ovviamente è un problema solo del caso normale senza stella, perché \OLDsection* non aggiorna i mark, e col titolo
+% breve, perché altrimenti non c'è distinzione tra i titoli nelle testatine.
+
+% ----------------------------------------------------------------------------------------------------------------------
+
+% BUG N°4: CASO PARTICOLARE COME IL 3 MA DI MINORE INTERESSE - TESTATINE NELLE PAGINE DEI CAPITOLI SBALLATE
+% ATTENZIONE: AGGIORNAMENTO (*): UN ALTRO DOVUTO COMMENTO RELATIVO AI CAPITOLI - TESTATINA AD INIZIO CAPITOLO.
+% SEBBENE una modifica analoga a quella discussa per le sezioni si possa fare anche per i capitoli, come spiegato almeno
+% in generale non sembra necessaria. Tuttavia potrebbe non essere scontato. A seguire analizzeremo il caso particolare
+% in cui si attivino le testatine sulla prima pagina del capitolo stesso.
+% Quello che accade nel codice.
+% IN OGNI CASO:
+% - il comportamento della memoria della testatina non cambia in funzione del fatto che il capitolo inizi su
+%   su una pagina destra (openright) o una sinistra (openany)
+% - il comportamento della stampa della testatina, a posteriori della memoria, invece cambia come sappiamo in base alla
+%   pagina: sulla sinistra stampa ultimo leftmark, sulla destra stampa primo rightmark.
+% LATEX DEFAULT:
+% - usa \markboth{nomecapitolo}{}: il capitolo di default è memorizzato solo sul \leftmark, la cui stampa si aggiorna,
+%   mentre il \rightmark rimane vuoto, e la stampa non si può aggiornare.
+% - sulla pagina del capitolo non c'è mai la testatina
+% CUSTOM CLASS CON TESTATINA MODIFICATA
+% - usa \markboth{nomecapitolo}{nomecapitolo}: il capitolo è memorizzato sia sul \leftmark, la cui stampa si aggiorna,
+%   che sul \rightmark, la cui stampa non si può aggiornare.
+% - sulla pagina del capitolo non c'è mai la testatina
+% LATEX DEFAULT: SE SI ATTIVASSE DUNQUE LA TESTATINA SULLA PAGINA DEL CAPITOLO?
+% - se la pagina è a sx, che stampa il leftmark, mostra il nome del capitolo. In particolare l'ultimo sovrascritto. OK.
+% - se la pagina è a dx, che stampa il rightmark, è VUOTA. Ok? Sì in sostanza, non è una sezione, e anche se ci fossero
+%   sezioni non sarebbero stampate (rightmark non si aggiorna). Non del tutto giusto, discutibile, ma non sbagliato.
+% - pagine successive: nessun problema ovviamente. O usano i loro valori, o se non ci sono dichiarazioni, il sistema
+%   eredita quelli delle precedenti pagine, sempre gli ultimi valori aggiornati.
+%   Senza nuovi dati, continuano ad esserci testatine vuote a DX, com'è giusto senza sezioni.
+% Forse è discutibile che la testatina sia vuota nel caso cominci a dx, ma almeno sta seguendo una regola semplice.
+% Quindi in realtà è giusto. Ricorda comunque che con la stampa della testatina disattiva sulla pagina del capitolo,
+% come di norma, IL PROBLEMA NON SI VEDE.
+% CUSTOM CLASS CON TESTATINA MODIFICATA: SE SI ATTIVASSE DUNQUE LA TESTATINA SULLA PAGINA DEL CAPITOLO?
+% - se la pagina è a sx, che stampa il leftmark, mostra il nome del capitolo. In particolare l'ultimo sovrascritto. OK.
+% - se la pagina è a dx, che stampa il rightmark, STAMPA IL PRIMO LEFTMARK, cioè IL TITOLO LUNGO secondo il codice
+%   che fa solo la sovrascrittura del \chaptermark -> ERRORE! Stiamo inserendo un'anomalia nel comportamento del codice:
+%   anche se è nascosto, solo li farebbe questa cosa diversa da tutte le altre pagine: non segue una regola.
+% Qui la cosa è formalmente sbagliata, perché non sta seguendo comunque una regola semplice.
+% Faremo quindi in modo DI NON USARE LA SOVRASCRITTURA anche nel caso dei capitoli, bensì L'INTERCETTAZIONE, in modo da
+% avere IN MEMORIA IL PRIMO LEFTMARK sempre e comunque corretto.
+% Questa è una strategia di PROGRAMMAZIONE DIFENSIVA, che serve ad evitare errori e comportamenti anomali, le cui cause
+% sono difficili da individuare, e che rendono il debugging tipicamente infernale.
+% Se la modifica è da fare, tanto vale farla corretta a priori.
+% Ricorda comunque che con la stampa della testatina disattiva sulla pagina del capitolo, come di norma anche con i
+% comandi custom, IL PROBLEMA NON SI VEDE.
+%
+% NOTA FINALE: tra tutti e 4 i casi di uso del chapter sovrascritto (con o senza stella, con o senza titolo breve),
+% ovviamente è un problema solo del caso normale senza stella, perché \OLDchapter* non aggiorna i mark, e col titolo
+% breve, perché altrimenti non c'è distinzione tra i titoli nelle testatine.
+
+% ----------------------------------------------------------------------------------------------------------------------
+
+% BUG N°5: CONFLITTO RIDEFINIZIONE DI CHAPTER E SECTION, CON LE DEFINIZIONI DI UCHAPTER E USECTION RISPETTIVAMENTE
+% Avevo scritto uchapter e usection prima di modificare, come allo stato attuale, i comandi chapter e section, e dunque
+% al loro interno avevo usato i comandi \chapter* e \section* originali.
+% Visto che erano definiti nel contesto dei chapter originali, basta che al loro posto al loro interno si usino
+% \OLDchapter* e \OLDsection* per risolvere il problema.
+% Oppure li si può riscrivere utilizzando direttamente \chapter e \section modificati appunto! Basta in realtà passare i
+% titoli nel modo giusto in sostanza, e lasciare che siano i comandi modificati a gestire tutto.
+% Altrimenti ancora, per evitare che siano riferiti ai comandi dello stato modificato, si potrebbe fare in modo che
+% usino le macro protette dei capitoli \@schapter e \@ssection, che per prassi non si toccano!
+% Vedi codice in custom macros!
+
+% ----------------------------------------------------------------------------------------------------------------------
+
+% BUG N°6: RIDEFINIZIONE DI \listoffigures e \listoftables PER CORREGGERE TESTATINE - Definizioni chapter, criteri marks
+% MEGLIO USARE INTERCETTAZIONE, anche in quel caso! Applicare anche a toc!
+
+
+
 
 
 

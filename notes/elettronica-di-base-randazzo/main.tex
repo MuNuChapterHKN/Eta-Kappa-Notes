@@ -243,6 +243,33 @@ righe non sono commentate!
 %     che potrebbe rompere il funzionamento di questi file. LaTeX lo disattiva
 %     automaticamente alla fine di questi file.
 
+% 27. Rinomina la nuova versione della Custom Class in HKNbook, così da
+%     mantenere compatibilità con le vecchie versioni, che potranno ancora
+%     essere usate.
+
+% 28. Riformula comandi di sectioning con asterisco. Lascia quelli normali
+%     senza testatine perché sono chiamati da altri comandi generatori di
+%     capitoli speciali, come \tableofcontents, \listoffigures, \listoftables,
+%     \printbibliography, makeindex, tutti basati su \chapter*{...} che non
+%     aggiorna le testatine: hanno tutti una gestione di testatine a parte.
+%     Anche se il leftmark dei capitoli è sovrascrivibile, aggiungere una
+%     scrittura dei marks gratuiti non è il caso. Meglio lasciare questa
+%     variante ai comandi di sectioning unnumbered but indexed, che possono
+%     anch'essi essere usati con asterisco.
+
+% 29. Sposta comandi di uSectioning (uchapter, usection, ecc) in un file
+%     pacchetto dedicato uSectioning.sty, che la custom class importerà con
+%     \RequirePackage. In questo modo si mantiene la custom class più pulita e
+%     si forniscono quei comandi come contenuto a se stante (importabile anche
+%     in altri progetti).
+%     NOTA: ricorda che nei file .def \makeatletter è attivo di default, e non
+%     si deve mai usare \makeatother. LaTeX fa tutto da se.
+
+% 30. Sposta le altre definizioni e/o ridefinizioni in file apposito di tipo
+%     .def, come ad esempio HKNbook.def.
+%     NOTA: ricorda che nei file .def \makeatletter è attivo di default, e non
+%     si deve mai usare \makeatother. LaTeX fa tutto da se.
+
 \begin{comment} CANDIDATE PULL REQUESTS (PR) PER TEMPLATE HKN
 ================================================================================
 PROPOSTE DI PULL REQUEST (PR) PER IL TEMPLATE HKN - PROBLEMI RISCONTRATI
