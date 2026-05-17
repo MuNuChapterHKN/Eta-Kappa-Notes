@@ -230,6 +230,46 @@ Tale fattorizzazione è detta fattorizzazione di Choleski e viene dimostrata nel
     \[\mathbf{A}=\mathbf{L}_1\mathbf{L}_1^T\]
 \end{theorem}
 
+\begin{proof}
+    È possibile dimostrare che se i determinanti delle matrici $\mathbf{A}_k$, formate
+    dall'intersezione delle prime $k$ righe e $k$ colonne di una matrice $\mathbf{A}$,
+    sono diversi da $0$ per $k=1,\dots,n-1$, allora esiste ed è unica la fattorizzazione
+    $\mathbf{LU}$ di $\mathbf{A}$.
+
+    Poiché per ipotesi $\mathbf{A}$ è simmetrica e definita positiva, e dunque verifica
+    $\det(\mathbf{A}_k)>0$ per $k=1,\dots,n$, allora possiamo affermare che
+    esiste un'unica matrice $\mathbf{L}$ triangolare inferiore con diagonale unitaria e
+    un'unica matrice $\mathbf{U}$ triangolare superiore, tali che
+    \[\mathbf{A}=\mathbf{LU}\]
+    Se denotiamo con $\mathbf{D}$ la matrice diagonale i cui elementi principali sono
+    quelli di $\mathbf{U}$ e con $\mathbf{U}_1$ la matrice triangolare superiore con
+    diagonale unitaria tale che $\mathbf{DU}_1=\mathbf{U}$, allora possiamo scrivere
+    \[\mathbf{A}=\mathbf{LDU}_1\]
+    Poiché $\mathbf{A}=\mathbf{LU}$ è simmetrica ed $\mathbf{L}$ è unica allora
+    $\mathbf{U}_1=\mathbf{L}^T$; infatti, da
+    \[\mathbf{A}=\mathbf{LDU_1}\text{ segue }\mathbf{A}=\mathbf{A}^T=\mathbf{U}_1^T\mathbf{DL}^T\]
+    con $\mathbf{U}_1^T$ triangolare inferiore con diagonale unitaria. Per l'unicità di $\mathbf{L}$,
+    si ha allora $\mathbf{L}=\mathbf{U}_1^T$ e $\mathbf{DU_1}=\mathbf{U}=\mathbf{DL}^T$.
+    Pertanto, risulta univocamente
+    \[\mathbf{A}=\mathbf{LDL}^T\]
+    Inoltre, poiché $\mathbf{A}$ è definita positiva, gli elementi diagonali della matrice
+    $\mathbf{D}$ sono tutti positivi in quanto anche $\mathbf{D}$ è definita positiva; infatti,
+    per $\mathbf{x}\ne\mathbf{o}$, si ha
+    \[0<\mathbf{x}^T\mathbf{Ax}=\mathbf{x}^T\mathbf{LDL}^T\mathbf{x}=(\mathbf{L}^T\mathbf{x})^T
+    \mathbf{D}(\mathbf{L}^T\mathbf{x})=\mathbf{y}^T\mathbf{Dy}\]
+    con $\mathbf{y}=\mathbf{L}^T\mathbf{x}\ne\mathbf{o}$, essendo $\mathbf{x}\ne\mathbf{o}$
+    e $\mathbf{L}$ non singolare.
+
+    Pertanto, denotando con $\mathbf{D}^\frac12$ la matrice i cui elementi diagonali sono definitio
+    come la radice quadrata degli elementi diagonali della matrice $\mathbf{D}$, allora
+    $\mathbf{D}=\mathbf{D}^\frac12\mathbf{D}^\frac12$ e
+    \[\mathbf{A}=\mathbf{LDL}^T=\mathbf{LD}^\frac12\mathbf{D}^\frac12\mathbf{L}^T=
+    \mathbf{L}_1\mathbf{L}_1^T\]
+    avendo posto $\mathbf{L}_1=\mathbf{LD}^\frac12$. Per costruzione $\mathbf{L}_1$ è triangolare
+    inferiore con elementi diagonali positivi e, per l'unicità di $\mathbf{L}$ e di $\mathbf{D}$,
+    $\mathbf{L}_1$ è unica.
+\end{proof}
+
 Il calcolo del fattore di Choleski $\mathbf{R}$ si ottiene mediante un algoritmo il cui costo
 computazionale è essenzialmente $O(n^3/6)$.
 
