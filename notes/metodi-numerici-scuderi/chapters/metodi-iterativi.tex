@@ -9,3 +9,88 @@ elementi diversi dallo zero è di ordine $n$.
 
 La presenza di sparsità in una matrice rappresenta a priori un vantaggio, dal momento che memorizzando
 solo gli elementi non nulli, si possono ottenere notevoli risparmi di memoria e di operazioni.
+
+Una interessante alternativa ai metodi diretti, quando la matrice è sparsa e di grandi dimensioni,
+è fornita dai metodi iterativi e dai metodi di tipo gradiente.
+
+Per descrivere il generico metodo iterativo per la risoluzione di un sistema lineare, partiamo dal
+seguente sistema:
+\[\mathbf{Ax}=\mathbf{b}\leftrightarrow\begin{cases}
+    a_{11}x_1+a_{12}x_2+\dots+a_{1n}x_n=b_1 \\
+    a_{21}x_1+a_{22}x_2+\dots+a_{2n}x_n=b_2 \\
+    \quad\vdots \\
+    a_{n1}x_1+a_{n2}x_2+\dots+a_{nn}x_n=b_n \\
+\end{cases}\]
+
+e supponiamo che $a_{ii}\ne0$ per ogni $i=1,\dots,n$. Tale condizione, essendo $\mathbf{A}$ non
+singolare, si può realizzare mediante opportuni scambi di equazioni.
+
+A partire da un arbitrario vettore iniziale $\mathbf{x}^{(0)}$, con un metodo iterativo si determina
+una sequenza di vettori $\left\{\mathbf{x}^{(k)}\right\}_{k=1,2,\dots}$ che, sotto opportune condizioni, converge
+alla soluzione esatta $\mathbf{x}^*$ del sistema:
+\[\mathbf{x}^{(0)}\to\left\{\mathbf{x}^{(k)}\right\}_{k=1,2,\dots}\,:\,\lim_{k\to\infty}\left(\mathbf{x}^*-
+\mathbf{x}^{(k)}\right)=\mathbf{o}\]
+
+\section{Metodi di sdoppiamento (o splitting)}
+
+Definiamo dapprima due classici metodi iterativi. A tale scopo ricaviamo dall'$i$-esima equazione
+per $i=1,\dots,n$ l'incognita $x_i$:
+\[x_i=\frac{b_i-\sum_{j=1}^{i-1}{a_{ij}x_j}-\sum_{j=i+1}^{n}{a_{ij}x_j}}{a_{ii}},\qquad a_{ii}\ne0\]
+e, a partire dal vettore $\mathbf{x}^{(0)}$, generiamo la successione di vettori $\left\{\mathbf{x}^{(k)}
+\right\}_{k=1,2,\dots}$ la cui $i$-esima componente, per $i=1,\dots,n$, è definita dall'espressione:
+\[x_i^{(k)}=\frac{b_i-\sum_{j=1}^{i-1}{a_{ij}x_j^{(k-1)}}-\sum_{j=i+1}^{n}{a_{ij}x_j^{(k-1)}}}{a_{ii}},
+\qquad k=1,2,\dots\]
+Tale formula iterativa definisce il cosiddetto \textbf{metodo di Jacobi}.
+
+Ponendolo invece
+\[x_i^{(k)}=\frac{b_i-\sum_{j=1}^{i-1}{a_{ij}x_j^{(k)}}-\sum_{j=i+1}^{n}{a_{ij}x_j^{(k-1)}}}{a_{ii}},
+\qquad k=1,2,\dots\]
+otteniamo il cosiddetto \textbf{metodo di Gauss-Seidel}.
+
+I metodi di Jacobi e di Gauss-Seidel fanno parte di quella classe più generale di procedimenti iterativi
+che si deducono nel seguente modo:
+\[\mathbf{Ax}=\mathbf{b}\quad\leftrightarrow\quad(\mathbf{D}+\mathbf{C})\mathbf{x}=\mathbf{b}\quad
+\leftrightarrow\quad\mathbf{Dx}=-\mathbf{Cx}+\mathbf{b}\]
+\[\to\mathbf{Dx}^{(k)}=-\mathbf{Cx}^{(k-1)}+\mathbf{b},\qquad k=1,2,\dots\]
+ove, a ogni iterazione $k$, $\mathbf{x}^{(k)}$ è la soluzione di un sistema lineare con matrice
+dei coefficienti $\mathbf{D}$ e termine noto $\mathbf{b}-\mathbf{Cx}^{(k-1)}$.
+
+Pertanto la matrice $\mathbf{D}$ deve essere:
+\begin{itemize}
+    \item non singolare, ovvero tale da garantire l'esistenza e l'unicità della soluzione $\mathbf{x}^{(k)}$
+    a ogni passo $k$;
+    \item di forma semplice (triangolare, diagonale), ovvero tale che la soluzione $\mathbf{x}^{k}$
+    del sistema possa ottenersi, a ogni passo $k$, con un algoritmo relativamente semplice e poco costoso;
+    \item tale da garantire la convergenza, per $k\to\infty$, di $\mathbf{x}^{(k)}$ alla soluzione
+    $\mathbf{x}^*$ del sistema originario.
+\end{itemize}
+
+Osserviamo che, nel caso del metodo di Jacobi:
+\[a_{ii}x_i^{(k)}=b_i-\sum_{j=1}^{i-1}{a_{ij}x_j^{(k-1)}}-\sum_{j=i+1}^{n}{a_{ij}x_j^{(k-1)}},\qquad i=1,\dots,n\]
+le matrici $\mathbf{D}$ e $\mathbf{C}$ dello sdoppiamento $\mathbf{A}=\mathbf{D}+\mathbf{C}$ sono così definite
+\[\mathbf{D}=\left(
+    \begin{matrix}
+        a_{11} & 0 & \cdots & 0 \\
+        0 & a_{22} & \cdots & 0 \\
+        \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & \cdots & a_{nn}
+    \end{matrix}
+\right),\qquad\mathbf{C}=\mathbf{A}-\mathbf{D};\]
+
+Invece, nel caso del metodo di Gauss-Seidel:
+\[a_{ii}x_i^{(k)}=b_i-\sum_{j=1}^{i-1}{a_{ij}x_j^{(k)}}-\sum_{j=i+1}^{n}{a_{ij}x_j^{(k-1)}},\qquad i=1,\dots,n\]
+le matrici $\mathbf{D}$ e $\mathbf{C}$ dello sdoppiamento $\mathbf{A}=\mathbf{D}+\mathbf{C}$ sono così definite
+\[\mathbf{D}=\left(
+    \begin{matrix}
+        a_{11} & 0 & \cdots & 0 \\
+        a_{21} & a_{22} & \cdots & 0 \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{n1} & a_{n2} & \cdots & a_{nn}
+    \end{matrix}
+\right),\qquad\mathbf{C}=\mathbf{A}-\mathbf{D};\]
+
+Per lo studio della convergenza dei metodi iterativi, definiamo il vettore errore
+\[\mathbf{e}^{(k)}:=\mathbf{x}^*-\mathbf{x}^{(k)}\]
+e sottraiamo membro a membro le seguenti due equazioni:
+
+\section{Convergenza dei metodi iterativi}
