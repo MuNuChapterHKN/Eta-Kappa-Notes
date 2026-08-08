@@ -1,0 +1,734 @@
+\chapter{Funzione Hamiltoniana}
+\section{La trasformata di Legendre}
+
+Sia \(f:\mathbb{R}\longrightarrow\mathbb{R}\) almeno derivabile con continuità due volte. Assumiamo inoltre che
+\[
+f''(x)>0 \quad \forall x\in\mathbb{R}.
+\]
+Questa condizione garantisce che la derivata prima
+\[
+f'(x) \text{ sia strettamente monotona crescente}.
+\]
+
+Possiamo allora invertire \(f'(x)\), ovvero definire
+\[
+x=(f')^{-1}(p) \quad \forall p\in \operatorname{Im}(f').
+\]
+
+Una possibile costruzione per la trasformata di Legendre è quella geometrica.
+
+Fisso una pendenza \(p\) e disegno la retta \(y=px\).
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1, >=Stealth]
+  % assi
+  \draw[->, thick] (-2.2,0) -- (3.2,0);
+  \draw[->, thick] (0,-1.5) -- (0,3.2);
+
+  % parametro della retta
+  \def\p{1.3}
+
+  % funzione convessa di esempio
+  \draw[thick, domain=-0.8:2.7, samples=200]
+    plot (\x,{0.6*(\x-1)^2 + 0.4});
+  \node at (-0.95,2.35) {\(f\)};
+
+  % retta y = px
+  \draw[thick] (-1.1,{-1.1*\p}) -- (2.35,{2.35*\p});
+  \node at (1.3,2.75) {\(y=px\)};
+
+  % punto della funzione in cui la tangente è parallela alla retta
+  % f'(x)=1.2(x-1), quindi f'(x)=p per x=1+p/1.2
+  \pgfmathsetmacro{\xt}{1+\p/1.2}
+  \pgfmathsetmacro{\yf}{0.6*(\xt-1)^2 + 0.4}
+  \pgfmathsetmacro{\yl}{\p*\xt}
+
+  % segmento verticale rosso tra funzione e retta
+  \draw[red, thick] (\xt,\yf) -- (\xt,\yl);
+
+  % freccia e scritta rossa
+  \draw[red, thick, ->] (\xt+0.08,{(\yf+\yl)/2})
+    .. controls (\xt+0.55,{(\yf+\yl)/2+0.2}) and (\xt+0.95,{(\yf+\yl)/2+0.1}) ..
+    (\xt+1.15,{(\yf+\yl)/2+0.15});
+  \node[red] at (\xt+1.55,{(\yf+\yl)/2+0.35}) {\(f^*(p)\)};
+\end{tikzpicture}
+\end{center}
+
+Definisco
+\[
+f^*(p)=xp-f(x)
+\]
+con \(x\) tale che \(px-f(x)\) è massima ovvero
+\[
+f^*(p)=\sup_{x\in\mathbb{R}}\bigl(xp-f(x)\bigr).
+\]
+
+Tale valore è assunto per \(x\in\mathbb{R}\) tale che \(f'(x)=p\), ovvero
+\[
+x(p)=(f')^{-1}(p).
+\]
+
+Infatti dobbiamo massimizzare
+\[
+g(x)=xp-f(x)
+\quad \Rightarrow \quad
+g'(x)=p-f'(x)
+\]
+\[
+\Rightarrow \quad
+g''(x)=-f''(x).
+\]
+Allora
+\[
+g'(x)=0 \Longleftrightarrow f'(x)=p
+\]
+ed inoltre
+\[
+g''(x)<0 \quad \Rightarrow \quad x \text{ è un massimo}.
+\]
+
+Spesso la trasformata di Legendre viene quindi indicata come
+\[
+f^*(p)=x(p)p-f(x(p)),
+\qquad
+x(p)=(f')^{-1}(p).
+\]
+
+\begin{proposition}{}
+Sia \(f(x)\) strettamente convessa su \(\mathbb{R}\) e almeno \(C^2(\mathbb{R})\) e sia \(f^*(p)\) la sua trasformata di Legendre, allora
+\[
+\frac{d f^{(*)}(p)}{dp}=x
+\]
+ovvero l'antitrasformata della trasformata di Legendre è la sua derivata.
+\end{proposition}
+
+\begin{proof}
+\[
+\frac{d f^{(*)}(p)}{dp}
+=
+\frac{d}{dp}\bigl(xp-f(x)\bigr)
+=
+\frac{dx}{dp}p+x-f'(x)\frac{dx}{dp}
+=
+\frac{dx}{dp}p+x-p\frac{dx}{dp}
+=
+x.
+\]
+\end{proof}
+
+\section{Funzione di Hamilton}
+
+Consideriamo \(\mathcal{L}(q_1,\ldots,q_m,\dot q_1,\ldots,\dot q_m)\) lagrangiana per un sistema a \(m\) gradi di libertà.
+Sappiamo che possiamo scrivere le equazioni di Lagrange
+\[
+\frac{d}{dt}\frac{\partial \mathcal{L}}{\partial \dot q_j}
+=
+\frac{\partial \mathcal{L}}{\partial q_j}
+\qquad
+j=1,\ldots,m.
+\]
+
+Sappiamo anche che se
+\[
+\frac{\partial \mathcal{L}}{\partial q_j}=0
+\quad \Rightarrow \quad
+\frac{\partial \mathcal{L}}{\partial \dot q_j}
+\]
+è un integrale primo.
+
+In generale un moto descritto nel piano delle fasi è una curva regolare
+
+\begin{center}
+\begin{tikzpicture}[scale=1.15, >=Stealth]
+  \draw[->, thick] (0,0) -- (0,2.4);
+  \draw[->, thick] (0,0) -- (2.4,0);
+  \draw[thick] (-1.0,-1.2) -- (0,0);
+
+  \draw[thick]
+    plot[smooth, tension=0.8] coordinates {
+      (-1.3,-0.8)
+      (-0.9,0.0)
+      (-0.25,0.55)
+      (0.35,0.7)
+      (0.95,0.65)
+      (1.45,0.78)
+      (1.9,1.05)
+    };
+
+  \node at (2.9,1.15) {\((q(t),\dot q(t))\)};
+\end{tikzpicture}
+\end{center}
+
+Se però riusciamo ad usare
+\[
+\frac{\partial \mathcal{L}}{\partial \dot q_j}
+\]
+come nuova coordinata libera \(\tilde q\)
+allora il moto sarebbe descritto da una curva piana
+
+\begin{center}
+\begin{tikzpicture}[scale=1.15, >=Stealth]
+  \draw[->, thick] (0,0) -- (0,2.5);
+  \draw[->, thick] (0,0) -- (2.5,0);
+  \draw[->, thick] (0,0) -- (-1.2,-1.25);
+
+  \node at (-0.25,2.65) {\(\tilde q\)};
+
+  \draw[red, thick]
+    plot[smooth, tension=0.9] coordinates {
+      (-0.85,-1.0)
+      (-0.45,-0.45)
+      (0.25,-0.18)
+      (0.9,0.08)
+      (1.4,0.28)
+      (1.65,0.55)
+      (1.95,0.48)
+    };
+
+  \node at (-0.45,-1.35) {\((q(t),\dot q(t))\)};
+
+  \draw[thick, ->]
+    (1.65,0.25) .. controls (2.0,-0.05) and (2.4,0.0) .. (2.65,0.1);
+
+  \node at (3.35,0.35) {sta nel piano};
+  \node at (3.15,-0.15) {\(\dot{\tilde q}=\text{cost.}\)};
+\end{tikzpicture}
+\end{center}
+
+ovvero lavoreremmo in uno spazio delle fasi di dimensione minore.
+
+Questa è l'idea dietro la funzione di Hamilton. Come vedremo però la sua definizione non dipende da integrali primi del moto ed è quindi utilizzabile anche in casi più generali.
+
+\begin{definition}{}
+Si definisce funzione Hamiltoniana la trasformata di Legendre della lagrangiana.
+\end{definition}
+
+Se consideriamo un sistema ad \(1\) grado di libertà siamo già pronti a scrivere l'Hamiltoniana.
+\[
+\mathcal{L}=\mathcal{L}(q,\dot q)
+\qquad
+\text{definisco}
+\qquad
+p=\frac{\partial \mathcal{L}}{\partial \dot q}
+\qquad
+\text{allora}
+\]
+\[
+H(p,q)=p\dot q(p,q)-\tilde{\mathcal{L}}(q,p)
+\]
+avendo definito
+\[
+\tilde{\mathcal{L}}(q,p)=\mathcal{L}(q,\dot q(q,p)).
+\]
+
+Possiamo generalizzare la definizione al caso con \(m\) gradi di libertà ma prima facciamo un'osservazione \((\text{valida anche per }m=1)\).
+\begin{oss}{}
+\(\mathcal{L}\) è una funzione convessa di \(\dot q\).
+\[
+\mathcal{L}
+=
+T(\underline q,\dot{\underline q})-V(\underline q)
+=
+\frac{1}{2}\sum_{i=1}^{n}m_i\,\underline v_i\cdot \underline v_i
+-
+V(\underline q)
+=
+\frac{1}{2}\sum_{i=1}^{n}m_i\,
+\frac{d\underline x_i}{dt}\cdot \frac{d\underline x_i}{dt}
+-
+V(\underline q)
+=
+\]
+\[
+=
+\frac{1}{2}\sum_{i=1}^{n}
+\left[
+m_i
+\left(
+\sum_{j=1}^{m}\frac{\partial \underline x_i}{\partial q_j}\dot q_j
+\right)
+\left(
+\sum_{k=1}^{m}\frac{\partial \underline x_i}{\partial q_k}\dot q_k
+\right)
+\right]
+-
+V(\underline q)
+=
+\frac{1}{2}\sum_{j=1}^{m}\sum_{k=1}^{m}
+\left(
+\sum_{i=1}^{n}m_i
+\frac{\partial \underline x_i}{\partial q_j}\cdot
+\frac{\partial \underline x_i}{\partial q_k}
+\right)
+\dot q_j\dot q_k -V(\underline{q})
+=
+\]
+\[
+=
+\frac{1}{2}\sum_{j=1}^{m}\sum_{k=1}^{m}
+a_{jk}\dot q_j\dot q_k
+-
+V(\underline q)
+=
+\frac{1}{2}\dot{\underline q}^{T}\underline a\,\dot{\underline q}
+-
+V(\underline q).
+\]
+
+Dal momento che
+\[
+T=
+\frac{1}{2}\dot{\underline q}^{T}\underline a\,\dot{\underline q}\ge 0
+\qquad
+\text{e}
+\qquad
+T=0 \Longleftrightarrow \dot{\underline q}^{T}=\underline 0
+\]
+allora \(T\) è una forma quadratica definita positiva e \(\mathcal{L}(\underline q,\dot{\underline q})\) è una funzione convessa.
+
+Nel caso \(m\) dimensionale la buona definizione dell'Hamiltoniana non dipende tanto dalla convessità di \(\mathcal{L}\) ma più dal fatto che quest'ultima è una forma quadratica definita positiva.
+
+Definiamo
+\[
+p_j=
+\frac{\partial \mathcal{L}}{\partial \dot q_j}
+=
+\frac{\partial T}{\partial \dot q_j}
+\]
+perché \(V(q)\) non dipende da \(\dot q_j\). Allora
+\[
+\underline p
+=
+(p_j)_{j=1,\ldots,m}
+=
+\nabla_{\dot{\underline q}}
+\left(
+\frac{1}{2}\dot{\underline q}^{T}\underline a\,\dot{\underline q}
+\right)
+=
+\underline a\,\dot{\underline q}.
+\]
+
+Ovvero la mappa
+\[
+\dot{\underline q}\longmapsto \underline p
+\]
+è un'applicazione lineare di matrice \(\underline a\).
+A questo punto usiamo il fatto che \(T\) è definita positiva e quindi ha autovalori reali positivi che garantiscono l'invertibilità.
+\end{oss}
+Per un sistema a \(m\) coordinate libere possiamo scrivere
+\[
+\mathcal{L}
+=
+\mathcal{L}(q_1,\ldots,q_m,\dot q_1,\ldots,\dot q_m)
+=
+\mathcal{L}(\underline q,\dot{\underline q})
+\]
+e
+\[
+H(\underline q,\underline p)
+=
+\underline p\cdot \dot{\underline q}(\underline q,\underline p)
+-
+\tilde{\mathcal{L}}(\underline q,\underline p)
+=
+\sum_{j=1}^{m}p_j\dot q_j
+-
+\tilde{\mathcal{L}}(q_1,\ldots,q_m,p_1,\ldots,p_m)
+\]
+con \(\underline p\) definito sopra e
+\[
+\tilde{\mathcal{L}}(\underline q,\underline p)
+=
+\mathcal{L}(\underline q,\dot{\underline q}(\underline q,\underline p)).
+\]
+
+Calcoliamo ora il differenziale di \(H(q,p)\) che ricordiamo agisce sullo spazio tangente.
+Partiamo dal caso \(m=1\)
+\[
+\nabla H(q,p)
+\binom{\delta q}{\delta p}
+=
+\begin{pmatrix}
+\dfrac{\partial H}{\partial q} & \dfrac{\partial H}{\partial p}
+\end{pmatrix}^{T}
+\cdot
+\binom{\delta q}{\delta p}
+=
+-\frac{\partial}{\partial q}\bigl(\tilde{\mathcal{L}}(q,p)\bigr)\cdot\delta q
++
+\frac{\partial}{\partial q}\bigl(p\dot q(p,q)\bigr)\cdot\delta q
++
+\]
+\[
++
+\frac{\partial}{\partial p}\bigl(p\dot q(p,q)\bigr)\delta p
+-
+\frac{\partial}{\partial p}\bigl(\tilde{\mathcal{L}}(q,p)\bigr)\delta p
+=
+\]
+\[
+=
+-\frac{\partial}{\partial q}\bigl(\mathcal{L}(q,\dot q(q,p))\bigr)\cdot\delta q
++
+p\frac{\partial \dot q}{\partial q}\cdot\delta q
++
+\dot q(p,q)\delta p
++
+p\frac{\partial \dot q}{\partial p}\delta p
+-
+\frac{\partial}{\partial p}\bigl(\mathcal{L}(q,\dot q(q,p))\bigr)\cdot\delta p
+=
+\]
+\[
+=
+-\frac{\partial\mathcal{L}}{\partial q}\delta q
+-
+\frac{\partial\mathcal{L}}{\partial \dot q}\cdot
+\frac{\partial\dot q}{\partial q}\cdot\delta q
++
+p\frac{\partial\dot q}{\partial q}\cdot\delta q
++
+\dot q\cdot\delta p
++
+p\frac{\partial\dot q}{\partial p}\delta p
+-
+\frac{\partial\mathcal{L}}{\partial \dot q}\cdot
+\frac{\partial\dot q}{\partial p}\cdot\delta p
+\]
+
+Ricordando che
+\[
+\frac{\partial\mathcal{L}}{\partial \dot q}=p
+\]
+\[
+\nabla H(q,p)
+\binom{\delta q}{\delta p}
+=
+-\frac{\partial\mathcal{L}}{\partial q}\cdot\delta q
+-
+p\cdot\frac{\partial\dot q}{\partial q}\cdot\delta q
++
+p\frac{\partial\dot q}{\partial q}\cdot\delta q
++
+\dot q\delta p
++
+p\frac{\partial\dot q}{\partial p}\delta p
+-
+p\cdot\frac{\partial\dot q}{\partial p}\delta p
+=
+\]
+\[
+=
+-\frac{\partial\mathcal{L}}{\partial q}\delta q
++
+\dot q\delta p
+\]
+
+Uso l'equazione di Lagrange
+\[
+\frac{d}{dt}\frac{\partial\mathcal{L}}{\partial \dot q}
+=
+\dot p
+=
+\frac{\partial\mathcal{L}}{\partial q}
+\]
+\[
+\nabla H(q,p)
+=
+-\dot p\delta q+\dot q\delta p
+\]
+
+Dal momento che è valido \(\forall \delta q,\delta p\) allora ottengo le equazioni di Hamilton
+\[
+\begin{cases}
+\dot q=\dfrac{\partial H}{\partial p}\\[6pt]
+\dot p=-\dfrac{\partial H}{\partial q}
+\end{cases}
+\]
+
+
+Nel caso a \(m\) gradi di libertà con passaggi analoghi dall'Hamiltoniana
+\[
+H(\underline q,\underline p)
+=
+\underline p\cdot \dot{\underline q}(\underline q,\underline p)
+-
+\tilde{\mathcal{L}}(\underline q,\underline p)
+\]
+si ottengono le equazioni di Hamilton
+\[
+\begin{cases}
+\dot q_j=\dfrac{\partial H}{\partial p_j}\\[6pt]
+\dot p_j=-\dfrac{\partial H}{\partial q_j}
+\end{cases}
+\qquad
+\forall j=1,\ldots,m.
+\]
+
+Rispetto alle equazioni di Lagrange siamo passati da \(m\) equazioni del secondo ordine a \(2m\) equazioni del primo ordine.
+
+\begin{oss}{}
+\(m=1\)
+\[
+\begin{cases}
+\dot q=\dfrac{\partial H}{\partial p}\\[6pt]
+\dot p=-\dfrac{\partial H}{\partial q}
+\end{cases}
+\qquad
+\binom{\dot q}{\dot p}
+=
+\begin{pmatrix}
+0 & 1\\
+-1 & 0
+\end{pmatrix}
+\binom{\dfrac{\partial H}{\partial q}}{\dfrac{\partial H}{\partial p}}
+\]
+
+La matrice
+\[
+\begin{pmatrix}
+0 & 1\\
+-1 & 0
+\end{pmatrix}
+\]
+è detta matrice simplettica.
+\end{oss}
+
+\begin{oss}{}
+Se
+\[
+\mathcal{L}=\mathcal{L}(\underline q,\dot{\underline q}_j,t)
+\]
+dipende anche dal tempo allora anche
+\[
+H=H(\underline q,\underline p,t)
+\]
+dipenderà dal tempo e allo stesso modo si possono ricavare equazioni di Hamilton modificate.
+\end{oss}
+
+\begin{oss}{}
+Se un sistema è conservativo \(H\) è l'energia totale \(H(q,p)\).
+
+Dimostriamo il caso \(m=1\). Sappiamo che
+\[
+T=\frac{1}{2}a(q)\dot q^2,
+\qquad
+a>0,
+\qquad
+\mathcal{L}=\frac{1}{2}a(q)\dot q^2-V(q),
+\qquad
+p=\frac{\partial\mathcal{L}}{\partial\dot q}
+=
+a(q)\dot q.
+\]
+\[
+\Rightarrow
+H
+=
+p\dot q-\mathcal{L}(q,\dot q)
+=
+p\cdot\frac{p}{a(q)}
+-
+\mathcal{L}\left(q,\frac{p}{a(q)}\right)
+=
+p\cdot\frac{p}{a(q)}
+-
+\frac{1}{2}a(q)\dot q^2
++
+V(q)
+=
+\frac{p^2}{a(q)}
+-
+\frac{1}{2}a(q)\frac{p^2}{a^2(q)}
++
+V(q)
+=
+\]
+\[
+=
+\frac{1}{2}\frac{p^2}{a(q)}
++
+V(q)
+=
+\frac{1}{2}a(q)\dot q^2+V(q)
+=
+T+V.
+\]
+\end{oss}
+
+
+\begin{example}{}
+Oscillatore armonico
+\[
+m\ddot{x}=-Kx
+\]
+\[
+T=\frac{m\dot{x}^2}{2}
+\qquad
+V=\frac{Kx^2}{2}
+\qquad
+q=x
+\quad \Rightarrow \quad
+\mathcal{L}=\frac{m\dot{x}^2}{2}-\frac{Kx^2}{2}
+\]
+\[
+p=\frac{\partial \mathcal{L}}{\partial \dot{x}}=m\dot{x}
+\]
+\[
+H(p,q)
+=
+\frac{m\dot{x}^2}{2}
++
+\frac{Kx^2}{2}
+=
+\frac{mp^2}{2m^2}
++
+\frac{Kx^2}{2}
+=
+\frac{p^2}{2m}
++
+\frac{Kx^2}{2}
+\]
+\end{example}
+
+\begin{example}{}
+Consideriamo un punto materiale di massa \(m\) soggetto al vincolo
+\[
+y=\frac{x^2}{2}.
+\]
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1, >=Stealth]
+  % assi
+  \draw[thick] (-2.2,0) -- (2.8,0);
+  \draw[thick] (0,-0.8) -- (0,2.5);
+
+  % parabola
+  \draw[thick, domain=-1.75:1.9, samples=200]
+    plot (\x,{0.5*\x*\x});
+
+  \node at (1.8,1.95) {\(y=\dfrac{x^2}{2}\)};
+
+  % punto materiale
+  \fill[black] (-1.35,{0.5*1.35*1.35}) circle (1.4pt);
+
+  % forza peso
+  \draw[red, thick, ->] (-1.35,{0.5*1.35*1.35}) -- (-1.35,0.15);
+  \node[red] at (-1.65,0.65) {\(mg\)};
+  \draw[red, thick] (-1.75,0.15) -- (-1.25,0.15);
+\end{tikzpicture}
+\end{center}
+
+Scelgo come coordinata libera \(s(t)\)
+\[
+\begin{cases}
+x=s(t)\\[4pt]
+y=\dfrac{s^2(t)}{2}
+\end{cases}
+\Rightarrow
+\begin{cases}
+\dot{x}=\dot{s}\\[4pt]
+\dot{y}=\dfrac{2s\dot{s}}{2}=s\dot{s}
+\end{cases}
+\]
+\[
+\Rightarrow
+T
+=
+\frac{1}{2}m\dot{\underline{x}}\cdot\dot{\underline{x}}
+=
+\frac{1}{2}m(\dot{x}^2+\dot{y}^2)
+=
+\frac{1}{2}m(\dot{s}^2+s^2\dot{s}^2)
+=
+\frac{1}{2}m\dot{s}^2(1+s^2)
+\]
+\[
+V=mgy=mg\frac{s^2}{2}
+\Rightarrow
+\mathcal{L}
+=
+m(1+s^2)\frac{\dot{s}^2}{2}
+-
+mg\frac{s^2}{2}.
+\]
+
+Costruiamo l'equazione di Lagrange.
+\[
+\frac{\partial\mathcal{L}}{\partial\dot{s}}
+=
+m(1+s^2)\dot{s}
+\Rightarrow
+\frac{d}{dt}\frac{\partial\mathcal{L}}{\partial\dot{s}}
+=
+m\ddot{s}(1+s^2)+m\dot{s}\cdot s\cdot 2\dot{s}
+=
+m\ddot{s}(1+s^2)+2ms\dot{s}^2
+\]
+\[
+\frac{\partial\mathcal{L}}{\partial s}
+=
+m\dot{s}^2s-mgs
+\Rightarrow
+m(1+s^2)\ddot{s}+s\dot{s}^2m=-mgs
+\Rightarrow
+(1+s^2)\ddot{s}+s\dot{s}^2=-gs
+\]
+
+Come sempre siamo arrivati ad un'equazione pura del moto del secondo ordine.
+Proviamo l'approccio con le equazioni di Hamilton
+\[
+p=
+\frac{\partial\mathcal{L}}{\partial\dot{s}}
+=
+m(1+s^2)\dot{s}
+\Rightarrow
+\dot{s}
+=
+\frac{p}{m(1+s^2)}
+\]
+
+In questo caso è stato possibile esplicitare un'equazione già da subito.
+Questo non avviene in generale.
+Calcoliamo l'hamiltoniana
+\[
+H
+=
+p\dot{s}-\mathcal{L}(s,\dot{s})
+=
+p\cdot\frac{p}{m(1+s^2)}
+-
+m\frac{(1+s^2)}{2}\cdot
+\frac{p^2}{m^2(1+s^2)^2}
++
+mg\frac{s^2}{2}
+=
+\frac{p^2}{2m(1+s^2)}
++
+mg\frac{s^2}{2}
+\]
+\[
+\Rightarrow
+\begin{cases}
+\dot{s}=\dfrac{\partial H}{\partial p}\\[6pt]
+\dot{p}=-\dfrac{\partial H}{\partial s}
+\end{cases}
+\Rightarrow
+\begin{cases}
+\dot{s}=\dfrac{p}{(1+s^2)m}\\[8pt]
+\dot{p}
+=
+-\left(
+\dfrac{p^2(-2s)}{2m(1+s^2)^2}
++
+mgs
+\right)
+=
+\dfrac{p^2s}{m(1+s^2)^2}
+-
+mgs
+\end{cases}
+\]
+Come previsto abbiamo ottenuto 2 equazioni del primo ordine accoppiate.
+\end{example}

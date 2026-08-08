@@ -1,0 +1,1269 @@
+\chapter{Principio dei lavori virtuali}
+\begin{definition}{}[Lavoro di una forza]
+Sia \(\underline{f}(\underline{x},\underline{v},t)\) una forza che agisce nel punto materiale di posizione \(\underline{x}(t)\), e velocità \(\underline{v}(t)\). Definiamo il lavoro della forza lungo la traiettoria \(\underline{x}(t)\) come
+\[
+L=\int_{\underline{x}} \underline{f}\cdot d\underline{x}
+\]
+
+\begin{center}
+\begin{tikzpicture}[scale=1.1, >=Latex]
+
+% assi
+\draw[->, line width=0.8pt] (0,0) -- (-2.5,-2.7);
+\draw[->, line width=0.8pt] (0,0) -- (3.2,0);
+\draw[->, line width=0.8pt] (0,0) -- (0,2.3);
+
+\node at (-2.65,-2.85) {\(x\)};
+\node at (3.25,-0.45) {\(y\)};
+\node at (0.35,2.35) {\(z\)};
+
+% traiettoria
+\draw[line width=0.8pt]
+  (0.25,-1.2)
+  .. controls (0.45,-0.2) and (0.8,0.4) ..
+  (1.6,0.7)
+  .. controls (2.4,1.0) and (2.9,1.7) ..
+  (3.35,2.1);
+
+% estremi e punto materiale
+\fill (0.25,-1.2) circle (1.7pt);
+\fill (3.35,2.1) circle (1.7pt);
+\fill (1.7,0.62) circle (1.7pt);
+
+\node at (1.05,0.95) {\(\underline{x}(t)\)};
+
+% forza
+\draw[->, line width=0.8pt] (1.7,0.62) -- (2.85,0.15);
+\node at (2.75,0.7) {\(\underline{f}(\underline{x},\underline{v},t)\)};
+
+\end{tikzpicture}
+\end{center}
+\end{definition}
+Ricordiamo che ad ogni vincolo è associata una reazione vincolare che assicura il soddisfacimento del vincolo stesso.
+
+\begin{definition}{}[Vincoli perfetti]
+Un vincolo perfetto è un vincolo per il quale la reazione vincolare non compie lavoro, perché è \(\perp\) (localmente) alla traiettoria. Matematicamente un vincolo perfetto è tale che
+\[
+\underline{\Psi}\cdot \delta \underline{x}=0
+\qquad
+\forall\, \delta \underline{x}\ \text{compatibile con il vincolo}
+\]
+\end{definition}
+
+
+Risulta necessario definire con chiarezza cosa siano i \(\delta \underline{x}\) e cosa voglia dire che questi siano ``compatibili con il vincolo''.
+Lo facciamo nel caso in cui i vincoli siano regolari ma è possibile farlo anche in caso contrario.
+Per fare ciò in modo matematicamente rigoroso abbiamo bisogno di strumenti di geometria differenziale avanzata e calcolo tensoriale che vanno al di là degli scopi del corso. Presenteremo quindi una trattazione meno rigorosa e più intuitiva basandoci su concetti di geometria differenziale di base rifacendoci soprattutto al caso noto delle superfici regolari.
+
+I \(\delta \underline{x}\) vengono detti spostamenti virtuali. Supponiamo che un punto
+
+materiale \((\underline{x}(t),m)\) sia soggetto al vincolo olonomo \(\overline{\Phi}(\underline{x},t)=0\).
+Per ogni istante \(t\) definiamo la sottovarietà
+\[
+M_t=\{P\in\mathbb{R}^3:\overline{\Phi}(P,t)=0\}
+\]
+
+ovvero \(M_t=\overline{\Phi}^{-1}(0,t)\). Nel caso semplice in cui \(\underline{x}(t)\in\mathbb{R}^3\) questa può essere una superficie o una curva. In un caso più generale questa è una sotto-varietà dello spazio delle configurazioni \(Q\).
+Se il vincolo è regolare, ovvero se \(d\overline{\Phi}(\underline{x},t)\) ha rango massimo \(\forall x\in\mathbb{R}^3\), allora \(M_t\) è una sottovarietà regolare. Risulta quindi definito in ogni punto \(\underline{x}\in M_t\) lo spazio tangente \(T_xM_t=\Ker(d\overline{\Phi}(\underline{x},t))\) a \(M_t\).
+Per capire più facilmente questa condizione possiamo pensare al caso di superficie regolare ottenuta tramite controimmagine di un valore regolare: sia \(F:\mathbb{R}^3\to\mathbb{R}\) differenziabile e sia \(S=F^{-1}(0)\) con \(dF_p\) di rango massimo \(\forall p\in S\). In questo caso possiamo usare l'identificazione del funzionale \(dF_p:\mathbb{R}^3\to\mathbb{R}\) con il gradiente \(\nabla F_p\in\mathbb{R}^3\) data da \(dF_p(v)=\nabla F_p^Tv\ \ \forall v\in\mathbb{R}^3\).
+Dire che \(dF_p\) ha rango massimo equivale a dire \(\nabla F_p\neq 0\) infatti \(\mathrm{rg}(dF_p)=\mathrm{rg}(L_{\nabla F_p})=0\) sse \(\nabla F_p=0\).
+Allora lo spazio tangente non è altro che \(T_pS=\Ker(dF_p)=\{v\in\mathbb{R}: \nabla F_p^Tv=0\}\).\\
+Gli spostamenti virtuali \(\delta \underline{x}\) sono in ogni istante fissato \(t\) gli elementi di \(T_{\underline{x}(t)}M_t\), ovvero sono le direzioni percorribili compatibili con la varietà \(M_t\) a \(t\) fissato.
+È importante non confondere gli spostamenti virtuali \(\delta \underline{x}\) con gli spostamenti infinitesimi reali \(d\underline{x}=\underline{\dot{x}}(t)\,dt\).
+
+I \(\delta \underline{x}\) sono tutti i possibili spostamenti percorribili in un tempo infinitesimo, sono una linearizzazione istantanea dei movimenti ammessi ma non è detto che questi vengano effettuati dalla traiettoria \(\underline{x}(t)\) (anzi al massimo uno di loro potrebbe essere effettuato ma non è detto che lo sia).
+
+Dall'altra parte \(d\underline{x}=\underline{\dot{x}}(t)\,dt\) è effettivamente lo spostamento effettuato in un tempo infinitesimo \(dt\) dopo l'istante \(t\).\\
+La differenza è netta tra i due nel caso di un vincolo dipendente dal tempo \(\overline{\Phi}(\underline{x},t)=0\). Immaginiamo due istanti di tempo \(t_1,t_2\) infinitesimamente vicini ai quali corrispondono le varietà \(M_{t_1},M_{t_2}\) con \(\underline{x}(t_1)\in M_{t_1}\), \(\underline{x}(t_2)\in M_{t_2}\).
+Gli spostamenti virtuali stanno in \(T_{\underline{x}(t_1)}M_{t_1}\) e in \(T_{\underline{x}(t_2)}M_{t_2}\) che sono due spazi ben distinti. Lo spostamento reale infinitesimo invece è
+\[
+d\underline{x}=\underline{x}(t_2)-\underline{x}(t_1)\qquad (\text{abbiamo supposto } t_1-t_2\sim 0)
+\]
+
+che non sta in nessuno dei 2 tangenti.
+Per capire meglio questo concetto pensiamo al caso del vincolo
+\[
+\overline{\Phi}(x,y,t)=(x-x_c(t))^2+(y-y_c(t))^2-R(t)^2=0
+\]
+Ad ogni istante \(t\) il punto è vincolato a muoversi su una circonferenza di raggio e centro variabile. Disegniamo spostamenti virtuali e spostamento reale per 2 istanti \(t_1,t_2\) molto vicini. \(C_1=(x_c(t_1),y_c(t_1))\), \(C_2=(x_c(t_2),y_c(t_2))\)
+\begin{center}
+\begin{tikzpicture}[scale=1,>=Latex]
+
+% assi cartesiani
+\draw[->, line width=1pt] (0.8,0.8) -- (0.8,6.2);
+\draw[->, line width=1pt] (0.8,0.8) -- (9.4,0.8);
+\node at (0.45,5.95) {\(y\)};
+\node at (9.15,0.45) {\(x\)};
+
+% circonferenze
+\draw[line width=0.9pt] (3.0,2.2) circle (1.2);
+\draw[line width=0.9pt] (7.4,4.2) circle (1.7);
+
+% centri
+\fill (3.0,2.2) circle (2pt);
+\fill (7.4,4.2) circle (2pt);
+\node at (2.75,1.75) {\(C_1\)};
+\node at (7.15,3.75) {\(C_2\)};
+
+% punti x(t1), x(t2)
+\fill[purple] (3.8485,3.0485) circle (2.2pt);
+\fill[purple] (6.3070,2.8978) circle (2.2pt);
+
+\node[purple] at (4.55,3.35) {\(\underline{x}(t_1)\)};
+\node[purple] at (6.95,2.45) {\(\underline{x}(t_2)\)};
+
+% raggi
+\draw[line width=0.9pt] (3.0,2.2) -- (3.8485,3.0485);
+\draw[line width=0.9pt] (7.4,4.2) -- (6.3070,2.8978);
+
+\node at (3.15,3.00) {\(R(t_1)\)};
+\node at (6.45,3.95) {\(R(t_2)\)};
+
+% tangente in x(t1)
+\draw[line width=1pt, color=green!60!black] (3.32,3.58) -- (4.38,2.52);
+\node[color=green!60!black] at (2.55,3.95) {\(T_{\underline{x}(t_1)}M\)};
+
+% tangente in x(t2)
+\draw[line width=1pt, color=red!80!black] (5.62,3.47) -- (6.99,2.33);
+\node[color=red!80!black] at (8.25,2.55) {\(T_{\underline{x}(t_2)}M\)};
+
+% vettore dx
+\draw[->, line width=1pt, color=orange!90!black] (3.8485,3.0485) -- (6.3070,2.8978);
+\node[color=orange!90!black] at (5.05,3.22) {\(\underline{dx}\)};
+
+\end{tikzpicture}
+\end{center}
+
+Nel caso di vincolo costante si ha che \(M_t=M\ \forall t\) e che \(\underline{x}\in M\), \(d\underline{x}\in T_{\underline{x}}M\). Anche in questo caso però lo spostamento reale è un'entità distinta dagli spostamenti virtuali perché è l'unico che viene effettivamente effettuato.
+
+\begin{oss}{}
+Il concetto di spostamento virtuale si può generalizzare a un punto materiale soggetto a \(m\) vincoli olonomi differenziabili
+\[
+\overline{\Phi}_i(\underline{x},t)=0
+\qquad
+\forall i=1,\ldots,m
+\]
+in tal caso lo spazio dei \(\delta \underline{x}\) è \(T_{\underline{x}}M\) con
+\[
+M=\bigcap_{i=1}^{m}\Ker(d\overline{\Phi}_i)\Rightarrow \forall\,\delta \underline{x}\in T_{\underline{x}}M \quad d\overline{\Phi}_i\,\delta \underline{x}=0
+\]
+
+Allo stesso modo possiamo definire il concetto di spostamento virtuale per un sistema di \(n\) punti \(\underline{x}_1,\ldots,\underline{x}_n\) soggetto a \(m\) vincoli olonomi perfetti \(\overline{\Phi}_1(\underline{x}_1,\ldots,\underline{x}_n,t)\ldots \overline{\Phi}_m(\underline{x}_1,\ldots,\underline{x}_n,t)\).
+
+Indichiamo una configurazione del sistema come
+\[
+\underline{x}=(\underline{x}_1,\ldots,\underline{x}_n)\in\mathbb{R}^{3n}.
+\]
+Imponendo i vincoli otteniamo
+\[
+M_t=\left\{\underline{x}\in\mathbb{R}^{3n}:\overline{\Phi}_1(\underline{x},t)=\ldots=\overline{\Phi}_m(\underline{x},t)=0\right\}
+\]
+
+Se i vincoli indipendenti e regolari su \(M_t\), ovvero il loro differenziale ha rango massimo su \(M_t\), quest'ultima è una sotto varietà regolare di \(\mathbb{R}^{3n}\) di dimensione \(r=3n-m\).
+
+Uno spostamento virtuale \(\delta \underline{x}\) del sistema nella configurazione \(\underline{x}\in M_t\) è un vettore del tangente in \(\underline{x}\) a \(M_t\)
+\[
+\delta \underline{x}=(\delta \underline{x}_1,\ldots,\delta \underline{x}_n)\in T_{\underline{x}}M_t
+\]
+
+Importante notare che le \(\delta \underline{x}_i\) non sono arbitrarie proprio perché devono garantire \(\delta \underline{x}\in T_{\underline{x}}M_t\).
+
+Si ha che
+\[
+T_{\underline{x}}M_t=\bigcap_{\nu=1}^{m}\Ker(d\overline{\Phi}_{\nu\,\underline{x}})=\left\{\delta \underline{x}:d\overline{\Phi}_{\nu\,\underline{x}}(\delta \underline{x})=0 \quad \forall \nu=1,\ldots,m\right\}
+\]
+
+Scrivendo in componenti
+\[
+T_{\underline{x}}M_t=\left\{\delta \underline{x}:\nabla \overline{\Phi}_\nu(\underline{x},t)^T\delta \underline{x}=0 \quad \forall \nu=1,\ldots,m\right\}=\mathrm{span}^{\perp}\left\{\nabla \overline{\Phi}_1(\underline{x},t),\ldots,\nabla \overline{\Phi}_m(\underline{x},t)\right\}
+\]
+
+ovvero è lo spazio ortogonale ai gradienti di tutti i vincoli in \(\underline{x}\).
+\end{oss}
+
+\begin{theorem}{}[Principio dei lavori virtuali ,ipotesi semplificate, vincoli dipendenti solo da un punto]
+Consideriamo un sistema meccanico formato dai punti \(\underline{x}_1,\ldots,\underline{x}_n\). Il punto \(\underline{x}_i\) è soggetto ai vincoli perfetti regolari
+\[
+\overline{\Phi}_{i,j}(\underline{x}_i)=0
+\qquad
+\forall j=1,\ldots,m_i.
+\]
+In ogni punto \(\underline{x}_i\) è esercitata una forza risultante
+\[
+\underline{f}_i=\underline{f}_i^{\mathrm{att.}}+\underline{f}_i^{\mathrm{reat.}}
+\]
+All'equilibrio vale la relazione
+\[
+\sum_{i=1}^{n}\underline{f}_i\cdot \delta \underline{x}_i=0
+\qquad
+\forall (\delta \underline{x}_1,\ldots,\delta \underline{x}_n)\in T_{\underline{x}_1}M_1\times\cdots\times T_{\underline{x}_n}M_n
+\]
+dove \(M_i\) è la varietà generata dai vincoli \(\{\overline{\Phi}_{i,j}(\underline{x}_i)\}_{j=1}^{m_i}\) e gli \(\delta \underline{x}_i\) sono gli spostamenti virtuali compatibili con i vincoli.
+\end{theorem}
+
+\begin{oss}{}
+Similmente al concetto dei moltiplicatori di Lagrange stiamo dicendo che \(\forall i\) se \(\overline{\Phi}_{i,j}(\underline{x}_i)=0\) \(j=1,\ldots,m_i\): sono i vincoli perfetti imposti sul punto \(\underline{x}_i\) allora
+\[
+\underline{f}_i\in \mathrm{Span}\left\{\nabla \overline{\Phi}_{i,1}(\underline{x}_i),\ldots,\nabla \overline{\Phi}_{i,m_i}\right\}
+\Longleftrightarrow
+\underline{f}_i=\lambda_1\nabla \overline{\Phi}_{i,1}(\underline{x}_i)+\cdots+\lambda_{m_i}\nabla \overline{\Phi}_{i,m_i}
+\]
+\end{oss}
+\begin{proof}
+Sia \(M_i=\{\underline{x}_i\in\mathbb{R}^3:\overline{\Phi}_{i,1}(\underline{x}_i)=\ldots=\overline{\Phi}_{i,m_i}(\underline{x}_i)=0\}\) e sia \((\underline{x}_1,\ldots,\underline{x}_n)\in M_1\times\ldots\times M_n\).
+
+Per ogni punto \(\underline{x}_i\) vale \(\underline{f}_i=\underline{f}_i^{\mathrm{att}}+\underline{f}_i^{\mathrm{reat}}\). Poiché i vincoli sono perfetti per ogni scelta di spostamenti virtuali ammessi vale
+\[
+\sum_{i=1}^{n}\underline{f}_i^{\mathrm{reat}}\cdot \delta \underline{x}_i=0
+\qquad
+(\delta \underline{x}_1,\ldots,\delta \underline{x}_n)\in T_{\underline{x}_1}M_1\times\ldots\times T_{\underline{x}_n}M_n
+\]
+
+Quindi la condizione sui lavori virtuali equivale a una sulle sole forze attive
+\[
+\sum_{i=1}^{n}\underline{f}_i\cdot \delta \underline{x}_i=0
+\Longleftrightarrow
+\sum_{i=1}^{n}\underline{f}_i^{\mathrm{att}}\cdot \delta \underline{x}_i=0
+\]
+
+Basta quindi dimostrare il teorema per la seconda condizione
+
+\((\Rightarrow)\) Se siamo in una configurazione di equilibrio allora \(\forall i=1,\ldots,n\)
+\[
+\underline{f}_i^{\mathrm{att}}+\underline{f}_i^{\mathrm{reat}}=0
+\]
+
+Moltiplicando scalarmente per un qualsiasi \((\delta \underline{x}_1,\ldots,\delta \underline{x}_n)\) si ottiene
+\[
+\sum_{i=1}^{n}\underline{f}_i^{\mathrm{att}}\cdot \delta \underline{x}_i=
+\sum_{i=1}^{n}\left(\underline{f}_i^{\mathrm{att}}+\underline{f}_i^{\mathrm{reat}}\right)\cdot \delta \underline{x}_i=0
+\]
+
+\((\Leftarrow)\) Supponiamo ora che
+\[
+\sum_{i=1}^{n}\underline{f}_i^{\mathrm{att}}\cdot \delta \underline{x}_i=0
+\qquad
+(\delta \underline{x}_1,\ldots,\delta \underline{x}_n)\in T_{\underline{x}_1}M_1\times\ldots\times T_{\underline{x}_n}M_n
+\]
+
+In particolare se scelgo un \(i\in\{1,\ldots,n\}\) deve essere vero per una configurazione del tipo \((0,\ldots,0,\delta \underline{x}_i,0,\ldots,0)\) con \(\delta \underline{x}_i\in T_{\underline{x}_i}M_i\) arbitrario. La condizione diventa
+\[
+\underline{f}_i^{\mathrm{att}}\cdot \delta \underline{x}_i=0
+\qquad
+\forall \delta \underline{x}_i\in T_{\underline{x}_i}M_i
+\]
+
+Quindi \(\underline{f}_i^{\mathrm{att}}\in (T_{\underline{x}_i}M_i)^{\perp}=\mathrm{span}\{\nabla \overline{\Phi}_{i,1}(\underline{x}_i),\ldots,\nabla \overline{\Phi}_{i,m_i}(\underline{x}_i)\}\Longleftrightarrow \exists \lambda_{i,1},\ldots,\lambda_{i,m_i}\) tali che
+\[
+\underline{f}_i^{\mathrm{att}}=\sum_{j=1}^{m_i}\lambda_{i,j}\nabla \overline{\Phi}_{i,j}(\underline{x}_i)
+\]
+
+Definiamo allora \(\underline{f}_i^{\mathrm{reat}}=-\sum_{j=1}^{m_i}\lambda_{i,j}\nabla \overline{\Phi}_{i,j}(\underline{x}_i)\). Ovviamente si ha \(\underline{f}_i^{\mathrm{att}}+\underline{f}_i^{\mathrm{reat}}=0\).
+
+Abbiamo trovato una reazione vincolare compatibile con i vincoli che determina una configurazione di equilibrio valida per \(\underline{x}_i\). Dal momento che la \(i\) era arbitraria ho trovato una configurazione statica ammissibile per il sistema.
+\end{proof}
+\begin{theorem}{}[Principio dei lavori virtuali, vincoli regolari]
+Consideriamo un sistema meccanico formato dai punti \(\underline{x}_1,\ldots,\underline{x}_n\) soggetto a \(m\) vincoli olonomi perfetti regolari
+\[
+\overline{\Phi}_1(\underline{x}_1,\ldots,\underline{x}_n,t)=\ldots=\overline{\Phi}_m(\underline{x}_1,\ldots,\underline{x}_n,t)=0.
+\]
+Supponiamo inoltre che in ogni punto agisca una risultante delle forze attive \(\underline{f}_i^{\mathrm{att}}\). Allora siamo in una configurazione di equilibrio sse
+\[
+\sum_{i=1}^{n}\underline{f}_i^{\mathrm{att}}\cdot \delta \underline{x}_i=0
+\qquad
+\forall\, \delta \underline{x}=(\delta \underline{x}_1,\ldots,\delta \underline{x}_n)\in T_{\underline{x}}M_t
+\]
+dove \(M_t\) è la sottovarietà generata dai vincoli.
+\end{theorem}
+\begin{oss}{}
+    Anche il principio dei lavori virtuali è valido nel caso in cui i vincoli siano solo olonomi perfetti ma non regolari. In questo caso però si perde la trattazione data dalla geometria differenziale e si deve procedere in altro modo.
+\end{oss}
+\begin{proof}
+Indichiamo con \(\underline{R}=(\underline{R}_1,\ldots,\underline{R}_n)\) il sistema delle reazioni vincolari, allora dal momento che i vincoli sono perfetti vale
+\[
+\sum_{i=1}^{n}\underline{R}_i\cdot \delta \underline{x}_i=0
+\qquad
+\forall\, \delta \underline{x}=(\delta \underline{x}_1,\ldots,\delta \underline{x}_n)\in T_{\underline{x}}M_t
+\]
+ovvero \(\underline{R}\in T_{\underline{x}}M_t^\perp\).
+
+\((\Rightarrow)\) Supponiamo \(\underline{x}\) di equilibrio, per definizione esistono le reazioni vincolari \(\underline{R}_1,\ldots,\underline{R}_n\) tali che
+\[
+\underline{f}_i^{\mathrm{att}}+\underline{R}_i=0
+\qquad
+\forall i=1,\ldots,n
+\]
+Sia \(\delta \underline{x}\) uno spostamento virtuale arbitrario. Allora
+\[
+0=\sum_{i=1}^{n}\left(\underline{f}_i^{\mathrm{att}}+\underline{R}_i\right)\cdot \delta \underline{x}_i
+=\sum_{i=1}^{n}\underline{f}_i^{\mathrm{att}}\cdot \delta \underline{x}_i
+\]
+
+\((\Leftarrow)\) Supponiamo ora che
+\[
+\sum_{i=1}^{n}\underline{f}_i^{\mathrm{att}}\cdot \delta \underline{x}_i=0
+\qquad
+\forall\, \delta \underline{x}=(\delta \underline{x}_1,\ldots,\delta \underline{x}_n)\in T_{\underline{x}}M_t
+\]
+Introduciamo il vettore globale delle forze attive
+\[
+\underline{A}=(\underline{f}_1^{\mathrm{att}},\ldots,\underline{f}_n^{\mathrm{att}})\in\mathbb{R}^{3n},
+\]
+la condizione si riscrive come
+\[
+\underline{A}\cdot \delta \underline{x}=0
+\qquad
+\forall\, \delta \underline{x}\in T_{\underline{x}}M_t
+\Longleftrightarrow
+\underline{A}\in T_{\underline{x}}M_t^\perp
+\]
+Siccome i vincoli sono regolari
+\[
+T_{\underline{x}}M_t^\perp=\mathrm{Span}\left\{\nabla \overline{\Phi}_{1\underline{x}},\ldots,\nabla \overline{\Phi}_{m\underline{x}}\right\},
+\]
+perciò esistono \(\lambda_1,\ldots,\lambda_m\) tali che
+\[
+\underline{A}=\sum_{j=1}^{m}\lambda_j\,\nabla \overline{\Phi}_{j\underline{x}}
+\]
+Definiamo ora \(\underline{R}=-\underline{A}\). Per definizione \(\underline{R}\in T_{\underline{x}}M_t^\perp\) ed è quindi una reazione vincolare ammissibile. Se riscriviamo la condizione \(\underline{A}+\underline{R}=0\) per blocchi otteniamo
+\[
+(\underline{f}_1^{\mathrm{att}},\ldots,\underline{f}_n^{\mathrm{att}})+(\underline{R}_1,\ldots,\underline{R}_n)=0
+\]
+che scritta componente per componente è
+\[
+\underline{f}_i^{\mathrm{att}}+\underline{R}_i=0
+\qquad
+\forall i=1,\ldots,n
+\]
+ovvero la condizione di equilibrio.
+
+Abbiamo quindi dimostrato che il principio dei lavori virtuali è condizione necessaria e sufficiente per l'equilibrio.
+\end{proof}
+
+Consideriamo un sistema meccanico con \(n\) punti, \(3n\) gradi di libertà, \(m\) vincoli olonomi perfetti regolari.
+
+Poiché i vincoli sono anche olonomi possiamo determinare \(q_1,\ldots,q_{3n-m}\) coordinate libere.
+Le posizioni \(\underline{x}_i(t)\) sono univocamente determinate dalle coordinate libere
+\[
+\underline{x}_i(q_1(t),\ldots,q_{3n-m}(t))
+\]
+
+Possiamo considerare gli spostamenti virtuali nello spazio delle variabili libere.
+Localmente il differenziale di \(\underline{x}_i(q_1,\ldots,q_{3n-m})\) manda un \(\delta \underline{q}=(\delta q_1,\ldots,\delta q_{3n-m})\) in un \(\delta \underline{x}_i\), ovvero
+\[
+\delta \underline{x}_i=d\underline{x}_{i,\underline{q}}(\delta \underline{q})
+\]
+
+In coordinate
+\[
+\delta \underline{x}_i=\sum_{j=1}^{3n-m}\frac{\partial \underline{x}_i}{\partial q_j}(\underline{q})\,\delta q_j
+\]
+
+\begin{example}{}
+Consideriamo un punto che si muove su una circonferenza. \(i=1\) \(q=\theta\).
+\[
+\underline{x}_1=(R\cos\theta,R\sin\theta)
+\]
+
+\[
+\delta \underline{x}=\frac{\partial \underline{x}}{\partial q}\cdot \delta q
+=\frac{\partial \underline{x}}{\partial \theta}\cdot \delta \theta
+=\frac{\partial}{\partial \theta}
+\begin{pmatrix}
+R\cos\theta\\
+R\sin\theta
+\end{pmatrix}
+\delta \theta
+=
+\begin{pmatrix}
+-R\sin\theta\,\delta \theta\\
+R\cos\theta\,\delta \theta
+\end{pmatrix}
+\]
+\end{example}
+
+Se metto questa rappresentazione dello spostamento virtuale in funzione delle coordinate libere nel principio dei lavori virtuali ottengo
+\[
+\sum_{i=1}^{n}\underline{f}_i\cdot \delta \underline{x}_i
+=
+\sum_{i=1}^{n}\underline{f}_i^{\mathrm{att}}\cdot \delta \underline{x}_i
+=
+\sum_{i=1}^{n}\underline{f}_i^{\mathrm{att}}\cdot \sum_{j=1}^{3n-m}\frac{\partial \underline{x}_i}{\partial q_j}\,\delta q_j
+=
+\sum_{j=1}^{3n-m}\left(\sum_{i=1}^{n}\underline{f}_i\cdot \frac{\partial \underline{x}_i}{\partial q_j}\right)\delta q_j
+\]
+
+Chiamiamo
+\[
+\sum_{i=1}^{n}\underline{f}_i\cdot \frac{\partial \underline{x}_i}{\partial q_j}=Q_j
+\qquad \Rightarrow \qquad
+\sum_{i=1}^{n}\underline{f}_i\cdot \delta \underline{x}_i
+=
+\sum_{j=1}^{3n-m}Q_j\,\delta q_j
+\]
+
+Possiamo dare un'altra dimostrazione del principio dei lavori virtuali basato sulla parametrizzazione locale della varietà attraverso le coordinate libere.
+\begin{proof}
+Alternativamente si può procedere in coordinate libere. Si ha
+\[
+\sum_{i=1}^{n} \underline{f}_i^{\mathrm{att}}\cdot \delta \underline{x}_i
+=
+\sum_{i=1}^{n} \underline{f}_i^{\mathrm{att}}\cdot
+\sum_{j=1}^{3n-m}
+\frac{\partial \underline{x}_i}{\partial q_j}\,\delta q_j
+=
+\sum_{j=1}^{3n-m}
+\left(
+\underbrace{
+\sum_{i=1}^{n}
+\underline{f}_i^{\mathrm{att}}\cdot
+\frac{\partial \underline{x}_i}{\partial q_j}
+}_{Q_j}
+\right)
+\delta q_j.
+\]
+
+Dal momento che
+\[
+\underline{Q}\cdot
+\begin{pmatrix}
+\delta q_1\\
+\vdots\\
+\delta q_{3n-m}
+\end{pmatrix}
+=0
+\qquad
+\forall\,(\delta q_1,\dots,\delta q_{3n-m}),
+\]
+segue che
+\[
+\underline{Q}=\underline{0}
+\qquad \Longrightarrow \qquad
+Q_j=0
+\quad
+\forall j=1,\dots,3n-m.
+\]
+
+Allora la risultante delle forze attive è perpendicolare allo spazio delle direzioni ammesse dai vincoli e arriviamo alla stessa conclusione di prima.
+\end{proof}
+
+\begin{example}{}
+  Studiamo la statica del seguente sistema.
+  \begin{center}
+    \begin{tikzpicture}[
+    x=1cm,
+    y=1cm,
+    >=Latex,
+    line cap=round,
+    line join=round,
+    every node/.style={font=\small}
+]
+
+% Parametri
+\def\R{1.55}
+
+% Coordinate
+\coordinate (O) at (0,0);
+\coordinate (A) at (0,3.45);
+\coordinate (G) at (7.20,\R);
+\coordinate (C) at (7.20,0);
+\coordinate (Top) at ($(G)+(0,\R)$);
+\coordinate (B) at ($(A)!0.42!(G)$);
+
+% Assi
+\draw[black, line width=1.4pt, ->] (0,0) -- (10.2,0) node[below right] {$x$};
+\draw[black, line width=1.4pt, ->] (0,0) -- (0,4.2) node[above left] {$y$};
+
+% Parete verticale
+\draw[black, line width=2pt] (0,0) -- (0,4.05);
+
+% Origine
+\node[below left] at (O) {$O$};
+
+% Riferimento centrato in O
+\draw[orange!85!black, line width=1.4pt, ->] (O) -- ++(0.95,0);
+\draw[orange!85!black, line width=1.4pt, ->] (O) -- ++(0,0.95);
+\node[orange!85!black, below] at ($(O)+(0.48,0)$) {$\underline{\imath}$};
+\node[orange!85!black, left] at ($(O)+(0,0.48)$) {$\underline{\jmath}$};
+
+\draw[orange!85!black, line width=1.2pt] (-0.45,0.18) circle (0.18);
+\fill[orange!85!black] (-0.45,0.18) circle (0.03);
+\node[orange!85!black, left] at (-0.62,0.62) {$\underline{k}$};
+
+% Sbarrette verticali attaccate all'asse y
+\draw[black, line width=1.6pt] (0,3.14) -- (0,3.56);
+\draw[black, line width=1.6pt] (0.12,3.14) -- (0.12,3.56);
+
+% Punto A
+\node[left] at (A) {$A$};
+
+% Asta
+\draw[black, line width=1.8pt] (A) -- (G);
+
+% Punto B
+\fill[red] (B) circle (2.8pt);
+\node[above] at (B) {$B$};
+
+% Etichetta asta
+\node[above right] at ($(B)!0.52!(G)$) {$l,m$};
+
+% Angolo theta
+\draw[black, line width=1.1pt]
+($(A)+(0,-0.78)$) arc[start angle=-90,end angle=-14.5,radius=0.78];
+\node at ($(A)+(0.72,-0.87)$) {$\theta$};
+
+% Freccia verde in A
+\draw[green!55!black, line width=1.4pt, ->] ($(A)$) -- ++(1.80,0);
+\node[green!55!black, above] at ($(A)+(1.25,0.20)$) {$\underline{\psi}$};
+
+% Molla attaccata all'asse y
+\draw[black, line width=1.4pt, smooth, samples=240, domain=0:7.02]
+plot (\x,{1.55 + 0.10*sin(900*\x)});
+
+% Ruota
+\draw[black, line width=1.8pt] (G) circle (\R);
+
+% Punto C
+\node[below] at (C) {$C$};
+
+% Centro G
+\filldraw[white, draw=black, line width=1.2pt] (G) circle (0.09);
+\node[above left] at ($(G)+(-0.10,0.08)$) {$G$};
+
+% Etichetta M,R
+\node[above right] at ($(Top)+(0.95,-0.05)$) {$M,R$};
+
+% Raggi tratteggiati
+\draw[black, dashed, line width=1.1pt] (Top) -- (G);
+\draw[black, dashed, line width=1.1pt] (G) -- ++(0.95,1.00);
+
+% Angolo phi
+\draw[black, line width=1.0pt, ->]
+($(G)+(0,0.58)$) arc[start angle=90,end angle=46,radius=0.58];
+\node at ($(G)+(0.47,0.92)$) {$\varphi$};
+
+% Forza mg in B
+\draw[red!85!black, line width=1.5pt, ->] (B) -- ++(0,-1.15);
+\node[red!85!black, left] at ($(B)+(0.10,-0.70)$) {$m\underline{g}$};
+
+% Forza Mg in G
+\draw[red!85!black, line width=1.5pt, ->] (G) -- ++(0,-1.05);
+\node[red!85!black, right] at ($(G)+(0.52,-0.62)$) {$M\underline{g}$};
+
+% Forza elastica
+\draw[red!85!black, line width=1.5pt, ->] (G) -- ++(-1.25,0);
+\node[red!85!black, below] at ($(G)+(-0.82,-0.12)$) {$-k\,\underline{x}_G$};
+
+% Assi verdi vicino a C
+\draw[green!55!black, line width=1.4pt, ->] ($(C)+(0.18,0)$) -- ++(1.90,0);
+\draw[green!55!black, line width=1.4pt, ->] ($(C)+(0.18,0)$) -- ++(0,0.95);
+\node[green!55!black, right] at ($(C)+(2.10,0)$) {$\underline{\xi}_x$};
+\node[green!55!black, right] at ($(C)+(0.22,0.58)$) {$\underline{\xi}_y$};
+
+\end{tikzpicture}
+  \end{center}
+Imposto un riferimento fisso
+\[
+\{O,\hat{\imath},\hat{\jmath},\hat{k}\}.
+\]
+Il sistema è soggetto ai vincoli
+\[
+\left\{
+\begin{array}{l}
+x_G^{\mathrm{disco}}=x_G^{\mathrm{asta}},\\[2mm]
+y_G^{\mathrm{disco}}=y_G^{\mathrm{asta}}.
+\end{array}
+\right.
+\]
+
+Come coordinata libera posso scegliere $\theta$, $\psi$ o $x_G$.
+Supponendo che per $\psi=0$ il corpo sia in $x_G=0$, si ha
+\[
+l\sin\theta = R\psi = x_G.
+\]
+
+Scrivo le equazioni della statica per i due corpi:
+\[
+\left\{
+\begin{array}{l}
+\underline{\psi}
++
+m\underline{g}
++
+M\underline{g}
+-
+k\underline{x}_G
++
+\underline{\xi}_x
++
+\underline{\xi}_y
+=
+\underline{0},
+\\[2mm]
+\left(\underline{x}_C-\underline{x}_G\right)\wedge \underline{\xi}_x
+=
+\underline{0},
+\\[2mm]
+\left(\underline{x}_B-\underline{x}_G\right)\wedge m\underline{g}
++
+\left(\underline{x}_A-\underline{x}_G\right)\wedge \underline{\psi}
+=
+\underline{0}.
+\end{array}
+\right.
+\]
+
+Dove nella prima ho accorpato la prima legge cardinale per i due corpi
+attraverso il principio di azione e reazione.
+
+\[
+\left\{
+\begin{array}{l}
+\psi-kx_G+\xi_x=0,
+\\[1mm]
+-mg-Mg+\xi_y=0,
+\\[1mm]
+-R\xi_x=0,
+\\[1mm]
+mg\dfrac{l}{2}\sin\theta-l\psi\cos\theta=0.
+\end{array}
+\right.
+\]
+
+Quindi
+\[
+\left\{
+\begin{array}{l}
+\psi=kl\sin\theta,
+\\[1mm]
+\xi_y=mg+Mg,
+\\[1mm]
+mg\dfrac{l}{2}\sin\theta
+-
+l\cos\theta\,kl\sin\theta
+=0.
+\end{array}
+\right.
+\]
+
+Da cui
+\[
+mg\sin\theta-2kl\sin\theta\cos\theta=0.
+\]
+
+Se
+\[
+\sin\theta=0,
+\]
+allora
+\[
+\theta_1=0,
+\qquad
+\theta_2=\pi.
+\]
+
+Se invece
+\[
+\sin\theta\neq 0,
+\]
+allora
+\[
+mg-2kl\cos\theta=0
+\]
+e quindi
+\[
+\cos\theta_{3,4}
+=
+\frac{mg}{2kl},
+\qquad
+\frac{mg}{2kl}\leq 1.
+\]
+
+Dal momento che
+\[
+\cos\theta_{3,4}>0,
+\]
+le configurazioni di equilibrio sono le seguenti.
+\begin{center}
+  \begin{tikzpicture}[scale=1, line cap=round, line join=round, >=Latex]
+
+%======================
+% Disegno 1
+%======================
+\begin{scope}[shift={(0,0)}]
+    \node at (0,3.35) {$\theta_1=0$};
+
+    % piano
+    \draw[line width=0.9pt] (-1.7,0) -- (1.7,0);
+
+    % disco
+    \draw[line width=1pt] (0,1) circle (1);
+
+    % asta verticale
+    \draw[line width=1pt] (0,1) -- (0,2.85);
+
+    % punto A e guida
+    \fill (0,2.15) circle (1.2pt);
+    \node[right] at (0,2.15) {$A$};
+    \draw[line width=0.8pt] (-0.13,1.90) -- (-0.13,2.40);
+    \draw[line width=0.8pt] ( 0.13,1.90) -- ( 0.13,2.40);
+\end{scope}
+
+%======================
+% Disegno 2
+%======================
+\begin{scope}[shift={(5.6,0)}]
+    \node at (0,3.35) {$\theta_2=\pi$};
+
+    % piano
+    \draw[line width=0.9pt] (-1.7,0) -- (1.7,0);
+
+    % disco
+    \draw[line width=1pt] (0,1) circle (1);
+
+    % asta verticale verso il basso
+    \draw[line width=1pt] (0,1) -- (0,-1.05);
+
+    % punto A e guida
+    \fill (0,-0.38) circle (1.2pt);
+    \node[right] at (0,-0.38) {$A$};
+    \draw[line width=0.8pt] (-0.13,-0.63) -- (-0.13,-0.13);
+    \draw[line width=0.8pt] ( 0.13,-0.63) -- ( 0.13,-0.13);
+\end{scope}
+
+%======================
+% Disegno 3
+%======================
+\begin{scope}[shift={(12.4,0)}]
+    \node at (0,3.35) {$\theta_3,\theta_4$};
+
+    % piano con freccia
+    \draw[line width=0.9pt, ->] (-3.3,0) -- (4.2,0);
+
+    % asse verticale centrale
+    \draw[line width=1pt] (0,-1.4) -- (0,2.95);
+
+    % dischi
+    \draw[line width=1pt] (-1.7,1) circle (1);
+    \draw[line width=1pt] ( 1.7,1) circle (1);
+
+    % centri dei dischi
+    \coordinate (GL) at (-1.7,1);
+    \coordinate (GR) at ( 1.7,1);
+    \coordinate (A)  at (0,2.18);
+
+    % punto A e guida
+    \fill (A) circle (1.2pt);
+    \node[right] at (A) {$A$};
+    \draw[line width=0.8pt] (-0.13,1.92) -- (-0.13,2.42);
+    \draw[line width=0.8pt] ( 0.13,1.92) -- ( 0.13,2.42);
+
+    % aste inclinate che partono dai centri delle circonferenze
+    \draw[line width=1pt] (GL) -- (A);
+    \draw[line width=1pt] (GR) -- (A);
+
+    % molla orizzontale tra i due centri
+    \draw[line width=1pt] (-1.7,1) -- (-1.25,1);
+
+    \draw[line width=1pt, smooth, samples=100, domain=-1.25:-0.15]
+        plot (\x,{1 + 0.07*sin((\x+1.25)/1.10*1080)});
+
+    \fill (0,1) circle (1.2pt);
+
+    \draw[line width=1pt, smooth, samples=100, domain=0.15:1.25]
+        plot (\x,{1 + 0.07*sin((\x-0.15)/1.10*1080)});
+
+    \draw[line width=1pt] (1.25,1) -- (1.7,1);
+\end{scope}
+
+\end{tikzpicture}
+\end{center}
+
+Troviamo le stesse posizioni con il principio dei lavori virtuali:
+\[
+-mg\hat{\jmath}\cdot \delta \underline{x}_B
+-Mg\hat{\jmath}\cdot \delta \underline{x}_G
+-kl\sin\theta\,\hat{\imath}\cdot \delta \underline{x}_G
+=0
+\qquad
+\forall\,(\delta \underline{x}_B,\delta \underline{x}_G)
+\text{ ammessi}.
+\]
+
+Passo alla coordinata libera:
+\[
+\underline{x}_B
+=
+\frac{l}{2}\sin\theta\,\hat{\imath}
++
+\left(
+R+\frac{l}{2}\cos\theta
+\right)\hat{\jmath},
+\qquad
+\underline{x}_G
+=
+l\sin\theta\,\hat{\imath}
++
+R\hat{\jmath}.
+\]
+
+Quindi
+\[
+\delta \underline{x}_B
+=
+\frac{l}{2}\cos\theta\,\delta\theta\,\hat{\imath}
+-
+\frac{l}{2}\sin\theta\,\delta\theta\,\hat{\jmath},
+\qquad
+\delta \underline{x}_G
+=
+l\cos\theta\,\delta\theta\,\hat{\imath}.
+\]
+
+Allora
+\[
+-mg\hat{\jmath}\cdot
+\left(
+-\frac{l}{2}\sin\theta\,\delta\theta\,\hat{\jmath}
+\right)
+-
+Mg\hat{\jmath}\cdot
+\left(
+l\cos\theta\,\delta\theta\,\hat{\imath}
+\right)
+-
+kl\sin\theta\,\hat{\imath}\cdot
+\left(
+l\cos\theta\,\delta\theta\,\hat{\imath}
+\right)
+=0.
+\]
+
+Da cui
+\[
+mg\frac{l}{2}\sin\theta\,\delta\theta
+-
+kl\sin\theta\,l\cos\theta\,\delta\theta
+=0
+\qquad
+\forall\,\delta\theta.
+\]
+
+Pertanto
+\[
+mg\frac{l}{2}\sin\theta
+-
+kl\sin\theta\,l\cos\theta
+=0.
+\]
+
+Equivalentemente,
+\[
+mg\sin\theta
+-
+2kl\sin\theta\cos\theta
+=0.
+\]
+
+Quindi
+\[
+\theta_1=0,
+\qquad
+\theta_2=\pi,
+\qquad
+\cos\theta_{3,4}
+=
+\frac{mg}{2kl},
+\qquad
+\frac{mg}{2kl}\leq 1.
+\]
+\end{example}
+
+\vspace{60pt}
+\begin{example}{}
+  Studiamo la statica del seguente sistema.
+  \begin{center}
+    \begin{tikzpicture}[
+    x=1cm,
+    y=1cm,
+    >=Latex,
+    line cap=round,
+    line join=round,
+    every node/.style={font=\small}
+]
+
+% Coordinate principali
+\coordinate (O) at (0,0);
+\coordinate (A) at (2.70,0);
+\coordinate (C) at (6.10,0);
+\coordinate (B) at (6.10,-2.35);
+\coordinate (G) at ($(A)!0.47!(B)$);
+
+% Riferimento a sinistra
+\draw[blue!70!black, line width=1.4pt, ->] (O) -- ++(0,1.10);
+\draw[blue!70!black, line width=1.4pt, ->] (O) -- ++(0.85,0);
+\node[blue!70!black, left]  at ($(O)+(0,0.60)$) {$\underline{\jmath}$};
+\node[blue!70!black, below] at ($(O)+(0.42,0)$) {$\underline{\imath}$};
+
+\draw[blue!70!black, line width=1.2pt] ($(O)+(-0.55,-0.45)$) circle (0.20);
+\fill[blue!70!black] ($(O)+(-0.55,-0.45)$) circle (0.035);
+\node[blue!70!black, left]  at ($(O)$) {$O$};
+\node[blue!70!black, below] at ($(O)+(-0.55,-0.72)$) {$\underline{k}$};
+
+% Molla sinistra attaccata al riferimento
+\draw[yellow!80!orange!90!black, line width=1.4pt] (O) -- (0.22,0);
+\draw[yellow!80!orange!90!black, line width=1.4pt, smooth, samples=140, domain=0.22:2.48]
+plot (\x,{0.16*sin(deg((\x-0.22)*15.5))});
+\draw[yellow!80!orange!90!black, line width=1.4pt] (2.48,0) -- (A);
+\node at (1.00,0.55) {$K$};
+
+% Tratto orizzontale superiore
+\draw[black, line width=1.2pt] (0,0) -- (7.05,0);
+
+% Asta inclinata
+\draw[black, line width=1.2pt] (A) -- (B);
+
+% Molla destra verticale
+\draw[yellow!80!orange!90!black, line width=1.4pt] (C) -- ++(0,-0.22);
+\draw[yellow!80!orange!90!black, line width=1.4pt, smooth, samples=140, domain=-0.22:-2.13]
+plot ({6.10 + 0.10*sin(deg((\x+0.22)*16.5))}, \x);
+\draw[yellow!80!orange!90!black, line width=1.4pt] (6.10,-2.13) -- (B);
+\node[right] at ($(C)+(0.45,-1.15)$) {$K$};
+
+% Punti e nomi
+\node[below left]  at (A) {$A$};
+\node[above]       at (C) {$C$};
+\node[below right] at (B) {$B$};
+\node[below]       at ($(B)+(-0.45,-0.10)$) {$m,l$};
+
+\fill[black] (G) circle (1.6pt);
+\node[right] at ($(G)+(0.05,0.05)$) {$G$};
+
+% Angolo theta
+\draw[black, line width=1.0pt]
+($(A)+(0.65,0)$) arc[start angle=0,end angle=-38,radius=0.65];
+\node at ($(A)+(0.82,-0.40)$) {$\theta$};
+
+% Freccia rossa F
+\draw[red!80!black, line width=1.5pt, ->] ($(A)+(0.05,0)$) -- ++(1.05,0);
+\node[red!80!black, above] at ($(A)+(0.55,0.38)$) {$\underline{F}$};
+
+% Freccia verde psi in A
+\draw[green!55!black, line width=1.4pt, ->] ($(A)+(0,-0.05)$) -- ++(0,-0.60);
+\node[green!55!black, right] at ($(A)+(0.10,-0.47)$) {$\underline{\psi}$};
+
+% Forza elastica sinistra
+\draw[red!80!black, line width=1.5pt, ->] ($(A)+(-0.25,-0.55)$) -- ++(-1.10,0);
+\node[red!80!black, below] at ($(A)+(-0.80,-0.55)$) {$-k\,\underline{x}_A$};
+
+% Peso in G
+\draw[red!80!black, line width=1.5pt, ->] (G) -- ++(0,-1.00);
+\node[red!80!black, left] at ($(G)+(-0.10,-0.68)$) {$m\underline{g}$};
+
+% Forza elastica destra
+\draw[red!80!black, line width=1.5pt, ->] ($(C)+(1.20,-2.00)$) -- ++(0,1.10);
+\node[red!80!black, right] at ($(C)+(1.40,-1.45)$)
+{$K\big(\underline{x}_C-\underline{x}_B\big)$};
+
+\end{tikzpicture}
+  \end{center}
+  Imposto un riferimento fisso
+\[
+\{O,\hat{\imath},\hat{\jmath},\hat{k}\}.
+\]
+L'asta di lunghezza \(l\) e massa \(m\) è sottoposta al vincolo
+\[
+y_A^{\mathrm{asta}}=0
+\]
+ed ha quindi \(2\) gradi di libertà. Scelgo come coordinate libere
+\[
+x_A,\theta.
+\]
+Studiamo le sue equazioni della statica:
+\[
+\left\{
+\begin{array}{l}
+\underline{F}
+-k\underline{x}_A
++\underline{\psi}
++m\underline{g}
++k\left(\underline{x}_C-\underline{x}_B\right)
+=
+\underline{0},
+\\[2mm]
+\left(\underline{x}_G-\underline{x}_A\right)\wedge m\underline{g}
++
+\left(\underline{x}_B-\underline{x}_A\right)\wedge
+k\left(\underline{x}_C-\underline{x}_B\right)
+=
+\underline{0}
+\qquad
+\text{polo } A.
+\end{array}
+\right.
+\]
+
+Quindi
+\[
+\left\{
+\begin{array}{l}
+F\hat{\imath}
+-kx_A\hat{\imath}
+-\psi\hat{\jmath}
+-mg\hat{\jmath}
++kl\sin\theta\,\hat{\jmath}
+=
+\underline{0},
+\\[2mm]
+\dfrac{l}{2}
+\left(
+\cos\theta\,\hat{\imath}
+-
+\sin\theta\,\hat{\jmath}
+\right)
+\wedge
+\left(
+-mg\hat{\jmath}
+\right)
++
+l
+\left(
+\cos\theta\,\hat{\imath}
+-
+\sin\theta\,\hat{\jmath}
+\right)
+\wedge
+kl\sin\theta\,\hat{\jmath}
+=
+\underline{0}.
+\end{array}
+\right.
+\]
+
+Passando alle componenti:
+\[
+\left\{
+\begin{array}{l}
+F-kx_A=0,
+\\[1mm]
+-\psi-mg+kl\sin\theta=0,
+\\[1mm]
+-\dfrac{l}{2}\cos\theta\,mg
++
+l\cos\theta\,kl\sin\theta
+=0.
+\end{array}
+\right.
+\]
+
+Dalla prima equazione:
+\[
+x_A=\frac{F}{k}.
+\]
+
+Dalla terza equazione:
+\[
+-\frac{l}{2}\cos\theta\,mg
++
+kl^2\sin\theta\cos\theta
+=0,
+\]
+cioè
+\[
+2kl\sin\theta\cos\theta
+-
+mg\cos\theta
+=0.
+\]
+
+Se
+\[
+\cos\theta=0,
+\]
+allora
+\[
+\theta_1=\frac{\pi}{2},
+\qquad
+\theta_2=\frac{3}{2}\pi.
+\]
+
+Se invece
+\[
+\cos\theta\neq 0,
+\]
+allora
+\[
+2kl\sin\theta=mg,
+\]
+da cui
+\[
+\sin\theta=\frac{mg}{2kl}.
+\]
+
+Quindi
+\[
+\sin\theta_{3,4}
+=
+\frac{mg}{2kl},
+\qquad
+\frac{mg}{2kl}\leq 1.
+\]
+
+Facciamolo con il principio dei lavori virtuali:
+\[
+-k\underline{x}_A\cdot \delta\underline{x}_A
++
+\underline{F}\cdot \delta\underline{x}_A
++
+m\underline{g}\cdot \delta\underline{x}_G
++
+k\left(\underline{x}_C-\underline{x}_B\right)\cdot
+\delta\underline{x}_B
+=
+0.
+\]
+
+Scrivo gli spostamenti virtuali in coordinate libere:
+\[
+\underline{x}_A
+=
+x_A\hat{\imath}
+\qquad \Longrightarrow \qquad
+\delta\underline{x}_A
+=
+\delta x_A\hat{\imath}.
+\]
+
+\[
+\underline{x}_G
+=
+\underline{x}_G-\underline{x}_A+\underline{x}_A
+=
+\frac{l}{2}
+\left(
+\cos\theta\,\hat{\imath}
+-
+\sin\theta\,\hat{\jmath}
+\right)
++
+x_A\hat{\imath},
+\]
+quindi
+\[
+\delta\underline{x}_G
+=
+\delta x_A\hat{\imath}
+-
+\frac{l}{2}\sin\theta\,\delta\theta\,\hat{\imath}
+-
+\frac{l}{2}\cos\theta\,\delta\theta\,\hat{\jmath}.
+\]
+
+Analogamente,
+\[
+\underline{x}_B
+=
+\underline{x}_B-\underline{x}_A+\underline{x}_A
+=
+l
+\left(
+\cos\theta\,\hat{\imath}
+-
+\sin\theta\,\hat{\jmath}
+\right)
++
+x_A\hat{\imath},
+\]
+quindi
+\[
+\delta\underline{x}_B
+=
+\delta x_A\hat{\imath}
+-
+l\sin\theta\,\delta\theta\,\hat{\imath}
+-
+l\cos\theta\,\delta\theta\,\hat{\jmath}.
+\]
+
+Sostituendo nel principio dei lavori virtuali:
+\[
+-Kx_A\hat{\imath}\cdot \delta x_A\hat{\imath}
++
+F\hat{\imath}\cdot \delta x_A\hat{\imath}
+-
+mg\hat{\jmath}\cdot
+\left(
+\delta x_A\hat{\imath}
+-
+\frac{l}{2}\sin\theta\,\delta\theta\,\hat{\imath}
+-
+\frac{l}{2}\cos\theta\,\delta\theta\,\hat{\jmath}
+\right)
+\]
+\[
++
+Kl\sin\theta\,\hat{\jmath}\cdot
+\left(
+\delta x_A\hat{\imath}
+-
+l\sin\theta\,\delta\theta\,\hat{\imath}
+-
+l\cos\theta\,\delta\theta\,\hat{\jmath}
+\right)
+=
+0.
+\]
+
+Da cui
+\[
+\left\{
+\begin{array}{l}
+-Kx_A\,\delta x_A
++
+F\,\delta x_A
+=
+0,
+\\[2mm]
+mg\dfrac{l}{2}\cos\theta\,\delta\theta
+-
+Kl\sin\theta\,l\cos\theta\,\delta\theta
+=
+0,
+\end{array}
+\right.
+\qquad
+\forall\,(\delta x_A,\delta\theta).
+\]
+
+Quindi
+\[
+\left\{
+\begin{array}{l}
+F=Kx_A,
+\\[2mm]
+mg\dfrac{l}{2}\cos\theta
+-
+Kl\sin\theta\,l\cos\theta
+=
+0.
+\end{array}
+\right.
+\]
+
+Equivalentemente,
+\[
+\left\{
+\begin{array}{l}
+x_A=\dfrac{F}{K},
+\\[3mm]
+mg\cos\theta
+-
+2Kl\sin\theta\cos\theta
+=
+0.
+\end{array}
+\right.
+\]
+
+E arriviamo alla stessa conclusione di prima.
+\end{example}

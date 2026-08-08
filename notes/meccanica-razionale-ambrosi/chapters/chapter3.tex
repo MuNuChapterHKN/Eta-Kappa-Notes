@@ -1,0 +1,453 @@
+\chapter{Richiami di Algebra Lineare, rototraslazioni e formula fondamentale del moto dei corpi rigidi}
+\begin{definition}{}
+Una matrice $A\in\mathbb{R}^{n\times n}$ si dice \emph{ortogonale} se
+\[
+A^{\mathsf T}A=I_n
+\]
+(equivalentemente $AA^{\mathsf T}=I_n$), cioè se le sue colonne (e righe) formano un insieme ortonormale.
+\end{definition}
+
+\begin{oss}{}
+Se $A$ è ortogonale, allora
+\[
+\det(A)=\pm 1.
+\]
+infatti ricordando che $\det(A) = \det(A^T)$ e la formula di Binet $\det(AB) = \det(A) \det(B)$ otteniamo
+\[
+\det(A^T A) = \det(A) \det(A^T) = \det(A)^2 = \det(I) = 1 \Rightarrow \det(A) = \pm 1
+\]
+Con la classica identificazione $\operatorname{End}(\mathbb{R}^n) \cong \mathbb{R}^{n \times n }$ tramite $A \to L_A: \mathbb{R}^n \to \mathbb{R}^n , \underline{x} \mapsto A\underline{x}$ chiamiamo le matrici ortogonali con determinante 1 rotazioni e le matrici ortogonali con determinante -1 riflessioni.
+\end{oss}
+
+\begin{example}{}
+Consideriamo
+\[
+A=
+\begin{pmatrix}
+0 & 1 & 0\\
+1 & 0 & 0\\
+0 & 0 & 1
+\end{pmatrix}.
+\]
+Si ha $A^{\mathsf T}A=I$ e $\det(A)=-1$, quindi $A$ è ortogonale ma non è una rotazione (inverte l'orientazione).
+
+L'applicazione lineare associata $L_A(\underline{x})=A\underline{x}$ scambia le prime due coordinate e lascia invariata la terza:
+\[
+L_A(x,y,z)=(y,x,z).
+\]
+Geometricamente, è la riflessione rispetto al piano $x=y$ (equivalentemente: scambia gli assi $x$ e $y$ e lascia fisso l'asse $z$).
+\end{example}
+
+\begin{example}{}
+Consideriamo
+\[
+A=
+\begin{pmatrix}
+1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & -1
+\end{pmatrix}.
+\]
+Anche in questo caso $A^{\mathsf T}A=I$ e $\det(A)=-1$, quindi $A$ è ortogonale e inverte l'orientazione.
+
+L'applicazione lineare associata $L_A(\underline{x})=A\underline{x}$ lascia invariati $x$ e $y$ e cambia segno a $z$:
+\[
+L_A(x,y,z)=(x,y,-z).
+\]
+Geometricamente, è la riflessione rispetto al piano $z=0$ (piano $xy$).
+\end{example}
+Noi siamo interessati per lo più alle \emph{rotazioni}, ovvero alle matrici A tali che $\det(A) = 1$.
+
+\begin{example}{}
+Sia
+\[
+R=
+\begin{pmatrix}
+\cos\theta & -\sin\theta & 0\\
+\sin\theta & \cos\theta  & 0\\
+0          & 0           & 1
+\end{pmatrix}.
+\]
+Si ha $\det R=1$ e
+\[
+RR^{\mathsf T}
+=
+\begin{pmatrix}
+\cos\theta & -\sin\theta & 0\\
+\sin\theta & \cos\theta  & 0\\
+0          & 0           & 1
+\end{pmatrix}
+\begin{pmatrix}
+\cos\theta & \sin\theta & 0\\
+-\sin\theta& \cos\theta & 0\\
+0          & 0          & 1
+\end{pmatrix}
+=
+\begin{pmatrix}
+1&0&0\\
+0&1&0\\
+0&0&1
+\end{pmatrix}.
+\]
+È la rotazione attorno all'asse $z$ di un angolo $\theta$ in senso antiorario.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.05, line cap=round, line join=round]
+  % assi 3D in prospettiva
+  \coordinate (O) at (0,0);
+  \draw[->,line width=1.1pt] (O) -- (-2.2,-1.3) node[below left] {$x$};
+  \draw[->,line width=1.1pt] (O) -- (3.4,0) node[below right] {$y$};
+  \draw[->,line width=1.1pt] (O) -- (0,3.2) node[above] {$z$};
+
+  % archetto di rotazione nel piano xy
+  \draw[line width=1.0pt] (1.2,0) arc[start angle=0,end angle=45,radius=1.2];
+  \draw[->,line width=1.0pt] ({1.2*cos(45)},{1.2*sin(45)}) -- ++(0.001,0.001);
+  \node at (0.95,0.35) {$\theta$};
+\end{tikzpicture}
+\end{center}
+
+Calcoliamo autovalori e autospazi di $R$.
+\[
+\det(R-\lambda I)=
+\begin{vmatrix}
+\cos\theta-\lambda & -\sin\theta & 0\\
+\sin\theta & \cos\theta-\lambda & 0\\
+0 & 0 & 1-\lambda
+\end{vmatrix}
+\]
+\[
+=(1-\lambda)
+\begin{vmatrix}
+\cos\theta-\lambda & -\sin\theta\\
+\sin\theta & \cos\theta-\lambda
+\end{vmatrix}
+=(1-\lambda)\bigl[(\cos\theta-\lambda)^2+\sin^2\theta\bigr]
+\]
+\[
+=(1-\lambda)\bigl[\cos^2\theta+\lambda^2-2\cos\theta\,\lambda+\sin^2\theta\bigr]
+=(1-\lambda)\bigl[\lambda^2-2\cos\theta\,\lambda+1\bigr]
+=p(\lambda).
+\]
+Quindi $p(\lambda)=0$ se e solo se $\lambda_1=1$ oppure $\lambda^2-2\cos\theta\,\lambda+1=0$.
+Il discriminante è
+\[
+\Delta=4\cos^2\theta-4=4(\cos^2\theta-1)=-4\sin^2\theta=i^2\,4\sin^2\theta,
+\]
+e dunque
+\[
+\lambda_{2,3}=\frac{2\cos\theta\pm 2i|\sin\theta|}{2}
+=\cos\theta\pm i|\sin\theta|.
+\]
+
+Concludiamo quindi che:
+\begin{itemize}
+\item se $\theta=2k\pi$ allora $\lambda_1=\lambda_2=\lambda_3=1$;
+\item se $\theta=(2k+1)\pi$ allora $\lambda_1=1$ e $\lambda_2=\lambda_3=-1$;
+\item mentre se $\theta\neq k\pi$ allora $\lambda_1=1$ è l'unico autovalore reale.
+\end{itemize}
+
+Calcoliamo gli autospazi.
+\begin{itemize}
+\item $\theta\neq k\pi \ \Rightarrow\ E_1(R)=\Ker(R-I)$ con
+\[
+R-I=
+\begin{pmatrix}
+\cos\theta-1 & -\sin\theta & 0\\
+\sin\theta & \cos\theta-1 & 0\\
+0 & 0 & 0
+\end{pmatrix},
+\]
+da cui il sistema
+\[
+(\cos\theta-1)x-\sin\theta\,y=0,\qquad y=0,\qquad z\in\mathbb{R},
+\]
+e quindi
+\[
+E_1(R)=\mathrm{span}\!\left\{\begin{pmatrix}0\\0\\1\end{pmatrix}\right\}.
+\]
+Ovvero l'unico sottospazio che viene mandato in se stesso è l'asse $z$, che è l'asse di rotazione.
+
+\item $\theta=2k\pi \ \Rightarrow\ E_1(R)=\Ker(R-I)$ con $R-I=0$, quindi
+\[
+E_1(R)=\mathbb{R}^3.
+\]
+In questo caso non c'è rotazione e tutto lo spazio viene mandato in se stesso.
+
+\item $\theta=(2k+1)\pi \ \Rightarrow\ E_1(R)=\Ker(R-I)$ e $E_{-1}(R)=\Ker(R+I)$.
+In particolare
+\[
+R-I=
+\begin{pmatrix}
+-2&0&0\\
+0&-2&0\\
+0&0&0
+\end{pmatrix}
+\quad\Rightarrow\quad
+E_1(R)=\mathrm{span}\!\left\{\begin{pmatrix}0\\0\\1\end{pmatrix}\right\},
+\]
+e
+\[
+R+I=
+\begin{pmatrix}
+0&0&0\\
+0&0&0\\
+0&0&-2
+\end{pmatrix}
+\quad\Rightarrow\quad
+E_{-1}(R)=\mathrm{span}\!\left\{\begin{pmatrix}1\\0\\0\end{pmatrix},
+\begin{pmatrix}0\\1\\0\end{pmatrix}\right\}.
+\]
+Otteniamo quindi che $R$ in questo caso mantiene fisso l'asse $z$ (asse di rotazione) e riflette i vettori sul piano $xy$ lungo la loro direzione.
+\end{itemize}
+
+\begin{oss}{}
+Da $R$ possiamo ottenere le rotazioni attorno agli assi $x$ e $y$ semplicemente moltiplicando a destra $R$ per le matrici
+\[
+T_x=
+\begin{pmatrix}
+0&1&0\\
+0&0&1\\
+1&0&0
+\end{pmatrix},
+\qquad
+T_y=
+\begin{pmatrix}
+0&0&1\\
+1&0&0\\
+0&1&0
+\end{pmatrix}.
+\]
+\end{oss}
+\begin{oss}{}
+Essendo $R^{-1}=R^{\mathsf T}$ allora $R^{\mathsf T}$ è una rotazione attorno all'asse $z$ di un angolo $\theta$ in senso orario.
+\end{oss}
+\end{example}
+
+\begin{definition}{}
+Sia $A\in\mathbb{R}^{n\times n}$.
+\begin{itemize}
+\item $A$ si dice \emph{simmetrica} se $A^{\mathsf T}=A$.
+\item $A$ si dice \emph{antisimmetrica} se $A^{\mathsf T}=-A$.
+\end{itemize}
+\end{definition}
+
+Applichiamo i richiami di Algebra Lineare al corpo rigido.\\
+Per caratterizzare la configurazione del corpo rigido ne scelgo un punto che a $t=0$ avrà posizione $\underline{x}_0$.
+
+Nel tempo il punto si muove e il corpo rigido ruota attorno al punto:
+\begin{enumerate}[label=\roman*)]
+\item $\underline{x}_p(t)$;
+\item fisso una matrice di rotazione attorno a $\underline{x}_p(t)$.
+\end{enumerate}
+Notiamo che servono 6 informazioni: le 3 coordinate di $\underline{x}_p(t)$ e 3 coefficienti per $R$.
+\\Una matrice generica $3\times 3$ ha $9$ coefficienti liberi. Una matrice di rotazione deve invece soddisfare i vincoli
+\[
+R^{\mathsf T}R=I,\qquad \det R=1,
+\]
+cioè appartenere a $SO(3)$.
+
+Scrivendo $R=(\underline r_1\,|\,\underline r_2\,|\,\underline r_3)$, la condizione $R^{\mathsf T}R=I$ equivale a dire che le colonne sono ortonormali:
+\[
+\langle \underline r_i,\underline r_j\rangle=\delta_{ij}.
+\]
+Questa condizione impone $6$ vincoli indipendenti:
+\begin{itemize}
+\item $3$ vincoli di norma: $\|\underline r_1\|=1,\ \|\underline r_2\|=1,\ \|\underline r_3\|=1$;
+\item $3$ vincoli di ortogonalità: $\underline r_1\cdot \underline r_2=0,\ \underline r_1\cdot \underline r_3=0,\ \underline r_2\cdot \underline r_3=0$.
+\end{itemize}
+Di conseguenza, il numero di parametri continui liberi passa da $9$ a
+\[
+9-6=3.
+\]
+Il vincolo $\det R=1$ seleziona la componente delle rotazioni (escludendo le riflessioni), ma non cambia il conteggio dei gradi di libertà continui.
+
+\medskip
+\textbf{Interpretazione geometrica.}
+Una rotazione nello spazio è determinata da $3$ parametri (ad esempio tre angoli), quindi $R$ dipende da $3$ gradi di libertà.\\
+Scegliamo la matrice $R(t)$ variabile nel tempo tale che moltiplicata a sinistra per  il vettore $\underline{x_q}(0) - \underline{x_p}(0)$ dia la posizione del punto $q$ rispetto al punto $p$ all'istante $t$, ovvero il vettore $\underline{x_q}(t) - \underline{x_p}(t)$. In formule
+\[
+\underline{x}_q(t)=\underline{x}_p(t)+R\bigl(\underline{x}_q(0)-\underline{x}_p(0)\bigr).
+\]
+
+\begin{oss}{}
+    Per avere $\underline{x_q}(t = 0) = \underline{x_q}(0)$ necessariamente si deve avere $R(0) = I$.
+\end{oss}
+
+\begin{center}
+\begin{tikzpicture}[scale=1.05, line cap=round, line join=round]
+
+% assi in prospettiva
+\coordinate (O) at (0,0);
+\draw[->,line width=1.1pt] (O) -- (-2.4,-1.4) node[below left] {$x$};
+\draw[->,line width=1.1pt] (O) -- (4.6,0) node[below right] {$y$};
+\draw[->,line width=1.1pt] (O) -- (0,3.8) node[above] {$z$};
+
+% punti
+\coordinate (Xp) at (3.0,1.35);
+\coordinate (Xq) at (3.35,2.75);
+
+% vettori posizione
+\draw[->,line width=1.2pt] (O) -- (Xp);
+\draw[->,line width=1.2pt] (O) -- (Xq);
+
+% vettore differenza x_q - x_p
+\draw[->,line width=1.2pt] (Xp) -- (Xq);
+
+% punti marcati
+\fill (Xp) circle (2.2pt);
+\fill (Xq) circle (2.2pt);
+
+% etichette
+\node[below right] at (Xp) {$\underline{x}_p$};
+\node[above left]  at (Xq) {$\underline{x}_q$};
+\node[right] at ($(Xp)!0.55!(Xq)$) {$\underline{x}_q-\underline{x}_p$};
+
+\end{tikzpicture}
+\end{center}
+
+determiniamo la velocità:
+\[
+(\underline{x}_q-\underline{x}_p)(t)=R\bigl(\underline{x}_q(0)-\underline{x}_p(0)\bigr)
+\]
+\[
+\Rightarrow\quad
+R^{\mathsf T}(\underline{x}_q-\underline{x}_p)(t)=\underline{x}_q(0)-\underline{x}_p(0)
+\]
+\[
+\Rightarrow\quad
+\frac{d\underline{x}_q}{dt}(t)=\frac{d\underline{x}_p}{dt}+\frac{d}{dt}\Bigl(R\bigl(\underline{x}_q(0)-\underline{x}_p(0)\bigr)\Bigr)
+\]
+\[
+\Rightarrow\quad
+\underline{v}_q=\underline{v}_p+\dot{R}R^{\mathsf T}(\underline{x}_q-\underline{x}_p).
+\]
+(dove $R=(r_{ij})$)
+
+\medskip
+
+$R(t)$ e $R^{\mathsf T}(t)$ sono funzioni del tempo e $RR^{\mathsf T}=I$.
+Quindi
+\[
+\frac{d}{dt}(RR^{\mathsf T})=0
+\ \Longleftrightarrow\
+\dot{R}R^{\mathsf T}+R\dot{R}^{\mathsf T}=0
+\ \Longleftrightarrow\
+\dot{R}R^{\mathsf T}=-R\dot{R}^{\mathsf T}=-(\dot{R}R^{\mathsf T})^{\mathsf T}.
+\]
+\[
+\Rightarrow\quad \dot{R}R^{\mathsf T}\ \text{è antisimmetrica, cioè}\quad
+\dot{R}R^{\mathsf T}=
+\begin{pmatrix}
+0 & -\omega_z & \omega_y\\
+\omega_z & 0 & -\omega_x\\
+-\omega_y & \omega_x & 0
+\end{pmatrix}.
+\]
+
+Quindi la velocità si può scrivere come
+\[
+\underline{v}_q=\underline{v}_p+
+\begin{pmatrix}
+0 & -\omega_z & \omega_y\\
+\omega_z & 0 & -\omega_x\\
+-\omega_y & \omega_x & 0
+\end{pmatrix}
+\begin{pmatrix}
+x_q-x_p\\
+y_q-y_p\\
+z_q-z_p
+\end{pmatrix}
+=
+\underline{v}_p+
+\begin{pmatrix}
+\omega_y(z_q-z_p)-\omega_z(y_q-y_p)\\
+\omega_z(x_q-x_p)-\omega_x(z_q-z_p)\\
+\omega_x(y_q-y_p)-\omega_y(x_q-x_p)
+\end{pmatrix}.
+\]
+
+\[
+\underline{v}_q=\underline{v}_p+\underline{\omega}\wedge(\underline{x}_q-\underline{x}_p),
+\qquad
+\underline{\omega}=
+\begin{pmatrix}
+\omega_x\\
+\omega_y\\
+\omega_z
+\end{pmatrix}
+\quad\text{(velocità angolare).}
+\]
+
+\[
+\text{\emph{Formula fondamentale del moto dei corpi rigidi}.}
+\]
+
+\begin{oss}{}
+$\underline{x}_p$ e $\underline{x}_q$ sono due punti qualsiasi del corpo rigido.
+\end{oss}
+
+\begin{oss}{}
+In generale $\underline{\omega}=\bigl(\omega_x(t),\omega_y(t),\omega_z(t)\bigr)$, ma se vincoliamo il moto nel piano allora
+\[
+\underline{\omega}=(0,0,\omega(t)).
+\]
+\end{oss}
+Possiamo derivare nel tempo la formula fondamentale ottenendo
+\[
+\frac{d}{dt}\left(\underline{v_q}\right)
+=
+\frac{d}{dt}\left(\underline{v_p}\right)
++
+\frac{d}{dt}\left(\underline{\omega}\wedge\left(\underline{x_q}-\underline{x_p}\right)\right)
+=
+\]
+
+\[
+=
+\underline{a_p}
++
+\frac{d}{dt}\left(\underline{\omega}\right)\wedge\left(\underline{x_q}-\underline{x_p}\right)
++
+\underline{\omega}\wedge\frac{d}{dt}\left(\underline{x_q}-\underline{x_p}\right)
+=
+\]
+
+\[
+=
+\underline{a_p}
++
+\underline{\alpha}\wedge\left(\underline{x_q}-\underline{x_p}\right)
++
+\underline{\omega}\wedge\left(\underline{v_q}-\underline{v_p}\right)
+=
+\]
+
+\[
+=
+\underline{a_p}
++
+\underline{\alpha}\wedge\left(\underline{x_q}-\underline{x_p}\right)
++
+\underline{\omega}\wedge\left(\underline{v_p}+\underline{\omega}\wedge\left(\underline{x_q}-\underline{x_p}\right)-\underline{v_p}\right)
+=
+\]
+
+\[
+=
+\underline{a_p}
++
+\underline{\alpha}\wedge\left(\underline{x_q}-\underline{x_p}\right)
++
+\underline{\omega}\wedge\left(\underline{\omega}\wedge\left(\underline{x_q}-\underline{x_p}\right)\right)
+\]
+ovvero
+
+\[
+\underline{a_q}
+=
+\underline{a_p}
++
+\underline{\alpha}\wedge\left(\underline{x_q}-\underline{x_p}\right)
++
+\underline{\omega}\wedge\left(\underline{\omega}\wedge\left(\underline{x_q}-\underline{x_p}\right)\right)
+\]
