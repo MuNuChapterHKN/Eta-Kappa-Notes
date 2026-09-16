@@ -93,20 +93,26 @@ RR^{\mathsf T}
 
 \begin{center}
 \begin{tikzpicture}[scale=1.05, line cap=round, line join=round]
-  % assi 3D in prospettiva
+  % assi 3D in prospettiva (lasciati identici ai tuoi)
   \coordinate (O) at (0,0);
   \draw[->,line width=1.1pt] (O) -- (-2.2,-1.3) node[below left] {$x$};
   \draw[->,line width=1.1pt] (O) -- (3.4,0) node[below right] {$y$};
   \draw[->,line width=1.1pt] (O) -- (0,3.2) node[above] {$z$};
 
-  % archetto di rotazione nel piano xy
-  \draw[line width=1.0pt] (1.2,0) arc[start angle=0,end angle=45,radius=1.2];
-  \draw[->,line width=1.0pt] ({1.2*cos(45)},{1.2*sin(45)}) -- ++(0.001,0.001);
-  \node at (0.95,0.35) {$\theta$};
+  % archetto di rotazione nel piano xy (Sdraiato sul pavimento!)
+  % Parte vicino all'asse x (angolo 210) e va verso l'asse y (angolo 340)
+  \draw[->,line width=1.0pt, red] (-1.1,-0.65) arc[start angle=210,end angle=340, x radius=1.3, y radius=0.6];
+
+  % Etichetta theta posizionata correttamente
+  \node[red] at (0.2, -0.8) {$\theta$};
+
+  % Opzionale ma consigliato: freccia di omega sull'asse z
+  \draw[->,line width=1.2pt, blue] (O) -- (0,1.8) node[right] {$\underline{\omega}$};
 \end{tikzpicture}
 \end{center}
 
-Calcoliamo autovalori e autospazi di $R$.
+
+\inizioapprof Calcoliamo autovalori e autospazi di $R$.
 \[
 \det(R-\lambda I)=
 \begin{vmatrix}
@@ -218,6 +224,7 @@ T_y=
 \end{pmatrix}.
 \]
 \end{oss}
+\fineapprof
 \begin{oss}{}
 Essendo $R^{-1}=R^{\mathsf T}$ allora $R^{\mathsf T}$ è una rotazione attorno all'asse $z$ di un angolo $\theta$ in senso orario.
 \end{oss}
@@ -232,6 +239,7 @@ Sia $A\in\mathbb{R}^{n\times n}$.
 \end{definition}
 
 Applichiamo i richiami di Algebra Lineare al corpo rigido.\\
+\inizioapprof
 Per caratterizzare la configurazione del corpo rigido ne scelgo un punto che a $t=0$ avrà posizione $\underline{x}_0$.
 
 Nel tempo il punto si muove e il corpo rigido ruota attorno al punto:
@@ -264,6 +272,7 @@ Il vincolo $\det R=1$ seleziona la componente delle rotazioni (escludendo le rif
 \medskip
 \textbf{Interpretazione geometrica.}
 Una rotazione nello spazio è determinata da $3$ parametri (ad esempio tre angoli), quindi $R$ dipende da $3$ gradi di libertà.\\
+\fineapprof
 Scegliamo la matrice $R(t)$ variabile nel tempo tale che moltiplicata a sinistra per  il vettore $\underline{x_q}(0) - \underline{x_p}(0)$ dia la posizione del punto $q$ rispetto al punto $p$ all'istante $t$, ovvero il vettore $\underline{x_q}(t) - \underline{x_p}(t)$. In formule
 \[
 \underline{x}_q(t)=\underline{x}_p(t)+R\bigl(\underline{x}_q(0)-\underline{x}_p(0)\bigr).

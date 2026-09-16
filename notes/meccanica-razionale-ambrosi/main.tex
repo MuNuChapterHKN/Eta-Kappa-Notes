@@ -9,6 +9,67 @@
 \usepackage{tikz}
 \usetikzlibrary{calc, patterns, arrows.meta, decorations.pathmorphing, decorations.pathreplacing}
 
+
+
+% --- SCORCIATOIA AGGIUNTA ---
+\usepackage{marginnote}
+
+\newcommand{\inizioapprof}{%
+  \marginnote[{%
+    \raggedleft\scriptsize
+    \begin{tabular}{@{}c@{}}
+    $\downarrow$\\[-2pt]
+    \textbf{APPROF.}\\[-2pt]
+    \textbf{EXTRA}
+    \end{tabular}%
+  }]{%
+    \raggedright\scriptsize
+    \begin{tabular}{@{}c@{}}
+    $\downarrow$\\[-2pt]
+    \textbf{APPROF.}\\[-2pt]
+    \textbf{EXTRA}
+    \end{tabular}%
+  }%
+}
+
+\newcommand{\fineapprof}{%
+  \marginnote[{%
+    \raggedleft\scriptsize
+    \begin{tabular}{@{}c@{}}
+    \textbf{FINE}\\[-2pt]
+    \textbf{EXTRA}\\[-2pt]
+    $\uparrow$
+    \end{tabular}%
+  }]{%
+    \raggedright\scriptsize
+    \begin{tabular}{@{}c@{}}
+    \textbf{FINE}\\[-2pt]
+    \textbf{EXTRA}\\[-2pt]
+    $\uparrow$
+    \end{tabular}%
+  }%
+}
+
+\newcommand{\inizioapprofcon}[1]{%
+  \marginnote[{%
+    \raggedleft\scriptsize
+    \begin{tabular}{@{}c@{}}
+    $\downarrow$\\[-2pt]
+    \textbf{APPROF.}\\[-2pt]
+    \textbf{EXTRA}\\[-2pt]
+    \textit{#1}
+    \end{tabular}%
+  }]{%
+    \raggedright\scriptsize
+    \begin{tabular}{@{}c@{}}
+    $\downarrow$\\[-2pt]
+    \textbf{APPROF.}\\[-2pt]
+    \textbf{EXTRA}\\[-2pt]
+    \textit{#1}
+    \end{tabular}%
+  }%
+}
+% ----------------------------
 % ridefinizioni ed operatori matematici personalizzati
 \providecommand{\tg}{\operatorname{tg}}
 \providecommand{\arctg}{\operatorname{arctg}}
@@ -36,7 +97,20 @@
 \editor{Stefano Bloise}
 
 \begin{document}
+\vspace*{1cm}
+\begin{tcolorbox}[colback=gray!5, colframe=gray!40, arc=3pt, title={\textbf{Nota alla lettura}}]
+Questi sono appunti originali presi durante le lezioni del Prof. Ambrosi. L'autore ha tuttavia integrato di sua iniziativa alcune dimostrazioni e formalizzazioni matematiche non trattate in aula.
 
+In fase di revisione, per massima chiarezza, questi contenuti extra sono stati isolati a margine per distinguerli dal programma effettivo:
+
+\begin{itemize}
+    \item \textbf{APPROF. EXTRA ($\downarrow$)}: Inizio della parte aggiuntiva.
+    \item \textbf{FINE EXTRA ($\uparrow$)}: Fine della parte aggiuntiva e ritorno alla lezione originale.
+\end{itemize}
+
+\textit{Nota bene:} Questi approfondimenti non fanno parte del programma d'esame.
+\end{tcolorbox}
+\vspace*{1cm}
 \include{chapters/chapter1}
 \include{chapters/chapter2}
 \include{chapters/chapter3}

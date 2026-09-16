@@ -294,203 +294,378 @@ T
 
 Ovvero abbiamo ritrovato il periodo del pendolo linearizzato.
 \end{example}
-Consideriamo un sistema conservativo ad \(1\) grado di libertà. Posso scrivere
+Consideriamo un sistema conservativo ad \(1\) grado di libertà. Possiamo scrivere
 \[
-T=\frac{1}{2}a(q)\dot q^2
+T=\frac{1}{2}a(q)\dot q^2,
 \qquad
-V=V(q)
+V=V(q),
 \]
+con \(a(q)>0\) nella regione di configurazioni considerata.
 
-Sia \((q,\dot q)=(q_0,0)\) una configurazione di equilibrio, ovvero un minimo di \(V(q)\).
+Sia
+\[
+(q,\dot q)=(q_0,0)
+\]
+una configurazione di equilibrio stabile. Per studiare le piccole oscillazioni armoniche supponiamo inoltre che l'equilibrio sia \emph{non degenere}, cioè
+\[
+V''(q_0)>0.
+\]
 
 Vogliamo linearizzare le equazioni del moto attorno alla configurazione di equilibrio.
 
-Sviluppo \(V(q)\)
+Sviluppiamo \(V(q)\) in serie di Taylor:
 \[
 V(q)
 =
-V(q_0)+V'(q_0)(q-q_0)+\frac{V''}{2}(q_0)(q-q_0)^2+o(q-q_0)^2
-\]
-
-Visto che le costanti sono arbitrarie per un potenziale pongo \(V(q_0)=0\) ed inoltre \(V'(q_0)(q-q_0)=0\) perché \(q_0\) è un punto di minimo (Fermat). Per lo stesso motivo \(V''(q_0)>0\). Allora
-\[
-V(q)=\frac{V''}{2}(q_0)(q-q_0)^2+o(q-q_0)^2
-\]
-
-Allo stesso modo l'energia cinetica
-\[
-2T=a(q)\dot q^2
-=
-a(q_0)\dot q^2
+V(q_0)
 +
-\left.
+V'(q_0)(q-q_0)
++
+\frac{1}{2}V''(q_0)(q-q_0)^2
++
+o\!\left((q-q_0)^2\right).
+\]
+
+Poiché il potenziale è definito a meno di una costante additiva, possiamo porre
+\[
+V(q_0)=0.
+\]
+Inoltre, essendo \(q_0\) una configurazione di equilibrio,
+\[
+V'(q_0)=0.
+\]
+
+Pertanto
+\[
+V(q)
+=
+\frac{1}{2}V''(q_0)(q-q_0)^2
++
+o\!\left((q-q_0)^2\right).
+\]
+
+Allo stesso modo, sviluppiamo l'energia cinetica
+\[
+2T(q,\dot q)=a(q)\dot q^2
+\]
+attorno a \((q_0,0)\). Ponendo
+\[
+x=q-q_0,
+\]
+si ha
+\[
+\begin{aligned}
+2T(q,\dot q)
+={}&
+2T(q_0,0)
++
+\nabla(2T)\big|_{(q_0,0)}
+\cdot
+\begin{pmatrix}
+x\\
+\dot q
+\end{pmatrix}
+\\
+&+
+\frac{1}{2}
+\begin{pmatrix}
+x\\
+\dot q
+\end{pmatrix}^{T}
+H_{2T}\big|_{(q_0,0)}
+\begin{pmatrix}
+x\\
+\dot q
+\end{pmatrix}
++
+o\!\left(
+\left\|
+\begin{pmatrix}
+x\\
+\dot q
+\end{pmatrix}
+\right\|^2
+\right).
+\end{aligned}
+\]
+
+Poiché
+\[
+2T(q_0,0)=0,
+\]
+\[
+\nabla(2T)
+=
 \begin{pmatrix}
 a'(q)\dot q^2\\
-a(q)\cdot 2\dot q
-\end{pmatrix}
-\right|_{(q,\dot q)=(q_0,0)}
-\cdot
-\binom{q-q_0}{\dot q}
+2a(q)\dot q
+\end{pmatrix},
 \]
+e
 \[
-+
-\frac{1}{2}
-\begin{pmatrix}
-q-q_0\\
-\dot q
-\end{pmatrix}^{T}
-\cdot
-\left.
+H_{2T}
+=
 \begin{pmatrix}
 a''(q)\dot q^2 & 2a'(q)\dot q\\
-a'(q)\cdot 2\dot q & 2a(q)
-\end{pmatrix}
-\right|_{(q,\dot q)=(q_0,0)}
-\cdot
-\binom{q-q_0}{\dot q}
-+
-o\left(
-\left\|
-\binom{q-q_0}{\dot q}
-\right\|^2
-\right)
-=
+2a'(q)\dot q & 2a(q)
+\end{pmatrix},
 \]
+valutando in \((q_0,0)\) otteniamo
 \[
+\nabla(2T)\big|_{(q_0,0)}
+=
+\begin{pmatrix}
+0\\
+0
+\end{pmatrix},
+\qquad
+H_{2T}\big|_{(q_0,0)}
+=
+\begin{pmatrix}
+0 & 0\\
+0 & 2a(q_0)
+\end{pmatrix}.
+\]
+
+Quindi
+\[
+2T(q,\dot q)
 =
 \frac{1}{2}
 \begin{pmatrix}
-q-q_0\\
+x\\
 \dot q
 \end{pmatrix}^{T}
-\cdot
 \begin{pmatrix}
 0 & 0\\
 0 & 2a(q_0)
 \end{pmatrix}
-\cdot
-\binom{q-q_0}{\dot q}
-+
-o\left(
-\left\|
-\binom{q-q_0}{\dot q}
-\right\|^2
-\right)
-=
-\]
-\[
-=
-\frac{1}{2}
 \begin{pmatrix}
-q-q_0\\
+x\\
 \dot q
-\end{pmatrix}^{T}
-\cdot
-\binom{0}{2a(q_0)\dot q}
+\end{pmatrix}
 +
-o\left(
+o\!\left(
 \left\|
-\binom{q-q_0}{\dot q}
+\begin{pmatrix}
+x\\
+\dot q
+\end{pmatrix}
 \right\|^2
-\right)
-=
+\right),
 \]
+ossia
 \[
+2T(q,\dot q)
 =
 a(q_0)\dot q^2
 +
-o\left(
+o\!\left(
 \left\|
-\binom{q-q_0}{\dot q}
+\begin{pmatrix}
+x\\
+\dot q
+\end{pmatrix}
 \right\|^2
-\right)
-\Rightarrow
-T\simeq \frac{1}{2}a(q_0)\dot q^2
+\right).
+\]
+
+Pertanto, al secondo ordine,
+\[
+T\simeq \frac{1}{2}a(q_0)\dot q^2.
 \]
 
 La lagrangiana linearizzata è quindi
 \[
-\tilde{\mathcal{L}}
+\widetilde{\mathcal L}
 =
 \frac{1}{2}a(q_0)\dot q^2
 -
-\frac{V''}{2}(q_0)(q-q_0)^2
+\frac{1}{2}V''(q_0)x^2.
 \]
 
-Scriviamo le equazioni di Lagrange del problema linearizzato
+Scriviamo le equazioni di Lagrange del problema linearizzato:
 \[
-\frac{\partial \tilde{\mathcal{L}}}{\partial \dot q}
+\frac{\partial \widetilde{\mathcal L}}{\partial \dot q}
 =
-a(q_0)\dot q
-\Rightarrow
-\frac{d}{dt}\frac{\partial \tilde{\mathcal{L}}}{\partial \dot q}
+a(q_0)\dot q,
+\]
+e quindi
+\[
+\frac{d}{dt}
+\frac{\partial \widetilde{\mathcal L}}{\partial \dot q}
 =
 a(q_0)\ddot q,
-\qquad
-\frac{\partial \tilde{\mathcal{L}}}{\partial q}
+\]
+mentre
+\[
+\frac{\partial \widetilde{\mathcal L}}{\partial q}
 =
 -
-V''(q_0)(q-q_0)
-\]
-\[
-\Rightarrow
-a(q_0)\ddot q=-V''(q_0)(q-q_0)
+V''(q_0)x.
 \]
 
-Ponendo \(t=q-q_0\Rightarrow \ddot t=\ddot q\) otteniamo
+Pertanto
 \[
-\ddot t=-\omega^2t,
-\qquad
-\omega^2=\frac{V''(q_0)}{a(q_0)}
-\qquad
-a(q_0)>0 \text{ perché } T>0
+a(q_0)\ddot q
+=
+-
+V''(q_0)x.
 \]
 
-Ogni sistema ad \(1\) G.D.L. vicino ad una configurazione di equilibrio stabile si comporta come un oscillatore armonico.
-Linearizziamo ora le equazioni del moto per un sistema conservativo con \(m\) gradi di libertà.
-Siano \(\{q_1,\ldots,q_m\}\) le coordinate libere.
+Poiché
+\[
+x=q-q_0,
+\qquad
+\ddot x=\ddot q,
+\]
+otteniamo
+\[
+\ddot x=-\omega^2x,
+\qquad
+\omega^2=\frac{V''(q_0)}{a(q_0)}.
+\]
+
+Dal momento che
+\[
+a(q_0)>0
+\qquad\text{e}\qquad
+V''(q_0)>0,
+\]
+segue che
+\[
+\omega^2>0.
+\]
+
+Quindi, per un equilibrio stabile non degenere, il sistema linearizzato è un oscillatore armonico:
+\[
+\ddot x+\omega^2x=0.
+\]
+
+Linearizziamo ora le equazioni del moto per un sistema conservativo con \(m\) gradi di libertà. Siano
+\[
+\underline q=(q_1,\ldots,q_m)
+\]
+le coordinate libere.
 
 Per il sistema possiamo scrivere
 \[
-V(\underline q),
+V=V(\underline q),
 \qquad
 T(\underline q,\dot{\underline q})
 =
-\frac{1}{2}\dot{\underline q}^{T}A(\underline q)\dot{\underline q}
-\qquad
-\text{con } A(\underline q) \text{ definita positiva}
+\frac{1}{2}
+\dot{\underline q}^{\,T}
+A(\underline q)
+\dot{\underline q},
 \]
-sia
-\[
-(\underline q,\dot{\underline q})=(\underline q_0,\underline 0)
-\]
-configurazione di equilibrio stabile.
+con \(A(\underline q)\) simmetrica definita positiva.
 
-Scriviamo lo sviluppo di Taylor per \(V(\underline q)\)
+Sia
+\[
+(\underline q,\dot{\underline q})
+=
+(\underline q_0,\underline 0)
+\]
+una configurazione di equilibrio stabile. Per ottenere la linearizzazione armonica supponiamo inoltre che l'equilibrio sia \emph{non degenere}, cioè
+\[
+\nabla V(\underline q_0)=\underline 0,
+\qquad
+H_V(\underline q_0)\text{ definita positiva},
+\]
+dove \(H_V(\underline q_0)\) è la matrice Hessiana del potenziale.
+
+Sviluppiamo \(V(\underline q)\) in serie di Taylor:
 \[
 V(\underline q)
 =
 V(\underline q_0)
 +
-\nabla V\big|_{\underline q_0}\cdot(\underline q-\underline q_0)
+\nabla V(\underline q_0)\cdot
+(\underline q-\underline q_0)
 +
-\frac{1}{2}(\underline q-\underline q_0)^{T}
-H(V)\big|_{\underline q_0}\cdot(\underline q-\underline q_0)
+\frac{1}{2}
+(\underline q-\underline q_0)^T
+H_V(\underline q_0)
+(\underline q-\underline q_0)
 +
-o\left(\|\underline q-\underline q_0\|^2\right)
+o\!\left(
+\|\underline q-\underline q_0\|^2
+\right).
 \]
 
-Per gli stessi motivi del caso \(m=1\) possiamo porre \(V(\underline q_0)=0\) e
+Poiché il potenziale è definito a meno di una costante additiva, possiamo porre
+\[
+V(\underline q_0)=0.
+\]
+Essendo \(\underline q_0\) una configurazione di equilibrio,
 \[
 \nabla V(\underline q_0)=\underline 0.
 \]
-Inoltre \(H_V(\underline q_0)\) è definita positiva.
 
-Con ragionamenti analoghi al caso \(m=1\) otteniamo
+Pertanto
 \[
-T\sim \frac{1}{2}\dot{\underline q}^{T}A(\underline q_0)\dot{\underline q}
+V(\underline q)
+=
+\frac{1}{2}
+(\underline q-\underline q_0)^T
+H_V(\underline q_0)
+(\underline q-\underline q_0)
++
+o\!\left(
+\|\underline q-\underline q_0\|^2
+\right).
 \]
-con \(A(\underline q_0)\) definita positiva.
+
+Con ragionamento analogo al caso \(m=1\), per la parte cinetica otteniamo
+\[
+T
+\simeq
+\frac{1}{2}
+\dot{\underline q}^{\,T}
+A(\underline q_0)
+\dot{\underline q},
+\]
+con
+\[
+A(\underline q_0)
+\]
+definita positiva.
+
+Pertanto, ponendo
+\[
+\underline x=\underline q-\underline q_0,
+\]
+la lagrangiana linearizzata assume la forma
+\[
+\widetilde{\mathcal L}
+=
+\frac{1}{2}
+\dot{\underline x}^{\,T}
+A(\underline q_0)
+\dot{\underline x}
+-
+\frac{1}{2}
+\underline x^{T}
+H_V(\underline q_0)
+\underline x.
+\]
+
+Le equazioni di Lagrange del sistema linearizzato sono quindi
+\[
+A(\underline q_0)\ddot{\underline x}
+=
+-
+H_V(\underline q_0)\underline x.
+\]
+
+Poiché
+\[
+A(\underline q_0)
+\quad\text{e}\quad
+H_V(\underline q_0)
+\]
+sono definite positive, il sistema linearizzato descrive un sistema di oscillatori armonici accoppiati, che può essere disaccoppiato tramite un opportuno cambiamento lineare alle coordinate normali.
 
 Poniamo $\underline{t} = \underline{q} - \underline{q_0}$. La lagrangiana per il sistema è
 \[
@@ -610,7 +785,7 @@ Ci ricordiamo che 2 matrici simili hanno gli stessi autovalori e notiamo che
 \[
 \left(A^{1/2}\right)^{-1}ABA^{1/2}\sim AB.
 \]
-Concludiamo che \(AB\) è diagonalizzabile e ha 2 autovalori positivi.
+Concludiamo che \(AB\) è diagonalizzabile e ha tutti gli autovalori positivi.
 \end{proof}
 
 Voglio diagonalizzare

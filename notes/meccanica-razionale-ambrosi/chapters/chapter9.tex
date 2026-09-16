@@ -54,7 +54,7 @@ Un vincolo perfetto è un vincolo per il quale la reazione vincolare non compie 
 Risulta necessario definire con chiarezza cosa siano i \(\delta \underline{x}\) e cosa voglia dire che questi siano ``compatibili con il vincolo''.
 Lo facciamo nel caso in cui i vincoli siano regolari ma è possibile farlo anche in caso contrario.
 Per fare ciò in modo matematicamente rigoroso abbiamo bisogno di strumenti di geometria differenziale avanzata e calcolo tensoriale che vanno al di là degli scopi del corso. Presenteremo quindi una trattazione meno rigorosa e più intuitiva basandoci su concetti di geometria differenziale di base rifacendoci soprattutto al caso noto delle superfici regolari.
-
+\inizioapprof
 I \(\delta \underline{x}\) vengono detti spostamenti virtuali. Supponiamo che un punto
 
 materiale \((\underline{x}(t),m)\) sia soggetto al vincolo olonomo \(\overline{\Phi}(\underline{x},t)=0\).
@@ -159,7 +159,7 @@ Imponendo i vincoli otteniamo
 M_t=\left\{\underline{x}\in\mathbb{R}^{3n}:\overline{\Phi}_1(\underline{x},t)=\ldots=\overline{\Phi}_m(\underline{x},t)=0\right\}
 \]
 
-Se i vincoli indipendenti e regolari su \(M_t\), ovvero il loro differenziale ha rango massimo su \(M_t\), quest'ultima è una sotto varietà regolare di \(\mathbb{R}^{3n}\) di dimensione \(r=3n-m\).
+Se i vincoli sono indipendenti e regolari su \(M_t\), ovvero il loro differenziale ha rango massimo su \(M_t\), quest'ultima è una sotto varietà regolare di \(\mathbb{R}^{3n}\) di dimensione \(r=3n-m\).
 
 Uno spostamento virtuale \(\delta \underline{x}\) del sistema nella configurazione \(\underline{x}\in M_t\) è un vettore del tangente in \(\underline{x}\) a \(M_t\)
 \[
@@ -181,7 +181,7 @@ T_{\underline{x}}M_t=\left\{\delta \underline{x}:\nabla \overline{\Phi}_\nu(\und
 ovvero è lo spazio ortogonale ai gradienti di tutti i vincoli in \(\underline{x}\).
 \end{oss}
 
-\begin{theorem}{}[Principio dei lavori virtuali ,ipotesi semplificate, vincoli dipendenti solo da un punto]
+\begin{theorem}{}[Principio dei lavori virtuali, ipotesi semplificate, vincoli dipendenti solo da un punto]
 Consideriamo un sistema meccanico formato dai punti \(\underline{x}_1,\ldots,\underline{x}_n\). Il punto \(\underline{x}_i\) è soggetto ai vincoli perfetti regolari
 \[
 \overline{\Phi}_{i,j}(\underline{x}_i)=0
@@ -253,7 +253,7 @@ In particolare se scelgo un \(i\in\{1,\ldots,n\}\) deve essere vero per una conf
 \forall \delta \underline{x}_i\in T_{\underline{x}_i}M_i
 \]
 
-Quindi \(\underline{f}_i^{\mathrm{att}}\in (T_{\underline{x}_i}M_i)^{\perp}=\mathrm{span}\{\nabla \overline{\Phi}_{i,1}(\underline{x}_i),\ldots,\nabla \overline{\Phi}_{i,m_i}(\underline{x}_i)\}\Longleftrightarrow \exists \lambda_{i,1},\ldots,\lambda_{i,m_i}\) tali che
+Quindi \(\underline{f}_i^{\mathrm{att}}\in (T_{\underline{x}_i}M_i)^{\perp}=\mathrm{span}\{\nabla \overline{\Phi}_{i,1}(\underline{x}_i),\ldots,\nabla \overline{\Phi}_{i,m_i}(\underline{x}_i)\}\Longleftrightarrow \exists \lambda_{i,1},\ldots,\lambda_{i,m_i} \in \mathbb{R}\) tali che
 \[
 \underline{f}_i^{\mathrm{att}}=\sum_{j=1}^{m_i}\lambda_{i,j}\nabla \overline{\Phi}_{i,j}(\underline{x}_i)
 \]
@@ -267,7 +267,7 @@ Consideriamo un sistema meccanico formato dai punti \(\underline{x}_1,\ldots,\un
 \[
 \overline{\Phi}_1(\underline{x}_1,\ldots,\underline{x}_n,t)=\ldots=\overline{\Phi}_m(\underline{x}_1,\ldots,\underline{x}_n,t)=0.
 \]
-Supponiamo inoltre che in ogni punto agisca una risultante delle forze attive \(\underline{f}_i^{\mathrm{att}}\). Allora siamo in una configurazione di equilibrio sse
+Supponiamo inoltre che in ogni punto agisca una risultante delle forze attive puramente posizionali \(\underline{f}_i^{\mathrm{att}}\). Allora siamo in una configurazione di equilibrio sse
 \[
 \sum_{i=1}^{n}\underline{f}_i^{\mathrm{att}}\cdot \delta \underline{x}_i=0
 \qquad
@@ -321,7 +321,7 @@ Siccome i vincoli sono regolari
 \[
 T_{\underline{x}}M_t^\perp=\mathrm{Span}\left\{\nabla \overline{\Phi}_{1\underline{x}},\ldots,\nabla \overline{\Phi}_{m\underline{x}}\right\},
 \]
-perciò esistono \(\lambda_1,\ldots,\lambda_m\) tali che
+perciò esistono $\lambda_1, \dots, \lambda_m \in \mathbb{R}$ tali che
 \[
 \underline{A}=\sum_{j=1}^{m}\lambda_j\,\nabla \overline{\Phi}_{j\underline{x}}
 \]
@@ -339,7 +339,7 @@ ovvero la condizione di equilibrio.
 
 Abbiamo quindi dimostrato che il principio dei lavori virtuali è condizione necessaria e sufficiente per l'equilibrio.
 \end{proof}
-
+\fineapprof
 Consideriamo un sistema meccanico con \(n\) punti, \(3n\) gradi di libertà, \(m\) vincoli olonomi perfetti regolari.
 
 Poiché i vincoli sono anche olonomi possiamo determinare \(q_1,\ldots,q_{3n-m}\) coordinate libere.

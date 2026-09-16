@@ -14,11 +14,11 @@ In particolare mostriamo che i vincoli olonomi
 \[
 z_q=0,\qquad q\in\mathcal{R}
 \]
-bastano per descrivere il sistema. Sia $q$ un punto del corpo rigido che ha componente $z_q=0$ nel nostro sistema di riferimento scelto. Sia $p$ un altro punto del corpo rigido. Mostriamo che $z_p=k\in\mathbb{R}$. Impostando la legge fondamentale si ottiene
+bastano per descrivere il sistema. Sia $p$ un punto del corpo rigido che ha componente $z_p=0$ nel nostro sistema di riferimento scelto. Sia $q$ un altro punto del corpo rigido. Mostriamo che $z_q=k\in\mathbb{R}$. Impostando la legge fondamentale si ottiene
 \[
-\underline{v}_p=\underline{v}_q+\underline{\omega}\wedge(\underline{x}_p-\underline{x}_q)
+\underline{v}_q=\underline{v}_p+\underline{\omega}\wedge(\underline{x}_q-\underline{x}_p)
 \]
-e applicando i vincoli $z_q=0$, $\omega_x=\omega_y=0$ si ha
+e applicando i vincoli $z_p=0$, $\omega_x=\omega_y=0$ si ha
 \[
 \underline{\omega}=
 \begin{pmatrix}
@@ -31,14 +31,14 @@ e applicando i vincoli $z_q=0$, $\omega_x=\omega_y=0$ si ha
 \begin{pmatrix}
 x_p\\
 y_p\\
-z_p
+0
 \end{pmatrix},
 \qquad
 \underline{x}_q=
 \begin{pmatrix}
 x_q\\
 y_q\\
-0
+z_q
 \end{pmatrix}
 \]
 \[
@@ -46,28 +46,28 @@ y_q\\
 \begin{pmatrix}
 v_{p,x}\\
 v_{p,y}\\
-v_{p,z}
+0
 \end{pmatrix},
 \qquad
 \underline{v}_q=
 \begin{pmatrix}
 v_{q,x}\\
 v_{q,y}\\
-0
+v_{q,z}
 \end{pmatrix}
 \]
 da cui
 \[
-\underline{v}_p=
-\begin{pmatrix}
-v_{p,x}\\
-v_{p,y}\\
-v_{p,z}
-\end{pmatrix}
-=
+\underline{v}_q=
 \begin{pmatrix}
 v_{q,x}\\
 v_{q,y}\\
+v_{q,z}
+\end{pmatrix}
+=
+\begin{pmatrix}
+v_{p,x}\\
+v_{p,y}\\
 0
 \end{pmatrix}
 +
@@ -78,59 +78,59 @@ v_{q,y}\\
 \end{pmatrix}
 \wedge
 \begin{pmatrix}
-x_p-x_q\\
-y_p-y_q\\
-z_p
+x_q-x_p\\
+y_q-y_p\\
+z_q
 \end{pmatrix}
 =
 \]
 \[
 =
 \begin{pmatrix}
-v_{q,x}\\
-v_{q,y}\\
+v_{p,x}\\
+v_{p,y}\\
 0
 \end{pmatrix}
 +
 \begin{vmatrix}
 \hat{\imath} & \hat{\jmath} & \hat{k}\\
 0 & 0 & \omega_z\\
-x_p-x_q & y_p-y_q & z_p
+x_q-x_p & y_q-y_p & z_q
 \end{vmatrix}
 =
 \begin{pmatrix}
-v_{q,x}\\
-v_{q,y}\\
+v_{p,x}\\
+v_{p,y}\\
 0
 \end{pmatrix}
-+\hat{\imath}\bigl(-\omega_z(y_p-y_q)\bigr)
-+\hat{\jmath}\bigl(-(-\omega_z(x_p-x_q))\bigr)
++\hat{\imath}\bigl(-\omega_z(y_q-y_p)\bigr)
++\hat{\jmath}\bigl(\omega_z(x_q-x_p)\bigr)
 +\hat{k}\cdot 0
 \]
 \[
 =
 \begin{pmatrix}
-v_{q,x}\\
-v_{q,y}\\
+v_{p,x}\\
+v_{p,y}\\
 0
 \end{pmatrix}
 +
 \begin{pmatrix}
-y_q\omega_z-\omega_z y_p\\
-x_q\omega_z-\omega_z x_p\\
+\omega_z y_p-\omega_z y_q\\
+\omega_z x_q-\omega_z x_p\\
 0
 \end{pmatrix}
 =
 \begin{pmatrix}
-v_{q,x}+y_q\omega_z-\omega_z y_p\\
-v_{q,y}+x_q\omega_z-\omega_z x_p\\
+v_{p,x}+\omega_z y_p-\omega_z y_q\\
+v_{p,y}+\omega_z x_q-\omega_z x_p\\
 0
 \end{pmatrix}.
 \]
 
 In particolare
 \[
-v_{p,z}=0 \;\;\Rightarrow\;\; z_p=k\in\mathbb{R}.
+v_{q,z}=0 \;\;\Rightarrow\;\; z_q=k\in\mathbb{R}.
 \]
 Un corpo rigido vincolato ad un moto piano ha quindi $6-3=3$ gradi di libertà.\\
 Possiamo ad esempio descriverlo attraverso le coordinate libere
@@ -736,8 +736,9 @@ Il vincolo di puro rotolamento in questo caso è integrabile.
     La velocità angolare   è univocamente determinata dal moto del corpo rigido. In particolare non cambia da punto a punto del corpo rigido.
 \end{theorem}
 \begin{proof}
-Per assurdo suppongo che per $q_1,q_2$ si ha $\underline{\omega}_1\neq \underline{\omega}_2$.
+Siano $\underline{\omega}_1$ e $\underline{\omega}_2$ due vettori velocità angolare associati allo stesso atto di moto, valutati a partire da due poli di riferimento diversi $q_1$ e $q_2$.
 
+Per un generico punto $p$ del corpo rigido possiamo scrivere:
 \[
 \underline{v}_p=\underline{v}_{q_1}+\underline{\omega}_1\wedge(\underline{x}_p-\underline{x}_{q_1})
 \]
@@ -752,11 +753,12 @@ Sottraiamo le 2 equazioni:
 -\underline{\omega}_2\wedge(\underline{x}_p-\underline{x}_{q_2})
 \]
 
-Uso
+Esprimiamo $\underline{v}_{q_2}$ rispetto a $q_1$ tramite la formula fondamentale:
 \[
 \underline{v}_{q_2}=\underline{v}_{q_1}+\underline{\omega}_1\wedge(\underline{x}_{q_2}-\underline{x}_{q_1})
 \]
 
+Sostituendo nell'espressione precedente:
 \[
 \underline{0}
 =
@@ -767,6 +769,7 @@ Uso
 -\underline{\omega}_2\wedge(\underline{x}_p-\underline{x}_{q_2})
 \]
 
+Sviluppando i prodotti vettoriali:
 \[
 \Rightarrow\quad
 \underline{0}
@@ -779,6 +782,7 @@ Uso
 +\underline{\omega}_2\wedge \underline{x}_{q_2}
 \]
 
+Semplificando i termini opposti:
 \[
 \Rightarrow\quad
 \underline{0}
@@ -789,12 +793,13 @@ Uso
 +\underline{\omega}_2\wedge \underline{x}_{q_2}
 \]
 
+Raccogliendo a fattor comune i prodotti vettoriali:
 \[
 \Rightarrow\quad
 \underline{0}
 =
-+\underline{\omega}_1(\underline{x}_p-\underline{x}_{q_2})
--\underline{\omega}_2(\underline{x}_p-\underline{x}_{q_2})
+\underline{\omega}_1\wedge(\underline{x}_p-\underline{x}_{q_2})
+-\underline{\omega}_2\wedge(\underline{x}_p-\underline{x}_{q_2})
 \]
 
 \[
@@ -802,9 +807,10 @@ Uso
 \underline{0}
 =
 (\underline{\omega}_1-\underline{\omega}_2)\wedge(\underline{x}_p-\underline{x}_{q_2})
-\qquad \forall\,\underline{x}_p\ \forall\,\underline{x}_{q_2}
+\qquad \forall\,\underline{x}_p
 \]
 
+Poiché questa relazione deve valere per ogni punto $p$, e quindi per un generico vettore $(\underline{x}_p-\underline{x}_{q_2})$, l'unica soluzione possibile affinché il prodotto vettoriale sia sempre nullo è che il primo fattore sia nullo:
 \[
 \Rightarrow\quad
 \underline{\omega}_1-\underline{\omega}_2=0
@@ -895,63 +901,58 @@ y_C=\dfrac{\ell}{2}\cos\theta
 \begin{example}{}
     Studiamo il seguente sistema
 \begin{center}
-\begin{tikzpicture}[scale=0.7]
+\begin{tikzpicture}[scale=0.9, >=stealth]
 
 % parametri
 \def\Rbig{3}
 \def\Rsmall{1}
 \def\theta{35} % angolo dal verticale verso destra
 
-% centri
+% centri (usando le coordinate polari dirette di TikZ)
 \coordinate (O) at (0,0);
-\coordinate (A) at ({2*sin(\theta)},{-2*cos(\theta)}); % distanza 2R
-\coordinate (C) at ({2*sin(\theta)+sin(\theta)},{-2*cos(\theta)-cos(\theta)});
+\coordinate (A) at ({-90+\theta}:2*\Rsmall); % distanza 2R
+\coordinate (C) at ({-90+\theta}:3*\Rsmall); % distanza 3R
 
-% circonferenze
+% circonferenza fissa
 \draw[line width=1.2pt] (O) circle (\Rbig);
-\draw[line width=1.2pt] (A) circle (\Rsmall);
 
-% punti
-\fill (O) circle (2.2pt);
-\fill (A) circle (2.2pt);
-\fill (C) circle (2.2pt);
+% disco piccolo (riempito di bianco per coprire l'asse e pulire il disegno)
+\draw[line width=1.2pt, fill=white] (A) circle (\Rsmall);
 
-% segmento OA in rosso
-\draw[red,line width=1.2pt] (O) -- (A);
-
-% segmento AC
+% segmento OA in rosso e AC in nero
+\draw[red, line width=1.2pt] (O) -- (A);
 \draw[line width=1pt] (A) -- (C);
 
 % tratteggio verticale
-\draw[dashed] (O) -- (0,-2.45);
+\draw[dashed, thick] (O) -- (0,-2.8);
 
-% etichette
-\node[above] at (O) {$O$};
-\node[right] at ($(A)+(0.18,0.05)$) {$A$};
-\node[right] at ($(C)+(0.15,-0.05)$) {$C$};
+% punti
+\fill (O) circle (2.2pt) node[above] {$O$};
+\fill (A) circle (2.2pt) node[above right, xshift=2pt] {$A$};
+\fill (C) circle (2.2pt) node[below right] {$C$};
 
 % etichetta R
-\node[right] at ($(A)!0.58!(C)+(0.15,0.1)$) {$R$};
+\node[right] at ($(A)!0.5!(C)$) {$R$};
 
-% versore normale
-\draw[->,line width=0.9pt] (A) -- ++({0.78*cos(\theta)},{0.78*sin(\theta)});
-\node[left] at (1.5,-1) {$\hat{n}$};
+% --- CORREZIONE VERSORE \hat{n} ---
+% Disegnato perpendicolare all'asta, con il simbolo di angolo retto
+\draw[->, line width=1.1pt, purple] (A) -- ++(\theta:1.2) node[above right, inner sep=1pt] {$\hat{n}$};
+% Simboletto angolo retto
+\draw[line width=0.6pt] ($(A)+({-90+\theta}:0.25)$) -- ++(\theta:0.25) -- ++({90+\theta}:0.25);
 
 
-% freccia omega sopra il disco piccolo
-\draw[->,line width=0.9pt]
-($(A)+(0.25,1.0)$) arc[start angle=160,end angle=20,radius=0.75];
-\node[right] at ($(A)+(0.85,1.15)$) {$\omega$};
+% --- CORREZIONE ROTAZIONI E ANGOLO ---
+% angolo theta (minuscolo, coerente col testo!)
+\draw[line width=0.9pt] (0,-0.8) arc[start angle=-90, end angle={-90+\theta}, radius=0.8];
+\node at ({-90+\theta/2}:0.6) {$\theta$};
 
-% freccia Omega a sinistra
-\draw[->,line width=0.9pt]
-($(O)+(-1.1,-0.1)$) arc[start angle=170,end angle=285,radius=0.75];
-\node[left] at ($(O)+(-1.25,-0.95)$) {$\Omega$};
+% freccia Omega dell'asta (ora abbraccia la cerniera in modo fluido)
+\draw[->, line width=1pt, red!80!black] (0,-1.4) arc[start angle=-90, end angle={-90+\theta-5}, radius=1.4];
+\node[red!80!black, below] at ({-90+\theta/2}:1.55) {$\Omega$};
 
-% angolo theta
-\draw[->,line width=0.9pt]
-(0,-0.7) arc[start angle=-90,end angle={-90+\theta},radius=0.7];
-\node at (0.3,-0.8) {$\Theta$};
+% freccia omega del disco (ruota perfettamente attorno ad A)
+\draw[->, line width=1pt, green!50!black] ($(A)+({90+\theta+40}:1.3)$) arc[start angle={90+\theta+40}, end angle={90+\theta-40}, radius=1.3];
+\node[green!50!black, above] at ($(A)+(90+\theta:1.4)$) {$\omega$};
 
 \end{tikzpicture}
 \end{center}

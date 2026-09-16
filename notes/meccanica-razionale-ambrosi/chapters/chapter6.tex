@@ -159,7 +159,6 @@ Si dice centro di massa del sistema
 \]
 \end{definition}
 
-
 \begin{definition}{}
 Si dice vettore posizione del punto $i$-esimo rispetto al centro di massa
 \[
@@ -186,20 +185,19 @@ Si dice vettore posizione del punto $i$-esimo rispetto al centro di massa
 \draw[->,blue] (O) -- (X2) node[midway, above right] {$\underline{x}_G$}; % vettore x2
 
 % vettore differenza
-\draw[->,green] (X2) -- (X1) node[midway, above right] {$\underline{x_i^{'}}$}; % differenza tra i vettori
+\draw[->,green] (X2) -- (X1) node[midway, above right] {$\underline{x}_i'$}; % differenza tra i vettori
 
 \end{tikzpicture}
 \end{figure}
-
 
 \begin{oss}{}
 \[
 \sum_{i=1}^{n} m_i \,\underline{x}_i' = \sum_{i=1}^{n} m_i \,(\underline{x}_i - \underline{x}_G) = \sum_{i=1}^{n} m_i \, \underline{x}_i - \sum_{i=1}^{n} m_i \,\underline{x}_G
 \]
 \[
-\underline{x}'_G
+\underline{x}_G'
 =
-\frac{\sum_{i=1}^{n} m_i \underline{x}'_i}{\sum_{i=1}^{n} m_i}
+\frac{\sum_{i=1}^{n} m_i \underline{x}_i'}{\sum_{i=1}^{n} m_i}
 =
 \frac{\sum_{i=1}^{n} m_i(\underline{x}_i-\underline{x}_G)}{\sum_{i=1}^{n} m_i}
 \]
@@ -211,21 +209,19 @@ Si dice vettore posizione del punto $i$-esimo rispetto al centro di massa
 =
 \underline{x}_G-\underline{x}_G
 =
-0
+\underline{0}
 \]
 
-
-Questo è ovvio perché la posizione del centro di massa calcolato in un sistema di riferimento che ha l'origine nel centro di massa è l'origine.
+Questo è ovvio perché la posizione del centro di massa calcolato in un sistema di riferimento che ha l'origine nel centro di massa è l'origine stessa.
 \end{oss}
-
 
 Consideriamo il sistema di $n$ punti materiali di posizioni $\underline{x}_i$ e masse $m_i$ sottoposti a forze di risultante $\underline{f}_i$. Allora per ogni punto vale:
 \[
-m_i \ddot{\underline{x}}_i = \underline{f}_i.
+m_i \underline{\ddot{x}}_i = \underline{f}_i.
 \]
 Sommiamo su tutti i punti:
 \[
-\sum_{i=1}^{n} m_i \ddot{\underline{x}}_i = \sum_{i=1}^{n} m_i \frac{d^2}{dt^2} \left( \underline{x}_G + \underline{x}^{'}_i \right) = \frac{d^2}{dt^2} \left( \sum_{i=1}^{n} m_i \underline{x}_G + \sum_{i=1}^{n} m_i \underline{x}^{'}_i \right)
+\sum_{i=1}^{n} m_i \underline{\ddot{x}}_i = \sum_{i=1}^{n} m_i \frac{d^2}{dt^2} \left( \underline{x}_G + \underline{x}_i' \right) = \frac{d^2}{dt^2} \left( \sum_{i=1}^{n} m_i \underline{x}_G + \sum_{i=1}^{n} m_i \underline{x}_i' \right)
 \]
 
 \[
@@ -234,20 +230,18 @@ Sommiamo su tutti i punti:
 
 Ora, dette $\underline{f}_i^{\text{est}}$ e $\underline{f}_i^{\text{int}}$ rispettivamente la risultante delle forze esterne che agiscono su $i$ e la risultante delle forze interne che agiscono su $i$, possiamo scrivere:
 \[
-\underline{f}_i = \underline{f}_i^{\text{est}} + \underline{f}_i^{\text{int}} = \underline{f}_i^{\text{est}} + \sum_{j=1, j \neq i}^{n} \underline{f}_{ij}
+\underline{f}_i = \underline{f}_i^{\text{est}} + \underline{f}_i^{\text{int}} = \underline{f}_i^{\text{est}} + \sum_{\substack{j=1 \\ j \neq i}}^{n} \underline{f}_{ij}
 \]
 Allora otteniamo
 \[
-\sum_{i=1}^{n} m_i \ddot{\underline{x}}_i = \sum_{i=1}^{n} \underline{f}_i = \sum_{i=1}^{n} \underline{f}_i^{\text{est}} + \sum_{i=1}^{n} \sum_{j=1, j \neq i}^{n} \underline{f}_{ij} = \sum_{i=1}^{n} \underline{f}_i^{\text{est}}
+\sum_{i=1}^{n} m_i \underline{\ddot{x}}_i = \sum_{i=1}^{n} \underline{f}_i = \sum_{i=1}^{n} \underline{f}_i^{\text{est}} + \sum_{i=1}^{n} \sum_{\substack{j=1 \\ j \neq i}}^{n} \underline{f}_{ij} = \sum_{i=1}^{n} \underline{f}_i^{\text{est}}
 \]
-Dal momento che $\sum_{i=1}^{n} \sum_{j=1, j \neq i}^{n} \underline{f}_{ij} = 0$ per il principio di azione e reazione (si annullano a due a due!).\\
+Dal momento che $\sum_{i=1}^{n} \sum_{\substack{j=1 \\ j \neq i}}^{n} \underline{f}_{ij} = \underline{0}$ per il principio di azione e reazione (le forze interne si annullano a due a due!).\\
 Otteniamo infine
 \[
 \frac{d}{dt} \left( m \underline{v}_G \right) = \sum_{i=1}^{n} \underline{f}_i^{\text{est}}.
 \]
 detta \textbf{prima equazione cardinale del moto di un corpo rigido.}
-
-
 
 \begin{oss}{}
 Il centro di massa di un corpo rigido si comporta come un punto materiale sottoposto solo alle forze esterne.
@@ -508,7 +502,7 @@ Siano \( \underline{a}, \underline{b}, \underline{c} \in \mathbb{R}^3 \). Allora
 \underline{a} \wedge (\underline{b} \wedge \underline{c}) = \underline{b} (\underline{a} \cdot \underline{c}) - \underline{c} (\underline{b} \cdot \underline{a}).
 \]
 \end{lemma}
-
+\inizioapprof
 \begin{proof}
 Siano \(\underline{a}=(a_1,a_2,a_3)\), \(\underline{b}=(b_1,b_2,b_3)\), \(\underline{c}=(c_1,c_2,c_3)\).
 
@@ -566,7 +560,7 @@ b_1[a_2c_2+a_3c_3+a_1c_1]-c_1[a_1b_1+a_2b_2+a_3b_3],\;
 b_2[a_1c_1+a_2c_2+a_3c_3]-c_2[a_1b_1+a_2b_2+a_3b_3],\;
 \]
 \[
-,b_3[a_1c_1+a_2c_2+a_3b_3]-c_3[a_1b_1+a_2b_2+a_3b_3]
+,b_3[a_1c_1+a_2c_2+a_3c_3]-c_3[a_1b_1+a_2b_2+a_3b_3]
 \bigr)=
 \]
 
@@ -579,7 +573,7 @@ b_3\cdot \underline{a}\cdot \underline{c}-c_3\cdot \underline{a}\cdot \underline
 \underline{b}\cdot \underline{a}\cdot \underline{c}-\underline{c}\cdot \underline{a}\cdot \underline{b}
 \]
 \end{proof}
-
+\fineapprof
 Consideriamo un sistema di \(n\) particelle ognuna caratterizzata da posizione \(\underline{x}_i\), velocità \(\underline{v}_i\) e massa \(m_i\).
 
 Per ogni particella scriviamo l'equazione del momento della quantità di moto per il punto \(i\)-esimo rispetto a \(O\).
@@ -1344,11 +1338,11 @@ Calcoliamo il momento delle forze generato dalla coppia di forze rispetto al pol
 \[
 \underline{M}
 =
-(\underline{x}_1-\underline{x}_p)\wedge f\,\hat m
+(\underline{x}_1-\underline{x}_p)\wedge f\,\hat n
 +
-(\underline{x}_2-\underline{x}_p)\wedge (-f\,\hat m)
+(\underline{x}_2-\underline{x}_p)\wedge (-f\,\hat n)
 =
-(\underline{x}_1-\underline{x}_2)\wedge f\,\hat m
+(\underline{x}_1-\underline{x}_2)\wedge f\,\hat n
 \]
 
 Quindi il momento generato da una coppia di forze è indipendente dal polo e dipende soltanto dal prodotto dell'intensità della forza e la distanza tra le rette di applicazione. Infatti
@@ -1808,42 +1802,39 @@ Sistema di \(3\) equazioni nelle \(3\) incognite \(\psi_x,\psi_y,\theta\).
 \begin{example}{}
 Consideriamo un'asta di lunghezza \(\ell\) e massa \(m\) collegata all'estremo
 superiore ad una molla di costante elastica \(K\).
-
-\begin{tikzpicture}[scale=1.1]
+\begin{center}
+\begin{tikzpicture}[scale=1.1, >=stealth]
     % assi
-    \draw[->,line width=1.2pt] (0,0) -- (8.2,0) node[right] {$x$};
+    \draw[->,line width=1.2pt] (0,0) -- (4.5,0) node[right] {$x$};
     \draw[->,line width=1.2pt] (0,0) -- (0,5.8) node[above] {$y$};
 
-    % punti principali
-    \coordinate (A) at (0,3.4);
-    \coordinate (B) at (4.9,0);
+    % Punti calcolati con terna pitagorica 3-4-5 per un rigore matematico assoluto!
+    % Lunghezza asta = 5, quota soffitto \ell = 5
+    \coordinate (A) at (0,4);
+    \coordinate (B) at (3,0);
     \coordinate (G) at ($(A)!0.5!(B)$);
-    \coordinate (S1) at (0,4.85);
-    \coordinate (S2) at (0,4.15);
+    \coordinate (S1) at (0,5); % Soffitto a quota 5
 
-    % quota l
+    % quota \ell (altezza 5)
     \draw[line width=1.2pt] (-1.55,0) -- (-1.55,5.0);
     \draw[line width=1.2pt] (-1.75,0) -- (-1.35,0);
     \draw[line width=1.2pt] (-1.75,5.0) -- (-1.35,5.0);
     \node[left] at (-1.55,2.5) {$\ell$};
 
     % guida verticale in A
-    \draw[line width=1.3pt] (-0.12,3.65) -- (-0.12,3.1);
-    \draw[line width=1.3pt] ( 0.12,3.65) -- ( 0.12,3.1);
+    \draw[line width=1.3pt] (-0.15,4.2) -- (-0.15,3.8);
+    \draw[line width=1.3pt] ( 0.15,4.2) -- ( 0.15,3.8);
 
-    % guida verticale in B
-    \draw[line width=1.3pt] (4.7 , 0.12) -- (5.2 , 0.12);
-    \draw[line width=1.3pt] (4.7 ,- 0.12) -- (5.2, -0.12);
-
+    % guida orizzontale in B
+    \draw[line width=1.3pt] (2.8, 0.15) -- (3.2, 0.15);
+    \draw[line width=1.3pt] (2.8,-0.15) -- (3.2,-0.15);
 
     % asta
     \draw[line width=1.4pt] (A) -- (B);
 
-    % molla
+    % molla disegnata a zig-zag proporzionato tra Soffitto(5.0) e A(4.0)
     \fill (S1) circle (2.2pt);
-    \draw[line width=1.2pt] (S1) -- (S2);
-    \draw[line width=1.2pt]
-        (S2) -- (-0.12,4.02) -- (0.12,3.89) -- (-0.12,3.76) -- (0.12,3.63) -- (-0.12,3.50) -- (0.12,3.37) -- (A);
+    \draw[line width=1.2pt] (S1) -- (0,4.85) -- (-0.12,4.7) -- (0.12,4.55) -- (-0.12,4.4) -- (0.12,4.25) -- (0,4.1) -- (A);
 
     % punti A, B, G
     \fill (A) circle (2pt);
@@ -1853,27 +1844,30 @@ superiore ad una molla di costante elastica \(K\).
     \node[left] at (A) {$A$};
     \node[below] at (B) {$B$};
 
-    % forze
+    % forze attive
     \draw[->,red,line width=1.1pt] (A) -- ++(0,0.85);
-    \node[red,right] at ($(A)+(0.02,0.55)$) {$\underline{F}_e$};
+    \node[red,right] at ($(A)+(0.05,0.6)$) {$\underline{F}_{el}$};
 
-    \draw[->,red,line width=1.1pt] (G) -- ++(0,-0.95);
-    \node[red,right] at ($(G)+(0.15,-0.45)$) {$m\underline{g}$};
+    \draw[->,red,line width=1.1pt] (G) -- ++(0,-1.0);
+    \node[red,right] at ($(G)+(0.15,-0.5)$) {$m\underline{g}$};
 
-    % reazioni vincolari
-    \draw[->,green!60!black,line width=1.1pt] (A) -- ++(1.55,0);
-    \node[green!60!black,above] at ($(A)+(1.2,0)$) {$\underline{\psi}$};
+    % reazioni vincolari incognite
+    \draw[->,green!60!black,line width=1.1pt] (A) -- ++(1.4,0);
+    \node[green!60!black,above] at ($(A)+(1.0,0)$) {$\underline{\psi}$};
 
     \draw[->,green!60!black,line width=1.1pt] (B) -- ++(0,1.25);
     \node[green!60!black,right] at ($(B)+(0,0.75)$) {$\underline{\varphi}$};
 
-    % angolo theta
-    \draw[->,line width=0.9pt] (0,2.5) arc[start angle=-90,end angle=-35,radius=0.9];
-    \node at (2.2,0.95) {$\theta$};
+    % angolo theta: posizionato e calcolato in modo esatto
+    % Con i cateti a 3 e 4, l'angolo d'inclinazione è di circa 53.13 gradi
+    \draw[->,line width=0.9pt] (0,2.8) arc[start angle=-90,end angle=-53.13,radius=1.2];
+    \node at (0.45, 2.5) {$\theta$};
 
     % versore k uscente
-    \node[red] at (3.45,5.0) {$\odot\,\hat{k}$};
+    \node[red] at (3.5,4.8) {$\odot\,\hat{k}$};
+
 \end{tikzpicture}
+\end{center}
 
 
 L'asta è soggetta ai vincoli

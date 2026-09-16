@@ -29,7 +29,7 @@ tale che
 \underline{f}=\nabla U.
 \]
 \end{oss}
-
+\inizioapprof
 \begin{oss}{}
 Condizione necessaria per cui \(\underline{f}\) posizionale sia conservativa è che
 \[
@@ -66,7 +66,7 @@ infatti
 x^2-2y\neq 0.
 \]
 \end{oss}
-
+\fineapprof
 \begin{oss}{}
 L'energia potenziale è sempre definita a meno di una costante:
 \[
@@ -983,23 +983,26 @@ Se invece \(\theta=\pi\), è una configurazione di equilibrio instabile perché,
 se ho una condizione iniziale del moto ``vicina'', nel moto si allontana da
 \(\theta=\pi\).
 \end{example}
-
+\inizioapprof
 Formalmente diamo la seguente definizione di \textbf{stabilità}.
 \begin{definition}{}
-Sia \(\underline{q}(t)\) il moto di un sistema meccanico e sia \(\hat{\underline{q}}\) una configurazione di equilibrio.
+Sia $\underline{q}(t)$ una soluzione delle equazioni del moto di un sistema
+meccanico e sia $\hat{\underline{q}}$ una configurazione di equilibrio.
 
-La configurazione \(\hat{\underline{q}}\) è di equilibrio stabile se
+La configurazione di equilibrio $\hat{\underline{q}}$ si dice stabile se
 \[
 \forall \varepsilon>0\ \exists \delta>0
 \]
-tale che, per ogni \(\underline{q}\),
+tale che, per ogni soluzione $\underline{q}(t)$,
 \[
-\left|\hat{\underline{q}}-\underline{q}(0)\right|<\delta,
+\|\underline{q}(0)-\hat{\underline{q}}\|<\delta,
 \qquad
-\left|\dot{\underline{q}}(0)\right|<\delta
-\ \Longrightarrow\
-\left|\underline{q}(t)-\hat{\underline{q}}\right|<\varepsilon
-\qquad \forall t>0.
+\|\dot{\underline{q}}(0)\|<\delta
+\]
+implica
+\[
+\|\underline{q}(t)-\hat{\underline{q}}\|<\varepsilon
+\qquad \forall t\ge 0.
 \]
 \end{definition}
 Se
@@ -1259,7 +1262,7 @@ implica
 \]
 Ovvero \(\hat{\underline{q}}\) è stabile.
 \end{proof}
-
+\fineapprof
 Possiamo quindi individuare i punti di equilibrio risolvendo $\nabla V(\underline{q}) = 0$ e caratterizzando la loro stabilità studiando il segno degli autovalori della matrice hessiana $H_V(\underline{q})$.
 \begin{example}{}
     Riconsideriamo l'esempio dello scorso capitolo con le stesse ipotesi e studiamo la stabilità delle configurazioni di equilibrio.
