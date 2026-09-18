@@ -743,45 +743,27 @@ Consideriamo
 \[
 A^{-1/2}ABA^{1/2}=A^{1/2}BA^{1/2}.
 \]
-Si osserva che
-\[
-\text{(i) è simmetrica:}\quad
-\left(A^{-1/2}ABA^{1/2}\right)^T
-=
-\left(A^{1/2}\right)^T \cdot \left(A^{-1/2}AB\right)^T
-=
-A^{1/2}(AB)^T\left(A^{-1/2}\right)^T
-=
-A^{1/2}B^TA^TA^{-1/2}
-=
-\]
-\[
-=
-A^{1/2}BAA^{-1/2}
-=
-A^{1/2}BA^{1/2}.
-\]
-\[
-\text{(ii) è definita positiva:}\quad
-\underline{x}^T A^{-1/2}ABA^{1/2}\underline{x}
-=
-\underline{x}^T A^{1/2}BA^{1/2}\underline{x}
-=
-\underline{x}^T\left(A^{1/2}\right)^TBA^{1/2}\underline{x}
-=
-\]
-\[
-=
-\left(A^{1/2}\underline{x}\right)^TBA^{1/2}\underline{x}
-=
-\underline{y}^TB\underline{y}\ge 0
-\quad \forall \underline{y}\in \mathbb{R}^n
-\]
-con
-\[
-\underline{y}=A^{1/2}\underline{x}.
-\]
-Ci ricordiamo che 2 matrici simili hanno gli stessi autovalori e notiamo che
+Si osserva che:
+
+\noindent (i) è simmetrica:
+\begin{align*}
+\left(A^{-1/2}ABA^{1/2}\right)^T &= \left(A^{1/2}\right)^T \cdot \left(A^{-1/2}AB\right)^T \\
+&= A^{1/2}(AB)^T\left(A^{-1/2}\right)^T \\
+&= A^{1/2}B^TA^TA^{-1/2} \\
+&= A^{1/2}BAA^{-1/2} \\
+&= A^{1/2}BA^{1/2}.
+\end{align*}
+
+\noindent (ii) è definita positiva:
+\begin{align*}
+\underline{x}^T A^{-1/2}ABA^{1/2}\underline{x} &= \underline{x}^T A^{1/2}BA^{1/2}\underline{x} \\
+&= \underline{x}^T\left(A^{1/2}\right)^TBA^{1/2}\underline{x} \\
+&= \left(A^{1/2}\underline{x}\right)^TBA^{1/2}\underline{x} \\
+&= \underline{y}^TB\underline{y} \ge 0 \quad \forall \underline{y}\in \mathbb{R}^n
+\end{align*}
+con \(\underline{y}=A^{1/2}\underline{x}\).
+
+Ci ricordiamo che due matrici simili hanno gli stessi autovalori e notiamo che
 \[
 \left(A^{1/2}\right)^{-1}ABA^{1/2}\sim AB.
 \]
@@ -1052,45 +1034,51 @@ Gli autovalori di \(B\) sono
 Tutti i vincoli sono di puro scivolamento. Trovare il valore minimo di \(K\) perché il sistema resti in equilibrio.
 
 \[
-\begin{tikzpicture}[scale=1]
+\begin{tikzpicture}[scale=1.2, >=stealth]
+  % Linea del piano orizzontale
   \draw[thick] (-2.4,0) -- (2.4,0);
 
+  % Circonferenze dei tre dischi
   \draw[thick] (-0.8,0.8) circle (0.8);
   \draw[thick] (0.8,0.8) circle (0.8);
   \draw[thick] (0,2.185) circle (0.8);
 
+  % Aggiungo i punti centrali per chiarezza
+  \filldraw (-0.8,0.8) circle (1pt);
+  \filldraw (0.8,0.8) circle (1pt);
+  \filldraw (0,2.185) circle (1pt);
 
-  \node at (-1.9,0.95) {\(m,r\)};
-  \node at (1.9,0.95) {\(m,r\)};
-  \node at (0.9,2.75) {\(m,r\)};
+  % Etichette massa e raggio (leggermente spostate all'esterno)
+  \node at (-1.9,1.1) {\(m,r\)};
+  \node at (1.9,1.1) {\(m,r\)};
+  \node at (0.9,2.8) {\(m,r\)};
 
-  \draw[red, thick, ->] (-0.8,0.8) -- (-0.8,-0.6);
-  \node[red] at (-0.65,-0.35) {\(mg\)};
+  % ---------------------------------------------------------
+  % VETTORI VERTICALI (sfalsati per non sovrapporsi)
+  % ---------------------------------------------------------
+  % Disco in alto: sposto il testo mg MOLTO PIÙ IN BASSO (pos=0.9) per superare i vettori \xi
+  \draw[red, thick, ->] (0,2.185) -- (0,1.1) node[pos=0.9, right, fill=white, inner sep=1pt] {\(mg\)};
 
-  \draw[red, thick, ->] (0.8,0.8) -- (0.8,-0.6);
-  \node[red] at (0.95,-0.35) {\(mg\)};
+  % Disco in basso a sinistra: inverto le posizioni! \varphi all'esterno e mg all'interno
+  \draw[red, thick, ->] (-0.75,0.8) -- (-0.75,-0.5) node[right] {\(mg\)};
+  \draw[orange, thick, ->] (-0.85,0) -- (-0.85,0.7) node[left, fill=white, inner sep=1pt] {\(\varphi\)};
 
-  \draw[red, thick, ->] (0,2.185) -- (0,1.25);
-  \node[red] at (0.2,1.8) {\(mg\)};
+  % Disco in basso a destra: rimangono perfetti così
+  \draw[red, thick, ->] (0.85,0.8) -- (0.85,-0.5) node[right] {\(mg\)};
+  \draw[orange, thick, ->] (0.75,0) -- (0.75,0.7) node[left, fill=white, inner sep=1pt] {\(\varphi\)};
 
-  \draw[orange, thick, ->] (-0.8,0) -- (-0.8,0.7);
-  \node[orange] at (-1.05,0.45) {\(\varphi\)};
+  % ---------------------------------------------------------
+  % VETTORI OBLIQUI E ORIZZONTALI (aggiunto fill=white a tutti)
+  % ---------------------------------------------------------
+  % Forze interne \xi
+  \draw[orange, thick, ->] (-0.4,1.45) -- (0,2.15) node[midway, above left, fill=white, inner sep=1pt] {\(\xi\)};
+  \draw[orange, thick, ->] (0.4,1.45) -- (0,2.15) node[midway, above right, fill=white, inner sep=1pt] {\(\xi\)};
 
-  \draw[orange, thick, ->] (0.8,0) -- (0.8,0.7);
-  \node[orange] at (1.05,0.45) {\(\varphi\)};
+  % Forza \psi (arancione) - spostata a y = 0.95 (sopra il centro)
+  \draw[orange, thick, ->] (-0.1, 0.95) -- (-0.7, 0.95) node[midway, above, fill=white, inner sep=1pt] {\(\psi\)};
 
-  \draw[orange, thick, ->] (-0.4,1.45) -- (0,2.15);
-  \node[orange] at (-0.55,1.85) {\(\xi\)};
-
-  \draw[orange, thick, ->] (0.4,1.45) -- (0,2.15);
-  \node[orange] at (0.55,1.85) {\(\xi\)};
-
-  \draw[orange, thick, ->] (0,0.8) -- (-0.65,0.8);
-  \node[orange] at (-0.35,1.02) {\(\psi\)};
-
-  \draw[red, thick, ->] (-0.45,0.8) -- (0.3,0.8) ;
-  \node[red] at (-0.05,1.05) {\(2Kr\)};
-
+  % Forza della molla 2Kr (rossa) - spostata a y = 0.65 (sotto il centro)
+  \draw[red, thick, ->] (-0.7, 0.65) -- (0.1, 0.65) node[midway, below, fill=white, inner sep=1pt] {\(2Kr\)};
 
 \end{tikzpicture}
 \]

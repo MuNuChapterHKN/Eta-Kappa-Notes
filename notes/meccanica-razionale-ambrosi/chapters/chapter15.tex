@@ -6,31 +6,39 @@ La frequenza di oscillazione del pendolo è dipendente dai dati iniziali ovvero 
 Ci domandiamo se esiste una curva non circolare che assicura una frequenza di oscillazione indipendente dai dati iniziali. Questa curva è una cicloide ribaltata. Costruiamo una sua parametrizzazione. La cicloide è la traiettoria percorsa da un punto sul bordo di un disco che si muove di puro rotolamento. Prendiamo un disco che rotola di raggio \(R\)
 
 \[
-\begin{tikzpicture}
-  \draw[green!70!black, thick, ->] (-2.2,0) -- (-2.2,0.8);
-  \node[green!70!black] at (-2.45,0.75) {\(\widehat{j}\)};
-  \draw[green!70!black, thick, ->] (-2.2,0) -- (-1.3,0);
-  \node[green!70!black] at (-1.65,-0.25) {\(\widehat{i}\)};
-  \node[green!70!black] at (-2.7,0.15) {\(\widehat{k}\)};
-  \draw[green!70!black] (-2.55,0.1) circle (0.12);
-  \fill[green!70!black] (-2.55,0.1) circle (0.03);
+\begin{tikzpicture}[scale=1.4, >=stealth]
+  % 1. SISTEMA DI RIFERIMENTO (Sollevato e staccato)
+  \draw[green!70!black, thick, ->] (-2.4, 0.3) -- (-2.4, 1.1) node[left] {\(\widehat{j}\)};
+  \draw[green!70!black, thick, ->] (-2.4, 0.3) -- (-1.5, 0.3) node[below] {\(\widehat{i}\)};
 
-  \draw[thick] (-1.2,0) -- (2.6,0);
-  \draw[thick] (0,0.8) circle (0.8);
-  \filldraw[black] (0,0.8) circle (1.5pt);
-  \node at (-0.15,0.65) {\(G\)};
-  \node at (0,-0.25) {\(C\)};
+  % Il vettore k spostato a sinistra per non accavallarsi
+  \draw[green!70!black] (-2.7, 0.5) circle (0.12);
+  \fill[green!70!black] (-2.7, 0.5) circle (0.03);
+  \node[green!70!black, left] at (-2.85, 0.5) {\(\widehat{k}\)};
 
-  \draw[dashed] (0,0.8) -- (0,1.6);
-  \draw[thick] (0,0.8) -- (0.6,1.35);
-  \filldraw[black] (0.6,1.35) circle (1.2pt);
-  \node at (0.78,1.45) {\(P\)};
-  \node at (0.34,1.02) {\(R\)};
+  % 2. LINEA DI TERRA E DISCO
+  \draw[thick] (-1.2, 0) -- (2.6, 0);
+  \draw[thick] (0, 0.8) circle (0.8);
+  \filldraw[black] (0, 0.8) circle (1.5pt);
+  \node[below left] at (0, 0.8) {\(G\)};
+  \node[below] at (0, 0) {\(C\)};
 
-  \draw[thick, ->] (-0.7,0.8) arc (180:120:0.7);
-  \node at (-0.95,1.25) {\(\theta\)};
-  \draw[thick, ->] (0,1.38) arc (90:66:0.58);
-  \node at (0.18,1.23) {\(\theta\)};
+  % 3. RAGGIO E PUNTO P
+  \draw[dashed] (0, 0.8) -- (0, 1.8);
+  \draw[thick] (0, 0.8) -- (0.6, 1.35);
+  \filldraw[black] (0.6, 1.35) circle (1.2pt) node[right] {\(P\)};
+
+  % La R messa a metà esatta della linea, con sfondo bianco
+  \node[fill=white, inner sep=1.5pt] at (0.3, 1.075) {\(R\)};
+
+  % 4. ARCHI E ANGOLI
+  % Freccia esterna (rotazione disco) allargata leggermente
+  \draw[thick, ->] (-0.9, 0.8) arc (180:110:0.9);
+  \node at (-1.1, 1.3) {\(\theta\)};
+
+  % Arco interno allungato fino alla linea di P e con sfondo bianco
+  \draw[thick, ->] (0, 1.38) arc (90:43:0.58);
+  \node[fill=white, inner sep=1pt] at (0.18, 1.28) {\(\theta\)};
 \end{tikzpicture}
 \]
 
@@ -87,14 +95,17 @@ y_P(t)=R\cos\theta-R\cos\theta_0
 \]
 
 \[
-\begin{tikzpicture}
-  \draw[thick, ->] (0,-0.7) -- (0,1.9);
-  \node at (-0.2,1.75) {\(y\)};
-  \draw[thick, ->] (-0.7,0) -- (5.8,0);
-  \node at (5.7,-0.25) {\(x\)};
+\begin{tikzpicture}[>=stealth]
+  % Assi x e y
+  \draw[thick, ->] (0,-0.7) -- (0,1.9) node[left] {\(y\)};
+  \draw[thick, ->] (-0.7,0) -- (5.8,0) node[below] {\(x\)};
+
+  % Curva (traiettoria) calcolata in gradi per evitare errori
   \draw[thick, domain=-0.55:5.4, samples=200, smooth]
-    plot ({\x},{abs(cos(1.25*\x r))});
-  \node at (2.25,0.9) {\(\underline{x}_P(t)\)};
+    plot ({\x},{abs(cos(deg(1.25*\x)))});
+
+  % Etichetta della curva posizionata sul picco
+  \node[fill=white, inner sep=1.5pt] at (2.5, 1.35) {\(\underline{x}_P(t)\)};
 \end{tikzpicture}
 \]
 
@@ -123,14 +134,17 @@ R\cos\theta\,\widehat{j}
 \]
 
 \[
-\begin{tikzpicture}
-  \draw[thick, ->] (0,-1.9) -- (0,1.6);
-  \node at (-0.2,1.45) {\(y\)};
-  \draw[thick, ->] (-0.7,0) -- (5.6,0);
-  \node at (5.5,0.2) {\(x\)};
+\begin{tikzpicture}[>=stealth]
+  % Assi x e y con etichette integrate
+  \draw[thick, ->] (0,-1.9) -- (0,1.6) node[left] {\(y\)};
+  \draw[thick, ->] (-0.7,0) -- (5.6,0) node[above] {\(x\)};
+
+  % Curva (traiettoria rovesciata) calcolata in gradi per evitare errori
   \draw[thick, domain=-0.55:5.4, samples=200, smooth]
-    plot ({\x},{-abs(cos(1.25*\x r))});
-  \node at (2.25,-0.75) {\(\widetilde{\underline{x}}_P(t)\)};
+    plot ({\x},{-abs(cos(deg(1.25*\x)))});
+
+  % Etichetta posizionata esattamente sotto l'avvallamento centrale
+  \node[fill=white, inner sep=1.5pt] at (2.5, -1.35) {\(\widetilde{\underline{x}}_P(t)\)};
 \end{tikzpicture}
 \]
 
@@ -284,7 +298,7 @@ Ricordiamo che
 \int_0^{\theta_0}
 \frac{\cos\frac{\theta}{2}}{\sqrt{\cos^2\frac{\theta}{2}-\cos^2\frac{\theta_0}{2}}}\,d\theta
 \]
-Poniamo $u = \sin(\theta / 2) \Rightarrow du = 1/2 \cos(\theta / 2) d \theta$. Allora 
+Poniamo $u = \sin(\theta / 2) \Rightarrow du = 1/2 \cos(\theta / 2) d \theta$. Allora
 \[
 2\int_{u_1}^{u_2}
 \frac{du}{\sqrt{1-\sin^2\frac{\theta}{2}-1+\sin^2\frac{\theta_0}{2}}}
@@ -316,7 +330,7 @@ v_2
 =
 1
 \]
-Allora 
+Allora
 \[
 2
 \int_{v_1}^{v_2}
